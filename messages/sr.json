@@ -1896,7 +1896,11 @@
     "potpisi": "Potpiši",
     "greska_ucitavanje": "Greška pri učitavanju prijava.",
     "forma_minimum": "Najmanji iznos pokroviteljstva je {iznos} RSD.",
-    "forma_minimum_napomena": "Najmanji iznos pokroviteljstva je {iznos} RSD. Pokroviteljstvo je donacija novca."
+    "forma_minimum_napomena": "Najmanji iznos pokroviteljstva je {iznos} RSD. Pokroviteljstvo je donacija novca.",
+    "forma_isprava_label": "Knjigovodstvena isprava (slika)",
+    "forma_isprava_napomena": "Izvod sa poslovnog računa, nalog za prenos ili drugi dokaz o knjiženju, na isti iznos i sa istim davaocem. Njome pokazuješ da uplata potiče iz imovine pravnog lica odnosno preduzetnika, a ne iz tvoje lične imovine.",
+    "forma_isprava_prevelika": "Isprava je prevelika (maks. ~3MB).",
+    "forma_isprava_obavezna": "Priloži knjigovodstvenu ispravu."
   },
   "doprinosOglasi": {
     "naslov": "Operativni doprinos",
@@ -2458,6 +2462,8 @@
     "pokr_prijave_odbij_razlog_prompt": "Razlog odbijanja (član će ga videti):",
     "pokr_prijave_ugovor_naslov": "Ugovor o donaciji",
     "pokr_prijave_zatvori": "Zatvori",
+    "pokr_prijave_isprava_naslov": "Knjigovodstvena isprava",
+    "pokr_prijave_isprava_alt": "Isprava",
     "donacije_nacin_ips": "IPS QR",
     "donacije_izvod_naslov": "Evidentiraj uplatu iz izvoda",
     "donacije_izvod_opis": "Unesi poziv na broj sa priliva (model 97), on identifikuje člana. Kontrolne cifre se proveravaju, pa pogrešan prepis ne može da prođe.",

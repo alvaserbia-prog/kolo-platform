@@ -109,6 +109,8 @@ Sponsorship is initiated by a verified system user by submitting a sponsorship a
 
 The application contains: the name of the legal entity or entrepreneur, the tax identification number and the amount of the donation in dinars. The minimum amount of a sponsorship application is 10,000 dinars.
 
+The application shall be accompanied by an accounting document by which the sponsor records that same disbursement in its own business books — a business account statement, a transfer order or other proof of entry, for the same amount and from the same payer. The document confirms that the disbursement originates from the assets of the legal entity or entrepreneur, and not from the personal assets of the user submitting the application.
+
 Upon submission of the application, the platform automatically generates a donation agreement between the named sponsor and the Foundation. The donation agreement does not contain provisions on POEN or on the recording of POEN.
 
 ### Article 8 — Signing and performance

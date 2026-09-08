@@ -1889,7 +1889,11 @@
     "potpisi": "Aláírás",
     "greska_ucitavanje": "Hiba a jelentkezések betöltésekor.",
     "forma_minimum": "A pártfogás legkisebb összege {iznos} RSD.",
-    "forma_minimum_napomena": "A pártfogás legkisebb összege {iznos} RSD. A pártfogás pénzadomány."
+    "forma_minimum_napomena": "A pártfogás legkisebb összege {iznos} RSD. A pártfogás pénzadomány.",
+    "forma_isprava_label": "Számviteli bizonylat (kép)",
+    "forma_isprava_napomena": "Üzleti számlakivonat, átutalási megbízás vagy a könyvelés egyéb bizonyítéka, azonos összegre és azonos fizető féltől. Ezzel igazolod, hogy a befizetés a jogi személy, illetve az egyéni vállalkozó vagyonából származik, nem pedig a te személyes vagyonodból.",
+    "forma_isprava_prevelika": "A bizonylat túl nagy (max. ~3MB).",
+    "forma_isprava_obavezna": "Csatold a számviteli bizonylatot."
   },
   "doprinosOglasi": {
     "naslov": "Hozzájárulási feladatok",
@@ -2451,6 +2455,8 @@
     "pokr_prijave_odbij_razlog_prompt": "Az elutasítás oka (a tag látni fogja):",
     "pokr_prijave_ugovor_naslov": "Ugovor o donaciji",
     "pokr_prijave_zatvori": "Zatvori",
+    "pokr_prijave_isprava_naslov": "Knjigovodstvena isprava",
+    "pokr_prijave_isprava_alt": "Isprava",
     "donacije_nacin_ips": "IPS QR",
     "donacije_izvod_naslov": "Befizetés rögzítése a kivonatból",
     "donacije_izvod_opis": "Add meg a beérkezés hivatkozási számát (97-es modell) — ez azonosítja a tagot. Az ellenőrző számjegyeket a rendszer egyezteti, így hibás átírás nem mehet át.",

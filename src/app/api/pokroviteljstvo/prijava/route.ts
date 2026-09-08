@@ -12,6 +12,10 @@ import { POKROVITELJSTVO_AKTIVNO, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 // stavki i bez primopredaje — vrednost se nije mogla proveriti nigde.
 const DOZVOLJENE_VRSTE: VrstaDonacije[] = ["NOVAC"];
 
+// Knjigovodstvena isprava (čl. 7) — base64 slika ide u bazu, kao i ranije
+// cenovnik. Isti obrazac, ne R2.
+const MAX_SLIKA = 4_000_000;
+
 // GET /api/pokroviteljstvo/prijava — sopstvene prijave
 export async function GET() {
   if (!POKROVITELJSTVO_AKTIVNO) return await greska(PORUKA_MODUL_UGASEN, 410);
@@ -60,6 +64,7 @@ export async function POST(req: NextRequest) {
   const pib = (body.pib ?? "").trim();
   const vrstaDonacije = body.vrstaDonacije as VrstaDonacije;
   const vrednostRsd = Number(body.vrednostRsd);
+  const ispravaSlika: string | null = body.ispravaSlika ?? null;
 
   if (!naziv || !pib)
     return await greska("Naziv pravnog lica ili preduzetnika i PIB su obavezni.", 400);
@@ -75,6 +80,16 @@ export async function POST(req: NextRequest) {
       400
     );
 
+  // Čl. 7: uz prijavu ide knjigovodstvena isprava kojom pokrovitelj to isto
+  // davanje evidentira u sopstvenim poslovnim knjigama. Ona ne meri vrednost
+  // (novac je sam sebi mera) nego pokazuje ČIJE je davanje: bez nje se uplata
+  // iz ličnog džepa prijavljuje kao davanje firme i dobija koeficijent ×1,20
+  // umesto ×1,00.
+  if (!ispravaSlika)
+    return await greska("Uz prijavu je obavezna knjigovodstvena isprava.", 400);
+  if (ispravaSlika.length > MAX_SLIKA)
+    return await greska("Isprava je prevelika (maks. ~3MB).", 400);
+
   const ugovorTekst = generisiUgovorTekst({ naziv, pib, vrstaDonacije, vrednostRsd });
 
   const prijava = await prisma.pokroviteljPrijava.create({
@@ -84,6 +99,7 @@ export async function POST(req: NextRequest) {
       pib,
       vrstaDonacije,
       vrednostRsd,
+      ispravaSlika,
       ugovorTekst,
     },
     select: { id: true },
