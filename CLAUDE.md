@@ -183,6 +183,16 @@ van sistema** (odluka vlasnika). Sadržinski:
   `poenPoDelu` već postoje, samo se sada upisuju pri utvrđivanju parametara umesto pri
   objavi. Nova ruta `POST /api/admin/nabavke/[id]/parametri`, audit
   `NABAVKA_PARAMETRI_UTVRDJENI`.
+- 🔴 **Nabavke, čl. 17 i 19 — nabavka je PROGRAM POMOĆI SA KLJUČEM RASPODELE, ne
+  prodaja.** Čl. 19 sada izričito kaže da Fondacija po osnovu poništenja zapisa **ne
+  prima nikakvu vrednost**, da se dobra korisnicima **ustupaju bez naknade** u
+  ostvarivanju ciljeva Fondacije, da poništenje **nije protivčinidba** nego posledica
+  iskorišćenja učešća, i da je broj POEN-a po delu **merilo ko učestvuje u raspodeli**,
+  a ne cena. Čl. 17 traži da odluka **navede potrebu zajednice** koja se podmiruje.
+  Razlog: fondacije koje dele pomoć ne plaćaju PDV na to jer je davanje **besplatno**;
+  ceo teret te odbrane nosi činjenica da korisnik ne daje ništa. Ako je POEN „ništa"
+  (nema vrednost van sistema, ne prelazi Fondaciji, gasi se), naš slučaj je običan
+  slučaj; ako je „nešto", to je promet uz naknadu. Odredbe su zaključane testom.
 - **DPIA na 4.4.3 — ispravljen zbir u zaključku.** Tačka 9 je vodila **sedam** rizika
   kao srednje, uključujući R5, a tabela rizika daje R5 = 4 (nizak); uz to je tačka
   5.8 izostavljala R13 iz spiska najviših. Tačno je **šest srednjih** (R1, R2, R8,

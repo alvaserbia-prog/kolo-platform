@@ -166,6 +166,8 @@ An offer from a user of the system is accepted only if it is the most favourable
 
 The decision initiating the procurement establishes the total quantity of the good to be acquired, the size of a single share, and the number of POEN annulled per share, in accordance with Article 12 of this Rulebook.
 
+The decision states the need of the community that the procurement meets. The parameters under paragraph 1 are established according to that need.
+
 The number of shares equals the quotient of the total quantity and the size of a share.
 
 The parameters under paragraph 1 are established before offers are collected and are not derived from the dinar price of the good, which is not known at that time. They are published with the calculation, together with a statement of reasons for how they were established, and are not modified after publication.
@@ -189,6 +191,10 @@ The number of POEN per share is not a price of the good. It is derived neither f
 The number of POEN per share expresses the measure of participation in the common good that is annulled by the collection of a share.
 
 POEN is not exchanged for goods and does not reach the supplier; the goods are acquired with dinar funds, while POEN is annulled as a record of participation that has been used.
+
+The Foundation receives no value whatsoever on the basis of the annulment of the record. The goods are provided to users free of charge, in the pursuit of the Foundation's purposes; the annulment of the record is not consideration for the good provided but a consequence of participation having been used.
+
+The number of POEN per share is the measure by which it is determined who takes part in the distribution, and not a price at which the good is provided.
 
 ### Article 20
 

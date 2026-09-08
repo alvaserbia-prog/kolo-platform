@@ -166,6 +166,8 @@ A rendszer felhasználójának ajánlata csak akkor kerül elfogadásra, ha az a
 
 A beszerzést megindító határozat megállapítja a beszerzendő jószág teljes mennyiségét, egy rész méretét és az egy részre eső, érvénytelenítésre kerülő POEN számát, e szabályzat 12. cikkével összhangban.
 
+A határozat megjelöli a közösségnek azt a szükségletét, amelyet a beszerzés kielégít. Az (1) bekezdés szerinti paramétereket e szükséglethez igazodva állapítják meg.
+
 A részek száma a teljes mennyiség és a rész méretének hányadosa.
 
 Az (1) bekezdés szerinti paramétereket az ajánlatok begyűjtése előtt állapítják meg, és azok nem vezethetők le a jószág dinárban kifejezett árából, amely ebben az időpontban nem ismert. A kalkulációval együtt kerülnek közzétételre, a megállapításukra vonatkozó indokolással, és a közzététel után nem módosulnak.
@@ -189,6 +191,10 @@ Az egy részre eső POEN száma nem a jószág ára. Nem vezethető le sem a bes
 Az egy részre eső POEN száma a közös jóban való részvételnek azt a mértékét fejezi ki, amely a rész átvételével érvénytelenítésre kerül.
 
 A POEN nem cserélődik javakra és nem jut el a szállítóhoz; a javak dinárban meglévő eszközökből kerültek beszerzésre, a POEN pedig a felhasznált részvétel bejegyzéseként érvénytelenítésre kerül.
+
+Az Alapítvány a bejegyzés érvénytelenítése alapján semmilyen értéket nem kap. A javakat a felhasználók ellenszolgáltatás nélkül kapják meg, az Alapítvány céljainak megvalósítása keretében; a bejegyzés érvénytelenítése nem a juttatott jószág ellenszolgáltatása, hanem a felhasznált részvétel következménye.
+
+Az egy részre eső POEN száma az a mérték, amely alapján megállapítást nyer, ki vesz részt az elosztásban, nem pedig ár, amelyen a jószágot juttatják.
 
 ### 20. cikk
 

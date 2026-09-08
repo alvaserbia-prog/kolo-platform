@@ -164,6 +164,8 @@ Ponuda korisnika sistema prihvata se samo ako je najpovoljnija, uz objavljeno po
 
 Odluka kojom se nabavka pokreće utvrđuje ukupnu količinu dobra koje se nabavlja, veličinu jednog dela i broj POEN-a koji se poništava po jednom delu, u skladu sa članom 12 ovog pravilnika.
 
+Odluka navodi potrebu zajednice koja se nabavkom podmiruje. Parametri iz stava 1 utvrđuju se prema toj potrebi.
+
 Broj delova jednak je količniku ukupne količine i veličine dela.
 
 Parametri iz stava 1 utvrđuju se pre prikupljanja ponuda i ne izvode se iz dinarske cene dobra, koja u tom trenutku nije poznata. Objavljuju se kalkulacijom, uz obrazloženje kako su utvrđeni, i posle objave se ne menjaju.
@@ -187,6 +189,10 @@ Broj POEN-a po delu nije cena dobra. On se ne izvodi ni iz nabavne cene ni iz ma
 Broj POEN-a po delu izražava meru učešća u zajedničkom dobru koja se poništava preuzimanjem dela.
 
 POEN se ne razmenjuje za dobra i ne dolazi do dobavljača; dobra su nabavljena dinarskim sredstvima, a POEN se poništava kao zapis o iskorišćenom učešću.
+
+Fondacija po osnovu poništenja zapisa ne prima nikakvu vrednost. Dobra se korisnicima ustupaju bez naknade, u ostvarivanju ciljeva Fondacije; poništenje zapisa nije protivčinidba za ustupljeno dobro nego posledica iskorišćenja učešća.
+
+Broj POEN-a po delu je merilo po kome se utvrđuje ko učestvuje u raspodeli, a ne cena po kojoj se dobro daje.
 
 ### Član 20
 
