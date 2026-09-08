@@ -653,6 +653,17 @@ kad rezervacija postoji). Testovi `__tests__/nabavka-pravila.test.ts` (46 prover
 `NABAVKA_PONUDA_DODATA/OBRISANA`, `NABAVKA_OBJAVLJENA`, `NABAVKA_RED_UTVRDJEN`,
 `NABAVKA_PLACENA`, `NABAVKA_PREUZETO`, `NABAVKA_OBUSTAVLJENA`, `NABAVKA_IZBOR_*`.
 
+🔴 **Nabavka je REDOVAN projekat i sprovodi se neograničeno, u skladu sa sredstvima
+na računu** (odluka vlasnika, 2026-09-07). Predlog da se ograniči učestalost ili udeo
+opticaja koji se sme poništiti po tom osnovu je **odbijen**. Ograničenja koja ostaju
+su ona koja akt već ima: sredstva iznad operativne rezerve (čl. 5), gornja granica
+trošenja (čl. 8) i zaštitni veto (čl. 7). **Ne dodavati kapu na broj nabavki ni na
+udeo opticaja** bez izričitog naloga.
+🟡 Posledicu znati: dok je nabavka izuzetan projekat, lako je braniti kao namensku
+pomoć; kad postane redovna, jača čitanje o privrednoj delatnosti fondacije (ZZF) i
+slabi argument izuzetnosti. Odbranu tada nosi isključivo besplatnost davanja
+(čl. 19: Fondacija ne prima nikakvu vrednost, dobra se ustupaju bez naknade).
+
 🟡 **Jedini kriterijum je PRAG od 20.000 POEN** (čl. 21, od 4.4.3) — bez obzira na
 kanal kroz koji je POEN nastao i bez obzira šta je korisnik predložio. Reč zato ne
 filtrira sama sebe. Ako to postane problem, poluga je rezervisati prvih M mesta
