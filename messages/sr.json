@@ -1902,7 +1902,11 @@
     "potpis_potvrda": "Potpisati ugovor o donaciji u ime pravnog lica ili preduzetnika?",
     "greska": "Greška.",
     "potpisi": "Potpiši",
-    "greska_ucitavanje": "Greška pri učitavanju prijava."
+    "greska_ucitavanje": "Greška pri učitavanju prijava.",
+    "forma_isprava_label": "Knjigovodstvena isprava (slika/PDF)",
+    "forma_isprava_napomena": "Obavezna za robu i usluge — otpremnica, račun ili druga isprava kojom davanje evidentiraš u svojim poslovnim knjigama. Mora glasiti na istu robu odnosno usluge i na istu vrednost.",
+    "forma_isprava_prevelika": "Isprava je prevelika (maks. ~3MB).",
+    "forma_isprava_obavezna": "Za robu i usluge priloži i knjigovodstvenu ispravu."
   },
   "doprinosOglasi": {
     "naslov": "Operativni doprinos",
@@ -2540,7 +2544,9 @@
     "doprinos_revizija_bez_minimuma": "ima oglas, ali nijedan ne ispunjava sadržinski minimum, zato doprinos nije ni zabeležen",
     "tab_razmene": "Razmene",
     "emisija_tbl_nivo1": "svaka donacija ispod 5.000",
-    "tab_nabavke": "Nabavke"
+    "tab_nabavke": "Nabavke",
+    "pokr_prijave_isprava_naslov": "Knjigovodstvena isprava",
+    "pokr_prijave_isprava_alt": "Isprava"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",

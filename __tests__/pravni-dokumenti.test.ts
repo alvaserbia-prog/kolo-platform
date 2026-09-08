@@ -276,6 +276,15 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // 🔴 Javnost NIJE uslov za evidentiranje POEN-a (to bi bila struktura
       // „plati → dobij vidljivost"); razlog je proverljivost upisa.
       "bila bi upis koji se ne može proveriti",
+      // 🔴 Pokroviteljstvo (čl. 7, 11, 13). Maloprodajna vrednost bez obrazloženja
+      // izgleda kao naduvavanje — obrazloženje je čini merom ukupnog odricanja.
+      // Knjigovodstvena isprava je jedina brana od naduvavanja samo prema
+      // Fondaciji. Javno imenovanje sme, ali PRAVO na promociju je sponzorstvo.
+      "odriče triju stvari",
+      "knjigovodstvenu ispravu kojom pokrovitelj to davanje evidentira",
+      "nije raspodela dobiti",
+      "ne stiče pravo na objavljivanje logotipa",
+      "Javno priznanje je akt Fondacije, a ne protivčinidba",
     ],
     en: [
       "is not a price of POEN and is not a discount on a donation",
@@ -285,6 +294,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "this recording is not a counter-performance",
       "permanent recognition of a deed performed, not an acquired status",
       "recording that cannot be verified",
+      "gives up three things",
+      "accounting document by which the sponsor records that supply",
+      "is not a distribution of profit",
+      "no right to the publication of a logo",
+      "Public recognition is an act of the Foundation, not a counter-performance",
     ],
     ru: [
       "не является ценой ПОЕН и не является скидкой",
@@ -294,6 +308,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "этот учёт не является встречным предоставлением",
       "постоянное признание совершённого дела, а не приобретённый статус",
       "записью, которую невозможно проверить",
+      "отказывается от трёх вещей",
+      "бухгалтерский документ, которым покровитель отражает эту передачу",
+      "не является распределением прибыли",
+      "не приобретает права на публикацию логотипа",
+      "Публичное признание является актом Фонда, а не встречным предоставлением",
     ],
   },
   // 4.4.3 — upozorenje o pribavljanju POEN-a mimo sistema. Ekonomski deo (ne stiče

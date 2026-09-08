@@ -98,9 +98,11 @@ Odnos između Zaklade i pokrovitelja uređuje se ugovorom o donaciji.
 
 ### Članak 7. — Pokretanje pokroviteljstva
 
-Pokroviteljstvo pokreće verificirani korisnik sustava podnošenjem prijave pokroviteljstva na platformi.
+Pokroviteljstvo pokreće verificirani korisnik sustava podnošenjem prijave pokroviteljstva na platformi. Prijavu podnosi vlasnik odnosno zakonski zastupnik pravne osobe, odnosno sam obrtnik.
 
-Prijava sadrži: naziv pravne osobe ili obrtnika, vrstu donacije (novac, roba, usluge) i vrijednost donacije u dinarima. Ako su predmet donacije roba ili usluge, korisnik uz prijavu prilaže važeći maloprodajni cjenik pokrovitelja na temelju kojega je utvrđena dinarska vrijednost donacije.
+Prijava sadrži: naziv pravne osobe ili obrtnika, vrstu donacije (novac, roba, usluge) i vrijednost donacije u dinarima. Ako su predmet donacije roba ili usluge, korisnik uz prijavu prilaže važeći maloprodajni cjenik pokrovitelja na temelju kojega je utvrđena dinarska vrijednost donacije, kao i knjigovodstvenu ispravu kojom pokrovitelj to davanje evidentira u svojim poslovnim knjigama. Isprava mora glasiti na istu robu odnosno usluge i na istu vrijednost kao prijava.
+
+Maloprodajna vrijednost uzima se zato što se pokrovitelj davanjem robe odriče triju stvari: nabavne vrijednosti robe, poreza koji je po propisima o porezu na dodanu vrijednost dužan obračunati na to davanje, i prihoda koji bi ostvario njezinom prodajom. Maloprodajna vrijednost jedina je javno provjerljiva mjera koja obuhvaća sve tri.
 
 Po podnošenju prijave platforma automatski generira ugovor o donaciji između navedenog pokrovitelja i Zaklade. Ugovor o donaciji ne sadrži odredbe o POEN-u niti o evidentiranju POEN-a.
 
@@ -142,6 +144,10 @@ Tablica se može proširiti dodatnim razinama odlukom nadležnog tijela u skladu
 
 Evidentiranje POEN-a po osnovi pokroviteljstva automatski je akt Protokola u smislu čl. 40. i čl. 73. Pravilnika o KOLO sustavu. Ne ulazi u dnevni limit emisije Programa Protokola.
 
+Doprinos se evidentira u zapisu korisnika koji je prijavu pokroviteljstva podnio. Pokrovitelj po osnovi doprinosa ne stječe POEN, ZRNO, potraživanje prema Zakladi, pravo na povrat donacije ni bilo koje drugo pravo.
+
+Evidentiranje POEN-a nije davanje pravne osobe odnosno obrtnika korisniku, nije raspodjela dobiti niti drugi oblik prijenosa vrijednosti iz imovine pokrovitelja, i ne stvara nijedno imovinsko pravo. POEN nema vrijednost izvan sustava (čl. 12. i čl. 13. Pravilnika o KOLO sustavu).
+
 ### Članak 12. — Porezne obveze pokrovitelja
 
 Porezne obveze koje proizlaze iz donacije — uključujući porez na dodanu vrijednost, porez na dobit i druga javna davanja — snosi pokrovitelj u skladu s važećim propisima.
@@ -154,7 +160,9 @@ Platforma vodi javnu rang-listu pokrovitelja na temelju kumulativne vrijednosti 
 
 Pokrovitelj se identificira na rang-listi punim registriranim nazivom, skraćenim nazivom ili komercijalnim nazivom pod kojim posluje, prema podatku koji je korisnik unio u prijavu pokroviteljstva.
 
-Objavljivanje rang-liste pokrovitelja predstavlja javno priznanje doprinosa i element transparentnosti rada Zaklade.
+Objavljivanje rang-liste pokrovitelja predstavlja javno priznanje doprinosa i element transparentnosti rada Zaklade. Zaklada smije pokrovitelja javno imenovati i javno mu zahvaliti.
+
+Pokrovitelj po osnovi doprinosa ne stječe pravo na objavljivanje logotipa, na upućivanje na svoju internetsku stranicu, na oglasni prostor na Platformi, na spominjanje u kampanjama Zaklade niti na bilo koju drugu promotivnu činidbu, i takvu činidbu ne može ugovoriti niti zahtijevati. Javno priznanje akt je Zaklade, a ne protučinidba za doprinos.
 
 ## IV — Raspoređivanje viška
 

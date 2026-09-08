@@ -59,6 +59,7 @@ export async function POST(req: NextRequest) {
   const vrstaDonacije = body.vrstaDonacije as VrstaDonacije;
   const vrednostRsd = Number(body.vrednostRsd);
   const cenovnikSlika: string | null = body.cenovnikSlika ?? null;
+  const ispravaSlika: string | null = body.ispravaSlika ?? null;
 
   if (!naziv || !pib)
     return await greska("Naziv pravnog lica ili preduzetnika i PIB su obavezni.", 400);
@@ -68,8 +69,15 @@ export async function POST(req: NextRequest) {
     return await greska("Vrednost donacije mora biti pozitivna.", 400);
   if ((vrstaDonacije === "ROBA" || vrstaDonacije === "USLUGE") && !cenovnikSlika)
     return await greska("Za robu i usluge obavezan je maloprodajni cenovnik.", 400);
+  // Čl. 7: uz cenovnik ide i knjigovodstvena isprava iz poslovnih knjiga
+  // pokrovitelja. Cenovnik utvrđuje meru, isprava je vezuje za knjige — bez nje
+  // vrednost se može naduvati samo prema Fondaciji, bez posledica drugde.
+  if ((vrstaDonacije === "ROBA" || vrstaDonacije === "USLUGE") && !ispravaSlika)
+    return await greska("Za robu i usluge obavezna je i knjigovodstvena isprava.", 400);
   if (cenovnikSlika && cenovnikSlika.length > MAX_SLIKA)
     return await greska("Cenovnik je prevelik (maks. ~3MB).", 400);
+  if (ispravaSlika && ispravaSlika.length > MAX_SLIKA)
+    return await greska("Isprava je prevelika (maks. ~3MB).", 400);
 
   const ugovorTekst = generisiUgovorTekst({ naziv, pib, vrstaDonacije, vrednostRsd });
 
@@ -81,6 +89,7 @@ export async function POST(req: NextRequest) {
       vrstaDonacije,
       vrednostRsd,
       cenovnikSlika: cenovnikSlika || null,
+      ispravaSlika: ispravaSlika || null,
       ugovorTekst,
     },
     select: { id: true },

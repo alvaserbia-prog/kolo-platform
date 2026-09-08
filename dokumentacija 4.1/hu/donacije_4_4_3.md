@@ -98,9 +98,11 @@ Az Alapítvány és a pártfogó közötti viszonyt adományozási szerződés r
 
 ### 7. cikk — A pártfogás megindítása
 
-A pártfogást a rendszer hitelesített felhasználója indítja meg pártfogási kérelem platformon történő benyújtásával.
+A pártfogást a rendszer hitelesített felhasználója indítja meg pártfogási kérelem platformon történő benyújtásával. A kérelmet a jogi személy tulajdonosa, illetve törvényes képviselője, vagy maga az egyéni vállalkozó nyújtja be.
 
-A kérelem tartalmazza: a jogi személy vagy egyéni vállalkozó nevét, az adomány fajtáját (pénz, áru, szolgáltatás) és az adomány dinárban kifejezett értékét. Ha az adomány tárgya áru vagy szolgáltatás, a felhasználó a kérelemhez csatolja a pártfogó hatályos kiskereskedelmi árjegyzékét, amely alapján az adomány dinárértékét megállapították.
+A kérelem tartalmazza: a jogi személy vagy egyéni vállalkozó nevét, az adomány fajtáját (pénz, áru, szolgáltatás) és az adomány dinárban kifejezett értékét. Ha az adomány tárgya áru vagy szolgáltatás, a felhasználó a kérelemhez csatolja a pártfogó hatályos kiskereskedelmi árjegyzékét, amely alapján az adomány dinárértékét megállapították, valamint azt a számviteli bizonylatot, amellyel a pártfogó ezt az átadást saját üzleti könyveiben nyilvántartásba veszi. A bizonylatnak ugyanarra az árura, illetve szolgáltatásra és ugyanarra az értékre kell szólnia, mint a kérelemnek.
+
+A kiskereskedelmi érték azért irányadó, mert a pártfogó az áru átadásával három dologról mond le: az áru beszerzési értékéről, arról az adóról, amelyet az általános forgalmi adóra vonatkozó előírások szerint ezen átadás után köteles felszámítani, és arról a bevételről, amelyet az áru eladásával ért volna el. A kiskereskedelmi érték az egyetlen nyilvánosan ellenőrizhető mérték, amely mindhármat magában foglalja.
 
 A kérelem benyújtását követően a platform automatikusan létrehozza az adományozási szerződést a megjelölt pártfogó és az Alapítvány között. Az adományozási szerződés nem tartalmaz a POEN-re, sem a POEN nyilvántartásba vételére vonatkozó rendelkezéseket.
 
@@ -142,6 +144,10 @@ A táblázat további szintekkel bővíthető az illetékes szerv határozatáva
 
 A POEN pártfogás alapján történő nyilvántartásba vétele a Protokoll automatikus aktusa a KOLO rendszerről szóló szabályzat 40. és 73. cikke értelmében. Nem számít bele a Protokoll Programjainak napi kibocsátási limitjébe.
 
+A hozzájárulás annak a felhasználónak a bejegyzésében kerül nyilvántartásba, aki a pártfogási kérelmet benyújtotta. A hozzájárulás alapján a pártfogó nem szerez sem POEN-t, sem ZRNO-t, sem követelést az Alapítvánnyal szemben, sem az adomány visszatérítéséhez való jogot, sem bármely más jogot.
+
+A POEN nyilvántartásba vétele nem a jogi személy, illetve az egyéni vállalkozó juttatása a felhasználó részére, nem nyereségfelosztás és nem is az érték átadásának más formája a pártfogó vagyonából, továbbá nem keletkeztet semmilyen vagyoni jogot. A POEN-nek a rendszeren kívül nincs értéke (a KOLO rendszerről szóló szabályzat 12. és 13. cikke).
+
 ### 12. cikk — A pártfogó adókötelezettségei
 
 Az adományból eredő adókötelezettségeket — ideértve a hozzáadottérték-adót, a társasági adót és egyéb közterheket — a pártfogó viseli a hatályos jogszabályokkal összhangban.
@@ -154,7 +160,9 @@ A platform nyilvános pártfogói rangsort vezet a pártfogói nyilvántartásb�
 
 A pártfogó a rangsorban teljes bejegyzett nevével, rövidített nevével vagy azzal a kereskedelmi névvel azonosítható, amely alatt működik, azon adat szerint, amelyet a felhasználó a pártfogási kérelemben megadott.
 
-A pártfogói rangsor közzététele a hozzájárulás nyilvános elismerése és az Alapítvány működése átláthatóságának eleme.
+A pártfogói rangsor közzététele a hozzájárulás nyilvános elismerése és az Alapítvány működése átláthatóságának eleme. Az Alapítvány a pártfogót nyilvánosan megnevezheti és nyilvánosan köszönetet mondhat neki.
+
+A hozzájárulás alapján a pártfogó nem szerez jogot logó közzétételére, saját internetes oldalára mutató hivatkozásra, a Platformon hirdetési felületre, az Alapítvány kampányaiban való említésre, sem bármely más promóciós szolgáltatásra, és ilyen szolgáltatást nem köthet ki és nem követelhet. A nyilvános elismerés az Alapítvány aktusa, nem pedig a hozzájárulás ellenszolgáltatása.
 
 ## IV — A többlet elosztása
 

@@ -1902,7 +1902,11 @@
     "potpis_potvrda": "Подписать договор пожертвования от имени юридического лица или предпринимателя?",
     "greska": "Ошибка.",
     "potpisi": "Подписать",
-    "greska_ucitavanje": "Ошибка при загрузке заявок."
+    "greska_ucitavanje": "Ошибка при загрузке заявок.",
+    "forma_isprava_label": "Бухгалтерский документ (изображение/PDF)",
+    "forma_isprava_napomena": "Обязателен для товаров и услуг — накладная, счёт или иной документ, которым ты отражаешь передачу в своих учётных книгах. Должен относиться к тем же товарам или услугам и к той же стоимости.",
+    "forma_isprava_prevelika": "Документ слишком большой (макс. ~3МБ).",
+    "forma_isprava_obavezna": "Для товаров и услуг приложи также бухгалтерский документ."
   },
   "doprinosOglasi": {
     "naslov": "Операционный вклад",
@@ -2540,7 +2544,9 @@
     "doprinos_revizija_bez_minimuma": "есть объявление, но ни одно не отвечает содержательному минимуму — поэтому вклад не был отмечен",
     "tab_razmene": "Razmene",
     "emisija_tbl_nivo1": "любое пожертвование ниже 5.000",
-    "tab_nabavke": "Nabavke"
+    "tab_nabavke": "Nabavke",
+    "pokr_prijave_isprava_naslov": "Knjigovodstvena isprava",
+    "pokr_prijave_isprava_alt": "Isprava"
   },
   "kolacici": {
     "aria": "Согласие на использование cookie",

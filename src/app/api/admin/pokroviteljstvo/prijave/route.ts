@@ -28,6 +28,7 @@ export async function GET() {
       vrstaDonacije: p.vrstaDonacije,
       vrednostRsd: Number(p.vrednostRsd),
       imaCenovnik: !!p.cenovnikSlika,
+      imaIspravu: !!p.ispravaSlika,
       status: p.status,
       odbijenoRazlog: p.odbijenoRazlog,
       createdAt: p.createdAt.toISOString(),

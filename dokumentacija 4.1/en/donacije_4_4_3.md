@@ -98,9 +98,11 @@ The relationship between the Foundation and the sponsor is governed by a donatio
 
 ### Article 7 — Initiation of sponsorship
 
-Sponsorship is initiated by a verified system user by submitting a sponsorship application on the platform.
+Sponsorship is initiated by a verified system user by submitting a sponsorship application on the platform. The application is submitted by the owner or legal representative of the legal entity, or by the entrepreneur themselves.
 
-The application contains: the name of the legal entity or entrepreneur, the type of donation (money, goods, services), and the value of the donation in dinars. If the subject of the donation is goods or services, the user attaches to the application the sponsor's current retail price list on the basis of which the dinar value of the donation was determined.
+The application contains: the name of the legal entity or entrepreneur, the type of donation (money, goods, services), and the value of the donation in dinars. If the subject of the donation is goods or services, the user attaches to the application the sponsor's current retail price list on the basis of which the dinar value of the donation was determined, as well as the accounting document by which the sponsor records that supply in their own business books. The document must refer to the same goods or services and to the same value as the application.
+
+The retail value is taken because, by giving goods, the sponsor gives up three things: the purchase value of the goods, the tax they are obliged to calculate on that supply under value added tax regulations, and the revenue they would have obtained by selling the goods. The retail value is the only publicly verifiable measure that covers all three.
 
 Upon submission of the application, the platform automatically generates a donation agreement between the named sponsor and the Foundation. The donation agreement does not contain provisions on POEN or on the recording of POEN.
 
@@ -142,6 +144,10 @@ The table may be extended with additional tiers by a decision of the competent b
 
 The recording of POEN on account of sponsorship is an automatic act of the Protocol within the meaning of Art. 40 and Art. 73 of the KOLO System Rulebook. It does not count against the daily emission limit of the Protocol Programme.
 
+The contribution is recorded in the record of the user who submitted the sponsorship application. On account of the contribution the sponsor acquires no POEN, no ZRNO, no claim against the Foundation, no right to a refund of the donation and no other right.
+
+The recording of POEN is not a payment from the legal entity or entrepreneur to the user, is not a distribution of profit or any other form of transfer of value from the sponsor's assets, and creates no property right. POEN has no value outside the system (Art. 12 and Art. 13 of the KOLO System Rulebook).
+
 ### Article 12 — Tax obligations of the sponsor
 
 Tax obligations arising from the donation — including value added tax, corporate income tax, and other public levies — are borne by the sponsor in accordance with the applicable regulations.
@@ -154,7 +160,9 @@ The platform maintains a public sponsor ranking list based on the cumulative con
 
 A sponsor is identified on the ranking list by their full registered name, abbreviated name, or trade name under which they operate, according to the data entered by the user in the sponsorship application.
 
-Publication of the sponsor ranking list constitutes public recognition of contributions and an element of transparency in the Foundation's work.
+Publication of the sponsor ranking list constitutes public recognition of contributions and an element of transparency in the Foundation's work. The Foundation may publicly name a sponsor and publicly thank them.
+
+On account of the contribution the sponsor acquires no right to the publication of a logo, to a link to their website, to advertising space on the Platform, to being mentioned in the Foundation's campaigns or to any other promotional performance, and cannot contract for or demand such performance. Public recognition is an act of the Foundation, not a counter-performance for the contribution.
 
 ## IV — Allocation of Surplus
 

@@ -1895,7 +1895,11 @@
     "potpis_potvrda": "Aláírod az adományozási szerződést a jogi személy vagy vállalkozó nevében?",
     "greska": "Hiba.",
     "potpisi": "Aláírás",
-    "greska_ucitavanje": "Hiba a jelentkezések betöltésekor."
+    "greska_ucitavanje": "Hiba a jelentkezések betöltésekor.",
+    "forma_isprava_label": "Számviteli bizonylat (kép/PDF)",
+    "forma_isprava_napomena": "Áru és szolgáltatás esetén kötelező — szállítólevél, számla vagy más bizonylat, amellyel az átadást saját üzleti könyveidben nyilvántartásba veszed. Ugyanarra az árura, illetve szolgáltatásra és ugyanarra az értékre kell szólnia.",
+    "forma_isprava_prevelika": "A bizonylat túl nagy (max. ~3MB).",
+    "forma_isprava_obavezna": "Áru és szolgáltatás esetén csatold a számviteli bizonylatot is."
   },
   "doprinosOglasi": {
     "naslov": "Hozzájárulási feladatok",
@@ -2533,7 +2537,9 @@
     "doprinos_revizija_bez_minimuma": "van hirdetése, de egyik sem felel meg a tartalmi minimumnak — ezért hozzájárulás nem került feljegyzésre",
     "tab_razmene": "Razmene",
     "emisija_tbl_nivo1": "minden 5.000 alatti adomány",
-    "tab_nabavke": "Nabavke"
+    "tab_nabavke": "Nabavke",
+    "pokr_prijave_isprava_naslov": "Knjigovodstvena isprava",
+    "pokr_prijave_isprava_alt": "Isprava"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",

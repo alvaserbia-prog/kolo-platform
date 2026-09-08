@@ -19,7 +19,7 @@ type Prijava = {
   createdAt: string;
 };
 
-type Detalji = Prijava & { ugovorTekst: string; cenovnikSlika: string | null };
+type Detalji = Prijava & { ugovorTekst: string; cenovnikSlika: string | null; ispravaSlika: string | null };
 
 export default function PokroviteljPrijaveTab({ onDone }: { onDone: () => void }) {
   const locale = useLocale();
@@ -131,6 +131,13 @@ export default function PokroviteljPrijaveTab({ onDone }: { onDone: () => void }
                 <p className="text-sm font-medium text-kolo-muted mb-2">{t("pokr_prijave_cenovnik_naslov")}</p>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={detalji.cenovnikSlika} alt={t("pokr_prijave_cenovnik_alt")} className="w-full rounded-xl border border-kolo-border" />
+              </div>
+            )}
+            {detalji.ispravaSlika && (
+              <div>
+                <p className="text-sm font-medium text-kolo-muted mb-2">{t("pokr_prijave_isprava_naslov")}</p>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={detalji.ispravaSlika} alt={t("pokr_prijave_isprava_alt")} className="w-full rounded-xl border border-kolo-border" />
               </div>
             )}
             <button onClick={() => setDetalji(null)} className="px-4 py-2 rounded-xl bg-kolo-bg border border-kolo-border text-sm font-semibold text-kolo-muted">

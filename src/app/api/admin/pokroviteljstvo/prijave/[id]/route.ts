@@ -29,6 +29,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     vrednostRsd: Number(p.vrednostRsd),
     ugovorTekst: p.ugovorTekst,
     cenovnikSlika: p.cenovnikSlika,
+    ispravaSlika: p.ispravaSlika,
     status: p.status,
     odbijenoRazlog: p.odbijenoRazlog,
     createdAt: p.createdAt.toISOString(),

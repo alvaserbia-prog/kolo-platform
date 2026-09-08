@@ -1902,7 +1902,11 @@
     "potpis_potvrda": "Sign the donation agreement on behalf of the legal entity or entrepreneur?",
     "greska": "Error.",
     "potpisi": "Sign",
-    "greska_ucitavanje": "Error while loading the applications."
+    "greska_ucitavanje": "Error while loading the applications.",
+    "forma_isprava_label": "Accounting document (image/PDF)",
+    "forma_isprava_napomena": "Required for goods and services — a delivery note, invoice or other document by which you record the supply in your own business books. It must refer to the same goods or services and to the same value.",
+    "forma_isprava_prevelika": "The document is too large (max. ~3MB).",
+    "forma_isprava_obavezna": "For goods and services, also attach the accounting document."
   },
   "doprinosOglasi": {
     "naslov": "Contribution Tasks",
@@ -2540,7 +2544,9 @@
     "doprinos_revizija_bez_minimuma": "has a listing, but none meets the content minimum — so no contribution was noted",
     "tab_razmene": "Razmene",
     "emisija_tbl_nivo1": "any donation below 5,000",
-    "tab_nabavke": "Nabavke"
+    "tab_nabavke": "Nabavke",
+    "pokr_prijave_isprava_naslov": "Knjigovodstvena isprava",
+    "pokr_prijave_isprava_alt": "Isprava"
   },
   "kolacici": {
     "aria": "Cookie consent",

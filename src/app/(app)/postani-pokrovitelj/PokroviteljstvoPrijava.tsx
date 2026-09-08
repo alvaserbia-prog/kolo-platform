@@ -39,8 +39,12 @@ export default function PokroviteljstvoPrijava() {
   const [vrsta, setVrsta] = useState<Prijava["vrstaDonacije"]>("NOVAC");
   const [vrednost, setVrednost] = useState("");
   const [cenovnik, setCenovnik] = useState<string | null>(null);
+  // Knjigovodstvena isprava iz poslovnih knjiga pokrovitelja (čl. 7) — ide UZ
+  // cenovnik, ne umesto njega: cenovnik daje meru, isprava je vezuje za knjige.
+  const [isprava, setIsprava] = useState<string | null>(null);
   const [greska, setGreska] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
+  const ispravaRef = useRef<HTMLInputElement>(null);
 
   function onFile(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
@@ -52,23 +56,38 @@ export default function PokroviteljstvoPrijava() {
     reader.readAsDataURL(f);
   }
 
+  function onIsprava(e: React.ChangeEvent<HTMLInputElement>) {
+    const f = e.target.files?.[0];
+    setGreska("");
+    if (!f) { setIsprava(null); return; }
+    if (f.size > MAX_BYTES) { setGreska(t("forma_isprava_prevelika")); if (ispravaRef.current) ispravaRef.current.value = ""; return; }
+    const reader = new FileReader();
+    reader.onload = () => setIsprava(typeof reader.result === "string" ? reader.result : null);
+    reader.readAsDataURL(f);
+  }
+
   async function posalji() {
     setGreska("");
     if ((vrsta === "ROBA" || vrsta === "USLUGE") && !cenovnik) {
       setGreska(t("forma_cenovnik_obavezan"));
       return;
     }
+    if ((vrsta === "ROBA" || vrsta === "USLUGE") && !isprava) {
+      setGreska(t("forma_isprava_obavezna"));
+      return;
+    }
     setRadnja("posalji");
     const res = await fetch("/api/pokroviteljstvo/prijava", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ naziv: naziv.trim(), pib: pib.trim(), vrstaDonacije: vrsta, vrednostRsd: Number(vrednost), cenovnikSlika: cenovnik }),
+      body: JSON.stringify({ naziv: naziv.trim(), pib: pib.trim(), vrstaDonacije: vrsta, vrednostRsd: Number(vrednost), cenovnikSlika: cenovnik, ispravaSlika: isprava }),
     });
     const d = await res.json().catch(() => ({}));
     setRadnja(null);
     if (res.ok) {
-      setNaziv(""); setPib(""); setVrsta("NOVAC"); setVrednost(""); setCenovnik(null);
+      setNaziv(""); setPib(""); setVrsta("NOVAC"); setVrednost(""); setCenovnik(null); setIsprava(null);
       if (fileRef.current) fileRef.current.value = "";
+      if (ispravaRef.current) ispravaRef.current.value = "";
       await refetch();
     } else setGreska(d.error ?? t("forma_greska_slanja"));
   }
@@ -131,11 +150,19 @@ export default function PokroviteljstvoPrijava() {
           </div>
         </div>
         {trebaCenovnik && (
+          <>
           <div>
             <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_cenovnik_label")}</label>
             <input ref={fileRef} type="file" accept="image/*" onChange={onFile} className="text-sm" />
             <p className="mt-1 text-xs text-kolo-muted">{t("forma_cenovnik_napomena")}</p>
           </div>
+
+          <div>
+            <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_isprava_label")}</label>
+            <input ref={ispravaRef} type="file" accept="image/*" onChange={onIsprava} className="text-sm" />
+            <p className="mt-1 text-xs text-kolo-muted">{t("forma_isprava_napomena")}</p>
+          </div>
+          </>
         )}
         {greska && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>}
         <button onClick={posalji}

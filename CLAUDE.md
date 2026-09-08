@@ -691,6 +691,79 @@ u aktima ni u copy-ju da je Fondacija „oslobođena poreza" kao svojstvo — to
 za potvrdu od pravnice, i njegov odgovor počiva na istoj besplatnosti davanja na kojoj
 stoji i čl. 19 Pravilnika o nabavkama.
 
+### Pokroviteljstvo: isprava, javno priznanje, razgraničenje prema firmi (2026-09-08)
+
+Odluke uz analizu rizika **R-05** (pokroviteljstvo pravnih lica i preduzetnika).
+Izmenjeni čl. 7, 11 i 13 `donacije_4_4_3.md` na svih pet jezika, uz izmenu koda.
+
+🔴 **Maloprodajna cena OSTAJE — ali sada ima obrazloženje** (odluka vlasnika; M-1
+„po nabavnoj vrednosti" je **odbijena**). Obrazloženje u čl. 7 glasi da se pokrovitelj
+davanjem robe odriče **triju stvari**: nabavne vrednosti, poreza koji je po propisima
+o PDV-u dužan da obračuna na to davanje, i prihoda koji bi ostvario prodajom.
+🔴 **Mora se pisati sa sve tri stavke.** Vlasnikova prvobitna formulacija bila je „plati
+PDV na nju, to je njegovo ulaganje" — tačna po smeru, netačna po osnovici: PDV pri
+besplatnom davanju iz poslovne imovine obračunava se na **cenu koštanja, ne na
+maloprodajnu cenu**. Izdatak je dakle nabavna + PDV na nju, a ostatak do maloprodajne
+je **marža** — stvarno odricanje, ali izmakli prihod, ne izdatak. Sa sve tri stavke
+maloprodajna cena je odbranjiva mera ukupnog odricanja; sa samo PDV-om ne pokriva
+sopstveni broj.
+
+🔴 **Uz cenovnik ide i KNJIGOVODSTVENA ISPRAVA** (čl. 7; `PokroviteljPrijava.ispravaSlika`,
+migracija `20260908130000_pokroviteljstvo_isprava`). Otpremnica, račun ili druga isprava
+kojom pokrovitelj **to isto davanje evidentira u sopstvenim poslovnim knjigama**, na istu
+robu i istu vrednost. Razlog: cenovnik utvrđuje **meru**, a meru je do sada određivala
+strana koja ima korist — korisnik prilaže cenovnik SVOJE firme i po njemu se emituje
+POEN. Isprava tu meru vezuje za knjige, pa se vrednost ne može naduvati samo prema
+Fondaciji bez posledica drugde. Ruta odbija prijavu za ROBA/USLUGE bez isprave;
+obrazac ima drugo polje; admin je vidi u detaljima prijave.
+🟡 Ista base64 putanja kao `cenovnikSlika` (do ~3MB u bazi), ne R2 — prati zatečeni
+obrazac tog toka.
+
+🔴 **Javno imenovanje SME, pravo na promociju NE** (čl. 13; M-3 ublažen na zahtev
+vlasnika, koji pokrovitelje namerava da pominje kao javno priznanje). Granica prema
+sponzorstvu nije **pominjanje** nego **pravo**: sponzorstvo je usluga reklame uz
+naknadu (oporeziva, sa fakturom i PDV-om), a donacija sa imenovanjem donatora nije.
+Zato akt kaže da Fondacija **sme** javno da imenuje i zahvali, a da pokrovitelj po
+osnovu doprinosa **ne stiče pravo** na logotip, link ka svom sajtu, oglasni prostor,
+pominjanje u kampanjama ni bilo koju drugu promotivnu činidbu, i **ne može je ugovoriti
+niti zahtevati**. Javno priznanje je akt Fondacije, ne protivčinidba. **Ne dodavati
+logotipe ni linkove na `/pokrovitelji`** — javna stranica namerno prikazuje samo naziv
+i kumulativ.
+
+**Razgraničenje prema pravnom licu** (čl. 11, M-4): doprinos se evidentira u zapisu
+korisnika koji je prijavu podneo; pokrovitelj ne stiče POEN, ZRNO, potraživanje, pravo
+na povraćaj ni bilo koje drugo pravo; evidentiranje **nije davanje pravnog lica
+korisniku, nije raspodela dobiti** ni drugi oblik prenosa vrednosti iz imovine
+pokrovitelja. Uz to čl. 7 sada traži da prijavu podnosi **vlasnik odnosno zakonski
+zastupnik**, a ne bilo ko ovlašćen da zastupa.
+🟡 Kod tu odredbu **ne sprovodi** — nema provere vlasništva; nosi je čovek koji potvrđuje
+prijem donacije. Prihvaćeno; ako zatreba, mesto je potvrda prijave, ne obrazac.
+
+🔴 **ŠTA SE NAMERNO NE PIŠE U AKTIMA, a pravnica mora da zna** (odluka vlasnika:
+„on dobija, nemoj to pisati, ali ne dobija firma"):
+- **Daje pravno lice, korist ima fizičko lice lično.** Firma da 1.000.000 RSD, a vlasnik
+  dobije 2.880.000 POEN u svoj zapis — iz kog proizlaze ZRNO, glas u Gornjem Kolu i
+  mesto u redu za kolektivnu nabavku. To je jedina **trostrana** konstrukcija u sistemu
+  i najoštrija tačka R-05: ako odbrana „POEN nema vrednost van sistema" ikad padne, ovo
+  je najbliže izvlačenju sredstava iz firme bez oporezivanja. Akt kaže samo da **firma
+  ne dobija ništa**; prećutkivanje ne menja činjenicu, pa ide u registar za pravnicu.
+- **Nesrazmera prema donaciji fizičkog lica nije obrazložena.** Isti iznos od 1.000.000
+  RSD: fizičko lice 1.800.000 POEN, pokroviteljstvo 2.880.000 (**1,6×**). M-5 (izjednačiti
+  ili obrazložiti) nije prihvaćen. Otvorena tačka.
+- 🟢 **Kod preduzetnika distance nema** — davalac i primalac su isto lice, pa gornja
+  briga otpada, ali je očiglednije da je POEN dobijen za novac.
+
+🟢 **Ciljevi Fondacije se uklapaju u krug za priznavanje rashoda** (izjava vlasnika),
+pa pokroviteljima donacija prolazi kroz poreski bilans do zakonskog limita. P-1 zatvoren.
+
+🟡 **OTVORENO — režim donacije USLUGA.** Usluga nema zalihu ni javan cenovnik, cena je
+po klijentu, a davalac vrednost **stvara ni iz čega**; uz to se ne zna da li je usluga
+Fondaciji uopšte trebala. Predložene dve varijante: **(A)** Fondacija unapred prihvata
+uslugu odlukom koja utvrđuje obim i **dinarsku vrednost koju ta usluga ima za nju** —
+isti obrt kao kod kolektivne nabavke, gde odluka utvrđuje parametar pre nego što druga
+strana kaže cenu; **(B)** isto što i roba (cenovnik + isprava). Odluka vlasnika se čeka;
+do tada za usluge važi isti režim kao za robu.
+
 ### Kolektivna nabavka — implementacija (2026-09-02)
 
 Mehanizam iz **Pravilnika o projektima i kolektivnim nabavkama** (set 4.4.1) je od
