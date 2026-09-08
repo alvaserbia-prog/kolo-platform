@@ -1384,12 +1384,6 @@ model PokroviteljPrijava {
   vrstaDonacije  VrstaDonacije
   vrednostRsd    Decimal                  @db.Decimal(12, 2)
   cenovnikSlika  String?
-  // Knjigovodstvena isprava kojom pokrovitelj davanje robe/usluga evidentira u
-  // SVOJIM poslovnim knjigama (Pravilnik o pokroviteljstvu i donacijama, cl. 7).
-  // Obavezna uz cenovnik za ROBA/USLUGE: cenovnik utvrdjuje meru, isprava je
-  // vezuje za knjige pokrovitelja, pa se vrednost ne moze naduvati samo prema
-  // Fondaciji. Null = novcana donacija ili zatecena prijava.
-  ispravaSlika   String?
   ugovorTekst    String
   status         PokroviteljPrijavaStatus @default(CEKA_POTPIS)
   potpisanoAt    DateTime?

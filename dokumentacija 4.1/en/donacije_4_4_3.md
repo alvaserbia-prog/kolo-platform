@@ -129,6 +129,8 @@ On the basis of the register, the Foundation determines each sponsor's cumulativ
 
 The sponsorship recording coefficient equals the donation recording coefficient from Article 4 increased by twenty percent, for the same cumulative amount. The coefficient of the newly reached tier applies to the entire new donation.
 
+The difference relative to the coefficient from Article 4 is neither an incentive for a particular legal form of the giver nor a consideration in return for the contribution. A donation by a legal entity or entrepreneur does not necessarily reduce the giver's tax base: to the extent that it is not recognised as an expense under tax regulations, tax on profit is payable on it. Such a donation may therefore constitute a sacrifice greater than the donated amount itself, which a donation by a natural person never is. That difference in the measure of sacrifice is expressed through the recording coefficient.
+
 On the basis of the sponsor's cumulative contribution, the Protocol records POEN in the user's record according to the following table:
 
 | **Tier** | **Sponsor's cumulative contribution (RSD)** | **Bonus POEN recording for that tier** |

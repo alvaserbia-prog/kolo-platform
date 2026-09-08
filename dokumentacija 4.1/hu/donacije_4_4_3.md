@@ -129,6 +129,8 @@ A nyilvántartás alapján az Alapítvány valamennyi megerősített kérelem é
 
 A pártfogás nyilvántartási együtthatója megegyezik a 4. cikk szerinti adomány-nyilvántartási együtthatóval, húsz százalékkal növelve, azonos halmozott összeg esetén. Az újonnan elért szint együtthatója a teljes új adományra alkalmazandó.
 
+A 4. cikk szerinti együtthatóhoz képesti különbség nem ösztönző az adományozó meghatározott jogi formájára, és nem is ellenszolgáltatás a hozzájárulásért. A jogi személy, illetve egyéni vállalkozó adománya nem feltétlenül csökkenti az adományozó adóalapját: amennyiben az adójogszabályok szerint nem minősül költségnek, arra nyereségadót kell fizetni. Az ilyen adomány ezért az adományozott összegnél nagyobb lemondást jelenthet, ami a természetes személy adománya esetében soha nem áll fenn. A lemondás mértékének e különbsége fejeződik ki a nyilvántartási együtthatóban.
+
 A pártfogó halmozott hozzájárulása alapján a Protokoll POEN-eket vesz nyilvántartásba a felhasználó bejegyzésében, a következő táblázat szerint:
 
 | **Szint** | **A pártfogó halmozott hozzájárulása (RSD)** | **Bónusz POEN-nyilvántartás az adott szintért** |

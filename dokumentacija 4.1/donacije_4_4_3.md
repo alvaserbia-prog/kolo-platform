@@ -122,6 +122,8 @@ Na osnovu registra, Fondacija utvrđuje kumulativni doprinos svakog pokrovitelja
 
 Koeficijent evidencije pokroviteljstva jednak je koeficijentu evidencije donacija iz člana 4 uvećanom za dvadeset odsto, za isti kumulativni iznos. Koeficijent novodostignutog nivoa primenjuje se na celu novu donaciju.
 
+Razlika u odnosu na koeficijent iz člana 4 nije podsticaj za određeni pravni oblik davaoca niti protivčinidba za doprinos. Donacija pravnog lica odnosno preduzetnika ne umanjuje nužno poresku osnovicu davaoca: u meri u kojoj se po poreskim propisima ne priznaje kao rashod, na nju se plaća porez na dobit. Zbog toga takva donacija može predstavljati odricanje veće od samog doniranog iznosa, što donacija fizičkog lica nikada nije. Ta razlika u meri odricanja izražava se kroz koeficijent evidencije.
+
 Na osnovu kumulativnog doprinosa pokrovitelja, Protokol evidentira POEN-e u zapisu korisnika, prema sledećoj tabeli:
 
 | **Nivo** | **Kumulativni doprinos pokrovitelja (RSD)** | **Koeficijent evidencije** |

@@ -129,6 +129,8 @@ Na temelju registra Zaklada utvrđuje kumulativni doprinos svakog pokrovitelja z
 
 Koeficijent evidencije pokroviteljstva jednak je koeficijentu evidencije donacija iz članka 4. uvećanom za dvadeset posto, za isti kumulativni iznos. Koeficijent novodostignute razine primjenjuje se na cijelu novu donaciju.
 
+Razlika u odnosu na koeficijent iz članka 4. nije poticaj za određeni pravni oblik davatelja niti protučinidba za doprinos. Donacija pravne osobe odnosno obrtnika ne umanjuje nužno poreznu osnovicu davatelja: u mjeri u kojoj se po poreznim propisima ne priznaje kao rashod, na nju se plaća porez na dobit. Zbog toga takva donacija može predstavljati odricanje veće od samoga doniranog iznosa, što donacija fizičke osobe nikada nije. Ta se razlika u mjeri odricanja izražava kroz koeficijent evidencije.
+
 Na temelju kumulativnog doprinosa pokrovitelja Protokol evidentira POEN-e u zapisu korisnika, prema sljedećoj tablici:
 
 | **Razina** | **Kumulativni doprinos pokrovitelja (RSD)** | **Bonus evidencija POEN-a za tu razinu** |

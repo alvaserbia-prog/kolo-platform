@@ -284,6 +284,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "uvećanom za dvadeset odsto",
       "Najmanji iznos prijave pokroviteljstva je 10.000 dinara",
       "Tabela se nastavlja bez ograničenja",
+      // Obrazloženje razlike od 20% (čl. 10). Bez njega je viši koeficijent
+      // za pravno lice gola prednost po pravnoj formi.
+      "nije podsticaj za određeni pravni oblik davaoca",
+      "u meri u kojoj se po poreskim propisima ne priznaje kao rashod, na nju se plaća porez na dobit",
       "nije raspodela dobiti",
       "ne stiče pravo na objavljivanje logotipa",
       "Javno priznanje je akt Fondacije, a ne protivčinidba",
@@ -300,6 +304,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "increased by twenty percent",
       "minimum amount of a sponsorship application is 10,000 dinars",
       "The table continues without limit",
+      "is neither an incentive for a particular legal form of the giver",
+      "not recognised as an expense under tax regulations, tax on profit is payable on it",
       "is not a distribution of profit",
       "no right to the publication of a logo",
       "Public recognition is an act of the Foundation, not a counter-performance",
@@ -316,6 +322,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "увеличенному на двадцать процентов",
       "Наименьшая сумма заявки на покровительство — 10 000 динаров",
       "Таблица продолжается без ограничения",
+      "не является ни стимулом для определённой правовой формы дарителя",
+      "не признаётся расходом, с него уплачивается налог на прибыль",
       "не является распределением прибыли",
       "не приобретает права на публикацию логотипа",
       "Публичное признание является актом Фонда, а не встречным предоставлением",

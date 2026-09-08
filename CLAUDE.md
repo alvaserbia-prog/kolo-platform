@@ -742,6 +742,29 @@ brojeve 1…7. **Migracija brojeva nivoa nije bila potrebna.** Zaključano testo
 poništava**, a kumulativ zatečenih pokrovitelja se prenosi i dalje služi kao osnov
 za nivo.
 
+🔴 **ZAŠTO 20% — obrazloženje u čl. 10 (2026-09-08).** Do tada je razlika prema
+donaciji fizičkog lica stajala kao gola brojka; sada akt kaže da **nije podsticaj za
+određeni pravni oblik davaoca ni protivčinidba za doprinos**, nego mera **odricanja**:
+donacija pravnog lica odnosno preduzetnika **ne umanjuje nužno poresku osnovicu** — u
+meri u kojoj se po poreskim propisima ne priznaje kao rashod, na nju se plaća porez
+na dobit, pa takva donacija može predstavljati **odricanje veće od samog doniranog
+iznosa**, što donacija fizičkog lica nikada nije.
+🔴 **Stopa se NE piše u aktu** (danas 15%) — stope se menjaju, a akt bi zastareo bez
+ijedne izmene. Isti razlog iz kog se poreske stope proveravaju na dan primene.
+🔴 **NE pisati „Fondacija preferira donacije pravnih lica jer im to više odgovara".**
+Vlasnikova formulacija sadrži oba razloga, ali oni idu u suprotnim smerovima: ako je
+korporativni put **jeftiniji** za davaoca (a po računici iz sekcije ispod jeste, dok
+je donacija priznat rashod), onda viši koeficijent nagrađuje **jeftiniji** put — što je
+tačno prigovor koji se obara. Odbranjiv je samo drugi razlog: **skuplji** slučaj, kad
+rashod nije priznat. Zato u akt ide samo on. Ista logika kao kod ZRNA i tabele
+donacija — u tekstu stoji mera doprinosa, nikad opis podsticaja.
+🟡 **Obrazloženje počiva na istom otvorenom pitanju za knjigovođu** (čl. 15 Zakona o
+porezu na dobit): ako svrha Fondacije ulazi u taksativni krug, donacija JESTE priznat
+rashod do 5% ukupnog prihoda i tada obrazloženje pokriva samo višak preko limita. To
+ga ne obara — „ne umanjuje **nužno**" je tačno u oba slučaja — ali treba znati da mu
+je domet uži nego što deluje.
+**Zaključano testom** `pravni-dokumenti.test.ts` na sr/en/ru.
+
 **Kod:**
 - `src/lib/donacija-pravila.ts` — `pragZaNivo`, `koeficijentZaNivo`,
   `koeficijentPokroviteljstvaZaNivo`, `nivoPokroviteljstvaZaKumulativ`,
@@ -809,8 +832,11 @@ uplatio** — ako je platila firma, to piše na samom prilivu, uz **matični bro
 PIB** iz prijave. Isprava bi bila drugi dokaz iste činjenice, i to onaj koji
 prilaže strana koja ima korist. **P-5 time nije zatvoren, ali se ne zatvara
 ispravom** — nosi ga čovek koji potvrđuje prijem prijave, poređenjem uplatioca sa
-prijavljenim pravnim licem. (Commit `4bfbf60` je vraćen commit-om koji ga poništava;
-kolona `ispravaSlika` ostaje neiskorišćena.)
+prijavljenim pravnim licem.
+🟢 **Kolona `PokroviteljPrijava.ispravaSlika` je OBRISANA** (migracija
+`20260908140000_ukloni_ispravu`). Živela je jedan dan i nijedna prijava je nije
+popunila, pa nema zatečenih podataka — za razliku od `cenovnikSlika`, koja ostaje
+jer je nose stariji zapisi.
 
 ~~Maloprodajna cena OSTAJE — ali sada ima obrazloženje~~ (odluka vlasnika; M-1
 „po nabavnoj vrednosti" je bila odbijena). Obrazloženje u čl. 7 glasi da se pokrovitelj
@@ -863,9 +889,8 @@ prijem donacije. Prihvaćeno; ako zatreba, mesto je potvrda prijave, ne obrazac.
   i najoštrija tačka R-05: ako odbrana „POEN nema vrednost van sistema" ikad padne, ovo
   je najbliže izvlačenju sredstava iz firme bez oporezivanja. Akt kaže samo da **firma
   ne dobija ništa**; prećutkivanje ne menja činjenicu, pa ide u registar za pravnicu.
-- **Nesrazmera prema donaciji fizičkog lica nije obrazložena.** Isti iznos od 1.000.000
-  RSD: fizičko lice 1.800.000 POEN, pokroviteljstvo 2.880.000 (**1,6×**). M-5 (izjednačiti
-  ili obrazložiti) nije prihvaćen. Otvorena tačka.
+- 🟢 **Nesrazmera je OBRAZLOŽENA 08.09.2026** (čl. 10, vidi pasus ispod) — do tada je
+  bila otvorena tačka i M-5 je bio odbijen.
 - 🟢 **Kod preduzetnika distance nema** — davalac i primalac su isto lice, pa gornja
   briga otpada, ali je očiglednije da je POEN dobijen za novac.
 
