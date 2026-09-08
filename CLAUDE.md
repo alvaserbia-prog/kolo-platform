@@ -193,6 +193,13 @@ van sistema** (odluka vlasnika). Sadržinski:
   ceo teret te odbrane nosi činjenica da korisnik ne daje ništa. Ako je POEN „ništa"
   (nema vrednost van sistema, ne prelazi Fondaciji, gasi se), naš slučaj je običan
   slučaj; ako je „nešto", to je promet uz naknadu. Odredbe su zaključane testom.
+  🔴 **Korisnik pri preuzimanju NE DAJE ništa** — nema činidbe ni prema Fondaciji ni
+  prema dobavljaču; menja se jedino **evidencija njegovog ranijeg doprinosa
+  zajednici**, koja se umanjuje. Uz tu rečenicu OBAVEZNO ide brana iz istog stava:
+  raniji doprinos **ne daje pravo na dobro** i nije potraživanje (čl. 13 Pravilnika),
+  a pravo na učešće proizlazi iz odluke o nabavci, ne iz ranijeg davanja. Bez brane
+  se donacija čita kao **unapred plaćena kupovina** — gore od svega što smo ovim
+  rešavali.
 - **DPIA na 4.4.3 — ispravljen zbir u zaključku.** Tačka 9 je vodila **sedam** rizika
   kao srednje, uključujući R5, a tabela rizika daje R5 = 4 (nizak); uz to je tačka
   5.8 izostavljala R13 iz spiska najviših. Tačno je **šest srednjih** (R1, R2, R8,
