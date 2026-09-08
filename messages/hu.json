@@ -881,7 +881,12 @@
     "model": "Modell:",
     "poziv_na_broj": "Hivatkozási szám:",
     "vas_broj_opis": "Ez az állandó befizetési számod (97-es modell). Add meg minden befizetésnél — ez alapján ismerhető fel, hogy a befizetés a tiéd, és így kerül bejegyzésre neked a POEN. A bank elutasítja a hibásan beírt számot, így a befizetés nem kerülhet rossz taghoz.",
-    "rang_pojasnjenje": "Magasabb rang kedvezőbb árfolyamot jelent."
+    "rang_pojasnjenje": "Magasabb rang kedvezőbb árfolyamot jelent.",
+    "ugovor_link": "Adományozási szerződés",
+    "ugovor_naslov": "Adományozási szerződés",
+    "ugovor_stampaj": "Nyomtatás",
+    "ugovor_nazad": "Vissza az adományokhoz",
+    "ugovor_napomena": "A szerződés az adomány megerősítésének pillanatában készült, és azóta nem változott. A szerb eredeti az irányadó."
   },
   "poruke": {
     "naslov": "Üzenetek",

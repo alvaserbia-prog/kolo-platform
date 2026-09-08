@@ -27,6 +27,9 @@ export async function GET() {
           status: true,
           javno: true,
           createdAt: true,
+          // Ne salje se ceo tekst ugovora u listu — samo da li postoji, pa
+          // ekran zna da li da ponudi link (cl. 5b).
+          ugovorTekst: true,
         },
       },
     },
@@ -84,6 +87,7 @@ export async function GET() {
       poenEmitted: d.poenEmitted,
       status: d.status,
       javno: d.javno,
+      imaUgovor: d.ugovorTekst !== null,
       createdAt: d.createdAt.toISOString(),
     })),
     listaDonacija: javneDonacije.map((d) => ({

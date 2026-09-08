@@ -59,7 +59,9 @@ export async function POST(req: NextRequest) {
         parametri: { rsd: iznos, poen: result.poenEmitted },
         naslov: "Donacija potvrđena!",
         tekst: `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
-        link: "/donacije",
+        // Ugovor o donaciji (čl. 5b) se isporučuje kroz Platformu — link vodi
+        // pravo na njega, ne na spisak donacija.
+        link: `/donacije/${result.zapisId}/ugovor`,
       });
 
       return NextResponse.json({ ok: true, ...result });
@@ -108,7 +110,7 @@ export async function POST(req: NextRequest) {
       parametri: { rsd: iznos, poen: result.poenEmitted },
       naslov: "Donacija potvrđena!",
       tekst: `Tvoja donacija od ${iznos.toLocaleString("sr-RS")} RSD je potvrđena. Evidentirano ti je ${result.poenEmitted.toLocaleString("sr-RS")} POEN.`,
-      link: "/donacije",
+      link: `/donacije/${result.zapisId}/ugovor`,
     });
 
     return NextResponse.json({ ok: true, ...result });

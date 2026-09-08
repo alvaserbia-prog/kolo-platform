@@ -888,7 +888,12 @@
     "model": "Model:",
     "poziv_na_broj": "Poziv na broj:",
     "vas_broj_opis": "Ovo je tvoj trajni broj za uplate (model 97). Navedi ga uz svaku uplatu, po njemu se uplata prepoznaje kao tvoja i POEN se upisuje tebi. Banka odbija pogrešno ukucan broj, pa uplata ne može da ode pogrešnom članu.",
-    "rang_pojasnjenje": "Viši rang znači povoljniji koeficijent evidencije."
+    "rang_pojasnjenje": "Viši rang znači povoljniji koeficijent evidencije.",
+    "ugovor_link": "Ugovor o donaciji",
+    "ugovor_naslov": "Ugovor o donaciji",
+    "ugovor_stampaj": "Odštampaj",
+    "ugovor_nazad": "Nazad na donacije",
+    "ugovor_napomena": "Ugovor je sačinjen u trenutku potvrde donacije i od tada se ne menja. Merodavan je srpski original."
   },
   "poruke": {
     "naslov": "Poruke",

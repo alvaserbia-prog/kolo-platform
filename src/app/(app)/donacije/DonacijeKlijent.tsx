@@ -13,6 +13,7 @@ interface Donacija {
   poenEmitted: number;
   status: "PENDING" | "CONFIRMED";
   javno: boolean;
+  imaUgovor: boolean;
   createdAt: string;
 }
 
@@ -367,6 +368,16 @@ export default function DonacijeKlijent() {
                     <p className="text-xs text-kolo-green-700 mt-1">
                       +{d.poenEmitted.toLocaleString(intlTag(locale))} {tc("poen")}
                     </p>
+                  )}
+                  {/* Ugovor o donaciji (čl. 5b) — samo za zapise koji ga imaju;
+                      zatečene donacije su nastale pre uvođenja ugovora. */}
+                  {d.imaUgovor && (
+                    <a
+                      href={`/donacije/${d.id}/ugovor`}
+                      className="text-xs text-kolo-muted underline hover:text-kolo-text mt-1 inline-block"
+                    >
+                      {t("ugovor_link")}
+                    </a>
                   )}
                 </div>
               </div>

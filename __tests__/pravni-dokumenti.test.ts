@@ -266,16 +266,34 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "nije cena POEN-a i nije popust na donaciju",
       "Donacijom se ništa ne pribavlja",
       "veću meru priznanja doprinosa",
+      // 🔴 Ugovor o donaciji (čl. 5b) je JEDINO mesto na kome bezteretnost izjavljuje
+      // i sam donator, a ne samo pravilnik koji piše Fondacija.
+      "Fondacija sačinjava ugovor o donaciji i isporučuje ga donatoru kroz Platformu",
+      "taj upis nije protivčinidba",
+      "naknadnim izmenama ovog pravilnika se ne menja",
+      // Nivo je priznanje za delo, ne kupljen status.
+      "trajno priznanje za učinjeno delo, a ne stečen status",
+      // 🔴 Javnost NIJE uslov za evidentiranje POEN-a (to bi bila struktura
+      // „plati → dobij vidljivost"); razlog je proverljivost upisa.
+      "bila bi upis koji se ne može proveriti",
     ],
     en: [
       "is not a price of POEN and is not a discount on a donation",
       "Nothing is acquired by a donation",
       "greater measure of recognition of the contribution",
+      "draws up a donation agreement and delivers it to the donor through the Platform",
+      "this recording is not a counter-performance",
+      "permanent recognition of a deed performed, not an acquired status",
+      "recording that cannot be verified",
     ],
     ru: [
       "не является ценой ПОЕН и не является скидкой",
       "Пожертвованием ничего не приобретается",
       "большую меру признания вклада",
+      "составляет договор о пожертвовании и вручает его жертвователю через Платформу",
+      "этот учёт не является встречным предоставлением",
+      "постоянное признание совершённого дела, а не приобретённый статус",
+      "записью, которую невозможно проверить",
     ],
   },
   // 4.4.3 — upozorenje o pribavljanju POEN-a mimo sistema. Ekonomski deo (ne stiče

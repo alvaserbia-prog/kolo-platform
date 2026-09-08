@@ -54,6 +54,8 @@ Broj evidentiranih POEN-a jednak je iznosu donacije u dinarima pomnoženom koefi
 
 Nivo je kumulativan i trajan — ne smanjuje se korišćenjem POEN-a niti bilo kojom drugom aktivnošću korisnika.
 
+Dostignuti nivo je trajno priznanje za učinjeno delo, a ne stečen status. Ne može se izgubiti, ne može se preneti na drugo lice i ne daje nijedno pravo prema Fondaciji.
+
 Koeficijent evidencije izražava uvažavanje doprinosa zajedničkom dobru. Veći pojedinačan doprinos ima veći značaj za zajednicu od istog iznosa razlivenog kroz vreme, jer zaokružen iznos omogućava da se konkretna potreba zajednice podmiri odjednom — da se plati infrastruktura, pokrene program ili sprovede projekat. Zajednica takav doprinos zato i uvažava više.
 
 Koeficijent evidencije nije cena POEN-a i nije popust na donaciju. Donacijom se ništa ne pribavlja: donator ne stiče nijedno dobro, nijedno potraživanje prema Fondaciji, pravo na povraćaj, pravo na otkup POEN-a ni uticaj u odlučivanju o pravilima sistema. Pošto predmeta sticanja nema, razlika u koeficijentu ne predstavlja povoljniji uslov sticanja nego veću meru priznanja doprinosa.
@@ -70,9 +72,19 @@ Evidentirani POEN-i imaju isti status kao svi drugi POEN-i u sistemu.
 
 Platforma vodi listu donacija fizičkih lica dostupnu verifikovanim korisnicima. Donator koji je izvršio javnu donaciju identifikuje se u listi imenom i prezimenom. Ime i prezime beleže se uz donaciju u trenutku njenog evidentiranja i čuvaju se kao trajan deo zapisa donacije — kao i podaci o uplati — te se ne menjaju naknadnim izmenama profila niti se uklanjaju iz liste. Anonimni donatori se u listi ne identifikuju.
 
-Objavljivanje imena donatora predstavlja javno priznanje doprinosa i element transparentnosti rada Fondacije, i neposredno je vezano za evidentiranje POEN-a po osnovu javne donacije.
+Objavljivanje imena donatora služi transparentnosti raspolaganja sredstvima Fondacije i proveri osnova po kome je POEN upisan. Ukupan broj evidentiranih POEN-a javan je i zbir svih zapisa u Protokolu jednak je nuli; donacija koja bi POEN nosila a ne bi se mogla pripisati nijednom licu bila bi upis koji se ne može proveriti. Iz tog razloga se za anonimnu donaciju POEN ne evidentira.
 
-Donator je svestan da javno povezivanje njegovog imena sa donacijom omogućava povezivanje njegovog pseudonimnog zapisa u sistemu sa njegovim identitetom. Davanje ovog pristanka dobrovoljno je i predstavlja uslov za evidentiranje POEN-a po osnovu donacije.
+Donator je svestan da javno povezivanje njegovog imena sa donacijom omogućava povezivanje njegovog pseudonimnog zapisa u sistemu sa njegovim identitetom. Donator sam bira da li će donirati javno ili anonimno; Fondacija oba oblika donacije prima ravnopravno i koristi ih za iste ciljeve. Izostanak evidentiranja POEN-a kod anonimne donacije posledica je razloga iz stava 2 ovog člana, a ne uskraćivanja pristanka.
+
+### Član 5b — Ugovor o donaciji
+
+Za svaku donaciju fizičkog lica Fondacija sačinjava ugovor o donaciji i isporučuje ga donatoru kroz Platformu. Ugovor se sačinjava u elektronskom obliku u trenutku u kome Fondacija donaciju prihvati.
+
+Ugovor sadrži iznos donacije, izjavu da je donacija dobrovoljna i bez naknade, izjavu da donator donacijom ne pribavlja nijedno dobro ni uslugu, ne stiče potraživanje prema Fondaciji, pravo na povraćaj donacije, pravo na otkup POEN-a ni uticaj u odlučivanju o pravilima sistema, obavezu Fondacije da donaciju upotrebi isključivo za ostvarivanje ciljeva zbog kojih je osnovana, kao i podatak o broju POEN-a upisanom povodom donacije uz naznaku da taj upis nije protivčinidba.
+
+Tekst ugovora čuva se uz zapis donacije onakav kakav je bio u trenutku prihvatanja donacije i naknadnim izmenama ovog pravilnika se ne menja.
+
+Donator ugovoru pristupa u svakom trenutku kroz Platformu i može ga odštampati.
 
 ## III — Pokroviteljstvo pravnih lica
 

@@ -56,6 +56,8 @@ The number of POEN recorded equals the donation amount in dinars multiplied by t
 
 The tier is cumulative and permanent — it does not decrease through the use of POEN or through any other user activity.
 
+The tier attained is a permanent recognition of a deed performed, not an acquired status. It cannot be lost, cannot be transferred to another person and confers no right against the Foundation.
+
 The recording coefficient expresses the regard in which a contribution to the common good is held. A larger single contribution has greater significance for the community than the same amount spread out over time, because a rounded sum makes it possible to meet a concrete need of the community at once — to pay for infrastructure, to launch a programme, or to carry out a project. The community therefore holds such a contribution in higher regard.
 
 The recording coefficient is not a price of POEN and is not a discount on a donation. Nothing is acquired by a donation: the donor acquires no good, no claim against the Foundation, no right to a refund, no right to redemption of POEN, and no influence in decision-making on the rules of the system. Since there is no object of acquisition, the difference in the coefficient does not constitute more favourable terms of acquisition but a greater measure of recognition of the contribution.
@@ -72,9 +74,19 @@ Recorded POEN have the same status as all other POEN in the system.
 
 The platform maintains a list of donations by natural persons, available to verified users. A donor who has made a public donation is identified in the list by first and last name. The first and last name are recorded with the donation at the moment it is registered and are kept as a permanent part of the donation record — like the payment details — and are not altered by subsequent profile changes nor removed from the list. Anonymous donors are not identified in the list.
 
-Publication of the donor's name constitutes public recognition of the contribution and an element of transparency in the Foundation's work, and is directly tied to the recording of POEN on account of the public donation.
+Publication of the donor's name serves the transparency of the Foundation's handling of funds and the verification of the basis on which POEN was recorded. The total number of recorded POEN is public and the sum of all records in the Protocol equals zero; a donation that carried POEN but could not be attributed to any person would be a recording that cannot be verified. For that reason POEN is not recorded for an anonymous donation.
 
-The donor is aware that publicly linking their name to a donation makes it possible to connect their pseudonymous record in the system with their identity. Giving this consent is voluntary and constitutes a condition for the recording of POEN on account of the donation.
+The donor is aware that publicly linking their name to a donation makes it possible to connect their pseudonymous record in the system with their identity. The donor chooses whether to donate publicly or anonymously; the Foundation accepts both forms of donation equally and uses them for the same aims. The absence of POEN recording for an anonymous donation follows from the reason set out in paragraph 2 of this Article, and not from the withholding of consent.
+
+### Article 5b — Donation agreement
+
+For every donation by a natural person the Foundation draws up a donation agreement and delivers it to the donor through the Platform. The agreement is drawn up in electronic form at the moment the Foundation accepts the donation.
+
+The agreement contains the amount of the donation, a statement that the donation is voluntary and without consideration, a statement that through the donation the donor acquires no good or service, no claim against the Foundation, no right to a refund, no right to redeem POEN and no influence over decisions on the rules of the system, the Foundation's obligation to use the donation solely for the aims for which it was established, and the number of POEN recorded on account of the donation together with a note that this recording is not a counter-performance.
+
+The text of the agreement is kept with the donation record as it stood at the moment the donation was accepted and is not altered by subsequent amendments to this Rulebook.
+
+The donor may access the agreement at any time through the Platform and may print it.
 
 ## III — Sponsorship by Legal Entities
 

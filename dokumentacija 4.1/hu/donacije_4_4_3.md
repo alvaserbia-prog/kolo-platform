@@ -56,6 +56,8 @@ A nyilvántartásba vett POEN-ek száma megegyezik az adomány dinárban kifejez
 
 A szint halmozott és tartós — nem csökken a POEN felhasználásával, sem a felhasználó bármely más tevékenységével.
 
+Az elért szint a véghezvitt cselekedet tartós elismerése, nem pedig megszerzett státusz. Nem veszíthető el, más személyre nem ruházható át, és semmilyen jogot nem biztosít az Alapítvánnyal szemben.
+
 A nyilvántartási együttható a közös jóhoz való hozzájárulás megbecsülését fejezi ki. A nagyobb egyszeri hozzájárulás nagyobb jelentőséggel bír a közösség számára, mint ugyanazon összeg időben elnyújtva, mivel a kerek összeg lehetővé teszi a közösség konkrét szükségletének egyszerre történő fedezését — az infrastruktúra kifizetését, egy program elindítását vagy egy projekt megvalósítását. A közösség ezért az ilyen hozzájárulást nagyobbra értékeli.
 
 A nyilvántartási együttható nem a POEN ára és nem az adomány kedvezménye. Az adománnyal semmi sem kerül megszerzésre: az adományozó nem szerez sem jószágot, sem követelést az Alapítvánnyal szemben, sem visszatérítéshez való jogot, sem a POEN visszaváltásához való jogot, sem befolyást a rendszer szabályairól szóló döntéshozatalban. Mivel a megszerzés tárgya hiányzik, az együttható különbsége nem kedvezőbb megszerzési feltételt jelent, hanem a hozzájárulás elismerésének nagyobb mértékét.
@@ -72,9 +74,19 @@ A nyilvántartásba vett POEN-ek ugyanolyan státusszal bírnak, mint a rendszer
 
 A platform a hitelesített felhasználók számára elérhető listát vezet a természetes személyek adományairól. Az az adományozó, aki nyilvános adományt teljesített, a listán nevével azonosítható. A nevet az adomány mellé annak nyilvántartásba vételekor jegyzik fel, és az adomány bejegyzésének tartós részeként őrzik meg — akárcsak a befizetés adatait —, így azt a profil utólagos módosítása nem változtatja meg, és a listáról nem törlik. A névtelen adományozókat a lista nem azonosítja.
 
-Az adományozó nevének közzététele a hozzájárulás nyilvános elismerése és az Alapítvány működése átláthatóságának eleme, és közvetlenül kapcsolódik a POEN nyilvános adomány alapján történő nyilvántartásba vételéhez.
+Az adományozó nevének közzététele az Alapítvány eszközeivel való rendelkezés átláthatóságát és annak az alapnak az ellenőrizhetőségét szolgálja, amely alapján a POEN-t nyilvántartásba vették. A nyilvántartásba vett POEN-ek összes száma nyilvános, a Protokoll valamennyi bejegyzésének összege pedig nulla; az az adomány, amely POEN-t hordozna, de egyetlen személyhez sem volna hozzárendelhető, olyan bejegyzés lenne, amely nem ellenőrizhető. Ezért névtelen adomány után POEN nem kerül nyilvántartásba.
 
-Az adományozó tudatában van annak, hogy nevének az adománnyal való nyilvános összekapcsolása lehetővé teszi rendszerbeli álnevesített bejegyzésének személyazonosságához kötését. E hozzájárulás megadása önkéntes, és feltételét képezi a POEN adomány alapján történő nyilvántartásba vételének.
+Az adományozó tudatában van annak, hogy nevének az adománnyal való nyilvános összekapcsolása lehetővé teszi rendszerbeli álnevesített bejegyzésének személyazonosságához kötését. Az adományozó maga választja meg, hogy nyilvánosan vagy névtelenül adományoz-e; az Alapítvány az adomány mindkét formáját egyenrangúan fogadja el, és ugyanazon célokra használja fel. A POEN nyilvántartásba vételének elmaradása névtelen adomány esetén az e cikk 2. bekezdésében kifejtett okból következik, nem pedig a hozzájárulás megtagadásából.
+
+### 5.b cikk — Adományozási szerződés
+
+Természetes személy minden adománya után az Alapítvány adományozási szerződést készít, és azt a Platformon keresztül eljuttatja az adományozónak. A szerződés elektronikus formában, abban a pillanatban készül, amelyben az Alapítvány az adományt elfogadja.
+
+A szerződés tartalmazza az adomány összegét, azt a nyilatkozatot, hogy az adomány önkéntes és ellenszolgáltatás nélküli, azt a nyilatkozatot, hogy az adománnyal az adományozó semmilyen jószágot vagy szolgáltatást nem szerez, nem szerez követelést az Alapítvánnyal szemben, sem visszatérítéshez való jogot, sem a POEN visszaváltásához való jogot, sem befolyást a rendszer szabályairól szóló döntéshozatalban, az Alapítvány azon kötelezettségét, hogy az adományt kizárólag azon célok megvalósítására fordítja, amelyek érdekében létrehozták, valamint az adomány kapcsán nyilvántartásba vett POEN számát azzal a megjelöléssel, hogy e nyilvántartásba vétel nem ellenszolgáltatás.
+
+A szerződés szövegét az adomány bejegyzése mellett abban a formában őrzik meg, ahogyan az az adomány elfogadásának pillanatában szólt, és azt a jelen szabályzat utólagos módosításai nem változtatják meg.
+
+Az adományozó a szerződéshez a Platformon keresztül bármikor hozzáfér, és azt kinyomtathatja.
 
 ## III — Jogi személyek pártfogása
 

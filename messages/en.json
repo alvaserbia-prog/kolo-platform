@@ -888,7 +888,12 @@
     "model": "Model:",
     "poziv_na_broj": "Reference number:",
     "vas_broj_opis": "This is your permanent payment reference number (model 97). Quote it with every payment — that is how the payment is recognised as yours and POEN is recorded to you. The bank rejects a mistyped number, so a payment cannot go to the wrong member.",
-    "rang_pojasnjenje": "A higher rank means a better rate."
+    "rang_pojasnjenje": "A higher rank means a better rate.",
+    "ugovor_link": "Donation agreement",
+    "ugovor_naslov": "Donation agreement",
+    "ugovor_stampaj": "Print",
+    "ugovor_nazad": "Back to donations",
+    "ugovor_napomena": "The agreement was drawn up at the moment the donation was confirmed and has not changed since. The Serbian original is authoritative."
   },
   "poruke": {
     "naslov": "Messages",

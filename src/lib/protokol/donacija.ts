@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { TransactionType, DonationStatus } from "@/generated/prisma/client";
 import { emitujPoen } from "./emisija";
 import { izracunajPoenZaDonaciju, nivoZaKumulativ } from "@/lib/donacija-pravila";
+import { generisiUgovorODonaciji } from "@/lib/donacija-ugovor";
 
 // Nivoi, koeficijent i obracun POENA zive u `donacija-pravila.ts` (bez Prisme,
 // jer ih uvozi i admin ekran u pretrazivacu). Ovde se re-eksportuju, pa server
@@ -32,7 +33,14 @@ export async function evidentirajDonaciju(
   userId: string,
   novaRSD: number,
   options?: { existingRecordId?: string; adminId?: string; javno?: boolean }
-): Promise<{ poenEmitted: number; noviNivo: number; noviKumulativ: number; kurs: number }> {
+): Promise<{
+  poenEmitted: number;
+  noviNivo: number;
+  noviKumulativ: number;
+  kurs: number;
+  /** Zapis donacije — pozivna mesta ga koriste za link na ugovor (čl. 5b). */
+  zapisId: string;
+}> {
   const javno = options?.javno ?? true;
 
   const user = await prisma.user.findUnique({
@@ -40,6 +48,7 @@ export async function evidentirajDonaciju(
     include: {
       wallet: true,
       podaci: { select: { punoIme: true } },
+      // pseudonim ide u ugovor o donaciji (cl. 5b)
       donations: {
         // Samo javne donacije ulaze u kumulativni nivo (anonimne ne nose POEN).
         // Tekući zapis (existingRecordId) se ISKLJUČUJE iz kumulativa — kartični tok
@@ -71,6 +80,22 @@ export async function evidentirajDonaciju(
   // Trajan snapshot imena za javnu donaciju (čl. 5a) — ne menja se kasnije.
   const donatorIme = javno ? user.podaci?.punoIme?.trim() || null : null;
 
+  // Ugovor o donaciji (čl. 5b) — sačinjava se pri potvrdi i SNIMA se na zapis.
+  // Jedno mesto za sva tri puta (ručna evidencija, potvrda PENDING zapisa,
+  // kartični callback), jer svi prolaze kroz ovu funkciju.
+  const zapisId = options?.existingRecordId ?? crypto.randomUUID();
+  const ugovorTekst = generisiUgovorODonaciji({
+    ime: donatorIme,
+    pseudonim: user.pseudonim,
+    iznosRSD: novaRSD,
+    poen,
+    nivo: noviNivo,
+    koeficijent: kurs,
+    javno,
+    zapisId,
+    datum: new Date(),
+  });
+
   if (options?.existingRecordId) {
     await prisma.donationRecord.update({
       where: { id: options.existingRecordId },
@@ -81,6 +106,7 @@ export async function evidentirajDonaciju(
         poenEmitted: poen,
         javno,
         donatorIme,
+        ugovorTekst,
         status: DonationStatus.CONFIRMED,
         confirmedAt: new Date(),
         confirmedById: options.adminId ?? null,
@@ -89,6 +115,7 @@ export async function evidentirajDonaciju(
   } else {
     await prisma.donationRecord.create({
       data: {
+        id: zapisId,
         userId,
         amountRSD: novaRSD,
         cumulativeRSD: noviKumulativ,
@@ -96,6 +123,7 @@ export async function evidentirajDonaciju(
         poenEmitted: poen,
         javno,
         donatorIme,
+        ugovorTekst,
         status: DonationStatus.CONFIRMED,
         confirmedAt: new Date(),
         confirmedById: options?.adminId ?? null,
@@ -112,5 +140,5 @@ export async function evidentirajDonaciju(
     );
   }
 
-  return { poenEmitted: poen, noviNivo, noviKumulativ, kurs };
+  return { poenEmitted: poen, noviNivo, noviKumulativ, kurs, zapisId };
 }

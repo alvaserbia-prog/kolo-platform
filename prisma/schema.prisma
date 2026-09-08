@@ -1336,6 +1336,13 @@ model DonationRecord {
   // donacija (pre uvođenja pravila) → ne prikazuje se u listi.
   donatorIme String?
 
+  // Ugovor o donaciji (Pravilnik o pokroviteljstvu i donacijama, cl. 5b) —
+  // SNIMLJEN tekst u trenutku potvrde donacije. Ne generise se ponovo pri
+  // citanju: dokument mora da govori ono sto je govorio kad je donacija
+  // primljena, bez obzira na kasnije izmene pravilnika. Null = istorijska
+  // donacija (pre uvodjenja ugovora).
+  ugovorTekst String?
+
   @@index([status, createdAt])
 }
 

@@ -622,6 +622,75 @@ Do ove izmene prepis POEN-a **nije mogao da se obori ničim** — jedino poništ
 - **Kod:** `src/lib/razmena-prijava.ts` (ČISTE funkcije — bez Prisme, jer ih uvozi i admin tab u pretraživaču) + `src/lib/protokol/prijava-razmene.ts` (servisne, re-eksportuje pravila). Rute: `POST /api/transakcije/[id]/prijavi`, `GET /api/admin/prijave-razmene`, `POST .../[id]/{ponisti,odbaci}`. Migracija `20260815120000_prijava_razmene`. Testovi `__tests__/protokol/prijava-razmene.test.ts`. Audit: `PREPIS_PONISTEN`, `PRIJAVA_RAZMENE_ODBACENA`. Badge: tab Razmene + sidebar `adminCekanje`.
 - 🔴 **Akti ovo NE poznaju, a od pune naplate u minus razmimoilaženje je veće.** Uslovi čl. 22 kažu da Fondacija nije strana u razmeni; nijedan akt joj ne daje ovlašćenje da obori prepis, a čl. 14 st. 3 poznaje **samo jedan** izuzetak od zabrane negativnog zapisa (nadoknadu iz čl. 20b) — kod ih sada ima dva. **Pre puštanja u ozbiljan rad ovome treba odredba**: postupak po prijavi u Uslovima i drugi izuzetak u Pravilniku uz čl. 14/16 (uz upućivanje na režim nadoknade iz čl. 20b, jer se minus tako i ponaša). Do tada je to faktička praksa Fondacije, ne pravo prijavioca ni obaveza Fondacije.
 
+### Ugovor o donaciji za svakog donatora (2026-09-08)
+
+Odluka vlasnika uz analizu rizika **R-04** (donacija sa rastućim koeficijentom —
+dobročina ili teretna). Za **svaku** donaciju fizičkog lica Fondacija sačinjava
+ugovor i isporučuje ga donatoru kroz Platformu. Akt: **`donacije_4_4_3.md` čl. 5b**
+(sr + en/ru/hr/hu), uz izmenjene čl. 4 i čl. 5a istog akta.
+
+🔴 **Zašto ugovor uopšte postoji.** Ceo pravni položaj sistema počiva na tome da je
+donacija **bez naknade** — da donator POEN ničim ne pribavlja. Dok se to nigde ne
+izjavljuje **između strana**, tvrdnja živi samo u pravilniku koji piše Fondacija.
+Ugovor je jedino mesto na kome bezteretnost izjavljuje i sam donator. Zaključan
+testom `pravni-dokumenti.test.ts` na sr/en/ru.
+
+🔴 **Tekst se SNIMA na zapis** (`DonationRecord.ugovorTekst`, migracija
+`20260908120000_donacija_ugovor`) i posle toga se ne menja — isti razlog kao
+`donatorIme` (čl. 5a) i kalkulacija nabavke: dokument mora da govori ono što je
+govorio u trenutku donacije, bez obzira na kasnije izmene pravilnika. **Ne
+generisati ga ponovo pri čitanju.**
+
+- **Jedno mesto generisanja — `evidentirajDonaciju`**, kroz koje prolaze sva tri
+  puta (ručna evidencija iz izvoda, potvrda PENDING zapisa, kartični callback).
+  Funkcija sada vraća i `zapisId`, jer pri ručnoj evidenciji zapis tek nastaje, a
+  obaveštenje mora da linkuje pravo na ugovor.
+- **Čista funkcija `src/lib/donacija-ugovor.ts`** (bez Prisme — tekst prikazuje i
+  stranica u pretraživaču). Tekst je **na srpskom na svim jezicima**, kao i ugovor
+  o pokroviteljstvu: to je pravni dokument po srpskom pravu, a merodavan je srpski
+  original.
+- **Anonimna donacija dobija svoj ugovor** — sa izjavom da POEN nije evidentiran i
+  bez imena donatora. Bezteretnost se izjavljuje isto.
+- **Ekran:** `/donacije/[id]/ugovor` (server komponenta, dugme „Odštampaj",
+  `print:hidden` na svemu ostalom). Tuđa donacija i donacija bez ugovora vraćaju
+  **404**, ne poruku o zabrani — poruka bi potvrdila da zapis postoji. Link stoji
+  uz svaku potvrđenu donaciju u istoriji (`imaUgovor` iz `GET /api/donacije`) i u
+  obaveštenju o potvrdi.
+- 🟡 **Zatečene donacije ostaju bez ugovora** (`ugovorTekst = null`) — za njih
+  ugovor nije ni sačinjen. Nema prelazne radnje: retroaktivno „sačinjen" ugovor sa
+  današnjim datumom bio bi netačan dokument.
+
+**Uz ugovor su izmenjena dva člana istog akta:**
+- **čl. 4** — dostignuti nivo je **trajno priznanje za učinjeno delo, a ne stečen
+  status**; ne gubi se, ne prenosi se, ne daje nijedno pravo (formulacija vlasnika).
+- 🔴 **čl. 5a — javnost VIŠE NIJE uslov za evidentiranje POEN-a.** Do ove izmene je
+  st. 3 glasio da je pristanak na objavu „uslov za evidentiranje POEN-a", što uz
+  čl. 5 st. 1 daje strukturu **platiš → dobiješ vidljivost** — to je oblik
+  sponzorstva bez obzira na to kako se zove. Sada razlog nosi **proverljivost**:
+  ukupan broj POEN-a je javan i zbir zapisa u Protokolu je nula, pa bi donacija
+  koja nosi POEN a ne može se pripisati nijednom licu bila upis koji se ne može
+  proveriti. **Pravila su netaknuta** (ime trajno uz zapis, anonimni se ne
+  identifikuju, anonimna donacija ne nosi POEN) — menja se samo razlog, i to je
+  cela poenta izmene. Ne vraćati formulaciju o uslovu.
+
+🔴 **ODBIJENE MERE UZ R-04 (odluka vlasnika, 2026-09-07) — ne predlagati ponovo:**
+- **Izravnati koeficijent / fiksan iznos po nivou** — odbijeno: „hoću da favorizujem
+  velike donacije, što pre što više, to je cilj." 🔴 **Tako se NE piše u aktima, FAQ-u
+  ni copy-ju** — isto pravilo kao kod ZRNA: u tekstu stoji „veći pojedinačan doprinos
+  ima veći značaj za zajednicu", nikad opis podsticaja.
+- **Sopstveni KYC za velike donacije** — odbijeno: uplata ide preko računa Fondacije,
+  pa identifikaciju uplatioca po Zakonu o sprečavanju pranja novca sprovodi **banka**;
+  platforma samo evidentira ko je donirao.
+
+🟡 **Poresko oslobođenje NIJE u Statutu.** Provereno: `statut_4_1_0.md` ne sadrži ni
+reč „porez" ni „neprofitno". Ono što ima (čl. 71, 79, 81, 227) jeste **činjenična
+pretpostavka** oslobođenja — namenska upotreba imovine, zabrana raspodele osnivačima
+i organima, prenos imovine sličnoj fondaciji pri prestanku. Oslobođenje daje **poreski
+zakon**, ne statut, i uslovljeno je time da poklon služi opštekorisnom cilju. Ne pisati
+u aktima ni u copy-ju da je Fondacija „oslobođena poreza" kao svojstvo — to je pitanje
+za potvrdu od pravnice, i njegov odgovor počiva na istoj besplatnosti davanja na kojoj
+stoji i čl. 19 Pravilnika o nabavkama.
+
 ### Kolektivna nabavka — implementacija (2026-09-02)
 
 Mehanizam iz **Pravilnika o projektima i kolektivnim nabavkama** (set 4.4.1) je od
@@ -1452,6 +1521,7 @@ Do ove izmene je vodič `/dobrodosli` znao da je prvi prolaz isključivo po `ses
 - **Koeficijentni model (Pravilnik o pokroviteljstvu i donacijama 3.7.3, čl. 4):** kumulativna donacija određuje nivo; koeficijent novodostignutog nivoa primenjuje se na celu novu donaciju; `Math.round()`.
 - **11 nivoa, 1,00× (2.000 RSD) → 2,00× (5.000.000 RSD)** — kod (`donacija.ts` `RANG_TABELA`) usklađen sa `donacije_3_7_3.md` čl. 4. ✅
 - Jedna transakcija „Bonus za donaciju iznos X". Logika: `donacija.ts` (`nivoZaKumulativ`, `izracunajPoenZaDonaciju`, `evidentirajDonaciju`).
+- **Ugovor o donaciji za svaku donaciju** (čl. 5b, od 2026-09-08) — vidi zasebnu sekciju.
 
 ### Osnivački doprinos (implementiran)
 - Naknadna evidencija pre-launch rada (Pravilnik čl. 37; Pravilnik o osnivačkom doprinosu).
