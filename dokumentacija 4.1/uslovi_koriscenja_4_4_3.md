@@ -242,6 +242,8 @@ Korisniku je zabranjeno i da nudi, kupuje, prodaje ili posreduje u prometu POEN-
 
 Posao iz stava 2 ovog člana sklapa se u celini van Platforme. Fondacija u njemu ne posreduje, ne evidentira ga i ne pruža zaštitu nijednoj strani, a korisnik koji POEN pribavi na taj način ne stiče nivo donacija niti pomera koeficijent evidencije iz Pravilnika o pokroviteljstvu i donacijama. Na korisnika koji postupi protivno stavu 2 primenjuju se mere iz Članova 27 i 28 ovih Uslova.
 
+Korisniku je zabranjeno i da ustupi, iznajmi ili proda pristup svom nalogu, kao i da koristi tuđi nalog. Nalog je vezan za lice čija je stvarnost potvrđena u lancu potvrda i nije prenosiv. Ustupanjem naloga prenose se i zapisi u njemu, uključujući upisano ZRNO, koje se po Pravilniku o KOLO sistemu ne može preneti; zabrana iz ovog stava sprečava da se ta neprenosivost zaobiđe. Na korisnika koji postupi protivno ovom stavu primenjuju se mere iz Članova 27 i 28 ovih Uslova.
+
 ### Član 25 — Sadržaj korisnika
 
 Korisnik je odgovoran za sav sadržaj koji objavljuje na Platformi, uključujući ponude, zahteve i svu drugu komunikaciju putem Platforme.

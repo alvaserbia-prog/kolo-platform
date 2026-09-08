@@ -38,6 +38,8 @@ Obračunski se koeficijent mijenja s aktivnošću u sustavu. Nijedan korisnik, n
 
 Promjena položaja nositelja ZRNA u obračunskom sustavu nije prinos i nije zajamčena. Razlika između obračunskog koeficijenta u trenutku upisa ZRNA i u trenutku otpisa aritmetička je posljedica promjene stanja evidencije cijelog sustava. Nijedan sudionik tu razliku ne isplaćuje niti jamči. Eventualna korist od promjene pozicije ostvaruje se isključivo u POEN-ima — zapisima u evidenciji bez vanjske imovinske vrijednosti.
 
+Nositelj ZRNA nema pravo na dinarska sredstva Zaklade, ni neposredno ni posredno. Dinarska sredstva ulaze u Zakladu i ne ulaze u obračunski okvir sustava. Odluke o raspoređivanju dinarskih sredstava, uključujući projekte i kolektivne nabave, ne stvaraju imovinsko pravo nijednog nositelja ZRNA i ne daju mu udjel u imovini Zaklade. Prestankom svojstva nositelja ZRNA ne nastaje nikakvo potraživanje prema Zakladi.
+
 ### Članak 5. — Nepovratnost donacija
 
 Dinarska sredstva koja korisnik daje Zakladi donacije su u smislu važećih propisa. Donacija je nepovratna, bez obzira na daljnji razvoj sustava.

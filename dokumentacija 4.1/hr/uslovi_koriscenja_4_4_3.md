@@ -244,6 +244,8 @@ Korisniku je zabranjeno i nuditi, kupovati, prodavati POEN ili ZRNO te posredova
 
 Posao iz stavka 2. ovoga članka sklapa se u cijelosti izvan Platforme. Zaklada u njemu ne posreduje, ne evidentira ga i ne pruža zaštitu nijednoj strani, a korisnik koji POEN pribavi na taj način ne stječe razinu donacija niti pomiče koeficijent evidencije iz Pravilnika o pokroviteljstvu i donacijama. Na korisnika koji postupi protivno stavku 2. primjenjuju se mjere iz Članaka 27. i 28. ovih Uvjeta.
 
+Korisniku je zabranjeno i ustupiti, iznajmiti ili prodati pristup svojem računu, kao i koristiti tuđi račun. Račun je vezan uz osobu čija je stvarnost potvrđena u lancu potvrda i nije prenosiv. Ustupanjem računa prenose se i zapisi u njemu, uključujući upisano ZRNO, koje se po Pravilniku o KOLO sustavu ne može prenijeti; zabrana iz ovoga stavka sprječava zaobilaženje te neprenosivosti. Na korisnika koji postupi protivno ovome stavku primjenjuju se mjere iz Članaka 27. i 28. ovih Uvjeta.
+
 ### Članak 25. — Sadržaj korisnika
 
 Korisnik je odgovoran za sav sadržaj koji objavljuje na Platformi, uključujući ponude, zahtjeve i svu drugu komunikaciju putem Platforme.

@@ -38,6 +38,8 @@ The accounting coefficient changes with activity in the system. No user, no inst
 
 A change in the position of a ZRNO Holder within the accounting system is not a return and is not guaranteed. The difference between the accounting coefficient at the time of ZRNO registration and at the time of deregistration is an arithmetic consequence of changes in the state of the entire system's ledger. No actor pays or guarantees that difference. Any benefit arising from a change in position is realised solely in POEN — records in the ledger with no external property value.
 
+A ZRNO Holder has no right to the Foundation's dinar funds, whether directly or indirectly. Dinar funds enter the Foundation and do not enter the accounting framework of the system. Decisions on the allocation of dinar funds, including projects and collective procurements, create no property right of any ZRNO Holder and confer no share in the Foundation's assets. The cessation of the capacity of ZRNO Holder gives rise to no claim against the Foundation.
+
 ### Article 5 — Irrevocability of donations
 
 Dinar funds that the user gives to the Foundation are donations within the meaning of the applicable regulations. A donation is irrevocable, regardless of the further development of the system.

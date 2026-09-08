@@ -230,6 +230,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // koliko POEN vredi u dinarima i primenjuje to na sopstvene radnje.
       "ne primenjuje ni u jednom svom postupku",
       "ne izvode se iz dinara",
+      // 🔴 Nalog je neprenosiv. Bez ove zabrane se neprenosivost ZRNA (čl. 22
+      // Pravilnika) zaobilazi u jednom potezu — proda se ceo nalog sa ZRNOM u njemu.
+      "ustupi, iznajmi ili proda pristup svom nalogu",
+      "nije prenosiv",
     ],
     en: [
       "Listing by an Unverified User",
@@ -239,6 +243,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "acquires no donation tier",
       "does not apply the orientation ratio in any of its own procedures",
       "are not derived from dinars",
+      "assigning, renting out, or selling access to their account",
+      "is not transferable",
     ],
     ru: [
       "Объявление неверифицированного пользователя",
@@ -248,6 +254,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "не получает уровня пожертвований",
       "не применяет ориентировочное соотношение ни в одной своей процедуре",
       "не выводятся из динаров",
+      "уступать, сдавать в аренду или продавать доступ",
+      "не является передаваемой",
     ],
   },
   // 4.4.3 — obrazloženje koeficijenta evidencije. Tabela nivoa (1,00–2,00) bez
@@ -277,16 +285,25 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ne pribavlja od drugih korisnika za novac",
       "ne pomera koeficijent evidencije",
       "a ne protivčinidbu za donaciju",
+      // 🔴 ZRNO ne daje pravo na dinarska sredstva Fondacije. Odbrana „iza jedinice
+      // nema imovine" je oslabljena kolektivnom nabavkom, u kojoj nosioci ZRNA
+      // odlučuju o trošenju dinara — razgraničenje mora biti izričito.
+      "nema pravo na dinarska sredstva Fondacije",
+      "ne stvaraju imovinsko pravo nijednog nosioca ZRNA",
     ],
     en: [
       "not acquired from other users for money",
       "does not move the recording coefficient",
       "not consideration for the donation",
+      "no right to the Foundation's dinar funds",
+      "create no property right of any ZRNO Holder",
     ],
     ru: [
       "не приобретается у других пользователей за деньги",
       "не сдвигает коэффициент учёта",
       "а не встречное предоставление за пожертвование",
+      "не имеет права на динарные средства Фонда",
+      "не создают имущественного права ни одного держателя ЗРНО",
     ],
   },
   // Prihvatanje Politike NIJE pristanak za obrade čiji je osnov pristanak — bez te

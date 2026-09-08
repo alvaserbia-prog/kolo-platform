@@ -205,6 +205,36 @@ van sistema** (odluka vlasnika). Sadržinski:
   5.8 izostavljala R13 iz spiska najviših. Tačno je **šest srednjih** (R1, R2, R8,
   R11, R13, R16) i **jedanaest niskih**. Brojevi su zaključani testom.
 
+- 🔴 **Uslovi, čl. 24 — NALOG JE NEPRENOSIV.** Zabranjeno je ustupanje, iznajmljivanje
+  i prodaja pristupa nalogu, kao i korišćenje tuđeg naloga, uz mere iz čl. 27 i 28.
+  Razlog je konkretan: ZRNO se po čl. 22 Pravilnika ne može preneti, ali se **ceo
+  nalog sa ZRNOM u njemu** mogao ustupiti u jednom potezu — neprenosivost se time
+  zaobilazila bez ijedne zabranjene radnje. Par uz zabranu prometa POEN-a iz istog
+  člana.
+- 🔴 **Izjava o rizicima, čl. 4 — ZRNO NE DAJE PRAVO NA SREDSTVA FONDACIJE.** Nosilac
+  nema pravo na dinarska sredstva ni neposredno ni posredno; odluke o raspoređivanju
+  dinara, **uključujući projekte i kolektivne nabavke**, ne stvaraju imovinsko pravo
+  nijednog nosioca; prestankom svojstva ne nastaje potraživanje. Povod: odbrana „iza
+  jedinice nema imovine" (čl. 15 st. 4 Pravilnika) oslabljena je kolektivnom nabavkom,
+  u kojoj nosioci ZRNA odlučuju o trošenju dinara — uticaj postoji iako pravo ne
+  postoji, pa razgraničenje mora biti izričito.
+  🟡 Najjači dom za ovu odredbu bio bi **Pravilnik čl. 25**, ali bump glavnog
+  Pravilnika povlači ispravku upućivanja u DPIA i Pravilniku o učešću dece, pa i
+  njihov bump. Nije otvarano bez naloga; ako zatreba, to je zaseban potez.
+
+🔴 **ODBIJENE MERE UZ R-03 (odluka vlasnika, 2026-09-07) — ne predlagati ponovo:**
+- **Otpis po koeficijentu iz upisa** (da nestane razlika kao izvor dobitka) —
+  odbijeno: „ZRNO i služi tome da neko zaradi POEN jer ranije ulazi; to je nagrada za
+  one koji ranije počnu da pomažu zajedničkom dobru, jer je njihov ulog najbitniji za
+  razvoj KOLA." 🔴 **Formulacija je pravno osetljiva i mora se pisati tačno:**
+  „uvažavanje ranijeg doprinosa zajedničkom dobru" je odbranjivo, „ko ranije uđe
+  zaradiće više" je opis investicionog podsticaja. Ne pisati drugu varijantu u copy,
+  FAQ ni akte.
+- **Period vezivanja pre otpisa** — odbijeno: trgovinske dinamike nema, koeficijent se
+  računa jednom dnevno u ponoć (čl. 24), pa nema šta da se usporava.
+- **Tvrda kapa na glasačku moć** — odbijeno: kvadratni koren (čl. 46) već je značajno
+  ograničenje maksimuma.
+
 🟡 **Uslovi su ostali na 4.4.3** iako su menjani dvaput istog dana: 4.4.3 nije bio
 objavljen ni na `main`-u ni na produkciji kad je došla izmena čl. 19, pa nema
 verzije koja bi „govorila nešto drugo nego kad je objavljena". Nabavke su prvi put

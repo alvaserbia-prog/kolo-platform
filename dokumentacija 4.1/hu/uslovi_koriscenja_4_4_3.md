@@ -244,6 +244,8 @@ A felhasználónak tilos továbbá POEN-t vagy ZRNO-t kínálnia, vásárolnia, 
 
 A jelen cikk (2) bekezdése szerinti ügyletet teljes egészében a Platformon kívül kötik meg. Az Alapítvány abban nem közvetít, azt nem veszi nyilvántartásba, és egyik félnek sem nyújt védelmet, az a felhasználó pedig, aki így szerez POEN-t, nem szerez adományszintet, és nem mozdítja el a pártfogásról és adományokról szóló szabályzat szerinti nyilvántartási együtthatót. A (2) bekezdéssel ellentétesen eljáró felhasználóval szemben a jelen Feltételek 27. és 28. cikke szerinti intézkedéseket kell alkalmazni.
 
+A felhasználónak tilos továbbá a fiókjához való hozzáférést átengednie, bérbe adnia vagy eladnia, valamint más fiókját használnia. A fiók ahhoz a személyhez kötődik, akinek valósságát a megerősítési láncban megerősítették, és nem ruházható át. A fiók átengedésével az abban szereplő bejegyzések is átszállnak, ideértve a nyilvántartásba vett ZRNO-t, amely a KOLO rendszerről szóló szabályzat szerint nem ruházható át; az e bekezdés szerinti tilalom megakadályozza e nem átruházhatóság megkerülését. Az e bekezdéssel ellentétesen eljáró felhasználóval szemben a jelen Feltételek 27. és 28. cikke szerinti intézkedéseket kell alkalmazni.
+
 ### 25. cikk — Felhasználói tartalom
 
 A felhasználó felelős a Platformon közzétett valamennyi tartalomért, ideértve az ajánlatokat, a kereslet-hirdetéseket és a Platformon keresztüli minden egyéb kommunikációt.

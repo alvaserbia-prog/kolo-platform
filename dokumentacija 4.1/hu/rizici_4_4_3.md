@@ -38,6 +38,8 @@ Az elszámolási együttható a rendszer aktivitásával változik. Egyetlen fel
 
 A ZRNO-tulajdonos elszámolási rendszerbeli helyzetének változása nem hozam, és nem garantált. A ZRNO nyilvántartásba vételekor és leírásakor érvényes elszámolási együttható közötti különbség a teljes rendszer nyilvántartási állapotának változásából eredő számtani következmény. Ezt a különbséget egyetlen szereplő sem fizeti ki és nem szavatolja. A pozícióváltozásból eredő esetleges előny kizárólag POEN-ben valósul meg — olyan nyilvántartási bejegyzésekben, amelyeknek nincs külső vagyoni értéke.
 
+A ZRNO-tulajdonost nem illeti meg jog az Alapítvány dináreszközeire, sem közvetlenül, sem közvetve. A dináreszközök az Alapítványhoz kerülnek, és nem lépnek be a rendszer elszámolási keretébe. A dináreszközök elosztásáról szóló határozatok, ideértve a projekteket és a kollektív beszerzéseket, egyetlen ZRNO-tulajdonos számára sem keletkeztetnek vagyoni jogot, és nem biztosítanak részesedést az Alapítvány vagyonából. A ZRNO-tulajdonosi minőség megszűnésével semmilyen követelés nem keletkezik az Alapítvánnyal szemben.
+
 ### 5. cikk — Az adományok visszavonhatatlansága
 
 Azok a dinárban nyújtott összegek, amelyeket a felhasználó az Alapítványnak ad, a hatályos jogszabályok értelmében adománynak minősülnek. Az adomány visszavonhatatlan, függetlenül a rendszer további fejlődésétől.

@@ -244,6 +244,8 @@ The user is likewise prohibited from offering, buying, selling, or brokering the
 
 An arrangement referred to in paragraph 2 of this Article is concluded entirely outside the Platform. The Foundation does not broker it, does not record it, and does not provide protection to either party, and a user who acquires POEN in that manner acquires no donation tier and does not move the recording coefficient under the Rulebook on Sponsorship and Donations. A user acting contrary to paragraph 2 is subject to the measures under Articles 27 and 28 of these Terms.
 
+The user is likewise prohibited from assigning, renting out, or selling access to their account, and from using another person's account. An account is tied to the person whose reality has been confirmed in the chain of confirmations and is not transferable. Assigning an account also transfers the records within it, including any recorded ZRNO, which under the Rulebook on the KOLO System may not be transferred; the prohibition under this paragraph prevents that non-transferability from being circumvented. A user acting contrary to this paragraph is subject to the measures under Articles 27 and 28 of these Terms.
+
 ### Article 25 — User Content
 
 The user is responsible for all content they publish on the Platform, including offers, requests, and all other communications via the Platform.
