@@ -161,6 +161,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ustupaju bez naknade",
       "nije protivčinidba",
       "navodi potrebu zajednice",
+      // 🔴 Korisnik pri preuzimanju NE DAJE ništa — umanjuje se evidencija njegovog
+      // ranijeg doprinosa. Uz to obavezno ide brana: raniji doprinos ne daje pravo
+      // na dobro, inače se donacija čita kao unapred plaćena kupovina.
+      "pri preuzimanju dela ne daje ništa",
+      "ne daje pravo na dobro",
       "najmanje 20.000 evidentiranih POEN-a",
       "nije cena dobra",
       "ne mora stajati u srazmeri",
@@ -179,6 +184,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "free of charge",
       "not consideration for the good provided",
       "states the need of the community",
+      "gives nothing when collecting a share",
+      "confers no right to a good",
       "at least 20,000 recorded POEN",
       "is not a price of the good",
       "need not stand in proportion",
@@ -196,6 +203,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "безвозмездно",
       "не является встречным предоставлением за предоставленное благо",
       "указывается потребность сообщества",
+      "пользователь ничего не даёт",
+      "не даёт права на благо",
       "не менее 20 000 ПОЕН",
       "не является ценой блага",
       "не обязано находиться с ней в соотношении",

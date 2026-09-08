@@ -194,6 +194,10 @@ Fondacija po osnovu poništenja zapisa ne prima nikakvu vrednost. Dobra se koris
 
 Broj POEN-a po delu je merilo po kome se utvrđuje ko učestvuje u raspodeli, a ne cena po kojoj se dobro daje.
 
+Korisnik pri preuzimanju dela ne daje ništa. Ne postoji činidba koju korisnik izvršava prema Fondaciji ili prema dobavljaču; menja se jedino evidencija njegovog ranijeg doprinosa zajednici, koja se umanjuje za broj POEN-a iz člana 17.
+
+Ranije evidentiran doprinos ne daje pravo na dobro i ne predstavlja potraživanje prema Fondaciji (član 13 Pravilnika o KOLO sistemu). Pravo na učešće ne proizlazi iz ranijeg davanja nego iz odluke kojom se nabavka pokreće; evidentiran doprinos je merilo po kome se utvrđuje ko u tom učešću ima prvenstvo.
+
 ### Član 20
 
 *Kalkulacija*

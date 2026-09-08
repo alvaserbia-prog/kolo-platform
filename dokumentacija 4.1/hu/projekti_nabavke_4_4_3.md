@@ -196,6 +196,10 @@ Az Alapítvány a bejegyzés érvénytelenítése alapján semmilyen értéket n
 
 Az egy részre eső POEN száma az a mérték, amely alapján megállapítást nyer, ki vesz részt az elosztásban, nem pedig ár, amelyen a jószágot juttatják.
 
+A felhasználó a rész átvételekor semmit sem ad. Nincs olyan szolgáltatás, amelyet a felhasználó az Alapítvány vagy a szállító felé teljesítene; kizárólag a közösséghez való korábbi hozzájárulásának nyilvántartása változik, amely a 17. cikk szerinti POEN-számmal csökken.
+
+A korábban nyilvántartott hozzájárulás nem keletkeztet jogot a jószágra, és nem jelent követelést az Alapítvánnyal szemben (a KOLO rendszerről szóló szabályzat 13. cikke). A részvételhez való jog nem a korábbi adásból, hanem a beszerzést megindító határozatból ered; a nyilvántartott hozzájárulás az a mérték, amely alapján az e részvételben való elsőbbség megállapítást nyer.
+
 ### 20. cikk
 
 *Kalkuláció*

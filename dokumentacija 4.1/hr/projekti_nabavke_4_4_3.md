@@ -196,6 +196,10 @@ Zaklada po osnovi poništenja zapisa ne prima nikakvu vrijednost. Dobra se koris
 
 Broj POEN-a po dijelu mjerilo je po kojem se utvrđuje tko sudjeluje u raspodjeli, a ne cijena po kojoj se dobro daje.
 
+Korisnik pri preuzimanju dijela ne daje ništa. Ne postoji činidba koju korisnik izvršava prema Zakladi ili prema dobavljaču; mijenja se jedino evidencija njegova ranijeg doprinosa zajednici, koja se umanjuje za broj POEN-a iz članka 17.
+
+Ranije evidentiran doprinos ne daje pravo na dobro i ne predstavlja potraživanje prema Zakladi (članak 13. Pravilnika o KOLO sustavu). Pravo na sudjelovanje ne proizlazi iz ranijega davanja nego iz odluke kojom se nabava pokreće; evidentiran je doprinos mjerilo po kojem se utvrđuje tko u tom sudjelovanju ima prednost.
+
 ### Članak 20.
 
 *Kalkulacija*

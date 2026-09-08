@@ -196,6 +196,10 @@ The Foundation receives no value whatsoever on the basis of the annulment of the
 
 The number of POEN per share is the measure by which it is determined who takes part in the distribution, and not a price at which the good is provided.
 
+The user gives nothing when collecting a share. There is no performance rendered by the user towards the Foundation or towards the supplier; what changes is solely the record of their earlier contribution to the community, which is reduced by the number of POEN under Article 17.
+
+An earlier recorded contribution confers no right to a good and does not constitute a claim against the Foundation (Article 13 of the Rulebook on the KOLO System). The right to take part does not arise from the earlier giving but from the decision initiating the procurement; the recorded contribution is the measure by which precedence in that participation is determined.
+
 ### Article 20
 
 *Calculation*
