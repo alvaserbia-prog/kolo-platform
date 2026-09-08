@@ -9,8 +9,12 @@ import { generisiUgovorODonaciji } from "@/lib/donacija-ugovor";
 // i dalje ima jedan ulaz.
 export {
   RANG_TABELA,
+  KORAK_KOEFICIJENTA,
   nivoZaKumulativ,
   izracunajPoenZaDonaciju,
+  pragZaNivo,
+  koeficijentZaNivo,
+  tabelaZaPrikaz,
 } from "@/lib/donacija-pravila";
 
 /**

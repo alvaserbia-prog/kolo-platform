@@ -765,9 +765,9 @@ Kérésre az Alapítvány a törvénnyel összhangban igazolást állít ki az a
       {
         id: 24,
         pitanje: `Kik a Patrónusok, és miben különböznek az adományozóktól?`,
-        odgovor: `A patrónusok jogi személyek és egyéni vállalkozók, akik az Alapítvány munkáját támogatják — nem csak pénzzel, hanem áruval vagy szolgáltatással is.
+        odgovor: `A patrónusok jogi személyek és egyéni vállalkozók, akik az Alapítvány munkáját pénzzel támogatják.
 
-A patrónusnak nincs saját fiókja: a POEN-bónusz annak a tulajdonosnak vagy társtulajdonosnak a fiókjára rögzül, aki rendes tag, illetve magának az egyéni vállalkozónak, egy 7 szintből álló fix táblázat szerint (10.000-től 1.000.000 RSD-ig).
+A patrónusnak nincs saját fiókja: a POEN annak a tulajdonosnak vagy törvényes képviselőnek a fiókjára rögzül, aki rendes tag, illetve magának az egyéni vállalkozónak. A számítás ugyanaz, mint az adományoknál — összeg × nyilvántartási együttható —, csak az együttható húsz százalékkal magasabb. A legkisebb kérelem 10.000 RSD.
 
 Minden patrónus nyilvánosan szerepel a Patrónusok oldalon — az átláthatóság és a hozzájárulás nyilvános elismerése végett.`,
       },

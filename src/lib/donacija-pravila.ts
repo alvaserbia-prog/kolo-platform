@@ -33,15 +33,118 @@ export const RANG_TABELA: { nivo: number; do: number; kurs: number }[] = [
   { nivo: 10, do:       2_000_000, kurs: 1.90 },
   { nivo: 11, do:       5_000_000, kurs: 2.00 },
 ];
+/**
+ * 🔴 Tabela se NASTAVLJA BEZ KRAJA (odluka vlasnika, 2026-09-08). `RANG_TABELA`
+ * gore je samo ZAKLJUČAN deo — jedanaest nivoa koji su objavljeni u aktu i koje
+ * čuva test. Iznad njih pragovi idu istim nizom 1–2–5 (10.000.000, 20.000.000,
+ * 50.000.000 …), a koeficijent raste za 0,10 po nivou. Bez plafona: sistem treba
+ * da izdrži skok u opticaju pri velikoj donaciji.
+ *
+ * Prag se zato NE traži u nizu nego se računa, a niz služi kao provera.
+ */
+
+/** Korak koeficijenta po nivou (čl. 4). */
+export const KORAK_KOEFICIJENTA = 0.1;
+
+/**
+ * 🔴 Koeficijent pokroviteljstva = koeficijent donacije × 1,20 (čl. 10, od
+ * 2026-09-08). Nije zasebna tabela nego IZVOD iz čl. 4 — dve lestvice se time
+ * ne mogu razići pri sledećoj izmeni, što je i bio razlog izmene: fiksni bonusi
+ * su davali 1,67–1,92× više po dinaru do milion, a preko miliona ništa.
+ */
+export const KOEFICIJENT_POKROVITELJSTVA = 1.2;
+
+/** Najmanji iznos prijave pokroviteljstva (čl. 7) — ispod toga ugovor košta više. */
+export const MINIMUM_PRIJAVE_POKROVITELJSTVA = 10_000;
+
+/**
+ * Donji prag kumulativa (RSD) za dati nivo. Nivo 1 nema prag (svaka donacija
+ * nosi POEN), nivo 2 je 5.000, a od nivoa 3 naviše niz je 1–2–5 počev od 10.000.
+ */
+export function pragZaNivo(nivo: number): number {
+  if (nivo <= 1) return 0;
+  if (nivo === 2) return 5_000;
+  const j = nivo - 3;
+  const mantisa = [1, 2, 5][j % 3];
+  return mantisa * Math.pow(10, 4 + Math.floor(j / 3));
+}
+
+/**
+ * Koeficijent za dati nivo. Računa se u celim brojevima (stotinkama) — sa
+ * `1 + (n-1) * 0.1` jedanaesti nivo daje 2.0000000000000004.
+ */
+export function koeficijentZaNivo(nivo: number): number {
+  return (100 + (Math.max(1, nivo) - 1) * 10) / 100;
+}
+
+/** Koeficijent pokroviteljstva za dati nivo — donacija × 1,20, tačno u stotinkama. */
+export function koeficijentPokroviteljstvaZaNivo(nivo: number): number {
+  const cent = 100 + (Math.max(1, nivo) - 1) * 10;
+  return Math.round((cent * 12) / 10) / 100;
+}
+
 
 /**
  * Vraća nivo i koeficijent evidencije za dati kumulativni RSD iznos.
  * Svaki iznos (uključujući 0) je bar Nivo 1 (koeficijent 1,00).
  */
 export function nivoZaKumulativ(kumulativRSD: number): { nivo: number; kurs: number } {
-  const rang = [...RANG_TABELA].reverse().find((r) => kumulativRSD >= r.do);
-  if (!rang) return { nivo: 1, kurs: 1.00 };
-  return { nivo: rang.nivo, kurs: rang.kurs };
+  // Nije pretraga po nizu nego penjanje po pragovima — tabela nema kraj.
+  // `Number.isFinite` čuva petlju: Infinity bi je vrtelo beskonačno, NaN pada na
+  // nivo 1 sam od sebe (poređenje sa NaN je uvek netačno).
+  if (!Number.isFinite(kumulativRSD) || kumulativRSD < 0) return { nivo: 1, kurs: 1.0 };
+  let nivo = 1;
+  while (kumulativRSD >= pragZaNivo(nivo + 1)) nivo++;
+  return { nivo, kurs: koeficijentZaNivo(nivo) };
+}
+
+/**
+ * Nivo i koeficijent pokroviteljstva za dati kumulativ (čl. 10).
+ *
+ * Numeracija nivoa pokroviteljstva počinje od najmanje prijave (10.000 RSD), pa
+ * je pomerena za dva u odnosu na nivoe donacija: nivo 1 pokroviteljstva = nivo 3
+ * donacija. 🟢 Zatečeni `Pokrovitelj.trenutniNivo` (1–7 po staroj fiksnoj tabeli)
+ * time OSTAJE tačan — stari pragovi 10.000…1.000.000 daju iste brojeve 1…7, pa
+ * prelazak na koeficijentni model ne traži migraciju brojeva nivoa.
+ */
+export const POMERAJ_NIVOA_POKROVITELJSTVA = 2;
+
+export function nivoPokroviteljstvaZaKumulativ(kumulativRSD: number): {
+  nivo: number;
+  kurs: number;
+} {
+  const { nivo } = nivoZaKumulativ(kumulativRSD);
+  return {
+    nivo: Math.max(1, nivo - POMERAJ_NIVOA_POKROVITELJSTVA),
+    kurs: koeficijentPokroviteljstvaZaNivo(nivo),
+  };
+}
+
+/** Redovi Tabele B za prikaz (čl. 10) — počinju od najmanje prijave. */
+export function tabelaPokroviteljstvaZaPrikaz(
+  doNivoa = 12
+): { nivo: number; do: number; kurs: number }[] {
+  return Array.from({ length: doNivoa }, (_, i) => {
+    const nivoDonacije = i + 1 + POMERAJ_NIVOA_POKROVITELJSTVA;
+    return {
+      nivo: i + 1,
+      do: pragZaNivo(nivoDonacije),
+      kurs: koeficijentPokroviteljstvaZaNivo(nivoDonacije),
+    };
+  });
+}
+
+/**
+ * Redovi za prikaz — zaključanih jedanaest plus nekoliko iz nastavka, da se na
+ * ekranu vidi da tabela ne staje. Prikaz, ne pravilo: obračun ide kroz
+ * `nivoZaKumulativ`, koji nema gornju granicu.
+ */
+export function tabelaZaPrikaz(doNivoa = 14): { nivo: number; do: number; kurs: number }[] {
+  return Array.from({ length: doNivoa }, (_, i) => ({
+    nivo: i + 1,
+    do: pragZaNivo(i + 1),
+    kurs: koeficijentZaNivo(i + 1),
+  }));
 }
 
 /**

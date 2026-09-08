@@ -754,9 +754,9 @@ On request, the Foundation issues a confirmation of the donation in accordance w
       {
         id: 24,
         pitanje: `What are Sponsors and how do they differ from donors?`,
-        odgovor: `Sponsors are legal entities and sole traders that support the Foundation's work — not only with money, but also with goods or services.
+        odgovor: `Sponsors are legal entities and sole traders that support the Foundation's work with money.
 
-A sponsor has no account of its own: the POEN bonus is recorded to the account of the owner or co-owner who is a full member, or of the sole trader themselves, under a fixed table of 7 levels (from 10,000 to 1,000,000 RSD).
+A sponsor has no account of its own: POEN is recorded to the account of the owner or legal representative who is a full member, or of the sole trader themselves. The calculation is the same as for donations — amount × recording coefficient — only the coefficient is twenty percent higher. The minimum application is 10,000 RSD.
 
 All sponsors are shown publicly on the Sponsors page — for transparency and public recognition of the contribution.`,
       },

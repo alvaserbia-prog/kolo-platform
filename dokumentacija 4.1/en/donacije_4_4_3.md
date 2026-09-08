@@ -6,7 +6,7 @@
 
 ### Article 1 — Subject matter
 
-This Rulebook governs the parameters for recording financial contributions in the KOLO system, specifically: donation tiers for natural persons and the donation recording coefficient, the initiation and confirmation of sponsorship recording for legal entities, sponsorship tiers and bonus POEN recording, the valuation of goods and services donations, and the sponsor ranking list.
+This Rulebook governs the parameters for recording financial contributions in the KOLO system, specifically: donation tiers for natural persons and the donation recording coefficient, the initiation and confirmation of sponsorship recording for legal entities, sponsorship tiers and the sponsorship recording coefficient, and the sponsor ranking list.
 
 ### Article 2 — Definitions
 
@@ -16,9 +16,9 @@ Terms used in this Rulebook have the meaning established in the KOLO System Rule
 
 **Donation tier** — the level of a donor's cumulative contribution that determines the donation recording coefficient.
 
-**Sponsorship tier** — the level of a sponsor's cumulative contribution that determines the amount of the bonus POEN recording.
+**Sponsorship tier** — the level of a sponsor's cumulative contribution that determines the sponsorship recording coefficient.
 
-**Sponsor's cumulative contribution** — the sum of all confirmed contributions by the sponsor up to a given moment, across all channels — money, goods, services.
+**Sponsor's cumulative contribution** — the sum of all confirmed monetary contributions by the sponsor up to a given moment.
 
 **Sponsorship application** — a request submitted by a verified user on the platform to initiate the recording of a sponsorship contribution.
 
@@ -38,21 +38,28 @@ The larger the user's cumulative contribution to the common good, the higher the
 
 The tier is determined on the basis of the sum of all of the user's previous donations and the new donation. The recording coefficient for the newly reached tier applies to the entire new donation.
 
-| **Tier** | **Cumulative donation (RSD)** | **Recording coefficient** |
+| **Tier** | **Sponsor's cumulative contribution (RSD)** | **Recording coefficient** |
 | --- | --- | --- |
-| 1 | 2,000 | 1.00 |
-| 2 | 5,000 | 1.10 |
-| 3 | 10,000 | 1.20 |
-| 4 | 20,000 | 1.30 |
-| 5 | 50,000 | 1.40 |
-| 6 | 100,000 | 1.50 |
-| 7 | 200,000 | 1.60 |
+| 1 | 10,000 | 1.44 |
+| 2 | 20,000 | 1.56 |
+| 3 | 50,000 | 1.68 |
+| 4 | 100,000 | 1.80 |
+| 5 | 200,000 | 1.92 |
+| 6 | 500,000 | 2.04 |
+| 7 | 1,000,000 | 2.16 |
+| 8 | 2,000,000 | 2.28 |
+| 9 | 5,000,000 | 2.40 |
+| 10 | 10,000,000 | 2.52 |
+| 11 | 20,000,000 | 2.64 |
+| 12 | 50,000,000 | 2.76 |
 | 8 | 500,000 | 1.70 |
 | 9 | 1,000,000 | 1.80 |
 | 10 | 2,000,000 | 1.90 |
 | 11 | 5,000,000 | 2.00 |
 
 The number of POEN recorded equals the donation amount in dinars multiplied by the recording coefficient.
+
+The table continues without limit. Each subsequent tier begins at the next threshold in the 1–2–5 sequence (10,000,000, 20,000,000, 50,000,000 dinars and so on), and the recording coefficient increases by 0.10 with each subsequent tier.
 
 The tier is cumulative and permanent — it does not decrease through the use of POEN or through any other user activity.
 
@@ -92,7 +99,7 @@ The donor may access the agreement at any time through the Platform and may prin
 
 ### Article 6 — Sponsorship
 
-Sponsorship is a donation of money, goods, or services by a legal entity or an entrepreneur to the Foundation. The sponsor is not a system user and receives neither POEN nor ZRNO.
+Sponsorship is a donation of money by a legal entity or an entrepreneur to the Foundation. The sponsor is not a system user and receives neither POEN nor ZRNO.
 
 The relationship between the Foundation and the sponsor is governed by a donation agreement.
 
@@ -100,15 +107,13 @@ The relationship between the Foundation and the sponsor is governed by a donatio
 
 Sponsorship is initiated by a verified system user by submitting a sponsorship application on the platform. The application is submitted by the owner or legal representative of the legal entity, or by the entrepreneur themselves.
 
-The application contains: the name of the legal entity or entrepreneur, the type of donation (money, goods, services), and the value of the donation in dinars. If the subject of the donation is goods or services, the user attaches to the application the sponsor's current retail price list on the basis of which the dinar value of the donation was determined, as well as the accounting document by which the sponsor records that supply in their own business books. The document must refer to the same goods or services and to the same value as the application.
-
-The retail value is taken because, by giving goods, the sponsor gives up three things: the purchase value of the goods, the tax they are obliged to calculate on that supply under value added tax regulations, and the revenue they would have obtained by selling the goods. The retail value is the only publicly verifiable measure that covers all three.
+The application contains: the name of the legal entity or entrepreneur, the tax identification number and the amount of the donation in dinars. The minimum amount of a sponsorship application is 10,000 dinars.
 
 Upon submission of the application, the platform automatically generates a donation agreement between the named sponsor and the Foundation. The donation agreement does not contain provisions on POEN or on the recording of POEN.
 
 ### Article 8 — Signing and performance
 
-The user signs the generated donation agreement on behalf of the legal entity or entrepreneur. The method of signing and the procedure for the transfer of the donation are established by a separate decision of the Foundation in accordance with the applicable accounting and tax regulations.
+The user signs the generated donation agreement on behalf of the legal entity or entrepreneur. The method of signing is established by a separate decision of the Foundation in accordance with the applicable accounting and tax regulations. The donation is performed by payment into the Foundation account.
 
 Upon receipt of the donation, the Foundation confirms receipt on the platform. Following confirmation, the Protocol records POEN in the user's record according to the tiers set out in Article 10 of this Rulebook.
 
@@ -120,9 +125,11 @@ The Foundation maintains a sponsor register in which it records all confirmed ap
 
 On the basis of the register, the Foundation determines each sponsor's cumulative contribution by summing the values of all confirmed applications.
 
-### Article 10 — Sponsorship tiers and bonus recording
+### Article 10 — Sponsorship tiers and recording coefficient
 
-On the basis of the sponsor's cumulative contribution, the Protocol records bonus POEN in the user's record according to the following table:
+The sponsorship recording coefficient equals the donation recording coefficient from Article 4 increased by twenty percent, for the same cumulative amount. The coefficient of the newly reached tier applies to the entire new donation.
+
+On the basis of the sponsor's cumulative contribution, the Protocol records POEN in the user's record according to the following table:
 
 | **Tier** | **Sponsor's cumulative contribution (RSD)** | **Bonus POEN recording for that tier** |
 | --- | --- | --- |
@@ -134,11 +141,11 @@ On the basis of the sponsor's cumulative contribution, the Protocol records bonu
 | 6 | 500,000 | 800,000 |
 | 7 | 1,000,000 | 1,500,000 |
 
-Recording occurs upon each confirmed application by which the sponsor's cumulative contribution reaches a new tier. For each newly reached tier, the amount shown in the column "Bonus POEN recording for that tier" is recorded. Tiers already reached are not repeated and cannot be lost.
+The number of POEN recorded equals the donation amount in dinars multiplied by the recording coefficient of the newly reached tier. The tier is cumulative and permanent.
 
-If a single confirmed application spans multiple tiers at once, the sum of bonus recording amounts for all newly reached tiers is recorded.
+The table continues without limit, in accordance with Article 4 of this Rulebook.
 
-The table may be extended with additional tiers by a decision of the competent body in accordance with the KOLO System Rulebook.
+POEN recorded under the previously applicable bonus table is not annulled. The cumulative contribution of existing sponsors is carried over and continues to serve as the basis for determining the tier.
 
 ### Article 11 — Legal qualification of sponsorship recording
 

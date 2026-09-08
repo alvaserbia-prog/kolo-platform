@@ -754,9 +754,9 @@ Fondacija na zahtjev izdaje potvrdu o donaciji u skladu sa zakonom.`,
       {
         id: 24,
         pitanje: `Što su Pokrovitelji i koja je razlika u odnosu na donaciju?`,
-        odgovor: `Pokrovitelji su pravne osobe i obrtnici koji podupiru rad Fondacije, ne samo novcem, nego i robom ili uslugama.
+        odgovor: `Pokrovitelji su pravne osobe i obrtnici koji novčano podupiru rad Zaklade.
 
-Pokrovitelj nema vlastiti račun: POEN bonus upisuje se na račun vlasnika ili suvlasnika koji je redovni član, odnosno samog obrtnika, po fiksnoj tablici sa 7 razina (od 10.000 do 1.000.000 RSD).
+Pokrovitelj nema vlastiti račun: POEN se upisuje na račun vlasnika ili zakonskog zastupnika koji je redovni član, odnosno samog obrtnika. Obračun je isti kao kod donacija — iznos × koeficijent evidencije — samo je koeficijent za dvadeset posto veći. Najmanja prijava jest 10.000 RSD.
 
 Svi pokrovitelji javno su prikazani na stranici Pokrovitelji, radi transparentnosti i javnog priznanja doprinosa.`,
       },

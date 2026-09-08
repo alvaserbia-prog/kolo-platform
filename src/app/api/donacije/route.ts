@@ -3,7 +3,7 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { nivoZaKumulativ, RANG_TABELA } from "@/lib/protokol/donacija";
+import { nivoZaKumulativ, tabelaZaPrikaz } from "@/lib/protokol/donacija";
 import { dohvatiIpsConfig, pozivNaBrojZaClana, prikazPozivNaBroj } from "@/lib/placanje/ips-qr";
 
 export async function GET() {
@@ -99,6 +99,8 @@ export async function GET() {
       poenEmitted: d.poenEmitted,
       createdAt: (d.confirmedAt ?? d.createdAt).toISOString(),
     })),
-    rangTabela: RANG_TABELA,
+    // Tabela nema kraj (čl. 4) — šalje se nekoliko redova iznad zaključanih
+    // jedanaest, da se na ekranu vidi da se niz nastavlja.
+    rangTabela: tabelaZaPrikaz(),
   });
 }

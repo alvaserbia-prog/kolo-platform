@@ -276,12 +276,14 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // 🔴 Javnost NIJE uslov za evidentiranje POEN-a (to bi bila struktura
       // „plati → dobij vidljivost"); razlog je proverljivost upisa.
       "bila bi upis koji se ne može proveriti",
-      // 🔴 Pokroviteljstvo (čl. 7, 11, 13). Maloprodajna vrednost bez obrazloženja
-      // izgleda kao naduvavanje — obrazloženje je čini merom ukupnog odricanja.
-      // Knjigovodstvena isprava je jedina brana od naduvavanja samo prema
-      // Fondaciji. Javno imenovanje sme, ali PRAVO na promociju je sponzorstvo.
-      "odriče triju stvari",
-      "knjigovodstvenu ispravu kojom pokrovitelj to davanje evidentira",
+      // 🔴 Pokroviteljstvo (čl. 6, 7, 10, 11, 13). Roba i usluge su UKINUTE —
+      // iznos je kucao korisnik, cenovnik je bio slika bez stavki i primopredaje.
+      // Koeficijent je izvod iz čl. 4 (× 1,20), pa se dve lestvice ne mogu razići.
+      // Javno imenovanje sme, ali PRAVO na promociju je sponzorstvo.
+      "donacija novca pravnog lica ili preduzetnika",
+      "uvećanom za dvadeset odsto",
+      "Najmanji iznos prijave pokroviteljstva je 10.000 dinara",
+      "Tabela se nastavlja bez ograničenja",
       "nije raspodela dobiti",
       "ne stiče pravo na objavljivanje logotipa",
       "Javno priznanje je akt Fondacije, a ne protivčinidba",
@@ -294,8 +296,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "this recording is not a counter-performance",
       "permanent recognition of a deed performed, not an acquired status",
       "recording that cannot be verified",
-      "gives up three things",
-      "accounting document by which the sponsor records that supply",
+      "a donation of money by a legal entity",
+      "increased by twenty percent",
+      "minimum amount of a sponsorship application is 10,000 dinars",
+      "The table continues without limit",
       "is not a distribution of profit",
       "no right to the publication of a logo",
       "Public recognition is an act of the Foundation, not a counter-performance",
@@ -308,8 +312,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "этот учёт не является встречным предоставлением",
       "постоянное признание совершённого дела, а не приобретённый статус",
       "записью, которую невозможно проверить",
-      "отказывается от трёх вещей",
-      "бухгалтерский документ, которым покровитель отражает эту передачу",
+      "денежное пожертвование юридическим лицом",
+      "увеличенному на двадцать процентов",
+      "Наименьшая сумма заявки на покровительство — 10 000 динаров",
+      "Таблица продолжается без ограничения",
       "не является распределением прибыли",
       "не приобретает права на публикацию логотипа",
       "Публичное признание является актом Фонда, а не встречным предоставлением",

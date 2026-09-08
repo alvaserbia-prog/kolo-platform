@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { intlTag } from "@/lib/format";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslations, useLocale } from "next-intl";
+import { MINIMUM_PRIJAVE_POKROVITELJSTVA } from "@/lib/donacija-pravila";
 
 type Prijava = {
   id: string;
@@ -36,58 +37,25 @@ export default function PokroviteljstvoPrijava() {
 
   const [naziv, setNaziv] = useState("");
   const [pib, setPib] = useState("");
-  const [vrsta, setVrsta] = useState<Prijava["vrstaDonacije"]>("NOVAC");
   const [vrednost, setVrednost] = useState("");
-  const [cenovnik, setCenovnik] = useState<string | null>(null);
-  // Knjigovodstvena isprava iz poslovnih knjiga pokrovitelja (čl. 7) — ide UZ
-  // cenovnik, ne umesto njega: cenovnik daje meru, isprava je vezuje za knjige.
-  const [isprava, setIsprava] = useState<string | null>(null);
   const [greska, setGreska] = useState("");
-  const fileRef = useRef<HTMLInputElement>(null);
-  const ispravaRef = useRef<HTMLInputElement>(null);
-
-  function onFile(e: React.ChangeEvent<HTMLInputElement>) {
-    const f = e.target.files?.[0];
-    setGreska("");
-    if (!f) { setCenovnik(null); return; }
-    if (f.size > MAX_BYTES) { setGreska(t("forma_cenovnik_prevelik")); if (fileRef.current) fileRef.current.value = ""; return; }
-    const reader = new FileReader();
-    reader.onload = () => setCenovnik(typeof reader.result === "string" ? reader.result : null);
-    reader.readAsDataURL(f);
-  }
-
-  function onIsprava(e: React.ChangeEvent<HTMLInputElement>) {
-    const f = e.target.files?.[0];
-    setGreska("");
-    if (!f) { setIsprava(null); return; }
-    if (f.size > MAX_BYTES) { setGreska(t("forma_isprava_prevelika")); if (ispravaRef.current) ispravaRef.current.value = ""; return; }
-    const reader = new FileReader();
-    reader.onload = () => setIsprava(typeof reader.result === "string" ? reader.result : null);
-    reader.readAsDataURL(f);
-  }
 
   async function posalji() {
     setGreska("");
-    if ((vrsta === "ROBA" || vrsta === "USLUGE") && !cenovnik) {
-      setGreska(t("forma_cenovnik_obavezan"));
-      return;
-    }
-    if ((vrsta === "ROBA" || vrsta === "USLUGE") && !isprava) {
-      setGreska(t("forma_isprava_obavezna"));
+    if (Number(vrednost) < MINIMUM_PRIJAVE_POKROVITELJSTVA) {
+      setGreska(t("forma_minimum", { iznos: MINIMUM_PRIJAVE_POKROVITELJSTVA.toLocaleString(intlTag(locale)) }));
       return;
     }
     setRadnja("posalji");
     const res = await fetch("/api/pokroviteljstvo/prijava", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ naziv: naziv.trim(), pib: pib.trim(), vrstaDonacije: vrsta, vrednostRsd: Number(vrednost), cenovnikSlika: cenovnik, ispravaSlika: isprava }),
+      body: JSON.stringify({ naziv: naziv.trim(), pib: pib.trim(), vrstaDonacije: "NOVAC", vrednostRsd: Number(vrednost) }),
     });
     const d = await res.json().catch(() => ({}));
     setRadnja(null);
     if (res.ok) {
-      setNaziv(""); setPib(""); setVrsta("NOVAC"); setVrednost(""); setCenovnik(null); setIsprava(null);
-      if (fileRef.current) fileRef.current.value = "";
-      if (ispravaRef.current) ispravaRef.current.value = "";
+      setNaziv(""); setPib(""); setVrednost("");
       await refetch();
     } else setGreska(d.error ?? t("forma_greska_slanja"));
   }
@@ -101,18 +69,12 @@ export default function PokroviteljstvoPrijava() {
     else { const d = await res.json().catch(() => ({})); alert(d.error ?? t("greska")); }
   }
 
-  const trebaCenovnik = vrsta === "ROBA" || vrsta === "USLUGE";
 
   const STATUS_LABEL: Record<Prijava["status"], string> = {
     CEKA_POTPIS: t("status_ceka_potpis"),
     POTPISANA: t("status_potpisana"),
     POTVRDJENA: t("status_potvrdjena"),
     ODBIJENA: t("status_odbijena"),
-  };
-  const VRSTA_LABEL: Record<Prijava["vrstaDonacije"], string> = {
-    NOVAC: t("vrsta_novac"),
-    ROBA: t("vrsta_roba"),
-    USLUGE: t("vrsta_usluge"),
   };
 
   return (
@@ -135,35 +97,14 @@ export default function PokroviteljstvoPrijava() {
               className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_vrsta_label")}</label>
-            <select value={vrsta} onChange={(e) => setVrsta(e.target.value as Prijava["vrstaDonacije"])}
-              className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700">
-              <option value="NOVAC">{t("vrsta_novac")}</option>
-              <option value="ROBA">{t("vrsta_roba")}</option>
-              <option value="USLUGE">{t("vrsta_usluge")}</option>
-            </select>
-          </div>
-          <div>
             <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_vrednost_label")}</label>
             <input type="number" value={vrednost} onChange={(e) => setVrednost(e.target.value)}
               className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-700" />
+            <p className="mt-1 text-xs text-kolo-muted">
+              {t("forma_minimum_napomena", { iznos: MINIMUM_PRIJAVE_POKROVITELJSTVA.toLocaleString(intlTag(locale)) })}
+            </p>
           </div>
         </div>
-        {trebaCenovnik && (
-          <>
-          <div>
-            <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_cenovnik_label")}</label>
-            <input ref={fileRef} type="file" accept="image/*" onChange={onFile} className="text-sm" />
-            <p className="mt-1 text-xs text-kolo-muted">{t("forma_cenovnik_napomena")}</p>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-kolo-muted mb-1">{t("forma_isprava_label")}</label>
-            <input ref={ispravaRef} type="file" accept="image/*" onChange={onIsprava} className="text-sm" />
-            <p className="mt-1 text-xs text-kolo-muted">{t("forma_isprava_napomena")}</p>
-          </div>
-          </>
-        )}
         {greska && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{greska}</p>}
         <button onClick={posalji}
           disabled={radnja === "posalji" || !naziv.trim() || !pib.trim() || !vrednost || Number(vrednost) <= 0}
@@ -188,7 +129,7 @@ export default function PokroviteljstvoPrijava() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <p className="font-medium text-kolo-text">{p.naziv} <span className="text-kolo-muted font-normal">· {t("forma_pib_label")} {p.pib}</span></p>
-                    <p className="text-sm text-kolo-muted mt-0.5">{VRSTA_LABEL[p.vrstaDonacije]} · {p.vrednostRsd.toLocaleString(intlTag(locale))} RSD</p>
+                    <p className="text-sm text-kolo-muted mt-0.5">{p.vrednostRsd.toLocaleString(intlTag(locale))} RSD</p>
                     <p className="text-xs mt-1 font-semibold text-kolo-gold-600">{STATUS_LABEL[p.status]}</p>
                     {p.status === "ODBIJENA" && p.odbijenoRazlog && (
                       <p className="text-xs text-kolo-danger mt-0.5">{t("odbijena_razlog")} {p.odbijenoRazlog}</p>

@@ -3,12 +3,14 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { generisiUgovorTekst } from "@/lib/protokol/pokrovitelj";
+import { generisiUgovorTekst, MINIMUM_PRIJAVE_POKROVITELJSTVA } from "@/lib/protokol/pokrovitelj";
 import { VrstaDonacije } from "@/generated/prisma/client";
 import { POKROVITELJSTVO_AKTIVNO, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 
-const DOZVOLJENE_VRSTE: VrstaDonacije[] = ["NOVAC", "ROBA", "USLUGE"];
-const MAX_SLIKA = 4_000_000; // ~3MB base64
+// Pokroviteljstvo je od 2026-09-08 isključivo NOVAC (čl. 6). Roba i usluge su
+// ukinute: iznos je kucao korisnik, a „maloprodajni cenovnik" je bio slika bez
+// stavki i bez primopredaje — vrednost se nije mogla proveriti nigde.
+const DOZVOLJENE_VRSTE: VrstaDonacije[] = ["NOVAC"];
 
 // GET /api/pokroviteljstvo/prijava — sopstvene prijave
 export async function GET() {
@@ -58,8 +60,6 @@ export async function POST(req: NextRequest) {
   const pib = (body.pib ?? "").trim();
   const vrstaDonacije = body.vrstaDonacije as VrstaDonacije;
   const vrednostRsd = Number(body.vrednostRsd);
-  const cenovnikSlika: string | null = body.cenovnikSlika ?? null;
-  const ispravaSlika: string | null = body.ispravaSlika ?? null;
 
   if (!naziv || !pib)
     return await greska("Naziv pravnog lica ili preduzetnika i PIB su obavezni.", 400);
@@ -67,17 +67,13 @@ export async function POST(req: NextRequest) {
     return await greska("Neispravna vrsta donacije.", 400);
   if (!vrednostRsd || isNaN(vrednostRsd) || vrednostRsd <= 0)
     return await greska("Vrednost donacije mora biti pozitivna.", 400);
-  if ((vrstaDonacije === "ROBA" || vrstaDonacije === "USLUGE") && !cenovnikSlika)
-    return await greska("Za robu i usluge obavezan je maloprodajni cenovnik.", 400);
-  // Čl. 7: uz cenovnik ide i knjigovodstvena isprava iz poslovnih knjiga
-  // pokrovitelja. Cenovnik utvrđuje meru, isprava je vezuje za knjige — bez nje
-  // vrednost se može naduvati samo prema Fondaciji, bez posledica drugde.
-  if ((vrstaDonacije === "ROBA" || vrstaDonacije === "USLUGE") && !ispravaSlika)
-    return await greska("Za robu i usluge obavezna je i knjigovodstvena isprava.", 400);
-  if (cenovnikSlika && cenovnikSlika.length > MAX_SLIKA)
-    return await greska("Cenovnik je prevelik (maks. ~3MB).", 400);
-  if (ispravaSlika && ispravaSlika.length > MAX_SLIKA)
-    return await greska("Isprava je prevelika (maks. ~3MB).", 400);
+  // Najmanja prijava (čl. 7) — ispod toga ugovor, potpis i knjiženje koštaju
+  // više nego što donacija vredi.
+  if (vrednostRsd < MINIMUM_PRIJAVE_POKROVITELJSTVA)
+    return await greska(
+      `Najmanji iznos pokroviteljstva je ${MINIMUM_PRIJAVE_POKROVITELJSTVA.toLocaleString("sr-RS")} RSD.`,
+      400
+    );
 
   const ugovorTekst = generisiUgovorTekst({ naziv, pib, vrstaDonacije, vrednostRsd });
 
@@ -88,8 +84,6 @@ export async function POST(req: NextRequest) {
       pib,
       vrstaDonacije,
       vrednostRsd,
-      cenovnikSlika: cenovnikSlika || null,
-      ispravaSlika: ispravaSlika || null,
       ugovorTekst,
     },
     select: { id: true },

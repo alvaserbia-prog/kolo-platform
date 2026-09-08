@@ -4,7 +4,7 @@
 
 ### Član 1 — Predmet
 
-Ovim pravilnikom uređuju se parametri evidentiranja finansijskog doprinosa u KOLO sistemu, i to: nivoi donacija fizičkih lica i koeficijent evidencije donacija, pokretanje i potvrda evidencije pokroviteljstva pravnih lica, nivoi pokroviteljstva i bonus evidencija POEN-a, utvrđivanje vrednosti donacije robe i usluga i rang-lista pokrovitelja.
+Ovim pravilnikom uređuju se parametri evidentiranja finansijskog doprinosa u KOLO sistemu, i to: nivoi donacija fizičkih lica i koeficijent evidencije donacija, pokretanje i potvrda evidencije pokroviteljstva pravnih lica, nivoi pokroviteljstva i koeficijent evidencije pokroviteljstva i rang-lista pokrovitelja.
 
 ### Član 2 — Pojmovi
 
@@ -14,9 +14,9 @@ Pojmovi koji se koriste u ovom pravilniku imaju značenje utvrđeno Pravilnikom 
 
 **Nivo donacija** — stepen kumulativnog doprinosa donatora koji određuje koeficijent evidencije donacija.
 
-**Nivo pokroviteljstva** — stepen kumulativnog doprinosa pokrovitelja koji određuje iznos bonus evidencije POEN-a.
+**Nivo pokroviteljstva** — stepen kumulativnog doprinosa pokrovitelja koji određuje koeficijent evidencije pokroviteljstva.
 
-**Kumulativni doprinos pokrovitelja** — zbir svih do datog trenutka potvrđenih doprinosa pokrovitelja kroz sve kanale — novac, roba, usluge.
+**Kumulativni doprinos pokrovitelja** — zbir svih do datog trenutka potvrđenih novčanih doprinosa pokrovitelja.
 
 **Prijava pokroviteljstva** — zahtev koji verifikovani korisnik podnosi na platformi radi pokretanja evidencije doprinosa pokroviteljstva.
 
@@ -38,7 +38,7 @@ Nivo se utvrđuje na osnovu zbira svih prethodnih donacija korisnika i nove dona
 
 | **Nivo** | **Kumulativna donacija (RSD)** | **Koeficijent evidencije** |
 | --- | --- | --- |
-| 1 | 2.000 | 1,00 |
+| 1 | 0 | 1,00 |
 | 2 | 5.000 | 1,10 |
 | 3 | 10.000 | 1,20 |
 | 4 | 20.000 | 1,30 |
@@ -51,6 +51,8 @@ Nivo se utvrđuje na osnovu zbira svih prethodnih donacija korisnika i nove dona
 | 11 | 5.000.000 | 2,00 |
 
 Broj evidentiranih POEN-a jednak je iznosu donacije u dinarima pomnoženom koeficijentom evidencije.
+
+Tabela se nastavlja bez ograničenja. Svaki naredni nivo nastupa na narednom pragu iz niza 1–2–5 (10.000.000, 20.000.000, 50.000.000 dinara i tako dalje), a koeficijent evidencije uvećava se za 0,10 po svakom narednom nivou.
 
 Nivo je kumulativan i trajan — ne smanjuje se korišćenjem POEN-a niti bilo kojom drugom aktivnošću korisnika.
 
@@ -90,7 +92,7 @@ Donator ugovoru pristupa u svakom trenutku kroz Platformu i može ga odštampati
 
 ### Član 6 — Pokroviteljstvo
 
-Pokroviteljstvo je donacija novca, robe ili usluga pravnog lica ili preduzetnika Fondaciji. Pokrovitelj nije korisnik sistema i ne prima POEN ni ZRNO.
+Pokroviteljstvo je donacija novca pravnog lica ili preduzetnika Fondaciji. Pokrovitelj nije korisnik sistema i ne prima POEN ni ZRNO.
 
 Odnos između Fondacije i pokrovitelja uređuje se ugovorom o donaciji.
 
@@ -98,15 +100,13 @@ Odnos između Fondacije i pokrovitelja uređuje se ugovorom o donaciji.
 
 Pokroviteljstvo pokreće verifikovani korisnik sistema podnošenjem prijave pokroviteljstva na platformi. Prijavu podnosi vlasnik odnosno zakonski zastupnik pravnog lica, odnosno sam preduzetnik.
 
-Prijava sadrži: naziv pravnog lica ili preduzetnika, vrstu donacije (novac, roba, usluge) i vrednost donacije u dinarima. Ako je predmet donacije roba ili usluge, korisnik uz prijavu prilaže važeći maloprodajni cenovnik pokrovitelja na osnovu kojeg je utvrđena dinarska vrednost donacije, kao i knjigovodstvenu ispravu kojom pokrovitelj to davanje evidentira u svojim poslovnim knjigama. Isprava mora glasiti na istu robu odnosno usluge i na istu vrednost kao prijava.
-
-Maloprodajna vrednost uzima se zato što se pokrovitelj davanjem robe odriče triju stvari: nabavne vrednosti robe, poreza koji je po propisima o porezu na dodatu vrednost dužan da obračuna na to davanje, i prihoda koji bi ostvario njenom prodajom. Maloprodajna vrednost je jedina javno proverljiva mera koja obuhvata sve tri.
+Prijava sadrži: naziv pravnog lica ili preduzetnika, PIB i iznos donacije u dinarima. Najmanji iznos prijave pokroviteljstva je 10.000 dinara.
 
 Po podnošenju prijave, platforma automatski generiše ugovor o donaciji između navedenog pokrovitelja i Fondacije. Ugovor o donaciji ne sadrži odredbe o POEN-u niti o evidentiranju POEN-a.
 
 ### Član 8 — Potpisivanje i izvršenje
 
-Korisnik potpisuje generisani ugovor o donaciji u ime pravnog lica ili preduzetnika. Način potpisivanja i postupak primopredaje donacije utvrđuju se posebnom odlukom Fondacije u skladu sa važećim računovodstvenim i poreskim propisima.
+Korisnik potpisuje generisani ugovor o donaciji u ime pravnog lica ili preduzetnika. Način potpisivanja utvrđuje se posebnom odlukom Fondacije u skladu sa važećim računovodstvenim i poreskim propisima. Donacija se izvršava uplatom na račun Fondacije.
 
 Po prijemu donacije, Fondacija potvrđuje prijem na platformi. Po potvrdi, Protokol evidentira POEN-e u zapisu korisnika prema nivoima iz člana 10 ovog pravilnika.
 
@@ -118,25 +118,32 @@ Fondacija vodi registar pokrovitelja u kojem beleži sve potvrđene prijave sa p
 
 Na osnovu registra, Fondacija utvrđuje kumulativni doprinos svakog pokrovitelja sabiranjem vrednosti svih potvrđenih prijava.
 
-### Član 10 — Nivoi pokroviteljstva i bonus evidencija
+### Član 10 — Nivoi pokroviteljstva i koeficijent evidencije
 
-Na osnovu kumulativnog doprinosa pokrovitelja, Protokol evidentira bonus POEN-e u zapisu korisnika, prema sledećoj tabeli:
+Koeficijent evidencije pokroviteljstva jednak je koeficijentu evidencije donacija iz člana 4 uvećanom za dvadeset odsto, za isti kumulativni iznos. Koeficijent novodostignutog nivoa primenjuje se na celu novu donaciju.
 
-| **Nivo** | **Kumulativni doprinos pokrovitelja (RSD)** | **Bonus evidencija POEN-a za taj nivo** |
+Na osnovu kumulativnog doprinosa pokrovitelja, Protokol evidentira POEN-e u zapisu korisnika, prema sledećoj tabeli:
+
+| **Nivo** | **Kumulativni doprinos pokrovitelja (RSD)** | **Koeficijent evidencije** |
 | --- | --- | --- |
-| 1 | 10.000 | 20.000 |
-| 2 | 20.000 | 30.000 |
-| 3 | 50.000 | 80.000 |
-| 4 | 100.000 | 150.000 |
-| 5 | 200.000 | 300.000 |
-| 6 | 500.000 | 800.000 |
-| 7 | 1.000.000 | 1.500.000 |
+| 1 | 10.000 | 1,44 |
+| 2 | 20.000 | 1,56 |
+| 3 | 50.000 | 1,68 |
+| 4 | 100.000 | 1,80 |
+| 5 | 200.000 | 1,92 |
+| 6 | 500.000 | 2,04 |
+| 7 | 1.000.000 | 2,16 |
+| 8 | 2.000.000 | 2,28 |
+| 9 | 5.000.000 | 2,40 |
+| 10 | 10.000.000 | 2,52 |
+| 11 | 20.000.000 | 2,64 |
+| 12 | 50.000.000 | 2,76 |
 
-Evidencija se vrši pri svakoj potvrđenoj prijavi kojom kumulativni doprinos pokrovitelja dostiže novi nivo. Za svaki novodostignuti nivo, evidentira se iznos naveden u koloni „Bonus evidencija POEN-a za taj nivo“. Već dostignuti nivoi se ne ponavljaju i ne mogu se izgubiti.
+Broj evidentiranih POEN-a jednak je iznosu donacije u dinarima pomnoženom koeficijentom evidencije novodostignutog nivoa. Nivo je kumulativan i trajan.
 
-Ako jedna potvrđena prijava prelazi više nivoa odjednom, evidentira se zbir iznosa bonus evidencije za sve novodostignute nivoe.
+Tabela se nastavlja bez ograničenja, saglasno članu 4 ovog pravilnika.
 
-Tabela se može proširiti dodatnim nivoima odlukom nadležnog organa u skladu sa Pravilnikom o KOLO sistemu.
+POEN evidentiran po ranije važećoj tabeli bonusa ne poništava se. Kumulativni doprinos zatečenih pokrovitelja prenosi se i dalje služi kao osnov za utvrđivanje nivoa.
 
 ### Član 11 — Pravna kvalifikacija evidencije pokroviteljstva
 

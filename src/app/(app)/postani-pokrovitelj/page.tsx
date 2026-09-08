@@ -7,6 +7,7 @@ import Link from "next/link";
 import { getTranslations, getLocale } from "next-intl/server";
 import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 import PokroviteljstvoPrijava from "./PokroviteljstvoPrijava";
+import { tabelaPokroviteljstvaZaPrikaz } from "@/lib/donacija-pravila";
 
 export const metadata = { title: "Postani pokrovitelj — KOLO" };
 
@@ -72,18 +73,17 @@ export default async function PostaniPokroviteljPage() {
       <div className="bg-kolo-surface border border-kolo-border rounded-2xl p-5 mb-6">
         <h2 className="font-semibold text-kolo-text mb-3">{t("nivoi_naslov")}</h2>
         <div className="space-y-1.5 text-sm">
-          {[
-            { nivo: 1, rsd: "10.000", poen: "20.000" },
-            { nivo: 2, rsd: "20.000", poen: "30.000" },
-            { nivo: 3, rsd: "50.000", poen: "80.000" },
-            { nivo: 4, rsd: "100.000", poen: "150.000" },
-            { nivo: 5, rsd: "200.000", poen: "300.000" },
-            { nivo: 6, rsd: "500.000", poen: "800.000" },
-            { nivo: 7, rsd: "1.000.000", poen: "1.500.000" },
-          ].map((r) => (
+          {/* Tabela se čita iz pravila (čl. 10), ne prepisuje se ovde — prepisana
+              tabela je već jednom odlutala od izvora (vidi komentar u
+              `donacija-pravila.ts`). */}
+          {tabelaPokroviteljstvaZaPrikaz().map((r) => (
             <div key={r.nivo} className="flex justify-between py-1.5 border-b border-kolo-border last:border-0">
-              <span className="text-kolo-muted">{t("nivo_red", { nivo: r.nivo, rsd: r.rsd })}</span>
-              <span className="font-semibold text-kolo-green-700">{r.poen} {tc("poen")}</span>
+              <span className="text-kolo-muted">
+                {t("nivo_red", { nivo: r.nivo, rsd: r.do.toLocaleString(intlTag(locale)) })}
+              </span>
+              <span className="font-semibold text-kolo-green-700">
+                ×{r.kurs.toLocaleString(intlTag(locale), { minimumFractionDigits: 2 })}
+              </span>
             </div>
           ))}
         </div>

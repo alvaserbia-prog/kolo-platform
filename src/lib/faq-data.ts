@@ -762,16 +762,16 @@ Donacija je nepovratna, to je jedan od nepromenljivih principa sistema. Donacije
         pitanje: `U kojoj valuti doniram, mogu li poslati evre iz inostranstva?`,
         odgovor: `Možeš, donacija se daje uplatom na račun Fondacije, u dinarima ili u drugoj valuti, dakle i evrima iz inostranstva. Plaćanje karticom i IPS QR kodom kroz platformu radi samo u dinarima.
 
-POEN se upisuje po istim pravilima kao za svaku donaciju: iznos × koeficijent evidencije donacija, koji raste sa kumulativnim iznosom kroz 11 nivoa (detaljno u pitanju o donacijama). Iznos u stranoj valuti računa se u dinarskoj protivvrednosti.
+POEN se upisuje po istim pravilima kao za svaku donaciju: iznos × koeficijent evidencije donacija, koji raste sa kumulativnim iznosom i nema gornju granicu (detaljno u pitanju o donacijama). Iznos u stranoj valuti računa se u dinarskoj protivvrednosti.
 
 Fondacija na zahtev izdaje potvrdu o donaciji u skladu sa zakonom.`,
       },
       {
         id: 24,
         pitanje: `Šta su Pokrovitelji i koja je razlika u odnosu na donaciju?`,
-        odgovor: `Pokrovitelji su pravna lica i preduzetnici koji podržavaju rad Fondacije, ne samo novcem, nego i robom ili uslugama.
+        odgovor: `Pokrovitelji su pravna lica i preduzetnici koji novčano podržavaju rad Fondacije.
 
-Pokrovitelj nema sopstveni nalog: POEN bonus se upisuje na nalog vlasnika ili suvlasnika koji je redovan član, odnosno samog preduzetnika, po fiksnoj tabeli sa 7 nivoa (od 10.000 do 1.000.000 RSD).
+Pokrovitelj nema sopstveni nalog: POEN se upisuje na nalog vlasnika ili zakonskog zastupnika koji je redovan član, odnosno samog preduzetnika. Obračun je isti kao kod donacija — iznos × koeficijent evidencije — samo je koeficijent za dvadeset odsto veći. Najmanja prijava je 10.000 RSD.
 
 Svi pokrovitelji javno su prikazani na stranici Pokrovitelji, radi transparentnosti i javnog priznanja doprinosa.`,
       },
@@ -780,7 +780,7 @@ Svi pokrovitelji javno su prikazani na stranici Pokrovitelji, radi transparentno
         pitanje: `Može li firma da bude direktni član?`,
         odgovor: `Ne. Direktni članovi su isključivo fizička lica. Nalog se otvara na čoveka, a stvarnost čoveka potvrđuje drugi čovek koji ga lično poznaje, firma se ne može potvrditi.
 
-Firme i preduzetnici učestvuju kroz Pokroviteljstvo: pravno lice ili preduzetnik potpisuje sa Fondacijom ugovor o donaciji u novcu, robi ili uslugama, a POEN se upisuje vlasniku, suvlasniku ili samom preduzetniku, ako je redovan član. Sama firma ne dobija POEN, jer nije član.
+Firme i preduzetnici učestvuju kroz Pokroviteljstvo: pravno lice ili preduzetnik potpisuje sa Fondacijom ugovor o donaciji novca, a POEN se upisuje vlasniku ili zakonskom zastupniku, ako je redovan član. Sama firma ne dobija POEN, jer nije član.
 
 Vlasnik firme može, naravno, i sam biti član kao fizičko lice, nezavisno od pokroviteljstva.`,
       },

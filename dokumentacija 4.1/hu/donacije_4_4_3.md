@@ -6,7 +6,7 @@
 
 ### 1. cikk — Tárgy
 
-E szabályzat rendezi a pénzügyi hozzájárulás nyilvántartásának paramétereit a KOLO rendszerben, mégpedig: a természetes személyek adományainak szintjeit és az adományok nyilvántartási együtthatóját, a jogi személyek pártfogása nyilvántartásának megindítását és megerősítését, a pártfogás szintjeit és a bónusz POEN-nyilvántartást, az áru- és szolgáltatásadományok értékének megállapítását, valamint a pártfogók rangsorát.
+E szabályzat rendezi a pénzügyi hozzájárulás nyilvántartásának paramétereit a KOLO rendszerben, mégpedig: a természetes személyek adományainak szintjeit és az adományok nyilvántartási együtthatóját, a jogi személyek pártfogása nyilvántartásának megindítását és megerősítését, a pártfogás szintjeit és a pártfogás nyilvántartási együtthatóját, valamint a pártfogók rangsorát.
 
 ### 2. cikk — Fogalmak
 
@@ -16,9 +16,9 @@ Az e szabályzatban használt fogalmak a KOLO rendszerről szóló szabályzatba
 
 **Az adományok szintje** — az adományozó halmozott hozzájárulásának foka, amely meghatározza az adományok nyilvántartási együtthatóját.
 
-**A pártfogás szintje** — a pártfogó halmozott hozzájárulásának foka, amely meghatározza a bónusz POEN-nyilvántartás összegét.
+**A pártfogás szintje** — a pártfogó halmozott hozzájárulásának foka, amely meghatározza a pártfogás nyilvántartási együtthatóját.
 
-**A pártfogó halmozott hozzájárulása** — a pártfogó adott időpontig megerősített valamennyi hozzájárulásának összege minden csatornán át — pénz, áru, szolgáltatás.
+**A pártfogó halmozott hozzájárulása** — a pártfogó adott időpontig megerősített valamennyi pénzbeli hozzájárulásának összege.
 
 **Pártfogási kérelem** — az a kérelem, amelyet a hitelesített felhasználó a platformon nyújt be a pártfogási hozzájárulás nyilvántartásának megindítása érdekében.
 
@@ -38,21 +38,28 @@ Minél nagyobb a felhasználó közös jóhoz való halmozott hozzájárulása, 
 
 A szint a felhasználó valamennyi korábbi adományának és az új adománynak az összege alapján kerül megállapításra. Az újonnan elért szinthez tartozó nyilvántartási együttható a teljes új adományra alkalmazandó.
 
-| **Szint** | **Halmozott adomány (RSD)** | **Nyilvántartási együttható** |
+| **Szint** | **A pártfogó halmozott hozzájárulása (RSD)** | **Nyilvántartási együttható** |
 | --- | --- | --- |
-| 1 | 2.000 | 1,00 |
-| 2 | 5.000 | 1,10 |
-| 3 | 10.000 | 1,20 |
-| 4 | 20.000 | 1,30 |
-| 5 | 50.000 | 1,40 |
-| 6 | 100.000 | 1,50 |
-| 7 | 200.000 | 1,60 |
+| 1 | 10.000 | 1,44 |
+| 2 | 20.000 | 1,56 |
+| 3 | 50.000 | 1,68 |
+| 4 | 100.000 | 1,80 |
+| 5 | 200.000 | 1,92 |
+| 6 | 500.000 | 2,04 |
+| 7 | 1.000.000 | 2,16 |
+| 8 | 2.000.000 | 2,28 |
+| 9 | 5.000.000 | 2,40 |
+| 10 | 10.000.000 | 2,52 |
+| 11 | 20.000.000 | 2,64 |
+| 12 | 50.000.000 | 2,76 |
 | 8 | 500.000 | 1,70 |
 | 9 | 1.000.000 | 1,80 |
 | 10 | 2.000.000 | 1,90 |
 | 11 | 5.000.000 | 2,00 |
 
 A nyilvántartásba vett POEN-ek száma megegyezik az adomány dinárban kifejezett összegének és a nyilvántartási együtthatónak a szorzatával.
+
+A táblázat korlátozás nélkül folytatódik. Minden további szint az 1–2–5 sorozat következő küszöbén lép életbe (10.000.000, 20.000.000, 50.000.000 dinár és így tovább), a nyilvántartási együttható pedig minden további szinttel 0,10-del növekszik.
 
 A szint halmozott és tartós — nem csökken a POEN felhasználásával, sem a felhasználó bármely más tevékenységével.
 
@@ -92,7 +99,7 @@ Az adományozó a szerződéshez a Platformon keresztül bármikor hozzáfér, �
 
 ### 6. cikk — Pártfogás
 
-A pártfogás jogi személy vagy egyéni vállalkozó által az Alapítványnak nyújtott pénz-, áru- vagy szolgáltatásadomány. A pártfogó nem felhasználója a rendszernek, és nem kap sem POEN-t, sem ZRNO-t.
+A pártfogás jogi személy vagy egyéni vállalkozó által az Alapítványnak nyújtott pénzadomány. A pártfogó nem felhasználója a rendszernek, és nem kap sem POEN-t, sem ZRNO-t.
 
 Az Alapítvány és a pártfogó közötti viszonyt adományozási szerződés rendezi.
 
@@ -100,15 +107,13 @@ Az Alapítvány és a pártfogó közötti viszonyt adományozási szerződés r
 
 A pártfogást a rendszer hitelesített felhasználója indítja meg pártfogási kérelem platformon történő benyújtásával. A kérelmet a jogi személy tulajdonosa, illetve törvényes képviselője, vagy maga az egyéni vállalkozó nyújtja be.
 
-A kérelem tartalmazza: a jogi személy vagy egyéni vállalkozó nevét, az adomány fajtáját (pénz, áru, szolgáltatás) és az adomány dinárban kifejezett értékét. Ha az adomány tárgya áru vagy szolgáltatás, a felhasználó a kérelemhez csatolja a pártfogó hatályos kiskereskedelmi árjegyzékét, amely alapján az adomány dinárértékét megállapították, valamint azt a számviteli bizonylatot, amellyel a pártfogó ezt az átadást saját üzleti könyveiben nyilvántartásba veszi. A bizonylatnak ugyanarra az árura, illetve szolgáltatásra és ugyanarra az értékre kell szólnia, mint a kérelemnek.
-
-A kiskereskedelmi érték azért irányadó, mert a pártfogó az áru átadásával három dologról mond le: az áru beszerzési értékéről, arról az adóról, amelyet az általános forgalmi adóra vonatkozó előírások szerint ezen átadás után köteles felszámítani, és arról a bevételről, amelyet az áru eladásával ért volna el. A kiskereskedelmi érték az egyetlen nyilvánosan ellenőrizhető mérték, amely mindhármat magában foglalja.
+A kérelem tartalmazza: a jogi személy vagy egyéni vállalkozó nevét, az adóazonosító számot és az adomány dinárban kifejezett összegét. A pártfogási kérelem legkisebb összege 10.000 dinár.
 
 A kérelem benyújtását követően a platform automatikusan létrehozza az adományozási szerződést a megjelölt pártfogó és az Alapítvány között. Az adományozási szerződés nem tartalmaz a POEN-re, sem a POEN nyilvántartásba vételére vonatkozó rendelkezéseket.
 
 ### 8. cikk — Aláírás és teljesítés
 
-A felhasználó a jogi személy vagy az egyéni vállalkozó nevében írja alá a létrehozott adományozási szerződést. Az aláírás módját és az adomány átadás-átvételének eljárását az Alapítvány külön határozata állapítja meg, a hatályos számviteli és adójogszabályokkal összhangban.
+A felhasználó a jogi személy vagy az egyéni vállalkozó nevében írja alá a létrehozott adományozási szerződést. Az aláírás módját az Alapítvány külön határozata állapítja meg, a hatályos számviteli és adójogszabályokkal összhangban. Az adomány teljesítése az Alapítvány számlájára történő befizetéssel valósul meg.
 
 Az adomány kézhezvételét követően az Alapítvány a platformon megerősíti az átvételt. A megerősítést követően a Protokoll a felhasználó bejegyzésében nyilvántartásba veszi a POEN-eket az e szabályzat 10. cikke szerinti szintek alapján.
 
@@ -120,9 +125,11 @@ Az Alapítvány pártfogói nyilvántartást vezet, amelyben rögzíti valamenny
 
 A nyilvántartás alapján az Alapítvány valamennyi megerősített kérelem értékének összeadásával állapítja meg minden pártfogó halmozott hozzájárulását.
 
-### 10. cikk — A pártfogás szintjei és a bónusz nyilvántartás
+### 10. cikk — A pártfogás szintjei és a nyilvántartási együttható
 
-A pártfogó halmozott hozzájárulása alapján a Protokoll bónusz POEN-eket vesz nyilvántartásba a felhasználó bejegyzésében, a következő táblázat szerint:
+A pártfogás nyilvántartási együtthatója megegyezik a 4. cikk szerinti adomány-nyilvántartási együtthatóval, húsz százalékkal növelve, azonos halmozott összeg esetén. Az újonnan elért szint együtthatója a teljes új adományra alkalmazandó.
+
+A pártfogó halmozott hozzájárulása alapján a Protokoll POEN-eket vesz nyilvántartásba a felhasználó bejegyzésében, a következő táblázat szerint:
 
 | **Szint** | **A pártfogó halmozott hozzájárulása (RSD)** | **Bónusz POEN-nyilvántartás az adott szintért** |
 | --- | --- | --- |
@@ -134,12 +141,11 @@ A pártfogó halmozott hozzájárulása alapján a Protokoll bónusz POEN-eket v
 | 6 | 500.000 | 800.000 |
 | 7 | 1.000.000 | 1.500.000 |
 
-A nyilvántartásba vétel minden olyan megerősített kérelemnél megtörténik, amellyel a pártfogó halmozott hozzájárulása új szintet ér el. Minden újonnan elért szintért a „Bónusz POEN-nyilvántartás az adott szintért” oszlopban feltüntetett összeg kerül nyilvántartásba. A már elért szintek nem ismétlődnek, és nem veszíthetők el.
+A nyilvántartásba vett POEN-ek száma megegyezik az adomány dinárban kifejezett összegének és az újonnan elért szint nyilvántartási együtthatójának a szorzatával. A szint halmozott és tartós.
 
-Ha egyetlen megerősített kérelem egyszerre több szintet lép át, valamennyi újonnan elért szint bónusz-nyilvántartási összegének összege kerül nyilvántartásba.
+A táblázat korlátozás nélkül folytatódik, a jelen szabályzat 4. cikkével összhangban.
 
-A táblázat további szintekkel bővíthető az illetékes szerv határozatával, a KOLO rendszerről szóló szabályzattal összhangban.
-
+A korábban hatályos bónusztáblázat szerint nyilvántartásba vett POEN nem semmisül meg. A meglévő pártfogók halmozott hozzájárulása átvezetésre kerül, és továbbra is a szint megállapításának alapjául szolgál.
 ### 11. cikk — A pártfogás nyilvántartásának jogi minősítése
 
 A POEN pártfogás alapján történő nyilvántartásba vétele a Protokoll automatikus aktusa a KOLO rendszerről szóló szabályzat 40. és 73. cikke értelmében. Nem számít bele a Protokoll Programjainak napi kibocsátási limitjébe.

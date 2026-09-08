@@ -691,13 +691,117 @@ u aktima ni u copy-ju da je Fondacija „oslobođena poreza" kao svojstvo — to
 za potvrdu od pravnice, i njegov odgovor počiva na istoj besplatnosti davanja na kojoj
 stoji i čl. 19 Pravilnika o nabavkama.
 
+### 🔴 Tabele donacija i pokroviteljstva — koeficijentni model bez plafona (2026-09-08)
+
+Odluka vlasnika, doneta u drugoj sesiji i preneta ovamo kao samostalan nalog.
+Menja `donacije_4_4_3.md` (čl. 1, 2, 4, 6, 7, 8, 10) na svih pet jezika i prateći kod.
+
+**Povod — dva kvara istovremeno.** Poređenjem dve lestvice na istim iznosima:
+pokroviteljstvo je do milion dinara plaćalo **60–92% više po dinaru** od lične
+donacije (10.000 RSD → 20.000 naspram 12.000 POEN), a **iznad miliona marginalni
+prinos je bio nula** — fiksna tabela je imala sedam nivoa i staja­la, pa je firma sa
+pet miliona dobijala isto što i firma sa milion (2.880.000 POEN, tj. 0,58 po dinaru
+naspram 2,00 kod fizičkog lica). 🔴 Nesrazmera nije estetska: POEN vodi ka ZRNU
+(minimum upisa 20.000) a ZRNO ka glasu u Gornjem Kolu, pa se prednost po **pravnoj
+formi** pretvarala u upravljačku moć; ko nema firmu bio je strukturno u lošijem kursu.
+
+**Šta je odlučeno:**
+- **Donacije fizičkih lica se ne menjaju** — koeficijenti 1,00–2,00, korak +0,10.
+- 🔴 **Prag nivoa 1 je 0, ne 2.000.** Akt je govorio 2.000, a kod je od početka davao
+  1,00 od nule. **Ispravljen je AKT prema kodu** — svaka donacija nosi POEN.
+- 🔴 **Obe tabele se nastavljaju BEZ KRAJA**, nizom 1–2–5 (10.000.000, 20.000.000,
+  50.000.000 …), +0,10 po nivou. `RANG_TABELA` je od sada samo **zaključan deo**
+  (jedanaest objavljenih nivoa koje čuva test); prag se **računa**, ne traži u nizu.
+  Odluka vlasnika: sistem treba da izdrži skok u opticaju pri velikoj donaciji.
+- 🔴 **Pokroviteljstvo prelazi na koeficijentni model: koeficijent = donacija × 1,20.**
+  Fiksni bonusi po nivou su ukinuti. Čl. 10 time prestaje da bude sopstvena tabela i
+  postaje **izvod iz čl. 4** — jedno pravilo umesto dva, pa se lestvice ne mogu razići
+  pri sledećoj izmeni. Korak +0,12 je **posledica**, ne zaseban parametar.
+- 🔴 **Donacija ROBE i USLUGA je UKINUTA — ostaje samo novac** (čl. 6). Razlozi:
+  iznos u dinarima kucao je korisnik rukom, a „maloprodajni cenovnik" je bila slika
+  bez stavki i bez proverljive primopredaje; vrednovanje po maloprodajnoj ceni nosi
+  skriveni množilac 30–100%; usluga nema primopredaju i cenovnik usluga firma piše
+  sama sebi; odluka o primopredaji iz čl. 8 nikad nije doneta; roba nosi PDV obavezu,
+  novac ne. 🟡 **Nije trajno** — roba se može vratiti kad se uredi (nabavna odnosno
+  knjigovodstvena vrednost + otpremnica ili faktura + odluka o primopredaji), usluge
+  poslednje ako ikad. Firmi koja hoće da da server ili štampu ostaje čist put: donira
+  novac, Fondacija kupi.
+- **Najmanja prijava pokroviteljstva: 10.000 RSD** (čl. 7).
+
+**Efekat na pokrovitelje:** do milion dinara **manje nego ranije** (100.000 RSD:
+180.000 umesto 280.000 POEN, −36%), iznad miliona **prvi put ima razloga da nastavi**
+(5.000.000 RSD: 12.000.000 umesto 2.880.000). Odnos pokrovitelj/fizičko lice je
+sada **tačno 1,20 na svakom iznosu**, umesto da luta između 0,29× i 1,92×.
+
+🟢 **Zatečeni `Pokrovitelj.trenutniNivo` OSTAJE tačan** — numeracija nivoa
+pokroviteljstva počinje od najmanje prijave, pa je pomerena za dva u odnosu na
+donacije (`POMERAJ_NIVOA_POKROVITELJSTVA`); stari pragovi 10.000…1.000.000 daju iste
+brojeve 1…7. **Migracija brojeva nivoa nije bila potrebna.** Zaključano testom.
+
+🔴 **Prelazna odredba (čl. 10):** POEN evidentiran po ranijoj tabeli se **ne
+poništava**, a kumulativ zatečenih pokrovitelja se prenosi i dalje služi kao osnov
+za nivo.
+
+**Kod:**
+- `src/lib/donacija-pravila.ts` — `pragZaNivo`, `koeficijentZaNivo`,
+  `koeficijentPokroviteljstvaZaNivo`, `nivoPokroviteljstvaZaKumulativ`,
+  `tabelaZaPrikaz`, `tabelaPokroviteljstvaZaPrikaz`, `KOEFICIJENT_POKROVITELJSTVA`,
+  `MINIMUM_PRIJAVE_POKROVITELJSTVA`. 🔴 Koeficijent se računa **u stotinkama**
+  (`(100 + (n-1)*10)/100`) — sa `1 + (n-1)*0.1` jedanaesti nivo daje
+  2.0000000000000004. 🔴 `nivoZaKumulativ` se **penje po pragovima** i zato odbija
+  `Infinity` (petlja bi se vrtela beskonačno); NaN i negativan iznos padaju na nivo 1.
+- `src/lib/protokol/pokrovitelj.ts` — `NIVOI_POKROVITELJA`, `bonusZaNivo` i
+  `izracunajNivo` **obrisani**; `evidentirajDoprinos` piše **jedan** zapis
+  `PokroviteljBonusEmisija` po doprinosu (nema više „naplate preskočenih nivoa").
+  Nivo se **izvodi iz kumulativa**, ne pamti kao dostignuće.
+- `POST /api/pokroviteljstvo/prijava` — samo `NOVAC`, minimum 10.000, bez cenovnika
+  i isprave. Obrazac i admin tab bez izbora vrste i bez prikaza slika.
+- 🔴 **Tabela nivoa na `/postani-pokrovitelj` se sada ČITA IZ PRAVILA.** Bila je
+  prepisana ručno u `page.tsx` — isti kvar koji je već jednom opisan u
+  `donacija-pravila.ts` (admin panel je držao svoju prepisanu tabelu, i ona je bila
+  pogrešna). **Ne prepisivati tabele u ekrane.**
+- `GET /api/donacije` šalje `tabelaZaPrikaz()` (14 redova) umesto `RANG_TABELA`.
+
+**Baza se NE menja.** Enum `VrstaDonacije` (NOVAC/ROBA/USLUGE) i kolone
+`cenovnikSlika`/`ispravaSlika` ostaju — nose ih zatečeni zapisi, a `ispravaSlika` je
+polje za mogući povratak robe. `Pokrovitelj.trenutniNivo` i `rsdKumulativ` ostaju.
+
+**Testovi:** `__tests__/protokol/pokrovitelj.test.ts` prepisan (odnos ×1,20 na svakom
+pragu, svih dvanaest objavljenih redova, kontinuitet zatečenih nivoa, minimum);
+`donacija.test.ts` dopunjen (nastavak niza, nema plafona, `Infinity`/`NaN`);
+`pravni-dokumenti.test.ts` traži ×20%, minimum od 10.000 i „nastavlja se bez
+ograničenja" na sr/en/ru.
+
+🔴 **OTVORENO — pitanje za knjigovođu, ne pisati kao obećanje na sajtu:** da li
+upisana svrha Fondacije ulazi u taksativno nabrojane iz **čl. 15 Zakona o porezu na
+dobit** (humanitarne, zdravstvene, obrazovne, naučne, verske, kulturne, zaštita
+životne sredine, sport, socijalna zaštita). Ako ne ulazi, donacija pravnog lica
+**nije priznat rashod** i cela poreska prednost korporativnog puta nestaje.
+🟡 Granica je **5% ukupnog prihoda tekućeg perioda** (ne dobiti, ne prošlogodišnjeg),
+višak se ne prenosi. Poreske stope (dobit 15%, dividenda 15%) proveriti kao važeće na
+dan primene. Računica koja stoji iza odluke: da Fondaciji stigne 100.000 RSD, kroz
+firmu se troši 100.000 dobiti, a iz ličnog džepa 138.408 (0,85 × 0,85 = 0,7225), pa
+korporativni put i **bez ijedne premije** donosi 38,4% više novca pri istoj žrtvi.
+
+🟡 **Poznata posledica, svesno ostavljena:** donacija od 5.000.000 RSD po Tabeli A
+emituje 10.000.000 POEN, a osnivački korak se pali na svakih 100.000 POEN opticaja
+(`osnivacki.ts`, `PRAG_SKOK`) uz ukupno 100 koraka — jedna takva donacija iscrpela bi
+ceo osnivački kanal odjednom. **Odluka vlasnika: ne rešava se sada.**
+
 ### Pokroviteljstvo: isprava, javno priznanje, razgraničenje prema firmi (2026-09-08)
 
 Odluke uz analizu rizika **R-05** (pokroviteljstvo pravnih lica i preduzetnika).
 Izmenjeni čl. 7, 11 i 13 `donacije_4_4_3.md` na svih pet jezika, uz izmenu koda.
 
-🔴 **Maloprodajna cena OSTAJE — ali sada ima obrazloženje** (odluka vlasnika; M-1
-„po nabavnoj vrednosti" je **odbijena**). Obrazloženje u čl. 7 glasi da se pokrovitelj
+🔴 **PREVAZIĐENO ISTOG DANA — roba i usluge su UKINUTE** (vidi sekciju „Tabele
+donacija i pokroviteljstva" ispod). Sve što ovaj pasus i naredni kažu o
+maloprodajnoj ceni i knjigovodstvenoj ispravi **više ne važi** — te odredbe nemaju
+predmet i izbrisane su iz akta. Zapis ostaje kao istorija odluke; kolona
+`PokroviteljPrijava.ispravaSlika` je zadržana jer je to tačno polje koje bi
+trebalo ako se roba jednom vrati po uslovu „nabavna vrednost + otpremnica".
+
+~~Maloprodajna cena OSTAJE — ali sada ima obrazloženje~~ (odluka vlasnika; M-1
+„po nabavnoj vrednosti" je bila odbijena). Obrazloženje u čl. 7 glasi da se pokrovitelj
 davanjem robe odriče **triju stvari**: nabavne vrednosti, poreza koji je po propisima
 o PDV-u dužan da obračuna na to davanje, i prihoda koji bi ostvario prodajom.
 🔴 **Mora se pisati sa sve tri stavke.** Vlasnikova prvobitna formulacija bila je „plati
