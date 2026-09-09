@@ -2,7 +2,7 @@
 
 # Rulebook on Projects and Collective Procurement
 
-*This Rulebook governs the allocation of the Foundation's dinar funds to community projects and, as the first regulated form of such a project, collective procurement — the joint acquisition of goods that users cannot obtain within the system. It is adopted on the basis of Articles 14a and 51a of the KOLO System Rulebook.*
+*This Rulebook governs the allocation of the Foundation's dinar funds to community projects and, as the first regulated form of such a project, collective procurement — the joint acquisition of goods that users cannot obtain within the system. It is adopted on the basis of Articles 14a and 51a of the KOLO System Rulebook, and in accordance with Article 7 point c) and Article 9 paragraph 3 of the Foundation's Statute.*
 
 ## I — General provisions
 
@@ -20,6 +20,8 @@ Terms not defined by this Rulebook have the meaning established by the KOLO Syst
 
 This Rulebook elaborates the provisions of Articles 14a and 51a of the KOLO System Rulebook. In the event of any inconsistency, the provisions of the KOLO System Rulebook prevail.
 
+Collective procurement is one of the ways of pursuing the Foundation's purposes under Article 7 point c) of the Statute (organising collective procurement of goods and services for the benefit of programme users) and is carried out as a programme within the meaning of Article 9 paragraph 3 of the Statute.
+
 The decision-making procedure of the Upper Kolo is governed by the Rulebook on the Upper Kolo and applies to decisions under this Rulebook as well.
 
 ### Article 3
@@ -28,13 +30,25 @@ The decision-making procedure of the Upper Kolo is governed by the Rulebook on t
 
 A **project** is the dedicated spending of the Foundation's dinar funds for the benefit of the community, outside the Foundation's operating costs.
 
-**Collective procurement** is a project by which the Foundation acquires goods from a third party using dinar funds, and users collect those goods in equal shares with the annulment of a corresponding number of POEN.
+**Collective procurement** is a programme of the Foundation within the meaning of Article 7 of the Statute, carried out as a project by which the Foundation acquires goods from a third party using dinar funds, and users collect those goods in equal shares with the annulment of a corresponding number of POEN.
 
 The **object of procurement** is the good selected in the manner established by Article 11 of this Rulebook.
 
 A **share** is an equal quantity of the good belonging to one user within a single procurement.
 
 A **supplier** is a third party from which the Foundation acquires goods. The supplier is not a party to the relationship between the Foundation and users.
+
+### Article 3a
+
+*Nature of the procurement*
+
+Collective procurement pursues the purposes of the Foundation established by Article 6 of the Statute, in particular social protection and solidarity support and support for the voluntary association of citizens for mutual aid and self-organisation. The goods are distributed to programme users within the meaning of Article 9 paragraph 4 of the Statute.
+
+Collective procurement is not an economic activity. The Foundation derives no revenue and no profit from the procurement, does not offer the goods on the market to an indeterminate circle of persons, and acquires no value whatsoever on the basis of ceding them. The funds used to acquire the goods originate from donations and patronage contributions.
+
+The Foundation may not receive consideration for a ceded good, whether in money or in any other form, either from users or from a third party.
+
+Introducing consideration for a ceded good would constitute an economic activity and is not permitted without amending the Statute and registering that activity in accordance with the law.
 
 ### Article 4
 
@@ -166,7 +180,7 @@ An offer from a user of the system is accepted only if it is the most favourable
 
 The decision initiating the procurement establishes the total quantity of the good to be acquired, the size of a single share, and the number of POEN annulled per share, in accordance with Article 12 of this Rulebook.
 
-The decision states the need of the community that the procurement meets. The parameters under paragraph 1 are established according to that need.
+The decision states the need of the community that the procurement meets and the purpose of the Foundation under Article 3a paragraph 1 thereby pursued. The parameters under paragraph 1 are established according to that need.
 
 The number of shares equals the quotient of the total quantity and the size of a share.
 
@@ -306,7 +320,11 @@ Only the number of POEN present in the record is reserved and annulled.
 
 *Uncollected shares*
 
+A share that becomes free before the expiry of the collection period — through withdrawal, expiry of an invitation, or failure to collect — is offered to the next user in the order, under Article 23 of this Rulebook. Invitations are repeated as long as there are users in the order and the collection period lasts.
+
 Shares not collected by the expiry of the collection period enter the next procurement as additional units.
+
+Uncollected shares are not sold. The Foundation cedes them solely without consideration, in accordance with Article 3a of this Rulebook.
 
 ## VIII — Relationship with the supplier
 
@@ -331,6 +349,8 @@ The following are publicly available: the register of proposals in aggregate for
 Verified users additionally have access to the list of users who collected a share, showing the pseudonym and position in the order. The number of POEN in a user's record is not published alongside that list.
 
 Data on the participation of an individual user is not published beyond the scope set out in paragraph 2 of this Article.
+
+The Foundation also publishes aggregate data on projects for the current calendar year: the total amount of dinar funds spent on projects and the number of procurements carried out. The publication is a record of scale, not a limit — the frequency of procurements is not restricted by this Rulebook.
 
 ## X — Final provisions
 

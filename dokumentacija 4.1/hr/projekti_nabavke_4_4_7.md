@@ -2,7 +2,7 @@
 
 # Pravilnik o projektima i kolektivnim nabavama
 
-*Ovaj pravilnik uređuje raspoređivanje dinarskih sredstava Zaklade u projekte zajednice i, kao prvi uređeni oblik takva projekta, kolektivnu nabavu — zajedničku nabavu dobara koja korisnici ne mogu osigurati unutar sustava. Donosi se na temelju članka 14a i članka 51a Pravilnika o KOLO sustavu.*
+*Ovaj pravilnik uređuje raspoređivanje dinarskih sredstava Zaklade u projekte zajednice i, kao prvi uređeni oblik takva projekta, kolektivnu nabavu — zajedničku nabavu dobara koja korisnici ne mogu osigurati unutar sustava. Donosi se na temelju članka 14a i članka 51a Pravilnika o KOLO sustavu, a u skladu s člankom 7. točkom c) i člankom 9. stavkom 3. Statuta Zaklade.*
 
 ## I — Opće odredbe
 
@@ -20,6 +20,8 @@ Izrazi koji nisu definirani ovim pravilnikom imaju značenje utvrđeno Pravilnik
 
 Ovaj pravilnik razrađuje odredbe članaka 14a i 51a Pravilnika o KOLO sustavu. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.
 
+Kolektivna nabava jedan je od načina ostvarivanja ciljeva Zaklade iz članka 7. točke c) Statuta (organiziranje kolektivnih nabava robe i usluga u korist korisnika programa) i provodi se kao program u smislu članka 9. stavka 3. Statuta.
+
 Postupak odlučivanja Gornjeg Kola uređen je Pravilnikom o Gornjem Kolu i primjenjuje se i na odluke iz ovoga pravilnika.
 
 ### Članak 3.
@@ -28,13 +30,25 @@ Postupak odlučivanja Gornjeg Kola uređen je Pravilnikom o Gornjem Kolu i primj
 
 **Projekt** je namjensko trošenje dinarskih sredstava Zaklade u korist zajednice, izvan operativnih troškova Zaklade.
 
-**Kolektivna nabava** je projekt kojim Zaklada dinarskim sredstvima nabavlja dobra od treće osobe, a korisnici ta dobra preuzimaju u jednakim dijelovima uz poništenje odgovarajućeg broja POEN-a.
+**Kolektivna nabava** je program Zaklade u smislu članka 7. Statuta, koji se provodi kao projekt kojim Zaklada dinarskim sredstvima nabavlja dobra od treće osobe, a korisnici ta dobra preuzimaju u jednakim dijelovima uz poništenje odgovarajućeg broja POEN-a.
 
 **Predmet nabave** je dobro izabrano na način utvrđen člankom 11. ovoga pravilnika.
 
 **Dio** je jednaka količina dobra koja pripada jednom korisniku u okviru jedne nabave.
 
 **Dobavljač** je treća osoba od koje Zaklada nabavlja dobra. Dobavljač nije strana u odnosu između Zaklade i korisnika.
+
+### Članak 3a
+
+*Priroda nabave*
+
+Kolektivnom nabavom ostvaruju se ciljevi Zaklade utvrđeni člankom 6. Statuta, osobito socijalna zaštita i solidarna podrška te podrška dobrovoljnom udruživanju građana radi uzajamne pomoći i samoorganiziranja. Dobra se raspodjeljuju korisnicima programa u smislu članka 9. stavka 4. Statuta.
+
+Kolektivna nabava nije gospodarska djelatnost. Zaklada po osnovi nabave ne ostvaruje prihod ni dobit, dobra ne nudi na tržištu neodređenom krugu osoba i po osnovi njihova ustupanja ne stječe nikakvu vrijednost. Sredstva kojima se dobra nabavljaju potječu iz donacija i pokroviteljskih doprinosa.
+
+Zaklada za ustupljeno dobro ne smije primiti naknadu u novcu ni u drugom obliku, ni od korisnika ni od treće osobe.
+
+Uvođenje naknade za ustupljeno dobro predstavljalo bi gospodarsku djelatnost i nije dopušteno bez izmjene Statuta i upisa djelatnosti u registar u skladu sa zakonom.
 
 ### Članak 4.
 
@@ -166,7 +180,7 @@ Ponuda korisnika sustava prihvaća se samo ako je najpovoljnija, uz objavljenu u
 
 Odluka kojom se nabava pokreće utvrđuje ukupnu količinu dobra koje se nabavlja, veličinu jednoga dijela i broj POEN-a koji se poništava po jednom dijelu, u skladu s člankom 12. ovoga pravilnika.
 
-Odluka navodi potrebu zajednice koja se nabavom podmiruje. Parametri iz stavka 1. utvrđuju se prema toj potrebi.
+Odluka navodi potrebu zajednice koja se nabavom podmiruje i cilj Zaklade iz članka 3a stavka 1. koji se time ostvaruje. Parametri iz stavka 1. utvrđuju se prema toj potrebi.
 
 Broj dijelova jednak je količniku ukupne količine i veličine dijela.
 
@@ -306,7 +320,11 @@ Rezervira se i poništava isključivo broj POEN-a koji u zapisu postoji.
 
 *Nepreuzeti dijelovi*
 
+Dio koji ostane slobodan prije isteka razdoblja preuzimanja — zbog odustanka, isteka poziva ili nepreuzimanja — nudi se sljedećem korisniku u redoslijedu, po članku 23. ovoga pravilnika. Pozivi se ponavljaju dok ima korisnika u redoslijedu i dok traje razdoblje preuzimanja.
+
 Dijelovi koji do isteka razdoblja preuzimanja ne budu preuzeti ulaze u sljedeću nabavu kao dodatne jedinice.
+
+Nepreuzeti se dijelovi ne prodaju. Zaklada ih ustupa isključivo bez naknade, u skladu s člankom 3a ovoga pravilnika.
 
 ## VIII — Odnos prema dobavljaču
 
@@ -331,6 +349,8 @@ Javno su dostupni: registar prijedloga u zbirnom obliku, ishod izbornog glasovan
 Verificiranim korisnicima dostupan je i popis korisnika koji su preuzeli dio, s pseudonimom i mjestom u redoslijedu. Broj POEN-a u zapisu korisnika ne objavljuje se uz taj popis.
 
 Podaci o sudjelovanju pojedinog korisnika ne objavljuju se izvan obima iz stavka 2. ovoga članka.
+
+Zaklada javno objavljuje i zbirne podatke o projektima za tekuću kalendarsku godinu: ukupan iznos dinarskih sredstava utrošen na projekte i broj provedenih nabava. Objava je evidencija obima, a ne ograničenje — učestalost nabava ovim pravilnikom nije ograničena.
 
 ## X — Završne odredbe
 

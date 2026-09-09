@@ -69,6 +69,8 @@ A nyilvántartási együttható a közös jóhoz való hozzájárulás megbecsü
 
 A nyilvántartási együttható nem a POEN ára és nem az adomány kedvezménye. Az adománnyal semmi sem kerül megszerzésre: az adományozó nem szerez sem jószágot, sem követelést az Alapítvánnyal szemben, sem visszatérítéshez való jogot, sem a POEN visszaváltásához való jogot, sem befolyást a rendszer szabályairól szóló döntéshozatalban. Mivel a megszerzés tárgya hiányzik, az együttható különbsége nem kedvezőbb megszerzési feltételt jelent, hanem a hozzájárulás elismerésének nagyobb mértékét.
 
+Az adomány nem ad jogot a kollektív beszerzésből származó javakra, nem biztosít helyet az átvételi sorrendben, és ezen a jogcímen nem keletkeztet követelést az Alapítvánnyal szemben. A beszerzésben való részvétel joga a beszerzést megindító határozatból ered, a nyilvántartásba vett hozzájárulás pedig az a mérce, amely alapján az elsőbbséget megállapítják (a projektekről és a kollektív beszerzésekről szóló szabályzat 19. cikke).
+
 ### 5. cikk — Az adományok nyilvántartásba vételének jogi minősítése
 
 POEN kizárólag a 3. cikk értelmében vett nyilvános adományok után kerül nyilvántartásba. Névtelen adományok után POEN nem kerül nyilvántartásba, és azok nem számítanak bele a 4. cikk szerinti halmozott adományszintbe.

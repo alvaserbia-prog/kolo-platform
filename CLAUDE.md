@@ -101,6 +101,16 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-09 (osamnaesti put):** na **4.4.7** idu **DVA akta** — Pravilnik
+o projektima i kolektivnim nabavkama (sa 4.4.3) i Pravilnik o pokroviteljstvu i
+donacijama (sa 4.4.3). Ostalih petnaest ostaje gde jeste. Povod je **analiza rizika
+R-10** (ponovljena nabavka čita se kao privredna delatnost fondacije). Sadržinski,
+vidi sekciju „Nabavka je program Fondacije, ne privredna delatnost" ispod.
+
+🟡 **Zašto 4.4.7 istog dana kad je objavljen 4.4.6:** 4.4.6 je već objavljen za pet
+akata (R-09); da su nabavke dobile isti broj, dva različita događaja objave delila bi
+jednu šifru. Isto pravilo kao kod operativnog doprinosa (4.4.4 umesto 4.4.3).
+
 **AŽURIRANO 2026-09-09 (sedamnaesti put):** na **4.4.6** ide **PET akata** — Pravilnik
 o KOLO sistemu (sa 4.4.1), Pravilnik o Gornjem Kolu (sa 4.4.1), Pravilnik o
 hijerarhiji akata (sa 4.4.1), Izjava o prihvatanju rizika (sa 4.4.5) i Whitepaper
@@ -964,6 +974,110 @@ uslugu odlukom koja utvrđuje obim i **dinarsku vrednost koju ta usluga ima za n
 isti obrt kao kod kolektivne nabavke, gde odluka utvrđuje parametar pre nego što druga
 strana kaže cenu; **(B)** isto što i roba (cenovnik + isprava). Odluka vlasnika se čeka;
 do tada za usluge važi isti režim kao za robu.
+
+### Nabavka je program Fondacije, ne privredna delatnost (2026-09-09)
+
+Odluke uz analizu rizika **R-10** (nabavka je odlukom vlasnika od 07.09.2026. redovan
+projekat bez ograničenja učestalosti, pa se ponovljena nabavka i raspodela dobara čita
+kao privredna delatnost fondacije). Izmenjeni `projekti_nabavke_4_4_7.md` (zaglavlje,
+čl. 2, 3, nov **čl. 3a**, 17, 29, 31) i `donacije_4_4_7.md` (čl. 4) na svih pet
+jezika, uz izmenu koda.
+
+🟢 **Statut je nabavku predvideo IMENOM, a pravilnik se na to nije pozivao.**
+Statut **čl. 7 t. c)**: *„organizovanje kolektivnih nabavki robe i usluga u korist
+korisnika programa"*; **čl. 9 st. 3**: *„raspodela sredstava i dobara korisnicima vrši
+se isključivo kroz programe iz člana 7"*. Najjača odbrana koju imamo stajala je
+neiskorišćena — pravilnik je citirao samo čl. 14a i 51a KOLO Pravilnika. Sada je
+statutarni osnov u zaglavlju i u čl. 2, a čl. 3 nabavku definiše kao **program
+Fondacije u smislu čl. 7 Statuta koji se sprovodi kao projekat**. Terminološki, ali
+nosivo: čl. 9 st. 3 dozvoljava raspodelu dobara **samo kroz programe**.
+
+🔴 **Nov čl. 3a — „Priroda nabavke".** Četiri stava: (1) ostvaruju se ciljevi iz
+Statuta čl. 6 — socijalna zaštita i solidarna podrška i podrška uzajamnoj pomoći i
+samoorganizovanju, a dobra idu **korisnicima programa** u smislu čl. 9 st. 4;
+(2) **nije privredna delatnost** — nema prihoda, nema dobiti, dobra se ne nude na
+tržištu neodređenom krugu lica, sredstva su iz donacija i pokroviteljstva;
+(3) **zabrana naplate** — Fondacija za ustupljeno dobro ne sme primiti naknadu ni u
+novcu ni u drugom obliku, ni od korisnika ni od trećeg lica; (4) uvođenje naknade bi
+bilo privredna delatnost i traži izmenu Statuta i upis u registar.
+🔴 Stav 3 je **zabrana, ne opis** — ista razlika kao između „POEN je nekonvertibilan"
+(izjava) i „zabranjeno je prodavati POEN" (Uslovi čl. 24, norma sa sankcijom).
+
+🔴 **Odgovor na najoštriju verziju prigovora — „zatvoren krug korisnika".** Po čl. 21
+prijavljuje se samo ko ima 20.000 POEN, a najbrži put do tog broja je donacija; petlja
+*daš dinare → dobiješ POEN → dobiješ mesto u redu → dobiješ robu kupljenu tim dinarima*
+se čita kao nabavna zadruga ili kupovina sa odloženim izvršenjem. Odgovor je u Statutu:
+**uzajamnost i samoorganizovanje su UPISANI opštekorisni ciljevi** (čl. 6), pa je
+uzajamna korist osnov, ne mana. Zato čl. 3a st. 1 i čl. 17 sada traže da se imenuje
+**koji cilj Fondacije** se nabavkom ostvaruje, ne samo koja potreba zajednice.
+
+🔴 **Brana protiv te petlje prebačena je i u pravilnik o donacijama** (čl. 4, nov
+stav): donacija **ne daje pravo na dobra iz nabavke, ne obezbeđuje mesto u redu i ne
+stvara potraživanje**. Do sada je stajala samo u nabavkama čl. 19 — a petlja se
+najgore vidi iz akta o donacijama, koji spoljni čitalac otvara prvi.
+
+**Čl. 29 — nepreuzeti delovi (formulacija vlasnika).** Do sada je akt govorio samo da
+nepreuzeti delovi „ulaze u narednu nabavku", što **nije opisivalo šta kod radi**:
+`obradiNabavke` na odustanak, istek poziva i nepreuzimanje oslobađa mesto i zove
+`pozoviSledeceg`, dakle deo ide **sledećem u redu koji je bio ispod crte**. Sada akt
+to i kaže; u narednu nabavku ulazi tek ono što ostane po isteku perioda preuzimanja.
+🔴 Dodato i da se **nepreuzeti delovi ne prodaju** — prodaja viška bi bila promet uz
+naknadu i sama otvorila privrednu delatnost. Kod se nije menjao; akt je sustignut.
+
+**Čl. 31 st. 4 (M-8) — godišnji zbir projekata.** Javno se objavljuje **ukupan iznos
+utrošen na projekte u tekućoj kalendarskoj godini i broj sprovedenih nabavki**.
+🔴 **Ovo NIJE kapa** — kapa na broj nabavki i na udeo opticaja je odbijena
+07.09.2026. i ostaje odbijena. Ovo je evidencija obima: bez godišnjeg zbira se obimu
+prilazi naslepo, uključujući i poreske pragove.
+- Kod: `dohvatiGodisnjiProjektniPregled()` u `fondacija.ts` — meri po
+  `ProjekatTrosak.datum` (dan troška, indeksiran), NIKAD po `FondacijaTrosak`; broj
+  nabavki po `Nabavka.status = ZAVRSENA` i `zavrsenoAt` u godini. Izloženo u
+  `GET /api/javno/fondacija` i `GET /api/nabavke`, prikazano na ekranu `/nabavke`
+  (`nabavke.godisnji_pregled`, pet jezika).
+
+🟢 **PDV — odgovor na pitanje vlasnika (2026-09-09), zabeležen jer se ponavlja.**
+Ako Fondacija primi 10.000.000 RSD donacija i potroši ih plaćajući cene sa PDV-om,
+**ne ulazi u sistem PDV-a.** Tri razloga, sva tri nezavisna:
+1. **Prag se meri na SOPSTVENI promet** (ono što ti isporučuješ), ne na ono što primiš
+   ni na ono što potrošiš. Donacija nije promet dobara ni usluga — novac primljen bez
+   protivisporuke se ne broji.
+2. **Kupovina je ulaz.** Plaćanje PDV-a dobavljaču nikoga ne čini obveznikom; to je
+   prethodni porez, koji Fondacija van sistema jednostavno **snosi kao trošak** (pri
+   stopi od 20% to je ≈ 16,67% potrošenog iznosa, dakle ≈ 1,67M od 10M).
+3. **Besplatno davanje iz poslovne imovine** izjednačava se sa prometom uz naknadu
+   samo kad je pri nabavci **korišćen prethodni porez** — a Fondacija ga ne odbija.
+🔴 **Šta BI je uvelo:** isključivo njen sopstveni promet — dakle ako bi se poništenje
+POEN-a kvalifikovalo kao **naknada**. Tada vrednost ustupljenih dobara postaje NAŠ
+promet i prag se dostiže brzo. **To je tačno linija koju čl. 3a i čl. 19 brane** — i
+to je razlog zašto R-10 uopšte vredi rešavati.
+🟡 **Ironija koju treba znati:** ulazak u sistem PDV-a bi **besplatno davanje učinio
+oporezivim** (jer bi se prethodni porez odbijao), pa je ostanak van sistema i poreski
+i pravno u interesu ovog modela.
+
+🟡 **Dva različita „praga" i mere različite stvari** — ne mešati ih:
+- **PDV:** ukupan **sopstveni promet** u prethodnih 12 meseci (standardno 8.000.000
+  RSD; proveriti kao važeće na dan primene).
+- **Porez na dobit, oslobođenje nedobitne organizacije:** **višak prihoda nad
+  rashodima** u poreskom periodu do zakonskog iznosa (standardno 400.000 RSD), uz
+  uslove — ne raspodeljuje se, nema monopolskog položaja i slično.
+🔴 **Nijedan od ta dva broja ne pisati u akte ni na sajt** — brojevi i stope se menjaju,
+a akt bi zastario bez ijedne izmene (isto pravilo kao kod stope poreza na dobit u
+čl. 10 pravilnika o donacijama).
+
+🔴 **OTVORENO — pitanje za pravnicu i knjigovođu, ne pisati kao tvrdnju:** (a) da li
+se za ovakvu raspodelu traži upis šifre delatnosti u APR i izmena Statuta i kad je
+davanje besplatno; (b) da li neko može kvalifikovati poništenje POEN-a kao naknadu u
+smislu Zakona o PDV-u; (c) kad nas obim projekata dovede blizu praga.
+
+🔴 **ODBIJENE MERE UZ R-10 (odluka vlasnika) — ne predlagati ponovo:** kapa na broj
+nabavki, kapa na udeo opticaja i uslovljavanje učestalosti (07.09.2026); izmena
+Statuta radi upisa privredne delatnosti (09.09.2026 — statutarni osnov iz čl. 7 t. c)
+već postoji i dovoljan je).
+
+🟡 **Sprega sa R-18 (reklamacija) je stvarna i ide u suprotnom smeru:** što je davanje
+jasnije **besplatno**, to je korisnik slabije zaštićen potrošačkim pravom; što bismo
+mu više dali prava, to davanje više liči na prodaju. Reklamacija je namerno
+izostavljena i to ovde postaje **deo odbrane**, ne samo praznina.
 
 ### Gornje Kolo: telo Fondacije, a ne njen organ (2026-09-09)
 

@@ -69,6 +69,8 @@ Koeficijent evidencije izražava uvažavanje doprinosa zajedničkom dobru. Veći
 
 Koeficijent evidencije nije cijena POEN-a i nije popust na donaciju. Donacijom se ništa ne pribavlja: donator ne stječe nijedno dobro, nijedno potraživanje prema Zakladi, pravo na povrat, pravo na otkup POEN-a ni utjecaj u odlučivanju o pravilima sustava. Budući da predmeta stjecanja nema, razlika u koeficijentu ne predstavlja povoljniji uvjet stjecanja nego veću mjeru priznanja doprinosa.
 
+Donacija ne daje pravo na dobra iz kolektivne nabave, ne osigurava mjesto u redoslijedu za preuzimanje i ne stvara tražbinu prema Zakladi po toj osnovi. Pravo na sudjelovanje u nabavi proizlazi iz odluke kojom se nabava pokreće, a evidentiran doprinos mjerilo je po kojem se utvrđuje prvenstvo (članak 19. Pravilnika o projektima i kolektivnim nabavama).
+
 ### Članak 5. — Pravna kvalifikacija evidentiranja donacija
 
 POEN se evidentira isključivo za javne donacije u smislu članka 3. Za anonimne se donacije POEN ne evidentira i one ne ulaze u kumulativnu razinu donacija iz članka 4.

@@ -4,17 +4,19 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { registarPredloga } from "@/lib/protokol/nabavka";
+import { dohvatiGodisnjiProjektniPregled } from "@/lib/protokol/fondacija";
 
 /**
  * GET /api/nabavke
  *
- * Registar predloga (zbirno, bez pseudonima — čl. 10 st. 2) i spisak nabavki.
+ * Registar predloga (zbirno, bez pseudonima — čl. 10 st. 2) i spisak nabavki, uz
+ * zbirni godišnji pregled projekata (čl. 31 st. 4) — evidencija obima, ne granica.
  */
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
 
-  const [registar, nabavke] = await Promise.all([
+  const [registar, nabavke, projekti] = await Promise.all([
     registarPredloga(),
     prisma.nabavka.findMany({
       where: { status: { in: ["OBJAVLJENA", "RED_UTVRDJEN", "PLACENA", "ZAVRSENA"] } },
@@ -32,6 +34,7 @@ export async function GET() {
         _count: { select: { prijave: true } },
       },
     }),
+    dohvatiGodisnjiProjektniPregled(),
   ]);
 
   const moja = await prisma.nabavkaPrijava.findMany({
@@ -41,6 +44,7 @@ export async function GET() {
   const mojePoNabavci = new Map(moja.map((m) => [m.nabavkaId, m]));
 
   return NextResponse.json({
+    projekti,
     registar: registar.map((r) => ({
       nazivId: r.nazivId,
       naziv: r.naziv,

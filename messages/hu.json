@@ -3380,6 +3380,7 @@
   "nabavke": {
     "naslov": "Közös beszerzések",
     "uvod": "A közös beszerzésekkel olyan árukat biztosítunk, amelyeket tagjaink nem állítanak elő.",
+    "godisnji_pregled": "Projektek {godina}-ben: {iznos} RSD felhasználva · lefolytatott beszerzések: {broj}",
     "predlog_naslov": "A te javaslatod",
     "predlog_opis": "Javasold, mi legyen a következő közös beszerzés tárgya.",
     "ukloni": "Eltávolítás",

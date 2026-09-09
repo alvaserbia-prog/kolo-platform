@@ -2,7 +2,7 @@
 
 # Szabályzat a projektekről és a kollektív beszerzésekről
 
-*Ez a szabályzat az Alapítvány dinárban meglévő eszközeinek közösségi projektekre való elosztását rendezi, valamint — az ilyen projekt első szabályozott formájaként — a kollektív beszerzést: olyan javak közös beszerzését, amelyeket a felhasználók a rendszeren belül nem tudnak biztosítani. A KOLO rendszerről szóló szabályzat 14a. és 51a. cikke alapján kerül elfogadásra.*
+*Ez a szabályzat az Alapítvány dinárban meglévő eszközeinek közösségi projektekre való elosztását rendezi, valamint — az ilyen projekt első szabályozott formájaként — a kollektív beszerzést: olyan javak közös beszerzését, amelyeket a felhasználók a rendszeren belül nem tudnak biztosítani. A KOLO rendszerről szóló szabályzat 14a. és 51a. cikke alapján, az Alapítvány Alapszabályának 7. cikk c) pontjával és 9. cikk (3) bekezdésével összhangban kerül elfogadásra.*
 
 ## I — Általános rendelkezések
 
@@ -20,6 +20,8 @@ Az e szabályzatban nem meghatározott kifejezések a KOLO rendszerről szóló 
 
 Ez a szabályzat a KOLO rendszerről szóló szabályzat 14a. és 51a. cikkének rendelkezéseit fejti ki. Ellentmondás esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.
 
+A kollektív beszerzés az Alapítvány Alapszabálya 7. cikk c) pontja szerinti céljai megvalósításának egyik módja (javak és szolgáltatások kollektív beszerzésének megszervezése a programok felhasználóinak javára), és az Alapszabály 9. cikk (3) bekezdése értelmében programként valósul meg.
+
 A Felső Kolo döntéshozatali eljárását a Felső Koloról szóló szabályzat rendezi, és az e szabályzat szerinti döntésekre is alkalmazandó.
 
 ### 3. cikk
@@ -28,13 +30,25 @@ A Felső Kolo döntéshozatali eljárását a Felső Koloról szóló szabályza
 
 **Projekt** az Alapítvány dinárban meglévő eszközeinek célzott, a közösség javára történő felhasználása, az Alapítvány működési költségein kívül.
 
-**Kollektív beszerzés** az a projekt, amelynek keretében az Alapítvány dinárban meglévő eszközökből harmadik személytől javakat szerez be, a felhasználók pedig e javakat egyenlő részekben veszik át, a megfelelő számú POEN érvénytelenítése mellett.
+**Kollektív beszerzés** az Alapítvány Alapszabály 7. cikke értelmében vett programja, amely olyan projektként valósul meg, amelynek keretében az Alapítvány dinárban meglévő eszközökből harmadik személytől javakat szerez be, a felhasználók pedig e javakat egyenlő részekben veszik át, a megfelelő számú POEN érvénytelenítése mellett.
 
 **A beszerzés tárgya** az e szabályzat 11. cikkében megállapított módon kiválasztott jószág.
 
 **Rész** a jószág azonos mennyisége, amely egy felhasználót illet meg egyetlen beszerzés keretében.
 
 **Szállító** az a harmadik személy, akitől az Alapítvány a javakat beszerzi. A szállító nem részese az Alapítvány és a felhasználók közötti jogviszonynak.
+
+### 3a. cikk
+
+*A beszerzés jellege*
+
+A kollektív beszerzés az Alapítványnak az Alapszabály 6. cikkében megállapított céljait valósítja meg, különösen a szociális védelmet és a szolidáris támogatást, valamint a polgárok kölcsönös segítségnyújtás és önszerveződés céljából történő önkéntes társulásának támogatását. A javak az Alapszabály 9. cikk (4) bekezdése értelmében vett programfelhasználók között kerülnek elosztásra.
+
+A kollektív beszerzés nem gazdasági tevékenység. Az Alapítvány a beszerzés jogcímén sem bevételt, sem nyereséget nem szerez, a javakat nem kínálja a piacon meghatározatlan személyi körnek, és azok átengedése jogcímén semmilyen értéket nem szerez. A javak beszerzésére fordított eszközök adományokból és patronálói hozzájárulásokból származnak.
+
+Az Alapítvány az átengedett jószágért nem fogadhat el ellenszolgáltatást sem pénzben, sem más formában, sem a felhasználóktól, sem harmadik személytől.
+
+Az átengedett jószágért járó ellenszolgáltatás bevezetése gazdasági tevékenységnek minősülne, és az Alapszabály módosítása, valamint a tevékenységnek a jogszabályokkal összhangban történő nyilvántartásba vétele nélkül nem megengedett.
 
 ### 4. cikk
 
@@ -166,7 +180,7 @@ A rendszer felhasználójának ajánlata csak akkor kerül elfogadásra, ha az a
 
 A beszerzést megindító határozat megállapítja a beszerzendő jószág teljes mennyiségét, egy rész méretét és az egy részre eső, érvénytelenítésre kerülő POEN számát, e szabályzat 12. cikkével összhangban.
 
-A határozat megjelöli a közösségnek azt a szükségletét, amelyet a beszerzés kielégít. Az (1) bekezdés szerinti paramétereket e szükséglethez igazodva állapítják meg.
+A határozat megjelöli a közösségnek azt a szükségletét, amelyet a beszerzés kielégít, valamint az Alapítványnak a 3a. cikk (1) bekezdése szerinti célját, amely ezáltal megvalósul. Az (1) bekezdés szerinti paramétereket e szükséglethez igazodva állapítják meg.
 
 A részek száma a teljes mennyiség és a rész méretének hányadosa.
 
@@ -306,7 +320,11 @@ Kizárólag az a POEN-szám kerül foglalásra és érvénytelenítésre, amely 
 
 *Át nem vett részek*
 
+Az a rész, amely az átvételi időszak lejárta előtt szabaddá válik — elállás, a meghívás lejárta vagy az át nem vétel miatt —, e szabályzat 23. cikke szerint a sorrendben következő felhasználónak kerül felajánlásra. A meghívások mindaddig ismétlődnek, amíg van felhasználó a sorrendben és tart az átvételi időszak.
+
 Azok a részek, amelyeket az átvételi időszak lejártáig nem vesznek át, további egységként a következő beszerzésbe kerülnek.
+
+Az át nem vett részek nem kerülnek eladásra. Az Alapítvány azokat kizárólag ellenszolgáltatás nélkül engedi át, e szabályzat 3a. cikkével összhangban.
 
 ## VIII — Viszony a szállítóhoz
 
@@ -331,6 +349,8 @@ Nyilvánosan hozzáférhető: a javaslatok nyilvántartása összesített formá
 A hitelesített felhasználók számára hozzáférhető továbbá a részt átvett felhasználók jegyzéke, álnévvel és a sorrendbeli hellyel. A felhasználó bejegyzésében szereplő POEN száma e jegyzékkel együtt nem kerül közzétételre.
 
 Az egyes felhasználók részvételére vonatkozó adatok az e cikk (2) bekezdésében meghatározott körön kívül nem kerülnek közzétételre.
+
+Az Alapítvány közzéteszi a projektekre vonatkozó összesített adatokat is a folyó naptári évre: a projektekre fordított dináreszközök teljes összegét és a lefolytatott beszerzések számát. A közzététel a nagyságrend nyilvántartása, nem korlátozás — a beszerzések gyakoriságát e szabályzat nem korlátozza.
 
 ## X — Záró rendelkezések
 

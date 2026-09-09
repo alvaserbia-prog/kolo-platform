@@ -37,7 +37,7 @@ const AKTI = [
   "whitepaper_4_4_6.md",
   "rizici_4_4_6.md",
   "hijerarhija_4_4_6.md",
-  "donacije_4_4_3.md",
+  "donacije_4_4_7.md",
   "operativni_4_4_4.md",
   "osnivacki_4_4_5.md",
   "gornje_kolo_4_4_6.md",
@@ -45,7 +45,7 @@ const AKTI = [
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce_dece_4_4_2.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
-  "projekti_nabavke_4_4_3.md",
+  "projekti_nabavke_4_4_7.md",
 ];
 
 /**
@@ -202,7 +202,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // jedan", sistem je sam objavljivao koliko POEN vredi u dinarima, pa se tabela
   // koeficijenta donacija čitala kao cenovnik. Zato se sada traži suprotno:
   // odsustvo pariteta i prisustvo odredbe da broj nije cena dobra.
-  "projekti_nabavke_4_4_3.md": {
+  "projekti_nabavke_4_4_7.md": {
     sr: [
       "### Član 27",
       "tri operativna troška Fondacije za prethodni mesec",
@@ -230,6 +230,18 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Rok za prijavu iznosi tri dana",
       "Rok za odgovor na poziv iznosi tri dana",
       "Period preuzimanja iznosi tri dana",
+      // 🔴 4.4.7 (R-10) — priroda nabavke. Kad je nabavka redovna a ne izuzetna,
+      // jedina odbrana od čitanja „privredna delatnost fondacije" je da se ništa ne
+      // prima. Traži se troje: statutarni osnov (čl. 7 t. c Statuta ga imenuje),
+      // izričita tvrdnja da nije privredna delatnost, i ZABRANA naplate — jer izjava
+      // bez zabrane je isto što je nekonvertibilnost bila pre Uslova čl. 24.
+      "### Član 3a",
+      "nije privredna delatnost",
+      "ne sme primiti naknadu u novcu ni u drugom obliku",
+      "člana 7 tačka c) Statuta",
+      // Nepreuzet deo ide sledećem u redu i nikad se ne prodaje.
+      "nudi se sledećem korisniku u redu",
+      "Nepreuzeti delovi se ne prodaju",
     ],
     en: [
       "The spending coefficient is 1.00",
@@ -238,6 +250,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "established before offers are collected",
       "exceeds the upper limit under Article 8, no procurement is carried out",
       "receives no value whatsoever",
+      "### Article 3a",
+      "is not an economic activity",
+      "may not receive consideration for a ceded good",
+      "Uncollected shares are not sold",
       "free of charge",
       "not consideration for the good provided",
       "states the need of the community",
@@ -257,6 +273,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "устанавливаются до сбора оферт",
       "превышают верхний предел по статье 8, закупка не проводится",
       "не получает никакой ценности",
+      "### Статья 3a",
+      "не является хозяйственной деятельностью",
+      "не вправе принять встречное предоставление",
+      "Неполученные доли не продаются",
       "безвозмездно",
       "не является встречным предоставлением за предоставленное благо",
       "указывается потребность сообщества",
@@ -318,7 +338,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 4.4.3 — obrazloženje koeficijenta evidencije. Tabela nivoa (1,00–2,00) bez
   // obrazloženja čita se kao cenovnik; odredba da se donacijom NIŠTA ne pribavlja
   // je ono što razliku u koeficijentu drži izvan pojma popusta, pa se traži doslovno.
-  "donacije_4_4_3.md": {
+  "donacije_4_4_7.md": {
     sr: [
       "nije cena POEN-a i nije popust na donaciju",
       "Donacijom se ništa ne pribavlja",
@@ -330,6 +350,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "naknadnim izmenama ovog pravilnika se ne menja",
       // Nivo je priznanje za delo, ne kupljen status.
       "trajno priznanje za učinjeno delo, a ne stečen status",
+      // 4.4.7 (R-10) — petlja donacija → POEN → red za robu vidi se iz OVOG akta,
+      // pa brana mora stajati i ovde, ne samo u pravilniku o nabavkama.
+      "ne daje pravo na dobra iz kolektivne nabavke",
       // 🔴 Javnost NIJE uslov za evidentiranje POEN-a (to bi bila struktura
       // „plati → dobij vidljivost"); razlog je proverljivost upisa.
       "bila bi upis koji se ne može proveriti",

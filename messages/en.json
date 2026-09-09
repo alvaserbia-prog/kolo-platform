@@ -3380,6 +3380,7 @@
   "nabavke": {
     "naslov": "Collective procurement",
     "uvod": "Through collective procurement we provide goods our members do not produce.",
+    "godisnji_pregled": "Projects in {godina}: {iznos} RSD spent · procurements carried out: {broj}",
     "predlog_naslov": "Your proposal",
     "predlog_opis": "Suggest what the next collective procurement should be.",
     "ukloni": "Remove",

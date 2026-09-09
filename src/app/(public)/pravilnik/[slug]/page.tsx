@@ -34,9 +34,12 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   },
   // 4.4.3 — obrazloženje koeficijenta evidencije (čl. 4) i definicija koeficijenta
   // bez jedinične formulacije „po jednom dinaru" (čl. 2).
+  // 4.4.7 — donacija ne daje pravo na dobra iz kolektivne nabavke ni mesto u redu
+  // (čl. 4). Petlja donacija → POEN → red za robu vidi se iz OVOG akta, pa brana
+  // mora stajati i ovde, ne samo u pravilniku o nabavkama.
   "pokroviteljstvo-donacije": {
-    fajl: "donacije_4_4_3.md",
-    verzija: "4.4.3",
+    fajl: "donacije_4_4_7.md",
+    verzija: "4.4.7",
   },
   // 4.4.4 — pravna priroda operativnog doprinosa (čl. 27): nema naručioca, nema
   // naknade, rezultat ide u zajedničko dobro pod licencama iz Glave II. Brisan
@@ -73,9 +76,12 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
   // 4.4.3 — broj POEN-a po delu je parametar odluke o nabavci (čl. 17), a ne izvod
   // iz maloprodajne vrednosti dobra (čl. 19). Maloprodajna referenca je brisana.
+  // 4.4.7 — priroda nabavke (R-10): program iz čl. 7 t. c) Statuta, nije privredna
+  // delatnost, zabranjena naknada za ustupljeno dobro (nov čl. 3a); oslobođen deo
+  // ide sledećem u redu i ne prodaje se (čl. 29); godišnji zbir projekata (čl. 31).
   "projekti-nabavke": {
-    fajl: "projekti_nabavke_4_4_3.md",
-    verzija: "4.4.3",
+    fajl: "projekti_nabavke_4_4_7.md",
+    verzija: "4.4.7",
   },
 };
 

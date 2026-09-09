@@ -69,6 +69,8 @@ The recording coefficient expresses the regard in which a contribution to the co
 
 The recording coefficient is not a price of POEN and is not a discount on a donation. Nothing is acquired by a donation: the donor acquires no good, no claim against the Foundation, no right to a refund, no right to redemption of POEN, and no influence in decision-making on the rules of the system. Since there is no object of acquisition, the difference in the coefficient does not constitute more favourable terms of acquisition but a greater measure of recognition of the contribution.
 
+A donation confers no right to goods from a collective procurement, secures no position in the collection order, and creates no claim against the Foundation on that basis. The right to participate in a procurement arises from the decision initiating it, while the recorded contribution is the criterion by which precedence is determined (Article 19 of the Rulebook on Projects and Collective Procurement).
+
 ### Article 5 — Legal qualification of donation recording
 
 POEN is recorded exclusively for public donations within the meaning of Article 3. For anonymous donations, no POEN is recorded and they do not count toward the cumulative donation tier under Article 4.

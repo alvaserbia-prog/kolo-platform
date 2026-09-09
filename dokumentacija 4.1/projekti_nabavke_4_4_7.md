@@ -1,6 +1,6 @@
 # Pravilnik o projektima i kolektivnim nabavkama
 
-*Ovaj pravilnik uređuje raspoređivanje dinarskih sredstava Fondacije u projekte zajednice i, kao prvi uređeni oblik takvog projekta, kolektivnu nabavku — zajedničku nabavku dobara koja korisnici ne mogu obezbediti unutar sistema. Donosi se na osnovu člana 14a i člana 51a Pravilnika o KOLO sistemu.*
+*Ovaj pravilnik uređuje raspoređivanje dinarskih sredstava Fondacije u projekte zajednice i, kao prvi uređeni oblik takvog projekta, kolektivnu nabavku — zajedničku nabavku dobara koja korisnici ne mogu obezbediti unutar sistema. Donosi se na osnovu člana 14a i člana 51a Pravilnika o KOLO sistemu, a u skladu sa članom 7 tačka c) i članom 9 stav 3 Statuta Fondacije.*
 
 ## I — Opšte odredbe
 
@@ -18,6 +18,8 @@ Izrazi koji nisu definisani ovim pravilnikom imaju značenje utvrđeno Pravilnik
 
 Ovaj pravilnik razrađuje odredbe članova 14a i 51a Pravilnika o KOLO sistemu. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.
 
+Kolektivna nabavka je jedan od načina ostvarivanja ciljeva Fondacije iz člana 7 tačka c) Statuta (organizovanje kolektivnih nabavki robe i usluga u korist korisnika programa) i sprovodi se kao program u smislu člana 9 stav 3 Statuta.
+
 Postupak odlučivanja Gornjeg Kola uređen je Pravilnikom o Gornjem Kolu i primenjuje se i na odluke iz ovog pravilnika.
 
 ### Član 3
@@ -26,13 +28,25 @@ Postupak odlučivanja Gornjeg Kola uređen je Pravilnikom o Gornjem Kolu i prime
 
 **Projekat** je namensko trošenje dinarskih sredstava Fondacije u korist zajednice, izvan operativnih troškova Fondacije.
 
-**Kolektivna nabavka** je projekat kojim Fondacija dinarskim sredstvima nabavlja dobra od trećeg lica, a korisnici ta dobra preuzimaju u jednakim delovima uz poništenje odgovarajućeg broja POEN-a.
+**Kolektivna nabavka** je program Fondacije u smislu člana 7 Statuta, koji se sprovodi kao projekat kojim Fondacija dinarskim sredstvima nabavlja dobra od trećeg lica, a korisnici ta dobra preuzimaju u jednakim delovima uz poništenje odgovarajućeg broja POEN-a.
 
 **Predmet nabavke** je dobro izabrano na način utvrđen članom 11 ovog pravilnika.
 
 **Deo** je jednaka količina dobra koja pripada jednom korisniku u okviru jedne nabavke.
 
 **Dobavljač** je treće lice od koga Fondacija nabavlja dobra. Dobavljač nije strana u odnosu između Fondacije i korisnika.
+
+### Član 3a
+
+*Priroda nabavke*
+
+Kolektivnom nabavkom ostvaruju se ciljevi Fondacije utvrđeni članom 6 Statuta, naročito socijalna zaštita i solidarna podrška i podrška dobrovoljnom udruživanju građana radi uzajamne pomoći i samoorganizovanja. Dobra se raspodeljuju korisnicima programa u smislu člana 9 stav 4 Statuta.
+
+Kolektivna nabavka nije privredna delatnost. Fondacija po osnovu nabavke ne ostvaruje prihod ni dobit, dobra ne nudi na tržištu neodređenom krugu lica i po osnovu njihovog ustupanja ne stiče nikakvu vrednost. Sredstva kojima se dobra nabavljaju potiču iz donacija i pokroviteljskih doprinosa.
+
+Fondacija za ustupljeno dobro ne sme primiti naknadu u novcu ni u drugom obliku, ni od korisnika ni od trećeg lica.
+
+Uvođenje naknade za ustupljeno dobro predstavljalo bi privrednu delatnost i nije dopušteno bez izmene Statuta i upisa delatnosti u registar u skladu sa zakonom.
 
 ### Član 4
 
@@ -164,7 +178,7 @@ Ponuda korisnika sistema prihvata se samo ako je najpovoljnija, uz objavljeno po
 
 Odluka kojom se nabavka pokreće utvrđuje ukupnu količinu dobra koje se nabavlja, veličinu jednog dela i broj POEN-a koji se poništava po jednom delu, u skladu sa članom 12 ovog pravilnika.
 
-Odluka navodi potrebu zajednice koja se nabavkom podmiruje. Parametri iz stava 1 utvrđuju se prema toj potrebi.
+Odluka navodi potrebu zajednice koja se nabavkom podmiruje i cilj Fondacije iz člana 3a stav 1 koji se time ostvaruje. Parametri iz stava 1 utvrđuju se prema toj potrebi.
 
 Broj delova jednak je količniku ukupne količine i veličine dela.
 
@@ -304,7 +318,11 @@ Rezerviše se i poništava isključivo broj POEN-a koji u zapisu postoji.
 
 *Nepreuzeti delovi*
 
+Deo koji ostane slobodan pre isteka perioda preuzimanja — zbog odustanka, isteka poziva ili nepreuzimanja — nudi se sledećem korisniku u redu, po članu 23 ovog pravilnika. Pozivi se ponavljaju dok ima korisnika u redu i dok traje period preuzimanja.
+
 Delovi koji do isteka perioda preuzimanja ne budu preuzeti ulaze u narednu nabavku kao dodatne jedinice.
+
+Nepreuzeti delovi se ne prodaju. Fondacija ih ustupa isključivo bez naknade, u skladu sa članom 3a ovog pravilnika.
 
 ## VIII — Odnos prema dobavljaču
 
@@ -329,6 +347,8 @@ Javno su dostupni: registar predloga u zbirnom obliku, ishod izbornog glasanja, 
 Verifikovanim korisnicima dostupan je i spisak korisnika koji su preuzeli deo, sa pseudonimom i mestom u redu. Broj POEN-a u zapisu korisnika ne objavljuje se uz taj spisak.
 
 Podaci o učešću pojedinog korisnika ne objavljuju se izvan obima iz stava 2 ovog člana.
+
+Fondacija javno objavljuje i zbirne podatke o projektima za tekuću kalendarsku godinu: ukupan iznos dinarskih sredstava utrošen na projekte i broj sprovedenih nabavki. Objava je evidencija obima, ne ograničenje — učestalost nabavki ovim pravilnikom nije ograničena.
 
 ## X — Završne odredbe
 

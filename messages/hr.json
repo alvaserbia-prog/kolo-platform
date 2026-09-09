@@ -3380,6 +3380,7 @@
   "nabavke": {
     "naslov": "Kolektivne nabave",
     "uvod": "Kolektivnim nabavama osiguravamo robu koju naši članovi ne proizvode.",
+    "godisnji_pregled": "Projekti u {godina}: utrošeno {iznos} RSD · provedenih nabava: {broj}",
     "predlog_naslov": "Tvoj prijedlog",
     "predlog_opis": "Predloži što bi želio da bude predmet sljedeće kolektivne nabave.",
     "ukloni": "Ukloni",
