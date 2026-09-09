@@ -2,7 +2,7 @@
 
 # Pravilnik o sudjelovanju djece
 
-*Ovaj pravilnik uređuje sudjelovanje maloljetnih osoba u KOLO sustavu — pristupanje, obim aktivnosti, odnos s roditeljem, doprinos iz dječjeg prostora i prijelaz u punoljetni račun. Donosi se na temelju članka 58. Pravilnika o KOLO sustavu (v4.4.1), koji izričito upućuje na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
+*Ovaj pravilnik uređuje sudjelovanje maloljetnih osoba u KOLO sustavu — pristupanje, obim aktivnosti, odnos s roditeljem, doprinos iz dječjeg prostora i prijelaz u punoljetni račun. Donosi se na temelju članka 58. Pravilnika o KOLO sustavu (v4.4.6), koji izričito upućuje na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
 
 ## I — Opće odredbe
 
@@ -38,7 +38,11 @@ Maloljetna osoba može otvoriti račun sama. Pri otvaranju unosi pseudonim, lozi
 
 Datum rođenja se pri otvaranju ne unosi. Njega unosi roditelj pri preuzimanju računa (članak 7.).
 
-Do preuzimanja računa o maloljetnom korisniku obrađuju se samo pseudonim i elektronička adresa roditelja.
+Do preuzimanja računa o maloljetnom korisniku obrađuju se pseudonim, podaci nužni za pristup računu i elektronička adresa roditelja. Ako maloljetni korisnik u tom razdoblju sklopi prijateljstvo iz članka 14.a, obrađuje se i zapis o tom prijateljstvu s datumom.
+
+Do preuzimanja računa podaci maloljetnog korisnika obrađuju se na temelju legitimnog interesa, u svrhu uspostavljanja kontakta s roditeljem radi pribavljanja privole koju zakon zahtijeva. Obrada po toj osnovi prestaje preuzimanjem računa, kada osnova postaje privola roditelja iz članka 3., odnosno brisanjem računa po članku 4.b.
+
+Maloljetni korisnik čiji račun čeka preuzimanje može sam obrisati račun u svakom trenutku.
 
 Elektronička adresa roditelja podatak je o trećoj osobi koji unosi maloljetna osoba. Obrađuje se na temelju legitimnog interesa, radi pribavljanja privole koju zakon zahtijeva, i isključivo radi upućivanja poruke iz članka 4.b.
 

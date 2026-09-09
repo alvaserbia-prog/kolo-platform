@@ -621,6 +621,12 @@
     "odustani": "Mégse",
     "brisem": "Törlés…",
     "brisi_potvrdi": "Törlés megerősítése",
+    "dete_brisi_naslov": "A fiók törlése",
+    "dete_brisi_opis": "A fiók még arra vár, hogy anya vagy apa átvegye. Amíg vár, magad is törölheted. Törlődik az álneved, a jelszavad, a megadott cím és a megkötött barátságaid. Ez a művelet nem vonható vissza.",
+    "dete_brisi_dugme": "A fiókom törlése",
+    "dete_brisi_potvrda": "Biztos? A fiók és minden barátság törlődik, és nem állítható vissza.",
+    "dete_brisi_potvrdi": "Igen, törlöm",
+    "dete_brisi_greska": "Hiba a törlés során.",
     "trx_transfer": "Átírás",
     "trx_emisija": "Protokoll",
     "trx_verifikacija": "Megerősítés",
@@ -935,7 +941,7 @@
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.4.2"
+      "ver": "4.4.8"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -943,11 +949,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.4.3"
+      "ver": "4.4.8"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.4.2"
+      "ver": "4.4.8"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
@@ -981,13 +987,13 @@
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
     "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.4.3-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.4.2-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.4.8-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.4.3-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.4.8-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.4.2-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.4.8-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.6-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",

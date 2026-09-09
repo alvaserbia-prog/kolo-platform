@@ -2,7 +2,7 @@
 
 # Rulebook on the Participation of Children
 
-*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.4.1), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
+*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.4.6), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
 
 ## I — General Provisions
 
@@ -38,7 +38,11 @@ A minor may open an account independently. Upon opening, they enter a pseudonym,
 
 The date of birth is not entered upon opening. It is entered by the parent upon taking over the account (Article 7).
 
-Until the account is taken over, only the pseudonym and the parent's email address are processed about the minor user.
+Until the account is taken over, the pseudonym, the data necessary for access to the account, and the parent's email address are processed about the minor user. If the minor user forms a friendship under Article 14a during that period, the record of that friendship with its date is processed as well.
+
+Until the account is taken over, the minor user's data are processed on the basis of legitimate interest, for the purpose of establishing contact with the parent in order to obtain the consent required by law. Processing on that basis ceases upon takeover of the account, when the basis becomes the parent's consent under Article 3, or upon deletion of the account under Article 4b.
+
+A minor user whose account is awaiting takeover may delete the account themselves at any time.
 
 The parent's email address is data about a third party entered by the minor. It is processed on the basis of legitimate interest, for the purpose of obtaining the consent required by law, and solely in order to send the message under Article 4b.
 

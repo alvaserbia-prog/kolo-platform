@@ -2,7 +2,7 @@
 
 # Szabályzat a gyermekek részvételéről
 
-*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.4.1) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
+*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.4.6) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
 
 ## I — Általános rendelkezések
 
@@ -38,7 +38,11 @@ A kiskorú személy önállóan is nyithat fiókot. A megnyitáskor álnevet, je
 
 A születési dátumot a megnyitáskor nem adja meg. Azt a szülő jegyzi be a fiók átvételekor (7. cikk).
 
-A fiók átvételéig a kiskorú felhasználóról csak az álnév és a szülő elektronikus címe kerül kezelésre.
+A fiók átvételéig a kiskorú felhasználóról az álnév, a fiókhoz való hozzáféréshez szükséges adatok és a szülő elektronikus címe kerül kezelésre. Ha a kiskorú felhasználó ebben az időszakban a 14.a cikk szerinti barátságot köt, a barátságról szóló, dátummal ellátott bejegyzés kezelésére is sor kerül.
+
+A fiók átvételéig a kiskorú felhasználó adatainak kezelése jogos érdeken alapul, abból a célból, hogy a szülővel kapcsolat létesüljön a jogszabály által megkívánt beleegyezés megszerzése érdekében. Az ezen az alapon történő kezelés a fiók átvételével szűnik meg, amikor az alapot a szülőnek a 3. cikk szerinti beleegyezése váltja fel, illetve a fiók 4.b cikk szerinti törlésével.
+
+A kiskorú felhasználó, akinek fiókja átvételre vár, a fiókot bármikor maga is törölheti.
 
 A szülő elektronikus címe harmadik személyre vonatkozó adat, amelyet a kiskorú ad meg. Kezelése jogos érdeken alapul, a jogszabály által megkívánt beleegyezés megszerzése céljából, és kizárólag a 4.b cikk szerinti üzenet elküldése érdekében.
 

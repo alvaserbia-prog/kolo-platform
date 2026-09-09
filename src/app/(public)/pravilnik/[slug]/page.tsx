@@ -70,8 +70,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce-dece": {
-    fajl: "ucesce_dece_4_4_2.md",
-    verzija: "4.4.2",
+    fajl: "ucesce_dece_4_4_8.md",
+    verzija: "4.4.8",
   },
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
   // 4.4.3 — broj POEN-a po delu je parametar odluke o nabavci (čl. 17), a ne izvod

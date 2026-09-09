@@ -628,6 +628,12 @@
     "odustani": "Odustani",
     "brisem": "Brišem...",
     "brisi_potvrdi": "Potvrdi brisanje",
+    "dete_brisi_naslov": "Brisanje računa",
+    "dete_brisi_opis": "Račun još čeka da ga preuzme mama ili tata. Dok čeka, možeš ga obrisati sam. Brišu se tvoj pseudonim, lozinka, adresa koju si unio i prijateljstva koja si sklopio. Ova je radnja nepovratna.",
+    "dete_brisi_dugme": "Obriši moj račun",
+    "dete_brisi_potvrda": "Sigurno? Račun i sva prijateljstva brišu se i ne mogu se vratiti.",
+    "dete_brisi_potvrdi": "Da, obriši",
+    "dete_brisi_greska": "Greška pri brisanju.",
     "trx_transfer": "Prepis",
     "trx_emisija": "Protokol",
     "trx_verifikacija": "Potvrda",
@@ -942,7 +948,7 @@
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.4.2"
+      "ver": "4.4.8"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -950,11 +956,11 @@
     },
     "dpia": {
       "naslov": "DPIA. Procjena učinka na zaštitu osobnih podataka",
-      "ver": "4.4.3"
+      "ver": "4.4.8"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade osobnih podataka",
-      "ver": "4.4.2"
+      "ver": "4.4.8"
     },
     "rizici": {
       "naslov": "Izjava o prihvaćanju rizika",
@@ -988,13 +994,13 @@
     "meta_uslovi_title": "Uvjeti korištenja · KOLO",
     "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.4.3",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.4.2",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.4.8",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.4.3",
+    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.4.8",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.4.2",
+    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.4.8",
     "meta_rizici_title": "Izjava o prihvaćanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.4.6",
     "meta_whitepaper_title": "Whitepaper · KOLO",

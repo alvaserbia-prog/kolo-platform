@@ -628,6 +628,12 @@
     "odustani": "Cancel",
     "brisem": "Deleting...",
     "brisi_potvrdi": "Confirm deletion",
+    "dete_brisi_naslov": "Deleting the account",
+    "dete_brisi_opis": "The account is still waiting to be taken over by a parent. While it waits, you can delete it yourself. Your pseudonym, password, the address you entered, and the friendships you have formed will be deleted. This action cannot be undone.",
+    "dete_brisi_dugme": "Delete my account",
+    "dete_brisi_potvrda": "Are you sure? The account and all friendships will be deleted and cannot be restored.",
+    "dete_brisi_potvrdi": "Yes, delete",
+    "dete_brisi_greska": "Error while deleting.",
     "trx_transfer": "Re-registration",
     "trx_emisija": "Protocol",
     "trx_verifikacija": "Confirmation",
@@ -942,7 +948,7 @@
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "4.4.2"
+      "ver": "4.4.8"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -950,11 +956,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "4.4.3"
+      "ver": "4.4.8"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "4.4.2"
+      "ver": "4.4.8"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
@@ -988,13 +994,13 @@
     "meta_uslovi_title": "Terms of Use — KOLO",
     "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.4.3",
     "meta_privatnost_title": "Privacy Policy — KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.4.2",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.4.8",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.4.3",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.4.8",
     "meta_radnje_title": "Register of Processing Activities — KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 4.4.2",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.4.8",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
     "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.4.6",
     "meta_whitepaper_title": "Whitepaper — KOLO",

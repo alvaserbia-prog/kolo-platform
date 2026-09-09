@@ -362,6 +362,22 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
     setPrigovorOpis("");
   }
 
+  // Dete čiji nalog čeka preuzimanje briše nalog samo (čl. 4a st. 6). Zaseban tok
+  // od `obrisiNalog`: tamo se nalog anonimizuje i ostaje, ovde nestaje.
+  const [deteBrisiOpen, setDeteBrisiOpen] = useState(false);
+  const [deteBrisiLoading, setDeteBrisiLoading] = useState(false);
+  const [deteBrisiError, setDeteBrisiError] = useState("");
+
+  async function obrisiDecjiNalog() {
+    setDeteBrisiError("");
+    setDeteBrisiLoading(true);
+    const res = await fetch("/api/deca/nalog", { method: "DELETE" });
+    const data = await res.json().catch(() => ({}));
+    setDeteBrisiLoading(false);
+    if (!res.ok) { setDeteBrisiError(data.error ?? t("dete_brisi_greska")); return; }
+    await signOut({ callbackUrl: "/" });
+  }
+
   async function obrisiNalog() {
     setBrisiError("");
     setBrisiLoading(true);
@@ -855,6 +871,48 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
           </div>
         </div>
       </div>
+
+      {/* Sopstveni izlaz deteta iz naloga koji čeka preuzimanje (čl. 4a st. 6).
+          Stoji IZVAN grida iznad, koji je detetu sakriven: prigovor, GDPR eksport
+          i anonimizacija punoletnog naloga nisu radnje sedmogodišnjaka, ali izlaz
+          iz obrade koja se u tom razdoblju vodi po legitimnom interesu jeste.
+          Po preuzimanju naloga blok nestaje — tada nalog briše roditelj. */}
+      {maloletan && stanjeDeteta === "NA_CEKANJU" && (
+        <div className="bg-white rounded-2xl border border-red-200 p-6">
+          <h2 className="text-base font-semibold text-kolo-danger mb-2">{t("dete_brisi_naslov")}</h2>
+          <p className="text-xs text-kolo-muted mb-4">{t("dete_brisi_opis")}</p>
+          {!deteBrisiOpen ? (
+            <button
+              onClick={() => setDeteBrisiOpen(true)}
+              className="px-4 py-2.5 rounded-xl border border-red-300 text-kolo-danger text-sm font-semibold hover:bg-red-50 transition-colors"
+            >
+              {t("dete_brisi_dugme")}
+            </button>
+          ) : (
+            <div className="space-y-3 border border-red-200 rounded-xl p-4 bg-red-50">
+              <p className="text-sm font-semibold text-kolo-danger">{t("dete_brisi_potvrda")}</p>
+              {deteBrisiError && (
+                <p className="text-xs text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{deteBrisiError}</p>
+              )}
+              <div className="flex gap-3">
+                <button
+                  onClick={() => { setDeteBrisiOpen(false); setDeteBrisiError(""); }}
+                  className="flex-1 py-2.5 rounded-xl border border-kolo-border text-sm text-kolo-muted hover:bg-kolo-bg transition-colors"
+                >
+                  {t("odustani")}
+                </button>
+                <button
+                  onClick={obrisiDecjiNalog}
+                  disabled={deteBrisiLoading}
+                  className="flex-1 py-2.5 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors disabled:opacity-60"
+                >
+                  {deteBrisiLoading ? t("brisem") : t("dete_brisi_potvrdi")}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

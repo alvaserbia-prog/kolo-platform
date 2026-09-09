@@ -1,6 +1,6 @@
 # Pravilnik o učešću dece
 
-*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.4.1), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
+*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.4.6), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
 
 ## I — Opšte odredbe
 
@@ -36,7 +36,11 @@ Maloletno lice može otvoriti nalog samo. Pri otvaranju unosi pseudonim, lozinku
 
 Datum rođenja se pri otvaranju ne unosi. Njega unosi roditelj pri preuzimanju naloga (član 7).
 
-Do preuzimanja naloga o maloletnom korisniku se obrađuju samo pseudonim i elektronska adresa roditelja.
+Do preuzimanja naloga o maloletnom korisniku obrađuju se pseudonim, podaci neophodni za pristup nalogu i elektronska adresa roditelja. Ako maloletni korisnik u tom razdoblju sklopi prijateljstvo iz člana 14a, obrađuje se i zapis o tom prijateljstvu sa datumom.
+
+Podaci maloletnog korisnika obrađuju se do preuzimanja naloga po osnovu legitimnog interesa, u svrsi uspostavljanja kontakta sa roditeljem radi pribavljanja saglasnosti koju zakon traži. Obrada po tom osnovu prestaje preuzimanjem naloga, kada osnov postaje saglasnost roditelja iz člana 3, odnosno brisanjem naloga po članu 4b.
+
+Maloletni korisnik čiji nalog čeka preuzimanje može sam obrisati nalog u svakom trenutku.
 
 Elektronska adresa roditelja je podatak o trećem licu koji unosi maloletno lice. Obrađuje se po osnovu legitimnog interesa, radi pribavljanja saglasnosti koju zakon traži, i isključivo radi upućivanja poruke iz člana 4b.
 

@@ -29,10 +29,10 @@ const AKTI = [
   // reference na verziju koja kao dokument više ne postoji.
   "Pravilnik_4_4_6.md",
   "dokaz_stvarnosti_4_4_1.md",
-  "DPIA_4_4_3.md",
-  "radnje_obrade_4_4_2.md",
+  "DPIA_4_4_8.md",
+  "radnje_obrade_4_4_8.md",
   "uslovi_koriscenja_4_4_3.md",
-  "politika_4_4_2.md",
+  "politika_4_4_8.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_6.md",
   "rizici_4_4_6.md",
@@ -43,7 +43,7 @@ const AKTI = [
   "gornje_kolo_4_4_6.md",
   "programi_podrske_4_4_1.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
-  "ucesce_dece_4_4_2.md",
+  "ucesce_dece_4_4_8.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
   "projekti_nabavke_4_4_7.md",
 ];
@@ -135,7 +135,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_4_2.md": {
+  "radnje_obrade_4_4_8.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16"],
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16"],
@@ -143,10 +143,28 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 4.4.3 — ispravljen zbir u zaključku: tabela daje R5 = 4 (nizak), a zaključak ga
   // je vodio među srednjima i izostavljao R13 iz spiska najviših. Brojevi se traže
   // doslovno da se aritmetika procene ne raziđe sa sopstvenom tabelom rizika.
-  "DPIA_4_4_3.md": {
-    sr: ["R15 —", "## 5.10.", "R17 —", "## 5.12.", "Šest rizika je na srednjem nivou (R1, R2, R8, R11, R13, R16)"],
-    en: ["R15 —", "## 5.10.", "R17 —", "## 5.12.", "Six risks are at the medium level (R1, R2, R8, R11, R13, R16)"],
-    ru: ["R15 —", "## 5.10.", "R17 —", "## 5.12.", "Шесть рисков находятся на среднем уровне (R1, R2, R8, R11, R13, R16)"],
+  // 4.4.8 — procena srazmernosti za obradu po legitimnom interesu. Bez nje R16
+  // stoji na meri koja je opisivala nešto što sistem ne radi („nalog bez pristupa
+  // funkcijama"), pa je rezidualna ocena od 8 počivala na netačnoj tvrdnji.
+  "DPIA_4_4_8.md": {
+    sr: [
+      "R15 —", "## 5.10.", "R17 —", "## 5.12.",
+      "Šest rizika je na srednjem nivou (R1, R2, R8, R11, R13, R16)",
+      "Procena srazmernosti za obradu po legitimnom interesu",
+      "Sopstveni izlaz maloletnog korisnika",
+    ],
+    en: [
+      "R15 —", "## 5.10.", "R17 —", "## 5.12.",
+      "Six risks are at the medium level (R1, R2, R8, R11, R13, R16)",
+      "Balancing test for processing on the basis of legitimate interest",
+      "The minor user's own way out",
+    ],
+    ru: [
+      "R15 —", "## 5.10.", "R17 —", "## 5.12.",
+      "Шесть рисков находятся на среднем уровне (R1, R2, R8, R11, R13, R16)",
+      "Оценка соразмерности обработки на основании законного интереса",
+      "Собственный выход несовершеннолетнего пользователя",
+    ],
   },
   // 4.4.1 — izborno glasanje. Čl. 8 i 9 su pisani za dvočlani izbor („za"/„protiv");
   // izbor jedne mogućnosti između više njih nije prosta većina i bez ove odredbe kod
@@ -471,7 +489,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // svakom potvrđenom članu. Ako ta odredba ispadne iz akta, kod nastavi da
   // zatvara profil bez osnova, a pregled po školama ostane bez ijednog pravila o
   // tome šta se sme objaviti — pa se traži doslovno, na sva tri jezika.
-  "ucesce_dece_4_4_2.md": {
+  "ucesce_dece_4_4_8.md": {
     sr: [
       "### Član 7a",
       "### Član 15a",
@@ -489,6 +507,15 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Prethodna lozinka se pri tom ne traži",
       // Mesto na listi ne sme da postane kanal evidentiranja (čl. 15 Pravilnika).
       "ne donosi POEN",
+      // 4.4.8 — razdoblje pre pristanka. Akt je do tada tvrdio da se obrađuju
+      // „samo pseudonim i elektronska adresa roditelja", a nalog u tom razdoblju
+      // sklapa prijateljstva i ima lozinku. Osnov obrade (legitimni interes) i
+      // sopstveni izlaz deteta traže se doslovno: bez osnova obrada u tom
+      // razdoblju stoji bez ijednog pravnog naslova, a bez izlaza jedina protivteža
+      // legitimnom interesu ostaje u rukama roditelja koji se još nije javio.
+      "po osnovu legitimnog interesa",
+      "obrađuje se i zapis o tom prijateljstvu sa datumom",
+      "može sam obrisati nalog u svakom trenutku",
     ],
     en: [
       "### Article 7a",
@@ -501,6 +528,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "No notifications",
       "The previous password is not required",
       "carries no POEN",
+      "on the basis of legitimate interest",
+      "the record of that friendship with its date is processed as well",
+      "may delete the account themselves at any time",
     ],
     ru: [
       "### Статья 7a",
@@ -513,12 +543,30 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Уведомления и иная почта на этот адрес не отправляются",
       "Прежний пароль при этом не требуется",
       "не приносит ПОЕН",
+      "на основании законного интереса",
+      "обрабатывается также запись об этой дружбе с датой",
+      "может удалить её сам в любой момент",
     ],
   },
-  "politika_4_4_2.md": {
-    sr: ["nije pristanak za obrade čiji je pravni osnov pristanak"],
-    en: ["is not consent for processing whose legal basis is consent"],
-    ru: ["не является согласием на обработку"],
+  "politika_4_4_8.md": {
+    sr: [
+      "nije pristanak za obrade čiji je pravni osnov pristanak",
+      // 4.4.8 — Politika je do tada opisivala razdoblje pre pristanka uže nego
+      // što sistem radi („bez pristupa funkcijama", „samo pseudonim i adresa").
+      // Traži se osnov obrade u tom razdoblju; bez njega opis ostaje bez naslova.
+      "Pravni osnov u razdoblju do preuzimanja",
+      "ima profil i može sklapati prijateljstva",
+    ],
+    en: [
+      "is not consent for processing whose legal basis is consent",
+      "Legal basis in the period before takeover",
+      "the account has a profile and may form friendships",
+    ],
+    ru: [
+      "не является согласием на обработку",
+      "Правовое основание в период до принятия",
+      "имеет профиль и может заключать дружбы",
+    ],
   },
   // 4.3.1 — prag za socijalni program je funkcionalnih 10% (jedna primljena
   // potvrda), ne pun indeks od 100%. Kod prag drži u konstanti

@@ -101,6 +101,23 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-09 (devetnaesti put):** na **4.4.8** idu **ČETIRI akta** —
+Pravilnik o učešću dece (sa 4.4.2), Politika privatnosti (sa 4.4.2), DPIA (sa 4.4.3)
+i Registar radnji obrade (sa 4.4.2). Ostalih trinaest ostaje gde jeste. Povod je
+**analiza rizika R-11** (donja granica od sedam godina i obrada podataka deteta u
+razdoblju pre pribavljenog pristanka roditelja). Sadržinski, vidi sekciju „Razdoblje
+pre pristanka: osnov je imenovan, opis usklađen sa stvarnošću" ispod.
+
+🟢 **Usput su ispravljena unakrsna upućivanja u sva četiri akta** — ona su se
+izmenom ionako ponovo objavljuju, pa bi objavljen fajl 4.4.8 koji upućuje na
+`Pravilnik o KOLO sistemu (v4.4.1)` pokazivao na fajl koji ne postoji. Sada
+upućuju na 4.4.6 (Pravilnik, hijerarhija, whitepaper) i 4.4.8 (Politika, Registar).
+🔴 **Upućivanja na akte koji se NISU menjali ostala su netaknuta** — programi
+podrške na 4.4.1, dokaz stvarnosti na 4.4.1, Statut na 4.1. Pri prvoj automatskoj
+zameni su i ona bila pomerena na 4.4.6; greška je uhvaćena i vraćena. **Ne raditi
+blanket zamenu verzija u aktima** — regularni izraz ne zna na koji akt pokazuje
+broj koji menja.
+
 **AŽURIRANO 2026-09-09 (osamnaesti put):** na **4.4.7** idu **DVA akta** — Pravilnik
 o projektima i kolektivnim nabavkama (sa 4.4.3) i Pravilnik o pokroviteljstvu i
 donacijama (sa 4.4.3). Ostalih petnaest ostaje gde jeste. Povod je **analiza rizika
@@ -1078,6 +1095,86 @@ već postoji i dovoljan je).
 jasnije **besplatno**, to je korisnik slabije zaštićen potrošačkim pravom; što bismo
 mu više dali prava, to davanje više liči na prodaju. Reklamacija je namerno
 izostavljena i to ovde postaje **deo odbrane**, ne samo praznina.
+
+### Razdoblje pre pristanka: osnov je imenovan, opis usklađen sa stvarnošću (2026-09-09)
+
+Odluke uz analizu rizika **R-11** (donja granica od sedam godina i obrada podataka
+deteta pre pribavljenog pristanka roditelja). Izmenjeni `ucesce_dece_4_4_8.md`
+(čl. 4a), `politika_4_4_8.md` (4.7, kategorije podataka, pravni osnov),
+`DPIA_4_4_8.md` (R16, tačka 5.11, tačka 8) i `radnje_obrade_4_4_8.md` (radnja 11)
+na svih pet jezika, uz izmenu koda.
+
+🔴 **Nalaz koji je pokrenuo sve ostalo: tri akta su opisivala razdoblje uže nego
+što sistem radi.** Pravilnik čl. 4a st. 3, Politika 4.7 i DPIA 5.11 su tvrdili da se
+do preuzimanja naloga obrađuju **„samo pseudonim i elektronska adresa roditelja"** i
+da nalog stoji **„bez pristupa funkcijama sistema"**. Ni jedno ni drugo nije tačno:
+`registrujDete` upisuje i **lozinku**, a čl. 4c st. 1 t. 1 istog pravilnika izričito
+kaže da nalog na čekanju **sklapa prijateljstva iz čl. 14a** — pa u tom razdoblju
+nastaje i **graf sa datumima**. 🔴 Najgore je bilo mesto na kome je netačnost
+stajala: DPIA je „nalog bez pristupa funkcijama" brojala kao **meru**, dakle kao
+razlog zbog kog je rezidualna ocena R16 = 8 prihvatljiva. Ocena je počivala na
+opisu koji ne odgovara sistemu.
+
+🔴 **Obrada u tom razdoblju sada IMA imenovan osnov — legitimni interes** (čl. 12
+st. 1 t. 6 ZZPL-a), u svrsi uspostavljanja kontakta sa roditeljem radi pribavljanja
+saglasnosti koju zakon traži. Do 4.4.8 je osnov bio imenovan **samo za adresu
+roditelja**; za same podatke deteta nije stajalo ništa — a saglasnost, koja je
+jedini navedeni osnov, u tom trenutku po definiciji ne postoji. Preuzimanjem naloga
+osnov postaje saglasnost roditelja iz čl. 16 ZZPL-a.
+
+🔴 **Procena srazmernosti je NAPISANA, ne podrazumevana** (DPIA 5.11): interes,
+neophodnost (blažeg sredstva nema — adresa roditelja je jedini podatak kojim dete
+raspolaže, a bez zapisa o nalogu poziv se ne bi mogao vezati ni za koga) i
+odmeravanje (obim sveden na neophodno, razdoblje četrnaest dana, zatvorene funkcije,
+u poruci samo pseudonim, dva izlaza bez prijave za primaoca i sopstveni izlaz za
+dete). Kod obrade po legitimnom interesu procena je ono što se traži na uvid; bez
+nje se osnov ne može ni braniti.
+
+🔴 **Dete sada sámo briše nalog koji čeka preuzimanje** (čl. 4a st. 6). Do ove
+izmene je jedini izlaz držao **roditelj** — dugmetom iz poruke ili istekom roka od
+četrnaest dana; dete koje se predomisli nije imalo nijedan način da povuče
+sopstvene podatke. Kod pravnog osnova legitimnog interesa pravo na prigovor je
+najjača protivteža, a ovde je nije bilo ni u kom obliku.
+- `obrisiSopstveniNalogNaCekanju` (`protokol/deca-poziv.ts`), ruta
+  `DELETE /api/deca/nalog`, blok na profilu deteta (`ProfilKlijent.tsx`).
+- 🔴 **Ide kroz `obrisiDecjiNalog`, ne kroz `DELETE /api/profil`.** Punoletni tok
+  nalog **anonimizuje i zadržava** (čl. 34), a ovde nalog treba da **nestane** —
+  u razdoblju pre pristanka nema šta da se čuva. Zato zasebna ruta.
+- 🔴 **Radnja postoji ISKLJUČIVO u stanju `NA_CEKANJU`.** Po preuzimanju odgovornost
+  je na roditelju (čl. 10) i brisanje ide preko njegovog profila — inače bi dete
+  jednim potezom obrisalo nalog koji roditelj nadzire. Blok na profilu stoji **van**
+  grida koji je detetu sakriven (prigovor, GDPR eksport, anonimizacija), jer to nisu
+  radnje sedmogodišnjaka a izlaz iz obrade po legitimnom interesu jeste.
+
+🔴 **Ograničenje broja poziva je po ADRESI, ne po IP-u** (`MAX_POZIVA_PO_ADRESI = 3`
+u `deca-poziv.ts`). Zatečeni `rateLimit` je gledao IP, a IP se menja u jednom
+potezu; adresa roditelja je podatak **trećeg lica** koji unosi neko drugi, pa se bez
+ove brane na tuđu adresu moglo otvoriti proizvoljno mnogo naloga i poslati isto
+toliko poruka. Broje se **pozivi koji još čekaju** (neiskorišćeni, u roku, nalog bez
+roditelja), pa ograničenje nikoga ne zaključava trajno. Provera je u **servisu**, ne
+u ruti — reč je o pravilu, ne o zaštiti od preopterećenja. Limit po IP-u ostaje uz
+njega.
+
+🟡 **Rezidualna ocena R16 ostaje 8.** Opis je proširen (prijateljstva u razdoblju,
+lozinka), ali su uz njega upisane i tri stvarne mere koje ranije nisu bile navedene:
+graf nije javan, **POEN se u tom razdoblju ne evidentira** (čl. 14b traži stanje
+`AKTIVNO`), a Pričaonica, oglasi i komunikacija sa punoletnim licima su zatvoreni —
+dakle dete u tom razdoblju **nije izloženo punoletnim licima**. Ocena se ne menja
+zato što se ni izloženost nije promenila; menja se to što sada počiva na tačnom
+opisu.
+
+🔴 **ODBIJENA MERA UZ R-11 (odluka vlasnika, 2026-09-09) — „ne za sada":**
+**podizanje donje granice za samostalnu registraciju** (npr. samo od 13 ili 15
+godina, uz zadržanih 7 za ulazak preko roditeljskog profila). Time bi razdoblje pre
+pristanka za najmlađu decu nestalo u celini. Nije odbijeno trajno — vlasnik je
+rekao „ne za sada", pa se može vratiti kad modul bude imao više korisnika.
+
+🟡 **Šta je ostalo netaknuto i zašto:** donja granica od sedam godina (čl. 2), rok
+od četrnaest dana za preuzimanje, dva izlaza bez prijave u poruci roditelju, i to
+što se **prijateljstva u razdoblju čekanja sklapaju** — ona su, uz obostrano
+čekanje isplate, ceo razlog zbog kog dete gnjavi roditelja da preuzme nalog
+(vidi „Modul Deca — unapređeni model"). Sklanjanje prijateljstava iz tog razdoblja
+bi ugasilo jedini pritisak koji sistem vrši i nije razmatrano.
 
 ### Gornje Kolo: telo Fondacije, a ne njen organ (2026-09-09)
 
