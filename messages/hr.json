@@ -1823,7 +1823,7 @@
     "neverif_opis": "Za prvi objavljeni oglas upisuje ti se {iznos} POENA",
     "neverif_napomena": "* poeni se upisuju nakon odobrenja administratora.",
     "oznaka_neverifikovan": "Novi član",
-    "oznaka_neverifikovan_opis": "Oglašivač još nije potvrđen u lancu potvrda. Za razmjenu odgovarate međusobno. Fondacija ne posreduje i ne odgovara.",
+    "oznaka_neverifikovan_opis": "Oglašivač još nije potvrđen u lancu potvrda. Možeš ga potvrditi osobno prilikom obavljanja prve razmjene.",
     "oznaka_dete": "DIJETE",
     "oznaka_dete_opis": "Oglas je objavilo dijete. Njegov roditelj ima uvid u razgovor koji vodite.",
     "traka_neverifikovan": "Postavi svoj prvi oglas",
