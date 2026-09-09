@@ -2,7 +2,7 @@
 
 # Szabályzat a Felső Koloról
 
-*Ez a szabályzat a Felső Kolo szavazási eljárásait és működésének operatív szabályait rendezi. A KOLO rendszerről szóló szabályzat (v4.4.1) 41., 46. és 47. cikke alapján kerül elfogadásra, amelyek kifejezetten erre az aktusra utalnak. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
+*Ez a szabályzat a Felső Kolo szavazási eljárásait és működésének operatív szabályait rendezi. A KOLO rendszerről szóló szabályzat (v4.4.6) 41., 46. és 47. cikke alapján kerül elfogadásra, amelyek kifejezetten erre az aktusra utalnak. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
 
 ## I — Általános rendelkezések
 
@@ -16,6 +16,8 @@ Azok a kifejezések, amelyeket e szabályzat nem határoz meg, a KOLO rendszerr�
 
 A KOLO rendszerről szóló szabályzat VII. fejezete (41–51. cikk) rendezi a Felső Kolo összetételét és hatáskörét, a négyzetes szavazást mint elvet, a delegálást mint elvet, az Alapítvány védelmi vétóját és az irányítási hatalom korlátait. Ez a szabályzat e rendelkezéseket nem módosítja és nem ismétli, hanem operatív alkalmazásukat dolgozza ki.
 
+A Felső Kolo az Alapítvány külön testülete, amelyet e szabályzat hozott létre az Igazgatótanácsnak az Alapszabályból eredő jogköre alapján (a Szabályzat 41. cikke). Nem tartozik az Alapítványnak az Alapszabályban megállapított szervei közé, nem képviseli az Alapítványt, és nem rendelkezik annak vagyonával.
+
 ### 3. cikk — Időbeli hatály
 
 A Felső Kolo a 2. fázisban jön létre és válik a rendszer irányító testületévé, az 1.000.000 nyilvántartott POEN küszöb elérésekor (a Szabályzat 42. és 44. cikke). Az e szabályzat szerinti eljárások a Felső Kolo megalakulásától alkalmazandók.
@@ -27,6 +29,8 @@ Az 1. fázisban a Protokoll szabályait az alapító állapítja meg az Alapítv
 ### 4. cikk — Összetétel
 
 A Felső Kolót valamennyi ZRNO-tulajdonos alkotja. A döntéshozatalban való részvétel joga kizárólag aktivált ZRNO-val gyakorolható.
+
+Az összetételt nem kinevezés állapítja meg: a tagság a ZRNO beírásával és aktiválásával keletkezik, és annak leírásával, azaz a ZRNO szabad állapotba való visszahelyezésével szűnik meg. Megbízatási idő nincs megállapítva, és visszahívásra nem kerül sor. A tagok száma változó, az összetétel viszont minden pillanatban megállapítható a Protokoll nyilvántartásából, és az elszámolási időszak alatt állandó (6. cikk).
 
 ### 5. cikk — Szavazati erő
 
@@ -57,6 +61,8 @@ Minden döntés a leadott szavazatok egyszerű többségével születik.
 A döntés akkor születik meg, ha a leadott „igen” szavazatok szavazati erejének összege meghaladja a leadott „nem” szavazatok szavazati erejének összegét.
 
 Ha a döntés több felkínált lehetőség közötti választással történik, a szavazás választásos: a birtokos egy lehetőségre ad szavazatot, és az a lehetőség kerül kiválasztásra, amely a leadott szavazatok szavazati erejének legnagyobb összegével rendelkezik. Választásos szavazásra akkor kerül sor, ha azt külön szabályzat így írja elő; e szabályzat állapítja meg a lehetőségek listájának összeállítási módját is.
+
+A Felső Kolo határozatát az Alapítvány Igazgatótanácsához kell címezni, és azt e szabályzat 17. cikke szerinti módon kell végrehajtani.
 
 ### 9. cikk — Szavazategyenlőség
 
@@ -110,6 +116,10 @@ A delegálás bármikor visszavonható. A visszavonás és az új delegálás a 
 
 A Felső Kolo elfogadott döntését az Alapítvány hajtja végre szolgáltatói szerepében (a Szabályzat 51. cikke) — a Protokollon keresztüli alkalmazással vagy megfelelő aktussal, a jogszabályokkal összhangban.
 
+A döntést végrehajtó aktust az Igazgatótanács késedelem nélkül fogadja el, és eközben nem mérlegeli a döntés célszerűségét. A megtagadás csak a Szabályzat 51. cikkében kifejezetten felsorolt okokból lehetséges — törvénybe ütközés, az Alapszabályba ütközés, a Felső Kolo hatásköréből kivett kérdés, valamint a védelmi vétó, amíg az fennáll —, és azt indokolni kell, valamint közzé kell tenni azzal a döntéssel együtt, amelyre vonatkozik.
+
+A Felső Kolo határozata nem keletkeztet közvetlenül jogokat vagy kötelezettségeket harmadik személyekkel szemben.
+
 ### 18. cikk — Védelmi vétó és pénzügyi önállóság
 
 Az Alapítvány indokolt védelmi vétót emelhet olyan döntés végrehajtása ellen, amely a pénzügyi önállóság elérése előtt veszélyeztetné az Alapítvány működési és pénzügyi fenntarthatóságát (a Szabályzat 48. cikke). A vétót az eredmény megállapítását követően haladéktalanul kell emelni, olyan indokolással, amely konkrét fenntarthatósági fenyegetésre utal.
@@ -144,7 +154,7 @@ Az elutasított, azonos vagy lényegében megegyező tartalmú javaslat nem terj
 
 ### 23. cikk — E szabályzat módosítása
 
-E szabályzatot a Felső Kolo döntésével módosítják (8. cikk). Az 1. fázisban, a Felső Kolo létrejötte előtt, a szabályzatot az alapító alkotja és módosítja az Alapítvánnyal együttműködve (a Szabályzat 43. cikke).
+E szabályzat módosításának tartalmát a Felső Kolo döntése állapítja meg (8. cikk), magát a módosítást pedig az Alapítvány Igazgatótanácsa fogadja el az e szabályzat 17. cikke szerinti módon. Az 1. fázisban, a Felső Kolo létrejötte előtt, a szabályzatot az Alapítvány alkotja és módosítja, az alapító részvételével (a Szabályzat 43. cikke).
 
 E szabályzat módosítása nem lehet ellentétes a KOLO rendszerről szóló szabályzattal, és nem érintheti a Felső Kolo hatáskörén kívüli kérdéseket (7. cikk).
 

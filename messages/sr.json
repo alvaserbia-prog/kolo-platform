@@ -817,6 +817,17 @@
     "veto_obrazlozenje_placeholder": "Obrazloženje veta, konkretna pretnja održivosti (čl. 18)",
     "potvrdi_veto": "Potvrdi veto",
     "otkazi_veto": "Otkaži",
+    "izvrsenje_nije_sprovedeno": "Nije sprovedeno",
+    "izvrsenje_akt_label": "Akt UO:",
+    "izvrsenje_akt_placeholder": "Oznaka akta UO kojim je odluka sprovedena",
+    "izvrsenje_akt_napomena": "Odluku Gornjeg Kola sprovodi Upravni odbor svojim aktom (čl. 51).",
+    "potvrdi_izvrseno": "Potvrdi sprovođenje",
+    "ne_sprovodi": "Ne sprovodi",
+    "potvrdi_ne_sprovodi": "Potvrdi odbijanje",
+    "odbijanje_razlog_zakon": "Odluka je suprotna zakonu",
+    "odbijanje_razlog_statut": "Odluka je suprotna Statutu Fondacije",
+    "odbijanje_razlog_van_nadleznosti": "Pitanje je izuzeto iz nadležnosti Gornjeg Kola (čl. 50)",
+    "odbijanje_obrazlozenje_placeholder": "Obrazloženje odbijanja (obavezno, čl. 51)",
     "greska_generic": "Greška.",
     "preporuka_odgovor_naslov": "Odgovor UO na preporuku (čl. 20)",
     "preporuka_obrazlozenje_placeholder": "Obrazloženje odgovora (obavezno)",
@@ -947,15 +958,15 @@
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
-      "ver": "4.4.5"
+      "ver": "4.4.6"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.4.5"
+      "ver": "4.4.6"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
-      "ver": "4.4.1",
+      "ver": "4.4.6",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -985,11 +996,11 @@
     "meta_radnje_title": "Registar radnji obrade · KOLO",
     "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.4.2",
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
-    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.4.5",
+    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.4.6",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.5",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.6",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.4.1",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.4.6",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sistemu",

@@ -1,6 +1,6 @@
 # Pravilnik o Gornjem Kolu
 
-*Ovaj pravilnik uređuje postupke glasanja i operativna pravila rada Gornjeg Kola. Donosi se na osnovu članova 41, 46 i 47 Pravilnika o KOLO sistemu (v4.4.1), koji izričito upućuju na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
+*Ovaj pravilnik uređuje postupke glasanja i operativna pravila rada Gornjeg Kola. Donosi se na osnovu članova 41, 46 i 47 Pravilnika o KOLO sistemu (v4.4.6), koji izričito upućuju na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
 
 ## I — Opšte odredbe
 
@@ -14,6 +14,8 @@ Izrazi koji nisu definisani ovim pravilnikom imaju značenje utvrđeno Pravilnik
 
 Glava VII Pravilnika o KOLO sistemu (čl. 41–51) uređuje sastav i nadležnost Gornjeg Kola, kvadratno glasanje kao princip, delegiranje kao princip, zaštitni veto Fondacije i ograničenja upravljačke moći. Ovaj pravilnik te odredbe ne menja niti ponavlja, već razrađuje njihovu operativnu primenu.
 
+Gornje Kolo je posebno telo Fondacije obrazovano ovim pravilnikom, na osnovu ovlašćenja Upravnog odbora iz Statuta (čl. 41 Pravilnika). Ono se ne ubraja u organe Fondacije utvrđene Statutom, ne zastupa Fondaciju i ne raspolaže njenom imovinom.
+
 ### Član 3 — Vremensko važenje
 
 Gornje Kolo nastaje i postaje upravno telo sistema u Fazi 2, po dostizanju praga od 1.000.000 evidentiranih POEN-a (čl. 42, 44 Pravilnika). Postupci iz ovog pravilnika primenjuju se od konstituisanja Gornjeg Kola.
@@ -25,6 +27,8 @@ U Fazi 1 pravila Protokola postavlja osnivač u saradnji sa Fondacijom (čl. 42,
 ### Član 4 — Sastav
 
 Gornje Kolo čine svi nosioci ZRNA. Pravo učešća u odlučivanju ostvaruje se isključivo aktiviranim ZRNOM.
+
+Sastav se ne utvrđuje imenovanjem: članstvo se stiče upisom i aktiviranjem ZRNA, a prestaje njihovim otpisom, odnosno vraćanjem ZRNA u slobodno stanje. Mandat se ne određuje i opoziv se ne vrši. Broj članova je promenljiv, a sastav je u svakom trenutku odrediv iz evidencije Protokola i konstantan tokom obračunskog perioda (čl. 6).
 
 ### Član 5 — Glasačka moć
 
@@ -55,6 +59,8 @@ Sve odluke se donose prostom većinom datih glasova.
 Odluka je doneta ako je zbir glasačke moći datih „za" veći od zbira glasačke moći datih „protiv".
 
 Kada se odlučuje izborom između više ponuđenih mogućnosti, glasa se izborno: nosilac daje glas za jednu mogućnost, a izabrana je mogućnost sa najvećim zbirom glasačke moći datih glasova. Izborno glasanje sprovodi se kada je tako propisano posebnim pravilnikom, koji utvrđuje i način sastavljanja liste mogućnosti.
+
+Odluka Gornjeg Kola upućuje se Upravnom odboru Fondacije i sprovodi se na način iz člana 17 ovog pravilnika.
 
 ### Član 9 — Izjednačen rezultat
 
@@ -106,7 +112,11 @@ Delegiranje se može opozvati u svakom trenutku. Opoziv i novo delegiranje proiz
 
 ### Član 17 — Izvršenje
 
-Usvojenu odluku Gornjeg Kola izvršava Fondacija u svojoj servisnoj ulozi (čl. 51 Pravilnika) — primenom kroz Protokol ili odgovarajućim aktom, u skladu sa zakonom.
+Usvojenu odluku Gornjeg Kola sprovodi Fondacija u svojoj servisnoj ulozi (čl. 51 Pravilnika) — primenom kroz Protokol ili odgovarajućim aktom, u skladu sa zakonom.
+
+Akt kojim se odluka sprovodi donosi Upravni odbor bez odlaganja i pri tome ne ceni celishodnost odluke. Odbijanje je moguće samo iz razloga izričito nabrojanih u čl. 51 Pravilnika — suprotnost zakonu, suprotnost Statutu, pitanje izuzeto iz nadležnosti Gornjeg Kola i zaštitni veto dok traje — i mora biti obrazloženo i objavljeno uz odluku na koju se odnosi.
+
+Odluka Gornjeg Kola ne stvara neposredno prava ni obaveze prema trećim licima.
 
 ### Član 18 — Zaštitni veto i finansijska samostalnost
 
@@ -142,7 +152,7 @@ Neusvojen predlog iste ili suštinski istovetne sadržine ne može se ponovo sta
 
 ### Član 23 — Izmena ovog pravilnika
 
-Ovaj pravilnik se menja odlukom Gornjeg Kola (čl. 8). U Fazi 1, pre uspostavljanja Gornjeg Kola, pravilnik donosi i menja osnivač u saradnji sa Fondacijom (čl. 43 Pravilnika).
+Sadržinu izmene ovog pravilnika utvrđuje odluka Gornjeg Kola (čl. 8), a izmenu donosi Upravni odbor Fondacije na način iz člana 17 ovog pravilnika. U Fazi 1, pre uspostavljanja Gornjeg Kola, pravilnik donosi i menja Fondacija, uz učešće osnivača (čl. 43 Pravilnika).
 
 Izmena ovog pravilnika ne može biti u suprotnosti sa Pravilnikom o KOLO sistemu niti zadirati u pitanja izvan nadležnosti Gornjeg Kola (čl. 7).
 

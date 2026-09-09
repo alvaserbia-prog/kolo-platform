@@ -15,13 +15,18 @@ import { pageMetadata } from "@/lib/seo";
  * čekala da je neko prepiše kao tačnu.
  */
 const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
+  // 4.4.6 — položaj Gornjeg Kola (R-09): telo obrazovano na osnovu Statuta, nije
+  // organ Fondacije; odluku sprovodi UO svojim aktom i dužan je da ga donese osim
+  // po zatvorenoj listi razloga (čl. 51). Brisano „izvršna, ne upravljačka".
   "kolo-sistem": {
-    fajl: "Pravilnik_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "Pravilnik_4_4_6.md",
+    verzija: "4.4.6",
   },
+  // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
+  // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.
   "hijerarhija": {
-    fajl: "hijerarhija_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "hijerarhija_4_4_6.md",
+    verzija: "4.4.6",
   },
   "dokaz-stvarnosti": {
     fajl: "dokaz_stvarnosti_4_4_1.md",
@@ -50,9 +55,11 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
     fajl: "osnivacki_4_4_5.md",
     verzija: "4.4.5",
   },
+  // 4.4.6 — statutarni osnov (čl. 2), dinamičan sastav bez imenovanja (čl. 4),
+  // sprovođenje odluke aktom UO (čl. 17), izmenu pravilnika donosi UO (čl. 23).
   "gornje-kolo": {
-    fajl: "gornje_kolo_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "gornje_kolo_4_4_6.md",
+    verzija: "4.4.6",
   },
   "programi-podrske": {
     fajl: "programi_podrske_4_4_1.md",

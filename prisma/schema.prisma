@@ -126,8 +126,18 @@ enum PredlogStatus {
 // Stanje izvršenja usvojene odluke Gornjeg Kola (čl. 17, 18)
 enum IzvrsenjeStatus {
   ZA_IZVRSENJE // usvojeno, čeka izvršenje od strane Fondacije
-  IZVRSENO // Fondacija izvršila odluku
+  IZVRSENO // UO sproveo odluku svojim aktom (čl. 51 Pravilnika, čl. 17 Gornjeg Kola)
   VETO_OBUSTAVLJENO // izvršenje obustavljeno zaštitnim vetom (čl. 18, 48)
+  NIJE_SPROVEDENO // UO odbio da sprovede odluku iz razloga sa zatvorene liste (čl. 51)
+}
+
+// Zatvorena lista razloga za odbijanje sprovođenja odluke Gornjeg Kola (čl. 51
+// Pravilnika, set 4.4.6). Zaštitni veto NIJE ovde — on ima sopstveni status
+// VETO_OBUSTAVLJENO, jer je privremen i gasi se trajno po čl. 49.
+enum OdbijanjeRazlog {
+  ZAKON // odluka je suprotna zakonu
+  STATUT // odluka je suprotna Statutu Fondacije
+  VAN_NADLEZNOSTI // pitanje izuzeto iz nadležnosti Gornjeg Kola (čl. 50)
 }
 
 // Vrsta predloga: obavezujuća odluka ili neobavezujuća dinarska preporuka (čl. 20)
@@ -1240,29 +1250,33 @@ model ZrnoDelegacija {
 // ─── Glasanje ─────────────────────────────────────────────────────────────────
 
 model GlasanjePredlog {
-  id               String           @id @default(uuid())
-  title            String
-  description      String
-  authorId         String
-  author           User             @relation(fields: [authorId], references: [id])
-  vrsta            PredlogVrsta     @default(ODLUKA) // odluka (obavezujuća) ili dinarska preporuka (čl. 20)
-  glasanjePocetak  DateTime // ponoć narednog obračunskog perioda (čl. 11)
-  deadline         DateTime // kraj glasanja = kraj tog perioda
-  status           PredlogStatus    @default(ACTIVE)
-  ishodUsvojen     Boolean? // utvrđen po zatvaranju, prosta većina (čl. 8, 9, 13)
-  zaZbir           Int? // zbir glasačke moći „za" u trenutku zatvaranja
-  protivZbir       Int? // zbir glasačke moći „protiv" u trenutku zatvaranja
-  izvrsenjeStatus  IzvrsenjeStatus? // postavlja se na ZA_IZVRSENJE kad je odluka usvojena (čl. 17)
-  vetoObrazlozenje String? // obavezno obrazloženje zaštitnog veta (čl. 18)
-  izvrsenoAt       DateTime?
-  vetoAt           DateTime?
-  uoOdgovor        UoOdgovor? // obrazložen odgovor UO na usvojenu preporuku (čl. 20)
-  uoObrazlozenje   String?
-  uoOdgovorAt      DateTime?
-  glasovi          GlasanjeGlas[]
-  nabavka          Nabavka?
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
+  id                    String           @id @default(uuid())
+  title                 String
+  description           String
+  authorId              String
+  author                User             @relation(fields: [authorId], references: [id])
+  vrsta                 PredlogVrsta     @default(ODLUKA) // odluka (obavezujuća) ili dinarska preporuka (čl. 20)
+  glasanjePocetak       DateTime // ponoć narednog obračunskog perioda (čl. 11)
+  deadline              DateTime // kraj glasanja = kraj tog perioda
+  status                PredlogStatus    @default(ACTIVE)
+  ishodUsvojen          Boolean? // utvrđen po zatvaranju, prosta većina (čl. 8, 9, 13)
+  zaZbir                Int? // zbir glasačke moći „za" u trenutku zatvaranja
+  protivZbir            Int? // zbir glasačke moći „protiv" u trenutku zatvaranja
+  izvrsenjeStatus       IzvrsenjeStatus? // postavlja se na ZA_IZVRSENJE kad je odluka usvojena (čl. 17)
+  vetoObrazlozenje      String? // obavezno obrazloženje zaštitnog veta (čl. 18)
+  izvrsenjeAkt          String? // oznaka akta UO kojim je odluka sprovedena (čl. 51) — bez njega registar ne pokazuje da je nadležni organ išta doneo
+  odbijanjeRazlog       OdbijanjeRazlog? // razlog sa zatvorene liste iz čl. 51
+  odbijanjeObrazlozenje String? // obavezno obrazloženje odbijanja (čl. 51)
+  odbijanjeAt           DateTime?
+  izvrsenoAt            DateTime?
+  vetoAt                DateTime?
+  uoOdgovor             UoOdgovor? // obrazložen odgovor UO na usvojenu preporuku (čl. 20)
+  uoObrazlozenje        String?
+  uoOdgovorAt           DateTime?
+  glasovi               GlasanjeGlas[]
+  nabavka               Nabavka?
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
 }
 
 model GlasanjeGlas {
@@ -1711,12 +1725,12 @@ enum ChatSoba {
 }
 
 model ChatMessage {
-  id             String          @id @default(uuid())
-  soba           ChatSoba        @default(ODRASLI)
+  id             String    @id @default(uuid())
+  soba           ChatSoba  @default(ODRASLI)
   userId         String
-  user           User            @relation("ChatPoruke", fields: [userId], references: [id])
+  user           User      @relation("ChatPoruke", fields: [userId], references: [id])
   content        String
-  createdAt      DateTime        @default(now())
+  createdAt      DateTime  @default(now())
   // Uklanjanje od strane Fondacije (Uslovi čl. 25 st. 2 — obuhvata „svu drugu
   // komunikaciju putem Platforme"). Meko brisanje: poruka nestaje iz sobe, ali
   // ostaje trag ko je i zašto uklonio dok je noćni cron ne pobriše sa ostalima.
@@ -2142,16 +2156,16 @@ model Nabavka {
   iznosNabavke  Decimal? @db.Decimal(12, 2)
 
   // ── Ponuda i kalkulacija (čl. 15, 17, 18, 19)
-  dobavljac    String?
-  jedinicaMere String? // „vreća 25 kg" — samo za prikaz
-  nabavnaCena  Decimal? @db.Decimal(12, 2)
-  brojJedinica Int?
-  brojDelova   Int?
-  velicinaDela Int?
+  dobavljac        String?
+  jedinicaMere     String? // „vreća 25 kg" — samo za prikaz
+  nabavnaCena      Decimal? @db.Decimal(12, 2)
+  brojJedinica     Int?
+  brojDelova       Int?
+  velicinaDela     Int?
   /// Čl. 17 — broj POEN-a po delu koji je utvrdila odluka o nabavci. NE izvodi se
   /// iz cene dobra: do 4.4.3 je bio `velicinaDela × maloprodajna referenca`, čime
   /// je sistem objavljivao kurs POEN-a prema dinaru.
-  poenPoDelu   Int?
+  poenPoDelu       Int?
   /// Čl. 17 st. 2 — obrazloženje kako je broj POEN-a po delu utvrđen. Objavljuje se
   /// kalkulacijom, jer je bez njega parametar odluke neproverljiv.
   poenObrazlozenje String?
@@ -2162,11 +2176,11 @@ model Nabavka {
   preuzimanjeOd    DateTime?
   preuzimanjeDo    DateTime?
 
-  objavljenoAt DateTime?
-  redUtvrdjenAt DateTime?
-  placenoAt    DateTime?
-  placenoRSD   Decimal?  @db.Decimal(12, 2)
-  zavrsenoAt   DateTime?
+  objavljenoAt   DateTime?
+  redUtvrdjenAt  DateTime?
+  placenoAt      DateTime?
+  placenoRSD     Decimal?  @db.Decimal(12, 2)
+  zavrsenoAt     DateTime?
   obustavljenoAt DateTime?
   obustavaRazlog String?
 

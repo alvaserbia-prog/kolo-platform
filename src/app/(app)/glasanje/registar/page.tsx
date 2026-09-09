@@ -73,10 +73,25 @@ export default async function RegistarOdlukaPage() {
                     <span className={`inline-block px-2 py-0.5 rounded font-medium ${
                       o.izvrsenjeStatus === "IZVRSENO" ? "bg-kolo-green-100 text-kolo-green-700"
                       : o.izvrsenjeStatus === "VETO_OBUSTAVLJENO" ? "bg-kolo-danger-light text-kolo-danger"
+                      : o.izvrsenjeStatus === "NIJE_SPROVEDENO" ? "bg-kolo-bg text-kolo-muted"
                       : "bg-kolo-gold-100 text-kolo-gold-600"
                     }`}>
-                      {o.izvrsenjeStatus === "ZA_IZVRSENJE" ? t("izvrsenje_ceka") : o.izvrsenjeStatus === "IZVRSENO" ? t("izvrsenje_izvrseno") : t("izvrsenje_veto")}
+                      {o.izvrsenjeStatus === "ZA_IZVRSENJE" ? t("izvrsenje_ceka")
+                        : o.izvrsenjeStatus === "IZVRSENO" ? t("izvrsenje_izvrseno")
+                        : o.izvrsenjeStatus === "NIJE_SPROVEDENO" ? t("izvrsenje_nije_sprovedeno")
+                        : t("izvrsenje_veto")}
                     </span>
+                    {/* Akt UO kojim je odluka sprovedena (čl. 51) — bez njega registar
+                        ne pokazuje da je nadležni organ išta doneo. */}
+                    {o.izvrsenjeAkt && (
+                      <p className="mt-1 text-kolo-muted">{t("izvrsenje_akt_label")} {o.izvrsenjeAkt}</p>
+                    )}
+                    {o.odbijanjeRazlog && (
+                      <p className="mt-1 text-kolo-muted italic">
+                        {t(`odbijanje_razlog_${o.odbijanjeRazlog.toLowerCase()}`)}
+                        {o.odbijanjeObrazlozenje ? ` — ${o.odbijanjeObrazlozenje}` : ""}
+                      </p>
+                    )}
                     {o.vetoObrazlozenje && (
                       <p className="mt-1 text-kolo-muted italic">{t("veto_obrazlozenje_label")} {o.vetoObrazlozenje}</p>
                     )}

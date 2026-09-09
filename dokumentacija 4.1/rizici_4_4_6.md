@@ -38,6 +38,8 @@ Promena položaja nosioca ZRNA u obračunskom sistemu nije prinos i nije zagaran
 
 Nosilac ZRNA nema pravo na dinarska sredstva Fondacije, ni neposredno ni posredno. Dinarska sredstva ulaze u Fondaciju i ne ulaze u obračunski okvir sistema. Odluke o raspoređivanju dinarskih sredstava, uključujući projekte i kolektivne nabavke, ne stvaraju imovinsko pravo nijednog nosioca ZRNA i ne daju mu udeo u imovini Fondacije. Prestankom svojstva nosioca ZRNA ne nastaje nikakvo potraživanje prema Fondaciji.
 
+Aktivirano ZRNO daje glas u Gornjem Kolu. Gornje Kolo je telo obrazovano pravilnikom Fondacije i ne ubraja se u organe Fondacije utvrđene Statutom; njegova odluka se sprovodi aktom Upravnog odbora, koji je dužan da ga donese osim iz razloga izričito nabrojanih u aktima. Glas u Gornjem Kolu ne daje pravo da Fondacija donese određeni akt, ne daje udeo u njenoj imovini i ne stvara potraživanje ako akt izostane iz razloga predviđenih aktima.
+
 Osnivački doprinos evidentira se u zapisima zatvorenog kruga lica, do gornje granice utvrđene Pravilnikom o osnivačkom doprinosu, u koracima vezanim za rast ukupnog broja POEN-a. Zbirno evidentiran osnivački doprinos čini između približno jedne petine i približno jedne četvrtine ukupnog broja evidentiranih POEN-a, a u trenutku zatvaranja kanala približno 24%. Taj udeo ne nosi imovinsko pravo, ne predstavlja potraživanje prema Fondaciji i ne daje pravo na njena dinarska sredstva; krug osnivača je zatvoren i ne može se proširiti, a kanal se po dostizanju gornje granice zatvara trajno i neopozivo.
 
 ### Član 5 — Nepovratnost donacija

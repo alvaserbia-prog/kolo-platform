@@ -596,6 +596,8 @@ Svaki sistem ima pravila i neko ta pravila mora da postavi, menja i obezbeđuje 
 
 KOLO sistem rešava ovo pitanje progresivnom decentralizacijom — strukturiranom putanjom od centralizovanog ka decentralizovanom upravljanju sa merljivim uslovima prelaza. Upravljanje počinje kod osnivača i Fondacije i progresivno se prenosi na Zajednicu kroz Gornje Kolo.
 
+Gornje Kolo je posebno telo Fondacije koje se obrazuje ovim pravilnikom, na osnovu ovlašćenja Upravnog odbora iz Statuta da pravilnikom uspostavi savetodavna i druga tela koja učestvuju u pripremi odluka i mehanizme za prikupljanje mišljenja korisnika. Njime se ostvaruje cilj Fondacije upisan u Statut — razvoj ekonomskih modela zasnovanih na demokratskom odlučivanju.
+
 Ova glava uređuje dve faze upravljanja, uslove prelaza iz jedne u drugu, sastav i način odlučivanja Gornjeg Kola, mehanizam delegiranja glasova, zaštitni veto Fondacije i ograničenja upravljačke moći. Postupci glasanja i operativna pravila rada Gornjeg Kola utvrđuju se Pravilnikom o Gornjem Kolu.
 
 ### Član 42
@@ -616,11 +618,15 @@ Diskrecija osnivača nije neograničena. Osnivač ne može da izmeni četiri pri
 
 Ograničenja diskrecije osnivača ugrađena su u ovaj pravilnik kao normativni akt Fondacije i istovremeno u tehničku arhitekturu sistema.
 
+Pravila sistema utvrđuju se aktima Fondacije koje donosi njen Upravni odbor. Diskrecija osnivača ostvaruje se kroz predlaganje i učešće u radu Fondacije, u skladu sa Statutom.
+
 ### Član 44
 
 Prag prelaza iz Faze 1 u Fazu 2 iznosi 1.000.000 evidentiranih POEN-a u sistemu.
 
 Dostizanje praga istovremeno aktivira mogućnost upisa ZRNA i uspostavlja Gornje Kolo.
+
+Upravni odbor Fondacije bez odlaganja donosi i objavljuje akt kojim konstatuje da su uslovi za prelaz ispunjeni. Taj akt je deklarativan — prelaz nastupa dostizanjem praga, a ne donošenjem akta.
 
 U obračunskoj logici, prag od milion evidentiranih POEN-a odgovara stanju zapisa Protokola od −1.000.000.
 
@@ -628,11 +634,13 @@ U obračunskoj logici, prag od milion evidentiranih POEN-a odgovara stanju zapis
 
 Gornje Kolo je upravno telo sistema koje čine svi nosioci ZRNA.
 
+Sastav Gornjeg Kola ne utvrđuje se imenovanjem, već ispunjenjem uslova propisanog ovim pravilnikom: članstvo se stiče upisom i aktiviranjem ZRNA, a prestaje njihovim otpisom, odnosno vraćanjem ZRNA u slobodno stanje. Sastav je u svakom trenutku odrediv iz evidencije Protokola i konstantan tokom obračunskog perioda.
+
 Gornje Kolo nastaje automatski sa aktivacijom ZRNA — čim prvi korisnici upišu ZRNO po pravilima sistema, oni čine Gornje Kolo.
 
-Gornje Kolo odlučuje o pravilima Protokola, o aktiviranju i deaktiviranju modula i o svim pitanjima koja utiču na zajedničko dobro, osim pitanja koja su izuzeta iz njegove nadležnosti u skladu sa ovim pravilnikom.
+Gornje Kolo odlučuje o pravilima Protokola, o aktiviranju i deaktiviranju modula i o svim pitanjima koja utiču na zajedničko dobro, osim pitanja koja su izuzeta iz njegove nadležnosti u skladu sa ovim pravilnikom. Odluka Gornjeg Kola upućuje se Upravnom odboru Fondacije i sprovodi se na način utvrđen članom 51 ovog pravilnika.
 
-Gornje Kolo nije pravno lice.
+Gornje Kolo nije pravno lice i ne ubraja se u organe Fondacije utvrđene Statutom — organi Fondacije su Upravni odbor i Direktor. Gornje Kolo ne zastupa Fondaciju, ne raspolaže njenom imovinom i ne preuzima obaveze u njeno ime. Odluka Gornjeg Kola ne stvara neposredno prava ni obaveze prema trećim licima.
 
 ### Član 46
 
@@ -680,7 +688,13 @@ Treće ograničenje su licence zajedničkog dobra. Gornje Kolo ne može da zamen
 
 ### Član 51
 
-U Fazi 2 Fondacija zadržava servisnu ulogu — obezbeđuje i održava infrastrukturu, zastupa sistem u pravnom prometu i primenjuje odluke Gornjeg Kola. Uloga Fondacije je izvršna, ne upravljačka, uz zadržavanje zakonskih odgovornosti Upravnog odbora.
+U Fazi 2 Fondacija zadržava servisnu ulogu — obezbeđuje i održava infrastrukturu, zastupa sistem u pravnom prometu i sprovodi odluke Gornjeg Kola. Fondacija ne odlučuje o pravilima Protokola po sopstvenom nahođenju, već postupa po odluci Gornjeg Kola, u granicama zakona i Statuta i uz zadržavanje zakonskih odgovornosti Upravnog odbora.
+
+Odluku Gornjeg Kola sprovodi Upravni odbor donošenjem odgovarajućeg akta. Upravni odbor je dužan da taj akt donese bez odlaganja i pri tome ne ceni celishodnost odluke.
+
+Upravni odbor može odbiti da sprovede odluku samo ako je ona suprotna zakonu, suprotna Statutu Fondacije, usmerena na pitanje izuzeto iz nadležnosti Gornjeg Kola po članu 50 ovog pravilnika, ili obuhvaćena zaštitnim vetom iz člana 48 dok on traje. Drugi razlozi za odbijanje ne postoje i ne mogu se ustanoviti.
+
+Odbijanje mora biti obrazloženo pozivanjem na konkretan razlog iz prethodnog stava i objavljuje se uz odluku na koju se odnosi. Gornje Kolo može izmeniti odluku tako da otkloni utvrđeni razlog i ponovo o njoj odlučiti.
 
 U pogledu raspoređivanja dinarskih sredstava, Gornje Kolo upućuje preporuke Upravnom odboru Fondacije. Upravni odbor razmatra preporuke i primenjuje ih u okviru svojih zakonskih ovlašćenja po Zakonu o zadužbinama i fondacijama, sa obavezom obrazloženog odgovora na svaku preporuku.
 
@@ -723,6 +737,10 @@ Modul je proširenje koje dodaje funkcionalnost osnovnom sistemu.
 Redosled aktiviranja modula zavisi od potreba Zajednice i nije unapred utvrđen.
 
 Novi moduli mogu se dodavati odlukom Fondacije u Fazi 1, odnosno Gornjeg Kola u Fazi 2, pod uslovom da ne narušavaju principe sistema.
+
+Odluka Gornjeg Kola iz prethodnog stava sprovodi se na način utvrđen članom 51 ovog pravilnika.
+
+Ako aktiviranje modula uvodi novu obradu podataka o ličnosti, akt kojim se modul aktivira donosi se po prethodno ažuriranoj proceni uticaja na zaštitu podataka o ličnosti.
 
 ### Član 55
 

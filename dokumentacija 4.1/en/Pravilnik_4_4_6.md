@@ -598,6 +598,8 @@ Every system has rules, and someone must set, change, and ensure their applicati
 
 The KOLO system resolves this through progressive decentralization — a structured pathway from centralized to decentralized governance with measurable transition conditions. Governance begins with the founder and the Foundation and is progressively transferred to the Community through the Upper Kolo.
 
+The Upper Kolo is a special body of the Foundation established by this Rulebook, on the basis of the Management Board's power under the Statute to establish, by rulebook, advisory and other bodies that participate in the preparation of decisions, as well as mechanisms for gathering the opinions of users. It gives effect to the Foundation's purpose recorded in the Statute — the development of economic models based on democratic decision-making.
+
 This chapter governs the two governance phases, the conditions for transition from one to the other, the composition and decision-making procedure of the Upper Kolo, the vote delegation mechanism, the Foundation's protective veto, and the limits of governance power. Voting procedures and the operational rules of the Upper Kolo are established by the Rulebook on the Upper Kolo.
 
 ### Article 42
@@ -618,11 +620,15 @@ The founder's discretion is not unlimited. The founder may not amend the four pr
 
 The limitations on the founder's discretion are embedded in this Rulebook as a normative act of the Foundation, and simultaneously in the technical architecture of the system.
 
+The system's rules are established by acts of the Foundation adopted by its Management Board. The founder's discretion is exercised through proposing and participating in the work of the Foundation, in accordance with the Statute.
+
 ### Article 44
 
 The threshold for transition from Phase 1 to Phase 2 is 1,000,000 recorded POENs in the system.
 
 Reaching the threshold simultaneously activates the possibility of ZRNO inscription and establishes the Upper Kolo.
+
+The Foundation's Management Board shall without delay adopt and publish an act recording that the conditions for the transition have been met. That act is declaratory — the transition occurs upon reaching the threshold, not upon the adoption of the act.
 
 In the accounting logic, the threshold of one million recorded POENs corresponds to a Protocol record state of −1,000,000.
 
@@ -630,11 +636,13 @@ In the accounting logic, the threshold of one million recorded POENs corresponds
 
 The Upper Kolo is the governing body of the system, composed of all ZRNO Holders.
 
+The composition of the Upper Kolo is not established by appointment, but by the fulfilment of the condition prescribed by this Rulebook: membership is acquired by the inscription and activation of ZRNO and ceases upon their write-off, that is, upon the return of ZRNO to free status. The composition is at every moment determinable from the Protocol's records and constant throughout the accounting period.
+
 The Upper Kolo is formed automatically upon the activation of ZRNO — as soon as the first users inscribe ZRNO under the system's rules, they constitute the Upper Kolo.
 
-The Upper Kolo decides on Protocol rules, on the activation and deactivation of modules, and on all matters affecting the common good, except matters excluded from its competence in accordance with this Rulebook.
+The Upper Kolo decides on Protocol rules, on the activation and deactivation of modules, and on all matters affecting the common good, except matters excluded from its competence in accordance with this Rulebook. A decision of the Upper Kolo is addressed to the Foundation's Management Board and is implemented in the manner established by Article 51 of this Rulebook.
 
-The Upper Kolo is not a legal entity.
+The Upper Kolo is not a legal entity and is not among the organs of the Foundation established by the Statute — the organs of the Foundation are the Management Board and the Director. The Upper Kolo does not represent the Foundation, does not dispose of its property, and does not assume obligations on its behalf. A decision of the Upper Kolo does not directly create rights or obligations towards third parties.
 
 ### Article 46
 
@@ -682,7 +690,13 @@ The third limitation consists of the common-good licenses. The Upper Kolo may no
 
 ### Article 51
 
-In Phase 2, the Foundation retains its service role — it provides and maintains the infrastructure, represents the system in legal transactions, and implements Upper Kolo decisions. The Foundation's role is executive, not governance, with retention of the Management Board's statutory responsibilities.
+In Phase 2, the Foundation retains its service role — it provides and maintains the infrastructure, represents the system in legal transactions, and implements Upper Kolo decisions. The Foundation does not decide on Protocol rules at its own discretion, but acts upon the decision of the Upper Kolo, within the limits of the law and the Statute and with retention of the Management Board's statutory responsibilities.
+
+A decision of the Upper Kolo is implemented by the Management Board through the adoption of a corresponding act. The Management Board is obliged to adopt that act without delay and does not assess the expediency of the decision.
+
+The Management Board may refuse to implement a decision only if the decision is contrary to law, contrary to the Foundation's Statute, directed at a matter excluded from the competence of the Upper Kolo under Article 50 of this Rulebook, or covered by the protective veto under Article 48 while it lasts. No other grounds for refusal exist and none may be established.
+
+A refusal must be reasoned by reference to a specific ground from the preceding paragraph and is published alongside the decision to which it relates. The Upper Kolo may amend the decision so as to remove the established ground and decide upon it again.
 
 With regard to the distribution of dinar funds, the Upper Kolo issues recommendations to the Foundation's Management Board. The Management Board considers recommendations and applies them within its statutory powers under the Law on Endowments and Foundations, with an obligation to give a reasoned response to each recommendation.
 
@@ -725,6 +739,10 @@ A module is an extension that adds functionality to the core system.
 The order in which modules are activated depends on the Community's needs and is not predetermined.
 
 New modules may be added by decision of the Foundation in Phase 1, and of the Upper Kolo in Phase 2, provided they do not undermine the system's principles.
+
+A decision of the Upper Kolo under the preceding paragraph is implemented in the manner established by Article 51 of this Rulebook.
+
+If the activation of a module introduces new processing of personal data, the act activating the module is adopted following a prior update of the data protection impact assessment.
 
 ### Article 55
 

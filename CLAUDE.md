@@ -95,6 +95,25 @@ tačan podatak.
 `messages/*.json` (`pravne.<doc>.ver` i `meta_<doc>_desc`) i spisak `AKTI` u
 `__tests__/pravni-dokumenti.test.ts`. Sve to samo za akt koji se menja.
 
+🔴 **ODLUKA VLASNIKA (2026-09-09): kad se ceo registar rizika završi, SVI dokumenti
+se povlače na verziju 5.0.** Mešovite šifre 4.4.x su radno stanje dok traje obrada
+rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se i
+zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
+usput — 5.0 je poslednji potez, posle poslednjeg rizika.
+
+**AŽURIRANO 2026-09-09 (sedamnaesti put):** na **4.4.6** ide **PET akata** — Pravilnik
+o KOLO sistemu (sa 4.4.1), Pravilnik o Gornjem Kolu (sa 4.4.1), Pravilnik o
+hijerarhiji akata (sa 4.4.1), Izjava o prihvatanju rizika (sa 4.4.5) i Whitepaper
+(sa 4.4.5). Ostalih dvanaest ostaje gde jeste. Povod je **analiza rizika R-09**
+(Gornje Kolo odlučuje o pravilima i bira predmet trošenja, a po Statutu ne postoji).
+Sadržinski, vidi sekciju „Gornje Kolo: telo Fondacije, a ne njen organ" ispod.
+
+🟡 **Whitepaper je bumpovan drugi put u dva dana, iz istog razloga kao prvi put:**
+nosio je doslovno rečenicu koja je iz Pravilnika brisana („uloga izvršna, ne
+upravljačka"). Uhvatio ga je test — `UKINUTO` obrazac je pao na whitepaperu, ne na
+Pravilniku. Pouka: pri brisanju rečenice iz akta OBAVEZNO proveriti whitepaper, on
+istu tvrdnju po pravilu ponavlja svojim rečima.
+
 **AŽURIRANO 2026-09-09 (šesnaesti put):** na **4.4.5** idu **TRI akta** — Pravilnik
 o osnivačkom doprinosu (sa 4.4.1), Izjava o prihvatanju rizika (sa 4.4.4) i
 Whitepaper (sa 4.4.1). Ostalih četrnaest ostaje gde jeste. Povod je **analiza rizika
@@ -945,6 +964,125 @@ uslugu odlukom koja utvrđuje obim i **dinarsku vrednost koju ta usluga ima za n
 isti obrt kao kod kolektivne nabavke, gde odluka utvrđuje parametar pre nego što druga
 strana kaže cenu; **(B)** isto što i roba (cenovnik + isprava). Odluka vlasnika se čeka;
 do tada za usluge važi isti režim kao za robu.
+
+### Gornje Kolo: telo Fondacije, a ne njen organ (2026-09-09)
+
+Odluke uz analizu rizika **R-09** (Gornje Kolo odlučuje o pravilima Protokola i bira
+predmet trošenja, a Statut ga ne poznaje). Izmenjeni `Pravilnik_4_4_6.md` (čl. 41,
+43, 44, 45, 51, 54), `gornje_kolo_4_4_6.md` (čl. 2, 4, 8, 17, 23),
+`hijerarhija_4_4_6.md` (čl. 12), `rizici_4_4_6.md` (čl. 4) i `whitepaper_4_4_6.md`
+(gl. 10, „Dve faze upravljanja“) na svih pet jezika, uz izmenu koda.
+
+🔴 **Prigovor nije „nemate demokratiju" nego obrnuto — imate skupštinu u pravnoj
+formi koja skupštinu ne može da ima.** Statut čl. 10: *„Organi Fondacije su Upravni
+odbor i Direktor."* Čl. 12 t. 1 i 5 i čl. 22 st. 2 daju UO isključivu nadležnost za
+opšte akte. Ispod toga stoji zakon: fondacija je **bezčlanska** forma — imovina
+namenjena cilju, kojom upravlja organ. A akti su pisali da Gornje Kolo „odlučuje"
+(čl. 45 st. 3) i da je uloga Fondacije „izvršna, ne upravljačka" (čl. 51 st. 1).
+
+**Rešenje je dvoslojno i tako se mora i pisati:**
+- **Forma — telo, ne organ.** Gornje Kolo je posebno telo Fondacije obrazovano
+  pravilnikom, na osnovu **Statuta čl. 12 st. 2** (UO može pravilnikom uspostaviti
+  savetodavna i druga tela koja učestvuju u pripremi odluka i mehanizme za
+  prikupljanje mišljenja korisnika). Odluka Gornjeg Kola **upućuje se UO**, a UO je
+  sprovodi **svojim aktom**.
+- **Dejstvo — samoobavezivanje Fondacije.** UO je **dužan** da akt donese i
+  **ne ceni celishodnost** odluke; odbiti može samo iz **zatvorene liste** (čl. 51):
+  suprotnost zakonu, suprotnost Statutu, pitanje izuzeto po čl. 50, zaštitni veto
+  dok traje. Uvek uz objavljeno obrazloženje.
+
+🔴 **Obavezu nosi Fondacija prema sebi, ne Gornje Kolo prema Fondaciji** — i tako se
+piše. Opšti akt obavezuje i donosioca dok ga ne promeni (Statut čl. 22 st. 3), pa je
+efekat isti kao da Gornje Kolo odlučuje, a nadležnost ostaje tamo gde je zakon
+stavlja. 🟡 **Ostatak koji se ne može ukloniti:** UO uvek može izmeniti pravilnik i
+osloboditi se. Nijedna konstrukcija to ne sprečava — fondacija se ne može odreći
+sopstvenih ovlašćenja. Decentralizacija je **normativna i faktička, ne apsolutna**;
+to je sada napisano, a ranije je samo bilo tako.
+
+🔴 **Dinarska strana je bila ISPRAVNA od početka i ostaje netaknuta** (čl. 51 st. 5,
+čl. 51a st. 3, GK čl. 20): tu Gornje Kolo **upućuje preporuke**, a UO ima diskreciju
+uz obrazložen odgovor. Razlika je namerna — pravila Protokola vezuju UO, raspolaganje
+imovinom Fondacije ne sme. **Ne izjednačavati ta dva režima.**
+
+🟢 **Dinamičan broj članova je DOPUŠTEN** i to je zabeleženo u aktu (Pravilnik čl. 45
+st. 2, GK čl. 4). Obaveza imenovanja pojedinaca vezuje se za **organe** (Statut
+čl. 11, 14–17: mandat, imenovanje, opoziv), a Gornje Kolo nije organ. Traži se samo
+da sastav bude **odrediv po objektivnom merilu**: članstvo se stiče upisom i
+aktiviranjem ZRNA, a ZRNO se upisuje i otpisuje u ponoć obračunskog perioda (GK
+čl. 6), pa je sastav tokom celog perioda konstantan i javno proverljiv iz registra.
+🔴 Dinamičan sastav prolazi **zato što** je uloga prepakovana — telo sa promenljivim
+članstvom koje *odlučuje umesto organa* je skupština. Ta dva se ne razdvajaju.
+
+**Ostale izmene istog poteza:**
+- **Pravilnik čl. 45 st. 5** — izričito: *nije pravno lice i **ne ubraja se u organe
+  Fondacije utvrđene Statutom***, ne zastupa Fondaciju, ne raspolaže imovinom, odluka
+  ne stvara neposredno prava prema trećim licima. Do tada je stajalo samo „nije
+  pravno lice", što je manje.
+- **Pravilnik čl. 44** — UO **bez odlaganja donosi deklarativan akt** kojim konstatuje
+  da su uslovi za prelaz u Fazu 2 ispunjeni. Prelaz i dalje nastupa dostizanjem praga
+  (ne aktom) — ali „vlast je prešla u ponoć kad je opticaj prešao broj" bez ijednog
+  papira nije bilo odbranjivo.
+- **Pravilnik čl. 43** — pravila sistema utvrđuju se **aktima Fondacije koje donosi
+  UO**; diskrecija osnivača ostvaruje se predlaganjem i učešćem u radu Fondacije.
+  Ista mana kao kod Gornjeg Kola, samo u Fazi 1: ni osnivač nije organ.
+- **Pravilnik čl. 54** — odluka Gornjeg Kola o modulu sprovodi se po čl. 51; ako
+  aktiviranje modula uvodi **novu obradu podataka o ličnosti**, akt se donosi po
+  prethodno ažuriranoj DPIA.
+- 🔴 **Hijerarhija čl. 12 st. 4 — akt je obarao SAM SEBE.** Prenosio je nadležnost za
+  opšte akte na Gornje Kolo, dok isti pravilnik u čl. 2 st. 1 kaže da je podređen
+  Statutu, a u čl. 8 st. 2 da *„akt nižeg ranga ne može izmeniti ono što je uređeno
+  aktom višeg ranga"*. **Jedini takav slučaj u celom setu** i najlakše se nalazi. Sada:
+  sadržinu izmene utvrđuje odluka Gornjeg Kola, a izmenu donosi UO. Nov **st. 6**:
+  opšte akte u svim fazama donosi UO, a odluka tela obrazovanog pravilnikom **nije
+  opšti akt**.
+- **GK čl. 23** — pravilnik o Gornjem Kolu više ne menja samo Gornje Kolo (telo je
+  menjalo akt kojim je konstituisano, mimo UO).
+- **Izjava o rizicima čl. 4** — glas u Gornjem Kolu **ne daje pravo da Fondacija
+  donese određeni akt**, ne daje udeo u imovini i ne stvara potraživanje ako akt
+  izostane iz razloga predviđenih aktima.
+
+🔴 **Rečenica „Uloga Fondacije je izvršna, ne upravljačka" je BRISANA i zaključana
+testom** (`UKINUTO` blok u `pravni-dokumenti.test.ts`, svih pet jezika). Bila je
+najcitiraniji red u setu protiv nas — pisano priznanje da organ koji po zakonu
+odgovara abdicira u korist tela koje zakon ne poznaje. **Ne vraćati je** ni u akte
+ni u whitepaper.
+
+**Kod (M-8 — trag akta UO u registru odluka):**
+- `izvrsiOdluku(id, akt)` sada traži **oznaku akta UO** i upisuje je u
+  `GlasanjePredlog.izvrsenjeAkt`. Bez tog traga registar pokazuje da je „izvršeno",
+  ali ne i da je nadležni organ išta doneo — a upravo taj trag drži konstrukciju u
+  granicama Statuta.
+- Nova `neSprovediOdluku(id, razlog, obrazlozenje)` + `POST /api/admin/glasanje/[id]/ne-sprovedi`,
+  status `IzvrsenjeStatus.NIJE_SPROVEDENO`, enum `OdbijanjeRazlog`
+  (ZAKON / STATUT / VAN_NADLEZNOSTI). 🔴 **Zaštitni veto NIJE u toj listi** — ima
+  sopstvenu radnju `vetoNaIzvrsenje` i status `VETO_OBUSTAVLJENO`, jer je privremen i
+  gasi se trajno po čl. 49, dok su ova tri razloga trajna. Ne spajati ih.
+- Migracije `20260909130000_izvrsenje_nije_sprovedeno` (samo nova enum vrednost,
+  ZASEBAN fajl) → `20260909130100_izvrsenje_akt_uo` (enum `OdbijanjeRazlog` + četiri
+  kolone). Audit: `ODLUKA_IZVRSENA` (sa oznakom akta), `ODLUKA_NIJE_SPROVEDENA`.
+- 🟢 **Kod je i pre ovoga bio uredan i to ostaje tačno:** usvojena `ODLUKA` samo
+  prelazi u `ZA_IZVRSENJE` (status, ne primena), a `DINARSKA_PREPORUKA` i
+  `IZBOR_NABAVKE` nikad ne ulaze u izvršenje. **Nijedna kodna putanja ne primenjuje
+  odluku Gornjeg Kola na sistem sama** — to je ono što je R-09 držalo teorijskim.
+
+🔴 **Zaostala unakrsna upućivanja — svesno neispravljena, sada ih ima TRI.** Na
+`Pravilnik o KOLO sistemu (v4.4.1)` upućuju `ucesce_dece_4_4_2` (zaglavlje),
+`radnje_obrade_4_4_2` (zaglavlje) i `DPIA_4_4_3` (Povezani dokumenti, gde stoji i
+`Pravilnik o hijerarhiji akata (v4.4.1)`). Nisu dirana iz istog razloga kao ranije:
+ti redovi opisuju stanje seta na dan donošenja tih akata. Sa 4.4.6 broj slomljenih
+pokazivača raste na tri — **i to je upravo ono što bump celog seta na 5.0 briše
+odjednom.** Do tada ne prepravljati objavljene fajlove.
+
+🟡 **R-09 je BUDUĆI rizik, ne zatečen prekršaj.** Sistem je u Fazi 1, Gornje Kolo ne
+postoji i nijedan pravilnik nije donet njegovom odlukom. Ali se palio sam, dostizanjem
+praga, bez ičije odluke — zato je rešavan pre nego što se upali.
+
+🔴 **ODBIJENA MERA UZ R-09 (odluka vlasnika, 2026-09-09) — ne predlagati ponovo:**
+**izmena Statuta da imenuje Gornje Kolo** (čl. 23, dvotrećinska većina UO + APR).
+Razlog stoji i nezavisno od odluke: Statut može imenovati telo, ali ga **ne može
+učiniti organom fondacije** — fondacija po zakonu nema članove ni skupštinu — pa bi
+izmena isti problem prenela na viši akt i učinila ga vidljivim registracionom organu.
+Statutarni osnov iz čl. 12 st. 2 postiže isto u granicama koje zakon dopušta.
 
 ### Osnivački doprinos: udeo je objavljen, granica je obrazložena (2026-09-09)
 

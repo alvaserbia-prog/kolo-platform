@@ -144,9 +144,11 @@ Obavezujući akti KOLO sistema jesu:
 
 (3) U Fazi 1, KOLO Pravilnik i ostale pravilnike donosi i menja Fondacija; ovlašćenja osnivača u toj fazi utvrđena su Statutom i KOLO Pravilnikom.
 
-(4) Po prelasku sistema u Fazu 2, izmene KOLO Pravilnika i ostalih pravilnika u delu koji se odnosi na pravila protokola, module i pitanja zajedničkog dobra donose se po postupku i u nadležnosti utvrđenoj KOLO Pravilnikom, uz zaštitni veto Fondacije dok on traje; u preostalom delu KOLO Pravilnik i ostale pravilnike menja Fondacija u okviru svojih zakonskih ovlašćenja.
+(4) Po prelasku sistema u Fazu 2, sadržinu izmene KOLO Pravilnika i ostalih pravilnika u delu koji se odnosi na pravila protokola, module i pitanja zajedničkog dobra utvrđuje odluka Gornjeg Kola, doneta po postupku iz KOLO Pravilnika i Pravilnika o Gornjem Kolu. Izmenu donosi Upravni odbor Fondacije, koji je dužan da je donese i pri tome ne ceni celishodnost odluke; odbijanje je moguće samo iz razloga izričito nabrojanih u čl. 51 KOLO Pravilnika, uključujući zaštitni veto Fondacije dok on traje. U preostalom delu KOLO Pravilnik i ostale pravilnike menja Fondacija u okviru svojih zakonskih ovlašćenja.
 
 (5) Akti zaštite podataka o ličnosti, platformski akti i obrasci i interni akti donose se i menjaju u nadležnosti Fondacije, u skladu sa propisima i aktima višeg ranga.
+
+(6) Opšte akte Fondacije, u smislu Statuta, u svim fazama donosi Upravni odbor. Odluka tela obrazovanog pravilnikom nije opšti akt Fondacije; ona se sprovodi aktom Upravnog odbora, na način utvrđen aktom kojim je telo obrazovano.
 
 ### Član 13 — Granice izmena
 

@@ -2,7 +2,7 @@
 
 # Rulebook on the Upper Kolo
 
-*This Rulebook governs the voting procedures and operational rules of the Upper Kolo. It is adopted on the basis of Articles 41, 46, and 47 of the KOLO System Rulebook (v4.4.1), which expressly refer to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
+*This Rulebook governs the voting procedures and operational rules of the Upper Kolo. It is adopted on the basis of Articles 41, 46, and 47 of the KOLO System Rulebook (v4.4.6), which expressly refer to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
 
 ## I — General Provisions
 
@@ -16,6 +16,8 @@ Terms not defined by this Rulebook have the meaning established in the KOLO Syst
 
 Chapter VII of the KOLO System Rulebook (Art. 41–51) governs the composition and competence of the Upper Kolo, quadratic voting as a principle, delegation as a principle, the Foundation's protective veto, and the limits of governance power. This Rulebook does not amend or repeat those provisions, but elaborates their operational application.
 
+The Upper Kolo is a special body of the Foundation established by this Rulebook, on the basis of the Management Board's power under the Statute (Art. 41 of the Rulebook). It is not among the organs of the Foundation established by the Statute, does not represent the Foundation, and does not dispose of its property.
+
 ### Article 3 — Temporal applicability
 
 The Upper Kolo comes into existence and becomes the governance body of the system in Phase 2, upon reaching the threshold of 1,000,000 recorded POENs (Art. 42, 44 of the Rulebook). The procedures in this Rulebook apply from the constitution of the Upper Kolo.
@@ -27,6 +29,8 @@ In Phase 1, the rules of the Protocol are established by the founder in cooperat
 ### Article 4 — Composition
 
 The Upper Kolo consists of all ZRNO Holders. The right to participate in decision-making is exercised exclusively through activated ZRNO.
+
+The composition is not established by appointment: membership is acquired by the inscription and activation of ZRNO and ceases upon their write-off, that is, upon the return of ZRNO to free status. No term of office is set and no removal takes place. The number of members is variable, while the composition is at every moment determinable from the Protocol's records and constant throughout the accounting period (Art. 6).
 
 ### Article 5 — Voting power
 
@@ -57,6 +61,8 @@ All decisions are adopted by a simple majority of votes cast.
 A decision is adopted if the sum of the voting power of votes cast "for" exceeds the sum of the voting power of votes cast "against".
 
 Where a decision is made by choosing among several offered options, the vote is selective: a holder casts a vote for one option, and the option with the highest sum of the voting power of the votes cast is selected. A selective vote is conducted where so prescribed by a separate rulebook, which also establishes the manner in which the list of options is compiled.
+
+A decision of the Upper Kolo is addressed to the Foundation's Management Board and is implemented in the manner set out in Article 17 of this Rulebook.
 
 ### Article 9 — Tied result
 
@@ -108,7 +114,11 @@ A delegation may be revoked at any time. A revocation and a new delegation take 
 
 ### Article 17 — Execution
 
-The Foundation, in its service role (Art. 51 of the Rulebook), executes an adopted decision of the Upper Kolo — through application via the Protocol or by an appropriate act, in accordance with the law.
+The Foundation, in its service role (Art. 51 of the Rulebook), implements an adopted decision of the Upper Kolo — through application via the Protocol or by an appropriate act, in accordance with the law.
+
+The act implementing the decision is adopted by the Management Board without delay, and in doing so it does not assess the expediency of the decision. Refusal is possible only on the grounds expressly enumerated in Art. 51 of the Rulebook — contrariety to law, contrariety to the Statute, a matter excluded from the competence of the Upper Kolo, and the protective veto while it lasts — and must be reasoned and published alongside the decision to which it relates.
+
+A decision of the Upper Kolo does not directly create rights or obligations towards third parties.
 
 ### Article 18 — Protective veto and financial self-sufficiency
 
@@ -144,7 +154,7 @@ A proposal of the same or substantially identical content that was not adopted m
 
 ### Article 23 — Amendment of this Rulebook
 
-This Rulebook is amended by a decision of the Upper Kolo (Art. 8). In Phase 1, before the establishment of the Upper Kolo, the Rulebook is adopted and amended by the founder in cooperation with the Foundation (Art. 43 of the Rulebook).
+The content of an amendment to this Rulebook is determined by a decision of the Upper Kolo (Art. 8), and the amendment is adopted by the Foundation's Management Board in the manner set out in Article 17 of this Rulebook. In Phase 1, before the establishment of the Upper Kolo, the Rulebook is adopted and amended by the Foundation, with the participation of the founder (Art. 43 of the Rulebook).
 
 An amendment to this Rulebook may not be inconsistent with the KOLO System Rulebook, nor may it encroach on matters outside the competence of the Upper Kolo (Art. 7).
 

@@ -2,7 +2,7 @@
 
 # Pravilnik o Gornjem Kolu
 
-*Ovaj pravilnik uređuje postupke glasovanja i operativna pravila rada Gornjeg Kola. Donosi se na temelju članaka 41., 46. i 47. Pravilnika o KOLO sustavu (v4.4.1), koji izričito upućuju na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
+*Ovaj pravilnik uređuje postupke glasovanja i operativna pravila rada Gornjeg Kola. Donosi se na temelju članaka 41., 46. i 47. Pravilnika o KOLO sustavu (v4.4.6), koji izričito upućuju na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
 
 ## I — Opće odredbe
 
@@ -16,6 +16,8 @@ Izrazi koji nisu definirani ovim pravilnikom imaju značenje utvrđeno Pravilnik
 
 Glava VII. Pravilnika o KOLO sustavu (čl. 41.–51.) uređuje sastav i nadležnost Gornjeg Kola, kvadratno glasovanje kao načelo, delegiranje kao načelo, zaštitni veto Zaklade i ograničenja upravljačke moći. Ovaj pravilnik te odredbe ne mijenja niti ponavlja, nego razrađuje njihovu operativnu primjenu.
 
+Gornje Kolo posebno je tijelo koje Zaklada obrazuje ovim pravilnikom, na temelju ovlasti Upravnog odbora iz Statuta (čl. 41. Pravilnika). Ono se ne ubraja u tijela Zaklade utvrđena Statutom, ne zastupa Zakladu i ne raspolaže njezinom imovinom.
+
 ### Članak 3. — Vremensko važenje
 
 Gornje Kolo nastaje i postaje upravno tijelo sustava u Fazi 2., po dostizanju praga od 1.000.000 evidentiranih POEN-a (čl. 42., 44. Pravilnika). Postupci iz ovog pravilnika primjenjuju se od konstituiranja Gornjeg Kola.
@@ -27,6 +29,8 @@ U Fazi 1. pravila Protokola postavlja osnivač u suradnji sa Zakladom (čl. 42.,
 ### Članak 4. — Sastav
 
 Gornje Kolo čine svi nositelji ZRNA. Pravo sudjelovanja u odlučivanju ostvaruje se isključivo aktiviranim ZRNOM.
+
+Sastav se ne utvrđuje imenovanjem: članstvo se stječe upisom i aktiviranjem ZRNA, a prestaje njihovim otpisom, odnosno vraćanjem ZRNA u slobodno stanje. Mandat se ne određuje i opoziv se ne provodi. Broj članova je promjenjiv, a sastav je u svakom trenutku odrediv iz evidencije Protokola i konstantan tijekom obračunskog razdoblja (čl. 6.).
 
 ### Članak 5. — Glasačka moć
 
@@ -57,6 +61,8 @@ Sve se odluke donose prostom većinom danih glasova.
 Odluka je donesena ako je zbroj glasačke moći danih „za” veći od zbroja glasačke moći danih „protiv”.
 
 Kada se odlučuje izborom između više ponuđenih mogućnosti, glasuje se izborno: nositelj daje glas za jednu mogućnost, a izabrana je mogućnost s najvećim zbrojem glasačke moći danih glasova. Izborno glasovanje provodi se kada je tako propisano posebnim pravilnikom, koji utvrđuje i način sastavljanja liste mogućnosti.
+
+Odluka Gornjeg Kola upućuje se Upravnom odboru Zaklade i provodi se na način iz članka 17. ovoga pravilnika.
 
 ### Članak 9. — Izjednačen rezultat
 
@@ -108,7 +114,11 @@ Delegiranje se može opozvati u svakom trenutku. Opoziv i novo delegiranje proiz
 
 ### Članak 17. — Izvršenje
 
-Usvojenu odluku Gornjeg Kola izvršava Zaklada u svojoj servisnoj ulozi (čl. 51. Pravilnika) — primjenom kroz Protokol ili odgovarajućim aktom, u skladu sa zakonom.
+Usvojenu odluku Gornjeg Kola provodi Zaklada u svojoj servisnoj ulozi (čl. 51. Pravilnika) — primjenom kroz Protokol ili odgovarajućim aktom, u skladu sa zakonom.
+
+Akt kojim se odluka provodi donosi Upravni odbor bez odgode i pritom ne ocjenjuje svrhovitost odluke. Odbijanje je moguće samo iz razloga izričito nabrojanih u čl. 51. Pravilnika — suprotnost zakonu, suprotnost Statutu, pitanje izuzeto iz nadležnosti Gornjeg Kola i zaštitni veto dok traje — i mora biti obrazloženo i objavljeno uz odluku na koju se odnosi.
+
+Odluka Gornjeg Kola ne stvara neposredno prava ni obveze prema trećim osobama.
 
 ### Članak 18. — Zaštitni veto i financijska samostalnost
 
@@ -144,7 +154,7 @@ Neusvojen prijedlog istog ili bitno istovjetnog sadržaja ne može se ponovno st
 
 ### Članak 23. — Izmjena ovog pravilnika
 
-Ovaj se pravilnik mijenja odlukom Gornjeg Kola (čl. 8.). U Fazi 1., prije uspostave Gornjeg Kola, pravilnik donosi i mijenja osnivač u suradnji sa Zakladom (čl. 43. Pravilnika).
+Sadržaj izmjene ovoga pravilnika utvrđuje odluka Gornjeg Kola (čl. 8.), a izmjenu donosi Upravni odbor Zaklade na način iz članka 17. ovoga pravilnika. U Fazi 1., prije uspostave Gornjeg Kola, pravilnik donosi i mijenja Zaklada, uz sudjelovanje osnivača (čl. 43. Pravilnika).
 
 Izmjena ovog pravilnika ne može biti u suprotnosti s Pravilnikom o KOLO sustavu niti zadirati u pitanja izvan nadležnosti Gornjeg Kola (čl. 7.).
 

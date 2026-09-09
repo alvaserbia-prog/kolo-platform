@@ -146,9 +146,11 @@ Obvezujući akti KOLO sustava jesu:
 
 (3) U Fazi 1. KOLO Pravilnik i ostale pravilnike donosi i mijenja Zaklada; ovlasti osnivača u toj fazi utvrđene su Statutom i KOLO Pravilnikom.
 
-(4) Po prelasku sustava u Fazu 2., izmjene KOLO Pravilnika i ostalih pravilnika u dijelu koji se odnosi na pravila protokola, module i pitanja zajedničkog dobra donose se po postupku i u nadležnosti utvrđenoj KOLO Pravilnikom, uz zaštitni veto Zaklade dok on traje; u preostalom dijelu KOLO Pravilnik i ostale pravilnike mijenja Zaklada u okviru svojih zakonskih ovlasti.
+(4) Po prelasku sustava u Fazu 2., sadržaj izmjene KOLO Pravilnika i ostalih pravilnika u dijelu koji se odnosi na pravila protokola, module i pitanja zajedničkog dobra utvrđuje odluka Gornjeg Kola, donesena po postupku iz KOLO Pravilnika i Pravilnika o Gornjem Kolu. Izmjenu donosi Upravni odbor Zaklade, koji ju je dužan donijeti i pritom ne ocjenjuje svrhovitost odluke; odbijanje je moguće samo iz razloga izričito nabrojanih u čl. 51. KOLO Pravilnika, uključujući zaštitni veto Zaklade dok on traje. U preostalom dijelu KOLO Pravilnik i ostale pravilnike mijenja Zaklada u okviru svojih zakonskih ovlasti.
 
 (5) Akti zaštite osobnih podataka, platformski akti te obrasci i interni akti donose se i mijenjaju u nadležnosti Zaklade, u skladu s propisima i aktima višeg ranga.
+
+(6) Opće akte Zaklade, u smislu Statuta, u svim fazama donosi Upravni odbor. Odluka tijela obrazovanog pravilnikom nije opći akt Zaklade; ona se provodi aktom Upravnog odbora, na način utvrđen aktom kojim je tijelo obrazovano.
 
 ### Članak 13. — Granice izmjena
 

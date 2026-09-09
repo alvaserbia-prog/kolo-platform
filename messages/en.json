@@ -817,6 +817,17 @@
     "veto_obrazlozenje_placeholder": "Veto justification — specific threat to sustainability (art. 18)",
     "potvrdi_veto": "Confirm veto",
     "otkazi_veto": "Cancel",
+    "izvrsenje_nije_sprovedeno": "Not implemented",
+    "izvrsenje_akt_label": "Board act:",
+    "izvrsenje_akt_placeholder": "Reference of the Board act implementing the decision",
+    "izvrsenje_akt_napomena": "A decision of the Upper Kolo is implemented by the Management Board through its own act (Art. 51).",
+    "potvrdi_izvrseno": "Confirm implementation",
+    "ne_sprovodi": "Do not implement",
+    "potvrdi_ne_sprovodi": "Confirm refusal",
+    "odbijanje_razlog_zakon": "The decision is contrary to law",
+    "odbijanje_razlog_statut": "The decision is contrary to the Foundation's Statute",
+    "odbijanje_razlog_van_nadleznosti": "The matter is excluded from the competence of the Upper Kolo (Art. 50)",
+    "odbijanje_obrazlozenje_placeholder": "Reasons for refusal (required, Art. 51)",
     "greska_generic": "Error.",
     "preporuka_odgovor_naslov": "Board response to recommendation (art. 20)",
     "preporuka_obrazlozenje_placeholder": "Justification for the response (required)",
@@ -947,15 +958,15 @@
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "4.4.5"
+      "ver": "4.4.6"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.4.5"
+      "ver": "4.4.6"
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.4.1",
+      "ver": "4.4.6",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -985,11 +996,11 @@
     "meta_radnje_title": "Register of Processing Activities — KOLO",
     "meta_radnje_desc": "Register of personal data processing activities, version 4.4.2",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.4.5",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.4.6",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.5",
+    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.6",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.4.1",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.4.6",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",

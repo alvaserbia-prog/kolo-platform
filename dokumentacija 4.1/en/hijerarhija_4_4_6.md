@@ -146,9 +146,11 @@ The binding acts of the KOLO system are:
 
 (3) In Phase 1, the KOLO Rulebook and other rulebooks are adopted and amended by the Foundation; the founder's powers in that phase are established by the Statute and the KOLO Rulebook.
 
-(4) Upon the system's transition to Phase 2, amendments to the KOLO Rulebook and other rulebooks in the part relating to protocol rules, modules, and common-good matters are adopted under the procedure and within the competence established by the KOLO Rulebook, subject to the Foundation's protective veto for as long as it subsists; in the remaining part, the KOLO Rulebook and other rulebooks are amended by the Foundation within its statutory powers.
+(4) Upon the system's transition to Phase 2, the content of an amendment to the KOLO Rulebook and other rulebooks in the part relating to protocol rules, modules, and common-good matters is determined by a decision of the Upper Kolo, adopted under the procedure set out in the KOLO Rulebook and the Rulebook on the Upper Kolo. The amendment is adopted by the Foundation's Management Board, which is obliged to adopt it and does not assess the expediency of the decision; refusal is possible only on the grounds expressly enumerated in Art. 51 of the KOLO Rulebook, including the Foundation's protective veto for as long as it subsists. In the remaining part, the KOLO Rulebook and other rulebooks are amended by the Foundation within its statutory powers.
 
 (5) Personal data protection acts, platform acts, and forms and internal acts are adopted and amended within the competence of the Foundation, in accordance with the applicable regulations and acts of higher rank.
+
+(6) General acts of the Foundation, within the meaning of the Statute, are adopted in all phases by the Management Board. A decision of a body established by a rulebook is not a general act of the Foundation; it is implemented by an act of the Management Board, in the manner established by the act by which the body was constituted.
 
 ### Article 13 — Limits on amendments
 

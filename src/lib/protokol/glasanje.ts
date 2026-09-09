@@ -98,6 +98,9 @@ export async function dohvatiRegistarOdluka() {
     vrsta: o.vrsta,
     izvrsenjeStatus: o.izvrsenjeStatus,
     vetoObrazlozenje: o.vetoObrazlozenje,
+    izvrsenjeAkt: o.izvrsenjeAkt,
+    odbijanjeRazlog: o.odbijanjeRazlog,
+    odbijanjeObrazlozenje: o.odbijanjeObrazlozenje,
     uoOdgovor: o.uoOdgovor,
     uoObrazlozenje: o.uoObrazlozenje,
     brGlasova: o._count.glasovi,
@@ -161,15 +164,59 @@ export async function zatvoriIstekleIObjaviIshod(now: Date = new Date()): Promis
   }
 }
 
-/** Fondacija (UO) beleži da je usvojena odluka izvršena (čl. 17). */
-export async function izvrsiOdluku(id: string): Promise<void> {
+/**
+ * Fondacija (UO) beleži da je usvojena odluka sprovedena SVOJIM AKTOM (čl. 51
+ * Pravilnika, čl. 17 Gornjeg Kola).
+ *
+ * 🔴 Oznaka akta je OBAVEZNA. Gornje Kolo nije organ Fondacije — Statut poznaje
+ * samo Upravni odbor i Direktora — pa odluku Gornjeg Kola sprovodi UO donošenjem
+ * sopstvenog akta. Bez zapisa o tom aktu registar pokazuje samo da je „izvršeno",
+ * a ne i da je nadležni organ išta doneo; upravo taj trag je ono što konstrukciju
+ * drži u granicama Statuta.
+ */
+export async function izvrsiOdluku(id: string, akt: string): Promise<void> {
+  const a = (akt ?? "").trim();
+  if (a.length < 3)
+    throw new GlasanjeGreska("Navedi akt Upravnog odbora kojim je odluka sprovedena (čl. 51).");
   const p = await prisma.glasanjePredlog.findUnique({ where: { id }, select: { izvrsenjeStatus: true } });
   if (!p) throw new GlasanjeGreska("Predlog nije pronađen.", 404);
   if (p.izvrsenjeStatus !== "ZA_IZVRSENJE")
     throw new GlasanjeGreska("Izvršenje je moguće samo za usvojenu odluku koja čeka izvršenje.");
   await prisma.glasanjePredlog.update({
     where: { id },
-    data: { izvrsenjeStatus: "IZVRSENO", izvrsenoAt: new Date() },
+    data: { izvrsenjeStatus: "IZVRSENO", izvrsenjeAkt: a, izvrsenoAt: new Date() },
+  });
+}
+
+/**
+ * UO odbija da sprovede odluku Gornjeg Kola (čl. 51 Pravilnika).
+ *
+ * 🔴 Razlozi su ZATVORENA LISTA i tip ih sprovodi — celishodnost odluke UO ne ceni.
+ * Zaštitni veto NIJE ovde: on ima sopstvenu radnju (`vetoNaIzvrsenje`), jer je
+ * privremen i gasi se trajno po čl. 49, dok su ova tri razloga trajna.
+ */
+export async function neSprovediOdluku(
+  id: string,
+  razlog: "ZAKON" | "STATUT" | "VAN_NADLEZNOSTI",
+  obrazlozenje: string
+): Promise<void> {
+  if (razlog !== "ZAKON" && razlog !== "STATUT" && razlog !== "VAN_NADLEZNOSTI")
+    throw new GlasanjeGreska("Razlog mora biti sa liste iz čl. 51.");
+  const o = (obrazlozenje ?? "").trim();
+  if (o.length < 10)
+    throw new GlasanjeGreska("Odbijanje mora biti obrazloženo pozivanjem na konkretan razlog (čl. 51).");
+  const p = await prisma.glasanjePredlog.findUnique({ where: { id }, select: { izvrsenjeStatus: true } });
+  if (!p) throw new GlasanjeGreska("Predlog nije pronađen.", 404);
+  if (p.izvrsenjeStatus !== "ZA_IZVRSENJE")
+    throw new GlasanjeGreska("Odbijanje je moguće samo za odluku koja čeka sprovođenje.");
+  await prisma.glasanjePredlog.update({
+    where: { id },
+    data: {
+      izvrsenjeStatus: "NIJE_SPROVEDENO",
+      odbijanjeRazlog: razlog,
+      odbijanjeObrazlozenje: o,
+      odbijanjeAt: new Date(),
+    },
   });
 }
 

@@ -598,6 +598,8 @@ Minden rendszernek vannak szabályai, és valakinek meg kell alkotnia, módosít
 
 A KOLO rendszer ezt a kérdést progresszív decentralizációval oldja meg — a centralizált irányítástól a decentralizált felé vezető strukturált pályával, mérhető átmeneti feltételekkel. Az irányítás az alapítónál és az Alapítványnál kezdődik, és fokozatosan átkerül a Közösséghez a Felső Kolón keresztül.
 
+A Felső Kolo az Alapítvány külön testülete, amelyet e szabályzat hoz létre, az Igazgatótanácsnak az Alapszabályból eredő azon jogkörén alapulva, hogy szabályzattal tanácsadó és egyéb testületeket hozzon létre, amelyek részt vesznek a döntések előkészítésében, valamint a felhasználók véleményének összegyűjtésére szolgáló mechanizmusokat. Ezzel valósul meg az Alapítványnak az Alapszabályban rögzített célja — a demokratikus döntéshozatalon alapuló gazdasági modellek fejlesztése.
+
 Ez a fejezet rendezi az irányítás két szakaszát, az egyikből a másikba való átmenet feltételeit, a Felső Kolo összetételét és döntéshozatali módját, a szavazatok delegálásának mechanizmusát, az Alapítvány védelmi vétóját és az irányítási hatalom korlátait. A szavazási eljárásokat és a Felső Kolo működésének operatív szabályait a Felső Koloról szóló szabályzat állapítja meg.
 
 ### 42. cikk
@@ -618,11 +620,15 @@ Az alapító mérlegelési jogköre nem korlátlan. Az alapító nem módosítha
 
 Az alapító mérlegelési jogkörének korlátai e szabályzatba mint az Alapítvány normatív aktusába, és egyidejűleg a rendszer technikai architektúrájába is beépítettek.
 
+A rendszer szabályait az Alapítvány aktusai állapítják meg, amelyeket Igazgatótanácsa fogad el. Az alapító mérlegelési jogköre javaslattétel és az Alapítvány munkájában való részvétel útján érvényesül, az Alapszabállyal összhangban.
+
 ### 44. cikk
 
 Az 1. szakaszból a 2. szakaszba való átmenet küszöbe 1.000.000 nyilvántartásba vett POEN a rendszerben.
 
 A küszöb elérése egyidejűleg aktiválja a ZRNO beírásának lehetőségét, és létrehozza a Felső Kolót.
+
+Az Alapítvány Igazgatótanácsa késedelem nélkül elfogad és közzétesz egy aktust, amelyben megállapítja, hogy az átmenet feltételei teljesültek. Ez az aktus deklaratív jellegű — az átmenet a küszöb elérésével áll be, nem az aktus elfogadásával.
 
 Az elszámolási logikában az egymillió nyilvántartásba vett POEN küszöbe a Protokoll bejegyzésének −1.000.000-s állásának felel meg.
 
@@ -630,11 +636,13 @@ Az elszámolási logikában az egymillió nyilvántartásba vett POEN küszöbe 
 
 A Felső Kolo a rendszer irányító testülete, amelyet valamennyi ZRNO-tulajdonos alkot.
 
+A Felső Kolo összetételét nem kinevezés, hanem az e szabályzatban előírt feltétel teljesítése állapítja meg: a tagság a ZRNO beírásával és aktiválásával keletkezik, és annak leírásával, azaz a ZRNO szabad állapotba való visszahelyezésével szűnik meg. Az összetétel minden pillanatban megállapítható a Protokoll nyilvántartásából, és az elszámolási időszak alatt állandó.
+
 A Felső Kolo automatikusan jön létre a ZRNO aktiválásával — amint az első felhasználók a rendszer szabályai szerint beírják a ZRNO-t, ők alkotják a Felső Kolót.
 
-A Felső Kolo dönt a Protokoll szabályairól, a modulok aktiválásáról és deaktiválásáról, valamint minden olyan kérdésről, amely a közjót érinti, kivéve azokat a kérdéseket, amelyek e szabályzattal összhangban ki vannak véve hatásköréből.
+A Felső Kolo dönt a Protokoll szabályairól, a modulok aktiválásáról és deaktiválásáról, valamint minden olyan kérdésről, amely a közjót érinti, kivéve azokat a kérdéseket, amelyek e szabályzattal összhangban ki vannak véve hatásköréből. A Felső Kolo határozatát az Alapítvány Igazgatótanácsához kell címezni, és azt e szabályzat 51. cikkében megállapított módon kell végrehajtani.
 
-A Felső Kolo nem jogi személy.
+A Felső Kolo nem jogi személy, és nem tartozik az Alapítványnak az Alapszabályban megállapított szervei közé — az Alapítvány szervei az Igazgatótanács és az Igazgató. A Felső Kolo nem képviseli az Alapítványt, nem rendelkezik annak vagyonával, és nem vállal kötelezettséget a nevében. A Felső Kolo határozata nem keletkeztet közvetlenül jogokat vagy kötelezettségeket harmadik személyekkel szemben.
 
 ### 46. cikk
 
@@ -682,7 +690,13 @@ A harmadik korlát a közjó licencei. A Felső Kolo nem cserélheti fel az AGPL
 
 ### 51. cikk
 
-A 2. szakaszban az Alapítvány megtartja szolgáltatási szerepét — biztosítja és fenntartja az infrastruktúrát, képviseli a rendszert a jogforgalomban, és alkalmazza a Felső Kolo határozatait. Az Alapítvány szerepe végrehajtói, nem irányítói, az Igazgatótanács jogszabályi felelősségeinek fenntartása mellett.
+A 2. szakaszban az Alapítvány megtartja szolgáltatási szerepét — biztosítja és fenntartja az infrastruktúrát, képviseli a rendszert a jogforgalomban, és végrehajtja a Felső Kolo határozatait. Az Alapítvány a Protokoll szabályairól nem saját belátása szerint dönt, hanem a Felső Kolo határozata szerint jár el, a törvény és az Alapszabály keretei között, az Igazgatótanács jogszabályi felelősségeinek fenntartása mellett.
+
+A Felső Kolo határozatát az Igazgatótanács a megfelelő aktus elfogadásával hajtja végre. Az Igazgatótanács köteles ezt az aktust késedelem nélkül elfogadni, és eközben nem mérlegeli a határozat célszerűségét.
+
+Az Igazgatótanács csak akkor tagadhatja meg a határozat végrehajtását, ha az törvénybe ütközik, az Alapítvány Alapszabályába ütközik, e szabályzat 50. cikke szerint a Felső Kolo hatásköréből kivett kérdésre irányul, vagy a 48. cikk szerinti védelmi vétó alá esik, amíg az fennáll. Más megtagadási ok nem létezik és nem is állapítható meg.
+
+A megtagadást az előző bekezdés szerinti konkrét okra hivatkozva indokolni kell, és azt a határozattal együtt közzé kell tenni, amelyre vonatkozik. A Felső Kolo a határozatot úgy módosíthatja, hogy a megállapított okot elhárítsa, és arról ismét dönthet.
 
 A dináros eszközök elosztása tekintetében a Felső Kolo ajánlásokat intéz az Alapítvány Igazgatótanácsához. Az Igazgatótanács megvizsgálja az ajánlásokat, és a zálogalapokról és alapítványokról szóló törvény szerinti jogszabályi hatáskörén belül alkalmazza őket, minden ajánlásra indokolt választ adva.
 
@@ -725,6 +739,10 @@ A modul olyan bővítmény, amely funkcionalitást ad az alaprendszerhez.
 A modulok aktiválásának sorrendje a Közösség szükségleteitől függ, és nincs előre megállapítva.
 
 Új modulok az 1. szakaszban az Alapítvány, a 2. szakaszban a Felső Kolo határozatával adhatók hozzá, feltéve hogy nem sértik a rendszer elveit.
+
+A Felső Kolo előző bekezdés szerinti határozatát e szabályzat 51. cikkében megállapított módon kell végrehajtani.
+
+Ha a modul aktiválása személyes adatok új kezelését vezeti be, a modult aktiváló aktust az adatvédelmi hatásvizsgálat előzetes frissítését követően kell elfogadni.
 
 ### 55. cikk
 

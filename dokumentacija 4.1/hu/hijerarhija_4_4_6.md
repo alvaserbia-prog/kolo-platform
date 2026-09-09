@@ -146,9 +146,11 @@ A KOLO rendszer kötelező érvényű aktusai a következők:
 
 (3) Az 1. fázisban a KOLO Szabályzatot és a további szabályzatokat az Alapítvány fogadja el és módosítja; az alapítók e fázisbeli jogosítványait az Alapszabály és a KOLO Szabályzat állapítja meg.
 
-(4) A rendszer 2. fázisba lépését követően a KOLO Szabályzat és a további szabályzatok módosításai a protokoll szabályaira, a modulokra és a közjó kérdéseire vonatkozó részben a KOLO Szabályzatban meghatározott eljárás szerint és hatáskörben kerülnek elfogadásra, az Alapítvány védelmi vétója mellett, amíg az fennáll; a fennmaradó részben a KOLO Szabályzatot és a további szabályzatokat az Alapítvány módosítja törvényes jogosítványai keretében.
+(4) A rendszer 2. fázisba lépését követően a KOLO Szabályzat és a további szabályzatok módosításának tartalmát a protokoll szabályaira, a modulokra és a közjó kérdéseire vonatkozó részben a Felső Kolo döntése állapítja meg, amelyet a KOLO Szabályzat és a Felső Koloról szóló szabályzat szerinti eljárásban hoznak meg. Magát a módosítást az Alapítvány Igazgatótanácsa fogadja el, amely köteles azt elfogadni, és eközben nem mérlegeli a döntés célszerűségét; a megtagadás csak a KOLO Szabályzat 51. cikkében kifejezetten felsorolt okokból lehetséges, ideértve az Alapítvány védelmi vétóját, amíg az fennáll. A fennmaradó részben a KOLO Szabályzatot és a további szabályzatokat az Alapítvány módosítja törvényes jogosítványai keretében.
 
 (5) A személyes adatok védelmére vonatkozó aktusokat, a platformszintű aktusokat, valamint az űrlapokat és belső aktusokat az Alapítvány hatáskörében fogadják el és módosítják, a jogszabályokkal és a magasabb rangú aktusokkal összhangban.
+
+(6) Az Alapítvány általános aktusait az Alapszabály értelmében valamennyi fázisban az Igazgatótanács fogadja el. A szabályzattal létrehozott testület döntése nem az Alapítvány általános aktusa; azt az Igazgatótanács aktusa hajtja végre, az azon aktusban megállapított módon, amellyel a testületet létrehozták.
 
 ### 13. cikk — A módosítások korlátai
 

@@ -810,6 +810,17 @@
     "veto_obrazlozenje_placeholder": "A vétó indokolása — konkrét fenyegetés a fenntarthatóságra (18. cikk)",
     "potvrdi_veto": "Vétó megerősítése",
     "otkazi_veto": "Mégse",
+    "izvrsenje_nije_sprovedeno": "Nincs végrehajtva",
+    "izvrsenje_akt_label": "Igazgatótanácsi aktus:",
+    "izvrsenje_akt_placeholder": "A határozatot végrehajtó igazgatótanácsi aktus megjelölése",
+    "izvrsenje_akt_napomena": "A Felső Kolo határozatát az Igazgatótanács saját aktusával hajtja végre (51. cikk).",
+    "potvrdi_izvrseno": "Végrehajtás megerősítése",
+    "ne_sprovodi": "Nem hajtja végre",
+    "potvrdi_ne_sprovodi": "Megtagadás megerősítése",
+    "odbijanje_razlog_zakon": "A határozat törvénybe ütközik",
+    "odbijanje_razlog_statut": "A határozat az Alapítvány Alapszabályába ütközik",
+    "odbijanje_razlog_van_nadleznosti": "A kérdés ki van véve a Felső Kolo hatásköréből (50. cikk)",
+    "odbijanje_obrazlozenje_placeholder": "A megtagadás indokolása (kötelező, 51. cikk)",
     "greska_generic": "Hiba.",
     "preporuka_odgovor_naslov": "Az Igazgatóság válasza az ajánlásra (20. cikk)",
     "preporuka_obrazlozenje_placeholder": "A válasz indokolása (kötelező)",
@@ -940,15 +951,15 @@
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.4.5"
+      "ver": "4.4.6"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.4.5"
+      "ver": "4.4.6"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.4.1",
+      "ver": "4.4.6",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -978,11 +989,11 @@
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
     "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.4.2-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.5-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.6-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.5-es verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.6-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.4.1-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.4.6-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",

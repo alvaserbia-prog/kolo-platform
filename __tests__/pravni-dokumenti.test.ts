@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_4_1.md`, `uslovi_koriscenja_4_4_3.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_4_6.md`, `uslovi_koriscenja_4_4_3.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,20 +27,20 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_4_1.md",
+  "Pravilnik_4_4_6.md",
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_4_3.md",
   "radnje_obrade_4_4_2.md",
   "uslovi_koriscenja_4_4_3.md",
   "politika_4_4_2.md",
   "statut_4_1_0.md",
-  "whitepaper_4_4_5.md",
-  "rizici_4_4_5.md",
-  "hijerarhija_4_4_1.md",
+  "whitepaper_4_4_6.md",
+  "rizici_4_4_6.md",
+  "hijerarhija_4_4_6.md",
   "donacije_4_4_3.md",
   "operativni_4_4_4.md",
   "osnivacki_4_4_5.md",
-  "gornje_kolo_4_4_1.md",
+  "gornje_kolo_4_4_6.md",
   "programi_podrske_4_4_1.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce_dece_4_4_2.md",
@@ -62,7 +62,7 @@ const AKTI = [
  * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_4_1.md": {
+  "Pravilnik_4_4_6.md": {
     sr: [
       "### Član 40a",
       "evidentira se u Protokolu kada Fondacija odobri oglas",
@@ -87,6 +87,17 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "### Član 51a",
       "ne može preći 5.000 POEN-a po korisniku",
       "najmanje 1.000 POEN-a",
+      // 🔴 4.4.6 (R-09) — položaj Gornjeg Kola. Statut poznaje samo Upravni odbor i
+      // Direktora, pa telo koje „odlučuje" a Fondacija ga „izvršava" izgleda kao
+      // organ koji Statut ne poznaje. Traži se troje: da akt sam kaže da GK nije
+      // organ, da odluku sprovodi UO svojim aktom, i da su razlozi za odbijanje
+      // zatvorena lista. Ako iz teksta padne bilo šta od toga, vraća se prigovor.
+      "ne ubraja se u organe Fondacije utvrđene Statutom",
+      "Odluku Gornjeg Kola sprovodi Upravni odbor donošenjem odgovarajućeg akta",
+      "Drugi razlozi za odbijanje ne postoje i ne mogu se ustanoviti",
+      // Sastav bez imenovanja je ono što telo sa promenljivim brojem članova čini
+      // dopuštenim — mora stajati u aktu, ne samo u kodu.
+      "Sastav Gornjeg Kola ne utvrđuje se imenovanjem",
     ],
     en: [
       "### Article 40a",
@@ -98,6 +109,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "### Article 14a",
       "### Article 51a",
       "may not exceed 5,000 POENs per user",
+      "is not among the organs of the Foundation established by the Statute",
+      "implemented by the Management Board through the adoption of a corresponding act",
+      "No other grounds for refusal exist and none may be established",
+      "The composition of the Upper Kolo is not established by appointment",
     ],
     ru: [
       "### Статья 40a",
@@ -109,6 +124,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "### Статья 14a",
       "### Статья 51a",
       "не может превышать 5 000 ПОЕН",
+      "не относится к органам Фонда, установленным Уставом",
+      "исполняет Правление принятием соответствующего акта",
+      "Иных оснований для отказа не существует",
+      "Состав Верхнего Коло определяется не назначением",
     ],
   },
   "dokaz_stvarnosti_4_4_1.md": {
@@ -132,10 +151,48 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 4.4.1 — izborno glasanje. Čl. 8 i 9 su pisani za dvočlani izbor („za"/„protiv");
   // izbor jedne mogućnosti između više njih nije prosta većina i bez ove odredbe kod
   // sprovodi glasanje koje akt ne poznaje.
-  "gornje_kolo_4_4_1.md": {
-    sr: ["glasa se izborno"],
-    en: ["the vote is selective"],
-    ru: ["голосование является выборным"],
+  // 🔴 4.4.6 (R-09) — statutarni osnov i dinamičan sastav. Bez ovih odredaba akt
+  // opisuje telo koje odlučuje umesto organa Fondacije, a to je oblik skupštine —
+  // koju fondacija kao bezčlanska forma ne može imati.
+  "gornje_kolo_4_4_6.md": {
+    sr: [
+      "glasa se izborno",
+      "na osnovu ovlašćenja Upravnog odbora iz Statuta",
+      "Sastav se ne utvrđuje imenovanjem",
+      "Akt kojim se odluka sprovodi donosi Upravni odbor",
+      "a izmenu donosi Upravni odbor Fondacije",
+    ],
+    en: [
+      "the vote is selective",
+      "on the basis of the Management Board's power under the Statute",
+      "The composition is not established by appointment",
+      "The act implementing the decision is adopted by the Management Board",
+      "the amendment is adopted by the Foundation's Management Board",
+    ],
+    ru: [
+      "голосование является выборным",
+      "на основании полномочия Правления по Уставу",
+      "Состав не определяется назначением",
+      "Акт, которым решение исполняется, Правление принимает без промедления",
+      "изменение принимает Правление Фонда",
+    ],
+  },
+  // 🔴 4.4.6 (R-09) — čl. 12 st. 4 je do tada prenosio nadležnost za opšte akte na
+  // Gornje Kolo, čime je akt obarao sopstveni čl. 8 st. 2 („akt nižeg ranga ne može
+  // izmeniti ono što je uređeno aktom višeg ranga"). Jedini takav slučaj u setu.
+  "hijerarhija_4_4_6.md": {
+    sr: [
+      "Izmenu donosi Upravni odbor Fondacije",
+      "Opšte akte Fondacije, u smislu Statuta, u svim fazama donosi Upravni odbor",
+    ],
+    en: [
+      "The amendment is adopted by the Foundation's Management Board",
+      "are adopted in all phases by the Management Board",
+    ],
+    ru: [
+      "Само изменение принимает Правление Фонда",
+      "на всех этапах принимает Правление",
+    ],
   },
   // 4.4.1 — brojevi kolektivne nabavke žive i u kodu kao konstante (koeficijent
   // trošenja, niz 100/50/20, paritet 1:1, rokovi od tri dana). Traže se doslovno da
@@ -331,7 +388,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   },
   // 4.4.3 — upozorenje o pribavljanju POEN-a mimo sistema. Ekonomski deo (ne stiče
   // nivo, ne pomera koeficijent) je ono što zabranu iz Uslova čini samoodrživom.
-  "rizici_4_4_5.md": {
+  "rizici_4_4_6.md": {
     sr: [
       "ne pribavlja od drugih korisnika za novac",
       "ne pomera koeficijent evidencije",
@@ -350,6 +407,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // prag od 10.000.000). Ko ga sam izračuna dobija nalaz; ovako je izjava.
       "približno 24%",
       "krug osnivača je zatvoren i ne može se proširiti",
+      // 4.4.6 — glas u Gornjem Kolu nije pravo da Fondacija donese određeni akt.
+      "ne daje pravo da Fondacija donese određeni akt",
     ],
     en: [
       "not acquired from other users for money",
@@ -358,6 +417,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "no right to the Foundation's dinar funds",
       "create no property right of any ZRNO Holder",
       "operational contribution and other channels for recording contribution",
+      "does not confer a right that the Foundation adopt a particular act",
       "neither the party commissioning work nor the beneficiary of a performance",
       "approximately 24%",
       "the circle of founders is closed and cannot be expanded",
@@ -372,6 +432,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ни заказчиком работы, ни получателем исполнения",
       "примерно 24%",
       "круг учредителей закрыт и не может быть расширен",
+      "не даёт права на принятие Фондом определённого акта",
     ],
   },
   // Prihvatanje Politike NIJE pristanak za obrade čiji je osnov pristanak — bez te
@@ -540,11 +601,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
  * NEISTINITE IZJAVE i nigde ne stavlja verifikatora na tuđe mesto.
  */
 const UKINUTO: Record<string, RegExp[]> = {
-  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i],
-  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i],
-  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i],
-  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i],
-  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i],
+  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+ne\s+upravljačka/i],
+  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i, /executive,?\s+not\s+governance/i],
+  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i, /исполнительной,?\s+а\s+не\s+управленческой/i],
+  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+a\s+ne\s+upravljačka/i],
+  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i, /végrehajtói,?\s+nem\s+irányítói/i],
 };
 
 /** Napomene o izmeni namerno pominju ukinutu tablu — one se izuzimaju iz provere. */
@@ -661,7 +722,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_4_1.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_4_6.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });
