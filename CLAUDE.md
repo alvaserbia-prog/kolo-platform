@@ -95,6 +95,31 @@ tačan podatak.
 `messages/*.json` (`pravne.<doc>.ver` i `meta_<doc>_desc`) i spisak `AKTI` u
 `__tests__/pravni-dokumenti.test.ts`. Sve to samo za akt koji se menja.
 
+**AŽURIRANO 2026-09-09 (šesnaesti put):** na **4.4.5** idu **TRI akta** — Pravilnik
+o osnivačkom doprinosu (sa 4.4.1), Izjava o prihvatanju rizika (sa 4.4.4) i
+Whitepaper (sa 4.4.1). Ostalih četrnaest ostaje gde jeste. Povod je **analiza rizika
+R-08** (osnivački doprinos raste sa rastom sistema i optički je alokacija
+osnivačima). Sadržinski, vidi sekciju „Osnivački doprinos: udeo je objavljen, granica
+je obrazložena" ispod.
+
+🟡 **Whitepaper je prvi put bumpovan po novom pravilu.** Nije normativan akt, ali je
+dokument koji spoljni čitalac otvara prvi i **nosio je istu netačnu tvrdnju** kao
+čl. 8 osnivačkog pravilnika, pa je morao uz njega.
+
+🔴 **Zaostalo unakrsno upućivanje — svesno neispravljeno.** DPIA 4.4.3 u redu
+„Povezani dokumenti" navodi `Whitepaper (v4.4.1)`, a whitepaper je sada 4.4.5.
+Upućivanje NIJE ispravljeno: DPIA je objavljena 07.09.2026. i taj red opisuje stanje
+seta na dan donošenja, pa bi izmena učinila da objavljen fajl 4.4.3 govori nešto
+drugo nego kad je objavljen — tačno ono što pravilo bumpovanja sprečava. Isti
+postupak kao sa „Modul 4 aktiviran DPIA v4.3.0". 🟡 Cena je slomljen pokazivač: ko
+u DPIA potraži whitepaper v4.4.1 neće naći fajl. Ovo je **druga posledica pravila o
+bumpovanju samo izmenjenog akta** i ponoviće se pri svakom sledećem bumpu akta na
+koji neko upućuje; ako počne da smeta, rešenje je da upućivanja u zaglavljima
+prestanu da nose broj verzije, ne da se objavljeni fajlovi prepravljaju.
+
+Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`. DPIA i
+Registar radnji obrade sadržinski nisu dirani.
+
 **AŽURIRANO 2026-09-09 (petnaesti put):** na **4.4.4** idu **DVA akta** — Pravilnik
 o operativnom doprinosu (sa 4.4.1) i Izjava o prihvatanju rizika (sa 4.4.3).
 Ostalih petnaest ostaje gde jeste. Povod je **analiza rizika R-07** (operativni
@@ -920,6 +945,94 @@ uslugu odlukom koja utvrđuje obim i **dinarsku vrednost koju ta usluga ima za n
 isti obrt kao kod kolektivne nabavke, gde odluka utvrđuje parametar pre nego što druga
 strana kaže cenu; **(B)** isto što i roba (cenovnik + isprava). Odluka vlasnika se čeka;
 do tada za usluge važi isti režim kao za robu.
+
+### Osnivački doprinos: udeo je objavljen, granica je obrazložena (2026-09-09)
+
+Odluke uz analizu rizika **R-08** (osnivački doprinos od 2.400.000 POEN raste sa
+rastom sistema i optički je alokacija osnivačima). Izmenjeni `osnivacki_4_4_5.md`
+(čl. 4, 5, 8), `rizici_4_4_5.md` (čl. 4) i `whitepaper_4_4_5.md` (8.1) na svih pet
+jezika. Kod NIJE menjan — mehanika ostaje ista.
+
+🔴 **Aritmetički nalaz koji je pokrenuo sve ostalo.** Čl. 8 i whitepaper su tvrdili
+da „relativni uticaj osnivačkog doprinosa opada kako sistem raste". Ta tvrdnja je
+tačna za **jedan korak** prema ukupnom broju (pri 100.000 jedan korak je 24%
+ukupnog, pri 10.000.000 je 0,24%), ali **kumulativni udeo je druga veličina i on ne
+opada**. Pošto su i pragovi i korak fiksni, a POEN osnivača ulazi u ukupan broj
+(čl. 7 st. 3):
+
+| korak | organski POEN | ukupno | osnivači | udeo |
+|---:|---:|---:|---:|---:|
+| 1 | 100.000 | 124.000 | 24.000 | **19,4%** |
+| 10 | 784.000 | 1.024.000 | 240.000 | **23,4%** |
+| 100 | 7.624.000 | 10.024.000 | 2.400.000 | **23,94%** |
+
+Udeo **RASTE** sa 19,4% na 23,9% i tu ostaje. Akt je kao jedinu odbranu od prigovora
+„ovo je alokacija" nudio tvrdnju o veličini koja na taj prigovor ne odgovara.
+
+🔴 **Broj je OBJAVLJEN, ne opisan** (odluka vlasnika). Čl. 8, čl. 4 Izjave o rizicima
+i whitepaper 8.1 sada izričito kažu „između približno jedne petine i približno jedne
+četvrtine", a u trenutku zatvaranja kanala **približno 24%**. Razlog: izvodi se iz
+dva broja koja smo već objavili (2.400.000 i prag od 10.000.000), pa je pitanje samo
+ko ga prvi napiše — mi uz obrazloženje ili neko drugi kao nalaz. Zaključano testom na
+sr/en/ru. **Ne uklanjati brojku iz akata.**
+
+**Obrazloženje gornje granice (čl. 5) — formulacija vlasnika, filtrirana:**
+- 🟢 **Utrošak sopstvenih novčanih sredstava i sopstvenog vremena** pre postojanja
+  sistema. Ide doslovno.
+- 🔴 **Rad se nije mogao evidentirati kroz operativni kanal, i to je ARITMETIKA a ne
+  procena:** dnevni limit tog kanala je 10% ukupnog broja evidentiranih POEN-a
+  (operativni čl. 23; u kodu `Math.floor(opticaj * 0.1)`), pa je **pri opticaju nula
+  i limit nula**. Isto pogađa i rad u početnoj fazi dok je opticaj zanemarljiv. To je
+  najjači deo obrazloženja i nigde nije bio napisan.
+- 🟡 **Razlog o razblaživanju velikog imaoca je tačan ali JEDNOSTRAN.** Donacija koja
+  emituje 10.000.000 POEN daje jednom čoveku 100% zapisa bez kanala, a 80,6% sa
+  kanalom — razblaživanje jeste stvarno, ali se relativna težina prenosi **na
+  osnivače**, ne na zajednicu. Zato je u čl. 8 napisan samo u **činjeničnom i
+  ograničenom** obliku (kanal se evidentira baš kad ukupan broj zapisa raste,
+  uključujući rast od jednog velikog doprinosa; dejstvo je ograničeno gornjom
+  granicom i prestaje zatvaranjem kanala). **Ne pisati „da osnivači ne bi bili
+  prestignuti"** — to je gorivo za sam R-08.
+
+🔴 **ŠTA NAMERNO NE IDE U AKT** (odluka o formi, ne o sadržaju): vlasnikova
+formulacija da je osnivački doprinos **„poluga i motivacija osnivača"** i da „od
+osnivača najviše zavisi da li će sistem proraditi". To je **opis podsticaja**, a
+projekat to isto pravilo primenjuje već dvaput — kod ZRNA („uvažavanje ranijeg
+doprinosa" da, „ko ranije uđe zaradiće više" ne) i kod tabele donacija. Napisano u
+aktu, ta rečenica je najbolji citat protiv nas: potvrđuje da je kanal napravljen da
+osnivačima obezbedi položaj. Razlog stoji ovde kao zabeležena odluka, ne u normi.
+
+🔴 **Čl. 4 — rezultat osnivačkog rada ide u zajedničko dobro pod licencama iz Glave
+II** (AGPL-3.0 / CC BY-SA 4.0), Fondacija i osnivači ne stiču isključivo pravo, a
+licence se ne mogu zameniti restriktivnijim (čl. 50 Pravilnika). Ovo je **najjači
+odgovor na „alokacija osnivačima"**: osnivači drže ~24% jednog zapisa i **0% same
+stvari koju su napravili** — softver, protokol i dokumentacija poklonjeni su svima,
+neopozivo. Nijedan premine to nema i ne može da ima. Isti potez kao u operativnom
+doprinosu (čl. 27 st. 4, set 4.4.4).
+
+🔴 **Čl. 8 više ne obećava postupnost koju ne isporučuje.** Dodata je rečenica da
+kanal prati rast **kakav god da je njegov tempo** i da pravilnik **ne obećava** da će
+evidentiranje biti raspoređeno kroz duži period. Povod: donacija od 5.000.000 RSD
+emituje 10.000.000 POEN (Tabela A), a `proveriIEvidentirajKorak` pali korake u petlji
+nad **jednim snimkom** ukupnog POEN-a — svih 100 koraka prođe u istoj noći i kanal se
+zatvara. **Odluka vlasnika: to nije kvar nego mehanizam** — u slučaju velike donacije
+postupnog rasta ionako nema, rast je ekstreman, i tada kanal radi upravo ono zbog
+čega postoji. Akt je usklađen sa tim, umesto da obećava suprotno.
+
+🔴 **ODBIJENA MERA UZ R-08 (odluka vlasnika, 2026-09-09) — ne predlagati ponovo:**
+**najviše jedan korak po obračunskom periodu** (da jedna donacija ne može da isprazni
+kanal u jednoj noći). Odbijeno — tempo ostaje isti, iz razloga iz prethodnog pasusa.
+
+🟡 **Šta je ostalo neizmenjeno i zašto se ne dira:** mehanika (100 × 24.000, prag
+100.000, gornja granica 2.400.000), zatvoren krug osnivača (čl. 3), automatsko
+evidentiranje bez diskrecije (čl. 9), trajno zatvaranje (čl. 14, 15), isti prag i
+ista kapa od 1% pri upisu ZRNA za osnivača kao za svakoga (čl. 11) i puna javnost
+(čl. 16 — javna stranica zaista prikazuje pseudonime, udele i dnevnik koraka).
+**Materijal za odbranu je i pre ovoga postojao — nije bio sklopljen protiv pravog
+prigovora.**
+
+🟡 **Mere koje smanjuju položaj osnivača nisu ni predlagane** (niža granica,
+uslovljavanje koraka aktivnošću, otpis pri neaktivnosti) — uz R-03 je već zabeležena
+odluka istog reda, pa se ista polazna tačka primenjuje i ovde.
 
 ### Operativni doprinos: nema naručioca, nema naknade (2026-09-09)
 

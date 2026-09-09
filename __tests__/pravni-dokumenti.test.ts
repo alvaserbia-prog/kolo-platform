@@ -34,12 +34,12 @@ const AKTI = [
   "uslovi_koriscenja_4_4_3.md",
   "politika_4_4_2.md",
   "statut_4_1_0.md",
-  "whitepaper_4_4_1.md",
-  "rizici_4_4_4.md",
+  "whitepaper_4_4_5.md",
+  "rizici_4_4_5.md",
   "hijerarhija_4_4_1.md",
   "donacije_4_4_3.md",
   "operativni_4_4_4.md",
-  "osnivacki_4_4_1.md",
+  "osnivacki_4_4_5.md",
   "gornje_kolo_4_4_1.md",
   "programi_podrske_4_4_1.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
@@ -331,7 +331,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   },
   // 4.4.3 — upozorenje o pribavljanju POEN-a mimo sistema. Ekonomski deo (ne stiče
   // nivo, ne pomera koeficijent) je ono što zabranu iz Uslova čini samoodrživom.
-  "rizici_4_4_4.md": {
+  "rizici_4_4_5.md": {
     sr: [
       "ne pribavlja od drugih korisnika za novac",
       "ne pomera koeficijent evidencije",
@@ -345,6 +345,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // rizika iz čl. 10 važi samo za razmenu, a ne i za kanale evidentiranja.
       "operativnog doprinosa i drugih kanala evidentiranja doprinosa",
       "nije naručilac posla ni korisnik činidbe",
+      // 4.4.5 — udeo osnivačkog doprinosa je OBJAVLJEN brojem. Do tada ga nijedan
+      // akt nije pominjao, a izvodi se iz dva već objavljena broja (2.400.000 i
+      // prag od 10.000.000). Ko ga sam izračuna dobija nalaz; ovako je izjava.
+      "približno 24%",
+      "krug osnivača je zatvoren i ne može se proširiti",
     ],
     en: [
       "not acquired from other users for money",
@@ -354,6 +359,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "create no property right of any ZRNO Holder",
       "operational contribution and other channels for recording contribution",
       "neither the party commissioning work nor the beneficiary of a performance",
+      "approximately 24%",
+      "the circle of founders is closed and cannot be expanded",
     ],
     ru: [
       "не приобретается у других пользователей за деньги",
@@ -363,6 +370,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "не создают имущественного права ни одного держателя ЗРНО",
       "операционного вклада и иных каналов учёта вклада",
       "ни заказчиком работы, ни получателем исполнения",
+      "примерно 24%",
+      "круг учредителей закрыт и не может быть расширен",
     ],
   },
   // Prihvatanje Politike NIJE pristanak za obrade čiji je osnov pristanak — bez te
@@ -444,6 +453,43 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // a Fondacija ne naručuje i ne prima ništa. Rezultat ide u zajedničko dobro pod
   // licencama iz Glave II — to je ono što obara protivprimer „rad na
   // infrastrukturi Fondacije".
+  // 4.4.5 — osnov gornje granice (čl. 5) i ispravka tvrdnje o opadanju (čl. 8).
+  // 🔴 Do 4.4.5 je akt kao jedinu odbranu nudio tvrdnju da uticaj opada — tačnu za
+  // JEDAN korak, ali ne i za zbirni udeo, koji stoji na ~19–24% i blago RASTE.
+  // Test čuva i obrazloženje granice: bez njega je najveća alokacija u sistemu
+  // jedini krupan parametar bez ijedne rečenice razloga.
+  "osnivacki_4_4_5.md": {
+    sr: [
+      "Granica je mera doprinosa koji je prethodio sistemu",
+      "uložili sopstvena novčana sredstva i sopstveno vreme",
+      // Aritmetički razlog: dnevni limit operativnog kanala je 10% opticaja, pa je
+      // pri opticaju nula i limit nula. To je najjači deo obrazloženja.
+      "dok je taj broj nula, limit je takođe nula",
+      "je druga veličina i ona ne opada",
+      "približno 24%",
+      "kakav god da je njegov tempo",
+      // Rezultat osnivačkog rada je poklonjen svima — odgovor na „alokacija osnivačima".
+      "ulazi u zajedničko dobro pod licencama",
+    ],
+    en: [
+      "The limit is a measure of the contribution that preceded the system",
+      "invested their own monetary resources and their own time",
+      "while that number is zero, the limit is likewise zero",
+      "is a different quantity, and it does not decrease",
+      "approximately 24%",
+      "whatever its pace may be",
+      "enters the common good under the licences",
+    ],
+    ru: [
+      "Предел является мерой вклада, предшествовавшего системе",
+      "вложили в проектирование, создание и юридическую и организационную подготовку системы собственные денежные средства",
+      "пока это число равно нулю, лимит также равен нулю",
+      "иная величина, и она не убывает",
+      "примерно 24%",
+      "каким бы ни был его темп",
+      "поступает в общее благо под лицензиями",
+    ],
+  },
   "operativni_4_4_4.md": {
     sr: [
       "nema naručioca",

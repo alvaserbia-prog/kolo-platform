@@ -40,6 +40,8 @@ Promjena položaja nositelja ZRNA u obračunskom sustavu nije prinos i nije zaja
 
 Nositelj ZRNA nema pravo na dinarska sredstva Zaklade, ni neposredno ni posredno. Dinarska sredstva ulaze u Zakladu i ne ulaze u obračunski okvir sustava. Odluke o raspoređivanju dinarskih sredstava, uključujući projekte i kolektivne nabave, ne stvaraju imovinsko pravo nijednog nositelja ZRNA i ne daju mu udjel u imovini Zaklade. Prestankom svojstva nositelja ZRNA ne nastaje nikakvo potraživanje prema Zakladi.
 
+Osnivački se doprinos evidentira u zapisima zatvorenog kruga osoba, do gornje granice utvrđene Pravilnikom o osnivačkom doprinosu, u koracima vezanima uz rast ukupnog broja POEN-a. Zbirno evidentiran osnivački doprinos čini između približno jedne petine i približno jedne četvrtine ukupnog broja evidentiranih POEN-a, a u trenutku zatvaranja kanala približno 24%. Taj udjel ne nosi imovinsko pravo, ne predstavlja potraživanje prema Zakladi i ne daje pravo na njezina dinarska sredstva; krug osnivača je zatvoren i ne može se proširiti, a kanal se po dostizanju gornje granice zatvara trajno i neopozivo.
+
 ### Članak 5. — Nepovratnost donacija
 
 Dinarska sredstva koja korisnik daje Zakladi donacije su u smislu važećih propisa. Donacija je nepovratna, bez obzira na daljnji razvoj sustava.

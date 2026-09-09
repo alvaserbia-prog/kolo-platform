@@ -36,13 +36,21 @@ Osnivački rad obuhvata rad obavljen pre otvaranja platforme, a naročito: proje
 
 Osnivački rad je po svojoj prirodi operativni doprinos obavljen pre nego što je sistem postojao, pa nije mogao biti evidentiran u trenutku kad se odvijao.
 
+Rezultat osnivačkog rada — softver, protokol i dokumentacija sistema — ulazi u zajedničko dobro pod licencama iz Glave II Pravilnika o KOLO sistemu: softver pod licencom AGPL-3.0, sadržaj pod licencom CC BY-SA 4.0. Osnivači po osnovu tog rada ne stiču isključivo pravo na rezultat; rezultat je pod istim uslovima dostupan svim licima, a licence se ne mogu zameniti restriktivnijim (član 50 Pravilnika o KOLO sistemu).
+
 ## III — Gornja granica i koraci evidentiranja
 
 ### Član 5
 
-*Gornja granica*
+*Gornja granica i njen osnov*
 
 Gornja granica osnivačkog doprinosa iznosi 2.400.000 POEN-a. Ovo je ukupan maksimalan iznos koji Protokol može evidentirati kroz kanal osnivačkog doprinosa.
+
+Granica je mera doprinosa koji je prethodio sistemu. Osnivači su u projektovanje, izradu i pravnu i organizacionu pripremu sistema uložili sopstvena novčana sredstva i sopstveno vreme, u periodu u kome sistem nije postojao i u kome nijedan kanal evidentiranja nije radio.
+
+Taj doprinos se ne može evidentirati kroz kanal operativnog doprinosa. Dnevni limit tog kanala iznosi 10% ukupnog broja POEN-a evidentiranih u sistemu (član 23 Pravilnika o operativnom doprinosu); dok je taj broj nula, limit je takođe nula i kanal ne može evidentirati nijedan doprinos. Isto ograničenje pogađa i rad obavljen u početnoj fazi, dok je ukupan broj evidentiranih POEN-a još zanemarljiv.
+
+Granica je utvrđena unapred i ne može se povećati. Krug lica među koja se raspodeljuje zatvoren je članom 3 ovog pravilnika, a kanal se zatvara trajno i neopozivo u skladu sa članovima 14 i 15.
 
 ### Član 6
 
@@ -64,9 +72,15 @@ POEN-i evidentirani kroz osnivački doprinos ulaze u ukupan broj POEN-a evidenti
 
 ### Član 8
 
-*Dejstvo koraka na obračunski koeficijent*
+*Dejstvo na obračunski koeficijent i udeo u ukupnom broju POEN-a*
 
-Korak fiksnog iznosa dizajniran je tako da njegov relativni uticaj na obračunski koeficijent opada kako sistem raste. U ranoj fazi sistema, kada je ukupan broj POEN-a mali, korak od 24.000 POEN-a čini veći udeo u ukupnom broju. Kako sistem raste, isti apsolutni iznos čini sve manji udeo — pa najveći deo uticaja osnivačkog doprinosa pada u ranu fazu, pre aktivacije ZRNA, dok obračunski koeficijent još nema operativnu ulogu.
+Korak je fiksnog iznosa, pa uticaj jednog koraka na obračunski koeficijent opada kako sistem raste. U ranoj fazi sistema, kada je ukupan broj POEN-a mali, korak od 24.000 POEN-a čini veći udeo u ukupnom broju; kako sistem raste, isti apsolutni iznos čini sve manji udeo.
+
+Udeo zbirno evidentiranog osnivačkog doprinosa u ukupnom broju POEN-a je druga veličina i ona ne opada. Pošto su i pragovi i korak izraženi u fiksnim iznosima, a POEN evidentiran kroz ovaj kanal ulazi u ukupan broj (član 7 stav 3), zbirno evidentiran osnivački doprinos čini između približno jedne petine i približno jedne četvrtine ukupnog broja evidentiranih POEN-a kroz ceo vek kanala. U trenutku zatvaranja kanala taj udeo iznosi približno 24%.
+
+Kanal prati rast ukupnog broja POEN-a kakav god da je njegov tempo. Ako ukupan broj poraste naglo, koraci se evidentiraju istom brzinom kojom je rast nastupio; ovaj pravilnik ne obećava da će evidentiranje biti raspoređeno kroz duži period.
+
+Vezivanje za rast ukupnog broja POEN-a znači i da se osnivački doprinos evidentira upravo u trenucima kada ukupan broj zapisa raste, uključujući i rast koji potiče od jednog velikog pojedinačnog doprinosa. U takvom slučaju udeo jednog lica u ukupnom broju zapisa manji je nego što bi bio da kanal ne postoji. Ovo dejstvo ograničeno je gornjom granicom iz člana 5 i prestaje zatvaranjem kanala.
 
 ## IV — Mehanika evidentiranja
 

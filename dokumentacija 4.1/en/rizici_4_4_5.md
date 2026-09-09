@@ -40,6 +40,8 @@ A change in the position of a ZRNO Holder within the accounting system is not a 
 
 A ZRNO Holder has no right to the Foundation's dinar funds, whether directly or indirectly. Dinar funds enter the Foundation and do not enter the accounting framework of the system. Decisions on the allocation of dinar funds, including projects and collective procurements, create no property right of any ZRNO Holder and confer no share in the Foundation's assets. The cessation of the capacity of ZRNO Holder gives rise to no claim against the Foundation.
 
+Founding contribution is recorded in the records of a closed circle of persons, up to the upper limit established by the Rulebook on Founding Contribution, in steps tied to the growth of the total number of POEN. The aggregate recorded founding contribution constitutes between approximately one fifth and approximately one quarter of the total number of recorded POEN, and at the moment the channel closes approximately 24%. That share carries no property right, constitutes no claim against the Foundation, and confers no right to its dinar funds; the circle of founders is closed and cannot be expanded, and upon reaching the upper limit the channel closes permanently and irrevocably.
+
 ### Article 5 — Irrevocability of donations
 
 Dinar funds that the user gives to the Foundation are donations within the meaning of the applicable regulations. A donation is irrevocable, regardless of the further development of the system.

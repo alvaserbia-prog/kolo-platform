@@ -40,6 +40,8 @@ A ZRNO-tulajdonos elszámolási rendszerbeli helyzetének változása nem hozam,
 
 A ZRNO-tulajdonost nem illeti meg jog az Alapítvány dináreszközeire, sem közvetlenül, sem közvetve. A dináreszközök az Alapítványhoz kerülnek, és nem lépnek be a rendszer elszámolási keretébe. A dináreszközök elosztásáról szóló határozatok, ideértve a projekteket és a kollektív beszerzéseket, egyetlen ZRNO-tulajdonos számára sem keletkeztetnek vagyoni jogot, és nem biztosítanak részesedést az Alapítvány vagyonából. A ZRNO-tulajdonosi minőség megszűnésével semmilyen követelés nem keletkezik az Alapítvánnyal szemben.
 
+Az alapítói hozzájárulás egy zárt személyi kör bejegyzéseiben kerül nyilvántartásba, az alapítói hozzájárulásról szóló szabályzatban megállapított felső határig, a POEN-ek teljes számának növekedéséhez kötött lépésekben. Az összesítetten nyilvántartásba vett alapítói hozzájárulás a nyilvántartásba vett POEN-ek teljes számának megközelítőleg egyötöde és egynegyede közötti hányadát teszi ki, a csatorna lezárásának pillanatában pedig megközelítőleg 24%-át. E hányad nem hordoz vagyoni jogot, nem jelent követelést az Alapítvánnyal szemben, és nem biztosít jogot annak dináreszközeire; az alapítók köre zárt és nem bővíthető, a csatorna pedig a felső határ elérésével véglegesen és visszavonhatatlanul lezárul.
+
 ### 5. cikk — Az adományok visszavonhatatlansága
 
 Azok a dinárban nyújtott összegek, amelyeket a felhasználó az Alapítványnak ad, a hatályos jogszabályok értelmében adománynak minősülnek. Az adomány visszavonhatatlan, függetlenül a rendszer további fejlődésétől.

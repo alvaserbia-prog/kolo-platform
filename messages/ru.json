@@ -947,11 +947,11 @@
     },
     "rizici": {
       "naslov": "Заявление о принятии рисков",
-      "ver": "4.4.4"
+      "ver": "4.4.5"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.4.1"
+      "ver": "4.4.5"
     },
     "pravilnik": {
       "naslov": "Правила системы КОЛО",
@@ -985,9 +985,9 @@
     "meta_radnje_title": "Реестр операций обработки — КОЛО",
     "meta_radnje_desc": "Реестр операций обработки персональных данных, версия 4.4.2",
     "meta_rizici_title": "Заявление о принятии рисков — КОЛО",
-    "meta_rizici_desc": "Заявление о принятии рисков участия в системе КОЛО, версия 4.4.4",
+    "meta_rizici_desc": "Заявление о принятии рисков участия в системе КОЛО, версия 4.4.5",
     "meta_whitepaper_title": "Whitepaper — КОЛО",
-    "meta_whitepaper_desc": "KOLO Whitepaper, версия 4.4.1",
+    "meta_whitepaper_desc": "KOLO Whitepaper, версия 4.4.5",
     "meta_pravilnik_title": "Правила системы КОЛО — КОЛО",
     "meta_pravilnik_desc": "Указатель правил системы КОЛО, версия 4.4.1",
     "rb": {

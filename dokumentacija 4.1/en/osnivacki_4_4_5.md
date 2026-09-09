@@ -38,13 +38,21 @@ Founding work encompasses work performed before the platform was opened, in part
 
 Founding work is by its nature operational contribution performed before the system existed and therefore could not be recorded at the time it was carried out.
 
+The result of founding work — the software, the protocol, and the documentation of the system — enters the common good under the licences set out in Chapter II of the KOLO System Rulebook: software under the AGPL-3.0 licence, content under the CC BY-SA 4.0 licence. Founders acquire no exclusive right to that result on the basis of that work; the result is available to all persons on the same terms, and the licences cannot be replaced with more restrictive ones (Article 50 of the KOLO System Rulebook).
+
 ## III — Upper Limit and Recording Steps
 
 ### Article 5
 
-*Upper limit*
+*Upper limit and its basis*
 
 The upper limit of founding contribution is 2,400,000 POEN. This is the total maximum amount that the Protocol may record through the founding contribution channel.
+
+The limit is a measure of the contribution that preceded the system. The founders invested their own monetary resources and their own time in the design, construction, and legal and organisational preparation of the system, in a period in which the system did not exist and in which no recording channel was in operation.
+
+That contribution cannot be recorded through the operational contribution channel. The daily limit of that channel amounts to 10% of the total number of POEN recorded in the system (Article 23 of the Rulebook on Operational Contribution); while that number is zero, the limit is likewise zero and the channel can record no contribution at all. The same constraint affects work performed in the initial phase, while the total number of recorded POEN is still negligible.
+
+The limit is established in advance and cannot be increased. The circle of persons among whom it is distributed is closed by Article 3 of this Rulebook, and the channel closes permanently and irrevocably in accordance with Articles 14 and 15.
 
 ### Article 6
 
@@ -66,9 +74,15 @@ POEN recorded through founding contribution are included in the total number of 
 
 ### Article 8
 
-*Effect of a step on the accounting coefficient*
+*Effect on the accounting coefficient and share of the total number of POEN*
 
-The fixed-amount step is designed so that its relative impact on the accounting coefficient decreases as the system grows. In the early phase of the system, when the total number of POEN is small, a step of 24,000 POEN constitutes a larger share of the total. As the system grows, the same absolute amount represents an ever-smaller share — so the greatest part of the impact of founding contribution falls in the early phase, before ZRNO is activated, while the accounting coefficient does not yet play an operational role.
+The step is of a fixed amount, so the impact of a single step on the accounting coefficient decreases as the system grows. In the early phase of the system, when the total number of POEN is small, a step of 24,000 POEN constitutes a larger share of the total; as the system grows, the same absolute amount represents an ever-smaller share.
+
+The share of the aggregate recorded founding contribution in the total number of POEN is a different quantity, and it does not decrease. Since both the thresholds and the step are expressed in fixed amounts, and POEN recorded through this channel enters the total number (Article 7 paragraph 3), the aggregate founding contribution constitutes between approximately one fifth and approximately one quarter of the total number of recorded POEN throughout the entire life of the channel. At the moment the channel closes, that share amounts to approximately 24%.
+
+The channel follows the growth of the total number of POEN whatever its pace may be. If the total number grows abruptly, the steps are recorded at the same speed at which the growth occurred; this Rulebook does not promise that recording will be spread over a longer period.
+
+Tying recording to the growth of the total number of POEN also means that founding contribution is recorded precisely at the moments when the total number of records grows, including growth originating from a single large individual contribution. In such a case the share of a single person in the total number of records is smaller than it would be if the channel did not exist. This effect is bounded by the upper limit set out in Article 5 and ceases when the channel closes.
 
 ## IV — Recording Mechanics
 

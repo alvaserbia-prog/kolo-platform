@@ -41,9 +41,14 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
     fajl: "operativni_4_4_4.md",
     verzija: "4.4.4",
   },
+  // 4.4.5 — osnov gornje granice (čl. 5): utrošena sopstvena sredstva i vreme, uz
+  // aritmetički razlog zašto taj rad operativni kanal ne može da evidentira (limit
+  // je 10% opticaja, a opticaj je bio nula). Čl. 8 više ne tvrdi da udeo opada —
+  // opada uticaj JEDNOG koraka, a zbirni udeo stoji na ~19–24%. Čl. 4: rezultat
+  // ulazi u zajedničko dobro pod licencama iz Glave II.
   "osnivacki": {
-    fajl: "osnivacki_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "osnivacki_4_4_5.md",
+    verzija: "4.4.5",
   },
   "gornje-kolo": {
     fajl: "gornje_kolo_4_4_1.md",

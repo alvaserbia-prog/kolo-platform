@@ -947,11 +947,11 @@
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "4.4.4"
+      "ver": "4.4.5"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.4.1"
+      "ver": "4.4.5"
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
@@ -985,9 +985,9 @@
     "meta_radnje_title": "Register of Processing Activities — KOLO",
     "meta_radnje_desc": "Register of personal data processing activities, version 4.4.2",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.4.4",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.4.5",
     "meta_whitepaper_title": "Whitepaper — KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.1",
+    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.5",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
     "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.4.1",
     "rb": {

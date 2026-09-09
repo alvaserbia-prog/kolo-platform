@@ -947,11 +947,11 @@
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
-      "ver": "4.4.4"
+      "ver": "4.4.5"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.4.1"
+      "ver": "4.4.5"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
@@ -985,9 +985,9 @@
     "meta_radnje_title": "Registar radnji obrade · KOLO",
     "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.4.2",
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
-    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.4.4",
+    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.4.5",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.1",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.5",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
     "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.4.1",
     "rb": {

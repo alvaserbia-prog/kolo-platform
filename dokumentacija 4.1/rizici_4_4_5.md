@@ -38,6 +38,8 @@ Promena položaja nosioca ZRNA u obračunskom sistemu nije prinos i nije zagaran
 
 Nosilac ZRNA nema pravo na dinarska sredstva Fondacije, ni neposredno ni posredno. Dinarska sredstva ulaze u Fondaciju i ne ulaze u obračunski okvir sistema. Odluke o raspoređivanju dinarskih sredstava, uključujući projekte i kolektivne nabavke, ne stvaraju imovinsko pravo nijednog nosioca ZRNA i ne daju mu udeo u imovini Fondacije. Prestankom svojstva nosioca ZRNA ne nastaje nikakvo potraživanje prema Fondaciji.
 
+Osnivački doprinos evidentira se u zapisima zatvorenog kruga lica, do gornje granice utvrđene Pravilnikom o osnivačkom doprinosu, u koracima vezanim za rast ukupnog broja POEN-a. Zbirno evidentiran osnivački doprinos čini između približno jedne petine i približno jedne četvrtine ukupnog broja evidentiranih POEN-a, a u trenutku zatvaranja kanala približno 24%. Taj udeo ne nosi imovinsko pravo, ne predstavlja potraživanje prema Fondaciji i ne daje pravo na njena dinarska sredstva; krug osnivača je zatvoren i ne može se proširiti, a kanal se po dostizanju gornje granice zatvara trajno i neopozivo.
+
 ### Član 5 — Nepovratnost donacija
 
 Dinarska sredstva koja korisnik daje Fondaciji su donacije u smislu važećih propisa. Donacija je nepovratna, bez obzira na dalji razvoj sistema.

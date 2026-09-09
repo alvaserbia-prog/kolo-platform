@@ -38,13 +38,21 @@ Az alapítói munka a platform megnyitása előtt végzett munkát foglalja mag�
 
 Az alapítói munka természeténél fogva olyan operatív hozzájárulás, amelyet azelőtt végeztek, hogy a rendszer létezett volna, ezért nem lehetett nyilvántartásba venni akkor, amikor zajlott.
 
+Az alapítói munka eredménye — a rendszer szoftvere, protokollja és dokumentációja — a KOLO rendszerről szóló szabályzat II. fejezete szerinti licencek alatt kerül a közjóba: a szoftver az AGPL-3.0 licenc, a tartalom a CC BY-SA 4.0 licenc alatt. Az alapítók e munka alapján nem szereznek kizárólagos jogot az eredményre; az eredmény azonos feltételekkel minden személy számára hozzáférhető, és a licencek nem cserélhetők le korlátozóbbakra (a KOLO rendszerről szóló szabályzat 50. cikke).
+
 ## III — Felső határ és nyilvántartási lépések
 
 ### 5. cikk
 
-*Felső határ*
+*A felső határ és annak alapja*
 
 Az alapítói hozzájárulás felső határa 2.400.000 POEN. Ez az a teljes legnagyobb összeg, amelyet a Protokoll az alapítói hozzájárulás csatornáján nyilvántartásba vehet.
+
+A határ a rendszert megelőző hozzájárulás mértéke. Az alapítók a rendszer megtervezésébe, elkészítésébe, valamint jogi és szervezeti előkészítésébe saját pénzeszközeiket és saját idejüket fektették, olyan időszakban, amelyben a rendszer nem létezett és amelyben egyetlen nyilvántartási csatorna sem működött.
+
+Ez a hozzájárulás az operatív hozzájárulás csatornáján nem vehető nyilvántartásba. E csatorna napi korlátja a rendszerben nyilvántartásba vett POEN-ek teljes számának 10%-a (a működési hozzájárulásról szóló szabályzat 23. cikke); amíg ez a szám nulla, a korlát is nulla, és a csatorna semmilyen hozzájárulást nem tud nyilvántartásba venni. Ugyanez a korlátozás érinti a kezdeti szakaszban végzett munkát is, amíg a nyilvántartásba vett POEN-ek teljes száma még elhanyagolható.
+
+A határ előre megállapított és nem növelhető. Azon személyek köre, akik között felosztásra kerül, e szabályzat 3. cikkével zárt, a csatorna pedig a 14. és 15. cikknek megfelelően véglegesen és visszavonhatatlanul lezárul.
 
 ### 6. cikk
 
@@ -66,9 +74,15 @@ Az alapítói hozzájárulás csatornáján nyilvántartott POEN-ek beszámítan
 
 ### 8. cikk
 
-*A lépés hatása az elszámolási együtthatóra*
+*Hatás az elszámolási együtthatóra és részesedés a POEN-ek teljes számából*
 
-A fix összegű lépést úgy tervezték, hogy az elszámolási együtthatóra gyakorolt relatív hatása a rendszer növekedésével csökkenjen. A rendszer korai fázisában, amikor a POEN-ek teljes száma alacsony, a 24.000 POEN-es lépés nagyobb hányadot képvisel a teljes számban. Ahogy a rendszer növekszik, ugyanaz az abszolút összeg egyre kisebb hányadot tesz ki — így az alapítói hozzájárulás hatásának legnagyobb része a korai fázisra esik, a ZRNO aktiválása előtt, amikor az elszámolási együtthatónak még nincs operatív szerepe.
+A lépés fix összegű, ezért egyetlen lépésnek az elszámolási együtthatóra gyakorolt hatása a rendszer növekedésével csökken. A rendszer korai fázisában, amikor a POEN-ek teljes száma alacsony, a 24.000 POEN-es lépés nagyobb hányadot képvisel a teljes számban; ahogy a rendszer növekszik, ugyanaz az abszolút összeg egyre kisebb hányadot tesz ki.
+
+Az összesítetten nyilvántartásba vett alapítói hozzájárulásnak a POEN-ek teljes számában képviselt hányada ettől eltérő mennyiség, és az nem csökken. Mivel mind a küszöbök, mind a lépés fix összegben van kifejezve, és az e csatornán nyilvántartásba vett POEN beleszámít a teljes számba (7. cikk (3) bekezdés), az összesített alapítói hozzájárulás a csatorna teljes fennállása alatt a nyilvántartásba vett POEN-ek teljes számának megközelítőleg egyötöde és megközelítőleg egynegyede közötti hányadát teszi ki. A csatorna lezárásának pillanatában ez a hányad megközelítőleg 24%.
+
+A csatorna a POEN-ek teljes számának növekedését követi, bármilyen is legyen annak üteme. Ha a teljes szám hirtelen növekszik, a lépések ugyanolyan sebességgel kerülnek nyilvántartásba, amilyennel a növekedés bekövetkezett; e szabályzat nem ígéri, hogy a nyilvántartásba vétel hosszabb időszakra oszlik el.
+
+A POEN-ek teljes számának növekedéséhez kötés azt is jelenti, hogy az alapítói hozzájárulás éppen azokban a pillanatokban kerül nyilvántartásba, amikor a bejegyzések teljes száma növekszik, ideértve az egyetlen nagy egyedi hozzájárulásból eredő növekedést is. Ilyen esetben egyetlen személy részesedése a bejegyzések teljes számában kisebb, mint amekkora a csatorna hiányában lenne. E hatást az 5. cikk szerinti felső határ korlátozza, és a csatorna lezárásával megszűnik.
 
 ## IV — A nyilvántartás mechanikája
 
