@@ -248,7 +248,9 @@ I uz pseudonimnost, kombinacija iznosa, vremena i učestalosti transakcija može
 
 Platforma koristi nužne kolačiće koji su potrebni za funkcioniranje Platforme — prijava, održavanje sesije, sigurnosne postavke. Ti kolačići nisu podložni privoli jer su nužni za pružanje usluge.
 
-Platforma koristi i analitičke kolačiće radi mjerenja posjećenosti i razumijevanja načina korištenja Platforme: Google Analytics (Google Ireland Limited / Google LLC) i Vercel Analytics (Vercel Inc.). Ti se kolačići obrađuju na temelju privole korisnika (čl. 12. st. 1. t. 1. ZZPL-a), koja se daje prije postavljanja analitičkih kolačića i može se povući u svakom trenutku kroz postavke kolačića. Uskraćivanje ili povlačenje privole na analitičke kolačiće ne utječe na mogućnost korištenja Platforme. Podaci prikupljeni tim kolačićima mogu se prenositi izvršiteljima obrade u Sjedinjenim Američkim Državama (vidjeti članak 9.).
+Platforma koristi i analitičke kolačiće radi mjerenja posjećenosti i razumijevanja načina korištenja Platforme: Google Analytics (Google Ireland Limited / Google LLC). Ti se kolačići obrađuju na temelju privole korisnika (čl. 12. st. 1. t. 1. ZZPL-a), koja se daje prije postavljanja analitičkih kolačića i može se povući u svakom trenutku kroz postavke kolačića. Uskraćivanje ili povlačenje privole na analitičke kolačiće ne utječe na mogućnost korištenja Platforme. Podaci prikupljeni tim kolačićima mogu se prenositi izvršiteljima obrade u Sjedinjenim Američkim Državama (vidjeti članak 9.).
+
+Uz to Platforma mjeri posjećenost i bez kolačića, uslugom Vercel Analytics (Vercel Inc.). Ta usluga ne postavlja kolačiće, ne čita podatke s uređaja korisnika i ne prati korisnika između različitih stranica; obrađuje se samo zbirni broj posjeta pojedinih stranica. Osnova je legitimni interes Zaklade da zna koliko se Platforma koristi (čl. 12. st. 1. t. 6. ZZPL-a), a korisnik na tu obradu ima pravo prigovora po članku 13.
 
 ### Članak 8. — Primatelji podataka i izvršitelji obrade
 
@@ -258,21 +260,37 @@ Ako Zaklada angažira treće osobe za održavanje infrastrukture, te su osobe iz
 
 Podaci mogu biti dostupni sljedećim primateljima:
 
-Hosting i isporuka aplikacije — Vercel Inc. (Sjedinjene Američke Države) — isključivo u svrhu tehničkog funkcioniranja Platforme, na temelju ugovora o obradi podataka.
+Hosting i isporuka aplikacije — Vercel Inc. (društvo sa sjedištem u Sjedinjenim Američkim Državama; aplikacija se izvršava u Europskoj uniji, regija Frankfurt) — isključivo u svrhu tehničkog funkcioniranja Platforme, na temelju ugovora o obradi podataka.
 
-Baza podataka — Neon Inc. (Sjedinjene Američke Države) — čuvanje evidencijskih i identifikacijskih podataka, na temelju ugovora o obradi podataka.
+Baza podataka — Neon Inc. (društvo sa sjedištem u Sjedinjenim Američkim Državama; baza podataka nalazi se u Europskoj uniji, regija Frankfurt) — čuvanje evidencijskih i identifikacijskih podataka, na temelju ugovora o obradi podataka.
 
 Pohrana slika — Cloudflare, Inc. (usluga Cloudflare R2, Sjedinjene Američke Države) — čuvanje profilnih slika (avatara) i slika oglasa; u bazu se upisuje samo javna internetska adresa (URL) slike, a ne sama slika. Na temelju ugovora o obradi podataka.
 
-Email usluga — Resend, Inc. (Sjedinjene Američke Države) — isključivo za dostavu sustavnih obavijesti (primjerice poruke za ponovno postavljanje lozinke).
+Email usluga — Resend, Inc. (Sjedinjene Američke Države) — isključivo za dostavu sustavnih obavijesti (primjerice poruke za ponovno postavljanje lozinke). Obavijest o novoj poruci sadrži isječak te poruke, pa i taj isječak prolazi kroz ovu uslugu.
+
+Kanal upozorenja Zakladi — Telegram Messenger Inc. (Sjedinjene Američke Države) — isključivo radi obavještavanja Zaklade o događajima koji traže njezino postupanje. Upozorenje sadrži pseudonim i vrstu događaja; ne sadrži podatke unesene u prijavi na program podrške ni sadržaj poruka korisnika. Isto upozorenje ide i elektroničkom poštom.
+
+Mjerenje posjećenosti — Google Ireland Limited odnosno Google LLC (Sjedinjene Američke Države), isključivo po privoli korisnika, i Vercel Inc. bez kolačića (članak 7.).
+
+Obrada plaćanja platnom karticom — poslovna banka Zaklade i njezin posrednik za plaćanje na internetu (Republika Srbija) — kada korisnik donaciju izvršava platnom karticom. Podatke o platnoj kartici Zaklada ne prima i ne čuva.
 
 Nadležna državna tijela — kada je to zakonska obveza, uključujući Poreznu upravu, Upravu za sprječavanje pranja novca i druga tijela u skladu sa zakonom.
 
+Navedeni izvršitelji obrade za izvršavanje pojedinih radnji angažiraju vlastite podizvršitelje, prije svega pružatelje podatkovnih centara. Aktualne popise podizvršitelja objavljuju sami izvršitelji obrade na svojim internetskim stranicama.
+
 ### Članak 9. — Prijenos podataka izvan Srbije
 
-Budući da se infrastruktura Platforme (hosting, baza podataka, pohrana slika i email usluga iz članka 8.) nalazi kod pružatelja sa sjedištem u Sjedinjenim Američkim Državama, osobni podaci mogu biti preneseni i obrađivani u Sjedinjenim Američkim Državama.
+**Gdje se podaci nalaze.** Aplikacija se izvršava, a baza podataka nalazi se u Europskoj uniji, u regiji Frankfurt. Europska unija je na popisu država koje osiguravaju primjerenu razinu zaštite osobnih podataka, pa se na te podatke ne primjenjuju posebni uvjeti iz čl. 65.–69. ZZPL-a.
 
-Prijenos se obavlja uz primjenu odgovarajućih zaštitnih mjera u skladu s čl. 65.–69. ZZPL-a. Zaklada osigurava da prijenos podataka u treće zemlje bude utemeljen na primjerenoj razini zaštite — odlukom o primjerenosti, standardnim ugovornim klauzulama ili drugim odgovarajućim mjerama zaštite predviđenima zakonom. Sa svakim izvršiteljem obrade iz članka 8. sklapa se ugovor o obradi podataka koji sadrži takve mjere. Izbor pružatelja infrastrukture uzima u obzir lokaciju poslužitelja i primjenjiv pravni okvir za zaštitu podataka u jurisdikciji u kojoj se poslužitelji nalaze.
+Vercel Inc. i Neon Inc. društva su sa sjedištem u Sjedinjenim Američkim Državama. Zbog toga je moguć pristup podacima iz treće zemlje u administrativne i tehničke svrhe — podršku, održavanje i sustavne dnevnike.
+
+**Što se stvarno obrađuje u Sjedinjenim Američkim Državama:** slike koje korisnici postavljaju (Cloudflare R2), elektroničke poruke koje Platforma šalje, uključujući isječak nove poruke u obavijesti (Resend), upozorenja koja se šalju Zakladi (Telegram) i podaci za mjerenje posjećenosti (Google, isključivo po privoli).
+
+**Osnova prijenosa.** Sjedinjene Američke Države nisu na popisu država za koje je utvrđena primjerena razina zaštite. Zaklada zato podatke prenosi isključivo izvršitelju obrade s kojim je sklopljen ugovor o obradi podataka koji sadrži standardne ugovorne klauzule ili druge odgovarajuće mjere zaštite iz čl. 65. ZZPL-a. Izvršitelju obrade s kojim takav ugovor nije sklopljen podaci se ne prenose.
+
+**Provjera.** Zaklada čuva primjerak ugovora o obradi za svakog izvršitelja obrade iz članka 8. i najmanje jednom godišnje provjerava je li ugovor na snazi i je li se popis podizvršitelja promijenio.
+
+**Izbor pružatelja.** Pri izboru pružatelja infrastrukture Zaklada uzima u obzir lokaciju poslužitelja i primjenjiv pravni okvir za zaštitu podataka u jurisdikciji u kojoj se poslužitelji nalaze. Iz tog razloga aplikacija i baza podataka izvršavaju se u Europskoj uniji.
 
 ### Članak 10. — Rokovi čuvanja podataka
 

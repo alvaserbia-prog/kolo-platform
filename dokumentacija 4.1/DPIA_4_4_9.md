@@ -17,7 +17,7 @@
 | **Lice za zaštitu podataka (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
 | **Datum izrade** | 23.05.2026. (poslednja izmena 16.06.2026.) |
 | **Predmet procene** | KOLO sistem — Faza 1, aktivne radnje obrade br. 1–15, uključujući aktivirani Modul 3 (Socijalni programi sa verifikatorskom potvrdom), Nadzor integriteta sistema verifikacija, javnu listu donacija, nadzorni predmet, putanju doprinosa razmeni i **aktivirani Modul 4 — Deca (radnja br. 11)** |
-| **Povezani dokumenti** | Pravilnik o KOLO sistemu (v4.4.6), Politika privatnosti (v4.4.8), Registar radnji obrade (v4.4.8), Pravilnik o programima podrške (v4.4.1), Pravilnik o hijerarhiji akata (v4.4.6), Statut (v4.1), Whitepaper (v4.4.6) |
+| **Povezani dokumenti** | Pravilnik o KOLO sistemu (v4.4.6), Politika privatnosti (v4.4.9), Registar radnji obrade (v4.4.9), Pravilnik o programima podrške (v4.4.1), Pravilnik o hijerarhiji akata (v4.4.6), Statut (v4.1), Whitepaper (v4.4.6) |
 | **Sledeća revizija** | Pri izmeni mehanizma potvrde socijalnih programa, pri izmeni pravila dečjeg prostora, ili najkasnije 12 meseci od poslednje izmene |
 
 Ova procena uticaja na zaštitu podataka o ličnosti (u daljem tekstu: DPIA) izrađuje se u skladu sa čl. 54 Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL). DPIA se zasniva na odredbama Glave IX Pravilnika o KOLO sistemu (čl. 60–67), Politici privatnosti KOLO platforme i Registru radnji obrade podataka o ličnosti.
@@ -44,7 +44,7 @@ Treća dizajnerska odluka — minimizacija podataka. Platforma prikuplja samo po
 
 ## 2.3. Pregled radnji obrade
 
-Sistem u Fazi 1 obuhvata šesnaest radnji obrade definisanih Registrom radnji obrade (v4.4.8). Sve šesnaest radnji su aktivne. Radnja 16 obuhvata predlog za nabavku i učešće u kolektivnoj nabavci, uvedene članovima 14a i 51a Pravilnika o KOLO sistemu. Modul 3 (Socijalni programi) aktiviran je ranijom verzijom ove procene; radnja 13 obuhvata javnu listu donacija, radnja 14 nadzorni predmet uveden Pravilnikom o dokazu stvarnosti 4.2.1, a radnja 15 putanju doprinosa razmeni uvedenu članom 40b Pravilnika o KOLO sistemu. **Radnja 11 (Modul 4 — Deca) aktivira se ovom procenom**, uz Pravilnik o učešću dece.
+Sistem u Fazi 1 obuhvata šesnaest radnji obrade definisanih Registrom radnji obrade (v4.4.9). Sve šesnaest radnji su aktivne. Radnja 16 obuhvata predlog za nabavku i učešće u kolektivnoj nabavci, uvedene članovima 14a i 51a Pravilnika o KOLO sistemu. Modul 3 (Socijalni programi) aktiviran je ranijom verzijom ove procene; radnja 13 obuhvata javnu listu donacija, radnja 14 nadzorni predmet uveden Pravilnikom o dokazu stvarnosti 4.2.1, a radnja 15 putanju doprinosa razmeni uvedenu članom 40b Pravilnika o KOLO sistemu. **Radnja 11 (Modul 4 — Deca) aktivira se ovom procenom**, uz Pravilnik o učešću dece.
 
 | **Radnja** | **Naziv** | **Pravni osnov** | **Status** |
 | --- | --- | --- | --- |
@@ -64,7 +64,7 @@ Sistem u Fazi 1 obuhvata šesnaest radnji obrade definisanih Registrom radnji ob
 | Br. 14 | Nadzorni predmet (ishod nadzora verifikacije) | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2) | Aktivno |
 | Br. 15 | Upit povodom oglasa i putanja doprinosa razmeni | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2) | Aktivno |
 
-Detaljne kategorije podataka, kategorije lica, primaoci, rokovi čuvanja i mere zaštite za svaku radnju obrade utvrđeni su Registrom radnji obrade (v4.4.8) koji se primenjuje zajedno sa ovom procenom.
+Detaljne kategorije podataka, kategorije lica, primaoci, rokovi čuvanja i mere zaštite za svaku radnju obrade utvrđeni su Registrom radnji obrade (v4.4.9) koji se primenjuje zajedno sa ovom procenom.
 
 ## 2.4. Tok podataka
 
@@ -82,7 +82,9 @@ Oglas neverifikovanog korisnika sadrži podatke o ponuđenom dobru ili usluzi (n
 
 ## 2.5. Primaoci i obrađivači
 
-Infrastrukturu Protokola održavaju sledeći obrađivači u smislu čl. 45 ZZPL-a, svi sa sedištem u Sjedinjenim Američkim Državama i na osnovu ugovora o obradi: Vercel Inc. (hosting i isporuka aplikacije), Neon Inc. (baza podataka), Cloudflare, Inc. (skladište slika — servis Cloudflare R2; u bazu se upisuje samo URL slike) i Resend, Inc. (dostava sistemskih email poruka). Bankovna dokumentacija donacija ostaje kod Fondacije i, po potrebi, kod revizora. Pošto se obrađivači nalaze u SAD, vrši se prekogranični prenos podataka, koji se uređuje u skladu sa čl. 65–69 ZZPL-a i čl. 9 Politike privatnosti.
+Infrastrukturu Protokola održavaju sledeći obrađivači u smislu čl. 45 ZZPL-a, svi na osnovu ugovora o obradi: Vercel Inc. (hosting i isporuka aplikacije), Neon Inc. (baza podataka), Cloudflare, Inc. (skladište slika — servis Cloudflare R2; u bazu se upisuje samo URL slike), Resend, Inc. (dostava sistemskih email poruka) i Telegram Messenger Inc. (kanal upozorenja Fondaciji). Uz njih, po pristanku korisnika, Google Ireland Limited odnosno Google LLC obrađuje podatke o posećenosti. Bankovna dokumentacija donacija ostaje kod Fondacije i, po potrebi, kod revizora; kartično plaćanje donacije obrađuje poslovna banka Fondacije i njen posrednik za plaćanje na internetu, oba u Republici Srbiji.
+
+Vercel Inc. i Neon Inc. su društva iz SAD, ali se **aplikacija izvršava i baza podataka nalazi u Evropskoj uniji, u regionu Frankfurt**. Evropska unija obezbeđuje primereni nivo zaštite, pa za te podatke ne postoji prekogranični prenos u smislu čl. 65–69 ZZPL-a; ostaje mogućnost pristupa iz SAD u administrativne i tehničke svrhe. Prekogranični prenos stvarno se vrši za slike (Cloudflare R2), elektronsku poštu koju Platforma šalje (Resend), upozorenja Fondaciji (Telegram) i merenje posećenosti (Google), i uređuje se u skladu sa čl. 65–69 ZZPL-a i čl. 9 Politike privatnosti.
 
 ## 3. Procena neophodnosti i srazmernosti
 
@@ -123,7 +125,7 @@ Rizici se procenjuju prema matrici verovatnoća × ozbiljnost, pri čemu se nivo
 | R5 — Javna vidljivost oglasa neverifikovanog korisnika | 2 | 2 | 4 | Oglas je javno vidljiv i indeksira se. Sadržaj bira korisnik; identifikujući podaci se ne traže. Mere: sadržinski minimum umesto ličnih podataka, broj telefona nije javan, najviše tri aktivna oglasa, uklanjanje u svakom trenutku. |
 | R6 — Greške u automatizovanom odlučivanju | 1 | 3 | 3 | Pogrešan obračun POEN-a može uticati na položaj korisnika. Mere: javna deterministička formula, pravo na objašnjenje i prigovor, ljudski uvid. |
 | R7 — Neovlašćeno korišćenje tehničkih logova | 1 | 2 | 2 | Logovi sadrže IP adrese i podatke o uređaju. Mere: pristup ograničen na DPO i administratore bezbednosti, rok čuvanja 12 meseci, TLS, zaštićen format. |
-| R8 — Prekogranični prenos podataka | 2 | 3 | 6 | Ako se koriste serveri van Republike Srbije. Mere: izbor provajdera uzima u obzir lokaciju servera, primena čl. 65–69 ZZPL-a, odluka o adekvatnosti ili odgovarajuće mere zaštite. |
+| R8 — Prekogranični prenos podataka | 1 | 3 | 3 | Deo obrade se odvija van Republike Srbije. Mere, sve sprovedene: aplikacija i baza podataka se izvršavaju u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite, pa najveći deo podataka uopšte ne izlazi iz tog kruga; u treću zemlju odlaze samo slike, elektronska pošta koju Platforma šalje, upozorenja Fondaciji i podaci o posećenosti; upozorenje Fondaciji ne sadrži podatke iz prijave na program podrške; podaci se prenose isključivo obrađivaču sa kojim je zaključen ugovor o obradi sa merama zaštite iz čl. 65 ZZPL-a; Fondacija čuva primerak svakog takvog ugovora i najmanje jednom godišnje proverava da li je na snazi i da li se spisak podobrađivača promenio. Vidi tačku 5.13. |
 | R9 — Povreda podataka o donacijama | 1 | 3 | 3 | Bankovna dokumentacija čuva se direktno u Fondaciji. Mere: fizička i logička zaštita, kontrola pristupa, razdvojeno čuvanje od podataka platforme. |
 | R10 — Narušavanje integriteta evidencije | 1 | 4 | 4 | Retroaktivna promena zapisa bi ugrozila zajedničko dobro. Mere: zero-sum invarijanta (zbir svih stanja jednak nuli) sa automatskom proverom, atomaran upis promena, vremensko označavanje zapisa, revizijski dnevnik administrativnih radnji i redovne provere konzistentnosti. |
 | R11 — Otkrivanje pripadnosti posebnoj kategoriji verifikatorima | 2 | 3 | 6 | U postupku potvrde socijalnog programa verifikatori podnosioca saznaju da se prijavio za određeni program, što može ukazati na posebnu kategoriju (npr. invaliditet, status roditelja). Mere: postupak se pokreće isključivo uz izričit pristanak; krug primalaca ograničen je na sopstvene verifikatore podnosioca, lica koja ga već lično poznaju; verifikatorima se ne prikazuje sadržaj prijave (datumi rođenja dece, rešenje, dob); obaveštavanje isključivo u platformi (in-app), bez spoljnih kanala; mogućnost povlačenja pristanka u svakom trenutku. |
@@ -186,9 +188,13 @@ Minimizacija — jedini nov podatak je činjenica upita (koji korisnik se javio 
 
 **Minimizacija predloga** — predlog za nabavku sadrži samo naziv dobra; količina, cena, obrazloženje i bilo koji drugi podatak se ne traže. **Zbirna objava** — registar predloga objavljuje se bez pseudonima; pojedinačni predlog se ne objavljuje. **Bez dokazivanja statusa** — kriterijumi učešća se ne postavljaju, pa se ne prikupljaju isprave ni izjave o delatnosti, imovini ili prilikama korisnika. **Bez novog prikupljanja** — broj POEN-a po kome se utvrđuje red očitava se iz radnje br. 4. **Dobavljač ne dobija podatke o ličnosti** — dostavlja mu se isključivo spisak kodova za preuzimanje. **Suženo objavljivanje ishoda** — uz spisak onih koji su preuzeli deo objavljuju se pseudonim i mesto u redu, ali ne i broj POEN-a u zapisu. **Bez automatizovanog odlučivanja** — utvrđivanje reda je primena javno objavljenih pravila i ne proizvodi posledice po status korisnika (čl. 38 ZZPL-a), uz izričito pravo na prigovor o kome odlučuje čovek. **Brisanje** — predlog se briše izborom drugog naziva, uklanjanjem, sprovođenjem nabavke tog naziva i najkasnije po isteku dvanaest meseci.
 
+## 5.13. Mere za prekogranični prenos
+
+**Obrada u Evropskoj uniji** — aplikacija se izvršava i baza podataka se nalazi u regionu Frankfurt. Time evidencija Protokola, podaci iz prijava na programe podrške, poruke između korisnika i podaci maloletnih korisnika ostaju u krugu sa primerenim nivoom zaštite. **Uzak obim onoga što izlazi** — u treću zemlju odlaze samo slike koje korisnici postavljaju, elektronska pošta koju Platforma šalje, upozorenja koja se šalju Fondaciji i podaci o posećenosti. **Kanal upozorenja je sveden na najmanju meru** — upozorenje Fondaciji sadrži pseudonim i vrstu događaja, a ne sadrži podatke unete u prijavi na program podrške ni sadržaj poruka korisnika. **Ugovor kao uslov prenosa** — podaci se prenose isključivo obrađivaču sa kojim je zaključen ugovor o obradi koji sadrži standardne ugovorne klauzule ili druge mere zaštite iz čl. 65 ZZPL-a. **Godišnja provera** — Fondacija čuva primerak svakog takvog ugovora i najmanje jednom godišnje proverava da li je na snazi i da li se spisak podobrađivača promenio. **Merenje posećenosti po pristanku** — Google Analytics se ne učitava dok korisnik ne pristane, a merenje bez kolačića ne postavlja kolačiće i ne prati korisnika između sajtova.
+
 ## 5.8. Rezidualni rizik
 
-Nakon primene svih navedenih mera, rezidualni rizik se ocenjuje kao prihvatljiv. Najviši rezidualni rizici su R1 (neovlašćen pristup), R2 (reidentifikacija), R8 (prekogranični prenos), R11 (otkrivanje pripadnosti posebnoj kategoriji verifikatorima), R13 (deanonimizacija donatora kroz javnu listu donacija) i R16 (dečji prostor), svi na srednjem nivou (5–8). Rizik R5 (javna vidljivost oglasa) ukidanjem table i sužavanjem obrade pada na nizak nivo (4). Ovi rizici se dodatno umanjuju kontinuiranim nadzorom, redovnim testiranjem i ažuriranjem mera.
+Nakon primene svih navedenih mera, rezidualni rizik se ocenjuje kao prihvatljiv. Najviši rezidualni rizici su R1 (neovlašćen pristup), R2 (reidentifikacija), R11 (otkrivanje pripadnosti posebnoj kategoriji verifikatorima), R13 (deanonimizacija donatora kroz javnu listu donacija) i R16 (dečji prostor), svi na srednjem nivou (5–8). Rizik R8 (prekogranični prenos) pada na nizak nivo (3) time što se aplikacija i baza podataka izvršavaju u Evropskoj uniji, pa najveći deo podataka uopšte ne izlazi iz kruga sa primerenim nivoom zaštite. Rizik R5 (javna vidljivost oglasa) ukidanjem table i sužavanjem obrade pada na nizak nivo (4). Ovi rizici se dodatno umanjuju kontinuiranim nadzorom, redovnim testiranjem i ažuriranjem mera.
 
 ## 6. Prava lica na koja se podaci odnose
 
@@ -247,7 +253,7 @@ Dodatni rizici: maloletna lica su posebno ranjiva kategorija; graf prijateljstav
 
 Na osnovu sprovedene procene:
 
-Identifikovano je sedamnaest rizika po prava i slobode lica na koja se podaci odnose. Nijedan rizik nije ocenjen kao visok. Šest rizika je na srednjem nivou (R1, R2, R8, R11, R13, R16), a jedanaest na niskom (R3, R4, R5, R6, R7, R9, R10, R12, R14, R15, R17).
+Identifikovano je sedamnaest rizika po prava i slobode lica na koja se podaci odnose. Nijedan rizik nije ocenjen kao visok. Pet rizika je na srednjem nivou (R1, R2, R11, R13, R16), a dvanaest na niskom (R3, R4, R5, R6, R7, R8, R9, R10, R12, R14, R15, R17).
 
 Za svaki identifikovani rizik primenjene su odgovarajuće tehničke i organizacione mere zaštite. Rezidualni rizik nakon primene mera ocenjuje se kao prihvatljiv.
 

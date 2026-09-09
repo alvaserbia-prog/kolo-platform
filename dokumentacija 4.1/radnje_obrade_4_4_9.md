@@ -1,6 +1,6 @@
 # Registar radnji obrade podataka o ličnosti
 
-*Ovaj registar donosi se na osnovu čl. 47 Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL), čl. 62 i 63 Pravilnika o KOLO sistemu (verzija 4.4.6) i čl. 9 Pravilnika o hijerarhiji akata KOLO sistema. Primenjuje se zajedno sa Politikom privatnosti KOLO platforme (verzija 4.4.8) i Pravilnikom o programima podrške (verzija 4.4.1).*
+*Ovaj registar donosi se na osnovu čl. 47 Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL), čl. 62 i 63 Pravilnika o KOLO sistemu (verzija 4.4.6) i čl. 9 Pravilnika o hijerarhiji akata KOLO sistema. Primenjuje se zajedno sa Politikom privatnosti KOLO platforme (verzija 4.4.9) i Pravilnikom o programima podrške (verzija 4.4.1).*
 
 **PODACI O RUKOVAOCU**
 
@@ -19,8 +19,8 @@
 | **Kategorije lica** | Korisnici KOLO platforme. |
 | **Kategorije podataka** | Pseudonim (korisničko ime), email adresa, lozinka (čuva se isključivo u hashovanom obliku), datum pristupanja sistemu. |
 | **Pravni osnov** | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2 ZZPL-a) — korisnik pristupanjem sistemu prihvata pravila korišćenja. |
-| **Primaoci / obrađivači** | Vercel Inc. (hosting) i Neon Inc. (baza podataka), Sjedinjene Američke Države, na osnovu ugovora o obradi u skladu sa zakonom. |
-| **Prenos u treću zemlju** | Da — obrađivači infrastrukture nalaze se u SAD (videti čl. 9 Politike privatnosti). |
+| **Primaoci / obrađivači** | Vercel Inc. (hosting, izvršavanje u Evropskoj uniji) i Neon Inc. (baza podataka, region u Evropskoj uniji), na osnovu ugovora o obradi u skladu sa zakonom. |
+| **Prenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite. Vercel Inc. i Neon Inc. su društva iz SAD, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mere iz čl. 9 Politike privatnosti. |
 | **Rok čuvanja** | Dok korisnički nalog ostaje aktivan. Po prestanku statusa, email adresa se briše, a preostali podaci se anonimizuju u skladu sa čl. 34 Pravilnika i čl. 11 Politike privatnosti. |
 | **Mere zaštite** | Hashiranje lozinke, TLS enkripcija u prenosu (min. verzija 1.2), enkripcija u mirovanju na nivou hosting infrastrukture, kontrola pristupa po principu minimalne neophodnosti, višefaktorska autentifikacija za administrativni pristup. |
 
@@ -31,8 +31,8 @@
 | **Kategorije lica** | Korisnici platforme koji prolaze postupak verifikacije. |
 | **Kategorije podataka** | Graf verifikacija (evidencija ko je koga verifikovao, u pseudonimnom obliku), indeks stvarnosti (numerička vrednost stepena verifikovanosti), verifikacioni zapisi (pseudonim verifikatora, redni broj verifikacije, pseudonim verifikovanog, vremenski žig, pseudonim nadzornika). |
 | **Pravni osnov** | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2 ZZPL-a). |
-| **Primaoci / obrađivači** | Vercel Inc. (hosting) i Neon Inc. (baza podataka), Sjedinjene Američke Države, na osnovu ugovora o obradi. |
-| **Prenos u treću zemlju** | Da — obrađivači infrastrukture nalaze se u SAD (videti čl. 9 Politike privatnosti). |
+| **Primaoci / obrađivači** | Vercel Inc. (hosting, izvršavanje u Evropskoj uniji) i Neon Inc. (baza podataka, region u Evropskoj uniji), na osnovu ugovora o obradi. |
+| **Prenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite. Vercel Inc. i Neon Inc. su društva iz SAD, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mere iz čl. 9 Politike privatnosti. |
 | **Rok čuvanja** | Dok korisnički nalog ostaje aktivan. Po prestanku statusa, veze u grafu verifikacija se anonimizuju; zapisi koji ostaju pod identifikatorom koji ne omogućava identifikaciju prestaju da budu lični podaci u smislu ZZPL-a. |
 | **Mere zaštite** | Pseudonimizacija, razdvajanje identifikacionih od obračunskih podataka, TLS enkripcija, enkripcija u mirovanju, kontrola pristupa. |
 | **Napomena** | Graf verifikacija, čak i u pseudonimnom obliku, predstavlja obradu podataka o ličnosti u smislu ZZPL-a. |
@@ -44,8 +44,8 @@
 | **Kategorije lica** | Korisnici platforme koji dobrovoljno unesu dodatne podatke. |
 | **Kategorije podataka** | Ime i prezime, broj telefona, adresa, drugi kontakt podaci, profilna slika (avatar) i opis, slike priložene uz oglase. |
 | **Pravni osnov** | Pristanak korisnika (čl. 12 st. 1 t. 1 ZZPL-a). Pristanak je dobrovoljan i može se povući u svakom trenutku. Unošenje ovih podataka nije uslov za dokaz stvarnosti niti za pristup funkcijama sistema. |
-| **Primaoci / obrađivači** | Vercel Inc. (hosting) i Neon Inc. (baza podataka), Sjedinjene Američke Države, na osnovu ugovora o obradi. Slike (avatar i slike oglasa) čuvaju se kod obrađivača Cloudflare, Inc. (servis Cloudflare R2, SAD); u bazu se upisuje samo internet-adresa (URL) slike. Podaci koje korisnik odabere da budu vidljivi (ime, prezime, telefon) dostupni su verifikovanim korisnicima platforme. |
-| **Prenos u treću zemlju** | Da — obrađivači infrastrukture nalaze se u SAD (videti čl. 9 Politike privatnosti). |
+| **Primaoci / obrađivači** | Vercel Inc. (hosting, izvršavanje u Evropskoj uniji) i Neon Inc. (baza podataka, region u Evropskoj uniji), na osnovu ugovora o obradi. Slike (avatar i slike oglasa) čuvaju se kod obrađivača Cloudflare, Inc. (servis Cloudflare R2, SAD); u bazu se upisuje samo internet-adresa (URL) slike. Podaci koje korisnik odabere da budu vidljivi (ime, prezime, telefon) dostupni su verifikovanim korisnicima platforme. |
+| **Prenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite. Vercel Inc. i Neon Inc. su društva iz SAD, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mere iz čl. 9 Politike privatnosti. |
 | **Rok čuvanja** | Do povlačenja pristanka ili brisanja od strane korisnika. Po prestanku statusa korisnika, brišu se u celosti. |
 | **Mere zaštite** | TLS enkripcija, enkripcija u mirovanju, kontrola pristupa, mogućnost brisanja u svakom trenutku od strane korisnika. |
 
@@ -56,8 +56,8 @@
 | **Kategorije lica** | Korisnici platforme koji učestvuju u razmenama i doprinosima. |
 | **Kategorije podataka** | Iznos ažuriranja evidencije POEN-a, vreme ažuriranja, pseudonimi strana u evidentiranoj razmeni. |
 | **Pravni osnov** | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2 ZZPL-a) dok korisnik učestvuje u sistemu. Nakon prestanka statusa i anonimizacije, zapisi prestaju da budu lični podaci. |
-| **Primaoci / obrađivači** | Vercel Inc. (hosting) i Neon Inc. (baza podataka), Sjedinjene Američke Države, na osnovu ugovora o obradi. Evidencija je javna u pseudonimnom obliku — verifikovani korisnici mogu videti iznose, vremenske oznake i pseudonime strana. |
-| **Prenos u treću zemlju** | Da — obrađivači infrastrukture nalaze se u SAD (videti čl. 9 Politike privatnosti). |
+| **Primaoci / obrađivači** | Vercel Inc. (hosting, izvršavanje u Evropskoj uniji) i Neon Inc. (baza podataka, region u Evropskoj uniji), na osnovu ugovora o obradi. Evidencija je javna u pseudonimnom obliku — verifikovani korisnici mogu videti iznose, vremenske oznake i pseudonime strana. |
+| **Prenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite. Vercel Inc. i Neon Inc. su društva iz SAD, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mere iz čl. 9 Politike privatnosti. |
 | **Rok čuvanja** | 10 godina od nastanka, u skladu sa poreskim i računovodstvenim propisima, u pseudonimnom obliku. Po prestanku statusa korisnika, identifikacioni podaci se brišu, a numerička istorija se zadržava pod identifikatorom koji ne omogućava identifikaciju. |
 | **Mere zaštite** | Pseudonimizacija, integritet evidencije (zero-sum invarijanta sa automatskom proverom, atomaran upis i vremensko označavanje zapisa), TLS enkripcija, enkripcija u mirovanju na nivou hosting infrastrukture. |
 
@@ -68,8 +68,8 @@
 | **Kategorije lica** | Donatori — fizička lica koja doniraju sredstva Fondaciji. |
 | **Kategorije podataka** | Iznos donacije, datum donacije, identitet donatora (obezbeđuje se kroz bankovni sistem — Fondacija prima donacije sa verifikovanih bankovnih računa). |
 | **Pravni osnov** | Zakonska obaveza (čl. 12 st. 1 t. 3 ZZPL-a). |
-| **Primaoci / obrađivači** | Fondacija (čuva podatke direktno), bankarska institucija, revizor (ako je primenjivo). |
-| **Prenos u treću zemlju** | Ne — bankovna dokumentacija se čuva u okviru Fondacije. |
+| **Primaoci / obrađivači** | Fondacija (čuva podatke direktno), bankarska institucija, revizor (ako je primenjivo). Zapis o donaciji, sa imenom donatora i tekstom ugovora, čuva se u bazi podataka Platforme kod Neon Inc.; pri plaćanju platnom karticom u obradi učestvuju i poslovna banka Fondacije i njen posrednik za plaćanje na internetu (Republika Srbija). |
+| **Prenos u treću zemlju** | Ne — bankovna dokumentacija se čuva u okviru Fondacije, a zapis o donaciji u bazi podataka u Evropskoj uniji (region Frankfurt). Kartično plaćanje se obrađuje u Republici Srbiji. |
 | **Rok čuvanja** | 10 godina od nastanka, u skladu sa Zakonom o računovodstvu i poreskim propisima. Korisnik nema pravo da zahteva brisanje pre isteka zakonskog roka. |
 | **Mere zaštite** | Fizička i logička zaštita dokumentacije, kontrola pristupa, razdvojeno čuvanje od podataka platforme. |
 
@@ -93,10 +93,11 @@
 | **Kategorije lica** | Svi korisnici i posetioci platforme. |
 | **Kategorije podataka** | IP adresa, podaci o uređaju i pretraživaču, vreme i datum pristupa, evidencija pristupa (ko je pristupio, kad, kojim podacima, sa kog uređaja). |
 | **Pravni osnov** | Legitimni interes (čl. 12 st. 1 t. 6 ZZPL-a). |
-| **Primaoci / obrađivači** | Vercel Inc. (hosting) i Neon Inc. (baza podataka), Sjedinjene Američke Države, na osnovu ugovora o obradi. |
-| **Prenos u treću zemlju** | Da — obrađivači infrastrukture nalaze se u SAD (videti čl. 9 Politike privatnosti). |
+| **Primaoci / obrađivači** | Vercel Inc. (hosting, izvršavanje u Evropskoj uniji) i Neon Inc. (baza podataka, region u Evropskoj uniji), na osnovu ugovora o obradi. |
+| **Prenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite. Vercel Inc. i Neon Inc. su društva iz SAD, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mere iz čl. 9 Politike privatnosti. |
 | **Rok čuvanja** | 12 meseci. |
 | **Mere zaštite** | Administrativne radnje i otkrivanje kontakt podataka beleže se u revizijskom dnevniku, kontrola pristupa ograničena na lice za zaštitu podataka i administratore bezbednosti, TLS enkripcija. |
+| **Merenje posećenosti** | Google Analytics (Google Ireland Limited odnosno Google LLC, Sjedinjene Američke Države) — isključivo po pristanku korisnika (čl. 12 st. 1 t. 1 ZZPL-a), kolačić se ne postavlja pre pristanka; merenje bez kolačića (Vercel Inc.) po legitimnom interesu, bez praćenja između sajtova. Za Google se vrši prenos u treću zemlju uz mere iz čl. 9 Politike privatnosti. |
 
 **Radnja obrade br. 8 — Automatizovano odlučivanje**
 
@@ -105,8 +106,8 @@
 | **Kategorije lica** | Korisnici platforme. |
 | **Kategorije podataka** | Podaci o doprinosima, parametri obračunskog okvira, podaci o pripadnosti kvalifikovanim grupama (po aktiviranju Modula 3). |
 | **Pravni osnov** | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2 ZZPL-a); za socijalne programe — izričit pristanak (čl. 17 st. 2 t. 1 ZZPL-a). |
-| **Primaoci / obrađivači** | Vercel Inc. (hosting) i Neon Inc. (baza podataka), Sjedinjene Američke Države, na osnovu ugovora o obradi. |
-| **Prenos u treću zemlju** | Da — obrađivači infrastrukture nalaze se u SAD (videti čl. 9 Politike privatnosti). |
+| **Primaoci / obrađivači** | Vercel Inc. (hosting, izvršavanje u Evropskoj uniji) i Neon Inc. (baza podataka, region u Evropskoj uniji), na osnovu ugovora o obradi. |
+| **Prenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite. Vercel Inc. i Neon Inc. su društva iz SAD, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mere iz čl. 9 Politike privatnosti. |
 | **Rok čuvanja** | Kao za radnju obrade br. 4 (10 godina). |
 | **Mere zaštite** | Deterministički definisana javna formula za obračunski koeficijent, pravo korisnika na objašnjenje logike, ljudski uvid i prigovor (čl. 38 ZZPL-a). |
 | **Napomena** | Ove automatizovane obrade mogu pravno ili značajno uticati na lice u smislu čl. 38 ZZPL-a. |
@@ -118,8 +119,8 @@
 | **Kategorije lica** | Neverifikovani korisnici platforme koji postavljaju oglas kojim nude dobro ili uslugu. |
 | **Kategorije podataka** | Pseudonim oglašivača, naslov i opis dobra ili usluge, kategorija, cena, mesto (naselje iz šifarnika), fotografije koje korisnik sam prilaže i, po sopstvenom izboru, broj telefona. |
 | **Pravni osnov** | Pristanak korisnika (čl. 12 st. 1 t. 1 ZZPL-a), dat objavom oglasa, uz upozorenje da je oglas javno vidljiv. Pristanak je dobrovoljan i može se povući u svakom trenutku uklanjanjem oglasa, bez posledica po status korisnika u sistemu. |
-| **Primaoci / obrađivači** | Vercel Inc. (hosting), Neon Inc. (baza podataka) i Cloudflare Inc. (skladište fotografija), Sjedinjene Američke Države, na osnovu ugovora o obradi. Oglas je javno dostupan svim posetiocima platforme, uključujući neprijavljena lica, i indeksira se od strane pretraživača. Broj telefona oglašivača dostupan je isključivo verifikovanim korisnicima. |
-| **Prenos u treću zemlju** | Da — obrađivači infrastrukture nalaze se u SAD (videti čl. 9 Politike privatnosti). |
+| **Primaoci / obrađivači** | Vercel Inc. (hosting, izvršavanje u Evropskoj uniji) i Neon Inc. (baza podataka, region u Evropskoj uniji), uz Cloudflare Inc. (skladište fotografija, Sjedinjene Američke Države), na osnovu ugovora o obradi. Oglas je javno dostupan svim posetiocima platforme, uključujući neprijavljena lica, i indeksira se od strane pretraživača. Broj telefona oglašivača dostupan je isključivo verifikovanim korisnicima. |
+| **Prenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite. Vercel Inc. i Neon Inc. su društva iz SAD, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mere iz čl. 9 Politike privatnosti. |
 | **Rok čuvanja** | Dok korisnik oglas ne ukloni ili dok oglas ne bude uklonjen u skladu sa Uslovima korišćenja. Po prestanku statusa korisnika, podaci se brišu u celosti. |
 | **Mere zaštite** | Sadržinski minimum umesto traženja identifikujućih podataka (fotografija lica, ime i prezime nisu traženi ni potrebni), broj telefona nije javan, vidljiva oznaka da oglašivač nije verifikovan, ograničenje na tri aktivna oglasa, TLS enkripcija, kontrola pristupa. |
 | **Napomena** | Ovom verzijom registra ukinuta je ranija radnja obrade „podaci objavljeni na tabli zahteva za jemstvo" (kartica prepoznavanja: ime, prezime, godište, mesto, nadimak, opis zanimanja, broj telefona i saglasnost za pozivanje). Tabla zahteva za jemstvo prestala je da postoji, a svi podaci prikupljeni tim putem su obrisani. Nova obrada je uža po obimu i ne traži identifikujuće podatke. |
@@ -132,8 +133,8 @@
 | **Kategorije lica** | Korisnici koji pripadaju kvalifikovanim grupama (roditelji, starija lica, osobe sa invaliditetom, učenici i studenti) i njihovi verifikatori. |
 | **Kategorije podataka** | Status roditelja, starosna dob, invaliditet (rešenje o invaliditetu nadležnog organa — ne medicinska dokumentacija ni dijagnoza), studentski status ili pripadnost drugoj kvalifikovanoj grupi, datum verifikacije statusa. Fondacija ne čuva kopije podnesene dokumentacije — u sistemu ostaje samo minimalni zapis o pripadnosti grupi. U postupku potvrde, verifikatorima se otkriva podatak da se podnosilac (pseudonim) prijavio za određeni program — što može ukazati na pripadnost posebnoj kategoriji — ali ne i sadržaj unetih podataka. |
 | **Pravni osnov** | Izričit pristanak korisnika (čl. 17 st. 2 t. 1 ZZPL-a), dat zasebno za prijavu i za traženje potvrde od verifikatora. Pristanak se može povući u svakom trenutku, sa posledicom prestanka postupka odnosno automatskog evidentiranja. |
-| **Primaoci / obrađivači** | Vercel Inc. (hosting) i Neon Inc. (baza podataka), Sjedinjene Američke Države, na osnovu ugovora o obradi. Lice koje obrađuje prijavu u Fondaciji ima uvid u unete podatke. Verifikatori podnosioca primaju isključivo zahtev za potvrdu (naziv programa i pseudonim podnosioca koga lično poznaju) — bez uvida u unete podatke. |
-| **Prenos u treću zemlju** | Da — obrađivači infrastrukture nalaze se u SAD (videti čl. 9 Politike privatnosti). |
+| **Primaoci / obrađivači** | Vercel Inc. (hosting, izvršavanje u Evropskoj uniji) i Neon Inc. (baza podataka, region u Evropskoj uniji), na osnovu ugovora o obradi. Lice koje obrađuje prijavu u Fondaciji ima uvid u unete podatke. Verifikatori podnosioca primaju isključivo zahtev za potvrdu (naziv programa i pseudonim podnosioca koga lično poznaju) — bez uvida u unete podatke. |
+| **Prenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite. Vercel Inc. i Neon Inc. su društva iz SAD, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mere iz čl. 9 Politike privatnosti. |
 | **Rok čuvanja** | Do povlačenja pristanka od strane korisnika. Zapisi o potvrdama verifikatora (potvrđeno/odbijeno, obrazloženje odbijanja) čuvaju se uz prijavu dok status traje. |
 | **Mere zaštite** | Podaci se vode pseudonimizovano i dostupni su samo licu koje u Fondaciji obrađuje prijavu; verifikatori i drugi korisnici nemaju uvid u unete podatke. Minimizacija: evidentiraju se samo datumi (datumi rođenja dece bez imena, datum rešenja o invaliditetu bez broja/dijagnoze). Prijava zahteva indeks stvarnosti od najmanje 10% i izričit pristanak. Tvrda blokada: prijava se ne odobrava dok svi verifikatori ne potvrde; odbijanje zahteva obrazloženje. Obaveštavanje verifikatora isključivo unutar platforme (in-app), bez spoljnih kanala. Minimizacija: verifikatoru se ne prikazuje sadržaj prijave. |
 
@@ -145,8 +146,8 @@
 | **Kategorije lica** | Maloletni korisnici platforme (od navršenih sedam do navršenih osamnaest godina) i roditelji odnosno zakonski zastupnici. |
 | **Kategorije podataka** | Pseudonim maloletnog korisnika; podaci neophodni za pristup nalogu (lozinka u kriptovanom obliku); elektronska adresa roditelja koju unosi maloletno lice; sopstvena elektronska adresa maloletnog korisnika, ako je navede; datum rođenja koji upisuje roditelj; veza sa jednim ili dvoje roditelja i saglasnost; graf prijateljstava sa datumima; poruke u dečjoj Pričaonici i u razgovorima; zapisi POEN-a; oglasi; škola koju navodi sam maloletni korisnik. |
 | **Pravni osnov** | Pristanak roditelja ili zakonskog zastupnika (čl. 16 ZZPL-a), sa dodatnim ograničenjima za lica mlađa od petnaest godina. Za elektronsku adresu roditelja i za podatke maloletnog korisnika u razdoblju do preuzimanja naloga — legitimni interes (čl. 12 st. 1 t. 6 ZZPL-a) radi pribavljanja tog pristanka; procena srazmernosti je u tački 5.11 DPIA. Sopstvena elektronska adresa maloletnog korisnika obrađuje se u okviru istog pristanka, uz dobrovoljnost navođenja i uz svrhu ograničenu na ponovni pristup nalogu. |
-| **Primaoci / obrađivači** | Vercel Inc. (hosting), Neon Inc. (baza podataka) i Resend (dostavljanje jedne poruke roditelju), Sjedinjene Američke Države, na osnovu ugovora o obradi. Drugi maloletni korisnici vide poruke svojih prijatelja; roditelj vidi spisak prijateljstava i razgovora bez sadržaja, a sadržaj razgovora samo kada je druga strana punoletna. |
-| **Prenos u treću zemlju** | Da — obrađivači infrastrukture nalaze se u SAD (videti čl. 9 Politike privatnosti). |
+| **Primaoci / obrađivači** | Vercel Inc. (hosting, izvršavanje u Evropskoj uniji) i Neon Inc. (baza podataka, region u Evropskoj uniji), uz Resend (dostavljanje jedne poruke roditelju, Sjedinjene Američke Države), na osnovu ugovora o obradi. Drugi maloletni korisnici vide poruke svojih prijatelja; roditelj vidi spisak prijateljstava i razgovora bez sadržaja, a sadržaj razgovora samo kada je druga strana punoletna. |
+| **Prenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite. Vercel Inc. i Neon Inc. su društva iz SAD, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mere iz čl. 9 Politike privatnosti. |
 | **Rok čuvanja** | Dok nalog ostaje aktivan. Nalog koji roditelj ne preuzme u roku od četrnaest dana od otvaranja se briše, zajedno sa adresom roditelja i pozivom. Prijateljstva se brišu sticanjem punoletstva i pri brisanju naloga. Sopstvena elektronska adresa maloletnog korisnika — dok je ne ukloni ili dok ne prestane svojstvo korisnika; nepotvrđena adresa gubi dejstvo posle dvadeset četiri sata. |
 | **Mere zaštite** | Vidi tačku 5.11 DPIA. Najvažnije: u razdoblju pre pristanka obim je sveden na ono što je neophodno za uspostavljanje kontakta sa roditeljem, a Pričaonica, oglasi, komunikacija sa punoletnim licima i evidentiranje POEN-a su zatvoreni; maloletni korisnik može sam obrisati nalog koji čeka preuzimanje; u poruci roditelju stoji samo pseudonim, nikad ime; dve radnje za prekid obrade bez prijave; pun pristup tek kada roditelja potvrdi treće lice u lancu potvrda; roditelj ne čita razgovore između maloletnih korisnika; punoletni sagovornik se obaveštava da razgovor čita roditelj; dečja Pričaonica filtrirana grafom prijateljstava, bez odgovora sa citatom; profil maloletnog korisnika nije dostupan punoletnim korisnicima, nego se prikazuje obaveštenje sa pseudonimom roditelja; pregled po školama je zbirni i bez podataka o ličnosti; istorija ranijih izbora škole se ne čuva; sopstvena elektronska adresa maloletnog korisnika upisuje se tek po potvrdi otvaranjem veze poslate na tu adresu, na nju se ne šalju obaveštenja, a kada je nema, novu lozinku postavlja roditelj. |
 
@@ -170,8 +171,8 @@
 | **Kategorije lica** | Donatori fizička lica koji su izabrali javnu donaciju. |
 | **Kategorije podataka** | Ime i prezime, iznos i datum donacije, pseudonim. |
 | **Pravni osnov** | Pristanak (čl. 12 st. 1 t. 1 ZZPL-a), dat izborom javne donacije radi evidentiranja POEN-a. Za anonimne donacije ime se ne objavljuje i POEN se ne evidentira. |
-| **Primaoci / obrađivači** | Vercel Inc. (hosting) i Neon Inc. (baza podataka), Sjedinjene Američke Države, na osnovu ugovora o obradi. Verifikovani korisnici platforme (lista donacija). |
-| **Prenos u treću zemlju** | Da — obrađivači infrastrukture nalaze se u SAD (videti čl. 9 Politike privatnosti). |
+| **Primaoci / obrađivači** | Vercel Inc. (hosting, izvršavanje u Evropskoj uniji) i Neon Inc. (baza podataka, region u Evropskoj uniji), na osnovu ugovora o obradi. Verifikovani korisnici platforme (lista donacija). |
+| **Prenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite. Vercel Inc. i Neon Inc. su društva iz SAD, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mere iz čl. 9 Politike privatnosti. |
 | **Rok čuvanja** | Kao za podatke o donacijama — 10 godina, u skladu sa poreskim i računovodstvenim propisima. |
 | **Mere zaštite** | Izbor je dobrovoljan i po pojedinačnoj donaciji; jasno upozorenje pre javne donacije; anonimna opcija bez POEN-a kao alternativa; pravilo se primenjuje samo ubuduće; TLS enkripcija, kontrola pristupa. |
 | **Napomena** | Javno povezivanje imena sa donacijom omogućava povezivanje pseudonimnog zapisa donatora sa njegovim identitetom; otkrivanje je dobrovoljno i predstavlja uslov za evidentiranje POEN-a po osnovu donacije. |
@@ -209,7 +210,7 @@
 | **Kategorije lica** | Korisnici koji podnesu predlog za nabavku; korisnici koji se prijave na objavljenu nabavku. |
 | **Kategorije podataka** | Predlog za nabavku: pseudonim, naziv dobra iz rečnika naziva, vreme upisa. Učešće u nabavci: podatak o prijavi, mesto u redu, dan preuzimanja koji je korisnik upisao, kod za preuzimanje, vreme preuzimanja. Broj POEN-a po kome se utvrđuje red ne prikuplja se iznova, već se očitava iz radnje br. 4. **Kriterijumi učešća se ne postavljaju; isprave i izjave o statusu, delatnosti, imovini ili prilikama korisnika se ne traže i ne prikupljaju.** |
 | **Pravni osnov** | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2 ZZPL-a) — učešće u raspodeli zajedničkog dobra je sadržina odnosa po kome korisnik koristi sistem. Podnošenje predloga i prijava su dobrovoljni; izostanak nema posledica po status korisnika. |
-| **Primaoci / obrađivači** | **Dobavljaču se dostavlja isključivo spisak kodova za preuzimanje — bez pseudonima i bez ijednog podatka o licu; dobavljač nije primalac podataka o ličnosti.** Registar predloga objavljuje se zbirno, bez pseudonima. Verifikovanim korisnicima dostupan je spisak korisnika koji su preuzeli deo, sa pseudonimom i mestom u redu; broj POEN-a u zapisu korisnika se uz taj spisak ne objavljuje. Infrastruktura: Vercel Inc. (hosting) i Neon Inc. (baza podataka), Sjedinjene Američke Države, na osnovu ugovora o obradi. |
+| **Primaoci / obrađivači** | **Dobavljaču se dostavlja isključivo spisak kodova za preuzimanje — bez pseudonima i bez ijednog podatka o licu; dobavljač nije primalac podataka o ličnosti.** Registar predloga objavljuje se zbirno, bez pseudonima. Verifikovanim korisnicima dostupan je spisak korisnika koji su preuzeli deo, sa pseudonimom i mestom u redu; broj POEN-a u zapisu korisnika se uz taj spisak ne objavljuje. Infrastruktura: Vercel Inc. (hosting, izvršavanje u Evropskoj uniji) i Neon Inc. (baza podataka, region u Evropskoj uniji), na osnovu ugovora o obradi. |
 | **Prenos u treću zemlju** | Da — obrađivači infrastrukture nalaze se u SAD; prenos uz zaštitne mere (videti čl. 9 Politike privatnosti). |
 | **Rok čuvanja** | Predlog za nabavku briše se kada korisnik izabere drugi naziv ili predlog ukloni, kada bude sprovedena nabavka izabranog naziva dobra, i najkasnije po isteku dvanaest meseci od upisa. Podaci o učešću i preuzimanju čuvaju se deset godina, uz računovodstvenu dokumentaciju nabavke. Po prestanku statusa korisnika brišu se odnosno anonimizuju zajedno sa ostalim podacima naloga. |
 | **Mere zaštite** | Pseudonimizacija; predlog sadrži samo naziv dobra; zbirna objava registra bez pseudonima; broj POEN-a se ne objavljuje uz spisak preuzimalaca; dobavljaču se prosleđuje samo kod; kod je jednokratan i vezan za jednu prijavu; TLS enkripcija, enkripcija u mirovanju, kontrola pristupa. Utvrđivanje reda je primena javno objavljenih pravila i ne dira status korisnika, pa nema automatizovanog odlučivanja u smislu čl. 38 ZZPL-a; protiv utvrđenog reda dopušten je prigovor po čl. 37 ZZPL-a i po članu 30 Pravilnika, o kome odlučuje čovek. |

@@ -246,7 +246,9 @@ I uz pseudonimnost, kombinacija iznosa, vremena i učestalosti transakcija može
 
 Platforma koristi neophodne kolačiće koji su neophodni za funkcionisanje Platforme — prijava, održavanje sesije, bezbednosne postavke. Ovi kolačići nisu podložni pristanku jer su neophodni za pružanje usluge.
 
-Platforma koristi i analitičke kolačiće radi merenja posećenosti i razumevanja načina korišćenja Platforme: Google Analytics (Google Ireland Limited / Google LLC) i Vercel Analytics (Vercel Inc.). Ovi kolačići obrađuju se na osnovu pristanka korisnika (čl. 12 st. 1 t. 1 ZZPL-a), koji se daje pre postavljanja analitičkih kolačića i može se povući u svakom trenutku kroz podešavanja kolačića. Uskraćivanje ili povlačenje pristanka na analitičke kolačiće ne utiče na mogućnost korišćenja Platforme. Podaci prikupljeni ovim kolačićima mogu se prenositi obrađivačima u Sjedinjenim Američkim Državama (videti član 9).
+Platforma koristi i analitičke kolačiće radi merenja posećenosti i razumevanja načina korišćenja Platforme: Google Analytics (Google Ireland Limited / Google LLC). Ovi kolačići obrađuju se na osnovu pristanka korisnika (čl. 12 st. 1 t. 1 ZZPL-a), koji se daje pre postavljanja analitičkih kolačića i može se povući u svakom trenutku kroz podešavanja kolačića. Uskraćivanje ili povlačenje pristanka na analitičke kolačiće ne utiče na mogućnost korišćenja Platforme. Podaci prikupljeni ovim kolačićima mogu se prenositi obrađivačima u Sjedinjenim Američkim Državama (videti član 9).
+
+Uz to Platforma meri posećenost i bez kolačića, servisom Vercel Analytics (Vercel Inc.). Taj servis ne postavlja kolačiće, ne čita podatke sa uređaja korisnika i ne prati korisnika između različitih sajtova; obrađuje se samo zbirni broj poseta pojedinih stranica. Osnov je legitimni interes Fondacije da zna koliko se Platforma koristi (čl. 12 st. 1 t. 6 ZZPL-a), a korisnik na tu obradu ima pravo prigovora po članu 13.
 
 ### Član 8 — Primaoci podataka i obrađivači
 
@@ -256,21 +258,37 @@ Ako Fondacija angažuje treća lica za održavanje infrastrukture, ta lica su ob
 
 Podaci mogu biti dostupni sledećim primaocima:
 
-Hosting i isporuka aplikacije — Vercel Inc. (Sjedinjene Američke Države) — isključivo u svrhu tehničkog funkcionisanja Platforme, na osnovu ugovora o obradi podataka.
+Hosting i isporuka aplikacije — Vercel Inc. (društvo sa sedištem u Sjedinjenim Američkim Državama; aplikacija se izvršava u Evropskoj uniji, region Frankfurt) — isključivo u svrhu tehničkog funkcionisanja Platforme, na osnovu ugovora o obradi podataka.
 
-Baza podataka — Neon Inc. (Sjedinjene Američke Države) — čuvanje evidencionih i identifikacionih podataka, na osnovu ugovora o obradi podataka.
+Baza podataka — Neon Inc. (društvo sa sedištem u Sjedinjenim Američkim Državama; baza podataka se nalazi u Evropskoj uniji, region Frankfurt) — čuvanje evidencionih i identifikacionih podataka, na osnovu ugovora o obradi podataka.
 
 Skladište slika — Cloudflare, Inc. (servis Cloudflare R2, Sjedinjene Američke Države) — čuvanje profilnih slika (avatara) i slika oglasa; u bazu se upisuje samo javni internet-adresa (URL) slike, ne sama slika. Na osnovu ugovora o obradi podataka.
 
-Email servis — Resend, Inc. (Sjedinjene Američke Države) — isključivo za dostavljanje sistemskih obaveštenja (na primer poruke za resetovanje lozinke).
+Email servis — Resend, Inc. (Sjedinjene Američke Države) — isključivo za dostavljanje sistemskih obaveštenja (na primer poruke za resetovanje lozinke). Obaveštenje o novoj poruci sadrži isečak te poruke, pa i taj isečak prolazi kroz ovaj servis.
+
+Kanal upozorenja Fondaciji — Telegram Messenger Inc. (Sjedinjene Američke Države) — isključivo radi obaveštavanja Fondacije o događajima koji traže njeno postupanje. Upozorenje sadrži pseudonim i vrstu događaja; ne sadrži podatke unete u prijavi na program podrške niti sadržaj poruka korisnika. Isto upozorenje ide i elektronskom poštom.
+
+Merenje posećenosti — Google Ireland Limited odnosno Google LLC (Sjedinjene Američke Države), isključivo po pristanku korisnika, i Vercel Inc. bez kolačića (član 7).
+
+Obrada plaćanja platnom karticom — poslovna banka Fondacije i njen posrednik za plaćanje na internetu (Republika Srbija) — kada korisnik donaciju izvršava platnom karticom. Podatke o platnoj kartici Fondacija ne prima i ne čuva.
 
 Nadležni državni organi — kada je to zakonska obaveza, uključujući Poresku upravu, Upravu za sprečavanje pranja novca i druge organe u skladu sa zakonom.
 
+Navedeni obrađivači za izvršavanje pojedinih radnji angažuju sopstvene podobrađivače, pre svega provajdere data centara. Aktuelne spiskove podobrađivača objavljuju sami obrađivači na svojim internet stranicama.
+
 ### Član 9 — Prenos podataka van Srbije
 
-Pošto se infrastruktura Platforme (hosting, baza podataka, skladište slika i email servis iz člana 8) nalazi kod provajdera sa sedištem u Sjedinjenim Američkim Državama, podaci o ličnosti mogu biti preneti i obrađivani u Sjedinjenim Američkim Državama.
+**Gde se podaci nalaze.** Aplikacija se izvršava i baza podataka se nalazi u Evropskoj uniji, u regionu Frankfurt. Evropska unija je na listi država koje obezbeđuju primereni nivo zaštite podataka o ličnosti, pa se za te podatke ne primenjuju posebni uslovi iz čl. 65–69 ZZPL-a.
 
-Prenos se vrši uz primenu odgovarajućih zaštitnih mera u skladu sa čl. 65–69 ZZPL-a. Fondacija obezbeđuje da prenos podataka u treće zemlje bude zasnovan na adekvatnom nivou zaštite — odlukom o adekvatnosti, standardnim ugovornim klauzulama ili drugim odgovarajućim merama zaštite predviđenim zakonom. Sa svakim obrađivačem iz člana 8 zaključuje se ugovor o obradi podataka koji sadrži takve mere. Izbor provajdera infrastrukture uzima u obzir lokaciju servera i primenjiv pravni okvir za zaštitu podataka u jurisdikciji u kojoj se serveri nalaze.
+Vercel Inc. i Neon Inc. su društva sa sedištem u Sjedinjenim Američkim Državama. Zbog toga je moguć pristup podacima iz treće zemlje u administrativne i tehničke svrhe — podršku, održavanje i sistemske dnevnike.
+
+**Šta se stvarno obrađuje u Sjedinjenim Američkim Državama:** slike koje korisnici postavljaju (Cloudflare R2), elektronske poruke koje Platforma šalje, uključujući isečak nove poruke u obaveštenju (Resend), upozorenja koja se šalju Fondaciji (Telegram) i podaci za merenje posećenosti (Google, isključivo po pristanku).
+
+**Osnov prenosa.** Sjedinjene Američke Države nisu na listi država za koje je utvrđen primereni nivo zaštite. Fondacija zato podatke prenosi isključivo obrađivaču sa kojim je zaključen ugovor o obradi podataka koji sadrži standardne ugovorne klauzule ili druge odgovarajuće mere zaštite iz čl. 65 ZZPL-a. Obrađivaču sa kojim takav ugovor nije zaključen podaci se ne prenose.
+
+**Provera.** Fondacija čuva primerak ugovora o obradi za svakog obrađivača iz člana 8 i najmanje jednom godišnje proverava da li je ugovor na snazi i da li se spisak podobrađivača promenio.
+
+**Izbor provajdera.** Pri izboru provajdera infrastrukture Fondacija uzima u obzir lokaciju servera i primenjiv pravni okvir za zaštitu podataka u jurisdikciji u kojoj se serveri nalaze. Iz tog razloga se aplikacija i baza podataka izvršavaju u Evropskoj uniji.
 
 ### Član 10 — Rokovi čuvanja podataka
 

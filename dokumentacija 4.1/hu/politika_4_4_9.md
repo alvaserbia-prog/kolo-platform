@@ -248,7 +248,9 @@ Az álnevesítettség ellenére az összegek, az időpontok és a tranzakciók g
 
 A Platform szükséges sütiket használ, amelyek a Platform működéséhez elengedhetetlenek — bejelentkezés, munkamenet fenntartása, biztonsági beállítások. Ezek a sütik nem esnek hozzájárulás alá, mivel a szolgáltatás nyújtásához elengedhetetlenek.
 
-A Platform analitikai sütiket is használ a látogatottság mérése és a Platform használati módjának megértése érdekében: Google Analytics (Google Ireland Limited / Google LLC) és Vercel Analytics (Vercel Inc.). Ezeket a sütiket a felhasználó hozzájárulása alapján kezeljük (ZZPL 12. cikk (1) bekezdés 1. pont), amelyet az analitikai sütik elhelyezése előtt ad meg, és amely a sütibeállításokon keresztül bármikor visszavonható. Az analitikai sütikhez való hozzájárulás megtagadása vagy visszavonása nem érinti a Platform használhatóságát. Az e sütikkel gyűjtött adatok az Egyesült Államokban lévő adatfeldolgozókhoz továbbíthatók (lásd a 9. cikket).
+A Platform analitikai sütiket is használ a látogatottság mérése és a Platform használati módjának megértése érdekében: Google Analytics (Google Ireland Limited / Google LLC). Ezeket a sütiket a felhasználó hozzájárulása alapján kezeljük (ZZPL 12. cikk (1) bekezdés 1. pont), amelyet az analitikai sütik elhelyezése előtt ad meg, és amely a sütibeállításokon keresztül bármikor visszavonható. Az analitikai sütikhez való hozzájárulás megtagadása vagy visszavonása nem érinti a Platform használhatóságát. Az e sütikkel gyűjtött adatok az Egyesült Államokban lévő adatfeldolgozókhoz továbbíthatók (lásd a 9. cikket).
+
+Emellett a Platform sütik nélkül is méri a látogatottságot, a Vercel Analytics szolgáltatással (Vercel Inc.). Ez a szolgáltatás nem helyez el sütiket, nem olvas ki adatot a felhasználó eszközéről, és nem követi a felhasználót a különböző webhelyek között; kizárólag az egyes oldalak látogatásainak összesített száma kerül kezelésre. Az alap az Alapítvány jogos érdeke annak ismeretében, hogy mennyire használják a Platformot (ZZPL 12. cikk (1) bekezdés 6. pont), a felhasználót pedig e kezeléssel szemben a 13. cikk szerinti tiltakozási jog illeti meg.
 
 ### 8. cikk — Adattovábbítás címzettjei és adatfeldolgozók
 
@@ -258,21 +260,37 @@ Ha az Alapítvány harmadik személyeket bíz meg az infrastruktúra fenntartás
 
 Az adatok a következő címzettek számára lehetnek hozzáférhetők:
 
-Hosting és alkalmazáskiszolgálás — Vercel Inc. (Egyesült Államok) — kizárólag a Platform technikai működése céljából, adatfeldolgozási szerződés alapján.
+Hosting és alkalmazáskiszolgálás — Vercel Inc. (az Egyesült Államokban székhellyel rendelkező társaság; az alkalmazás az Európai Unióban, a frankfurti régióban fut) — kizárólag a Platform technikai működése céljából, adatfeldolgozási szerződés alapján.
 
-Adatbázis — Neon Inc. (Egyesült Államok) — nyilvántartási és azonosító adatok tárolása, adatfeldolgozási szerződés alapján.
+Adatbázis — Neon Inc. (az Egyesült Államokban székhellyel rendelkező társaság; az adatbázis az Európai Unióban, a frankfurti régióban található) — nyilvántartási és azonosító adatok tárolása, adatfeldolgozási szerződés alapján.
 
 Képtárolás — Cloudflare, Inc. (Cloudflare R2 szolgáltatás, Egyesült Államok) — a profilképek (avatarok) és a hirdetésképek tárolása; az adatbázisba kizárólag a kép nyilvános internetcíme (URL) kerül be, maga a kép nem. Adatfeldolgozási szerződés alapján.
 
-Email szolgáltatás — Resend, Inc. (Egyesült Államok) — kizárólag rendszerüzenetek kézbesítésére (például jelszó-visszaállítási üzenetek).
+Email szolgáltatás — Resend, Inc. (Egyesült Államok) — kizárólag rendszerüzenetek kézbesítésére (például jelszó-visszaállítási üzenetek). Az új üzenetről szóló értesítés az adott üzenet részletét tartalmazza, így ez a részlet is áthalad e szolgáltatáson.
+
+Riasztási csatorna az Alapítvány felé — Telegram Messenger Inc. (Egyesült Államok) — kizárólag az Alapítvány értesítése céljából olyan eseményekről, amelyek az ő eljárását igénylik. A riasztás az álnevet és az esemény típusát tartalmazza; nem tartalmazza a támogatási programra benyújtott kérelemben megadott adatokat, sem a felhasználók üzeneteinek tartalmát. Ugyanez a riasztás elektronikus levélben is elmegy.
+
+Látogatottságmérés — Google Ireland Limited, illetve Google LLC (Egyesült Államok), kizárólag a felhasználó hozzájárulása alapján, valamint a Vercel Inc. sütik nélkül (7. cikk).
+
+Bankkártyás fizetés feldolgozása — az Alapítvány üzleti bankja és annak internetes fizetési közvetítője (Szerb Köztársaság) — amikor a felhasználó az adományt bankkártyával teljesíti. A bankkártyaadatokat az Alapítvány nem kapja meg és nem tárolja.
 
 Illetékes állami hatóságok — amennyiben ez jogi kötelezettség, ideértve az adóhatóságot, a pénzmosás megelőzéséért felelős hatóságot és más hatóságokat a jogszabályoknak megfelelően.
 
+A fenti adatfeldolgozók egyes műveletek elvégzéséhez saját további adatfeldolgozókat vesznek igénybe, elsősorban adatközpont-szolgáltatókat. A további adatfeldolgozók aktuális listáját maguk az adatfeldolgozók teszik közzé a honlapjukon.
+
 ### 9. cikk — Adattovábbítás Szerbián kívülre
 
-Mivel a Platform infrastruktúrája (hosting, adatbázis, képtárolás és a 8. cikk szerinti email szolgáltatás) az Egyesült Államokban székhellyel rendelkező szolgáltatóknál található, a személyes adatok az Egyesült Államokba továbbíthatók és ott kezelhetők.
+**Hol találhatók az adatok.** Az alkalmazás az Európai Unióban, a frankfurti régióban fut, és ott található az adatbázis is. Az Európai Unió szerepel a személyes adatok megfelelő védelmi szintjét biztosító országok listáján, ezért ezekre az adatokra a ZZPL 65–69. cikke szerinti különös feltételek nem alkalmazandók.
 
-A továbbítás a ZZPL 65–69. cikke szerinti megfelelő védelmi intézkedések alkalmazásával történik. Az Alapítvány biztosítja, hogy a harmadik országokba történő adattovábbítás megfelelő védelmi szinten alapuljon — megfelelőségi határozattal, általános szerződési feltételekkel vagy a jogszabályban előírt egyéb megfelelő védelmi intézkedésekkel. A 8. cikk szerinti minden adatfeldolgozóval ilyen intézkedéseket tartalmazó adatfeldolgozási szerződés kerül megkötésre. Az infrastruktúra-szolgáltató kiválasztása figyelembe veszi a kiszolgálók elhelyezkedését és az adatvédelemre alkalmazandó jogi keretet abban a joghatóságban, ahol a kiszolgálók találhatók.
+A Vercel Inc. és a Neon Inc. az Egyesült Államokban székhellyel rendelkező társaságok. Emiatt lehetséges az adatokhoz harmadik országból történő hozzáférés adminisztratív és technikai célból — támogatás, karbantartás és rendszernaplók.
+
+**Ami ténylegesen az Egyesült Államokban kerül kezelésre:** a felhasználók által feltöltött képek (Cloudflare R2), a Platform által küldött elektronikus üzenetek, ideértve az értesítésben szereplő új üzenet részletét is (Resend), az Alapítványnak küldött riasztások (Telegram), valamint a látogatottságmérés adatai (Google, kizárólag hozzájárulás alapján).
+
+**A továbbítás alapja.** Az Egyesült Államok nem szerepel azon országok listáján, amelyekre megfelelő védelmi szintet állapítottak meg. Az Alapítvány ezért kizárólag olyan adatfeldolgozónak továbbít adatot, amellyel a ZZPL 65. cikke szerinti általános szerződési feltételeket vagy egyéb megfelelő védelmi intézkedéseket tartalmazó adatfeldolgozási szerződést kötött. Olyan adatfeldolgozónak, amellyel ilyen szerződés nem jött létre, adatot nem továbbít.
+
+**Ellenőrzés.** Az Alapítvány a 8. cikk szerinti minden adatfeldolgozó vonatkozásában megőrzi az adatfeldolgozási szerződés egy példányát, és legalább évente egyszer ellenőrzi, hogy a szerződés hatályban van-e, és hogy a további adatfeldolgozók listája megváltozott-e.
+
+**A szolgáltatók kiválasztása.** Az infrastruktúra-szolgáltató kiválasztásakor az Alapítvány figyelembe veszi a kiszolgálók elhelyezkedését és az adatvédelemre alkalmazandó jogi keretet abban a joghatóságban, ahol a kiszolgálók találhatók. Ezért fut az alkalmazás és az adatbázis az Európai Unióban.
 
 ### 10. cikk — Az adatok megőrzési ideje
 

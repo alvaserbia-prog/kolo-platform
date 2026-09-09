@@ -101,6 +101,15 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-09 (dvadeseti put):** na **4.4.9** idu **TRI akta** — Politika
+privatnosti (sa 4.4.8), DPIA (sa 4.4.8) i Registar radnji obrade (sa 4.4.8).
+Ostalih četrnaest ostaje gde jeste. Povod je **analiza rizika R-12** (infrastruktura
+kod američkih provajdera bez odluke o adekvatnosti). Sadržinski, vidi sekciju
+„Prekogranični prenos: hosting i baza su u EU, akti su to prećutali" ispod.
+
+🟢 **Unakrsna upućivanja u ta tri akta su ispravljena** (Politika i Registar → 4.4.9);
+upućivanja na akte koji se nisu menjali ostaju na svojoj šifri.
+
 **AŽURIRANO 2026-09-09 (devetnaesti put):** na **4.4.8** idu **ČETIRI akta** —
 Pravilnik o učešću dece (sa 4.4.2), Politika privatnosti (sa 4.4.2), DPIA (sa 4.4.3)
 i Registar radnji obrade (sa 4.4.2). Ostalih trinaest ostaje gde jeste. Povod je
@@ -1095,6 +1104,104 @@ već postoji i dovoljan je).
 jasnije **besplatno**, to je korisnik slabije zaštićen potrošačkim pravom; što bismo
 mu više dali prava, to davanje više liči na prodaju. Reklamacija je namerno
 izostavljena i to ovde postaje **deo odbrane**, ne samo praznina.
+
+### Prekogranični prenos: hosting i baza su u EU, akti su to prećutali (2026-09-09)
+
+Odluke uz analizu rizika **R-12**. Izmenjeni `politika_4_4_9.md` (čl. 7, 8, 9,
+kategorije primalaca), `DPIA_4_4_9.md` (tačka 3 — obrađivači, rizik **R8**, nova
+tačka **5.13**, rezidual i zbir rizika) i `radnje_obrade_4_4_9.md` (dvanaest redova
+o primaocima i prenosu, radnje 5 i 7) na svih pet jezika, uz izmenu koda.
+
+🟢 **Ključna činjenica koju vlasnik javio, a akti nisu znali: Vercel i Neon su u
+FRANKFURTU, ostalo je u SAD.** `vercel.json` je i pre ovoga imao
+`"regions": ["fra1"]`, a Neon endpoint je u EU regionu — dakle **aplikacija se
+izvršava i baza se nalazi u Evropskoj uniji**. Akti su tvrdili suprotno: Politika
+čl. 8 je sva četiri obrađivača vodila kao „Sjedinjene Američke Države", a Registar
+je u **deset redova** ponavljao „Prenos u treću zemlju: Da — obrađivači
+infrastrukture nalaze se u SAD". 🔴 **Ovo je prvi rizik u registru gde su akti
+opisivali GORE stanje nego što jeste** — svuda drugde je bilo obrnuto.
+
+🔴 **Druga polovina nalaza je ista kao svuda: obećanje se brojalo kao mera.**
+Politika čl. 9 je glasila „Fondacija **obezbeđuje** da prenos bude zasnovan na
+adekvatnom nivou zaštite… sa svakim obrađivačem **zaključuje se** ugovor o obradi".
+To nije pravilo nego **tvrdnja o činjenici** koju niko nije proverio — nema
+prikupljenih ugovora, datuma ni verzija. Mere uz R8 bile su doslovan citat zakona
+(„primena čl. 65–69, odluka o adekvatnosti ili odgovarajuće mere"), dakle ništa
+sprovedeno. Ista greška kao „nalog bez pristupa funkcijama" kod R16, samo na drugom
+mestu.
+
+**Šta akti sada kažu (čl. 9 Politike, prepisan u pet naslovljenih stavova):**
+- **Gde se podaci nalaze** — izvršavanje i baza u EU (Frankfurt), koja je na listi
+  država sa primerenim nivoom zaštite, pa se za te podatke čl. 65–69 ne primenjuju;
+  Vercel i Neon su društva iz SAD, pa je moguć **administrativni pristup** iz treće
+  zemlje. To se izričito piše — bez toga bi „sve je u EU" bilo novo preuveličavanje.
+- **Šta stvarno izlazi u SAD** — slike (Cloudflare R2), pošta koju Platforma šalje
+  **uključujući isečak nove poruke** (Resend), upozorenja Fondaciji (Telegram) i
+  merenje posećenosti (Google, po pristanku). 🔴 Isečak poruke se piše izričito:
+  `poruke/[konvId]/route.ts` šalje `tekst: isecak` (120 znakova poruke), pa bi
+  tvrdnja „sadržaj razgovora ne izlazi" bila neistinita.
+- **Osnov prenosa je NORMA, ne izveštaj** — „Fondacija podatke prenosi isključivo
+  obrađivaču sa kojim je zaključen ugovor… Obrađivaču sa kojim takav ugovor nije
+  zaključen podaci se ne prenose." 🔴 Namerno obaveza, a ne tvrdnja da su ugovori
+  već prikupljeni — to bi ponovilo grešku koju ovaj rizik ispravlja.
+- **Godišnja provera** — Fondacija čuva primerak svakog ugovora i najmanje jednom
+  godišnje proverava da li je na snazi i da li se spisak podobrađivača promenio.
+
+🔴 **Spisak primalaca je dopunjen sa tri koja su nedostajala:** **Telegram**
+(bio samo u tri reda Registra, nigde u Politici ni DPIA), **Google** (stajao samo u
+članu o kolačićima, ne među primaocima) i **banka + posrednik za kartično plaćanje**
+(nije postojao nigde). Dodat je i stav o **podobrađivačima** — provajderi data
+centara, čije spiskove objavljuju sami obrađivači.
+
+🔴 **Naziv programa izlazi iz kanala upozorenja Fondaciji** (`posaljiAdminAlert` u
+`programi/[type]/prijava` i `programi/potvrde/[id]/odgovori`). Poruka je glasila
+*„Program: POSEBNA_BRIGA / Korisnik: <pseudonim>"* — dakle **pseudonim vezan za
+posebnu kategoriju podataka**, u kanal koji ide na Telegram i na `ADMIN_EMAIL` preko
+Resend-a, oba u SAD. Sada ide samo pseudonim i „Detalji su u admin panelu", gde su
+uneti podaci ionako otvoreni **samo superadminu**.
+🟡 **Notifikacija VERIFIKATORU zadržava naziv programa i dalje ide mejlom** — po
+čl. 4 Pravilnika o programima podrške verifikator potvrđuje baš taj program, pa mora
+da zna koji je; to je rizik **R11**, prihvaćen i opisan u DPIA. Usput je ispravljen
+komentar u kodu koji je tvrdio „jedini kanal — nema email/push", što nije bilo tačno.
+
+🟢 **R8 pada sa 6 (srednji) na 3 (nizak)** — verovatnoća 2 → 1, jer najveći deo
+podataka ne izlazi iz kruga sa primerenim nivoom zaštite. Time se menja i zbir:
+**pet srednjih (R1, R2, R11, R13, R16) i dvanaest niskih**, umesto šest i jedanaest.
+🔴 Ocena je spuštena tek pošto su mere postale stvarne (region, uzak obim, uklonjen
+naziv programa, godišnja provera) — ne zbog same činjenice o Frankfurtu.
+
+🔴 **Vercel Analytics — akt i kod se više ne protivreče.** Politika ga je svrstavala
+među **analitičke kolačiće koji traže pristanak**, a `layout.tsx` ga učitava
+**bezuslovno** jer je bez kolačića. Sada je izdvojen iz tog pasusa: bez kolačića, bez
+praćenja između sajtova, po **legitimnom interesu**, uz pravo prigovora. Google
+Analytics ostaje po pristanku i `Analitika.tsx` ga zaista ne renderuje dok pristanka
+nema — ta strana je bila uredna.
+
+**Kod i brane:**
+- `__tests__/pravni-dokumenti.test.ts` — nov blok **„region izvršavanja"** čita
+  `vercel.json` i pada ako `regions` ne sadrži `fra1`. 🔴 Region je **mera zaštite**:
+  ko ga promeni, oborio je tačnost Politike čl. 9, ocene R8 i dvanaest redova
+  Registra, i to bez ijednog vidljivog kvara. Region Neon baze se ovako ne može
+  proveriti (živi u `DATABASE_URL`) — zabeležen je u beleški ispod.
+- `docs/obradjivaci-i-prenos.md` — nova radna beleška: tabela ko je gde, šta treba
+  prikupiti i šta je odloženo. **Nije normativa.**
+
+🟡 **Jedina preostala praznina iz R-12 je M-1 i nije u kodu:** primerci ugovora o
+obradi (DPA) za svih šest obrađivača nisu prikupljeni. Politika čl. 9 od 4.4.9 traži
+da se čuvaju i godišnje proveravaju, pa ta obaveza do prikupljanja stoji neispunjena.
+Zadatak vlasnika, spisak je u `docs/obradjivaci-i-prenos.md`.
+
+🔴 **ODLOŽENO ODLUKOM VLASNIKA (2026-09-09) — ne otvarati sada:** pravno mišljenje o
+tome da li EU standardne ugovorne klauzule u provajderskim DPA zadovoljavaju **čl. 65**
+ZZPL-a ili traže odobrenje Poverenika po **čl. 67**. Podsetnik zašto pitanje uopšte
+postoji: **Poverenik je doneo SOPSTVENE standardne klauzule**, koje nisu iste kao EU
+SCC iz 2021, a provajderski DPA nose EU verziju. Odgovor ne menja ništa od gore
+urađenog — menjao bi samo koliko je uzak preostali prenos dovoljan.
+
+🟡 **Potpuni izlazak sa američkih provajdera nije potreban** i nije rađen: hosting i
+baza su već u EU, a ostatak je uzak. Ako ikad zatreba, najlakši sledeći korak je
+**R2 baket sa `jurisdiction: eu`**, pa Resend EU region — oba su promena naloga, ne
+koda.
 
 ### Razdoblje pre pristanka: osnov je imenovan, opis usklađen sa stvarnošću (2026-09-09)
 

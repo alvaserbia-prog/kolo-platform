@@ -948,7 +948,7 @@
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.4.8"
+      "ver": "4.4.9"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -956,11 +956,11 @@
     },
     "dpia": {
       "naslov": "DPIA. Procjena učinka na zaštitu osobnih podataka",
-      "ver": "4.4.8"
+      "ver": "4.4.9"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade osobnih podataka",
-      "ver": "4.4.8"
+      "ver": "4.4.9"
     },
     "rizici": {
       "naslov": "Izjava o prihvaćanju rizika",
@@ -994,13 +994,13 @@
     "meta_uslovi_title": "Uvjeti korištenja · KOLO",
     "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.4.3",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.4.8",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.4.9",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.4.8",
+    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.4.9",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.4.8",
+    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.4.9",
     "meta_rizici_title": "Izjava o prihvaćanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.4.6",
     "meta_whitepaper_title": "Whitepaper · KOLO",

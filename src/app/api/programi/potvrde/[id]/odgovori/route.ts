@@ -57,9 +57,14 @@ export async function POST(
     });
 
     if (svePotvrdjeno) {
+  // 🔴 Naziv programa NE ide u kanal upozorenja (Telegram + mejl na ADMIN_EMAIL).
+  // Iz para „pseudonim + POSEBNA_BRIGA" čita se pripadnost posebnoj kategoriji
+  // podataka, a taj kanal ide preko obrađivača u SAD koje Politika navodi samo za
+  // uzak obim (čl. 8, 9). Ko odlučuje o prijavi vidi je u admin panelu, gde su
+  // uneti podaci ionako otvoreni samo superadminu.
       void posaljiAdminAlert(
         "Prijava spremna za odobravanje",
-        `Program: ${potvrda.enrollment.type}\nSvi verifikatori su potvrdili — prijava čeka odluku Fondacije.`
+        `Svi verifikatori su potvrdili — prijava čeka odluku Fondacije.\nDetalji su u admin panelu.`
       );
       await obavesti(potvrda.enrollment.userId, {
         tip: "info",
@@ -99,7 +104,7 @@ export async function POST(
   });
   void posaljiAdminAlert(
     "Prijava na program odbijena (verifikator)",
-    `Program: ${potvrda.enrollment.type}\nVerifikator: ${verifikatorPseudonim}\nObrazloženje: ${obrazlozenje}`
+    `Verifikator: ${verifikatorPseudonim}\nObrazloženje: ${obrazlozenje}\nDetalji su u admin panelu.`
   );
 
   return NextResponse.json({ ok: true, odbijeno: true });

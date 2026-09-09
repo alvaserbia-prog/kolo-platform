@@ -29,10 +29,10 @@ const AKTI = [
   // reference na verziju koja kao dokument više ne postoji.
   "Pravilnik_4_4_6.md",
   "dokaz_stvarnosti_4_4_1.md",
-  "DPIA_4_4_8.md",
-  "radnje_obrade_4_4_8.md",
+  "DPIA_4_4_9.md",
+  "radnje_obrade_4_4_9.md",
   "uslovi_koriscenja_4_4_3.md",
-  "politika_4_4_8.md",
+  "politika_4_4_9.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_6.md",
   "rizici_4_4_6.md",
@@ -135,7 +135,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_4_8.md": {
+  "radnje_obrade_4_4_9.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16"],
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16"],
@@ -146,24 +146,37 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 4.4.8 — procena srazmernosti za obradu po legitimnom interesu. Bez nje R16
   // stoji na meri koja je opisivala nešto što sistem ne radi („nalog bez pristupa
   // funkcijama"), pa je rezidualna ocena od 8 počivala na netačnoj tvrdnji.
-  "DPIA_4_4_8.md": {
+  // 4.4.9 — R8 pada na nizak nivo zato što se aplikacija i baza izvršavaju u EU
+  // (`vercel.json` → regions: fra1, Neon endpoint u EU). Ako se region ikad vrati u
+  // SAD, ocena i mere iz 5.13 postaju netačne — zato se traže doslovno, uz nov zbir
+  // srednjih i niskih rizika.
+  "DPIA_4_4_9.md": {
     sr: [
-      "R15 —", "## 5.10.", "R17 —", "## 5.12.",
-      "Šest rizika je na srednjem nivou (R1, R2, R8, R11, R13, R16)",
+      "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
+      "Pet rizika je na srednjem nivou (R1, R2, R11, R13, R16)",
       "Procena srazmernosti za obradu po legitimnom interesu",
       "Sopstveni izlaz maloletnog korisnika",
+      "Mere za prekogranični prenos",
+      "region Frankfurt",
+      "najmanje jednom godišnje",
     ],
     en: [
-      "R15 —", "## 5.10.", "R17 —", "## 5.12.",
-      "Six risks are at the medium level (R1, R2, R8, R11, R13, R16)",
+      "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
+      "Five risks are at the medium level (R1, R2, R11, R13, R16)",
       "Balancing test for processing on the basis of legitimate interest",
       "The minor user's own way out",
+      "Measures for Cross-Border Transfer",
+      "Frankfurt region",
+      "at least once a year",
     ],
     ru: [
-      "R15 —", "## 5.10.", "R17 —", "## 5.12.",
-      "Шесть рисков находятся на среднем уровне (R1, R2, R8, R11, R13, R16)",
+      "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
+      "Пять рисков находятся на среднем уровне (R1, R2, R11, R13, R16)",
       "Оценка соразмерности обработки на основании законного интереса",
       "Собственный выход несовершеннолетнего пользователя",
+      "Меры для трансграничной передачи",
+      "регион Франкфурт",
+      "не реже одного раза в год",
     ],
   },
   // 4.4.1 — izborno glasanje. Čl. 8 i 9 su pisani za dvočlani izbor („za"/„protiv");
@@ -548,7 +561,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "может удалить её сам в любой момент",
     ],
   },
-  "politika_4_4_8.md": {
+  "politika_4_4_9.md": {
     sr: [
       "nije pristanak za obrade čiji je pravni osnov pristanak",
       // 4.4.8 — Politika je do tada opisivala razdoblje pre pristanka uže nego
@@ -556,16 +569,29 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // Traži se osnov obrade u tom razdoblju; bez njega opis ostaje bez naslova.
       "Pravni osnov u razdoblju do preuzimanja",
       "ima profil i može sklapati prijateljstva",
+      // 4.4.9 — gde se podaci stvarno nalaze. Do tada je čl. 9 tvrdio da je CELA
+      // infrastruktura u SAD, a hosting i baza su u Frankfurtu; uz to je čl. 9
+      // OBEĆAVAO adekvatan nivo zaštite kao već postignut. Traži se opis stanja i
+      // obaveza godišnje provere, jer se oboje lako izgubi pri sledećem bumpu.
+      "region Frankfurt",
+      "najmanje jednom godišnje",
+      "Telegram Messenger Inc.",
     ],
     en: [
       "is not consent for processing whose legal basis is consent",
       "Legal basis in the period before takeover",
       "the account has a profile and may form friendships",
+      "Frankfurt region",
+      "at least once a year",
+      "Telegram Messenger Inc.",
     ],
     ru: [
       "не является согласием на обработку",
       "Правовое основание в период до принятия",
       "имеет профиль и может заключать дружбы",
+      "регион Франкфурт",
+      "не реже одного раза в год",
+      "Telegram Messenger Inc.",
     ],
   },
   // 4.3.1 — prag za socijalni program je funkcionalnih 10% (jedna primljena
@@ -872,5 +898,25 @@ describe("prevodi u nastajanju (hr, hu)", () => {
         expect(tekst.length).toBeGreaterThan(500);
       }
     }
+  });
+});
+
+/**
+ * 🔴 Region izvršavanja je MERA ZAŠTITE, ne podešavanje performansi.
+ *
+ * Politika čl. 9, DPIA (ocena R8 = 3 i tačka 5.13) i svaki red „Prenos u treću
+ * zemlju" u Registru radnji obrade počivaju na tome da se aplikacija izvršava u
+ * Evropskoj uniji. Ko obriše ili promeni `regions` u `vercel.json`, oborio je
+ * tačnost tri akta odjednom — i to bez ijednog traga, jer sajt nastavlja da radi.
+ *
+ * Region Neon baze se ovako ne može proveriti (živi u `DATABASE_URL`, koji je
+ * tajna okruženja); on je zabeležen u `docs/obradjivaci-i-prenos.md`.
+ */
+describe("region izvršavanja", () => {
+  it("vercel.json drži izvršavanje u EU (fra1)", async () => {
+    const sirovo = await fs.readFile(path.join(process.cwd(), "vercel.json"), "utf-8");
+    const config = JSON.parse(sirovo) as { regions?: string[] };
+    expect(config.regions, "vercel.json nema `regions` — akti tvrde da je izvršavanje u EU").toBeDefined();
+    expect(config.regions).toContain("fra1");
   });
 });

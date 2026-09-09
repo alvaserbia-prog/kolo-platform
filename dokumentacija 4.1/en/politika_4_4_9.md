@@ -248,7 +248,9 @@ Even with pseudonymity, the combination of amounts, times, and frequency of tran
 
 The Platform uses necessary cookies that are required for the functioning of the Platform — login, session maintenance, security settings. These cookies are not subject to consent because they are necessary for the provision of the service.
 
-The Platform also uses analytical cookies to measure traffic and understand how the Platform is used: Google Analytics (Google Ireland Limited / Google LLC) and Vercel Analytics (Vercel Inc.). These cookies are processed on the basis of the user's consent (Art. 12(1)(1) of the LPDP), which is given before analytical cookies are set and may be withdrawn at any time through the cookie settings. Refusing or withdrawing consent to analytical cookies does not affect the ability to use the Platform. Data collected by these cookies may be transferred to processors in the United States of America (see Article 9).
+The Platform also uses analytical cookies to measure traffic and understand how the Platform is used: Google Analytics (Google Ireland Limited / Google LLC). These cookies are processed on the basis of the user's consent (Art. 12(1)(1) of the LPDP), which is given before analytical cookies are set and may be withdrawn at any time through the cookie settings. Refusing or withdrawing consent to analytical cookies does not affect the ability to use the Platform. Data collected by these cookies may be transferred to processors in the United States of America (see Article 9).
+
+In addition, the Platform measures traffic without cookies, using the Vercel Analytics service (Vercel Inc.). That service sets no cookies, reads no data from the user's device, and does not track the user across different websites; only the aggregate number of visits to individual pages is processed. The basis is the Foundation's legitimate interest in knowing how much the Platform is used (Art. 12(1)(6) LPDP), and the user has the right to object to that processing under Article 13.
 
 ### Article 8 — Recipients of Data and Processors
 
@@ -258,21 +260,37 @@ If the Foundation engages third parties for infrastructure maintenance, those pa
 
 Data may be accessible to the following recipients:
 
-Hosting and application delivery — Vercel Inc. (United States of America) — exclusively for the purpose of the technical functioning of the Platform, on the basis of a data processing agreement.
+Hosting and application delivery — Vercel Inc. (a company established in the United States of America; the application is executed in the European Union, Frankfurt region) — exclusively for the purpose of the technical functioning of the Platform, on the basis of a data processing agreement.
 
-Database — Neon Inc. (United States of America) — storage of ledger and identification data, on the basis of a data processing agreement.
+Database — Neon Inc. (a company established in the United States of America; the database is located in the European Union, Frankfurt region) — storage of ledger and identification data, on the basis of a data processing agreement.
 
 Image storage — Cloudflare, Inc. (the Cloudflare R2 service, United States of America) — storage of profile pictures (avatars) and listing images; only the public internet address (URL) of the image is recorded in the database, not the image itself. On the basis of a data processing agreement.
 
-Email service — Resend, Inc. (United States of America) — exclusively for the delivery of system notifications (for example, password reset messages).
+Email service — Resend, Inc. (United States of America) — exclusively for the delivery of system notifications (for example, password reset messages). The notification of a new message contains an excerpt of that message, so that excerpt also passes through this service.
+
+Alert channel to the Foundation — Telegram Messenger Inc. (United States of America) — exclusively in order to notify the Foundation of events requiring its action. An alert contains the pseudonym and the type of event; it does not contain the data entered in an application for a support programme, nor the content of users' messages. The same alert is also sent by email.
+
+Traffic measurement — Google Ireland Limited or Google LLC (United States of America), exclusively upon the user's consent, and Vercel Inc. without cookies (Article 7).
+
+Payment card processing — the Foundation's commercial bank and its online payment intermediary (Republic of Serbia) — where a user makes a donation by payment card. The Foundation neither receives nor stores payment card data.
 
 Competent state authorities — when this is a statutory obligation, including the Tax Administration, the Administration for the Prevention of Money Laundering, and other authorities in accordance with the law.
 
+The processors listed above engage their own sub-processors for the performance of particular operations, primarily data centre providers. The current lists of sub-processors are published by the processors themselves on their websites.
+
 ### Article 9 — Transfer of Data Outside Serbia
 
-Since the Platform's infrastructure (hosting, database, image storage, and email service referred to in Article 8) is located with providers established in the United States of America, personal data may be transferred to and processed in the United States of America.
+**Where the data are located.** The application is executed and the database is located in the European Union, in the Frankfurt region. The European Union is on the list of countries providing an adequate level of personal data protection, so the special conditions under Art. 65–69 LPDP do not apply to those data.
 
-The transfer is carried out with the application of appropriate safeguards in accordance with Art. 65–69 LPDP. The Foundation ensures that the transfer of data to third countries is based on an adequate level of protection — an adequacy decision, standard contractual clauses, or other appropriate protective measures provided by law. A data processing agreement containing such measures is concluded with each processor referred to in Article 8. The selection of the infrastructure provider takes into account the server location and the applicable legal framework for data protection in the jurisdiction in which the servers are located.
+Vercel Inc. and Neon Inc. are companies established in the United States of America. For that reason, access to the data from a third country is possible for administrative and technical purposes — support, maintenance, and system logs.
+
+**What is actually processed in the United States of America:** images uploaded by users (Cloudflare R2), electronic messages sent by the Platform, including the excerpt of a new message contained in a notification (Resend), alerts sent to the Foundation (Telegram), and data for traffic measurement (Google, exclusively upon consent).
+
+**Basis for the transfer.** The United States of America is not on the list of countries for which an adequate level of protection has been established. The Foundation therefore transfers data exclusively to a processor with which a data processing agreement has been concluded containing standard contractual clauses or other appropriate protective measures under Art. 65 LPDP. Data are not transferred to a processor with which no such agreement has been concluded.
+
+**Verification.** The Foundation keeps a copy of the data processing agreement for each processor referred to in Article 8 and verifies, at least once a year, whether the agreement is in force and whether the list of sub-processors has changed.
+
+**Selection of providers.** In selecting the infrastructure provider, the Foundation takes into account the server location and the applicable legal framework for data protection in the jurisdiction in which the servers are located. For that reason, the application and the database are executed in the European Union.
 
 ### Article 10 — Data Retention Periods
 

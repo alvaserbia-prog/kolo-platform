@@ -99,7 +99,13 @@ export async function POST(
     await kreirajPotvrde(tx, enrollmentId, verifikatori);
   });
 
-  // In-app notifikacija svakom verifikatoru (jedini kanal — nema email/push).
+  // Notifikacija svakom verifikatoru. 🔴 Komentar je do 4.4.9 tvrdio „jedini kanal
+  // — nema email/push"; to nije tačno: `obavesti` bez `email: false` šalje i mejl
+  // (Resend) i push. Naziv programa time stiže verifikatoru i elektronskom poštom.
+  // Ostaje namerno: verifikator po čl. 4 Pravilnika o programima podrške potvrđuje
+  // baš taj program, pa mora da zna koji je — to je rizik R11 iz DPIA, prihvaćen i
+  // opisan. Ono što je uklonjeno je naziv programa u kanalu upozorenja FONDACIJI,
+  // koji tu informaciju nikome nije ni davao (vidi ispod).
   for (const verifikatorId of verifikatori) {
     await obavesti(verifikatorId, {
       tip: "info",
@@ -111,9 +117,14 @@ export async function POST(
     });
   }
 
+  // 🔴 Naziv programa NE ide u kanal upozorenja (Telegram + mejl na ADMIN_EMAIL).
+  // Iz para „pseudonim + POSEBNA_BRIGA" čita se pripadnost posebnoj kategoriji
+  // podataka, a taj kanal ide preko obrađivača u SAD koje Politika navodi samo za
+  // uzak obim (čl. 8, 9). Ko odlučuje o prijavi vidi je u admin panelu, gde su
+  // uneti podaci ionako otvoreni samo superadminu.
   void posaljiAdminAlert(
     "Nova prijava na program",
-    `Program: ${programType}\nKorisnik: ${korisnik.pseudonim}\nČeka potvrdu ${verifikatori.length} verifikatora.`
+    `Korisnik: ${korisnik.pseudonim}\nČeka potvrdu ${verifikatori.length} verifikatora.\nDetalji su u admin panelu.`
   );
 
   return NextResponse.json({ ok: true, brojVerifikatora: verifikatori.length });
