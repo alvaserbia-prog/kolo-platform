@@ -46,17 +46,19 @@ The following terms are used in this Rulebook:
 
 ### Article 4
 
-*Persons authorised to propose a task*
+*Publication of a task and the position of the Foundation*
+
+A task is published on account of a need of the common good, for the purpose of contributing to that good, and not for the purpose of performing work for the Foundation or for any other person.
 
 Tasks may be published by:
 
-- the Foundation, through the Management Board (UO) or a person authorised by it;
+- a ZRNO Holder, independently, following the activation of the Upper Kolo;
 
-- Gornje Kolo (Upper Kolo), by a decision adopted in accordance with the KOLO System Rulebook, upon its activation;
+- Gornje Kolo (Upper Kolo), by a decision adopted in accordance with the KOLO System Rulebook, upon its activation.
 
-- a ZRNO Holder, independently, following the activation of the Upper Kolo.
+In Phase 1, while the Upper Kolo has not yet been activated and while there are no ZRNO Holders in the system, the function referred to in paragraph 2 of this Article is temporarily exercised by the Foundation, through the Management Board (UO) or a person authorised by it. The Foundation exercises that function on behalf of the community and under the same rules that apply to ZRNO Holders, and not in its own name.
 
-In Phase 1, while the Upper Kolo has not yet been activated, tasks are published exclusively by the Foundation.
+The Foundation does not commission a task for itself. It is not the party ordering a work, it is not the beneficiary of the contributor's performance, and it receives no value whatsoever on account of a performed task.
 
 ### Article 5
 
@@ -90,7 +92,7 @@ The proposed POEN is determined according to the estimated scope of work and the
 
 The proposed POEN is not a guaranteed amount that the contributor will receive. The actual ledger entry depends on the distribution of the daily limit in accordance with Chapter VI of this Rulebook.
 
-Indicative rules for proposing POEN — time equivalents, types of work, upper values — may be established by a decision of the Management Board (UO) in Phase 1 and by the Upper Kolo in Phase 2.
+The proposed POEN is not expressed as a value per unit of working time, nor is it determined according to predetermined values by type of work.
 
 ### Article 7
 
@@ -132,7 +134,7 @@ An application is submitted electronically on the platform and contains:
 
 - the execution plan referred to in Article 11 of this Rulebook;
 
-- a declaration that the user is aware of the legal nature of operational contribution as set out in Article 28 of this Rulebook and of the weighted nature of the proposed POEN as set out in Article 22 of this Rulebook.
+- a declaration that the user is aware of the legal nature of operational contribution as set out in Article 27 of this Rulebook and of the weighted nature of the proposed POEN as set out in Article 22 of this Rulebook.
 
 ### Article 11
 
@@ -168,8 +170,6 @@ Receipt of an application is an automatic act of the Protocol. A verified user w
 
 For tasks with multiple intended contributors, the Protocol receives applications in the order of submission until the number specified in the task is reached. Subsequent applications are rejected automatically, with notification to the user.
 
-During the course of a task, the verifier may issue a warning to a contributor that the execution plan as submitted is likely not to be confirmed, with reasons. The warning does not halt execution and does not change the task status; the contributor continues in all respects at their own risk.
-
 ### Article 14
 
 *Tasks with approval*
@@ -200,13 +200,15 @@ Where a qualification filter has been established, the first application that sa
 
 *Verifier*
 
-The execution plan in tasks with approval is approved, and execution in all tasks is verified, by:
+The execution plan in tasks with approval is approved, and execution in all tasks is verified, by a ZRNO Holder, in accordance with the operating rules of the Upper Kolo.
 
-- in Phase 1 — members of the Management Board (UO) of the Foundation or a person authorised by the Management Board;
+In Phase 1, while there are no ZRNO Holders in the system, verification is temporarily carried out by members of the Management Board (UO) of the Foundation or a person authorised by the Management Board, on behalf of the community and under the same rules.
 
-- in Phase 2 — ZRNO Holders, in accordance with the operating rules of the Upper Kolo.
+Verification establishes solely whether the task has been performed in accordance with the criteria published with the task. The verifier does not accept performance on behalf of the Foundation and acquires no right for the Foundation thereby.
 
-The verifier may not be the proposer of the same task if that would give rise to a conflict of interest. The verifier may not be a contributor to the same task.
+The verifier may not be a contributor to the same task. This restriction admits of no exception.
+
+Nor may the verifier be the person who published the task. In Phase 1, while tasks are published and verification carried out by the Foundation, this restriction does not apply to a person expressly authorised for that purpose by the Management Board.
 
 ## V — Execution and Verification
 
@@ -298,41 +300,43 @@ POEN are entered in the contributor's record and have the same status as all oth
 
 ### Article 26
 
-*Upper limit of proposed POEN per task*
-
-The proposed POEN for a single task, as well as the proposed POEN for an individual daily execution in a multi-day task, may not exceed the upper limit established by a decision of the Management Board (UO) in Phase 1, or by the Upper Kolo in Phase 2.
-
-The upper limit is expressed as an absolute amount or as a percentage of the current daily limit. The purpose of this limit is to prevent a single task or a single verification from monopolising the entire daily distribution.
-
-### Article 27
-
 *Variability of limits*
 
-The percentage referred to in Article 23 of this Rulebook and the upper limit referred to in Article 26 of this Rulebook are operational parameters of the system.
+The percentage referred to in Article 23 of this Rulebook is an operational parameter of the system.
 
-Their values are changed by the Management Board (UO) of the Foundation in Phase 1, or by the Upper Kolo in Phase 2. A change takes effect from the first accounting period following the adoption of the decision and is communicated to users in accordance with the KOLO System Rulebook.
+Its value is changed by the Management Board (UO) of the Foundation in Phase 1, or by the Upper Kolo in Phase 2. A change takes effect from the first accounting period following the adoption of the decision and is communicated to users in accordance with the KOLO System Rulebook.
 
 ## VII — Legal Qualification
 
-### Article 28
+### Article 27
 
-*Operational contribution and employment*
+*Legal nature of operational contribution*
 
-Operational contribution does not establish an employment relationship within the meaning of Article 5 of the Labour Act. In the relationship between the task proposer, the verifier, and the contributor:
+Operational contribution is a contribution to the common good. It does not perform work commissioned by the Foundation or by any other person, and nothing is paid out on account of it.
+
+In the relationship between the person who published the task, the verifier, and the contributor:
+
+- there is no commissioning party — a task is published on account of a need of the common good, and not upon the order of a person who would receive the performance for itself; the community of users of the KOLO system is not a legal person, has no bodies, and cannot be a party to a contract;
+
+- there is no remuneration — no amount is paid out and no good is given to the contributor; POEN recorded following verified execution are entries in the Protocol's ledger of a contribution made, with no external property value;
 
 - there is no subordination — the contributor independently decides whether to apply, independently proposes the method of execution, independently determines the pace of work, and may withdraw at any time without consequences;
 
-- there is no personal obligation to work — accepting a task is voluntary and does not create a legal obligation;
+- there is no personal obligation to work — accepting a task is voluntary and does not create a legal obligation.
 
-- there is no remuneration — POEN recorded following verified execution are entries in the Protocol's ledger with no external property value.
+The Foundation is not the party ordering a work and is not the beneficiary of the contributor's performance. On account of a performed task it receives no value whatsoever and acquires no right against the contributor.
+
+The result of an operational contribution enters the common good under the licences set out in Chapter II of the KOLO System Rulebook — software under the AGPL-3.0 licence, content under the CC BY-SA 4.0 licence. The Foundation acquires no exclusive right to the result on that basis; the result is available to all persons on the same terms, and the Foundation uses it on the same basis as any other person.
+
+By virtue of the characteristics set out in paragraphs 2 and 3 of this Article, operational contribution does not establish an employment relationship within the meaning of Article 5 of the Labour Act, nor does it constitute work outside an employment relationship — in particular not a contract for work (ugovor o delu) — because a commissioning party, a commissioned performance, and remuneration are all absent.
 
 POEN recorded on account of operational contribution do not constitute remuneration within the meaning of labour regulations, personal income tax regulations, or payment services regulations.
 
-The proposed POEN is not agreed-upon consideration for work — it is a weighting coefficient in the distribution of the shared daily limit, whose actual realisation depends on the state of the system and total demand in the accounting period, in accordance with Chapter VI of this Rulebook.
+The proposed POEN is not agreed-upon consideration for work — it is a weighting coefficient in the distribution of the shared daily limit, whose actual realisation depends on the state of the system and total demand in the accounting period, in accordance with Chapter VI of this Rulebook. The number of POEN is not a price of work and need not stand in proportion to the value that the same work would have on the market.
 
 ## VIII — Transparency
 
-### Article 29
+### Article 28
 
 *Data available to all users*
 
@@ -342,7 +346,7 @@ The following data on operational contribution are available to all system users
 
 - the current status of each task.
 
-### Article 30
+### Article 29
 
 *Data available to verified users*
 
@@ -360,7 +364,7 @@ The following data are available exclusively to verified system users:
 
 - the current usage of the daily limit and the distribution coefficient for the current accounting period, as well as historical distribution data for previous accounting periods.
 
-### Article 31
+### Article 30
 
 *Pseudonymity*
 
@@ -368,13 +372,13 @@ Data on the contributor and the verifier are published under their pseudonyms in
 
 ## IX — Final Provisions
 
-### Article 32
+### Article 31
 
 *Amendments to the Rulebook*
 
 This Rulebook is adopted and amended by the Management Board (UO) of the KOLO Foundation, under the procedure established in the KOLO System Rulebook.
 
-### Article 33
+### Article 32
 
 *Entry into force*
 

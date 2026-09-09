@@ -947,7 +947,7 @@
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "4.4.3"
+      "ver": "4.4.4"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
@@ -985,7 +985,7 @@
     "meta_radnje_title": "Register of Processing Activities — KOLO",
     "meta_radnje_desc": "Register of personal data processing activities, version 4.4.2",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.4.3",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.4.4",
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.1",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
@@ -1935,7 +1935,7 @@
     "mesta_popunjena": "All contributor slots are filled.",
     "plan_label": "Completion plan * (approach, timeline, evidence)",
     "plan_placeholder": "How you plan to carry out the task (min. 10 characters)...",
-    "plan_min10": "A completion plan is required for this task (min. 10 characters).",
+    "plan_min10": "An execution plan is required (min. 10 characters).",
     "saljem_prijavu": "Submitting...",
     "prijava_podneta_ceka": "Application submitted — awaiting plan approval from someone who confirms you.",
     "moja_dnevna_izvrsenja": "My daily completions",
@@ -1963,7 +1963,11 @@
     "ev_uspeh": "Daily completion submitted. A the person who confirmed you (ZRNO Holder / Board) will confirm it.",
     "saljem": "Sending...",
     "posalji_dnevno": "Submit daily completion",
-    "prijavi_se_za_zadatak": "Apply for this task"
+    "prijavi_se_za_zadatak": "Apply for this task",
+    "izjava_naslov": "Contributor's declaration",
+    "izjava_potvrda": "I have read the declaration and confirm it.",
+    "izjava_obavezna": "Confirm the declaration in order to apply.",
+    "predlozeni_napomena": "The proposed POEN is not remuneration for work but a weighting coefficient in the distribution of the daily limit. How much is recorded depends on total demand in that period."
   },
   "nadzor": {
     "page_naslov": "Oversight",
@@ -2532,7 +2536,8 @@
     "doprinos_revizija_bez_minimuma": "has a listing, but none meets the content minimum — so no contribution was noted",
     "tab_razmene": "Razmene",
     "emisija_tbl_nivo1": "any donation below 5,000",
-    "tab_nabavke": "Nabavke"
+    "tab_nabavke": "Nabavke",
+    "ped_izjava_label": "Contributor's declaration"
   },
   "kolacici": {
     "aria": "Cookie consent",

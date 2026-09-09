@@ -33,9 +33,13 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
     fajl: "donacije_4_4_3.md",
     verzija: "4.4.3",
   },
+  // 4.4.4 — pravna priroda operativnog doprinosa (čl. 27): nema naručioca, nema
+  // naknade, rezultat ide u zajedničko dobro pod licencama iz Glave II. Brisan
+  // vremenski ekvivalent (čl. 6), upozorenje verifikatora (čl. 13) i gornja
+  // granica predloženog POEN-a (raniji čl. 26).
   "operativni": {
-    fajl: "operativni_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "operativni_4_4_4.md",
+    verzija: "4.4.4",
   },
   "osnivacki": {
     fajl: "osnivacki_4_4_1.md",

@@ -95,6 +95,22 @@ tačan podatak.
 `messages/*.json` (`pravne.<doc>.ver` i `meta_<doc>_desc`) i spisak `AKTI` u
 `__tests__/pravni-dokumenti.test.ts`. Sve to samo za akt koji se menja.
 
+**AŽURIRANO 2026-09-09 (petnaesti put):** na **4.4.4** idu **DVA akta** — Pravilnik
+o operativnom doprinosu (sa 4.4.1) i Izjava o prihvatanju rizika (sa 4.4.3).
+Ostalih petnaest ostaje gde jeste. Povod je **analiza rizika R-07** (operativni
+doprinos ima oblik naručenog posla sa naknadom u naturi). Sadržinski, vidi sekciju
+„Operativni doprinos: nema naručioca, nema naknade" ispod.
+
+🟡 **Zašto 4.4.4, a ne 4.4.3 za operativni.** Šifra 4.4.3 je već objavljena
+07–08.09.2026. za tri druga akta; da je operativni dobio isti broj, dva različita
+događaja objave delila bi jednu šifru i iz broja se ne bi videlo o kojoj je izmeni
+reč. Naredna slobodna šifra je 4.4.4 i oba izmenjena akta idu na nju.
+
+Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`. DPIA i
+Registar radnji obrade nisu dirani: izjava izvršioca ne uvodi nov podatak o
+ličnosti (tekst je generisan iz naziva zadatka i broja POEN-a) ni novu radnju
+obrade — prijava na zadatak je već pokrivena.
+
 **AŽURIRANO 2026-09-07 (četrnaesti put):** na **4.4.3** idu **TRI akta** — Pravilnik
 o pokroviteljstvu i donacijama, Uslovi korišćenja i Izjava o prihvatanju rizika.
 Ostalih četrnaest ostaje gde jeste (Pravilnik, dokaz stvarnosti, hijerarhija,
@@ -905,6 +921,127 @@ isti obrt kao kod kolektivne nabavke, gde odluka utvrđuje parametar pre nego š
 strana kaže cenu; **(B)** isto što i roba (cenovnik + isprava). Odluka vlasnika se čeka;
 do tada za usluge važi isti režim kao za robu.
 
+### Operativni doprinos: nema naručioca, nema naknade (2026-09-09)
+
+Odluke uz analizu rizika **R-07** (operativni doprinos ima oblik naručenog posla sa
+naknadom u naturi, pa dodiruje radno i poresko pravo). Izmenjen
+`operativni_4_4_4.md` (čl. 4, 6, 10, 13, 16, 26, 27) i `rizici_4_4_4.md` (čl. 10)
+na svih pet jezika, uz izmenu koda.
+
+🔴 **Odbrana je do 4.4.4 odgovarala na pogrešno pitanje.** Raniji čl. 28 pobijao je
+samo **radni odnos** (čl. 5 Zakona o radu), a to je najmanje verovatna kvalifikacija
+i nikome ne treba da bi naplatio porez. Opasna kvalifikacija je **rad van radnog
+odnosa, pre svega ugovor o delu** — a njemu subordinacija i lična obaveza rada nisu
+ni potrebne. Od tri stuba stare odbrane dva su bila **neutralna ili su radila protiv
+nas**: „nema subordinacije" i „izvršilac radi samostalno" su definiciona svojstva
+poslenika po ugovoru o delu, ne odbrana od njega. Ceo teret nosio je treći stub
+(„nema naknade"), koji stoji na istom temelju kao R-01, R-02 i R-03.
+
+🔴 **Nosivo je ODSUSTVO NARUČIOCA** (odluka vlasnika, formulacija njegova): zadatak
+ne naručuje Fondacija nego ga objavljuje član platforme povodom potrebe zajedničkog
+dobra; **zajednica nije isto što i Fondacija**, nije pravno lice, nema organe i ne
+može biti strana ugovora. Ono što ne može da ugovori ne može ni da naruči. Time
+ugovor o delu pada u korenu, a ne kroz pobijanje njegovih posledica. Isti obrt kao u
+nabavkama (čl. 19: „Fondacija ne prima nikakvu vrednost"), samo sa druge strane
+stola.
+
+**Šta je izmenjeno u aktu:**
+- **čl. 4** prepisan — zadatak objavljuje nosilac ZRNA odnosno Gornje Kolo; **u Fazi 1
+  tu funkciju privremeno vrši Fondacija „u ime zajednice i po istim pravilima", a ne
+  u svoje ime**. Dodat stav da Fondacija nije naručilac dela, nije korisnik činidbe i
+  po osnovu izvršenog zadatka ne prima nikakvu vrednost. Do tada je akt doslovno
+  pisao suprotno („zadatke objavljuje **isključivo Fondacija**"), što je opis
+  stopostotne stvarnosti Faze 1 i najlakša meta.
+- **čl. 16** isto za verifikatora — nosilac ZRNA, u Fazi 1 privremeno UO u ime
+  zajednice; dodato da verifikator izvršenje **ne prima u ime Fondacije** i time za
+  nju ne stiče nijedno pravo.
+- 🔴 **čl. 27 (raniji 28) prepisan** — četiri alineje umesto tri (dodata „nema
+  naručioca"), plus stav da Fondacija nije naručilac ni korisnik činidbe, plus
+  izričito da doprinos **ne predstavlja ni rad van radnog odnosa, naročito ne ugovor
+  o delu**, plus da **broj POEN-a nije cena rada i ne mora stajati u srazmeri** sa
+  tržišnom vrednošću istog rada.
+- 🔴 **čl. 27 st. 4 — rezultat ide u zajedničko dobro pod licencama iz Glave II**
+  (AGPL-3.0 / CC BY-SA 4.0), Fondacija ne stiče isključivo pravo. Ovo obara
+  najtvrđi protivprimer: „tehnički rad na infrastrukturi" (Pravilnik čl. 36 st. 3),
+  gde Fondacija jeste faktički korisnik. Rezultat joj **ne pripada** — licencu ne
+  može ni da povuče (čl. 50 Pravilnika).
+- 🔴 **čl. 6 st. 3 BRISAN — „vremenski ekvivalent, tipovi rada, gornje vrednosti".**
+  To je bilo ovlašćenje UO da uvede **satnicu i platne razrede**. Iz koda su
+  `hourlyRate`/`hoursWorked` uklonjeni davno, a akt je dozvoljavao povratak jednom
+  odlukom. Zamenjen stavom da se predloženi POEN **ne izražava kao vrednost jedinice
+  vremena rada** i ne utvrđuje po unapred određenim vrednostima po vrstama rada.
+  Zaključano testom (`UKINUTO` blok, svih pet jezika).
+- **„prema prirodi zadatka" i procena obima rada OSTAJU** (odluka vlasnika). Kad nema
+  kupca, broj prestaje da bude cena — opasnost od „obima rada" postoji samo ako neko
+  po njemu plaća.
+- 🔴 **čl. 13 st. 3 BRISAN** — upozorenje verifikatora izvršiocu u toku rada. Bilo je
+  jedino mesto gde se neko izjašnjava o tuđem radu **dok rad traje**, uz čl. 17 koji u
+  istom aktu kaže da se „ne nameću radne instrukcije". Odluka vlasnika: brisati, ne
+  preformulisati. Posledica koju treba znati: čovek više ne dobija rano upozorenje da
+  mu plan verovatno neće biti potvrđen i to saznaje tek pri verifikaciji.
+- 🔴 **čl. 26 BRISAN — gornje granice predloženog POEN-a nema** (odluka vlasnika).
+  Pozivao se na odluku UO koja nikad nije doneta, pa je bio prazan. Raniji čl. 27
+  (promenljivost limita) postao je čl. 26 i više ne pominje gornju granicu;
+  numeracija je pomerena, akt sada ima **32 člana** umesto 33.
+  🟡 **Posledicu znati:** operativni doprinos i socijalni programi dele **isti dnevni
+  limit od 10%** (Pravilnik čl. 15; `programi.ts`), a raspodela je srazmerna
+  (`min(1, L/P)`). Bez gornje granice jedan zadatak sa vrlo velikim predloženim
+  POEN-om u istom periodu **srazmerno razblažuje** Podršku majkama, Podršku starijima,
+  Posebnu brigu i Školovanje za taj dan. Ne obara ih — razblažuje, i to tiho.
+- **Izjava o rizicima čl. 10** — nov stav: poreski rizik pokriva i POEN evidentiran po
+  osnovu **operativnog doprinosa i drugih kanala**, uključujući prihod u nenovčanom
+  obliku. Do tada je čl. 10 pokrivao samo razmenu, pa je R-06 bio „dobro alociran" a
+  R-07 nije bio alociran nigde.
+
+🔴 **OTVORENO — prebacivanje poreskog rizika pokriva korisnika, ne Fondaciju.**
+Argument „nema naručioca, nema naknade" obara **građanskopravnu** liniju (ugovor o
+delu) u celini. Poreska linija ostaje gde je bila: prihod u naturi se oporezuje kad
+lice primi nešto što ima vrednost, bez obzira na pravni osnov, pa i dalje počiva
+isključivo na tome da POEN nema vrednost van sistema (isti temelj kao R-01/R-02/R-03).
+Uz to, kod „drugih prihoda" obveznik obračuna po odbitku je **isplatilac** — izjavom
+korisnika se ta obaveza ne skida. Ne pisati nigde da je poreski rizik „rešen".
+
+🟡 **Orijentacioni odnos 1 POEN ≈ 1 RSD (Uslovi čl. 19) čini svaki zadatak deljivim na
+sate od strane bilo koga.** Svesno prihvaćeno („vrednost se ne može sakriti") i ne
+dira se. To je razlog više zašto objavljen **vremenski ekvivalent** ne sme nazad: on
+bi tu računicu izveo umesto posmatrača i pretvorio je u naš sopstveni zapis.
+
+**Kod:**
+- 🔴 **Izjava izvršioca — sprovedena, konačno.** `operativni-izjava.ts`
+  (`generisiIzjavuIzvrsioca`, ČISTA funkcija bez Prisme — uvozi je i obrazac u
+  pretraživaču). **Odredba čl. 10 al. 3 postojala je od prve verzije akta, a kod je
+  nikad nije prikupljao** — pravilnik je propisivao dokaz koji nije nastajao. Tekst se
+  **SNIMA** na `OglasPrijava.izjavaTekst`/`izjavaAt` (migracija
+  `20260909120000_operativni_izjava`) i posle toga se ne menja — isti razlog kao
+  `DonationRecord.ugovorTekst`. **Ne generisati ga ponovo pri čitanju.** Tekst je na
+  **srpskom na svim jezicima**, kao ugovor o donaciji.
+  🟡 Zatečene prijave ostaju bez izjave (`null`) — za njih izjava nije ni data;
+  retroaktivno „data" izjava bila bi netačan dokument. Bez prelazne radnje.
+- 🔴 **Plan izvršenja je sada obavezan uz SVAKU prijavu** (čl. 10, 11). Kod ga je
+  tražio samo za zadatke `saOdobravanjem`, pa za većinu zadataka **nije postojao
+  nijedan zapis da je izvršilac sam odredio način rada** — a to je prvi stub odbrane
+  iz čl. 27. Ruta i obrazac sada oba traže minimum 10 znakova.
+- **Tvrda granica od 10.000.000 POEN u `evidencija/route.ts` OSTAJE** (odluka
+  vlasnika) — ali nije iz akta: to je brava na unos protiv omaške u kucanju. Komentar
+  više ne upućuje na obrisani čl. 26. Provera „dnevno izvršenje ≤ predloženi POEN
+  zadatka" ostaje i ona je iz **čl. 11**, ne iz čl. 26.
+- **Copy:** definiciona rečenica uz polje za predloženi POEN (`predlozeni_napomena`,
+  pet jezika) — isti posao koji `novcanik.send_napomena` radi za prepis. Bez nje se
+  polje za unos iznosa čita kao fakturisanje rada. Novi ključevi: `izjava_naslov`,
+  `izjava_potvrda`, `izjava_obavezna`, `admin.ped_izjava_label`; `plan_min10` više ne
+  kaže „za ovaj zadatak".
+- Izjavu vidi izvršilac uz svoju prijavu i verifikator u admin tabu (Evidencija/PED).
+
+🟢 **Sukob interesa u kodu se poklapa sa novim čl. 16:** izvršilac ne može verifikovati
+sopstveno izvršenje **apsolutno**, a zabrana „predlagač = verifikator" ima izuzetak za
+superadmina u Fazi 1 — što je tačno „lice koje Upravni odbor za to izričito ovlasti"
+iz čl. 16 st. 5.
+
+🟢 **Pravilnik o KOLO sistemu NIJE diran.** Čl. 36 kaže „Fondacija, Gornje Kolo ili
+nosioci ZRNA objavljuju zadatak" i delegira proceduru posebnom pravilniku — nema
+protivrečnosti sa novim čl. 4. Bump glavnog Pravilnika povlači ispravke u DPIA i
+Pravilniku o učešću dece, pa se ne otvara bez naloga.
+
 ### Kolektivna nabavka — implementacija (2026-09-02)
 
 Mehanizam iz **Pravilnika o projektima i kolektivnim nabavkama** (set 4.4.1) je od
@@ -1583,7 +1720,7 @@ Do ove izmene Fondacija **nije imala nijednu polugu nad tuđim sadržajem** osim
 - Logika: `src/lib/protokol/krug.ts` → `proveriIEmitujBonusPrag()`.
 
 ### Programi Protokola
-- **Operativni doprinos (Pravilnik čl. 36; Pravilnik o operativnom doprinosu):** Fondacija/Gornje Kolo/nosioci ZRNA objavljuju **zadatak**; korisnik (indeks ≥ 10%) se prijavljuje i izvršava; izvršenje **verifikuju nosioci ZRNA (Faza 2), odn. UO (Faza 1)** — **NIJE** međusobno potvrđivanje proizvoljnih korisnika. Model: predlagač zadaje **predloženi POEN** (težinski koeficijent), evidentirani POEN = predloženi × min(1, L/P) u okviru dnevnog limita. ✅ Implementirano u `programi.ts` (`raspodelaKoeficijent`, `evidentiraniPoen`); verifikacija nosilaca ZRNA/UO sa proverom sukoba interesa.
+- **Operativni doprinos (Pravilnik čl. 36; Pravilnik o operativnom doprinosu):** zadatak objavljuje nosilac ZRNA odn. Gornje Kolo, a u Fazi 1 privremeno Fondacija **u ime zajednice** (čl. 4, od 4.4.4 — vidi „Operativni doprinos: nema naručioca, nema naknade"); korisnik (indeks ≥ 10%) se prijavljuje i izvršava; izvršenje **verifikuju nosioci ZRNA (Faza 2), odn. UO (Faza 1)** — **NIJE** međusobno potvrđivanje proizvoljnih korisnika. Model: predlagač zadaje **predloženi POEN** (težinski koeficijent), evidentirani POEN = predloženi × min(1, L/P) u okviru dnevnog limita. ✅ Implementirano u `programi.ts` (`raspodelaKoeficijent`, `evidentiraniPoen`); verifikacija nosilaca ZRNA/UO sa proverom sukoba interesa.
 - **Socijalni programi:** PODRSKA_MAJKAMA (i primarni staratelji), PODRSKA_STARIJIMA, POSEBNA_BRIGA, SKOLOVANJE — uslovi/koeficijenti u programskim pravilnicima.
 - Svi programi otvoreni verifikovanim korisnicima (indeks ≥ 10%), nezavisno od Kruga.
 - 🔴 **Socijalni program traži indeks ≥ 10% — jednu primljenu potvrdu (od seta 4.3.1, 2026-08-18).** Do tada je čl. 4 Pravilnika o programima podrške tražio **pun indeks (100%)**, pa su prijavu mogli da podnesu samo nalozi sa svih deset potvrda; u kodu je to bio zaseban `MAX_INDEKS` gejt u `POST /api/programi/[type]/prijava`, iznad već postojećeg `imaFunkcionalniPristup`. Taj gejt je uklonjen — prag sada drži jedno mesto. Isto važi i za obustavu: `razlogObustaveProgram` (`programi.ts`, cron `/api/cron/programi-revizija`) gasi ACTIVE prijavu tek kad indeks padne **ispod 10%**, ne ispod 100%; ranije je jedna poništena potvrda gasila program čoveku koji uslov i dalje ispunjava. UI prop se zove `imaPristupProgramima` (bio `imaPunIndeks`).

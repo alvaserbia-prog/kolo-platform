@@ -5,11 +5,13 @@ import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
+import { generisiIzjavuIzvrsioca } from "@/lib/operativni-izjava";
 
 interface MojaPrijava {
   id: string;
   status: string;
   planIzvrsenja: string | null;
+  izjavaTekst?: string | null;
   rejectionReason: string | null;
   createdAt: string;
 }
@@ -55,6 +57,7 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
   const router = useRouter();
   const [loadingPrijava, setLoadingPrijava] = useState(false);
   const [plan, setPlan] = useState("");
+  const [izjava, setIzjava] = useState(false);
   const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
 
   const aktivan = oglas.status === "ACTIVE";
@@ -76,15 +79,21 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
   };
 
   async function prijavi() {
-    if (oglas.saOdobravanjem && plan.trim().length < 10) {
+    // Plan izvršenja je obavezan uz svaku prijavu (čl. 10, 11) — on je zapis o
+    // tome da je izvršilac sam odredio način rada.
+    if (plan.trim().length < 10) {
       setPoruka({ text: t("plan_min10"), ok: false });
+      return;
+    }
+    if (!izjava) {
+      setPoruka({ text: t("izjava_obavezna"), ok: false });
       return;
     }
     setLoadingPrijava(true); setPoruka(null);
     const res = await fetch(`/api/doprinos-oglasi/${oglas.id}/prijavi`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ planIzvrsenja: plan.trim() || undefined }),
+      body: JSON.stringify({ planIzvrsenja: plan.trim(), izjavaPotvrdjena: true }),
     });
     const data = await res.json();
     setLoadingPrijava(false);
@@ -161,6 +170,16 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
           </div>
         )}
 
+        {/* Snimljena izjava (čl. 10 al. 3). Prikazuje se tekst SA PRIJAVE, ne
+            ponovo generisan — dokument mora da govori ono što je govorio tada.
+            Zatečene prijave nemaju izjavu i tada ovaj odeljak izostaje. */}
+        {oglas.mojaPrijava?.izjavaTekst && (
+          <details className="rounded-xl border border-kolo-border bg-kolo-bg-soft px-4 py-3">
+            <summary className="text-xs font-semibold text-kolo-muted cursor-pointer">{t("izjava_naslov")}</summary>
+            <p className="mt-2 text-xs text-kolo-muted whitespace-pre-line leading-relaxed">{oglas.mojaPrijava.izjavaTekst}</p>
+          </details>
+        )}
+
         {/* Akcije */}
         <div className="pt-1 space-y-3">
           {!isVerified && aktivan && (
@@ -171,17 +190,28 @@ export default function OglasDetalj({ oglas, isVerified }: { oglas: OglasData; i
           )}
           {mozePrijaviti && !mestaPopunjena && (
             <>
-              {oglas.saOdobravanjem && (
-                <div>
-                  <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("plan_label")}</label>
-                  <textarea rows={3} value={plan} onChange={(e) => setPlan(e.target.value)}
-                    placeholder={t("plan_placeholder")}
-                    className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 resize-none" />
-                </div>
-              )}
-              <button onClick={prijavi} disabled={loadingPrijava}
+              <div>
+                <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("plan_label")}</label>
+                <textarea rows={3} value={plan} onChange={(e) => setPlan(e.target.value)}
+                  placeholder={t("plan_placeholder")}
+                  className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 resize-none" />
+              </div>
+              {/* Izjava o pravnoj prirodi (čl. 10 al. 3). Tekst stoji VIDLJIV iznad
+                  potvrde, ne kao link na pravilnik — potvrđuje se ono što se pročita. */}
+              <div className="rounded-xl border border-kolo-border bg-kolo-bg-soft p-3">
+                <p className="text-xs font-semibold text-kolo-muted mb-2">{t("izjava_naslov")}</p>
+                <p className="text-xs text-kolo-muted whitespace-pre-line leading-relaxed">
+                  {generisiIzjavuIzvrsioca({ nazivZadatka: oglas.title, predlozeniPoen: oglas.predlozeniPoen })}
+                </p>
+                <label className="mt-3 flex items-start gap-2 cursor-pointer">
+                  <input type="checkbox" checked={izjava} onChange={(e) => setIzjava(e.target.checked)}
+                    className="mt-0.5 accent-kolo-green-700" />
+                  <span className="text-xs text-kolo-text">{t("izjava_potvrda")}</span>
+                </label>
+              </div>
+              <button onClick={prijavi} disabled={loadingPrijava || !izjava}
                 className="w-full py-3 rounded-xl bg-kolo-green-700 text-white font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60">
-                {loadingPrijava ? t("saljem_prijavu") : (oglas.saOdobravanjem ? t("prijavi_se_sa_planom") : t("prijavi_se_za_zadatak"))}
+                {loadingPrijava ? t("saljem_prijavu") : t("prijavi_se_sa_planom")}
               </button>
             </>
           )}
@@ -326,6 +356,10 @@ function EvidencijaForma({ oglasId, maxPredlozeni, onSuccess }: {
             onChange={(e) => setPredlozeniPoen(e.target.value)}
             placeholder={t("predlozeni_poen_placeholder")}
             className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600" />
+          {/* Definiciona rečenica uz samo polje — isti posao koji
+              `novcanik.send_napomena` radi za prepis. Bez nje polje za unos
+              iznosa čita se kao fakturisanje rada. */}
+          <p className="mt-1.5 text-[11px] leading-snug text-kolo-muted">{t("predlozeni_napomena")}</p>
         </div>
       </div>
 

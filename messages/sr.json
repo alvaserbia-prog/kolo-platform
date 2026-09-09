@@ -947,7 +947,7 @@
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
-      "ver": "4.4.3"
+      "ver": "4.4.4"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
@@ -985,7 +985,7 @@
     "meta_radnje_title": "Registar radnji obrade · KOLO",
     "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.4.2",
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
-    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.4.3",
+    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.4.4",
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.1",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
@@ -1935,7 +1935,7 @@
     "mesta_popunjena": "Sva mesta za izvršioce su popunjena.",
     "plan_label": "Plan izvršenja * (način, vremenski okvir, dokazivanje)",
     "plan_placeholder": "Kako planiraš da izvršiš zadatak (min. 10 znakova)...",
-    "plan_min10": "Za ovaj zadatak je obavezan plan izvršenja (min. 10 znakova).",
+    "plan_min10": "Plan izvršenja je obavezan (min. 10 znakova).",
     "saljem_prijavu": "Šaljem prijavu...",
     "prijava_podneta_ceka": "Prijava podneta, čeka odobrenje plana od nosioca ZRNA.",
     "moja_dnevna_izvrsenja": "Moja dnevna izvršenja",
@@ -1963,7 +1963,11 @@
     "ev_uspeh": "Dnevno izvršenje podneto. Nosilac ZRNA (ili Upravni odbor) potvrđuje izvršenje.",
     "saljem": "Šaljem...",
     "posalji_dnevno": "Pošalji dnevno izvršenje",
-    "prijavi_se_za_zadatak": "Prijavi se za ovaj zadatak"
+    "prijavi_se_za_zadatak": "Prijavi se za ovaj zadatak",
+    "izjava_naslov": "Izjava izvršioca",
+    "izjava_potvrda": "Pročitao sam izjavu i potvrđujem je.",
+    "izjava_obavezna": "Potvrdi izjavu da bi mogao da se prijaviš.",
+    "predlozeni_napomena": "Predloženi POEN nije naknada za rad nego težinski koeficijent u raspodeli dnevnog limita. Koliko će biti evidentirano zavisi od ukupne potražnje u tom periodu."
   },
   "nadzor": {
     "page_naslov": "Nadzor",
@@ -2532,7 +2536,8 @@
     "doprinos_revizija_bez_minimuma": "ima oglas, ali nijedan ne ispunjava sadržinski minimum, zato doprinos nije ni zabeležen",
     "tab_razmene": "Razmene",
     "emisija_tbl_nivo1": "svaka donacija ispod 5.000",
-    "tab_nabavke": "Nabavke"
+    "tab_nabavke": "Nabavke",
+    "ped_izjava_label": "Izjava izvršioca"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",

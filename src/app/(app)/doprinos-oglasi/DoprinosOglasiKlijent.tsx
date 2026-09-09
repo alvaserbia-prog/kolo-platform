@@ -101,17 +101,10 @@ function OglasKartica({ oglas, isVerified, prijavaStatusBadge, sourceLabel }: {
   const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
 
   const badge = oglas.mojaPrijava ? prijavaStatusBadge[oglas.mojaPrijava] : null;
-  // Brza prijava sa kartice moguća je samo za zadatke bez odobravanja (bez plana izvršenja).
-  const mozePrijaviti = isVerified && !oglas.mojaPrijava && !oglas.saOdobravanjem;
-
-  async function prijavi() {
-    setLoading(true); setPoruka(null);
-    const res = await fetch(`/api/doprinos-oglasi/${oglas.id}/prijavi`, { method: "POST" });
-    const data = await res.json();
-    setLoading(false);
-    setPoruka({ text: res.ok ? t("prijava_primljena_izvršilac") : (data.error ?? t("greska")), ok: res.ok });
-    if (res.ok) setTimeout(() => router.refresh(), 1200);
-  }
+  // 🔴 Brze prijave sa kartice VIŠE NEMA. Od seta 4.4.4 svaka prijava traži plan
+  // izvršenja (čl. 10, 11) i potvrđenu izjavu o pravnoj prirodi (čl. 10 al. 3), pa
+  // se prijava podnosi isključivo sa stranice zadatka, gde se oboje vidi i unosi.
+  const mozePrijaviti = isVerified && !oglas.mojaPrijava;
 
   return (
     <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
@@ -154,12 +147,6 @@ function OglasKartica({ oglas, isVerified, prijavaStatusBadge, sourceLabel }: {
               {t("detalji")}
             </Link>
             {mozePrijaviti && (
-              <button onClick={prijavi} disabled={loading}
-                className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-800 transition-colors disabled:opacity-60">
-                {loading ? "..." : t("prijavi_se")}
-              </button>
-            )}
-            {isVerified && !oglas.mojaPrijava && oglas.saOdobravanjem && (
               <Link href={`/doprinos-oglasi/${oglas.id}`}
                 className="px-3 py-1.5 bg-kolo-green-700 text-white text-xs font-semibold rounded-xl hover:bg-kolo-green-800 transition-colors">
                 {t("prijavi_se_sa_planom")}

@@ -46,17 +46,19 @@ E szabályzatban a következő fogalmak használatosak:
 
 ### 4. cikk
 
-*A feladat javaslattételére jogosult személyek*
+*A feladat közzététele és az Alapítvány helyzete*
+
+A feladat a közjó valamely szükséglete okán, az e javára történő hozzájárulás céljából kerül közzétételre, nem pedig az Alapítvány vagy bármely más személy számára végzett munka teljesítése céljából.
 
 Feladatot közzétehet:
 
-- az Alapítvány, az Igazgatótanácson vagy az általa felhatalmazott személyen keresztül;
+- a ZRNO-tulajdonos, önállóan, a Felső Kolo aktiválását követően;
 
-- a Felső Kolo, a KOLO rendszerről szóló szabályzattal összhangban hozott határozattal, annak aktiválását követően;
+- a Felső Kolo, a KOLO rendszerről szóló szabályzattal összhangban hozott határozattal, annak aktiválását követően.
 
-- a ZRNO-tulajdonos, önállóan, a Felső Kolo aktiválását követően.
+Az 1. szakaszban, amíg a Felső Kolo nincs aktiválva és amíg a rendszerben nincsenek ZRNO-tulajdonosok, az e cikk (2) bekezdése szerinti feladatkört ideiglenesen az Alapítvány látja el, az Igazgatótanácson vagy az általa felhatalmazott személyen keresztül. Az Alapítvány e feladatkört a közösség nevében és a ZRNO-tulajdonosokra vonatkozó ugyanazon szabályok szerint látja el, nem pedig a saját nevében.
 
-Az 1. szakaszban, amíg a Felső Kolo nincs aktiválva, feladatot kizárólag az Alapítvány tesz közzé.
+Az Alapítvány a feladatot nem a maga számára rendeli meg. Nem megrendelője a műnek, nem élvezője a végrehajtó szolgáltatásának, és a teljesített feladat alapján semmilyen értéket nem kap.
 
 ### 5. cikk
 
@@ -90,7 +92,7 @@ A javasolt POEN a munka becsült terjedelme és a feladat jellege szerint kerül
 
 A javasolt POEN nem garantált összeg, amelyet a végrehajtó megkap. A tényleges nyilvántartásba vétel a napi korlát elosztásától függ, e szabályzat VI. fejezetével összhangban.
 
-A POEN javaslatára vonatkozó irányadó szabályok — időbeli egyenérték, munkatípusok, felső értékek — az 1. szakaszban az Igazgatótanács, a 2. szakaszban a Felső Kolo határozatával állapíthatók meg.
+A javasolt POEN nem fejezhető ki a munkaidő egységére vetített értékként, és nem állapítható meg munkafajták szerint előre meghatározott értékek alapján.
 
 ### 7. cikk
 
@@ -132,7 +134,7 @@ A jelentkezés elektronikusan, a platformon nyújtandó be, és a következőket
 
 - az e szabályzat 11. cikke szerinti végrehajtási terv;
 
-- nyilatkozat arról, hogy a felhasználó megismerte a működési hozzájárulás e szabályzat 28. cikke szerinti jogi természetét, valamint a javasolt POEN e szabályzat 22. cikke szerinti súlyozási jellegét.
+- nyilatkozat arról, hogy a felhasználó megismerte a működési hozzájárulás e szabályzat 27. cikke szerinti jogi természetét, valamint a javasolt POEN e szabályzat 22. cikke szerinti súlyozási jellegét.
 
 ### 11. cikk
 
@@ -168,7 +170,6 @@ A jelentkezés befogadása a Protokoll automatikus aktusa. Az a hitelesített fe
 
 A több előirányzott végrehajtóval rendelkező feladatok esetében a Protokoll a benyújtás sorrendjében fogadja be a jelentkezéseket a feladatban előirányzott létszám betöltéséig. A későbbi jelentkezések automatikusan elutasításra kerülnek, a felhasználó értesítése mellett.
 
-A hitelesítő a feladat időtartama alatt figyelmeztetést intézhet a végrehajtóhoz arról, hogy a benyújtott formájában a végrehajtási terv valószínűleg nem nyer megerősítést, indokolással együtt. A figyelmeztetés nem állítja le a végrehajtást, és nem változtatja meg a feladat állapotát; a végrehajtó mindenben saját kockázatára folytatja.
 
 ### 14. cikk
 
@@ -200,13 +201,15 @@ Ha a minősítési szűrő megállapításra került, az első azt teljesítő j
 
 *A hitelesítő*
 
-A jóváhagyásos feladatokban a végrehajtási tervet jóváhagyja, valamennyi feladatban pedig a végrehajtást hitelesíti:
+A jóváhagyásos feladatokban a végrehajtási tervet jóváhagyja, valamennyi feladatban pedig a végrehajtást hitelesíti a ZRNO-tulajdonos, a Felső Kolo működési szabályai szerint.
 
-- az 1. szakaszban — az Alapítvány Igazgatótanácsának tagjai vagy az Igazgatótanács által felhatalmazott személy;
+Az 1. szakaszban, amíg a rendszerben nincsenek ZRNO-tulajdonosok, a hitelesítést ideiglenesen az Alapítvány Igazgatótanácsának tagjai vagy az Igazgatótanács által felhatalmazott személy végzi, a közösség nevében és ugyanazon szabályok szerint.
 
-- a 2. szakaszban — a ZRNO-tulajdonosok, a Felső Kolo működési szabályai szerint.
+A hitelesítés kizárólag azt állapítja meg, hogy a feladat a feladattal együtt közzétett feltételek szerint teljesült-e. A hitelesítő a teljesítést nem az Alapítvány nevében veszi át, és ezzel az Alapítvány számára semmilyen jogot nem szerez.
 
-A hitelesítő nem lehet ugyanazon feladat javaslattevője, ha ez összeférhetetlenséghez vezetne. A hitelesítő nem lehet ugyanazon feladat végrehajtója.
+A hitelesítő nem lehet ugyanazon feladat végrehajtója. E korlátozás alól nincs kivétel.
+
+A hitelesítő nem lehet a feladatot közzétevő személy sem. Az 1. szakaszban, amíg a feladatokat az Alapítvány teszi közzé és a hitelesítést is az végzi, e korlátozás nem alkalmazandó arra a személyre, akit az Igazgatótanács erre kifejezetten felhatalmaz.
 
 ## V — Végrehajtás és hitelesítés
 
@@ -298,41 +301,43 @@ A POEN-ek a végrehajtó bejegyzésében kerülnek rögzítésre, és ugyanolyan
 
 ### 26. cikk
 
-*A feladatonkénti javasolt POEN felső határa*
+*A korlát változtathatósága*
 
-Egy feladat javasolt POEN-je, valamint a többnapos feladatban az egyes napi végrehajtások javasolt POEN-je nem haladhatja meg az 1. szakaszban az Igazgatótanács, a 2. szakaszban a Felső Kolo határozatával megállapított felső határt.
+Az e szabályzat 23. cikke szerinti százalék a rendszer működési paramétere.
 
-A felső határ abszolút összegként vagy a folyó napi korlát százalékában fejezendő ki. E határ célja annak megakadályozása, hogy egyetlen feladat vagy egyetlen hitelesítés teljes egészében monopolizálja a napi elosztást.
-
-### 27. cikk
-
-*A korlátok változtathatósága*
-
-Az e szabályzat 23. cikke szerinti százalék és a 26. cikke szerinti felső határ a rendszer működési paraméterei.
-
-Értéküket az 1. szakaszban az Alapítvány Igazgatótanácsa, a 2. szakaszban a Felső Kolo változtatja meg. A módosítás a határozat meghozatalát követő első elszámolási időszakban lép hatályba, és a KOLO rendszerről szóló szabályzattal összhangban közzétételre kerül a felhasználók felé.
+Értékét az 1. szakaszban az Alapítvány Igazgatótanácsa, a 2. szakaszban a Felső Kolo változtatja meg. A módosítás a határozat meghozatalát követő első elszámolási időszakban lép hatályba, és a KOLO rendszerről szóló szabályzattal összhangban közzétételre kerül a felhasználók felé.
 
 ## VII — Jogi minősítés
 
-### 28. cikk
+### 27. cikk
 
-*A működési hozzájárulás és a munkaviszony*
+*A működési hozzájárulás jogi természete*
 
-A működési hozzájárulás nem hoz létre munkaviszonyt a munkatörvény 5. cikke értelmében. A feladat javaslattevője, a hitelesítő és a végrehajtó közötti viszonyban:
+A működési hozzájárulás a közjó javára tett hozzájárulás. Nem az Alapítvány vagy bármely más személy által megrendelt munka teljesítése, és annak alapján semmi nem kerül kifizetésre.
+
+A feladatot közzétevő személy, a hitelesítő és a végrehajtó közötti viszonyban:
+
+- nincs megrendelő — a feladat a közjó valamely szükséglete okán kerül közzétételre, nem pedig olyan személy megbízásából, aki a teljesítést a maga számára venné át; a KOLO rendszer felhasználóinak közössége nem jogi személy, nincsenek szervei, és nem lehet szerződés alanya;
+
+- nincs díjazás — a végrehajtó részére semmilyen összeg nem kerül kifizetésre és semmilyen dolog nem kerül átadásra; a hitelesített végrehajtást követően nyilvántartásba vett POEN-ek a Protokoll nyilvántartásának a megtett hozzájárulásról szóló bejegyzései, külső vagyoni érték nélkül;
 
 - nincs alárendeltség — a végrehajtó önállóan dönti el, hogy jelentkezik-e, önállóan javasolja a végrehajtás módját, önállóan határozza meg a munka ütemét, és bármikor következmények nélkül elállhat;
 
-- nincs személyes munkavégzési kötelezettség — a feladat vállalása önkéntes, és jogi értelemben nem keletkeztet kötelmet;
+- nincs személyes munkavégzési kötelezettség — a feladat vállalása önkéntes, és jogi értelemben nem keletkeztet kötelmet.
 
-- nincs díjazás — a hitelesített végrehajtást követően nyilvántartásba vett POEN-ek a Protokoll nyilvántartásának bejegyzései, külső vagyoni érték nélkül.
+Az Alapítvány nem megrendelője a műnek és nem élvezője a végrehajtó szolgáltatásának. A teljesített feladat alapján semmilyen értéket nem kap, és a végrehajtóval szemben semmilyen jogot nem szerez.
+
+A működési hozzájárulás eredménye a KOLO rendszerről szóló szabályzat II. fejezete szerinti licencek alatt kerül a közjóba — a szoftver az AGPL-3.0 licenc, a tartalom a CC BY-SA 4.0 licenc alatt. Az Alapítvány ezen az alapon nem szerez kizárólagos jogot az eredményre; az eredmény azonos feltételekkel minden személy számára hozzáférhető, és az Alapítvány azt ugyanazon az alapon használja, mint bármely más személy.
+
+Az e cikk (2) és (3) bekezdésében foglalt jellemzők folytán a működési hozzájárulás nem hoz létre munkaviszonyt a munkatörvény 5. cikke értelmében, és nem minősül munkaviszonyon kívüli munkavégzésnek sem — különösen nem vállalkozási szerződésnek —, mivel hiányzik a megrendelő, a megrendelt szolgáltatás és a díjazás.
 
 A működési hozzájárulás alapján nyilvántartásba vett POEN-ek nem minősülnek díjazásnak a munkajogi előírások, a polgárok jövedelemadójáról szóló előírások, sem a fizetési szolgáltatásokról szóló előírások értelmében.
 
-A javasolt POEN nem a munka szerződéses ellenértéke — súlyozási együttható a közös napi korlát elosztásában, amelynek tényleges megvalósulása a rendszer állapotától és az elszámolási időszak teljes keresletétől függ, e szabályzat VI. fejezetével összhangban.
+A javasolt POEN nem a munka szerződéses ellenértéke — súlyozási együttható a közös napi korlát elosztásában, amelynek tényleges megvalósulása a rendszer állapotától és az elszámolási időszak teljes keresletétől függ, e szabályzat VI. fejezetével összhangban. A POEN száma nem a munka ára, és nem kell arányban állnia azzal az értékkel, amellyel ugyanaz a munka a piacon rendelkezne.
 
 ## VIII — Átláthatóság
 
-### 29. cikk
+### 28. cikk
 
 *A valamennyi felhasználó számára elérhető adatok*
 
@@ -342,7 +347,7 @@ A működési hozzájárulásra vonatkozó következő adatok a rendszer valamen
 
 - minden feladat aktuális állapota.
 
-### 30. cikk
+### 29. cikk
 
 *A hitelesített felhasználók számára elérhető adatok*
 
@@ -360,7 +365,7 @@ A következő adatok kizárólag a rendszer hitelesített felhasználói számá
 
 - a napi korlát folyó kihasználtsága és a folyó elszámolási időszakra vonatkozó elosztási együttható, valamint a korábbi elszámolási időszakok elosztására vonatkozó előzményadatok.
 
-### 31. cikk
+### 30. cikk
 
 *Álnevesség*
 
@@ -368,13 +373,13 @@ A végrehajtóra és a hitelesítőre vonatkozó adatok a rendszerbeli álnevük
 
 ## IX — Záró rendelkezések
 
-### 32. cikk
+### 31. cikk
 
 *A szabályzat módosítása*
 
 E szabályzatot a KOLO Alapítvány Igazgatótanácsa fogadja el és módosítja, a KOLO rendszerről szóló szabályzatban megállapított eljárás szerint.
 
-### 33. cikk
+### 32. cikk
 
 *Hatálybalépés*
 

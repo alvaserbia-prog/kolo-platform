@@ -68,8 +68,12 @@ export async function POST(
   if (!oglas || oglas.status !== "ACTIVE") return await greska("Zadatak nije aktivan.", 400);
 
   // Predloženi POEN pojedinačnog dnevnog izvršenja ne sme premašiti predloženi POEN
-  // celog zadatka (čl. 26 — gornja granica po dnevnom izvršenju). Zadatak sa
-  // predlozeniPoen = 0 nema ograničenje — važi samo zdravorazumska granica unosa.
+  // celog zadatka. Osnov je čl. 11 (raspodela predloženog POEN-a po dnevnim
+  // izvršenjima), a NE raniji čl. 26 — gornja granica je brisana setom 4.4.4, jer
+  // se pozivala na odluku UO koja nikad nije doneta.
+  //
+  // Granica od 10.000.000 nije iz akta: to je brava na unos, protiv omaške u
+  // kucanju. Zadatak sa predlozeniPoen = 0 nema drugog ograničenja.
   if (predlozeni > 10_000_000)
     return await greska("Predloženi POEN dnevnog izvršenja ne može preći 10.000.000.", 400);
   if (oglas.predlozeniPoen > 0 && predlozeni > oglas.predlozeniPoen)

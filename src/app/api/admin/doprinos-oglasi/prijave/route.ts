@@ -28,6 +28,7 @@ export async function GET(_req: NextRequest) {
       predlozeniPoen: p.oglas.predlozeniPoen,
       positions: p.oglas.positions,
       planIzvrsenja: p.planIzvrsenja,
+      izjavaTekst: p.izjavaTekst,
       createdAt: p.createdAt.toISOString(),
     })),
   });

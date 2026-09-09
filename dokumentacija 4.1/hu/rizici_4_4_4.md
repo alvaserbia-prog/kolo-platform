@@ -82,6 +82,8 @@ A rendszer álláspontja az, hogy a POEN és a ZRNO vagyoni érték nélküli ny
 
 Az adóhatóságok eltérő álláspontra helyezkedhetnek. A javak és szolgáltatások rendszeren belüli cseréje az adójogszabályok értelmében cserének vagy más adóköteles eseménynek minősülhet, ideértve a lakosság jövedelemadójáról és a hozzáadottérték-adóról szóló jogszabályokat.
 
+Ugyanez vonatkozik a működési hozzájárulás és a hozzájárulás nyilvántartásba vételének más csatornái alapján nyilvántartásba vett POEN-re is. A rendszer álláspontja az, hogy az ilyen bejegyzéssel nem kerül kifizetésre díjazás és nem kerül átadásra semmilyen érték, hanem a közjó javára tett hozzájárulás kerül rögzítésre, és hogy ezen az alapon az Alapítvány sem a munka megrendelője, sem a szolgáltatás élvezője nem. Az adóhatóságok eltérő álláspontra helyezkedhetnek, és az ilyen bejegyzést a felhasználó jövedelmének minősíthetik, ideértve a nem pénzbeli formában szerzett jövedelmet is.
+
 Az Alapítvány nem nyújt adótanácsadást, és nem tudja szavatolni a felhasználó rendszerbeli tevékenységének adójogi megítélését. A felhasználó felelős a rendszerben való részvétellel összefüggésben esetlegesen keletkező saját adókötelezettségeiért, és javasoljuk, hogy konzultáljon adótanácsadóval.
 
 ### 11. cikk — Szabályozási kockázat

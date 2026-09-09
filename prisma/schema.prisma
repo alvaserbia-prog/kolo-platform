@@ -1115,7 +1115,13 @@ model OglasPrijava {
   oglas           DoprinosOglas      @relation(fields: [oglasId], references: [id])
   userId          String
   user            User               @relation("OglasPrijave", fields: [userId], references: [id])
-  planIzvrsenja   String? // plan izvršenja (čl. 11) — obavezan za zadatke „sa odobravanjem"
+  planIzvrsenja   String? // plan izvršenja (čl. 10, 11) — obavezan uz svaku prijavu
+  // Izjava izvršioca o pravnoj prirodi operativnog doprinosa (čl. 10 al. 3).
+  // Tekst se SNIMA i posle toga se ne menja — dokument mora da govori ono što je
+  // govorio u trenutku prijave. Zatečene prijave ostaju bez izjave (null): za njih
+  // izjava nije ni data, a retroaktivno „data" izjava bila bi netačan dokument.
+  izjavaTekst     String?
+  izjavaAt        DateTime?
   status          OglasPrijavaStatus @default(PENDING)
   approvedById    String?
   approvedAt      DateTime?

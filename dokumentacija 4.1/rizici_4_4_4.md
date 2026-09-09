@@ -80,6 +80,8 @@ Pozicija sistema je da su POEN i ZRNO evidencija bez imovinske vrednosti i da ra
 
 Poreske vlasti mogu zauzeti drugačiji stav. Razmena dobara i usluga unutar sistema može se kvalifikovati kao trampa ili drugi oporezivi događaj u smislu poreskih propisa, uključujući propise o porezu na dohodak građana i porezu na dodatu vrednost.
 
+Isto važi i za POEN evidentiran po osnovu operativnog doprinosa i drugih kanala evidentiranja doprinosa. Pozicija sistema je da se tim upisom ne isplaćuje naknada niti daje bilo kakva vrednost, nego se beleži učinjen doprinos zajedničkom dobru, i da Fondacija po tom osnovu nije naručilac posla ni korisnik činidbe. Poreske vlasti mogu zauzeti drugačiji stav i takav upis kvalifikovati kao prihod korisnika, uključujući prihod ostvaren u nenovčanom obliku.
+
 Fondacija ne pruža poreski savet i ne može garantovati poreski tretman aktivnosti korisnika u sistemu. Korisnik je odgovoran za sopstvene poreske obaveze koje mogu nastati u vezi sa učešćem u sistemu i preporučuje mu se da se konsultuje sa poreskim savetnikom.
 
 ### Član 11 — Regulatorni rizik

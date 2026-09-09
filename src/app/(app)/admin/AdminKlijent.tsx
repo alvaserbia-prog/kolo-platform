@@ -141,6 +141,7 @@ interface AdminPendingPrijava {
   predlozeniPoen: number;
   positions: number;
   planIzvrsenja: string | null;
+  izjavaTekst?: string | null;
   createdAt: string;
 }
 
@@ -692,6 +693,13 @@ function AdminPedTab({ data, onDone }: { data: AdminPedData; onDone: () => void 
                     <p className="font-semibold text-kolo-text text-sm"><Pseudonim>{p.pseudonim}</Pseudonim></p>
                     <p className="text-xs text-kolo-muted mt-0.5">{p.oglasTitle} · {p.predlozeniPoen > 0 ? p.predlozeniPoen.toLocaleString(intlTag(locale)) : t("ped_neograniceno")} {t("ped_predlozeni_poen")}</p>
                     {p.planIzvrsenja && <p className="text-xs text-kolo-muted mt-1 line-clamp-3"><span className="font-semibold">{t("ped_plan_label")}</span> {p.planIzvrsenja}</p>}
+                    {/* Izjava izvršioca (čl. 10 al. 3) — snimljena uz prijavu. */}
+                    {p.izjavaTekst && (
+                      <details className="mt-1">
+                        <summary className="text-xs text-kolo-muted cursor-pointer font-semibold">{t("ped_izjava_label")}</summary>
+                        <p className="mt-1 text-xs text-kolo-muted whitespace-pre-line">{p.izjavaTekst}</p>
+                      </details>
+                    )}
                     <p className="text-xs text-kolo-muted">{new Date(p.createdAt).toLocaleDateString(intlTag(locale))}</p>
                   </div>
                   <div className="flex gap-2">

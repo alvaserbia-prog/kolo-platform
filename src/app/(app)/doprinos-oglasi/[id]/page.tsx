@@ -16,7 +16,7 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
       krug: { select: { name: true } },
       prijave: {
         where: { userId: session.user.id },
-        select: { id: true, status: true, planIzvrsenja: true, rejectionReason: true, createdAt: true },
+        select: { id: true, status: true, planIzvrsenja: true, izjavaTekst: true, rejectionReason: true, createdAt: true },
       },
       evidencije: {
         where: { userId: session.user.id },
@@ -48,7 +48,7 @@ export default async function OglasPage({ params }: { params: Promise<{ id: stri
         odobreniClanovi: oglas._count.prijave,
         createdAt: oglas.createdAt.toISOString(),
         mojaPrijava: oglas.prijave[0]
-          ? { id: oglas.prijave[0].id, status: oglas.prijave[0].status as string, planIzvrsenja: oglas.prijave[0].planIzvrsenja, rejectionReason: oglas.prijave[0].rejectionReason, createdAt: oglas.prijave[0].createdAt.toISOString() }
+          ? { id: oglas.prijave[0].id, status: oglas.prijave[0].status as string, planIzvrsenja: oglas.prijave[0].planIzvrsenja, izjavaTekst: oglas.prijave[0].izjavaTekst, rejectionReason: oglas.prijave[0].rejectionReason, createdAt: oglas.prijave[0].createdAt.toISOString() }
           : null,
         mojeEvidencije: oglas.evidencije.map((e) => ({
           id: e.id,

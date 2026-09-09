@@ -35,10 +35,10 @@ const AKTI = [
   "politika_4_4_2.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_1.md",
-  "rizici_4_4_3.md",
+  "rizici_4_4_4.md",
   "hijerarhija_4_4_1.md",
   "donacije_4_4_3.md",
-  "operativni_4_4_1.md",
+  "operativni_4_4_4.md",
   "osnivacki_4_4_1.md",
   "gornje_kolo_4_4_1.md",
   "programi_podrske_4_4_1.md",
@@ -331,7 +331,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   },
   // 4.4.3 — upozorenje o pribavljanju POEN-a mimo sistema. Ekonomski deo (ne stiče
   // nivo, ne pomera koeficijent) je ono što zabranu iz Uslova čini samoodrživom.
-  "rizici_4_4_3.md": {
+  "rizici_4_4_4.md": {
     sr: [
       "ne pribavlja od drugih korisnika za novac",
       "ne pomera koeficijent evidencije",
@@ -341,6 +341,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // odlučuju o trošenju dinara — razgraničenje mora biti izričito.
       "nema pravo na dinarska sredstva Fondacije",
       "ne stvaraju imovinsko pravo nijednog nosioca ZRNA",
+      // 4.4.4 — poreski rizik pokriva i operativni doprinos. Bez ovoga prebacivanje
+      // rizika iz čl. 10 važi samo za razmenu, a ne i za kanale evidentiranja.
+      "operativnog doprinosa i drugih kanala evidentiranja doprinosa",
+      "nije naručilac posla ni korisnik činidbe",
     ],
     en: [
       "not acquired from other users for money",
@@ -348,6 +352,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "not consideration for the donation",
       "no right to the Foundation's dinar funds",
       "create no property right of any ZRNO Holder",
+      "operational contribution and other channels for recording contribution",
+      "neither the party commissioning work nor the beneficiary of a performance",
     ],
     ru: [
       "не приобретается у других пользователей за деньги",
@@ -355,6 +361,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "а не встречное предоставление за пожертвование",
       "не имеет права на динарные средства Фонда",
       "не создают имущественного права ни одного держателя ЗРНО",
+      "операционного вклада и иных каналов учёта вклада",
+      "ни заказчиком работы, ни получателем исполнения",
     ],
   },
   // Prihvatanje Politike NIJE pristanak za obrade čiji je osnov pristanak — bez te
@@ -428,6 +436,46 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["reality index of at least 10%"],
     ru: ["индексом реальности не менее 10 %"],
   },
+  // 4.4.4 — pravna priroda operativnog doprinosa (čl. 27). Do tada je akt branio
+  // SAMO od radnog odnosa (čl. 5 Zakona o radu), a opasna kvalifikacija je ugovor
+  // o delu, kome subordinacija i lična obaveza rada nisu ni potrebne. Nosivo je
+  // odsustvo NARUČIOCA i naknade: zadatak se objavljuje povodom potrebe
+  // zajedničkog dobra, zajednica nije pravno lice i ne može biti strana ugovora,
+  // a Fondacija ne naručuje i ne prima ništa. Rezultat ide u zajedničko dobro pod
+  // licencama iz Glave II — to je ono što obara protivprimer „rad na
+  // infrastrukturi Fondacije".
+  "operativni_4_4_4.md": {
+    sr: [
+      "nema naručioca",
+      "nije pravno lice, nema organe i ne može biti strana ugovora",
+      "Fondacija nije naručilac dela i nije korisnik činidbe izvršioca",
+      "niti predstavlja rad van radnog odnosa",
+      "Rezultat operativnog doprinosa ulazi u zajedničko dobro",
+      "Broj POEN-a nije cena rada",
+      // Predloženi POEN se ne sme izraziti kao satnica — kod je model satnice
+      // (`hourlyRate`/`hoursWorked`) uklonio, a akt je do 4.4.4 dozvoljavao da se
+      // vrati odlukom UO kroz „vremenski ekvivalent".
+      "ne izražava se kao vrednost jedinice vremena rada",
+    ],
+    en: [
+      "there is no commissioning party",
+      "is not a legal person, has no bodies, and cannot be a party to a contract",
+      "The Foundation is not the party ordering a work",
+      "nor does it constitute work outside an employment relationship",
+      "The result of an operational contribution enters the common good",
+      "The number of POEN is not a price of work",
+      "is not expressed as a value per unit of working time",
+    ],
+    ru: [
+      "отсутствует заказчик",
+      "не является юридическим лицом, не имеет органов и не может быть стороной договора",
+      "Фонд не является заказчиком работы",
+      "не представляет собой работу вне трудовых отношений",
+      "Результат операционного вклада поступает в общее благо",
+      "Число ПОЕН не является ценой труда",
+      "не выражается как величина за единицу рабочего времени",
+    ],
+  },
 };
 
 /**
@@ -446,11 +494,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
  * NEISTINITE IZJAVE i nigde ne stavlja verifikatora na tuđe mesto.
  */
 const UKINUTO: Record<string, RegExp[]> = {
-  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i],
-  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i],
-  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i],
-  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i],
-  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i],
+  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i],
+  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i],
+  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i],
+  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i],
+  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i],
 };
 
 /** Napomene o izmeni namerno pominju ukinutu tablu — one se izuzimaju iz provere. */

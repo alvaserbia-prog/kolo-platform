@@ -82,6 +82,8 @@ The system's position is that POEN and ZRNO are records without property value a
 
 Tax authorities may take a different position. The exchange of goods and services within the system may be qualified as barter or another taxable event within the meaning of tax regulations, including regulations on personal income tax and value added tax.
 
+The same applies to POEN recorded on account of operational contribution and other channels for recording contribution. The system's position is that such an entry pays out no remuneration and gives no value whatsoever, but records a contribution made to the common good, and that on that basis the Foundation is neither the party commissioning work nor the beneficiary of a performance. Tax authorities may take a different position and qualify such an entry as income of the user, including income realised in non-monetary form.
+
 The Foundation does not provide tax advice and cannot guarantee the tax treatment of users' activities in the system. The user is responsible for their own tax obligations that may arise in connection with participation in the system and is advised to consult a tax adviser.
 
 ### Article 11 — Regulatory risk

@@ -940,7 +940,7 @@
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.4.3"
+      "ver": "4.4.4"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
@@ -978,7 +978,7 @@
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
     "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.4.2-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.3-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.4-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.1-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
@@ -1928,7 +1928,7 @@
     "mesta_popunjena": "A közreműködői helyek beteltek.",
     "plan_label": "Teljesítési terv * (megközelítés, ütemezés, bizonyíték)",
     "plan_placeholder": "Hogyan tervezed végrehajtani a feladatot (min. 10 karakter)...",
-    "plan_min10": "Ehhez a feladathoz teljesítési terv szükséges (legalább 10 karakter).",
+    "plan_min10": "A végrehajtási terv kötelező (legalább 10 karakter).",
     "saljem_prijavu": "Küldés…",
     "prijava_podneta_ceka": "Jelentkezés benyújtva — megerősítő tervjóváhagyására vár.",
     "moja_dnevna_izvrsenja": "Napi teljesítéseim",
@@ -1956,7 +1956,11 @@
     "ev_uspeh": "A napi teljesítést elküldtük. Megerősítő (ZRNO-tartó / Igazgatóság) fogja megerősíteni.",
     "saljem": "Küldés…",
     "posalji_dnevno": "Napi teljesítés küldése",
-    "prijavi_se_za_zadatak": "Jelentkezés erre a feladatra"
+    "prijavi_se_za_zadatak": "Jelentkezés erre a feladatra",
+    "izjava_naslov": "A végrehajtó nyilatkozata",
+    "izjava_potvrda": "Elolvastam a nyilatkozatot és megerősítem.",
+    "izjava_obavezna": "Erősítsd meg a nyilatkozatot a jelentkezéshez.",
+    "predlozeni_napomena": "A javasolt POEN nem a munka díjazása, hanem súlyozási együttható a napi korlát elosztásában. Hogy mennyi kerül nyilvántartásba, az adott időszak teljes keresletétől függ."
   },
   "nadzor": {
     "page_naslov": "Felügyelet",
@@ -2525,7 +2529,8 @@
     "doprinos_revizija_bez_minimuma": "van hirdetése, de egyik sem felel meg a tartalmi minimumnak — ezért hozzájárulás nem került feljegyzésre",
     "tab_razmene": "Razmene",
     "emisija_tbl_nivo1": "minden 5.000 alatti adomány",
-    "tab_nabavke": "Nabavke"
+    "tab_nabavke": "Nabavke",
+    "ped_izjava_label": "A végrehajtó nyilatkozata"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",

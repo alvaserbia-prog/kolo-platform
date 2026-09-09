@@ -82,6 +82,8 @@ Pozicija je sustava da su POEN i ZRNO evidencija bez imovinske vrijednosti i da 
 
 Porezna tijela mogu zauzeti drukčije stajalište. Razmjena dobara i usluga unutar sustava može se kvalificirati kao trampa ili drugi oporezivi događaj u smislu poreznih propisa, uključujući propise o porezu na dohodak građana i porezu na dodanu vrijednost.
 
+Isto vrijedi i za POEN evidentiran po osnovi operativnog doprinosa i drugih kanala evidentiranja doprinosa. Pozicija je sustava da se tim upisom ne isplaćuje naknada niti daje bilo kakva vrijednost, nego se bilježi učinjen doprinos zajedničkom dobru, i da Zaklada po toj osnovi nije naručitelj posla ni korisnik činidbe. Porezna tijela mogu zauzeti drukčije stajalište i takav upis kvalificirati kao dohodak korisnika, uključujući dohodak ostvaren u nenovčanom obliku.
+
 Zaklada ne pruža porezni savjet i ne može jamčiti porezni tretman aktivnosti korisnika u sustavu. Korisnik je odgovoran za vlastite porezne obveze koje mogu nastati u vezi sa sudjelovanjem u sustavu i preporučuje mu se da se posavjetuje s poreznim savjetnikom.
 
 ### Članak 11. — Regulatorni rizik

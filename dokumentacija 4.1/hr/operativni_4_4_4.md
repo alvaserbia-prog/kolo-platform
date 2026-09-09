@@ -46,17 +46,19 @@ U ovom se pravilniku koriste sljedeći pojmovi:
 
 ### Članak 4.
 
-*Osobe ovlaštene predložiti zadatak*
+*Objavljivanje zadatka i položaj Zaklade*
+
+Zadatak se objavljuje povodom potrebe zajedničkog dobra, radi doprinosa tom dobru, a ne radi izvršenja posla za Zakladu ili za bilo koju drugu osobu.
 
 Zadatak mogu objaviti:
 
-- Zaklada, preko Upravnog odbora ili osobe koju on ovlasti;
+- nositelj ZRNA, samostalno, po aktiviranju Gornjeg Kola;
 
-- Gornje Kolo, odlukom donesenom u skladu s Pravilnikom o KOLO sustavu, po njegovu aktiviranju;
+- Gornje Kolo, odlukom donesenom u skladu s Pravilnikom o KOLO sustavu, po njegovu aktiviranju.
 
-- nositelj ZRNA, samostalno, po aktiviranju Gornjeg Kola.
+U Fazi 1., dok Gornje Kolo nije aktivirano i dok u sustavu nema nositelja ZRNA, funkciju iz stavka 2. ovog članka privremeno obavlja Zaklada, preko Upravnog odbora ili osobe koju on ovlasti. Zaklada tu funkciju obavlja u ime zajednice i po istim pravilima koja vrijede za nositelje ZRNA, a ne u svoje ime.
 
-U Fazi 1., dok Gornje Kolo nije aktivirano, zadatke objavljuje isključivo Zaklada.
+Zaklada zadatak ne naručuje za sebe. Ona nije naručitelj djela, nije korisnik činidbe izvršitelja i po osnovi izvršenog zadatka ne prima nikakvu vrijednost.
 
 ### Članak 5.
 
@@ -90,7 +92,7 @@ Predloženi POEN utvrđuje se prema procijenjenom opsegu rada i prirodi zadatka.
 
 Predloženi POEN nije zajamčeni iznos koji će izvršitelj dobiti. Stvarna evidencija ovisi o raspodjeli dnevnog limita u skladu s Glavom VI. ovog pravilnika.
 
-Indikativna pravila za prijedlog POEN-a — vremenski ekvivalent, tipovi rada, gornje vrijednosti — mogu se utvrditi odlukom Upravnog odbora u Fazi 1., odnosno Gornjeg Kola u Fazi 2.
+Predloženi POEN ne izražava se kao vrijednost jedinice vremena rada niti se utvrđuje prema unaprijed određenim vrijednostima po vrstama rada.
 
 ### Članak 7.
 
@@ -132,7 +134,7 @@ Prijava se podnosi elektronički na platformi i sadrži:
 
 - plan izvršenja iz članka 11. ovog pravilnika;
 
-- izjavu da je korisnik upoznat s pravnom prirodom operativnog doprinosa iz članka 28. ovog pravilnika i s težinskom prirodom predloženog POEN-a iz članka 22. ovog pravilnika.
+- izjavu da je korisnik upoznat s pravnom prirodom operativnog doprinosa iz članka 27. ovog pravilnika i s težinskom prirodom predloženog POEN-a iz članka 22. ovog pravilnika.
 
 ### Članak 11.
 
@@ -168,7 +170,6 @@ Primitak prijave automatski je akt Protokola. Verificirani korisnik koji ispunja
 
 Za zadatke s više predviđenih izvršitelja, Protokol prima prijave prema redoslijedu podnošenja do popune broja predviđenog zadatkom. Naknadne se prijave odbijaju automatski uz obavijest korisniku.
 
-Verifikator može, tijekom trajanja zadatka, izvršitelju uputiti upozorenje da plan izvršenja kako je podnesen vjerojatno neće biti potvrđen, uz obrazloženje. Upozorenje ne zaustavlja izvršenje i ne mijenja status zadatka; izvršitelj u svemu nastavlja na vlastiti rizik.
 
 ### Članak 14.
 
@@ -200,13 +201,15 @@ Kada je kvalifikacijski filtar utvrđen, prima se prva prijava koja ga ispunjava
 
 *Verifikator*
 
-Plan izvršenja u zadacima s odobravanjem odobrava, a izvršenje u svim zadacima verificira:
+Plan izvršenja u zadacima s odobravanjem odobrava, a izvršenje u svim zadacima verificira nositelj ZRNA, prema pravilima rada Gornjeg Kola.
 
-- u Fazi 1. — članovi Upravnog odbora Zaklade ili osoba koju Upravni odbor ovlasti;
+U Fazi 1., dok u sustavu nema nositelja ZRNA, verifikaciju privremeno obavljaju članovi Upravnog odbora Zaklade ili osoba koju Upravni odbor ovlasti, u ime zajednice i po istim pravilima.
 
-- u Fazi 2. — nositelji ZRNA, prema pravilima rada Gornjeg Kola.
+Verifikacijom se utvrđuje isključivo je li zadatak izvršen prema kriterijima objavljenima uz zadatak. Verifikator izvršenje ne prima u ime Zaklade i time za Zakladu ne stječe nijedno pravo.
 
-Verifikator ne može biti predlagatelj istog zadatka ako bi to dovelo do sukoba interesa. Verifikator ne može biti izvršitelj istog zadatka.
+Verifikator ne može biti izvršitelj istog zadatka. To ograničenje nema iznimke.
+
+Verifikator ne može biti ni osoba koja je zadatak objavila. U Fazi 1., dok zadatke objavljuje i verifikaciju obavlja Zaklada, to se ograničenje ne primjenjuje na osobu koju Upravni odbor za to izričito ovlasti.
 
 ## V — Izvršenje i verifikacija
 
@@ -298,41 +301,43 @@ POEN-i se bilježe u zapisu izvršitelja i imaju isti status kao svi drugi POEN-
 
 ### Članak 26.
 
-*Gornja granica predloženog POEN-a po zadatku*
-
-Predloženi POEN jednog zadatka, kao i predloženi POEN pojedinačnog dnevnog izvršenja u višednevnom zadatku, ne smije premašiti gornju granicu utvrđenu odlukom Upravnog odbora u Fazi 1., odnosno Gornjeg Kola u Fazi 2.
-
-Gornja se granica izražava kao apsolutni iznos ili kao postotak tekućeg dnevnog limita. Cilj je te granice onemogućiti da jedan zadatak ili jedna verifikacija u cijelosti monopolizira dnevnu raspodjelu.
-
-### Članak 27.
-
 *Promjenjivost limita*
 
-Postotak iz članka 23. ovog pravilnika i gornja granica iz članka 26. ovog pravilnika operativni su parametri sustava.
+Postotak iz članka 23. ovog pravilnika operativni je parametar sustava.
 
-Njihove vrijednosti mijenja Upravni odbor Zaklade u Fazi 1., odnosno Gornje Kolo u Fazi 2. Izmjena stupa na snagu prvog narednog obračunskog razdoblja nakon donošenja odluke i objavljuje se korisnicima u skladu s Pravilnikom o KOLO sustavu.
+Njegovu vrijednost mijenja Upravni odbor Zaklade u Fazi 1., odnosno Gornje Kolo u Fazi 2. Izmjena stupa na snagu prvog narednog obračunskog razdoblja nakon donošenja odluke i objavljuje se korisnicima u skladu s Pravilnikom o KOLO sustavu.
 
 ## VII — Pravna kvalifikacija
 
-### Članak 28.
+### Članak 27.
 
-*Operativni doprinos i radni odnos*
+*Pravna priroda operativnog doprinosa*
 
-Operativni doprinos ne uspostavlja radni odnos u smislu članka 5. Zakona o radu. U odnosu između predlagatelja zadatka, verifikatora i izvršitelja:
+Operativni doprinos doprinos je zajedničkom dobru. Njime se ne izvršava posao naručen od Zaklade ni od bilo koje druge osobe i po njemu se ništa ne isplaćuje.
+
+U odnosu između osobe koja je zadatak objavila, verifikatora i izvršitelja:
+
+- nema naručitelja — zadatak se objavljuje povodom potrebe zajedničkog dobra, a ne po nalogu osobe koja bi izvršenje primila za sebe; zajednica korisnika KOLO sustava nije pravna osoba, nema tijela i ne može biti stranka ugovora;
+
+- nema naknade — izvršitelju se ne isplaćuje nijedan iznos i ne daje se nijedno dobro; POEN-i evidentirani nakon verificiranog izvršenja zapisi su u evidenciji Protokola o učinjenom doprinosu, bez vanjske imovinske vrijednosti;
 
 - nema subordinacije — izvršitelj samostalno odlučuje hoće li se prijaviti, samostalno predlaže način izvršenja, samostalno određuje tempo rada i može odustati u svakom trenutku bez posljedica;
 
-- nema osobne obveze rada — preuzimanje je zadatka dobrovoljno i ne stvara obvezu u pravnom smislu;
+- nema osobne obveze rada — preuzimanje je zadatka dobrovoljno i ne stvara obvezu u pravnom smislu.
 
-- nema naknade — POEN-i evidentirani nakon verificiranog izvršenja zapisi su u evidenciji Protokola bez vanjske imovinske vrijednosti.
+Zaklada nije naručitelj djela i nije korisnik činidbe izvršitelja. Po osnovi izvršenog zadatka ona ne prima nikakvu vrijednost i ne stječe nijedno pravo prema izvršitelju.
+
+Rezultat operativnog doprinosa ulazi u zajedničko dobro pod licencijama iz Glave II. Pravilnika o KOLO sustavu — softver pod licencijom AGPL-3.0, sadržaj pod licencijom CC BY-SA 4.0. Zaklada po toj osnovi ne stječe isključivo pravo na rezultat; rezultat je pod istim uvjetima dostupan svim osobama, a Zaklada ga koristi po istoj osnovi kao i svaka druga osoba.
+
+Zbog svojstava iz stavaka 2. i 3. ovog članka, operativni doprinos ne uspostavlja radni odnos u smislu članka 5. Zakona o radu, niti predstavlja rad izvan radnog odnosa — osobito ne ugovor o djelu — jer nedostaju naručitelj, naručena činidba i naknada.
 
 POEN-i evidentirani po osnovi operativnog doprinosa ne predstavljaju naknadu u smislu propisa o radu, propisa o porezu na dohodak građana ni propisa o platnim uslugama.
 
-Predloženi POEN nije ugovorena protuvrijednost rada — to je težinski koeficijent u raspodjeli zajedničkog dnevnog limita, čija stvarna realizacija ovisi o stanju sustava i ukupnoj potražnji u obračunskom razdoblju, u skladu s Glavom VI. ovog pravilnika.
+Predloženi POEN nije ugovorena protuvrijednost rada — to je težinski koeficijent u raspodjeli zajedničkog dnevnog limita, čija stvarna realizacija ovisi o stanju sustava i ukupnoj potražnji u obračunskom razdoblju, u skladu s Glavom VI. ovog pravilnika. Broj POEN-a nije cijena rada i ne mora stajati u razmjeru s vrijednošću koju bi isti rad imao na tržištu.
 
 ## VIII — Transparentnost
 
-### Članak 29.
+### Članak 28.
 
 *Podaci dostupni svim korisnicima*
 
@@ -342,7 +347,7 @@ Sljedeći podaci o operativnom doprinosu dostupni su svim korisnicima sustava, u
 
 - tekući status svakog zadatka.
 
-### Članak 30.
+### Članak 29.
 
 *Podaci dostupni verificiranim korisnicima*
 
@@ -360,7 +365,7 @@ Sljedeći su podaci dostupni isključivo verificiranim korisnicima sustava:
 
 - tekuća iskorištenost dnevnog limita i koeficijent raspodjele za tekuće obračunsko razdoblje, kao i povijesni podaci o raspodjeli za prethodna obračunska razdoblja.
 
-### Članak 31.
+### Članak 30.
 
 *Pseudonimnost*
 
@@ -368,13 +373,13 @@ Podaci o izvršitelju i verifikatoru objavljuju se pod njihovim pseudonimima u s
 
 ## IX — Završne odredbe
 
-### Članak 32.
+### Članak 31.
 
 *Izmjene pravilnika*
 
 Ovaj pravilnik donosi i mijenja Upravni odbor KOLO Zaklade, po postupku utvrđenom Pravilnikom o KOLO sustavu.
 
-### Članak 33.
+### Članak 32.
 
 *Stupanje na snagu*
 
