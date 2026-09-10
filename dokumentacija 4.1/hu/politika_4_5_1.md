@@ -312,19 +312,23 @@ A nem hitelesített felhasználó hirdetésében szereplő adatokat (4.8. alpont
 
 A hirdetés kapcsán tett megkeresés bejegyzését (4.10. alpont) azzal a hirdetéssel együtt töröljük, amelyre vonatkozik. A felhasználói jogállás megszűnésekor az adott fiók többi adatával együtt töröljük, illetve anonimizáljuk.
 
+A felhasználók közötti beszélgetésekben lévő üzenetek törlődnek, amikor legalább az egyik fél megszünteti a fiókját, illetve amikor a beszélgetés utolsó üzenete óta 24 hónap eltelt.
+
 A kiskorú felhasználó adatai (4.7. alpont) addig kerülnek megőrzésre, ameddig a fiók aktív marad. A szülő elektronikus címe és a fiók átvételére szóló felhívás törlődik azzal a fiókkal együtt, amelyet tizennégy napon belül senki nem vett át; az átvételt követően elveszítik céljukat, és a jogállás megszűnésekor a fiókkal együtt törlődnek. A barátságok a felhasználó nagykorúvá válásával és a fiók törlésekor törlődnek. Az iskolára vonatkozó adat a nagykorúság elérésekor és a jogállás megszűnésekor törlődik; a korábbi választások előzményei nem kerülnek megőrzésre. A kiskorú felhasználó saját e-mail címét addig őrizzük meg, amíg el nem távolítja, illetve amíg a felhasználói minőség meg nem szűnik; a nagykorú fiókba való átlépéskor megmarad. A meg nem erősített cím és a megerősítő hivatkozás huszonnégy óra elteltével hatályát veszti.
 
-A határidő lejártát követően az adatokat töröljük vagy véglegesen anonimizáljuk oly módon, amely a személy azonosítását ellehetetleníti.
+A határidő lejártát követően az adatokat töröljük vagy véglegesen anonimizáljuk oly módon, amely a személy azonosítását ellehetetleníti. Az Alapítvány évente legalább egyszer ellenőrzi, hogy valamely adatkategória megőrzési ideje lejárt-e, és törli, illetve anonimizálja azokat az adatokat, amelyeknél lejárt.
 
 A beszerzési javaslat (4.11 alpont) törlésre kerül, amikor Ön másik megnevezést választ vagy a javaslatot eltávolítja, amikor a kiválasztott jószágmegnevezésre vonatkozó beszerzés lebonyolításra kerül, és legkésőbb a bevitelt követő tizenkét hónap elteltével. A beszerzésben való részvételre és az átvételre vonatkozó adatok tíz évig kerülnek megőrzésre, a beszerzés számviteli dokumentációjával együtt.
 
-### 11. cikk — A státusz megszűnése és az adatok anonimizálása
+### 11. cikk — A státusz megszűnése és az adatok álnevesítése
 
-A felhasználói státusz megszűnésével — legyen az kilépés, kizárás vagy halál — megindul az anonimizálási eljárás a KOLO rendszerről szóló szabályzat 34. cikkével összhangban.
+A felhasználói státusz megszűnésével — legyen az kilépés, kizárás vagy halál — megindul az álnevesítési eljárás a KOLO rendszerről szóló szabályzat 34. cikkével összhangban.
 
-Törlésre kerül az email cím, valamennyi önkéntesen megadott adat és a közzétett hirdetésekben szereplő adat, ideértve a fényképeket és a telefonszámot. Anonimizálásra kerülnek a felhasználó kapcsolatai a hitelesítési gráfban.
+Törlésre kerül az elektronikus cím, valamennyi önkéntesen megadott adat és a közzétett hirdetésekben szereplő adat, ideértve a címet, a leírást, a helyet és a fényképeket; a hirdetések lekerülnek a hirdetési felületről, a fényképek pedig törlődnek a tárhelyről. Törlésre kerül a POEN átírásához fűzött szabad szöveg is, mind az, amelyet maga a felhasználó adott meg, mind az, amelyet a másik fél. Anonimizálásra kerülnek a felhasználó kapcsolatai a megerősítési gráfban.
 
-A felhasználó POEN-bejegyzései érvényüket vesztik, a numerikus előzmények pedig olyan azonosító alatt maradnak meg, amely az azonosítást többé nem teszi lehetővé. Az így anonimizált bejegyzések megszűnnek a ZZPL értelmében vett személyes adatnak lenni, és a közjó részeként tartósan megőrzésre kerülnek.
+A felhasználó POEN-bejegyzései érvényüket vesztik, a numerikus előzmények pedig olyan álnév alatt maradnak meg, amely nem utal névre. Ez az eljárás álnevesítés, nem anonimizálás: az Alapítvány megőrzi a fiók belső azonosítóját, ezért a megőrzött bejegyzések továbbra is a ZZPL értelmében vett személyes adatnak minősülnek, és e szabályzat szerinti teljes védelmet élvezik. Azért maradnak meg, mert a törlés nem korlátlan jog — a ZZPL 30. cikk 3. bekezdése szerint nem alkalmazandó, ha az adatkezelés jogszabályi megőrzési kötelezettség teljesítéséhez, valamint jogi igény előterjesztéséhez, érvényesítéséhez vagy védelméhez szükséges.
+
+A státusz megszűnése után nyilvános marad: a nyilvántartás numerikus bejegyzései a névre nem utaló álnév mellett, az az alap, amelyen a POEN-t nyilvántartásba vették, valamint a nyilvános adomány melletti vezeték- és keresztnév. Az adományozó neve a támogatásról és adományokról szóló szabályzat 5a. cikke szerint az adomány bejegyzésének állandó részeként marad meg, és a felhasználói minőség megszűnésével sem kerül le a listáról. A nyilvánosan adományozó felhasználó esetében az álnevesített bejegyzésének a személyazonossággal való összekapcsolása a fiók megszüntetése után is lehetséges marad; erre a következményre minden nyilvános adomány előtt figyelmeztetünk, az alternatíva pedig a névtelen adomány.
 
 Az azonosító és az elszámolási adatok e szétválasztása feloldja a felhasználó személyes adatok törléséhez való joga (ZZPL 30. cikk) és a közjó nyilvántartása integritása közötti feszültséget. A hozzájárulás-nyilvántartás a tervezés folytán konzisztens — egyetlen felhasználó bejegyzéseinek törlése sértené a teljes nyilvántartás konzisztenciáját, amely valamennyi résztvevő közjava. Az adatok szétválasztása biztosítja mind a felhasználó jogainak tiszteletben tartását, mind a nyilvántartás integritásának megőrzését.
 
@@ -356,9 +360,9 @@ A ZZPL szerint Önt a következő jogok illetik meg:
 
 Hozzáférési jog (ZZPL 26. cikk) — kérheti annak megerősítését, hogy kezeljük-e adatait, és másolatot kérhet ezekről az adatokról.
 
-Helyesbítéshez való jog (ZZPL 29. cikk) — kérheti a pontatlan adatok helyesbítését vagy a hiányos adatok kiegészítését.
+Helyesbítéshez való jog (ZZPL 29. cikk) — kérheti a pontatlan adatok helyesbítését vagy a hiányos adatok kiegészítését. A kérelmet a Platformon, „Adathelyesbítés” típusú panasszal, vagy az 1. cikkben megadott címre lehet benyújtani.
 
-Törléshez való jog (ZZPL 30. cikk) — kérheti az adatok törlését, ha az adatkezelés célja megvalósult, ha visszavonta hozzájárulását, vagy ha az adatkezelés nem jogszerű. Ez a jog két esetben korlátozott: ha jogszabályi adatmegőrzési kötelezettség áll fenn, és ha a törlés sértené a közjó nyilvántartásának integritását — ez utóbbi esetben a jelen szabályzat 11. cikke szerinti anonimizálási eljárás alkalmazandó.
+Törléshez való jog (ZZPL 30. cikk) — kérheti az adatok törlését, ha az adatkezelés célja megvalósult, ha visszavonta hozzájárulását, vagy ha az adatkezelés nem jogszerű. Ez a jog két esetben korlátozott: ha jogszabályi adatmegőrzési kötelezettség áll fenn, és ha a törlés sértené a közjó nyilvántartásának integritását — ez utóbbi esetben a jelen szabályzat 11. cikke szerinti álnevesítési eljárás alkalmazandó.
 
 Az adatkezelés korlátozásához való jog (ZZPL 31. cikk) — kérheti az adatkezelés átmeneti korlátozását a tiltakozás elbírálásáig vagy az adatok helyesbítéséig.
 

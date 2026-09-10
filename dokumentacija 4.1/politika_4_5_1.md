@@ -310,19 +310,23 @@ Podaci u oglasu neverifikovanog korisnika (pododeljka 4.8) čuvaju se dok korisn
 
 Zapis o upitu povodom oglasa (pododeljka 4.10) briše se sa oglasom na koji se odnosi. Po prestanku statusa korisnika briše se odnosno anonimizuje zajedno sa ostalim podacima tog naloga.
 
+Poruke u razgovorima između korisnika brišu se kada bar jedna strana ugasi nalog, odnosno kada od poslednje poruke u razgovoru prođu 24 meseca.
+
 Podaci maloletnog korisnika (pododeljka 4.7) čuvaju se dok nalog ostaje aktivan. Elektronska adresa roditelja i poziv za preuzimanje naloga brišu se sa nalogom koji niko nije preuzeo u roku od četrnaest dana, odnosno gube svrhu po preuzimanju i brišu se sa nalogom pri prestanku statusa. Prijateljstva se brišu sticanjem punoletstva korisnika i pri brisanju naloga. Podatak o školi briše se sticanjem punoletstva i pri prestanku statusa; istorija ranijih izbora se ne čuva. Sopstvena elektronska adresa maloletnog korisnika čuva se dok je ne ukloni ili dok ne prestane svojstvo korisnika; prelaskom u punoletni nalog se zadržava. Nepotvrđena adresa i veza za potvrdu gube dejstvo posle dvadeset četiri sata.
 
-Po isteku roka, podaci se brišu ili trajno anonimizuju na način koji onemogućava identifikaciju lica.
+Po isteku roka, podaci se brišu ili trajno anonimizuju na način koji onemogućava identifikaciju lica. Fondacija najmanje jednom godišnje proverava da li je za neku kategoriju podataka rok čuvanja istekao i briše odnosno anonimizuje podatke kojima jeste.
 
 Predlog za nabavku (pododeljka 4.11) briše se kada Vi izaberete drugi naziv ili predlog uklonite, kada bude sprovedena nabavka izabranog naziva dobra, i najkasnije po isteku dvanaest meseci od upisa. Podaci o učešću u nabavci i o preuzimanju čuvaju se deset godina, uz računovodstvenu dokumentaciju nabavke.
 
-### Član 11 — Prestanak statusa i anonimizacija podataka
+### Član 11 — Prestanak statusa i pseudonimizacija podataka
 
-Prestankom statusa korisnika — bilo istupanjem, isključenjem ili smrću — pokreće se postupak anonimizacije u skladu sa čl. 34 Pravilnika o KOLO sistemu.
+Prestankom statusa korisnika — bilo istupanjem, isključenjem ili smrću — pokreće se postupak pseudonimizacije u skladu sa čl. 34 Pravilnika o KOLO sistemu.
 
-Brišu se email adresa, svi dobrovoljno uneti podaci i podaci u objavljenim oglasima, uključujući fotografije i broj telefona. Anonimizuju se veze korisnika u grafu verifikacija.
+Brišu se elektronska adresa, svi dobrovoljno uneti podaci i podaci u objavljenim oglasima, uključujući naslov, opis, mesto i fotografije; oglasi se uklanjaju sa prostora za oglašavanje, a fotografije se brišu iz skladišta. Briše se i slobodan tekst unet uz prepis POEN-a, kako onaj koji je uneo sam korisnik tako i onaj koji je uneo njegov sagovornik. Anonimizuju se veze korisnika u grafu potvrda.
 
-Zapisi POEN-a korisnika poništavaju se, a numerička istorija zadržava se pod identifikatorom koji više ne omogućava identifikaciju. Tako anonimizovani zapisi prestaju da budu podaci o ličnosti u smislu ZZPL-a i čuvaju se trajno kao deo zajedničkog dobra.
+Zapisi POEN-a korisnika poništavaju se, a numerička istorija zadržava se pod pseudonimom koji ne upućuje na ime. Taj postupak je pseudonimizacija, a ne anonimizacija: Fondacija zadržava interni identifikator naloga, pa zadržani zapisi i dalje predstavljaju podatke o ličnosti u smislu ZZPL-a i uživaju punu zaštitu po ovoj politici. Zadržavaju se zato što brisanje nije neograničeno pravo — po čl. 30 st. 3 ZZPL-a ono se ne primenjuje kada je obrada nužna radi ispunjenja zakonske obaveze čuvanja i radi podnošenja, ostvarivanja ili odbrane pravnog zahteva.
+
+Posle prestanka statusa javno ostaju: numerički zapisi evidencije uz pseudonim koji ne upućuje na ime, osnov po kome je POEN upisan, i ime i prezime uz javnu donaciju. Ime donatora se po čl. 5a Pravilnika o pokroviteljstvu i donacijama čuva kao trajan deo zapisa donacije i ne uklanja se iz liste ni prestankom svojstva korisnika. Za korisnika koji je donirao javno, povezivanje njegove pseudonimne evidencije sa identitetom ostaje moguće i posle gašenja naloga; na tu posledicu se upozorava pre svake javne donacije, a alternativa je anonimna donacija.
 
 Ovo razdvajanje identifikacionih i obračunskih podataka rešava tenziju između prava korisnika na brisanje ličnih podataka (čl. 30 ZZPL-a) i integriteta evidencije zajedničkog dobra. Evidencija doprinosa je po dizajnu konzistentna — brisanje zapisa jednog korisnika bi narušilo konzistentnost celokupne evidencije koja je zajedničko dobro svih učesnika. Razdvajanjem podataka obezbeđuje se i poštovanje prava korisnika i očuvanje integriteta evidencije.
 
@@ -354,9 +358,9 @@ U skladu sa ZZPL-om imate sledeća prava:
 
 Pravo na pristup (čl. 26 ZZPL-a) — možete zatražiti potvrdu da li obrađujemo vaše podatke i dobiti kopiju tih podataka.
 
-Pravo na ispravku (čl. 29 ZZPL-a) — možete zahtevati ispravku netačnih ili dopunu nepotpunih podataka.
+Pravo na ispravku (čl. 29 ZZPL-a) — možete zahtevati ispravku netačnih ili dopunu nepotpunih podataka. Zahtev se podnosi u Platformi, prigovorom vrste „Ispravka podatka“, ili na adresu iz Člana 1.
 
-Pravo na brisanje (čl. 30 ZZPL-a) — možete zahtevati brisanje podataka kada je svrha obrade ispunjena, kada ste povukli pristanak ili kada obrada nije zakonita. Ovo pravo je ograničeno u dva slučaja: kada postoji zakonska obaveza čuvanja podataka i kada bi brisanje narušilo integritet evidencije zajedničkog dobra — u tom slučaju se primenjuje postupak anonimizacije iz Člana 11 ove politike.
+Pravo na brisanje (čl. 30 ZZPL-a) — možete zahtevati brisanje podataka kada je svrha obrade ispunjena, kada ste povukli pristanak ili kada obrada nije zakonita. Ovo pravo je ograničeno u dva slučaja: kada postoji zakonska obaveza čuvanja podataka i kada bi brisanje narušilo integritet evidencije zajedničkog dobra — u tom slučaju se primenjuje postupak pseudonimizacije iz Člana 11 ove politike.
 
 Pravo na ograničenje obrade (čl. 31 ZZPL-a) — možete zahtevati privremeno ograničenje obrade dok se rešava prigovor ili dok se podaci ne isprave.
 

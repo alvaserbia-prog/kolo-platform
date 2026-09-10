@@ -681,7 +681,8 @@
     "roditelji": "Szülők",
     "deca": "Gyerekek",
     "status_dete_ceka": "szülői jóváhagyásra vár",
-    "status_dete_radi": "a fiók működik"
+    "status_dete_radi": "a fiók működik",
+    "prigovor_tip_podaci": "Rólam szóló pontatlan adat helyesbítése"
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -879,7 +880,7 @@
     "vidljivost_javna_opis": "A vezeték- és keresztneved nyilvánosan megjelenik az adományok listáján. POEN csak nyilvános adomány után kerül bejegyzésre.",
     "vidljivost_anonimna": "Névtelen adomány (POEN nélkül)",
     "vidljivost_anonimna_opis": "A neved nem jelenik meg. Névtelen adomány után nem kerül rögzítésre POEN.",
-    "vidljivost_upozorenje": "Megjegyzés: a név nyilvános megjelenítése az adomány mellett összekapcsolhatja az álnevedet és a többi bejegyzésedet a személyazonosságoddal.",
+    "vidljivost_upozorenje": "Megjegyzés: a neved nyilvános megjelenítése az adomány mellett összekapcsolhatja az álnevedet és a többi bejegyzésedet a személyazonosságoddal. A név az adomány bejegyzésénél és a listán akkor is megmarad, ha megszünteted a fiókodat.",
     "lista_naslov": "Adományok listája",
     "lista_opis": "A nyilvános adományozók vezeték- és keresztnévvel jelennek meg; a névtelen adományozókat nem azonosítjuk.",
     "lista_prazno": "Még nincs rögzített adomány.",
@@ -944,7 +945,7 @@
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.5.0"
+      "ver": "4.5.1"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -952,11 +953,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.5.0"
+      "ver": "4.5.1"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.5.0"
+      "ver": "4.5.1"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
@@ -990,13 +991,13 @@
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
     "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.4.3-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.0-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.1-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.5.0-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.5.1-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.0-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.1-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.6-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
@@ -2550,7 +2551,8 @@
     "tab_razmene": "Razmene",
     "emisija_tbl_nivo1": "minden 5.000 alatti adomány",
     "tab_nabavke": "Nabavke",
-    "ped_izjava_label": "A végrehajtó nyilatkozata"
+    "ped_izjava_label": "A végrehajtó nyilatkozata",
+    "prigovori_tip_podaci": "Adathelyesbítés"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",

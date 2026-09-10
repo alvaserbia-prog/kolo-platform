@@ -81,7 +81,7 @@ Evidentirani POEN-i imaju isti status kao svi drugi POEN-i u sustavu.
 
 ### Članak 5.a — Popis donacija i javno priznanje donatora
 
-Platforma vodi popis donacija fizičkih osoba dostupan verificiranim korisnicima. Donator koji je izvršio javnu donaciju identificira se u popisu imenom i prezimenom. Ime i prezime bilježe se uz donaciju u trenutku njezina evidentiranja i čuvaju se kao trajan dio zapisa donacije — kao i podaci o uplati — te se ne mijenjaju naknadnim izmjenama profila niti se uklanjaju iz popisa. Anonimni se donatori u popisu ne identificiraju.
+Platforma vodi popis donacija fizičkih osoba dostupan verificiranim korisnicima. Donator koji je izvršio javnu donaciju identificira se u popisu imenom i prezimenom. Ime i prezime bilježe se uz donaciju u trenutku njezina evidentiranja i čuvaju se kao trajan dio zapisa donacije — kao i podaci o uplati — te se ne mijenjaju naknadnim izmjenama profila, niti se uklanjaju s popisa — ni prestankom svojstva korisnika. Donator je unaprijed obaviješten da javno prikazano ime ostaje na popisu i nakon što ugasi račun, pa je povezivanje njegove pseudonimne evidencije s identitetom moguće i tada. Anonimni se donatori u popisu ne identificiraju.
 
 Objavljivanje imena donatora služi transparentnosti raspolaganja sredstvima Zaklade i provjeri osnove po kojoj je POEN upisan. Ukupan je broj evidentiranih POEN-a javan, a zbroj svih zapisa u Protokolu jednak je nuli; donacija koja bi POEN nosila, a ne bi se mogla pripisati nijednoj osobi, bila bi upis koji se ne može provjeriti. Iz tog se razloga za anonimnu donaciju POEN ne evidentira.
 

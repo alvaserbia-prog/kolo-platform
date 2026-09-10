@@ -688,7 +688,8 @@
     "roditelji": "Roditelji",
     "deca": "Deca",
     "status_dete_ceka": "čeka odobrenje roditelja",
-    "status_dete_radi": "nalog radi"
+    "status_dete_radi": "nalog radi",
+    "prigovor_tip_podaci": "Ispravka netačnog podatka o meni"
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -886,7 +887,7 @@
     "vidljivost_javna_opis": "Tvoje ime i prezime biće javno prikazano u listi donacija. Samo za javnu donaciju se upisuje POEN.",
     "vidljivost_anonimna": "Anonimna donacija (bez POENA)",
     "vidljivost_anonimna_opis": "Tvoje ime se ne prikazuje. Za anonimnu donaciju se ne evidentira POEN.",
-    "vidljivost_upozorenje": "Napomena: javnim prikazom imena pored donacije tvoj pseudonim i ostala evidencija mogu se povezati sa tvojim identitetom.",
+    "vidljivost_upozorenje": "Napomena: javnim prikazom imena pored donacije tvoj pseudonim i ostala evidencija mogu se povezati sa tvojim identitetom. Ime ostaje uz zapis donacije i u listi i kada ugasiš nalog.",
     "lista_naslov": "Lista donacija",
     "lista_opis": "Javni donatori su prikazani imenom i prezimenom; anonimni donatori se ne identifikuju.",
     "lista_prazno": "Još nema evidentiranih donacija.",
@@ -951,7 +952,7 @@
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.5.0"
+      "ver": "4.5.1"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -959,11 +960,11 @@
     },
     "dpia": {
       "naslov": "DPIA. Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "4.5.0"
+      "ver": "4.5.1"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "4.5.0"
+      "ver": "4.5.1"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
@@ -997,13 +998,13 @@
     "meta_uslovi_title": "Uslovi korišćenja · KOLO",
     "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.4.3",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.0",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.1",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.5.0",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.5.1",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.5.0",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.5.1",
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.4.6",
     "meta_whitepaper_title": "Whitepaper · KOLO",
@@ -2557,7 +2558,8 @@
     "tab_razmene": "Razmene",
     "emisija_tbl_nivo1": "svaka donacija ispod 5.000",
     "tab_nabavke": "Nabavke",
-    "ped_izjava_label": "Izjava izvršioca"
+    "ped_izjava_label": "Izjava izvršioca",
+    "prigovori_tip_podaci": "Ispravka podatka"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",

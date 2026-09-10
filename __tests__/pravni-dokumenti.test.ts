@@ -29,15 +29,15 @@ const AKTI = [
   // reference na verziju koja kao dokument više ne postoji.
   "Pravilnik_4_4_6.md",
   "dokaz_stvarnosti_4_4_1.md",
-  "DPIA_4_5_0.md",
-  "radnje_obrade_4_5_0.md",
+  "DPIA_4_5_1.md",
+  "radnje_obrade_4_5_1.md",
   "uslovi_koriscenja_4_4_3.md",
-  "politika_4_5_0.md",
+  "politika_4_5_1.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_6.md",
   "rizici_4_4_6.md",
   "hijerarhija_4_4_6.md",
-  "donacije_4_4_7.md",
+  "donacije_4_5_1.md",
   "operativni_4_4_4.md",
   "osnivacki_4_4_5.md",
   "gornje_kolo_4_4_6.md",
@@ -135,10 +135,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_5_0.md": {
-    sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16"],
-    en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16"],
-    ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16"],
+  "radnje_obrade_4_5_1.md": {
+    sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16", "Radnja obrade br. 17"],
+    en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16", "Processing activity No. 17"],
+    ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16", "Операция обработки № 17"],
   },
   // 4.4.3 — ispravljen zbir u zaključku: tabela daje R5 = 4 (nizak), a zaključak ga
   // je vodio među srednjima i izostavljao R13 iz spiska najviših. Brojevi se traže
@@ -150,7 +150,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // (`vercel.json` → regions: fra1, Neon endpoint u EU). Ako se region ikad vrati u
   // SAD, ocena i mere iz 5.13 postaju netačne — zato se traže doslovno, uz nov zbir
   // srednjih i niskih rizika.
-  "DPIA_4_5_0.md": {
+  "DPIA_4_5_1.md": {
     sr: [
       "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
       "Pet rizika je na srednjem nivou (R1, R2, R11, R13, R16)",
@@ -165,6 +165,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // opisu užem od sistema, što je isti kvar koji je R-11 ispravio kod R16.
       "| 3 | 3 | 9 |",
       "Prihvaćena posledica javnosti evidencije",
+      "## 5.14.",
+      "sedamnaest radnji obrade",
       "Zatvaranje postupka",
     ],
     en: [
@@ -177,6 +179,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "at least once a year",
       "| 3 | 3 | 9 |",
       "Accepted consequence of the ledger's publicity",
+      "## 5.14.",
+      "seventeen processing activities",
       "Closing the procedure",
     ],
     ru: [
@@ -189,6 +193,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "не реже одного раза в год",
       "| 3 | 3 | 9 |",
       "Принятое следствие публичности реестра",
+      "## 5.14.",
+      "семнадцать операций обработки",
       "Закрытие процедуры",
     ],
   },
@@ -382,7 +388,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 4.4.3 — obrazloženje koeficijenta evidencije. Tabela nivoa (1,00–2,00) bez
   // obrazloženja čita se kao cenovnik; odredba da se donacijom NIŠTA ne pribavlja
   // je ono što razliku u koeficijentu drži izvan pojma popusta, pa se traži doslovno.
-  "donacije_4_4_7.md": {
+  "donacije_4_5_1.md": {
     sr: [
       "nije cena POEN-a i nije popust na donaciju",
       "Donacijom se ništa ne pribavlja",
@@ -574,7 +580,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "может удалить её сам в любой момент",
     ],
   },
-  "politika_4_5_0.md": {
+  "politika_4_5_1.md": {
     sr: [
       "nije pristanak za obrade čiji je pravni osnov pristanak",
       // 4.4.8 — Politika je do tada opisivala razdoblje pre pristanka uže nego
@@ -593,6 +599,14 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // vidi svaki verifikovan korisnik, trajno; Politika je do tada opisivala samo
       // krug verifikatora. Uz to: povlačenje pristanka i brisanje unetih podataka.
       "Zapis o evidentiranom POEN-u nije skriven",
+      // 4.5.1 (R-14) — prestanak statusa. Akt je obećavao brisanje oglasa koje
+      // kod nije radio, a zadržane zapise je zvao anonimizovanima i iz toga
+      // izvodio da prestaju da budu podaci o ličnosti. Traži se tačna
+      // kvalifikacija, osnov ograničenja i izričit spisak onoga što ostaje.
+      "pseudonimizacija, a ne anonimizacija",
+      "čl. 30 st. 3 ZZPL-a",
+      "oglasi se uklanjaju sa prostora za oglašavanje",
+      "Poruke u razgovorima između korisnika brišu se kada bar jedna strana ugasi nalog",
       "jedina mogućnost je da se na program ne prijavite",
       "podaci koje ste uneli se brišu",
     ],
@@ -604,6 +618,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "at least once a year",
       "Telegram Messenger Inc.",
       "The record of POEN recorded is not hidden",
+      "pseudonymization, not anonymization",
+      "Art. 30 para. 3 LPDP",
+      "the listings are removed from the advertising space",
+      "Messages in conversations between users are deleted when at least one party closes their account",
       "the only option is not to apply for the program",
       "deletes the data you entered",
     ],
@@ -615,6 +633,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "не реже одного раза в год",
       "Telegram Messenger Inc.",
       "Запись об учтённых ПОЕН не скрыта",
+      "псевдонимизацией, а не анонимизацией",
+      "ч. 3 ст. 30 ЗЗПЛ",
+      "объявления снимаются с площадки для размещения",
+      "Сообщения в переписках между пользователями удаляются",
       "единственная возможность — не подавать заявку на программу",
       "внесённые Вами данные удаляются",
     ],

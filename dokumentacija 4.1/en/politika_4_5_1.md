@@ -312,19 +312,23 @@ Data in a listing by an unverified user (sub-section 4.8) are retained until the
 
 The record of an enquiry in relation to a listing (sub-section 4.10) is deleted together with the listing to which it relates. Upon termination of the user's status it is deleted or anonymized together with the other data of that account.
 
+Messages in conversations between users are deleted when at least one party closes their account, or when 24 months have passed since the last message in the conversation.
+
 A minor user's data (subsection 4.7) are retained while the account remains active. The parent's email address and the invitation to take over the account are deleted together with an account that nobody has taken over within fourteen days; upon takeover they lose their purpose and are deleted with the account upon termination of status. Friendships are deleted when the user attains the age of majority and upon deletion of the account. The school datum is deleted upon attaining majority and upon termination of status; no history of earlier choices is kept. A minor user's own email address is retained until they remove it or until the capacity of user ceases; it is retained upon transition to an adult account. An unconfirmed address and its confirmation link lose effect after twenty-four hours.
 
-Upon expiry of the retention period, data are deleted or permanently anonymized in a manner that prevents identification of the person.
+Upon expiry of the retention period, data are deleted or permanently anonymized in a manner that prevents identification of the person. The Foundation verifies at least once a year whether the retention period has expired for any category of data and deletes or anonymizes the data for which it has.
 
 A procurement proposal (subsection 4.11) is deleted when you choose another name or remove the proposal, when a procurement for the selected name of the good is carried out, and at the latest upon the expiry of twelve months from entry. Data on participation in a procurement and on collection are kept for ten years, together with the accounting documentation of the procurement.
 
-### Article 11 — Termination of Status and Anonymization of Data
+### Article 11 — Termination of Status and Pseudonymization of Data
 
-Upon termination of the user's status — whether by withdrawal, exclusion, or death — the anonymization procedure is initiated in accordance with Art. 34 of the Rulebook on the KOLO System.
+Upon termination of the user's status — whether by withdrawal, exclusion, or death — the pseudonymization procedure is initiated in accordance with Art. 34 of the Rulebook on the KOLO System.
 
-The email address, all voluntarily entered data, and data in published listings are deleted, including photographs and the telephone number. The user's connections in the verification graph are anonymized.
+The email address, all voluntarily entered data, and data in published listings are deleted, including the title, description, place, and photographs; the listings are removed from the advertising space and the photographs are deleted from storage. The free text entered alongside a re-registration of POEN is also deleted, both the text entered by the user and the text entered by their counterparty. The user's connections in the graph of confirmations are anonymized.
 
-The user's POEN records are annulled, and the numerical history is retained under an identifier that no longer enables identification. Records thus anonymized cease to be personal data within the meaning of the LPDP and are retained permanently as part of the common good.
+The user's POEN records are annulled, and the numerical history is retained under a pseudonym that does not point to a name. That procedure is pseudonymization, not anonymization: the Foundation retains the account's internal identifier, so the retained records remain personal data within the meaning of the LPDP and enjoy the full protection of this policy. They are retained because erasure is not an unlimited right — under Art. 30 para. 3 LPDP it does not apply where the processing is necessary for compliance with a statutory retention obligation and for the establishment, exercise, or defence of a legal claim.
+
+After the termination of status, the following remain public: the numerical records of the ledger alongside a pseudonym that does not point to a name, the basis on which the POEN was recorded, and the first and last name alongside a public donation. Under Art. 5a of the Rulebook on Patronage and Donations, the donor's name is retained as a permanent part of the donation record and is not removed from the list even upon the cessation of the capacity of user. For a user who has donated publicly, linking their pseudonymous record to their identity remains possible even after the account is closed; this consequence is warned of before every public donation, and the alternative is an anonymous donation.
 
 This separation of identification and accounting data resolves the tension between the user's right to erasure of personal data (Art. 30 LPDP) and the integrity of the common-good ledger. The contribution ledger is by design consistent — deleting one user's records would undermine the consistency of the entire ledger, which is the common good of all participants. By separating data, both the user's rights and the integrity of the ledger are preserved.
 
@@ -356,9 +360,9 @@ In accordance with the LPDP, you have the following rights:
 
 Right of access (Art. 26 LPDP) — you may request confirmation of whether we process your data and obtain a copy of those data.
 
-Right to rectification (Art. 29 LPDP) — you may request the rectification of inaccurate or completion of incomplete data.
+Right to rectification (Art. 29 LPDP) — you may request the rectification of inaccurate or completion of incomplete data. The request is submitted within the Platform, as an appeal of the type “Data correction”, or to the address in Article 1.
 
-Right to erasure (Art. 30 LPDP) — you may request the deletion of data when the purpose of processing has been fulfilled, when you have withdrawn your consent, or when processing is unlawful. This right is limited in two cases: when there is a statutory obligation to retain data and when deletion would undermine the integrity of the common-good ledger — in that case the anonymization procedure in Article 11 of this Policy applies.
+Right to erasure (Art. 30 LPDP) — you may request the deletion of data when the purpose of processing has been fulfilled, when you have withdrawn your consent, or when processing is unlawful. This right is limited in two cases: when there is a statutory obligation to retain data and when deletion would undermine the integrity of the common-good ledger — in that case the pseudonymization procedure in Article 11 of this Policy applies.
 
 Right to restriction of processing (Art. 31 LPDP) — you may request a temporary restriction of processing while a complaint is being resolved or while data are being corrected.
 

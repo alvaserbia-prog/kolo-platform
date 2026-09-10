@@ -46,7 +46,16 @@ const PROTOKOL_WALLET_ID = "banka-singleton";
  * 3. Poništi POEN balans korisnika (ili prenesi drugom korisniku ako je zadat primalac)
  * 4. Napusti aktivne Krugove
  * 5. Obriši aktivne tokene (VerifikacijaToken, PasswordResetToken); anonimizuj User i UserPodaci
- * 6. Zadržaj: transakcije, audit log, KrugBonusLog
+ * 6. Ukloni oglase i njihov sadržaj (Politika čl. 11 st. 2) — vidi korak 4b
+ * 7. Obriši slobodan tekst uz prepise POEN-a (Politika čl. 11 st. 2)
+ * 8. Zadržaj: numerička istorija transakcija, audit log, KrugBonusLog
+ *
+ * 🔴 Ovo je PSEUDONIMIZACIJA, ne anonimizacija (set 4.5.1, R-14). `User` red
+ * ostaje sa svojim `id`, a nov pseudonim je iz njega izveden — Fondacija u
+ * svakom trenutku može ponovo da poveže zapis sa osobom. Zapisi zato i dalje
+ * jesu podaci o ličnosti; ograničenje brisanja stoji na čl. 30 st. 3 ZZPL-a
+ * (zakonska obaveza čuvanja i integritet evidencije), ne na tvrdnji da su
+ * prestali to da budu. Ne vraćati raniju formulaciju.
  */
 export async function DELETE(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -308,6 +317,63 @@ export async function DELETE(req: NextRequest) {
     await prisma.krugClanstvo.update({
       where: { id: m.id },
       data: { leftAt: new Date() },
+    });
+  }
+
+  // --- 4b. Oglasi: uklanjanje sa Pijace + brisanje sadržaja i fotografija ---
+  // 🔴 Politika čl. 11 st. 2 od prve verzije obećava da se brišu „podaci u
+  // objavljenim oglasima, uključujući fotografije i broj telefona" — a do seta
+  // 4.5.1 ovaj tok oglase NIJE ni dodirivao. Ostajali su `ACTIVE` i javni i
+  // gostu, sa opisom u kome ljudi po pravilu ostave telefon, sa mestom i sa
+  // fotografijama na R2. Pseudonim `obrisani-korisnik-…` tu ne pomaže: takav
+  // sadržaj identifikuje sam.
+  const oglasi = await prisma.marketplaceListing.findMany({
+    where: { sellerId: userId },
+    select: { id: true, images: true },
+  });
+  if (oglasi.length > 0) {
+    await prisma.marketplaceListing.updateMany({
+      where: { sellerId: userId },
+      data: {
+        status: "UKLONJEN",
+        title: "",
+        description: "",
+        location: null,
+        images: [],
+        uklonjenAt: new Date(),
+        uklonjenRazlog: "Nalog je ugašen (čl. 34 Pravilnika, čl. 11 Politike privatnosti).",
+      },
+    });
+    // Fotografije sa R2 — best-effort, ne sme da obori brisanje naloga.
+    for (const o of oglasi) {
+      for (const slika of o.images) await obrisiSaR2(slika);
+    }
+  }
+
+  // --- 4c. Slobodan tekst uz prepise POEN-a ---
+  // Odluka vlasnika (2026-09-10): opis prepisa ostaje vidljiv svima, ali se
+  // BRIŠE kad se nalog ugasi. Meri se uzak krug: samo prepisi između DVA
+  // korisnička zapisa u kojima je ugašeni nalog jedna strana. Opisi u kojima je
+  // Protokol jedna strana su sistemski (osnov emisije, protivzapisi po čl. 34) —
+  // oni nose proverljivost evidencije i ostaju.
+  const mojWalletId = user.wallet?.id ?? null;
+  if (mojWalletId) {
+    // 🔴 `NOT: { fromWalletId: null }` je obavezan: Prisma u `not` filter
+    // UKLJUČUJE NULL, a emisije Protokola upravo tako izgledaju (`fromWalletId`
+    // je null). Bez ovoga bi se brisali i opisi emisija — osnov po kome je POEN
+    // upisan, koji je odlukom uz R-13 namerno javan.
+    await prisma.transaction.updateMany({
+      where: {
+        type: TransactionType.TRANSFER,
+        description: { not: null },
+        NOT: { fromWalletId: null },
+        AND: [
+          { fromWalletId: { not: PROTOKOL_WALLET_ID } },
+          { toWalletId: { not: PROTOKOL_WALLET_ID } },
+          { OR: [{ fromWalletId: mojWalletId }, { toWalletId: mojWalletId }] },
+        ],
+      },
+      data: { description: null },
     });
   }
 

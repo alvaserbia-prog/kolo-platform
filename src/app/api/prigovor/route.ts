@@ -38,7 +38,10 @@ export async function POST(req: NextRequest) {
   }
 
   // OGLAS — prigovor na uklonjen oglas ili poruku (Uslovi čl. 25 st. 2, čl. 30).
-  const tipovi = ["VERIFIKACIJA", "SUSPENZIJA", "PROGRAM", "OGLAS", "OSTALO"];
+  // „PODACI" je zahtev za ispravku netačnog podatka (čl. 29 ZZPL-a) — pravo koje
+  // Politika navodi među pravima korisnika, a do seta 4.5.1 nije imalo nijedan
+  // put u sistemu. Ide kroz zatečeni prigovor, bez novog modela i novog taba.
+  const tipovi = ["VERIFIKACIJA", "SUSPENZIJA", "PROGRAM", "OGLAS", "PODACI", "OSTALO"];
   if (!tipovi.includes(tipOdluke)) {
     return await greska("Nepoznat tip odluke.", 400);
   }

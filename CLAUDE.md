@@ -101,6 +101,21 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-10 (dvadeset drugi put):** na **4.5.1** idu **ČETIRI akta** —
+Politika privatnosti (sa 4.5.0), DPIA (sa 4.5.0), Registar radnji obrade (sa 4.5.0)
+i Pravilnik o pokroviteljstvu i donacijama (sa 4.4.7). Ostalih trinaest ostaje gde
+jeste. Povod je **analiza rizika R-14** (javna pseudonimna evidencija naspram prava
+na brisanje). Sadržinski, vidi sekciju „Prestanak statusa: pseudonimizacija, ne
+anonimizacija" ispod.
+
+🟢 **Unakrsna upućivanja su ispravljena** (DPIA → Politika i Registar na 4.5.1);
+upućivanja na programe podrške ostaju na 4.5.0, jer se taj akt nije menjao. 🟡 Usput
+je zatvoren zaostatak iz R-12 — petnaest redova o prenosu u treću zemlju u Registru
+je i dalje govorilo da je infrastruktura u SAD.
+
+🔴 **Registar od ovog seta ima SEDAMNAEST radnji obrade** — nova je br. 17
+(privatna komunikacija između korisnika). DPIA zbir je usklađen.
+
 **AŽURIRANO 2026-09-10 (dvadeset prvi put):** na **4.5.0** idu **ČETIRI akta** —
 Pravilnik o programima podrške (sa 4.4.1), Politika privatnosti (sa 4.4.9), DPIA
 (sa 4.4.9) i Registar radnji obrade (sa 4.4.9). Ostalih trinaest ostaje gde jeste.
@@ -1121,6 +1136,97 @@ već postoji i dovoljan je).
 jasnije **besplatno**, to je korisnik slabije zaštićen potrošačkim pravom; što bismo
 mu više dali prava, to davanje više liči na prodaju. Reklamacija je namerno
 izostavljena i to ovde postaje **deo odbrane**, ne samo praznina.
+
+### Prestanak statusa: pseudonimizacija, ne anonimizacija (2026-09-10)
+
+Odluke uz analizu rizika **R-14** (javna pseudonimna evidencija naspram prava na
+brisanje, čl. 30 ZZPL-a). Na **4.5.1** idu **ČETIRI akta** — Politika privatnosti
+(sa 4.5.0), DPIA (sa 4.5.0), Registar radnji obrade (sa 4.5.0) i Pravilnik o
+pokroviteljstvu i donacijama (sa 4.4.7). Ostalih trinaest ostaje gde jeste.
+
+🔴 **Prvi nalaz je pravni i obara nosivu rečenicu.** Politika čl. 11 je tvrdila da
+se nalog pri gašenju **anonimizuje** i da zadržani zapisi „**prestaju da budu podaci
+o ličnosti u smislu ZZPL-a**". Nije tačno: `DELETE /api/profil` ne briše `User` red
+— ostaju `id`, `memberHash`, `donatorskiBroj`, `Wallet`, cela istorija, `AuditLog` sa
+`targetUserId`, `DonationRecord` sa `userId` — a nov pseudonim je
+`obrisani-korisnik-<prvih 8 znakova UUID-a>`, dakle **izveden iz internog id-a**.
+Rukovalac koji može da re-identifikuje drži **podatke o ličnosti**; ovo je
+pseudonimizacija. Odbrana „integritet evidencije zajedničkog dobra" je legitimna i
+ostaje, ali sada stoji tamo gde joj je mesto — na **čl. 30 st. 3 ZZPL-a** (zakonska
+obaveza čuvanja i pravni zahtev). **Ne vraćati raniju formulaciju**; zaključana je
+testom, u oba smera (traži se nova, zabranjena je stara).
+
+🔴 **Drugi nalaz je četvrti po redu iste vrste: akt obećava, kod ne radi.** Čl. 11
+st. 2 je od prve verzije govorio da se brišu „podaci u objavljenim oglasima,
+uključujući fotografije i broj telefona" — a tok brisanja `MarketplaceListing`
+**nije ni pominjao**. Oglasi su ostajali `ACTIVE`, javni i gostu (`pijaca/page.tsx`
+filtrira samo po statusu), sa opisom u kome ljudi po pravilu ostave telefon, sa
+mestom i sa fotografijama na R2 — sa kog se brisao **samo avatar**. Pseudonim
+`obrisani-korisnik-…` tu ne pomaže: takav sadržaj identifikuje sam.
+
+🔴 **Ime donatora ostaje javno i posle gašenja naloga — i to je sada napisano na
+oba mesta (odluka vlasnika, varijanta „a").** Zapis se ne dira: čl. 5a Pravilnika o
+donacijama nosi razlog (proverljivost — ukupan broj POEN-a je javan, zbir zapisa u
+Protokolu je nula, pa upis koji se ne može pripisati licu nije proverljiv). Menja se
+to što su se dva akta oko toga protivrečila: Politika je tvrdila da identifikacija
+posle prestanka statusa nije moguća, a kod donatora jeste. Sada Politika čl. 11 ima
+izričit spisak onoga što ostaje javno, čl. 5a kaže „ni prestankom svojstva
+korisnika", a upozorenje pri donaciji (`vidljivost_upozorenje`, pet jezika) dodaje
+da ime ostaje u listi i kad se nalog ugasi. **Bez te dopune pristanak ne pokriva
+stvarnu posledicu.**
+
+**Ostali nalazi i šta je urađeno:**
+- 🔴 **Poruke onoga ko ode nisu se brisale.** `gdpr-cistenje` je tražio **oba**
+  uslova istovremeno (oba naloga ugašena **I** 24 meseca), dok su i docstring rute i
+  CLAUDE.md tvrdili „jedna strana **ILI** 24 meseca". Sada je uslov `OR` — bar jedna
+  strana ugasila nalog, ili 24 meseca od poslednje poruke. Rok je ušao i u Politiku
+  čl. 10, gde ga uopšte nije bilo.
+- **Slobodan tekst uz prepis POEN-a ostaje vidljiv svima, ali se BRIŠE pri gašenju
+  naloga** (odluka vlasnika). Uzak krug: samo prepisi između **dva korisnička
+  zapisa** u kojima je ugašeni nalog jedna strana. 🔴 `NOT: { fromWalletId: null }`
+  je obavezan — Prisma u `not` filter **uključuje NULL**, a emisije Protokola tako i
+  izgledaju; bez toga bi se obrisali i opisi emisija, tj. osnov po kome je POEN
+  upisan, koji je odlukom uz R-13 namerno javan.
+- **Pravo na ispravku (čl. 29 ZZPL-a) dobilo je put** — nova vrsta prigovora
+  `PODACI`. Bez novog modela i bez novog admin taba; `tipOdluke` je i inače `String`,
+  pa migracija nije trebala.
+- **Rok od deset godina** se ne sprovodi cronom (nema šta da istekne još godinama);
+  umesto toga Politika čl. 10 dobija **obavezu godišnje provere** rokova — isti
+  postupak kao godišnja provera ugovora o obradi iz R-12: norma sa ritmom, ne
+  obećanje.
+- **DPIA** — R2 dopunjen (pseudonimizacija, re-identifikacija moguća na strani
+  Fondacije), R13 dopunjen trajnošću imena posle gašenja naloga, nova tačka
+  **5.14** sa merama i sa prihvaćenom posledicom javne donacije. Ocene se ne menjaju.
+
+🟡 **Dodata je i radnja obrade br. 17 — privatna komunikacija između korisnika.**
+To nije bilo u odobrenim merama, nego je posledica M-4: rok čuvanja poruka ušao je u
+Politiku, a u Registru poruke **nisu bile popisane kao radnja** — komunikacija je
+stajala samo kao jedna od svrha radnje br. 1, bez kategorija podataka i bez roka.
+Ostaviti tako značilo bi napraviti nov razlaz iste vrste koju ceo registar rizika
+ispravlja. DPIA zato sada broji **sedamnaest** radnji.
+
+🟡 **Usput ispravljeno — zaostatak iz R-12:** petnaest redova „Prenos u treću zemlju"
+u Registru je i dalje glasilo „Da — obrađivači infrastrukture nalaze se u SAD"
+(sr 3, en 2, ru 3, hr 3, hu 4). R-12 je ispravio dvanaest redova i tu stao. Sada su
+svi na opisu sa EU regionom; redovi koji pominju **kanal upozorenja** (Telegram,
+Resend) zadržavaju rečenicu da po tom osnovu prenos u SAD postoji.
+
+**Kod:**
+- `DELETE /api/profil` — koraci **4b** (oglasi: `UKLONJEN` + prazan naslov/opis/mesto
+  + `images: []` + brisanje sa R2) i **4c** (opis prepisa). Docstring sada kaže da je
+  reč o pseudonimizaciji i zašto.
+- `gdpr-cistenje` — uslov `OR`.
+- `POST /api/prigovor` + `ProfilKlijent` + `AdminKlijent` — vrsta `PODACI`
+  (`prigovor_tip_podaci`, `prigovori_tip_podaci`, pet jezika).
+- **Brana:** `__tests__/profil-brisanje-izvor.test.ts` — gleda IZVOR (oglasi se
+  prazne i brišu sa R2, opis prepisa se briše uz `NOT fromWalletId null`, GDPR uslov
+  je `OR`, prigovor prima `PODACI`) i traži da Politika nosi „pseudonimizacija, a ne
+  anonimizacija" a **ne** oborenu tvrdnju. Odredbe akata dodatno su zaključane u
+  `pravni-dokumenti.test.ts` na sr/en/ru.
+
+🟡 **Poznata posledica, svesno prihvaćena:** ko je donirao javno, ostaje povezan sa
+svojom pseudonimnom evidencijom i posle gašenja naloga. To je jedini takav slučaj u
+sistemu; alternativa je bila i ostaje anonimna donacija, koja ne nosi POEN.
 
 ### Socijalni program: pristanak sada pokriva ono što se zaista dešava (2026-09-10)
 

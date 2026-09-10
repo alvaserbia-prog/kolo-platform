@@ -312,19 +312,23 @@ Podaci u oglasu neverificiranog korisnika (pododjeljak 4.8.) čuvaju se dok kori
 
 Zapis o upitu povodom oglasa (pododjeljak 4.10.) briše se s oglasom na koji se odnosi. Po prestanku statusa korisnika briše se odnosno anonimizira zajedno s ostalim podacima toga računa.
 
+Poruke u razgovorima između korisnika brišu se kada barem jedna strana ugasi račun, odnosno kada od posljednje poruke u razgovoru prođu 24 mjeseca.
+
 Podaci maloljetnog korisnika (pododjeljak 4.7) čuvaju se dok račun ostaje aktivan. Elektronička adresa roditelja i poziv za preuzimanje računa brišu se s računom koji nitko nije preuzeo u roku od četrnaest dana, odnosno gube svrhu po preuzimanju i brišu se s računom pri prestanku statusa. Prijateljstva se brišu stjecanjem punoljetnosti korisnika i pri brisanju računa. Podatak o školi briše se stjecanjem punoljetnosti i pri prestanku statusa; povijest ranijih odabira se ne čuva. Vlastita elektronička adresa maloljetnog korisnika čuva se dok je ne ukloni ili dok ne prestane svojstvo korisnika; prelaskom u punoljetni račun se zadržava. Nepotvrđena adresa i poveznica za potvrdu gube učinak nakon dvadeset četiri sata.
 
-Po isteku roka podaci se brišu ili trajno anonimiziraju na način koji onemogućuje identifikaciju osobe.
+Po isteku roka podaci se brišu ili trajno anonimiziraju na način koji onemogućuje identifikaciju osobe. Zaklada najmanje jednom godišnje provjerava je li za neku kategoriju podataka rok čuvanja istekao te briše odnosno anonimizira podatke kojima jest.
 
 Prijedlog za nabavu (pododjeljka 4.11) briše se kada Vi izaberete drugi naziv ili prijedlog uklonite, kada bude provedena nabava izabranog naziva dobra, i najkasnije po isteku dvanaest mjeseci od upisa. Podaci o sudjelovanju u nabavi i o preuzimanju čuvaju se deset godina, uz računovodstvenu dokumentaciju nabave.
 
-### Članak 11. — Prestanak statusa i anonimizacija podataka
+### Članak 11. — Prestanak statusa i pseudonimizacija podataka
 
-Prestankom statusa korisnika — bilo istupanjem, isključenjem ili smrću — pokreće se postupak anonimizacije u skladu s čl. 34. Pravilnika o KOLO sustavu.
+Prestankom statusa korisnika — bilo istupanjem, isključenjem ili smrću — pokreće se postupak pseudonimizacije u skladu s čl. 34. Pravilnika o KOLO sustavu.
 
-Brišu se email adresa, svi dobrovoljno uneseni podaci i podaci u objavljenim oglasima, uključujući fotografije i broj telefona. Anonimiziraju se veze korisnika u grafu verifikacija.
+Brišu se elektronička adresa, svi dobrovoljno uneseni podaci i podaci u objavljenim oglasima, uključujući naslov, opis, mjesto i fotografije; oglasi se uklanjaju s prostora za oglašavanje, a fotografije se brišu iz pohrane. Briše se i slobodan tekst unesen uz prijenos POEN-a, kako onaj koji je unio sam korisnik tako i onaj koji je unio njegov sugovornik. Anonimiziraju se veze korisnika u grafu potvrda.
 
-Zapisi POEN-a korisnika poništavaju se, a numerička se povijest zadržava pod identifikatorom koji više ne omogućuje identifikaciju. Tako anonimizirani zapisi prestaju biti osobni podaci u smislu ZZPL-a i čuvaju se trajno kao dio zajedničkog dobra.
+Zapisi POEN-a korisnika poništavaju se, a numerička se povijest zadržava pod pseudonimom koji ne upućuje na ime. Taj je postupak pseudonimizacija, a ne anonimizacija: Zaklada zadržava interni identifikator računa, pa zadržani zapisi i dalje predstavljaju osobne podatke u smislu ZZPL-a i uživaju punu zaštitu po ovoj politici. Zadržavaju se jer brisanje nije neograničeno pravo — po čl. 30. st. 3. ZZPL-a ono se ne primjenjuje kada je obrada nužna radi ispunjenja zakonske obveze čuvanja te radi postavljanja, ostvarivanja ili obrane pravnog zahtjeva.
+
+Nakon prestanka statusa javno ostaju: numerički zapisi evidencije uz pseudonim koji ne upućuje na ime, osnova po kojoj je POEN upisan te ime i prezime uz javnu donaciju. Ime donatora se po čl. 5a. Pravilnika o pokroviteljstvu i donacijama čuva kao trajan dio zapisa donacije i ne uklanja se s popisa ni prestankom svojstva korisnika. Za korisnika koji je donirao javno, povezivanje njegove pseudonimne evidencije s identitetom ostaje moguće i nakon gašenja računa; na tu se posljedicu upozorava prije svake javne donacije, a alternativa je anonimna donacija.
 
 To razdvajanje identifikacijskih i obračunskih podataka rješava napetost između prava korisnika na brisanje osobnih podataka (čl. 30. ZZPL-a) i integriteta evidencije zajedničkog dobra. Evidencija doprinosa po dizajnu je konzistentna — brisanje zapisa jednog korisnika narušilo bi konzistentnost cjelokupne evidencije koja je zajedničko dobro svih sudionika. Razdvajanjem podataka osigurava se i poštovanje prava korisnika i očuvanje integriteta evidencije.
 
@@ -356,9 +360,9 @@ U skladu sa ZZPL-om imate sljedeća prava:
 
 Pravo na pristup (čl. 26. ZZPL-a) — možete zatražiti potvrdu obrađujemo li vaše podatke i dobiti presliku tih podataka.
 
-Pravo na ispravak (čl. 29. ZZPL-a) — možete zahtijevati ispravak netočnih ili dopunu nepotpunih podataka.
+Pravo na ispravak (čl. 29. ZZPL-a) — možete zahtijevati ispravak netočnih ili dopunu nepotpunih podataka. Zahtjev se podnosi u Platformi, prigovorom vrste „Ispravak podatka”, ili na adresu iz Članka 1.
 
-Pravo na brisanje (čl. 30. ZZPL-a) — možete zahtijevati brisanje podataka kada je svrha obrade ispunjena, kada ste povukli privolu ili kada obrada nije zakonita. To je pravo ograničeno u dva slučaja: kada postoji zakonska obveza čuvanja podataka i kada bi brisanje narušilo integritet evidencije zajedničkog dobra — u tom se slučaju primjenjuje postupak anonimizacije iz Članka 11. ove politike.
+Pravo na brisanje (čl. 30. ZZPL-a) — možete zahtijevati brisanje podataka kada je svrha obrade ispunjena, kada ste povukli privolu ili kada obrada nije zakonita. To je pravo ograničeno u dva slučaja: kada postoji zakonska obveza čuvanja podataka i kada bi brisanje narušilo integritet evidencije zajedničkog dobra — u tom se slučaju primjenjuje postupak pseudonimizacije iz Članka 11. ove politike.
 
 Pravo na ograničenje obrade (čl. 31. ZZPL-a) — možete zahtijevati privremeno ograničenje obrade dok se rješava prigovor ili dok se podaci ne isprave.
 
