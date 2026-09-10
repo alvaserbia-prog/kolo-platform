@@ -2,7 +2,7 @@
 
 # Pravilnik o sudjelovanju djece
 
-*Ovaj pravilnik uređuje sudjelovanje maloljetnih osoba u KOLO sustavu — pristupanje, obim aktivnosti, odnos s roditeljem, doprinos iz dječjeg prostora i prijelaz u punoljetni račun. Donosi se na temelju članka 58. Pravilnika o KOLO sustavu (v4.4.6), koji izričito upućuje na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
+*Ovaj pravilnik uređuje sudjelovanje maloljetnih osoba u KOLO sustavu — pristupanje, obim aktivnosti, odnos s roditeljem, doprinos iz dječjeg prostora i prijelaz u punoljetni račun. Donosi se na temelju članka 58. Pravilnika o KOLO sustavu (v4.5.2), koji izričito upućuje na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
 
 ## I — Opće odredbe
 
@@ -84,15 +84,23 @@ Za preuzimanje računa po članku 4.b indeks stvarnosti nije uvjet. Preuzimanjem
 
 ### Članak 6.
 
-Po otvaranju računa po članku 4., osobe koje su potvrdile stvarnost roditelja pozivaju se da potvrde da roditelj ima dijete navedenog uzrasta. Potvrda se daje za svako dijete posebno.
+Roditelj koji otvara račun po članku 4., odnosno koji račun preuzima po članku 4.b, daje izjavu pod punom odgovornošću da ima dijete navedene dobi. Izjava se daje u trenutku otvaranja odnosno preuzimanja računa; njezin se tekst čuva uz vezu roditelja i djeteta i nakon davanja se ne mijenja. Kada je račun u maloljetni preveden odlukom Zaklade, roditelj izjavu daje u roku iz stavka 4.
 
-Rok za izjašnjavanje je trideset dana od otvaranja računa.
+Nastankom veze roditelja i djeteta, osobe koje su potvrdile stvarnost tog roditelja pozivaju se da potvrde da roditelj ima dijete navedene dobi. Potvrda se daje za svako dijete posebno.
 
-Osobi koja se u tom roku ne izjasni poništava se potvrda stvarnosti tog roditelja. Poništenjem se ukidaju zapisi POEN-a evidentirani povodom te potvrde i oslobađa se verifikacijski slot te osobe.
+Postupak se provodi za svakog roditelja posebno i ponavlja se pri svakoj novoj potvrdi stvarnosti roditelja.
 
-Izjašnjavanje dano po isteku roka ne otklanja nastupjelo poništenje.
+Rok za izjašnjavanje je šezdeset dana. Prije isteka roka obavještavaju se sve osobe koje bi poništenjem bile pogođene.
 
-Poništena potvrda može se ponoviti, a stvarnost roditelja može potvrditi i druga osoba, po općim pravilima. Svakom novom potvrdom stvarnosti roditelja postupak iz ovog članka provodi se ponovno.
+Potvrda stvarnosti roditelja opstaje samo ako se u roku izjasne oba člana veze — osoba koja je potvrdu dala i sam roditelj. Ako izjašnjavanje jednog od njih izostane, potvrda se poništava.
+
+Poništenjem se svakoj osobi kojoj je povodom te potvrde bio evidentiran POEN taj POEN otpisuje — osobi koja je potvrdu dala, roditelju, i nadzorniku ako je ishod nadzora bio uredan. Svatko od njih vraća isključivo ono što je povodom te potvrde dobio; teret se ne prenosi na drugu osobu i naknada iz članka 20b Pravilnika o dokazu stvarnosti ne primjenjuje se. Otpis se izvršava i kada zapis time prijeđe u negativnu vrijednost, u skladu s člankom 14. stavkom 3. točkom 4. Pravilnika o KOLO sustavu. Osobi koja je potvrdu dala oslobađa se verifikacijski slot.
+
+Poništenje po ovom članku ne pretpostavlja neistinitu potvrdu i nije mjera zbog povrede obveze. Ono nastupa neaktivnošću u postupku, primjenom ovog pravilnika i bez odluke tijela Zaklade.
+
+Izjašnjavanje dano po isteku roka ne otklanja nastupjelo poništenje samo po sebi. Osoba pogođena poništenjem ima pravo prigovora, o kojem odlučuje ovlaštena osoba Zaklade. Pravo prigovora postoji zato što poništenje nastupa automatskom primjenom pravila, u smislu članka 38. Zakona o zaštiti podataka o ličnosti.
+
+Poništena potvrda može se ponoviti, a stvarnost roditelja može potvrditi i druga osoba, po općim pravilima; ponovnom potvrdom POEN se evidentira iznova.
 
 Izjašnjavanje kojim se postojanje djeteta osporava zahtijeva obrazloženje; o njemu odlučuje Upravni odbor.
 

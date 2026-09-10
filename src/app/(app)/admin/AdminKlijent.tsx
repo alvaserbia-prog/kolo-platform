@@ -1506,6 +1506,7 @@ const prigovorTipLabel = (t: ReturnType<typeof useTranslations<"admin">>): Recor
   PROGRAM: t("prigovori_tip_program"),
   OGLAS: t("prigovori_tip_oglas"),
   PODACI: t("prigovori_tip_podaci"),
+  POTVRDA: t("prigovori_tip_potvrda"),
   OSTALO: t("prigovori_tip_ostalo"),
 });
 

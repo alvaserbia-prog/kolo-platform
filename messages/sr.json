@@ -689,7 +689,8 @@
     "deca": "Deca",
     "status_dete_ceka": "čeka odobrenje roditelja",
     "status_dete_radi": "nalog radi",
-    "prigovor_tip_podaci": "Ispravka netačnog podatka o meni"
+    "prigovor_tip_podaci": "Ispravka netačnog podatka o meni",
+    "prigovor_tip_potvrda": "Poništena potvrda stvarnosti zbog neaktivnosti"
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -952,7 +953,7 @@
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.5.1"
+      "ver": "4.5.2"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -960,11 +961,11 @@
     },
     "dpia": {
       "naslov": "DPIA. Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "4.5.1"
+      "ver": "4.5.2"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "4.5.1"
+      "ver": "4.5.2"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
@@ -976,7 +977,7 @@
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
-      "ver": "4.4.6",
+      "ver": "4.5.2",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -998,19 +999,19 @@
     "meta_uslovi_title": "Uslovi korišćenja · KOLO",
     "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.4.3",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.1",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.2",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.5.1",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.5.2",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.5.1",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.5.2",
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.4.6",
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.6",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.4.6",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.5.2",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sistemu",
@@ -2559,7 +2560,8 @@
     "emisija_tbl_nivo1": "svaka donacija ispod 5.000",
     "tab_nabavke": "Nabavke",
     "ped_izjava_label": "Izjava izvršioca",
-    "prigovori_tip_podaci": "Ispravka podatka"
+    "prigovori_tip_podaci": "Ispravka podatka",
+    "prigovori_tip_potvrda": "Poništena potvrda"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",
@@ -2660,10 +2662,6 @@
     "doprinos_razmeni_tekst": "Evidentiran ti je {korak}. korak putanje doprinosa razmeni i upisano ti je {iznos} POEN (Pravilnik čl. 40b).",
     "roditeljstvo_potvrda_naslov": "Potvrdi postojanje deteta",
     "roditeljstvo_potvrda_tekst": "Sa naloga {pseudonim} otvoren je nalog za dete uzrasta {godine} godina. Imaš {dana} dana da potvrdiš da to znaš.",
-    "roditeljstvo_istekla_naslov": "Potvrda stvarnosti je poništena",
-    "roditeljstvo_istekla_tekst": "Izjašnjenje nije stiglo u roku, pa je tvoja potvrda stvarnosti člana {pseudonim} poništena.",
-    "roditeljstvo_pala_potvrda_naslov": "Jedna potvrda tvoje stvarnosti je pala",
-    "roditeljstvo_pala_potvrda_tekst": "Iz tvog lanca nije stiglo izjašnjenje o postojanju tvog deteta u roku.",
     "oglas_uklonio_roditelj_naslov": "Roditelj je uklonio tvoj oglas",
     "oglas_uklonio_roditelj_tekst": "Tvoj oglas je uklonjen sa Pijace.",
     "prijava_razmene_ponistena_naslov": "Prepis je poništen",
@@ -2697,7 +2695,7 @@
     "nalog_preveden_u_maloletni_naslov": "Nalog je preveden u dečji",
     "nalog_preveden_u_maloletni_tekst": "Tvoj nalog sada radi po pravilima za maloletne korisnike, a kao roditelj je upisan {roditelj}. Poništeno ti je {iznos} POEN upisanih kroz kanale; POEN koji su ti drugi prepisali ostaje.",
     "roditeljstvo_upisano_naslov": "Upisan si kao roditelj",
-    "roditeljstvo_upisano_tekst": "Nalog {pseudonim} je preveden u dečji i ti si upisan kao njegov roditelj.",
+    "roditeljstvo_upisano_tekst": "Nalog {pseudonim} je preveden u dečji i ti si upisan kao njegov roditelj. Daj izjavu o postojanju deteta u roku — bez nje padaju potvrde tvoje stvarnosti onih koji se o detetu izjašnjavaju.",
     "potvrda_pala_minus_naslov": "Potvrda je pala, zapis je u minusu",
     "potvrda_pala_minus_tekst": "Nalog {pseudonim} je preveden u dečji, pa je potvrda povodom koje ti je upisan POEN pala. Tvoj zapis je sada u minusu za {iznos} POEN. POEN-i koji pristignu prvo popunjavaju taj minus.",
     "nabavka_poziv_naslov": "Ušao si u nabavku",
@@ -2709,7 +2707,21 @@
     "program_pristanak_povucen_naslov": "Pristanak povučen",
     "program_pristanak_povucen_tekst": "Povukao si pristanak za program „{program}“. Postupak je prekinut, evidentiranje je prestalo, a uneti podaci su obrisani.",
     "program_pristanak_povucen_spoljni_naslov": "Pristanak povučen",
-    "program_pristanak_povucen_spoljni_tekst": "Povlačenje pristanka je zabeleženo. Detalji su u aplikaciji."
+    "program_pristanak_povucen_spoljni_tekst": "Povlačenje pristanka je zabeleženo. Detalji su u aplikaciji.",
+    "roditeljstvo_potvrda_prevod_naslov": "Potvrdi postojanje deteta",
+    "roditeljstvo_potvrda_prevod_tekst": "Nalog člana {pseudonim} ispravljen je u nalog deteta uzrasta {godine} godina. Imaš {dana} dana da potvrdiš da to znaš.",
+    "roditeljstvo_podsetnik_potvrdjivac_naslov": "Potvrda postojanja deteta ističe",
+    "roditeljstvo_podsetnik_potvrdjivac_tekst": "Ostalo ti je {dana} dana da se izjasniš o detetu člana {pseudonim}. Ako izjašnjenje izostane, tvoja potvrda njegove stvarnosti biće poništena i sa tvog zapisa će biti otpisano {iznos} POEN — i kada zapis time pređe u minus.",
+    "roditeljstvo_podsetnik_roditelj_naslov": "Potvrda tvoje stvarnosti ističe",
+    "roditeljstvo_podsetnik_roditelj_tekst": "Ostalo je {dana} dana da se {pseudonim} izjasni o postojanju tvog deteta. Ako izjašnjenje izostane, ta potvrda tvoje stvarnosti biće poništena i sa tvog zapisa će biti otpisano {iznos} POEN — i kada zapis time pređe u minus.",
+    "roditeljstvo_podsetnik_nadzornik_naslov": "Potvrda koju si nadzirao ističe",
+    "roditeljstvo_podsetnik_nadzornik_tekst": "Ostalo je {dana} dana da se {pseudonim} izjasni o postojanju deteta. Ako izjašnjenje izostane, potvrda koju si nadzirao biće poništena i sa tvog zapisa će biti otpisano {iznos} POEN — i kada zapis time pređe u minus.",
+    "roditeljstvo_ponistena_potvrdjivac_naslov": "Potvrda stvarnosti je poništena",
+    "roditeljstvo_ponistena_potvrdjivac_tekst": "Tvoja potvrda stvarnosti člana {pseudonim} poništena je jer izjašnjenje o postojanju deteta nije stiglo u roku. Sa tvog zapisa je otpisano {iznos} POEN; zapis time može preći u minus. Poništenje ne znači da je iko dao neistinitu potvrdu — ako smatraš da je nepravilno, možeš uložiti prigovor sa svog profila.",
+    "roditeljstvo_ponistena_roditelj_naslov": "Jedna potvrda tvoje stvarnosti je poništena",
+    "roditeljstvo_ponistena_roditelj_tekst": "Potvrda stvarnosti koju ti je dao {pseudonim} poništena je jer izjašnjenje o postojanju deteta nije stiglo u roku. Sa tvog zapisa je otpisano {iznos} POEN; zapis time može preći u minus. Stvarnost može potvrditi drugo lice, a na poništenje možeš uložiti prigovor sa svog profila.",
+    "roditeljstvo_ponistena_nadzornik_naslov": "Potvrda koju si nadzirao je poništena",
+    "roditeljstvo_ponistena_nadzornik_tekst": "Potvrda koju si nadzirao poništena je jer izjašnjenje o postojanju deteta nije stiglo u roku. Sa tvog zapisa je otpisano {iznos} POEN; zapis time može preći u minus. Na poništenje možeš uložiti prigovor sa svog profila."
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",
@@ -3176,7 +3188,7 @@
     "brisanje_otkucaj": "Otkucaj „{pseudonim}“ da potvrdiš",
     "brisanje_potvrdi": "Obriši nalog",
     "potvrde_naslov": "Potvrde postojanja deteta",
-    "potvrde_opis": "Neko iz tvog lanca ima nalog za svoje dete. Imaš {dana} dana da se izjasniš.",
+    "potvrde_opis": "Neko iz tvog lanca ima nalog za svoje dete. Imaš {dana} dana da se izjasniš. Potvrda opstaje samo ako se u roku izjasnite i ti i sam roditelj.",
     "potvrde_prazno": "Nemaš nijedno izjašnjenje na čekanju.",
     "pitanje": "Da li {pseudonim} ima dete uzrasta {godine} godina?",
     "pitanje_opis": "Izjašnjavaš se iz onoga što i sam znaš o osobi {pseudonim}. Podaci o detetu ti se ne prikazuju.",
@@ -3185,7 +3197,7 @@
     "dugme_nema": "Ne, nema",
     "dugme_posalji": "Pošalji",
     "obrazlozenje_naslov": "Obrazloženje (obavezno)",
-    "ako_ne_znas": "Ako nemaš saznanja o tome, nemoj pritiskati nijedno dugme. Ali znaj: ako se ne izjasniš u roku, tvoja potvrda stvarnosti te osobe biće poništena, POEN upisan povodom nje otpisan, a mesto ti se oslobađa.",
+    "ako_ne_znas": "Ako nemaš saznanja o tome, nemoj pritiskati nijedno dugme. Ali znaj: ako izjašnjenje izostane, potvrda stvarnosti te osobe biće poništena, a svakome koga je ta potvrda donela POEN taj POEN se otpisuje — i tebi, i njoj, i nadzorniku ako ga je bilo. Otpis se izvršava i kada zapis time pređe u minus. Poništenje ne znači da je iko dao neistinitu potvrdu; na njega možeš uložiti prigovor sa svog profila.",
     "prikazi_lozinku": "Prikaži lozinku",
     "sakrij_lozinku": "Sakrij lozinku",
     "pseudonim_pravilo": "Pseudonim: 3–30 znakova, samo latinična slova (a–z), brojevi i _ . -, bez razmaka i bez č, ć, š, ž, đ. Ne sme počinjati ni završavati se razdvajačem.",
@@ -3218,7 +3230,10 @@
     "lozinka_polje": "Nova lozinka",
     "lozinka_dugme": "Postavi lozinku",
     "lozinka_pravilo": "Najmanje {broj} znakova. Zapiši je i reci detetu.",
-    "lozinka_uspeh": "Lozinka je postavljena. Reci je detetu."
+    "lozinka_uspeh": "Lozinka je postavljena. Reci je detetu.",
+    "izjava_naslov": "Izjava o postojanju deteta",
+    "izjava_opis": "Rok ističe za {dana} dana. Bez tvoje izjave padaju potvrde tvoje stvarnosti onih koji se o detetu izjašnjavaju, a svakome od njih se otpisuje POEN evidentiran povodom te potvrde.",
+    "izjava_dugme": "Potvrđujem i dajem izjavu"
   },
   "decjaPocetna": {
     "naslov": "Dečja pijaca",

@@ -148,6 +148,8 @@ A 4. modul (Gyermekek) aktiválásával a KOLO rendszerről szóló szabályzat 
 
 E modul aktiválása az adatvédelmi hatásvizsgálat előzetes frissítését és a gyermekek részvételéről szóló szabályzat elfogadását igényli.
 
+**A gyermek létezésének megerősítése.** Az a szülő, aki fiókot nyit vagy vesz át, teljes felelősség mellett nyilatkozatot tesz arról, hogy a megjelölt életkorú gyermeke van; a nyilatkozat szövegét megőrzik, és megtétele után nem változik. A szülő valóságát megerősítő személyeket felhívják, hogy ezt ők is erősítsék meg; a gyermekre vonatkozó adatokat nem mutatják meg nekik. Ha a felek egyike határidőn belül nem nyilatkozik, a szülő valóságáról adott megerősítés érvénytelenné válik, és az e megerősítés kapcsán nyilvántartott POEN leírásra kerül mindenkitől, aki azt ezen a jogcímen kapta. A határidő lejárta előtt értesítik mindazokat, akiket az érvénytelenítés érintene, az érvénytelenítés ellen pedig kifogás áll rendelkezésre, amelyről az Alapítvány felhatalmazott személye dönt.
+
 **4.8 A nem hitelesített felhasználó hirdetésében szereplő adatok**
 
 A nem hitelesített felhasználó javat vagy szolgáltatást kínáló hirdetést tehet közzé (a Felhasználási feltételek 16. cikke). Ilyen hirdetés közzétételével bemutatkozik a hitelesített felhasználók hálózatának, és ezzel létrehozza a valóságbizonyítékról szóló szabályzat 5. cikke szerinti hitelesítés lefolytatásához szükséges kapcsolatot.
@@ -349,6 +351,8 @@ POEN-kibocsátás — a Protokoll a nyilvántartásba vett hozzájárulások ala
 Az elszámolási együttható kiszámítása — a Protokoll az elszámolási együtthatót determinisztikusan meghatározott nyilvános képlet alapján, naponta egyszer, az elszámolási időszak végén automatikusan kiszámítja.
 
 Automatikus nyilvántartás a szociális programokban — a 3. modul aktiválását követően a Protokoll automatikusan POEN-bejegyzéseket ír be a jogosult csoportokhoz tartozó felhasználók javára, a felhasználó konkrét tevékenysége nélkül.
+
+A valóságról adott megerősítés érvénytelenítése inaktivitás miatt — ha a kapcsolat valamelyik fele határidőn belül nem nyilatkozik a gyermek létezéséről, a Protokoll automatikusan érvényteleníti e megerősítést, és az annak kapcsán nyilvántartott POEN-t leírja mindenkitől, aki azt ezen a jogcímen kapta, akkor is, ha a bejegyzés ezáltal negatív értékbe fordul (a gyermekek részvételéről szóló szabályzat 6. cikke). Ez az egyetlen automatizált adatkezelés a rendszerben, amely a felhasználó státuszát érinti, ezért a határidő lejárta előtt értesítünk mindenkit, akit az érvénytelenítés érintene, az érvénytelenítés ellen pedig kifogás áll rendelkezésre, amelyről az Alapítvány felhatalmazott személye dönt.
 
 Ezek az automatizált adatkezelések a ZZPL 38. cikke értelmében jogilag vagy jelentős mértékben érinthetik a személyt. Minden felhasználó jogosult magyarázatot kérni az automatizált adatkezelés logikájáról, emberi beavatkozást kérni a konkrét döntés tekintetében, és tiltakozni az automatizált döntés ellen.
 

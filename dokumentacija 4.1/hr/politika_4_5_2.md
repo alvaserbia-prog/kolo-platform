@@ -148,6 +148,8 @@ Aktiviranjem Modula 4 (Djeca) u skladu s čl. 58. Pravilnika o KOLO sustavu, sus
 
 Aktiviranje ovog modula zahtijeva prethodno ažuriranje procjene učinka na zaštitu podataka i donošenje Pravilnika o sudjelovanju djece.
 
+**Potvrda postojanja djeteta.** Roditelj koji otvara ili preuzima račun daje izjavu pod punom odgovornošću da ima dijete navedene dobi; tekst izjave se čuva i nakon davanja se ne mijenja. Osobe koje su potvrdile stvarnost roditelja pozivaju se da to potvrde i one; njima se ne prikazuju podaci o djetetu. Ako se u roku ne izjasni jedna od strana, potvrda stvarnosti roditelja se poništava i POEN evidentiran povodom nje otpisuje se svakoj osobi koja ga je po toj osnovi dobila. Prije isteka roka obavještava se svaka osoba koja bi poništenjem bila pogođena, a protiv poništenja stoji prigovor o kojem odlučuje ovlaštena osoba Zaklade.
+
 **4.8 Podaci u oglasu neverificiranog korisnika**
 
 Neverificirani korisnik može postaviti oglas kojim nudi dobro ili uslugu (članak 16. Uvjeta korištenja). Objavom takva oglasa predstavlja se mreži verificiranih korisnika i time uspostavlja kontakt potreban za provedbu verifikacije iz članka 5. Pravilnika o dokazu stvarnosti.
@@ -349,6 +351,8 @@ Emisija POEN-a — Protokol automatski izračunava i evidentira POEN jedinice na
 Izračun obračunskog koeficijenta — Protokol automatski izračunava obračunski koeficijent na temelju deterministički definirane javne formule, jednom dnevno na kraju obračunskog razdoblja.
 
 Automatska evidencija u socijalnim programima — po aktiviranju Modula 3, Protokol automatski upisuje zapise POEN-a za korisnike koji pripadaju kvalificiranim skupinama, bez potrebe za konkretnom aktivnošću korisnika.
+
+Poništenje potvrde stvarnosti zbog neaktivnosti — kada se o postojanju djeteta u roku ne izjasni jedna od strana veze, Protokol automatski poništava tu potvrdu i otpisuje POEN evidentiran povodom nje svakoj osobi koja ga je po toj osnovi dobila, i kada zapis time prijeđe u negativnu vrijednost (čl. 6. Pravilnika o sudjelovanju djece). Ovo je jedina automatizirana obrada u sustavu koja dira status korisnika, pa prije isteka roka obavještavamo svaku osobu koja bi poništenjem bila pogođena, a protiv poništenja stoji prigovor o kojem odlučuje ovlaštena osoba Zaklade.
 
 Te automatizirane obrade mogu pravno ili znatno utjecati na osobu u smislu čl. 38. ZZPL-a. Svaki korisnik ima pravo zatražiti objašnjenje logike automatizirane obrade, zatražiti ljudski uvid u konkretnu odluku i uložiti prigovor na automatiziranu odluku.
 

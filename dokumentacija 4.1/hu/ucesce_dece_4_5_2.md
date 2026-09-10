@@ -2,7 +2,7 @@
 
 # Szabályzat a gyermekek részvételéről
 
-*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.4.6) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
+*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.5.2) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
 
 ## I — Általános rendelkezések
 
@@ -84,17 +84,25 @@ A fiók 4.b cikk szerinti átvételéhez a valóságindex nem feltétel. Az átv
 
 ### 6. cikk
 
-A fiók 4. cikk szerinti megnyitását követően azokat a személyeket, akik a szülő valóságát megerősítették, felhívják annak megerősítésére, hogy a szülőnek van a megjelölt korú gyermeke. A megerősítés minden gyermekre külön adandó.
+Az a szülő, aki a 4. cikk szerint fiókot nyit, illetve aki a 4.b cikk szerint fiókot vesz át, teljes felelősség mellett nyilatkozatot tesz arról, hogy a megjelölt életkorú gyermeke van. A nyilatkozat a fiók megnyitásának, illetve átvételének pillanatában kerül megtételre; szövegét a szülő és a gyermek közötti kapcsolat mellett őrzik, és megtétele után nem változik. Ha a fiókot az Alapítvány döntése alakította kiskorú fiókká, a szülő a nyilatkozatot a (4) bekezdés szerinti határidőn belül teszi meg.
 
-A nyilatkozattételi határidő a fiók megnyitásától számított harminc nap.
+A szülő és a gyermek közötti kapcsolat létrejöttével azokat a személyeket, akik e szülő valóságát megerősítették, felhívják annak megerősítésére, hogy a szülőnek megjelölt életkorú gyermeke van. A megerősítés minden gyermek esetében külön kerül megadásra.
 
-Annak a személynek, aki e határidőn belül nem nyilatkozik, érvénytelenítik az adott szülő valóságáról adott megerősítését. Az érvénytelenítés megszünteti az e megerősítés alapján nyilvántartásba vett POEN-bejegyzéseket, és felszabadítja e személy hitelesítési helyét.
+Az eljárást minden szülő esetében külön folytatják le, és a szülő valóságának minden újabb megerősítésekor megismétlik.
 
-A határidő lejárta után tett nyilatkozat nem szünteti meg a beállt érvénytelenítést.
+A nyilatkozattételre nyitva álló határidő hatvan nap. A határidő lejárta előtt értesítik mindazokat a személyeket, akiket az érvénytelenítés érintene.
 
-Az érvénytelenített megerősítés megismételhető, és a szülő valóságát más személy is megerősítheti, az általános szabályok szerint. A szülő valóságának minden újabb megerősítésével az e cikk szerinti eljárás újból lefolytatásra kerül.
+A szülő valóságáról adott megerősítés csak akkor marad fenn, ha a kapcsolat mindkét tagja határidőn belül nyilatkozik — az a személy, aki a megerősítést adta, és maga a szülő. Ha bármelyikük nyilatkozata elmarad, a megerősítés érvénytelenné válik.
 
-A gyermek létét vitató nyilatkozat indokolást igényel; arról az Igazgatótanács dönt.
+Az érvénytelenítéssel minden személytől, akinél e megerősítés kapcsán POEN került nyilvántartásba, e POEN leírásra kerül — a megerősítést adó személytől, a szülőtől, valamint a felügyelőtől, ha a felügyelet kimenetele rendben volt. Mindegyikük kizárólag azt adja vissza, amit e megerősítés kapcsán kapott; a teher nem száll át más személyre, és a valóság bizonyításáról szóló szabályzat 20b. cikke szerinti megtérítés nem alkalmazandó. A leírás akkor is végrehajtásra kerül, ha a bejegyzés ezáltal negatív értékbe fordul, a KOLO rendszerről szóló szabályzat 14. cikke (3) bekezdésének 4. pontjával összhangban. A megerősítést adó személy hitelesítési helye felszabadul.
+
+Az e cikk szerinti érvénytelenítés nem feltételez valótlan megerősítést, és nem kötelezettségszegés miatti intézkedés. Az eljárásban tanúsított inaktivitás folytán, e szabályzat alkalmazásával és az Alapítvány szervének döntése nélkül áll be.
+
+A határidő lejárta után tett nyilatkozat önmagában nem szünteti meg a beállt érvénytelenítést. Az érvénytelenítéssel érintett személynek joga van kifogást benyújtani, amelyről az Alapítvány felhatalmazott személye dönt. E jog azért áll fenn, mert az érvénytelenítés a szabályok automatizált alkalmazása folytán áll be, a személyes adatok védelméről szóló törvény 38. cikke értelmében.
+
+Az érvénytelenített megerősítés megismételhető, és a szülő valóságát más személy is megerősítheti az általános szabályok szerint; ismételt megerősítéssel a POEN újból nyilvántartásba kerül.
+
+Az a nyilatkozat, amely a gyermek létezését vitatja, indokolást igényel; arról az Igazgatótanács dönt.
 
 ### 7. cikk
 

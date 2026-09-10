@@ -148,6 +148,8 @@ Upon activation of Module 4 (Children) in accordance with Art. 58 of the Ruleboo
 
 Activation of this module requires a prior update of the data protection impact assessment and the adoption of the Rulebook on the Participation of Children.
 
+**Confirmation that the child exists.** A parent who opens or takes over an account gives a statement under full responsibility that they have a child of the stated age; the text of the statement is kept and is not altered after it is given. The persons who have confirmed the parent's reality are invited to confirm this as well; no data about the child is shown to them. If either party fails to make a declaration within the period, the confirmation of the parent's reality is annulled and the POEN recorded on account of it is written off for every person who received it on that ground. Before the period expires, every person who would be affected by the annulment is notified, and an appeal decided upon by an authorized person of the Foundation lies against the annulment.
+
 **4.8 Data in a Listing by an Unverified User**
 
 An unverified user may post a listing offering a good or a service (Article 16 of the Terms of Use). By posting such a listing they present themselves to the network of verified users and thereby establish the contact necessary for the conduct of verification under Article 5 of the Rulebook on Proof of Reality.
@@ -349,6 +351,8 @@ POEN issuance — the Protocol automatically calculates and records POEN units b
 Calculation of the accounting coefficient — the Protocol automatically calculates the accounting coefficient on the basis of a deterministically defined public formula, once daily at the end of the accounting period.
 
 Automatic recording in social programs — upon activation of Module 3, the Protocol automatically records POEN entries for users belonging to qualifying groups, without the need for a specific user activity.
+
+Annulment of a confirmation of reality due to inactivity — where either party to the link fails to make a declaration about the child's existence within the period, the Protocol automatically annuls that confirmation and writes off the POEN recorded on account of it for every person who received it on that ground, even where the record thereby becomes negative (Article 6 of the Rulebook on the Participation of Children). This is the only automated processing in the system that touches a user's status, so before the period expires we notify every person who would be affected by the annulment, and an appeal decided upon by an authorized person of the Foundation lies against it.
 
 These automated processing activities may have a legal or significant effect on a person within the meaning of Art. 38 LPDP. Every user has the right to request an explanation of the logic of the automated processing, request human review of a specific decision, and object to an automated decision.
 

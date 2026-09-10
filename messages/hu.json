@@ -682,7 +682,8 @@
     "deca": "Gyerekek",
     "status_dete_ceka": "szülői jóváhagyásra vár",
     "status_dete_radi": "a fiók működik",
-    "prigovor_tip_podaci": "Rólam szóló pontatlan adat helyesbítése"
+    "prigovor_tip_podaci": "Rólam szóló pontatlan adat helyesbítése",
+    "prigovor_tip_potvrda": "Inaktivitás miatt érvénytelenített megerősítés"
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -945,7 +946,7 @@
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.5.1"
+      "ver": "4.5.2"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -953,11 +954,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.5.1"
+      "ver": "4.5.2"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.5.1"
+      "ver": "4.5.2"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
@@ -969,7 +970,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.4.6",
+      "ver": "4.5.2",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -991,19 +992,19 @@
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
     "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.4.3-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.1-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.2-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.5.1-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.5.2-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.1-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.2-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.6-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.6-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.4.6-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.5.2-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -2552,7 +2553,8 @@
     "emisija_tbl_nivo1": "minden 5.000 alatti adomány",
     "tab_nabavke": "Nabavke",
     "ped_izjava_label": "A végrehajtó nyilatkozata",
-    "prigovori_tip_podaci": "Adathelyesbítés"
+    "prigovori_tip_podaci": "Adathelyesbítés",
+    "prigovori_tip_potvrda": "Érvénytelenített megerősítés"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",
@@ -2652,11 +2654,7 @@
     "doprinos_razmeni_naslov": "Cseréhez való hozzájárulást jegyeztünk be neked — {korak}. lépés",
     "doprinos_razmeni_tekst": "Teljesítetted a csere-hozzájárulási út {korak}. lépését, és {iznos} POEN került bejegyzésre neked (Szabályzat 40a. cikk).",
     "roditeljstvo_potvrda_naslov": "Erősítsd meg a gyermek létezését",
-    "roditeljstvo_potvrda_tekst": "{pseudonim} fiókot nyitott a {godine} éves gyermekének. {dana} napod van megerősíteni, hogy erről tudsz.",
-    "roditeljstvo_istekla_naslov": "A megerősítésed megsemmisült",
-    "roditeljstvo_istekla_tekst": "Nem nyilatkoztál határidőn belül, ezért {pseudonim} tagra vonatkozó megerősítésed visszavonásra került.",
-    "roditeljstvo_pala_potvrda_naslov": "A valóságodról adott egyik megerősítés elesett",
-    "roditeljstvo_pala_potvrda_tekst": "Valaki, aki megerősített téged, nem nyilatkozott időben a gyermeked létezéséről.",
+    "roditeljstvo_potvrda_tekst": "{pseudonim} fiókjából fiókot nyitottak egy {godine} éves gyermek számára. {dana} napod van megerősíteni, hogy erről tudsz.",
     "oglas_uklonio_roditelj_naslov": "A szülő eltávolította a hirdetésedet",
     "oglas_uklonio_roditelj_tekst": "A hirdetésedet eltávolították a Piacról.",
     "prijava_razmene_ponistena_naslov": "Az átírás érvénytelenítve",
@@ -2689,8 +2687,8 @@
     "lozinka_promenio_roditelj_tekst": "Kérdezd meg tőle az új jelszót, és azzal jelentkezz be.",
     "nalog_preveden_u_maloletni_naslov": "A fiókod gyerekfiók lett",
     "nalog_preveden_u_maloletni_tekst": "A fiókod mostantól a kiskorú felhasználókra vonatkozó szabályok szerint működik, szülőként pedig {roditelj} van bejegyezve. {iznos} POEN, amelyet a csatornákon jegyeztek be, visszavonásra került; a mások által rád átírt POEN megmarad.",
-    "roditeljstvo_upisano_naslov": "Szülőként vagy bejegyezve",
-    "roditeljstvo_upisano_tekst": "A(z) {pseudonim} fiók gyerekfiók lett, és téged jegyeztek be a szülőjeként.",
+    "roditeljstvo_upisano_naslov": "Szülőként vagy nyilvántartva",
+    "roditeljstvo_upisano_tekst": "A(z) {pseudonim} fiókot gyermekfiókká alakították, és téged jegyeztek be a szülőjeként. Tedd meg a nyilatkozatot a gyermek létezéséről a határidőn belül — enélkül érvénytelenné válnak a valóságodról adott megerősítések azoktól, akik a gyermekről nyilatkoznak.",
     "potvrda_pala_minus_naslov": "Megszűnt egy megerősítés, a bejegyzésed mínuszban van",
     "potvrda_pala_minus_tekst": "A(z) {pseudonim} fiók gyerekfiókká vált, így megszűnt az a megerősítés, amelyért POEN-t jegyeztek be neked. A bejegyzésed most {iznos} POEN-nel mínuszban van — a beérkező POEN először ezt tölti fel.",
     "nabavka_poziv_naslov": "Bekerültél a beszerzésbe",
@@ -2702,7 +2700,21 @@
     "program_pristanak_povucen_naslov": "Hozzájárulás visszavonva",
     "program_pristanak_povucen_tekst": "Visszavontad a hozzájárulásodat a(z) „{program}” programhoz. Az eljárás megszakadt, a jóváírás megszűnt, a megadott adatokat pedig töröltük.",
     "program_pristanak_povucen_spoljni_naslov": "Hozzájárulás visszavonva",
-    "program_pristanak_povucen_spoljni_tekst": "A hozzájárulás visszavonását rögzítettük. A részletek az alkalmazásban találhatók."
+    "program_pristanak_povucen_spoljni_tekst": "A hozzájárulás visszavonását rögzítettük. A részletek az alkalmazásban találhatók.",
+    "roditeljstvo_potvrda_prevod_naslov": "Erősítsd meg a gyermek létezését",
+    "roditeljstvo_potvrda_prevod_tekst": "{pseudonim} tag fiókját egy {godine} éves gyermek fiókjává javították. {dana} napod van megerősíteni, hogy erről tudsz.",
+    "roditeljstvo_podsetnik_potvrdjivac_naslov": "A megerősítés határideje lejár",
+    "roditeljstvo_podsetnik_potvrdjivac_tekst": "{dana} napod maradt, hogy nyilatkozz {pseudonim} gyermekéről. Ha a nyilatkozat elmarad, a valóságáról adott megerősítésed érvénytelenné válik, és {iznos} POEN kerül leírásra a nyilvántartásodból — akkor is, ha az emiatt mínuszba megy.",
+    "roditeljstvo_podsetnik_roditelj_naslov": "A valóságodról adott megerősítés lejár",
+    "roditeljstvo_podsetnik_roditelj_tekst": "{pseudonim} tagnak {dana} napja maradt, hogy nyilatkozzon gyermeked létezéséről. Ha a nyilatkozat elmarad, a valóságodról adott megerősítés érvénytelenné válik, és {iznos} POEN kerül leírásra a nyilvántartásodból — akkor is, ha az emiatt mínuszba megy.",
+    "roditeljstvo_podsetnik_nadzornik_naslov": "Az általad felügyelt megerősítés lejár",
+    "roditeljstvo_podsetnik_nadzornik_tekst": "{pseudonim} tagnak {dana} napja maradt, hogy nyilatkozzon a gyermek létezéséről. Ha a nyilatkozat elmarad, az általad felügyelt megerősítés érvénytelenné válik, és {iznos} POEN kerül leírásra a nyilvántartásodból — akkor is, ha az emiatt mínuszba megy.",
+    "roditeljstvo_ponistena_potvrdjivac_naslov": "A megerősítés érvénytelenné vált",
+    "roditeljstvo_ponistena_potvrdjivac_tekst": "{pseudonim} tag valóságáról adott megerősítésed érvénytelenné vált, mert a gyermek létezéséről nem érkezett nyilatkozat határidőn belül. {iznos} POEN került leírásra a nyilvántartásodból; az emiatt mínuszba mehet. Az érvénytelenítés nem jelenti azt, hogy bárki valótlan megerősítést adott — ha helytelennek tartod, kifogást nyújthatsz be a profilodról.",
+    "roditeljstvo_ponistena_roditelj_naslov": "A valóságodról adott egyik megerősítés érvénytelenné vált",
+    "roditeljstvo_ponistena_roditelj_tekst": "A {pseudonim} tagtól kapott megerősítés érvénytelenné vált, mert a gyermek létezéséről nem érkezett nyilatkozat határidőn belül. {iznos} POEN került leírásra a nyilvántartásodból; az emiatt mínuszba mehet. Valóságodat más személy is megerősítheti, az érvénytelenítés ellen pedig kifogást nyújthatsz be a profilodról.",
+    "roditeljstvo_ponistena_nadzornik_naslov": "Az általad felügyelt megerősítés érvénytelenné vált",
+    "roditeljstvo_ponistena_nadzornik_tekst": "Az általad felügyelt megerősítés érvénytelenné vált, mert a gyermek létezéséről nem érkezett nyilatkozat határidőn belül. {iznos} POEN került leírásra a nyilvántartásodból; az emiatt mínuszba mehet. Az érvénytelenítés ellen kifogást nyújthatsz be a profilodról."
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",
@@ -3176,7 +3188,7 @@
     "brisanje_otkucaj": "Írd be: „{pseudonim}” a megerősítéshez",
     "brisanje_potvrdi": "Fiók törlése",
     "potvrde_naslov": "A gyermek létezésének megerősítése",
-    "potvrde_opis": "Valaki, akit megerősítettél, fiókot nyitott a gyermekének. {dana} napod van nyilatkozni.",
+    "potvrde_opis": "A láncodban valakinek van fiókja a gyermeke számára. {dana} napod van, hogy nyilatkozz. A megerősítés csak akkor marad fenn, ha határidőn belül nyilatkozol te is és maga a szülő is.",
     "potvrde_prazno": "Nincs függőben lévő nyilatkozatod.",
     "pitanje": "Van-e {pseudonim} felhasználónak {godine} éves gyermeke?",
     "pitanje_opis": "Abból nyilatkozol, amit magad tudsz {pseudonim} személyről. A gyermek adatait nem látod.",
@@ -3185,7 +3197,7 @@
     "dugme_nema": "Nem, nincs",
     "dugme_posalji": "Küldés",
     "obrazlozenje_naslov": "Indokolás (kötelező)",
-    "ako_ne_znas": "Ha nincs erről tudomásod, ne nyomj meg egyetlen gombot sem. De tudd: ha nem nyilatkozol határidőn belül, az adott személyre vonatkozó megerősítésed visszavonásra kerül, a hozzá bejegyzett POEN leírásra, a helyed pedig felszabadul.",
+    "ako_ne_znas": "Ha erről nincs tudomásod, ne nyomj meg egyetlen gombot sem. De tudd: ha a nyilatkozat elmarad, az adott személy valóságáról adott megerősítésed érvénytelenné válik, és mindenkitől, akinek ez a megerősítés POEN-t hozott, azt leírják — tőled, tőle és a felügyelőtől is, ha volt ilyen. A leírás akkor is végrehajtásra kerül, ha a nyilvántartás ezáltal mínuszba megy. Az érvénytelenítés nem jelenti azt, hogy bárki valótlan megerősítést adott; kifogást nyújthatsz be a profilodról.",
     "prikazi_lozinku": "Jelszó megjelenítése",
     "sakrij_lozinku": "Jelszó elrejtése",
     "pseudonim_pravilo": "Álnév: 3–30 karakter, csak latin betűk (a–z), számok és _ . - — szóköz nélkül, valamint č, ć, š, ž, đ nélkül. Nem kezdődhet és nem végződhet elválasztóval.",
@@ -3218,7 +3230,10 @@
     "lozinka_polje": "Új jelszó",
     "lozinka_dugme": "Jelszó beállítása",
     "lozinka_pravilo": "Legalább {broj} karakter. Írd fel, és mondd el a gyermekednek.",
-    "lozinka_uspeh": "A jelszó be van állítva. Mondd el a gyermekednek."
+    "lozinka_uspeh": "A jelszó be van állítva. Mondd el a gyermekednek.",
+    "izjava_naslov": "Nyilatkozat a gyermek létezéséről",
+    "izjava_opis": "A határidő {dana} nap múlva jár le. Nyilatkozatod nélkül érvénytelenné válnak a valóságodról adott megerősítések azoktól, akik a gyermekről nyilatkoznak, és mindegyiküktől leírásra kerül az e megerősítés kapcsán nyilvántartott POEN.",
+    "izjava_dugme": "Megerősítem és megteszem a nyilatkozatot"
   },
   "decjaPocetna": {
     "naslov": "Gyerekpiac",

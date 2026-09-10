@@ -101,6 +101,25 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-10 (dvadeset treći put):** na **4.5.2** ide **PET akata** —
+Pravilnik o KOLO sistemu (sa 4.4.6), Pravilnik o učešću dece (sa 4.4.8), Politika
+privatnosti (sa 4.5.1), DPIA (sa 4.5.1) i Registar radnji obrade (sa 4.5.1). Ostalih
+dvanaest ostaje gde jeste. Povod je **analiza rizika R-15** (poništenje potvrde zbog
+neaktivnosti u postupku iz čl. 6). Sadržinski, vidi sekciju „Potvrda postojanja
+deteta: izjašnjavaju se obe strane" ispod.
+
+🔴 **Glavni Pravilnik je morao da se bumpuje i to nije bio izbor.** Čl. 14 st. 3
+nabraja izuzetke od zabrane negativnog zapisa i zatvara listu rečenicom „Drugi osnov
+za negativan zapis ne može se ustanoviti — ni ovim pravilnikom bez izmene ovog člana,
+ni bilo kojim drugim aktom." Odluka vlasnika (svi pogođeni idu u minus) traži nov
+osnov, pa ga poseban pravilnik nije mogao uvesti sam. **Izuzetaka je sada četiri.**
+
+🟢 Unakrsna upućivanja u tih pet akata su ispravljena (Pravilnik → 4.5.2 u zaglavlju
+Pravilnika o učešću dece i u „Povezanim dokumentima" DPIA; Politika i Registar →
+4.5.2). 🔴 **`gornje_kolo_4_4_6.md` i dalje upućuje na `Pravilnik o KOLO sistemu
+(v4.4.6)` i NIJE dirano** — taj akt se ne menja. Slomljenih pokazivača je sada
+četiri; čisti ih bump celog seta na 5.0.
+
 **AŽURIRANO 2026-09-10 (dvadeset drugi put):** na **4.5.1** idu **ČETIRI akta** —
 Politika privatnosti (sa 4.5.0), DPIA (sa 4.5.0), Registar radnji obrade (sa 4.5.0)
 i Pravilnik o pokroviteljstvu i donacijama (sa 4.4.7). Ostalih trinaest ostaje gde
@@ -1136,6 +1155,110 @@ već postoji i dovoljan je).
 jasnije **besplatno**, to je korisnik slabije zaštićen potrošačkim pravom; što bismo
 mu više dali prava, to davanje više liči na prodaju. Reklamacija je namerno
 izostavljena i to ovde postaje **deo odbrane**, ne samo praznina.
+
+### Potvrda postojanja deteta: izjašnjavaju se obe strane (2026-09-10)
+
+Odluke uz analizu rizika **R-15** (poništenje potvrde zbog neaktivnosti u postupku
+iz čl. 6 Pravilnika o učešću dece). Na **4.5.2** idu **PET akata**; kod je izmenjen
+na osam mesta.
+
+🔴 **Reč je o NEAKTIVNOSTI, ne o ćutanju** (ispravka vlasnika). Ćutanje je izjava
+koja se propušta; ovde čovek naprosto nije došao na platformu. Razlika nije stilska —
+„ćutanje" nosi pretpostavku da je neko odlučio da ne odgovori, a upravo ta
+pretpostavka opravdava kaznu koju ovaj rizik obara. **Ne vraćati „ćutanje" u akte ni
+u copy.**
+
+**Šta je sistem radio do ovog seta.** Roditelj sa indeksom ≥ 10% otvori nalog detetu;
+svi koji su potvrdili njegovu stvarnost dobiju jedno obaveštenje i imaju 30 dana da
+potvrde da roditelj ima dete tog uzrasta. Ko se ne izjasni, gubi sopstvenu potvrdu.
+Poništenje je išlo kroz **zatečeni postupak iz Glave VIII dokaza stvarnosti** —
+onaj pisan za **utvrđenu lažnu verifikaciju**.
+
+**Sedam nalaza, po težini:**
+1. 🔴 **Neaktivnost je mogla da otvori negativan zapis do 2.500 POEN.**
+   `ponistiVerifikaciju` skida roditeljevih 1.000 i nadzornikovih 500 **najviše do
+   nule**, a nepokriveni deo prebacuje **na potvrđivača** kao nadoknadu; njegovih
+   1.000 skida „bez ograničenja". Čl. 6 st. 3 o nadoknadi nije rekao ni reč, a
+   jedini osnov nadoknade (čl. 20b) vezan je za **utvrđenu lažnu verifikaciju**.
+2. 🔴 **Minus se otvarao bez ijedne reči.** `obradiIstekleRokove` je odbacivao listu
+   `nadoknade` koju mu `ponistiVerifikaciju` vrati i slao samo „potvrda je
+   poništena". Oba admin puta uredno javljaju.
+3. 🔴 **U zapisu čoveka koji nije slagao pisalo je da jeste** — opis transakcije
+   glasio je `Poništavanje lažne verifikacije X → Y (čl. 20a)`, i to u njegovoj
+   istoriji POEN-a **i u GDPR izvozu** (`/api/profil/eksport` vraća `description`).
+4. 🔴 **Jedina automatizovana obrada u sistemu koja DIRA status — i jedina koja nije
+   bila prijavljena.** Politika čl. 12 nabraja tri; na sedam mesta u Politici i DPIA
+   stoji formula „nema automatizovanog odlučivanja jer *ne dira status*". Ovde dira:
+   roditelju pada indeks za 10 p.p., a ako mu je to bila jedina potvrda — 10 → 0,
+   gubi pun pristup i **detetu nalog pada iz `AKTIVNO` u `POVEZANO`**, pa mu se POEN
+   prestaje upisivati (`redovan` u `deca.ts` traži indeks ≥ 10%).
+5. 🔴 **Postupak se otvarao SAMO pri otvaranju naloga iz roditeljskog profila.**
+   `poveziRoditelja` (dete koje se registrovalo samo + drugi roditelj) nije stvarao
+   nijedan red — ceo taj ulaz prolazio je bez ijedne provere, iako je upravo on onaj
+   iza koga ne stoji niko dok roditelj ne dođe.
+6. 🔴 **Čl. 6 st. 5 („pri svakoj novoj potvrdi postupak se sprovodi ponovo") kod nije
+   sprovodio uopšte.** Peti nalaz istog oblika posle R-11, R-12, R-13 i R-14.
+7. **Podsetnika nije bilo** — jedno obaveštenje na početku, pa mesec dana tišine.
+
+**Šta je odlučeno (odluke vlasnika):**
+- 🔴 **Izjašnjavaju se OBA člana veze** — potvrđivač i sam roditelj. Roditelj daje
+  **izjavu pod punom odgovornošću** da ima dete tog uzrasta; tekst se **snima** na
+  `Roditeljstvo.izjavaTekst` i posle toga se ne menja (isti razlog kao
+  `DonationRecord.ugovorTekst` i `OglasPrijava.izjavaTekst` — **ne generisati ga
+  ponovo pri čitanju**). Izjava nastaje **odmah**, u trenutku u kome roditelj
+  preuzima odgovornost za nalog (otvaranje po čl. 4, preuzimanje po čl. 4b), pa mu
+  rok ne teče. 🔴 **Jedini slučaj u kome rok TEČE** je administrativno prevođenje
+  punoletnog naloga u maloletni — tamo roditelj nije izvršio nijednu radnju kojom bi
+  izjavu dao, pa je daje sa profila deteta (`POST /api/deca/[id]/izjava`).
+- 🔴 **Svako vraća isključivo SVOJE, i svako sme u minus** (odluka vlasnika: „svima
+  treba skinuti njihovo što su dobili, ne najviše do nule nego i ka minusu za svakog
+  pogođenog"). Nadoknada iz čl. 20b se po ovom osnovu **ne primenjuje** — teret se ne
+  prenosi ni na koga. Sprovodi `ponistiVerifikaciju(id, { bezNadoknade: true })`.
+- 🔴 **Podsetnik ide SVAKOME koga bi poništenje oštetilo** — potvrđivaču, roditelju i
+  nadzorniku (odluka vlasnika), na **30, 7 i 1 dan** pre isteka, sa iznosom koji bi
+  mu bio otpisan. `PODSETNIK_PRAGOVI_DANA` + `pragPodsetnika`; jedno polje
+  (`RoditeljstvoPotvrda.podsetnikDana`) drži ceo raspored i čini posao idempotentnim.
+- **Rok sa 30 na 60 dana** (`ROK_POTVRDE_DANA`).
+- **Sopstveni opis u zapisu** — „Poništenje potvrde … zbog neaktivnosti u postupku
+  potvrde postojanja deteta (čl. 6 st. 3)". 🔴 Ne vraćati podrazumevani opis.
+- **Prigovor** — nova vrsta `PrigovorNaOdluku.tipOdluke = "POTVRDA"`. Migracija nije
+  trebala (`tipOdluke` je `String`). Postoji zato što čl. 38 ZZPL-a za obradu koja
+  automatski dira status traži pravo na ljudski uvid, a čl. 6 st. 4 ga je izričito
+  uskraćivao.
+- **Postupak se otvara svuda gde nastaje veza** — `otvoriPostupakPotvrde` zovu i
+  `otvoriNalogDeteta`, i `poveziRoditelja`, i `prevediUMaloletni`; a
+  `otvoriPostupakZaNovogPotvrdjivaca` se zove iz `verifikacija-service.ts` po svakoj
+  novoj potvrdi stvarnosti roditelja (čl. 6 st. 5).
+- **Poseban tekst pri prevođenju naloga** (`roditeljstvo_potvrda_prevod`) — sa
+  strane potvrđivača nalog deteta se nije pojavio ničijom vidljivom radnjom nego
+  ispravkom pogrešno unetog uzrasta.
+
+🔴 **`RoditeljstvoPotvrda` sada nosi `roditeljId`.** Do ovog seta je red vezivao samo
+dete, pa je pri isteku padala **svaka** potvrda tog potvrđivača **svakom** roditelju
+tog deteta — i onima koji sa istekom nemaju veze. Čl. 6 st. 3 govori o potvrdi
+stvarnosti **tog** roditelja, dakle o jednoj vezi. `@@unique` je sada
+`[deteId, roditeljId, potvrdjivacId]`.
+
+🟡 **Zatečene veze roditelj–dete NE dobijaju rok za izjavu** (migracija
+`20260910120000_potvrda_obe_strane`). Roditelj koji je nalog otvorio ranije izvršio
+je radnju kojom je odgovornost preuzeo, ali izjavu nije dao jer je tada nije ni bilo:
+upisati mu rok značilo bi oboriti mu potvrde zbog propusta koji nije mogao da
+izbegne, a upisati `izjavaAt` značilo bi tvrditi da je dao izjavu koju nije. Oba
+polja ostaju prazna — isto kao `ugovorTekst` kod zatečenih donacija.
+
+🔴 **Pravilnik čl. 14 st. 3 — ČETVRTI izuzetak.** „otpis po poništenju potvrde zbog
+neaktivnosti", uz izričito „teret se ne prenosi na drugo lice". 🟡 **U kodu ih je sada
+PET** (nadoknada, poništen prepis, otpis prijateljstva, prevod u maloletni, ovaj), a
+u aktu četiri — razlika je predmet **R-20** i ne rešava se usput.
+
+**Kod:** `deca-pravila.ts` (rok, pragovi, `pragPodsetnika`), nov `src/lib/deca-izjava.ts`
+(ČISTA funkcija, tekst na srpskom na svim jezicima), `protokol/deca.ts`
+(`otvoriPostupakPotvrde`, `javiPotvrdjivacima`, `otvoriPostupakZaNovogPotvrdjivaca`,
+`dajIzjavuRoditelja`, `obradiIstekleRokove` prepisan, `posaljiPodsetnike`),
+`lazna-verifikacija.ts` (`PonistavanjeOpcije`), `deca-poziv.ts`, `prevod-u-maloletni.ts`,
+`verifikacija-service.ts`, cron `/api/cron/deca-potvrde` (podsetnici PRE isteka).
+**Brana:** `__tests__/deca-potvrde-izvor.test.ts` (18 provera, gleda IZVOR) + odredbe
+čl. 6 zaključane u `pravni-dokumenti.test.ts` na sr/en/ru.
 
 ### Prestanak statusa: pseudonimizacija, ne anonimizacija (2026-09-10)
 

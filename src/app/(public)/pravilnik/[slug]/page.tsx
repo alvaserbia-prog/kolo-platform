@@ -18,9 +18,13 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // 4.4.6 — položaj Gornjeg Kola (R-09): telo obrazovano na osnovu Statuta, nije
   // organ Fondacije; odluku sprovodi UO svojim aktom i dužan je da ga donese osim
   // po zatvorenoj listi razloga (čl. 51). Brisano „izvršna, ne upravljačka".
+  // 4.5.2 — čl. 14 st. 3 dobija ČETVRTI izuzetak od zabrane negativnog zapisa:
+  // otpis po poništenju potvrde zbog neaktivnosti (čl. 6 Pravilnika o učešću dece).
+  // Bez izmene ovog člana taj otpis ne bi imao osnov — st. 6 izričito kaže da se
+  // drugi osnov ne može ustanoviti nijednim drugim aktom.
   "kolo-sistem": {
-    fajl: "Pravilnik_4_4_6.md",
-    verzija: "4.4.6",
+    fajl: "Pravilnik_4_5_2.md",
+    verzija: "4.5.2",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.
@@ -69,9 +73,13 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
     verzija: "4.5.0",
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
+  // 4.5.2 — postupak potvrde postojanja deteta (R-15, čl. 6 prepisan): izjašnjavaju
+  // se OBE strane veze, rok je 60 dana uz podsetnike svima koje bi poništenje
+  // oštetilo, svako vraća isključivo svoje (bez nadoknade iz čl. 20b), poništenje
+  // nije kvalifikacija neistinite potvrde i protiv njega stoji prigovor.
   "ucesce-dece": {
-    fajl: "ucesce_dece_4_4_8.md",
-    verzija: "4.4.8",
+    fajl: "ucesce_dece_4_5_2.md",
+    verzija: "4.5.2",
   },
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
   // 4.4.3 — broj POEN-a po delu je parametar odluke o nabavci (čl. 17), a ne izvod

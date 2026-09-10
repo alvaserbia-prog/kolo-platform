@@ -210,15 +210,17 @@ The sum of all POEN records in the system, including the Protocol's record, equa
 
 The Protocol maintains a record that is negative at all times and represents the counter-entry for all POENs recorded with users and organizational units.
 
-No user or collective form may have a negative POEN record. There are three exceptions, and they are listed here exhaustively:
+No user or collective form may have a negative POEN record. There are four exceptions, and they are listed here exhaustively:
 
 1) **restitution upon annulment of a false verification**, governed by Article 20b of the Rulebook on Proof of Reality: where annulment withdraws POEN records that have already been spent, the uncovered part becomes a negative value and is transferred to the verifier who introduced the account;
 
 2) **annulment of a record update following an exchange report**, governed by Article 16, paragraph 10 of this Rulebook: the refund is made in full and is executed even where the recipient's record thereby becomes negative;
 
-3) **write-off of a contribution from the children's space**, governed by the Rulebook on the Participation of Children: upon the ending of a friendship and upon attaining the age of majority, the contribution recorded under that Rulebook is written off, and the write-off is executed even where the record thereby becomes negative.
+3) **write-off of a contribution from the children's space**, governed by the Rulebook on the Participation of Children: upon the ending of a friendship and upon attaining the age of majority, the contribution recorded under that Rulebook is written off, and the write-off is executed even where the record thereby becomes negative;
 
-The same regime applies to a negative record on each of the three grounds: it is not a debt and is not collected, POENs that reach the user first replenish it, initiating a record update in favour of another user is possible only once the record passes zero, and the exchange of goods and services is not restricted.
+4) **write-off upon annulment of a confirmation due to inactivity**, governed by Article 6 of the Rulebook on the Participation of Children: where a confirmation of a parent's reality is annulled because one of the parties to the link failed to make a declaration about the child's existence within the period, each affected person has written off what was recorded on account of that confirmation, and the write-off is executed even where the record thereby becomes negative; the burden is not transferred to another person.
+
+The same regime applies to a negative record on each of the four grounds: it is not a debt and is not collected, POENs that reach the user first replenish it, initiating a record update in favour of another user is possible only once the record passes zero, and the exchange of goods and services is not restricted.
 
 No further ground for a negative record may be established — neither by this Rulebook without amending this Article, nor by any other act.
 

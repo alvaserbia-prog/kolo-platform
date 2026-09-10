@@ -146,6 +146,8 @@ Aktiviranjem Modula 4 (Deca) u skladu sa čl. 58 Pravilnika o KOLO sistemu, sist
 
 Aktiviranje ovog modula zahteva prethodno ažuriranje procene uticaja na zaštitu podataka i donošenje Pravilnika o učešću dece.
 
+**Potvrda postojanja deteta.** Roditelj koji otvara ili preuzima nalog daje izjavu pod punom odgovornošću da ima dete navedenog uzrasta; tekst izjave se čuva i posle davanja se ne menja. Lica koja su potvrdila stvarnost roditelja pozivaju se da to potvrde i ona; njima se ne prikazuju podaci o detetu. Ako se u roku ne izjasni jedna od strana, potvrda stvarnosti roditelja se poništava i POEN evidentiran povodom nje otpisuje se svakom licu koje ga je po tom osnovu dobilo. Pre isteka roka obaveštava se svako lice koje bi poništenjem bilo pogođeno, a protiv poništenja stoji prigovor o kome odlučuje ovlašćeno lice Fondacije.
+
 **4.8 Podaci u oglasu neverifikovanog korisnika**
 
 Neverifikovani korisnik može da postavi oglas kojim nudi dobro ili uslugu (član 16 Uslova korišćenja). Objavom takvog oglasa predstavlja se mreži verifikovanih korisnika i time uspostavlja kontakt neophodan za sprovođenje verifikacije iz člana 5 Pravilnika o dokazu stvarnosti.
@@ -347,6 +349,8 @@ Emisija POEN-a — Protokol automatski izračunava i evidentira POEN jedinice na
 Izračunavanje obračunskog koeficijenta — Protokol automatski izračunava obračunski koeficijent na osnovu deterministički definisane javne formule, jednom dnevno na kraju obračunskog perioda.
 
 Automatska evidencija u socijalnim programima — po aktiviranju Modula 3, Protokol automatski upisuje zapise POEN-a za korisnike koji pripadaju kvalifikovanim grupama, bez potrebe za konkretnom aktivnošću korisnika.
+
+Poništenje potvrde stvarnosti zbog neaktivnosti — kada se o postojanju deteta u roku ne izjasni jedna od strana veze, Protokol automatski poništava tu potvrdu i otpisuje POEN evidentiran povodom nje svakom licu koje ga je po tom osnovu dobilo, i kada zapis time pređe u negativnu vrednost (čl. 6 Pravilnika o učešću dece). Ovo je jedina automatizovana obrada u sistemu koja dira status korisnika, pa pre isteka roka obaveštavamo svako lice koje bi poništenjem bilo pogođeno, a protiv poništenja stoji prigovor o kome odlučuje ovlašćeno lice Fondacije.
 
 Ove automatizovane obrade mogu pravno ili značajno uticati na lice u smislu čl. 38 ZZPL-a. Svaki korisnik ima pravo da zatraži objašnjenje logike automatizovane obrade, zatraži ljudski uvid u konkretnu odluku i uloži prigovor na automatizovanu odluku.
 

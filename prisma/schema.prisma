@@ -332,6 +332,7 @@ model User {
   punoletstvoNajavaAt              DateTime?
   punoletstvoObradjenAt            DateTime?
   potvrdeRoditeljstvaZaMene        RoditeljstvoPotvrda[]     @relation("PotvrdaDete")
+  potvrdeRoditeljstvaOMeni         RoditeljstvoPotvrda[]     @relation("PotvrdaRoditelj")
   potvrdeRoditeljstvaKojeDajem     RoditeljstvoPotvrda[]     @relation("PotvrdaPotvrdjivac")
   prijateljstvaA                   Prijateljstvo[]           @relation("PrijateljA")
   prijateljstvaB                   Prijateljstvo[]           @relation("PrijateljB")
@@ -448,10 +449,28 @@ model Roditeljstvo {
   roditeljId String
   roditelj   User     @relation("RoditeljstvoRoditelj", fields: [roditeljId], references: [id], onDelete: Cascade)
   createdAt  DateTime @default(now())
+  // Izjava roditelja pod punom odgovornoscu da ima dete tog uzrasta (cl. 6 st. 1).
+  //
+  // Potvrda opstaje samo ako su se izjasnila OBA clana veze — potvrdjivac i sam
+  // roditelj. Roditelj po pravilu izjavu daje u trenutku u kome preuzima
+  // odgovornost za nalog (otvaranje po cl. 4, preuzimanje po cl. 4b), pa mu tada
+  // `izjavaAt` i `izjavaTekst` nastaju odmah, a `izjavaRokDo` ostaje prazan.
+  //
+  // 🔴 Tekst se SNIMA i posle toga se ne menja — isti razlog kao `ugovorTekst` kod
+  // donacije i `izjavaTekst` kod operativnog doprinosa: dokument mora da govori ono
+  // sto je govorio u trenutku davanja. Ne generisati ga ponovo pri citanju.
+  izjavaAt     DateTime?
+  izjavaTekst  String?
+  // Popunjen samo kad izjava NEDOSTAJE i tece rok — jedini takav slucaj je
+  // administrativno prevodjenje punoletnog naloga u maloletni, gde roditelj nije
+  // izvrsio nijednu radnju kojom bi izjavu dao. Neaktivnost roditelja do ovog roka
+  // obara sve potvrde koje za to dete cekaju izjasnjenje.
+  izjavaRokDo  DateTime?
 
   @@unique([deteId, roditeljId])
   @@index([deteId])
   @@index([roditeljId])
+  @@index([izjavaRokDo])
 }
 
 /// Poziv roditelju pri samostalnoj registraciji deteta (Modul Deca, čl. 4a).
@@ -509,18 +528,29 @@ model RoditeljstvoPotvrda {
   id            String                    @id @default(uuid())
   deteId        String
   dete          User                      @relation("PotvrdaDete", fields: [deteId], references: [id], onDelete: Cascade)
+  // Roditelj o čijem se detetu izjašnjava. Do seta 4.5.2 ga red nije nosio, pa se
+  // pri isteku roka nije znalo koja tačno veza pada — kod deteta sa dvoje roditelja
+  // padale su SVE potvrde tog potvrđivača, i onima koji sa istekom nemaju veze.
+  // Čl. 6 st. 3 govori o potvrdi stvarnosti TOG roditelja, dakle o jednoj vezi.
+  roditeljId    String
+  roditelj      User                      @relation("PotvrdaRoditelj", fields: [roditeljId], references: [id])
   potvrdjivacId String
   potvrdjivac   User                      @relation("PotvrdaPotvrdjivac", fields: [potvrdjivacId], references: [id])
   status        RoditeljstvoPotvrdaStatus @default(CEKA)
   // Obavezno uz osporavanje (čl. 6 st. 6). Uz potvrdu se ne traži.
   obrazlozenje  String?
   rokDo         DateTime
+  // Poslednji prag podsetnika koji je poslat (u danima do isteka), npr. 30, 7, 1.
+  // Jedno polje drzi ceo raspored i cini posao idempotentnim: podsetnik se salje
+  // samo kad je zatecena vrednost prazna ili veca od praga koji je sada na redu.
+  podsetnikDana Int?
   odgovorAt     DateTime?
   createdAt     DateTime                  @default(now())
 
-  @@unique([deteId, potvrdjivacId])
+  @@unique([deteId, roditeljId, potvrdjivacId])
   @@index([potvrdjivacId, status])
   @@index([status, rokDo])
+  @@index([roditeljId, status])
 }
 
 enum RoditeljstvoPotvrdaStatus {
@@ -528,8 +558,9 @@ enum RoditeljstvoPotvrdaStatus {
   POTVRDIO
   // Osporavanje postojanja deteta — ide Upravnom odboru (čl. 6 st. 6).
   OSPORIO
-  // Rok od 30 dana istekao bez izjašnjenja; potvrda stvarnosti roditelja je pala.
-  // Izjašnjenje dato posle roka ne otklanja nastupelo poništenje (čl. 6 st. 4).
+  // Rok istekao bez izjašnjenja jedne od dve strane (potvrđivača ili roditelja);
+  // potvrda stvarnosti roditelja je pala. Izjašnjenje dato posle roka ne otklanja
+  // nastupelo poništenje samo po sebi — put je prigovor po čl. 6 st. 4.
   ISTEKLA
 }
 

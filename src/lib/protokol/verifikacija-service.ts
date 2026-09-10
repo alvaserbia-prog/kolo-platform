@@ -415,6 +415,18 @@ async function emitujPoenZaVerifikaciju(
   // `AKTIVNO`, pa prijateljstva koja su čekala drugu stranu sazrevaju (čl. 14b st. 2).
   // Ne baca — verifikacija je već upisana i ne sme da padne zbog dečjeg kanala.
   await osveziPrijateljstvaDece(verifikovaniId);
+  // Čl. 6 st. 5 Pravilnika o učešću dece: svakom novom potvrdom stvarnosti
+  // roditelja postupak potvrde postojanja deteta sprovodi se ponovo. Odredba
+  // postoji od prve verzije akta; do seta 4.5.2 je kod nije sprovodio, pa onaj ko
+  // roditelja potvrdi POSLE otvaranja dečjeg naloga nikad nije bio upitan — a
+  // upravo je on jedini potvrđivač koji o detetu ništa nije rekao.
+  // Ne baca — potvrda je već upisana i ne sme da padne zbog ovog postupka.
+  try {
+    const { otvoriPostupakZaNovogPotvrdjivaca } = await import("@/lib/protokol/deca");
+    await otvoriPostupakZaNovogPotvrdjivaca(verifikovaniId, fazaJedan.verifikatorId);
+  } catch {
+    /* postupak potvrde ne obara verifikaciju */
+  }
   // Verifikacija pomera i TUĐE brojače: razmena sa neverifikovanim korisnikom se
   // beleži, a u brojač ulazi tek kad on bude verifikovan. Zato se preračunavaju
   // svi koji su sa njim već obavili razmenu. Sekvencijalno — svaki poziv vodi u

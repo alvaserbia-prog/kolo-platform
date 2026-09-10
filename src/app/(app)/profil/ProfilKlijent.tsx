@@ -67,6 +67,7 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
     { value: "PROGRAM", label: t("prigovor_tip_program") },
     { value: "OGLAS", label: t("prigovor_tip_oglas") },
     { value: "PODACI", label: t("prigovor_tip_podaci") },
+    { value: "POTVRDA", label: t("prigovor_tip_potvrda") },
     { value: "OSTALO", label: t("prigovor_tip_ostalo") },
   ];
   const [avatar, setAvatar] = useState<string | null>(user.avatar);

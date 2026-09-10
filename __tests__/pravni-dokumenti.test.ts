@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_4_6.md`, `uslovi_koriscenja_4_4_3.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_5_2.md`, `uslovi_koriscenja_4_4_3.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,12 +27,12 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_4_6.md",
+  "Pravilnik_4_5_2.md",
   "dokaz_stvarnosti_4_4_1.md",
-  "DPIA_4_5_1.md",
-  "radnje_obrade_4_5_1.md",
+  "DPIA_4_5_2.md",
+  "radnje_obrade_4_5_2.md",
   "uslovi_koriscenja_4_4_3.md",
-  "politika_4_5_1.md",
+  "politika_4_5_2.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_6.md",
   "rizici_4_4_6.md",
@@ -43,7 +43,7 @@ const AKTI = [
   "gornje_kolo_4_4_6.md",
   "programi_podrske_4_5_0.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
-  "ucesce_dece_4_4_8.md",
+  "ucesce_dece_4_5_2.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
   "projekti_nabavke_4_4_7.md",
 ];
@@ -62,7 +62,7 @@ const AKTI = [
  * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_4_6.md": {
+  "Pravilnik_4_5_2.md": {
     sr: [
       "### Član 40a",
       "evidentira se u Protokolu kada Fondacija odobri oglas",
@@ -70,7 +70,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // ISCRPNO. Traži se sva tri, jer je do 4.3.0 akt poznavao samo prvi, a kod
       // radio sa tri; ako iz teksta padne bilo koji, kod opet radi bez osnova.
       "20b Pravilnika o dokazu stvarnosti",
-      "Izuzetaka je tri i navedeni su ovde iscrpno",
+      "Izuzetaka je četiri i navedeni su ovde iscrpno",
+      // R-15 — četvrti izuzetak: otpis po poništenju potvrde zbog neaktivnosti
+      // (čl. 6 Pravilnika o učešću dece). Bez njega taj otpis nema osnov, jer
+      // st. 6 zabranjuje ustanovljavanje drugog osnova bilo kojim drugim aktom.
+      "otpis po poništenju potvrde zbog neaktivnosti",
+      "teret se ne prenosi na drugo lice",
       "Drugi osnov za negativan zapis ne može se ustanoviti",
       // 4.3.0 — deveti kanal. Kanal koji ne stoji u čl. 15 ne postoji, a kod
       // upisuje POEN po njemu.
@@ -103,7 +108,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "### Article 40a",
       "is recorded in the Protocol when the Foundation approves the listing",
       "Article 20b of the Rulebook on Proof of Reality",
-      "There are three exceptions, and they are listed here exhaustively",
+      "There are four exceptions, and they are listed here exhaustively",
+      "write-off upon annulment of a confirmation due to inactivity",
+      "the burden is not transferred to another person",
       "contribution of children in the children's space",
       "### Article 40b",
       "### Article 14a",
@@ -118,7 +125,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "### Статья 40a",
       "учитывается в Протоколе, когда Фонд одобрит объявление",
       "статьёй 20b Правил о доказательстве реальности",
-      "Исключений три, и здесь они перечислены исчерпывающе",
+      "Исключений четыре, и здесь они перечислены исчерпывающе",
+      "списание при аннулировании подтверждения из-за неактивности",
+      "бремя не переносится на другое лицо",
       "вклад детей в детском пространстве",
       "### Статья 40b",
       "### Статья 14a",
@@ -135,7 +144,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_5_1.md": {
+  "radnje_obrade_4_5_2.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16", "Radnja obrade br. 17"],
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16", "Processing activity No. 17"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16", "Операция обработки № 17"],
@@ -150,7 +159,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // (`vercel.json` → regions: fra1, Neon endpoint u EU). Ako se region ikad vrati u
   // SAD, ocena i mere iz 5.13 postaju netačne — zato se traže doslovno, uz nov zbir
   // srednjih i niskih rizika.
-  "DPIA_4_5_1.md": {
+  "DPIA_4_5_2.md": {
     sr: [
       "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
       "Pet rizika je na srednjem nivou (R1, R2, R11, R13, R16)",
@@ -521,7 +530,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // svakom potvrđenom članu. Ako ta odredba ispadne iz akta, kod nastavi da
   // zatvara profil bez osnova, a pregled po školama ostane bez ijednog pravila o
   // tome šta se sme objaviti — pa se traži doslovno, na sva tri jezika.
-  "ucesce_dece_4_4_8.md": {
+  "ucesce_dece_4_5_2.md": {
     sr: [
       "### Član 7a",
       "### Član 15a",
@@ -548,6 +557,17 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "po osnovu legitimnog interesa",
       "obrađuje se i zapis o tom prijateljstvu sa datumom",
       "može sam obrisati nalog u svakom trenutku",
+      // 4.5.2 (R-15) — postupak potvrde postojanja deteta. Do tada se izjašnjavao
+      // SAMO potvrđivač, a poništenje je išlo kroz postupak za UTVRĐENU lažnu
+      // verifikaciju: tuđi nepokriveni deo padao je na njega kao nadoknada, do
+      // 2.500 POEN u minusu, uz zapis koji ga naziva davaocem lažne potvrde.
+      // Sve četiri odredbe se traže doslovno; bez njih se kod vraća na staro
+      // stanje a da nijedan test ne pukne.
+      "izjasne oba člana veze",
+      "šezdeset dana",
+      "obaveštavaju se sva lica koja bi poništenjem bila pogođena",
+      "nadoknada iz člana 20b Pravilnika o dokazu stvarnosti se ne primenjuje",
+      "ima pravo prigovora",
     ],
     en: [
       "### Article 7a",
@@ -563,6 +583,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "on the basis of legitimate interest",
       "the record of that friendship with its date is processed as well",
       "may delete the account themselves at any time",
+      "both parties to the link make a declaration",
+      "sixty days",
+      "all persons who would be affected by an annulment are notified",
+      "restitution under Article 20b of the Rulebook on Proof of Reality does not apply",
+      "the right to an appeal",
     ],
     ru: [
       "### Статья 7a",
@@ -578,9 +603,14 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "на основании законного интереса",
       "обрабатывается также запись об этой дружбе с датой",
       "может удалить её сам в любой момент",
+      "выскажутся обе стороны связи",
+      "шестьдесят дней",
+      "уведомляются все лица, которых аннулирование затронуло бы",
+      "возмещение по статье 20b Правил о доказательстве реальности не применяется",
+      "имеет право на возражение",
     ],
   },
-  "politika_4_5_1.md": {
+  "politika_4_5_2.md": {
     sr: [
       "nije pristanak za obrade čiji je pravni osnov pristanak",
       // 4.4.8 — Politika je do tada opisivala razdoblje pre pristanka uže nego
@@ -893,7 +923,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_4_6.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_5_2.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });

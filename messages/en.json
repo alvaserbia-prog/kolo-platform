@@ -689,7 +689,8 @@
     "deca": "Children",
     "status_dete_ceka": "waiting for a parent's approval",
     "status_dete_radi": "account works",
-    "prigovor_tip_podaci": "Correction of inaccurate data about me"
+    "prigovor_tip_podaci": "Correction of inaccurate data about me",
+    "prigovor_tip_potvrda": "Confirmation cancelled due to inactivity"
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -952,7 +953,7 @@
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "4.5.1"
+      "ver": "4.5.2"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -960,11 +961,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "4.5.1"
+      "ver": "4.5.2"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "4.5.1"
+      "ver": "4.5.2"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
@@ -976,7 +977,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.4.6",
+      "ver": "4.5.2",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -998,19 +999,19 @@
     "meta_uslovi_title": "Terms of Use — KOLO",
     "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.4.3",
     "meta_privatnost_title": "Privacy Policy — KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.5.1",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.5.2",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.5.1",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.5.2",
     "meta_radnje_title": "Register of Processing Activities — KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 4.5.1",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.5.2",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
     "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.4.6",
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.6",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.4.6",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.5.2",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -2559,7 +2560,8 @@
     "emisija_tbl_nivo1": "any donation below 5,000",
     "tab_nabavke": "Nabavke",
     "ped_izjava_label": "Contributor's declaration",
-    "prigovori_tip_podaci": "Data correction"
+    "prigovori_tip_podaci": "Data correction",
+    "prigovori_tip_potvrda": "Cancelled confirmation"
   },
   "kolacici": {
     "aria": "Cookie consent",
@@ -2658,12 +2660,8 @@
     "nadoknada_tekst": "Cancelling a confirmation you gave created a compensation of {iznos} POEN, because the cancelled POEN was not covered. The compensation is not a debt and cannot be collected; POEN recorded or re-registered to you fills it first. Exchanging goods and services is not restricted for you.",
     "doprinos_razmeni_naslov": "An exchange contribution has been recorded for you — step {korak}",
     "doprinos_razmeni_tekst": "You have passed step {korak} of the exchange contribution path and {iznos} POEN has been recorded for you (Rules, Art. 40a).",
-    "roditeljstvo_potvrda_naslov": "Confirm that a child exists",
-    "roditeljstvo_potvrda_tekst": "{pseudonim} has opened an account for their child, aged {godine}. You have {dana} days to confirm that you know this.",
-    "roditeljstvo_istekla_naslov": "Your confirmation has been annulled",
-    "roditeljstvo_istekla_tekst": "You did not respond in time, so your confirmation of {pseudonim} has been cancelled.",
-    "roditeljstvo_pala_potvrda_naslov": "One confirmation of your reality has lapsed",
-    "roditeljstvo_pala_potvrda_tekst": "Someone who confirmed you did not respond about your child's existence in time.",
+    "roditeljstvo_potvrda_naslov": "Confirm that the child exists",
+    "roditeljstvo_potvrda_tekst": "An account for a child aged {godine} has been opened from {pseudonim}'s account. You have {dana} days to confirm that you know this.",
     "oglas_uklonio_roditelj_naslov": "Your parent removed your listing",
     "oglas_uklonio_roditelj_tekst": "Your listing has been removed from the Marketplace.",
     "prijava_razmene_ponistena_naslov": "The re-registration has been annulled",
@@ -2697,7 +2695,7 @@
     "nalog_preveden_u_maloletni_naslov": "Your account is now a child account",
     "nalog_preveden_u_maloletni_tekst": "Your account now follows the rules for minor users, and {roditelj} is recorded as your parent. {iznos} POEN recorded through the channels has been reversed; POEN others re-registered to you remains.",
     "roditeljstvo_upisano_naslov": "You are recorded as a parent",
-    "roditeljstvo_upisano_tekst": "The account {pseudonim} became a child account and you are recorded as its parent.",
+    "roditeljstvo_upisano_tekst": "The account {pseudonim} was converted into a child account and you are recorded as its parent. Give the statement that the child exists within the deadline — without it, the confirmations of your reality given by those responding about the child will fall.",
     "potvrda_pala_minus_naslov": "A confirmation lapsed, your record is negative",
     "potvrda_pala_minus_tekst": "The account {pseudonim} became a child account, so the confirmation for which POEN was recorded to you has lapsed. Your record is now negative by {iznos} POEN — incoming POEN fills that gap first.",
     "nabavka_poziv_naslov": "You are in the procurement",
@@ -2709,7 +2707,21 @@
     "program_pristanak_povucen_naslov": "Consent withdrawn",
     "program_pristanak_povucen_tekst": "You have withdrawn your consent for the “{program}” programme. The procedure has stopped, recording has ceased, and the data you entered has been deleted.",
     "program_pristanak_povucen_spoljni_naslov": "Consent withdrawn",
-    "program_pristanak_povucen_spoljni_tekst": "Your withdrawal of consent has been recorded. The details are in the app."
+    "program_pristanak_povucen_spoljni_tekst": "Your withdrawal of consent has been recorded. The details are in the app.",
+    "roditeljstvo_potvrda_prevod_naslov": "Confirm that the child exists",
+    "roditeljstvo_potvrda_prevod_tekst": "The account of member {pseudonim} was corrected into an account for a child aged {godine}. You have {dana} days to confirm that you know this.",
+    "roditeljstvo_podsetnik_potvrdjivac_naslov": "The confirmation deadline is running out",
+    "roditeljstvo_podsetnik_potvrdjivac_tekst": "You have {dana} days left to respond about {pseudonim}'s child. If no response arrives, your confirmation of their reality will be cancelled and {iznos} POEN written off your record — even when the record thereby goes negative.",
+    "roditeljstvo_podsetnik_roditelj_naslov": "A confirmation of your reality is running out",
+    "roditeljstvo_podsetnik_roditelj_tekst": "{pseudonim} has {dana} days left to respond about your child's existence. If no response arrives, that confirmation of your reality will be cancelled and {iznos} POEN written off your record — even when the record thereby goes negative.",
+    "roditeljstvo_podsetnik_nadzornik_naslov": "A confirmation you supervised is running out",
+    "roditeljstvo_podsetnik_nadzornik_tekst": "{pseudonim} has {dana} days left to respond about the child's existence. If no response arrives, the confirmation you supervised will be cancelled and {iznos} POEN written off your record — even when the record thereby goes negative.",
+    "roditeljstvo_ponistena_potvrdjivac_naslov": "A confirmation has been cancelled",
+    "roditeljstvo_ponistena_potvrdjivac_tekst": "Your confirmation of member {pseudonim} was cancelled because no response about the child's existence arrived in time. {iznos} POEN was written off your record; the record may thereby go negative. Cancellation does not mean anyone gave an untrue confirmation — if you consider it wrong, you can appeal from your profile.",
+    "roditeljstvo_ponistena_roditelj_naslov": "A confirmation of your reality has been cancelled",
+    "roditeljstvo_ponistena_roditelj_tekst": "The confirmation given to you by {pseudonim} was cancelled because no response about the child's existence arrived in time. {iznos} POEN was written off your record; the record may thereby go negative. Another person may confirm your reality, and you can appeal the cancellation from your profile.",
+    "roditeljstvo_ponistena_nadzornik_naslov": "A confirmation you supervised has been cancelled",
+    "roditeljstvo_ponistena_nadzornik_tekst": "The confirmation you supervised was cancelled because no response about the child's existence arrived in time. {iznos} POEN was written off your record; the record may thereby go negative. You can appeal the cancellation from your profile."
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",
@@ -3176,7 +3188,7 @@
     "brisanje_otkucaj": "Type “{pseudonim}” to confirm",
     "brisanje_potvrdi": "Delete the account",
     "potvrde_naslov": "Confirmations that a child exists",
-    "potvrde_opis": "Someone you confirmed has opened an account for their child. You have {dana} days to respond.",
+    "potvrde_opis": "Someone you confirmed has an account for their child. You have {dana} days to respond. The confirmation survives only if both you and the parent respond in time.",
     "potvrde_prazno": "You have no pending responses.",
     "pitanje": "Does {pseudonim} have a child aged {godine}?",
     "pitanje_opis": "You are responding from what you yourself know about {pseudonim}. The child's details are not shown to you.",
@@ -3185,7 +3197,7 @@
     "dugme_nema": "No, they do not",
     "dugme_posalji": "Send",
     "obrazlozenje_naslov": "Reasons (required)",
-    "ako_ne_znas": "If you have no knowledge of this, don't press either button. But be aware: if you don't respond in time, your confirmation of that person will be cancelled, the POEN recorded for it written off, and your slot freed.",
+    "ako_ne_znas": "If you have no knowledge of this, don't press either button. But be aware: if no response arrives, your confirmation of that person will be cancelled, and everyone whom that confirmation earned POEN has it written off — you, them, and the supervisor if there was one. The write-off is carried out even when the record thereby goes negative. Cancellation does not mean anyone gave an untrue confirmation; you can appeal it from your profile.",
     "prikazi_lozinku": "Show password",
     "sakrij_lozinku": "Hide password",
     "pseudonim_pravilo": "Pseudonym: 3–30 characters, Latin letters (a–z), digits and _ . - only — no spaces and no č, ć, š, ž, đ. It may not start or end with a separator.",
@@ -3218,7 +3230,10 @@
     "lozinka_polje": "New password",
     "lozinka_dugme": "Set password",
     "lozinka_pravilo": "At least {broj} characters. Write it down and tell your child.",
-    "lozinka_uspeh": "The password is set. Tell your child what it is."
+    "lozinka_uspeh": "The password is set. Tell your child what it is.",
+    "izjava_naslov": "Statement that the child exists",
+    "izjava_opis": "The deadline expires in {dana} days. Without your statement, the confirmations of your reality given by those responding about the child will fall, and each of them has the POEN recorded for that confirmation written off.",
+    "izjava_dugme": "I confirm and give the statement"
   },
   "decjaPocetna": {
     "naslov": "Children's marketplace",

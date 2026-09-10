@@ -41,7 +41,19 @@ export async function POST(req: NextRequest) {
   // „PODACI" je zahtev za ispravku netačnog podatka (čl. 29 ZZPL-a) — pravo koje
   // Politika navodi među pravima korisnika, a do seta 4.5.1 nije imalo nijedan
   // put u sistemu. Ide kroz zatečeni prigovor, bez novog modela i novog taba.
-  const tipovi = ["VERIFIKACIJA", "SUSPENZIJA", "PROGRAM", "OGLAS", "PODACI", "OSTALO"];
+  // „POTVRDA" je prigovor na poništenje potvrde stvarnosti zbog neaktivnosti u
+  // postupku iz čl. 6 Pravilnika o učešću dece. Postoji zato što je to jedina
+  // automatska posledica u sistemu koja dira status: nastupa bez ičije odluke, a
+  // čl. 38 ZZPL-a za takvu obradu traži pravo na ljudski uvid.
+  const tipovi = [
+    "VERIFIKACIJA",
+    "SUSPENZIJA",
+    "PROGRAM",
+    "OGLAS",
+    "PODACI",
+    "POTVRDA",
+    "OSTALO",
+  ];
   if (!tipovi.includes(tipOdluke)) {
     return await greska("Nepoznat tip odluke.", 400);
   }

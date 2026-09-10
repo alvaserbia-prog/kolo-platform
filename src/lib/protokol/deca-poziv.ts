@@ -32,7 +32,14 @@ import { gdePseudonim, poljaPseudonima } from "@/lib/pseudonim";
 import { bazniUrl, emailLayout, esc, posaljiEmailRaw } from "@/lib/email";
 import { obavesti } from "@/lib/notifikacije";
 import { beogradskiDan } from "./obracunski-dan";
-import { DecaGreska, obrisiDecjiNalog, poljaDeteta } from "./deca";
+import {
+  DecaGreska,
+  javiPotvrdjivacima,
+  obrisiDecjiNalog,
+  otvoriPostupakPotvrde,
+  poljaDeteta,
+} from "./deca";
+import { generisiIzjavuRoditelja } from "@/lib/deca-izjava";
 import { osveziPrijateljstvaDeteta } from "./prijateljstva";
 import {
   ROK_PREUZIMANJA_DANA,
@@ -328,11 +335,30 @@ async function poveziRoditelja(
     if (!dozvoljen.ok) throw new DecaGreska(dozvoljen.razlog, dozvoljen.status);
   }
 
+  const sada = new Date();
+  const datumZaIzjavu = dete.datumRodjenja ?? datumRodjenja!;
+  const godine = uzrast(datumZaIzjavu, beogradskiDan());
+  let potvrdjivaci: string[] = [];
+
   await prisma.$transaction(async (tx) => {
-    await tx.roditeljstvo.create({ data: { deteId: dete.id, roditeljId } });
+    // Preuzimanje je radnja kojom roditelj preuzima odgovornost za nalog, pa
+    // izjava iz čl. 6 st. 1 nastaje ODMAH i rok mu ne teče. Tekst se snima i
+    // posle toga se ne menja.
+    await tx.roditeljstvo.create({
+      data: {
+        deteId: dete.id,
+        roditeljId,
+        izjavaAt: sada,
+        izjavaTekst: generisiIzjavuRoditelja({ pseudonimDeteta: dete.pseudonim, godine }),
+      },
+    });
     if (!dete.datumRodjenja && datumRodjenja) {
       await tx.user.update({ where: { id: dete.id }, data: { datumRodjenja } });
     }
+    // 🔴 Postupak potvrde iz čl. 6 do seta 4.5.2 na ovom putu NIJE ni otvaran.
+    // Dete koje se registrovalo samo i drugi roditelj prolazili su bez ijedne
+    // provere — a to je upravo ulaz iza koga ne stoji niko dok roditelj ne dođe.
+    potvrdjivaci = await otvoriPostupakPotvrde(dete.id, roditeljId, sada, tx);
     // Poziv je odradio posao. Red OSTAJE — u njemu živi šestocifreni kod kojim
     // ulazi drugi roditelj (čl. 4b st. 6) — ali se obeleži kao iskorišćen, pa
     // noćni posao više ne broji ovaj nalog kao nepreuzet.
@@ -341,6 +367,8 @@ async function poveziRoditelja(
       data: { iskoriscenAt: new Date(), odbijenAt: null },
     });
   });
+
+  await javiPotvrdjivacima(potvrdjivaci, roditelj.pseudonim, godine);
 
   await obavesti(dete.id, {
     tip: "dete_preuzet_nalog",

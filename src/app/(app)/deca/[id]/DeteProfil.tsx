@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { MIN_LOZINKA } from "@/lib/deca-pravila";
+import { MIN_LOZINKA, danaDoIsteka } from "@/lib/deca-pravila";
+import { generisiIzjavuRoditelja } from "@/lib/deca-izjava";
 
 type Dete = {
   id: string;
@@ -15,6 +16,8 @@ type Dete = {
   clanOd: string;
   balans: number;
   dozvolaOdrasli: boolean;
+  /** Rok do koga roditelj mora dati izjavu iz čl. 6 st. 1; `null` kad je već data. */
+  izjavaRokDo: string | null;
 };
 
 type Oglas = {
@@ -92,6 +95,8 @@ export default function DeteProfil({ dete, oglasi }: { dete: Dete; oglasi: Oglas
       </section>
 
       {greska && <p className="text-sm text-kolo-danger">{greska}</p>}
+
+      <IzjavaRoditelja dete={dete} />
 
       {/* Prekidač iz čl. 10 st. 2 — jedina saglasnost koju roditelj daje posle
           otvaranja naloga. Stoji na vrhu, jer menja krug ljudi sa kojima dete
@@ -493,6 +498,67 @@ function NovaLozinka({ deteId }: { deteId: string }) {
           {poruka.tekst}
         </p>
       )}
+    </section>
+  );
+}
+
+/**
+ * Izjava roditelja o postojanju deteta (čl. 6 st. 1), kad rok teče.
+ *
+ * Vidi se samo u jednom slučaju — kad je nalog u maloletni preveo administrator,
+ * pa roditelj nije izvršio nijednu radnju kojom bi izjavu dao. Svuda drugde izjava
+ * nastaje pri otvaranju odnosno preuzimanju naloga i ovaj blok se ne crta.
+ *
+ * 🔴 Tekst izjave stoji pred čovekom PRE potvrde. Izjava se daje pod punom
+ * odgovornošću i snima se — dugme bez teksta bio bi potpis na nevidljiv dokument.
+ */
+function IzjavaRoditelja({ dete }: { dete: Dete }) {
+  const t = useTranslations("deca");
+  const router = useRouter();
+  const [radi, setRadi] = useState(false);
+  const [greska, setGreska] = useState<string | null>(null);
+  if (!dete.izjavaRokDo) return null;
+
+  const dana = danaDoIsteka(new Date(dete.izjavaRokDo), new Date());
+  const tekst = generisiIzjavuRoditelja({
+    pseudonimDeteta: dete.pseudonim,
+    godine: dete.godine ?? 0,
+  });
+
+  async function posalji() {
+    setRadi(true);
+    setGreska(null);
+    try {
+      const res = await fetch(`/api/deca/${dete.id}/izjava`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ potvrda: true }),
+      });
+      if (!res.ok) throw new Error();
+      router.refresh();
+    } catch {
+      setGreska(t("greska_slanje"));
+    } finally {
+      setRadi(false);
+    }
+  }
+
+  return (
+    <section className="rounded-2xl border border-kolo-danger/40 bg-kolo-danger/5 p-6">
+      <h2 className="text-lg font-medium text-kolo-text">{t("izjava_naslov")}</h2>
+      <p className="mt-1 text-sm text-kolo-muted">{t("izjava_opis", { dana })}</p>
+      <pre className="mt-3 max-h-64 overflow-y-auto whitespace-pre-wrap rounded-xl border border-kolo-border bg-white p-4 text-sm text-kolo-text">
+        {tekst}
+      </pre>
+      {greska && <p className="mt-2 text-sm text-kolo-danger">{greska}</p>}
+      <button
+        type="button"
+        disabled={radi}
+        onClick={posalji}
+        className="mt-3 rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-kolo-green-800 disabled:opacity-60"
+      >
+        {t("izjava_dugme")}
+      </button>
     </section>
   );
 }

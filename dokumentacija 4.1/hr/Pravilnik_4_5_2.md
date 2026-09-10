@@ -210,15 +210,17 @@ Zbroj svih zapisa POEN-a u sustavu, uključujući zapis Protokola, u svakom tren
 
 Protokol vodi zapis koji je u svakom trenutku negativan i predstavlja protuzapis svih POEN-a evidentiranih kod korisnika i organizacijskih jedinica.
 
-Nijedan korisnik niti kolektivni oblik ne može imati negativan zapis POEN-a. Iznimaka je tri i ovdje su navedene iscrpno:
+Nijedan korisnik niti kolektivni oblik ne može imati negativan zapis POEN-a. Iznimaka je četiri i ovdje su navedene iscrpno:
 
 1) **naknada po poništenju lažne verifikacije**, uređena člankom 20b Pravilnika o dokazu stvarnosti: kada se poništenjem oduzimaju zapisi POEN-a koji su već potrošeni, nepokriveni dio prelazi u negativnu vrijednost i prenosi se na verifikatora koji je račun uveo;
 
 2) **poništenje ažuriranja evidencije po prijavi razmjene**, uređeno člankom 16. stavkom 10. ovog pravilnika: povrat je pun i izvršava se i kada zapis primatelja time postane negativan;
 
-3) **otpis doprinosa iz dječjeg prostora**, uređen Pravilnikom o sudjelovanju djece: pri raskidu prijateljstva i pri stjecanju punoljetnosti otpisuje se doprinos koji je po tom pravilniku bio evidentiran, a otpis se izvršava i kada zapis time postane negativan.
+3) **otpis doprinosa iz dječjeg prostora**, uređen Pravilnikom o sudjelovanju djece: pri raskidu prijateljstva i pri stjecanju punoljetnosti otpisuje se doprinos koji je po tom pravilniku bio evidentiran, a otpis se izvršava i kada zapis time postane negativan;
 
-Na negativan zapis po svakoj od tri osnove primjenjuje se isti režim: on nije dug i ne naplaćuje se, POEN-i koji korisniku pristignu prvo ga popunjavaju, iniciranje ažuriranja evidencije u korist drugog korisnika moguće je tek kada zapis prijeđe nulu, a razmjena dobara i usluga nije ograničena.
+4) **otpis po poništenju potvrde zbog neaktivnosti**, uređen člankom 6. Pravilnika o sudjelovanju djece: kada se potvrda stvarnosti roditelja poništava zato što se o postojanju djeteta u roku nije izjasnila jedna od strana veze, svakoj pogođenoj osobi otpisuje se ono što joj je povodom te potvrde bilo evidentirano, a otpis se izvršava i kada zapis time postane negativan; teret se ne prenosi na drugu osobu.
+
+Na negativan zapis po svakoj od četiri osnove primjenjuje se isti režim: on nije dug i ne naplaćuje se, POEN-i koji korisniku pristignu prvo ga popunjavaju, iniciranje ažuriranja evidencije u korist drugog korisnika moguće je tek kada zapis prijeđe nulu, a razmjena dobara i usluga nije ograničena.
 
 Druga osnova za negativan zapis ne može se ustanoviti — ni ovim pravilnikom bez izmjene ovoga članka, ni bilo kojim drugim aktom.
 

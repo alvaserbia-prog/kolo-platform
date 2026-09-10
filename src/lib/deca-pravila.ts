@@ -29,8 +29,45 @@ export const UZRAST_MIN = 7;
 /** Gornja granica — punoletstvom prestaje svojstvo maloletnog korisnika (čl. 2). */
 export const UZRAST_PUNOLETSTVO = 18;
 
-/** Rok u kome se potvrđivači roditelja izjašnjavaju o postojanju deteta (čl. 6 st. 2). */
-export const ROK_POTVRDE_DANA = 30;
+/**
+ * Rok u kome se o postojanju deteta izjašnjavaju OBE strane veze (čl. 6 st. 2).
+ *
+ * 🔴 Sa 30 na 60 dana od seta 4.5.2. Rok ne meri ničiju savesnost nego samo koliko
+ * je vremena razumno dati čoveku da vidi obaveštenje. Trideset dana je za nalog
+ * kojim se ne služi svakodnevno prekratko, a posledica isteka je najteža automatska
+ * posledica u sistemu — pad sopstvene potvrde i negativan zapis.
+ */
+export const ROK_POTVRDE_DANA = 60;
+
+/**
+ * Pragovi podsetnika, u danima do isteka (čl. 6 st. 3).
+ *
+ * 🔴 Podsetnik ide SVAKOME koga bi poništenje oštetilo — potvrđivaču, roditelju i
+ * nadzorniku — a ne samo onome od koga se izjašnjenje traži. Do seta 4.5.2 je
+ * postojalo jedno jedino obaveštenje, u trenutku otvaranja naloga, pa je čovek
+ * gubio potvrdu i POEN bez ijednog upozorenja u međuvremenu.
+ *
+ * Redosled je opadajući i posao ga tako i čita.
+ */
+export const PODSETNIK_PRAGOVI_DANA = [30, 7, 1] as const;
+
+/**
+ * Prag podsetnika koji je sada na redu, ili `null` kad nema šta da se šalje.
+ *
+ * Vraća najveći prag koji je dostignut a još nije poslat. Time jedno polje
+ * (`RoditeljstvoPotvrda.podsetnikDana`) drži ceo raspored: posao koji je preskočen
+ * nekoliko dana ne šalje tri poruke odjednom nego jednu, za prag na kome se rok
+ * zatekao.
+ */
+export function pragPodsetnika(
+  danaDoRoka: number,
+  vecPoslato: number | null
+): number | null {
+  for (const prag of PODSETNIK_PRAGOVI_DANA) {
+    if (danaDoRoka <= prag && (vecPoslato === null || vecPoslato > prag)) return prag;
+  }
+  return null;
+}
 
 /**
  * Koliko važi link iz poruke poslate roditelju (čl. 4b st. 3).

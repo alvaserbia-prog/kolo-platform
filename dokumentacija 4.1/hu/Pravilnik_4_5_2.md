@@ -210,15 +210,17 @@ A rendszerben szereplő valamennyi POEN-bejegyzés összege, ideértve a Protoko
 
 A Protokoll olyan bejegyzést vezet, amely minden pillanatban negatív, és a felhasználóknál, valamint a szervezeti egységeknél nyilvántartásba vett valamennyi POEN ellenbejegyzését képezi.
 
-Egyetlen felhasználónak vagy kollektív formának sem lehet negatív POEN-bejegyzése. Három kivétel van, és azokat itt kimerítően felsoroljuk:
+Egyetlen felhasználónak vagy kollektív formának sem lehet negatív POEN-bejegyzése. Négy kivétel van, és azokat itt kimerítően felsoroljuk:
 
 1) **a hamis hitelesítés érvénytelenítése miatti megtérítés**, amelyet a valóság bizonyításáról szóló szabályzat 20b. cikke rendez: ha az érvénytelenítés már elköltött POEN-bejegyzéseket von el, a fedezetlen rész negatív értékbe fordul, és átszáll arra a hitelesítőre, aki a fiókot bevezette;
 
 2) **a nyilvántartás-frissítés érvénytelenítése cserebejelentés alapján**, amelyet e szabályzat 16. cikkének 10. bekezdése rendez: a visszatérítés teljes, és akkor is végrehajtásra kerül, ha a címzett bejegyzése ezáltal negatívvá válik;
 
-3) **a gyermektérből származó hozzájárulás leírása**, amelyet a gyermekek részvételéről szóló szabályzat rendez: a barátság megszüntetésekor és a nagykorúság elérésekor leírásra kerül az e szabályzat szerint nyilvántartásba vett hozzájárulás, és a leírás akkor is végrehajtásra kerül, ha a bejegyzés ezáltal negatívvá válik.
+3) **a gyermektérből származó hozzájárulás leírása**, amelyet a gyermekek részvételéről szóló szabályzat rendez: a barátság megszüntetésekor és a nagykorúság elérésekor leírásra kerül az e szabályzat szerint nyilvántartásba vett hozzájárulás, és a leírás akkor is végrehajtásra kerül, ha a bejegyzés ezáltal negatívvá válik;
 
-A negatív bejegyzésre mindhárom jogalap esetén ugyanaz a rend vonatkozik: nem tartozás és nem hajtják be, a felhasználóhoz beérkező POEN-ek először azt töltik fel, a nyilvántartás más felhasználó javára történő frissítésének kezdeményezése csak akkor lehetséges, ha a bejegyzés átlépi a nullát, az áruk és szolgáltatások cseréje pedig nincs korlátozva.
+4) **a megerősítés inaktivitás miatti érvénytelenítéséből eredő leírás**, amelyet a gyermekek részvételéről szóló szabályzat 6. cikke rendez: ha a szülő valóságáról adott megerősítés azért kerül érvénytelenítésre, mert a kapcsolat egyik fele határidőn belül nem nyilatkozott a gyermek létezéséről, minden érintett személytől leírásra kerül az, ami e megerősítés kapcsán nyilvántartásba került, és a leírás akkor is végrehajtásra kerül, ha a bejegyzés ezáltal negatívvá válik; a teher nem száll át más személyre.
+
+A negatív bejegyzésre mind a négy jogalap esetén ugyanaz a rend vonatkozik: nem tartozás és nem hajtják be, a felhasználóhoz beérkező POEN-ek először azt töltik fel, a nyilvántartás más felhasználó javára történő frissítésének kezdeményezése csak akkor lehetséges, ha a bejegyzés átlépi a nullát, az áruk és szolgáltatások cseréje pedig nincs korlátozva.
 
 A negatív bejegyzésre más jogalap nem hozható létre — sem e szabályzattal e cikk módosítása nélkül, sem bármely más aktussal.
 

@@ -32,7 +32,9 @@ export default async function DetePage({ params }: { params: Promise<{ id: strin
       avatar: true,
       datumRodjenja: true,
       maloletan: true,
-      roditeljstvaKaoDete: { select: { roditeljId: true } },
+      roditeljstvaKaoDete: {
+        select: { roditeljId: true, izjavaAt: true, izjavaRokDo: true },
+      },
       deaktiviranAt: true,
       createdAt: true,
       dozvolaOdrasli: true,
@@ -44,6 +46,8 @@ export default async function DetePage({ params }: { params: Promise<{ id: strin
   if (!dete || !dete.maloletan || !jeMoje || dete.deaktiviranAt) {
     notFound();
   }
+
+  const mojaVeza = dete.roditeljstvaKaoDete.find((r) => r.roditeljId === session.user.id);
 
   const oglasi = await prisma.marketplaceListing.findMany({
     where: { sellerId: dete.id, uklonjenAt: null, status: "ACTIVE" },
@@ -61,6 +65,13 @@ export default async function DetePage({ params }: { params: Promise<{ id: strin
         clanOd: dete.createdAt.toISOString(),
         balans: dete.wallet?.balance ?? 0,
         dozvolaOdrasli: dete.dozvolaOdrasli,
+        // Izjava iz čl. 6 st. 1 duguje se samo kad rok teče — a teče jedino kad je
+        // nalog u maloletni preveo administrator (svuda drugde izjava nastaje pri
+        // otvaranju odnosno preuzimanju naloga).
+        izjavaRokDo:
+          mojaVeza && !mojaVeza.izjavaAt && mojaVeza.izjavaRokDo
+            ? mojaVeza.izjavaRokDo.toISOString()
+            : null,
       }}
       oglasi={oglasi.map((o) => ({
         id: o.id,

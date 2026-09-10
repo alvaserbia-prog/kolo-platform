@@ -441,7 +441,14 @@ export async function prevediUMaloletni(
       },
     });
 
-    await tx.roditeljstvo.create({ data: { deteId: userId, roditeljId: roditelj.id } });
+    // 🔴 Jedini slučaj u kome roditelju TEČE rok za izjavu iz čl. 6 st. 1.
+    // Svuda drugde izjavu daje u trenutku u kome preuzima odgovornost za nalog
+    // (otvaranje po čl. 4, preuzimanje po čl. 4b); ovde tog trenutka nema —
+    // nalog je u maloletni preveo administrator, na zahtev, ispravljajući
+    // pogrešno unet uzrast. Roditelj izjavu daje sa svog profila.
+    await tx.roditeljstvo.create({
+      data: { deteId: userId, roditeljId: roditelj.id, izjavaRokDo: rokDo },
+    });
 
     // Kod kojim ulazi DRUGI roditelj (čl. 4b st. 6). Nastaje i ovde, iako poziva
     // nema — inače bi drugi roditelj mogao da uđe samo kod dece koja su se
@@ -453,7 +460,12 @@ export async function prevediUMaloletni(
 
     if (potvrdjivaci.length > 0) {
       await tx.roditeljstvoPotvrda.createMany({
-        data: potvrdjivaci.map((potvrdjivacId) => ({ deteId: userId, potvrdjivacId, rokDo })),
+        data: potvrdjivaci.map((potvrdjivacId) => ({
+          deteId: userId,
+          roditeljId: roditelj.id,
+          potvrdjivacId,
+          rokDo,
+        })),
         skipDuplicates: true,
       });
     }
@@ -506,20 +518,19 @@ export async function prevediUMaloletni(
     kljuc: "notifikacije.roditeljstvo_upisano",
     parametri: { pseudonim: nalog.pseudonim },
     naslov: "Upisan si kao roditelj",
-    tekst: `Nalog ${nalog.pseudonim} je preveden u dečji i ti si upisan kao njegov roditelj.`,
+    tekst:
+      `Nalog ${nalog.pseudonim} je preveden u dečji i ti si upisan kao njegov roditelj. ` +
+      `Daj izjavu o postojanju deteta u roku od ${ROK_POTVRDE_DANA} dana — bez nje ` +
+      `padaju potvrde tvoje stvarnosti onih koji se o detetu izjašnjavaju.`,
     link: "/profil",
   }).catch(() => {});
 
-  for (const potvrdjivacId of potvrdjivaci) {
-    await obavesti(potvrdjivacId, {
-      tip: "roditeljstvo_potvrda",
-      kljuc: "notifikacije.roditeljstvo_potvrda",
-      parametri: { pseudonim: roditelj.pseudonim, godine, dana: ROK_POTVRDE_DANA },
-      naslov: "Potvrdi postojanje deteta",
-      tekst: `Sa naloga ${roditelj.pseudonim} otvoren je nalog za dete uzrasta ${godine} godina. Imaš ${ROK_POTVRDE_DANA} dana da potvrdiš da to znaš.`,
-      link: "/deca/potvrde",
-    }).catch(() => {});
-  }
+  // 🔴 Potvrđivačima ide DRUGI tekst nego pri otvaranju naloga: sa njihove strane
+  // nalog deteta se nije pojavio ničijom radnjom koju su mogli da vide, nego je
+  // Fondacija ispravila pogrešno unet uzrast zatečenog naloga. Bez toga poruka
+  // pita za dete koje se „pojavilo" niotkuda.
+  const { javiPotvrdjivacima } = await import("./deca");
+  await javiPotvrdjivacima(potvrdjivaci, roditelj.pseudonim, godine, "prevod");
 
   return {
     pseudonim: nalog.pseudonim,

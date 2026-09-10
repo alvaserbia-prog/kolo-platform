@@ -2,7 +2,7 @@
 
 # Rulebook on the Participation of Children
 
-*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.4.6), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
+*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.5.2), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
 
 ## I — General Provisions
 
@@ -84,15 +84,23 @@ For the takeover of an account under Article 4b, the reality index is not a cond
 
 ### Article 6
 
-Upon the opening of an account under Article 4, the persons who have confirmed the parent's reality are invited to confirm that the parent has a child of the stated age. Confirmation is given for each child separately.
+A parent who opens an account under Article 4, or who takes over an account under Article 4b, gives a statement under full responsibility that they have a child of the stated age. The statement is given at the moment of opening or taking over the account; its text is kept alongside the parent–child link and is not altered after it is given. Where an account has been converted into a minor's account by a decision of the Foundation, the parent gives the statement within the period under paragraph 4.
 
-The period for making a declaration is thirty days from the opening of the account.
+Upon the establishment of the parent–child link, the persons who have confirmed that parent's reality are invited to confirm that the parent has a child of the stated age. Confirmation is given for each child separately.
 
-A person who does not make a declaration within that period has their confirmation of that parent's reality annulled. The annulment withdraws the POEN records recorded on account of that confirmation and releases that person's verification slot.
+The procedure is carried out for each parent separately and is repeated upon each new confirmation of the parent's reality.
 
-A declaration made after the expiry of the period does not remove the annulment that has taken effect.
+The period for making a declaration is sixty days. Before the period expires, all persons who would be affected by an annulment are notified.
 
-An annulled confirmation may be repeated, and the parent's reality may also be confirmed by another person, under the general rules. With each new confirmation of the parent's reality, the procedure under this Article is carried out anew.
+A confirmation of a parent's reality survives only if both parties to the link make a declaration within the period — the person who gave the confirmation and the parent themselves. If a declaration by either of them is absent, the confirmation is annulled.
+
+Upon annulment, each person for whom POEN was recorded on account of that confirmation has that POEN written off — the person who gave the confirmation, the parent, and the supervisor if the outcome of supervision was regular. Each of them returns solely what they received on account of that confirmation; the burden is not transferred to another person, and the restitution under Article 20b of the Rulebook on Proof of Reality does not apply. The write-off is executed even where the record thereby becomes negative, in accordance with Article 14, paragraph 3, point 4 of the KOLO System Rulebook. The verification slot of the person who gave the confirmation is released.
+
+An annulment under this Article does not presuppose an untrue confirmation and is not a measure for a breach of obligation. It takes effect through inactivity in the procedure, by application of this Rulebook and without a decision of an organ of the Foundation.
+
+A declaration made after the expiry of the period does not by itself remove the annulment that has taken effect. A person affected by an annulment has the right to an appeal, which is decided upon by an authorized person of the Foundation. This right exists because the annulment takes effect through automated application of rules, within the meaning of Article 38 of the Personal Data Protection Act.
+
+An annulled confirmation may be repeated, and the parent's reality may also be confirmed by another person, under the general rules; upon a renewed confirmation, POEN is recorded anew.
 
 A declaration disputing the existence of the child requires a statement of reasons; it is decided upon by the Management Board.
 

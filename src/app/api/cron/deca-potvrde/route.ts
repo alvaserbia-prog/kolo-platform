@@ -1,15 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
 import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
-import { obradiIstekleRokove } from "@/lib/protokol/deca";
+import { obradiIstekleRokove, posaljiPodsetnike } from "@/lib/protokol/deca";
 
 /**
  * POST /api/cron/deca-potvrde
  *
- * Istek roka od trideset dana za izjašnjenje o postojanju deteta (Pravilnik o
- * Modulu Deca, čl. 6 st. 3). Licu koje se nije izjasnilo poništava se potvrda
- * stvarnosti roditelja, ukidaju se zapisi POEN-a evidentirani povodom te potvrde
- * i oslobađa mu se verifikacioni slot.
+ * Postupak potvrde postojanja deteta (Pravilnik o učešću dece, čl. 6) — dva posla.
+ *
+ *  1. **Podsetnici** pre isteka roka, na 30, 7 i 1 dan. Idu SVAKOME koga bi
+ *     poništenje oštetilo — potvrđivaču, roditelju i nadzorniku — a ne samo onome
+ *     od koga se izjašnjenje traži.
+ *  2. **Istek roka.** Potvrda opstaje samo ako su se izjasnile obe strane veze;
+ *     neaktivnost bilo koje obara je. Svakom pogođenom oduzima se ono što mu je
+ *     povodom te potvrde bilo evidentirano, i kada zapis time pređe u minus.
+ *     Potvrđivaču se oslobađa verifikacioni slot.
+ *
+ * Podsetnici idu PRE isteka u istom pokretanju: obrnut redosled poslao bi
+ * podsetnik na rok koji je istog trenutka i istekao.
  *
  * Termin: dnevno u 21:00 UTC — namerno RAZDVOJEN od noćne emisije (22:00), da se
  * poništavanje zapisa ne sudari sa obračunom dana.
@@ -25,11 +33,12 @@ export async function POST(req: NextRequest) {
   // Ugašen modul nema šta da obrađuje, ali ruta ostaje živa da raspored ne puca.
   if (!MODUL_DECA_AKTIVAN) return NextResponse.json({ ok: true, preskoceno: true });
 
+  const podsetnici = await posaljiPodsetnike();
   const rezultat = await obradiIstekleRokove();
   console.log(
-    `[Deca Cron] Pregledano isteklih: ${rezultat.pregledano}, poništeno potvrda: ${rezultat.ponisteno}`
+    `[Deca Cron] Podsetnika: ${podsetnici.poslato}, pregledano isteklih: ${rezultat.pregledano}, poništeno potvrda: ${rezultat.ponisteno}`
   );
-  return NextResponse.json({ ok: true, ...rezultat });
+  return NextResponse.json({ ok: true, ...rezultat, podsetnika: podsetnici.poslato });
 }
 
 export async function GET(req: NextRequest) {

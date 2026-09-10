@@ -1,6 +1,6 @@
 # Pravilnik o učešću dece
 
-*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.4.6), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
+*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.5.2), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
 
 ## I — Opšte odredbe
 
@@ -82,15 +82,23 @@ Za preuzimanje naloga po članu 4b indeks stvarnosti nije uslov. Preuzimanjem na
 
 ### Član 6
 
-Po otvaranju naloga po članu 4, lica koja su potvrdila stvarnost roditelja pozivaju se da potvrde da roditelj ima dete navedenog uzrasta. Potvrda se daje za svako dete posebno.
+Roditelj koji otvara nalog po članu 4, odnosno koji nalog preuzima po članu 4b, daje izjavu pod punom odgovornošću da ima dete navedenog uzrasta. Izjava se daje u trenutku otvaranja odnosno preuzimanja naloga; njen tekst se čuva uz vezu roditelja i deteta i posle davanja se ne menja. Kada je nalog u maloletni preveden odlukom Fondacije, roditelj izjavu daje u roku iz stava 4.
 
-Rok za izjašnjenje je trideset dana od otvaranja naloga.
+Po nastanku veze roditelja i deteta, lica koja su potvrdila stvarnost tog roditelja pozivaju se da potvrde da roditelj ima dete navedenog uzrasta. Potvrda se daje za svako dete posebno.
 
-Licu koje se u tom roku ne izjasni poništava se potvrda stvarnosti tog roditelja. Poništenjem se ukidaju zapisi POEN-a evidentirani povodom te potvrde i oslobađa se verifikacioni slot tog lica.
+Postupak se sprovodi za svakog roditelja posebno i ponavlja se pri svakoj novoj potvrdi stvarnosti roditelja.
 
-Izjašnjenje dato po isteku roka ne otklanja nastupelo poništenje.
+Rok za izjašnjenje je šezdeset dana. Pre isteka roka obaveštavaju se sva lica koja bi poništenjem bila pogođena.
 
-Poništena potvrda može se ponoviti, a stvarnost roditelja može potvrditi i drugo lice, po opštim pravilima. Svakom novom potvrdom stvarnosti roditelja postupak iz ovog člana sprovodi se ponovo.
+Potvrda stvarnosti roditelja opstaje samo ako se u roku izjasne oba člana veze — lice koje je potvrdu dalo i sam roditelj. Ako izjašnjenje jednog od njih izostane, potvrda se poništava.
+
+Poništenjem se svakom licu kome je povodom te potvrde bio evidentiran POEN taj POEN otpisuje — licu koje je potvrdu dalo, roditelju, i nadzorniku ako je ishod nadzora bio uredan. Svako od njih vraća isključivo ono što je povodom te potvrde dobilo; teret se ne prenosi na drugo lice i nadoknada iz člana 20b Pravilnika o dokazu stvarnosti se ne primenjuje. Otpis se izvršava i kada zapis time pređe u negativnu vrednost, u skladu sa članom 14 stav 3 tačka 4 Pravilnika o KOLO sistemu. Licu koje je potvrdu dalo oslobađa se verifikacioni slot.
+
+Poništenje po ovom članu ne pretpostavlja neistinitu potvrdu i nije mera zbog povrede obaveze. Ono nastupa neaktivnošću u postupku, primenom ovog pravilnika i bez odluke organa Fondacije.
+
+Izjašnjenje dato po isteku roka ne otklanja nastupelo poništenje samo po sebi. Lice pogođeno poništenjem ima pravo prigovora, o kome odlučuje ovlašćeno lice Fondacije. Pravo prigovora postoji zato što poništenje nastupa automatskom primenom pravila, u smislu člana 38 Zakona o zaštiti podataka o ličnosti.
+
+Poništena potvrda može se ponoviti, a stvarnost roditelja može potvrditi i drugo lice, po opštim pravilima; ponovnom potvrdom POEN se evidentira iznova.
 
 Izjašnjenje kojim se postojanje deteta osporava zahteva obrazloženje; o njemu odlučuje Upravni odbor.
 
