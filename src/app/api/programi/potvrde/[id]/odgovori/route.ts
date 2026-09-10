@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { obavesti } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { labelPrograma } from "@/lib/protokol/programi";
+import { okoncajPrijavu } from "@/lib/protokol/program-prijava";
 
 // POST /api/programi/potvrde/[id]/odgovori
 // Telo: { potvrdi: boolean, obrazlozenje?: string }
@@ -80,18 +81,15 @@ export async function POST(
   }
 
   // Odbijanje — obara prijavu (tvrda blokada).
-  await prisma.$transaction(async (tx) => {
-    await tx.programPotvrda.update({
-      where: { id },
-      data: { status: "ODBIJENO", odgovorAt: new Date(), obrazlozenje },
-    });
-    await tx.programEnrollment.update({
-      where: { id: potvrda.enrollment.id },
-      data: {
-        status: "REJECTED",
-        rejectionReason: `Verifikator nije potvrdio ispunjenost uslova: ${obrazlozenje}`,
-      },
-    });
+  await prisma.programPotvrda.update({
+    where: { id },
+    data: { status: "ODBIJENO", odgovorAt: new Date(), obrazlozenje },
+  });
+  // Briše unete podatke i sklanja zahteve preostalim verifikatorima — postupka
+  // više nema, pa ni njihovi zahtevi nemaju svrhu. Vidi `okoncajPrijavu`.
+  await okoncajPrijavu(potvrda.enrollment.id, {
+    status: "REJECTED",
+    razlog: `Verifikator nije potvrdio ispunjenost uslova: ${obrazlozenje}`,
   });
 
   await obavesti(potvrda.enrollment.userId, {

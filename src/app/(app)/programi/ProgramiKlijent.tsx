@@ -37,6 +37,8 @@ interface Props {
   brojAktivnih: number;
   isVerified: boolean;
   imaPristupProgramima: boolean;
+  /** Koliko će ljudi biti zamoljeno da potvrdi — ide u tekst pristanka (čl. 4 st. 3). */
+  brojVerifikatora: number;
   emisioniKontekst: EmisioniKontekst;
 }
 
@@ -51,7 +53,7 @@ function useStatusBadge(): Record<EnrollmentStatus, { label: string; cls: string
 }
 
 
-export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, isVerified, imaPristupProgramima, emisioniKontekst }: Props) {
+export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, isVerified, imaPristupProgramima, brojVerifikatora, emisioniKontekst }: Props) {
   const locale = useLocale();
   const t = useTranslations("programi");
   const tc = useTranslations("common");
@@ -78,6 +80,19 @@ export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, is
   const onExpand = useCallback((type: string) => {
     setActiveProgram((prev) => (prev === type ? null : type));
   }, []);
+
+  // Povlačenje pristanka (čl. 4 st. 3). Potvrda je obavezna: radnja prekida
+  // postupak, gasi evidentiranje i BRIŠE unete podatke — ponovna prijava kreće
+  // iz početka, uključujući potvrdu svih verifikatora.
+  const povuci = useCallback(async (type: string) => {
+    if (!window.confirm(t("povuci_potvrda"))) return;
+    setLoading(true); setPoruka(null);
+    const res = await fetch(`/api/programi/${type}/povuci-pristanak`, { method: "POST" });
+    const data = await res.json().catch(() => ({}));
+    setLoading(false);
+    setPoruka({ text: res.ok ? t("povuci_uspeh") : (data.error ?? tc("greska_ucitavanja")), ok: res.ok, for: type });
+    if (res.ok) setTimeout(() => router.refresh(), 1200);
+  }, [t, tc, router]);
 
   const { opticaj, dnevniLimit, emitovanoAm, zahtevanoAm } = emisioniKontekst;
   const emitovanoPct = dnevniLimit > 0 && emitovanoAm !== null ? Math.min(100, Math.round((emitovanoAm / dnevniLimit) * 100)) : 0;
@@ -157,6 +172,8 @@ export default function ProgramiKlijent({ programi, pedAktivan, brojAktivnih, is
             expanded={activeProgram === p.type}
             onExpand={onExpand}
             onPrijavi={prijavi}
+            onPovuci={povuci}
+            brojVerifikatora={brojVerifikatora}
           />
         ))}
       </div>
@@ -200,7 +217,7 @@ function OperativniKartica({ aktivan }: { aktivan: boolean }) {
 // ── Kartica programa ───────────────────────────────────────────────────────────
 
 const ProgramKartica = memo(function ProgramKartica({
-  p, isVerified, imaPristupProgramima, loading, poruka, expanded, onExpand, onPrijavi,
+  p, isVerified, imaPristupProgramima, loading, poruka, expanded, onExpand, onPrijavi, onPovuci, brojVerifikatora,
 }: {
   p: ProgramInfo;
   isVerified: boolean;
@@ -210,6 +227,8 @@ const ProgramKartica = memo(function ProgramKartica({
   expanded: boolean;
   onExpand: (type: string) => void;
   onPrijavi: (type: string, meta?: Record<string, unknown>) => void;
+  onPovuci: (type: string) => void;
+  brojVerifikatora: number;
 }) {
   const locale = useLocale();
   const t = useTranslations("programi");
@@ -224,6 +243,7 @@ const ProgramKartica = memo(function ProgramKartica({
 
   const handleExpand = useCallback(() => onExpand(p.type), [onExpand, p.type]);
   const handlePrijavi = useCallback((meta?: Record<string, unknown>) => onPrijavi(p.type, meta), [onPrijavi, p.type]);
+  const handlePovuci = useCallback(() => onPovuci(p.type), [onPovuci, p.type]);
 
   return (
     <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
@@ -262,6 +282,14 @@ const ProgramKartica = memo(function ProgramKartica({
               {t("pokusaj_ponovo")}
             </button>
           )}
+          {/* Povlačenje pristanka — pravo iz čl. 4 st. 3, dostupno dok postupak
+              traje (PENDING) i dok se evidentira (ACTIVE). */}
+          {(enStatus === "PENDING" || enStatus === "ACTIVE") && (
+            <button onClick={handlePovuci} disabled={loading}
+              className="px-3 py-1.5 border border-kolo-border text-kolo-muted text-xs font-semibold rounded-xl hover:border-kolo-danger hover:text-kolo-danger transition-colors disabled:opacity-60">
+              {t("povuci_pristanak")}
+            </button>
+          )}
         </div>
       </div>
 
@@ -271,6 +299,7 @@ const ProgramKartica = memo(function ProgramKartica({
           <PrijavnaForma
             type={p.type}
             loading={loading}
+            brojVerifikatora={brojVerifikatora}
             onSubmit={handlePrijavi}
             onCancel={handleExpand}
           />
@@ -279,6 +308,12 @@ const ProgramKartica = memo(function ProgramKartica({
               {poruka.text}
             </p>
           )}
+        </div>
+      )}
+
+      {poruka && !expanded && (
+        <div className={`border-t border-kolo-border px-5 py-3 text-xs ${poruka.ok ? "text-kolo-green-700" : "text-kolo-danger"}`}>
+          {poruka.text}
         </div>
       )}
 
@@ -293,9 +328,10 @@ const ProgramKartica = memo(function ProgramKartica({
 
 // ── Forme za prijavu ───────────────────────────────────────────────────────────
 
-function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
+function PrijavnaForma({ type, loading, brojVerifikatora, onSubmit, onCancel }: {
   type: string;
   loading: boolean;
+  brojVerifikatora: number;
   onSubmit: (meta?: Record<string, unknown>) => void;
   onCancel: () => void;
 }) {
@@ -381,12 +417,16 @@ function PrijavnaForma({ type, loading, onSubmit, onCancel }: {
         </div>
       )}
 
-      {/* Pristanak — pravni osnov obrade je izričit pristanak (čl. 4). */}
+      {/* Pristanak — pravni osnov obrade posebnih kategorija podataka (čl. 4).
+          🔴 Tekst mora da imenuje ONO ŠTO SE ZAISTA DEŠAVA: koliko ljudi saznaje
+          za koji se program prijavljuješ i da zapis o evidentiranju POEN-a po tom
+          programu vide svi redovni članovi uz pseudonim. Pristanak koji ne
+          pokriva stvarno otkrivanje nije pristanak na tu obradu. */}
       <label className="flex items-start gap-2 pt-2 cursor-pointer">
         <input type="checkbox" checked={pristanak} onChange={(e) => setPristanak(e.target.checked)}
           className="mt-0.5 shrink-0" />
         <span className="text-xs text-kolo-muted">
-          {t("pristanak_tekst")}
+          {t("pristanak_tekst", { broj: brojVerifikatora })}
         </span>
       </label>
 

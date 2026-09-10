@@ -756,7 +756,7 @@
     "posebna_briga_datum_resenja": "Datum donošenja rešenja o invaliditetu",
     "posebna_briga_datum_isteka": "Datum isteka rešenja (opciono, ostavi prazno ako je trajno)",
     "posebna_briga_napomena2": "Evidentira se samo datum rešenja nadležnog organa, ne traži se broj rešenja, naziv organa, medicinska dokumentacija ni dijagnoza.",
-    "pristanak_tekst": "Pristajem da svi ljudi iz mog lanca budu zamoljeni da pod punom odgovornošću potvrde da ispunjavam uslov za ovaj program. Oni ne vide unete podatke. Prijavu odobrava Fondacija tek kada svi potvrde.",
+    "pristanak_tekst": "Pristajem da {broj} ljudi iz mog lanca bude zamoljeno da pod punom odgovornošću potvrdi da ispunjavam uslov za ovaj program. Oni saznaju o kom je programu reč — što može otkriti podatak o zdravlju, porodici ili godinama — ali ne vide unete podatke. Zapis o evidentiranju POEN-a po ovom programu vidljiv je svim redovnim članovima uz moj pseudonim. Prijavu odobrava Fondacija tek kada svi potvrde. Pristanak mogu povući u svakom trenutku.",
     "potvrde_naslov": "Zahtevi za potvrdu",
     "potvrde_opis": "Ljudi iz tvog lanca prijavili su se za socijalni program i naveli tebe. Potvrdi pod punom odgovornošću da osoba ispunjava uslov, ili obrazloži zašto ne možeš. Ne vidiš unete podatke prijave.",
     "potvrde_prazno": "Trenutno nemaš zahteva za potvrdu.",
@@ -769,7 +769,10 @@
     "potvrda_dugme_odbij": "Ne mogu da potvrdim",
     "potvrda_obrazlozenje_placeholder": "Obrazloženje (obavezno): zašto ne možeš da potvrdiš",
     "potvrda_nazad": "Nazad",
-    "potvrda_posalji_odbijanje": "Pošalji odbijanje"
+    "potvrda_posalji_odbijanje": "Pošalji odbijanje",
+    "povuci_pristanak": "Povuci pristanak",
+    "povuci_potvrda": "Povlačenjem pristanka postupak se prekida, evidentiranje POEN-a po ovom programu prestaje, a uneti podaci se brišu. Ponovna prijava kreće iz početka, uključujući potvrdu svih ljudi iz tvog lanca. Nastaviti?",
+    "povuci_uspeh": "Pristanak je povučen. Uneti podaci su obrisani."
   },
   "glasanje": {
     "naslov": "Glasanje",
@@ -948,7 +951,7 @@
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.4.9"
+      "ver": "4.5.0"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -956,11 +959,11 @@
     },
     "dpia": {
       "naslov": "DPIA. Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "4.4.9"
+      "ver": "4.5.0"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "4.4.9"
+      "ver": "4.5.0"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
@@ -994,13 +997,13 @@
     "meta_uslovi_title": "Uslovi korišćenja · KOLO",
     "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.4.3",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.4.9",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.0",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.4.9",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.5.0",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.4.9",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.5.0",
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.4.6",
     "meta_whitepaper_title": "Whitepaper · KOLO",
@@ -2698,7 +2701,13 @@
     "nabavka_poziv_naslov": "Ušao si u nabavku",
     "nabavka_poziv_tekst": "Nabavka „{dobro}”, tvoj deo košta {poen} POEN. Potvrdi izborom dana preuzimanja.",
     "nabavka_preuzeto_naslov": "Deo je preuzet",
-    "nabavka_preuzeto_tekst": "Preuzeo si svoj deo iz nabavke „{dobro}”. Poništeno je {poen} POEN."
+    "nabavka_preuzeto_tekst": "Preuzeo si svoj deo iz nabavke „{dobro}”. Poništeno je {poen} POEN.",
+    "zahtev_potvrda_spoljni_naslov": "Nov zahtev čeka tvoj odgovor",
+    "zahtev_potvrda_spoljni_tekst": "Neko te je naveo kao člana iz svog lanca. Otvori KOLO da vidiš zahtev.",
+    "program_pristanak_povucen_naslov": "Pristanak povučen",
+    "program_pristanak_povucen_tekst": "Povukao si pristanak za program „{program}“. Postupak je prekinut, evidentiranje je prestalo, a uneti podaci su obrisani.",
+    "program_pristanak_povucen_spoljni_naslov": "Pristanak povučen",
+    "program_pristanak_povucen_spoljni_tekst": "Povlačenje pristanka je zabeleženo. Detalji su u aplikaciji."
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",

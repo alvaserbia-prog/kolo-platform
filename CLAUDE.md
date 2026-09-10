@@ -83,7 +83,7 @@ pri svakom bumpu obavezno proveriti da li neki akt upućuje na akt koji je prome
 šifru, i ta upućivanja ispraviti. Provera je jedna komanda:
 
 ```
-grep -rn "v4\.4\.[0-9]\|verzija 4\.4\.[0-9]" "dokumentacija 4.1/"
+grep -rn "v4\.[45]\.[0-9]\|verzija 4\.[45]\.[0-9]" "dokumentacija 4.1/"
 ```
 
 Upućivanja na akte koji se NISU menjali ostaju na staroj šifri — to nije previd nego
@@ -100,6 +100,23 @@ se povlače na verziju 5.0.** Mešovite šifre 4.4.x su radno stanje dok traje o
 rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se i
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
+
+**AŽURIRANO 2026-09-10 (dvadeset prvi put):** na **4.5.0** idu **ČETIRI akta** —
+Pravilnik o programima podrške (sa 4.4.1), Politika privatnosti (sa 4.4.9), DPIA
+(sa 4.4.9) i Registar radnji obrade (sa 4.4.9). Ostalih trinaest ostaje gde jeste.
+Povod je **analiza rizika R-13** (socijalni programi otkrivaju posebne kategorije
+podataka). Sadržinski, vidi sekciju „Socijalni program: pristanak sada pokriva ono
+što se zaista dešava" ispod.
+
+🟡 **Zašto 4.5.0, a ne 4.4.10:** dvocifren treći član pokvario bi i imena fajlova
+(`politika_4_4_10.md`) i sve zatečene `grep` provere verzija, koje traže jednu cifru.
+Ovo NIJE bump celog seta na 5.0 — to i dalje ostaje poslednji potez, posle poslednjeg
+rizika iz registra.
+
+🟢 **Unakrsna upućivanja u ta četiri akta su ispravljena** (DPIA i Registar → 4.5.0
+za Politiku, Registar i programe podrške); upućivanja na akte koji se nisu menjali
+ostaju na svojoj šifri. 🟡 Usput je ispravljena zatečena greška u hu DPIA, koja je
+programe podrške vodila na v4.4.6 — ostatak blanket zamene iz bumpa R-09.
 
 **AŽURIRANO 2026-09-09 (dvadeseti put):** na **4.4.9** idu **TRI akta** — Politika
 privatnosti (sa 4.4.8), DPIA (sa 4.4.8) i Registar radnji obrade (sa 4.4.8).
@@ -1104,6 +1121,104 @@ već postoji i dovoljan je).
 jasnije **besplatno**, to je korisnik slabije zaštićen potrošačkim pravom; što bismo
 mu više dali prava, to davanje više liči na prodaju. Reklamacija je namerno
 izostavljena i to ovde postaje **deo odbrane**, ne samo praznina.
+
+### Socijalni program: pristanak sada pokriva ono što se zaista dešava (2026-09-10)
+
+Odluke uz analizu rizika **R-13** (socijalni programi otkrivaju posebne kategorije
+podataka). Set je ovim potezom dignut na **4.5.0** — na njega idu **ČETIRI akta**:
+Pravilnik o programima podrške (sa 4.4.1), Politika privatnosti (sa 4.4.9), DPIA
+(sa 4.4.9) i Registar radnji obrade (sa 4.4.9). Ostalih trinaest ostaje gde jeste.
+🟡 Naredna slobodna šifra posle 4.4.9 uzeta je kao **4.5.0**, a ne 4.4.10 — dvocifren
+treći član bi pokvario i imena fajlova i sve zatečene `grep` provere verzija.
+
+🔴 **Tri nalaza, sva tri istog oblika: akt je opisivao uže stanje nego što sistem
+radi, a DPIA je taj opis brojala kao MERU.** Isti kvar kao kod R16 (R-11) i kod
+prekograničnog prenosa (R-12); ovde se pojavio na tri mesta odjednom.
+1. **„Obaveštavanje isključivo unutar platforme" nije bilo tačno.** Stajalo je u
+   Pravilniku čl. 4, u Politici 4.6, među merama uz R11 u DPIA i u merama radnje 10
+   Registra — a `obavesti` je isti tekst slao i **mejlom (Resend, SAD)** i **push-om**,
+   koji stiže na zaključan ekran telefona. Naziv programa uz pseudonim time je izlazio
+   iz Platforme na dva kanala.
+2. **Povlačenje pristanka nije postojalo u kodu.** Pravo je propisano u čl. 4 st. 3,
+   dvaput u Politici 4.6 i vođeno je kao **mera u DPIA**, a jedini izlaz iz programa
+   bio je gašenje celog naloga. Pristanak je pravni osnov obrade posebnih kategorija
+   (čl. 17 st. 2 t. 1 ZZPL-a); osnov koji se ne može opozvati nije pristanak.
+3. **Rok čuvanja je visio o okidaču koji se ne pali.** Registar je vodio rok kao „do
+   povlačenja pristanka" — pa je onaj ko je odbijen, kome je istekla reverifikacija
+   ili je jednostavno otišao zadržavao `metadata` (datumi rođenja dece, datum rešenja
+   o invaliditetu, naziv ustanove) **zauvek**.
+
+🔴 **Javnost evidencije se NE skriva — odluka vlasnika.** Prvi predlog je bio da opis
+transakcije izgubi naziv programa (`Program Podrška majkama` → neutralan tekst);
+odbijen: *„mora tako jer je transparentna evidencija"* i *„mora biti osnov programa i
+tip jer može i da se kombinuju različiti programi"*. Zapis se zato ne dira — menja se
+to što ga akti sada **imenuju**. Stanje koje se opisuje: `/api/javno/feed` vraća
+`description` emisije svakom prijavljenom korisniku, a pseudonim strana samo
+verifikovanom; `/profil/[id]` je za neverifikovanog zatvoren (403). Dakle **naziv
+programa uz pseudonim vidi svaki verifikovan korisnik, trajno**.
+🔴 Zato **R11 ide sa 2 × 3 = 6 na 3 × 3 = 9** — i dalje srednji (skala 5–9), pa se
+zbir rizika i zaključak o čl. 55 ZZPL-a ne menjaju. Verovatnoća raste jer krug
+primalaca više nije ograničen na verifikatore. Uz ocenu ide i **prihvaćena posledica**
+u tački 5.6: naziv programa ostaje vidljiv i posle prestanka prijave, jer se
+evidentiran POEN ne poništava; umanjenje je u tome što se pristanak daje **pošto je
+ta posledica saopštena**, zajedno sa jedinom alternativom — da se korisnik ne prijavi.
+
+**Šta je izmenjeno u aktima:**
+- **Pravilnik o programima podrške čl. 4** — pristanak se daje pre nego što se od
+  bilo koga zatraži potvrda i izričito navodi **koliko će lica biti zamoljeno**, da
+  ta lica saznaju o kom je programu reč, da ne vide unete podatke i da je zapis o
+  evidentiranom POEN-u **vidljiv svim verifikovanim korisnicima uz pseudonim**; nov
+  stav o kanalu (poruka van Platforme ne sadrži ni program ni pseudonim); nov stav o
+  povlačenju (bez razloga, radnjom uz sam program, uz brisanje unetih podataka);
+  dopunjen završni stav o **brisanju unetih podataka pri svakom prestanku prijave**.
+- **Politika 4.6** — isto, plus nov pasus **„Zapis o evidentiranom POEN-u nije
+  skriven"** sa razlogom (proverljivost: ukupan broj POEN-a je javan, zbir zapisa u
+  Protokolu je nula) i sa jedinom alternativom napisanom otvoreno.
+- **DPIA** — R11 preimenovan i preocenjen, tačka 5.6 prepisana (dodate mere:
+  povlačenje kao sprovedena radnja, brisanje pri prestanku prijave, zatvaranje
+  postupka) + pasus o prihvaćenoj posledici.
+- **Registar, radnja 10** — primaoci dopunjeni javnom evidencijom, pravni osnov
+  sadržinom pristanka, **rok čuvanja prepisan** (podaci žive dok prijava važi), mere
+  usklađene sa stvarnim kanalom.
+
+**Kod:**
+- 🔴 **`posaljiNotifikaciju` dobija `spoljni`** (`notifikacije.ts`) — zaseban,
+  neutralan tekst za **mejl i push**, dok zvonce nosi pun tekst. Push je namerno
+  pokriven uz mejl: zaključan ekran telefona je jednako kanal van Platforme.
+  Koriste ga zahtev verifikatoru i obaveštenje o povlačenju pristanka.
+- **`POST /api/programi/[type]/povuci-pristanak`** + dugme uz karticu programa
+  (PENDING i ACTIVE), uz `window.confirm` koji kaže da se uneti podaci brišu.
+- 🔴 **`okoncajPrijavu`** (`protokol/program-prijava.ts`) — jedno mesto za sve ishode
+  koji prijavu skidaju sa evidentiranja: postavlja status, **briše `metadata`** i
+  zatvara postupak potvrda. Zovu ga admin odbijanje, odbijanje verifikatora, cron
+  revizije i povlačenje pristanka. Odobrenje ide samo kroz `zatvoriPostupakPotvrda`
+  — tamo `metadata` MORA da ostane, iz nje se računa dnevni iznos.
+- 🔴 **`zatvoriPostupakPotvrda`** (`program-potvrda.ts`) — briše nedovršene (CEKA)
+  potvrde i **obaveštenja** o njima, po `parametri.enrollmentId` (zato je taj ključ
+  dopisan u parametre; ne ulazi ni u jednu rečenicu). Odgovorene potvrde ostaju —
+  one su trag ko je šta potvrdio pod punom odgovornošću.
+  🟡 Obaveštenja poslata pre ovog seta nemaju `enrollmentId` i ostaju u zvoncetu;
+  zato oba spiska zahteva (`/api/programi/potvrde` i SSR stranica) sada filtriraju i
+  po `enrollment: { status: "PENDING" }`.
+- **Tekst pristanka** (`programi.pristanak_tekst`, pet jezika) prima `{broj}` —
+  stvarni broj verifikatora, koji `page.tsx` računa preko `dohvatiVerifikatore`.
+- **Brana:** `__tests__/programi-kanal-izvor.test.ts` — gleda IZVOR (da push/mejl idu
+  `spoljni` tekstom, da neutralan blok ne sadrži `labelPrograma` ni `pseudonim`, da
+  `posaljiAdminAlert` ne sklapa naziv programa, da sva tri ishoda zovu
+  `okoncajPrijavu`) i tekst pristanka na svih pet jezika. Odredbe akata zaključane su
+  u `pravni-dokumenti.test.ts` na sr/en/ru.
+
+🟡 **Šta NIJE dirano i zašto:** opis transakcije (odluka vlasnika, gore);
+obaveštenja koja idu **samom podnosiocu** o odobrenju i odbijanju — ona i dalje nose
+naziv programa u mejlu, jer je to njegov sopstveni podatak koji stiže na njegovu
+adresu, a tvrdnja o „isključivo unutar platforme" u aktima se odnosi samo na
+**verifikatore**. Obaveštenje o **povlačenju** je ipak neutralno spolja, jer ga
+korisnik u tom trenutku ionako gleda u aplikaciji.
+
+🟡 **Usput ispravljena zatečena greška:** hu DPIA je u tački 8.1 upućivao na
+`támogatási programokról szóló szabályzattal (v4.4.6)` — programi podrške nikad nisu
+bili 4.4.6, to je ostatak blanket zamene pri bumpu R-09. Isto upozorenje kao ranije:
+**ne raditi blanket zamenu verzija u aktima.**
 
 ### Prekogranični prenos: hosting i baza su u EU, akti su to prećutali (2026-09-09)
 
@@ -2295,6 +2410,7 @@ Do ove izmene Fondacija **nije imala nijednu polugu nad tuđim sadržajem** osim
 - 🔴 **Socijalni program traži indeks ≥ 10% — jednu primljenu potvrdu (od seta 4.3.1, 2026-08-18).** Do tada je čl. 4 Pravilnika o programima podrške tražio **pun indeks (100%)**, pa su prijavu mogli da podnesu samo nalozi sa svih deset potvrda; u kodu je to bio zaseban `MAX_INDEKS` gejt u `POST /api/programi/[type]/prijava`, iznad već postojećeg `imaFunkcionalniPristup`. Taj gejt je uklonjen — prag sada drži jedno mesto. Isto važi i za obustavu: `razlogObustaveProgram` (`programi.ts`, cron `/api/cron/programi-revizija`) gasi ACTIVE prijavu tek kad indeks padne **ispod 10%**, ne ispod 100%; ranije je jedna poništena potvrda gasila program čoveku koji uslov i dalje ispunjava. UI prop se zove `imaPristupProgramima` (bio `imaPunIndeks`).
 - **Ostatak čl. 4 je netaknut:** izričit pristanak podnosioca i potvrda SVIH njegovih verifikatora pod punom odgovornošću, bez uvida u unete podatke; Fondacija ne odobrava dok svi ne potvrde. Copy (`programi.nepun_indeks`, `programi.pristanak_tekst`, 5 jezika) više ne pominje „svih deset" — broj verifikatora zavisi od indeksa.
 - Dnevni limit (10% opticaja), proporcionalno smanjenje pri prekoračenju.
+- 🔴 **Povlačenje pristanka postoji od 2026-09-10** (`POST /api/programi/[type]/povuci-pristanak`, dugme uz karticu programa) — pravo iz čl. 4 st. 3 koje je do tada stajalo u tri akta a nije postojalo u kodu. Vidi „Socijalni program: pristanak sada pokriva ono što se zaista dešava".
 - 🔴 **Unete podatke prijave vidi i odluku donosi ISKLJUČIVO SUPERADMIN (2026-09-07).** DPIA 5.6 kaže da su uneti podaci „dostupni isključivo licu koje obrađuje prijavu u Fondaciji", a do ove izmene ih je video svaki admin — tekst mere bio je **uži od primene**. Sada `GET /api/admin/programi` i SSR u `admin/page.tsx` šalju `metadata` samo superadminu, a rute `enrollments/[id]/{odobri,odbij}` traže `jeSuperadmin`. Odluka i uvid idu zajedno: odlučivanje bez uvida bilo bi odlučivanje na slepo. Običan admin vidi pseudonim, program i datum, uz napomenu `admin.programi_samo_superadmin`. Isti obrazac kao revizijski dnevnik i nadzor.
 - 🟢 **Posebne kategorije se čuvaju minimalno (provereno 2026-09-07):** `buildMetadata` upisuje samo datume rođenja dece **bez imena**, datum rođenja, **datum rešenja i opcioni datum isteka** bez broja, organa i dijagnoze, i naziv ustanove. Raniji nalaz da se čuva `dijagnoza` je **zastareo i netačan** (ispravljen u `docs/analiza-kod-vs-pravilnici.md`). Enkripcije na nivou aplikacije nema, ali je DPIA ni ne obećava — tačka 5.1 govori o enkripciji **na nivou hosting infrastrukture**.
 

@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { obavesti } from "@/lib/notifikacije";
 import { labelPrograma, danaDoReverifikacije } from "@/lib/protokol/programi";
+import { zatvoriPostupakPotvrda } from "@/lib/protokol/program-potvrda";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -60,6 +61,10 @@ export async function POST(
       ...(nextReverifikacija ? { nextReverifikacija } : {}),
     },
   });
+
+  // Postupak je okončan — zahtevi verifikatorima nemaju više svrhu. `metadata`
+  // se ovde NE briše: iz nje se računa dnevni iznos dok program traje.
+  await zatvoriPostupakPotvrda(id);
 
   await logAdminAkcija(session.user.id, "PROGRAM_PRIJAVA_ODOBRENA", enrollment.userId, labelPrograma(enrollment.type));
 

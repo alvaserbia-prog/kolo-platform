@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { obavesti } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { labelPrograma, razlogObustaveProgram } from "@/lib/protokol/programi";
+import { okoncajPrijavu } from "@/lib/protokol/program-prijava";
 import { ProgramType } from "@/generated/prisma/client";
 
 /**
@@ -57,14 +58,12 @@ export async function GET(req: NextRequest) {
     if (razlogObustave == null) continue;
     const istekla = razlogObustave === "revizija";
 
-    await prisma.programEnrollment.update({
-      where: { id: en.id },
-      data: {
-        status: "INACTIVE",
-        rejectionReason: istekla
-          ? "Istekao rok reverifikacije statusa (čl. 12); status nije ponovo potvrđen."
-          : "Indeks stvarnosti pao ispod 10% — osnov za program više ne važi.",
-      },
+    // Briše i unete podatke — osnov (pristanak uz važeći status) je prestao.
+    await okoncajPrijavu(en.id, {
+      status: "INACTIVE",
+      razlog: istekla
+        ? "Istekao rok reverifikacije statusa (čl. 12); status nije ponovo potvrđen."
+        : "Indeks stvarnosti pao ispod 10% — osnov za program više ne važi.",
     });
 
     if (istekla) istekloRevizija++;

@@ -50,9 +50,13 @@ Pravo na program ostvaruje verificirani korisnik s indeksom stvarnosti od najman
 
 Prije odlučivanja Zaklade ispunjenost uvjeta potvrđuju svi verifikatori podnositelja. Svaki verifikator, pod punom odgovornošću i na temelju neposrednog osobnog poznanstva s podnositeljem, potvrđuje da podnositelj ispunjava uvjet programa ili odbija potvrdu uz obvezno obrazloženje. Verifikatori nemaju uvid u podatke koje je podnositelj unio — potvrđuju na temelju vlastita saznanja. Zaklada može odobriti prijavu tek kada svi verifikatori potvrde; izostanak ili odbijanje makar jednog verifikatora sprječava odobravanje. Taj mehanizam štiti integritet programa od neistinitih prijava (antimalverzacija).
 
-Prijava i traženje potvrde od verifikatora obavljaju se isključivo uz izričitu privolu podnositelja. Privolom podnositelj prihvaća da njegovi verifikatori budu obaviješteni da se prijavio za određeni program i zamoljeni da potvrde ispunjenost uvjeta; podatak o programu za koji se prijavio može verifikatorima otkriti pripadnost posebnoj kategoriji podataka. Privola se može povući u svakom trenutku, s posljedicom prestanka postupka odnosno automatskog evidentiranja POEN-a.
+Prijava i traženje potvrde od verifikatora obavljaju se isključivo uz izričitu privolu podnositelja. Privola se daje prije podnošenja prijave i prije nego što se od bilo koga zatraži potvrda, a u njoj se izričito navodi: koliko će osoba biti zamoljeno da potvrdi; da te osobe saznaju o kojem je programu riječ i da im taj podatak može otkriti pripadnost podnositelja posebnoj kategoriji podataka; da nemaju uvid u unesene podatke; i da je zapis o evidentiranom POEN-u po programu, zajedno s nazivom programa, vidljiv uz pseudonim podnositelja svim verificiranim korisnicima.
 
-Verifikacija statusa predstavlja obradu posebnih kategorija osobnih podataka; pravni je temelj obrade izričita privola korisnika. Uneseni podaci nisu javni i dostupni su isključivo osobi koja obrađuje prijavu u Zakladi — ne i verifikatorima.
+Verifikatori se o zahtjevu za potvrdu obavješćuju isključivo unutar Platforme. U poruci koju Platforma šalje elektroničkom poštom ili na uređaj korisnika ne navode se ni naziv programa ni pseudonim podnositelja.
+
+Privola se može povući u svakom trenutku, bez navođenja razloga. Povlačenjem se postupak prekida, automatsko evidentiranje POEN-a prestaje, a podaci uneseni u prijavu se brišu; POEN evidentiran do tog trenutka ne dira se. Radnja povlačenja dostupna je korisniku u Platformi, uz sam program.
+
+Verifikacija statusa predstavlja obradu posebnih kategorija osobnih podataka; pravni je temelj obrade izričita privola korisnika. Uneseni podaci nisu javni i dostupni su isključivo osobi koja obrađuje prijavu u Zakladi — ne i verifikatorima. Uneseni podaci brišu se kada prijava prestane vrijediti — odbijanjem, obustavom iz članka 12., povlačenjem privole ili prestankom svojstva korisnika. Ponovna prijava zahtijeva ponovni unos podataka i ponovnu potvrdu svih verifikatora.
 
 ### Članak 5.
 

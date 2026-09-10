@@ -749,7 +749,7 @@
     "posebna_briga_datum_resenja": "A fogyatékosságot megállapító határozat kelte",
     "posebna_briga_datum_isteka": "A határozat lejárati dátuma (nem kötelező — hagyd üresen, ha végleges)",
     "posebna_briga_napomena2": "Csak az illetékes hatóság határozatának keltét rögzítjük — sem a határozat száma, sem a hatóság neve, sem orvosi dokumentáció vagy diagnózis nem szükséges.",
-    "pristanak_tekst": "Hozzájárulok ahhoz, hogy a láncomban lévő valamennyi személyt felkérjék, hogy teljes felelősség mellett erősítse meg, hogy megfelelek e program feltételének. Ők nem látják a megadott adatokat. A kérelmet az Alapítvány csak akkor hagyja jóvá, ha mindannyian megerősítették.",
+    "pristanak_tekst": "Hozzájárulok, hogy {broj} embert a láncomból megkérjenek, hogy teljes felelősséggel megerősítse: megfelelek e program feltételének. Megtudják, melyik programról van szó — ami elárulhat egészségre, családra vagy életkorra vonatkozó adatot —, de a megadott adatokat nem látják. Az e program alapján jóváírt POEN bejegyzése minden rendes tag számára látható az álnevem mellett. Az Alapítvány csak akkor hagyja jóvá a jelentkezést, ha mindenki megerősítette. A hozzájárulásomat bármikor visszavonhatom.",
     "potvrde_naslov": "Megerősítési kérelmek",
     "potvrde_opis": "Azok, akiket megerősítettél, szociális programra jelentkeztek és téged neveztek meg. Erősítsd meg teljes felelősséggel, hogy az illető megfelel a feltételnek, vagy indokold, miért nem tudod. A beírt adatokat nem látod.",
     "potvrde_prazno": "Jelenleg nincs megerősítési kérésed.",
@@ -762,7 +762,10 @@
     "potvrda_dugme_odbij": "Nem tudom megerősíteni",
     "potvrda_obrazlozenje_placeholder": "Indoklás (kötelező) — miért nem tudod megerősíteni",
     "potvrda_nazad": "Vissza",
-    "potvrda_posalji_odbijanje": "Elutasítás küldése"
+    "potvrda_posalji_odbijanje": "Elutasítás küldése",
+    "povuci_pristanak": "Hozzájárulás visszavonása",
+    "povuci_potvrda": "A hozzájárulás visszavonása megszakítja az eljárást, megszünteti az e program szerinti POEN-jóváírást, és törli a megadott adatokat. Az újbóli jelentkezés elölről kezdődik, beleértve a láncod minden tagjának megerősítését is. Folytatod?",
+    "povuci_uspeh": "A hozzájárulást visszavontuk. A megadott adatokat töröltük."
   },
   "glasanje": {
     "naslov": "Szavazás",
@@ -941,7 +944,7 @@
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.4.9"
+      "ver": "4.5.0"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -949,11 +952,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.4.9"
+      "ver": "4.5.0"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.4.9"
+      "ver": "4.5.0"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
@@ -987,13 +990,13 @@
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
     "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.4.3-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.4.9-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.0-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.4.9-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.5.0-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.4.9-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.0-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.6-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
@@ -2691,7 +2694,13 @@
     "nabavka_poziv_naslov": "Bekerültél a beszerzésbe",
     "nabavka_poziv_tekst": "„{dobro}” beszerzés — a részed {poen} POEN-be kerül. Erősítsd meg az átvételi nap kiválasztásával.",
     "nabavka_preuzeto_naslov": "A rész átvéve",
-    "nabavka_preuzeto_tekst": "Átvetted a részedet a „{dobro}” beszerzésből. {poen} POEN érvénytelenítésre került."
+    "nabavka_preuzeto_tekst": "Átvetted a részedet a „{dobro}” beszerzésből. {poen} POEN érvénytelenítésre került.",
+    "zahtev_potvrda_spoljni_naslov": "Új kérés vár a válaszodra",
+    "zahtev_potvrda_spoljni_tekst": "Valaki megnevezett téged a láncából. Nyisd meg a KOLO-t, hogy lásd a kérést.",
+    "program_pristanak_povucen_naslov": "Hozzájárulás visszavonva",
+    "program_pristanak_povucen_tekst": "Visszavontad a hozzájárulásodat a(z) „{program}” programhoz. Az eljárás megszakadt, a jóváírás megszűnt, a megadott adatokat pedig töröltük.",
+    "program_pristanak_povucen_spoljni_naslov": "Hozzájárulás visszavonva",
+    "program_pristanak_povucen_spoljni_tekst": "A hozzájárulás visszavonását rögzítettük. A részletek az alkalmazásban találhatók."
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",

@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { obavesti } from "@/lib/notifikacije";
 import { labelPrograma } from "@/lib/protokol/programi";
+import { okoncajPrijavu } from "@/lib/protokol/program-prijava";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
@@ -28,10 +29,8 @@ export async function POST(
   if (enrollment.status !== "PENDING")
     return await greska("Prijava nije na čekanju.", 400);
 
-  await prisma.programEnrollment.update({
-    where: { id },
-    data: { status: "REJECTED", rejectionReason: razlog || null },
-  });
+  // Briše i unete podatke i zatvara postupak potvrda — vidi `okoncajPrijavu`.
+  await okoncajPrijavu(id, { status: "REJECTED", razlog: razlog || null });
 
   await logAdminAkcija(session.user.id, "PROGRAM_PRIJAVA_ODBIJENA", enrollment.userId,
     `${labelPrograma(enrollment.type)}${razlog ? ": " + razlog : ""}`);

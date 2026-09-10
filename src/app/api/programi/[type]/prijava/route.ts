@@ -7,7 +7,12 @@ import { ProgramType } from "@/generated/prisma/client";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { obavesti } from "@/lib/notifikacije";
 import { imaFunkcionalniPristup } from "@/lib/protokol/pristup";
-import { dohvatiVerifikatore, kreirajPotvrde } from "@/lib/protokol/program-potvrda";
+import {
+  dohvatiVerifikatore,
+  kreirajPotvrde,
+  zatvoriPostupakPotvrda,
+  KLJUC_ZAHTEV_POTVRDA,
+} from "@/lib/protokol/program-potvrda";
 import { labelPrograma } from "@/lib/protokol/programi";
 
 // PED (operativni doprinos) ne ide kroz enrollment — prijava se vrši na konkretan
@@ -72,8 +77,12 @@ export async function POST(
   if (verifikatori.length === 0)
     return await greska("Nemate verifikatore koji mogu da potvrde prijavu.", 403);
 
+  // Ponovna prijava: raščisti zatečen postupak (nedovršene potvrde + obaveštenja
+  // ranijeg kruga), da verifikatorima ne ostanu dva zahteva za istu prijavu.
+  if (mozeReapply && vec) await zatvoriPostupakPotvrda(vec.id);
+
   // Kreiranje/obnova prijave + potvrda za verifikatore — atomarno.
-  await prisma.$transaction(async (tx) => {
+  const enrollmentId = await prisma.$transaction(async (tx) => {
     let enrollmentId: string;
     if (mozeReapply && vec) {
       const enr = await tx.programEnrollment.update({
@@ -97,23 +106,38 @@ export async function POST(
       enrollmentId = enr.id;
     }
     await kreirajPotvrde(tx, enrollmentId, verifikatori);
+    return enrollmentId;
   });
 
-  // Notifikacija svakom verifikatoru. 🔴 Komentar je do 4.4.9 tvrdio „jedini kanal
-  // — nema email/push"; to nije tačno: `obavesti` bez `email: false` šalje i mejl
-  // (Resend) i push. Naziv programa time stiže verifikatoru i elektronskom poštom.
-  // Ostaje namerno: verifikator po čl. 4 Pravilnika o programima podrške potvrđuje
-  // baš taj program, pa mora da zna koji je — to je rizik R11 iz DPIA, prihvaćen i
-  // opisan. Ono što je uklonjeno je naziv programa u kanalu upozorenja FONDACIJI,
-  // koji tu informaciju nikome nije ni davao (vidi ispod).
+  // Notifikacija svakom verifikatoru.
+  //
+  // 🔴 Naziv programa ide ISKLJUČIVO u zvonce, unutar Platforme. Mejl (Resend) i
+  // push dobijaju neutralan tekst kroz `spoljni` — bez pseudonima i bez programa.
+  // Do 4.4.9 su akti tvrdili da se obaveštavanje verifikatora vrši „isključivo
+  // unutar platforme (in-app notifikacija)", a `obavesti` je isti tekst slao i
+  // mejlom i push-om; tvrdnja je od ovog seta istinita. Verifikator po čl. 4
+  // Pravilnika o programima podrške potvrđuje baš taj program, pa naziv mora da
+  // vidi — ali u aplikaciji, ne u tuđem sandučetu i ne na zaključanom ekranu.
+  //
+  // `enrollmentId` u parametrima ne ulazi ni u jednu rečenicu — nosi ga da bi
+  // `zatvoriPostupakPotvrda` mogla da obriše obaveštenje kad se postupak okonča.
   for (const verifikatorId of verifikatori) {
     await obavesti(verifikatorId, {
       tip: "info",
-      kljuc: "notifikacije.zahtev_potvrda_programa",
-      parametri: { pseudonim: korisnik.pseudonim, program: labelPrograma(programType) },
+      kljuc: KLJUC_ZAHTEV_POTVRDA,
+      parametri: {
+        pseudonim: korisnik.pseudonim,
+        program: labelPrograma(programType),
+        enrollmentId,
+      },
       naslov: "Zahtev za potvrdu socijalnog programa",
       tekst: `Korisnik ${korisnik.pseudonim} se prijavio za program „${labelPrograma(programType)}" i navodi tebe kao verifikatora. Potvrdi ispunjenost uslova pod punom odgovornošću, ili obrazloži odbijanje.`,
       link: "/programi/potvrde",
+      spoljni: {
+        kljuc: "notifikacije.zahtev_potvrda_spoljni",
+        naslov: "Nov zahtev čeka tvoj odgovor",
+        tekst: "Neko te je naveo kao osobu koja ga poznaje. Otvori KOLO da vidiš zahtev.",
+      },
     });
   }
 

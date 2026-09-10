@@ -29,10 +29,10 @@ const AKTI = [
   // reference na verziju koja kao dokument više ne postoji.
   "Pravilnik_4_4_6.md",
   "dokaz_stvarnosti_4_4_1.md",
-  "DPIA_4_4_9.md",
-  "radnje_obrade_4_4_9.md",
+  "DPIA_4_5_0.md",
+  "radnje_obrade_4_5_0.md",
   "uslovi_koriscenja_4_4_3.md",
-  "politika_4_4_9.md",
+  "politika_4_5_0.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_6.md",
   "rizici_4_4_6.md",
@@ -41,7 +41,7 @@ const AKTI = [
   "operativni_4_4_4.md",
   "osnivacki_4_4_5.md",
   "gornje_kolo_4_4_6.md",
-  "programi_podrske_4_4_1.md",
+  "programi_podrske_4_5_0.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce_dece_4_4_8.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
@@ -135,7 +135,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_4_9.md": {
+  "radnje_obrade_4_5_0.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16"],
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16"],
@@ -150,7 +150,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // (`vercel.json` → regions: fra1, Neon endpoint u EU). Ako se region ikad vrati u
   // SAD, ocena i mere iz 5.13 postaju netačne — zato se traže doslovno, uz nov zbir
   // srednjih i niskih rizika.
-  "DPIA_4_4_9.md": {
+  "DPIA_4_5_0.md": {
     sr: [
       "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
       "Pet rizika je na srednjem nivou (R1, R2, R11, R13, R16)",
@@ -159,6 +159,13 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Mere za prekogranični prenos",
       "region Frankfurt",
       "najmanje jednom godišnje",
+      // 4.5.0 (R-13) — R11 je prerastao krug verifikatora: isti podatak nosi i javan
+      // zapis o evidentiranom POEN-u, pa verovatnoća ide sa 2 na 3 (ocena 9, i dalje
+      // srednji). Traži se i prihvaćena posledica — bez nje ocena ponovo počiva na
+      // opisu užem od sistema, što je isti kvar koji je R-11 ispravio kod R16.
+      "| 3 | 3 | 9 |",
+      "Prihvaćena posledica javnosti evidencije",
+      "Zatvaranje postupka",
     ],
     en: [
       "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
@@ -168,6 +175,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Measures for Cross-Border Transfer",
       "Frankfurt region",
       "at least once a year",
+      "| 3 | 3 | 9 |",
+      "Accepted consequence of the ledger's publicity",
+      "Closing the procedure",
     ],
     ru: [
       "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
@@ -177,6 +187,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Меры для трансграничной передачи",
       "регион Франкфурт",
       "не реже одного раза в год",
+      "| 3 | 3 | 9 |",
+      "Принятое следствие публичности реестра",
+      "Закрытие процедуры",
     ],
   },
   // 4.4.1 — izborno glasanje. Čl. 8 i 9 su pisani za dvočlani izbor („za"/„protiv");
@@ -561,7 +574,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "может удалить её сам в любой момент",
     ],
   },
-  "politika_4_4_9.md": {
+  "politika_4_5_0.md": {
     sr: [
       "nije pristanak za obrade čiji je pravni osnov pristanak",
       // 4.4.8 — Politika je do tada opisivala razdoblje pre pristanka uže nego
@@ -576,6 +589,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "region Frankfurt",
       "najmanje jednom godišnje",
       "Telegram Messenger Inc.",
+      // 4.5.0 (R-13) — javnost zapisa se ne prećutkuje. Naziv programa uz pseudonim
+      // vidi svaki verifikovan korisnik, trajno; Politika je do tada opisivala samo
+      // krug verifikatora. Uz to: povlačenje pristanka i brisanje unetih podataka.
+      "Zapis o evidentiranom POEN-u nije skriven",
+      "jedina mogućnost je da se na program ne prijavite",
+      "podaci koje ste uneli se brišu",
     ],
     en: [
       "is not consent for processing whose legal basis is consent",
@@ -584,6 +603,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Frankfurt region",
       "at least once a year",
       "Telegram Messenger Inc.",
+      "The record of POEN recorded is not hidden",
+      "the only option is not to apply for the program",
+      "deletes the data you entered",
     ],
     ru: [
       "не является согласием на обработку",
@@ -592,16 +614,46 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "регион Франкфурт",
       "не реже одного раза в год",
       "Telegram Messenger Inc.",
+      "Запись об учтённых ПОЕН не скрыта",
+      "единственная возможность — не подавать заявку на программу",
+      "внесённые Вами данные удаляются",
     ],
   },
   // 4.3.1 — prag za socijalni program je funkcionalnih 10% (jedna primljena
   // potvrda), ne pun indeks od 100%. Kod prag drži u konstanti
   // FUNKCIONALNI_PRAG_INDEKSA i propušta prijavu na 10%; da akt tiho sklizne
   // nazad na pun indeks, norma i primena bi se razišle bez ijednog traga.
-  "programi_podrske_4_4_1.md": {
-    sr: ["indeksom stvarnosti od najmanje 10%"],
-    en: ["reality index of at least 10%"],
-    ru: ["индексом реальности не менее 10 %"],
+  // 4.5.0 (R-13) — pristanak mora da imenuje ono što se zaista dešava. Do tada je
+  // akt tvrdio da se verifikatori obaveštavaju „isključivo unutar platforme", a kod
+  // je isti tekst slao i mejlom i push-om; pravo na povlačenje pristanka postojalo
+  // je u normi a ne u kodu; a zapis o evidentiranom POEN-u sa nazivom programa
+  // vidljiv je svim verifikovanim korisnicima, o čemu pristanak nije govorio ništa.
+  // Traže se sva tri, jer bi se svako lako izgubilo bez ijednog vidljivog kvara.
+  "programi_podrske_4_5_0.md": {
+    sr: [
+      "indeksom stvarnosti od najmanje 10%",
+      "koliko će lica biti zamoljeno da potvrdi",
+      "vidljiv uz pseudonim podnosioca svim verifikovanim korisnicima",
+      "ne navode se ni naziv programa ni pseudonim podnosioca",
+      "podaci uneti u prijavu se brišu",
+      "Uneti podaci brišu se kada prijava prestane da važi",
+    ],
+    en: [
+      "reality index of at least 10%",
+      "how many persons will be asked to confirm",
+      "visible alongside the applicant's pseudonym to all verified users",
+      "states neither the name of the programme nor the applicant's pseudonym",
+      "deletes the data entered in the application",
+      "The entered data are deleted when the application ceases to be valid",
+    ],
+    ru: [
+      "индексом реальности не менее 10 %",
+      "сколько лиц будет приглашено подтвердить",
+      "видна рядом с псевдонимом заявителя всем верифицированным пользователям",
+      "не указываются ни название программы, ни псевдоним заявителя",
+      "удаление данных, внесённых в заявку",
+      "Внесённые данные удаляются, когда заявка перестаёт действовать",
+    ],
   },
   // 4.4.4 — pravna priroda operativnog doprinosa (čl. 27). Do tada je akt branio
   // SAMO od radnog odnosa (čl. 5 Zakona o radu), a opasna kvalifikacija je ugovor

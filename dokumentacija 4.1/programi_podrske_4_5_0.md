@@ -48,9 +48,13 @@ Pravo na program ostvaruje verifikovani korisnik sa indeksom stvarnosti od najma
 
 Pre odlučivanja Fondacije, ispunjenost uslova potvrđuju svi verifikatori podnosioca. Svaki verifikator, pod punom odgovornošću i na osnovu neposrednog ličnog poznavanja podnosioca, potvrđuje da podnosilac ispunjava uslov programa, ili odbija potvrdu uz obavezno obrazloženje. Verifikatori nemaju uvid u podatke koje je podnosilac uneo — potvrđuju na osnovu sopstvenog saznanja. Fondacija može odobriti prijavu tek kada svi verifikatori potvrde; izostanak ili odbijanje makar jednog verifikatora sprečava odobravanje. Ovaj mehanizam štiti integritet programa od neistinitih prijava (anti-malverzacija).
 
-Prijava i traženje potvrde od verifikatora vrše se isključivo uz izričit pristanak podnosioca. Pristankom podnosilac prihvata da njegovi verifikatori budu obavešteni da se prijavio za određeni program i zamoljeni da potvrde ispunjenost uslova; podatak o programu za koji se prijavio može otkriti verifikatorima pripadnost posebnoj kategoriji podataka. Pristanak se može povući u svakom trenutku, sa posledicom prestanka postupka odnosno automatskog evidentiranja POEN-a.
+Prijava i traženje potvrde od verifikatora vrše se isključivo uz izričit pristanak podnosioca. Pristanak se daje pre podnošenja prijave i pre nego što se od bilo koga zatraži potvrda, a u njemu se izričito navodi: koliko će lica biti zamoljeno da potvrdi; da ta lica saznaju o kom je programu reč i da im taj podatak može otkriti pripadnost podnosioca posebnoj kategoriji podataka; da ona nemaju uvid u unete podatke; i da je zapis o evidentiranom POEN-u po programu, zajedno sa nazivom programa, vidljiv uz pseudonim podnosioca svim verifikovanim korisnicima.
 
-Verifikacija statusa predstavlja obradu posebnih kategorija podataka o ličnosti; pravni osnov obrade je izričit pristanak korisnika. Uneti podaci nisu javni i dostupni su isključivo licu koje obrađuje prijavu u Fondaciji — ne i verifikatorima.
+Verifikatori se o zahtevu za potvrdu obaveštavaju isključivo unutar Platforme. U poruci koju Platforma šalje elektronskom poštom ili na uređaj korisnika ne navode se ni naziv programa ni pseudonim podnosioca.
+
+Pristanak se može povući u svakom trenutku, bez navođenja razloga. Povlačenjem se postupak prekida, automatsko evidentiranje POEN-a prestaje, a podaci uneti u prijavu se brišu; POEN evidentiran do tog trenutka se ne dira. Radnja povlačenja dostupna je korisniku u Platformi, uz sam program.
+
+Verifikacija statusa predstavlja obradu posebnih kategorija podataka o ličnosti; pravni osnov obrade je izričit pristanak korisnika. Uneti podaci nisu javni i dostupni su isključivo licu koje obrađuje prijavu u Fondaciji — ne i verifikatorima. Uneti podaci brišu se kada prijava prestane da važi — odbijanjem, obustavom iz člana 12, povlačenjem pristanka ili prestankom svojstva korisnika. Ponovna prijava zahteva ponovan unos podataka i ponovnu potvrdu svih verifikatora.
 
 ### Član 5
 

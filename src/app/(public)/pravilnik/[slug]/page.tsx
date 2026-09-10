@@ -65,8 +65,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
     verzija: "4.4.6",
   },
   "programi-podrske": {
-    fajl: "programi_podrske_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "programi_podrske_4_5_0.md",
+    verzija: "4.5.0",
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce-dece": {
