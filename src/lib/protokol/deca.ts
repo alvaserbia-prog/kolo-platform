@@ -34,7 +34,10 @@ import { obavesti } from "@/lib/notifikacije";
 import {
   PORUKA_CEKA_RODITELJA,
   ROK_POTVRDE_DANA,
+  UZRAST_SA_ODRASLIMA,
   danaDoIsteka,
+  granicaDatumaZaUzrast,
+  smeSaOdraslima,
   nalogRadi,
   pragPodsetnika,
   rokIzjasnjenja,
@@ -76,6 +79,7 @@ export function poljaDeteta(datumRodjenja: Date | null) {
 export const IZBOR_UCESNIKA = {
   id: true,
   maloletan: true,
+  datumRodjenja: true,
   dozvolaOdrasli: true,
   roditeljstvaKaoDete: {
     select: {
@@ -90,6 +94,7 @@ export const IZBOR_UCESNIKA = {
 type RedUcesnika = {
   id: string;
   maloletan: boolean;
+  datumRodjenja: Date | null;
   dozvolaOdrasli: boolean;
   roditeljstvaKaoDete: {
     roditeljId: string;
@@ -107,6 +112,10 @@ export function ucesnikIzReda(red: RedUcesnika): Ucesnik {
   return {
     id: red.id,
     maloletan: red.maloletan,
+    // Uzrast nosi razvrstavanje iz čl. 12. Kod deteta koje čeka preuzimanje datum
+    // još ne postoji (upisuje ga roditelj, čl. 7), pa ostaje `null` — a `null` po
+    // `smeSaOdraslima` pada na stroži režim, što je ovde ispravno.
+    godine: red.maloletan && red.datumRodjenja ? uzrast(red.datumRodjenja, beogradskiDan()) : null,
     dozvolaOdrasli: red.dozvolaOdrasli,
     roditeljIds: red.roditeljstvaKaoDete.map((r) => r.roditeljId),
     // Punoletan korisnik nema stanje — `AKTIVNO` je jedina vrednost koja ništa ne
@@ -180,9 +189,11 @@ export function usloviVidljivostiOglasa(posmatrac: Ucesnik | null) {
         {
           OR: [
             { maloletan: true },
-            // Oglase punoletnih dete vidi tek uz saglasnost roditelja — vidi
-            // obrazloženje uz `smeDaVidiOglas` u `deca-pravila.ts`.
-            ...(posmatrac.dozvolaOdrasli ? [{ maloletan: false }] : []),
+            // Oglase punoletnih dete vidi tek uz saglasnost roditelja i tek od 15.
+            // godine — vidi obrazloženje uz `smeDaVidiOglas` u `deca-pravila.ts`.
+            ...(smeSaOdraslima(posmatrac) && posmatrac.dozvolaOdrasli
+              ? [{ maloletan: false }]
+              : []),
           ],
         },
       ],
@@ -195,7 +206,15 @@ export function usloviVidljivostiOglasa(posmatrac: Ucesnik | null) {
       {
         OR: [
           { maloletan: false },
-          { maloletan: true, dozvolaOdrasli: true },
+          // 🔴 Uzrasni uslov MORA biti i u upitu, ne samo u `smeDaVidiOglas`: spisak
+          // na Pijaci se diže jednim `findMany`, pa bi bez njega oglas deteta do 15
+          // izašao punoletnom posmatraču i pre nego što ijedna čista funkcija stigne
+          // da ga odbije.
+          {
+            maloletan: true,
+            dozvolaOdrasli: true,
+            datumRodjenja: { lte: granicaDatumaZaUzrast(UZRAST_SA_ODRASLIMA, beogradskiDan()) },
+          },
           // Sopstveno dete roditelj vidi i kad je prekidač isključen.
           { maloletan: true, roditeljstvaKaoDete: { some: { roditeljId: posmatrac.id } } },
         ],
@@ -389,6 +408,19 @@ export async function postaviLozinkuDeteta(
   const dete = await mojeDeteIliBaci(roditeljId, deteId);
   if (typeof lozinka !== "string" || lozinka.length < MIN_LOZINKA) {
     throw new DecaGreska(`Lozinka mora imati najmanje ${MIN_LOZINKA} znakova.`, 400);
+  }
+
+  // 🔴 Ovlašćenje prestaje čim dete upiše i potvrdi SOPSTVENU adresu (čl. 7a):
+  // tada mu je put oporavka sopstveni i roditelju ovo dugme više ne treba, a
+  // ostavljeno bi značilo da roditelj u svakom trenutku preuzima nalog deteta —
+  // uključujući sedamnaestogodišnjaka sa sopstvenom lozinkom. Kad je pristup
+  // zaista izgubljen, put je prigovor o kome odlučuje Fondacija (čl. 10 st. 3).
+  const sopstvenaAdresa = await prisma.user.findUnique({
+    where: { id: dete.id },
+    select: { email: true },
+  });
+  if (sopstvenaAdresa?.email) {
+    throw new DecaGreska(PORUKA_LOZINKA_IMA_ADRESU, 403);
   }
 
   const passwordHash = await bcrypt.hash(lozinka, 12);
@@ -662,6 +694,13 @@ export async function obrisiDecjiNalog(
  * izjašnjenje samo po sebi ne otklanja poništenje, ali prigovor postoji i o njemu
  * odlučuje čovek. Bez druge rečenice poruka saopštava da izlaza nema.
  */
+/**
+ * Zašto roditelj ne postavlja lozinku detetu koje ima svoju adresu (čl. 10 st. 3).
+ * Poruka imenuje i izlaz — inače saopštava samo zabranu.
+ */
+export const PORUKA_LOZINKA_IMA_ADRESU =
+  "Dete je upisalo svoju elektronsku adresu, pa lozinku postavlja samo ono — kroz postupak za zaboravljenu lozinku. Ako je pristup stvarno izgubljen, podnesi prigovor sa svog profila; odlučuje Fondacija.";
+
 export const PORUKA_ROK_ISTEKAO =
   "Rok za izjašnjenje je istekao. Ako smatraš da je poništenje nepravilno, možeš uložiti prigovor sa svog profila.";
 

@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_5_2.md`, `uslovi_koriscenja_4_4_3.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_5_2.md`, `uslovi_koriscenja_4_5_3.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -31,7 +31,7 @@ const AKTI = [
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_5_2.md",
   "radnje_obrade_4_5_2.md",
-  "uslovi_koriscenja_4_4_3.md",
+  "uslovi_koriscenja_4_5_3.md",
   "politika_4_5_2.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_6.md",
@@ -43,7 +43,7 @@ const AKTI = [
   "gornje_kolo_4_4_6.md",
   "programi_podrske_4_5_0.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
-  "ucesce_dece_4_5_2.md",
+  "ucesce_dece_4_5_3.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
   "projekti_nabavke_4_4_7.md",
 ];
@@ -353,7 +353,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
   // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
   // počiva upravo na tome da takav promet nije dopušten.
-  "uslovi_koriscenja_4_4_3.md": {
+  "uslovi_koriscenja_4_5_3.md": {
     sr: [
       "Oglas neverifikovanog korisnika",
       "ne smatra se izmenom Uslova",
@@ -530,7 +530,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // svakom potvrđenom članu. Ako ta odredba ispadne iz akta, kod nastavi da
   // zatvara profil bez osnova, a pregled po školama ostane bez ijednog pravila o
   // tome šta se sme objaviti — pa se traži doslovno, na sva tri jezika.
-  "ucesce_dece_4_5_2.md": {
+  "ucesce_dece_4_5_3.md": {
     sr: [
       "### Član 7a",
       "### Član 15a",
@@ -568,6 +568,19 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "obaveštavaju se sva lica koja bi poništenjem bila pogođena",
       "nadoknada iz člana 20b Pravilnika o dokazu stvarnosti se ne primenjuje",
       "ima pravo prigovora",
+      // 4.5.3 (R-17) — uzrasne grupe i granica prema punoletnima. Odredbe se traže
+      // doslovno jer ih kod sprovodi na više mesta (poruke, oglasi, prepis), pa bi
+      // tiho brisanje iz akta ostavilo kod bez osnova.
+      "dve uzrasne grupe",
+      "nije navršio petnaest godina sa punoletnim korisnicima ne komunicira i ne razmenjuje",
+      "ne razvrstavaju se po uzrastu",
+      "### Član 12a",
+      "male vrednosti",
+      "u granicama svoje poslovne sposobnosti",
+      "5.000 POEN",
+      "20.000 POEN",
+      "u roku od sedam dana",
+      "prestaje kada maloletni korisnik upiše i potvrdi sopstvenu elektronsku adresu",
     ],
     en: [
       "### Article 7a",
@@ -588,6 +601,16 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "all persons who would be affected by an annulment are notified",
       "restitution under Article 20b of the Rulebook on Proof of Reality does not apply",
       "the right to an appeal",
+      "two age groups",
+      "has not reached the age of fifteen neither communicates nor exchanges",
+      "are not classified by age",
+      "### Article 12a",
+      "small value",
+      "within the limits of their contractual capacity",
+      "5,000 POEN",
+      "20,000 POEN",
+      "within seven days",
+      "ceases once the minor user enters and confirms their own e-mail address",
     ],
     ru: [
       "### Статья 7a",
@@ -608,6 +631,16 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "уведомляются все лица, которых аннулирование затронуло бы",
       "возмещение по статье 20b Правил о доказательстве реальности не применяется",
       "имеет право на возражение",
+      "две возрастные группы",
+      "не достигший пятнадцати лет, с совершеннолетними пользователями не общается и не обменивается",
+      "по возрасту не разделяются",
+      "### Статья 12a",
+      "малой стоимости",
+      "в пределах своей дееспособности",
+      "5.000 ПОЕН",
+      "20.000 ПОЕН",
+      "в срок семь дней",
+      "прекращается, когда несовершеннолетний пользователь укажет и подтвердит собственный электронный адрес",
     ],
   },
   "politika_4_5_2.md": {

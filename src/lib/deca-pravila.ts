@@ -30,6 +30,66 @@ export const UZRAST_MIN = 7;
 export const UZRAST_PUNOLETSTVO = 18;
 
 /**
+ * Granica uzrasnih grupa (čl. 12): **7–14** i **15–17**.
+ *
+ * 🔴 Do ovog uzrasta maloletni korisnik sa punoletnima NITI razmenjuje NITI
+ * komunicira, i saglasnost roditelja to ne otvara. Razlog je pravni, ne
+ * bezbednosni: po članu 64 Porodičnog zakona dete koje nije navršilo četrnaest
+ * godina preduzima samo poslove male vrednosti i poslove kojima pribavlja
+ * isključivo prava, a od navršenih četrnaest sve ostalo uz saglasnost roditelja
+ * — koja se daje za KONKRETAN posao, ne unapred za sve.
+ *
+ * 🔴 Razvrstavanje se odnosi ISKLJUČIVO na odnos sa punoletnim korisnicima.
+ * Prijateljstva (čl. 14a), Pričaonica (čl. 18) i razmena među decom se NE
+ * razvrstavaju po uzrastu — inače bi se graf presekao i po čl. 19 otpisao POEN
+ * evidentiran za prijateljstva koja bi time pala.
+ */
+export const UZRAST_SA_ODRASLIMA = 15;
+
+/**
+ * Prag iznad koga prepis iz zapisa maloletnog korisnika čeka odobrenje roditelja
+ * (čl. 14). Dva praga, jer „mala vrednost" nije ista za sedmogodišnjaka i za
+ * sedamnaestogodišnjaka.
+ */
+export const PRAG_ODOBRENJA_MLADJI = 5_000;
+export const PRAG_ODOBRENJA_STARIJI = 20_000;
+
+/** Koliko dana roditelj ima da se izjasni o prepisu na čekanju (čl. 14). */
+export const ROK_ODOBRENJA_PREPISA_DANA = 7;
+
+/** Prag za dati uzrast; nepoznat uzrast pada na stroži prag. */
+export function pragOdobrenja(godine: number | null): number {
+  return (godine ?? 0) >= UZRAST_SA_ODRASLIMA ? PRAG_ODOBRENJA_STARIJI : PRAG_ODOBRENJA_MLADJI;
+}
+
+/**
+ * Da li maloletni korisnik uopšte sme u odnos sa punoletnim korisnicima (čl. 12).
+ * Punoletni nalog uvek sme — ovo pravilo uređuje samo dečju stranu.
+ */
+export function smeSaOdraslima(u: Ucesnik): boolean {
+  if (!u.maloletan) return true;
+  return (u.godine ?? 0) >= UZRAST_SA_ODRASLIMA;
+}
+
+/**
+ * Da li prepis traži odobrenje roditelja (čl. 14).
+ *
+ * 🔴 Samo ODLIV iz dečjeg zapisa. Priliv se ne odobrava: po članu 64 Porodičnog
+ * zakona posao kojim maloletnik pribavlja isključivo prava preduzima sam.
+ *
+ * 🔴 Prepis između roditelja i njegovog deteta se NE odobrava — čl. 14 st. 2 ga
+ * pušta bez ograničenja, a odobravanje sopstvenog poteza nema predmet.
+ */
+export function trebaOdobrenjeRoditelja(od: Ucesnik, ka: Ucesnik, iznos: number): boolean {
+  if (!od.maloletan) return false;
+  if (jeMojeDete(ka, od)) return false;
+  return iznos >= pragOdobrenja(od.godine);
+}
+
+export const PORUKA_SAMO_SA_DECOM =
+  "Do navršenih 15 godina razmena i razgovor idu samo sa drugom decom. Saglasnost roditelja to ne menja.";
+
+/**
  * Rok u kome se o postojanju deteta izjašnjavaju OBE strane veze (čl. 6 st. 2).
  *
  * 🔴 Sa 30 na 60 dana od seta 4.5.2. Rok ne meri ničiju savesnost nego samo koliko
@@ -142,6 +202,11 @@ export type RoditeljStanje = {
 export type Ucesnik = {
   id: string;
   maloletan: boolean;
+  /**
+   * Uzrast u godinama; `null` kod punoletnog naloga i kod deteta kome roditelj
+   * datum rođenja još nije upisao (nalog na čekanju po čl. 4b).
+   */
+  godine: number | null;
   /** Prekidač iz čl. 10 st. 2. Kod punoletnog korisnika nema značenja. */
   dozvolaOdrasli: boolean;
   /** Roditelji (najviše dva, ista ovlašćenja). Kod punoletnog korisnika prazno. */
@@ -228,6 +293,19 @@ export function uzrast(datumRodjenja: Date, danas: Date): number {
   return godine;
 }
 
+/**
+ * Najkasniji datum rođenja pri kome je korisnik danas navršio `godine` godina.
+ *
+ * Postoji zbog upita nad bazom: uzrast se ne može računati u Prismi, pa se uslov
+ * „ima najmanje N godina" izražava kao `datumRodjenja <= granica`. Računa se u
+ * UTC-u, kao i `uzrast`, da se ta dva nikad ne raziđu za jedan dan.
+ */
+export function granicaDatumaZaUzrast(godine: number, danas: Date): Date {
+  return new Date(
+    Date.UTC(danas.getUTCFullYear() - godine, danas.getUTCMonth(), danas.getUTCDate())
+  );
+}
+
 /** Dan kada nalog prelazi u punoletni (čl. 19 st. 1). */
 export function datumPunoletstva(datumRodjenja: Date): Date {
   const d = new Date(datumRodjenja.getTime());
@@ -309,6 +387,11 @@ export function smeDaKomunicira(a: Ucesnik, b: Ucesnik): Provera {
   if (a.maloletan && b.maloletan) return { ok: true };
 
   const dete = a.maloletan ? a : b;
+  // Uzrasna granica ide PRE prekidača: do 15 saglasnost roditelja ne otvara ništa
+  // (čl. 12 st. 4). Zato se prekidač detetu do 14 i ne prikazuje.
+  if (!smeSaOdraslima(dete)) {
+    return { ok: false, razlog: PORUKA_SAMO_SA_DECOM, status: 403 };
+  }
   if (dete.dozvolaOdrasli) return { ok: true };
   return {
     ok: false,
@@ -371,16 +454,19 @@ export function smeDaVidiOglas(
   oglasivac: Ucesnik
 ): boolean {
   if (!oglasivac.maloletan) {
-    // Oglas punoletnog korisnika: javan je svima, a maloletnom se prikazuje uz saglasnost.
+    // Oglas punoletnog korisnika: javan je svima, a maloletnom se prikazuje uz
+    // saglasnost — i tek od 15. godine (čl. 12 st. 4).
     if (!posmatrac?.maloletan) return true;
-    return posmatrac.dozvolaOdrasli;
+    return smeSaOdraslima(posmatrac) && posmatrac.dozvolaOdrasli;
   }
   if (!posmatrac) return false;
   if (posmatrac.id === oglasivac.id) return true;
   if (posmatrac.admin) return true;
   if (oglasivac.roditeljIds.includes(posmatrac.id)) return true;
   if (posmatrac.maloletan) return true;
-  return oglasivac.dozvolaOdrasli;
+  // Punoletnom posmatraču oglas deteta do 15 nije vidljiv ni uz saglasnost: kad
+  // razmene ne sme da bude, prikaz oglasa je izlaganje bez svrhe (čl. 13 st. 3).
+  return smeSaOdraslima(oglasivac) && oglasivac.dozvolaOdrasli;
 }
 
 /**

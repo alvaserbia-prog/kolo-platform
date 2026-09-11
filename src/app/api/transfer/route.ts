@@ -4,12 +4,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { gdePseudonim } from "@/lib/pseudonim";
-import { DoprinosOkidac, TransactionType } from "@/generated/prisma/client";
-import { obavesti } from "@/lib/notifikacije";
-import { probajEvidentirati, smeDaSalje } from "@/lib/protokol/doprinos-sadrzaju";
-import { probajEvidentiratiKorake, probajNapredovati } from "@/lib/protokol/doprinos-razmeni";
+import { smeDaSalje } from "@/lib/protokol/doprinos-sadrzaju";
 import { jeNadoknada, iznosNadoknade } from "@/lib/protokol/nadoknada";
-import { smeDaPrepise, ucitajUcesnika } from "@/lib/protokol/deca";
+import { smeDaPrepise, trebaOdobrenjeRoditelja, ucitajUcesnika } from "@/lib/protokol/deca";
+import { izvrsiPrepis, PrepisGreska } from "@/lib/protokol/prepis";
+import { zatraziOdobrenje } from "@/lib/protokol/prepis-odobrenje";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -76,8 +75,9 @@ export async function POST(req: NextRequest) {
   const jeDecjiPar = odUcesnik.maloletan || kaUcesnik.maloletan;
 
   if (jeDecjiPar) {
-    // `smeDaPrepise` sam odbija nalog koji još čeka roditelja (čl. 4c) — stanje
-    // naloga je deo `Ucesnik`-a, pa nema odvojene provere.
+    // `smeDaPrepise` sam odbija nalog koji još čeka roditelja (čl. 4c) i par u kome
+    // je dete mlađe od 15 a druga strana punoletna (čl. 12) — oba uslova su deo
+    // `Ucesnik`-a, pa nema odvojene provere.
     const dozvoljeno = smeDaPrepise(odUcesnik, kaUcesnik);
     if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
   } else if (!smeDaSalje(posiljac.tipKorisnika)) {
@@ -101,65 +101,38 @@ export async function POST(req: NextRequest) {
     return await greska(`Nemate dovoljno POENA. Stanje: ${posiljac.wallet.balance}.`, 400);
   }
 
-  // Ažuriranje evidencije 1:1 — bez posrednika, bez provizije; nije prenos monetarne vrednosti (Pravilnik čl. 16)
-  // Skidanje POEN-a je ATOMSKO (updateMany sa uslovom balance >= iznos): garantuje da
-  // dva paralelna transfera ne mogu oba da prođu i odvedu stanje u minus (anti double-spend).
-  try {
-    await prisma.$transaction(async (tx) => {
-      const skinuto = await tx.wallet.updateMany({
-        where: { id: posiljac.wallet!.id, balance: { gte: iznos } },
-        data: { balance: { decrement: iznos } },
-      });
-      if (skinuto.count !== 1) {
-        // Stanje se u međuvremenu promenilo (paralelni transfer) — prekini ceo posao.
-        throw new Error("NEDOVOLJNO_SREDSTAVA");
-      }
-      await tx.wallet.update({
-        where: { id: primalac.wallet!.id },
-        data: { balance: { increment: iznos } },
-      });
-      await tx.transaction.create({
-        data: {
-          fromWalletId: posiljac.wallet!.id,
-          toWalletId: primalac.wallet!.id,
-          amount: iznos,
-          type: TransactionType.TRANSFER,
-          description: description?.trim() || null,
-        },
-      });
-    });
-  } catch (e) {
-    if (e instanceof Error && e.message === "NEDOVOLJNO_SREDSTAVA") {
-      return await greska("Nemate dovoljno POENA.", 400);
-    }
-    throw e;
+  // Prepis iz dečjeg zapisa iznad praga NE ide odmah nego čeka roditelja (Pravilnik
+  // o učešću dece, čl. 14). Provera stoji POSLE pokrića — nema smisla tražiti
+  // odobrenje za iznos koji ionako ne postoji na zapisu.
+  if (trebaOdobrenjeRoditelja(odUcesnik, kaUcesnik, iznos)) {
+    return NextResponse.json(
+      await zatraziOdobrenje({
+        deteId: posiljac.id,
+        detePseudonim: posiljac.pseudonim,
+        primalacId: primalac.id,
+        primalacPseudonim: primalac.pseudonim,
+        iznos,
+        opis: description,
+        godine: odUcesnik.godine,
+      })
+    );
   }
 
-  // Primljen POEN je jedan od dva okidača za evidentiranje doprinosa sadržaju
-  // (čl. 40a st. 3). Zove se VAN transakcije — `emitujPoen()` otvara sopstvenu.
-  // Ne baca: prenos je već upisan i ne sme da padne zbog ovog kanala.
-  await probajEvidentirati(primalac.id, DoprinosOkidac.PRIMLJEN_POEN, posiljac.id);
-  // Primljen POEN je okidač i za zabeležene korake putanje doprinosa razmeni.
-  await probajEvidentiratiKorake(primalac.id);
-
-  // Prenos POEN-a pomera brojač OBEMA stranama: pošiljaocu može da otvori korak 2
-  // (POEN ka sagovorniku van lanca), a obojici može da zatvori sagovornika ako je
-  // ovim POEN vraćen u roku od 60 dana. Sekvencijalno i van transakcije; ne baca.
-  await probajNapredovati(posiljac.id);
-  await probajNapredovati(primalac.id);
-
-  // Iznos se NE formatira ovde: broj ide kao parametar, a razdvajač hiljada se
-  // bira pri prikazu, po jeziku primaoca (sr 1.000 · en 1,000 · ru 1 000).
-  await obavesti(primalac.id, {
-    tip: "transfer_primljen",
-    kljuc: description
-      ? "notifikacije.transfer_primljen_poruka"
-      : "notifikacije.transfer_primljen",
-    parametri: { iznos, pseudonim: posiljac.pseudonim, poruka: description ?? "" },
-    naslov: `Prepisano ti je ${iznos.toLocaleString("sr-RS")} POEN`,
-    tekst: `Prepisano ti je ${iznos.toLocaleString("sr-RS")} POEN u tvoj zapis — od člana ${posiljac.pseudonim}.${description ? ` Poruka: „${description}"` : ""}`,
-    link: "/novcanik",
-  });
+  // Ažuriranje evidencije 1:1 — bez posrednika, bez provizije; nije prenos monetarne
+  // vrednosti (Pravilnik čl. 16). Sam posao živi u `izvrsiPrepis`, jer isti prepis
+  // kreće i odavde i iz odluke roditelja danima kasnije (čl. 14 Pravilnika o učešću
+  // dece) — dve kopije bi se razišle, a razlaz znači pokvaren zero-sum.
+  try {
+    await izvrsiPrepis(
+      { id: posiljac.id, pseudonim: posiljac.pseudonim, walletId: posiljac.wallet.id },
+      { id: primalac.id, pseudonim: primalac.pseudonim, walletId: primalac.wallet!.id },
+      iznos,
+      description
+    );
+  } catch (e) {
+    if (e instanceof PrepisGreska) return await greska("Nemate dovoljno POENA.", 400);
+    throw e;
+  }
 
   return NextResponse.json({ ok: true });
 }

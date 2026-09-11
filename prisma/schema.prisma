@@ -331,6 +331,8 @@ model User {
   // jednom, obrada se izvodi jednom.
   punoletstvoNajavaAt              DateTime?
   punoletstvoObradjenAt            DateTime?
+  prepisiNaOdobrenju               PrepisOdobrenje[]         @relation("PrepisDete")
+  prepisiKaMeni                    PrepisOdobrenje[]         @relation("PrepisPrimalac")
   potvrdeRoditeljstvaZaMene        RoditeljstvoPotvrda[]     @relation("PotvrdaDete")
   potvrdeRoditeljstvaOMeni         RoditeljstvoPotvrda[]     @relation("PotvrdaRoditelj")
   potvrdeRoditeljstvaKojeDajem     RoditeljstvoPotvrda[]     @relation("PotvrdaPotvrdjivac")
@@ -551,6 +553,39 @@ model RoditeljstvoPotvrda {
   @@index([potvrdjivacId, status])
   @@index([status, rokDo])
   @@index([roditeljId, status])
+}
+
+/// Ishod odlučivanja roditelja o prepisu iznad praga (Pravilnik o učešću dece, čl. 14).
+enum PrepisOdobrenjeStatus {
+  CEKA
+  ODOBREN
+  ODBIJEN
+  ISTEKAO
+}
+
+/// Prepis POEN-a iz zapisa maloletnog korisnika koji čeka odobrenje roditelja
+/// (Pravilnik o učešću dece, čl. 14).
+///
+/// 🔴 Ovo NIJE transakcija i NE ulazi u zero-sum. POEN se ne pomera dok roditelj
+/// ne odobri; do tada ovde stoji samo NAMERA. Kad bi se POEN skidao unapred,
+/// odbijen ili istekao prepis tražio bi povraćaj, a povraćaj je protivzapis koji
+/// bi u istoriji izgledao kao poništenje — što nije.
+model PrepisOdobrenje {
+  id         String                @id @default(uuid())
+  deteId     String
+  dete       User                  @relation("PrepisDete", fields: [deteId], references: [id], onDelete: Cascade)
+  primalacId String
+  primalac   User                  @relation("PrepisPrimalac", fields: [primalacId], references: [id], onDelete: Cascade)
+  iznos      Int
+  opis       String?
+  status     PrepisOdobrenjeStatus @default(CEKA)
+  rokDo      DateTime
+  odlucioId  String?
+  odlucenoAt DateTime?
+  createdAt  DateTime              @default(now())
+
+  @@index([deteId, status])
+  @@index([status, rokDo])
 }
 
 enum RoditeljstvoPotvrdaStatus {

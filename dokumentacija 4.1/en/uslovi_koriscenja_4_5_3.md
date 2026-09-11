@@ -210,6 +210,8 @@ Exchange redistributes existing POENs and does not increase their total number i
 
 The users who participate in the exchange are responsible for its performance, quality, and risk, pursuant to the general rules of the law of obligations.
 
+Where one party to the exchange is a minor user, the regulations on the contractual capacity of minors also apply. A minor user undertakes legal transactions within the limits set by those regulations, and the parent's consent given under the Children's Module does not replace consent to a particular legal transaction where the regulations require it. The conditions of a minor user's exchange are governed in more detail by the Rulebook on the Participation of Children.
+
 This applies in particular to an exchange based on a listing by an unverified user: the advertiser's reality has not been confirmed through the chain of confirmations, which the listing itself indicates by a visible mark (Article 16). A user entering such an exchange does so at their own risk. In that case too, the Foundation is not a party to the exchange, does not mediate in it, and is not liable for the performance of users' obligations.
 
 The Platform does not require users to separately mark, confirm, or rate an exchange. The only record of an exchange is the update of the POEN ledger which the users carry out themselves; the exchange contribution path is also read from it (Art. 40b of the Rulebook on the KOLO System).

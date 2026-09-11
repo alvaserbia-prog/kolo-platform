@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
 import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 import { obradiIstekleRokove, posaljiPodsetnike } from "@/lib/protokol/deca";
+import { obradiIstekleOdobrenja } from "@/lib/protokol/prepis-odobrenje";
 
 /**
  * POST /api/cron/deca-potvrde
@@ -35,10 +36,18 @@ export async function POST(req: NextRequest) {
 
   const podsetnici = await posaljiPodsetnike();
   const rezultat = await obradiIstekleRokove();
+  // Istek zahteva za odobrenje prepisa (čl. 14) — ništa se ne vraća jer ništa nije
+  // ni skinuto; zahtev samo prestaje da važi.
+  const odobrenja = await obradiIstekleOdobrenja();
   console.log(
-    `[Deca Cron] Podsetnika: ${podsetnici.poslato}, pregledano isteklih: ${rezultat.pregledano}, poništeno potvrda: ${rezultat.ponisteno}`
+    `[Deca Cron] Podsetnika: ${podsetnici.poslato}, pregledano isteklih: ${rezultat.pregledano}, poništeno potvrda: ${rezultat.ponisteno}, isteklih odobrenja: ${odobrenja.ugaseno}`
   );
-  return NextResponse.json({ ok: true, ...rezultat, podsetnika: podsetnici.poslato });
+  return NextResponse.json({
+    ok: true,
+    ...rezultat,
+    podsetnika: podsetnici.poslato,
+    istekloOdobrenja: odobrenja.ugaseno,
+  });
 }
 
 export async function GET(req: NextRequest) {

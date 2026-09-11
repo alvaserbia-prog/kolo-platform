@@ -38,6 +38,8 @@ export type UlazPrijave = {
   posiljaocId: string | null;
   /** Ko prijavljuje. */
   prijaviocId: string;
+  /** Je li prijavilac maloletan — za njega poništenje prepisa ne važi (čl. 14 st. 5). */
+  prijaviocMaloletan: boolean;
   /** Postoji li već prijava nad ovim prepisom. */
   vecPrijavljena: boolean;
   /** Koliko prijava ovog korisnika još čeka odluku. */
@@ -60,6 +62,18 @@ export function smePrijaviti(u: UlazPrijave): IshodProvere {
 
   if (!u.posiljaocId || u.posiljaocId !== u.prijaviocId)
     return { ok: false, razlog: "Prepis može da prijavi samo onaj ko je POEN prepisao." };
+
+  // 🔴 Za maloletnog korisnika poništenje prepisa NE važi (Pravilnik o učešću dece,
+  // čl. 14 st. 5). Odredba postoji od prve verzije akta, a kod je do 4.5.3 nije
+  // sprovodio — dete je moglo da podnese prijavu i tuđem detetu obori prepis u minus.
+  // Roditelj namerno NIJE ovlašćen umesto njega: pravo da se posao maloletnika obori
+  // daje Porodični zakon i ostvaruje se između strana, ne dugmetom u Platformi.
+  if (u.prijaviocMaloletan)
+    return {
+      ok: false,
+      razlog:
+        "Prepis maloletnog korisnika se ne poništava kroz Platformu. Ako razmena nije ispala kako je dogovoreno, dogovorite se sa drugom stranom.",
+    };
 
   if (u.vecPrijavljena)
     return { ok: false, razlog: "Ovaj prepis je već prijavljen." };

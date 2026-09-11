@@ -252,7 +252,7 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
   const [sugestije, setSugestije] = useState<string[]>([]);
   const [showSugestije, setShowSugestije] = useState(false);
   const [aktivniIndex, setAktivniIndex] = useState(-1);
-  const [uspeh, setUspeh] = useState<{ iznos: number; pseudonim: string } | null>(null);
+  const [uspeh, setUspeh] = useState<{ iznos: number; pseudonim: string; naCekanju: boolean } | null>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const listaRef = useRef<HTMLUListElement>(null);
@@ -327,7 +327,10 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error ?? t("send_greska")); return; }
-      setUspeh({ iznos, pseudonim: pseudonim.trim() });
+      // Prepis iz dečjeg zapisa iznad praga se NE izvršava odmah nego čeka roditelja
+      // (Pravilnik o učešću dece, čl. 14). Ekran to mora da kaže — inače dete vidi
+      // „prepisano" a POEN se nije pomerio.
+      setUspeh({ iznos, pseudonim: pseudonim.trim(), naCekanju: data?.naCekanju === true });
     } catch {
       setError(t("send_greska"));
     } finally {
@@ -338,8 +341,11 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
   if (uspeh) {
     return (
       <UspehKartica
-        naslov={t("send_uspeh_naslov")}
-        opis={t("send_uspeh_opis", { iznos: uspeh.iznos.toLocaleString(intlTag(locale)), pseudonim: uspeh.pseudonim })}
+        naslov={uspeh.naCekanju ? t("send_ceka_naslov") : t("send_uspeh_naslov")}
+        opis={t(uspeh.naCekanju ? "send_ceka_opis" : "send_uspeh_opis", {
+          iznos: uspeh.iznos.toLocaleString(intlTag(locale)),
+          pseudonim: uspeh.pseudonim,
+        })}
         dugmeTekst={t("send_uspeh_dugme")}
         onDugme={onSuccess}
       />

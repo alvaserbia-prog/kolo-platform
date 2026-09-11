@@ -210,6 +210,8 @@ Razmjena preraspodjeljuje postojeće POEN-e i ne uvećava njihov ukupan broj u s
 
 Za ispunjenje, kvalitetu i rizik u razmjeni odgovaraju korisnici koji u njoj sudjeluju, prema općim pravilima obveznog prava.
 
+Kada je jedna strana u razmjeni maloljetni korisnik, primjenjuju se i propisi o poslovnoj sposobnosti maloljetnih osoba. Maloljetni korisnik pravne poslove poduzima u granicama utvrđenim tim propisima, a privola roditelja dana u okviru Modula Djeca ne zamjenjuje privolu za konkretan pravni posao ondje gdje je propis traži. Uvjeti razmjene maloljetnog korisnika pobliže su uređeni Pravilnikom o sudjelovanju djece.
+
 To osobito vrijedi za razmjenu po oglasu neverificiranog korisnika: stvarnost oglašivača nije potvrđena kroz lanac potvrda, na što oglas i upozorava vidljivom oznakom (Članak 16.). Korisnik koji stupa u takvu razmjenu čini to na vlastiti rizik. Zaklada ni u tom slučaju nije stranka u razmjeni, ne posreduje u njoj i ne odgovara za ispunjenje obveza korisnika.
 
 Platforma ne traži od korisnika da razmjenu posebno označe, potvrde ni ocijene. Jedini je zapis o razmjeni ažuriranje evidencije POEN-a koje korisnici sami provedu; po njemu se očitava i putanja doprinosa razmjeni (Članak 40.b Pravilnika o KOLO sustavu).

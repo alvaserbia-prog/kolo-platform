@@ -146,9 +146,11 @@ The minor user is informed of the scope of the insight under this Article.
 
 On their child's profile, the parent may remove any listing the child has published.
 
-At the same place, the parent approves, by means of a switch, the minor user's communication and exchange with adult users. Consent may be withdrawn at any time.
+At the same place, the parent approves, by means of a switch, the minor user's communication and exchange with adult users. Consent may be withdrawn at any time. The switch takes effect once the minor user has reached the age of fifteen (Article 12, paragraph 4).
 
 On their child's profile the parent sets a new password for the minor user. The previous password is not required for this, since the parent does not know it. The minor user is notified of the change. This power exists because a minor user's account as a rule has no e-mail address, so the forgotten-password procedure is not available to them.
+
+The power under paragraph 3 ceases once the minor user enters and confirms their own e-mail address under Article 7a. From then on the password is set exclusively by the minor user, through the forgotten-password procedure. Where access to the account has genuinely been lost, the parent files an appeal, which is decided by the Foundation.
 
 The parent is liable for content published by the minor user up to the moment of removal, and for the actions of the minor user on the Platform.
 
@@ -162,15 +164,27 @@ The parent has no account in the children's space, does not publish content in i
 
 ### Article 12
 
-Minor users constitute a single group, without classification by age. This provision is transitional: classification into age groups, with its own rules of adjacency, is introduced by a decision of the Management Board, by amendment of this Rulebook.
+Minor users are classified into two age groups: from the age of seven to the age of fifteen, and from the age of fifteen until majority.
 
-If classification is introduced, it applies only to friendships made after its introduction; it does not end existing friendships and does not lead to the write-off of the contribution under Article 14b.
+A minor user communicates and exchanges with other minor users, regardless of age group.
 
-A minor user communicates and exchanges with other minor users.
+A minor user who has reached the age of fifteen communicates and exchanges with adult users with the parent's consent under Article 10.
 
-Communication and exchange with adult users are permitted with the parent's consent under Article 10.
+A minor user who has not reached the age of fifteen neither communicates nor exchanges with adult users. The parent's consent under Article 10 does not remove this and is not displayed for them.
+
+The classification under paragraph 1 concerns exclusively the relationship with adult users. Friendships under Article 14a, the Chat Room under Article 18 and exchange between minor users are not classified by age; existing friendships are not ended by this and the contribution under Article 14b is not written off on that ground.
 
 An account in the "pending" state does not participate in the communication under this Article.
+
+### Article 12a — The Nature of the Exchange and Contractual Capacity
+
+A minor user's exchange is an exchange of goods and services of small value, such as takes place among children in any case. It is not work that the minor user performs for another and it establishes neither an employment relationship nor work outside an employment relationship.
+
+A minor user undertakes legal transactions within the limits of their contractual capacity, under the regulations governing family relations. The parent's consent under Article 10 does not replace consent to a particular legal transaction where the regulations require it; consent to a particular re-registration is governed by Article 14.
+
+The Foundation is not a party to the exchange and does not mediate in it (Article 22 of the Terms of Use). The relationship between the parties is governed by the general rules of the law of obligations and, where one party is a minor user, also by the regulations on contractual capacity.
+
+The annulment of a legal transaction under those regulations is effected between the parties. The Platform does not carry out the annulment of an exchange and does not overturn the update of the POEN record on that ground (Article 14, paragraph 8).
 
 ### Article 13
 
@@ -178,7 +192,7 @@ The same conditions apply to the publication of a minor user's listing as to the
 
 A minor user's listing is visible to minor users and to their parents. The listing is not publicly available and is not displayed in search engines.
 
-With the parent's consent under Article 10, the listing is also visible to adult users.
+The listing of a minor user who has reached the age of fifteen is also visible to adult users, with the parent's consent under Article 10. The listing of a minor user who has not reached the age of fifteen is not visible to adult users, not even with the parent's consent.
 
 ### Article 14 — Updating the POEN Record
 
@@ -188,11 +202,17 @@ A parent and their child re-register POEN to one another without any limit on th
 
 Minor users re-register POEN among themselves.
 
-The re-registration of POEN between a minor and an adult user is permitted with the parent's consent under Article 10.
+The re-registration of POEN between a minor and an adult user is permitted under the conditions of Article 12.
+
+A re-registration that reduces a minor user's record is carried out upon the parent's approval once it reaches the threshold of 5,000 POEN for a minor user who has not reached the age of fifteen, or 20,000 POEN for a minor user who has reached the age of fifteen.
+
+Until approval, the minor user's record is not reduced and no POEN moves. The parent responds within seven days; if they do not respond within that period, the re-registration is not carried out.
+
+Approval is not required for a re-registration between a minor user and their parent, nor for a re-registration that increases the minor user's record.
 
 For a minor user there is no monthly limit, no prohibition period, and no annulment of a re-registration; the history is visible as it is for adult accounts.
 
-A minor user's record may be negative exclusively under Article 14c, paragraph 3 and Article 19, paragraph 2. This is the third exception to the prohibition of a negative record under Article 14, paragraph 3 of the KOLO System Rulebook, alongside restitution under Article 20b of the Rulebook on Proof of Reality and the annulment of a record update following an exchange report. The restitution regime applies to such a record: it is not a debt, it is not collected, POEN received first replenishes it, re-registration to another is possible only once it passes zero, and the exchange of goods and services is not restricted.
+A minor user's record may be negative exclusively under Article 14c, paragraph 3 and Article 19, paragraph 2. This is the third exception to the prohibition of a negative record under Article 14, paragraph 3 of the KOLO System Rulebook, alongside restitution under Article 20b of the Rulebook on Proof of Reality, the annulment of a record update following an exchange report, and the write-off upon annulment of a confirmation due to inactivity under Article 6. The restitution regime applies to such a record: it is not a debt, it is not collected, POEN received first replenishes it, re-registration to another is possible only once it passes zero, and the exchange of goods and services is not restricted.
 
 ### Article 14a — Friendships
 

@@ -210,6 +210,8 @@ A csere a meglévő POEN-eket újraosztja, és nem növeli azok teljes számát 
 
 A csere teljesítéséért, minőségéért és kockázatáért az abban részt vevő felhasználók felelnek a kötelmi jog általános szabályai szerint.
 
+Ha a csere egyik fele kiskorú felhasználó, a kiskorúak cselekvőképességére vonatkozó jogszabályok is alkalmazandók. A kiskorú felhasználó a jogügyleteket az e jogszabályok által megszabott keretek között köti, a Gyermekek modul keretében adott szülői beleegyezés pedig nem pótolja az adott jogügylethez való hozzájárulást ott, ahol azt jogszabály megköveteli. A kiskorú felhasználó cseréjének feltételeit részletesebben a gyermekek részvételéről szóló szabályzat rendezi.
+
 Ez különösen érvényes a nem hitelesített felhasználó hirdetése alapján történő cserére: a hirdető valósága nincs megerősítve a megerősítési láncon keresztül, amire a hirdetés látható jelöléssel figyelmeztet is (16. cikk). Az a felhasználó, aki ilyen cserébe bocsátkozik, ezt saját kockázatára teszi. Az Alapítvány ebben az esetben sem fél a cserében, abban nem közvetít, és nem felel a felhasználók kötelezettségeinek teljesítéséért.
 
 A Platform nem kívánja meg a felhasználóktól, hogy a cserét külön megjelöljék, megerősítsék vagy értékeljék. A cseréről az egyetlen nyilvántartás a POEN-nyilvántartás frissítése, amelyet a felhasználók maguk hajtanak végre; ebből olvasható ki a cseréhez való hozzájárulás útja is (a KOLO rendszerről szóló szabályzat 40.b cikke).

@@ -21,7 +21,7 @@ import {
 } from "@/lib/deca-pravila";
 
 function dete(id: string, roditeljIds: string[], stanje: StanjeDeteta = "AKTIVNO"): Ucesnik {
-  return { id, maloletan: true, dozvolaOdrasli: false, roditeljIds, stanje };
+  return { id, maloletan: true, godine: 12, dozvolaOdrasli: false, roditeljIds, stanje };
 }
 
 describe("iznos je 500 po strani", () => {

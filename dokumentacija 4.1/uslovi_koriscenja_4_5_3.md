@@ -208,6 +208,8 @@ Razmena redistribuira postojeće POEN-e i ne uvećava njihov ukupan broj u siste
 
 Za ispunjenje, kvalitet i rizik u razmeni odgovaraju korisnici koji u njoj učestvuju, prema opštim pravilima obligacionog prava.
 
+Kada je jedna strana u razmeni maloletan korisnik, primenjuju se i propisi o poslovnoj sposobnosti maloletnih lica. Maloletni korisnik pravne poslove preduzima u granicama utvrđenim tim propisima, a saglasnost roditelja data u okviru Modula Deca ne zamenjuje saglasnost za konkretan pravni posao tamo gde je propis traži. Uslovi razmene maloletnog korisnika bliže su uređeni Pravilnikom o učešću dece.
+
 Ovo posebno važi za razmenu po oglasu neverifikovanog korisnika: stvarnost oglašivača nije potvrđena kroz lanac potvrda, na šta oglas i upozorava vidljivom oznakom (Član 16). Korisnik koji stupa u takvu razmenu čini to na sopstveni rizik. Fondacija ni u tom slučaju nije strana u razmeni, ne posreduje u njoj i ne odgovara za ispunjenje obaveza korisnika.
 
 Platforma ne traži od korisnika da razmenu posebno označe, potvrde ni ocene. Jedini zapis o razmeni je ažuriranje evidencije POEN-a koje korisnici sami sprovedu; po njemu se očitava i putanja doprinosa razmeni (Član 40b Pravilnika o KOLO sistemu).

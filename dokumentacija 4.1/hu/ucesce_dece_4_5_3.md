@@ -146,9 +146,11 @@ A kiskorú felhasználó tájékoztatást kap az e cikk szerinti betekintés ter
 
 Gyermeke profilján a szülő eltávolíthat minden hirdetést, amelyet a gyermek közzétett.
 
-Ugyanott a szülő kapcsolóval engedélyezi a kiskorú felhasználó felnőtt felhasználókkal való kommunikációját és cseréjét. A beleegyezés bármikor visszavonható.
+Ugyanott a szülő kapcsolóval engedélyezi a kiskorú felhasználó felnőtt felhasználókkal való kommunikációját és cseréjét. A beleegyezés bármikor visszavonható. A kapcsoló a kiskorú felhasználó tizenötödik életévének betöltésétől hatályos (12. cikk (4) bekezdés).
 
 Gyermeke profilján a szülő új jelszót állít be a kiskorú felhasználónak. A korábbi jelszót ehhez nem kérjük, mivel a szülő nem ismeri. A kiskorú felhasználó értesítést kap a változásról. E jogosultság azért létezik, mert a kiskorú felhasználó fiókja rendszerint nem rendelkezik e-mail címmel, így az elfelejtett jelszóra vonatkozó eljárás nem áll a rendelkezésére.
+
+A (3) bekezdés szerinti jogosultság megszűnik, amint a kiskorú felhasználó a 7.a cikk szerint megadja és megerősíti saját e-mail címét. Ettől kezdve a jelszót kizárólag a kiskorú felhasználó állítja be, az elfelejtett jelszóra vonatkozó eljárással. Ha a fiókhoz való hozzáférés valóban elveszett, a szülő kifogást nyújt be, amelyről az Alapítvány dönt.
 
 A szülő felel a kiskorú felhasználó által az eltávolítás pillanatáig közzétett tartalomért, valamint a kiskorú felhasználó Platformon végzett cselekményeiért.
 
@@ -162,15 +164,27 @@ A szülőnek nincs fiókja a gyermektérben, nem tesz közzé benne tartalmat, �
 
 ### 12. cikk
 
-A kiskorú felhasználók egységes csoportot képeznek, kor szerinti osztályozás nélkül. Ez a rendelkezés átmeneti: a korcsoportok szerinti osztályozást, saját szomszédsági szabályokkal, az Igazgatótanács határozata vezeti be, e szabályzat módosításával.
+A kiskorú felhasználók két korcsoportba sorolódnak: a betöltött hét évtől a betöltött tizenöt évig, és a betöltött tizenöt évtől a nagykorúságig.
 
-Ha az osztályozás bevezetésre kerül, az csak a bevezetését követően kötött barátságokra vonatkozik; nem szünteti meg a meglévő barátságokat, és nem vezet a 14.b cikk szerinti hozzájárulás leírásához.
+A kiskorú felhasználó korcsoportjától függetlenül más kiskorú felhasználókkal kommunikál és cserél.
 
-A kiskorú felhasználó más kiskorú felhasználókkal kommunikál és cserél.
+Az a kiskorú felhasználó, aki betöltötte a tizenötödik életévét, a szülő 10. cikk szerinti beleegyezésével kommunikál és cserél a felnőtt felhasználókkal.
 
-A felnőtt felhasználókkal való kommunikáció és csere a szülő 10. cikk szerinti beleegyezésével engedélyezett.
+Az a kiskorú felhasználó, aki nem töltötte be a tizenötödik életévét, felnőtt felhasználókkal nem kommunikál és nem cserél. A szülő 10. cikk szerinti beleegyezése ezt nem szünteti meg, és számára nem jelenik meg.
+
+Az (1) bekezdés szerinti osztályozás kizárólag a felnőtt felhasználókkal való viszonyra vonatkozik. A 14.a cikk szerinti barátságok, a 18. cikk szerinti Beszélgető és a kiskorú felhasználók közötti csere nem kerül kor szerint osztályozásra; a meglévő barátságok ezzel nem szűnnek meg, és a 14.b cikk szerinti hozzájárulás ezen a jogcímen nem kerül leírásra.
 
 A „várakozó" állapotban lévő fiók nem vesz részt az e cikk szerinti kommunikációban.
+
+### 12.a cikk — A csere természete és a cselekvőképesség
+
+A kiskorú felhasználó cseréje kis értékű áruk és szolgáltatások cseréje, amilyen egyébként is zajlik a gyermekek között. Nem olyan munka, amelyet a kiskorú felhasználó másnak végez, és nem hoz létre sem munkaviszonyt, sem munkaviszonyon kívüli munkavégzést.
+
+A kiskorú felhasználó a jogügyleteket cselekvőképessége keretein belül köti, a családi kapcsolatokat szabályozó jogszabályok szerint. A szülő 10. cikk szerinti beleegyezése nem pótolja az adott jogügylethez való hozzájárulást ott, ahol azt jogszabály megköveteli; az egyes átírásokhoz való hozzájárulást a 14. cikk rendezi.
+
+Az Alapítvány nem részese a cserének és nem közvetít benne (a Felhasználási feltételek 22. cikke). A felek közötti viszonyra a kötelmi jog általános szabályai irányadók, és ha az egyik fél kiskorú felhasználó, a cselekvőképességre vonatkozó jogszabályok is.
+
+A jogügylet e jogszabályok szerinti érvénytelenítése a felek között történik. A Platform nem hajtja végre a csere érvénytelenítését, és ezen a jogcímen nem dönti meg a POEN-nyilvántartás frissítését (14. cikk (8) bekezdés).
 
 ### 13. cikk
 
@@ -178,7 +192,7 @@ A kiskorú felhasználó hirdetésének közzétételére ugyanazok a feltétele
 
 A kiskorú felhasználó hirdetése a kiskorú felhasználók és a szülei számára látható. A hirdetés nem nyilvánosan elérhető, és a keresőmotorokban nem jelenik meg.
 
-A szülő 10. cikk szerinti beleegyezésével a hirdetés a felnőtt felhasználók számára is látható.
+Annak a kiskorú felhasználónak a hirdetése, aki betöltötte a tizenötödik életévét, a szülő 10. cikk szerinti beleegyezésével a felnőtt felhasználók számára is látható. Annak a kiskorú felhasználónak a hirdetése, aki nem töltötte be a tizenötödik életévét, a felnőtt felhasználók számára nem látható, a szülő beleegyezésével sem.
 
 ### 14. cikk — A POEN-nyilvántartás frissítése
 
@@ -188,11 +202,17 @@ A szülő és gyermeke egymásnak összeghatár nélkül, mindkét irányban át
 
 A kiskorú felhasználók egymás között átírják a POEN-t.
 
-A POEN átírása kiskorú és felnőtt felhasználó között a szülő 10. cikk szerinti beleegyezésével engedélyezett.
+A POEN átírása kiskorú és felnőtt felhasználó között a 12. cikk feltételei szerint engedélyezett.
+
+Az az átírás, amely csökkenti a kiskorú felhasználó bejegyzését, a szülő jóváhagyásával kerül végrehajtásra, ha eléri az 5.000 POEN küszöböt a tizenötödik életévét be nem töltött kiskorú felhasználó esetében, illetve a 20.000 POEN küszöböt a tizenötödik életévét betöltött kiskorú felhasználó esetében.
+
+A jóváhagyásig a kiskorú felhasználó bejegyzése nem csökken, és egyetlen POEN sem mozdul. A szülő hét napon belül nyilatkozik; ha e határidőn belül nem nyilatkozik, az átírás nem kerül végrehajtásra.
+
+Nem szükséges jóváhagyás a kiskorú felhasználó és szülője közötti átíráshoz, sem az olyan átíráshoz, amely a kiskorú felhasználó bejegyzését növeli.
 
 A kiskorú felhasználóra nem vonatkozik havi korlát, tilalmi időszak, sem az átírás érvénytelenítése; az előzmény ugyanúgy látható, mint a nagykorú fiókoknál.
 
-A kiskorú felhasználó bejegyzése kizárólag a 14.c cikk (3) bekezdése és a 19. cikk (2) bekezdése szerint lehet negatív. Ez a harmadik kivétel a KOLO rendszerről szóló szabályzat 14. cikkének (3) bekezdése szerinti, negatív bejegyzésre vonatkozó tilalom alól, a valóság bizonyításáról szóló szabályzat 20b. cikke szerinti megtérítés és a cserebejelentés alapján történő nyilvántartás-frissítés érvénytelenítése mellett. Az ilyen bejegyzésre a megtérítés rendje vonatkozik: nem tartozás, nem hajtják be, a beérkező POEN először azt tölti fel, a más részére történő átírás csak a nulla átlépése után lehetséges, az áruk és szolgáltatások cseréje pedig nincs korlátozva.
+A kiskorú felhasználó bejegyzése kizárólag a 14.c cikk (3) bekezdése és a 19. cikk (2) bekezdése szerint lehet negatív. Ez a harmadik kivétel a KOLO rendszerről szóló szabályzat 14. cikkének (3) bekezdése szerinti, negatív bejegyzésre vonatkozó tilalom alól, a valóság bizonyításáról szóló szabályzat 20b. cikke szerinti megtérítés, a cserebejelentés alapján történő nyilvántartás-frissítés érvénytelenítése és a 6. cikk szerinti, inaktivitás miatti megerősítés-érvénytelenítésből eredő leírás mellett. Az ilyen bejegyzésre a megtérítés rendje vonatkozik: nem tartozás, nem hajtják be, a beérkező POEN először azt tölti fel, a más részére történő átírás csak a nulla átlépése után lehetséges, az áruk és szolgáltatások cseréje pedig nincs korlátozva.
 
 ### 14.a cikk — Barátságok
 

@@ -38,9 +38,13 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   });
   if (!transakcija) return await greska("Prepis ne postoji.", 404);
 
-  const [otvorenihPrijava] = await Promise.all([
+  const [otvorenihPrijava, ja] = await Promise.all([
     prisma.prijavaRazmene.count({
       where: { prijaviocId: session.user.id, status: "OTVORENA" },
+    }),
+    prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { maloletan: true },
     }),
   ]);
 
@@ -50,6 +54,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
     prijaviocId: session.user.id,
     vecPrijavljena: transakcija.prijavaRazmene !== null,
     otvorenihPrijava,
+    prijaviocMaloletan: ja?.maloletan ?? false,
     opis,
   });
   if (!provera.ok) return await greska(provera.razlog, 400);

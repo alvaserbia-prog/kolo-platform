@@ -366,7 +366,9 @@
     "nadoknada_naslov_dete": "Tartozol",
     "nadoknada_opis_dete": "Ez akkor íródott le, amikor egy barátság véget ért. Az első POEN, ami érkezik, feltölti. Minden más a szokásos módon működik.",
     "rezervisano_nabavka": "Beszerzésre foglalva",
-    "rezervisano_nabavka_opis": "Az áru átvételéig foglalva. Az átvételkor kerül érvénytelenítésre, nem korábban; ha nem veszed át, visszakerül a bejegyzésedbe."
+    "rezervisano_nabavka_opis": "Az áru átvételéig foglalva. Az átvételkor kerül érvénytelenítésre, nem korábban; ha nem veszed át, visszakerül a bejegyzésedbe.",
+    "send_ceka_naslov": "Az átírás a szülő jóváhagyására vár",
+    "send_ceka_opis": "{iznos} POEN {pseudonim} tagnak a szülő jóváhagyására vár. Addig a nyilvántartásodból semmi nem kerül levonásra."
   },
   "verifikacija": {
     "naslov": "Személyazonosság-ellenőrzés",
@@ -942,7 +944,7 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.4.3"
+      "ver": "4.5.3"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
@@ -990,7 +992,7 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.4.3-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.5.3-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
     "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.2-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
@@ -2714,7 +2716,13 @@
     "roditeljstvo_ponistena_roditelj_naslov": "A valóságodról adott egyik megerősítés érvénytelenné vált",
     "roditeljstvo_ponistena_roditelj_tekst": "A {pseudonim} tagtól kapott megerősítés érvénytelenné vált, mert a gyermek létezéséről nem érkezett nyilatkozat határidőn belül. {iznos} POEN került leírásra a nyilvántartásodból; az emiatt mínuszba mehet. Valóságodat más személy is megerősítheti, az érvénytelenítés ellen pedig kifogást nyújthatsz be a profilodról.",
     "roditeljstvo_ponistena_nadzornik_naslov": "Az általad felügyelt megerősítés érvénytelenné vált",
-    "roditeljstvo_ponistena_nadzornik_tekst": "Az általad felügyelt megerősítés érvénytelenné vált, mert a gyermek létezéséről nem érkezett nyilatkozat határidőn belül. {iznos} POEN került leírásra a nyilvántartásodból; az emiatt mínuszba mehet. Az érvénytelenítés ellen kifogást nyújthatsz be a profilodról."
+    "roditeljstvo_ponistena_nadzornik_tekst": "Az általad felügyelt megerősítés érvénytelenné vált, mert a gyermek létezéséről nem érkezett nyilatkozat határidőn belül. {iznos} POEN került leírásra a nyilvántartásodból; az emiatt mínuszba mehet. Az érvénytelenítés ellen kifogást nyújthatsz be a profilodról.",
+    "prepis_odobrenje_naslov": "A gyermeked POEN-átírás jóváhagyását kéri",
+    "prepis_odobrenje_tekst": "{dete} {iznos} POEN-t szeretne átírni {pseudonim} tagnak. A jóváhagyásod nélkül nem kerül végrehajtásra, a kérés pedig {dana} nap múlva lejár.",
+    "prepis_odobren_naslov": "A szülő jóváhagyta az átírást",
+    "prepis_odobren_tekst": "A(z) {iznos} POEN átírása {pseudonim} tagnak megtörtént.",
+    "prepis_odbijen_naslov": "Az átírás nem került végrehajtásra",
+    "prepis_odbijen_tekst": "A(z) {iznos} POEN átírása {pseudonim} tagnak nem került végrehajtásra."
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",
@@ -3233,7 +3241,15 @@
     "lozinka_uspeh": "A jelszó be van állítva. Mondd el a gyermekednek.",
     "izjava_naslov": "Nyilatkozat a gyermek létezéséről",
     "izjava_opis": "A határidő {dana} nap múlva jár le. Nyilatkozatod nélkül érvénytelenné válnak a valóságodról adott megerősítések azoktól, akik a gyermekről nyilatkoznak, és mindegyiküktől leírásra kerül az e megerősítés kapcsán nyilvántartott POEN.",
-    "izjava_dugme": "Megerősítem és megteszem a nyilatkozatot"
+    "izjava_dugme": "Megerősítem és megteszem a nyilatkozatot",
+    "prekidac_zatvoren": "15 éves koráig a gyermek csak más gyermekekkel cserél és beszélget, és ezen a te hozzájárulásod sem változtat. A kapcsoló akkor lép működésbe, amikor a gyermek betölti a 15. életévét.",
+    "lozinka_ima_adresu": "A gyermek megadta a saját e-mail címét, ezért mostantól csak ő állítja be a jelszót. Ha a hozzáférés valóban elveszett, nyújts be kifogást a profilodról — az Alapítvány dönt.",
+    "prepis_naslov": "Egy átírás a jóváhagyásodra vár",
+    "prepis_opis": "A gyermeked nyilvántartásából induló nagyobb átírás nem kerül végrehajtásra, amíg jóvá nem hagyod. Addig egyetlen POEN sem mozdul.",
+    "prepis_stavka": "{iznos} POEN {pseudonim} tagnak",
+    "prepis_rok": "{dana} nap múlva lejár; ezt követően nem kerül végrehajtásra.",
+    "prepis_odobri": "Jóváhagyom",
+    "prepis_odbij": "Nem hagyom jóvá"
   },
   "decjaPocetna": {
     "naslov": "Gyerekpiac",

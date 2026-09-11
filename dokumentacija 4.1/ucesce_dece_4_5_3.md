@@ -144,9 +144,11 @@ Maloletni korisnik se obaveštava o obimu uvida iz ovog člana.
 
 Na profilu svog deteta roditelj može ukloniti svaki oglas koji je dete objavilo.
 
-Na istom mestu roditelj prekidačem odobrava komunikaciju i razmenu maloletnog korisnika sa punoletnim korisnicima. Saglasnost se povlači u svakom trenutku.
+Na istom mestu roditelj prekidačem odobrava komunikaciju i razmenu maloletnog korisnika sa punoletnim korisnicima. Saglasnost se povlači u svakom trenutku. Prekidač dejstvuje od navršene petnaeste godine maloletnog korisnika (član 12 stav 4).
 
 Na profilu svog deteta roditelj postavlja novu lozinku maloletnog korisnika. Prethodna lozinka se pri tom ne traži, jer je roditelj ne zna. Maloletni korisnik se o promeni obaveštava. Ovo ovlašćenje postoji zato što nalog maloletnog korisnika po pravilu nema elektronsku adresu, pa mu postupak za zaboravljenu lozinku nije dostupan.
+
+Ovlašćenje iz stava 3 prestaje kada maloletni korisnik upiše i potvrdi sopstvenu elektronsku adresu po članu 7a. Od tada lozinku postavlja isključivo maloletni korisnik, postupkom za zaboravljenu lozinku. Kada je pristup nalogu stvarno izgubljen, roditelj podnosi prigovor o kome odlučuje Fondacija.
 
 Roditelj odgovara za sadržaj koji je maloletni korisnik objavio do trenutka uklanjanja, i za radnje maloletnog korisnika na Platformi.
 
@@ -160,15 +162,27 @@ Roditelj nema nalog u dečjem prostoru, ne objavljuje u njemu sadržaj i ne obra
 
 ### Član 12
 
-Maloletni korisnici čine jedinstvenu grupu, bez razvrstavanja po uzrastu. Ova odredba je prelazna: razvrstavanje po uzrasnim grupama, sa sopstvenim pravilima susedstva, uvodi se odlukom Upravnog odbora, izmenom ovog pravilnika.
+Maloletni korisnici razvrstavaju se u dve uzrasne grupe: od navršenih sedam do navršenih petnaest godina, i od navršenih petnaest godina do punoletstva.
 
-Ako se razvrstavanje uvede, ono važi samo za prijateljstva sklopljena posle njegovog uvođenja; ne raskida zatečena prijateljstva i ne dovodi do otpisa doprinosa iz člana 14b.
+Maloletni korisnik komunicira i razmenjuje sa drugim maloletnim korisnicima, bez obzira na uzrasnu grupu.
 
-Maloletni korisnik komunicira i razmenjuje sa drugim maloletnim korisnicima.
+Maloletni korisnik koji je navršio petnaest godina komunicira i razmenjuje sa punoletnim korisnicima uz saglasnost roditelja iz člana 10.
 
-Komunikacija i razmena sa punoletnim korisnicima dopuštene su uz saglasnost roditelja iz člana 10.
+Maloletni korisnik koji nije navršio petnaest godina sa punoletnim korisnicima ne komunicira i ne razmenjuje. Saglasnost roditelja iz člana 10 to ne otklanja i njemu se ne prikazuje.
+
+Razvrstavanje iz stava 1 odnosi se isključivo na odnos sa punoletnim korisnicima. Prijateljstva iz člana 14a, Pričaonica iz člana 18 i razmena između maloletnih korisnika ne razvrstavaju se po uzrastu; zatečena prijateljstva se ovim ne raskidaju i doprinos iz člana 14b se po tom osnovu ne otpisuje.
 
 Nalog u stanju „na čekanju" ne učestvuje u komunikaciji iz ovog člana.
+
+### Član 12a — Priroda razmene i poslovna sposobnost
+
+Razmena maloletnog korisnika je razmena dobara i usluga male vrednosti, kakva se i inače odvija među decom. Ona nije posao koji maloletni korisnik obavlja za drugoga i ne zasniva radni odnos ni rad van radnog odnosa.
+
+Maloletni korisnik pravne poslove preduzima u granicama svoje poslovne sposobnosti, prema propisima kojima se uređuju porodični odnosi. Saglasnost roditelja iz člana 10 ne zamenjuje saglasnost za konkretan pravni posao tamo gde je propis traži; saglasnost za konkretan prepis uređena je članom 14.
+
+Fondacija nije strana u razmeni i ne posreduje u njoj (član 22 Uslova korišćenja). Odnos između strana uređuje se prema opštim pravilima obligacionog prava, a kada je jedna strana maloletni korisnik — i prema propisima o poslovnoj sposobnosti.
+
+Poništenje pravnog posla po tim propisima ostvaruje se između strana. Platforma ne sprovodi poništenje razmene i po tom osnovu ne obara ažuriranje evidencije POEN-a (član 14 stav 8).
 
 ### Član 13
 
@@ -176,7 +190,7 @@ Za objavu oglasa maloletnog korisnika važe isti uslovi kao za oglas svakog drug
 
 Oglas maloletnog korisnika vidljiv je maloletnim korisnicima i njegovim roditeljima. Oglas nije javno dostupan i ne prikazuje se u pretraživačima.
 
-Uz saglasnost roditelja iz člana 10, oglas je vidljiv i punoletnim korisnicima.
+Oglas maloletnog korisnika koji je navršio petnaest godina vidljiv je i punoletnim korisnicima, uz saglasnost roditelja iz člana 10. Oglas maloletnog korisnika koji nije navršio petnaest godina punoletnim korisnicima nije vidljiv, ni uz saglasnost roditelja.
 
 ### Član 14 — Ažuriranje evidencije POEN-a
 
@@ -186,11 +200,17 @@ Roditelj i njegovo dete prepisuju POEN jedno drugom bez ograničenja iznosa, u o
 
 Maloletni korisnici prepisuju POEN međusobno.
 
-Prepis POEN-a između maloletnog i punoletnog korisnika dopušten je uz saglasnost roditelja iz člana 10.
+Prepis POEN-a između maloletnog i punoletnog korisnika dopušten je pod uslovima iz člana 12.
+
+Prepis kojim se umanjuje zapis maloletnog korisnika izvršava se po odobrenju roditelja kada dostigne prag od 5.000 POEN za maloletnog korisnika koji nije navršio petnaest godina, odnosno 20.000 POEN za maloletnog korisnika koji je navršio petnaest godina.
+
+Do odobrenja se zapis maloletnog korisnika ne umanjuje i POEN se ne pomera. Roditelj se izjašnjava u roku od sedam dana; ako se u tom roku ne izjasni, prepis se ne izvršava.
+
+Odobrenje se ne traži za prepis između maloletnog korisnika i njegovog roditelja, ni za prepis kojim se zapis maloletnog korisnika uvećava.
 
 Za maloletnog korisnika ne važi mesečni limit, period zabrane ni poništenje prepisa; istorija je vidljiva kao i kod punoletnih naloga.
 
-Zapis maloletnog korisnika može biti negativan isključivo po članu 14c stav 3 i članu 19 stav 2. To je treći izuzetak od zabrane negativnog zapisa iz člana 14 stav 3 Pravilnika o KOLO sistemu, uz nadoknadu po članu 20b Pravilnika o dokazu stvarnosti i poništenje ažuriranja evidencije po prijavi razmene. Na taj zapis primenjuje se režim nadoknade: nije dug, ne naplaćuje se, primljeni POEN ga prvo popunjava, prepis drugome je moguć tek preko nule, a razmena dobara i usluga nije ograničena.
+Zapis maloletnog korisnika može biti negativan isključivo po članu 14c stav 3 i članu 19 stav 2. To je treći izuzetak od zabrane negativnog zapisa iz člana 14 stav 3 Pravilnika o KOLO sistemu, uz nadoknadu po članu 20b Pravilnika o dokazu stvarnosti, poništenje ažuriranja evidencije po prijavi razmene i otpis po poništenju potvrde zbog neaktivnosti iz člana 6. Na taj zapis primenjuje se režim nadoknade: nije dug, ne naplaćuje se, primljeni POEN ga prvo popunjava, prepis drugome je moguć tek preko nule, a razmena dobara i usluga nije ograničena.
 
 ### Član 14a — Prijateljstva
 

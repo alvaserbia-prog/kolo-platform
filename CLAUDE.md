@@ -101,6 +101,16 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-11 (dvadeset četvrti put):** na **4.5.3** idu **DVA akta** —
+Pravilnik o učešću dece (sa 4.5.2) i Uslovi korišćenja (sa 4.4.3). Ostalih petnaest
+ostaje gde jeste. Povod je **analiza rizika R-17** (sedmogodišnjak kao strana u
+razmeni). Sadržinski, vidi sekciju „Uzrasne grupe 7–14 i 15–17" ispod.
+
+🟢 **Glavni Pravilnik NIJE diran** — odobrenje roditelja ne uvodi nov izuzetak ni
+nov kanal, a čl. 14 st. 3 ostaje na četiri izuzetka. DPIA, Politika i Registar
+radnji obrade takođe nisu dirani: nijedna mera ne uvodi nov podatak o ličnosti
+(uzrast se već obrađuje), a sve tri sužavaju zatečeni obim.
+
 **AŽURIRANO 2026-09-10 (dvadeset treći put):** na **4.5.2** ide **PET akata** —
 Pravilnik o KOLO sistemu (sa 4.4.6), Pravilnik o učešću dece (sa 4.4.8), Politika
 privatnosti (sa 4.5.1), DPIA (sa 4.5.1) i Registar radnji obrade (sa 4.5.1). Ostalih
@@ -1155,6 +1165,108 @@ već postoji i dovoljan je).
 jasnije **besplatno**, to je korisnik slabije zaštićen potrošačkim pravom; što bismo
 mu više dali prava, to davanje više liči na prodaju. Reklamacija je namerno
 izostavljena i to ovde postaje **deo odbrane**, ne samo praznina.
+
+### Uzrasne grupe 7–14 i 15–17 (2026-09-11)
+
+Odluke uz analizu rizika **R-17** (maloletni korisnik kao strana u razmeni). Na
+**4.5.3** idu **Pravilnik o učešću dece** i **Uslovi korišćenja**.
+
+🔴 **Polazna tačka je vlasnikova, i tako se piše u aktu:** razmena dece su
+**razmene male vrednosti, kao na dečjoj pijaci — nisu poslovi**. Nov čl. 12a to
+kaže izričito i dodaje da razmena ne zasniva radni odnos ni rad van radnog odnosa.
+Pravno nosivo je to što Porodični zakon (čl. 64) maloletniku dopušta poslove male
+vrednosti i poslove kojima pribavlja isključivo prava; sve preko toga traži
+saglasnost **za konkretan posao**, ne unapred za sve.
+
+**Pet odluka:**
+1. 🔴 **Do navršenih 15 godina dete sa punoletnima NITI razmenjuje NITI
+   komunicira**, i **prekidač iz čl. 10 to ne otvara** — detetu do 14 se i ne
+   prikazuje. Vlasnik je tražio zabranu trgovine; komunikacija je zatvorena uz nju
+   jer u ovom modulu postoji isključivo povodom oglasa (čl. 12 st. 4), pa bi
+   otvoren kanal ka odraslima ostao bez svrhe a nosio ceo rizik.
+2. 🔴 **Oglas deteta do 15 punoletnima nije vidljiv** ni uz saglasnost (čl. 13
+   st. 3). Kad razmene ne sme da bude, prikaz oglasa je izlaganje bez svrhe.
+3. 🔴 **Prepis iznad praga čeka roditelja** (čl. 14): **5.000 POEN** za 7–14 i
+   **20.000 POEN** za 15–17, **samo za ODLIV**, rok **7 dana**, bez odobrenja za
+   prepis sa sopstvenim roditeljem i za priliv.
+4. 🔴 **Roditeljski reset lozinke radi samo dok dete nema sopstvenu potvrđenu
+   adresu** (čl. 10). Kad je ima, lozinku postavlja samo ono; izgubljen pristup ide
+   kroz prigovor o kome odlučuje Fondacija.
+5. **Maloletni korisnik ne podnosi prijavu razmene** — kod se usklađuje sa čl. 14,
+   koji poništenje prepisa za njega izričito isključuje.
+
+🔴 **Razvrstavanje NE dira prijateljstva, Pričaonicu ni razmenu među decom** i to
+je izričito napisano u čl. 12 st. 5. Zatečeni čl. 12 st. 1–2 je razvrstavanje
+vezivao za „pravila susedstva", uz zaštitu da se zatečena prijateljstva ne
+raskidaju — da je podela pogodila graf, po čl. 19 bi se otpisao POEN evidentiran
+za prijateljstva koja bi time pala. Dvanaestogodišnjak i šesnaestogodišnjak ostaju
+prijatelji.
+
+**Nalazi u kodu koje je ovaj rizik otkrio:**
+- 🔴 **`postaviLozinkuDeteta` nije proveravalo NIŠTA osim da je to tvoje dete** —
+  ni uzrast, ni ima li dete svoju adresu. Roditelj je mogao da preuzme nalog
+  sedamnaestogodišnjaka sa sopstvenom lozinkom, u svakom trenutku. Vlasnikova
+  pretpostavka („dok dete nema svoj mejl") nije bila ono što kod radi.
+- 🔴 **`smePrijaviti` nije gledalo `maloletan`**, iako čl. 14 poništenje prepisa za
+  maloletnog korisnika isključuje — dete je moglo da podnese prijavu i tuđem detetu
+  obori prepis u minus. Obrnut smer od uobičajenog nalaza: akt je zabranjivao, kod
+  dozvoljavao.
+- **`deteSmeSaOdraslima` na Pijaci** je čitao samo prekidač; sada uz njega ide i
+  uzrast, jer se dugme „Kontaktiraj" bira tim propom.
+
+🔴 **ODBIJENE MERE UZ R-17 (odluka vlasnika, 2026-09-10) — ne predlagati ponovo:**
+- **Kapa na vrednost pojedinačnog posla deteta** — odbijena; umesto nje je
+  odobrenje po poslu iznad praga.
+- 🔴 **Dugme kojim roditelj obara prepis** — odbijeno, i razlog obara predlog:
+  roditelj bi mogao da poništi **ispravnu** razmenu, a drugo dete — koje u tom
+  postupku nije ničiji sin ni ćerka — završi u minusu. Zakon (ZOO čl. 56) daje
+  pravo da se obori **ugovor** između strana, ne naš zapis; to se ostvaruje između
+  strana, i čl. 12a to sada i kaže.
+- **Roditeljsko čitanje dečjih razgovora** — odbijeno. Uvid ide kroz prijavu u
+  nalog, i to samo dok dete nema svoju adresu.
+- **Izuzetak od minusa pri poništenju prepisa između dvoje dece** — odbijen;
+  „mora da ide u minus jer se stvara problem".
+- **Ublažavanje odgovornosti roditelja od 15** (čl. 10 st. 5) — odbijeno: roditelj
+  odgovara za radnje deteta u punom obimu i posle 15, iako mu uvid od tada slabi.
+  🟡 Posledicu znati i ne ublažavati je.
+- **Gubitak roditeljskog čitanja razgovora sa PUNOLETNIM licem od 15** — odbijeno;
+  čl. 9 st. 3 ostaje netaknut. To nije čitanje dečjih razgovora nego razgovora sa
+  odraslim, uz natpis koji odrasli vidi.
+
+🟡 **OTVORENO — prijava razmene se osmišljava iznova** (odluka vlasnika,
+2026-09-10): „prijava razmene se treba nekako drugačije osmisliti i rešiti". Zaseban
+zadatak, van R-17. Do tada važi zatečeni tok za punoletne (vidi „Poništenje prepisa
+po prijavi razmene"), a maloletni korisnik u njega ne ulazi.
+
+**Kod:**
+- `deca-pravila.ts` — `UZRAST_SA_ODRASLIMA`, `PRAG_ODOBRENJA_MLADJI/STARIJI`,
+  `ROK_ODOBRENJA_PREPISA_DANA`, `pragOdobrenja`, `smeSaOdraslima`,
+  `trebaOdobrenjeRoditelja`, `granicaDatumaZaUzrast`; `Ucesnik` dobija `godine`.
+- 🔴 **`granicaDatumaZaUzrast` postoji zbog upita nad bazom.** Uzrast se ne računa
+  u Prismi, pa `usloviVidljivostiOglasa` uslov „ima najmanje 15" izražava kao
+  `datumRodjenja <= granica`. Bez toga bi oglas deteta do 15 izašao punoletnom
+  posmatraču pre nego što ijedna čista funkcija stigne da ga odbije — spisak na
+  Pijaci se diže jednim `findMany`.
+- **Nov `src/lib/protokol/prepis.ts`** — `izvrsiPrepis`, izdvojeno iz
+  `POST /api/transfer`. Isti prepis sada kreće sa dva mesta (ruta i odluka
+  roditelja danima kasnije); dve kopije bi se razišle, a razlaz znači pokvaren
+  zero-sum ili izgubljen okidač kanala.
+- **Nov `src/lib/protokol/prepis-odobrenje.ts`** + model `PrepisOdobrenje`
+  (migracija `20260911120000_prepis_odobrenje`). 🔴 Red drži **nameru, ne
+  transakciju** — POEN se ne pomera dok roditelj ne odobri, pa zero-sum ovo ne
+  dodiruje. Skidanje unapred tražilo bi povraćaj pri odbijanju, a povraćaj je
+  protivzapis koji u istoriji izgleda kao poništenje — a ovde ničega nije ni bilo.
+  🔴 Pokriće se proverava **dvaput** (pri traženju i pri odluci) — između prolazi do
+  sedam dana.
+- Ruta `POST /api/deca/prepis/[id]`; istek u zatečenom cronu `/api/cron/deca-potvrde`
+  (bez izmene `vercel.json`).
+- **Brana:** `__tests__/deca-uzrast-izvor.test.ts` (16 provera, gleda i IZVOR) +
+  odredbe čl. 10, 12, 12a, 13 i 14 zaključane u `pravni-dokumenti.test.ts` na
+  sr/en/ru.
+
+🟡 **Usput ispravljeno:** čl. 14 st. 9 je nabrajao izuzetke od zabrane negativnog
+zapisa i stao na tri — set 4.5.2 je uveo četvrti (otpis po poništenju potvrde zbog
+neaktivnosti). Sada ih nabraja četiri.
 
 ### Potvrda postojanja deteta: izjašnjavaju se obe strane (2026-09-10)
 

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { MIN_LOZINKA, danaDoIsteka } from "@/lib/deca-pravila";
+import { MIN_LOZINKA, UZRAST_SA_ODRASLIMA, danaDoIsteka } from "@/lib/deca-pravila";
 import { generisiIzjavuRoditelja } from "@/lib/deca-izjava";
 
 type Dete = {
@@ -18,6 +18,17 @@ type Dete = {
   dozvolaOdrasli: boolean;
   /** Rok do koga roditelj mora dati izjavu iz čl. 6 st. 1; `null` kad je već data. */
   izjavaRokDo: string | null;
+  /** Ima li dete sopstvenu potvrđenu adresu (čl. 7a) — tada roditelj ne menja lozinku. */
+  imaSvojuAdresu: boolean;
+};
+
+/** Prepis iz dečjeg zapisa koji čeka odluku roditelja (čl. 14). */
+type Prepis = {
+  id: string;
+  iznos: number;
+  opis: string | null;
+  rokDo: string;
+  primalac: string;
 };
 
 type Oglas = {
@@ -28,13 +39,24 @@ type Oglas = {
   imaSliku: boolean;
 };
 
-export default function DeteProfil({ dete, oglasi }: { dete: Dete; oglasi: Oglas[] }) {
+export default function DeteProfil({
+  dete,
+  oglasi,
+  prepisi,
+}: {
+  dete: Dete;
+  oglasi: Oglas[];
+  prepisi: Prepis[];
+}) {
   const t = useTranslations("deca");
   const router = useRouter();
   const [dozvola, setDozvola] = useState(dete.dozvolaOdrasli);
   const [radi, setRadi] = useState(false);
   const [greska, setGreska] = useState<string | null>(null);
   const [skinuti, setSkinuti] = useState<Set<string>>(new Set());
+  // Do 15. godine odnos sa punoletnima je zatvoren i saglasnost ga ne otvara
+  // (čl. 12 st. 4), pa prekidač nema šta da uključi — ostaje samo objašnjenje.
+  const smeSaOdraslima = (dete.godine ?? 0) >= UZRAST_SA_ODRASLIMA;
 
   async function prebaciDozvolu() {
     setRadi(true);
@@ -98,6 +120,8 @@ export default function DeteProfil({ dete, oglasi }: { dete: Dete; oglasi: Oglas
 
       <IzjavaRoditelja dete={dete} />
 
+      <PrepisiNaCekanju deteId={dete.id} prepisi={prepisi} />
+
       {/* Prekidač iz čl. 10 st. 2 — jedina saglasnost koju roditelj daje posle
           otvaranja naloga. Stoji na vrhu, jer menja krug ljudi sa kojima dete
           sme da razgovara. */}
@@ -105,10 +129,13 @@ export default function DeteProfil({ dete, oglasi }: { dete: Dete; oglasi: Oglas
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
             <h2 className="font-semibold text-kolo-text">{t("prekidac_naslov")}</h2>
-            <p className="mt-1 text-sm text-kolo-muted">{t("prekidac_opis")}</p>
+            <p className="mt-1 text-sm text-kolo-muted">
+              {smeSaOdraslima ? t("prekidac_opis") : t("prekidac_zatvoren")}
+            </p>
           </div>
           <button
             type="button"
+            hidden={!smeSaOdraslima}
             role="switch"
             aria-checked={dozvola}
             aria-label={t("prekidac_naslov")}
@@ -166,7 +193,7 @@ export default function DeteProfil({ dete, oglasi }: { dete: Dete; oglasi: Oglas
 
       <Razgovori deteId={dete.id} />
 
-      <NovaLozinka deteId={dete.id} />
+      <NovaLozinka deteId={dete.id} imaSvojuAdresu={dete.imaSvojuAdresu} />
 
       <BrisanjeNaloga deteId={dete.id} pseudonim={dete.pseudonim} onGotovo={() => router.push("/profil")} />
     </div>
@@ -438,7 +465,13 @@ function Pregled({ deteId }: { deteId: string }) {
  * Lozinka se prikazuje dok se kuca. Roditelj je smišlja za dete i mora da je
  * pročita naglas — sakriveno polje bi ovde radilo protiv svrhe.
  */
-function NovaLozinka({ deteId }: { deteId: string }) {
+function NovaLozinka({
+  deteId,
+  imaSvojuAdresu,
+}: {
+  deteId: string;
+  imaSvojuAdresu: boolean;
+}) {
   const t = useTranslations("deca");
   const [lozinka, setLozinka] = useState("");
   const [radi, setRadi] = useState(false);
@@ -470,9 +503,11 @@ function NovaLozinka({ deteId }: { deteId: string }) {
   return (
     <section className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
       <h2 className="font-semibold text-kolo-text">{t("lozinka_naslov")}</h2>
-      <p className="mt-1 text-sm text-kolo-muted">{t("lozinka_opis")}</p>
+      <p className="mt-1 text-sm text-kolo-muted">
+        {imaSvojuAdresu ? t("lozinka_ima_adresu") : t("lozinka_opis")}
+      </p>
 
-      <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+      <div className="mt-3 flex flex-col gap-2 sm:flex-row" hidden={imaSvojuAdresu}>
         <input
           type="text"
           value={lozinka}
@@ -559,6 +594,82 @@ function IzjavaRoditelja({ dete }: { dete: Dete }) {
       >
         {t("izjava_dugme")}
       </button>
+    </section>
+  );
+}
+
+/**
+ * Prepisi iz dečjeg zapisa koji čekaju odluku roditelja (čl. 14).
+ *
+ * 🔴 Prikazuje se samo kad ih ima. Prazan odeljak „nema ničega na čekanju" bio bi
+ * na profilu svakog deteta svaki dan, a ovo je po prirodi redak događaj.
+ */
+function PrepisiNaCekanju({ deteId, prepisi }: { deteId: string; prepisi: Prepis[] }) {
+  const t = useTranslations("deca");
+  const router = useRouter();
+  const [radi, setRadi] = useState<string | null>(null);
+  const [greska, setGreska] = useState<string | null>(null);
+  if (prepisi.length === 0) return null;
+
+  async function odluci(id: string, odluka: "ODOBREN" | "ODBIJEN") {
+    setRadi(id);
+    setGreska(null);
+    try {
+      const res = await fetch(`/api/deca/prepis/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ odluka }),
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) throw new Error(data?.error ?? t("greska_slanje"));
+      router.refresh();
+    } catch (e) {
+      setGreska(e instanceof Error ? e.message : t("greska_slanje"));
+    } finally {
+      setRadi(null);
+    }
+  }
+
+  return (
+    <section className="rounded-2xl border border-kolo-green-700/40 bg-kolo-green-700/5 p-6">
+      <h2 className="font-semibold text-kolo-text">{t("prepis_naslov")}</h2>
+      <p className="mt-1 text-sm text-kolo-muted">{t("prepis_opis")}</p>
+      {greska && <p className="mt-2 text-sm text-kolo-danger">{greska}</p>}
+
+      <ul className="mt-3 space-y-3">
+        {prepisi.map((p) => (
+          <li key={p.id} className="rounded-xl border border-kolo-border bg-white p-4">
+            <p className="text-sm text-kolo-text">
+              {t("prepis_stavka", {
+                iznos: p.iznos.toLocaleString("sr-RS"),
+                pseudonim: p.primalac,
+              })}
+            </p>
+            {p.opis && <p className="mt-1 text-sm text-kolo-muted">„{p.opis}“</p>}
+            <p className="mt-1 text-xs text-kolo-muted">
+              {t("prepis_rok", { dana: danaDoIsteka(new Date(p.rokDo), new Date()) })}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button
+                type="button"
+                disabled={radi !== null}
+                onClick={() => odluci(p.id, "ODOBREN")}
+                className="rounded-xl bg-kolo-green-700 px-4 py-2 text-sm font-medium text-white transition hover:bg-kolo-green-800 disabled:opacity-60"
+              >
+                {t("prepis_odobri")}
+              </button>
+              <button
+                type="button"
+                disabled={radi !== null}
+                onClick={() => odluci(p.id, "ODBIJEN")}
+                className="rounded-xl border border-kolo-border px-4 py-2 text-sm font-medium text-kolo-text transition hover:bg-kolo-bg disabled:opacity-60"
+              >
+                {t("prepis_odbij")}
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

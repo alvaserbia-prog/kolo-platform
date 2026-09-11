@@ -77,9 +77,13 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // se OBE strane veze, rok je 60 dana uz podsetnike svima koje bi poništenje
   // oštetilo, svako vraća isključivo svoje (bez nadoknade iz čl. 20b), poništenje
   // nije kvalifikacija neistinite potvrde i protiv njega stoji prigovor.
+  // 4.5.3 — uzrasne grupe 7–14 i 15–17 (R-17, čl. 12): do 15 nema ni razmene ni
+  // razgovora sa punoletnima i saglasnost to ne otvara; nov čl. 12a (razmena male
+  // vrednosti, poslovna sposobnost); čl. 14 — prepis iznad praga čeka roditelja;
+  // čl. 10 — roditeljska lozinka samo dok dete nema sopstvenu adresu.
   "ucesce-dece": {
-    fajl: "ucesce_dece_4_5_2.md",
-    verzija: "4.5.2",
+    fajl: "ucesce_dece_4_5_3.md",
+    verzija: "4.5.3",
   },
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
   // 4.4.3 — broj POEN-a po delu je parametar odluke o nabavci (čl. 17), a ne izvod

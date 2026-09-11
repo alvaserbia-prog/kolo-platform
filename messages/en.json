@@ -373,7 +373,9 @@
     "nadoknada_naslov_dete": "You owe",
     "nadoknada_opis_dete": "This came off when a friendship ended. The first POEN that arrives fills it in. Everything else works as usual.",
     "rezervisano_nabavka": "Reserved for procurement",
-    "rezervisano_nabavka_opis": "Reserved until the goods are collected. Annulled upon collection, not before; if you do not collect, it returns to your record."
+    "rezervisano_nabavka_opis": "Reserved until the goods are collected. Annulled upon collection, not before; if you do not collect, it returns to your record.",
+    "send_ceka_naslov": "Waiting for a parent's approval",
+    "send_ceka_opis": "{iznos} POEN to member {pseudonim} is waiting for a parent to approve. Until then nothing is deducted from your record."
   },
   "verifikacija": {
     "naslov": "Proof of reality",
@@ -949,7 +951,7 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.4.3"
+      "ver": "4.5.3"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
@@ -997,7 +999,7 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use — KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.4.3",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.5.3",
     "meta_privatnost_title": "Privacy Policy — KOLO",
     "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.5.2",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
@@ -2721,7 +2723,13 @@
     "roditeljstvo_ponistena_roditelj_naslov": "A confirmation of your reality has been cancelled",
     "roditeljstvo_ponistena_roditelj_tekst": "The confirmation given to you by {pseudonim} was cancelled because no response about the child's existence arrived in time. {iznos} POEN was written off your record; the record may thereby go negative. Another person may confirm your reality, and you can appeal the cancellation from your profile.",
     "roditeljstvo_ponistena_nadzornik_naslov": "A confirmation you supervised has been cancelled",
-    "roditeljstvo_ponistena_nadzornik_tekst": "The confirmation you supervised was cancelled because no response about the child's existence arrived in time. {iznos} POEN was written off your record; the record may thereby go negative. You can appeal the cancellation from your profile."
+    "roditeljstvo_ponistena_nadzornik_tekst": "The confirmation you supervised was cancelled because no response about the child's existence arrived in time. {iznos} POEN was written off your record; the record may thereby go negative. You can appeal the cancellation from your profile.",
+    "prepis_odobrenje_naslov": "Your child is asking you to approve a re-registration",
+    "prepis_odobrenje_tekst": "{dete} wants to re-register {iznos} POEN to member {pseudonim}. Without your approval it is not carried out, and the request expires in {dana} days.",
+    "prepis_odobren_naslov": "A parent approved the re-registration",
+    "prepis_odobren_tekst": "The re-registration of {iznos} POEN to member {pseudonim} has been carried out.",
+    "prepis_odbijen_naslov": "The re-registration was not carried out",
+    "prepis_odbijen_tekst": "The re-registration of {iznos} POEN to member {pseudonim} was not carried out."
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",
@@ -3233,7 +3241,15 @@
     "lozinka_uspeh": "The password is set. Tell your child what it is.",
     "izjava_naslov": "Statement that the child exists",
     "izjava_opis": "The deadline expires in {dana} days. Without your statement, the confirmations of your reality given by those responding about the child will fall, and each of them has the POEN recorded for that confirmation written off.",
-    "izjava_dugme": "I confirm and give the statement"
+    "izjava_dugme": "I confirm and give the statement",
+    "prekidac_zatvoren": "Until the age of 15 the child exchanges and talks only with other children, and your consent does not change that. The switch becomes active when the child turns 15.",
+    "lozinka_ima_adresu": "The child has entered their own e-mail address, so from now on only they set the password. If access is genuinely lost, file an appeal from your profile — the Foundation decides.",
+    "prepis_naslov": "A re-registration is waiting for your approval",
+    "prepis_opis": "A larger re-registration from your child's record is not carried out until you approve it. Until then no POEN moves.",
+    "prepis_stavka": "{iznos} POEN to member {pseudonim}",
+    "prepis_rok": "Expires in {dana} days; after that it is not carried out.",
+    "prepis_odobri": "Approve",
+    "prepis_odbij": "Do not approve"
   },
   "decjaPocetna": {
     "naslov": "Children's marketplace",

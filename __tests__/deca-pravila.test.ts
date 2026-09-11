@@ -34,10 +34,10 @@ import {
 const DANAS = new Date("2026-08-14T00:00:00.000Z");
 
 function dete(o: Partial<Ucesnik> = {}): Ucesnik {
-  return { id: "d1", maloletan: true, dozvolaOdrasli: false, roditeljIds: ["r1"], stanje: "AKTIVNO", ...o };
+  return { id: "d1", maloletan: true, godine: 16, dozvolaOdrasli: false, roditeljIds: ["r1"], stanje: "AKTIVNO", ...o };
 }
 function odrastao(o: Partial<Ucesnik> = {}): Ucesnik {
-  return { id: "o1", maloletan: false, dozvolaOdrasli: false, roditeljIds: [], stanje: "AKTIVNO", ...o };
+  return { id: "o1", maloletan: false, godine: null, dozvolaOdrasli: false, roditeljIds: [], stanje: "AKTIVNO", ...o };
 }
 
 describe("uzrast", () => {

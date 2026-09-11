@@ -373,7 +373,9 @@
     "nadoknada_naslov_dete": "Duguješ",
     "nadoknada_opis_dete": "Ovo se skinulo kad je prijateljstvo prestalo. Prvi POENI koji ti stignu popunjavaju ovo. Sve ostalo radi normalno.",
     "rezervisano_nabavka": "Rezervisano za nabavku",
-    "rezervisano_nabavka_opis": "Rezervisano do preuzimanja robe. Poništava se pri preuzimanju, ne pre; ako ne preuzmeš, vraća se u tvoj zapis."
+    "rezervisano_nabavka_opis": "Rezervisano do preuzimanja robe. Poništava se pri preuzimanju, ne pre; ako ne preuzmeš, vraća se u tvoj zapis.",
+    "send_ceka_naslov": "Prepis čeka odobrenje roditelja",
+    "send_ceka_opis": "{iznos} POEN članu {pseudonim} čeka da roditelj odobri. POEN ti se do tada ne skida sa zapisa."
   },
   "verifikacija": {
     "naslov": "Potvrda stvarnosti",
@@ -949,7 +951,7 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "4.4.3"
+      "ver": "4.5.3"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
@@ -997,7 +999,7 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja · KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.4.3",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.5.3",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
     "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.2",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
@@ -2721,7 +2723,13 @@
     "roditeljstvo_ponistena_roditelj_naslov": "Jedna potvrda tvoje stvarnosti je poništena",
     "roditeljstvo_ponistena_roditelj_tekst": "Potvrda stvarnosti koju ti je dao {pseudonim} poništena je jer izjašnjenje o postojanju deteta nije stiglo u roku. Sa tvog zapisa je otpisano {iznos} POEN; zapis time može preći u minus. Stvarnost može potvrditi drugo lice, a na poništenje možeš uložiti prigovor sa svog profila.",
     "roditeljstvo_ponistena_nadzornik_naslov": "Potvrda koju si nadzirao je poništena",
-    "roditeljstvo_ponistena_nadzornik_tekst": "Potvrda koju si nadzirao poništena je jer izjašnjenje o postojanju deteta nije stiglo u roku. Sa tvog zapisa je otpisano {iznos} POEN; zapis time može preći u minus. Na poništenje možeš uložiti prigovor sa svog profila."
+    "roditeljstvo_ponistena_nadzornik_tekst": "Potvrda koju si nadzirao poništena je jer izjašnjenje o postojanju deteta nije stiglo u roku. Sa tvog zapisa je otpisano {iznos} POEN; zapis time može preći u minus. Na poništenje možeš uložiti prigovor sa svog profila.",
+    "prepis_odobrenje_naslov": "Dete traži odobrenje za prepis POENA",
+    "prepis_odobrenje_tekst": "{dete} hoće da prepiše {iznos} POEN članu {pseudonim}. Bez tvog odobrenja prepis se ne izvršava, a zahtev ističe za {dana} dana.",
+    "prepis_odobren_naslov": "Roditelj je odobrio prepis",
+    "prepis_odobren_tekst": "Prepis od {iznos} POENA članu {pseudonim} je izvršen.",
+    "prepis_odbijen_naslov": "Prepis nije izvršen",
+    "prepis_odbijen_tekst": "Prepis od {iznos} POENA članu {pseudonim} nije izvršen."
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",
@@ -3233,7 +3241,15 @@
     "lozinka_uspeh": "Lozinka je postavljena. Reci je detetu.",
     "izjava_naslov": "Izjava o postojanju deteta",
     "izjava_opis": "Rok ističe za {dana} dana. Bez tvoje izjave padaju potvrde tvoje stvarnosti onih koji se o detetu izjašnjavaju, a svakome od njih se otpisuje POEN evidentiran povodom te potvrde.",
-    "izjava_dugme": "Potvrđujem i dajem izjavu"
+    "izjava_dugme": "Potvrđujem i dajem izjavu",
+    "prekidac_zatvoren": "Do navršenih 15 godina dete razmenjuje i razgovara samo sa drugom decom, i tvoja saglasnost to ne menja. Prekidač se uključuje kad dete napuni 15.",
+    "lozinka_ima_adresu": "Dete je upisalo svoju elektronsku adresu, pa lozinku od sada postavlja samo ono. Ako je pristup stvarno izgubljen, podnesi prigovor sa svog profila — odlučuje Fondacija.",
+    "prepis_naslov": "Prepis čeka tvoje odobrenje",
+    "prepis_opis": "Veći prepis iz zapisa tvog deteta ne izvršava se dok ga ne odobriš. POEN se do tada ne pomera.",
+    "prepis_stavka": "{iznos} POEN članu {pseudonim}",
+    "prepis_rok": "Ističe za {dana} dana; posle toga se ne izvršava.",
+    "prepis_odobri": "Odobri prepis",
+    "prepis_odbij": "Ne odobravam"
   },
   "decjaPocetna": {
     "naslov": "Dečja pijaca",
