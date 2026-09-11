@@ -101,6 +101,27 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-11 (dvadeset sedmi put):** na **4.5.6** ide **JEDAN akt** —
+Pravilnik o KOLO sistemu (sa 4.5.4). Ostalih šesnaest ostaje gde jeste. Povod je
+**mera M-1 uz R-19**: čl. 13 je dobio obrazloženje zašto POEN nije virtuelna valuta.
+Sadržinski, vidi sekciju „Pranje novca: uplatilac mora biti donator" ispod.
+
+🔴 **Zašto je ovo moralo u glavni Pravilnik i nije moglo nigde drugde.** Tvrdnja
+„POEN nije digitalna imovina" stoji u čl. 13 st. 3 i to je **temeljna odredba** o
+pravnoj prirodi jedinice; poseban pravilnik ne može da je obrazloži jer je ne
+ustanovljava. Uz to je od svih odbrana u setu ova najskuplja ako padne: kvalifikacija
+POEN-a kao virtuelne valute čini Fondaciju pružaocem usluga povezanih sa digitalnom
+imovinom (dozvola, obavezan KYC, prijavljivanje sumnjivih transakcija) — teže od PDV-a
+iz R-10.
+
+🟡 **Zaostala unakrsna upućivanja — sada ih ima SEDAM.** Novo je `ucesce_dece_4_5_3`
+i `DPIA_4_5_2` → `Pravilnik o KOLO sistemu (v4.5.2)` (bilo zastarelo i pre ovog bumpa),
+`gornje_kolo_4_4_6` → `Pravilnik (v4.4.6)`, i DPIA → `Politika (v4.5.2)` i
+`Registar (v4.5.2)` na tri mesta, koji su zastareli bumpom iz R-19. 🔴 **Ispravka
+zapisa uz dvadeset šesti bump koja je tvrdila „i dalje ŠEST, nijedno novo" — netačno:
+bump Politike i Registra je učinio zastarelim i upućivanja DPIA na njih.** Sve to
+briše odjednom bump celog seta na 5.0.
+
 **AŽURIRANO 2026-09-11 (dvadeset šesti put):** na **4.5.5** idu **ČETIRI akta** —
 Pravilnik o pokroviteljstvu i donacijama (sa 4.5.1), Izjava o prihvatanju rizika
 (sa 4.4.6), Politika privatnosti (sa 4.5.2) i Registar radnji obrade (sa 4.5.2).
@@ -121,8 +142,10 @@ nov osnov poništenja ne ustanovljava"* — a put ide kroz **zatečeni** osnov:
 isključenje po Uslovima čl. 28 → prestanak statusa → poništenje po čl. 34
 Pravilnika. Zaključano testom. **Ne uvoditi AML poništenje u poseban akt.**
 
-🟡 **Zaostala unakrsna upućivanja — i dalje ŠEST, nijedno novo.** Nijedan od
-četiri izmenjena akta ne menja šifru na koju neko drugi upućuje po broju.
+🔴 **ISPRAVKA (isti dan):** ovde je prvo stajalo „i dalje ŠEST, nijedno novo" — nije
+tačno. Bumpom Politike i Registra na 4.5.5 zastarela su i upućivanja DPIA na njih
+(`Politika (v4.5.2)`, `Registar (v4.5.2)` na tri mesta). Tačan broj je u zapisu uz
+dvadeset sedmi bump.
 
 **AŽURIRANO 2026-09-11 (dvadeset peti put):** na **4.5.4** idu **TRI akta** —
 Pravilnik o KOLO sistemu (sa 4.5.2), Pravilnik o projektima i kolektivnim nabavkama
@@ -1307,15 +1330,24 @@ je 15.000 EUR, dakle znatno viši — naš je namerno ispod njega.
   lično — vidi R-05) ostaje i sa AML strane najoštrija tačka. Vlasnik se sa nalazom
   složio; mera nije uvedena.
 
-🟡 **NIJE ODLUČENO — M-1 čeka odgovor vlasnika.** Predlog je bio da **Pravilnik
-čl. 13** dobije **obrazloženje** zašto POEN nije virtuelna valuta (nedostajući
-elementi definicije: ne može se pribaviti kupovinom, otuđenje uz naknadu je
-zabranjeno, nema tržišta ni kotacije, ne postoji izvan evidencije Protokola, ne
-služi izmirenju novčanih obaveza) umesto gole etikete „nije digitalna imovina".
-Čl. 13 **nije diran** — bump glavnog Pravilnika se ne otvara bez naloga. To je i
-dalje najvažnija otvorena stavka iz R-19: ako POEN bude kvalifikovan kao virtuelna
-valuta, Fondacija postaje pružalac usluga povezanih sa digitalnom imovinom, sa
-dozvolom, obaveznim KYC-om i prijavljivanjem sumnjivih transakcija.
+🔴 **M-1 SPROVEDEN (odobren istog dana) — Pravilnik čl. 13 na 4.5.6.** Do tada je
+akt samo nabrajao šta POEN nije („nije novac, nije digitalna imovina…"), što je
+**etiketa, ne odbrana**. Problem je precizan: definicija virtuelne valute **izričito
+isključuje status novca**, pa je naša odbrana pobijala element koji nam niko ne
+prigovara. Sada čl. 13 nabraja **elemente koji nedostaju** — ne može se pribaviti
+kupovinom (Fondacija ga ne prodaje, upis nije protivčinidba), otuđenje uz naknadu je
+zabranjeno Uslovima, nema otkupa ni konverzije (čl. 73), Fondacija ne utvrđuje cenu
+i ne nudi ga na tržištu, ne postoji izvan evidencije Protokola, ne služi izmirenju
+novčanih obaveza — i dodaje da Fondacija po osnovu POEN-a **ne pruža platne usluge,
+ne drži novčana sredstva korisnika i ne izvršava platne transakcije**.
+🔴 **Orijentacioni odnos 1 POEN ≈ 1 RSD se NE prećutkuje nego imenuje** (služi
+isključivo korisniku u sopstvenom oglasu, Fondacija ga ne primenjuje ni u jednom
+svom postupku — doslovno ono što Uslovi čl. 19 već kažu). Prećutan, bio bi prvi
+protivargument; imenovan, uklapa se u odbranu. **Ne brisati ga iz čl. 13.**
+Zaključano testom na sr/en/ru.
+
+🟢 **H-3 ODBIJEN (odluka vlasnika, 2026-09-11) — ne praviti zasebnu belešku za
+pravnicu u `docs/`.** Poređenje elemenata definicije živi u čl. 13 i u pasusu ispod.
 
 🔴 **OTVORENO — pitanje za pravnicu, ne pisati kao tvrdnju:** da li POEN ispunjava
 definiciju **virtuelne valute** (digitalni zapis vrednosti koji nije izdala

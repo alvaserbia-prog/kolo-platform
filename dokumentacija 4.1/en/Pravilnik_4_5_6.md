@@ -204,6 +204,22 @@ New POEN records are inscribed exclusively by the Protocol through the contribut
 
 POEN has no bearer; it exists solely as a record in the Protocol's ledger. POEN amounts are expressed in whole numbers. POEN does not represent money, currency, electronic money, a means of payment, digital assets, a financial instrument, or a security. POEN cannot be converted into a means with value outside the system.
 
+The provision of the preceding paragraph is not merely a label but a consequence of the properties of the record. POEN does not meet the elements by which digital assets, that is a virtual currency, are determined:
+
+— it cannot be acquired by purchase: the Foundation does not sell it and does not issue it for consideration, and the recording of POEN is not a counter-performance for any giving whatsoever;
+
+— it cannot be alienated for consideration: offering, buying, selling and brokering the trade of POEN for value outside the system are prohibited by the Terms of Use and entail the measures under those Terms;
+
+— it is neither redeemed nor converted (Article 73 of this Rulebook), so there is no exit from it in money;
+
+— the Foundation does not determine its price and does not offer it on a market; the indicative ratio under the Terms of Use serves the user alone in setting the amount in their own listing, and the Foundation applies it in none of its own procedures;
+
+— it does not exist outside the Protocol's ledger and cannot be transferred to a record the Protocol does not keep;
+
+— it does not serve the settlement of monetary obligations and cannot be offered in place of money.
+
+On account of POEN the Foundation provides no payment services, holds no monetary funds of users and executes no payment transactions. The updating of the ledger between users under Article 16 of this Rulebook is not a transfer of monetary value but a change of a record in the ledger kept by the Protocol.
+
 ### Article 14
 
 The sum of all POEN records in the system, including the Protocol's record, equals zero at all times. This property ensures that POENs cannot be created without a counter-entry — every recorded contribution has an exact counter-entry in the Protocol's ledger.

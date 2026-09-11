@@ -976,7 +976,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.5.4",
+      "ver": "4.5.6",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -1010,7 +1010,7 @@
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.6-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.5.4-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.5.6-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",

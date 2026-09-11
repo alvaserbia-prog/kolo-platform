@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_5_4.md`, `uslovi_koriscenja_4_5_4.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_5_6.md`, `uslovi_koriscenja_4_5_4.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,7 +27,7 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_5_4.md",
+  "Pravilnik_4_5_6.md",
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_5_2.md",
   "radnje_obrade_4_5_5.md",
@@ -62,8 +62,18 @@ const AKTI = [
  * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_5_4.md": {
+  "Pravilnik_4_5_6.md": {
     sr: [
+      // 🔴 4.5.6 (R-19, M-1) — čl. 13 ne sme ostati na goloj etiketi „nije digitalna
+      // imovina". Odbrana koja pobija STATUS NOVCA ne odgovara na prigovor, jer
+      // definicija virtuelne valute status novca izričito isključuje; nosivo je
+      // nabrajanje elemenata koji NEDOSTAJU. Ako iz akta padne, ostaje nam samo
+      // naziv, a to je ono što je R-19 ispravio.
+      "ne ispunjava elemente po kojima se određuje digitalna imovina odnosno virtuelna valuta",
+      "ne može se pribaviti kupovinom",
+      "ne postoji izvan evidencije Protokola",
+      "ne služi izmirenju novčanih obaveza",
+      "ne pruža platne usluge, ne drži novčana sredstva korisnika i ne izvršava platne transakcije",
       "### Član 40a",
       "evidentira se u Protokolu kada Fondacija odobri oglas",
       // 4.3.0 — čl. 14 st. 3 nabraja izuzetke od zabrane negativnog zapisa
@@ -117,6 +127,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Sastav Gornjeg Kola ne utvrđuje se imenovanjem",
     ],
     en: [
+      "does not meet the elements by which digital assets, that is a virtual currency, are determined",
+      "it cannot be acquired by purchase",
+      "provides no payment services",
       "### Article 40a",
       "is recorded in the Protocol when the Foundation approves the listing",
       "through the correction of an annulment effected without grounds",
@@ -141,6 +154,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "The composition of the Upper Kolo is not established by appointment",
     ],
     ru: [
+      "не отвечает элементам, по которым определяется цифровое имущество",
+      "его нельзя приобрести покупкой",
+      "не оказывает платёжных услуг",
       "### Статья 40a",
       "учитывается в Протоколе, когда Фонд одобрит объявление",
       "исправлением аннулирования, произведённого без основания",
@@ -1044,7 +1060,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_5_4.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_5_6.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });

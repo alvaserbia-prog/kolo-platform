@@ -202,6 +202,22 @@ Nove zapise POEN-a upisuje isključivo Protokol kroz kanale evidentiranja doprin
 
 POEN nema nosioca; postoji isključivo kao zapis u evidenciji Protokola. Iznosi POEN-a izražavaju se celim brojevima. POEN ne predstavlja novac, valutu, elektronski novac, platno sredstvo, digitalnu imovinu, finansijski instrument ni hartiju od vrednosti. POEN se ne može konvertovati u sredstvo sa vrednošću van sistema.
 
+Odredba prethodnog stava nije samo naziv nego posledica svojstava zapisa. POEN ne ispunjava elemente po kojima se određuje digitalna imovina odnosno virtuelna valuta:
+
+— ne može se pribaviti kupovinom: Fondacija ga ne prodaje i ne izdaje uz naknadu, a upis POEN-a nije protivčinidba ni za jedno davanje;
+
+— ne može se otuđiti uz naknadu: nuđenje, kupovina, prodaja i posredovanje u prometu POEN-a za vrednost van sistema zabranjeni su Uslovima korišćenja i povlače mere iz tih uslova;
+
+— ne otkupljuje se i ne konvertuje (član 73 ovog pravilnika), pa iz njega ne postoji izlaz u novcu;
+
+— Fondacija ne utvrđuje njegovu cenu i ne nudi ga na tržištu; orijentacioni odnos iz Uslova korišćenja služi isključivo korisniku pri određivanju iznosa u sopstvenom oglasu i Fondacija ga ne primenjuje ni u jednom svom postupku;
+
+— ne postoji izvan evidencije Protokola i ne može se preneti na zapis koji Protokol ne vodi;
+
+— ne služi izmirenju novčanih obaveza i ne može se ponuditi umesto novca.
+
+Fondacija po osnovu POEN-a ne pruža platne usluge, ne drži novčana sredstva korisnika i ne izvršava platne transakcije. Ažuriranje evidencije između korisnika iz člana 16 ovog pravilnika nije prenos novčane vrednosti nego izmena zapisa u evidenciji koju vodi Protokol.
+
 ### Član 14
 
 Zbir svih zapisa POEN-a u sistemu, uključujući zapis Protokola, u svakom trenutku iznosi nula. Ovo svojstvo obezbeđuje da se POEN-i ne mogu stvoriti bez protivzapisa — svaki evidentiran doprinos ima tačan protivzapis u evidenciji Protokola.

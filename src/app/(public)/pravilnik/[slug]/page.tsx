@@ -23,8 +23,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // Bez izmene ovog člana taj otpis ne bi imao osnov — st. 6 izričito kaže da se
   // drugi osnov ne može ustanoviti nijednim drugim aktom.
   "kolo-sistem": {
-    fajl: "Pravilnik_4_5_4.md",
-    verzija: "4.5.4",
+    fajl: "Pravilnik_4_5_6.md",
+    verzija: "4.5.6",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.

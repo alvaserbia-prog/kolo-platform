@@ -204,6 +204,22 @@ A POEN a rendszer belső elszámolási egysége, amellyel a közjóhoz való hoz
 
 A POEN-nek nincs birtokosa; kizárólag a Protokoll nyilvántartásában szereplő bejegyzésként létezik. A POEN összegei egész számokban fejezendők ki. A POEN nem minősül pénznek, valutának, elektronikus pénznek, fizetési eszköznek, digitális vagyonnak, pénzügyi eszköznek vagy értékpapírnak. A POEN nem konvertálható a rendszeren kívül értékkel bíró eszközzé.
 
+Az előző bekezdés rendelkezése nem puszta megnevezés, hanem a bejegyzés tulajdonságainak következménye. A POEN nem felel meg azoknak az elemeknek, amelyek alapján a digitális vagyont, illetve a virtuális fizetőeszközt meghatározzák:
+
+— vásárlással nem szerezhető meg: az Alapítvány nem adja el és nem bocsátja ki ellenérték fejében, a POEN nyilvántartásba vétele pedig semmilyen juttatásért nem ellenszolgáltatás;
+
+— ellenérték fejében nem ruházható át: a POEN rendszeren kívüli értékért való felkínálását, vételét, eladását és a forgalmában való közvetítést a Felhasználási feltételek tiltják, és az az e feltételek szerinti intézkedéseket vonja maga után;
+
+— nem váltják vissza és nem konvertálják (a jelen szabályzat 73. cikke), így belőle pénzbeli kiút nincs;
+
+— az Alapítvány nem állapítja meg az árát, és nem kínálja piacon; a Felhasználási feltételek szerinti tájékoztató arány kizárólag a felhasználót szolgálja a saját hirdetésében szereplő összeg meghatározásakor, és azt az Alapítvány egyetlen eljárásában sem alkalmazza;
+
+— a Protokoll nyilvántartásán kívül nem létezik, és nem vihető át olyan bejegyzésre, amelyet a Protokoll nem vezet;
+
+— nem szolgál pénztartozás teljesítésére, és nem kínálható fel pénz helyett.
+
+A POEN jogcímén az Alapítvány nem nyújt fizetési szolgáltatást, nem tart a felhasználók pénzeszközeinél, és nem hajt végre fizetési műveletet. A felhasználók közötti, a jelen szabályzat 16. cikke szerinti nyilvántartás-frissítés nem pénzbeli érték átutalása, hanem a Protokoll által vezetett nyilvántartásban szereplő bejegyzés módosítása.
+
 ### 14. cikk
 
 A rendszerben szereplő valamennyi POEN-bejegyzés összege, ideértve a Protokoll bejegyzését is, minden pillanatban nulla. Ez a tulajdonság biztosítja, hogy POEN-t ne lehessen ellenbejegyzés nélkül létrehozni — minden nyilvántartásba vett hozzájárulásnak pontos ellenbejegyzése van a Protokoll nyilvántartásában.
