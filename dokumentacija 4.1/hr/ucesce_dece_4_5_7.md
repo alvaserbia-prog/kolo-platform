@@ -2,7 +2,7 @@
 
 # Pravilnik o sudjelovanju djece
 
-*Ovaj pravilnik uređuje sudjelovanje maloljetnih osoba u KOLO sustavu — pristupanje, obim aktivnosti, odnos s roditeljem, doprinos iz dječjeg prostora i prijelaz u punoljetni račun. Donosi se na temelju članka 58. Pravilnika o KOLO sustavu (v4.5.2), koji izričito upućuje na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
+*Ovaj pravilnik uređuje sudjelovanje maloljetnih osoba u KOLO sustavu — pristupanje, obim aktivnosti, odnos s roditeljem, doprinos iz dječjeg prostora i prijelaz u punoljetni račun. Donosi se na temelju članka 58. Pravilnika o KOLO sustavu (v4.5.7), koji izričito upućuje na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
 
 ## I — Opće odredbe
 
@@ -73,6 +73,24 @@ Račun maloljetnog korisnika nalazi se u jednom od tri stanja:
 Ograničenja iz stavka 1. točke 1. bezbjednosne su prirode i obrazložena su u članku 18. stavku 2.
 
 Račun prelazi između stanja sam, prema statusu roditelja. Prijelaz iz stanja „aktivno" u stanje „povezano" nije mjera i ne teku rokovi propisani za suspenziju.
+
+### Članak 4.d — Prevođenje punoljetnog računa u maloljetni
+
+Kada se utvrdi da iza računa otvorenog kao račun punoljetne osobe stoji maloljetna osoba, Zaklada taj račun prevodi u račun maloljetnog korisnika. Odluku donosi ovlaštena osoba Zaklade; njome se određuje roditelj i upisuje datum rođenja iz članka 7.
+
+Prevođenje je ispravak pogrešno navedene dobi. Ono nije mjera prema korisniku, ne pretpostavlja povredu obveze i ne pokreće postupak iz Glave VIII. Pravilnika o dokazu stvarnosti.
+
+Prevođenjem račun izlazi iz lanca potvrda: poništavaju se sve potvrde koje taj račun dodiruje, u oba smjera. Poništenje ne znači da je potvrda bila neistinita — maloljetni korisnik u lanac potvrda ne ulazi (članak 15.), pa te potvrde ostaju bez osnove. Računu se otpisuje ZRNO, prestaju prijave na programe podrške i na operativni doprinos, a zabilježen doprinos iz članaka 40a i 40b Pravilnika o KOLO sustavu se briše.
+
+Poništava se doprinos koji je računu bio evidentiran kroz kanale iz članka 15. Pravilnika o KOLO sustavu, u broju koji je po tim kanalima upisan umanjenom za ono što je Protokolu već vraćeno. POEN koji je računu prepisao drugi korisnik se ne dira: prijepis nije evidentiranje doprinosa nego promjena nositelja zapisa, a maloljetni korisnik POEN smije imati.
+
+Otpis pogađa i osobe kojima je POEN bio evidentiran povodom potvrda koje prevođenjem otpadaju. Svaka od njih vraća isključivo ono što je povodom te potvrde dobila; teret se ne prenosi na drugu osobu i naknada iz članka 20b Pravilnika o dokazu stvarnosti se ne primjenjuje.
+
+Otpis iz stavaka 4. i 5. izvršava se i kada zapis time prijeđe u negativnu vrijednost, u skladu s člankom 14. stavkom 3. točkom 5. Pravilnika o KOLO sustavu. Svaka pogođena osoba obavještava se o otpisu i o broju POEN-a koji joj je otpisan, a na odluku može podnijeti prigovor po članku 37a Uvjeta korištenja.
+
+Oglasi, razgovori i povijest zapisa se ne brišu. Zatečeni razgovori s punoljetnim osobama od prevođenja potpadaju pod članak 9.
+
+Prevedeni račun dalje potpada pod ovaj pravilnik. U punoljetni račun prelazi po članku 19., na dan punoljetnosti izračunat iz datuma rođenja upisanog odlukom o prevođenju.
 
 ### Članak 5.
 

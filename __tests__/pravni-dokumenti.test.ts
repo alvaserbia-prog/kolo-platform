@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_5_6.md`, `uslovi_koriscenja_4_5_4.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_5_7.md`, `uslovi_koriscenja_4_5_4.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,7 +27,7 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_5_6.md",
+  "Pravilnik_4_5_7.md",
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_5_2.md",
   "radnje_obrade_4_5_5.md",
@@ -43,7 +43,7 @@ const AKTI = [
   "gornje_kolo_4_4_6.md",
   "programi_podrske_4_5_0.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
-  "ucesce_dece_4_5_3.md",
+  "ucesce_dece_4_5_7.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
   "projekti_nabavke_4_5_4.md",
 ];
@@ -62,7 +62,7 @@ const AKTI = [
  * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_5_6.md": {
+  "Pravilnik_4_5_7.md": {
     sr: [
       // 🔴 4.5.6 (R-19, M-1) — čl. 13 ne sme ostati na goloj etiketi „nije digitalna
       // imovina". Odbrana koja pobija STATUS NOVCA ne odgovara na prigovor, jer
@@ -80,12 +80,19 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // ISCRPNO. Traži se sva tri, jer je do 4.3.0 akt poznavao samo prvi, a kod
       // radio sa tri; ako iz teksta padne bilo koji, kod opet radi bez osnova.
       "20b Pravilnika o dokazu stvarnosti",
-      "Izuzetaka je četiri i navedeni su ovde iscrpno",
+      "Izuzetaka je pet i navedeni su ovde iscrpno",
       // R-15 — četvrti izuzetak: otpis po poništenju potvrde zbog neaktivnosti
       // (čl. 6 Pravilnika o učešću dece). Bez njega taj otpis nema osnov, jer
       // st. 6 zabranjuje ustanovljavanje drugog osnova bilo kojim drugim aktom.
       "otpis po poništenju potvrde zbog neaktivnosti",
       "teret se ne prenosi na drugo lice",
+      // 🔴 R-20 — PETI izuzetak: otpis po prevođenju punoletnog naloga u maloletni.
+      // `prevod-u-maloletni.ts` pravi taj minus od 2026-08-23, i na samom nalogu i
+      // na licima kojima potvrde padaju, a čl. 14 st. 6 zabranjuje osnov koji ovde
+      // nije naveden. Dok je lista brojala četiri, kod je radio protiv akta — to je
+      // bila jedina dokazana protivrečnost u setu. Ako tačka padne, vraća se.
+      "otpis po prevođenju punoletnog naloga u maloletni",
+      "Na negativan zapis po svakom od pet osnova",
       // R-18 — ispravka poništenja izvršenog bez osnova (čl. 14a). Uvećava ukupan
       // broj POEN-a VAN kanala iz čl. 15, pa je čl. 14 morao da dobije izričit
       // osnov; bez njega bi poseban pravilnik probijao zatvorenu listu.
@@ -140,7 +147,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "allows it seven days to make a statement",
       "does not constitute mediation in the exchange",
       "Article 20b of the Rulebook on Proof of Reality",
-      "There are four exceptions, and they are listed here exhaustively",
+      "There are five exceptions, and they are listed here exhaustively",
+      // R-20 — peti izuzetak (vidi sr).
+      "write-off upon the conversion of an adult account into a minor's account",
       "write-off upon annulment of a confirmation due to inactivity",
       "the burden is not transferred to another person",
       "contribution of children in the children's space",
@@ -167,7 +176,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "предоставляет ей срок семи дней",
       "не является посредничеством в обмене",
       "статьёй 20b Правил о доказательстве реальности",
-      "Исключений четыре, и здесь они перечислены исчерпывающе",
+      "Исключений пять, и здесь они перечислены исчерпывающе",
+      // R-20 — пятое исключение (vidi sr).
+      "списание при переводе совершеннолетнего аккаунта в несовершеннолетний",
       "списание при аннулировании подтверждения из-за неактивности",
       "бремя не переносится на другое лицо",
       "вклад детей в детском пространстве",
@@ -634,8 +645,26 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // svakom potvrđenom članu. Ako ta odredba ispadne iz akta, kod nastavi da
   // zatvara profil bez osnova, a pregled po školama ostane bez ijednog pravila o
   // tome šta se sme objaviti — pa se traži doslovno, na sva tri jezika.
-  "ucesce_dece_4_5_3.md": {
+  "ucesce_dece_4_5_7.md": {
     sr: [
+      // 🔴 4.5.7 (R-20) — čl. 4d. Prevođenje je do ovog seta postojalo samo u kodu:
+      // nalog je izlazio iz lanca potvrda, gubio ZRNO i emitovan POEN, a zapis je
+      // išao u minus i njemu i trećim licima — bez ijedne odredbe. Peta tačka
+      // čl. 14 st. 3 Pravilnika upućuje baš ovde, pa bez ovog člana upućivanje
+      // ostaje prazno i minus opet nema osnov.
+      "### Član 4d",
+      "Prevođenje je ispravka pogrešno navedenog uzrasta",
+      "ne pokreće postupak iz Glave VIII",
+      // Prepisan POEN NIJE emisija i detetu ostaje — razlika koju kod pravi
+      // merenjem neto emisije, a akt mora da je nosi.
+      "prepis nije evidentiranje doprinosa nego promena nosioca zapisa",
+      // Minus na obe strane (odluka vlasnika 2026-08-23) + izričito upućivanje na
+      // osnov u glavnom Pravilniku.
+      "u skladu sa članom 14 stav 3 tačka 5",
+      "nadoknada iz člana 20b Pravilnika o dokazu stvarnosti se ne primenjuje",
+      // Pogođeno treće lice mora da sazna i da ima put — minus se ne sme pojaviti
+      // bez reči, a obrada koja dira status traži ljudski uvid.
+      "obaveštava se o otpisu",
       "### Član 7a",
       "### Član 15a",
       "### Član 15b",
@@ -687,6 +716,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "prestaje kada maloletni korisnik upiše i potvrdi sopstvenu elektronsku adresu",
     ],
     en: [
+      // R-20 — cl. 4d (vidi sr).
+      "### Article 4d",
+      "correction of an incorrectly stated age",
+      "a re-registration is not a recording of contribution but a change in the holder of the record",
+      "in accordance with Article 14, paragraph 3, item 5",
       "### Article 7a",
       "### Article 15a",
       "### Article 15b",
@@ -717,6 +751,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ceases once the minor user enters and confirms their own e-mail address",
     ],
     ru: [
+      // R-20 — ст. 4d (vidi sr).
+      "### Статья 4d",
+      "исправлением неверно указанного возраста",
+      "переписывание не является учётом вклада",
+      "со статьёй 14 пунктом 3 подпунктом 5",
       "### Статья 7a",
       "### Статья 15a",
       "### Статья 15b",
@@ -1060,7 +1099,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_5_6.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_5_7.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });

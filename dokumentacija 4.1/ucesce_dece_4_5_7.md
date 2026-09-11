@@ -1,6 +1,6 @@
 # Pravilnik o učešću dece
 
-*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.5.2), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
+*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.5.7), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
 
 ## I — Opšte odredbe
 
@@ -71,6 +71,24 @@ Nalog maloletnog korisnika nalazi se u jednom od tri stanja:
 Ograničenja iz stava 1 tačke 1 su bezbednosne prirode i obrazložena su u članu 18 stav 2.
 
 Nalog prelazi između stanja sam, prema statusu roditelja. Prelazak iz stanja „aktivno" u stanje „povezano" nije mera i ne teku rokovi propisani za suspenziju.
+
+### Član 4d — Prevođenje punoletnog naloga u maloletni
+
+Kada se utvrdi da iza naloga otvorenog kao nalog punoletnog lica stoji maloletno lice, Fondacija taj nalog prevodi u nalog maloletnog korisnika. Odluku donosi ovlašćeno lice Fondacije; njome se određuje roditelj i upisuje datum rođenja iz člana 7.
+
+Prevođenje je ispravka pogrešno navedenog uzrasta. Ono nije mera prema korisniku, ne pretpostavlja povredu obaveze i ne pokreće postupak iz Glave VIII Pravilnika o dokazu stvarnosti.
+
+Prevođenjem nalog izlazi iz lanca potvrda: poništavaju se sve potvrde koje taj nalog dodiruje, u oba smera. Poništenje ne znači da je potvrda bila neistinita — maloletni korisnik u lanac potvrda ne ulazi (član 15), pa te potvrde ostaju bez osnova. Nalogu se otpisuje ZRNO, prestaju prijave na programe podrške i na operativni doprinos, a zabeleženi doprinos iz članova 40a i 40b Pravilnika o KOLO sistemu se briše.
+
+Poništava se doprinos koji je nalogu bio evidentiran kroz kanale iz člana 15 Pravilnika o KOLO sistemu, u broju koji je po tim kanalima upisan umanjenom za ono što je Protokolu već vraćeno. POEN koji je nalogu prepisao drugi korisnik se ne dira: prepis nije evidentiranje doprinosa nego promena nosioca zapisa, a maloletni korisnik POEN sme imati.
+
+Otpis pogađa i lica kojima je POEN bio evidentiran povodom potvrda koje prevođenjem padaju. Svako od njih vraća isključivo ono što je povodom te potvrde dobilo; teret se ne prenosi na drugo lice i nadoknada iz člana 20b Pravilnika o dokazu stvarnosti se ne primenjuje.
+
+Otpis iz stavova 4 i 5 izvršava se i kada zapis time pređe u negativnu vrednost, u skladu sa članom 14 stav 3 tačka 5 Pravilnika o KOLO sistemu. Svako pogođeno lice obaveštava se o otpisu i o broju POEN-a koji mu je otpisan, a na odluku može podneti prigovor po članu 37a Uslova korišćenja.
+
+Oglasi, razgovori i istorija zapisa se ne brišu. Zatečeni razgovori sa punoletnim licima od prevođenja potpadaju pod član 9.
+
+Prevedeni nalog dalje potpada pod ovaj pravilnik. U punoletni nalog prelazi po članu 19, na dan punoletstva izračunat iz datuma rođenja upisanog odlukom o prevođenju.
 
 ### Član 5
 

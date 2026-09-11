@@ -224,7 +224,7 @@ Zbir svih zapisa POEN-a u sistemu, uključujući zapis Protokola, u svakom trenu
 
 Protokol vodi zapis koji je u svakom trenutku negativan i predstavlja protivzapis svih POEN-a evidentiranih kod korisnika i organizacionih jedinica.
 
-Nijedan korisnik niti kolektivni oblik ne može imati negativan zapis POEN-a. Izuzetaka je četiri i navedeni su ovde iscrpno:
+Nijedan korisnik niti kolektivni oblik ne može imati negativan zapis POEN-a. Izuzetaka je pet i navedeni su ovde iscrpno:
 
 1) **nadoknada po poništenju lažne verifikacije**, uređena članom 20b Pravilnika o dokazu stvarnosti: kada se poništenjem oduzimaju zapisi POEN-a koji su već potrošeni, nepokriveni deo prelazi u negativnu vrednost i prenosi se na verifikatora koji je nalog uveo;
 
@@ -232,9 +232,11 @@ Nijedan korisnik niti kolektivni oblik ne može imati negativan zapis POEN-a. Iz
 
 3) **otpis doprinosa iz dečjeg prostora**, uređen Pravilnikom o učešću dece: pri raskidu prijateljstva i pri sticanju punoletstva otpisuje se doprinos koji je po tom pravilniku bio evidentiran, i otpis se izvršava i kada zapis time postane negativan;
 
-4) **otpis po poništenju potvrde zbog neaktivnosti**, uređen članom 6 Pravilnika o učešću dece: kada se potvrda stvarnosti roditelja poništava zato što se o postojanju deteta u roku nije izjasnila jedna od strana veze, svakom pogođenom licu otpisuje se ono što mu je povodom te potvrde bilo evidentirano, i otpis se izvršava i kada zapis time postane negativan; teret se ne prenosi na drugo lice.
+4) **otpis po poništenju potvrde zbog neaktivnosti**, uređen članom 6 Pravilnika o učešću dece: kada se potvrda stvarnosti roditelja poništava zato što se o postojanju deteta u roku nije izjasnila jedna od strana veze, svakom pogođenom licu otpisuje se ono što mu je povodom te potvrde bilo evidentirano, i otpis se izvršava i kada zapis time postane negativan; teret se ne prenosi na drugo lice;
 
-Na negativan zapis po svakom od četiri osnova primenjuje se isti režim: on nije dug i ne naplaćuje se, POEN-i koji korisniku pristignu prvo ga popunjavaju, iniciranje ažuriranja evidencije u korist drugog korisnika moguće je tek kada zapis pređe nulu, a razmena dobara i usluga nije ograničena.
+5) **otpis po prevođenju punoletnog naloga u maloletni**, uređen članom 4d Pravilnika o učešću dece: kada Fondacija utvrdi da iza naloga otvorenog kao punoletan stoji maloletno lice, poništava se doprinos koji je tom nalogu bio evidentiran kroz kanale iz člana 15 ovog pravilnika, kao i doprinos koji je drugim licima bio evidentiran povodom potvrda koje tim prevođenjem padaju; otpis se izvršava i kada zapis time postane negativan, svako vraća isključivo ono što je povodom toga bilo evidentirano, a teret se ne prenosi na drugo lice.
+
+Na negativan zapis po svakom od pet osnova primenjuje se isti režim: on nije dug i ne naplaćuje se, POEN-i koji korisniku pristignu prvo ga popunjavaju, iniciranje ažuriranja evidencije u korist drugog korisnika moguće je tek kada zapis pređe nulu, a razmena dobara i usluga nije ograničena.
 
 Drugi osnov za negativan zapis ne može se ustanoviti — ni ovim pravilnikom bez izmene ovog člana, ni bilo kojim drugim aktom.
 

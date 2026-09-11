@@ -101,6 +101,24 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-11 (dvadeset osmi put):** na **4.5.7** idu **DVA akta** —
+Pravilnik o KOLO sistemu (sa 4.5.6) i Pravilnik o učešću dece (sa 4.5.3). Ostalih
+petnaest ostaje gde jeste. Povod je **analiza rizika R-20** (kod ima više izuzetaka
+od zabrane negativnog zapisa nego akt). Sadržinski, vidi sekciju „Peti izuzetak:
+prevođenje naloga je dobilo osnov" ispod.
+
+🔴 **Glavni Pravilnik je morao da se bumpuje i tu izbora nije bilo.** Čl. 14 st. 3
+nabraja osnove za negativan zapis **iscrpno** i zatvara listu („Drugi osnov… ne može
+se ustanoviti — ni ovim pravilnikom bez izmene ovog člana, ni bilo kojim drugim
+aktom"). Peti osnov se zato ne može uvesti nigde drugde. **Izuzetaka je sada pet.**
+
+🟡 **Zaostala unakrsna upućivanja — sada ih ima ŠEST, jedno manje nego pre.**
+`ucesce_dece` je prestalo da bude slomljeno jer se taj akt ovim potezom ponovo
+objavljuje, pa je upućivanje na Pravilnik ispravljeno na v4.5.7. Ostaju: `gornje_kolo`
+→ `Pravilnik (v4.4.6)` i DPIA → `Pravilnik (v4.5.2)`, `Politika (v4.5.2)` i
+`Registar (v4.5.2)` na tri mesta. Ti akti se nisu menjali, pa se ne prepravljaju —
+briše ih bump celog seta na 5.0.
+
 **AŽURIRANO 2026-09-11 (dvadeset sedmi put):** na **4.5.6** ide **JEDAN akt** —
 Pravilnik o KOLO sistemu (sa 4.5.4). Ostalih šesnaest ostaje gde jeste. Povod je
 **mera M-1 uz R-19**: čl. 13 je dobio obrazloženje zašto POEN nije virtuelna valuta.
@@ -1233,6 +1251,67 @@ ne ide kroz korisnikovo pravo prema Fondaciji nego kroz **obavezu Fondacije prem
 sopstvenom programu** (čl. 30 st. 5) i kroz **ispravku evidencije**, koja nije
 povraćaj naknade (čl. 30a st. 6). Odbrana besplatnosti time ostaje netaknuta.
 
+### Peti izuzetak: prevođenje naloga je dobilo osnov (2026-09-11)
+
+Odluke uz analizu rizika **R-20** (kod ima više izuzetaka od zabrane negativnog
+zapisa nego akt). Na **4.5.7** idu Pravilnik o KOLO sistemu i Pravilnik o učešću
+dece. **Kod NIJE menjan** — ovo je jedini rizik iz registra u kome je ispravka išla
+isključivo u akt.
+
+🔴 **Protivrečnost je bila dokazana, ne pretpostavljena.** Čl. 14 st. 3 je nabrajao
+**četiri** osnova i zatvarao listu (*„Drugi osnov za negativan zapis ne može se
+ustanoviti — ni ovim pravilnikom bez izmene ovog člana, ni bilo kojim drugim
+aktom"*), a `prevod-u-maloletni.ts` je od 23.08.2026. pravio **peti**: minus na
+samom nalogu (`otpisiEmisijuNalogu`) i minus na **trećim licima** kojima povodom
+prevođenja padaju potvrde (`oboriVerifikacijeNaloga` uz `dozvoliMinus: true`).
+
+**Provereno je i koliko ih je tačno** — pregledana su sva mesta koja umanjuju zapis,
+ne samo ona koja CLAUDE.md pominje. Puteva ka negativnom zapisu KORISNIKA ima pet
+(nadoknada, poništen prepis po prijavi razmene, otpis prijateljstva, otpis po
+poništenju potvrde zbog neaktivnosti, prevođenje u maloletni); ostala mesta štite:
+`prepis.ts` skida uslovnim `updateMany` (`balance >= iznos`), `nabavka.ts` odbija
+preuzimanje sa 409 kad zapis ne pokriva rezervisano (čl. 28), `zrno.ts` troši najviše
+1% stanja, `DELETE /api/profil` i `reset-korisnika.ts` staju na nuli
+(`Math.min(balance, iznos)`). `emisija.ts`, `nabavka-ispravka.ts` i `zrno.ts:177`
+umanjuju **Protokol**, koji u minus ide po definiciji.
+
+🔴 **Zašto je ispravka išla u AKT, a ne u kod.** Sam minus je supstancijalno ispravan
+i počiva na pravilu koje u sistemu već važi dvaput (otpis prijateljstva, poništen
+prepis): ko je POEN brže potrošio ne sme da prođe jeftinije od onoga ko ga je
+sačuvao. Ranija odluka vlasnika da se akt ne dopunjava (2026-08-23) obrazlagala se
+time da je prevođenje **tehnička ispravka uzrasta, a ne nov institut** — a čl. 14 ne
+nabraja institute nego **osnove za negativan zapis**, pa to obrazloženje odgovara na
+pitanje koje član ne postavlja.
+
+**Šta akti sada kažu:**
+- **Pravilnik čl. 14 st. 3 t. 5** — otpis po prevođenju punoletnog naloga u maloletni,
+  uz upućivanje na čl. 4d Pravilnika o učešću dece; poništava se i doprinos
+  evidentiran drugim licima povodom potvrda koje prevođenjem padaju, svako vraća
+  isključivo svoje, teret se ne prenosi. „Izuzetaka je **pet**", i zatvarajuća
+  odredba je netaknuta.
+- **Pravilnik o učešću dece, nov čl. 4d** — prevođenje kao ispravka pogrešno navedenog
+  uzrasta: nije mera i **ne pokreće postupak iz Glave VIII** dokaza stvarnosti (niko
+  nije slagao); izlazak iz lanca potvrda, otpis ZRNA, prestanak prijava na programe,
+  brisanje zabeleženog doprinosa iz čl. 40a i 40b; poništenje doprinosa iz kanala
+  čl. 15 **umanjeno za ono što je Protokolu već vraćeno**; obaveštenje svakom
+  pogođenom licu i prigovor po čl. 37a Uslova; oglasi, razgovori i istorija ostaju.
+
+🔴 **„Prepis nije evidentiranje doprinosa nego promena nosioca zapisa" mora da stoji
+u aktu.** To je jedina rečenica koja objašnjava zašto se poništava **neto emisija**, a
+ne stanje: POEN koji je detetu neko prepisao ostaje mu, jer prepis ne uvećava ukupan
+broj POEN-a (čl. 14, 16) i maloletni korisnik POEN sme imati. Bez nje bi se poništenje
+čitalo kao pražnjenje zapisa.
+
+🟡 **Nov član je smešten u Glavu II (Pristupanje), kao čl. 4d** — posle čl. 4c (stanja
+naloga). Prevođenje je treći način na koji nalog ulazi u maloletni režim, uz otvaranje
+iz roditeljskog profila (čl. 4) i samostalnu registraciju (čl. 4a). Numeracija ostalih
+članova nije dirana.
+
+**Zaključano testom** `pravni-dokumenti.test.ts` na sr/en/ru: traži se peta tačka i
+„Izuzetaka je pet", uz odredbe čl. 4d (priroda ispravke, izostanak Glave VIII, prepis
+kao promena nosioca, upućivanje na čl. 14 st. 3 t. 5, neprimenjivost nadoknade iz
+čl. 20b, obaveštenje pogođenom licu).
+
 ### Pranje novca: uplatilac mora biti donator (2026-09-11)
 
 Odluke uz analizu rizika **R-19** (sprečavanje pranja novca i finansiranja
@@ -1697,9 +1776,10 @@ izbegne, a upisati `izjavaAt` značilo bi tvrditi da je dao izjavu koju nije. Ob
 polja ostaju prazna — isto kao `ugovorTekst` kod zatečenih donacija.
 
 🔴 **Pravilnik čl. 14 st. 3 — ČETVRTI izuzetak.** „otpis po poništenju potvrde zbog
-neaktivnosti", uz izričito „teret se ne prenosi na drugo lice". 🟡 **U kodu ih je sada
-PET** (nadoknada, poništen prepis, otpis prijateljstva, prevod u maloletni, ovaj), a
-u aktu četiri — razlika je predmet **R-20** i ne rešava se usput.
+neaktivnosti", uz izričito „teret se ne prenosi na drugo lice". 🟢 **Razlika prema kodu
+je zatvorena setom 4.5.7 (R-20)** — peti izuzetak (prevod u maloletni) je ušao u akt,
+pa akt i kod od tada broje isto: **pet**. Raniji zapis („u aktu četiri — razlika je
+predmet R-20 i ne rešava se usput") više NE važi.
 
 **Kod:** `deca-pravila.ts` (rok, pragovi, `pragPodsetnika`), nov `src/lib/deca-izjava.ts`
 (ČISTA funkcija, tekst na srpskom na svim jezicima), `protokol/deca.ts`
@@ -2702,8 +2782,9 @@ razmene). Isto važi i za **druge ljude** kojima je POEN upisan povodom palih po
 završiti sa negativnim zapisom zbog tuđe omaške u uzrastu — zato mu ide **protivzapis
 u istoriju** (`OTPIS_PREVOD_U_MALOLETNI`) **i obaveštenje**; minus menja šta sme sa
 zapisom i ne sme da se pojavi bez reči. **Izuzetaka od zabrane negativnog zapisa
-(Pravilnik čl. 14 st. 3) u kodu sada ima ČETIRI** — nadoknada, poništen prepis, otpis
-prijateljstva i ovo.
+(Pravilnik čl. 14 st. 3) ima PET** — nadoknada, poništen prepis, otpis prijateljstva,
+otpis po poništenju potvrde zbog neaktivnosti i ovo. Od seta **4.5.7** akt ih nabraja
+isto toliko; ovo je peta tačka, uređena čl. 4d Pravilnika o učešću dece.
 
 🟡 **Reset naloga (`reset-korisnika.ts`) i dalje staje na nuli** — `dozvoliMinus` je
 podrazumevano `false`. Tamo je reč o probi korisničkog puta, ne o poništenju emisije.
@@ -2740,13 +2821,17 @@ Migracija `20260823120000_otpis_prevod_u_maloletni` (samo nova vrednost enum-a
 na dan izračunat iz ovde upisanog datuma. Ispravka samog datuma ide zasebnom rutom
 (`/api/admin/deca/[id]/datum-rodjenja`), koja namerno nema dugme.
 
-🟢 **Akt se ovim NE dopunjava — odluka vlasnika (2026-08-23).** Pravilnik o učešću
-dece o prevođenju ne govori i neće: reč je o **tehničkoj ispravci pogrešno unetog
-uzrasta**, ne o novom institutu. Nalog posle prevođenja stoji tačno u režimu koji
-akt već uređuje, a poništenje POEN-a je posledica toga što kanali iz čl. 15 nisu
-bili otvoreni maloletnom korisniku — ne nova mera. **Ne otvarati ovo ponovo pri
-sledećem bumpu seta.** (Razlika u odnosu na prijavu razmene, gde akt NEDOSTAJE: tamo
-Fondacija obara tuđi prepis bez ovlašćenja iz ijednog akta.)
+🔴 **PREVAZIĐENO setom 4.5.7 (R-20) — akt je dopunjen.** Ovde je stajalo „akt se ovim
+NE dopunjava" (odluka vlasnika 2026-08-23), sa obrazloženjem da je reč o tehničkoj
+ispravci uzrasta a ne o novom institutu. **To obrazloženje odgovara na pogrešno
+pitanje:** čl. 14 st. 3 ne nabraja institute nego **osnove za negativan zapis**, i
+zatvara listu rečenicom da se drugi osnov ne može ustanoviti nijednim drugim aktom.
+Prevođenje je taj minus pravilo od 23.08.2026, i na samom nalogu i na trećim licima,
+a u aktu ga nije bilo — jedina dokazana protivrečnost u celom setu. Sada je uređeno
+**čl. 4d Pravilnika o učešću dece**, a osnov je **čl. 14 st. 3 t. 5** glavnog
+Pravilnika. 🟢 **Kod NIJE menjan** — akt je sustignut, jer je sam minus supstancijalno
+ispravan (isto pravilo koje drži otpis prijateljstva: ko brže potroši ne sme da prođe
+jeftinije od onoga ko sačuva).
 
 FAQ ovo pokriva: pitanje 84 (ispravljena rečenica o brisanju) i pitanje **101**
 („Dete se registrovalo kao punoletno — može li to da se ispravi?"), na svih pet

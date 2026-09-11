@@ -983,7 +983,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.5.6",
+      "ver": "4.5.7",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -1017,7 +1017,7 @@
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.6",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.5.6",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.5.7",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",

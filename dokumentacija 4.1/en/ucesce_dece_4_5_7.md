@@ -2,7 +2,7 @@
 
 # Rulebook on the Participation of Children
 
-*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.5.2), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
+*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.5.7), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
 
 ## I — General Provisions
 
@@ -73,6 +73,24 @@ A minor user's account is in one of three states:
 The limitations under paragraph 1, item 1 are of a security nature and are explained in Article 18, paragraph 2.
 
 The account moves between states by itself, according to the parent's status. The transition from the "active" state to the "linked" state is not a measure and the periods prescribed for suspension do not run.
+
+### Article 4d — Conversion of an Adult Account into a Minor's Account
+
+Where it is established that a minor stands behind an account opened as an adult account, the Foundation converts that account into a minor user's account. The decision is taken by an authorised person of the Foundation; it designates the parent and enters the date of birth under Article 7.
+
+The conversion is a correction of an incorrectly stated age. It is not a measure against the user, does not presuppose a breach of obligation, and does not initiate the procedure under Chapter VIII of the Rulebook on Proof of Reality.
+
+Upon conversion the account leaves the chain of confirmations: all confirmations the account touches are annulled, in both directions. The annulment does not mean that a confirmation was untrue — a minor user does not enter the chain of confirmations (Article 15), so those confirmations are left without a basis. The account's ZRNO is written off, enrolments in support programmes and in the operational contribution cease, and the contribution noted under Articles 40a and 40b of the Rulebook on the KOLO System is deleted.
+
+The contribution recorded to the account through the channels under Article 15 of the Rulebook on the KOLO System is annulled, in the number recorded through those channels reduced by what has already been returned to the Protocol. POEN re-registered to the account by another user is not affected: a re-registration is not a recording of contribution but a change in the holder of the record, and a minor user may hold POEN.
+
+The write-off also affects persons to whom POEN was recorded on the occasion of the confirmations that fall with the conversion. Each of them returns solely what they received on the occasion of that confirmation; the burden is not transferred to another person and the compensation under Article 20b of the Rulebook on Proof of Reality does not apply.
+
+The write-off under paragraphs 4 and 5 is executed even where the record thereby passes into a negative value, in accordance with Article 14, paragraph 3, item 5 of the Rulebook on the KOLO System. Every affected person is notified of the write-off and of the number of POEN written off from them, and may lodge an objection against the decision under Article 37a of the Terms of Use.
+
+Listings, conversations and the history of records are not deleted. Existing conversations with adult users fall under Article 9 from the conversion onwards.
+
+A converted account is thereafter subject to this Rulebook. It passes into an adult account under Article 19, on the day of majority calculated from the date of birth entered by the decision on conversion.
 
 ### Article 5
 

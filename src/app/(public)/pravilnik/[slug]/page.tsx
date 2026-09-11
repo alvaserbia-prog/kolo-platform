@@ -22,9 +22,12 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // otpis po poništenju potvrde zbog neaktivnosti (čl. 6 Pravilnika o učešću dece).
   // Bez izmene ovog člana taj otpis ne bi imao osnov — st. 6 izričito kaže da se
   // drugi osnov ne može ustanoviti nijednim drugim aktom.
+  // 4.5.7 — čl. 14 st. 3 dobija PETI izuzetak: otpis po prevođenju punoletnog naloga
+  // u maloletni (čl. 4d Pravilnika o učešću dece). Kod je taj minus pravio od
+  // 2026-08-23, a akt ga je izričito zabranjivao — R-20.
   "kolo-sistem": {
-    fajl: "Pravilnik_4_5_6.md",
-    verzija: "4.5.6",
+    fajl: "Pravilnik_4_5_7.md",
+    verzija: "4.5.7",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.
@@ -81,9 +84,12 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // razgovora sa punoletnima i saglasnost to ne otvara; nov čl. 12a (razmena male
   // vrednosti, poslovna sposobnost); čl. 14 — prepis iznad praga čeka roditelja;
   // čl. 10 — roditeljska lozinka samo dok dete nema sopstvenu adresu.
+  // 4.5.7 — nov čl. 4d uređuje prevođenje punoletnog naloga u maloletni: ispravka
+  // uzrasta, izlazak iz lanca potvrda, poništenje doprinosa iz kanala čl. 15 uz
+  // minus na obe strane, obaveštenje i prigovor.
   "ucesce-dece": {
-    fajl: "ucesce_dece_4_5_3.md",
-    verzija: "4.5.3",
+    fajl: "ucesce_dece_4_5_7.md",
+    verzija: "4.5.7",
   },
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
   // 4.4.3 — broj POEN-a po delu je parametar odluke o nabavci (čl. 17), a ne izvod

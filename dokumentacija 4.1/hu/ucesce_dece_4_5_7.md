@@ -2,7 +2,7 @@
 
 # Szabályzat a gyermekek részvételéről
 
-*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.5.2) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
+*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.5.7) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
 
 ## I — Általános rendelkezések
 
@@ -73,6 +73,24 @@ A kiskorú felhasználó fiókja három állapot egyikében van:
 Az (1) bekezdés 1. pontja szerinti korlátozások biztonsági jellegűek, és a 18. cikk (2) bekezdése tartalmazza az indokolásukat.
 
 A fiók magától lép át az állapotok között, a szülő jogállása szerint. Az „aktív" állapotból az „összekapcsolt" állapotba való átmenet nem intézkedés, és a felfüggesztésre előírt határidők nem telnek.
+
+### 4.d cikk — A nagykorú fiók kiskorú fiókká alakítása
+
+Ha megállapításra kerül, hogy a nagykorú személy fiókjaként nyitott fiók mögött kiskorú személy áll, az Alapítvány ezt a fiókot kiskorú felhasználó fiókjává alakítja. A döntést az Alapítvány meghatalmazott személye hozza meg; azzal kijelöli a szülőt, és bejegyzi a 7. cikk szerinti születési dátumot.
+
+Az átalakítás a tévesen megadott életkor helyesbítése. Nem a felhasználóval szembeni intézkedés, nem feltételez kötelezettségszegést, és nem indítja meg a valóság bizonyításáról szóló szabályzat VIII. fejezete szerinti eljárást.
+
+Az átalakítással a fiók kilép a megerősítések láncából: érvénytelenítésre kerül minden megerősítés, amelyet a fiók érint, mindkét irányban. Az érvénytelenítés nem jelenti azt, hogy a megerősítés valótlan volt — a kiskorú felhasználó nem lép be a megerősítések láncába (15. cikk), így ezek a megerősítések jogalap nélkül maradnak. A fiók ZRNO-ja leírásra kerül, megszűnnek a támogatási programokra és az operatív hozzájárulásra vonatkozó jelentkezések, a KOLO rendszerről szóló szabályzat 40a. és 40b. cikke szerinti feljegyzett hozzájárulás pedig törlésre kerül.
+
+Érvénytelenítésre kerül az a hozzájárulás, amely a fiók javára a KOLO rendszerről szóló szabályzat 15. cikke szerinti csatornákon keresztül került nyilvántartásba, az e csatornákon bejegyzett számban, csökkentve azzal, ami a Protokollnak már visszatérült. A fiókra más felhasználó által átírt POEN érintetlen marad: az átírás nem hozzájárulás nyilvántartásba vétele, hanem a bejegyzés hordozójának megváltozása, a kiskorú felhasználó pedig birtokolhat POEN-t.
+
+A leírás azokat a személyeket is érinti, akiknek a javára POEN került nyilvántartásba az átalakítással megszűnő megerősítések kapcsán. Mindegyikük kizárólag azt téríti vissza, amit e megerősítés kapcsán kapott; a teher nem száll át más személyre, és a valóság bizonyításáról szóló szabályzat 20b. cikke szerinti megtérítés nem alkalmazandó.
+
+A 4. és 5. bekezdés szerinti leírás akkor is végrehajtásra kerül, ha a bejegyzés ezáltal negatív értékbe fordul, a KOLO rendszerről szóló szabályzat 14. cikke 3. bekezdésének 5. pontjával összhangban. Minden érintett személyt értesíteni kell a leírásról és a tőle leírt POEN számáról, és a döntés ellen a felhasználási feltételek 37a. cikke szerint kifogást emelhet.
+
+A hirdetések, a beszélgetések és a bejegyzések története nem kerül törlésre. A nagykorú személyekkel folytatott meglévő beszélgetések az átalakítástól a 9. cikk hatálya alá tartoznak.
+
+Az átalakított fiók a továbbiakban e szabályzat hatálya alá tartozik. Nagykorú fiókká a 19. cikk szerint válik, a nagykorúság napján, amelyet az átalakításról szóló döntéssel bejegyzett születési dátumból számítanak.
 
 ### 5. cikk
 
