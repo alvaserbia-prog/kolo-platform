@@ -63,15 +63,15 @@
 
 **Radnja obrade br. 5 — Donacije fizičkih lica**
 
-| **Svrha obrade** | Ispunjenje zakonske obaveze finansijskog izveštavanja. |
+| **Svrha obrade** | Ispunjenje zakonske obaveze finansijskog izveštavanja i sprečavanje zloupotrebe sistema radi pranja novca ili finansiranja terorizma. |
 | --- | --- |
 | **Kategorije lica** | Donatori — fizička lica koja doniraju sredstva Fondaciji. |
-| **Kategorije podataka** | Iznos donacije, datum donacije, identitet donatora (obezbeđuje se kroz bankovni sistem — Fondacija prima donacije sa verifikovanih bankovnih računa). |
-| **Pravni osnov** | Zakonska obaveza (čl. 12 st. 1 t. 3 ZZPL-a). |
+| **Kategorije podataka** | Iznos donacije, datum donacije, identitet donatora (obezbeđuje se kroz bankovni sistem — Fondacija prima donacije sa verifikovanih bankovnih računa), podatak o uplatiocu iz bankovnog izvoda, oznaka da je uplata izvršena sa računa otvorenog u inostranstvu, i — samo za donaciju iznad praga utvrđenog odlukom Upravnog odbora — izjava donatora o poreklu sredstava sadržana u ugovoru o donaciji. |
+| **Pravni osnov** | Zakonska obaveza (čl. 12 st. 1 t. 3 ZZPL-a); za podatak o uplatiocu i izjavu o poreklu sredstava — legitimni interes Fondacije (čl. 12 st. 1 t. 6 ZZPL-a), radi provere da se uplatilac i donator poklapaju i sprečavanja zloupotrebe sistema. |
 | **Primaoci / obrađivači** | Fondacija (čuva podatke direktno), bankarska institucija, revizor (ako je primenjivo). Zapis o donaciji, sa imenom donatora i tekstom ugovora, čuva se u bazi podataka Platforme kod Neon Inc.; pri plaćanju platnom karticom u obradi učestvuju i poslovna banka Fondacije i njen posrednik za plaćanje na internetu (Republika Srbija). |
 | **Prenos u treću zemlju** | Ne — bankovna dokumentacija se čuva u okviru Fondacije, a zapis o donaciji u bazi podataka u Evropskoj uniji (region Frankfurt). Kartično plaćanje se obrađuje u Republici Srbiji. |
 | **Rok čuvanja** | 10 godina od nastanka, u skladu sa Zakonom o računovodstvu i poreskim propisima. Korisnik nema pravo da zahteva brisanje pre isteka zakonskog roka. |
-| **Mere zaštite** | Fizička i logička zaštita dokumentacije, kontrola pristupa, razdvojeno čuvanje od podataka platforme. |
+| **Mere zaštite** | Fizička i logička zaštita dokumentacije, kontrola pristupa, razdvojeno čuvanje od podataka platforme. Izjava o poreklu sredstava prikuplja se samo iznad praga, pa se za većinu donacija ne obrađuje. Mere iz glave IV Pravilnika o pokroviteljstvu i donacijama. |
 
 **Radnja obrade br. 6 — Pokroviteljstvo pravnih lica**
 

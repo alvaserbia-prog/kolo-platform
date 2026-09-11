@@ -920,7 +920,8 @@
     "ugovor_naslov": "Donation agreement",
     "ugovor_stampaj": "Print",
     "ugovor_nazad": "Back to donations",
-    "ugovor_napomena": "The agreement was drawn up at the moment the donation was confirmed and has not changed since. The Serbian original is authoritative."
+    "ugovor_napomena": "The agreement was drawn up at the moment the donation was confirmed and has not changed since. The Serbian original is authoritative.",
+    "karticno_sopstvena_kartica": "By paying you confirm that the card is issued in your name. A contribution is recorded solely for the user with whose funds the payment was made."
   },
   "poruke": {
     "naslov": "Messages",
@@ -958,7 +959,7 @@
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "4.5.2"
+      "ver": "4.5.5"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -970,11 +971,11 @@
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "4.5.2"
+      "ver": "4.5.5"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "4.4.6"
+      "ver": "4.5.5"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
@@ -1004,15 +1005,15 @@
     "meta_uslovi_title": "Terms of Use — KOLO",
     "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.5.4",
     "meta_privatnost_title": "Privacy Policy — KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.5.2",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.5.5",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA — KOLO",
     "meta_dpia_desc": "Data Protection Impact Assessment, version 4.5.2",
     "meta_radnje_title": "Register of Processing Activities — KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 4.5.2",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.5.5",
     "meta_rizici_title": "Risk Acceptance Statement — KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.4.6",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.5.5",
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.6",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
@@ -2570,7 +2571,12 @@
     "prigovori_tip_razmena": "Re-registration on account of an exchange",
     "prigovori_tip_nabavka": "Share from a procurement",
     "prigovori_ispravi": "Correct the ledger",
-    "prigovori_predmet": "Subject"
+    "prigovori_predmet": "Subject",
+    "donacije_uplatilac_label": "Payer from the statement",
+    "donacije_uplatilac_placeholder": "Name from the incoming payment",
+    "donacije_uplatilac_pomoc": "A contribution is recorded solely for the user with whose funds the payment was made. Compare the name on the payment with the member before confirming.",
+    "donacije_uplatilac_obavezan": "Enter the payer's name from the statement.",
+    "donacije_strani_priliv": "Payment from an account opened abroad"
   },
   "kolacici": {
     "aria": "Cookie consent",
@@ -2747,6 +2753,7 @@
     "primljena_verifikacija": "Confirmation received from {pseudonim}",
     "nadzor": "Supervision of confirmation {verifikator} → {verifikovani}",
     "donacija": "Donation bonus: {iznos} POEN",
+    "donacija_uplatilac": "Donation bonus: {iznos} POEN — payer: {uplatilac}",
     "pokroviteljstvo": "Sponsorship bonus: {iznos} POEN",
     "osnivacki": "Founding contribution — step {korak}/{ukupno}",
     "krug_bonus": "Circle bonus “{krug}” — {clanovi} members",

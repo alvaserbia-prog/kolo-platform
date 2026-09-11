@@ -30,6 +30,12 @@ Svaki verificirani korisnik sustava može donirati novac Zakladi u dinarima ili 
 
 Donacija se obavlja uplatom na račun Zaklade. Zaklada izdaje potvrdu o donaciji na zahtjev donatora, u skladu sa zakonom. Porezni tretman donacije ovisi o statusu donatora, registriranom statusu Zaklade i važećim poreznim propisima u trenutku donacije.
 
+Donacija se izvršava isključivo prijenosom sredstava s računa na račun Zaklade ili platnim instrumentom koji glasi na donatora. Zaklada ne prima gotovinu.
+
+Doprinos se evidentira isključivo u zapis korisnika čijim je sredstvima uplata izvršena. Uplata koju je izvršila druga osoba ne evidentira se kao doprinos korisnika na čiji je poziv na broj izvršena. Uplata osobe koja nije korisnik sustava ne nosi evidentiranje POEN-a — sredstva se prihvaćaju kao donacija i upotrebljavaju za ostvarivanje ciljeva Zaklade.
+
+Podatak o uplatitelju iz izvatka bilježi se uz zapis donacije i uz zapis o evidentiranom POEN-u. Kod plaćanja platnom karticom donator izjavljuje da platni instrument glasi na njegovo ime.
+
 Donator pri svakoj donaciji bira je li donacija javna ili anonimna. Javnom donacijom donator pristaje da njegovo ime i prezime budu javno prikazani u popisu donacija na platformi, i samo se za javnu donaciju evidentira POEN prema članku 4. Anonimna donacija ne prikazuje ime donatora i za nju se POEN ne evidentira. Izbor se obavlja za svaku donaciju posebno i primjenjuje se na donacije izvršene nakon stupanja na snagu ovih odredaba.
 
 ### Članak 4. — Razine donacija i koeficijent evidencije
@@ -92,6 +98,8 @@ Donator je svjestan da javno povezivanje njegova imena s donacijom omogućuje po
 Za svaku donaciju fizičke osobe Zaklada sastavlja ugovor o donaciji i dostavlja ga donatoru putem Platforme. Ugovor se sastavlja u elektroničkom obliku u trenutku u kojem Zaklada donaciju prihvati.
 
 Ugovor sadrži iznos donacije, izjavu da je donacija dobrovoljna i bez naknade, izjavu da donator donacijom ne pribavlja nijedno dobro ni uslugu, ne stječe potraživanje prema Zakladi, pravo na povrat donacije, pravo na otkup POEN-a ni utjecaj u odlučivanju o pravilima sustava, obvezu Zaklade da donaciju upotrijebi isključivo za ostvarivanje ciljeva zbog kojih je osnovana, kao i podatak o broju POEN-a upisanom povodom donacije uz naznaku da taj upis nije protučinidba.
+
+Za donaciju čiji iznos, sam ili u zbroju s ranijim donacijama istoga donatora u posljednjih dvanaest mjeseci, prijeđe prag iz članka 13.b ovoga pravilnika, ugovor sadrži i izjavu donatora da donirana sredstva potječu iz zakonitih izvora i da donacija ne služi pranju novca ni financiranju terorizma. Za donaciju ispod praga ta se izjava ne traži.
 
 Tekst se ugovora čuva uz zapis donacije onakav kakav je bio u trenutku prihvaćanja donacije i naknadnim se izmjenama ovoga pravilnika ne mijenja.
 
@@ -175,7 +183,45 @@ Objavljivanje rang-liste pokrovitelja predstavlja javno priznanje doprinosa i el
 
 Pokrovitelj po osnovi doprinosa ne stječe pravo na objavljivanje logotipa, na upućivanje na svoju internetsku stranicu, na oglasni prostor na Platformi, na spominjanje u kampanjama Zaklade niti na bilo koju drugu promotivnu činidbu, i takvu činidbu ne može ugovoriti niti zahtijevati. Javno priznanje akt je Zaklade, a ne protučinidba za doprinos.
 
-## IV — Raspoređivanje viška
+## IV — Sprječavanje pranja novca i financiranja terorizma
+
+### Članak 13.a — Svrha i dobrovoljnost
+
+Zaklada nije obveznik u smislu propisa o sprječavanju pranja novca i financiranja terorizma. POEN nije digitalna imovina ni virtualna valuta, Zaklada ne pruža platne usluge i ne obavlja poslove na temelju kojih bi svojstvo obveznika stekla.
+
+Mjere iz ove glave Zaklada propisuje dobrovoljno, iz opreznosti i radi zaštite integriteta sustava. Njihovo propisivanje ne predstavlja priznanje svojstva obveznika niti zasniva obveze koje propisi za obveznike predviđaju.
+
+Razlog za dobrovoljno propisivanje je strukturni. Zaklada prima dinarska sredstva, vodi evidenciju doprinosa koja se prenosi među korisnicima unutar sustava i tim sredstvima pribavlja dobra koja ustupa korisnicima programa. Zaklada korisniku ni po jednoj osnovi ne isplaćuje novac, donacija se ne vraća i POEN se ne otkupljuje i ne konvertira, pa izlaza u novcu nema; ali struktura te vrste može biti zloupotrijebljena, pa se mjerama iz ove glave zlouporaba otežava i čini vidljivom.
+
+### Članak 13.b — Mjere
+
+Zaklada primjenjuje sljedeće mjere:
+
+1) donacija se izvršava isključivo bezgotovinski, na način utvrđen člankom 3. ovoga pravilnika;
+
+2) doprinos se evidentira isključivo u zapis korisnika čijim je sredstvima uplata izvršena, a podatak o uplatitelju bilježi se uz zapis donacije;
+
+3) za donaciju koja prijeđe prag utvrđen odlukom Upravnog odbora, Zaklada prije evidentiranja dokumentira odgovor na pitanje o podrijetlu sredstava, a donator u ugovoru o donaciji daje izjavu iz članka 5.b ovoga pravilnika;
+
+4) donacija s računa otvorenog u inozemstvu evidentira se nakon što Upravni odbor utvrdi identitet donatora i osnovu uplate; zapis o takvoj donaciji posebno se označava;
+
+5) Upravni odbor određuje osobu ovlaštenu za praćenje primjene ove glave; u Fazi 1 sustava tu funkciju obavlja član Upravnog odbora;
+
+6) dokumentacija o donacijama čuva se deset godina od nastanka, u skladu s rokovima iz propisa o računovodstvu.
+
+Prag iz stavka 1. točke 3. ovoga članka utvrđuje odluka Upravnog odbora i objavljuje se. Prag se ne unosi u ovaj pravilnik, jer se iznosi i propisi na koje se oslanja mijenjaju neovisno o njemu.
+
+### Članak 13.c — Postupanje po sumnji
+
+Kada postoji osnova za sumnju da je uplata izvršena radi pranja novca ili financiranja terorizma, Zaklada ne evidentira doprinos i ne upisuje POEN dok sumnja ne bude otklonjena.
+
+Zaklada o takvoj uplati obavještava nadležno tijelo kada je to propisima predviđeno i postupa po njegovu nalogu.
+
+Prema korisniku koji je u zlouporabi sudjelovao primjenjuju se mjere iz članaka 27. i 28. Uvjeta korištenja.
+
+Ako je POEN već evidentiran, poništenje se provodi isključivo po osnovama utvrđenima Pravilnikom o KOLO sustavu. Isključenje korisnika po članku 28. Uvjeta korištenja povlači poništenje evidencije po članku 34. toga pravilnika. Ovim se pravilnikom nova osnova poništenja ne ustanovljuje.
+
+## V — Raspoređivanje viška
 
 ### Članak 14. — Pravilo raspoređivanja
 
@@ -183,7 +229,7 @@ Kada dinarski prilivi od donacija i pokroviteljstva premaše operativne troškov
 
 Pravila raspoređivanja viška utvrđuju osnivač i Zaklada u Fazi 1., a Gornje Kolo u Fazi 2., u skladu s Pravilnikom o KOLO sustavu.
 
-## V — Izmjene i završne odredbe
+## VI — Izmjene i završne odredbe
 
 ### Članak 15. — Nadležnost za izmjene
 

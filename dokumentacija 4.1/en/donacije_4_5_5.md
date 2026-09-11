@@ -30,6 +30,12 @@ Any verified system user may donate money to the Foundation in dinars or another
 
 A donation is made by payment to the Foundation's account. The Foundation issues a donation receipt upon the donor's request, in accordance with the law. The tax treatment of a donation depends on the donor's status, the Foundation's registered status, and the applicable tax regulations at the time of the donation.
 
+A donation is executed exclusively by a transfer of funds from account to account of the Foundation, or by a payment instrument issued in the donor's name. The Foundation does not accept cash.
+
+The contribution is recorded exclusively in the record of the user with whose funds the payment was made. A payment made by another person is not recorded as the contribution of the user to whose reference number it was made. A payment by a person who is not a user of the system carries no recording of POEN — the funds are accepted as a donation and used to pursue the aims of the Foundation.
+
+The payer's details from the bank statement are kept with the donation record and with the record of the POEN recorded. Where payment is made by payment card, the donor declares that the payment instrument is issued in their name.
+
 With each donation, the donor chooses whether the donation is public or anonymous. By making a public donation, the donor agrees that their first and last name be publicly displayed in the donation list on the platform, and POEN is recorded under Article 4 only for a public donation. An anonymous donation does not display the donor's name, and no POEN is recorded for it. The choice is made for each donation separately and applies to donations made after the entry into force of these provisions.
 
 ### Article 4 — Donation tiers and recording coefficient
@@ -92,6 +98,8 @@ The donor is aware that publicly linking their name to a donation makes it possi
 For every donation by a natural person the Foundation draws up a donation agreement and delivers it to the donor through the Platform. The agreement is drawn up in electronic form at the moment the Foundation accepts the donation.
 
 The agreement contains the amount of the donation, a statement that the donation is voluntary and without consideration, a statement that through the donation the donor acquires no good or service, no claim against the Foundation, no right to a refund, no right to redeem POEN and no influence over decisions on the rules of the system, the Foundation's obligation to use the donation solely for the aims for which it was established, and the number of POEN recorded on account of the donation together with a note that this recording is not a counter-performance.
+
+For a donation whose amount, alone or together with earlier donations by the same donor over the preceding twelve months, exceeds the threshold under Article 13b of this Rulebook, the agreement also contains a statement by the donor that the donated funds originate from lawful sources and that the donation does not serve money laundering or the financing of terrorism. For a donation below the threshold that statement is not required.
 
 The text of the agreement is kept with the donation record as it stood at the moment the donation was accepted and is not altered by subsequent amendments to this Rulebook.
 
@@ -175,7 +183,45 @@ Publication of the sponsor ranking list constitutes public recognition of contri
 
 On account of the contribution the sponsor acquires no right to the publication of a logo, to a link to their website, to advertising space on the Platform, to being mentioned in the Foundation's campaigns or to any other promotional performance, and cannot contract for or demand such performance. Public recognition is an act of the Foundation, not a counter-performance for the contribution.
 
-## IV — Allocation of Surplus
+## IV — Prevention of money laundering and the financing of terrorism
+
+### Article 13a — Purpose and voluntariness
+
+The Foundation is not an obliged entity within the meaning of the regulations on the prevention of money laundering and the financing of terrorism. POEN is neither digital assets nor a virtual currency, the Foundation provides no payment services and performs no activity on account of which it would acquire the status of an obliged entity.
+
+The Foundation lays down the measures in this Chapter voluntarily, out of caution and in order to protect the integrity of the system. Laying them down constitutes neither an acknowledgement of the status of an obliged entity nor a basis for the obligations that the regulations prescribe for obliged entities.
+
+The reason for laying them down voluntarily is structural. The Foundation receives dinar funds, keeps a record of contributions which is transferred between users within the system, and with those funds acquires goods which it makes available to the users of its programmes. The Foundation pays no money to a user on any basis whatsoever, a donation is not returned, and POEN is neither redeemed nor converted, so there is no exit in money; but a structure of that kind may be abused, and the measures in this Chapter make abuse harder and make it visible.
+
+### Article 13b — Measures
+
+The Foundation applies the following measures:
+
+1) a donation is executed exclusively cashlessly, in the manner laid down by Article 3 of this Rulebook;
+
+2) the contribution is recorded exclusively in the record of the user with whose funds the payment was made, and the payer's details are kept with the donation record;
+
+3) for a donation exceeding the threshold laid down by a decision of the Management Board, the Foundation documents, before recording, the answer to the question of the origin of the funds, and the donor gives in the donation agreement the statement referred to in Article 5b of this Rulebook;
+
+4) a donation from an account opened abroad is recorded once the Management Board has established the identity of the donor and the basis of the payment; the record of such a donation is marked separately;
+
+5) the Management Board designates a person authorised to monitor the application of this Chapter; in Phase 1 of the system that function is performed by a member of the Management Board;
+
+6) documentation on donations is kept for ten years from its creation, in accordance with the periods laid down by the accounting regulations.
+
+The threshold referred to in point 3 of paragraph 1 of this Article is laid down by a decision of the Management Board and is published. The threshold is not written into this Rulebook, because the amounts and the regulations on which it relies change independently of it.
+
+### Article 13c — Action upon suspicion
+
+Where there are grounds to suspect that a payment was made for the purpose of money laundering or the financing of terrorism, the Foundation does not record the contribution and records no POEN until the suspicion has been dispelled.
+
+The Foundation notifies the competent authority of such a payment where the regulations so provide, and acts upon its order.
+
+The measures under Articles 27 and 28 of the Terms of Use apply to a user who took part in the abuse.
+
+Where POEN has already been recorded, its annulment is carried out exclusively on the grounds laid down by the Rulebook on the KOLO System. Exclusion of a user under Article 28 of the Terms of Use entails annulment of the record under Article 34 of that Rulebook. This Rulebook establishes no new ground for annulment.
+
+## V — Allocation of Surplus
 
 ### Article 14 — Allocation rule
 
@@ -183,7 +229,7 @@ When dinar inflows from donations and sponsorship exceed the Foundation's operat
 
 The rules for allocating the surplus are established by the founder and the Foundation in Phase 1, and by the Upper Kolo in Phase 2, in accordance with the KOLO System Rulebook.
 
-## V — Amendments and Final Provisions
+## VI — Amendments and Final Provisions
 
 ### Article 15 — Authority to amend
 

@@ -913,7 +913,8 @@
     "ugovor_naslov": "Adományozási szerződés",
     "ugovor_stampaj": "Nyomtatás",
     "ugovor_nazad": "Vissza az adományokhoz",
-    "ugovor_napomena": "A szerződés az adomány megerősítésének pillanatában készült, és azóta nem változott. A szerb eredeti az irányadó."
+    "ugovor_napomena": "A szerződés az adomány megerősítésének pillanatában készült, és azóta nem változott. A szerb eredeti az irányadó.",
+    "karticno_sopstvena_kartica": "A fizetéssel megerősíted, hogy a kártya a te nevedre szól. A hozzájárulás kizárólag annak a felhasználónak kerül nyilvántartásba, akinek az eszközeiből a befizetés történt."
   },
   "poruke": {
     "naslov": "Üzenetek",
@@ -951,7 +952,7 @@
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.5.2"
+      "ver": "4.5.5"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -963,11 +964,11 @@
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.5.2"
+      "ver": "4.5.5"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.4.6"
+      "ver": "4.5.5"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
@@ -997,15 +998,15 @@
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
     "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.5.4-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.2-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.5-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA — KOLO",
     "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.5.2-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.2-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.5-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.4.6-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.5.5-es verzió",
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.6-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
@@ -2563,7 +2564,12 @@
     "prigovori_tip_razmena": "Átírás csere miatt",
     "prigovori_tip_nabavka": "Rész a beszerzésből",
     "prigovori_ispravi": "Nyilvántartás helyesbítése",
-    "prigovori_predmet": "Tárgy"
+    "prigovori_predmet": "Tárgy",
+    "donacije_uplatilac_label": "Befizető a kivonat szerint",
+    "donacije_uplatilac_placeholder": "A jóváírás szerinti név",
+    "donacije_uplatilac_pomoc": "A hozzájárulás kizárólag annak a felhasználónak kerül nyilvántartásba, akinek az eszközeiből a befizetés történt. A megerősítés előtt vesd össze a jóváírás szerinti nevet a taggal.",
+    "donacije_uplatilac_obavezan": "Add meg a befizető nevét a kivonat szerint.",
+    "donacije_strani_priliv": "Külföldön nyitott számláról érkező befizetés"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",
@@ -2740,6 +2746,7 @@
     "primljena_verifikacija": "Megerősítés érkezett tőle: {pseudonim}",
     "nadzor": "Megerősítés felügyelete: {verifikator} → {verifikovani}",
     "donacija": "Adományozási bónusz: {iznos} POEN",
+    "donacija_uplatilac": "Adományozási bónusz: {iznos} POEN — befizető: {uplatilac}",
     "pokroviteljstvo": "Patronálási bónusz: {iznos} POEN",
     "osnivacki": "Alapítói hozzájárulás — {korak}/{ukupno} lépés",
     "krug_bonus": "Kör bónusz „{krug}” — {clanovi} tag",

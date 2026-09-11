@@ -65,15 +65,15 @@
 
 **Processing activity no. 5 — Donations by natural persons**
 
-| **Purpose of processing** | Fulfilment of the statutory obligation of financial reporting. |
+| **Purpose of processing** | Fulfilment of the statutory obligation of financial reporting and prevention of abuse of the system for money laundering or the financing of terrorism. |
 | --- | --- |
 | **Categories of data subjects** | Donors — natural persons donating funds to the Foundation. |
-| **Categories of data** | Donation amount, donation date, donor identity (provided through the banking system — the Foundation receives donations from verified bank accounts). |
-| **Legal basis** | Statutory obligation (Art. 12 para. 1 item 3 LPDP). |
+| **Categories of data** | Donation amount, donation date, donor identity (provided through the banking system — the Foundation receives donations from verified bank accounts), the payer's details from the bank statement, a marking that the payment was made from an account opened abroad, and — only for a donation above the threshold laid down by a decision of the Management Board — the donor's statement on the origin of the funds contained in the donation agreement. |
+| **Legal basis** | Statutory obligation (Art. 12 para. 1 item 3 LPDP); for the payer's details and the statement on the origin of funds — the legitimate interest of the Foundation (Art. 12 para. 1 item 6 LPDP), in order to verify that the payer and the donor coincide and to prevent abuse of the system. |
 | **Recipients / processors** | Foundation (stores data directly), banking institution, auditor (if applicable). The donation record, with the donor's name and the text of the agreement, is stored in the Platform's database at Neon Inc.; where payment is made by payment card, the Foundation's commercial bank and its online payment intermediary (Republic of Serbia) also take part in the processing. |
 | **Transfer to a third country** | No — banking documentation is stored within the Foundation, and the donation record in the database in the European Union (Frankfurt region). Card payment is processed in the Republic of Serbia. |
 | **Retention period** | 10 years from creation, in accordance with the Law on Accounting and tax regulations. The user does not have the right to request deletion before the expiry of the statutory retention period. |
-| **Protection measures** | Physical and logical protection of documentation, access control, separate storage from platform data. |
+| **Protection measures** | Physical and logical protection of documentation, access control, separate storage from platform data. The statement on the origin of funds is collected only above the threshold, so for most donations it is not processed. Measures under Chapter IV of the Rulebook on Sponsorship and Donations. |
 
 **Processing activity no. 6 — Sponsorship by legal entities**
 

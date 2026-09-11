@@ -71,7 +71,7 @@ describe("pravo na ispravku ima put", () => {
 });
 
 describe("akt ne tvrdi anonimizaciju", () => {
-  const AKTI = ["dokumentacija 4.1/politika_4_5_2.md", "dokumentacija 4.1/en/politika_4_5_2.md"];
+  const AKTI = ["dokumentacija 4.1/politika_4_5_5.md", "dokumentacija 4.1/en/politika_4_5_5.md"];
   for (const p of AKTI) {
     it(`${p}: čl. 11 imenuje pseudonimizaciju`, () => {
       const t = citaj(p);

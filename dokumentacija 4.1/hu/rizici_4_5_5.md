@@ -96,6 +96,14 @@ A KOLO rendszer több meglévő kategóriából származó jogintézményeket ko
 
 A szabályozási keret vagy az illetékes hatóságok értelmezésének változása befolyásolhatja a rendszer működését vagy a felhasználó jogi helyzetét.
 
+### 11.a cikk — A rendszerrel való visszaélés tilalma
+
+A rendszer pénzmosás, terrorizmusfinanszírozás vagy az eszközök eredetének leplezése céljából történő használatát a Felhasználási feltételek 24. cikke tiltja, és az a Felhasználási feltételek 27. és 28. cikke szerinti intézkedéseket vonja maga után, ideértve a kizárást is, valamint az illetékes hatóság értesítését, ha ezt jogszabály előírja.
+
+A felhasználó tudatában van annak, hogy az Alapítvány semmilyen jogcímen nem fizet pénzt a felhasználónak, hogy az adomány nem téríthető vissza, és hogy a POEN-t nem váltják vissza és nem konvertálják dinárra, így az Alapítványnak adott eszközök semmilyen formában nem téríthetők vissza pénzben.
+
+Az Alapítvány a pártfogásról és az adományokról szóló szabályzat IV. fejezete szerinti intézkedéseket alkalmazza. Ezeket az intézkedéseket az Alapítvány önkéntesen írja elő, és azok nem jelentik a kötelezett szolgáltatói minőség elismerését a pénzmosás és a terrorizmusfinanszírozás megelőzéséről szóló jogszabályok értelmében.
+
 ### 12. cikk — A felhasználó nyilatkozata
 
 A KOLO rendszerhez való csatlakozással a felhasználó kijelenti:
@@ -115,6 +123,8 @@ A KOLO rendszerhez való csatlakozással a felhasználó kijelenti:
 — hogy megérti, hogy a javak és szolgáltatások rendszeren belüli cseréjének adójogi következményei lehetnek, és hogy saját adókötelezettségeiért ő felel;
 
 — hogy elfogadja az álnevesített nyilvántartás nyilvánosságát mint a rendszer szerkezeti tulajdonságát;
+
+— hogy a rendszert nem használja pénzmosás, terrorizmusfinanszírozás vagy az eszközök eredetének leplezése céljából;
 
 — hogy a rendszerhez önként, saját megítélése alapján és saját felelősségére csatlakozik.
 

@@ -218,6 +218,10 @@ export default function DonacijeKlijent() {
           </button>
         </div>
         {karticaGreska && <p className="text-xs text-red-500">{karticaGreska}</p>}
+        {/* Čl. 3 Pravilnika o pokroviteljstvu i donacijama: doprinos se evidentira
+            isključivo onome čijim je sredstvima uplata izvršena. Kod kartice se
+            uplatilac ne vidi iz izvoda, pa izjavu daje sam donator. */}
+        <p className="text-xs text-kolo-muted">{t("karticno_sopstvena_kartica")}</p>
       </div>
 
       {/* Instrukcije za uplatu */}

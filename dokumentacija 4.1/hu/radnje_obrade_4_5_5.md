@@ -65,15 +65,15 @@
 
 **5. sz. adatkezelési tevékenység — Természetes személyek adományai**
 
-| **Az adatkezelés célja** | A pénzügyi beszámolásra vonatkozó jogszabályi kötelezettség teljesítése. |
+| **Az adatkezelés célja** | A pénzügyi beszámolásra vonatkozó jogszabályi kötelezettség teljesítése, valamint a rendszerrel való, pénzmosás vagy terrorizmusfinanszírozás céljából történő visszaélés megelőzése. |
 | --- | --- |
 | **Az érintettek kategóriái** | Adományozók — az Alapítványnak eszközt adományozó természetes személyek. |
-| **Az adatok kategóriái** | Az adomány összege, az adomány dátuma, az adományozó személyazonossága (a bankrendszeren keresztül biztosított — az Alapítvány hitelesített bankszámlákról fogad adományt). |
-| **Jogalap** | Jogszabályi kötelezettség (ZZPL 12. cikk 1. bek. 3. pont). |
+| **Az adatok kategóriái** | Az adomány összege, az adomány dátuma, az adományozó személyazonossága (a bankrendszeren keresztül biztosított — az Alapítvány hitelesített bankszámlákról fogad adományt), a bankszámlakivonat szerinti befizető adata, annak megjelölése, hogy a befizetés külföldön nyitott számláról történt, valamint — kizárólag az Igazgatótanács határozatával megállapított küszöböt meghaladó adomány esetén — az adományozónak az adományozási szerződésben foglalt, az eszközök eredetére vonatkozó nyilatkozata. |
+| **Jogalap** | Jogszabályi kötelezettség (ZZPL 12. cikk 1. bek. 3. pont); a befizető adata és az eszközök eredetére vonatkozó nyilatkozat tekintetében — az Alapítvány jogos érdeke (ZZPL 12. cikk 1. bek. 6. pont), a befizető és az adományozó egyezésének ellenőrzése és a rendszerrel való visszaélés megelőzése céljából. |
 | **Címzettek / adatfeldolgozók** | Az Alapítvány (közvetlenül őrzi az adatokat), a bankintézet, a könyvvizsgáló (ha alkalmazandó). Az adományról szóló bejegyzés — az adományozó nevével és a szerződés szövegével — a Platform adatbázisában, a Neon Inc.-nél tárolódik; bankkártyás fizetés esetén az adatkezelésben az Alapítvány üzleti bankja és annak internetes fizetési közvetítője (Szerb Köztársaság) is részt vesz. |
 | **Harmadik országba történő továbbítás** | Nem — a banki dokumentáció az Alapítvány keretein belül marad, az adományról szóló bejegyzés pedig az Európai Unióban (frankfurti régió) lévő adatbázisban. A kártyás fizetés feldolgozása a Szerb Köztársaságban történik. |
 | **Megőrzési idő** | A keletkezéstől számított 10 év, a számviteli törvénnyel és az adóelőírásokkal összhangban. A felhasználónak nincs joga a törvényes határidő letelte előtt törlést kérni. |
-| **Védelmi intézkedések** | A dokumentáció fizikai és logikai védelme, hozzáférés-ellenőrzés, a platform adataitól elkülönített tárolás. |
+| **Védelmi intézkedések** | A dokumentáció fizikai és logikai védelme, hozzáférés-ellenőrzés, a platform adataitól elkülönített tárolás. Az eszközök eredetére vonatkozó nyilatkozatot csak a küszöb felett gyűjtik, így az adományok többségénél nem kezelik. A pártfogásról és az adományokról szóló szabályzat IV. fejezete szerinti intézkedések. |
 
 **6. sz. adatkezelési tevékenység — Jogi személyek pártfogása**
 

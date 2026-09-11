@@ -22,8 +22,23 @@ export async function POST(req: NextRequest) {
   // Anonimna donacija (javno=false) ne nosi POEN. Default je javna.
   const javnoBody = body.javno !== false;
 
+  // Uplatilac iz izvoda (Pravilnik o pokroviteljstvu i donacijama, čl. 3 i glava
+  // IV). OBAVEZAN je na oba ručna puta: doprinos se evidentira isključivo
+  // korisniku čijim je sredstvima uplata izvršena, a poziv na broj je trajan broj
+  // člana — bilo ko sa bilo kog računa može da uplati na njega. Bez ovog polja
+  // se uplatilac i donator nigde ne porede, pa se treće lice evidentira kao
+  // donator. Provera je ljudska (čovek gleda izvod); polje je trag da je urađena.
+  const uplatilac = typeof body.uplatilac === "string" ? body.uplatilac.trim() : "";
+  const straniPriliv = body.straniPriliv === true;
+
   if (!amountRSD) {
     return await greska("Iznos je obavezan.", 400);
+  }
+  if (uplatilac.length < 2) {
+    return await greska(
+      "Unesite ime uplatioca iz izvoda. Doprinos se evidentira isključivo korisniku čijim je sredstvima uplata izvršena (čl. 3 Pravilnika o pokroviteljstvu i donacijama).",
+      400
+    );
   }
   const iznos = Number(amountRSD);
   if (isNaN(iznos) || iznos <= 0) {
@@ -49,10 +64,12 @@ export async function POST(req: NextRequest) {
         existingRecordId: donationId,
         adminId: session.user.id,
         javno: donation.javno,
+        uplatilac,
+        straniPriliv,
       });
 
       await logAdminAkcija(session.user.id, "DONACIJA_POTVRDJENA", donation.userId,
-        `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN`);
+        `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN; uplatilac: ${uplatilac}${straniPriliv ? "; strani priliv" : ""}`);
       await obavesti(donation.userId, {
         tip: "donacija_potvrdjena",
         kljuc: "notifikacije.donacija_potvrdjena",
@@ -100,10 +117,15 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const result = await evidentirajDonaciju(user.id, iznos, { adminId: session.user.id, javno: javnoBody });
+    const result = await evidentirajDonaciju(user.id, iznos, {
+      adminId: session.user.id,
+      javno: javnoBody,
+      uplatilac,
+      straniPriliv,
+    });
 
     await logAdminAkcija(session.user.id, "DONACIJA_RUCNO_EVIDENTIRANA", user.id,
-      `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN`);
+      `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN; uplatilac: ${uplatilac}${straniPriliv ? "; strani priliv" : ""}`);
     await obavesti(user.id, {
       tip: "donacija_potvrdjena",
       kljuc: "notifikacije.donacija_potvrdjena",

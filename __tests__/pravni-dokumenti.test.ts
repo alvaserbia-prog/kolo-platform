@@ -30,14 +30,14 @@ const AKTI = [
   "Pravilnik_4_5_4.md",
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_5_2.md",
-  "radnje_obrade_4_5_2.md",
+  "radnje_obrade_4_5_5.md",
   "uslovi_koriscenja_4_5_4.md",
-  "politika_4_5_2.md",
+  "politika_4_5_5.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_6.md",
-  "rizici_4_4_6.md",
+  "rizici_4_5_5.md",
   "hijerarhija_4_4_6.md",
-  "donacije_4_5_1.md",
+  "donacije_4_5_5.md",
   "operativni_4_4_4.md",
   "osnivacki_4_4_5.md",
   "gornje_kolo_4_4_6.md",
@@ -170,7 +170,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_5_2.md": {
+  "radnje_obrade_4_5_5.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16", "Radnja obrade br. 17"],
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16", "Processing activity No. 17"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16", "Операция обработки № 17"],
@@ -456,7 +456,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 4.4.3 — obrazloženje koeficijenta evidencije. Tabela nivoa (1,00–2,00) bez
   // obrazloženja čita se kao cenovnik; odredba da se donacijom NIŠTA ne pribavlja
   // je ono što razliku u koeficijentu drži izvan pojma popusta, pa se traži doslovno.
-  "donacije_4_5_1.md": {
+  "donacije_4_5_5.md": {
     sr: [
       "nije cena POEN-a i nije popust na donaciju",
       "Donacijom se ništa ne pribavlja",
@@ -489,6 +489,24 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "nije raspodela dobiti",
       "ne stiče pravo na objavljivanje logotipa",
       "Javno priznanje je akt Fondacije, a ne protivčinidba",
+      // 🔴 4.5.5 (R-19) — uplatilac i donator moraju biti isto lice. Poziv na broj
+      // je TRAJAN broj člana, pa bi bez ovoga bilo ko sa bilo kog računa uplatio na
+      // tuđi poziv na broj, a sistem zapisao da je član donirao. Uz to: bez gotovine.
+      "Fondacija ne prima gotovinu",
+      "Doprinos se evidentira isključivo u zapis korisnika čijim je sredstvima uplata izvršena",
+      "ne nosi evidentiranje POEN-a",
+      // Glava IV — mere su dobrovoljne i to se kaže izričito, da propisivanje ne
+      // bude pročitano kao priznanje svojstva obveznika.
+      "Fondacija nije obveznik u smislu propisa o sprečavanju pranja novca",
+      "ne predstavlja priznanje svojstva obveznika",
+      // 🔴 Prag NE ide u akt (isto pravilo kao poreske stope) — utvrđuje ga odluka UO.
+      "Prag se ne unosi u ovaj pravilnik",
+      // 🔴 Glava IV ne sme da uvede nov osnov poništenja: čl. 14 Pravilnika zatvara
+      // listu („po osnovima utvrđenim ovim pravilnikom"), pa bi poseban akt koji ga
+      // uvodi oborio zatvorenu listu i tražio bump glavnog Pravilnika.
+      "Ovim pravilnikom se nov osnov poništenja ne ustanovljava",
+      // Izjava o poreklu se traži SAMO iznad praga (odluka vlasnika).
+      "Za donaciju ispod praga ta izjava se ne traži",
     ],
     en: [
       "is not a price of POEN and is not a discount on a donation",
@@ -507,6 +525,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "is not a distribution of profit",
       "no right to the publication of a logo",
       "Public recognition is an act of the Foundation, not a counter-performance",
+      "The Foundation does not accept cash",
+      "The Foundation is not an obliged entity within the meaning of the regulations",
+      "This Rulebook establishes no new ground for annulment",
     ],
     ru: [
       "не является ценой ПОЕН и не является скидкой",
@@ -525,11 +546,14 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "не является распределением прибыли",
       "не приобретает права на публикацию логотипа",
       "Публичное признание является актом Фонда, а не встречным предоставлением",
+      "Фонд не принимает наличные",
+      "Фонд не является обязанным лицом",
+      "Настоящим регламентом новое основание аннулирования не устанавливается",
     ],
   },
   // 4.4.3 — upozorenje o pribavljanju POEN-a mimo sistema. Ekonomski deo (ne stiče
   // nivo, ne pomera koeficijent) je ono što zabranu iz Uslova čini samoodrživom.
-  "rizici_4_4_6.md": {
+  "rizici_4_5_5.md": {
     sr: [
       "ne pribavlja od drugih korisnika za novac",
       "ne pomera koeficijent evidencije",
@@ -543,6 +567,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // rizika iz čl. 10 važi samo za razmenu, a ne i za kanale evidentiranja.
       "operativnog doprinosa i drugih kanala evidentiranja doprinosa",
       "nije naručilac posla ni korisnik činidbe",
+      // 🔴 4.5.5 (R-19) — zabrana zloupotrebe i razlog zbog kog sistem za pranje
+      // novca ne valja: izlaza u novcu nema ni po jednom osnovu.
+      "ne isplaćuje novac",
+      "ni u kom obliku ne mogu biti vraćena u novcu",
+      "pranja novca, finansiranja terorizma ili prikrivanja porekla sredstava",
       // 4.4.5 — udeo osnivačkog doprinosa je OBJAVLJEN brojem. Do tada ga nijedan
       // akt nije pominjao, a izvodi se iz dva već objavljena broja (2.400.000 i
       // prag od 10.000.000). Ko ga sam izračuna dobija nalaz; ovako je izjava.
@@ -702,7 +731,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "прекращается, когда несовершеннолетний пользователь укажет и подтвердит собственный электронный адрес",
     ],
   },
-  "politika_4_5_2.md": {
+  "politika_4_5_5.md": {
     sr: [
       "nije pristanak za obrade čiji je pravni osnov pristanak",
       // 4.4.8 — Politika je do tada opisivala razdoblje pre pristanka uže nego

@@ -30,6 +30,12 @@ A rendszer minden hitelesített felhasználója adományozhat pénzt az Alapítv
 
 Az adományozás az Alapítvány számlájára történő befizetéssel valósul meg. Az Alapítvány az adományozó kérésére igazolást állít ki az adományról, a jogszabályokkal összhangban. Az adomány adójogi megítélése az adományozó státuszától, az Alapítvány bejegyzett státuszától és az adományozás időpontjában hatályos adójogszabályoktól függ.
 
+Az adomány teljesítése kizárólag számláról az Alapítvány számlájára történő átutalással, vagy az adományozó nevére szóló fizetési eszközzel valósul meg. Az Alapítvány készpénzt nem fogad el.
+
+A hozzájárulás kizárólag annak a felhasználónak a bejegyzésében kerül nyilvántartásba, akinek az eszközeiből a befizetés történt. A más személy által teljesített befizetés nem kerül nyilvántartásba annak a felhasználónak a hozzájárulásaként, akinek a közleményszámára érkezett. Olyan személy befizetése, aki nem felhasználója a rendszernek, nem jár POEN nyilvántartásba vételével — az eszközöket az Alapítvány adományként fogadja el, és céljai megvalósítására fordítja.
+
+A bankszámlakivonat szerinti befizető adatát az adomány bejegyzése mellett és a nyilvántartásba vett POEN bejegyzése mellett rögzítik. Fizetési kártyával történő fizetés esetén az adományozó nyilatkozik arról, hogy a fizetési eszköz az ő nevére szól.
+
 Az adományozó minden adományozás alkalmával megválasztja, hogy az adomány nyilvános vagy névtelen legyen. A nyilvános adománnyal az adományozó hozzájárul ahhoz, hogy neve nyilvánosan megjelenjen a platform adománylistáján, és POEN kizárólag nyilvános adomány után kerül nyilvántartásba a 4. cikk szerint. A névtelen adomány nem jeleníti meg az adományozó nevét, és utána POEN nem kerül nyilvántartásba. A választás minden adomány esetében külön történik, és az e rendelkezések hatálybalépését követően teljesített adományokra alkalmazandó.
 
 ### 4. cikk — Az adományok szintjei és a nyilvántartási együttható
@@ -92,6 +98,8 @@ Az adományozó tudatában van annak, hogy nevének az adománnyal való nyilvá
 Természetes személy minden adománya után az Alapítvány adományozási szerződést készít, és azt a Platformon keresztül eljuttatja az adományozónak. A szerződés elektronikus formában, abban a pillanatban készül, amelyben az Alapítvány az adományt elfogadja.
 
 A szerződés tartalmazza az adomány összegét, azt a nyilatkozatot, hogy az adomány önkéntes és ellenszolgáltatás nélküli, azt a nyilatkozatot, hogy az adománnyal az adományozó semmilyen jószágot vagy szolgáltatást nem szerez, nem szerez követelést az Alapítvánnyal szemben, sem visszatérítéshez való jogot, sem a POEN visszaváltásához való jogot, sem befolyást a rendszer szabályairól szóló döntéshozatalban, az Alapítvány azon kötelezettségét, hogy az adományt kizárólag azon célok megvalósítására fordítja, amelyek érdekében létrehozták, valamint az adomány kapcsán nyilvántartásba vett POEN számát azzal a megjelöléssel, hogy e nyilvántartásba vétel nem ellenszolgáltatás.
+
+Olyan adomány esetén, amelynek összege önmagában vagy ugyanazon adományozó elmúlt tizenkét hónapban teljesített korábbi adományaival együtt meghaladja a jelen szabályzat 13.b cikke szerinti küszöböt, a szerződés tartalmazza az adományozó azon nyilatkozatát is, hogy az adományozott eszközök törvényes forrásból származnak, és hogy az adomány nem szolgál pénzmosást vagy terrorizmusfinanszírozást. A küszöb alatti adomány esetén ezt a nyilatkozatot nem kérik.
 
 A szerződés szövegét az adomány bejegyzése mellett abban a formában őrzik meg, ahogyan az az adomány elfogadásának pillanatában szólt, és azt a jelen szabályzat utólagos módosításai nem változtatják meg.
 
@@ -174,7 +182,45 @@ A pártfogói rangsor közzététele a hozzájárulás nyilvános elismerése é
 
 A hozzájárulás alapján a pártfogó nem szerez jogot logó közzétételére, saját internetes oldalára mutató hivatkozásra, a Platformon hirdetési felületre, az Alapítvány kampányaiban való említésre, sem bármely más promóciós szolgáltatásra, és ilyen szolgáltatást nem köthet ki és nem követelhet. A nyilvános elismerés az Alapítvány aktusa, nem pedig a hozzájárulás ellenszolgáltatása.
 
-## IV — A többlet elosztása
+## IV — A pénzmosás és a terrorizmusfinanszírozás megelőzése
+
+### 13.a cikk — Cél és önkéntesség
+
+Az Alapítvány nem kötelezett szolgáltató a pénzmosás és a terrorizmusfinanszírozás megelőzéséről szóló jogszabályok értelmében. A POEN sem digitális vagyon, sem virtuális fizetőeszköz, az Alapítvány nem nyújt fizetési szolgáltatást, és nem végez olyan tevékenységet, amely alapján a kötelezett szolgáltatói minőséget megszerezné.
+
+Az e fejezetben foglalt intézkedéseket az Alapítvány önkéntesen, elővigyázatosságból és a rendszer integritásának védelme érdekében írja elő. Előírásuk nem jelenti a kötelezett szolgáltatói minőség elismerését, és nem keletkeztet olyan kötelezettségeket, amelyeket a jogszabályok a kötelezett szolgáltatók számára előírnak.
+
+Az önkéntes előírás oka szerkezeti. Az Alapítvány dinárban denominált eszközöket fogad, hozzájárulási nyilvántartást vezet, amely a rendszeren belül a felhasználók között átkerül, és ezekből az eszközökből javakat szerez be, amelyeket a programok felhasználóinak enged át. Az Alapítvány semmilyen jogcímen nem fizet pénzt a felhasználónak, az adományt nem téríti vissza, a POEN-t pedig nem váltja vissza és nem konvertálja, így pénzbeli kiút nincs; az ilyen szerkezettel azonban vissza lehet élni, ezért az e fejezetben foglalt intézkedések a visszaélést megnehezítik és láthatóvá teszik.
+
+### 13.b cikk — Intézkedések
+
+Az Alapítvány a következő intézkedéseket alkalmazza:
+
+1) az adomány teljesítése kizárólag készpénzmentesen, a jelen szabályzat 3. cikkében meghatározott módon történik;
+
+2) a hozzájárulás kizárólag annak a felhasználónak a bejegyzésében kerül nyilvántartásba, akinek az eszközeiből a befizetés történt, a befizető adatát pedig az adomány bejegyzése mellett rögzítik;
+
+3) az Igazgatótanács határozatával megállapított küszöböt meghaladó adomány esetén az Alapítvány a nyilvántartásba vétel előtt dokumentálja az eszközök eredetére vonatkozó kérdésre adott választ, az adományozó pedig az adományozási szerződésben megteszi a jelen szabályzat 5.b cikke szerinti nyilatkozatot;
+
+4) a külföldön nyitott számláról érkező adomány azt követően kerül nyilvántartásba, hogy az Igazgatótanács megállapította az adományozó személyazonosságát és a befizetés jogcímét; az ilyen adomány bejegyzését külön megjelölik;
+
+5) az Igazgatótanács kijelöli az e fejezet alkalmazásának felügyeletére felhatalmazott személyt; a rendszer 1. fázisában ezt a feladatot az Igazgatótanács tagja látja el;
+
+6) az adományokra vonatkozó dokumentációt a keletkezésétől számított tíz évig őrzik meg, a számviteli jogszabályokban meghatározott határidőkkel összhangban.
+
+Az e cikk 1. bekezdésének 3. pontja szerinti küszöböt az Igazgatótanács határozata állapítja meg, és azt közzéteszik. A küszöb nem kerül be a jelen szabályzatba, mert az összegek és azok a jogszabályok, amelyekre támaszkodik, attól függetlenül változnak.
+
+### 13.c cikk — Eljárás gyanú esetén
+
+Ha megalapozott a gyanú, hogy a befizetés pénzmosás vagy terrorizmusfinanszírozás céljából történt, az Alapítvány a hozzájárulást nem veszi nyilvántartásba, és POEN-t nem jegyez be mindaddig, amíg a gyanú el nem hárul.
+
+Az Alapítvány az ilyen befizetésről értesíti az illetékes hatóságot, ha ezt jogszabály előírja, és annak rendelkezése szerint jár el.
+
+A visszaélésben részt vevő felhasználóval szemben a Felhasználási feltételek 27. és 28. cikke szerinti intézkedéseket kell alkalmazni.
+
+Ha a POEN már nyilvántartásba került, annak érvénytelenítésére kizárólag a KOLO rendszerről szóló szabályzatban meghatározott jogcímeken kerül sor. A felhasználónak a Felhasználási feltételek 28. cikke szerinti kizárása az említett szabályzat 34. cikke szerinti nyilvántartás-érvénytelenítést vonja maga után. A jelen szabályzat új érvénytelenítési jogcímet nem állapít meg.
+
+## V — A többlet elosztása
 
 ### 14. cikk — Az elosztás szabálya
 
@@ -182,7 +228,7 @@ Amikor az adományokból és a pártfogásból származó dinárbevételek megha
 
 A többlet elosztásának szabályait az 1. fázisban az alapító és az Alapítvány, a 2. fázisban pedig a Felső Kolo állapítja meg, a KOLO rendszerről szóló szabályzattal összhangban.
 
-## V — Módosítások és záró rendelkezések
+## VI — Módosítások és záró rendelkezések
 
 ### 15. cikk — A módosítás hatásköre
 

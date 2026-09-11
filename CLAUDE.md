@@ -101,6 +101,29 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-11 (dvadeset šesti put):** na **4.5.5** idu **ČETIRI akta** —
+Pravilnik o pokroviteljstvu i donacijama (sa 4.5.1), Izjava o prihvatanju rizika
+(sa 4.4.6), Politika privatnosti (sa 4.5.2) i Registar radnji obrade (sa 4.5.2).
+Ostalih trinaest ostaje gde jeste. Povod je **analiza rizika R-19** (sprečavanje
+pranja novca i finansiranja terorizma). Sadržinski, vidi sekciju „Pranje novca:
+uplatilac mora biti donator" ispod.
+
+🟡 **Zašto 4.5.5, a ne 4.5.4:** 4.5.4 je istog dana već objavljen za tri akta
+(R-18, commit `47aa01a`); da su ovi dobili isti broj, dva različita događaja
+objave delila bi jednu šifru. Isto pravilo kao kod operativnog doprinosa
+(4.4.4 umesto 4.4.3) i nabavki (4.4.7 umesto 4.4.6).
+
+🟢 **Glavni Pravilnik NIJE diran, i to je bila projektantska odluka, ne previd.**
+Čl. 14 zatvara listu osnova za poništenje („po osnovima utvrđenim **ovim**
+pravilnikom"), pa poseban akt ne sme sam da uvede poništenje POEN-a zbog sumnje
+na pranje novca. Zato glava IV izričito kaže suprotno — *„Ovim pravilnikom se
+nov osnov poništenja ne ustanovljava"* — a put ide kroz **zatečeni** osnov:
+isključenje po Uslovima čl. 28 → prestanak statusa → poništenje po čl. 34
+Pravilnika. Zaključano testom. **Ne uvoditi AML poništenje u poseban akt.**
+
+🟡 **Zaostala unakrsna upućivanja — i dalje ŠEST, nijedno novo.** Nijedan od
+četiri izmenjena akta ne menja šifru na koju neko drugi upućuje po broju.
+
 **AŽURIRANO 2026-09-11 (dvadeset peti put):** na **4.5.4** idu **TRI akta** —
 Pravilnik o KOLO sistemu (sa 4.5.2), Pravilnik o projektima i kolektivnim nabavkama
 (sa 4.4.7) i Uslovi korišćenja (sa 4.5.3). Ostalih četrnaest ostaje gde jeste. Povod
@@ -1186,6 +1209,121 @@ dali prava, to davanje više liči na prodaju. 🟢 **Rešeno setom 4.5.4** tako
 ne ide kroz korisnikovo pravo prema Fondaciji nego kroz **obavezu Fondacije prema
 sopstvenom programu** (čl. 30 st. 5) i kroz **ispravku evidencije**, koja nije
 povraćaj naknade (čl. 30a st. 6). Odbrana besplatnosti time ostaje netaknuta.
+
+### Pranje novca: uplatilac mora biti donator (2026-09-11)
+
+Odluke uz analizu rizika **R-19** (sprečavanje pranja novca i finansiranja
+terorizma). Na **4.5.5** idu Pravilnik o pokroviteljstvu i donacijama, Izjava o
+prihvatanju rizika, Politika privatnosti i Registar radnji obrade.
+
+🔴 **Nalaz u kodu koji je pokrenuo ceo potez: uplatilac i donator se nigde nisu
+poredili.** `POST /api/admin/donacija` je donaciju evidentirao **po pozivu na
+broj**, a poziv na broj je **trajan broj člana** (model 97 nad `donatorskiBroj`).
+Ime koje ide na zapis (`donatorIme`) i u ugovor uzimalo se **iz profila člana, ne
+iz izvoda**. Dakle: bilo ko sa bilo kog računa mogao je da uplati na tuđi poziv na
+broj, a sistem bi zapisao da je **član donirao** i izdao mu ugovor koji to tvrdi.
+Isto je važilo i za karticu — karticu drži ko je drži.
+
+🟢 **Najjača odbrana je stvarna i treba je znati napamet: izlaza u novcu nema.**
+Provereno u kodu — **nijedna putanja ne isplaćuje dinare korisniku**, ni po jednom
+kanalu. Donacija je nepovratna (Pravilnik čl. 73), otkupa i konverzije nema, a
+čl. 50 zabranjuje da se donacije ikada učine povratnim — to ne može ni Gornje
+Kolo. Za pranje novca je to loša mašina. 🟡 **Ali izlaz u ROBI postoji** —
+kolektivna nabavka, koja je od 07.09.2026. redovan projekat bez ograničenja
+učestalosti. Ta tačka ostaje otvorena i svesno je prihvaćena (vidi ispod).
+
+**Šta akti sada kažu:**
+- **donacije čl. 3** — donacija se izvršava **isključivo bezgotovinski** (prenos
+  sa računa na račun ili platni instrument koji glasi na donatora); **Fondacija ne
+  prima gotovinu**; doprinos se evidentira **isključivo u zapis korisnika čijim je
+  sredstvima uplata izvršena**; uplata trećeg lica se ne evidentira kao doprinos
+  korisnika na čiji je poziv na broj legla; **uplata lica koje nije korisnik ne
+  nosi evidentiranje POEN-a** (odluka vlasnika: *„ako nije registrovan onda ne
+  može da dobije poen, sav novac se koristi za kolektivne nabavke"*); podatak o
+  uplatiocu beleži se uz zapis donacije **i uz zapis o evidentiranom POEN-u**.
+- **donacije čl. 5b** — izjava o poreklu sredstava ide u ugovor **samo iznad
+  praga** (odluka vlasnika: *„to onda važi samo za velike donacije ne i za male"*).
+- **donacije, nova Glava IV** (čl. 13a–13c) — svrha i **dobrovoljnost** mera,
+  šest mera, postupanje po sumnji. Numeracija članova nije dirana; glave IV i V su
+  postale V i VI.
+- **Izjava o rizicima, nov čl. 11a** + nova alineja u čl. 12.
+
+🔴 **Mere su DOBROVOLJNE i to se piše izričito.** Čl. 13a kaže da Fondacija nije
+obveznik i da propisivanje mera **ne predstavlja priznanje svojstva obveznika**.
+Bez te rečenice bi sopstvena AML glava bila najbolji dokaz protiv nas — akt kojim
+sami sebe svrstavamo u krug obveznika. Zaključano testom.
+
+🔴 **Prag NE ide u akt** (čl. 13b st. 2 — utvrđuje ga odluka UO i objavljuje se),
+iz istog razloga iz kog u aktu nema poreskih stopa: iznosi i propisi na koje se
+oslanja menjaju se nezavisno od pravilnika. U kodu živi kao
+`PRAG_PROVERE_POREKLA_RSD` (`donacija-pravila.ts`), danas **500.000 RSD**, uz
+prozor od **12 meseci**. Zakonski prag identifikacije kod povremenih transakcija
+je 15.000 EUR, dakle znatno viši — naš je namerno ispod njega.
+
+**Kod:**
+- `DonationRecord.uplatilac` i `straniPriliv` (migracija
+  `20260911150000_donacija_uplatilac`). 🟡 Zatečene donacije ostaju bez uplatioca
+  (`null`) — za njih taj podatak nije ni prikupljan, a retroaktivno upisano ime
+  bilo bi neprovereno. Bez prelazne radnje, isto kao `ugovorTekst`.
+- 🔴 **`POST /api/admin/donacija` odbija evidentiranje bez uplatioca** na **oba**
+  ručna puta (potvrda najavljenog zapisa i ručna evidencija iz izvoda). Provera je
+  ljudska — čovek gleda izvod; polje je **trag da je urađena** i ide u revizijski
+  dnevnik.
+- 🔴 **Prag se meri na SVE potvrđene donacije u prozoru — i javne i anonimne.**
+  Kumulativni nivo iz čl. 4 broji samo javne, pa se ta dva zbira **namerno**
+  računaju odvojeno (`zbir12m` je zaseban `aggregate`). Spajanje bi značilo da se
+  prag zaobilazi anonimnim donacijama.
+- **Opis transakcije nosi uplatioca** (`transakcije.donacija_uplatilac`, pet
+  jezika). Bezbedno po privatnost: POEN nosi samo **javna** donacija, čije je ime
+  ionako u listi donacija; anonimna donacija transakciju nema (POEN = 0).
+- **Kartični tok** ne čita izvod, pa `uplatilac` pada na `punoIme` korisnika — akt
+  traži da kartica glasi na donatora, a izjavu o tome daje sam donator
+  (`donacije.karticno_sopstvena_kartica`, pet jezika).
+- **Brana:** `__tests__/donacija-uplatilac-izvor.test.ts` (19 provera — prag i
+  prozor, zbir u prozoru, IZVOR: da ruta odbija bez uplatioca, da oba puta
+  prosleđuju, da ugovor nosi izjavu samo iznad praga). Odredbe akata zaključane u
+  `pravni-dokumenti.test.ts` na sr/en/ru.
+
+🔴 **ODBIJENE MERE UZ R-19 (odluka vlasnika, 2026-09-11) — ne predlagati ponovo:**
+- **Praćenje obrasca prepisa** (izveštaj/upozorenje kad jedan zapis primi prepise
+  od neuobičajeno mnogo korisnika) — odbijeno: *„nemoguće je sprovesti kontrolu
+  kada je transfer poena slobodan."* Posledicu znati: zabrana prodaje POEN-a iz
+  Uslova čl. 24 ostaje **nesprovedena kontrola**, i to je prihvaćeno.
+- **Zabrana prepisa POEN-a pribavljenog donacijom** (jedina mera koja bi zatvorila
+  raslojavanje potpuno) — odbijeno kao *„glupost"*; tražila bi obeležavanje porekla
+  svakog zapisa i razbila zamenljivost evidencije.
+- **Sopstveni KYC za velike donacije** — odbijeno još uz R-04, razlog stoji: uplatu
+  prima banka, koja identifikaciju uplatioca ionako sprovodi.
+
+🟡 **Prihvaćene posledice, svesno:**
+- **Petlja nabavke ostaje otvorena** (donacija → POEN → prag od 20.000 → mesto u
+  redu → roba). Ispitivanje porekla POEN-a pri prijavi na nabavku bi je zatvorilo,
+  ali obara odluku vlasnika uz R-10 (*„poreklo POEN-a se NE ispituje"*), pa se ne
+  otvara bez naloga.
+- **FATF/NPO izloženost** se nosi **transparentnošću trošenja**, ne ograničenjem
+  (odluka vlasnika: *„ako je potrošnja transparentna nema brige"*). Godišnji zbir
+  projekata iz nabavki čl. 31 st. 4 (R-10) je upravo taj instrument.
+- **Trostrana konstrukcija pokroviteljstva** (firma plaća, POEN dobija fizičko lice
+  lično — vidi R-05) ostaje i sa AML strane najoštrija tačka. Vlasnik se sa nalazom
+  složio; mera nije uvedena.
+
+🟡 **NIJE ODLUČENO — M-1 čeka odgovor vlasnika.** Predlog je bio da **Pravilnik
+čl. 13** dobije **obrazloženje** zašto POEN nije virtuelna valuta (nedostajući
+elementi definicije: ne može se pribaviti kupovinom, otuđenje uz naknadu je
+zabranjeno, nema tržišta ni kotacije, ne postoji izvan evidencije Protokola, ne
+služi izmirenju novčanih obaveza) umesto gole etikete „nije digitalna imovina".
+Čl. 13 **nije diran** — bump glavnog Pravilnika se ne otvara bez naloga. To je i
+dalje najvažnija otvorena stavka iz R-19: ako POEN bude kvalifikovan kao virtuelna
+valuta, Fondacija postaje pružalac usluga povezanih sa digitalnom imovinom, sa
+dozvolom, obaveznim KYC-om i prijavljivanjem sumnjivih transakcija.
+
+🔴 **OTVORENO — pitanje za pravnicu, ne pisati kao tvrdnju:** da li POEN ispunjava
+definiciju **virtuelne valute** (digitalni zapis vrednosti koji nije izdala
+centralna banka, nema status novca, **ali ga lica prihvataju kao sredstvo razmene**
+i može se prenositi i čuvati elektronski). Naša odbrana pobija *status novca*, a
+definicija status novca **izričito isključuje** — dakle pobijamo element koji nam
+niko ne prigovara. Otežavajuće: Pijaca jeste mesto gde se roba daje za POEN, a
+Uslovi čl. 19 sami objavljuju odnos 1 POEN ≈ 1 RSD.
 
 ### Prigovor je jedan institut: nabavka, razmena, profil (2026-09-11)
 

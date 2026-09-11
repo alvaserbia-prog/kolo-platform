@@ -96,6 +96,14 @@ The KOLO system combines legal concepts from several existing categories. Serbia
 
 A change in the regulatory framework or in the interpretation of competent authorities may affect the operation of the system or the legal position of users.
 
+### Article 11a — Prohibition of abuse of the system
+
+Use of the system for money laundering, the financing of terrorism or the concealment of the origin of funds is prohibited by Article 24 of the Terms of Use and entails the measures under Articles 27 and 28 of the Terms of Use, including exclusion, as well as notification of the competent authority where the regulations so provide.
+
+The user is aware that the Foundation pays no money to a user on any basis whatsoever, that a donation is non-refundable and that POEN is neither redeemed nor converted into dinars, so that funds given to the Foundation cannot be returned in money in any form.
+
+The Foundation applies the measures under Chapter IV of the Rulebook on Sponsorship and Donations. The Foundation lays those measures down voluntarily and they do not constitute an acknowledgement of the status of an obliged entity within the meaning of the regulations on the prevention of money laundering and the financing of terrorism.
+
 ### Article 12 — User declaration
 
 By joining the KOLO system, the user declares:
@@ -115,6 +123,8 @@ By joining the KOLO system, the user declares:
 — that they understand that the exchange of goods and services within the system may have tax implications and that they are responsible for their own tax obligations;
 
 — that they accept the public nature of the pseudonymous ledger as a structural characteristic of the system;
+
+— that they will not use the system for money laundering, the financing of terrorism or the concealment of the origin of funds;
 
 — that they join the system voluntarily, on the basis of their own assessment and at their own responsibility.
 

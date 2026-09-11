@@ -20,6 +20,35 @@
  * novodostignutog nivoa, primenjen na CELU novu donaciju. Nivo je kumulativan i
  * trajan. `do` je donji prag kumulativne donacije (RSD) za dati nivo.
  */
+/**
+ * Prag iznad kojeg se uz donaciju dokumentuje poreklo sredstava i uz ugovor ide
+ * izjava donatora (Pravilnik o pokroviteljstvu i donacijama, glava IV, cl. 13b
+ * t. 3 i cl. 5b). Meri se iznos POJEDINACNE donacije ili zbir donacija istog
+ * donatora u poslednjih dvanaest meseci — sta pre pređe prag.
+ *
+ * 🔴 Broj NIJE u aktu, i to je namerno: po cl. 13b st. 2 prag utvrdjuje odluka
+ * Upravnog odbora, jer se iznosi i propisi na koje se oslanja menjaju nezavisno
+ * od pravilnika (isto pravilo kao kod poreskih stopa). Ovde stoji vrednost te
+ * odluke; menja se izmenom OVE konstante, bez diranja akta.
+ *
+ * Zasto bas ovoliko: zakonski prag identifikacije kod povremenih transakcija je
+ * 15.000 EUR, dakle znatno vise. Fondacija svoj prag drzi ispod zakonskog, da
+ * mera ima smisla, a dovoljno visoko da obican donator izjavu nikad ne vidi.
+ */
+export const PRAG_PROVERE_POREKLA_RSD = 500_000;
+
+/** Period u kome se donacije istog donatora sabiraju za potrebe praga (meseci). */
+export const PROZOR_PRAGA_MESECI = 12;
+
+/**
+ * Da li za ovu donaciju treba izjava o poreklu sredstava. `zbir12m` je zbir
+ * ranijih donacija istog donatora u prozoru, BEZ tekuce.
+ */
+export function trebaIzjavaOPoreklu(iznosRSD: number, zbir12m: number): boolean {
+  if (!Number.isFinite(iznosRSD) || !Number.isFinite(zbir12m)) return true;
+  return iznosRSD + Math.max(0, zbir12m) > PRAG_PROVERE_POREKLA_RSD;
+}
+
 export const RANG_TABELA: { nivo: number; do: number; kurs: number }[] = [
   { nivo: 1,  do:               0, kurs: 1.00 },
   { nivo: 2,  do:           5_000, kurs: 1.10 },

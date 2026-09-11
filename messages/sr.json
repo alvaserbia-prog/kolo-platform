@@ -920,7 +920,8 @@
     "ugovor_naslov": "Ugovor o donaciji",
     "ugovor_stampaj": "Odštampaj",
     "ugovor_nazad": "Nazad na donacije",
-    "ugovor_napomena": "Ugovor je sačinjen u trenutku potvrde donacije i od tada se ne menja. Merodavan je srpski original."
+    "ugovor_napomena": "Ugovor je sačinjen u trenutku potvrde donacije i od tada se ne menja. Merodavan je srpski original.",
+    "karticno_sopstvena_kartica": "Plaćanjem potvrđuješ da kartica glasi na tvoje ime. Doprinos se evidentira isključivo korisniku čijim je sredstvima uplata izvršena."
   },
   "poruke": {
     "naslov": "Poruke",
@@ -958,7 +959,7 @@
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.5.2"
+      "ver": "4.5.5"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -970,11 +971,11 @@
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "4.5.2"
+      "ver": "4.5.5"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
-      "ver": "4.4.6"
+      "ver": "4.5.5"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
@@ -1004,15 +1005,15 @@
     "meta_uslovi_title": "Uslovi korišćenja · KOLO",
     "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.5.4",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.2",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.5",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
     "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.5.2",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.5.2",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.5.5",
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
-    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.4.6",
+    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.5.5",
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.6",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
@@ -2570,7 +2571,12 @@
     "prigovori_tip_razmena": "Prepis povodom razmene",
     "prigovori_tip_nabavka": "Deo iz nabavke",
     "prigovori_ispravi": "Ispravi evidenciju",
-    "prigovori_predmet": "Predmet"
+    "prigovori_predmet": "Predmet",
+    "donacije_uplatilac_label": "Uplatilac iz izvoda",
+    "donacije_uplatilac_placeholder": "Ime i prezime sa priliva",
+    "donacije_uplatilac_pomoc": "Doprinos se evidentira isključivo korisniku čijim je sredstvima uplata izvršena. Uporedi ime sa priliva sa članom pre potvrde.",
+    "donacije_uplatilac_obavezan": "Unesite ime uplatioca iz izvoda.",
+    "donacije_strani_priliv": "Uplata sa računa otvorenog u inostranstvu"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",
@@ -2747,6 +2753,7 @@
     "primljena_verifikacija": "Primljena potvrda od {pseudonim}",
     "nadzor": "Nadzor potvrde {verifikator} → {verifikovani}",
     "donacija": "Bonus za donaciju: {iznos} POEN",
+    "donacija_uplatilac": "Bonus za donaciju: {iznos} POEN — uplatilac: {uplatilac}",
     "pokroviteljstvo": "Bonus za pokroviteljstvo: {iznos} POEN",
     "osnivacki": "Osnivački doprinos, korak {korak}/{ukupno}",
     "krug_bonus": "Bonus Kruga „{krug}“, {clanovi} članova",

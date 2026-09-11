@@ -96,6 +96,14 @@ KOLO sustav kombinira pravne institute iz više postojećih kategorija. Srpsko p
 
 Promjena regulatornog okvira ili tumačenja nadležnih tijela može utjecati na funkcioniranje sustava ili na pravni položaj korisnika.
 
+### Članak 11.a — Zabrana zlouporabe sustava
+
+Korištenje sustava radi pranja novca, financiranja terorizma ili prikrivanja podrijetla sredstava zabranjeno je člankom 24. Uvjeta korištenja i povlači mjere iz članaka 27. i 28. Uvjeta korištenja, uključujući isključenje, kao i obavještavanje nadležnog tijela kada je to propisima predviđeno.
+
+Korisnik je svjestan da Zaklada korisniku ni po jednoj osnovi ne isplaćuje novac, da je donacija nepovratna i da se POEN ne otkupljuje i ne konvertira u dinare, pa sredstva dana Zakladi ni u kojem obliku ne mogu biti vraćena u novcu.
+
+Zaklada primjenjuje mjere iz glave IV. Pravilnika o pokroviteljstvu i donacijama. Te mjere Zaklada propisuje dobrovoljno i one ne predstavljaju priznanje svojstva obveznika u smislu propisa o sprječavanju pranja novca i financiranja terorizma.
+
 ### Članak 12. — Izjava korisnika
 
 Pristupanjem KOLO sustavu korisnik izjavljuje:
@@ -115,6 +123,8 @@ Pristupanjem KOLO sustavu korisnik izjavljuje:
 — da razumije da razmjena dobara i usluga unutar sustava može imati porezne implikacije i da je odgovoran za vlastite porezne obveze;
 
 — da prihvaća javnost pseudonimne evidencije kao strukturalnu značajku sustava;
+
+— da neće koristiti sustav radi pranja novca, financiranja terorizma ni prikrivanja podrijetla sredstava;
 
 — da sustavu pristupa dobrovoljno, na temelju vlastite procjene i na vlastitu odgovornost.
 

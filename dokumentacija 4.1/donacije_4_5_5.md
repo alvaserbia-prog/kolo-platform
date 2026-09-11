@@ -28,6 +28,12 @@ Svaki verifikovani korisnik sistema može donirati novac Fondaciji u dinarima il
 
 Donacija se vrši uplatom na račun Fondacije. Fondacija izdaje potvrdu o donaciji na zahtev donatora, u skladu sa zakonom. Poreski tretman donacije zavisi od statusa donatora, registrovanog statusa Fondacije i važećih poreskih propisa u trenutku donacije.
 
+Donacija se izvršava isključivo prenosom sredstava sa računa na račun Fondacije ili platnim instrumentom koji glasi na donatora. Fondacija ne prima gotovinu.
+
+Doprinos se evidentira isključivo u zapis korisnika čijim je sredstvima uplata izvršena. Uplata koju je izvršilo drugo lice ne evidentira se kao doprinos korisnika na čiji je poziv na broj izvršena. Uplata lica koje nije korisnik sistema ne nosi evidentiranje POEN-a — sredstva se prihvataju kao donacija i upotrebljavaju za ostvarivanje ciljeva Fondacije.
+
+Podatak o uplatiocu iz izvoda beleži se uz zapis donacije i uz zapis o evidentiranom POEN-u. Kod plaćanja platnom karticom donator izjavljuje da platni instrument glasi na njegovo ime.
+
 Donator pri svakoj donaciji bira da li je donacija javna ili anonimna. Javnom donacijom donator pristaje da njegovo ime i prezime budu javno prikazani u listi donacija na platformi i samo se za javnu donaciju evidentira POEN prema članu 4. Anonimna donacija ne prikazuje ime donatora i za nju se POEN ne evidentira. Izbor se vrši za svaku donaciju posebno i primenjuje se na donacije izvršene nakon stupanja na snagu ovih odredbi.
 
 ### Član 4 — Nivoi donacija i koeficijent evidencije
@@ -85,6 +91,8 @@ Donator je svestan da javno povezivanje njegovog imena sa donacijom omogućava p
 Za svaku donaciju fizičkog lica Fondacija sačinjava ugovor o donaciji i isporučuje ga donatoru kroz Platformu. Ugovor se sačinjava u elektronskom obliku u trenutku u kome Fondacija donaciju prihvati.
 
 Ugovor sadrži iznos donacije, izjavu da je donacija dobrovoljna i bez naknade, izjavu da donator donacijom ne pribavlja nijedno dobro ni uslugu, ne stiče potraživanje prema Fondaciji, pravo na povraćaj donacije, pravo na otkup POEN-a ni uticaj u odlučivanju o pravilima sistema, obavezu Fondacije da donaciju upotrebi isključivo za ostvarivanje ciljeva zbog kojih je osnovana, kao i podatak o broju POEN-a upisanom povodom donacije uz naznaku da taj upis nije protivčinidba.
+
+Za donaciju čiji iznos, sam ili u zbiru sa ranijim donacijama istog donatora u poslednjih dvanaest meseci, pređe prag iz člana 13b ovog pravilnika, ugovor sadrži i izjavu donatora da donirana sredstva potiču iz zakonitih izvora i da donacija ne služi pranju novca ni finansiranju terorizma. Za donaciju ispod praga ta izjava se ne traži.
 
 Tekst ugovora čuva se uz zapis donacije onakav kakav je bio u trenutku prihvatanja donacije i naknadnim izmenama ovog pravilnika se ne menja.
 
@@ -173,7 +181,45 @@ Objavljivanje rang-liste pokrovitelja predstavlja javno priznanje doprinosa i el
 
 Pokrovitelj po osnovu doprinosa ne stiče pravo na objavljivanje logotipa, na upućivanje na svoju internet stranicu, na oglasni prostor na Platformi, na pominjanje u kampanjama Fondacije niti na bilo koju drugu promotivnu činidbu, i takvu činidbu ne može ugovoriti niti zahtevati. Javno priznanje je akt Fondacije, a ne protivčinidba za doprinos.
 
-## IV — Raspoređivanje viška
+## IV — Sprečavanje pranja novca i finansiranja terorizma
+
+### Član 13a — Svrha i dobrovoljnost
+
+Fondacija nije obveznik u smislu propisa o sprečavanju pranja novca i finansiranja terorizma. POEN nije digitalna imovina ni virtuelna valuta, Fondacija ne pruža platne usluge i ne obavlja poslove po osnovu kojih bi svojstvo obveznika stekla.
+
+Mere iz ove glave Fondacija propisuje dobrovoljno, iz opreznosti i radi zaštite integriteta sistema. Njihovo propisivanje ne predstavlja priznanje svojstva obveznika niti zasniva obaveze koje propisi za obveznike predviđaju.
+
+Razlog za dobrovoljno propisivanje je strukturni. Fondacija prima dinarska sredstva, vodi evidenciju doprinosa koja se prenosi između korisnika unutar sistema i tim sredstvima pribavlja dobra koja ustupa korisnicima programa. Fondacija korisniku ni po jednom osnovu ne isplaćuje novac, donacija se ne vraća i POEN se ne otkupljuje i ne konvertuje, pa izlaza u novcu nema; ali struktura te vrste može biti zloupotrebljena, pa se merama iz ove glave zloupotreba otežava i čini vidljivom.
+
+### Član 13b — Mere
+
+Fondacija primenjuje sledeće mere:
+
+1) donacija se izvršava isključivo bezgotovinski, na način utvrđen članom 3 ovog pravilnika;
+
+2) doprinos se evidentira isključivo u zapis korisnika čijim je sredstvima uplata izvršena, a podatak o uplatiocu beleži se uz zapis donacije;
+
+3) za donaciju koja pređe prag utvrđen odlukom Upravnog odbora, Fondacija pre evidentiranja dokumentuje odgovor na pitanje o poreklu sredstava, a donator u ugovoru o donaciji daje izjavu iz člana 5b ovog pravilnika;
+
+4) donacija sa računa otvorenog u inostranstvu evidentira se pošto Upravni odbor utvrdi identitet donatora i osnov uplate; zapis o takvoj donaciji posebno se označava;
+
+5) Upravni odbor određuje lice ovlašćeno za praćenje primene ove glave; u Fazi 1 sistema tu funkciju vrši član Upravnog odbora;
+
+6) dokumentacija o donacijama čuva se deset godina od nastanka, u skladu sa rokovima iz propisa o računovodstvu.
+
+Prag iz stava 1 tačke 3 ovog člana utvrđuje odluka Upravnog odbora i objavljuje se. Prag se ne unosi u ovaj pravilnik, jer se iznosi i propisi na koje se oslanja menjaju nezavisno od njega.
+
+### Član 13c — Postupanje po sumnji
+
+Kada postoji osnov za sumnju da je uplata izvršena radi pranja novca ili finansiranja terorizma, Fondacija ne evidentira doprinos i ne upisuje POEN dok sumnja ne bude otklonjena.
+
+Fondacija o takvoj uplati obaveštava nadležni organ kada je to propisima predviđeno i postupa po njegovom nalogu.
+
+Prema korisniku koji je u zloupotrebi učestvovao primenjuju se mere iz članova 27 i 28 Uslova korišćenja.
+
+Ako je POEN već evidentiran, poništenje se sprovodi isključivo po osnovima utvrđenim Pravilnikom o KOLO sistemu. Isključenje korisnika po članu 28 Uslova korišćenja povlači poništenje evidencije po članu 34 tog pravilnika. Ovim pravilnikom se nov osnov poništenja ne ustanovljava.
+
+## V — Raspoređivanje viška
 
 ### Član 14 — Pravilo raspoređivanja
 
@@ -181,7 +227,7 @@ Kada dinarski prilivi od donacija i pokroviteljstva premaše operativne troškov
 
 Pravila raspoređivanja viška utvrđuju osnivač i Fondacija u Fazi 1, a Gornje Kolo u Fazi 2, u skladu sa Pravilnikom o KOLO sistemu.
 
-## V — Izmene i završne odredbe
+## VI — Izmene i završne odredbe
 
 ### Član 15 — Nadležnost za izmene
 

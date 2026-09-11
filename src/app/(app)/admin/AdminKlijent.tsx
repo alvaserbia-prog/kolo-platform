@@ -1129,6 +1129,9 @@ function EmisijaTab({ onSuccess }: { onSuccess: () => void }) {
   const t = useTranslations("admin");
   const [pseudonim, setPseudonim] = useState("");
   const [amountRSD, setAmountRSD] = useState("");
+  // Uplatilac iz izvoda (Pravilnik o pokroviteljstvu i donacijama, čl. 3).
+  const [uplatilac, setUplatilac] = useState("");
+  const [straniPriliv, setStraniPriliv] = useState(false);
   const [loading, setLoading] = useState(false);
   const [rezultat, setRezultat] = useState<{ poenEmitted: number; noviNivo: number; noviKumulativ: number } | null>(null);
   const [error, setError] = useState("");
@@ -1209,19 +1212,25 @@ function EmisijaTab({ onSuccess }: { onSuccess: () => void }) {
     if (!pseudonim.trim()) { setError(t("emisija_pseudonim_obavezan")); return; }
     const iznos = Number(amountRSD);
     if (!amountRSD || isNaN(iznos) || iznos <= 0) { setError(t("emisija_iznos_nevalidan")); return; }
+    if (uplatilac.trim().length < 2) { setError(t("donacije_uplatilac_obavezan")); return; }
 
     setLoading(true);
     const res = await fetch("/api/admin/donacija", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pseudonim: pseudonim.trim(), amountRSD: iznos }),
+      body: JSON.stringify({
+        pseudonim: pseudonim.trim(),
+        amountRSD: iznos,
+        uplatilac: uplatilac.trim(),
+        straniPriliv,
+      }),
     });
     const data = await res.json();
     setLoading(false);
 
     if (!res.ok) { setError(data.error ?? t("greska_generalna")); return; }
     setRezultat(data);
-    setPseudonim(""); setAmountRSD("");
+    setPseudonim(""); setAmountRSD(""); setUplatilac(""); setStraniPriliv(false);
     onSuccess();
   }
 
@@ -1286,6 +1295,23 @@ function EmisijaTab({ onSuccess }: { onSuccess: () => void }) {
               className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors font-mono"
             />
           </div>
+          {/* Uplatilac iz izvoda (čl. 3) — doprinos ide onome čijim je sredstvima
+              uplata izvršena, a poziv na broj je trajan broj člana. */}
+          <div>
+            <label className="block text-sm font-medium text-kolo-muted mb-1">{t("donacije_uplatilac_label")}</label>
+            <input
+              type="text"
+              value={uplatilac}
+              onChange={(e) => setUplatilac(e.target.value)}
+              placeholder={t("donacije_uplatilac_placeholder")}
+              className="w-full px-4 py-3 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
+            />
+            <p className="text-xs text-kolo-muted mt-1">{t("donacije_uplatilac_pomoc")}</p>
+          </div>
+          <label className="flex items-center gap-2 text-xs text-kolo-muted cursor-pointer">
+            <input type="checkbox" checked={straniPriliv} onChange={(e) => setStraniPriliv(e.target.checked)} />
+            {t("donacije_strani_priliv")}
+          </label>
           {error && <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{error}</p>}
           {rezultat && (
             <div className="bg-kolo-green-100 border border-kolo-green-100 rounded-xl px-4 py-3 text-sm text-kolo-green-700">
@@ -1362,6 +1388,11 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
   const [izvodPnb, setIzvodPnb] = useState("");
   const [izvodIznos, setIzvodIznos] = useState("");
   const [izvodAnonimna, setIzvodAnonimna] = useState(false);
+  const [izvodUplatilac, setIzvodUplatilac] = useState("");
+  const [izvodStrani, setIzvodStrani] = useState(false);
+  // Uplatilac i oznaka stranog priliva po redu (potvrda najavljene donacije).
+  const [uplatioci, setUplatioci] = useState<Record<string, string>>({});
+  const [strani, setStrani] = useState<Record<string, boolean>>({});
   const [izvodLoading, setIzvodLoading] = useState(false);
   const [izvodPoruka, setIzvodPoruka] = useState<{ text: string; ok: boolean } | null>(null);
 
@@ -1371,11 +1402,21 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
       setPoruke((p) => ({ ...p, [d.id]: { text: t("emisija_iznos_nevalidan"), ok: false } }));
       return;
     }
+    const up = (uplatioci[d.id] ?? "").trim();
+    if (up.length < 2) {
+      setPoruke((p) => ({ ...p, [d.id]: { text: t("donacije_uplatilac_obavezan"), ok: false } }));
+      return;
+    }
     setLoading(d.id);
     const res = await fetch("/api/admin/donacija", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ donationId: d.id, amountRSD: iznos }),
+      body: JSON.stringify({
+        donationId: d.id,
+        amountRSD: iznos,
+        uplatilac: up,
+        straniPriliv: strani[d.id] === true,
+      }),
     });
     const data = await res.json();
     setLoading(null);
@@ -1391,11 +1432,21 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
       setIzvodPoruka({ text: t("emisija_iznos_nevalidan"), ok: false });
       return;
     }
+    if (izvodUplatilac.trim().length < 2) {
+      setIzvodPoruka({ text: t("donacije_uplatilac_obavezan"), ok: false });
+      return;
+    }
     setIzvodLoading(true);
     const res = await fetch("/api/admin/donacija", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pozivNaBroj: izvodPnb.trim(), amountRSD: iznos, javno: !izvodAnonimna }),
+      body: JSON.stringify({
+        pozivNaBroj: izvodPnb.trim(),
+        amountRSD: iznos,
+        javno: !izvodAnonimna,
+        uplatilac: izvodUplatilac.trim(),
+        straniPriliv: izvodStrani,
+      }),
     });
     const data = await res.json();
     setIzvodLoading(false);
@@ -1407,6 +1458,7 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
     });
     if (res.ok) {
       setIzvodPnb(""); setIzvodIznos(""); setIzvodAnonimna(false);
+      setIzvodUplatilac(""); setIzvodStrani(false);
       setTimeout(onDone, 1200);
     }
   }
@@ -1448,9 +1500,23 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
               {izvodLoading ? t("donacije_potvrdjujem") : t("donacije_izvod_evidentiraj")}
             </button>
           </div>
+          <div>
+            <input
+              type="text"
+              value={izvodUplatilac}
+              onChange={(e) => setIzvodUplatilac(e.target.value)}
+              placeholder={t("donacije_uplatilac_placeholder")}
+              className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
+            />
+            <p className="text-xs text-kolo-muted mt-1">{t("donacije_uplatilac_pomoc")}</p>
+          </div>
           <label className="flex items-center gap-2 text-xs text-kolo-muted cursor-pointer">
             <input type="checkbox" checked={izvodAnonimna} onChange={(e) => setIzvodAnonimna(e.target.checked)} />
             {t("donacije_izvod_anonimna")}
+          </label>
+          <label className="flex items-center gap-2 text-xs text-kolo-muted cursor-pointer">
+            <input type="checkbox" checked={izvodStrani} onChange={(e) => setIzvodStrani(e.target.checked)} />
+            {t("donacije_strani_priliv")}
           </label>
           {izvodPoruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${izvodPoruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{izvodPoruka.text}</p>}
         </form>
@@ -1490,6 +1556,24 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
                   {loading === d.id ? t("donacije_potvrdjujem") : t("donacije_potvrdi")}
                 </button>
               </div>
+            </div>
+            <div className="space-y-2">
+              <input
+                type="text"
+                value={uplatioci[d.id] ?? ""}
+                onChange={(e) => setUplatioci((p) => ({ ...p, [d.id]: e.target.value }))}
+                placeholder={t("donacije_uplatilac_placeholder")}
+                className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
+              />
+              <p className="text-xs text-kolo-muted">{t("donacije_uplatilac_pomoc")}</p>
+              <label className="flex items-center gap-2 text-xs text-kolo-muted cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={strani[d.id] === true}
+                  onChange={(e) => setStrani((p) => ({ ...p, [d.id]: e.target.checked }))}
+                />
+                {t("donacije_strani_priliv")}
+              </label>
             </div>
             {poruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>}
           </div>

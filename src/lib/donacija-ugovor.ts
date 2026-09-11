@@ -29,6 +29,17 @@ export type UlazUgovoraODonaciji = {
   /** Identifikator zapisa donacije — veza dokumenta sa evidencijom. */
   zapisId: string;
   datum: Date;
+  /**
+   * Ime uplatioca iz bankovnog izvoda (čl. 3). Null za zatečene donacije i za
+   * tokove u kojima izvod još nije pročitan.
+   */
+  uplatilac?: string | null;
+  /**
+   * Da li ugovor nosi izjavu donatora o poreklu sredstava (čl. 5b, glava IV).
+   * Traži se SAMO iznad praga iz `PRAG_PROVERE_POREKLA_RSD`; ispod praga se ne
+   * traži i ne prikuplja.
+   */
+  izjavaOPoreklu?: boolean;
 };
 
 function broj(n: number): string {
@@ -70,6 +81,11 @@ export function generisiUgovorODonaciji(p: UlazUgovoraODonaciji): string {
     "",
     "Član 1 — Predmet",
     `Donator je Fondaciji dobrovoljno i bez naknade dao novčani iznos od ${broj(p.iznosRSD)} RSD. Fondacija donaciju prihvata i obavezuje se da je upotrebi isključivo za ostvarivanje ciljeva zbog kojih je osnovana, u skladu sa Statutom.`,
+    ...(p.uplatilac
+      ? [
+          `Uplata je izvršena sa računa koji glasi na: ${p.uplatilac}. Doprinos se evidentira isključivo u zapis korisnika čijim je sredstvima uplata izvršena (čl. 3 Pravilnika o pokroviteljstvu i donacijama).`,
+        ]
+      : []),
     "",
     "Član 2 — Odsustvo protivčinidbe",
     "Donacija je bez naknade. Donator donacijom ne pribavlja nijedno dobro ni uslugu, ne stiče potraživanje prema Fondaciji, pravo na povraćaj donacije, pravo na otkup POEN-a niti uticaj u odlučivanju o pravilima sistema.",
@@ -87,7 +103,15 @@ export function generisiUgovorODonaciji(p: UlazUgovoraODonaciji): string {
     "Član 6 — Poreske obaveze",
     "Poreske obaveze koje eventualno proizlaze iz donacije svaka strana snosi u skladu sa važećim propisima.",
     "",
-    "Član 7 — Zaključenje",
+    ...(p.izjavaOPoreklu
+      ? [
+          "Član 7 — Poreklo sredstava",
+          "Donator izjavljuje da donirana sredstva potiču iz zakonitih izvora i da donacija ne služi pranju novca ni finansiranju terorizma.",
+          "Izjava se daje zato što donacija prelazi prag utvrđen odlukom Upravnog odbora (čl. 5b i glava IV Pravilnika o pokroviteljstvu i donacijama). Za donacije ispod tog praga izjava se ne traži.",
+          "",
+        ]
+      : []),
+    `Član ${p.izjavaOPoreklu ? 8 : 7} — Zaključenje`,
     "Ugovor je zaključen prihvatanjem donacije od strane Fondacije. Sačinjen je u elektronskom obliku i isporučuje se Donatoru kroz Platformu.",
     "",
     `Zapis donacije: ${p.zapisId}`,

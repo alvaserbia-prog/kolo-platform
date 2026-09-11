@@ -42,8 +42,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // (čl. 4). Petlja donacija → POEN → red za robu vidi se iz OVOG akta, pa brana
   // mora stajati i ovde, ne samo u pravilniku o nabavkama.
   "pokroviteljstvo-donacije": {
-    fajl: "donacije_4_5_1.md",
-    verzija: "4.5.1",
+    fajl: "donacije_4_5_5.md",
+    verzija: "4.5.5",
   },
   // 4.4.4 — pravna priroda operativnog doprinosa (čl. 27): nema naručioca, nema
   // naknade, rezultat ide u zajedničko dobro pod licencama iz Glave II. Brisan

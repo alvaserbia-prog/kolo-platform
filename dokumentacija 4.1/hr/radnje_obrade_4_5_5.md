@@ -65,15 +65,15 @@
 
 **Radnja obrade br. 5 — Donacije fizičkih osoba**
 
-| **Svrha obrade** | Ispunjenje zakonske obveze financijskog izvještavanja. |
+| **Svrha obrade** | Ispunjenje zakonske obveze financijskog izvještavanja i sprječavanje zlouporabe sustava radi pranja novca ili financiranja terorizma. |
 | --- | --- |
 | **Kategorije osoba** | Donatori — fizičke osobe koje doniraju sredstva Zakladi. |
-| **Kategorije podataka** | Iznos donacije, datum donacije, identitet donatora (osigurava se kroz bankovni sustav — Zaklada prima donacije s verificiranih bankovnih računa). |
-| **Pravni temelj** | Zakonska obveza (čl. 12. st. 1. t. 3. ZZPL-a). |
+| **Kategorije podataka** | Iznos donacije, datum donacije, identitet donatora (osigurava se kroz bankovni sustav — Zaklada prima donacije s verificiranih bankovnih računa), podatak o uplatitelju iz bankovnog izvatka, oznaka da je uplata izvršena s računa otvorenog u inozemstvu i — samo za donaciju iznad praga utvrđenog odlukom Upravnog odbora — izjava donatora o podrijetlu sredstava sadržana u ugovoru o donaciji. |
+| **Pravni temelj** | Zakonska obveza (čl. 12. st. 1. t. 3. ZZPL-a); za podatak o uplatitelju i izjavu o podrijetlu sredstava — legitimni interes Zaklade (čl. 12. st. 1. t. 6. ZZPL-a), radi provjere podudaranja uplatitelja i donatora te sprječavanja zlouporabe sustava. |
 | **Primatelji / izvršitelji obrade** | Zaklada (čuva podatke izravno), bankarska institucija, revizor (ako je primjenjivo). |
 | **Prijenos u treću zemlju** | Ne — bankovna se dokumentacija čuva u okviru Zaklade. |
 | **Rok čuvanja** | 10 godina od nastanka, u skladu sa Zakonom o računovodstvu i poreznim propisima. Korisnik nema pravo zahtijevati brisanje prije isteka zakonskog roka. |
-| **Mjere zaštite** | Fizička i logička zaštita dokumentacije, kontrola pristupa, odvojeno čuvanje od podataka platforme. |
+| **Mjere zaštite** | Fizička i logička zaštita dokumentacije, kontrola pristupa, odvojeno čuvanje od podataka platforme. Izjava o podrijetlu sredstava prikuplja se samo iznad praga, pa se za većinu donacija ne obrađuje. Mjere iz glave IV. Pravilnika o pokroviteljstvu i donacijama. |
 
 **Radnja obrade br. 6 — Pokroviteljstvo pravnih osoba**
 

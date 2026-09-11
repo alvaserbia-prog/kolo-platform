@@ -1445,6 +1445,18 @@ model DonationRecord {
   // donacija (pre uvodjenja ugovora).
   ugovorTekst String?
 
+  // Ime uplatioca iz bankovnog izvoda (Pravilnik o pokroviteljstvu i donacijama
+  // cl. 3 i glava IV). Doprinos se evidentira ISKLJUCIVO korisniku cijim je
+  // sredstvima uplata izvrsena; ovo polje je trag da je to provereno. Trazi se
+  // pri rucnoj evidenciji i potvrdi priliva iz izvoda; kod karticnog placanja
+  // upisuje se ime samog korisnika, jer akt trazi da kartica glasi na njega.
+  // Null = istorijska donacija (pre uvodjenja pravila).
+  uplatilac String?
+
+  // Uplata sa racuna otvorenog u inostranstvu (cl. 13b t. 4) — evidentira se
+  // pošto UO utvrdi identitet donatora i osnov uplate. Oznaka sluzi izvestavanju.
+  straniPriliv Boolean @default(false)
+
   @@index([status, createdAt])
 }
 
