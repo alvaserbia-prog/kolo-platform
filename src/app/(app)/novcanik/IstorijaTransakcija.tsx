@@ -29,7 +29,6 @@ export default async function IstorijaTransakcija({
       toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
       // Status prijave neispunjene razmene — po njemu se bira da li se uz red
       // nudi dugme za prijavu ili stoji oznaka da je već prijavljeno.
-      prijavaRazmene: { select: { status: true } },
     },
   });
 
@@ -57,8 +56,6 @@ export default async function IstorijaTransakcija({
       createdAt: t.createdAt.toISOString(),
       // Prijavljuje samo pošiljalac (`!primio`) i samo prepis — poništenje se
       // ne prijavljuje ponovo.
-      mozePrijaviti: t.type === "TRANSFER" && !primio && t.prijavaRazmene === null,
-      prijavaStatus: t.prijavaRazmene?.status ?? null,
     };
   });
 

@@ -224,7 +224,7 @@ The same regime applies to a negative record on each of the four grounds: it is 
 
 No further ground for a negative record may be established — neither by this Rulebook without amending this Article, nor by any other act.
 
-The exchange of goods and services redistributes existing POENs and does not change their total number in the system. The total number of POENs increases exclusively through the inscription of new records via the contribution recording channels, and decreases through the annulment of records on the grounds established by this Rulebook.
+The exchange of goods and services redistributes existing POENs and does not change their total number in the system. The total number of POENs increases through the inscription of new records via the contribution recording channels and through the correction of an annulment effected without grounds within the meaning of Article 14a of this Rulebook, and decreases through the annulment of records on the grounds established by this Rulebook. There is no further ground for increasing the total number of POENs.
 
 ### Article 14a
 
@@ -236,7 +236,11 @@ The annulment is effected by a counter-record in favour of the Protocol. The sum
 
 Through annulment upon use, a user's record cannot pass into a negative value; only the number of POEN present in the record is annulled. This ground does not introduce a new exception to the prohibition of a negative record under Article 14, paragraph 3.
 
-The conditions, procedure, amount, and moment of annulment upon use are established by a separate rulebook.
+Where it is established that the condition of use was not met — that the good was not collected, or that the collected good was not usable for the purpose for which it was procured — the annulment is corrected by a counter-entry in favour of the user, in the number of POEN that had been annulled. The correction is not the inscription of a new record via a channel under Article 15 of this Rulebook, but the removal of an annulment effected without grounds.
+
+The correction is neither a refund of consideration nor any form of payment. On account of the correction the user receives no value other than the record that had been annulled, and the Foundation neither pays out nor receives anything on that ground.
+
+The conditions, procedure, amount, and moment of annulment upon use, as well as the deadline and procedure upon a reported defect, are established by a separate rulebook.
 
 ### Article 15
 
@@ -284,7 +288,7 @@ Posting a listing offering a good or a service is available to unverified users 
 
 A listing posted by an unverified user carries a visible mark indicating that the advertiser is not verified in the chain of confirmations. The mark is available to everyone to whom the listing itself is available.
 
-A user who initiated a record update in favour of another user, where the exchange on account of which they did so has not been fulfilled, may report this to the Foundation. Only that user may submit the report, and only one report per record update. The Foundation decides on the report with a statement of reasons communicated to both parties; where it establishes that the exchange has not been fulfilled, the Protocol returns the full amount to the reporting user's record by way of a counter-entry. The refund is executed even where the recipient's record thereby becomes negative (Article 14, paragraph 3, item 2). Deciding on such a report does not make the Foundation a party to the exchange and does not establish its liability for the fulfilment of users' obligations.
+A user who initiated a record update in favour of another user, where the exchange on account of which they did so has not been fulfilled, may lodge a complaint with the Foundation, within thirty days of the record update. Only that user may lodge the complaint, from their own profile, and only one complaint per record update. Before deciding, the Foundation notifies the other party and allows it seven days to make a statement; if it makes no statement within that period, the decision is taken without it. The Foundation decides with a statement of reasons communicated to both parties; where it establishes that the exchange has not been fulfilled, the Protocol returns the full amount to the complainant's record by way of a counter-entry. The refund is executed even where the recipient's record thereby becomes negative (Article 14, paragraph 3, item 2). A user whose record has been decreased by that decision may lodge a complaint against it within thirty days of the annulment. Deciding on a complaint concerns the record in the Protocol's ledger; it does not make the Foundation a party to the exchange, does not establish its liability for the fulfilment of users' obligations, and does not constitute mediation in the exchange.
 
 For non-registered and unverified persons, the advertiser's pseudonym in the advertising space is not linked to the contribution ledger, account balance, or user profile. The rules of the platform's advertising space are governed by the Terms of Use.
 

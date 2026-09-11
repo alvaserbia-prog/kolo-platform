@@ -216,6 +216,8 @@ This applies in particular to an exchange based on a listing by an unverified us
 
 The Platform does not require users to separately mark, confirm, or rate an exchange. The only record of an exchange is the update of the POEN ledger which the users carry out themselves; the exchange contribution path is also read from it (Art. 40b of the Rulebook on the KOLO System).
 
+A user who has re-registered POEN on account of an exchange that has not been fulfilled lodges a complaint with the Foundation in accordance with Article 37a of these Terms, from their own profile. Deciding on the complaint concerns the record in the Protocol's ledger; it does not make the Foundation a party to the exchange and does not constitute mediation in the exchange within the meaning of paragraph 5 of this Article.
+
 The provisions of this Article relate to exchange between users. They do not apply to collective procurement, in which the Foundation is the buyer and the contracting party in relation to the supplier.
 
 ### Article 22a — Collective Procurement
@@ -361,6 +363,22 @@ The user confirms that they have understood and accepted the stated risks by reg
 Disputes between users in connection with exchanges are resolved pursuant to the general rules of the law of obligations, before the competent court.
 
 In Phase 1, the user may submit a request to the Foundation for mediation in a dispute with another user. The Foundation acts as a mediator without a binding decision. The request is submitted to the email address in Article 3 of these Terms. The Foundation responds within 30 days of receipt of the request. The Foundation's mediation does not exclude the user's right to judicial protection.
+
+### Article 37a — Complaint to the Foundation
+
+A user may lodge a complaint against a decision of the Foundation concerning them and against a record in the Protocol's ledger. The complaint is submitted from the user's profile, via the Platform.
+
+A complaint may be lodged in particular against: a POEN ledger update on account of an exchange that has not been fulfilled, as well as against the annulment of such an update where the user's record has thereby been decreased; a defect in a share collected in a collective procurement, including the case where the share was not collected although it was marked as collected; the annulment of a confirmation of reality due to inactivity in the procedure under the Rulebook on the Participation of Children; a decision on confirmation of reality in the chain of confirmations; suspension and exclusion; a decision on an application to a support programme; the removal of a listing or a message; an inaccurate personal data item; and other decisions of the Foundation concerning the user.
+
+A complaint states the subject matter to which it relates. A complaint against a POEN ledger update and a complaint against a share from a collective procurement must designate exactly one ledger update, or exactly one share, respectively.
+
+The deadlines for lodging a complaint are: seven days from the notification of collection — for a defect in a share from a collective procurement; thirty days from the ledger update, or from its annulment — for a complaint relating to an exchange; fifteen days from receipt of the notification — for exclusion, in accordance with Article 28 of these Terms; thirty days from communication of the decision — for other decisions of the Foundation. A complaint relating to an inaccurate personal data item is not bound by a deadline.
+
+A user may have at most three open complaints per type.
+
+The Foundation responds to a complaint within 30 days, with a statement of reasons. Where the complaint relates to a record in the ledger, the statement of reasons is communicated to every person whose record is affected by the decision.
+
+Lodging a complaint does not exclude the user's right to judicial protection.
 
 ### Article 38 — Disputes Between Users and the Foundation
 

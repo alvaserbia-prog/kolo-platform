@@ -214,6 +214,8 @@ Ovo posebno važi za razmenu po oglasu neverifikovanog korisnika: stvarnost ogla
 
 Platforma ne traži od korisnika da razmenu posebno označe, potvrde ni ocene. Jedini zapis o razmeni je ažuriranje evidencije POEN-a koje korisnici sami sprovedu; po njemu se očitava i putanja doprinosa razmeni (Član 40b Pravilnika o KOLO sistemu).
 
+Korisnik koji je prepisao POEN povodom razmene koja nije ispunjena podnosi prigovor Fondaciji u skladu sa Članom 37a ovih Uslova, sa svog profila. Odlučivanje po prigovoru odnosi se na zapis u evidenciji Protokola; ono ne čini Fondaciju stranom u razmeni i ne predstavlja posredovanje u razmeni u smislu stava 5 ovog člana.
+
 Odredbe ovog člana odnose se na razmenu između korisnika. One se ne primenjuju na kolektivnu nabavku, u kojoj je Fondacija prema dobavljaču kupac i ugovorna strana.
 
 ### Član 22a — Kolektivna nabavka
@@ -359,6 +361,22 @@ Korisnik potvrđuje da je razumeo i prihvatio navedene rizike registracijom na P
 Sporovi između korisnika u vezi sa razmenama rešavaju se prema opštim pravilima obligacionog prava, pred nadležnim sudom.
 
 U Fazi 1, korisnik može podneti zahtev Fondaciji za posredovanje u sporu sa drugim korisnikom. Fondacija postupa kao posrednik bez obavezujuće odluke. Zahtev se podnosi na elektronsku adresu iz Člana 3 ovih Uslova. Fondacija odgovara u roku od 30 dana od prijema zahteva. Posredovanje Fondacije ne isključuje pravo korisnika na sudsku zaštitu.
+
+### Član 37a — Prigovor Fondaciji
+
+Korisnik može podneti prigovor na odluku Fondacije koja se na njega odnosi i na zapis u evidenciji Protokola. Prigovor se podnosi sa profila korisnika, putem Platforme.
+
+Prigovor se može podneti naročito na: ažuriranje evidencije POEN-a povodom razmene koja nije ispunjena, kao i na poništenje takvog ažuriranja kada je zapis korisnika time umanjen; nedostatak dela preuzetog u kolektivnoj nabavci, uključujući slučaj u kome deo nije preuzet iako je označen kao preuzet; poništenje potvrde stvarnosti zbog neaktivnosti u postupku iz Pravilnika o učešću dece; odluku o potvrdi stvarnosti u lancu potvrda; suspenziju i isključenje; odluku o prijavi na program podrške; uklanjanje oglasa ili poruke; netačan podatak o ličnosti; i druge odluke Fondacije koje se odnose na korisnika.
+
+Prigovor sadrži predmet na koji se odnosi. Prigovor na ažuriranje evidencije POEN-a i prigovor na deo iz kolektivne nabavke moraju označiti tačno jedno ažuriranje odnosno tačno jedan deo.
+
+Rokovi za podnošenje prigovora su: sedam dana od obaveštenja o preuzimanju — za nedostatak dela iz kolektivne nabavke; trideset dana od ažuriranja evidencije, odnosno od njegovog poništenja — za prigovor koji se odnosi na razmenu; petnaest dana od prijema obaveštenja — za isključenje, u skladu sa Članom 28 ovih Uslova; trideset dana od saopštenja odluke — za ostale odluke Fondacije. Prigovor koji se odnosi na netačan podatak o ličnosti nije vezan rokom.
+
+Korisnik može imati najviše tri otvorena prigovora po vrsti.
+
+Fondacija odgovara na prigovor u roku od 30 dana, uz obrazloženje. Kada se prigovor odnosi na zapis u evidenciji, obrazloženje se saopštava svim licima čiji je zapis odlukom pogođen.
+
+Podnošenje prigovora ne isključuje pravo korisnika na sudsku zaštitu.
 
 ### Član 38 — Sporovi između korisnika i Fondacije
 

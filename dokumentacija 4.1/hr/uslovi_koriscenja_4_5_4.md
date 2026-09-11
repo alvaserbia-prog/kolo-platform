@@ -216,6 +216,8 @@ To osobito vrijedi za razmjenu po oglasu neverificiranog korisnika: stvarnost og
 
 Platforma ne traži od korisnika da razmjenu posebno označe, potvrde ni ocijene. Jedini je zapis o razmjeni ažuriranje evidencije POEN-a koje korisnici sami provedu; po njemu se očitava i putanja doprinosa razmjeni (Članak 40.b Pravilnika o KOLO sustavu).
 
+Korisnik koji je prepisao POEN povodom razmjene koja nije ispunjena podnosi prigovor Zakladi u skladu s Člankom 37a ovih Uvjeta, sa svojeg profila. Odlučivanje po prigovoru odnosi se na zapis u evidenciji Protokola; ono ne čini Zakladu stranom u razmjeni i ne predstavlja posredovanje u razmjeni u smislu stavka 5. ovoga članka.
+
 Odredbe ovoga članka odnose se na razmjenu između korisnika. One se ne primjenjuju na kolektivnu nabavu, u kojoj je Zaklada prema dobavljaču kupac i ugovorna strana.
 
 ### Članak 22a — Kolektivna nabava
@@ -361,6 +363,22 @@ Korisnik potvrđuje da je razumio i prihvatio navedene rizike registracijom na P
 Sporovi između korisnika u vezi s razmjenama rješavaju se prema općim pravilima obveznog prava, pred nadležnim sudom.
 
 U Fazi 1. korisnik može podnijeti zahtjev Zakladi za posredovanje u sporu s drugim korisnikom. Zaklada postupa kao posrednik bez obvezujuće odluke. Zahtjev se podnosi na elektroničku adresu iz Članka 3. ovih Uvjeta. Zaklada odgovara u roku od 30 dana od primitka zahtjeva. Posredovanje Zaklade ne isključuje pravo korisnika na sudsku zaštitu.
+
+### Članak 37a — Prigovor Zakladi
+
+Korisnik može podnijeti prigovor na odluku Zaklade koja se na njega odnosi i na zapis u evidenciji Protokola. Prigovor se podnosi s profila korisnika, putem Platforme.
+
+Prigovor se može podnijeti osobito na: ažuriranje evidencije POEN-a povodom razmjene koja nije ispunjena, kao i na poništenje takvog ažuriranja kada je zapis korisnika time umanjen; nedostatak dijela preuzetog u kolektivnoj nabavi, uključujući slučaj u kojem dio nije preuzet iako je označen kao preuzet; poništenje potvrde stvarnosti zbog neaktivnosti u postupku iz Pravilnika o sudjelovanju djece; odluku o potvrdi stvarnosti u lancu potvrda; suspenziju i isključenje; odluku o prijavi na program potpore; uklanjanje oglasa ili poruke; netočan podatak o osobi; i druge odluke Zaklade koje se odnose na korisnika.
+
+Prigovor sadrži predmet na koji se odnosi. Prigovor na ažuriranje evidencije POEN-a i prigovor na dio iz kolektivne nabave moraju označiti točno jedno ažuriranje odnosno točno jedan dio.
+
+Rokovi za podnošenje prigovora jesu: sedam dana od obavijesti o preuzimanju — za nedostatak dijela iz kolektivne nabave; trideset dana od ažuriranja evidencije, odnosno od njegova poništenja — za prigovor koji se odnosi na razmjenu; petnaest dana od primitka obavijesti — za isključenje, u skladu s Člankom 28. ovih Uvjeta; trideset dana od priopćenja odluke — za ostale odluke Zaklade. Prigovor koji se odnosi na netočan podatak o osobi nije vezan rokom.
+
+Korisnik može imati najviše tri otvorena prigovora po vrsti.
+
+Zaklada odgovara na prigovor u roku od 30 dana, uz obrazloženje. Kada se prigovor odnosi na zapis u evidenciji, obrazloženje se priopćuje svim osobama čiji je zapis odlukom pogođen.
+
+Podnošenje prigovora ne isključuje pravo korisnika na sudsku zaštitu.
 
 ### Članak 38. — Sporovi između korisnika i Zaklade
 

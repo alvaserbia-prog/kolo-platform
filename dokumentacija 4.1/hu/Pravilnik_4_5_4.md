@@ -224,7 +224,7 @@ A negatív bejegyzésre mind a négy jogalap esetén ugyanaz a rend vonatkozik: 
 
 A negatív bejegyzésre más jogalap nem hozható létre — sem e szabályzattal e cikk módosítása nélkül, sem bármely más aktussal.
 
-A javak és szolgáltatások cseréje újraosztja a meglévő POEN-eket, és nem változtatja meg azok teljes számát a rendszerben. A POEN-ek teljes száma kizárólag a hozzájárulás nyilvántartásba vételének csatornáin keresztül történő új bejegyzésekkel növekszik, és az e szabályzatban megállapított jogalapokon történő bejegyzés-érvénytelenítéssel csökken.
+A javak és szolgáltatások cseréje újraosztja a meglévő POEN-eket, és nem változtatja meg azok teljes számát a rendszerben. A POEN-ek teljes száma a hozzájárulás nyilvántartásba vételének csatornáin keresztül történő új bejegyzésekkel, valamint az e szabályzat 14a. cikke értelmében jogalap nélkül végrehajtott érvénytelenítés helyesbítésével növekszik, és az e szabályzatban megállapított jogalapokon történő bejegyzés-érvénytelenítéssel csökken. A POEN-ek teljes számának növelésére más jogalap nincs.
 
 ### 14a. cikk
 
@@ -236,7 +236,11 @@ Az érvénytelenítés a Protokoll javára szóló ellenbejegyzéssel történik
 
 A felhasználás miatti érvénytelenítéssel a felhasználó bejegyzése nem mehet át negatív értékbe; kizárólag az a POEN-szám kerül érvénytelenítésre, amely a bejegyzésben megvan. E jogalap nem vezet be új kivételt a 14. cikk (3) bekezdése szerinti, negatív bejegyzésre vonatkozó tilalom alól.
 
-A felhasználás miatti érvénytelenítés feltételeit, eljárását, mértékét és időpontját külön szabályzat állapítja meg.
+Ha megállapítást nyer, hogy a felhasználás feltétele nem teljesült — hogy a javakat nem vették át, vagy hogy az átvett javak nem voltak alkalmasak arra a célra, amelyre beszerzésre kerültek —, az érvénytelenítést a felhasználó javára szóló ellenbejegyzéssel helyesbítik, az érvénytelenített POEN számában. A helyesbítés nem e szabályzat 15. cikke szerinti csatornán keresztüli új bejegyzés, hanem a jogalap nélkül végrehajtott érvénytelenítés megszüntetése.
+
+A helyesbítés sem ellenszolgáltatás visszatérítése, sem semmiféle kifizetés. A helyesbítés jogcímén a felhasználó az érvénytelenített bejegyzésen kívül semmilyen értéket nem kap, az Alapítvány pedig e jogcímen semmit nem fizet ki és semmit nem kap.
+
+A felhasználás miatti érvénytelenítés feltételeit, eljárását, mértékét és időpontját, valamint a bejelentett hiba szerinti határidőt és eljárást külön szabályzat állapítja meg.
 
 ### 15. cikk
 
@@ -284,7 +288,7 @@ Javat vagy szolgáltatást kínáló hirdetés közzététele a nem hitelesítet
 
 A nem hitelesített felhasználó hirdetése látható jelzést visel arról, hogy a hirdető nem hitelesített a megerősítési láncban. A jelzés mindazok számára elérhető, akik számára maga a hirdetés is elérhető.
 
-Az a felhasználó, aki más felhasználó javára nyilvántartás-frissítést kezdeményezett, de az a csere, amely miatt ezt tette, nem teljesült, ezt bejelentheti az Alapítványnak. A bejelentést kizárólag ez a felhasználó teheti meg, és nyilvántartás-frissítésenként legfeljebb egyet. Az Alapítvány a bejelentésről indokolással dönt, amelyet mindkét felnek közöl; ha megállapítja, hogy a csere nem teljesült, a Protokoll ellenbejegyzéssel a teljes összeget visszavezeti a bejelentő bejegyzésébe. A visszatérítés akkor is végrehajtásra kerül, ha a címzett bejegyzése ezáltal negatívvá válik (14. cikk 3. bekezdés 2. pont). Az ilyen bejelentésről való döntés nem teszi az Alapítványt a csere felévé, és nem alapozza meg a felelősségét a felhasználók kötelezettségeinek teljesítéséért.
+Az a felhasználó, aki más felhasználó javára nyilvántartás-frissítést kezdeményezett, de az a csere, amely miatt ezt tette, nem teljesült, a nyilvántartás-frissítéstől számított harminc napon belül kifogást nyújthat be az Alapítványhoz. A kifogást kizárólag ez a felhasználó nyújthatja be, a saját profiljáról, és nyilvántartás-frissítésenként legfeljebb egyet. A döntés előtt az Alapítvány értesíti a másik felet, és hét napot biztosít neki nyilatkozattételre; ha e határidőn belül nem nyilatkozik, a döntés nyilatkozata nélkül születik meg. Az Alapítvány indokolással dönt, amelyet mindkét féllel közöl; ha megállapítja, hogy a csere nem teljesült, a Protokoll ellenbejegyzéssel a teljes összeget visszavezeti a benyújtó bejegyzésébe. A visszatérítés akkor is végrehajtásra kerül, ha a címzett bejegyzése ezáltal negatívvá válik (14. cikk 3. bekezdés 2. pont). Az a felhasználó, akinek a bejegyzése e döntéssel csökkent, az érvénytelenítéstől számított harminc napon belül kifogást nyújthat be ellene. A kifogásról való döntés a Protokoll nyilvántartásában szereplő bejegyzésre vonatkozik; nem teszi az Alapítványt a csere felévé, nem alapozza meg a felelősségét a felhasználók kötelezettségeinek teljesítéséért, és nem jelent közvetítést a cserében.
 
 A hirdető álneve a hirdetési térben a be nem jelentkezett és nem hitelesített személyek számára nem kapcsolódik össze a hozzájárulási nyilvántartással, a számlaállással vagy a felhasználói profillal. A platform hirdetési terének szabályait a Felhasználási feltételek rendezik.
 

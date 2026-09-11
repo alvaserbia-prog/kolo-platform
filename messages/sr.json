@@ -359,16 +359,6 @@
     "putanja_na_redu": "Ispunjeno, evidentira se uskoro",
     "putanja_zakljucan": "Još nije otključano",
     "putanja_pravila": "U brojač ulaze prepisi POENA od najmanje 1.000 POENA sa ljudima van tvog lanca potvrda. Svaki sagovornik broji se jednom, bez obzira na broj prepisa. Prepis sa članom koga još niko nije potvrdio se beleži, a broji tek kad on bude potvrđen. Trenutno u brojaču: {sagovornika}.",
-    "prijavi_dugme": "Prijavi problem sa razmenom",
-    "prijavi_naslov": "Prijavi neispunjenu razmenu",
-    "prijavi_opis": "Ako je prepis otišao, a dogovoreno nije stiglo, javi Fondaciji. Prepis se ne poništava sam, o njemu odlučuje Fondacija; ako ga poništi, vraća ti se ceo iznos, i onda kada zapis druge strane time ode u minus.",
-    "prijavi_placeholder": "Šta je dogovoreno i šta se dogodilo.",
-    "prijavi_posalji": "Pošalji prijavu",
-    "prijavi_odustani": "Odustani",
-    "prijavi_ceka": "Prijava je poslata, čeka odluku Fondacije.",
-    "prijavi_ponistena": "Prepis je poništen po prijavi.",
-    "prijavi_odbacena": "Prijava je razmotrena, prepis ostaje.",
-    "prijavi_greska": "Prijava nije poslata.",
     "ceka_roditelja": "Nalog čeka da ga preuzme roditelj. Do tada POEN može da se prepisuje u tvoj zapis; prepis drugima otključava se kad roditelj preuzme nalog.",
     "nadoknada_naslov_dete": "Duguješ",
     "nadoknada_opis_dete": "Ovo se skinulo kad je prijateljstvo prestalo. Prvi POENI koji ti stignu popunjavaju ovo. Sve ostalo radi normalno.",
@@ -692,7 +682,20 @@
     "status_dete_ceka": "čeka odobrenje roditelja",
     "status_dete_radi": "nalog radi",
     "prigovor_tip_podaci": "Ispravka netačnog podatka o meni",
-    "prigovor_tip_potvrda": "Poništena potvrda stvarnosti zbog neaktivnosti"
+    "prigovor_tip_potvrda": "Poništena potvrda stvarnosti zbog neaktivnosti",
+    "prigovor_tip_razmena": "Prepis POENA povodom razmene",
+    "prigovor_tip_nabavka": "Deo iz kolektivne nabavke",
+    "prigovor_predmet_izaberi": "Izaberi na šta se prigovor odnosi",
+    "prigovor_predmet_prazno": "Nemaš nijedan predmet u roku za ovu vrstu prigovora.",
+    "prigovor_predmet_poslao": "{datum} · {iznos} POENA prepisano — {strana}",
+    "prigovor_predmet_ponisten": "{datum} · {iznos} POENA od {strana} — poništeno",
+    "prigovor_predmet_deo": "{datum} · {dobro}",
+    "izjasni_naslov": "Traži se tvoje izjašnjenje",
+    "izjasni_opis": "{pseudonim} je podneo prigovor da razmena povodom koje ti je {datum} prepisao {iznos} POENA nije ispunjena. Izjasni se pre nego što Fondacija odluči.",
+    "izjasni_rok": "Rok za izjašnjenje: {datum}",
+    "izjasni_placeholder": "Šta se po tvom sećanju dogodilo?",
+    "izjasni_dugme": "Pošalji izjašnjenje",
+    "izjasni_poslato": "Izjašnjenje je poslato."
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -951,7 +954,7 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "4.5.3"
+      "ver": "4.5.4"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
@@ -979,7 +982,7 @@
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
-      "ver": "4.5.2",
+      "ver": "4.5.4",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -999,7 +1002,7 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja · KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.5.3",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.5.4",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
     "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.2",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
@@ -1013,7 +1016,7 @@
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.6",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.5.2",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.5.4",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sistemu",
@@ -2563,7 +2566,11 @@
     "tab_nabavke": "Nabavke",
     "ped_izjava_label": "Izjava izvršioca",
     "prigovori_tip_podaci": "Ispravka podatka",
-    "prigovori_tip_potvrda": "Poništena potvrda"
+    "prigovori_tip_potvrda": "Poništena potvrda",
+    "prigovori_tip_razmena": "Prepis povodom razmene",
+    "prigovori_tip_nabavka": "Deo iz nabavke",
+    "prigovori_ispravi": "Ispravi evidenciju",
+    "prigovori_predmet": "Predmet"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",
@@ -2703,7 +2710,7 @@
     "nabavka_poziv_naslov": "Ušao si u nabavku",
     "nabavka_poziv_tekst": "Nabavka „{dobro}”, tvoj deo košta {poen} POEN. Potvrdi izborom dana preuzimanja.",
     "nabavka_preuzeto_naslov": "Deo je preuzet",
-    "nabavka_preuzeto_tekst": "Preuzeo si svoj deo iz nabavke „{dobro}”. Poništeno je {poen} POEN.",
+    "nabavka_preuzeto_tekst": "Preuzeo si svoj deo iz nabavke „{dobro}”. Poništeno je {poen} POEN. Ako deo nisi preuzeo ili nije ispravan, imaš {dana} dana da podneseš prigovor sa svog profila.",
     "zahtev_potvrda_spoljni_naslov": "Nov zahtev čeka tvoj odgovor",
     "zahtev_potvrda_spoljni_tekst": "Neko te je naveo kao člana iz svog lanca. Otvori KOLO da vidiš zahtev.",
     "program_pristanak_povucen_naslov": "Pristanak povučen",
@@ -2729,7 +2736,11 @@
     "prepis_odobren_naslov": "Roditelj je odobrio prepis",
     "prepis_odobren_tekst": "Prepis od {iznos} POENA članu {pseudonim} je izvršen.",
     "prepis_odbijen_naslov": "Prepis nije izvršen",
-    "prepis_odbijen_tekst": "Prepis od {iznos} POENA članu {pseudonim} nije izvršen."
+    "prepis_odbijen_tekst": "Prepis od {iznos} POENA članu {pseudonim} nije izvršen.",
+    "prijava_razmene_izjasni_naslov": "Traži se tvoje izjašnjenje",
+    "prijava_razmene_izjasni_tekst": "Podnet je prigovor da razmena povodom koje ti je prepisan POEN nije ispunjena. Imaš {dana} dana da se izjasniš pre nego što Fondacija odluči. Izjašnjenje se unosi na profilu.",
+    "nabavka_ispravka_naslov": "Evidencija je ispravljena",
+    "nabavka_ispravka_tekst": "Po tvom prigovoru na deo iz nabavke „{dobro}” poništenje je otklonjeno i u tvoj zapis je vraćeno {poen} POEN. Obrazloženje: {obrazlozenje}"
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",
@@ -2749,7 +2760,8 @@
     "prijateljstvo_punoletstvo_zbirno": "Poništenje POENA iz {broj} prijateljstava (punoletstvo)",
     "prevod_u_maloletni_otpis": "Poništenje POENA upisanih kroz kanale (nalog preveden u dečji)",
     "prevod_u_maloletni_potvrda": "Poništenje POENA iz pale potvrde ({pseudonim} preveden u dečji nalog)",
-    "nabavka": "Kolektivna nabavka, {dobro}"
+    "nabavka": "Kolektivna nabavka, {dobro}",
+    "nabavka_ispravka": "Ispravka evidencije, kolektivna nabavka {dobro}"
   },
   "mejl": {
     "pozdrav": "Pozdrav",
@@ -3495,6 +3507,7 @@
     "ponude_opis": "Objavljuju se sve, i one koje nisu izabrane.",
     "preuzeli": "Preuzeli",
     "preuzeli_napomena": "Prikazuju se pseudonim i mesto u redu. Broj POEN-a u zapisu se ne objavljuje.",
-    "broj_prijava": "Prijavljenih: {broj}"
+    "broj_prijava": "Prijavljenih: {broj}",
+    "ispravka_pouka": "Ako deo nisi preuzeo ili nije ispravan, imaš 7 dana da podneseš prigovor sa svog profila."
   }
 }

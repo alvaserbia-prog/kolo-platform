@@ -101,6 +101,25 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-11 (dvadeset peti put):** na **4.5.4** idu **TRI akta** —
+Pravilnik o KOLO sistemu (sa 4.5.2), Pravilnik o projektima i kolektivnim nabavkama
+(sa 4.4.7) i Uslovi korišćenja (sa 4.5.3). Ostalih četrnaest ostaje gde jeste. Povod
+je **analiza rizika R-18** (nema postupka po nedostatku — reklamacija). Sadržinski,
+vidi sekciju „Prigovor je jedan institut: nabavka, razmena, profil" ispod.
+
+🔴 **Glavni Pravilnik je morao da se bumpuje, kao i kod R-15, i opet zbog zatvorene
+liste.** Čl. 14 poslednji stav je glasio da se ukupan broj POEN-a uvećava
+**„isključivo upisom novih zapisa kroz kanale evidentiranja doprinosa"**, a ispravka
+poništenja izvršenog bez osnova ga uvećava **van kanala**. Poseban pravilnik to nije
+mogao sam da uvede. Sada čl. 14 imenuje i taj osnov i zatvara listu iznova
+(„Drugog osnova za uvećanje ukupnog broja POEN-a nema"), a mehanika je u čl. 14a.
+
+🟡 **Zaostala unakrsna upućivanja — svesno neispravljena, sada ih ima ŠEST.** Na
+`Pravilnik o KOLO sistemu (v4.5.2)` upućuju `ucesce_dece_4_5_3` (zaglavlje) i
+`DPIA_4_5_2` (Povezani dokumenti, uz `Politika (v4.5.2)` i `Registar (v4.5.2)` koji
+su tačni). Ti akti se nisu menjali, pa se ne prepravljaju — čisti ih bump celog seta
+na 5.0.
+
 **AŽURIRANO 2026-09-11 (dvadeset četvrti put):** na **4.5.3** idu **DVA akta** —
 Pravilnik o učešću dece (sa 4.5.2) i Uslovi korišćenja (sa 4.4.3). Ostalih petnaest
 ostaje gde jeste. Povod je **analiza rizika R-17** (sedmogodišnjak kao strana u
@@ -437,7 +456,7 @@ Nema nove `PolitikaVerzija` — `PRISTANAK_NA_AKTE_TRAZI_SE` je `false`.
 
 🔴 **Dobavljač NE dobija podatke o ličnosti** — samo spisak kodova. To je nosivo za radnju obrade br. 16 i za mere 5.12; ne menjati bez izmene oba akta.
 
-🔴 **Reklamacija je namerno izostavljena** (odluka vlasnika): Fondacija jeste kupac prema dobavljaču (čl. 30 novog akta, čl. 22 Uslova), ali korisnički tok reklamacije ne postoji ni u aktu ni u planu koda.
+🟢 **PREVAZIĐENO setom 4.5.4 (R-18).** Korisnički tok POSTOJI: prigovor sa profila u roku od sedam dana od obaveštenja o preuzimanju, istupanje Fondacije prema dobavljaču i, kad zamene nema, ispravka evidencije (nabavke čl. 30a). Raniji zapis („reklamacija je namerno izostavljena“) više ne važi.
 
 🟡 **Kriterijumi uključivanja su odbačeni** (npr. „samo svinjari"): prijavljuju se svi, pa se ne prikuplja nijedna izjava o delatnosti ili imovini. Posledica koju treba znati: reč ne filtrira sama sebe, pa robu mogu uzeti i oni kojima ne treba. Ako to postane problem, poluga je rezervisati prvih M mesta predlagačima te reči — ne uvoditi proveru statusa.
 
@@ -777,7 +796,7 @@ Do ove izmene prepis POEN-a **nije mogao da se obori ničim** — jedino poništ
 - **Ulazna tačka je uz sam prepis** u istoriji POEN-a (`IstorijaKlijent.tsx`), ne na stranici oglasa: odluka se vodi o prepisu, a ne o oglasu, i jedan oglas ume da rodi više prepisa. Dugme vidi samo pošiljalac (`mozePrijaviti` dolazi sa servera); kad je prijava podneta, dugme ustupa mesto ishodu.
 - **Admin tab „Razmene"** (`RazmeneTab.tsx`, ključ `razmene`) — dve odluke, obe uz **obavezno obrazloženje** (ide obema stranama i u revizijski dnevnik): *Poništi prepis* i *Odbaci prijavu*. Nije moderacija (tab „Pijaca") i nije prigovor na odluku Fondacije (tab „Prigovori") — tri različite odluke, tri taba, ne spajati ih.
 - **Kod:** `src/lib/razmena-prijava.ts` (ČISTE funkcije — bez Prisme, jer ih uvozi i admin tab u pretraživaču) + `src/lib/protokol/prijava-razmene.ts` (servisne, re-eksportuje pravila). Rute: `POST /api/transakcije/[id]/prijavi`, `GET /api/admin/prijave-razmene`, `POST .../[id]/{ponisti,odbaci}`. Migracija `20260815120000_prijava_razmene`. Testovi `__tests__/protokol/prijava-razmene.test.ts`. Audit: `PREPIS_PONISTEN`, `PRIJAVA_RAZMENE_ODBACENA`. Badge: tab Razmene + sidebar `adminCekanje`.
-- 🔴 **Akti ovo NE poznaju, a od pune naplate u minus razmimoilaženje je veće.** Uslovi čl. 22 kažu da Fondacija nije strana u razmeni; nijedan akt joj ne daje ovlašćenje da obori prepis, a čl. 14 st. 3 poznaje **samo jedan** izuzetak od zabrane negativnog zapisa (nadoknadu iz čl. 20b) — kod ih sada ima dva. **Pre puštanja u ozbiljan rad ovome treba odredba**: postupak po prijavi u Uslovima i drugi izuzetak u Pravilniku uz čl. 14/16 (uz upućivanje na režim nadoknade iz čl. 20b, jer se minus tako i ponaša). Do tada je to faktička praksa Fondacije, ne pravo prijavioca ni obaveza Fondacije.
+- 🟢 **AKTI OVO POZNAJU — raniji zapis („akti ovo NE poznaju“) je PREVAZIĐEN.** Postupak je u **Pravilniku čl. 16 st. 10**, a drugi izuzetak od zabrane negativnog zapisa u **čl. 14 st. 3 t. 2**. Od seta **4.5.4** (R-18) uz to idu: rok od 30 dana, izjašnjenje druge strane u roku od 7 dana pre odluke, pravo onoga kome je zapis umanjen da i on podnese prigovor, i izričito da odlučivanje nije posredovanje u razmeni. 🔴 **Ulazna tačka više NIJE dugme uz prepis nego prigovor sa profila** (Uslovi čl. 37a) — vidi „Prigovor je jedan institut“.
 
 ### Ugovor o donaciji za svakog donatora (2026-09-08)
 
@@ -1161,10 +1180,159 @@ nabavki, kapa na udeo opticaja i uslovljavanje učestalosti (07.09.2026); izmena
 Statuta radi upisa privredne delatnosti (09.09.2026 — statutarni osnov iz čl. 7 t. c)
 već postoji i dovoljan je).
 
-🟡 **Sprega sa R-18 (reklamacija) je stvarna i ide u suprotnom smeru:** što je davanje
-jasnije **besplatno**, to je korisnik slabije zaštićen potrošačkim pravom; što bismo
-mu više dali prava, to davanje više liči na prodaju. Reklamacija je namerno
-izostavljena i to ovde postaje **deo odbrane**, ne samo praznina.
+🟡 **Sprega sa R-18 je stvarna i ide u suprotnom smeru:** što je davanje jasnije
+**besplatno**, to je korisnik slabije zaštićen potrošačkim pravom; što bismo mu više
+dali prava, to davanje više liči na prodaju. 🟢 **Rešeno setom 4.5.4** tako što put
+ne ide kroz korisnikovo pravo prema Fondaciji nego kroz **obavezu Fondacije prema
+sopstvenom programu** (čl. 30 st. 5) i kroz **ispravku evidencije**, koja nije
+povraćaj naknade (čl. 30a st. 6). Odbrana besplatnosti time ostaje netaknuta.
+
+### Prigovor je jedan institut: nabavka, razmena, profil (2026-09-11)
+
+Odluke uz analizu rizika **R-18** (nema postupka po nedostatku — reklamacija). Na
+**4.5.4** idu Pravilnik, nabavke i Uslovi; kod je izmenjen na petnaest mesta.
+
+🔴 **Polazna odluka vlasnika:** i za kolektivnu nabavku i za razmenu prigovor se
+podnosi **kroz profil**, a **dugme uz prepis u istoriji POEN-a se uklanja** („da ne
+zbunjuje"). Time nestaje jedino mesto u sistemu na kome je jedan čovek jednim klikom
+pokretao obaranje tuđeg zapisa — ta radnja od sada ide kroz isti kanal kao sve
+ostalo. 🟢 Ovim je zatvoren i zadatak zabeležen uz R-17 („prijava razmene se treba
+drugačije osmisliti i rešiti").
+
+**Šta je sistem radio do ovog seta.** Kolektivna nabavka: `oznaciPreuzeto` poništi
+POEN u trenutku kad **administrator otkuca kod** po javljanju dobavljača, i posle
+te tačke **ne postoji nijedna ruta** — ko je dobio pokvarenu robu izgubio je i robu
+i zapis. Razmena: `PrijavaRazmene` je radila, ali se pokretala dugmetom uz prepis i
+odlučivalo se **po opisu jedne strane**, dok je posledica gurala tuđi zapis u minus.
+Sama reč „reklamacija" ne postoji nigde u setu od sedamnaest akata.
+
+🔴 **Ispravka evidencije NIJE povraćaj i tako se ne sme zvati** — ni u kodu, ni u
+copy-ju, ni u aktu. Poništenje po čl. 27 je poništenje **po iskorišćenju**; ako dobro
+nije bilo upotrebljivo, iskorišćenja nije ni bilo, pa je poništenje izvršeno **bez
+osnova** i otklanja se. Fondacija po tom osnovu ništa ne isplaćuje i ništa ne prima,
+pa odbrana iz čl. 3a i čl. 19 (davanje je besplatno, nema naknade, nabavka nije
+privredna delatnost) ostaje netaknuta. **Da je ovo povraćaj, R-10 bi pao zajedno sa
+njim** — a sa njim i pitanje PDV-a.
+
+**Šta akti sada kažu:**
+- **Pravilnik čl. 14 i 14a** — ispravka poništenja izvršenog bez osnova imenovana je
+  kao osnov uvećanja ukupnog broja POEN-a; izričito je da ispravka **nije upis kroz
+  kanal iz čl. 15** nego otklanjanje poništenja, i da nije povraćaj naknade.
+- **Pravilnik čl. 16 st. 10 prepisan** — prijava postaje **prigovor sa profila**, uz
+  **rok od 30 dana**, uz **izjašnjenje druge strane u roku od 7 dana pre odluke**, uz
+  pravo onoga kome je zapis umanjen da i on podnese prigovor, i uz izričito da
+  odlučivanje **ne predstavlja posredovanje u razmeni**.
+- **Nabavke čl. 15 i 30** — ponuda se prihvata **isključivo od registrovanog pravnog
+  lica odnosno preduzetnika**, nabavka ide po **računu koji Fondacija čuva**, a PDV
+  obračunat u ceni Fondacija **snosi kao trošak i ne odbija kao prethodni porez**.
+  🔴 Ta poslednja polovina rečenice nije formalnost nego **odbrana**: besplatno
+  davanje iz poslovne imovine izjednačava se sa prometom uz naknadu **samo kad je
+  korišćen prethodni porez**. Napisano kao golo „Fondacija plaća PDV", čitalo bi se
+  kao da ima sopstveni promet — tačno suprotno od onoga što branimo.
+- **Nabavke čl. 30 st. 5–6** — Fondacija prema dobavljaču **ugovara i ostvaruje prava
+  po osnovu nedostatka u korist korisnika programa**. 🔴 To je obaveza Fondacije
+  **prema sopstvenom programu**, ne korisnikovo pravo prema njoj — isti oblik
+  samoobavezivanja kao kod Gornjeg Kola (R-09). Time korisnik dobija stvarni put, a
+  odnos Fondacija–korisnik ostaje besplatan i neugovoran.
+- **Nabavke, nov čl. 30a** — postupanje po prijavljenom nedostatku: rok **7 dana od
+  obaveštenja o preuzimanju**, istupanje prema dobavljaču bez odlaganja, zamena →
+  zapis se **ne** ispravlja (učešće je iskorišćeno), bez zamene → ispravka evidencije.
+  Obaveštenje o preuzimanju **mora da nosi pouku o pravu i roku** (st. 7) — bez nje
+  rok od sedam dana nije zaštita nego zamka.
+- **Uslovi, nov čl. 37a — „Prigovor Fondaciji"** — jedan institut, devet vrsta, rokovi
+  i kapa po vrsti. Do 4.5.4 su Uslovi prigovor pominjali **samo uz isključenje**
+  (čl. 28), a razmena i nabavka nisu imale nijedan put.
+
+🔴 **„Posreduje" i „ne posreduje" su TRI različite stvari i ne smeju se pomešati:**
+1. **Fondacija ne posreduje u RAZMENI** (Uslovi čl. 22 st. 5, Pravilnik čl. 16 st. 5)
+   — nije strana u obligaciji i ne odgovara za ispunjenje. Netaknuto.
+2. **Fondacija može posredovati u SPORU** između korisnika (Uslovi čl. 37 st. 2) —
+   dobrovoljno, **bez obavezujuće odluke**, na imejl. Zatečeno i netaknuto; FAQ to
+   pominje i ta rečenica je tačna.
+3. **Fondacija odlučuje o PRIGOVORU na zapis** (Uslovi čl. 37a) — obavezujuće za
+   zapis, jer je ona vodi. Ovo je novo.
+Vlasnikova formulacija „Fondacija posreduje u prigovorima na transakcije između
+članova" znači (2) + (3); u akt ide samo taj razgraničen oblik, nikad „posreduje u
+razmeni".
+
+**Vrste prigovora i rokovi** (`src/lib/prigovor-pravila.ts` — ČISTE funkcije, uvozi
+ih i obrazac u pretraživaču):
+
+| Vrsta | Predmet | Rok |
+|---|---|---|
+| **NABAVKA** | prijava na nabavku | 7 dana od obaveštenja o preuzimanju |
+| **RAZMENA** | prepis (transakcija) | 30 dana od prepisa, odn. od poništenja |
+| POTVRDA / PROGRAM / OGLAS | — | 30 dana |
+| VERIFIKACIJA / SUSPENZIJA / PODACI / OSTALO | — | bez roka (isključenje 15 dana, čl. 28) |
+
+- 🔴 **Kapa je PO VRSTI (3 otvorena), ne globalno.** Ranije je bilo 3 ukupno — ko ima
+  tri otvorena, a istekne mu sedmodnevni rok za nabavku, izgubio bi pravo zbog kočnice
+  protiv spama. Kočnica ostaje, ali ne preko roka.
+- 🔴 **Dve vrste traže PREDMET** (`PrigovorNaOdluku.predmetId`, migracija
+  `20260911140100_prigovor_predmet`). Bez njega administrator ne zna šta da obori, a
+  odluka se ne može vezati za pravu transakciju.
+- **Jedan otvoren prigovor po predmetu** — druga žalba nad istim prepisom nije nov
+  podatak nego ponovljen pritisak (ista brana kao `@@unique` na
+  `PrijavaRazmene.transakcijaId`).
+
+**Kod:**
+- Nov `src/lib/prigovor-pravila.ts` (vrste, rokovi, `smePodneti`,
+  `smeOdlucitiORazmeni`) i nov `src/lib/protokol/nabavka-ispravka.ts`
+  (`ispraviEvidencijuNabavke`).
+- 🔴 **Protivzapis ide tipom `ISPRAVKA_NABAVKA`** (migracija
+  `20260911140000_ispravka_nabavka_enum`, ZASEBAN fajl) — nikad `EMISIJA_*` (nije
+  kanal iz čl. 15) ni `TRANSFER` (ne seli se između dva korisnička zapisa). Protokol
+  ide dublje u minus, opticaj se vraća na stanje pre poništenja; zero-sum netaknut.
+  `NabavkaPrijava.ispravljenoAt/ispravljenoPoen` sprečavaju dvostruku ispravku; iznos
+  je **snimak sa nabavke** (`poenPoDelu`), jer je `rezervisano` pri preuzimanju
+  vraćeno na nulu.
+- 🔴 **`smeOdlucitiORazmeni` je u SERVISU, ne u ruti** — `ponistiPrepis` i
+  `odbaciPrijavu` odbijaju odluku dok rok za izjašnjenje traje. Time čl. 16 st. 10
+  nije obećanje nego **svojstvo redosleda**, isti obrazac kao `utvrdiParametre` /
+  `dodajPonudu` kod nabavki.
+- **Odluka o prepisu zatvara i prigovor uz sebe** (`zatvoriPrigovorUzPrijavu`) — inače
+  bi administrator rešio slučaj u tabu Razmene, a čoveku bi prigovor visio otvoren u
+  profilu. Prigovor je korisnikov kanal, `PrijavaRazmene` je predmet — isti odnos kao
+  `NadzorZapis` i `NadzorniPredmet`.
+- **Obrisano:** `POST /api/transakcije/[id]/prijavi` i ceo blok u `IstorijaKlijent.tsx`
+  (uz `mozePrijaviti`/`prijavaStatus` propove i deset `novcanik.prijavi_*` ključeva na
+  pet jezika). **Ne vraćati ulaznu tačku uz prepis.**
+- Nove rute: `GET /api/prigovor/predmeti` (šta se sme izabrati + izjašnjenja koja se
+  traže), `POST /api/prigovor/razmena/[id]` (izjašnjenje druge strane). Odluka o
+  ispravci ide kroz zatečeni `PATCH /api/admin/prigovori/[id]` uz `ispravi: true` —
+  jedno mesto odlučivanja, ne nov tab.
+- Audit: `NABAVKA_EVIDENCIJA_ISPRAVLJENA`.
+- **Brana:** `__tests__/prigovor-izvor.test.ts` (21 provera — pravila + IZVOR: da
+  ruta za prijavu ne postoji, da istorija ne nudi prijavu, da servis zove pravilo o
+  izjašnjenju, da ispravka ne koristi `EMISIJA_*`/`TRANSFER`, da obaveštenje nosi
+  pouku). Odredbe akata zaključane u `pravni-dokumenti.test.ts` na sr/en/ru.
+
+**FAQ 82 i 59 prepisani na pet jezika** — oba su doslovno slala čoveka na „dugme uz
+sam prepis u istoriji POENA". Treći put ista greška (ranije: onboarding i FAQ 42 su
+mesecima slali na ukinutu Tablu jemstva). Sada upućuju na profil, nose rok od 30 dana
+i razlikuju **posredovanje u sporu** (dobrovoljno, neobavezujuće) od **prigovora na
+zapis** (odluka).
+
+🟡 **Usput ispravljena zatečena greška:** nabavke čl. 33 („Pravo na prigovor") je
+upućivao na **čl. 30 Pravilnika o KOLO sistemu**, a taj član govori o **nosiocu ZRNA**
+— u glavnom Pravilniku opšteg člana o prigovoru uopšte nema. Sada upućuje na Uslove
+čl. 37a. Ispravljeno na svih pet jezika.
+
+🔴 **ODBIJENE MERE UZ R-18 (odluka vlasnika, 2026-09-11) — ne predlagati ponovo:**
+- **Pomeranje poništenja sa preuzimanja na istek roka za prigovor** (M-4) — odbijeno
+  izborom M-3; produžilo bi rezervaciju i odložilo zatvaranje svake nabavke.
+- **Traženje registracije od proizvođača u RAZMENI** (M-5 u prvobitnom obliku) —
+  odbijeno: „mala kuća koja prodaje jaja" ili neko sa dve-tri voćke nije registrovan
+  kao PG i ne sme se time isključiti. Za razmenu odgovaraju sami korisnici; poreklo
+  se vidi iz zapisa o razmeni, a proizvođač je fizičko lice. **Važi samo za razmenu**
+  — u nabavci je dobavljač uvek registrovano pravno lice (izjava vlasnika), i to je
+  sada i u aktu.
+- **Ostaviti sve kako jeste** (M-9) — odbijeno.
+
+🟡 **Prihvaćena posledica koju treba znati:** trenutak poništenja i dalje visi o
+dobavljačevoj reči preko administratora — kod ne zna je li čovek stvarno primio
+ispravan deo. Prigovor to **leči**, ne uklanja uzrok; zato su pouka u obaveštenju i
+rok od sedam dana od tog obaveštenja nosivi, a ne ukras.
 
 ### Uzrasne grupe 7–14 i 15–17 (2026-09-11)
 
@@ -2155,8 +2323,8 @@ podataka o delatnosti).
 🟡 **Maloletni nalozi su isključeni IZRIČITO** (`smeUcestvovati`), ne posredno preko
 indeksa: dete sme da ima POEN i ušlo bi u red, a ne sme da bude strana u preuzimanju.
 
-🟡 **Reklamacija ne postoji** (odluka vlasnika) — Fondacija jeste kupac prema
-dobavljaču, ali korisnički tok reklamacije nije ni u aktu ni u kodu.
+🟢 **PREVAZIĐENO setom 4.5.4 (R-18)** — postupak po prijavljenom nedostatku postoji
+i u aktu (nabavke čl. 30a) i u kodu (`nabavka-ispravka.ts`).
 
 ### Modul Deca — unapređeni model (2026-08-17)
 

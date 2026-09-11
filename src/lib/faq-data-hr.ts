@@ -113,7 +113,7 @@ Zato prepiši POEN tek kad primiš robu ili uslugu. To je jedino pravilo koje te
 
 Što radi u tvoju korist. Sustav trajno pamti. Svako ažuriranje evidencije ostaje zabilježeno pod pseudonimom i vidljivo redovnim članovima, loše se ponašanje ne briše s računa.
 
-Ako razmjena propadne. Prijavi slučaj Fondaciji, dugme stoji uz sam prepis u tvojoj povijesti POEN-a. Prepis nije nepovratan: ako ga Fondacija po prijavi poništi, vraća ti se cijeli iznos, i onda kada zapis druge strane time ode u minus. Odluka je na Fondaciji, pa prijava nije automatski povrat.
+Ako razmjena propadne. Podnesi prigovor Fondaciji sa svojeg profila, u roku od 30 dana od prepisa, i izaberi baš taj prepis. Druga strana dobiva sedam dana da se očituje, pa Fondacija odlučuje uz obrazloženje koje ide objema stranama. Ako prepis poništi, vraća ti se cijeli iznos, i onda kada zapis druge strane time ode u minus. Odluka je na Fondaciji, pa prigovor nije automatski povrat.
 
 Za kvalitetu, isporuku i ispunjenje dogovora odgovaraš ti s drugom stranom, po općim pravilima obveznog prava; Fondacija i Protokol nisu strana u tom odnosu. U početnoj fazi možeš zatražiti i dobrovoljno posredovanje Fondacije, ono nije obvezujuće, ali često je dovoljno.
 
@@ -727,7 +727,7 @@ Jamstvo, rok i uvjete dogovaraš izravno s drugom stranom prije razmjene, što j
 
 Sustav nema automatsko storniranje razmjene. Ako se dogovorite da se nešto vrati, izvodi se kao novo, dobrovoljno ažuriranje evidencije POEN-a u suprotnom smjeru, kao nova razmjena natrag.
 
-Ako nešto pođe naopako, prvo pokušaj riješiti izravno s drugom stranom. U početnoj fazi možeš zatražiti i dobrovoljno, neobvezujuće posredovanje Fondacije; ako dogovor ne uspije, ostaje sudska zaštita po općim pravilima. Uz sam prepis u povijesti POEN-a stoji i dugme kojim slučaj prijavljuješ Fondaciji, ako po prijavi poništi prepis, POEN ti se vraća u cijelosti.`,
+Ako nešto pođe naopako, prvo pokušaj riješiti izravno s drugom stranom. U početnoj fazi možeš zatražiti i dobrovoljno, neobvezujuće posredovanje Fondacije; ako dogovor ne uspije, ostaje sudska zaštita po općim pravilima. Uz to, sa svojeg profila možeš podnijeti prigovor Fondaciji u roku od 30 dana od prepisa; to nije posredovanje između vas dvoje nego odluka o zapisu, i ako po njoj Fondacija poništi prepis, POEN ti se vraća u cijelosti.`,
       },
       {
         id: 23,

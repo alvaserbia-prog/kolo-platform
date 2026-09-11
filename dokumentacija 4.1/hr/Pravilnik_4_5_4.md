@@ -224,7 +224,7 @@ Na negativan zapis po svakoj od četiri osnove primjenjuje se isti režim: on ni
 
 Druga osnova za negativan zapis ne može se ustanoviti — ni ovim pravilnikom bez izmjene ovoga članka, ni bilo kojim drugim aktom.
 
-Razmjena dobara i usluga preraspodjeljuje postojeće POEN-e i ne mijenja njihov ukupan broj u sustavu. Ukupan se broj POEN-a uvećava isključivo upisom novih zapisa kroz kanale evidentiranja doprinosa, a umanjuje poništenjem zapisa po osnovama utvrđenim ovim pravilnikom.
+Razmjena dobara i usluga preraspodjeljuje postojeće POEN-e i ne mijenja njihov ukupan broj u sustavu. Ukupan se broj POEN-a uvećava upisom novih zapisa kroz kanale evidentiranja doprinosa i ispravkom poništenja izvršenog bez osnove u smislu članka 14a ovoga pravilnika, a umanjuje poništenjem zapisa po osnovama utvrđenim ovim pravilnikom. Druge osnove za uvećanje ukupnog broja POEN-a nema.
 
 ### Članak 14a
 
@@ -236,7 +236,11 @@ Poništenje se izvršava protuzapisom u korist Protokola. Zbroj svih zapisa i da
 
 Poništenjem po iskorištenju zapis korisnika ne može prijeći u negativnu vrijednost; poništava se isključivo broj POEN-a koji u zapisu postoji. Ova osnova ne uvodi novu iznimku od zabrane negativnog zapisa iz članka 14. stavka 3.
 
-Uvjeti, postupak, iznos i trenutak poništenja po iskorištenju utvrđuju se posebnim pravilnikom.
+Ako se utvrdi da uvjet iskorištenja nije bio ispunjen — da dobro nije preuzeto ili da preuzeto dobro nije bilo uporabljivo za svrhu zbog koje je nabavljeno — poništenje se ispravlja protuzapisom u korist korisnika, u broju POEN-a koji je bio poništen. Ispravak nije upis novog zapisa kroz kanal iz članka 15. ovoga pravilnika nego otklanjanje poništenja izvršenog bez osnove.
+
+Ispravak nije povrat naknade niti bilo kakva isplata. Korisnik po osnovi ispravka ne prima nikakvu vrijednost osim zapisa koji mu je bio poništen, a Zaklada po toj osnovi ništa ne isplaćuje i ništa ne prima.
+
+Uvjeti, postupak, iznos i trenutak poništenja po iskorištenju, kao i rok i postupak po prijavljenom nedostatku, utvrđuju se posebnim pravilnikom.
 
 ### Članak 15.
 
@@ -284,7 +288,7 @@ Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je i neverificiranim
 
 Oglas neverificiranog korisnika nosi vidljivu oznaku da oglašivač nije verificiran u lancu potvrda. Oznaka je dostupna svima kojima je dostupan i sam oglas.
 
-Korisnik koji je inicirao ažuriranje evidencije u korist drugog korisnika, a razmjena povodom koje je to učinio nije ispunjena, može to prijaviti Zakladi. Prijavu podnosi isključivo taj korisnik, i to najviše jednu po jednom ažuriranju. Zaklada po prijavi odlučuje uz obrazloženje koje se saopćava obje strane; kada utvrdi da razmjena nije ispunjena, Protokol protuzapisom vraća pun iznos u zapis podnositelja. Povrat se izvršava i kada zapis primatelja time postane negativan (članak 14. stavak 3. točka 2.). Odlučivanje po ovoj prijavi ne čini Zakladu stranom u razmjeni i ne uspostavlja njezinu odgovornost za ispunjenje obveza korisnika.
+Korisnik koji je inicirao ažuriranje evidencije u korist drugog korisnika, a razmjena povodom koje je to učinio nije ispunjena, može podnijeti prigovor Zakladi, u roku od trideset dana od ažuriranja. Prigovor podnosi isključivo taj korisnik, sa svojeg profila, i to najviše jedan po jednom ažuriranju. Prije odlučivanja Zaklada obavješćuje drugu stranu i ostavlja joj rok od sedam dana da se očituje; ako se u tom roku ne očituje, odlučuje se bez njezina očitovanja. Zaklada odlučuje uz obrazloženje koje se priopćuje objema stranama; kada utvrdi da razmjena nije ispunjena, Protokol protuzapisom vraća pun iznos u zapis podnositelja. Povrat se izvršava i kada zapis primatelja time postane negativan (članak 14. stavak 3. točka 2.). Korisnik čiji je zapis tom odlukom umanjen može na nju podnijeti prigovor u roku od trideset dana od poništenja. Odlučivanje po prigovoru odnosi se na zapis u evidenciji Protokola; ono ne čini Zakladu stranom u razmjeni, ne uspostavlja njezinu odgovornost za ispunjenje obveza korisnika i ne predstavlja posredovanje u razmjeni.
 
 Pseudonim oglašivača u prostoru za oglašavanje ne povezuje se, za neprijavljene i neverificirane osobe, s evidencijom doprinosa, stanjem računa ni profilom korisnika. Pravila platformskog prostora za oglašavanje uređuju se Uvjetima korištenja.
 

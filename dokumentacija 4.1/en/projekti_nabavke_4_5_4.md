@@ -166,6 +166,8 @@ The Foundation collects at least three offers for the selected good and chooses 
 
 All collected offers, with amounts and the name of the offeror, are published together with the calculation, including offers that were not selected.
 
+An offer is accepted exclusively from a registered legal entity or entrepreneur.
+
 ### Article 16
 
 *Conflict of interest*
@@ -338,6 +340,30 @@ The provision of Article 22 of the Terms of Use, according to which the Foundati
 
 The user does not enter into a contractual relationship with the supplier. Collection of a share is not a purchase and does not establish a contractual relationship between the user and the Foundation with respect to POEN.
 
+The procurement is executed with a registered legal entity or entrepreneur, on the basis of an invoice which the Foundation retains. The value added tax calculated in the price is borne by the Foundation as a cost of procurement and is not deducted as input tax.
+
+In relation to the supplier, the Foundation contracts for and exercises the rights arising from a defect in the goods for the benefit of the users of the programme. Where a user reports a defect, the Foundation acts without delay towards the supplier and informs the user of the outcome. Goods replaced by the supplier are made available by the Foundation to the same user, without a new annulment of POEN records.
+
+The obligation under paragraph 5 of this Article is an obligation of the Foundation towards its own programme. It does not establish a contractual relationship between the user and the supplier, nor between the user and the Foundation, and the user acquires no claim against the Foundation on that ground.
+
+### Article 30a
+
+*Procedure upon a reported defect*
+
+A user may report that a share was not collected although it was marked as collected, or that the collected good was not usable for the purpose for which it was procured.
+
+The report is submitted as a complaint to the Foundation, from the user's profile, within seven days of the notification of collection. Article 37a of the Terms of Use applies to the complaint procedure.
+
+Upon receipt of the complaint, the Foundation acts without delay towards the supplier, in accordance with Article 30 of this Rulebook, and informs the user of the outcome with a statement of reasons.
+
+If the supplier replaces the good, the POEN record is not corrected — the participation has been used.
+
+If the supplier neither replaces the good nor remedies the defect, the Foundation corrects the ledger: the annulment of the POEN record effected under Article 27 of this Rulebook is removed by a counter-entry in favour of the user, in the number of POEN that had been annulled, in accordance with Article 14a of the KOLO System Rulebook.
+
+The correction of the ledger is neither a refund of consideration nor any form of payment. On account of the correction the user receives no value other than the record that had been annulled; the Foundation neither pays out nor receives anything on that ground, whereby the provisions of Articles 3a and 19 of this Rulebook remain unaffected.
+
+The notification of collection contains information about the right under this Article and about the deadline.
+
 ## IX — Transparency
 
 ### Article 31
@@ -366,7 +392,7 @@ A proposal is also deleted upon termination of user status.
 
 *Right of objection*
 
-Against the established order and the outcome of a procurement, a user may lodge an objection in accordance with Article 30 of the KOLO System Rulebook. The objection is decided upon by an authorised person of the Foundation.
+Against the established order and the outcome of a procurement, a user may lodge an objection in accordance with Article 37a of the Terms of Use. The objection is decided upon by an authorised person of the Foundation.
 
 The establishment of the order is the application of rules published by this Rulebook and by the calculation, and does not constitute decision-making producing legal consequences for the user's status.
 

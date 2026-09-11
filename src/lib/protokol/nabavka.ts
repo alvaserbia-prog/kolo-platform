@@ -9,6 +9,7 @@ import { prisma } from "@/lib/prisma";
 import { TransactionType } from "@/generated/prisma/client";
 import type { NabavkaPrijavaStatus } from "@/generated/prisma/client";
 import { obavesti } from "@/lib/notifikacije";
+import { ROK_NABAVKA_DANA } from "@/lib/prigovor-pravila";
 import {
   dohvatiSaldoFondacije,
   dohvatiTrosakPrethodnogMeseca,
@@ -704,9 +705,13 @@ export async function oznaciPreuzeto(prijavaId: string) {
     await obavesti(p.userId, {
       tip: "NABAVKA",
       kljuc: "nabavka_preuzeto",
-      parametri: { dobro, poen: iznos },
+      parametri: { dobro, poen: iznos, dana: ROK_NABAVKA_DANA },
       naslov: "Deo je preuzet",
-      tekst: `Preuzeo si svoj deo iz nabavke „${dobro}". Poništeno je ${iznos} POEN.`,
+      // Pouka o pravu i roku je obavezan deo obaveštenja (nabavke čl. 30a st. 7):
+      // rok od sedam dana teče od OVOG obaveštenja, pa bez pouke nije zaštita nego zamka.
+      tekst:
+        `Preuzeo si svoj deo iz nabavke „${dobro}". Poništeno je ${iznos} POEN. ` +
+        `Ako deo nisi preuzeo ili nije ispravan, imaš ${ROK_NABAVKA_DANA} dana da podneseš prigovor sa svog profila.`,
       link: `/nabavke/${p.nabavkaId}`,
     });
   } catch (e) {

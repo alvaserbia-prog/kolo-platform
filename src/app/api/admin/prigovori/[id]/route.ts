@@ -6,10 +6,16 @@ import { prisma } from "@/lib/prisma";
 import { logAdminAkcija } from "@/lib/audit";
 import { posaljiNotifikaciju } from "@/lib/notifikacije";
 import { jeAdmin } from "@/lib/dozvole";
+import { ispraviEvidencijuNabavke } from "@/lib/protokol/nabavka-ispravka";
 
 /**
  * PATCH /api/admin/prigovori/[id] — odgovori na prigovor
- * Body: { status: "RESENO" | "ODBIJENO" | "U_OBRADI", odgovor: string }
+ * Body: { status: "RESENO" | "ODBIJENO" | "U_OBRADI", odgovor: string, ispravi?: boolean }
+ *
+ * `ispravi` važi samo za vrstu **NABAVKA** (nabavke čl. 30a st. 5): uz usvojen
+ * prigovor otklanja se poništenje zapisa POEN-a izvršeno pri preuzimanju. Radnja
+ * stoji ovde, a ne u zasebnom tabu, da se o jednom slučaju ne bi odlučivalo na
+ * dva mesta — isti razlog iz kog odluka o prepisu zatvara i prigovor uz sebe.
  */
 export async function PATCH(
   req: NextRequest,
@@ -23,6 +29,7 @@ export async function PATCH(
   const { id } = await params;
   const body = await req.json();
   const { status, odgovor } = body;
+  const ispravi = body.ispravi === true;
 
   const validStatusi = ["U_OBRADI", "RESENO", "ODBIJENO"];
   if (!validStatusi.includes(status)) {
@@ -34,6 +41,19 @@ export async function PATCH(
     include: { user: { select: { pseudonim: true } } },
   });
   if (!prigovor) return await greska("Prigovor nije pronađen.", 404);
+
+  // Ispravka evidencije ide PRE zatvaranja prigovora: ako padne, prigovor ostaje
+  // otvoren i vidi se da odluka nije sprovedena.
+  if (ispravi) {
+    if (prigovor.tipOdluke !== "NABAVKA" || !prigovor.predmetId)
+      return await greska("Ispravka evidencije moguća je samo po prigovoru na deo iz nabavke.", 400);
+    const ishod = await ispraviEvidencijuNabavke(
+      prigovor.predmetId,
+      session.user.id,
+      odgovor?.trim() ?? "",
+    );
+    if (!ishod.ok) return await greska(ishod.razlog, 400);
+  }
 
   await prisma.prigovorNaOdluku.update({
     where: { id },

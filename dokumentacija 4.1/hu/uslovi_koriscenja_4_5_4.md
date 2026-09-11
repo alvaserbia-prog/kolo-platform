@@ -216,6 +216,8 @@ Ez különösen érvényes a nem hitelesített felhasználó hirdetése alapján
 
 A Platform nem kívánja meg a felhasználóktól, hogy a cserét külön megjelöljék, megerősítsék vagy értékeljék. A cseréről az egyetlen nyilvántartás a POEN-nyilvántartás frissítése, amelyet a felhasználók maguk hajtanak végre; ebből olvasható ki a cseréhez való hozzájárulás útja is (a KOLO rendszerről szóló szabályzat 40.b cikke).
 
+Az a felhasználó, aki nem teljesült csere miatt POEN-t írt át, a jelen Feltételek 37a. cikkével összhangban, a saját profiljáról kifogást nyújt be az Alapítványhoz. A kifogásról való döntés a Protokoll nyilvántartásában szereplő bejegyzésre vonatkozik; nem teszi az Alapítványt a csere felévé, és e cikk (5) bekezdése értelmében nem jelent közvetítést a cserében.
+
 E cikk rendelkezései a felhasználók közötti cserére vonatkoznak. Nem alkalmazandók a kollektív beszerzésre, amelyben az Alapítvány a szállítóval szemben a vevő és a szerződő fél.
 
 ### 22a. cikk — Kollektív beszerzés
@@ -361,6 +363,22 @@ A felhasználó a Platformon való regisztrációval megerősíti, hogy a felsor
 A felhasználók közötti, cserékkel kapcsolatos jogviták a kötelmi jog általános szabályai szerint, az illetékes bíróság előtt rendezendők.
 
 Az 1. fázisban a felhasználó kérelmet nyújthat be az Alapítványhoz a másik felhasználóval fennálló jogvitában való közvetítés iránt. Az Alapítvány közvetítőként jár el, kötelező erejű döntés nélkül. A kérelmet a jelen Feltételek 3. cikkében megadott elektronikus címre kell benyújtani. Az Alapítvány a kérelem kézhezvételétől számított 30 napon belül válaszol. Az Alapítvány közvetítése nem zárja ki a felhasználó bírói jogvédelemhez való jogát.
+
+### 37a. cikk — Kifogás az Alapítványhoz
+
+A felhasználó kifogást nyújthat be az Alapítvány rá vonatkozó döntése ellen és a Protokoll nyilvántartásában szereplő bejegyzés ellen. A kifogást a felhasználó profiljáról, a Platformon keresztül nyújtja be.
+
+Kifogás nyújtható be különösen: a nem teljesült csere miatti POEN-nyilvántartás-frissítés ellen, valamint az ilyen frissítés érvénytelenítése ellen, ha a felhasználó bejegyzése ezáltal csökkent; a kollektív beszerzésben átvett rész hibája ellen, ideértve azt az esetet is, amikor a részt nem vették át, jóllehet az átvettként lett megjelölve; a valóság megerősítésének a gyermekek részvételéről szóló szabályzat szerinti eljárásban tanúsított tétlenség miatti érvénytelenítése ellen; a megerősítési láncban a valóság megerősítéséről hozott döntés ellen; a felfüggesztés és a kizárás ellen; a támogatási programra benyújtott jelentkezésről hozott döntés ellen; hirdetés vagy üzenet eltávolítása ellen; pontatlan személyes adat ellen; valamint az Alapítvány egyéb, a felhasználóra vonatkozó döntései ellen.
+
+A kifogás megjelöli a tárgyat, amelyre vonatkozik. A POEN-nyilvántartás-frissítés elleni kifogásnak és a kollektív beszerzésből származó rész elleni kifogásnak pontosan egy nyilvántartás-frissítést, illetve pontosan egy részt kell megjelölnie.
+
+A kifogás benyújtásának határideje: az átvételről szóló értesítéstől számított hét nap — a kollektív beszerzésből származó rész hibája esetén; a nyilvántartás-frissítéstől, illetve annak érvénytelenítésétől számított harminc nap — a cserére vonatkozó kifogás esetén; az értesítés kézhezvételétől számított tizenöt nap — kizárás esetén, a jelen Feltételek 28. cikkével összhangban; a döntés közlésétől számított harminc nap — az Alapítvány egyéb döntései esetén. A pontatlan személyes adatra vonatkozó kifogás nincs határidőhöz kötve.
+
+A felhasználónak fajtánként legfeljebb három nyitott kifogása lehet.
+
+Az Alapítvány a kifogásra 30 napon belül, indokolással válaszol. Ha a kifogás nyilvántartásban szereplő bejegyzésre vonatkozik, az indokolást minden olyan személlyel közli, akinek a bejegyzését a döntés érinti.
+
+A kifogás benyújtása nem zárja ki a felhasználó bírói jogvédelemhez való jogát.
 
 ### 38. cikk — A felhasználó és az Alapítvány közötti jogviták
 

@@ -34,7 +34,7 @@ const POZIV = izvor("src/lib/protokol/deca-poziv.ts");
 const VERIF = izvor("src/lib/protokol/verifikacija-service.ts");
 const LAZNA = izvor("src/lib/protokol/lazna-verifikacija.ts");
 const CRON = izvor("src/app/api/cron/deca-potvrde/route.ts");
-const PRIGOVOR = izvor("src/app/api/prigovor/route.ts");
+const PRIGOVOR = izvor("src/lib/prigovor-pravila.ts");
 const PREVOD = izvor("src/lib/protokol/prevod-u-maloletni.ts");
 
 describe("rok i podsetnici", () => {

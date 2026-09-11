@@ -23,8 +23,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // Bez izmene ovog člana taj otpis ne bi imao osnov — st. 6 izričito kaže da se
   // drugi osnov ne može ustanoviti nijednim drugim aktom.
   "kolo-sistem": {
-    fajl: "Pravilnik_4_5_2.md",
-    verzija: "4.5.2",
+    fajl: "Pravilnik_4_5_4.md",
+    verzija: "4.5.4",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.
@@ -92,8 +92,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // delatnost, zabranjena naknada za ustupljeno dobro (nov čl. 3a); oslobođen deo
   // ide sledećem u redu i ne prodaje se (čl. 29); godišnji zbir projekata (čl. 31).
   "projekti-nabavke": {
-    fajl: "projekti_nabavke_4_4_7.md",
-    verzija: "4.4.7",
+    fajl: "projekti_nabavke_4_5_4.md",
+    verzija: "4.5.4",
   },
 };
 

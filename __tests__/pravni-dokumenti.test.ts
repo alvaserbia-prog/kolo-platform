@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_5_2.md`, `uslovi_koriscenja_4_5_3.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_5_4.md`, `uslovi_koriscenja_4_5_4.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,11 +27,11 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_5_2.md",
+  "Pravilnik_4_5_4.md",
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_5_2.md",
   "radnje_obrade_4_5_2.md",
-  "uslovi_koriscenja_4_5_3.md",
+  "uslovi_koriscenja_4_5_4.md",
   "politika_4_5_2.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_6.md",
@@ -45,7 +45,7 @@ const AKTI = [
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce_dece_4_5_3.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
-  "projekti_nabavke_4_4_7.md",
+  "projekti_nabavke_4_5_4.md",
 ];
 
 /**
@@ -62,7 +62,7 @@ const AKTI = [
  * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_5_2.md": {
+  "Pravilnik_4_5_4.md": {
     sr: [
       "### Član 40a",
       "evidentira se u Protokolu kada Fondacija odobri oglas",
@@ -76,6 +76,18 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // st. 6 zabranjuje ustanovljavanje drugog osnova bilo kojim drugim aktom.
       "otpis po poništenju potvrde zbog neaktivnosti",
       "teret se ne prenosi na drugo lice",
+      // R-18 — ispravka poništenja izvršenog bez osnova (čl. 14a). Uvećava ukupan
+      // broj POEN-a VAN kanala iz čl. 15, pa je čl. 14 morao da dobije izričit
+      // osnov; bez njega bi poseban pravilnik probijao zatvorenu listu.
+      "ispravkom poništenja izvršenog bez osnova",
+      "Drugog osnova za uvećanje ukupnog broja POEN-a nema",
+      "otklanjanje poništenja izvršenog bez osnova",
+      "Ispravka nije povraćaj naknade",
+      // R-18 — prigovor na prepis: rok, izjašnjenje druge strane pre odluke i
+      // izričito da odlučivanje NIJE posredovanje u razmeni (čl. 16 st. 10).
+      "u roku od trideset dana od ažuriranja",
+      "ostavlja joj rok od sedam dana da se izjasni",
+      "ne predstavlja posredovanje u razmeni",
       "Drugi osnov za negativan zapis ne može se ustanoviti",
       // 4.3.0 — deveti kanal. Kanal koji ne stoji u čl. 15 ne postoji, a kod
       // upisuje POEN po njemu.
@@ -107,6 +119,13 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: [
       "### Article 40a",
       "is recorded in the Protocol when the Foundation approves the listing",
+      "through the correction of an annulment effected without grounds",
+      "There is no further ground for increasing the total number of POENs",
+      "the removal of an annulment effected without grounds",
+      "The correction is neither a refund of consideration",
+      "within thirty days of the record update",
+      "allows it seven days to make a statement",
+      "does not constitute mediation in the exchange",
       "Article 20b of the Rulebook on Proof of Reality",
       "There are four exceptions, and they are listed here exhaustively",
       "write-off upon annulment of a confirmation due to inactivity",
@@ -124,6 +143,13 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     ru: [
       "### Статья 40a",
       "учитывается в Протоколе, когда Фонд одобрит объявление",
+      "исправлением аннулирования, произведённого без основания",
+      "Иного основания для увеличения общего количества ПОЕН нет",
+      "устранением аннулирования, произведённого без основания",
+      "Исправление не является ни возвратом вознаграждения",
+      "в срок тридцати дней со дня обновления учёта",
+      "предоставляет ей срок семи дней",
+      "не является посредничеством в обмене",
       "статьёй 20b Правил о доказательстве реальности",
       "Исключений четыре, и здесь они перечислены исчерпывающе",
       "списание при аннулировании подтверждения из-за неактивности",
@@ -261,7 +287,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // jedan", sistem je sam objavljivao koliko POEN vredi u dinarima, pa se tabela
   // koeficijenta donacija čitala kao cenovnik. Zato se sada traži suprotno:
   // odsustvo pariteta i prisustvo odredbe da broj nije cena dobra.
-  "projekti_nabavke_4_4_7.md": {
+  "projekti_nabavke_4_5_4.md": {
     sr: [
       "### Član 27",
       "tri operativna troška Fondacije za prethodni mesec",
@@ -269,6 +295,15 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "utvrđuje ukupnu količinu dobra koje se nabavlja",
       "Broj delova jednak je količniku ukupne količine i veličine dela",
       "utvrđuju se pre prikupljanja ponuda",
+      // R-18 — postupanje po prijavljenom nedostatku. Rok, put (prigovor), i
+      // izričito da ispravka evidencije NIJE povraćaj naknade — na toj rečenici
+      // stoji i odbrana iz čl. 3a i čl. 19 (davanje je besplatno).
+      "### Član 30a",
+      "u roku od sedam dana od obaveštenja o preuzimanju",
+      "Ispravka evidencije nije povraćaj naknade",
+      "Ponuda se prihvata isključivo od registrovanog pravnog lica",
+      "ne odbija ga kao prethodni porez",
+      "ostvaruje prava po osnovu nedostatka dobra u korist korisnika programa",
       "prelazi gornju granicu iz člana 8, nabavka se ne sprovodi",
       // 🔴 Nabavka je program pomoći sa ključem raspodele, ne prodaja: Fondacija po
       // osnovu poništenja ne prima nikakvu vrednost, a dobra se daju bez naknade.
@@ -304,6 +339,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     ],
     en: [
       "The spending coefficient is 1.00",
+      "### Article 30a",
+      "within seven days of the notification of collection",
+      "The correction of the ledger is neither a refund of consideration",
+      "An offer is accepted exclusively from a registered legal entity",
+      "is not deducted as input tax",
+      "exercises the rights arising from a defect in the goods for the benefit of the users",
       "establishes the total quantity of the good to be acquired",
       "equals the quotient of the total quantity and the size of a share",
       "established before offers are collected",
@@ -327,6 +368,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     ],
     ru: [
       "Коэффициент расходования составляет 1,00",
+      "### Статья 30a",
+      "в срок семи дней со дня уведомления о получении",
+      "Исправление учёта не является ни возвратом вознаграждения",
+      "Оферта принимается исключительно от зарегистрированного юридического лица",
+      "не принимает его к вычету в качестве входящего налога",
+      "осуществляет права по основанию недостатка блага в пользу пользователей программы",
       "устанавливает общее количество приобретаемого блага",
       "равно частному общего количества и размера доли",
       "устанавливаются до сбора оферт",
@@ -353,9 +400,15 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
   // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
   // počiva upravo na tome da takav promet nije dopušten.
-  "uslovi_koriscenja_4_5_3.md": {
+  "uslovi_koriscenja_4_5_4.md": {
     sr: [
       "Oglas neverifikovanog korisnika",
+      // R-18 — prigovor kao jedan institut sa svojim članom. Do 4.5.4 su ga
+      // Uslovi pominjali samo uz isključenje, a razmena i nabavka nisu imale
+      // nijedan put; bez ovog člana rokovi i kapa po vrsti nemaju osnov.
+      "### Član 37a — Prigovor Fondaciji",
+      "najviše tri otvorena prigovora po vrsti",
+      "sedam dana od obaveštenja o preuzimanju",
       "ne smatra se izmenom Uslova",
       "posreduje u prometu POEN-a ili ZRNA",
       "načelu nekonvertibilnosti",
@@ -373,6 +426,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     ],
     en: [
       "Listing by an Unverified User",
+      "### Article 37a — Complaint to the Foundation",
+      "A user may have at most three open complaints per type",
+      "seven days from the notification of collection",
       "is not deemed an amendment to the Terms",
       "brokering the transfer of POEN or ZRNO",
       "principle of non-convertibility",
@@ -384,6 +440,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     ],
     ru: [
       "Объявление неверифицированного пользователя",
+      "### Статья 37a — Возражение Фонду",
+      "не более трёх открытых возражений по каждому виду",
+      "семь дней со дня уведомления о получении",
       "не считается изменением Условий",
       "посредничать в их обороте",
       "принципу неконвертируемости",
@@ -956,7 +1015,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_5_2.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_5_4.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });

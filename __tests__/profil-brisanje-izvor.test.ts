@@ -25,7 +25,7 @@ const citaj = (p: string) => readFileSync(path.join(KOREN, p), "utf8");
 
 const BRISANJE = citaj("src/app/api/profil/route.ts");
 const GDPR = citaj("src/app/api/cron/gdpr-cistenje/route.ts");
-const PRIGOVOR = citaj("src/app/api/prigovor/route.ts");
+const PRIGOVOR = citaj("src/lib/prigovor-pravila.ts");
 
 describe("gašenje naloga briše ono što akt obećava", () => {
   it("oglasi se uklanjaju i prazne", () => {

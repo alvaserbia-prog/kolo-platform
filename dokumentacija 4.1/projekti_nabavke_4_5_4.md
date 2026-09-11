@@ -164,6 +164,8 @@ Fondacija prikuplja najmanje tri ponude za izabrano dobro i bira najpovoljniju.
 
 Sve prikupljene ponude, sa iznosima i nazivom ponuđača, objavljuju se uz kalkulaciju, uključujući ponude koje nisu izabrane.
 
+Ponuda se prihvata isključivo od registrovanog pravnog lica odnosno preduzetnika.
+
 ### Član 16
 
 *Sukob interesa*
@@ -336,6 +338,30 @@ Odredba člana 22 Uslova korišćenja, prema kojoj Fondacija nije strana u razme
 
 Korisnik sa dobavljačem ne stupa u ugovorni odnos. Preuzimanje dela nije kupovina i ne zasniva ugovorni odnos između korisnika i Fondacije u pogledu POEN-a.
 
+Nabavka se izvršava kod registrovanog pravnog lica odnosno preduzetnika, po računu koji Fondacija čuva. Porez na dodatu vrednost obračunat u ceni Fondacija snosi kao trošak nabavke i ne odbija ga kao prethodni porez.
+
+Fondacija prema dobavljaču ugovara i ostvaruje prava po osnovu nedostatka dobra u korist korisnika programa. Kada korisnik prijavi nedostatak, Fondacija bez odlaganja istupa prema dobavljaču i o ishodu obaveštava korisnika. Dobro koje dobavljač zameni Fondacija ustupa istom korisniku, bez novog poništenja zapisa POEN-a.
+
+Obaveza iz stava 5 ovog člana je obaveza Fondacije prema sopstvenom programu. Njome se ne zasniva ugovorni odnos između korisnika i dobavljača ni između korisnika i Fondacije, i korisnik po tom osnovu ne stiče potraživanje prema Fondaciji.
+
+### Član 30a
+
+*Postupanje po prijavljenom nedostatku*
+
+Korisnik može prijaviti da deo nije preuzet iako je označen kao preuzet, ili da preuzeto dobro nije upotrebljivo za svrhu zbog koje je nabavljeno.
+
+Prijava se podnosi kao prigovor Fondaciji, sa profila korisnika, u roku od sedam dana od obaveštenja o preuzimanju. Na postupak po prigovoru primenjuje se član 37a Uslova korišćenja.
+
+Po prijemu prigovora Fondacija bez odlaganja istupa prema dobavljaču, u skladu sa članom 30 ovog pravilnika, i o ishodu obaveštava korisnika uz obrazloženje.
+
+Ako dobavljač dobro zameni, zapis POEN-a se ne ispravlja — učešće je iskorišćeno.
+
+Ako dobavljač dobro ne zameni niti nedostatak otkloni, Fondacija ispravlja evidenciju: poništenje zapisa POEN-a izvršeno po članu 27 ovog pravilnika otklanja se protivzapisom u korist korisnika, u broju POEN-a koji je bio poništen, u skladu sa članom 14a Pravilnika o KOLO sistemu.
+
+Ispravka evidencije nije povraćaj naknade niti bilo kakva isplata. Korisnik po osnovu ispravke ne prima nikakvu vrednost osim zapisa koji mu je bio poništen; Fondacija po tom osnovu ništa ne isplaćuje i ništa ne prima, čime odredbe članova 3a i 19 ovog pravilnika ostaju nedirnute.
+
+Obaveštenje o preuzimanju sadrži pouku o pravu iz ovog člana i o roku.
+
 ## IX — Transparentnost
 
 ### Član 31
@@ -364,7 +390,7 @@ Predlog se briše i prestankom svojstva korisnika.
 
 *Pravo na prigovor*
 
-Protiv utvrđenog reda i ishoda nabavke korisnik može podneti prigovor u skladu sa članom 30 Pravilnika o KOLO sistemu. O prigovoru odlučuje ovlašćeno lice Fondacije.
+Protiv utvrđenog reda i ishoda nabavke korisnik može podneti prigovor u skladu sa Članom 37a Uslova korišćenja. O prigovoru odlučuje ovlašćeno lice Fondacije.
 
 Utvrđivanje reda je primena pravila objavljenih ovim pravilnikom i kalkulacijom i ne predstavlja odlučivanje koje proizvodi pravne posledice po status korisnika.
 

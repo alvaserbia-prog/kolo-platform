@@ -359,16 +359,6 @@
     "putanja_na_redu": "Met — being recorded shortly",
     "putanja_zakljucan": "Not unlocked yet",
     "putanja_pravila": "The counter includes re-registrations of at least 1,000 POEN with people outside your chain of confirmations. Each counterpart counts once, no matter how many re-registrations. A re-registration with a member nobody has confirmed yet is noted, but counts only once they are confirmed. Currently in the counter: {sagovornika}.",
-    "prijavi_dugme": "Report a problem with this exchange",
-    "prijavi_naslov": "Report an unfulfilled exchange",
-    "prijavi_opis": "If you re-registered POEN and did not receive what was agreed, tell the Foundation. The re-registration is not reversed on its own — the Foundation decides; if it annuls it, the whole amount comes back to you, even when that pushes the other side's ledger below zero.",
-    "prijavi_placeholder": "What was agreed and what happened.",
-    "prijavi_posalji": "Send report",
-    "prijavi_odustani": "Cancel",
-    "prijavi_ceka": "Report sent — awaiting the Foundation's decision.",
-    "prijavi_ponistena": "The re-registration was annulled upon the report.",
-    "prijavi_odbacena": "The report was reviewed — the re-registration stands.",
-    "prijavi_greska": "The report was not sent.",
     "ceka_roditelja": "The account is waiting for a parent to take it over. Until then POEN can be re-registered into your record; re-registering to others unlocks once a parent takes the account over.",
     "nadoknada_naslov_dete": "You owe",
     "nadoknada_opis_dete": "This came off when a friendship ended. The first POEN that arrives fills it in. Everything else works as usual.",
@@ -692,7 +682,20 @@
     "status_dete_ceka": "waiting for a parent's approval",
     "status_dete_radi": "account works",
     "prigovor_tip_podaci": "Correction of inaccurate data about me",
-    "prigovor_tip_potvrda": "Confirmation cancelled due to inactivity"
+    "prigovor_tip_potvrda": "Confirmation cancelled due to inactivity",
+    "prigovor_tip_razmena": "POEN re-registration on account of an exchange",
+    "prigovor_tip_nabavka": "Share from a collective procurement",
+    "prigovor_predmet_izaberi": "Choose what the complaint concerns",
+    "prigovor_predmet_prazno": "You have no item within the deadline for this type of complaint.",
+    "prigovor_predmet_poslao": "{datum} · {iznos} POEN re-registered — {strana}",
+    "prigovor_predmet_ponisten": "{datum} · {iznos} POEN from {strana} — annulled",
+    "prigovor_predmet_deo": "{datum} · {dobro}",
+    "izjasni_naslov": "Your statement is requested",
+    "izjasni_opis": "{pseudonim} has lodged a complaint that the exchange for which they re-registered {iznos} POEN to you on {datum} was not fulfilled. Make a statement before the Foundation decides.",
+    "izjasni_rok": "Deadline for the statement: {datum}",
+    "izjasni_placeholder": "What happened, as you recall it?",
+    "izjasni_dugme": "Send statement",
+    "izjasni_poslato": "The statement has been sent."
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -951,7 +954,7 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.5.3"
+      "ver": "4.5.4"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
@@ -979,7 +982,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.5.2",
+      "ver": "4.5.4",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -999,7 +1002,7 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use — KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.5.3",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.5.4",
     "meta_privatnost_title": "Privacy Policy — KOLO",
     "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.5.2",
     "meta_statut_title": "KOLO Foundation Statute — KOLO",
@@ -1013,7 +1016,7 @@
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.6",
     "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.5.2",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.5.4",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -2563,7 +2566,11 @@
     "tab_nabavke": "Nabavke",
     "ped_izjava_label": "Contributor's declaration",
     "prigovori_tip_podaci": "Data correction",
-    "prigovori_tip_potvrda": "Cancelled confirmation"
+    "prigovori_tip_potvrda": "Cancelled confirmation",
+    "prigovori_tip_razmena": "Re-registration on account of an exchange",
+    "prigovori_tip_nabavka": "Share from a procurement",
+    "prigovori_ispravi": "Correct the ledger",
+    "prigovori_predmet": "Subject"
   },
   "kolacici": {
     "aria": "Cookie consent",
@@ -2703,7 +2710,7 @@
     "nabavka_poziv_naslov": "You are in the procurement",
     "nabavka_poziv_tekst": "Procurement “{dobro}” — your share costs {poen} POEN. Confirm by choosing a collection day.",
     "nabavka_preuzeto_naslov": "Share collected",
-    "nabavka_preuzeto_tekst": "You collected your share from the “{dobro}” procurement. {poen} POEN was annulled.",
+    "nabavka_preuzeto_tekst": "You collected your share from the “{dobro}” procurement. {poen} POEN was annulled. If you did not collect the share, or it is defective, you have {dana} days to lodge a complaint from your profile.",
     "zahtev_potvrda_spoljni_naslov": "A new request awaits your answer",
     "zahtev_potvrda_spoljni_tekst": "Someone named you as a member of their chain. Open KOLO to see the request.",
     "program_pristanak_povucen_naslov": "Consent withdrawn",
@@ -2729,7 +2736,11 @@
     "prepis_odobren_naslov": "A parent approved the re-registration",
     "prepis_odobren_tekst": "The re-registration of {iznos} POEN to member {pseudonim} has been carried out.",
     "prepis_odbijen_naslov": "The re-registration was not carried out",
-    "prepis_odbijen_tekst": "The re-registration of {iznos} POEN to member {pseudonim} was not carried out."
+    "prepis_odbijen_tekst": "The re-registration of {iznos} POEN to member {pseudonim} was not carried out.",
+    "prijava_razmene_izjasni_naslov": "Your statement is requested",
+    "prijava_razmene_izjasni_tekst": "A complaint has been lodged that the exchange for which POEN was re-registered to you was not fulfilled. You have {dana} days to make a statement before the Foundation decides. The statement is entered on your profile.",
+    "nabavka_ispravka_naslov": "The ledger has been corrected",
+    "nabavka_ispravka_tekst": "Following your complaint about the share from the “{dobro}” procurement, the annulment has been removed and {poen} POEN has been returned to your record. Reasons: {obrazlozenje}"
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",
@@ -2749,7 +2760,8 @@
     "prijateljstvo_punoletstvo_zbirno": "POEN from {broj} friendships written off (coming of age)",
     "prevod_u_maloletni_otpis": "Reversal of POEN recorded through the channels (account converted to a child account)",
     "prevod_u_maloletni_potvrda": "Reversal of POEN from a lapsed confirmation ({pseudonim} converted to a child account)",
-    "nabavka": "Collective procurement — {dobro}"
+    "nabavka": "Collective procurement — {dobro}",
+    "nabavka_ispravka": "Ledger correction, collective procurement {dobro}"
   },
   "mejl": {
     "pozdrav": "Hello",
@@ -3495,6 +3507,7 @@
     "ponude_opis": "All are published, including those not selected.",
     "preuzeli": "Collected by",
     "preuzeli_napomena": "The pseudonym and position in the order are shown. The number of POEN in the record is not published.",
-    "broj_prijava": "Applicants: {broj}"
+    "broj_prijava": "Applicants: {broj}",
+    "ispravka_pouka": "If you did not collect the share, or it is defective, you have 7 days to lodge a complaint from your profile."
   }
 }

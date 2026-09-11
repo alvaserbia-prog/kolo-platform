@@ -200,6 +200,7 @@ interface PrigovorItem {
   pseudonim: string;
   opis: string;
   tipOdluke: string;
+  predmetId?: string | null;
   status: string;
   createdAt: string;
 }
@@ -1501,6 +1502,8 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
 // ── Prigovori tab ────────────────────────────────────────────────────────────
 
 const prigovorTipLabel = (t: ReturnType<typeof useTranslations<"admin">>): Record<string, string> => ({
+  RAZMENA: t("prigovori_tip_razmena"),
+  NABAVKA: t("prigovori_tip_nabavka"),
   VERIFIKACIJA: t("prigovori_tip_verifikacija"),
   SUSPENZIJA: t("prigovori_tip_suspenzija"),
   PROGRAM: t("prigovori_tip_program"),
@@ -1529,12 +1532,15 @@ function PrigovorKartica({ p, onDone }: { p: PrigovorItem; onDone: () => void })
   const [loading, setLoading] = useState<string | null>(null);
   const [poruka, setPoruka] = useState<{ text: string; ok: boolean } | null>(null);
 
-  async function posalji(status: "RESENO" | "ODBIJENO" | "U_OBRADI") {
-    setLoading(status);
+  // `ispravi` uz usvojen prigovor na deo iz nabavke otklanja poništenje zapisa
+  // (nabavke čl. 30a st. 5). Prigovor na PREPIS se ovde NE rešava dugmetom —
+  // o njemu se odlučuje u tabu Razmene, koji zatvara i prigovor uz sebe.
+  async function posalji(status: "RESENO" | "ODBIJENO" | "U_OBRADI", ispravi = false) {
+    setLoading(ispravi ? "ISPRAVKA" : status);
     const res = await fetch(`/api/admin/prigovori/${p.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status, odgovor: odgovor.trim() }),
+      body: JSON.stringify({ status, odgovor: odgovor.trim(), ispravi }),
     });
     const data = await res.json();
     setLoading(null);
@@ -1560,6 +1566,12 @@ function PrigovorKartica({ p, onDone }: { p: PrigovorItem; onDone: () => void })
       <textarea value={odgovor} onChange={(e) => setOdgovor(e.target.value)} rows={2}
         placeholder={t("prigovori_odgovor_placeholder")}
         className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 resize-none" />
+      {!poruka && p.tipOdluke === "NABAVKA" && p.predmetId && (
+        <button onClick={() => posalji("RESENO", true)} disabled={loading !== null || odgovor.trim().length < 10}
+          className="w-full py-2 rounded-xl bg-kolo-gold-500 text-white text-sm font-semibold hover:bg-kolo-gold-600 disabled:opacity-60">
+          {loading === "ISPRAVKA" ? "..." : t("prigovori_ispravi")}
+        </button>
+      )}
       {!poruka && (
         <div className="flex gap-2">
           <button onClick={() => posalji("RESENO")} disabled={loading !== null}

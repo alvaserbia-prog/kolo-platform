@@ -3,6 +3,7 @@ import { TransactionType } from "@/generated/prisma/client";
 import { obavesti } from "@/lib/notifikacije";
 import { logAdminAkcija } from "@/lib/audit";
 import { iznosPovracaja, stanjePosle, idUMinus } from "@/lib/razmena-prijava";
+import { ROK_IZJASNJENJA_DANA, rokOd, smeOdlucitiORazmeni } from "@/lib/prigovor-pravila";
 
 export * from "@/lib/razmena-prijava";
 
@@ -51,6 +52,17 @@ export async function ponistiPrepis(
   if (prijava.status !== "OTVORENA") return { ok: false, razlog: "O prijavi je već odlučeno." };
   if (!prijava.prijavioc.wallet || !prijava.protiv.wallet)
     return { ok: false, razlog: "Jedna od strana nema zapis u Protokolu." };
+
+  // 🔴 Druga strana se izjašnjava PRE odluke (Pravilnik čl. 16 st. 10, set 4.5.4).
+  // Odluka gura tuđi zapis u minus; postupak u kome se čuje samo jedna strana za
+  // takvu posledicu nije dovoljan. Provera je ovde, u servisu, a ne u ruti — reč
+  // je o pravilu, ne o zaštiti ekrana.
+  const glas = smeOdlucitiORazmeni({
+    izjasnjenjeDo: prijava.izjasnjenjeDo,
+    odgovorProtivAt: prijava.odgovorProtivAt,
+    sada: new Date(),
+  });
+  if (!glas.ok) return { ok: false, razlog: glas.razlog };
 
   const iznos = prijava.transakcija.amount;
   const vraceno = iznosPovracaja(iznos);
@@ -129,6 +141,8 @@ export async function ponistiPrepis(
     `prijava ${prijavaId}, prepis ${prijava.transakcijaId}, vraćeno ${vraceno}, stanje primaoca posle ${stanjeNakon}; razlog: ${odluka}`,
   );
 
+  await zatvoriPrigovorUzPrijavu(prijava.prigovorId, adminId, odluka, "RESENO");
+
   return { ok: true, vraceno, uMinusu };
 }
 
@@ -145,10 +159,20 @@ export async function odbaciPrijavu(
 ): Promise<IshodOdluke> {
   const prijava = await prisma.prijavaRazmene.findUnique({
     where: { id: prijavaId },
-    select: { id: true, status: true, prijaviocId: true, transakcijaId: true },
+    select: {
+      id: true, status: true, prijaviocId: true, transakcijaId: true,
+      prigovorId: true, izjasnjenjeDo: true, odgovorProtivAt: true,
+    },
   });
   if (!prijava) return { ok: false, razlog: "Prijava ne postoji." };
   if (prijava.status !== "OTVORENA") return { ok: false, razlog: "O prijavi je već odlučeno." };
+
+  const glas = smeOdlucitiORazmeni({
+    izjasnjenjeDo: prijava.izjasnjenjeDo,
+    odgovorProtivAt: prijava.odgovorProtivAt,
+    sada: new Date(),
+  });
+  if (!glas.ok) return { ok: false, razlog: glas.razlog };
 
   const zatvoreno = await prisma.prijavaRazmene.updateMany({
     where: { id: prijavaId, status: "OTVORENA" },
@@ -172,5 +196,97 @@ export async function odbaciPrijavu(
     `prijava ${prijavaId}, prepis ${prijava.transakcijaId}; razlog: ${odluka}`,
   );
 
+  await zatvoriPrigovorUzPrijavu(prijava.prigovorId, adminId, odluka, "ODBIJENO");
+
+  return { ok: true, vraceno: 0, uMinusu: false };
+}
+
+/**
+ * Zatvori prigovor kroz koji je slučaj otvoren.
+ *
+ * 🔴 Odluka o prepisu i odgovor na prigovor su JEDAN čin, ne dva. Da se prigovor
+ * zatvara zasebno, administrator bi rešio slučaj u jednom tabu a čoveku bi
+ * prigovor visio otvoren u profilu — i dva zapisa o istoj stvari razišla bi se
+ * prvi put kad neko zaboravi drugi klik.
+ */
+async function zatvoriPrigovorUzPrijavu(
+  prigovorId: string | null,
+  adminId: string,
+  odgovor: string,
+  status: "RESENO" | "ODBIJENO",
+) {
+  if (!prigovorId) return;
+  await prisma.prigovorNaOdluku.updateMany({
+    where: { id: prigovorId, status: { in: ["PENDING", "U_OBRADI"] } },
+    data: { status, odgovor, odgovorioId: adminId, odgovorioAt: new Date() },
+  });
+}
+
+/**
+ * Otvori slučaj po prigovoru sa profila (Uslovi čl. 37a).
+ *
+ * Ulazna tačka je od seta 4.5.4 isključivo profil — dugme uz prepis u istoriji
+ * POEN-a je uklonjeno, jer je bilo jedino mesto u sistemu na kome je jedan čovek
+ * jednim klikom pokretao obaranje tuđeg zapisa.
+ *
+ * Ovde se upisuje i rok u kome se druga strana izjašnjava i šalje joj se poziv;
+ * bez toga bi `ponistiPrepis` odbijao odluku dok rok ne istekne, a rok nikad ne
+ * bi ni počeo.
+ */
+export async function otvoriPrijavuRazmene(args: {
+  transakcijaId: string;
+  prijaviocId: string;
+  prijaviocPseudonim: string;
+  protivId: string;
+  opis: string;
+  prigovorId: string;
+}) {
+  const izjasnjenjeDo = rokOd(new Date(), ROK_IZJASNJENJA_DANA);
+  const prijava = await prisma.prijavaRazmene.create({
+    data: {
+      transakcijaId: args.transakcijaId,
+      prijaviocId: args.prijaviocId,
+      protivId: args.protivId,
+      opis: args.opis,
+      prigovorId: args.prigovorId,
+      izjasnjenjeDo,
+    },
+    select: { id: true },
+  });
+
+  await obavesti(args.protivId, {
+    tip: "prijava_razmene",
+    kljuc: "notifikacije.prijava_razmene_izjasni",
+    parametri: { dana: ROK_IZJASNJENJA_DANA },
+    naslov: "Traži se tvoje izjašnjenje",
+    tekst:
+      `${args.prijaviocPseudonim} je podneo prigovor da razmena povodom koje ti je prepisao POEN nije ispunjena. ` +
+      `Imaš ${ROK_IZJASNJENJA_DANA} dana da se izjasniš pre nego što Fondacija odluči. Izjašnjenje se unosi na profilu.`,
+    link: "/profil",
+  });
+
+  return prijava.id;
+}
+
+/** Izjašnjenje druge strane pre odluke (Pravilnik čl. 16 st. 10). */
+export async function odgovoriNaPrijavuRazmene(
+  prijavaId: string,
+  korisnikId: string,
+  odgovor: string,
+): Promise<IshodOdluke> {
+  const p = await prisma.prijavaRazmene.findUnique({
+    where: { id: prijavaId },
+    select: { id: true, status: true, protivId: true, odgovorProtivAt: true },
+  });
+  if (!p || p.protivId !== korisnikId) return { ok: false, razlog: "Prijava ne postoji." };
+  if (p.status !== "OTVORENA") return { ok: false, razlog: "O prijavi je već odlučeno." };
+  if (p.odgovorProtivAt) return { ok: false, razlog: "Već si se izjasnio." };
+  if (odgovor.trim().length < 10)
+    return { ok: false, razlog: "Izjašnjenje mora imati najmanje 10 znakova." };
+
+  await prisma.prijavaRazmene.updateMany({
+    where: { id: prijavaId, status: "OTVORENA", odgovorProtivAt: null },
+    data: { odgovorProtiv: odgovor.trim(), odgovorProtivAt: new Date() },
+  });
   return { ok: true, vraceno: 0, uMinusu: false };
 }

@@ -124,7 +124,7 @@ Mit jelent a megerősített, és mit nem. A rendes tag olyasvalaki, akinek a val
 
 Mi dolgozik a javadra. A rendszer tartósan emlékszik. A nyilvántartás minden frissítése álnév alatt rögzítve marad, és a rendes tagok látják — a rossz magatartás nem törlődik a fiókról.
 
-Ha a csere meghiúsul. Jelentsd az esetet az Alapítványnak — a gomb magánál az átírásnál van, a POEN-előzményeidben. Az átírás nem visszafordíthatatlan: ha az Alapítvány a bejelentésed alapján érvényteleníti, a teljes összeg visszakerül hozzád, akkor is, ha a másik fél nyilvántartása ezzel mínuszba megy. A döntés az Alapítványé, tehát a bejelentés nem automatikus visszatérítés.
+Ha a csere meghiúsul. Nyújts be kifogást az Alapítványhoz a saját profilodról, az átírástól számított 30 napon belül, és válaszd ki pontosan azt az átírást. A másik fél hét napot kap a nyilatkozattételre, majd az Alapítvány indokolással dönt, amelyet mindkét féllel közöl. Ha az átírást érvényteleníti, a teljes összeg visszakerül hozzád, akkor is, ha a másik fél nyilvántartása ezzel mínuszba megy. A döntés az Alapítványé, tehát a kifogás nem automatikus visszatérítés.
 
 A minőségért, a teljesítésért és a megállapodás betartásáért te felelsz a másik féllel együtt, a kötelmi jog általános szabályai szerint; az Alapítvány és a Protokoll nem részese ennek a viszonynak. A kezdeti szakaszban kérheted az Alapítvány önkéntes közvetítését is — az nem kötelező erejű, de gyakran elegendő.
 
@@ -738,7 +738,7 @@ A jótállást, a határidőt és a feltételeket közvetlenül a másik féllel
 
 A rendszerben nincs automatikus csere-visszavonás. Ha megállapodtok, hogy valami visszajár, az új, önkéntes POEN-nyilvántartás-frissítésként történik ellenkező irányban — mint új, visszafelé irányuló csere.
 
-Ha valami rosszul sül el, először próbáld közvetlenül a másik féllel megoldani. A kezdeti szakaszban kérheted az Alapítvány önkéntes, nem kötelező erejű közvetítését is; ha nem születik megállapodás, marad a bírói út az általános szabályok szerint. Magánál az átírásnál, a POEN-előzményeidben ott a gomb is, amellyel az esetet bejelented az Alapítványnak — ha a bejelentés alapján érvényteleníti az átírást, a POEN teljes egészében visszakerül hozzád.`,
+Ha valami rosszul sül el, először próbáld közvetlenül a másik féllel megoldani. A kezdeti szakaszban kérheted az Alapítvány önkéntes, nem kötelező erejű közvetítését is; ha nem születik megállapodás, marad a bírói út az általános szabályok szerint. Ezen felül a saját profilodról kifogást nyújthatsz be az Alapítványhoz az átírástól számított 30 napon belül; ez nem kettőtök közötti közvetítés, hanem a bejegyzésről szóló döntés, és ha az Alapítvány ennek alapján érvényteleníti az átírást, a POEN teljes egészében visszakerül hozzád.`,
       },
       {
         id: 23,

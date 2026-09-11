@@ -166,6 +166,8 @@ Zaklada prikuplja najmanje tri ponude za izabrano dobro i bira najpovoljniju.
 
 Sve prikupljene ponude, s iznosima i nazivom ponuditelja, objavljuju se uz kalkulaciju, uključujući ponude koje nisu izabrane.
 
+Ponuda se prihvaća isključivo od registrirane pravne osobe odnosno obrtnika.
+
 ### Članak 16.
 
 *Sukob interesa*
@@ -338,6 +340,30 @@ Odredba članka 22. Uvjeta korištenja, prema kojoj Zaklada nije strana u razmje
 
 Korisnik s dobavljačem ne stupa u ugovorni odnos. Preuzimanje dijela nije kupnja i ne zasniva ugovorni odnos između korisnika i Zaklade u pogledu POEN-a.
 
+Nabava se izvršava kod registrirane pravne osobe odnosno obrtnika, po računu koji Zaklada čuva. Porez na dodanu vrijednost obračunat u cijeni Zaklada snosi kao trošak nabave i ne odbija ga kao pretporez.
+
+Zaklada prema dobavljaču ugovara i ostvaruje prava po osnovi nedostatka dobra u korist korisnika programa. Kada korisnik prijavi nedostatak, Zaklada bez odgode istupa prema dobavljaču i o ishodu obavješćuje korisnika. Dobro koje dobavljač zamijeni Zaklada ustupa istom korisniku, bez novog poništenja zapisa POEN-a.
+
+Obveza iz stavka 5. ovoga članka obveza je Zaklade prema vlastitom programu. Njome se ne zasniva ugovorni odnos između korisnika i dobavljača ni između korisnika i Zaklade, i korisnik po toj osnovi ne stječe potraživanje prema Zakladi.
+
+### Članak 30a
+
+*Postupanje po prijavljenom nedostatku*
+
+Korisnik može prijaviti da dio nije preuzet iako je označen kao preuzet, ili da preuzeto dobro nije bilo uporabljivo za svrhu zbog koje je nabavljeno.
+
+Prijava se podnosi kao prigovor Zakladi, s profila korisnika, u roku od sedam dana od obavijesti o preuzimanju. Na postupak po prigovoru primjenjuje se članak 37a Uvjeta korištenja.
+
+Po primitku prigovora Zaklada bez odgode istupa prema dobavljaču, u skladu s člankom 30. ovoga pravilnika, i o ishodu obavješćuje korisnika uz obrazloženje.
+
+Ako dobavljač dobro zamijeni, zapis POEN-a se ne ispravlja — sudjelovanje je iskorišteno.
+
+Ako dobavljač dobro ne zamijeni niti nedostatak otkloni, Zaklada ispravlja evidenciju: poništenje zapisa POEN-a izvršeno po članku 27. ovoga pravilnika otklanja se protuzapisom u korist korisnika, u broju POEN-a koji je bio poništen, u skladu s člankom 14a Pravilnika o KOLO sustavu.
+
+Ispravak evidencije nije povrat naknade niti bilo kakva isplata. Korisnik po osnovi ispravka ne prima nikakvu vrijednost osim zapisa koji mu je bio poništen; Zaklada po toj osnovi ništa ne isplaćuje i ništa ne prima, čime odredbe članaka 3a i 19. ovoga pravilnika ostaju nedirnute.
+
+Obavijest o preuzimanju sadrži pouku o pravu iz ovoga članka i o roku.
+
 ## IX — Transparentnost
 
 ### Članak 31.
@@ -366,7 +392,7 @@ Prijedlog se briše i prestankom svojstva korisnika.
 
 *Pravo na prigovor*
 
-Protiv utvrđenog redoslijeda i ishoda nabave korisnik može podnijeti prigovor u skladu s člankom 30. Pravilnika o KOLO sustavu. O prigovoru odlučuje ovlaštena osoba Zaklade.
+Protiv utvrđenog redoslijeda i ishoda nabave korisnik može podnijeti prigovor u skladu s člankom 37a Uvjeta korištenja. O prigovoru odlučuje ovlaštena osoba Zaklade.
 
 Utvrđivanje redoslijeda primjena je pravila objavljenih ovim pravilnikom i kalkulacijom i ne predstavlja odlučivanje koje proizvodi pravne posljedice po status korisnika.
 

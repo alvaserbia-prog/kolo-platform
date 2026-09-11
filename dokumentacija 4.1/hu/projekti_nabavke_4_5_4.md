@@ -166,6 +166,8 @@ Az Alapítvány a kiválasztott jószágra legalább három ajánlatot gyűjt be
 
 Valamennyi begyűjtött ajánlat — összeggel és az ajánlattevő megnevezésével — a kalkulációval együtt közzétételre kerül, ideértve a ki nem választott ajánlatokat is.
 
+Ajánlat kizárólag bejegyzett jogi személytől, illetve egyéni vállalkozótól fogadható el.
+
 ### 16. cikk
 
 *Összeférhetetlenség*
@@ -338,6 +340,30 @@ A Felhasználási feltételek 22. cikkének rendelkezése, amely szerint az Alap
 
 A felhasználó a szállítóval szerződéses viszonyba nem lép. A rész átvétele nem vásárlás, és a POEN tekintetében nem hoz létre szerződéses viszonyt a felhasználó és az Alapítvány között.
 
+A beszerzés bejegyzett jogi személynél, illetve egyéni vállalkozónál kerül végrehajtásra, olyan számla alapján, amelyet az Alapítvány megőriz. Az árban felszámított hozzáadottérték-adót az Alapítvány a beszerzés költségeként viseli, és azt előzetesen felszámított adóként nem vonja le.
+
+A szállítóval szemben az Alapítvány a jószág hibájából eredő jogokat a program felhasználóinak javára köti ki és érvényesíti. Ha a felhasználó hibát jelent be, az Alapítvány késedelem nélkül fellép a szállítóval szemben, és az eredményről tájékoztatja a felhasználót. A szállító által kicserélt jószágot az Alapítvány ugyanannak a felhasználónak engedi át, a POEN-bejegyzés újabb érvénytelenítése nélkül.
+
+Az e cikk (5) bekezdése szerinti kötelezettség az Alapítványnak a saját programja iránti kötelezettsége. Azzal nem jön létre szerződéses viszony sem a felhasználó és a szállító, sem a felhasználó és az Alapítvány között, és a felhasználó e jogcímen nem szerez követelést az Alapítvánnyal szemben.
+
+### 30a. cikk
+
+*Eljárás bejelentett hiba esetén*
+
+A felhasználó bejelentheti, hogy a részt nem vette át, jóllehet az átvettként lett megjelölve, vagy hogy az átvett jószág nem volt alkalmas arra a célra, amelyre beszerzésre került.
+
+A bejelentés az Alapítványhoz intézett kifogásként, a felhasználó profiljáról, az átvételről szóló értesítéstől számított hét napon belül nyújtható be. A kifogás szerinti eljárásra a Felhasználási feltételek 37a. cikke alkalmazandó.
+
+A kifogás beérkezését követően az Alapítvány e szabályzat 30. cikkével összhangban késedelem nélkül fellép a szállítóval szemben, és az eredményről indokolással tájékoztatja a felhasználót.
+
+Ha a szállító a jószágot kicseréli, a POEN-bejegyzés nem kerül helyesbítésre — a részvétel felhasználásra került.
+
+Ha a szállító a jószágot nem cseréli ki és a hibát sem szünteti meg, az Alapítvány helyesbíti a nyilvántartást: az e szabályzat 27. cikke szerint végrehajtott POEN-bejegyzés-érvénytelenítés a felhasználó javára szóló ellenbejegyzéssel megszüntetésre kerül, az érvénytelenített POEN számában, a KOLO rendszerről szóló szabályzat 14a. cikkével összhangban.
+
+A nyilvántartás helyesbítése sem ellenszolgáltatás visszatérítése, sem semmiféle kifizetés. A helyesbítés jogcímén a felhasználó az érvénytelenített bejegyzésen kívül semmilyen értéket nem kap; az Alapítvány e jogcímen semmit nem fizet ki és semmit nem kap, amivel e szabályzat 3a. és 19. cikkének rendelkezései érintetlenek maradnak.
+
+Az átvételről szóló értesítés tájékoztatást tartalmaz az e cikk szerinti jogról és a határidőről.
+
 ## IX — Átláthatóság
 
 ### 31. cikk
@@ -366,7 +392,7 @@ A javaslat a felhasználói minőség megszűnésével is törlésre kerül.
 
 *Kifogás joga*
 
-A megállapított sorrenddel és a beszerzés eredményével szemben a felhasználó a KOLO rendszerről szóló szabályzat 30. cikkével összhangban kifogást nyújthat be. A kifogásról az Alapítvány felhatalmazott személye dönt.
+A megállapított sorrenddel és a beszerzés eredményével szemben a felhasználó a Felhasználási feltételek 37a. cikkével összhangban kifogást nyújthat be. A kifogásról az Alapítvány felhatalmazott személye dönt.
 
 A sorrend megállapítása az e szabályzatban és a kalkulációban közzétett szabályok alkalmazása, és nem minősül olyan döntéshozatalnak, amely a felhasználó státuszára nézve joghatást vált ki.
 

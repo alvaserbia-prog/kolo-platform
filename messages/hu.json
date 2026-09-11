@@ -352,16 +352,6 @@
     "putanja_na_redu": "Teljesítve — hamarosan nyilvántartásba kerül",
     "putanja_zakljucan": "Még nem nyílt meg",
     "putanja_pravila": "A számlálóba a megerősítési láncodon kívüli emberekkel végzett, legalább 1.000 POEN összegű átírások számítanak. Minden partner egyszer számít, függetlenül az átírások számától. A még senki által meg nem erősített taggal végzett átírás feljegyzésre kerül, de csak az ő megerősítése után számít. Jelenleg a számlálóban: {sagovornika}.",
-    "prijavi_dugme": "Probléma bejelentése a cseréről",
-    "prijavi_naslov": "Nem teljesült csere bejelentése",
-    "prijavi_opis": "Ha átírtad a POEN-t, és nem kaptad meg a megbeszélteket, jelezd az Alapítványnak. Az átírás nem áll vissza magától — az Alapítvány dönt; ha érvényteleníti, a teljes összeg visszakerül hozzád, akkor is, ha a másik fél nyilvántartása ezzel mínuszba megy.",
-    "prijavi_placeholder": "Miben állapodtatok meg, és mi történt.",
-    "prijavi_posalji": "Bejelentés küldése",
-    "prijavi_odustani": "Mégse",
-    "prijavi_ceka": "A bejelentés elküldve — az Alapítvány döntésére vár.",
-    "prijavi_ponistena": "Az átírást a bejelentés alapján érvénytelenítették.",
-    "prijavi_odbacena": "A bejelentést megvizsgálták — az átírás marad.",
-    "prijavi_greska": "A bejelentést nem sikerült elküldeni.",
     "ceka_roditelja": "A fiók arra vár, hogy egy szülő átvegye. Addig a POEN átírható a bejegyzésedbe; a másoknak való átírás akkor nyílik meg, amikor a szülő átveszi a fiókot.",
     "nadoknada_naslov_dete": "Tartozol",
     "nadoknada_opis_dete": "Ez akkor íródott le, amikor egy barátság véget ért. Az első POEN, ami érkezik, feltölti. Minden más a szokásos módon működik.",
@@ -685,7 +675,20 @@
     "status_dete_ceka": "szülői jóváhagyásra vár",
     "status_dete_radi": "a fiók működik",
     "prigovor_tip_podaci": "Rólam szóló pontatlan adat helyesbítése",
-    "prigovor_tip_potvrda": "Inaktivitás miatt érvénytelenített megerősítés"
+    "prigovor_tip_potvrda": "Inaktivitás miatt érvénytelenített megerősítés",
+    "prigovor_tip_razmena": "POEN átírása csere miatt",
+    "prigovor_tip_nabavka": "Rész a kollektív beszerzésből",
+    "prigovor_predmet_izaberi": "Válaszd ki, mire vonatkozik a kifogás",
+    "prigovor_predmet_prazno": "Nincs egyetlen tárgy sem határidőn belül ehhez a kifogásfajtához.",
+    "prigovor_predmet_poslao": "{datum} · {iznos} POEN átírva — {strana}",
+    "prigovor_predmet_ponisten": "{datum} · {iznos} POEN tőle: {strana} — érvénytelenítve",
+    "prigovor_predmet_deo": "{datum} · {dobro}",
+    "izjasni_naslov": "A nyilatkozatodat kérjük",
+    "izjasni_opis": "{pseudonim} kifogást nyújtott be, hogy a csere, amely miatt {datum} napján {iznos} POEN-t írt át neked, nem teljesült. Nyilatkozz, mielőtt az Alapítvány dönt.",
+    "izjasni_rok": "A nyilatkozat határideje: {datum}",
+    "izjasni_placeholder": "Mi történt emlékeid szerint?",
+    "izjasni_dugme": "Nyilatkozat küldése",
+    "izjasni_poslato": "A nyilatkozat elküldve."
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -944,7 +947,7 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.5.3"
+      "ver": "4.5.4"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
@@ -972,7 +975,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.5.2",
+      "ver": "4.5.4",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -992,7 +995,7 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek — KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.5.3-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.5.4-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
     "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.2-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
@@ -1006,7 +1009,7 @@
     "meta_whitepaper_title": "Whitepaper — KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.6-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.5.2-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.5.4-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -2556,7 +2559,11 @@
     "tab_nabavke": "Nabavke",
     "ped_izjava_label": "A végrehajtó nyilatkozata",
     "prigovori_tip_podaci": "Adathelyesbítés",
-    "prigovori_tip_potvrda": "Érvénytelenített megerősítés"
+    "prigovori_tip_potvrda": "Érvénytelenített megerősítés",
+    "prigovori_tip_razmena": "Átírás csere miatt",
+    "prigovori_tip_nabavka": "Rész a beszerzésből",
+    "prigovori_ispravi": "Nyilvántartás helyesbítése",
+    "prigovori_predmet": "Tárgy"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",
@@ -2696,7 +2703,7 @@
     "nabavka_poziv_naslov": "Bekerültél a beszerzésbe",
     "nabavka_poziv_tekst": "„{dobro}” beszerzés — a részed {poen} POEN-be kerül. Erősítsd meg az átvételi nap kiválasztásával.",
     "nabavka_preuzeto_naslov": "A rész átvéve",
-    "nabavka_preuzeto_tekst": "Átvetted a részedet a „{dobro}” beszerzésből. {poen} POEN érvénytelenítésre került.",
+    "nabavka_preuzeto_tekst": "Átvetted a részedet a „{dobro}” beszerzésből. {poen} POEN érvénytelenítésre került. Ha a részt nem vetted át, vagy hibás, {dana} napod van kifogást benyújtani a profilodról.",
     "zahtev_potvrda_spoljni_naslov": "Új kérés vár a válaszodra",
     "zahtev_potvrda_spoljni_tekst": "Valaki megnevezett téged a láncából. Nyisd meg a KOLO-t, hogy lásd a kérést.",
     "program_pristanak_povucen_naslov": "Hozzájárulás visszavonva",
@@ -2722,7 +2729,11 @@
     "prepis_odobren_naslov": "A szülő jóváhagyta az átírást",
     "prepis_odobren_tekst": "A(z) {iznos} POEN átírása {pseudonim} tagnak megtörtént.",
     "prepis_odbijen_naslov": "Az átírás nem került végrehajtásra",
-    "prepis_odbijen_tekst": "A(z) {iznos} POEN átírása {pseudonim} tagnak nem került végrehajtásra."
+    "prepis_odbijen_tekst": "A(z) {iznos} POEN átírása {pseudonim} tagnak nem került végrehajtásra.",
+    "prijava_razmene_izjasni_naslov": "A nyilatkozatodat kérjük",
+    "prijava_razmene_izjasni_tekst": "Kifogást nyújtottak be, hogy a csere, amely miatt POEN-t írtak át neked, nem teljesült. {dana} napod van nyilatkozni, mielőtt az Alapítvány dönt. A nyilatkozat a profilodon adható meg.",
+    "nabavka_ispravka_naslov": "A nyilvántartás helyesbítésre került",
+    "nabavka_ispravka_tekst": "A „{dobro}” beszerzésből származó részre vonatkozó kifogásod nyomán az érvénytelenítés megszüntetésre került, és {poen} POEN visszakerült a bejegyzésedbe. Indokolás: {obrazlozenje}"
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",
@@ -2742,7 +2753,8 @@
     "prijateljstvo_punoletstvo_zbirno": "{broj} barátságból származó POEN leírása (nagykorúság)",
     "prevod_u_maloletni_otpis": "A csatornákon bejegyzett POEN visszavonása (a fiók gyerekfiókká vált)",
     "prevod_u_maloletni_potvrda": "Megszűnt megerősítésből származó POEN visszavonása ({pseudonim} gyerekfiókká vált)",
-    "nabavka": "Kollektív beszerzés — {dobro}"
+    "nabavka": "Kollektív beszerzés — {dobro}",
+    "nabavka_ispravka": "Nyilvántartás helyesbítése, kollektív beszerzés {dobro}"
   },
   "mejl": {
     "pozdrav": "Üdvözlünk",
@@ -3495,6 +3507,7 @@
     "ponude_opis": "Mind közzétételre kerül, a ki nem választottak is.",
     "preuzeli": "Átvették",
     "preuzeli_napomena": "Az álnév és a sorrendbeli hely látszik. A bejegyzésben szereplő POEN-szám nem kerül közzétételre.",
-    "broj_prijava": "Jelentkezők: {broj}"
+    "broj_prijava": "Jelentkezők: {broj}",
+    "ispravka_pouka": "Ha a részt nem vetted át, vagy hibás, 7 napod van kifogást benyújtani a profilodról."
   }
 }

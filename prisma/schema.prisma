@@ -90,6 +90,10 @@ enum TransactionType {
   // PONISTENJE_PREPISA: tamo se POEN seli između dva korisnička zapisa, ovde
   // nestaje iz sistema zato što je iskorišćen.
   OTPIS_NABAVKA
+  /// Ispravka poništenja po iskorišćenju kad uslov iskorišćenja nije bio ispunjen
+  /// (Pravilnik čl. 14a, nabavke čl. 30a). Protokol → korisnik; NIJE upis kroz
+  /// kanal iz čl. 15 nego otklanjanje poništenja izvršenog bez osnova.
+  ISPRAVKA_NABAVKA
 }
 
 enum TipKorisnika {
@@ -946,8 +950,20 @@ model PrijavaRazmene {
   protivId    String
   protiv      User   @relation("ProtivRazmene", fields: [protivId], references: [id])
 
+  /// Prigovor sa profila kroz koji je slučaj otvoren (Uslovi čl. 37a). Ulazna
+  /// tačka je od 4.5.4 isključivo profil — dugme uz prepis u istoriji je uklonjeno.
+  prigovorId String?          @unique
+  prigovor   PrigovorNaOdluku? @relation(fields: [prigovorId], references: [id])
+
   opis   String
   status PrijavaRazmeneStatus @default(OTVORENA)
+
+  /// 🔴 Rok u kome se druga strana izjašnjava PRE odluke (Pravilnik čl. 16 st. 10).
+  /// Odluka se ne donosi dok rok ne istekne ili dok se druga strana ne izjasni —
+  /// to sprovodi `ponistiPrepis`, pa je norma svojstvo redosleda, ne obećanje.
+  izjasnjenjeDo   DateTime?
+  odgovorProtiv   String?
+  odgovorProtivAt DateTime?
 
   /// Obrazloženje odluke Fondacije — obavezno u oba ishoda, ide prijaviocu.
   odluka  String?
@@ -1752,13 +1768,19 @@ model PrigovorNaOdluku {
   userId      String
   user        User           @relation(fields: [userId], references: [id])
   opis        String
-  tipOdluke   String // "VERIFIKACIJA" | "SUSPENZIJA" | "PROGRAM" | "OSTALO"
+  tipOdluke   String // vidi VRSTE_PRIGOVORA u src/lib/prigovor-pravila.ts
+  /// Predmet na koji se prigovor odnosi (Uslovi čl. 37a st. 3): id prepisa za
+  /// RAZMENA, id prijave na nabavku za NABAVKA. Bez njega se o tim vrstama ne
+  /// može odlučiti — odluka se vodi o TAČNO JEDNOM zapisu.
+  predmetId   String?
   status      PrigovorStatus @default(PENDING)
   odgovor     String?
   odgovorioId String?
   odgovorioAt DateTime?
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
+
+  prijavaRazmene PrijavaRazmene?
 
   @@index([status, createdAt(sort: Desc)])
   @@index([userId])
@@ -2304,6 +2326,12 @@ model NabavkaPrijava {
   /// Rezervisan POEN dok traje potvrda. Nula kad nema rezervacije — Novčanik red
   /// prikazuje samo kad postoji.
   rezervisano Int @default(0)
+
+  /// Ispravka poništenja po prijavljenom nedostatku (nabavke čl. 30a st. 5).
+  /// Postoji da se ista prijava ne bi ispravila dvaput; iznos je snimak, jer
+  /// `poenPoDelu` nabavke može biti drugačiji u nekoj kasnijoj nabavci.
+  ispravljenoAt   DateTime?
+  ispravljenoPoen Int?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

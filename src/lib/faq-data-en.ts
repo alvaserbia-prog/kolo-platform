@@ -113,7 +113,7 @@ What confirmed means, and what it does not. A full member is someone whose reali
 
 What works in your favour. The system remembers permanently. Every update of the record stays logged under a pseudonym and visible to full members — bad conduct is not erased from an account.
 
-If the exchange falls through. Report the case to the Foundation — the button sits next to the re-registration itself in your POEN history. A re-registration is not irreversible: if the Foundation annuls it upon your report, the whole amount comes back to you, even when that pushes the other side's ledger below zero. The decision rests with the Foundation, so a report is not an automatic refund.
+If the exchange falls through. Lodge a complaint with the Foundation from your own profile, within 30 days of the re-registration, and select that particular re-registration. The other side is given seven days to make a statement, then the Foundation decides with a statement of reasons sent to both sides. If it annuls the re-registration, the whole amount comes back to you, even when that pushes the other side's ledger below zero. The decision rests with the Foundation, so a complaint is not an automatic refund.
 
 For quality, delivery and performance of the agreement you and the other side are answerable under the general rules of the law of obligations; the Foundation and the Protocol are not a party to that relationship. In the initial phase you may also ask for voluntary mediation by the Foundation — it is not binding, but it is often enough.
 
@@ -727,7 +727,7 @@ The guarantee, the deadline and the terms you agree directly with the other side
 
 The system has no automatic reversal of an exchange. If you agree that something is to be returned, it is carried out as a new, voluntary update of the POEN record in the opposite direction — as a new exchange back.
 
-If something goes wrong, first try to resolve it directly with the other side. In the initial phase you can also ask for voluntary, non-binding mediation by the Foundation; if no agreement is reached, judicial protection under the general rules remains. Next to the re-registration itself in your POEN history there is also a button with which you report the case to the Foundation — if it annuls the re-registration upon your report, the POEN comes back to you in full.`,
+If something goes wrong, first try to resolve it directly with the other side. In the initial phase you can also ask for voluntary, non-binding mediation by the Foundation; if no agreement is reached, judicial protection under the general rules remains. In addition, from your own profile you may lodge a complaint with the Foundation within 30 days of the re-registration; that is not mediation between the two of you but a decision about the record, and if the Foundation annuls the re-registration upon it, the POEN comes back to you in full.`,
       },
       {
         id: 23,

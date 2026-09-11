@@ -4,6 +4,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { jeVrstaPrigovora, smePodneti } from "@/lib/prigovor-pravila";
+import { smePrijaviti } from "@/lib/razmena-prijava";
+import { otvoriPrijavuRazmene } from "@/lib/protokol/prijava-razmene";
 
 /**
  * POST /api/prigovor — korisnik podnosi prigovor na odluku (čl. 38 ZZPL)
@@ -18,7 +21,7 @@ export async function GET() {
     where: { userId: session.user.id },
     orderBy: { createdAt: "desc" },
     select: {
-      id: true, tipOdluke: true, opis: true, status: true,
+      id: true, tipOdluke: true, predmetId: true, opis: true, status: true,
       odgovor: true, odgovorioAt: true, createdAt: true,
     },
   });
@@ -30,40 +33,119 @@ export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
 
-  const body = await req.json();
-  const { opis, tipOdluke } = body;
+  const body = await req.json().catch(() => ({}));
+  const opis: string = typeof body.opis === "string" ? body.opis : "";
+  const tipOdluke: unknown = body.tipOdluke;
+  const predmetId: string | null =
+    typeof body.predmetId === "string" && body.predmetId ? body.predmetId : null;
 
-  if (!opis || opis.trim().length < 10) {
-    return await greska("Opis prigovora mora imati najmanje 10 znakova.", 400);
+  if (!jeVrstaPrigovora(tipOdluke)) return await greska("Nepoznat tip odluke.", 400);
+
+  // Predmet i rok se razrešavaju PRE opšte provere: „pocetakRoka" zavisi od toga
+  // šta je predmet, a za dve vrste zavisi i to sme li se prigovor uopšte podneti.
+  let pocetakRoka: Date | null = null;
+  /** Popunjava se samo za RAZMENA kad prigovor podnosi pošiljalac — tada se uz
+   *  prigovor otvara i slučaj o kome Fondacija odlučuje (Pravilnik čl. 16 st. 10). */
+  let razmena: { transakcijaId: string; protivId: string } | null = null;
+
+  if (tipOdluke === "RAZMENA") {
+    if (!predmetId) return await greska("Izaberi prepis na koji se prigovor odnosi.", 400);
+    const tx = await prisma.transaction.findUnique({
+      where: { id: predmetId },
+      select: {
+        id: true,
+        type: true,
+        createdAt: true,
+        fromWallet: { select: { userId: true } },
+        toWallet: { select: { userId: true } },
+        prijavaRazmene: { select: { id: true, status: true, resenAt: true } },
+      },
+    });
+    if (!tx) return await greska("Prepis ne postoji.", 404);
+
+    const jaSamPosiljalac = tx.fromWallet?.userId === session.user.id;
+    const jaSamPrimalac = tx.toWallet?.userId === session.user.id;
+
+    if (jaSamPosiljalac) {
+      const [otvorenihPrijava, ja] = await Promise.all([
+        prisma.prijavaRazmene.count({
+          where: { prijaviocId: session.user.id, status: "OTVORENA" },
+        }),
+        prisma.user.findUnique({
+          where: { id: session.user.id },
+          select: { maloletan: true },
+        }),
+      ]);
+      const provera = smePrijaviti({
+        tipTransakcije: tx.type,
+        posiljaocId: tx.fromWallet?.userId ?? null,
+        prijaviocId: session.user.id,
+        vecPrijavljena: tx.prijavaRazmene !== null,
+        otvorenihPrijava,
+        prijaviocMaloletan: ja?.maloletan ?? false,
+        opis,
+      });
+      if (!provera.ok) return await greska(provera.razlog, 400);
+      if (!tx.toWallet?.userId) return await greska("Druga strana nema zapis u Protokolu.", 400);
+      razmena = { transakcijaId: tx.id, protivId: tx.toWallet.userId };
+      pocetakRoka = tx.createdAt;
+    } else if (jaSamPrimalac && tx.prijavaRazmene?.status === "PONISTENA") {
+      // Prigovor na sopstvenu odluku Fondacije — zapis primaoca je poništenjem
+      // umanjen, moguće i u minus. Ovde se ne otvara nov slučaj: odlučuje se o
+      // odluci koja već postoji. Rok teče od PONIŠTENJA, ne od prepisa (Uslovi
+      // čl. 37a st. 4) — prepis je mogao biti mesecima ranije.
+      pocetakRoka = tx.prijavaRazmene.resenAt ?? tx.createdAt;
+    } else {
+      return await greska(
+        "Prigovor na prepis podnosi onaj ko je POEN prepisao, odnosno onaj kome je prepis poništen.",
+        400,
+      );
+    }
   }
 
-  // OGLAS — prigovor na uklonjen oglas ili poruku (Uslovi čl. 25 st. 2, čl. 30).
-  // „PODACI" je zahtev za ispravku netačnog podatka (čl. 29 ZZPL-a) — pravo koje
-  // Politika navodi među pravima korisnika, a do seta 4.5.1 nije imalo nijedan
-  // put u sistemu. Ide kroz zatečeni prigovor, bez novog modela i novog taba.
-  // „POTVRDA" je prigovor na poništenje potvrde stvarnosti zbog neaktivnosti u
-  // postupku iz čl. 6 Pravilnika o učešću dece. Postoji zato što je to jedina
-  // automatska posledica u sistemu koja dira status: nastupa bez ičije odluke, a
-  // čl. 38 ZZPL-a za takvu obradu traži pravo na ljudski uvid.
-  const tipovi = [
-    "VERIFIKACIJA",
-    "SUSPENZIJA",
-    "PROGRAM",
-    "OGLAS",
-    "PODACI",
-    "POTVRDA",
-    "OSTALO",
-  ];
-  if (!tipovi.includes(tipOdluke)) {
-    return await greska("Nepoznat tip odluke.", 400);
+  if (tipOdluke === "NABAVKA") {
+    if (!predmetId) return await greska("Izaberi deo na koji se prigovor odnosi.", 400);
+    const p = await prisma.nabavkaPrijava.findUnique({
+      where: { id: predmetId },
+      select: { id: true, userId: true, status: true, preuzetoAt: true, ispravljenoAt: true },
+    });
+    if (!p || p.userId !== session.user.id) return await greska("Deo ne postoji.", 404);
+    if (p.status !== "PREUZEO" || !p.preuzetoAt)
+      return await greska("Prigovor se podnosi po preuzimanju dela.", 400);
+    if (p.ispravljenoAt) return await greska("Evidencija za ovaj deo je već ispravljena.", 400);
+    pocetakRoka = p.preuzetoAt;
   }
 
-  // Spreči spam: max 3 otvorena prigovora
-  const otvoreni = await prisma.prigovorNaOdluku.count({
-    where: { userId: session.user.id, status: { in: ["PENDING", "U_OBRADI"] } },
+  const otvorenihIsteVrste = await prisma.prigovorNaOdluku.count({
+    where: {
+      userId: session.user.id,
+      tipOdluke,
+      status: { in: ["PENDING", "U_OBRADI"] },
+    },
   });
-  if (otvoreni >= 3) {
-    return await greska("Imate previše otvorenih prigovora. Sačekajte odgovor na prethodne.", 429);
+
+  const provera = smePodneti({
+    vrsta: tipOdluke,
+    opis,
+    predmetId,
+    otvorenihIsteVrste,
+    pocetakRoka,
+    sada: new Date(),
+  });
+  if (!provera.ok) return await greska(provera.razlog, 400);
+
+  // Jedan otvoren prigovor po predmetu — druga žalba nad istim prepisom ili
+  // delom nije nov podatak nego ponovljen pritisak (ista brana kao @@unique na
+  // PrijavaRazmene.transakcijaId).
+  if (predmetId) {
+    const vec = await prisma.prigovorNaOdluku.count({
+      where: {
+        userId: session.user.id,
+        predmetId,
+        status: { in: ["PENDING", "U_OBRADI"] },
+      },
+    });
+    if (vec > 0) return await greska("O ovom predmetu već imaš otvoren prigovor.", 400);
   }
 
   const prigovor = await prisma.prigovorNaOdluku.create({
@@ -71,13 +153,26 @@ export async function POST(req: NextRequest) {
       userId: session.user.id,
       opis: opis.trim(),
       tipOdluke,
+      predmetId,
     },
   });
+
+  if (razmena) {
+    await otvoriPrijavuRazmene({
+      transakcijaId: razmena.transakcijaId,
+      prijaviocId: session.user.id,
+      prijaviocPseudonim: session.user.pseudonim,
+      protivId: razmena.protivId,
+      opis: opis.trim(),
+      prigovorId: prigovor.id,
+    });
+  }
 
   void posaljiAdminAlert(
     "Novi prigovor na odluku",
     `Tip: ${tipOdluke}\nKorisnik: ${session.user.pseudonim}`
   );
+
 
   return NextResponse.json({ ok: true, id: prigovor.id }, { status: 201 });
 }
