@@ -695,7 +695,8 @@
     "izjasni_rok": "Rok za očitovanje: {datum}",
     "izjasni_placeholder": "Što se po tvom sjećanju dogodilo?",
     "izjasni_dugme": "Pošalji očitovanje",
-    "izjasni_poslato": "Očitovanje je poslano."
+    "izjasni_poslato": "Očitovanje je poslano.",
+    "suzen_opis": "Ovaj pregled je sužen. Vidiš pseudonim i oglase i možeš stupiti u kontakt. Stanje POEN-a, ZRNO, mrežu potvrda, povijest i telefon vidi član čiju je stvarnost potvrdio netko iz mreže."
   },
   "zrno": {
     "naslov": "ZRNO",

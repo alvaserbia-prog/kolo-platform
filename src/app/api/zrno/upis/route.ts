@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { smeProsireno } from "@/lib/dozvole";
 import { prisma } from "@/lib/prisma";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { MINIMUM_POEN_ZA_UPIS_ZRNA } from "@/lib/protokol/zrno";
@@ -11,7 +12,12 @@ import { beogradskiDan } from "@/lib/protokol/obracunski-dan";
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
-  if (!session.user.verified) return await greska("Mora biti verifikovan.", 403);
+  // R-01, odluka B: upis ZRNA je otvoren i članu čiji je identitet utvrđen na
+  // donatorskom putu. 🔴 Aktiviranje (`/zakljucaj`), otpis, delegiranje i glas
+  // OSTAJU zatvoreni — ZRNO se upisuje iz evidentiranog doprinosa, a aktivira
+  // tek uz potvrđenu stvarnost. Otpis je jedino mesto gde pozicija donosi
+  // prinos, pa bi otvoren dao prinos na uplaćen novac.
+  if (!smeProsireno(session.user)) return await greska("Mora biti potvrđen član ili imati utvrđen identitet.", 403);
 
   const trziste = await prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } });
   if (!trziste?.isActive) return await greska("ZRNO tržište nije aktivno.", 400);

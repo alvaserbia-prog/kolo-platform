@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { smeGlasati } from "@/lib/dozvole";
 import { prisma } from "@/lib/prisma";
 import { granicePeriodaGlasanja, fazaPredloga, zatvoriIstekleIObjaviIshod, postojiSkoroOdbijen } from "@/lib/protokol/glasanje";
 import { dohvatiFazuStatus } from "@/lib/protokol/faza-sistema";
@@ -51,10 +52,11 @@ export async function POST(req: NextRequest) {
   if (faza.faza !== "FAZA_2")
     return await greska("Glasanje Gornjeg Kola je operativno tek u Fazi 2.", 403);
 
-  // Samo nosioci sa aktivnim ZRNOM mogu predlagati (čl. 10)
+  // Samo nosioci sa AKTIVIRANIM ZRNOM i potvrđenom stvarnošću (čl. 10; R-01,
+  // odluka B). Član koji je ZRNO upisao iz donacije ga drži, ali ne odlučuje.
   const stanje = await prisma.zrnoStanje.findUnique({ where: { userId: session.user.id } });
-  if (!stanje || stanje.aktivno <= 0)
-    return await greska("Potrebno je imati aktivnih ZRNA za kreiranje predloga.", 403);
+  if (!smeGlasati(session.user, stanje?.aktivno ?? 0))
+    return await greska("Potrebno je aktivirano ZRNO i potvrđena stvarnost.", 403);
 
   const body = await req.json();
   const title = (body.title ?? "").trim();

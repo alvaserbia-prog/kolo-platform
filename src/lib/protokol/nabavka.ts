@@ -102,11 +102,11 @@ export async function pretraziNazive(upit: string, limit = 12) {
 export async function upisiPredlog(userId: string, naziv: string) {
   const korisnik = await prisma.user.findUnique({
     where: { id: userId },
-    select: { maloletan: true, deaktiviranAt: true, status: true },
+    select: { maloletan: true, deaktiviranAt: true, status: true, verified: true, indeksStvarnosti: true },
   });
   if (!korisnik) throw new NabavkaGreska("Korisnik nije pronađen.", 404);
   if (!smeUcestvovati(korisnik)) {
-    throw new NabavkaGreska("Predlog za nabavku podnose punoletni korisnici sa aktivnim nalogom.", 403);
+    throw new NabavkaGreska("Predlog za nabavku podnose punoletni korisnici sa aktivnim nalogom i potvrđenom stvarnošću (čl. 4).", 403);
   }
 
   const zapis = await razresiNaziv(naziv, userId);
@@ -412,14 +412,14 @@ export async function prijaviSe(userId: string, nabavkaId: string) {
   const [korisnik, n] = await Promise.all([
     prisma.user.findUnique({
       where: { id: userId },
-      select: { maloletan: true, deaktiviranAt: true, status: true, wallet: { select: { balance: true } } },
+      select: { maloletan: true, deaktiviranAt: true, status: true, verified: true, indeksStvarnosti: true, wallet: { select: { balance: true } } },
     }),
     prisma.nabavka.findUnique({ where: { id: nabavkaId }, select: { status: true, prijaveDo: true } }),
   ]);
   if (!korisnik) throw new NabavkaGreska("Korisnik nije pronađen.", 404);
   if (!n) throw new NabavkaGreska("Nabavka nije pronađena.", 404);
   if (!smeUcestvovati(korisnik)) {
-    throw new NabavkaGreska("U nabavci učestvuju punoletni korisnici sa aktivnim nalogom (čl. 4).", 403);
+    throw new NabavkaGreska("U nabavci učestvuju punoletni korisnici sa aktivnim nalogom i potvrđenom stvarnošću (čl. 4).", 403);
   }
   // Čl. 21 st. 1 — prag se proverava pri prijavi i PONOVO na istek roka, kad se
   // utvrđuje red; ko tada ne ispunjava prag, ne ulazi u red.

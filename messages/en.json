@@ -695,7 +695,8 @@
     "izjasni_rok": "Deadline for the statement: {datum}",
     "izjasni_placeholder": "What happened, as you recall it?",
     "izjasni_dugme": "Send statement",
-    "izjasni_poslato": "The statement has been sent."
+    "izjasni_poslato": "The statement has been sent.",
+    "suzen_opis": "This view is narrowed. You see the pseudonym and the ads, and you can make contact. The POEN balance, ZRNO, the network of confirmations, the history and the phone number are seen by a member whose reality someone in the network has confirmed."
   },
   "zrno": {
     "naslov": "ZRNO",

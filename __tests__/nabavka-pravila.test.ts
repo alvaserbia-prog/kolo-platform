@@ -309,7 +309,13 @@ describe("istek predloga (čl. 32)", () => {
 });
 
 describe("ko učestvuje (čl. 4)", () => {
-  const osnovni = { maloletan: false, deaktiviranAt: null, status: "ACTIVE" };
+  const osnovni = {
+    maloletan: false,
+    deaktiviranAt: null,
+    status: "ACTIVE",
+    verified: true,
+    indeksStvarnosti: 10,
+  };
 
   it("punoletan aktivan nalog učestvuje", () => {
     expect(smeUcestvovati(osnovni)).toBe(true);
@@ -324,6 +330,16 @@ describe("ko učestvuje (čl. 4)", () => {
   it("ugašen i suspendovan nalog ne učestvuju", () => {
     expect(smeUcestvovati({ ...osnovni, deaktiviranAt: new Date() })).toBe(false);
     expect(smeUcestvovati({ ...osnovni, status: "SUSPENDED" })).toBe(false);
+  });
+
+  // 🔴 Mera P-1 uz R-01: prag od 20.000 POEN-a bio je dostižan PREPISOM na svež
+  // nepotvrđen nalog — novac → POEN → roba, bez ijedne provere identiteta.
+  it("nepotvrđen nalog ne učestvuje, ma koliko POEN-a imao", () => {
+    expect(smeUcestvovati({ ...osnovni, verified: false, indeksStvarnosti: 0 })).toBe(false);
+  });
+
+  it("potvrđen nalog kome je indeks pao ispod praga ne učestvuje", () => {
+    expect(smeUcestvovati({ ...osnovni, indeksStvarnosti: 0 })).toBe(false);
   });
 });
 

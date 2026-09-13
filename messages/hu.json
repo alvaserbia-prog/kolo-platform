@@ -688,7 +688,8 @@
     "izjasni_rok": "A nyilatkozat határideje: {datum}",
     "izjasni_placeholder": "Mi történt emlékeid szerint?",
     "izjasni_dugme": "Nyilatkozat küldése",
-    "izjasni_poslato": "A nyilatkozat elküldve."
+    "izjasni_poslato": "A nyilatkozat elküldve.",
+    "suzen_opis": "Ez a nézet szűkített. Látod az álnevet és a hirdetéseket, és fel tudod venni a kapcsolatot. A POEN-egyenleget, a ZRNO-t, a megerősítések hálóját, az előzményeket és a telefonszámot az a tag látja, akinek a valóságát valaki a hálóból megerősítette."
   },
   "zrno": {
     "naslov": "ZRNO",

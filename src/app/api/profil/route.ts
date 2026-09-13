@@ -14,6 +14,7 @@ import {
 } from "@/lib/protokol/dokaz-stvarnosti";
 import { preracunajZoneUBazi } from "@/lib/protokol/zona-sinhronizacija";
 import { gdePseudonim, poljaPseudonima } from "@/lib/pseudonim";
+import { smeDaSalje } from "@/lib/doprinos-pravila";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -264,12 +265,25 @@ export async function DELETE(req: NextRequest) {
   const svezWallet = await prisma.wallet.findUnique({ where: { userId } });
   const balans = svezWallet?.balance ?? 0;
 
+  // 🔴 Prenos POEN-a drugom korisniku pri gašenju naloga je PREPIS, i zato ga sme
+  // samo redovan član (mera P-2 uz R-01). Član koji nije potvrđen — uključujući
+  // onoga čiji je identitet utvrđen na donatorskom putu — prepis ne inicira
+  // (čl. 28 st. 2); da mu je ovde dozvoljen, zabrana bi se zaobilazila u jednom
+  // potezu: ugasi nalog i sve prepiši kome hoćeš. Njemu POEN ide Protokolu.
+  const smeDaPrenese = smeDaSalje(user.tipKorisnika);
+  if (primalacPseudonim && !smeDaPrenese) {
+    return await greska(
+      "Prenos POEN-a drugom korisniku pri gašenju naloga može da izvrši samo potvrđen član (čl. 28 st. 2). Tvoj zapis se poništava uz protivzapis Protokola.",
+      403
+    );
+  }
+
   // Negativan zapis (nadoknada, čl. 20b Pravilnika o dokazu stvarnosti) se NAMERNO
   // ne dira: izuzetno od čl. 34 Pravilnika o KOLO sistemu ne poništava se prestankom
   // statusa i ne prelazi na Protokol. Kad bi se poništio, istupanje iz sistema bi
   // brisalo nadoknadu, a teret bi pao na sve ostale korisnike.
   if (balans > 0) {
-    if (primalacPseudonim) {
+    if (primalacPseudonim && smeDaPrenese) {
       // Prenesi zadatom korisniku
       const primalac = await prisma.user.findFirst({
         where: gdePseudonim(primalacPseudonim),

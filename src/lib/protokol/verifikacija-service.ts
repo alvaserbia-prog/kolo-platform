@@ -292,12 +292,27 @@ async function izvrsiJezgroVerifikacije(
   const noviIndeks = verifikovaniJePoseban
     ? Math.max(verifikovani.indeksStvarnosti, izracunatiIndeks)
     : izracunatiIndeks;
+  // 🔴 Član koji je ZRNO upisao PRE nego što ga je iko potvrdio (R-01, odluka B)
+  // ostaje NEVERIFIKOVAN dok traje to razdoblje, pa ga `zrno.ts` nije unapredio u
+  // nosioca ZRNA. Bez ove provere bi zauvek ostao REGULARNI — ispunio bi oba
+  // uslova za glas (aktivirano ZRNO i potvrđena stvarnost), a glas ne bi dobio,
+  // jer se unapređenje dešava SAMO u trenutku upisa. Status ga sustiže ovde.
+  const zrnoStanje = verifikovaniJePoseban
+    ? null
+    : await tx.zrnoStanje.findUnique({
+        where: { userId: verifikovani.id },
+        select: { slobodno: true, aktivno: true },
+      });
+  const drziZrno = (zrnoStanje?.slobodno ?? 0) + (zrnoStanje?.aktivno ?? 0) > 0;
+
   await tx.user.update({
     where: { id: verifikovani.id },
     data: {
       tipKorisnika: verifikovaniJePoseban
         ? verifikovani.tipKorisnika
-        : TipKorisnika.REGULARNI,
+        : drziZrno
+          ? TipKorisnika.NOSILAC_ZRNA
+          : TipKorisnika.REGULARNI,
       indeksStvarnosti: noviIndeks,
       verified: true,
       // Zadrži datum prve verifikacije pri dodatnim verifikacijama.

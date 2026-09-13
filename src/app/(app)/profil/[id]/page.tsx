@@ -52,6 +52,13 @@ interface ProfilData {
   roditelji: { id: string; pseudonim: string }[];
   deca: { id: string; pseudonim: string; avatar: string | null }[];
   zatvoren?: ZatvorenProfil;
+  /**
+   * Sužen pregled (R-01, mera M-9): profil gleda član čiji je identitet utvrđen
+   * na donatorskom putu, ali ga niko nije potvrdio. Vidi pseudonim, oglase i
+   * dugme za kontakt; stanje POEN-a, ZRNO i rang, indeks i mrežu potvrda,
+   * istoriju i telefon ne vidi. Odluku donosi server — ovo je samo prikaz.
+   */
+  suzen?: boolean;
   /** Maloletni korisnik (Modul Deca) — bez indeksa i bez lanca potvrda. */
   maloletan?: boolean;
   verified: boolean;
@@ -240,6 +247,13 @@ export default function JavniProfilPage() {
         <Pseudonim>{profil.pseudonim}</Pseudonim>
       </div>
 
+      {/* Sužen pregled — ekran mora da objasni zašto, inače izgleda kao kvar. */}
+      {profil.suzen && (
+        <div className="bg-kolo-green-100 rounded-2xl p-4 text-sm text-kolo-text">
+          {t("suzen_opis")}
+        </div>
+      )}
+
       {/* Gornji raspored: levo manja pseudonim kartica, desno statistike + indeks */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
         {/* LEVO — pseudonim kartica (ista visina kao lanac/transakcije) */}
@@ -395,17 +409,22 @@ export default function JavniProfilPage() {
 
           {/* Donji deo: indeks stvarnosti (status badge levo, indeks desno).
               Kod maloletnog korisnika ga nema — nema ni indeks ni lanac potvrda
-              (Modul Deca, čl. 15), pa bi kartica prikazivala nulu bez značenja. */}
-          {!profil.maloletan && (
+              (Modul Deca, čl. 15), pa bi kartica prikazivala nulu bez značenja.
+              U suženom pregledu se ne prikazuje (R-01). */}
+          {!profil.maloletan && !profil.suzen && (
             <IndeksSekcija korisnikId={profil.id} prikaziStablo={false} indeksKaoBadge ispuniVisinu />
           )}
         </div>
       </div>
 
-      {/* Red 50/50: levo lanac verifikacija, desno transakcije */}
+      {/* Red 50/50: levo lanac verifikacija, desno transakcije. Ceo red otpada u
+          suženom pregledu (R-01) — prazna kartica „nema transakcija" nije isto
+          što i „ne vidiš istoriju", a druga stvar je ono što se ovde dešava. */}
+      {!profil.suzen && (
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
-        {/* LEVO — lanac potvrda (mini stablo). Dete u njemu ne postoji. */}
-        {!profil.maloletan && (
+        {/* LEVO — lanac potvrda (mini stablo). Dete u njemu ne postoji; u suženom
+            pregledu se mreža potvrda ne otvara (R-01). */}
+        {!profil.maloletan && !profil.suzen && (
           <IndeksSekcija korisnikId={profil.id} prikaziIndeks={false} ispuniVisinu />
         )}
 
@@ -459,6 +478,7 @@ export default function JavniProfilPage() {
         </div>
         </div>
       </div>
+      )}
 
       {/* Oznake verifikatora — vidi samo UO Fondacije (admin). Nije javno. */}
       {profil.adminOznake &&
