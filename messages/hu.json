@@ -1894,7 +1894,9 @@
     "dete_ceka_odobrenje": "Amikor anya vagy apa jóváhagyja a fiókodat, írhatsz neki.",
     "dete_odrasli_zabranjeni": "Felnőtteknek csak akkor írhatsz, ha anya vagy apa bekapcsolja.",
     "dete_ceka_kratko": "jóváhagyásra vár",
-    "dete_odrasli_kratko": "szülői engedély kell"
+    "dete_odrasli_kratko": "szülői engedély kell",
+    "slika_format": "Az egyik kép formátuma nem támogatott. Az iPhone-fotót (HEIC) mentsd JPG-ként, majd add hozzá újra.",
+    "slike_ukupno_prevelike": "A képek együtt túl nagyok egyetlen küldéshez. Adj hozzá kevesebb képet, vagy cseréld őket kisebbekre."
   },
   "pocetna": {
     "dobrodoslice": "Szia, <ime>{pseudonim}</ime>",
@@ -2757,7 +2759,9 @@
     "zahtev_nije_pronadjen_ili_nije_na_cekanju": "A kérelem nem található vagy nincs függőben.",
     "zahtev_vise_nije_aktivan": "A kérelem már nem aktív.",
     "zastitni_veto_mora_imati_obrazlozenje_koje_upucuje_na_konkretnu_pretnju_odrzivos": "A védelmi vétót a fenntarthatóság konkrét veszélyére hivatkozva indokolni kell (18. cikk).",
-    "zatvoren_oglas_ne_moze_da_se_menja": "Lezárt hirdetés nem módosítható."
+    "zatvoren_oglas_ne_moze_da_se_menja": "Lezárt hirdetés nem módosítható.",
+    "slika_mora_biti_jpg_png_ili_webp_fotografiju_sa_iphone_a_heic_sacuvaj_kao_jpg": "A képnek JPG, PNG vagy WebP formátumúnak kell lennie. Az iPhone-fotót (HEIC) mentsd JPG-ként.",
+    "slike_su_prevelike_za_jedno_slanje_ukloni_jednu_ili_posalji_manje_fotografije": "A képek túl nagyok egyetlen küldéshez. Távolíts el egyet, vagy küldj kisebb fotókat."
   },
   "push": {
     "na_telefonu": "Értesítések a telefonon",
