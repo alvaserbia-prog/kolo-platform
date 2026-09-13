@@ -1903,7 +1903,8 @@
     "dete_ceka_kratko": "waiting for approval",
     "dete_odrasli_kratko": "needs a parent's permission",
     "slika_format": "One of the images is not in a supported format. Save an iPhone photo (HEIC) as JPG and add it again.",
-    "slike_ukupno_prevelike": "The images are too large to send together. Add fewer images or replace them with smaller ones."
+    "slike_ukupno_prevelike": "The images are too large to send together. Add fewer images or replace them with smaller ones.",
+    "slike_popunjeno": "You have reached the maximum number of images ({max}). Remove one with × to add another."
   },
   "pocetna": {
     "dobrodoslice": "Hello, <ime>{pseudonim}</ime>",

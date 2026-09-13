@@ -772,6 +772,11 @@ function IzmeniOglas({
             )}
           </div>
           <input id={ID_UNOSA_IZMENA} ref={fileRef} type="file" accept="image/*" multiple className="sr-only" onChange={handleNoveSlike} />
+          {/* Kad je maksimum dostignut, dugme „+" nestane — bez ove rečenice to
+              izgleda kao da dodavanje slika ne radi, a ne kao da je popunjeno. */}
+          {ukupnoSlika >= MAX_SLIKA && (
+            <p className="mt-1.5 text-xs text-kolo-muted">{t("slike_popunjeno", { max: MAX_SLIKA })}</p>
+          )}
           <p className="mt-1.5 text-xs text-kolo-muted">{t("slike_hint")}</p>
         </div>
 

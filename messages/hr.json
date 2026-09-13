@@ -1903,7 +1903,8 @@
     "dete_ceka_kratko": "čeka odobrenje",
     "dete_odrasli_kratko": "treba dopuštenje roditelja",
     "slika_format": "Neka slika nije u podržanom formatu. Fotografiju s iPhonea (HEIC) spremi kao JPG pa je dodaj ponovno.",
-    "slike_ukupno_prevelike": "Slike su zajedno prevelike za jedno slanje. Dodaj manje slika ili ih zamijeni manjima."
+    "slike_ukupno_prevelike": "Slike su zajedno prevelike za jedno slanje. Dodaj manje slika ili ih zamijeni manjima.",
+    "slike_popunjeno": "Dosegnut je najveći broj slika ({max}). Ukloni jednu klikom na × pa dodaj novu."
   },
   "pocetna": {
     "dobrodoslice": "Bok, <ime>{pseudonim}</ime>",

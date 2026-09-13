@@ -1896,7 +1896,8 @@
     "dete_ceka_kratko": "jóváhagyásra vár",
     "dete_odrasli_kratko": "szülői engedély kell",
     "slika_format": "Az egyik kép formátuma nem támogatott. Az iPhone-fotót (HEIC) mentsd JPG-ként, majd add hozzá újra.",
-    "slike_ukupno_prevelike": "A képek együtt túl nagyok egyetlen küldéshez. Adj hozzá kevesebb képet, vagy cseréld őket kisebbekre."
+    "slike_ukupno_prevelike": "A képek együtt túl nagyok egyetlen küldéshez. Adj hozzá kevesebb képet, vagy cseréld őket kisebbekre.",
+    "slike_popunjeno": "Elérted a képek maximális számát ({max}). Távolíts el egyet a × gombbal, és adj hozzá újat."
   },
   "pocetna": {
     "dobrodoslice": "Szia, <ime>{pseudonim}</ime>",
