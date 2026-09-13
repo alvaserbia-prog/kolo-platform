@@ -153,7 +153,7 @@ POEN exists only in the Protocol. The record is kept by the Protocol and cannot 
 
 POEN is not money. It is not a means of payment, not electronic money, not digital assets, not a financial instrument, and it is not a debt the Foundation owes you. It has no value outside the system: it is not exchanged for money, it is not resold, and the Foundation does not buy it back.
 
-So does it have a value in money? There is no exchange rate. But so that you and the other side can agree on what something is worth, amounts in the system are expressed on a scale where 1 POEN corresponds to 1 dinar. That is a measuring scale for comparison inside the system — the way you express weight in kilograms — not a rate at which something is exchanged for money. The ratio serves you alone when you post a listing: the Foundation does not apply it in any of its own procedures, does not record contributions by it, and does not determine any amount from the rulebooks by it. The Foundation does not guarantee any value of POEN and does not redeem it.`,
+So does it have a value in money? There is no exchange rate, and the Foundation publishes no ratio of POEN to the dinar. You set the amount in your listing yourself. Most people find their bearings by starting from the price they already know for that good or service — that is your own estimate, it holds for that listing, it binds no one else, and it is not a rate. The Foundation does not do that calculation for you: it records no contribution by it, determines no amount from the rulebooks by it, guarantees no value of POEN and does not redeem it.`,
       },
       {
         id: 2,
@@ -189,7 +189,7 @@ What ZRNO is not. It is not a share, not a stock, not digital assets, not a fina
         pitanje: `What about taxes and fiscal receipts?`,
         odgovor: `The Foundation does not calculate tax for you and does not issue fiscal receipts in your name. POEN is neither money nor legal tender, and re-registering POEN is not a payment transaction within the meaning of payment services regulations.
 
-POEN is not income in money. It is not paid out, it is not exchanged for dinars, and it cannot leave the Protocol. The 1 POEN = 1 dinar ratio is a measuring scale inside the system, not a price or a rate — POEN has no market on which a value outside the system could be established.
+POEN is not income in money. It is not paid out, it is not exchanged for dinars, and it cannot leave the Protocol. The Foundation publishes no ratio of POEN to the dinar; if people compare it with a price in dinars when agreeing, that is their own estimate, not a price and not a rate — POEN has no market on which a value outside the system could be established.
 
 But KOLO does not cancel obligations you already have. If you occasionally pass on a surplus or help someone out, nothing changes. If you make your living selling goods or providing services, the same regulations apply as outside KOLO — regardless of whether the arrangement is recorded in POEN.
 
@@ -685,7 +685,7 @@ If you carry on a business through the Marketplace, your tax and fiscal obligati
         pitanje: `How do I set the price and quantities of my products, and who values them?`,
         odgovor: `You set the amount in POEN for your goods and services yourself, freely. The platform does not fix it, does not limit it and does not control it, nor does anyone value your goods for you — you know best what you are offering and what it is worth.
 
-There is only a guide: one POEN corresponds roughly to one dinar. That is a measuring scale that helps you find your bearings when setting an amount, but it binds you to nothing and is not an official exchange rate.
+There is no official ratio and the Foundation publishes none. You set the amount, and the easiest way to find your bearings is to start from the price you already know for that good — that estimate holds for your listing and binds no one else.
 
 What is asked of you is honesty: an accurate and clear description of the good or the service, a realistic quantity and a realistic amount in POEN, and all the terms of the exchange. False or misleading content that misrepresents the nature, quality or quantity of what you offer is not allowed.
 
@@ -798,7 +798,7 @@ A donation is not a hidden purchase of POEN because these are two legally indepe
 
 No claim of yours arises from the donation — neither a right to demand that the Foundation record POEN for you, nor a right to demand your money back. The recording of POEN is not a consideration for the donation.
 
-For orientation, a measuring scale of roughly 1 POEN to 1 dinar is used, but the Foundation does not guarantee that value and does not exchange POEN for money.`,
+The Foundation publishes no ratio of POEN to the dinar; the amount in a listing is set by the user. The Foundation guarantees no value of POEN and does not exchange POEN for money.`,
       },
       {
         id: 98,

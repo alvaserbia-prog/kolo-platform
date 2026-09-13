@@ -49,6 +49,59 @@ export function trebaIzjavaOPoreklu(iznosRSD: number, zbir12m: number): boolean 
   return iznosRSD + Math.max(0, zbir12m) > PRAG_PROVERE_POREKLA_RSD;
 }
 
+/**
+ * Najveći iznos JEDNE kartične uplate (R-01, mera M-11).
+ *
+ * 🔴 Kapa ne štiti POEN — to od mere M-4a radi ljudska potvrda. Ona štiti tri
+ * druge stvari: (1) najgori pojedinačan gubitak po osporenoj transakciji, jer
+ * rok za chargeback ide mesecima posle evidentiranja, a osnova za poništenje
+ * POEN-a nema (mera M-12 je odbijena, pa POEN tada OSTAJE); (2) merchant nalog,
+ * koji kartične šeme gase kad odnos osporenih transakcija pređe prag; (3)
+ * osnivački kanal, koji jedna velika uplata može da isprazni u jednoj noći
+ * (korak se pali na svakih 100.000 POEN opticaja).
+ *
+ * Veći iznos ide uplatom na račun (domaći) ili deviznom doznakom (inostranstvo),
+ * gde se uplatilac vidi iz izvoda — što čl. 3 Pravilnika o pokroviteljstvu i
+ * donacijama ionako traži.
+ */
+export const MAX_KARTICNA_UPLATA_RSD = 100_000;
+
+/**
+ * Brzinska kočnica (R-01, mera M-11): najviše toliko kartičnih zapisa po nalogu
+ * u jednom danu, bez obzira na ishod.
+ *
+ * 🔴 Protiv druge pretnje nego kapa. Najverovatnija zloupotreba nije jedna
+ * velika uplata nego *card testing* — provera ukradenih brojeva kartica nizom
+ * sitnih donacija, jer nema isporuke robe ni provere kupca. Kapa po transakciji
+ * protiv toga ne radi ništa.
+ */
+export const MAX_KARTICNIH_UPLATA_DNEVNO = 3;
+
+/**
+ * Normalizuje ime uplatioca u ključ za poređenje (mera C-1 uz R-01).
+ *
+ * Mala slova, bez dijakritike i interpunkcije, reči sortirane — pa se
+ * „Petar Petrović", „PETROVIĆ PETAR" i „Petar  Petrovic" svode na isti ključ.
+ * Sortiranje je bitno jer izvodi pišu ime i prezime u oba redosleda.
+ *
+ * Vraća `null` kad od imena ne ostane ništa upotrebljivo (kraće od tri znaka) —
+ * tada se poređenje ne radi, umesto da se svi kratki unosi slože u isti ključ.
+ */
+export function normalizujUplatioca(ime: string | null | undefined): string | null {
+  if (!ime) return null;
+  const reci = ime
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/gi, "d")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .sort();
+  const kljuc = reci.join(" ");
+  return kljuc.length >= 3 ? kljuc : null;
+}
+
 export const RANG_TABELA: { nivo: number; do: number; kurs: number }[] = [
   { nivo: 1,  do:               0, kurs: 1.00 },
   { nivo: 2,  do:           5_000, kurs: 1.10 },

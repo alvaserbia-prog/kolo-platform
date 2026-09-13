@@ -224,6 +224,7 @@
     "primalac": "Primalac",
     "clanovi_pregled_blokiran": "Pregled svih članova dostupan je redovnim članovima.",
     "clan_dete": "DETE",
+    "clan_donator": "DONATOR",
     "nema_rezultata": "Nema rezultata. Pokušaj drugu reč.",
     "clan_count_1": "član",
     "clan_count_vise": "članova",
@@ -426,6 +427,7 @@
     "tip_regularni": "Redovan član",
     "tip_nosilac_zrna": "Nosilac ZRNA",
     "tip_neverifikovan": "Nov član",
+    "tip_donator": "Donator",
     "tip_pocetna": "Početni korisnik",
     "oznake_naslov": "Moje oznake",
     "oznake_opis": "Privatne oznake za osobe iz tvog lanca, da lakše znaš ko je preko tebe ušao u mrežu. Vide ih samo ti i Fondacija; nisu javne i ne prikazuju se drugim korisnicima.",
@@ -695,7 +697,8 @@
     "izjasni_rok": "Rok za izjašnjenje: {datum}",
     "izjasni_placeholder": "Šta se po tvom sećanju dogodilo?",
     "izjasni_dugme": "Pošalji izjašnjenje",
-    "izjasni_poslato": "Izjašnjenje je poslato."
+    "izjasni_poslato": "Izjašnjenje je poslato.",
+    "suzen_opis": "Ovaj pregled je sužen. Vidiš pseudonim i oglase, i možeš da stupiš u kontakt. Stanje POEN-a, ZRNO, mrežu potvrda, istoriju i telefon vidi član čiju je stvarnost potvrdio neko iz mreže."
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -723,7 +726,32 @@
     "zakazana_promena": "Zakazano: → <ime>{pseudonim}</ime>, stupa na snagu u ponoć",
     "zakazan_opoziv": "Zakazan opoziv, stupa na snagu u ponoć",
     "kurs_objasnjenje": "Odnos ukupnog broja POENA i ZRNA raspoloživih za upis, pokazuje koliko ti je POENA potrebno za jedno ZRNO. Nije cena i ne izražava vrednost.",
-    "greska_delegiranje": "Greška pri delegiranju. Pokušaj ponovo."
+    "greska_delegiranje": "Greška pri delegiranju. Pokušaj ponovo.",
+    "upravljanje_naslov": "Upis i otpis ZRNA",
+    "upis_naslov": "Upiši ZRNO",
+    "upis_opis": "Upisom se tvoj zapis POEN-a umanjuje, a u tvoj zapis se upisuje ZRNO po važećem koeficijentu. Izvršava se u ponoć.",
+    "upis_minimum": "Za upis je potrebno najmanje {min} POEN u zapisu.",
+    "upis_max": "Najviše {max} POEN po obračunskom periodu (1% tvog zapisa).",
+    "upis_placeholder": "Iznos u POEN-ima",
+    "upis_dugme": "Zatraži upis",
+    "upis_na_cekanju": "Zahtev za upis: {iznos} POEN — izvršava se u ponoć.",
+    "otpis_naslov": "Otpiši ZRNO",
+    "otpis_opis": "Otpisom se ZRNO briše iz tvog zapisa, a POEN se upisuje po važećem koeficijentu. Izvršava se u ponoć.",
+    "otpis_placeholder": "Broj ZRNA",
+    "otpis_priblizno": "Približno {poen} POEN po važećem koeficijentu.",
+    "otpis_dugme": "Zatraži otpis",
+    "otpis_na_cekanju": "Zahtev za otpis: {kolicina} ZRNA — izvršava se u ponoć.",
+    "nema_slobodnih": "Nemaš slobodnih ZRNA za otpis.",
+    "nema_zrna": "Još nemaš ZRNO.",
+    "status_naslov": "Aktiviranje glasa",
+    "status_opis": "Iz aktiviranog ZRNA proizlazi glas u Gornjem Kolu. Deaktiviranjem se ZRNO vraća u slobodno. Oba se izvršavaju u ponoć.",
+    "status_placeholder": "Broj ZRNA",
+    "status_na_cekanju": "Zahtev: {akcija} {kolicina} ZRNA — izvršava se u ponoć.",
+    "akcija_aktiviraj": "aktiviranje",
+    "akcija_deaktiviraj": "deaktiviranje",
+    "donator_upozorenje": "Upisano ZRNO ne možeš da otpišeš, da aktiviraš ni da delegiraš dok tvoju stvarnost ne potvrdi neko iz mreže. Novcem se dobija položaj, ne glas.",
+    "donator_zatvoreno": "Otvara se kad tvoju stvarnost potvrdi neko iz mreže.",
+    "greska_zahtev": "Greška pri slanju zahteva. Pokušaj ponovo."
   },
   "programi": {
     "naslov": "Programi Protokola",
@@ -921,7 +949,11 @@
     "ugovor_stampaj": "Odštampaj",
     "ugovor_nazad": "Nazad na donacije",
     "ugovor_napomena": "Ugovor je sačinjen u trenutku potvrde donacije i od tada se ne menja. Merodavan je srpski original.",
-    "karticno_sopstvena_kartica": "Plaćanjem potvrđuješ da kartica glasi na tvoje ime. Doprinos se evidentira isključivo korisniku čijim je sredstvima uplata izvršena."
+    "karticno_sopstvena_kartica": "Plaćanjem potvrđuješ da kartica glasi na tvoje ime. Doprinos se evidentira isključivo korisniku čijim je sredstvima uplata izvršena.",
+    "karticno_kapa": "Kartična uplata ide najviše do {max} RSD. Za veći iznos koristi uplatu na račun ili deviznu doznaku.",
+    "karticno_kapa_napomena": "Karticom se uplaćuje do {max} RSD. Veći iznos ide uplatom na račun (u zemlji) ili deviznom doznakom (iz inostranstva).",
+    "karticno_nepovratnost": "Potvrđujem da je donacija nepovratna i da njome ne dobijam robu ni uslugu.",
+    "karticno_nepovratnost_obavezna": "Potvrdi da je donacija nepovratna pre nego što nastaviš."
   },
   "poruke": {
     "naslov": "Poruke",
@@ -955,7 +987,7 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "4.5.4"
+      "ver": "4.5.8"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
@@ -983,7 +1015,7 @@
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
-      "ver": "4.5.7",
+      "ver": "4.5.8",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -1003,7 +1035,7 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja · KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.5.4",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.5.8",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
     "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.5",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
@@ -1017,7 +1049,7 @@
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.6",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.5.7",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.5.8",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sistemu",
@@ -2576,7 +2608,10 @@
     "donacije_uplatilac_placeholder": "Ime i prezime sa priliva",
     "donacije_uplatilac_pomoc": "Doprinos se evidentira isključivo korisniku čijim je sredstvima uplata izvršena. Uporedi ime sa priliva sa članom pre potvrde.",
     "donacije_uplatilac_obavezan": "Unesite ime uplatioca iz izvoda.",
-    "donacije_strani_priliv": "Uplata sa računa otvorenog u inostranstvu"
+    "donacije_strani_priliv": "Uplata sa računa otvorenog u inostranstvu",
+    "donacije_status_naplaceno": "Naplaćeno karticom — POEN čeka potvrdu",
+    "donacije_donator_nalog": "Na nalogu: {ime}",
+    "donacije_duplikat_ipak": "Potvrdi ipak (uplata sa zajedničkog računa)"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",

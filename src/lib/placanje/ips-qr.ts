@@ -9,7 +9,10 @@
  *    račun Fondacije (bez konverzije na našoj strani, provizija ~0).
  *  - USAGLAŠAVANJE (MVP): admin nađe priliv u bankovnom izvodu po pozivu na
  *    broj i potvrdi PENDING zapis u admin panelu → tek tada se emituje POEN.
- *    (Kasnije se isti zapis može auto-potvrditi PSP/bankarskim callback-om.)
+ *    🔴 Zapis potvrđuje ČOVEK i to se ne menja (R-01, mera M-4a): potvrda traži
+ *    poređenje uplatioca iz izvoda sa nalogom (čl. 3 Pravilnika o pokroviteljstvu
+ *    i donacijama). Automatsko evidentiranje po bankarskom callback-u je upravo
+ *    ono što je kod kartice ukinuto — ne uvoditi ga ovde.
  *
  * KONFIGURACIJA (unosi se NAKNADNO kroz env, kao i NestPay):
  *  - `IPS_RACUN`          — broj računa Fondacije, 18 cifara BEZ crtica (obavezno)

@@ -217,6 +217,7 @@
     "primalac": "Fogadó",
     "clanovi_pregled_blokiran": "A tagok listája csak ellenőrzött tagok számára érhető el.",
     "clan_dete": "GYEREK",
+    "clan_donator": "ADOMÁNYOZÓ",
     "nema_rezultata": "Nincs találat. Próbálj másik szót.",
     "clan_count_1": "tag",
     "clan_count_vise": "tag",
@@ -414,6 +415,7 @@
     "tip_regularni": "Rendes tag",
     "tip_nosilac_zrna": "ZRNO-tulajdonos",
     "tip_neverifikovan": "Új tag",
+    "tip_donator": "Adományozó",
     "tip_pocetna": "Kezdeti megerősítés",
     "oznake_naslov": "Címkéim",
     "oznake_opis": "Magánjellegű címkék azokhoz, akiket megerősítettél — hogy tudd, kit hoztál be. Csak te és az Alapítvány látja; nem nyilvánosak, és más felhasználóknak nem jelennek meg.",
@@ -688,7 +690,8 @@
     "izjasni_rok": "A nyilatkozat határideje: {datum}",
     "izjasni_placeholder": "Mi történt emlékeid szerint?",
     "izjasni_dugme": "Nyilatkozat küldése",
-    "izjasni_poslato": "A nyilatkozat elküldve."
+    "izjasni_poslato": "A nyilatkozat elküldve.",
+    "suzen_opis": "Ez a nézet szűkített. Látod az álnevet és a hirdetéseket, és fel tudod venni a kapcsolatot. A POEN-egyenleget, a ZRNO-t, a megerősítések hálóját, az előzményeket és a telefonszámot az a tag látja, akinek a valóságát valaki a hálóból megerősítette."
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -716,7 +719,32 @@
     "zakazana_promena": "Ütemezve: → <ime>{pseudonim}</ime> — éjfélkor lép hatályba",
     "zakazan_opoziv": "Visszavonás ütemezve — éjfélkor lép hatályba",
     "kurs_objasnjenje": "A POEN teljes száma és a bejegyzésre rendelkezésre álló ZRNO aránya — megmutatja, mennyi POEN kell egy ZRNO-hoz. Nem ár, és nem fejez ki értéket.",
-    "greska_delegiranje": "Hiba a delegáláskor. Próbáld újra."
+    "greska_delegiranje": "Hiba a delegáláskor. Próbáld újra.",
+    "upravljanje_naslov": "ZRNO bejegyzése és leírása",
+    "upis_naslov": "ZRNO bejegyzése",
+    "upis_opis": "A bejegyzés csökkenti a POEN-bejegyzésedet, és ZRNO kerül a bejegyzésedbe az érvényes együttható szerint. Éjfélkor hajtódik végre.",
+    "upis_minimum": "A bejegyzéshez legalább {min} POEN szükséges a bejegyzésedben.",
+    "upis_max": "Elszámolási időszakonként legfeljebb {max} POEN (a bejegyzésed 1%-a).",
+    "upis_placeholder": "Összeg POEN-ben",
+    "upis_dugme": "Bejegyzés kérése",
+    "upis_na_cekanju": "Bejegyzési kérelem: {iznos} POEN — éjfélkor hajtódik végre.",
+    "otpis_naslov": "ZRNO leírása",
+    "otpis_opis": "A leírás törli a ZRNO-t a bejegyzésedből, és POEN kerül bejegyzésre az érvényes együttható szerint. Éjfélkor hajtódik végre.",
+    "otpis_placeholder": "ZRNO darabszáma",
+    "otpis_priblizno": "Körülbelül {poen} POEN az érvényes együttható szerint.",
+    "otpis_dugme": "Leírás kérése",
+    "otpis_na_cekanju": "Leírási kérelem: {kolicina} ZRNO — éjfélkor hajtódik végre.",
+    "nema_slobodnih": "Nincs szabad ZRNO-d leírásra.",
+    "nema_zrna": "Még nincs ZRNO-d.",
+    "status_naslov": "A szavazat aktiválása",
+    "status_opis": "Az aktivált ZRNO-ból ered a szavazat a Felső Kolóban. A deaktiválás visszaadja a ZRNO-t a szabadok közé. Mindkettő éjfélkor hajtódik végre.",
+    "status_placeholder": "ZRNO darabszáma",
+    "status_na_cekanju": "Kérelem: {kolicina} ZRNO {akcija} — éjfélkor hajtódik végre.",
+    "akcija_aktiviraj": "aktiválása",
+    "akcija_deaktiviraj": "deaktiválása",
+    "donator_upozorenje": "A bejegyzett ZRNO-t nem írhatod le, nem aktiválhatod és nem delegálhatod, amíg valaki a hálózatból meg nem erősíti a valóságodat. A pénz helyzetet ad, nem szavazatot.",
+    "donator_zatvoreno": "Akkor nyílik meg, ha valaki a hálózatból megerősíti a valóságodat.",
+    "greska_zahtev": "Hiba a kérelem elküldésekor. Próbáld újra."
   },
   "programi": {
     "naslov": "Protokoll programok",
@@ -914,7 +942,11 @@
     "ugovor_stampaj": "Nyomtatás",
     "ugovor_nazad": "Vissza az adományokhoz",
     "ugovor_napomena": "A szerződés az adomány megerősítésének pillanatában készült, és azóta nem változott. A szerb eredeti az irányadó.",
-    "karticno_sopstvena_kartica": "A fizetéssel megerősíted, hogy a kártya a te nevedre szól. A hozzájárulás kizárólag annak a felhasználónak kerül nyilvántartásba, akinek az eszközeiből a befizetés történt."
+    "karticno_sopstvena_kartica": "A fizetéssel megerősíted, hogy a kártya a te nevedre szól. A hozzájárulás kizárólag annak a felhasználónak kerül nyilvántartásba, akinek az eszközeiből a befizetés történt.",
+    "karticno_kapa": "A kártyás befizetés legfeljebb {max} RSD lehet. Nagyobb összeghez használj banki átutalást vagy devizaátutalást.",
+    "karticno_kapa_napomena": "Kártyával {max} RSD-ig lehet fizetni. Nagyobb összeg banki átutalással (belföldről) vagy devizaátutalással (külföldről) megy.",
+    "karticno_nepovratnost": "Megerősítem, hogy az adomány vissza nem téríthető, és hogy érte árut vagy szolgáltatást nem kapok.",
+    "karticno_nepovratnost_obavezna": "Erősítsd meg, hogy az adomány vissza nem téríthető, mielőtt folytatod."
   },
   "poruke": {
     "naslov": "Üzenetek",
@@ -948,7 +980,7 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.5.4"
+      "ver": "4.5.8"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
@@ -976,7 +1008,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.5.7",
+      "ver": "4.5.8",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -996,7 +1028,7 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek · KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.5.4-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.5.8-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat · KOLO",
     "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.5-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya · KOLO",
@@ -1010,7 +1042,7 @@
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.6-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai · KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.5.7-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.5.8-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",

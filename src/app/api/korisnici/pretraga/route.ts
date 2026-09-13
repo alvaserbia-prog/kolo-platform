@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { smeProsireno } from "@/lib/dozvole";
 import { prisma } from "@/lib/prisma";
 import { rateLimit } from "@/lib/rate-limit";
 
@@ -10,7 +11,7 @@ export async function GET(req: NextRequest) {
   if (!session) return await greska("Nije prijavljen.", 401);
   // V2: pretraga otkriva pseudonime — dostupna samo korisnicima sa punim pristupom
   // (verifikovan, indeks ≥ 10%). Neverifikovani ne smeju da vide pseudonime drugih.
-  if (!session.user.verified) {
+  if (!smeProsireno(session.user)) {
     return await greska("Verifikacija potrebna.", 403);
   }
   // Anti-scraping: 30 pretraga u 10s po korisniku.

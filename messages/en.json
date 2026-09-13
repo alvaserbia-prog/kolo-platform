@@ -224,6 +224,7 @@
     "primalac": "Recipient",
     "clanovi_pregled_blokiran": "Member list is available to full members.",
     "clan_dete": "CHILD",
+    "clan_donator": "DONOR",
     "nema_rezultata": "No results. Try another word.",
     "clan_count_1": "member",
     "clan_count_vise": "members",
@@ -426,6 +427,7 @@
     "tip_regularni": "Full member",
     "tip_nosilac_zrna": "ZRNO holder",
     "tip_neverifikovan": "New member",
+    "tip_donator": "Donor",
     "tip_pocetna": "Initial confirmation",
     "oznake_naslov": "My labels",
     "oznake_opis": "Private labels for people you confirmed — so you can tell whom you brought in. Visible only to you and the Foundation; not public and not shown to other users.",
@@ -695,7 +697,8 @@
     "izjasni_rok": "Deadline for the statement: {datum}",
     "izjasni_placeholder": "What happened, as you recall it?",
     "izjasni_dugme": "Send statement",
-    "izjasni_poslato": "The statement has been sent."
+    "izjasni_poslato": "The statement has been sent.",
+    "suzen_opis": "This view is narrowed. You see the pseudonym and the ads, and you can make contact. The POEN balance, ZRNO, the network of confirmations, the history and the phone number are seen by a member whose reality someone in the network has confirmed."
   },
   "zrno": {
     "naslov": "ZRNO",
@@ -723,7 +726,32 @@
     "zakazana_promena": "Scheduled: → <ime>{pseudonim}</ime> — takes effect at midnight",
     "zakazan_opoziv": "Revocation scheduled — takes effect at midnight",
     "kurs_objasnjenje": "The ratio between the total POEN and the ZRNO available to be recorded — it shows how much POEN you need for one ZRNO. It is not a price and does not express value.",
-    "greska_delegiranje": "Error while delegating. Try again."
+    "greska_delegiranje": "Error while delegating. Try again.",
+    "upravljanje_naslov": "Recording and writing off ZRNO",
+    "upis_naslov": "Record ZRNO",
+    "upis_opis": "Recording decreases your POEN record and adds ZRNO to it at the current coefficient. Executed at midnight.",
+    "upis_minimum": "Recording requires at least {min} POEN in your record.",
+    "upis_max": "At most {max} POEN per accounting period (1% of your record).",
+    "upis_placeholder": "Amount in POEN",
+    "upis_dugme": "Request recording",
+    "upis_na_cekanju": "Recording request: {iznos} POEN — executed at midnight.",
+    "otpis_naslov": "Write off ZRNO",
+    "otpis_opis": "Writing off removes ZRNO from your record and records POEN at the current coefficient. Executed at midnight.",
+    "otpis_placeholder": "Number of ZRNO",
+    "otpis_priblizno": "Approximately {poen} POEN at the current coefficient.",
+    "otpis_dugme": "Request write-off",
+    "otpis_na_cekanju": "Write-off request: {kolicina} ZRNO — executed at midnight.",
+    "nema_slobodnih": "You have no free ZRNO to write off.",
+    "nema_zrna": "You do not have ZRNO yet.",
+    "status_naslov": "Activating your vote",
+    "status_opis": "Activated ZRNO gives a vote in the Upper Kolo. Deactivating returns ZRNO to free. Both execute at midnight.",
+    "status_placeholder": "Number of ZRNO",
+    "status_na_cekanju": "Request: {akcija} {kolicina} ZRNO — executed at midnight.",
+    "akcija_aktiviraj": "activation",
+    "akcija_deaktiviraj": "deactivation",
+    "donator_upozorenje": "You cannot write off, activate or delegate recorded ZRNO until someone in the network confirms your reality. Money gives a position, not a vote.",
+    "donator_zatvoreno": "Opens once someone in the network confirms your reality.",
+    "greska_zahtev": "Error sending the request. Please try again."
   },
   "programi": {
     "naslov": "Protocol Programs",
@@ -921,7 +949,11 @@
     "ugovor_stampaj": "Print",
     "ugovor_nazad": "Back to donations",
     "ugovor_napomena": "The agreement was drawn up at the moment the donation was confirmed and has not changed since. The Serbian original is authoritative.",
-    "karticno_sopstvena_kartica": "By paying you confirm that the card is issued in your name. A contribution is recorded solely for the user with whose funds the payment was made."
+    "karticno_sopstvena_kartica": "By paying you confirm that the card is issued in your name. A contribution is recorded solely for the user with whose funds the payment was made.",
+    "karticno_kapa": "A card payment can be at most {max} RSD. For a larger amount use a bank transfer or an international remittance.",
+    "karticno_kapa_napomena": "Card payments go up to {max} RSD. A larger amount goes by bank transfer (domestic) or international remittance (from abroad).",
+    "karticno_nepovratnost": "I confirm that the donation is non-refundable and that I receive no goods or services for it.",
+    "karticno_nepovratnost_obavezna": "Confirm that the donation is non-refundable before you continue."
   },
   "poruke": {
     "naslov": "Messages",
@@ -955,7 +987,7 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.5.4"
+      "ver": "4.5.8"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
@@ -983,7 +1015,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.5.7",
+      "ver": "4.5.8",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -1003,7 +1035,7 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use · KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.5.4",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.5.8",
     "meta_privatnost_title": "Privacy Policy · KOLO",
     "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.5.5",
     "meta_statut_title": "KOLO Foundation Statute · KOLO",
@@ -1017,7 +1049,7 @@
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.6",
     "meta_pravilnik_title": "KOLO System Rulebooks · KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.5.7",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.5.8",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { intlTag } from "@/lib/format";
 import { useTranslations, useLocale } from "next-intl";
 import IpsQrPlacanje from "./IpsQrPlacanje";
+import { MAX_KARTICNA_UPLATA_RSD } from "@/lib/donacija-pravila";
 
 interface Donacija {
   id: string;
@@ -64,6 +65,9 @@ export default function DonacijeKlijent() {
   const [javno, setJavno] = useState(true);
   const [karticaLoading, setKarticaLoading] = useState(false);
   const [karticaGreska, setKarticaGreska] = useState<string | null>(null);
+  // Izjava o nepovratnosti (R-01, mera M-11) — traži se PRE naplate i snima se
+  // na zapis donacije kao dokaz u sporu po osporenoj kartičnoj transakciji.
+  const [nepovratnost, setNepovratnost] = useState(false);
   const [ishod, setIshod] = useState<"uspeh" | "neuspeh" | "greska" | null>(null);
   useEffect(() => {
     fetch("/api/donacije")
@@ -81,12 +85,20 @@ export default function DonacijeKlijent() {
       setKarticaGreska(t("karticno_min_iznos"));
       return;
     }
+    if (iznos > MAX_KARTICNA_UPLATA_RSD) {
+      setKarticaGreska(t("karticno_kapa", { max: MAX_KARTICNA_UPLATA_RSD.toLocaleString(intlTag(locale)) }));
+      return;
+    }
+    if (!nepovratnost) {
+      setKarticaGreska(t("karticno_nepovratnost_obavezna"));
+      return;
+    }
     setKarticaLoading(true);
     try {
       const r = await fetch("/api/donacije/placanje/zapocni", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ iznosRSD: iznos, javno }),
+        body: JSON.stringify({ iznosRSD: iznos, javno, nepovratnost: true }),
       });
       const j = await r.json();
       if (!r.ok) {
@@ -202,6 +214,7 @@ export default function DonacijeKlijent() {
               inputMode="numeric"
               min={100}
               step={100}
+              max={MAX_KARTICNA_UPLATA_RSD}
               value={iznosKartica}
               onChange={(e) => setIznosKartica(e.target.value)}
               placeholder={t("karticno_iznos_placeholder")}
@@ -217,6 +230,18 @@ export default function DonacijeKlijent() {
             {karticaLoading ? t("karticno_otvaram") : t("karticno_plati")}
           </button>
         </div>
+        <label className="flex items-start gap-2 text-xs text-kolo-muted cursor-pointer">
+          <input
+            type="checkbox"
+            checked={nepovratnost}
+            onChange={(e) => setNepovratnost(e.target.checked)}
+            className="mt-0.5"
+          />
+          <span>{t("karticno_nepovratnost")}</span>
+        </label>
+        <p className="text-xs text-kolo-muted">
+          {t("karticno_kapa_napomena", { max: MAX_KARTICNA_UPLATA_RSD.toLocaleString(intlTag(locale)) })}
+        </p>
         {karticaGreska && <p className="text-xs text-red-500">{karticaGreska}</p>}
         {/* Čl. 3 Pravilnika o pokroviteljstvu i donacijama: doprinos se evidentira
             isključivo onome čijim je sredstvima uplata izvršena. Kod kartice se

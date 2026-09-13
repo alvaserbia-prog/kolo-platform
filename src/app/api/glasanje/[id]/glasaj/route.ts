@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { smeGlasati } from "@/lib/dozvole";
 import { prisma } from "@/lib/prisma";
 import { izracunajGlasove } from "@/lib/protokol/zrno";
 import { fazaPredloga } from "@/lib/protokol/glasanje";
@@ -31,6 +32,14 @@ export async function POST(
   }
   if (faza !== "U_TOKU")
     return await greska("Glasanje je završeno.", 400);
+
+  // Glas traži i potvrđenu stvarnost, ne samo aktivirano ZRNO (R-01, odluka B).
+  const stanjeZrna = await prisma.zrnoStanje.findUnique({
+    where: { userId: session.user.id },
+    select: { aktivno: true },
+  });
+  if (!smeGlasati(session.user, stanjeZrna?.aktivno ?? 0))
+    return await greska("Potrebno je aktivirano ZRNO i potvrđena stvarnost.", 403);
 
   const glasovi = await izracunajGlasove(session.user.id);
   if (glasovi <= 0)

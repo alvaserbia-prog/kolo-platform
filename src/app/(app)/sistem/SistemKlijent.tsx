@@ -41,6 +41,7 @@ interface Clan {
   verified: boolean;
   /** Maloletni nalog — nosi svoj pečat, ne „bez potvrde" (vidi ClanRed). */
   maloletan: boolean;
+  identitetUtvrdjen: boolean;
   avatar: string | null;
   balance: number;
   krug: string | null;
@@ -920,6 +921,11 @@ const ClanRed = memo(function ClanRed({
               se nikad neće promeniti. Isti razlog kao pečat na Pijaci. */}
           {c.maloletan ? (
             <span className="shrink-0 text-[10px] bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-bold uppercase tracking-wide">{t("clan_dete")}</span>
+          ) : !c.verified && c.identitetUtvrdjen ? (
+            /* Javan donator (R-01, M-9) — „?" bi rekao da iza naloga niko ne stoji,
+               a iza ovoga stoji banka: uplatilac je upoređen sa nalogom. Ime mu je
+               ionako u listi donacija (Uslovi čl. 17). */
+            <span className="shrink-0 text-[10px] bg-kolo-gold-100 text-kolo-gold-600 px-1.5 py-0.5 rounded font-bold uppercase tracking-wide">{t("clan_donator")}</span>
           ) : c.verified ? (
             <span className="shrink-0 text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
           ) : (
@@ -952,6 +958,8 @@ const ClanRed = memo(function ClanRed({
             </Link>
             {c.maloletan ? (
               <span className="text-[10px] bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-bold uppercase tracking-wide">{t("clan_dete")}</span>
+            ) : !c.verified && c.identitetUtvrdjen ? (
+              <span className="text-[10px] bg-kolo-gold-100 text-kolo-gold-600 px-1.5 py-0.5 rounded font-bold uppercase tracking-wide">{t("clan_donator")}</span>
             ) : c.verified ? (
               <span className="text-xs bg-kolo-green-100 text-kolo-green-700 px-1.5 py-0.5 rounded font-medium">✓</span>
             ) : (

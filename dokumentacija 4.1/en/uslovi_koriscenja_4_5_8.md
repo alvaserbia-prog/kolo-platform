@@ -108,7 +108,11 @@ An unverified user may view listings in the exchange space, exchange goods and s
 
 In POEN ledger updates an unverified user participates exclusively as a receiver. They may not initiate a POEN ledger update in favor of another user; that possibility opens upon verification (Art. 28 of the Rulebook on the KOLO System). POEN records made before verification remain valid.
 
-An unverified user may not verify other users. A contribution may be recorded for them exclusively through the channel of contribution to platform content (Art. 40a of the Rulebook on the KOLO System); through the other channels it may not.
+An unverified user may not verify other users. A contribution is recorded for them through the channel of contribution to platform content (Art. 40a of the Rulebook on the KOLO System) and, if their identity has been established on account of a donation, through the channel of financial contribution; through the other channels it cannot be.
+
+A user whose identity has been established on account of a donation — in that the Foundation compared the payer's details with their account — also has available: a listing seeking a good or a service, without the limit on the number of listings under Article 16, initiating communication on account of a listing, participation in the shared conversation space, searching for users with a view of another's profile narrowed to the pseudonym and published listings, and the inscription of ZRNO (Art. 28 para. 6 of the Rulebook on the KOLO System).
+
+An established identity is not verification and does not replace it. Such a user does not initiate POEN ledger updates, does not activate or write off ZRNO, does not vote in the Upper Kolo, does not verify others, does not participate in operational contribution, social programs, or collective procurements, and does not access advertisers' contact details. A donation is not a ground for verification and obliges no user to verify them.
 
 ### Article 15 — Verified User and ZRNO Holder
 
@@ -116,7 +120,9 @@ A verified user is a person whose reality has been confirmed through the chain o
 
 A verified user has full access to the Platform: they may exchange goods and services in the exchange space, have contributions recorded in POENs, verify other users in accordance with the proof-of-reality rules, donate to the Foundation, and participate in collective forms when these are activated. A verified user has access to the pseudonyms of all users, POEN account balances, and all transactions with the pseudonyms of parties.
 
-A ZRNO Holder has all the rights of a verified user. In addition, by activating ZRNO they acquire the right to participate in system governance through the Upper Kolo when it is activated, a position in the accounting system, and a permanent capacity to confirm the reality of other users.
+A ZRNO Holder whose reality has been confirmed has all the rights of a verified user. In addition, by activating ZRNO they acquire the right to participate in the governance of the system through the Upper Kolo when it is activated, a position in the accounting system, and a permanent capacity to confirm the reality of other users.
+
+A ZRNO Holder whose reality has not been confirmed holds ZRNO but does not activate or write it off; they do not have the rights arising from activation (Art. 30 of the Rulebook on the KOLO System).
 
 ### Article 16 — Listing by an Unverified User
 
@@ -126,7 +132,7 @@ An unverified user may not post a listing seeking a good or a service.
 
 A listing posted by an unverified user must meet the content minimum: a title, a description, at least one photograph, a category, and a place, whereby the length of the title and the description is not a condition. A listing that does not meet the content minimum is not published. The same condition applies when an already published listing is edited.
 
-An unverified user may have at most three active listings at any one time.
+An unverified user may have at most three active listings at any one time. The limitations under this Article do not apply to a user whose identity has been established on account of a donation (Article 14).
 
 A listing posted by an unverified user carries a visible mark indicating that the advertiser is not verified in the chain of confirmations. The mark is available to everyone to whom the listing itself is available, including non-registered persons.
 
@@ -166,21 +172,21 @@ The exchange space is the part of the Platform intended for advertising offers a
 
 Browsing listings in the exchange space — the content of an offer or request, price, location, and the advertiser's pseudonym — is public and accessible to all visitors.
 
-Posting a listing offering a good or a service is available to all registered users; to an unverified user under the conditions and limitations set out in Article 16. Posting a listing seeking a good or a service, accessing the advertiser's contact details, and initiating communication regarding a listing are available exclusively to verified users and ZRNO Holders.
+Posting a listing offering a good or a service is available to all registered users; to an unverified user under the conditions and limitations of Article 16. Posting a listing seeking a good or a service and initiating communication on account of a listing are available to verified users, ZRNO Holders, and a user whose identity has been established on account of a donation (Article 14). Access to advertisers' contact details is available exclusively to verified users and ZRNO Holders.
 
 For non-registered and unverified persons, the advertiser's pseudonym in the exchange space is not linked to the contribution ledger or the user's profile.
 
 The Foundation is not a party to the exchange and does not mediate in it. The legal relationship arises exclusively between the users who exchange goods and services.
 
-### Article 19 — Orientation Ratio and Determining the Amount in a Listing
+### Article 19 — Determining the Amount in a Listing
 
-To make it easier to determine the amount in a listing, one POEN is taken to correspond to one Serbian dinar (1 POEN ≈ 1 RSD) as an orientation ratio. The orientation ratio serves the user alone, in determining the amount in their own listing.
+The amount in a listing is expressed in POENs and is set by the user who posts the listing. The Foundation publishes no ratio of POEN to the dinar or to any other currency and does not recommend the ratio by which a user should set the amount.
 
-The Foundation does not apply the orientation ratio in any of its own procedures: it does not record contributions by it, does not establish any amount prescribed by the rulebooks by it, and does not determine the number of POEN in projects and collective procurements by it. The amounts prescribed by the rulebooks are expressed in POEN and are not derived from dinars.
+If, in setting the amount, a user starts from a value expressed in money, that is their own estimate. It applies only to that listing, does not bind the other party, and is not a ratio that the Foundation establishes, publishes, or applies.
 
-The orientation ratio does not bind any party to an exchange, is not a guarantee of convertibility, does not constitute an exchange rate within the meaning of payment services regulations, and does not change the legal nature of POEN as established by the Rulebook. The Foundation does not guarantee or maintain that value.
+The Foundation applies no ratio of POEN to money in any of its own procedures: it does not record contributions by it, does not establish any amount prescribed by the rulebooks, and does not determine the number of POENs in projects and collective procurements. The amounts prescribed by the rulebooks are expressed in POENs and are not derived from dinars.
 
-The Foundation does not redeem POEN or ZRNO and does not provide for their conversion into dinars or any other means of payment. There is no contract for the exchange of dinars for POEN.
+The estimate under paragraph 2 of this Article is not a guarantee of convertibility, does not constitute an exchange rate within the meaning of payment services regulations, and does not change the legal nature of POEN established by the Rulebook. The Foundation guarantees and maintains no value of POEN.
 
 Users freely determine the amount for the goods and services they offer. The Platform does not establish, limit, or control amounts.
 

@@ -153,7 +153,7 @@ POEN postoji samo u Protokolu. Zapis se vodi na Protokolu i ne može se iznijeti
 
 POEN nije novac. Nije sredstvo plaćanja, nije elektronički novac, nije digitalna imovina, nije financijski instrument i ne predstavlja dug Fondacije prema tebi. Nema vrijednost izvan sustava: ne mijenja se za novac, ne preprodaje se i Fondacija ga ne otkupljuje.
 
-Ima li onda vrijednost u novcu? Nema tečaj. Ali da biste se ti i druga strana mogli dogovoriti koliko nešto vrijedi, iznosi u sustavu izražavaju se u razmjeri u kojoj 1 POEN odgovara 1 dinaru. To je mjerna skala za usporedbu unutar sustava (kao kad težinu izražavaš u kilogramima) a ne tečaj po kojem se nešto mijenja za novac. Taj odnos služi samo tebi kad postavljaš oglas — Zaklada ga ne primjenjuje ni u jednom svom postupku, ne evidentira po njemu doprinos i ne određuje po njemu nijedan iznos iz pravilnika. Zaklada ne jamči nikakvu vrijednost POEN-a i ne otkupljuje ga.`,
+Ima li onda vrijednost u novcu? Nema tečaj, i Zaklada nijedan odnos POEN-a prema dinaru ne objavljuje. Iznos u oglasu određuješ ti sam. Većina se snađe tako što pođe od cijene koju za to dobro ili uslugu ionako zna — to je tvoja procjena, vrijedi za taj oglas, drugu stranu ne obvezuje i nije tečaj. Zaklada taj račun ne radi umjesto tebe: ne evidentira po njemu doprinos, ne određuje po njemu nijedan iznos iz pravilnika, ne jamči nikakvu vrijednost POEN-a i ne otkupljuje ga.`,
       },
       {
         id: 2,
@@ -189,7 +189,7 @@ Kako daje glas. Upisano ZRNO zaključavaš da bi postalo aktivno, tek aktivno ZR
         pitanje: `Kakav je odnos prema porezu i fiskalizaciji?`,
         odgovor: `Fondacija ti ne obračunava porez i ne izdaje fiskalne račune u tvoje ime. POEN nije novac ni zakonsko sredstvo plaćanja, a prepis POEN-a nije platna transakcija u smislu propisa o platnim uslugama.
 
-POEN nije prihod u novcu. Ne isplaćuje se, ne mijenja se za novac i ne može izaći iz Protokola. Razmjera 1 POEN = 1 dinar je mjerna skala unutar sustava, a ne cijena ni tečaj. POEN nema tržište na kojem bi se utvrđivala vrijednost izvan sustava.
+POEN nije prihod u novcu. Ne isplaćuje se, ne mijenja se za novac i ne može izaći iz Protokola. Zaklada ne objavljuje odnos POEN-a prema dinaru; ako ga ljudi pri dogovoru uspoređuju s cijenom u dinarima, to je njihova procjena, a ne cijena ni tečaj. POEN nema tržište na kojem bi se utvrđivala vrijednost izvan sustava.
 
 Ali KOLO ti ne ukida obveze koje već imaš. Ako povremeno daš viškove ili nekome pomogneš, ništa se ne mijenja. Ako od prodaje robe ili pružanja usluga živiš, vrijede isti propisi kao i izvan KOLA, bez obzira na to bilježi li se dogovor u POEN-ima.
 
@@ -685,7 +685,7 @@ Ako kroz Pijacu obavljaš djelatnost, tvoje porezne i fiskalne obveze po općim 
         pitanje: `Kako određujem cijenu i količine svojih proizvoda i tko ih vrednuje?`,
         odgovor: `Iznos u POEN-ima za svoja dobra i usluge određuješ sam, slobodno. Platforma ga ne utvrđuje, ne ograničava i ne kontrolira, niti itko vrednuje tvoju robu umjesto tebe, ti najbolje znaš što nudiš i koliko vrijedi.
 
-Postoji samo orijentir: jedan POEN otprilike odgovara jednom dinaru. To je mjerna skala koja pomaže da se snađeš pri određivanju iznosa, ali te ni na što ne obvezuje i nije službeni tečaj.
+Službenog odnosa nema i Zaklada ga ne objavljuje. Iznos određuješ ti, a najlakše se snađeš ako pođeš od cijene koju za to dobro ionako znaš — ta procjena vrijedi za tvoj oglas i nikoga drugog ne obvezuje.
 
 Ono što se traži jest poštenje: točan i jasan opis dobra ili usluge, realna količina i realan iznos u POEN-ima, i svi uvjeti razmjene. Nije dopušten lažan ili obmanjujuć sadržaj koji pogrešno predstavlja prirodu, kvalitetu ili količinu onoga što nudiš.
 
@@ -798,7 +798,7 @@ Donacija nije skrivena kupnja POEN-a zato što su to dva pravno neovisna akta. P
 
 Iz donacije ne nastaje tvoje potraživanje, ni pravo da od Fondacije tražiš upis POEN-a, ni pravo da tražiš novac natrag. Upis POEN-a nije protuusluga za donaciju.
 
-Radi orijentacije koristi se mjerna skala od otprilike 1 POEN za 1 dinar, ali Fondacija tu vrijednost ne jamči i ne mijenja POEN za novac.`,
+Zaklada ne objavljuje odnos POEN-a prema dinaru; iznos u oglasu određuje sam korisnik. Zaklada nikakvu vrijednost POEN-a ne jamči i ne mijenja POEN za novac.`,
       },
       {
         id: 98,

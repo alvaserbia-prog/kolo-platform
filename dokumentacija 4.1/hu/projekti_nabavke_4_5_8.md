@@ -54,7 +54,9 @@ Az átengedett jószágért járó ellenszolgáltatás bevezetése gazdasági te
 
 *A résztvevők köre*
 
-A kollektív beszerzésben aktív fiókkal rendelkező nagykorú felhasználók vesznek részt.
+A kollektív beszerzésben azok a nagykorú, aktív fiókkal rendelkező felhasználók vesznek részt, akiknek valóságát a megerősítési láncon keresztül megerősítették (a valóságindex legalább 10%).
+
+A megerősített valóság feltétele a beszerzés céljából következik: a javakat az Alapítvány Alapszabálya 9. cikkének 4. bekezdése értelmében vett programkedvezményezettek között osztják szét, ez pedig csak olyan személy lehet, akiért valaki a hálóból kiállt és megerősítette, hogy létezik. E feltétel nélkül a 21. cikk szerinti küszöb egy újonnan nyitott fiók javára történő nyilvántartás-frissítéssel elérhető lenne, így a javakat olyan személynek osztanák, akinek létezését senki nem erősítette meg.
 
 Kiskorú felhasználók beszerzési javaslatot nem nyújtanak be, beszerzésre nem jelentkeznek, és javakat nem vesznek át.
 

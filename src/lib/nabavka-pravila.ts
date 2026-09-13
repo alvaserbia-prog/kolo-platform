@@ -289,17 +289,36 @@ export function predlogIstice(upisanAt: Date): Date {
 
 // ─── Ko učestvuje (čl. 4) ─────────────────────────────────────────────────────
 
+/**
+ * Funkcionalni prag indeksa (čl. 4 Pravilnika o dokazu stvarnosti). Prepisan
+ * ovde umesto uvezen, jer ovaj modul namerno nema uvoza — čitaju ga i ekrani.
+ */
+export const FUNKCIONALNI_PRAG_INDEKSA_NABAVKA = 10;
+
 export interface UcesnikProvera {
   maloletan: boolean;
   deaktiviranAt: Date | null;
   status: string;
+  /**
+   * Potvrđena stvarnost (mera P-1 uz R-01). Dobra se raspodeljuju korisnicima
+   * programa u smislu čl. 9 st. 4 Statuta, a to mora biti lice čija je stvarnost
+   * potvrđena.
+   */
+  verified: boolean;
+  indeksStvarnosti: number;
 }
 
 /**
- * Čl. 4 — u nabavci učestvuju punoletni korisnici sa aktivnim nalogom.
+ * Čl. 4 — u nabavci učestvuju punoletni korisnici sa aktivnim nalogom i
+ * POTVRĐENOM STVARNOŠĆU (indeks ≥ 10%).
  *
  * 🔴 Maloletni nalog je isključen izričito, a ne posredno preko indeksa: dete sme
  * da ima POEN i ušlo bi u red, a ne sme da bude strana u preuzimanju robe.
+ *
+ * 🔴 Uslov potvrde je dodat merom P-1 uz R-01. Do tada je provera gledala samo
+ * uzrast i stanje naloga, pa je prag od 20.000 POEN-a bio dostižan PREPISOM na
+ * svež nepotvrđen nalog — novac → POEN → roba, bez ijedne provere identiteta.
+ * Postojalo je nezavisno od svega ostalog u tom riziku.
  */
 export function ispunjavaPrag(poen: number): boolean {
   return Number.isFinite(poen) && poen >= PRAG_POENA_ZA_UCESCE;
@@ -308,6 +327,7 @@ export function ispunjavaPrag(poen: number): boolean {
 export function smeUcestvovati(u: UcesnikProvera): boolean {
   if (u.maloletan) return false;
   if (u.deaktiviranAt) return false;
+  if (!u.verified || u.indeksStvarnosti < FUNKCIONALNI_PRAG_INDEKSA_NABAVKA) return false;
   return u.status === "ACTIVE";
 }
 

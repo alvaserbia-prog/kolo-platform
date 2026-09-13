@@ -14,6 +14,7 @@ type LanacResponse = {
     pseudonim: string;
     tip: string;
     jeOsnivac: boolean;
+    identitetUtvrdjen: boolean;
     indeks: number;
     kapacitet: number | null;
     neograniceno: boolean;
@@ -98,6 +99,7 @@ export default function IndeksSekcija({
           tip={data.korisnik.tip}
           indeks={data.korisnik.indeks}
           jeOsnivac={data.korisnik.jeOsnivac}
+          identitetUtvrdjen={data.korisnik.identitetUtvrdjen}
           statusKaoBadge={indeksKaoBadge}
           ispuniVisinu={ispuniVisinu}
         />

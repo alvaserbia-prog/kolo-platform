@@ -26,7 +26,7 @@ Terms used in this Rulebook have the meaning established in the KOLO System Rule
 
 ### Article 3 — Right to donate
 
-Any verified system user may donate money to the Foundation in dinars or another currency.
+Any system user may donate money to the Foundation in dinars or another currency. Reality confirmed in the chain of confirmations is not a condition for donating, nor for recording a contribution on that basis.
 
 A donation is made by payment to the Foundation's account. The Foundation issues a donation receipt upon the donor's request, in accordance with the law. The tax treatment of a donation depends on the donor's status, the Foundation's registered status, and the applicable tax regulations at the time of the donation.
 
@@ -34,7 +34,11 @@ A donation is executed exclusively by a transfer of funds from account to accoun
 
 The contribution is recorded exclusively in the record of the user with whose funds the payment was made. A payment made by another person is not recorded as the contribution of the user to whose reference number it was made. A payment by a person who is not a user of the system carries no recording of POEN — the funds are accepted as a donation and used to pursue the aims of the Foundation.
 
-The payer's details from the bank statement are kept with the donation record and with the record of the POEN recorded. Where payment is made by payment card, the donor declares that the payment instrument is issued in their name.
+The payer's details from the bank statement are kept with the donation record and with the record of the POEN recorded. In card payments the donor declares that the payment instrument is in their name.
+
+Where a donation has been made in a foreign currency, the dinar amount credited to the Foundation's account is authoritative. The contribution is recorded according to that amount, not the amount the donor sent; the difference arising from conversion and payment transaction costs is not recorded.
+
+Receipt of a donation is established by the Foundation, by comparing the payer's details with the user's account. The payment intermediary's report of a completed card charge is not an establishment of receipt but a ground for entering the payment into that procedure; the contribution is not recorded at the moment of the charge.
 
 With each donation, the donor chooses whether the donation is public or anonymous. By making a public donation, the donor agrees that their first and last name be publicly displayed in the donation list on the platform, and POEN is recorded under Article 4 only for a public donation. An anonymous donation does not display the donor's name, and no POEN is recorded for it. The choice is made for each donation separately and applies to donations made after the entry into force of these provisions.
 
@@ -81,7 +85,9 @@ A donation confers no right to goods from a collective procurement, secures no p
 
 POEN is recorded exclusively for public donations within the meaning of Article 3. For anonymous donations, no POEN is recorded and they do not count toward the cumulative donation tier under Article 4.
 
-The recording of POEN on account of a donation is an automatic act of the Protocol within the meaning of Art. 39 and Art. 73 of the KOLO System Rulebook. It does not count against the daily emission limit of the Protocol Programme.
+The recording of POEN on account of a donation is an automatic act of the Protocol within the meaning of Art. 39 and Art. 73 of the Rulebook on the KOLO System. It does not count towards the daily issuance limit of the Protocol Programs.
+
+The automatism concerns the amount, not the initiation. The Protocol determines the number of POENs without discretion, pursuant to Article 4 of this Rulebook; the recording itself is initiated only after the Foundation has established receipt of the donation within the meaning of Article 3. A donation is therefore not a way to acquire POEN at the moment it is needed.
 
 Recorded POEN have the same status as all other POEN in the system.
 

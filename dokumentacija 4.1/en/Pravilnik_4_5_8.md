@@ -212,11 +212,15 @@ The provision of the preceding paragraph is not merely a label but a consequence
 
 — it is neither redeemed nor converted (Article 73 of this Rulebook), so there is no exit from it in money;
 
-— the Foundation does not determine its price and does not offer it on a market; the indicative ratio under the Terms of Use serves the user alone in setting the amount in their own listing, and the Foundation applies it in none of its own procedures;
+— the Foundation does not determine its price and does not offer it on a market: it publishes no ratio of POEN to the dinar or to any other currency, and applies no such ratio in any of its own procedures. The amount in a listing is set by the user themselves (Article 19 of the Terms of Use); if in doing so they start from a value expressed in money, that is their own estimate, which binds neither the Foundation nor the other party;
 
 — it does not exist outside the Protocol's ledger and cannot be transferred to a record the Protocol does not keep;
 
 — it does not serve the settlement of monetary obligations and cannot be offered in place of money.
+
+No one is obliged to accept POEN. The Foundation does not accept POEN, expresses none of its own amounts in it, and publishes no price list in POENs. The amount in POENs in an exchange is set by the parties themselves and binds no other user.
+
+POEN cannot be acquired for the purpose of performing an exchange. A contribution on the basis of a donation is not recorded at the moment of payment: recording presupposes that the Foundation has first established the fact of receipt of the payment and the person with whose funds it was made (Article 15 and Article 39).
 
 On account of POEN the Foundation provides no payment services, holds no monetary funds of users and executes no payment transactions. The updating of the ledger between users under Article 16 of this Rulebook is not a transfer of monetary value but a change of a record in the ledger kept by the Protocol.
 
@@ -288,6 +292,8 @@ The channels under items 1, 3, 4, 7, and 8 are governed by Chapter VI of this Ru
 
 Financial contribution is made in dinars. Sponsorship is made by donating money, goods, or services. Dinar funds enter the Foundation and do not enter the accounting framework of the system. Upon receipt of a donation or a sponsorship contribution, the Protocol records the contribution in POENs in the record of the relevant user, pursuant to the recording parameters established by a special rulebook. The recording of POENs is an automatic act of the Protocol and does not create a contractual relationship between the donor and the Foundation.
 
+Two decisions in that procedure are separate. The fact of receipt of a payment and the person with whose funds it was made are established by the Foundation, by comparing the payer's details with the user's account; the payment intermediary's report of a completed charge does not itself trigger recording. The number of POENs recorded is determined automatically by the Protocol, pursuant to the parameters of a separate rulebook, and is not subject to the judgement of any actor in the system.
+
 ### Article 16
 
 Users within the system exchange goods and services. The Protocol records each exchange by updating the POEN ledger: the record of the user providing the good or service is increased, and the record of the receiving user is decreased by the same amount.
@@ -298,7 +304,9 @@ Exchange is not a payment transaction. The ledger update of POENs is not a trans
 
 For performance, quality, liability, and risk in exchange, the users who participate in it are responsible, pursuant to the general rules of the law of obligations. The Foundation and the Protocol do not mediate in the exchange and are not responsible for the performance of users' obligations.
 
-All users may exchange goods and services. Initiating a POEN ledger update in favor of another user (with or without a counter-service) is available to verified users, under the conditions set out in Article 28.
+All users may exchange goods and services. Initiating a POEN ledger update in favor of another user is available to verified users, under the conditions of Article 28.
+
+A ledger update carried out for the purpose of a transaction by which POEN is offered, bought, sold, or brokered for value outside the system is prohibited and entails the measures established by the Terms of Use. Such an update is not an exchange of goods and services within the meaning of this Article.
 
 The preview of listings in the platform's advertising space — the content of an offer or request, price, location, and pseudonym of the advertiser — is public and available to all visitors for the accessibility of exchange.
 
@@ -330,7 +338,9 @@ ZRNO is inscribed and written off exclusively by the Protocol, at the user's req
 
 ### Article 19
 
-A verified user inscribes ZRNO when they satisfy the conditions established by the system rules. By inscribing ZRNO, the user becomes a ZRNO Holder.
+ZRNO is inscribed from the contribution recorded in the user's record, irrespective of whether that contribution was recorded through a channel under Article 15 or the record was increased by the exchange of goods and services with other users. By inscribing ZRNO the user becomes a ZRNO Holder.
+
+A vote in the Upper Kolo arises not from inscribed but from activated ZRNO of a user whose reality has been confirmed through the chain of confirmations (Article 21 and Article 45). A user whose reality has not been confirmed inscribes and holds ZRNO, but does not activate it, does not write it off, and does not delegate a vote on its basis.
 
 Inscription of ZRNO requires a minimum of 20,000 recorded POENs in the user's record. In one accounting period, a user may use at most 1% of their recorded POENs for ZRNO inscription.
 
@@ -366,7 +376,7 @@ The difference between the accounting coefficient at the time of inscription and
 
 ZRNO cannot be transferred to another user.
 
-ZRNO is bound to the user whose reality has been confirmed through the chain of confirmations.
+ZRNO is bound to the user in whose record it is inscribed and is not transferred — neither on its own nor together with the account.
 
 There is no market for ZRNO, there is no price for ZRNO, and there is no possibility of trading it.
 
@@ -422,9 +432,13 @@ An unverified user has the right to view public system content, including viewin
 
 In POEN ledger updates an unverified user may participate exclusively as a receiver. Updating the ledger in favor of another user becomes available upon verification. POEN records made before verification remain valid and are not annulled.
 
-An unverified user may have a contribution recorded exclusively through the channel of contribution to platform content (Article 15 item 8 and Article 40a). Through the other channels no contribution is recorded for them, nor may they inscribe ZRNO.
+An unverified user has a contribution recorded through the channel of contribution to platform content (Article 15 item 8 and Article 40a), and a user under paragraph 6 of this Article also through the channel of financial contribution (Article 15 item 3). Through the other channels no contribution is recorded for them.
 
-An unverified user may not access advertisers' contact details or initiate communication via the Platform. They may reply within a conversation started by a verified user regarding their listing.
+An unverified user may not access advertisers' contact details or initiate communication via the Platform. They may reply in a conversation initiated by a verified user on account of their listing. An exception to the prohibition on initiating communication is governed by paragraph 6 of this Article.
+
+A user whose identity has been established on account of a donation — in that the Foundation compared the payer's details with their account (Article 39) — has available, in addition to the rights under the preceding paragraphs: a listing requesting a good or a service and a greater number of simultaneous listings than the number established by the Terms of Use for other unverified users, initiating communication on account of a listing, participation in the shared conversation space, searching for users with a view of another's profile narrowed to the pseudonym and published listings, and the inscription of ZRNO under the conditions of Article 19.
+
+An established identity is not a confirmation of reality and does not replace it. A user under the preceding paragraph does not initiate POEN ledger updates, does not activate or write off ZRNO, does not vote or delegate a vote in the Upper Kolo, does not confirm the reality of other users and does not supervise confirmations, does not participate in operational contribution, social programs, or collective procurements, and does not access advertisers' contact details.
 
 ### Article 29
 
@@ -432,13 +446,15 @@ A verified user is a person whose reality has been confirmed through the chain o
 
 A verified user may exchange goods and services, have contributions recorded in POENs, participate in collective forms and social programs, and confirm the reality of other users in the chain of confirmations.
 
-A verified user inscribes ZRNO when they satisfy the inscription conditions, thereby becoming a ZRNO Holder.
+A verified user inscribes ZRNO when they satisfy the conditions of Article 19, thereby becoming a ZRNO Holder. The inscription of ZRNO is not exclusively their right (Article 28 paragraph 6), but the activation of ZRNO and the rights arising from activation are bound to confirmed reality.
 
 ### Article 30
 
-A ZRNO Holder is a verified user to whom ZRNO has been inscribed in the Protocol. The first ZRNO Holders at the start of the system are established in the manner set out in the transitional provision of this Rulebook (Article 82).
+A ZRNO Holder is a user to whom ZRNO has been inscribed in the Protocol. The first ZRNO Holders at the start of the system are established in the manner set out in the transitional provision of this Rulebook (Article 82).
 
-A ZRNO Holder has all the rights of a verified user. In addition, by activating ZRNO they participate in system governance through the Upper Kolo and hold a position in the accounting system, as well as a permanent capacity to confirm the reality of other users.
+A ZRNO Holder whose reality has been confirmed has all the rights of a verified user. In addition, by activating ZRNO they participate in system governance through the Upper Kolo and hold a position in the accounting system, as well as a permanent capacity to confirm the reality of other users.
+
+A ZRNO Holder whose reality has not been confirmed holds ZRNO but does not activate it; from inscribed ZRNO there arises neither a vote, nor delegation, nor capacity to confirm. Their rights are those established by Article 28 paragraph 6, and the inscribed ZRNO is activated when their reality is confirmed.
 
 A ZRNO Holder whose ZRNO has been entirely written off regains the status of a verified user.
 
@@ -459,6 +475,8 @@ Every user has a reality index — a numerical value expressing the degree of co
 The set of confirmations in the chain of confirmations constitutes the verification graph. The verification graph is a record of personal data; it is maintained on the infrastructure on which the Protocol operates, with data minimization. The graph also covers supervision data — the supervision outcome and, where suspicion is expressed, the subject of suspicion and the reason code (Article 11 of the Rulebook on Proof of Reality). Those data are not public and Article 67 of this Rulebook applies to them.
 
 An unverified user establishes the contact necessary for the conduct of verification through the platform's advertising space (Article 16): by posting a listing offering a good or a service, they present themselves to the network of existing verified users. The existence of that path does not change the nature, procedure, or conditions of verification established by this Rulebook and the Rulebook on Proof of Reality. The rules for publication, content, and data processing are established by the Terms of Use and the Privacy Policy.
+
+A donation made is not a ground for confirming reality and does not replace the direct personal acquaintance under Article 5 of the Rulebook on Proof of Reality. The establishment of a payer's identity on account of a donation (Article 39) does not enter the chain of confirmations, does not increase the reality index, and does not oblige any user to confirm the donor's reality.
 
 The rules for calculating the reality index, the rules for expanding the network of confirmations, and the measures against abuse of the chain of confirmations are established by a special rulebook.
 
@@ -534,7 +552,9 @@ When dinar inflows exceed the Foundation's operational costs, the surplus is dir
 
 A natural person's donation is a dinar inflow to the Foundation on the basis of a donation agreement.
 
-Upon receipt of a donation, the Protocol records the contribution in the donor's record in POENs, pursuant to the recording parameters established by a special rulebook. The recording of POENs is an automatic act of the Protocol and does not create a contractual relationship between the donor and the Foundation with respect to POENs.
+Receipt of a donation is established by the Foundation, by comparing the payer's details with the user's account. The payment intermediary's report of a completed charge is not an establishment of receipt but a ground for entering the payment into that procedure.
+
+Upon established receipt of a donation, the Protocol records the contribution in the donor's record in POENs, pursuant to the recording parameters established by a separate rulebook. The recording of POENs is an automatic act of the Protocol and does not establish a contractual relationship between the donor and the Foundation with respect to POEN.
 
 The Foundation issues a donation receipt upon the donor's request, in accordance with the law. The tax treatment of the donation depends on the donor's status, the Foundation's registered status, and the applicable tax regulations at the time of the donation.
 
@@ -658,9 +678,9 @@ In the accounting logic, the threshold of one million recorded POENs corresponds
 
 ### Article 45
 
-The Upper Kolo is the governing body of the system, composed of all ZRNO Holders.
+The Upper Kolo is the governing body of the system, composed of the holders of activated ZRNO whose reality has been confirmed through the chain of confirmations.
 
-The composition of the Upper Kolo is not established by appointment, but by the fulfilment of the condition prescribed by this Rulebook: membership is acquired by the inscription and activation of ZRNO and ceases upon their write-off, that is, upon the return of ZRNO to free status. The composition is at every moment determinable from the Protocol's records and constant throughout the accounting period.
+The composition of the Upper Kolo is not established by appointment, but by the fulfilment of the condition prescribed by this Rulebook: membership is acquired by the activation of inscribed ZRNO by a user whose reality has been confirmed, and ceases upon the write-off of ZRNO, the return of ZRNO to the free state, or the cessation of confirmed reality. The composition is at every moment determinable from the Protocol's ledger and constant during the accounting period.
 
 The Upper Kolo is formed automatically upon the activation of ZRNO — as soon as the first users inscribe ZRNO under the system's rules, they constitute the Upper Kolo.
 

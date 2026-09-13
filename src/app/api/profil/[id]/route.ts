@@ -3,7 +3,7 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { jeAdmin } from "@/lib/dozvole";
+import { jeAdmin, smeProsireno } from "@/lib/dozvole";
 import { razresiKorisnikaIzAdrese } from "@/lib/pseudonim";
 import { pristupProfiluDeteta } from "@/lib/protokol/deca";
 import { razresiSkolu } from "@/lib/skola";
@@ -26,9 +26,15 @@ export async function GET(
   }
 
   // Kapija "samo verifikovani vide profile" odnosi se na TUĐE profile (Pravilnik čl. 28–30,
-  // 67): neverifikovan ne vidi pseudonime/profile drugih. Sopstveni profil korisnik uvek
+  // 67): nepotvrđen član ne vidi pseudonime/profile drugih. Sopstveni profil korisnik uvek
   // sme da vidi — inače bi klik na "Moj profil" blokirao i njega samog.
-  if (!session.user.verified && id !== session.user.id) {
+  //
+  // R-01, mera M-9: članu čiji je identitet utvrđen na donatorskom putu profil se
+  // OTVARA, ali OLJUŠTEN — vidi ono što mu treba da bi stupio u kontakt povodom
+  // oglasa (pseudonim, oglasi, dugme za kontakt), a ne stanje POEN-a, ZRNO i rang,
+  // istoriju i telefon. Isti obrazac kao zatvoren profil maloletnog korisnika:
+  // odluka je NA SERVERU, ne u komponenti.
+  if (!smeProsireno(session.user) && id !== session.user.id) {
     return await greska("Verifikacija potrebna.", 403);
   }
 
@@ -161,6 +167,9 @@ export async function GET(
   // punog pristupa) sme da vidi iznose/vremena, ali NE pseudonime druge strane ni
   // stanje računa (Pravilnik čl. 28–30, 67). Maskiramo protivstranu i izostavljamo bilans.
   const punPristup = session.user.verified;
+  // Sužen pregled: identifikovan član gleda TUĐI profil (R-01). Na sopstvenom
+  // profilu se ništa ne sužava — tamo važi zatečeno maskiranje protivstrane.
+  const suzen = !punPristup && !jeVlasnik;
   const transakcijeIzlaz = punPristup
     ? transakcijeSlice
     : transakcijeSlice.map((t) => ({
@@ -220,7 +229,7 @@ export async function GET(
     roditelji: korisnik.roditeljstvaKaoDete.map((r) => r.roditelj),
     deca: korisnik.roditeljstvaKaoRoditelj.map((r) => r.dete),
     verified: korisnik.verified,
-    verifiedAt: korisnik.verifiedAt,
+    verifiedAt: suzen ? null : korisnik.verifiedAt,
     status: korisnik.status,
     avatar: korisnik.avatar,
     createdAt: korisnik.createdAt,
@@ -229,14 +238,17 @@ export async function GET(
     lokacija: (jeVlasnik || podaci?.prikaziLokaciju) ? korisnik.location : null,
     opis: (jeVlasnik || podaci?.prikaziOpis) ? podaci?.opis ?? null : null,
     punoIme: (jeVlasnik || podaci?.prikaziPunoIme) ? podaci?.punoIme ?? null : null,
-    telefon: (jeVlasnik || podaci?.prikaziTelefon) ? korisnik.telefon : null,
+    // Telefon ostaje zatvoren i identifikovanom članu: Politika 4.8 obećava da ga
+    // vide „isključivo verifikovani korisnici", pa bi širenje prešlo dati pristanak.
+    telefon: (!suzen && (jeVlasnik || podaci?.prikaziTelefon)) ? korisnik.telefon : null,
     // POEN balans, ZRNO, rang donacija i oglasi su uvek vidljivi (ne podležu togglu)
     // — osim za neverifikovanog na sopstvenom profilu, kome se stanje računa ne prikazuje (V3).
     bilans: punPristup ? (korisnik.wallet?.balance ?? 0) : null,
-    zrno: korisnik.zrnoStanje ? korisnik.zrnoStanje.slobodno + korisnik.zrnoStanje.aktivno : 0,
-    rangDonacija,
-    transakcije: transakcijeIzlaz,
-    nextCursor,
+    zrno: suzen ? null : (korisnik.zrnoStanje ? korisnik.zrnoStanje.slobodno + korisnik.zrnoStanje.aktivno : 0),
+    rangDonacija: suzen ? null : rangDonacija,
+    transakcije: suzen ? [] : transakcijeIzlaz,
+    nextCursor: suzen ? null : nextCursor,
+    suzen,
     oglasi,
     adminOznake,
   });

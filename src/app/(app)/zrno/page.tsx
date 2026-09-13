@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { glasackaMoc, poslednjiKurs, UKUPNO_ZRNA } from "@/lib/protokol/zrno";
+import { glasackaMoc, poslednjiKurs, MINIMUM_POEN_ZA_UPIS_ZRNA, UKUPNO_ZRNA } from "@/lib/protokol/zrno";
 import { beogradskiDan } from "@/lib/protokol/obracunski-dan";
 import { fazaPredloga, zatvoriIstekleIObjaviIshod } from "@/lib/protokol/glasanje";
 import ZrnoKlijent from "./ZrnoKlijent";
@@ -49,6 +49,8 @@ export default async function ZrnoPage() {
       kurs={kurs}
       trzisjeAktivno={trziste?.isActive ?? false}
       isVerified={session.user.verified}
+      identitetUtvrdjen={session.user.identitetUtvrdjen}
+      minimumPoenZaUpis={MINIMUM_POEN_ZA_UPIS_ZRNA}
       upisZahtev={upisZahtev ? { poenIznos: upisZahtev.poenIznos, status: upisZahtev.status } : null}
       otpisZahtev={otpisZahtev ? { kolicina: otpisZahtev.kolicina, status: otpisZahtev.status } : null}
       statusZahtevi={statusZahtevi.map((z) => ({ kolicina: z.kolicina, akcija: z.akcija }))}

@@ -26,7 +26,7 @@ Pojmovi koji se koriste u ovom pravilniku imaju značenje utvrđeno Pravilnikom 
 
 ### Članak 3. — Pravo na donaciju
 
-Svaki verificirani korisnik sustava može donirati novac Zakladi u dinarima ili drugoj valuti.
+Svaki korisnik sustava može donirati novac Zakladi u dinarima ili drugoj valuti. Potvrđena stvarnost u lancu potvrda nije uvjet za donaciju ni za evidentiranje doprinosa po njezinoj osnovi.
 
 Donacija se obavlja uplatom na račun Zaklade. Zaklada izdaje potvrdu o donaciji na zahtjev donatora, u skladu sa zakonom. Porezni tretman donacije ovisi o statusu donatora, registriranom statusu Zaklade i važećim poreznim propisima u trenutku donacije.
 
@@ -35,6 +35,10 @@ Donacija se izvršava isključivo prijenosom sredstava s računa na račun Zakla
 Doprinos se evidentira isključivo u zapis korisnika čijim je sredstvima uplata izvršena. Uplata koju je izvršila druga osoba ne evidentira se kao doprinos korisnika na čiji je poziv na broj izvršena. Uplata osobe koja nije korisnik sustava ne nosi evidentiranje POEN-a — sredstva se prihvaćaju kao donacija i upotrebljavaju za ostvarivanje ciljeva Zaklade.
 
 Podatak o uplatitelju iz izvatka bilježi se uz zapis donacije i uz zapis o evidentiranom POEN-u. Kod plaćanja platnom karticom donator izjavljuje da platni instrument glasi na njegovo ime.
+
+Kada je donacija izvršena u stranoj valuti, mjerodavan je dinarski iznos odobren na računu Zaklade. Doprinos se evidentira po tom iznosu, a ne po iznosu koji je donator uputio; razlika nastala konverzijom i troškovima platnog prometa ne evidentira se.
+
+Primitak donacije utvrđuje Zaklada, uspoređujući podatke o uplatitelju s računom korisnika. Izvještaj platnog posrednika o izvršenoj naplati platnom karticom nije utvrđenje primitka nego osnova da se uplata unese u taj postupak; doprinos se ne evidentira u trenutku naplate.
 
 Donator pri svakoj donaciji bira je li donacija javna ili anonimna. Javnom donacijom donator pristaje da njegovo ime i prezime budu javno prikazani u popisu donacija na platformi, i samo se za javnu donaciju evidentira POEN prema članku 4. Anonimna donacija ne prikazuje ime donatora i za nju se POEN ne evidentira. Izbor se obavlja za svaku donaciju posebno i primjenjuje se na donacije izvršene nakon stupanja na snagu ovih odredaba.
 
@@ -82,6 +86,8 @@ Donacija ne daje pravo na dobra iz kolektivne nabave, ne osigurava mjesto u redo
 POEN se evidentira isključivo za javne donacije u smislu članka 3. Za anonimne se donacije POEN ne evidentira i one ne ulaze u kumulativnu razinu donacija iz članka 4.
 
 Evidentiranje POEN-a po osnovi donacije automatski je akt Protokola u smislu čl. 39. i čl. 73. Pravilnika o KOLO sustavu. Ne ulazi u dnevni limit emisije Programa Protokola.
+
+Automatizam se odnosi na iznos, a ne na pokretanje. Broj POEN-a Protokol određuje bez diskrecije, prema članku 4. ovoga pravilnika; sam upis pokreće se tek nakon što Zaklada utvrdi primitak donacije u smislu članka 3. Donacija stoga nije način da se POEN pribavi u trenutku u kojem je potreban.
 
 Evidentirani POEN-i imaju isti status kao svi drugi POEN-i u sustavu.
 

@@ -203,6 +203,12 @@ enum SistemskoStatus {
 
 enum DonationStatus {
   PENDING
+  // Kartična uplata je naplaćena, ali POEN JOŠ NIJE evidentiran (R-01, mera
+  // M-4a). Detekcija je automatska (callback banke), potvrda je ljudska: zapis
+  // čeka u admin tabu dok čovek ne uporedi uplatioca sa nalogom i ne potvrdi.
+  // 🔴 Ne vraćati automatsko evidentiranje po callback-u — to je projektantska
+  // odluka uz R-01, ne privremeno rešenje.
+  NAPLACENO
   CONFIRMED
 }
 
@@ -240,51 +246,51 @@ enum OglasPrijavaStatus {
 // ─── Modeli ───────────────────────────────────────────────────────────────────
 
 model User {
-  id                               String                    @id @default(uuid())
-  email                            String?                   @unique
-  passwordHash                     String?
-  oauthProvider                    String?
-  oauthId                          String?
-  oauthPending                     Boolean                   @default(false)
-  pseudonim                        String                    @unique
+  id                     String       @id @default(uuid())
+  email                  String?      @unique
+  passwordHash           String?
+  oauthProvider          String?
+  oauthId                String?
+  oauthPending           Boolean      @default(false)
+  pseudonim              String       @unique
   // Pseudonim u malim slovima — jedini ključ po kome se pseudonim traži i po kome
   // se čuva jedinstvenost. Bez ovoga bi "Marko" i "marko" bila dva različita naloga
   // (Postgres `@unique` je osetljiv na veličinu slova), što je i rupa za imitaciju i
   // dvosmislenost otkad adresa profila glasi `/profil/<pseudonim>`. Prikazuje se
   // uvek `pseudonim` (sa velikim slovima kako ga je korisnik upisao).
   // Održava se ISKLJUČIVO preko `src/lib/pseudonim.ts` — ne upisivati ručno.
-  pseudonimLower                   String                    @unique
+  pseudonimLower         String       @unique
   // Trajni donatorski broj člana — osnova poziva na broj (model 97) za uplate
   // (IPS QR + klasična uplatnica). Redni broj po datumu registracije (backfill u
   // migraciji), novi nalozi dobijaju sledeći iz sekvence. Ostaje i posle
   // anonimizacije naloga (neidentifikujući, kao i interni id).
-  donatorskiBroj                   Int                       @unique @default(autoincrement())
-  status                           UserStatus                @default(ACTIVE)
-  suspendedAt                      DateTime?
-  suspendedReason                  String?
-  verified                         Boolean                   @default(false)
-  verifiedAt                       DateTime?
-  tipKorisnika                     TipKorisnika              @default(NEVERIFIKOVAN)
-  admin                            AdminNivo                 @default(NONE)
+  donatorskiBroj         Int          @unique @default(autoincrement())
+  status                 UserStatus   @default(ACTIVE)
+  suspendedAt            DateTime?
+  suspendedReason        String?
+  verified               Boolean      @default(false)
+  verifiedAt             DateTime?
+  tipKorisnika           TipKorisnika @default(NEVERIFIKOVAN)
+  admin                  AdminNivo    @default(NONE)
   // Oznaka početnog nosioca ZRNA (osnivač). Zaseban marker pored tipKorisnika —
   // status NOSILAC_ZRNA može steći i običan korisnik upisom ZRNA, pa nije pouzdan
   // pokazatelj osnivača. Osnivač NE sme da verifikuje drugog osnivača (anti-malverzacija).
-  jeOsnivac                        Boolean                   @default(false)
-  indeksStvarnosti                 Int                       @default(0)
-  slotoviPotroseni                 Int                       @default(0)
+  jeOsnivac              Boolean      @default(false)
+  indeksStvarnosti       Int          @default(0)
+  slotoviPotroseni       Int          @default(0)
   // Upravni odbor je utvrdio da iza naloga ne stoji stvarna osoba, ili da nalog nije
   // jedinstven (dokaz stvarnosti 4.2.0, čl. 18). Takav nalog nikoga ne može poznavati,
   // pa padaju SVE verifikacije koje ga dodiruju — i primljene i obavljene (čl. 20).
   // Kaskada se time zaustavlja na prvom nalogu koji NIJE ovako označen: stvaran čovek
   // gubi samo vezu ka lažnom nalogu, a sopstvene verifikacije zadržava.
-  utvrdjenNepostojeci              DateTime?
-  pocetnaEmisijaIzvrsena           Boolean                   @default(false)
-  pseudonimChangedAt               DateTime?
+  utvrdjenNepostojeci    DateTime?
+  pocetnaEmisijaIzvrsena Boolean      @default(false)
+  pseudonimChangedAt     DateTime?
   // "Viđeno" vremena za sidebar badge-eve: badge broji samo stavke novije od ovog
   // trenutka. Postavlja se kad korisnik otvori odgovarajući tab → badge ide na 0.
-  vidjenoNovcanikAt                DateTime?
-  vidjenoPijacaAt                  DateTime?
-  vidjenoPocetnaAt                 DateTime?
+  vidjenoNovcanikAt      DateTime?
+  vidjenoPijacaAt        DateTime?
+  vidjenoPocetnaAt       DateTime?
   // Kad je čovek prvi put video vodič `/dobrodosli`. Dok je NULL, prva prijava
   // vodi na vodič — isto što registracija radi odmah po otvaranju naloga.
   // Do sada je „prvi prolaz" živeo samo u `sessionStorage` pregledača, pa vodič
@@ -292,7 +298,22 @@ model User {
   // dan registracije (server ne može da dopre do memorije pregledača).
   // Zatečeni nalozi su u migraciji popunjeni tekućim vremenom — vodič im se ne
   // otvara naknadno.
-  vodicVidjenAt                    DateTime?
+  vodicVidjenAt          DateTime?
+
+  // Identitet utvrđen na donatorskom putu (R-01, mera M-9). Postavlja se kad
+  // čovek potvrdi donaciju POREDEĆI uplatioca iz bankovnog izvoda sa nalogom
+  // (Pravilnik o pokroviteljstvu i donacijama, čl. 3). NIJE četvrti status
+  // korisnika — `TipKorisnika` ostaje NEVERIFIKOVAN dok ga neko iz mreže ne
+  // potvrdi; ovo svojstvo otvara uži skup prava (oglas POTRAŽNJA, pokretanje
+  // razgovora, Pričaonica, upis ZRNA BEZ glasa) i ne zamenjuje potvrdu
+  // stvarnosti iz čl. 5 Pravilnika o dokazu stvarnosti.
+  //
+  // 🔴 Postavlja se ISKLJUČIVO po JAVNOJ donaciji. Anonimna donacija ne nosi
+  // POEN (čl. 5a st. 2 pravilnika o donacijama), pa ne nastaje ni položaj; uz to
+  // je ovo javna oznaka „donator“, koja bi anonimnog donatora odala, a Politika
+  // mu obećava suprotno. Ime javnog donatora je ionako u listi donacija
+  // (Uslovi čl. 17), pa oznaka ne otkriva ništa novo.
+  identitetUtvrdjenAt              DateTime?
   // ─── Modul Deca (Pravilnik o Modulu Deca) ─────────────────────────────────
   // Nenulto samo kod maloletnih korisnika. Jedini izvor uzrasta; posle upisa se ne
   // menja (čl. 7) — roditeljska izjava je jedina provera godina kojom sistem
@@ -449,12 +470,12 @@ model User {
 /// 🔴 Prazan skup redova za dete NIJE greška u podacima nego stanje: „dete na
 /// čekanju" je nalog koji se registrovao sam i čeka da ga roditelj preuzme.
 model Roditeljstvo {
-  id         String   @id @default(uuid())
-  deteId     String
-  dete       User     @relation("RoditeljstvoDete", fields: [deteId], references: [id], onDelete: Cascade)
-  roditeljId String
-  roditelj   User     @relation("RoditeljstvoRoditelj", fields: [roditeljId], references: [id], onDelete: Cascade)
-  createdAt  DateTime @default(now())
+  id          String    @id @default(uuid())
+  deteId      String
+  dete        User      @relation("RoditeljstvoDete", fields: [deteId], references: [id], onDelete: Cascade)
+  roditeljId  String
+  roditelj    User      @relation("RoditeljstvoRoditelj", fields: [roditeljId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
   // Izjava roditelja pod punom odgovornoscu da ima dete tog uzrasta (cl. 6 st. 1).
   //
   // Potvrda opstaje samo ako su se izjasnila OBA clana veze — potvrdjivac i sam
@@ -465,13 +486,13 @@ model Roditeljstvo {
   // 🔴 Tekst se SNIMA i posle toga se ne menja — isti razlog kao `ugovorTekst` kod
   // donacije i `izjavaTekst` kod operativnog doprinosa: dokument mora da govori ono
   // sto je govorio u trenutku davanja. Ne generisati ga ponovo pri citanju.
-  izjavaAt     DateTime?
-  izjavaTekst  String?
+  izjavaAt    DateTime?
+  izjavaTekst String?
   // Popunjen samo kad izjava NEDOSTAJE i tece rok — jedini takav slucaj je
   // administrativno prevodjenje punoletnog naloga u maloletni, gde roditelj nije
   // izvrsio nijednu radnju kojom bi izjavu dao. Neaktivnost roditelja do ovog roka
   // obara sve potvrde koje za to dete cekaju izjasnjenje.
-  izjavaRokDo  DateTime?
+  izjavaRokDo DateTime?
 
   @@unique([deteId, roditeljId])
   @@index([deteId])
@@ -952,7 +973,7 @@ model PrijavaRazmene {
 
   /// Prigovor sa profila kroz koji je slučaj otvoren (Uslovi čl. 37a). Ulazna
   /// tačka je od 4.5.4 isključivo profil — dugme uz prepis u istoriji je uklonjeno.
-  prigovorId String?          @unique
+  prigovorId String?           @unique
   prigovor   PrigovorNaOdluku? @relation(fields: [prigovorId], references: [id])
 
   opis   String
@@ -1457,7 +1478,19 @@ model DonationRecord {
   // pošto UO utvrdi identitet donatora i osnov uplate. Oznaka sluzi izvestavanju.
   straniPriliv Boolean @default(false)
 
+  // Normalizovan ključ uplatioca (mera C-1 uz R-01) — mala slova, bez dijakritike,
+  // reči sortirane, pa se "Petar Petrović" i "PETROVIĆ PETAR" poklapaju. Sluzi
+  // ISKLJUČIVO poređenju: dva naloga sa uplatama istog uplatioca su isti čovek,
+  // što zaustavlja evidentiranje do ljudske odluke. Null = istorijska donacija.
+  uplatilacKljuc String?
+
+  // Kvačica pre kartične naplate (mera M-11): donator je potvrdio da je donacija
+  // nepovratna i da njome ne dobija robu ni uslugu. Snima se na zapis kao dokaz
+  // u sporu po osporenoj transakciji. Null = nije kartični tok ili istorijski zapis.
+  nepovratnostPotvrdjenaAt DateTime?
+
   @@index([status, createdAt])
+  @@index([uplatilacKljuc])
 }
 
 // ─── Pokrovitelji ─────────────────────────────────────────────────────────────

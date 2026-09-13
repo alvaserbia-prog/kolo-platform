@@ -54,7 +54,9 @@ Introducing consideration for a ceded good would constitute an economic activity
 
 *Circle of participants*
 
-Adult users with an active account participate in collective procurement.
+Collective procurement is participated in by adult users with an active account whose reality has been confirmed through the chain of confirmations (a reality index of at least 10%).
+
+The condition of confirmed reality follows from the purpose of procurement: goods are distributed to the beneficiaries of programs within the meaning of Article 9 paragraph 4 of the Foundation's Statute, and that can only be a person for whom someone in the network has stood up and confirmed that they exist. Without that condition, the threshold under Article 21 would be attainable by updating the ledger in favour of a newly opened account, so goods would be distributed to a person whose existence no one has confirmed.
 
 Minor users do not submit procurement proposals, do not apply for procurement, and do not collect goods.
 

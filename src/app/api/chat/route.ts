@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { smeProsireno } from "@/lib/dozvole";
 import { prisma } from "@/lib/prisma";
 import { ChatSoba } from "@/generated/prisma/client";
 import { idPrijatelja, smeUSobu } from "@/lib/protokol/prijateljstva";
@@ -97,7 +98,7 @@ export async function POST(req: NextRequest) {
   // za sobu odraslih; preneseno na decu, dečja soba bi zauvek bila samo za čitanje,
   // jer maloletni korisnik potvrdu nikad ne stiče (Modul Deca, čl. 15).
   const soba = await mojaSoba(session.user.id);
-  if (soba === ChatSoba.ODRASLI && !session.user.verified) {
+  if (soba === ChatSoba.ODRASLI && !smeProsireno(session.user)) {
     return await greska("Pisanje u pričaonicu je dostupno samo verifikovanim članovima.", 403);
   }
   // Zato što potvrde nema, uslov za dečju sobu je STANJE NALOGA: iza deteta mora da

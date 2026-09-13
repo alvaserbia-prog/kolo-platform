@@ -21,6 +21,32 @@ export type KorisnikDozvole = {
   admin?: string | null;
 };
 
+/**
+ * Prošireni krug funkcija (R-01, mera M-9 i odluka B).
+ *
+ * Otvoren je potvrđenom članu i članu čiji je identitet utvrđen na donatorskom
+ * putu — čoveku je neko poredio uplatioca iz izvoda sa nalogom, dakle iza naloga
+ * stoji identitet koji je banka već identifikovala.
+ *
+ * 🔴 Ovo NIJE potvrda stvarnosti i ne zamenjuje je (čl. 32 Pravilnika, čl. 5
+ * Pravilnika o dokazu stvarnosti). Otvara: oglas POTRAŽNJA i više od tri oglasa,
+ * pokretanje razgovora, Pričaonicu, pretragu članova i sužen pregled tuđeg
+ * profila, i UPIS ZRNA.
+ *
+ * 🔴 Ne otvara, i to je razlika između R-01 = 5 i R-01 = 9: prepis POEN-a,
+ * aktiviranje i otpis ZRNA, glas i delegiranje u Gornjem Kolu, nadzor
+ * verifikacija, potvrđivanje drugih, operativni doprinos, socijalne programe,
+ * kolektivnu nabavku, pokroviteljstvo i kontakt oglašivača.
+ */
+export type KorisnikProsireni = {
+  verified?: boolean | null;
+  identitetUtvrdjen?: boolean | null;
+};
+
+export function smeProsireno(u?: KorisnikProsireni | null): boolean {
+  return Boolean(u?.verified) || Boolean(u?.identitetUtvrdjen);
+}
+
 const NOSILAC_ZRNA = "NOSILAC_ZRNA";
 const ADMIN = "ADMIN";
 const SUPERADMIN = "SUPERADMIN";
@@ -38,6 +64,24 @@ export function jeAdmin(u?: KorisnikDozvole | null): boolean {
 /** Nadzor verifikacija i druge distribuirane (kvorum) funkcije — nosioci ZRNA + admini. */
 export function mozeNadzor(u?: KorisnikDozvole | null): boolean {
   return u?.tipKorisnika === NOSILAC_ZRNA || jeAdmin(u);
+}
+
+/**
+ * Glas u Gornjem Kolu (R-01, odluka B).
+ *
+ * Traži DVOJE: aktivirano ZRNO i potvrđenu stvarnost. Član čiji je identitet
+ * utvrđen na donatorskom putu ZRNO drži, ali ne glasa — novcem se dobija položaj
+ * u zajedničkom dobru, ne glas. Uz to `verified` u sesiji već nosi i funkcionalni
+ * prag indeksa (≥ 10%), pa glas gubi i onaj kome potvrda bude poništena.
+ *
+ * 🔴 Ne svoditi na „ima aktivno ZRNO": do ove mere je glasanje gledalo samo to,
+ * pa bi ga zadržao i onaj ko je aktivirao ZRNO pre nego što mu je indeks pao.
+ */
+export function smeGlasati(
+  u: KorisnikProsireni | null | undefined,
+  aktivnoZrno: number,
+): boolean {
+  return aktivnoZrno > 0 && Boolean(u?.verified);
 }
 
 /** Koren lanca potvrda — bootstrap poverenja (superadmin verifikuje prve ljude). */

@@ -135,9 +135,18 @@ export async function izvrsiZrnoOperacije(datum: Date) {
           update: { slobodno: { increment: zrnaDobija } },
         });
 
-        // Pravilnik čl. 29-30: verifikovani korisnik koji upiše ZRNO postaje
-        // nosilac ZRNA. (POCETNI već ima sva prava nosioca ZRNA — kapacitet i
-        // glasačku moć iz aktivnog ZRNA — pa zadržava svoj bootstrap status.)
+        // Pravilnik čl. 29-30: POTVRĐEN korisnik koji upiše ZRNO postaje nosilac
+        // ZRNA. (POCETNI već ima sva prava nosioca ZRNA — kapacitet i glasačku
+        // moć iz aktivnog ZRNA — pa zadržava svoj bootstrap status.)
+        //
+        // 🔴 Nepotvrđen nalog se NE unapređuje, i to nije slučajno (R-01, odluka
+        // B). `NOSILAC_ZRNA` je status koji NADJAČAVA indeks: nosi neograničen
+        // verifikacioni kapacitet, izuzeće od nadzora i pun pristup operativnom
+        // doprinosu i socijalnim programima (`dokaz-stvarnosti.ts`, `pristup.ts`).
+        // Član koji je ZRNO upisao iz donacije ga DRŽI, ali ostaje NEVERIFIKOVAN
+        // dok ga neko iz mreže ne potvrdi — inače bi jedna linija otvorila sve
+        // što je odlukom B zatvoreno. Kad ga potvrde, status ga sustiže tamo gde
+        // se potvrda upisuje (`verifikacija-service.ts`).
         if (z.user.tipKorisnika === TipKorisnika.REGULARNI) {
           await tx.user.update({
             where: { id: z.userId },

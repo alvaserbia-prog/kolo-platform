@@ -28,9 +28,17 @@ type Props = {
   ispuniVisinu?: boolean;
   /** Maloletni korisnik (Modul Deca) — oznaka statusa glasi „dete". */
   maloletan?: boolean;
+  /**
+   * Identifikovan član — javan donator čiji je uplatilac upoređen sa nalogom
+   * (R-01, mera M-9). Nije status u bazi: nalog ostaje NEVERIFIKOVAN dok ga neko
+   * iz mreže ne potvrdi. Oznaka postoji zato što „nov član“ imenuje trenutak koji
+   * prolazi, a ovaj čovek je već učinio doprinos — i zato što mu je ime ionako
+   * javno u listi donacija (Uslovi čl. 17). Anonimna donacija ovo svojstvo NE daje.
+   */
+  identitetUtvrdjen?: boolean;
 };
 
-export default function IndeksPrikaz({ prikaz, tip, indeks, jeOsnivac, podnaslov, statusKaoBadge, ispuniVisinu, maloletan }: Props) {
+export default function IndeksPrikaz({ prikaz, tip, indeks, jeOsnivac, podnaslov, statusKaoBadge, ispuniVisinu, maloletan, identitetUtvrdjen }: Props) {
   const t = useTranslations("verifikacija");
   const rootCls = `rounded-2xl border border-kolo-border bg-white p-6 shadow-sm${
     ispuniVisinu ? " h-full flex flex-col justify-center" : ""
@@ -57,20 +65,29 @@ export default function IndeksPrikaz({ prikaz, tip, indeks, jeOsnivac, podnaslov
   // Maloletni korisnik nije „nov član" — ta oznaka znači „skoro je došao", a dete
   // može biti u sistemu godinama. U dečjem prostoru status ionako ne određuje ništa
   // (Modul Deca, čl. 15), pa oznaka imenuje samo ko je: dete.
+  // Oznaka „donator“ stoji UMESTO „nov član“, i samo tu: potvrđenom članu se ne
+  // prikazuje, jer je „redovan član“ jači podatak, a dete i osnivač imaju svoje.
+  const jeDonator =
+    Boolean(identitetUtvrdjen) && !maloletan && !jeOsnivac && tip === "NEVERIFIKOVAN";
+
   const labela = maloletan
     ? t("tip_dete")
     : jeOsnivac
       ? t("tip_pocetna")
-      : bezPristupa
-        ? t("tip_bez_pristupa")
-        : (tipLabela[tip] ?? tip);
+      : jeDonator
+        ? t("tip_donator")
+        : bezPristupa
+          ? t("tip_bez_pristupa")
+          : (tipLabela[tip] ?? tip);
   const stil = maloletan
     ? "bg-kolo-bg text-kolo-muted"
     : jeOsnivac
       ? "bg-kolo-gold-100 text-kolo-gold-600"
-      : bezPristupa
-        ? "bg-kolo-bg text-kolo-muted"
-        : (badgeStil[tip] ?? "bg-kolo-bg text-kolo-muted");
+      : jeDonator
+        ? "bg-kolo-gold-100 text-kolo-gold-600"
+        : bezPristupa
+          ? "bg-kolo-bg text-kolo-muted"
+          : (badgeStil[tip] ?? "bg-kolo-bg text-kolo-muted");
 
   const indeksBlok = (
     <div className="min-w-0 text-center">
