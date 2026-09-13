@@ -1,6 +1,6 @@
 # Registar radnji obrade podataka o ličnosti
 
-*Ovaj registar donosi se na osnovu čl. 47 Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL), čl. 62 i 63 Pravilnika o KOLO sistemu (verzija 4.5.2) i čl. 9 Pravilnika o hijerarhiji akata KOLO sistema. Primenjuje se zajedno sa Politikom privatnosti KOLO platforme (verzija 4.5.2) i Pravilnikom o programima podrške (verzija 4.5.0).*
+*Ovaj registar donosi se na osnovu čl. 47 Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL), čl. 62 i 63 Pravilnika o KOLO sistemu (verzija 4.5.9) i čl. 9 Pravilnika o hijerarhiji akata KOLO sistema. Primenjuje se zajedno sa Politikom privatnosti KOLO platforme (verzija 4.5.9) i Pravilnikom o programima podrške (verzija 4.5.0).*
 
 **PODACI O RUKOVAOCU**
 
@@ -175,7 +175,7 @@
 | **Prenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite. Vercel Inc. i Neon Inc. su društva iz SAD, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mere iz čl. 9 Politike privatnosti. |
 | **Rok čuvanja** | Kao za podatke o donacijama — 10 godina, u skladu sa poreskim i računovodstvenim propisima. Ime se ne uklanja iz liste ni prestankom svojstva korisnika (čl. 5a Pravilnika o pokroviteljstvu i donacijama), pa za tog korisnika povezivanje pseudonimne evidencije sa identitetom ostaje moguće i posle gašenja naloga. |
 | **Mere zaštite** | Izbor je dobrovoljan i po pojedinačnoj donaciji; jasno upozorenje pre javne donacije; anonimna opcija bez POEN-a kao alternativa; pravilo se primenjuje samo ubuduće; TLS enkripcija, kontrola pristupa. |
-| **Napomena** | Javno povezivanje imena sa donacijom omogućava povezivanje pseudonimnog zapisa donatora sa njegovim identitetom; otkrivanje je dobrovoljno i predstavlja uslov za evidentiranje POEN-a po osnovu donacije. |
+| **Napomena** | Javno povezivanje imena sa donacijom omogućava povezivanje pseudonimnog zapisa donatora sa njegovim identitetom; otkrivanje je dobrovoljno. POEN se za anonimnu donaciju ne evidentira zato što se upis koji se ne može pripisati nijednom licu ne može proveriti (član 5a Pravilnika o pokroviteljstvu i donacijama), a ne zato što Fondacija objavljivanje postavlja kao uslov. |
 
 **Radnja obrade br. 14 — Nadzorni predmet (ishod nadzora verifikacije)**
 

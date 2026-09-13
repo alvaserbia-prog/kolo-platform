@@ -26,8 +26,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // u maloletni (čl. 4d Pravilnika o učešću dece). Kod je taj minus pravio od
   // 2026-08-23, a akt ga je izričito zabranjivao — R-20.
   "kolo-sistem": {
-    fajl: "Pravilnik_4_5_8.md",
-    verzija: "4.5.8",
+    fajl: "Pravilnik_4_5_9.md",
+    verzija: "4.5.9",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.

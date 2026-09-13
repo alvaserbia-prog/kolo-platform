@@ -2,7 +2,7 @@
 
 # Az adatkezelési tevékenységek nyilvántartása
 
-*E nyilvántartás a személyes adatok védelméről szóló törvény (Zakon o zaštiti podataka o ličnosti, „SZK Hivatalos Közlönye”, 87/2018. szám, a továbbiakban: ZZPL) 47. cikke, a KOLO rendszerről szóló szabályzat (4.5.2 verzió) 62. és 63. cikke, valamint a KOLO rendszer aktusainak hierarchiájáról szóló szabályzat 9. cikke alapján kerül elfogadásra. A KOLO platform adatvédelmi szabályzatával (4.5.2 verzió) és a támogatási programokról szóló szabályzattal (4.5.0 verzió) együtt alkalmazandó.*
+*E nyilvántartás a személyes adatok védelméről szóló törvény (Zakon o zaštiti podataka o ličnosti, „SZK Hivatalos Közlönye”, 87/2018. szám, a továbbiakban: ZZPL) 47. cikke, a KOLO rendszerről szóló szabályzat (4.5.9 verzió) 62. és 63. cikke, valamint a KOLO rendszer aktusainak hierarchiájáról szóló szabályzat 9. cikke alapján kerül elfogadásra. A KOLO platform adatvédelmi szabályzatával (4.5.9 verzió) és a támogatási programokról szóló szabályzattal (4.5.0 verzió) együtt alkalmazandó.*
 
 **AZ ADATKEZELŐ ADATAI**
 
@@ -177,7 +177,7 @@
 | **Harmadik országba történő továbbítás** | Az adatbázisban lévő adatok tekintetében nem — az alkalmazás és az adatbázis az Európai Unióban (frankfurti régió) fut, amely megfelelő védelmi szintet biztosít. A Vercel Inc. és a Neon Inc. egyesült államokbeli társaságok, ezért harmadik országból történő hozzáférés adminisztratív és technikai célból lehetséges, az adatvédelmi szabályzat 9. cikke szerinti intézkedések mellett. |
 | **Megőrzési idő** | Mint az adományokra vonatkozó adatoknál — 10 év, az adó- és számviteli előírásokkal összhangban. A név a felhasználói minőség megszűnésével sem kerül le a listáról (a támogatásról és adományokról szóló szabályzat 5a. cikke), így az ilyen felhasználó esetében az álnevesített nyilvántartás személyazonossággal való összekapcsolása a fiók megszüntetése után is lehetséges marad. |
 | **Védelmi intézkedések** | A választás önkéntes és adományonként történik; egyértelmű figyelmeztetés a nyilvános adományozás előtt; alternatívaként POEN nélküli névtelen lehetőség; a szabály csak a jövőre nézve alkalmazandó; TLS titkosítás, hozzáférés-ellenőrzés. |
-| **Megjegyzés** | A név adománnyal való nyilvános összekapcsolása lehetővé teszi az adományozó álneves bejegyzésének összekapcsolását a személyazonosságával; a feltárás önkéntes, és feltétele a POEN adomány alapján történő nyilvántartásba vételének. |
+| **Megjegyzés** | A név adománnyal való nyilvános összekapcsolása lehetővé teszi az adományozó álneves bejegyzésének összekapcsolását a személyazonosságával; a feltárás önkéntes. Névtelen adomány esetén a POEN azért nem kerül nyilvántartásba, mert az egyetlen személyhez sem rendelhető bejegyzés nem ellenőrizhető (a pártfogásról és adományokról szóló szabályzat 5a. cikke), és nem azért, mert az Alapítvány a közzétételt feltételül szabná. |
 
 **14. adatkezelési tevékenység — Felügyeleti ügy (a hitelesítés felügyeletének eredménye)**
 
