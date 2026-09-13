@@ -1331,9 +1331,27 @@ Nosilac je **`User.identitetUtvrdjenAt`** — postavlja se kad čovek potvrdi do
 **poredeći uplatioca iz izvoda sa nalogom**. 🔴 **NIJE četvrti status korisnika**:
 `TipKorisnika` ostaje `NEVERIFIKOVAN` dok ga neko iz mreže ne potvrdi.
 
-🔴 **Ne prikazivati kao javnu oznaku na profilu.** Jedini put do tog svojstva je
-donacija, pa bi oznaka odala i **anonimnog donatora**, kome Politika obećava suprotno.
-Vidi ga sam korisnik i Fondacija.
+🔴 **Postavlja se ISKLJUČIVO po JAVNOJ donaciji (ispravka 13.09.2026).** Prva
+verzija ga je vezivala za uplatioca bez obzira na javnost — pogrešno: **anonimna
+donacija ne evidentira POEN** (donacije čl. 5a st. 2: upis koji se ne može pripisati
+licu nije proverljiv), pa iz nje ne nastaje nikakav položaj koji bi proširena prava
+pratila. Sprovodi `if (javno && uplatilac && ...)` u `evidentirajDonaciju`, zaključano
+testom u oba smera.
+
+🔴 **Oznaka na ekranu glasi „donator“** (odluka vlasnika, 13.09.2026) i stoji
+**umesto** oznake „nov član“ — nikad uz „redovan član“, „dete“ ni „početni
+korisnik“, koji su jači odnosno sopstveni podaci. Prikazuje se na kartici statusa
+(`IndeksPrikaz`, ekran Potvrde i javni profil) i u spisku članova na `/sistem`, gde
+zamenjuje „?“. **Ne otkriva ništa novo:** ime javnog donatora je ionako u listi
+donacija sa pseudonimom i linkom ka profilu (Uslovi čl. 17), a Fondacija sme javno da
+imenuje i zahvali donatoru (donacije čl. 13). 🟡 Raniji zapis („ne prikazivati kao
+javnu oznaku“) počivao je na tome da bi oznaka odala anonimnog donatora — sa gornjom
+ispravkom taj slučaj više ne postoji.
+
+🔴 **Pečat na Pijaci se NE menja** — ostaje `BEZ POTVRDE`. On radi zaštitni posao
+prema drugoj strani (iza oglašivača još niko nije stao), a to je i dalje tačno i za
+donatora. Isti presedan kao kod „novog člana“: pečat i oznaka statusa rade različit
+posao i smeju da se razlikuju.
 
 | Otvoreno (mera M-9) | Zatvoreno i posle donacije |
 |---|---|
@@ -1463,10 +1481,17 @@ time **stroži po jedinstvenosti od lanca potvrda**.
    dok donacije čl. 5a taj isti podatak obrazlaže **proverljivošću**. Nije dirano — van
    obima R-01; ako se dira, ide u pravcu čl. 5a, ne obrnuto.
 
-🟡 **Ekrana za upis/otpis ZRNA u aplikaciji NEMA** (ZRNO stranica prikazuje stanja,
-glasanje i delegaciju), pa upozorenje uz upis koje traži odluka D-1 („upisano ZRNO ne
-možeš da otpišeš ni da aktiviraš dok te neko ne potvrdi") nema gde da stoji dok se taj
-ekran ne napravi. Rute su međutim zatvorene, pa nema šta da se zaobiđe.
+🟢 **Ekran za upis i otpis ZRNA je NAPRAVLJEN (13.09.2026).** Do tada ga nije bilo:
+ZRNO stranica je prikazivala stanja, glasanje i delegaciju, a rute
+`/api/zrno/{upis,otpis,zakljucaj,otkljucaj}` su postojale **bez ijedne ulazne tačke**.
+Upisom otvorenim identifikovanom članu ekran je postao neophodan — bez njega to pravo
+nema gde da se ostvari. Sekcija `UpisOtpisSekcija` u `ZrnoKlijent.tsx`: tri kartice
+(upis / otpis / aktiviranje glasa), sve tri se izvršavaju u ponoć.
+🔴 **Upozorenje iz odluke D-1 stoji PRE polja za unos i još jednom u `confirm()`**
+— identifikovan član ZRNO upisuje **jednosmerno**, a kartice za otpis i aktiviranje
+prikazuju mu se zatvorene, sa razlogom. Ne uklanjati ga i ne ublažavati; zaključano
+`identifikovan-clan-izvor.test.ts` (upozorenje na svih pet jezika, `samoUpis` grana,
+sve četiri rute).
 
 🟡 **Nije napravljeno iz mere M-4a:** grupna potvrda donacija i uvoz bankovnog izvoda.
 To su olakšice za rad, ne mere koje smanjuju rizik; admin tab prikazuje status i ime sa

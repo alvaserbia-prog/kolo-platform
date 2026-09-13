@@ -121,3 +121,71 @@ describe("status nosioca ZRNA se ne dodeljuje nepotvrđenom nalogu", () => {
     expect(servis).toContain("TipKorisnika.NOSILAC_ZRNA");
   });
 });
+
+describe("🔴 anonimna donacija NE daje svojstvo identifikovanog člana", () => {
+  it("identitetUtvrdjenAt se postavlja samo uz javnu donaciju", () => {
+    // Anonimna donacija ne nosi POEN (čl. 5a st. 2 pravilnika o donacijama:
+    // upis koji se ne može pripisati licu nije proverljiv), pa ne nastaje ni
+    // položaj koji bi proširena prava pratila. Uz to je `identitetUtvrdjen`
+    // javna oznaka „donator“ — postavljena po anonimnoj donaciji, odala bi
+    // upravo onoga kome Politika obećava suprotno.
+    const servis = izvor("src/lib/protokol/donacija.ts");
+    expect(servis).toContain("if (javno && uplatilac && !user.identitetUtvrdjenAt)");
+    expect(servis).not.toContain("if (uplatilac && !user.identitetUtvrdjenAt)");
+  });
+});
+
+describe("oznaka „donator“ (odluka vlasnika, 13.09.2026)", () => {
+  it("prikazuje se umesto oznake za novog člana, ne uz potvrđenog", () => {
+    const prikaz = izvor("src/components/verifikacija/IndeksPrikaz.tsx");
+    expect(prikaz).toContain("tip_donator");
+    // Samo NEVERIFIKOVAN nalog: potvrđenom je „redovan član" jači podatak, a
+    // dete i osnivač imaju svoje oznake.
+    expect(prikaz).toContain('tip === "NEVERIFIKOVAN"');
+  });
+
+  it("izvor oznake dolazi sa servera, ne iz pretpostavke ekrana", () => {
+    expect(izvor("src/app/api/verifikacija/lanac/[korisnikId]/route.ts")).toContain(
+      "identitetUtvrdjen: user.identitetUtvrdjenAt !== null"
+    );
+    expect(izvor("src/app/(app)/sistem/page.tsx")).toContain(
+      "identitetUtvrdjen: u.identitetUtvrdjenAt !== null"
+    );
+  });
+
+  it("spisak članova ne prikazuje javnog donatora kao „?“", () => {
+    expect(izvor("src/app/(app)/sistem/SistemKlijent.tsx")).toContain(
+      "!c.verified && c.identitetUtvrdjen"
+    );
+  });
+});
+
+describe("ekran za upis i otpis ZRNA (odluka D-1)", () => {
+  const ekran = () => izvor("src/app/(app)/zrno/ZrnoKlijent.tsx");
+
+  it("upozorenje pre upisa postoji i imenuje sva tri zatvorena poteza", () => {
+    // Odluka D-1: identifikovan član ZRNO upisuje JEDNOSMERNO. Bez upozorenja
+    // pravo bi se ostvarivalo naslepo — čovek bi saznao tek kad ga ruta odbije.
+    expect(ekran()).toContain("donator_upozorenje");
+    for (const jezik of ["sr", "en", "ru", "hr", "hu"]) {
+      const poruke = JSON.parse(izvor(`messages/${jezik}.json`));
+      const tekst: string = poruke.zrno.donator_upozorenje;
+      expect(tekst.length).toBeGreaterThan(40);
+    }
+  });
+
+  it("otpis i aktiviranje su zatvoreni identifikovanom članu", () => {
+    const s = ekran();
+    expect(s).toContain("const samoUpis = !isVerified && identitetUtvrdjen;");
+    expect(s).toContain("zatvorenaKartica(t(\"otpis_naslov\")");
+    expect(s).toContain("zatvorenaKartica(t(\"status_naslov\")");
+  });
+
+  it("ekran postoji za sve tri rute koje do sada nisu imale ulaznu tačku", () => {
+    const s = ekran();
+    expect(s).toContain("/api/zrno/upis");
+    expect(s).toContain("/api/zrno/otpis");
+    expect(s).toContain("/api/zrno/zakljucaj");
+    expect(s).toContain("/api/zrno/otkljucaj");
+  });
+});

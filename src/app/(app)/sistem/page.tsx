@@ -106,6 +106,7 @@ export default async function SistemPage({
         location: true,
         createdAt: true,
         maloletan: true,
+        identitetUtvrdjenAt: true,
         wallet: { select: { balance: true } },
         krugClanstva: {
           where: { leftAt: null },
@@ -218,6 +219,7 @@ export default async function SistemPage({
       pseudonim: u.pseudonim,
       verified: u.verified,
       maloletan: u.maloletan,
+      identitetUtvrdjen: u.identitetUtvrdjenAt !== null,
       avatar: u.avatar,
       balance: u.wallet?.balance ?? 0,
       krug: u.krugClanstva[0]?.krug?.name ?? null,

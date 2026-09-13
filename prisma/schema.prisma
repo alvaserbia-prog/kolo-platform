@@ -308,9 +308,11 @@ model User {
   // razgovora, Pričaonica, upis ZRNA BEZ glasa) i ne zamenjuje potvrdu
   // stvarnosti iz čl. 5 Pravilnika o dokazu stvarnosti.
   //
-  // 🔴 NE prikazivati kao javnu oznaku na profilu: jedini put do njega je
-  // donacija, pa bi oznaka odala i anonimnog donatora, kome Politika obećava
-  // suprotno. Vidi ga sam korisnik i Fondacija.
+  // 🔴 Postavlja se ISKLJUČIVO po JAVNOJ donaciji. Anonimna donacija ne nosi
+  // POEN (čl. 5a st. 2 pravilnika o donacijama), pa ne nastaje ni položaj; uz to
+  // je ovo javna oznaka „donator“, koja bi anonimnog donatora odala, a Politika
+  // mu obećava suprotno. Ime javnog donatora je ionako u listi donacija
+  // (Uslovi čl. 17), pa oznaka ne otkriva ništa novo.
   identitetUtvrdjenAt              DateTime?
   // ─── Modul Deca (Pravilnik o Modulu Deca) ─────────────────────────────────
   // Nenulto samo kod maloletnih korisnika. Jedini izvor uzrasta; posle upisa se ne

@@ -212,10 +212,15 @@ export async function evidentirajDonaciju(
   }
 
   // Identitet utvrđen na donatorskom putu (mera M-9). Postavlja se JEDNOM, pri
-  // prvoj potvrđenoj donaciji: čovek je uporedio uplatioca iz izvoda sa nalogom.
-  // 🔴 Vezuje se za uplatioca, ne za javnost donacije — i anonimna donacija
-  // prolazi istu proveru, a ona samo znači da se ime ne objavljuje.
-  if (uplatilac && !user.identitetUtvrdjenAt) {
+  // prvoj potvrđenoj JAVNOJ donaciji: čovek je uporedio uplatioca iz izvoda sa
+  // nalogom, a ime donatora je javno uz sam zapis.
+  // 🔴 ANONIMNA DONACIJA NE DAJE OVO SVOJSTVO. Za nju se POEN ne evidentira
+  // (čl. 5a st. 2 Pravilnika o pokroviteljstvu i donacijama: upis koji se ne može
+  // pripisati licu nije proverljiv), pa ne nastaje ni položaj koji bi proširena
+  // prava pratila. Uz to je `identitetUtvrdjen` javna oznaka „donator“ na profilu
+  // — postavljena po anonimnoj donaciji, odala bi upravo onoga kome Politika
+  // obećava suprotno. Ne vezivati je za uplatioca bez uslova `javno`.
+  if (javno && uplatilac && !user.identitetUtvrdjenAt) {
     await prisma.user.updateMany({
       where: { id: userId, identitetUtvrdjenAt: null },
       data: { identitetUtvrdjenAt: new Date() },

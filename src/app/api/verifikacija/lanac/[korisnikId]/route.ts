@@ -33,6 +33,7 @@ export async function GET(
       pseudonim: true,
       tipKorisnika: true,
       jeOsnivac: true,
+      identitetUtvrdjenAt: true,
       indeksStvarnosti: true,
       slotoviPotroseni: true,
       verifikacijeKojeSuMeVerifikovale: {
@@ -95,6 +96,10 @@ export async function GET(
       pseudonim: user.pseudonim,
       tip: user.tipKorisnika,
       jeOsnivac: user.jeOsnivac,
+      // Oznaka „donator“ (R-01, mera M-9). Postavlja se samo po JAVNOJ
+      // donaciji, čije je ime ionako u listi donacija (Uslovi čl. 17), pa se
+      // njome ne otkriva ništa što nije već javno.
+      identitetUtvrdjen: user.identitetUtvrdjenAt !== null,
       indeks: user.indeksStvarnosti,
       kapacitet: kapacitet === "neograniceno" ? null : kapacitet,
       neograniceno: kapacitet === "neograniceno",
