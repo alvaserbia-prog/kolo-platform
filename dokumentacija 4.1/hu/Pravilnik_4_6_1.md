@@ -388,7 +388,11 @@ Az elszámolási együttható a nyilvántartásba vett POEN-ek teljes számának
 
 Az elszámolási együtthatót a Protokoll számítja ki, automatikusan és mérlegelés nélkül.
 
-Az elszámolási együttható a rendszerbeli tevékenységgel változik: az új POEN-bejegyzések beírása, valamint a ZRNO beírása és leírása elmozdítja az együtthatót. A felhasználók közötti javak- és szolgáltatáscsere nem változtatja meg az együtthatót.
+Az elszámolási együttható a nyilvántartásba vett POEN-ek teljes számával változik: az új POEN-bejegyzések beírása felfelé, a nyilvántartásba vett POEN-ek megsemmisítése lefelé mozdítja el. Az együttható nem eleve növekedésre rendelt.
+
+A ZRNO beírása és leírása nem mozdítja el az elszámolási együtthatót. Beíráskor a Protokollban rendelkezésre álló ZRNO-k száma mellett ugyanolyan arányban csökken a nyilvántartásba vett POEN-ek teljes száma is — mivel a beírásra fordított POEN-ek visszakerülnek a Protokollhoz; leíráskor mindkét mennyiség ugyanolyan arányban növekszik. A ZRNO-tulajdonos sem saját beírásával, sem saját leírásával nem tudja elmozdítani az együtthatót.
+
+A felhasználók közötti javak- és szolgáltatáscsere nem változtatja meg az együtthatót.
 
 Az elszámolási együttható igazgatási mennyiség. Nem ár, nem árfolyam és nem teljesítménymutató; nem fejezi ki a ZRNO vagy a POEN rendszeren kívüli értékét.
 
@@ -409,6 +413,18 @@ A ZRNO-tulajdonos pozíciójának megváltozása kizárólag a rendszerbeli tev�
 A pozícióból eredő hasznot a ZRNO-tulajdonos kizárólag a rendszeren belül realizálja. A ZRNO-nak és a POEN-nek nincs a rendszeren kívüli értéke, és nem konvertálhatók pénzzé.
 
 Az a ZRNO-tulajdonos, aki nem vesz részt aktívan a rendszerben, megtartja nyilvántartásba vett helyzetét; e helyzet esetleges megváltozása más felhasználók rendszerbeli tevékenységének következménye, nem pedig a rendszer egyénre irányuló cselekménye.
+
+A ZRNO-tulajdonos helyzete nem minősül befektetésnek. Ez a megállapítás nem az egység nevén és nem azon a kijelentésen alapul, hogy a ZRNO nem befektetési eszköz, hanem azon, hogy hiányoznak belőle azok az elemek, amelyek a befektetést befektetéssé teszik:
+
+1) a ZRNO nem eszközök befektetésével szerezhető meg — a felhasználó bejegyzésében már nyilvántartásba vett hozzájárulásból íródik be; az Alapítvány a ZRNO-t nem adja el, nem kínálja és nem állapít meg rá árat, a beírás nem ellenszolgáltatás, és a ZRNO árának nincs létezése (22. cikk);
+
+2) nincs olyan hozam, amelyet realizálni lehetne — a helyzet változása kizárólag POEN-ekben jelenik meg, amelyeknek nincs a rendszeren kívüli értékük, és sem közvetlenül, sem közvetve nem válthatók vissza és nem konvertálhatók (71. cikk), így az elszámolási együttható különbözete nem hagyhatja el a Protokoll nyilvántartását;
+
+3) nincs más személynek a tulajdonos javára irányuló ráfordítása — az elszámolási együttható a nyilvántartás két összegének hányadosa, amelyet a Protokoll automatikusan és mérlegelés nélkül számít ki (23. cikk); senki sem kezeli és nem ígéri, a tulajdonos pedig sem saját beírásával, sem saját leírásával nem mozdítja el;
+
+4) a ZRNO-tulajdonos nincs elválasztva az irányítástól — az aktivált ZRNO-ból ered a szavazat a Felső Kolóban (45. cikk), így a tulajdonos maga dönt a rendszer szabályairól. Aki szavazatot akar, annak aktiválnia kell a ZRNO-t, és ezzel lemond a leírásról, amíg vissza nem állítja szabad állapotba (46. cikk); az irányítási funkció és az elszámolási rugalmasság kölcsönösen kizárják egymást.
+
+Az a felhasználó, akinek valóságát a megerősítési lánc nem erősítette meg, a ZRNO-t beírja és tartja, de nem írja le (19. cikk). Azokból az eszközökből, amelyekkel e felhasználó hozzájárulását nyilvántartásba vették, nem keletkezhet több nyilvántartásba vett POEN.
 
 ## V — Felhasználói jogállások, valóságbizonyíték és a jogállás megszűnése
 

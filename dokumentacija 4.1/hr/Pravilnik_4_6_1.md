@@ -388,7 +388,11 @@ Obračunski koeficijent brojčani je odnos ukupnog broja evidentiranih POEN-a i 
 
 Obračunski koeficijent izračunava Protokol, automatski i bez diskrecije.
 
-Obračunski se koeficijent mijenja s aktivnošću u sustavu: upis novih zapisa POEN-a te upis i otpis ZRNA pomiču koeficijent. Razmjena dobara i usluga između korisnika ne mijenja koeficijent.
+Obračunski se koeficijent mijenja s ukupnim brojem evidentiranih POEN-a: upis novih zapisa POEN-a pomiče ga naviše, a poništenje evidentiranih POEN-a naniže. Koeficijent nije predodređen da raste.
+
+Upis i otpis ZRNA ne pomiču obračunski koeficijent. Pri upisu se, uz broj ZRNA raspoloživih u Protokolu, u istom omjeru umanjuje i ukupan broj evidentiranih POEN-a — jer se POEN-i utrošeni na upis vraćaju Protokolu; pri otpisu se obje veličine uvećavaju po istom odnosu. Nositelj ZRNA vlastitim upisom ni otpisom ne može pomaknuti koeficijent.
+
+Razmjena dobara i usluga između korisnika ne mijenja koeficijent.
 
 Obračunski koeficijent administrativna je veličina. Nije cijena, nije tečaj i nije indeks performansi; ne izražava vrijednost ZRNA ni POEN-a izvan sustava.
 
@@ -409,6 +413,18 @@ Promjena pozicije nositelja ZRNA nastaje isključivo kao posljedica aktivnosti u
 Korist od pozicije nositelj ZRNA ostvaruje isključivo unutar sustava. ZRNO i POEN nemaju vrijednost izvan sustava i ne mogu se konvertirati u novac.
 
 Nositelj ZRNA koji ne sudjeluje aktivno u sustavu zadržava evidentiran položaj; eventualna promjena tog položaja posljedica je aktivnosti drugih korisnika u sustavu, a ne radnja sustava usmjerena prema pojedincu.
+
+Položaj nositelja ZRNA ne predstavlja ulaganje. Ta ocjena ne počiva na nazivu jedinice ni na izjavi da ZRNO nije investicijski instrument, nego na tome što u njemu nedostaju elementi koji ulaganje čine ulaganjem:
+
+1) ZRNO se ne pribavlja ulaganjem sredstava — upisuje se iz doprinosa već evidentiranog u zapisu korisnika; Zaklada ZRNO ne prodaje, ne nudi i ne utvrđuje mu cijenu, upis nije protučinidba i cijena ZRNA ne postoji (članak 22.);
+
+2) ne postoji prinos koji bi se mogao ostvariti — promjena položaja iskazuje se isključivo u POEN-ima, koji nemaju vrijednost izvan sustava, ne otkupljuju se i ne konvertiraju ni neposredno ni posredno (članak 71.), pa razlika u obračunskom koeficijentu ne može napustiti evidenciju Protokola;
+
+3) ne postoji napor drugoga usmjeren na stvaranje koristi za nositelja — obračunski koeficijent kvocijent je dvaju zbrojeva iz evidencije koji Protokol izračunava automatski i bez diskrecije (članak 23.), nitko njime ne upravlja niti ga obećava, a nositelj ga ne pomiče ni vlastitim upisom ni vlastitim otpisom;
+
+4) nositelj ZRNA nije odvojen od upravljanja — iz aktiviranog ZRNA proizlazi glas u Gornjem Kolu (članak 45.), pa nositelj sam odlučuje o pravilima sustava. Tko želi glas, mora aktivirati ZRNO i time odustaje od otpisa dok ga ne vrati u slobodno stanje (članak 46.); upravljačka funkcija i obračunska fleksibilnost uzajamno se isključuju.
+
+Korisnik čija stvarnost nije potvrđena kroz lanac potvrda ZRNO upisuje i drži, ali ga ne otpisuje (članak 19.). Iz sredstava kojima je doprinos toga korisnika evidentiran ne može nastati veći broj evidentiranih POEN-a.
 
 ## V — Statusi korisnika, dokaz stvarnosti i prestanak statusa
 

@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_6_0.md`, `uslovi_koriscenja_4_5_9.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_6_1.md`, `uslovi_koriscenja_4_5_9.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,14 +27,14 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_6_0.md",
+  "Pravilnik_4_6_1.md",
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_5_2.md",
   "radnje_obrade_4_5_9.md",
   "uslovi_koriscenja_4_5_9.md",
   "politika_4_5_9.md",
   "statut_4_1_0.md",
-  "whitepaper_4_6_0.md",
+  "whitepaper_4_6_1.md",
   "rizici_4_6_0.md",
   "hijerarhija_4_4_6.md",
   "donacije_4_5_8.md",
@@ -62,8 +62,46 @@ const AKTI = [
  * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_6_0.md": {
+  // 🔴 Whitepaper je dokument koji spoljni čitalac — i regulator — otvara prvi, pa
+  // je uz R-04 morao uz Pravilnik. Do 4.6.1 je na dva mesta sam nazivao razliku u
+  // koeficijentu PODSTICAJEM, a u odeljku 6.4 tvrdio da upis ZRNA diže koeficijent.
+  "whitepaper_4_6_1.md": {
     sr: [
+      "Upis i otpis ZRNA takođe ne pomeraju koeficijent",
+      "Koeficijent, dakle, nije monoton i nije predodređen da raste",
+      "a ne podsticaj za sticanje položaja",
+      "Ta mogućnost nije podsticaj",
+    ],
+    en: [
+      "The inscription and write-off of ZRNO likewise do not shift the coefficient",
+      "not an incentive to acquire a position",
+      "That option is not an incentive",
+    ],
+    ru: [
+      "Запись и списание ЗРНО также не смещают коэффициент",
+      "а не стимул к приобретению положения",
+      "Эта возможность не является стимулом",
+    ],
+  },
+  "Pravilnik_4_6_1.md": {
+    sr: [
+      // ═══ 4.6.1 (R-04 — ZRNO kao investicioni instrument, Komisija za HOV) ═══
+      // 🔴 Čl. 23 st. 3 je do 4.6.1 tvrdio da „upis i otpis ZRNA pomeraju
+      // koeficijent" — ARITMETIČKI NETAČNO. Pri upisu se u istoj srazmeri umanjuju
+      // i brojilac (POEN se vraća Protokolu) i imenilac (raspoloživa ZRNA), pa je
+      // količnik isti: (T − Z·k)/(R − Z) = k. Neutralnost je nosiv argument — bez
+      // nje se koeficijent čita kao cena koju nosilac svojim potezima pomera.
+      "Upis i otpis ZRNA ne pomeraju obračunski koeficijent",
+      "Koeficijent nije predodređen da raste",
+      // 🔴 Čl. 25: odbrana je do 4.6.1 bila ETIKETA („nije prinos", „nije cena") —
+      // a etiketa ne pobija nijedan element testa investicionog ugovora. Sada akt
+      // nabraja ELEMENTE KOJI NEDOSTAJU, isti obrazac kao čl. 13 uz R-01. Ako ovo
+      // padne iz akta, od odbrane ostaje samo nekonvertibilnost.
+      "Položaj nosioca ZRNA ne predstavlja ulaganje",
+      "ZRNO se ne pribavlja ulaganjem sredstava",
+      "ne postoji prinos koji bi se mogao ostvariti",
+      "ne postoji napor drugog lica usmeren na stvaranje koristi za nosioca",
+      "nosilac ZRNA nije odvojen od upravljanja",
       // ═══ 4.5.9 (R-02 — POEN kao prihod korisnika, Poreska uprava) ═══
       // Odbrana je do 4.5.9 pobijala pojam „naknade", a porez na dohodak oporezuje
       // PRIHODE iz svih izvora, uključujući prihod u naturi. Zato čl. 13 sada nabraja
@@ -181,6 +219,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Sastav Gornjeg Kola ne utvrđuje se imenovanjem",
     ],
     en: [
+      // 4.6.1 (R-04)
+      "The inscription and write-off of ZRNO do not shift the accounting coefficient",
+      "The position of a ZRNO Holder does not constitute an investment",
+      "there is no return that could be realized",
       "bear on the notion of a user's income",
       "in particular not a contract for work",
       "social protection and solidarity support for vulnerable social groups",
@@ -225,6 +267,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "The composition of the Upper Kolo is not established by appointment",
     ],
     ru: [
+      // 4.6.1 (R-04)
+      "Запись и списание ЗРНО коэффициент не смещают",
+      "Положение держателя ЗРНО не является вложением",
+      "не существует дохода, который можно было бы получить",
       "для понятия дохода пользователя",
       "не является договором подряда",
       "социальной защиты и солидарной поддержки уязвимых общественных групп",
@@ -1284,7 +1330,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_6_0.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_6_1.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });

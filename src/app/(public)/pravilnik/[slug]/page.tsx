@@ -31,9 +31,14 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // radnog odnosa, naročito ne ugovor o delu); čl. 57 st. 5 briše „nije socijalna
   // pomoć" — ta rečenica je sama zatvarala izuzeće iz čl. 9 ZPDG i protivrečila
   // čl. 6 Statuta. Ostaje „nije naknada".
+  // 4.6.1 — R-04: čl. 23 st. 3 je tvrdio da upis i otpis ZRNA pomeraju
+  // koeficijent (netačno — oba člana se menjaju u istoj srazmeri, pa je količnik
+  // isti); čl. 25 dobija odgovor po elementima testa investicionog ugovora
+  // umesto etikete „nije prinos". 4.6.0 je istog dana objavljen za R-02, pa dva
+  // događaja objave ne dele šifru.
   "kolo-sistem": {
-    fajl: "Pravilnik_4_6_0.md",
-    verzija: "4.6.0",
+    fajl: "Pravilnik_4_6_1.md",
+    verzija: "4.6.1",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.

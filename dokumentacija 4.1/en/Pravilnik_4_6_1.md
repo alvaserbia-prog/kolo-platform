@@ -388,7 +388,11 @@ The accounting coefficient is the numerical ratio of the total number of recorde
 
 The accounting coefficient is calculated by the Protocol, automatically and without discretion.
 
-The accounting coefficient changes with activity in the system: the inscription of new POEN records and the inscription and write-off of ZRNOs shift the coefficient. The exchange of goods and services between users does not change the coefficient.
+The accounting coefficient changes with the total number of recorded POENs: the inscription of new POEN records shifts it upward, and the annulment of recorded POENs shifts it downward. The coefficient is not predetermined to rise.
+
+The inscription and write-off of ZRNO do not shift the accounting coefficient. Upon inscription, alongside the number of ZRNOs available in the Protocol, the total number of recorded POENs is reduced in the same proportion — because the POENs spent on the inscription return to the Protocol; upon write-off, both quantities increase in the same ratio. A ZRNO Holder cannot shift the coefficient by their own inscription or their own write-off.
+
+The exchange of goods and services between users does not change the coefficient.
 
 The accounting coefficient is an administrative variable. It is not a price, not an exchange rate, and not a performance index; it does not express the value of ZRNO or POEN outside the system.
 
@@ -409,6 +413,18 @@ A change in a ZRNO Holder's position arises exclusively as a consequence of acti
 The benefit of the position is realized by the ZRNO Holder exclusively within the system. ZRNO and POEN have no value outside the system and cannot be converted into money.
 
 A ZRNO Holder who does not actively participate in the system retains their recorded position; any change in that position is a consequence of the activity of other users in the system, not an action of the system directed at the individual.
+
+The position of a ZRNO Holder does not constitute an investment. That assessment rests neither on the name of the unit nor on a declaration that ZRNO is not an investment instrument, but on the absence of the elements that make an investment an investment:
+
+1) ZRNO is not acquired by investing funds — it is inscribed from a contribution already recorded in the user's record; the Foundation does not sell ZRNO, does not offer it and does not set a price for it, inscription is not a counter-performance, and no price of ZRNO exists (Article 22);
+
+2) there is no return that could be realized — a change in position is expressed exclusively in POENs, which have no value outside the system and are neither redeemed nor converted, directly or indirectly (Article 71), so the difference in the accounting coefficient cannot leave the Protocol's records;
+
+3) there is no effort of another person directed at creating a benefit for the Holder — the accounting coefficient is the quotient of two sums from the records, which the Protocol calculates automatically and without discretion (Article 23); no person manages it or promises it, and the Holder does not shift it by their own inscription or their own write-off;
+
+4) the ZRNO Holder is not separated from governance — the vote in the Upper Kolo arises from activated ZRNO (Article 45), so the Holder decides on the rules of the system themselves. Whoever wants a vote must activate their ZRNO and thereby forgo write-off until it is returned to free status (Article 46); the governance function and accounting flexibility are mutually exclusive.
+
+A user whose reality has not been confirmed through the chain of confirmations inscribes and holds ZRNO but does not write it off (Article 19). From the funds by which that user's contribution was recorded, a larger number of recorded POENs cannot arise.
 
 ## Chapter V — User Statuses, Proof of Reality, and Termination of Status
 

@@ -332,7 +332,7 @@ Dopunska analiza potvrđuje isključenje iz kategorije ulagačkog instrumenta. K
 
 Lanac donacija–POEN–ZRNO. Korisnik koji donira dinare zakladi stječe evidenciju u POEN-ima koja ga može približiti pragu za upis ZRNA. Tri elementa razbijaju kvalifikaciju tog lanca kao ulagačkog ugovora: donacija je nepovratna i pravno odvojena od evidencije — donator ne može uvjetovati donaciju evidencijom niti zahtijevati povrat; donacija nije nužan ni povlašten put do ZRNA — isti prag vrijedi za sve aktivnosti i korisnik može stići do praga isključivo razmjenom i doprinosom, bez ijednog dinara donacije; odnos između iznosa donacije i broja evidentiranih POEN-a nije fiksna konverzijska stopa nego parametar koji se može mijenjati. Čak i kad bi odnos bio fiksan, donacija je pravno nepovratna i ne stvara obvezu zaklade prema donatoru, čime je prekinut element očekivanja koji bi utemeljio kvalifikaciju kao ulagački ugovor.
 
-Mehanika otpisa. Korisniku koji upiše ZRNO pri nižem obračunskom koeficijentu i otpiše pri višem, protokol evidentira više POEN-a nego što ih je iskoristio kao temelj upisa. Tri elementa razbijaju kvalifikaciju te razlike kao prinosa: POEN-i dobiveni otpisom nemaju vanjsku imovinsku vrijednost — ne mogu se konvertirati u novac, iznijeti iz sustava ni monetizirati (načelo nekonvertibilnosti); rast koeficijenta nije zajamčen — ovisi o aktivnosti cjelokupne zajednice, ne o naporu trećih osoba u smislu ulagačkog ugovora; ne postoji izdavatelj koji obećava rast koeficijenta niti institucija koja isplaćuje razliku. Dodatno, struktura sustava uspostavlja strukturni izbor koji ograničava čisto pasivno držanje: nositelj koji želi upravljačku korist mora aktivirati ZRNO, čime gubi mogućnost otpisa; nositelj koji želi obračunsku fleksibilnost ne može istodobno glasovati.
+Mehanika otpisa. Korisnik koji upiše ZRNO pri jednom obračunskom koeficijentu a otpiše ga pri drugom, dobiva drugačiji broj POEN-a od onoga koji je iskoristio kao temelj upisa — u oba smjera, jer koeficijent raste od upisa novih zapisa POEN-a a pada od njihova poništenja (odjeljak 6.4). Četiri elementa razbijaju kvalifikaciju te razlike kao prinosa: POEN-i evidentirani otpisom nemaju vanjsku imovinsku vrijednost — ne mogu se konvertirati u novac, iznijeti iz sustava ni monetizirati (načelo nekonvertibilnosti); promjena koeficijenta nije zajamčena — proizlazi iz stanja evidencije cjelokupne zajednice, ne iz napora trećih osoba u smislu ulagačkog ugovora; vlastiti upis i otpis koeficijent uopće ne pomiču, pa nositelj nema ni instrument ni trenutak kojim bi razliku ostvario; ne postoji izdavatelj koji obećava rast koeficijenta niti institucija koja isplaćuje razliku. Dodatno, struktura sustava uspostavlja strukturni izbor koji ograničava čisto pasivno držanje: nositelj koji želi upravljačku korist mora aktivirati ZRNO, čime gubi mogućnost otpisa; nositelj koji želi obračunsku fleksibilnost ne može istodobno glasovati.
 
 ## 6.3 Obračunski koeficijent
 
@@ -348,13 +348,17 @@ Oba su elementa formule promjenjiva. Ukupan broj POEN-a evidentiranih u sustavu 
 
 ### Kako se koeficijent mijenja
 
-Aktivnost u sustavu utječe na obračunski koeficijent na dva načina.
+Koeficijent pomiču isključivo promjene ukupnog broja evidentiranih POEN-a — naviše i naniže.
 
-Kad god protokol upiše nove zapise POEN-a — kroz korisnički doprinos (donacije, pokroviteljstvo, operativni doprinos, verifikacija), rast krugova i zadruga, socijalne programe ili osnivački doprinos — brojnik formule raste, bez obzira na to u čijem se zapisu novi POEN-i evidentiraju. To mijenja obračunski koeficijent naviše. Razmjena dobara i usluga ne utječe na koeficijent jer preraspodjeljuje postojeće POEN-e bez promjene ukupnog broja.
+Kad god protokol upiše nove zapise POEN-a — kroz korisnički doprinos (donacije, pokroviteljstvo, operativni doprinos, verifikacija), rast krugova i zadruga, socijalne programe ili osnivački doprinos — brojnik formule raste, bez obzira na to u čijem se zapisu novi POEN-i evidentiraju. To mijenja obračunski koeficijent naviše.
 
-Kad korisnici upisuju ZRNO, nazivnik formule opada. To također mijenja obračunski koeficijent naviše.
+Kad se evidentirani POEN-i ponište — prestankom svojstva korisnika, poništenjem po iskorištenju u kolektivnoj nabavi, otpisom po raskinutom prijateljstvu u dječjem prostoru ili drugom osnovom utvrđenim pravilnikom — brojnik opada. To mijenja obračunski koeficijent naniže. Koeficijent, dakle, nije monoton i nije predodređen da raste.
 
-Oba su učinka posljedica aktivnosti korisnika u sustavu. Nijedan pojedinačni korisnik ne kontrolira koeficijent. Nijedna institucija ne kontrolira koeficijent. Koeficijent je izračunata vrijednost koja proizlazi iz ukupnog stanja evidencije svih korisnika u sustavu.
+Razmjena dobara i usluga ne utječe na koeficijent jer preraspodjeljuje postojeće POEN-e bez promjene ukupnog broja.
+
+Upis i otpis ZRNA također ne pomiču koeficijent, i to je posljedica same formule, a ne pravila koje bi se moglo izmijeniti. Pri upisu se nazivnik umanjuje za upisana ZRNA, ali se brojnik istodobno umanjuje za POEN-e koji su tim upisom vraćeni protokolu i izašli iz optjecaja — a taj je broj upravo umnožak upisanih ZRNA i važećeg koeficijenta, pa kvocijent ostaje isti. Pri otpisu oba člana rastu po istom odnosu. Nositelj ZRNA svojim postupanjem ne može pomaknuti vlastiti koeficijent ni u jednom smjeru.
+
+Svi su ti učinci posljedica aktivnosti korisnika u sustavu. Nijedan pojedinačni korisnik ne kontrolira koeficijent. Nijedna institucija ne kontrolira koeficijent. Koeficijent je izračunata vrijednost koja proizlazi iz ukupnog stanja evidencije svih korisnika u sustavu.
 
 ### Što obračunski koeficijent znači za korisnike
 
@@ -366,9 +370,9 @@ Za nositelja ZRNA promjena obračunskog koeficijenta mijenja poziciju njegova ev
 
 Obračunski je koeficijent administrativna veličina — nije cijena (ne postoji tržište), nije tečaj (ne postoji konverzija između dviju valuta) i nije indeks performansi (ne mjeri profitabilnost). Protokol ga izračunava na temelju stanja evidencije i koristi kao parametar za primjenu pravila upisa i otpisa ZRNA. Njegov je rast ili pad posljedica aktivnosti u sustavu, ne odluke nijedne osobe.
 
-Struktura obračunskog koeficijenta ima poticajnu funkciju za rane sudionike. Korisnik koji doprinosi sustavu u ranoj fazi — kad je koeficijent nizak — upisuje ZRNO uz manje evidentiranih POEN-a nego korisnik koji to isto čini u kasnijoj fazi s višim koeficijentom. Ta struktura potiče rano sudjelovanje jer pozicija ranog sudionika odražava njegov doprinos u fazi kad je doprinos bio najvrjedniji za uspostavljanje sustava.
+Korisnik koji doprinosi sustavu u ranoj fazi — kad je koeficijent nizak — upisuje ZRNO uz manje evidentiranih POEN-a nego korisnik koji to isto čini u kasnijoj fazi s višim koeficijentom. Pozicija ranog sudionika time odražava njegov doprinos u fazi kad je doprinos bio najvrjedniji za uspostavljanje sustava. To je posljedica uvažavanja ranijeg doprinosa zajedničkom dobru, a ne poticaj za stjecanje položaja: broj POEN-a potreban za upis izračunava protokol iz stanja evidencije, ne odluka kojom bi se rano sudjelovanje nagrađivalo, i nijedna osoba ne obećava da će taj broj kasnije biti veći.
 
-Istodobno, pravilo od jedan posto stanja po obračunskom razdoblju (odjeljak 6.2) ograničava brzinu rasta koeficijenta jer sprječava naglo preuzimanje raspoloživih ZRNA — čak i kad velik broj korisnika istodobno ispuni uvjete za upis, ukupan je opseg upisa po razdoblju ograničen na jedan posto ukupnog stanja svih kvalificiranih korisnika. Taj mehanizam uravnotežuje poticaj za rano sudjelovanje sa zaštitom od prebrze promjene koeficijenta koja bi otežala pristup kasnijim sudionicima.
+Pravilo od jedan posto stanja po obračunskom razdoblju (odjeljak 6.2) ograničava brzinu kojom se raspoloživa ZRNA preuzimaju — čak i kad velik broj korisnika istodobno ispuni uvjete za upis, ukupan je opseg upisa po razdoblju ograničen na jedan posto ukupnog stanja svih kvalificiranih korisnika. Time se čuva pristup kasnijih sudionika i koeficijent ostaje manje osjetljiv na pojedinačne upise novih zapisa POEN-a, jer se broj raspoloživih ZRNA ne iscrpljuje naglo.
 
 # 7. Sudionici i dokaz stvarnosti
 
@@ -652,7 +656,7 @@ Verifikator ima i strukturno ograničenje — stavlja vlastitu poziciju u sustav
 
 Nositelj ZRNA ima sve poticaje korisnika sustava, plus dva dodatna: sudjelovanje u upravljanju kroz Gornje Kolo i poziciju u obračunskom sustavu čija se vrijednost mijenja s aktivnošću zajednice (poglavlja 6 i 10). Oba su dodatna poticaja usklađena s kolektivnim interesom — nositelj ZRNA želi da sustav raste jer njegova pozicija ovisi o kolektivnoj aktivnosti. Korist i ograničenja te pozicije kvalificirani su u odjeljku 6.2.
 
-Nositelj ZRNA ima i mogućnost otpisa — vraćanja slobodnog ZRNA u fond raspoloživih uz evidenciju POEN-a po tekućem obračunskom koeficijentu (odjeljak 6.2). Ta je mogućnost strukturni poticaj za rano i aktivno sudjelovanje, ali je korist ograničena na interni kapacitet razmjene jer POEN-i ne mogu napustiti sustav. Istodobno, strukturni izbor između upravljačke funkcije (aktivno ZRNO) i obračunske fleksibilnosti (slobodno ZRNO) sprječava istodobnu realizaciju obiju koristi.
+Nositelj ZRNA ima i mogućnost otpisa — vraćanja slobodnog ZRNA u fond raspoloživih uz evidenciju POEN-a po tekućem obračunskom koeficijentu (odjeljak 6.2). Ta mogućnost nije poticaj: razlika prema broju POEN-a utrošenom pri upisu nastaje u oba smjera, nijedna je osoba ne obećava, a vlastiti upis i otpis koeficijent ne pomiču (odjeljak 6.4). Eventualna je korist uz to ograničena na interni kapacitet razmjene, jer POEN-i ne mogu napustiti sustav. Istodobno, strukturni izbor između upravljačke funkcije (aktivno ZRNO) i obračunske fleksibilnosti (slobodno ZRNO) sprječava istodobnu realizaciju obiju koristi.
 
 Na individualnoj razini nositelj ZRNA ima poticaj da drugi razmjenjuju i doprinose, dok sam favorizira aktivnosti kroz koje nastaju novi POEN-i nad razmjenom koja mu smanjuje broj evidentiranih POEN-a. Ta je asimetrija strukturno svojstvo koje proizlazi iz napetosti između akumulacije i cirkulacije opisane u nastavku ovog poglavlja. Nositelj ZRNA ne može ostvariti korist od položaja na račun ostalih sudionika u smislu ekstrakcije vrijednosti iz sustava — ZRNO se ne može prenijeti, ne može prodati i ne može unovčiti.
 
