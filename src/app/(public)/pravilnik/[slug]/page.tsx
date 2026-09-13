@@ -32,8 +32,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // pomoć" — ta rečenica je sama zatvarala izuzeće iz čl. 9 ZPDG i protivrečila
   // čl. 6 Statuta. Ostaje „nije naknada".
   "kolo-sistem": {
-    fajl: "Pravilnik_4_5_9.md",
-    verzija: "4.5.9",
+    fajl: "Pravilnik_4_6_0.md",
+    verzija: "4.6.0",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.
@@ -61,8 +61,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   "operativni": {
   // 4.5.9 — čl. 27 st. 6 (R-02): odbrana više ne pobija samo pojam „naknade" nego
   // nabraja elemente pojma prihoda koji nedostaju.
-    fajl: "operativni_4_5_9.md",
-    verzija: "4.5.9",
+    fajl: "operativni_4_6_0.md",
+    verzija: "4.6.0",
   },
   // 4.4.5 — osnov gornje granice (čl. 5): utrošena sopstvena sredstva i vreme, uz
   // aritmetički razlog zašto taj rad operativni kanal ne može da evidentira (limit
@@ -72,8 +72,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   "osnivacki": {
   // 4.5.9 — čl. 4 (R-02): osnivački rad nije naručen posao ni ugovor o delu.
   // Jedini kanal koji sam sebe u aktu naziva radom, pa mu je odbrana bila nužna.
-    fajl: "osnivacki_4_5_9.md",
-    verzija: "4.5.9",
+    fajl: "osnivacki_4_6_0.md",
+    verzija: "4.6.0",
   },
   // 4.4.6 — statutarni osnov (čl. 2), dinamičan sastav bez imenovanja (čl. 4),
   // sprovođenje odluke aktom UO (čl. 17), izmenu pravilnika donosi UO (čl. 23).
@@ -85,8 +85,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // 4.5.9 — R-02: čl. 2 briše „nije socijalna pomoć"; nov čl. 6a (priroda
   // evidentiranja) — nema isplate, nema prelaza imovine, nije naknada, program se
   // sprovodi u ostvarivanju cilja iz čl. 6 Statuta.
-    fajl: "programi_podrske_4_5_9.md",
-    verzija: "4.5.9",
+    fajl: "programi_podrske_4_6_0.md",
+    verzija: "4.6.0",
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
   // 4.5.2 — postupak potvrde postojanja deteta (R-15, čl. 6 prepisan): izjašnjavaju
@@ -103,8 +103,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   "ucesce-dece": {
   // 4.5.9 — čl. 14b (R-02): upis iz kanala čl. 15 t. 9 nije naknada i ne donosi
   // maloletnom korisniku ni novac ni stvar.
-    fajl: "ucesce_dece_4_5_9.md",
-    verzija: "4.5.9",
+    fajl: "ucesce_dece_4_6_0.md",
+    verzija: "4.6.0",
   },
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
   // 4.4.3 — broj POEN-a po delu je parametar odluke o nabavci (čl. 17), a ne izvod
@@ -118,8 +118,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // radi preuzimanja; čl. 20 — kalkulacija se deli, dinarska strana ide uz čl. 31
   // (inače se odnos POEN:RSD čita deljenjem); nov čl. 21a — godišnja granica
   // dinarske vrednosti preuzetih dobara po korisniku.
-    fajl: "projekti_nabavke_4_5_9.md",
-    verzija: "4.5.9",
+    fajl: "projekti_nabavke_4_6_0.md",
+    verzija: "4.6.0",
   },
 };
 

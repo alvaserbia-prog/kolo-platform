@@ -375,7 +375,7 @@ izmena Statuta radi Gornjeg Kola, podizanje donje granice uzrasta) zabeležene s
 | **R-01** (dopune) | 13.09.2026. | Uz sprovođenje: D-1…D-5 i P-2 (vidi DEO III). Otpis ZRNA zatvoren, ime „nosilac ZRNA“ ostaje uz pridev *aktivirano*, kapa na kartici 100.000 RSD, devizni račun EUR/USD, gašenje naloga bez potvrde ide Protokolu. | 9 → **5** |
 | **R-01** (zaostatak) | 13.09.2026. | Zatvoren svesno prihvaćen ostatak br. 5: javnost donacije više nije „uslov za evidentiranje POEN-a“ (Uslovi čl. 17, Politika 4.5 i 4.9, Registar radnja 9) nego posledica proverljivosti (donacije čl. 5a); prošireni obim prava vezan je za **javnu** donaciju (Pravilnik čl. 28 st. 6, Uslovi čl. 14), čime je uklonjena razlika prema kodu, koji identitet postavlja samo uz `javno && uplatilac`. Set **4.5.9** (Pravilnik, Uslovi, Politika, Registar × 5 jezika). Kod nije menjan. | **5** |
 | **R-22** | 13.09.2026. | Otvoren po nalogu vlasnika. Nacrt mera zabeležen; obrada u svom redu. | 7 → **5** (procena) |
-| **R-02** | 13.09.2026. | Obrađen. Odobreno M-1…M-12, D-2 (godišnja granica 100.000 RSD po korisniku) i **opcija A** (nabavka ostaje raspodela po doprinosu; davanje se vodi kao **poklon**). Odbijeno: humanitarna nabavka po ZPDG čl. 9 st. 1 t. 11, i **svaka dinarska kapa na POEN**. Set 4.5.9 — osam akata × 5 jezika. | 9 → **6** |
+| **R-02** | 13.09.2026. | Obrađen. Odobreno M-1…M-12, D-2 (godišnja granica 100.000 RSD po korisniku) i **opcija A** (nabavka ostaje raspodela po doprinosu; davanje se vodi kao **poklon**). Odbijeno: humanitarna nabavka po ZPDG čl. 9 st. 1 t. 11, i **svaka dinarska kapa na POEN**. Set 4.6.0 — osam akata × 5 jezika. | 9 → **6** |
 
 ---
 

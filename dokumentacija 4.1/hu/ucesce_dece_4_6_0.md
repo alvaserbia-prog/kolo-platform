@@ -2,7 +2,7 @@
 
 # Szabályzat a gyermekek részvételéről
 
-*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.5.9) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
+*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.6.0) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
 
 ## I — Általános rendelkezések
 

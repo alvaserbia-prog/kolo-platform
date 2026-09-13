@@ -262,6 +262,14 @@ granica se računa iz podataka koji već postoje (`placenoRSD`, `brojDelova`,
 `NabavkaPrijava.preuzetoAt`). Registar i Politika ostaju na 4.5.9, gde ih je ostavio
 zaostatak uz R-01.
 
+🟡 **Zaostala unakrsna upućivanja — ŠEST novih.** Bumpom na 4.6.0 zastarela su
+upućivanja iz akata koji se ovim potezom NE objavljuju: Registar (4.5.9) → Pravilnik
+(„verzija 4.5.9") i → programi podrške („verzija 4.5.0", dva mesta), DPIA (4.5.2) →
+programi podrške (`v4.5.0`, dva mesta) i → Whitepaper (`v4.4.6`). Nisu ispravljena —
+objavljen fajl ne sme da govori nešto drugo nego kad je objavljen. Briše ih bump celog
+seta na 5.0. 🟢 Upućivanje `ucesce_dece` → Pravilnik JESTE ispravljeno na v4.6.0, jer
+se taj akt ovim potezom ponovo objavljuje.
+
 **AŽURIRANO 2026-09-13 (trideseti put):** na **4.5.9** idu **ČETIRI akta** —
 Pravilnik o KOLO sistemu (sa 4.5.8), Uslovi korišćenja (sa 4.5.8), Politika
 privatnosti (sa 4.5.5) i Registar radnji obrade (sa 4.5.5). Ostalih trinaest ostaje

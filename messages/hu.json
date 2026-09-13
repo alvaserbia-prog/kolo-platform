@@ -1000,15 +1000,15 @@
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.5.9"
+      "ver": "4.6.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.5.9"
+      "ver": "4.6.0"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.5.9",
+      "ver": "4.6.0",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -1038,11 +1038,11 @@
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása · KOLO",
     "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.9-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat · KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.5.9-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.0-es verzió",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.5.9-es verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.0-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai · KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.5.9-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.0-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",

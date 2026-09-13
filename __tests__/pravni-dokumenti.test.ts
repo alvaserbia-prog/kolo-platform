@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_5_9.md`, `uslovi_koriscenja_4_5_9.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_6_0.md`, `uslovi_koriscenja_4_5_9.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,25 +27,25 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_5_9.md",
+  "Pravilnik_4_6_0.md",
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_5_2.md",
   "radnje_obrade_4_5_9.md",
   "uslovi_koriscenja_4_5_9.md",
   "politika_4_5_9.md",
   "statut_4_1_0.md",
-  "whitepaper_4_5_9.md",
-  "rizici_4_5_9.md",
+  "whitepaper_4_6_0.md",
+  "rizici_4_6_0.md",
   "hijerarhija_4_4_6.md",
   "donacije_4_5_8.md",
-  "operativni_4_5_9.md",
-  "osnivacki_4_5_9.md",
+  "operativni_4_6_0.md",
+  "osnivacki_4_6_0.md",
   "gornje_kolo_4_4_6.md",
-  "programi_podrske_4_5_9.md",
+  "programi_podrske_4_6_0.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
-  "ucesce_dece_4_5_9.md",
+  "ucesce_dece_4_6_0.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
-  "projekti_nabavke_4_5_9.md",
+  "projekti_nabavke_4_6_0.md",
 ];
 
 /**
@@ -62,7 +62,7 @@ const AKTI = [
  * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_5_9.md": {
+  "Pravilnik_4_6_0.md": {
     sr: [
       // ═══ 4.5.9 (R-02 — POEN kao prihod korisnika, Poreska uprava) ═══
       // Odbrana je do 4.5.9 pobijala pojam „naknade", a porez na dohodak oporezuje
@@ -391,7 +391,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // jedan", sistem je sam objavljivao koliko POEN vredi u dinarima, pa se tabela
   // koeficijenta donacija čitala kao cenovnik. Zato se sada traži suprotno:
   // odsustvo pariteta i prisustvo odredbe da broj nije cena dobra.
-  "projekti_nabavke_4_5_9.md": {
+  "projekti_nabavke_4_6_0.md": {
     sr: [
       // ═══ 4.5.9 (R-02) ═══
       // 🔴 Nosivo za kvalifikaciju davanja: zapis se GASI, ne prelazi Fondaciji, i nije
@@ -731,7 +731,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   },
   // 4.4.3 — upozorenje o pribavljanju POEN-a mimo sistema. Ekonomski deo (ne stiče
   // nivo, ne pomera koeficijent) je ono što zabranu iz Uslova čini samoodrživom.
-  "rizici_4_5_9.md": {
+  "rizici_4_6_0.md": {
     sr: [
       // 4.5.9 (R-02) — najjača poreska činjenica seli se iz čl. 11a (AML) u čl. 10.
       "ni po jednom osnovu ne isplaćuje novac",
@@ -800,7 +800,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // svakom potvrđenom članu. Ako ta odredba ispadne iz akta, kod nastavi da
   // zatvara profil bez osnova, a pregled po školama ostane bez ijednog pravila o
   // tome šta se sme objaviti — pa se traži doslovno, na sva tri jezika.
-  "ucesce_dece_4_5_9.md": {
+  "ucesce_dece_4_6_0.md": {
     sr: [
       // 4.5.9 (R-02) — kanal iz čl. 15 t. 9 upisuje detetu; priroda upisa mora da stoji.
       "maloletni korisnik ne prima ni novac ni stvar",
@@ -1021,7 +1021,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // je u normi a ne u kodu; a zapis o evidentiranom POEN-u sa nazivom programa
   // vidljiv je svim verifikovanim korisnicima, o čemu pristanak nije govorio ništa.
   // Traže se sva tri, jer bi se svako lako izgubilo bez ijednog vidljivog kvara.
-  "programi_podrske_4_5_9.md": {
+  "programi_podrske_4_6_0.md": {
     sr: [
       // 4.5.9 (R-02) — nov čl. 6a. „Nije socijalna pomoć" je brisano iz čl. 2.
       "Priroda evidentiranja",
@@ -1067,7 +1067,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // JEDAN korak, ali ne i za zbirni udeo, koji stoji na ~19–24% i blago RASTE.
   // Test čuva i obrazloženje granice: bez njega je najveća alokacija u sistemu
   // jedini krupan parametar bez ijedne rečenice razloga.
-  "osnivacki_4_5_9.md": {
+  "osnivacki_4_6_0.md": {
     sr: [
       // 4.5.9 (R-02) — jedini kanal koji sam sebe u aktu naziva „radom".
       "nije rad naručen od Fondacije",
@@ -1103,7 +1103,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "поступает в общее благо под лицензиями",
     ],
   },
-  "operativni_4_5_9.md": {
+  "operativni_4_6_0.md": {
     sr: [
       // 4.5.9 (R-02) — „nije naknada" je pobijalo pogrešan pojam; sada i elementi prihoda.
       "ne utvrđuje nijedan iznos izražen u novcu",
@@ -1284,7 +1284,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_5_9.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_6_0.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });
