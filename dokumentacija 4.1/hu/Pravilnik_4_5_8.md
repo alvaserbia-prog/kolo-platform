@@ -212,11 +212,15 @@ Az előző bekezdés rendelkezése nem puszta megnevezés, hanem a bejegyzés tu
 
 — nem váltják vissza és nem konvertálják (a jelen szabályzat 73. cikke), így belőle pénzbeli kiút nincs;
 
-— az Alapítvány nem állapítja meg az árát, és nem kínálja piacon; a Felhasználási feltételek szerinti tájékoztató arány kizárólag a felhasználót szolgálja a saját hirdetésében szereplő összeg meghatározásakor, és azt az Alapítvány egyetlen eljárásában sem alkalmazza;
+— az Alapítvány nem állapítja meg az árát, és nem kínálja piacon: nem tesz közzé POEN–dinár vagy bármely más deviza szerinti arányt, és egyetlen ilyen arányt sem alkalmaz egyetlen saját eljárásában sem. A hirdetésben az összeget maga a felhasználó határozza meg (a Felhasználási feltételek 19. cikke); ha ennek során pénzben kifejezett értékből indul ki, az az ő becslése, amely sem az Alapítványt, sem a másik felet nem kötelezi;
 
 — a Protokoll nyilvántartásán kívül nem létezik, és nem vihető át olyan bejegyzésre, amelyet a Protokoll nem vezet;
 
 — nem szolgál pénztartozás teljesítésére, és nem kínálható fel pénz helyett.
+
+Senki nem köteles POEN-t elfogadni. Az Alapítvány POEN-t nem fogad el, egyetlen saját összegét sem fejezi ki benne, és nem tesz közzé POEN-ben megadott árjegyzéket. A cserénél a POEN-ben kifejezett összeget maguk a felek határozzák meg, és az egyetlen más felhasználót sem kötelez.
+
+A POEN nem szerezhető meg csere teljesítése céljából. Az adomány jogcímén nyújtott hozzájárulást nem a fizetés pillanatában jegyzik be: a bejegyzés feltételezi, hogy az Alapítvány előbb megállapítja a fizetés beérkezésének tényét és azt a személyt, akinek eszközeiből teljesült (15. cikk és 39. cikk).
 
 A POEN jogcímén az Alapítvány nem nyújt fizetési szolgáltatást, nem tart a felhasználók pénzeszközeinél, és nem hajt végre fizetési műveletet. A felhasználók közötti, a jelen szabályzat 16. cikke szerinti nyilvántartás-frissítés nem pénzbeli érték átutalása, hanem a Protokoll által vezetett nyilvántartásban szereplő bejegyzés módosítása.
 
@@ -288,6 +292,8 @@ Az 1., 3., 4., 7. és 8. pont szerinti csatornákat e szabályzat VI. fejezete r
 
 A pénzügyi hozzájárulás dinárban valósul meg. A pártfogás pénz, áru vagy szolgáltatás adományozásával valósul meg. A dináros eszközök az Alapítványba kerülnek, és nem lépnek be a rendszer elszámolási keretébe. Az adomány vagy a pártfogói hozzájárulás beérkezését követően a Protokoll a megfelelő felhasználó bejegyzésében nyilvántartásba veszi a hozzájárulást POEN-ben, a külön szabályzatban megállapított nyilvántartásba vételi paraméterek szerint. A POEN nyilvántartásba vétele a Protokoll automatikus aktusa, és nem hoz létre szerződéses jogviszonyt az adományozó és az Alapítvány között.
 
+Ebben az eljárásban két döntés elkülönül. A fizetés beérkezésének tényét és azt a személyt, akinek eszközeiből teljesült, az Alapítvány állapítja meg, a befizetőre vonatkozó adatokat a felhasználó fiókjával összevetve; a fizetési közvetítő teljesített terhelésről szóló jelentése önmagában nem indítja el a bejegyzést. A bejegyzett POEN számát a Protokoll automatikusan határozza meg, külön szabályzat paraméterei szerint, és az a rendszer egyetlen szereplőjének mérlegelése alá sem tartozik.
+
 ### 16. cikk
 
 A felhasználók a rendszeren belül javakat és szolgáltatásokat cserélnek. Minden cserét a Protokoll a POEN-nyilvántartás frissítésével vesz nyilvántartásba: a javat vagy szolgáltatást nyújtó felhasználó bejegyzése növekszik, a fogadó felhasználó bejegyzése pedig ugyanazzal az összeggel csökken.
@@ -298,7 +304,9 @@ A csere nem fizetési tranzakció. A POEN-nyilvántartás frissítése nem monet
 
 A csere teljesítéséért, minőségéért, az azzal járó felelősségért és kockázatért az abban részt vevő felhasználók felelnek, a kötelmi jog általános szabályai szerint. Az Alapítvány és a Protokoll nem közvetít a cserében, és nem felel a felhasználók kötelezettségeinek teljesítéséért.
 
-Valamennyi felhasználó cserélhet javakat és szolgáltatásokat. A POEN-nyilvántartás más felhasználó javára történő frissítésének kezdeményezése (csere mellett vagy ellenszolgáltatás nélkül) a hitelesített felhasználók számára elérhető, a 28. cikk szerinti feltételek mellett.
+Minden felhasználó cserélhet árut és szolgáltatást. A POEN-nyilvántartás más felhasználó javára történő frissítésének kezdeményezése a hitelesített felhasználók számára érhető el, a 28. cikkben foglalt feltételekkel.
+
+Tilos és a Felhasználási feltételekben megállapított intézkedéseket vonja maga után az a nyilvántartás-frissítés, amelyet olyan ügylet érdekében hajtanak végre, amellyel a POEN-t a rendszeren kívüli értékért kínálják, veszik, eladják, vagy forgalmában közvetítenek. Az ilyen frissítés e cikk értelmében nem áru- és szolgáltatáscsere.
 
 A platform hirdetési terében a hirdetések megtekintése — az ajánlat vagy kérés tartalma, ára, helye és a hirdető álneve — nyilvános és valamennyi látogató számára elérhető a csere hozzáférhetősége érdekében.
 
@@ -330,7 +338,9 @@ A ZRNO-t kizárólag a Protokoll írja be és le, a felhasználó kérelmére é
 
 ### 19. cikk
 
-A hitelesített felhasználó akkor ír be ZRNO-t, amikor teljesíti a rendszer szabályaiban megállapított feltételeket. A ZRNO beírásával a felhasználó ZRNO-tulajdonossá válik.
+A ZRNO a felhasználó nyilvántartásában bejegyzett hozzájárulásból íródik be, függetlenül attól, hogy azt a hozzájárulást a 15. cikk szerinti csatornán jegyezték-e be, vagy a nyilvántartás más felhasználókkal folytatott áru- és szolgáltatáscserével növekedett. A ZRNO beírásával a felhasználó ZRNO-tulajdonossá válik.
+
+A Felső Kolóban a szavazat nem a beírt, hanem az aktivált ZRNO-ból ered, olyan felhasználó esetében, akinek valóságát a megerősítési láncon keresztül megerősítették (21. cikk és 45. cikk). Az a felhasználó, akinek valóságát nem erősítették meg, a ZRNO-t beírja és tartja, de nem aktiválja, nem írja le, és annak alapján szavazatot sem delegál.
 
 A ZRNO beírása legalább 20.000 nyilvántartásba vett POEN-t feltételez a felhasználó bejegyzésében. A felhasználó egy elszámolási időszakban ZRNO beírására legfeljebb nyilvántartásba vett POEN-jeinek 1 %-át fordíthatja.
 
@@ -366,7 +376,7 @@ A beírás és a leírás pillanatában érvényes elszámolási együttható k�
 
 A ZRNO nem ruházható át másik felhasználóra.
 
-A ZRNO ahhoz a felhasználóhoz kötődik, akinek valódisága a megerősítési láncon keresztül nyert megerősítést.
+A ZRNO ahhoz a felhasználóhoz kötődik, akinek nyilvántartásában be van jegyezve, és nem ruházható át — sem önmagában, sem a fiókkal együtt.
 
 A ZRNO-ra nincs piac, nincs ZRNO-ár, és nincs lehetőség vele kereskedni.
 
@@ -422,9 +432,13 @@ A nem hitelesített felhasználónak joga van megtekinteni a rendszer nyilvános
 
 A POEN-nyilvántartás frissítésében a nem hitelesített felhasználó kizárólag fogadóként vehet részt. A nyilvántartás más felhasználó javára történő frissítése a hitelesítést követően érhető el. A hitelesítés előtt nyilvántartásba vett POEN-bejegyzések érvényesek maradnak, és nem kerülnek megsemmisítésre.
 
-A nem hitelesített felhasználó hozzájárulása kizárólag a platform tartalmához való hozzájárulás csatornáján keresztül vehető nyilvántartásba (15. cikk 8. pont és 40.a cikk). A többi csatornán keresztül hozzájárulása nem kerül nyilvántartásba, és ZRNO-t sem írhat be.
+A nem hitelesített felhasználó hozzájárulását a platform tartalmához való hozzájárulás csatornáján jegyzik be (15. cikk 8. pont és 40a. cikk), az e cikk 6. bekezdése szerinti felhasználóét pedig a pénzügyi hozzájárulás csatornáján is (15. cikk 3. pont). A többi csatornán hozzájárulást nem jegyeznek be neki.
 
-A nem hitelesített felhasználó nem férhet hozzá a hirdető elérhetőségi adataihoz, és nem kezdeményezhet kommunikációt a Platformon keresztül. Válaszolhat abban a beszélgetésben, amelyet hitelesített felhasználó indított a hirdetése kapcsán.
+A nem hitelesített felhasználó nem férhet hozzá a hirdetők kapcsolattartási adataihoz, és nem kezdeményezhet kommunikációt a Platformon keresztül. Válaszolhat abban a beszélgetésben, amelyet hitelesített felhasználó indított a hirdetése kapcsán. A kommunikáció kezdeményezésének tilalma alóli kivételt e cikk 6. bekezdése rendezi.
+
+Annak a felhasználónak, akinek személyazonosságát adomány kapcsán megállapították — azzal, hogy az Alapítvány a befizetőre vonatkozó adatokat összevetette a fiókjával (39. cikk) —, az előző bekezdésekben foglalt jogokon felül elérhető: árut vagy szolgáltatást kereső hirdetés és a Felhasználási feltételekben a többi nem hitelesített felhasználóra megállapított számnál több egyidejű hirdetés, a hirdetés kapcsán a kommunikáció kezdeményezése, a közös beszélgetőtérben való részvétel, a felhasználók keresése más profiljának álnévre és közzétett hirdetésekre szűkített megtekintésével, valamint a ZRNO beírása a 19. cikk feltételeivel.
+
+A megállapított személyazonosság nem a valóság megerősítése, és azt nem helyettesíti. Az előző bekezdés szerinti felhasználó nem kezdeményez POEN-nyilvántartás-frissítést, nem aktiválja és nem írja le a ZRNO-t, nem szavaz és nem delegál szavazatot a Felső Kolóban, nem erősíti meg más felhasználók valóságát és nem felügyeli a megerősítéseket, nem vesz részt az operatív hozzájárulásban, a szociális programokban és a kollektív beszerzésekben, és nem fér hozzá a hirdetők kapcsolattartási adataihoz.
 
 ### 29. cikk
 
@@ -432,13 +446,15 @@ A hitelesített felhasználó az a személy, akinek valódisága a valóságbizo
 
 A hitelesített felhasználó cserélhet javakat és szolgáltatásokat, hozzájárulása POEN-ben nyilvántartásba vehető, részt vehet a kollektív formákban és a szociális programokban, valamint megerősítheti más felhasználók valódiságát a megerősítési láncban.
 
-A hitelesített felhasználó akkor ír be ZRNO-t, amikor teljesíti a beírás feltételeit, és ezzel ZRNO-tulajdonossá válik.
+A hitelesített felhasználó akkor ír be ZRNO-t, amikor teljesíti a 19. cikk feltételeit, és ezzel ZRNO-tulajdonossá válik. A ZRNO beírása nem kizárólag az ő joga (28. cikk 6. bekezdés), az aktiválás és az abból eredő jogok azonban a megerősített valósághoz kötődnek.
 
 ### 30. cikk
 
-A ZRNO-tulajdonos az a hitelesített felhasználó, akinek a Protokollban ZRNO-t írtak be. Az első ZRNO-tulajdonosok a rendszer indulásakor e szabályzat átmeneti rendelkezésében megállapított módon kerülnek megállapításra (82. cikk).
+ZRNO-tulajdonos az a felhasználó, akinek a Protokollban ZRNO-t jegyeztek be. Az első ZRNO-tulajdonosok a rendszer indulásakor e szabályzat átmeneti rendelkezésében megállapított módon jönnek létre (82. cikk).
 
-A ZRNO-tulajdonost megilleti a hitelesített felhasználó valamennyi joga. Ezen túlmenően a ZRNO aktiválásával részt vesz a rendszer irányításában a Felső Kolón keresztül, pozícióval rendelkezik az elszámolási rendszerben, valamint tartós kapacitással bír más felhasználók valódiságának megerősítésére.
+Az a ZRNO-tulajdonos, akinek valóságát megerősítették, a hitelesített felhasználó minden jogával rendelkezik. Ezen felül a ZRNO aktiválásával részt vesz a rendszer irányításában a Felső Kolón keresztül, helyet foglal el az elszámolási rendszerben, és tartós képességgel bír mások valóságának megerősítésére.
+
+Az a ZRNO-tulajdonos, akinek valóságát nem erősítették meg, a ZRNO-t tartja, de nem aktiválja; a beírt ZRNO-ból sem szavazat, sem delegálás, sem megerősítési képesség nem ered. Jogai a 28. cikk 6. bekezdésében megállapítottak, a beírt ZRNO pedig akkor aktiválható, amikor valóságát megerősítik.
 
 Az a ZRNO-tulajdonos, akinek ZRNO-ja teljes egészében leírásra került, ismét hitelesített felhasználói jogállással rendelkezik.
 
@@ -459,6 +475,8 @@ Minden felhasználó rendelkezik valóságindexszel — számszerű értékkel, 
 A megerősítési láncban tett megerősítések összessége alkotja a hitelesítési gráfot. A hitelesítési gráf személyes adatok nyilvántartása; azon az infrastruktúrán vezetendő, amelyen a Protokoll működik, adattakarékosság mellett. A gráf a felügyeleti adatokat is felöleli — a felügyelet eredményét, gyanú kifejezése esetén pedig a gyanú alanyát és az indok kódját is (a valóság bizonyításáról szóló szabályzat 11. cikke). Ezek az adatok nem nyilvánosak, és rájuk a jelen szabályzat 67. cikke alkalmazandó.
 
 A hitelesítés lefolytatásához szükséges kapcsolatot a nem hitelesített felhasználó a platform hirdetési terén keresztül létesíti (16. cikk): javat vagy szolgáltatást kínáló hirdetés közzétételével bemutatkozik a meglévő hitelesített felhasználók hálózatának. E út megléte nem változtatja meg az e szabályzatban és a valóságbizonyítékról szóló szabályzatban megállapított hitelesítés természetét, eljárását vagy feltételeit. A közzététel, a tartalom és az adatkezelés szabályait a Felhasználási feltételek és az adatvédelmi szabályzat állapítják meg.
+
+A megtett adomány nem alapja a valóság megerősítésének, és nem helyettesíti a valóságbizonyítékról szóló szabályzat 5. cikke szerinti közvetlen személyes ismeretséget. A befizető személyazonosságának adomány kapcsán történő megállapítása (39. cikk) nem lép be a megerősítési láncba, nem növeli a valóságindexet, és egyetlen felhasználót sem kötelez az adományozó valóságának megerősítésére.
 
 A valóságindex kiszámításának szabályait, a megerősítési hálózat terjeszkedésének szabályait és a megerősítési lánccal való visszaélés elleni intézkedéseket külön szabályzat állapítja meg.
 
@@ -534,7 +552,9 @@ Amikor a dináros bevételek meghaladják az Alapítvány működési költsége
 
 A természetes személy adománya adományozási szerződés alapján az Alapítványba érkező dináros bevétel.
 
-Az adomány beérkezését követően a Protokoll nyilvántartásba veszi a hozzájárulást az adományozó bejegyzésében POEN-ben, a külön szabályzatban megállapított nyilvántartásba vételi paraméterek szerint. A POEN nyilvántartásba vétele a Protokoll automatikus aktusa, és a POEN tekintetében nem hoz létre szerződéses jogviszonyt az adományozó és az Alapítvány között.
+Az adomány beérkezését az Alapítvány állapítja meg, a befizetőre vonatkozó adatokat a felhasználó fiókjával összevetve. A fizetési közvetítő teljesített terhelésről szóló jelentése nem a beérkezés megállapítása, hanem alap arra, hogy a fizetés bekerüljön ebbe az eljárásba.
+
+A megállapított beérkezést követően a Protokoll a hozzájárulást POEN-ben bejegyzi az adományozó nyilvántartásába, a külön szabályzatban megállapított bejegyzési paraméterek szerint. A POEN bejegyzése a Protokoll automatikus aktusa, és a POEN tekintetében nem hoz létre szerződéses viszonyt az adományozó és az Alapítvány között.
 
 Az Alapítvány az adományozó kérésére a törvénnyel összhangban igazolást állít ki az adományról. Az adomány adójogi kezelése az adományozó jogállásától, az Alapítvány bejegyzett jogállásától és az adományozás idején hatályos adóelőírásoktól függ.
 
@@ -658,9 +678,9 @@ Az elszámolási logikában az egymillió nyilvántartásba vett POEN küszöbe 
 
 ### 45. cikk
 
-A Felső Kolo a rendszer irányító testülete, amelyet valamennyi ZRNO-tulajdonos alkot.
+A Felső Kolo a rendszer irányító testülete, amelyet az aktivált ZRNO azon tulajdonosai alkotnak, akiknek valóságát a megerősítési láncon keresztül megerősítették.
 
-A Felső Kolo összetételét nem kinevezés, hanem az e szabályzatban előírt feltétel teljesítése állapítja meg: a tagság a ZRNO beírásával és aktiválásával keletkezik, és annak leírásával, azaz a ZRNO szabad állapotba való visszahelyezésével szűnik meg. Az összetétel minden pillanatban megállapítható a Protokoll nyilvántartásából, és az elszámolási időszak alatt állandó.
+A Felső Kolo összetételét nem kinevezés, hanem az e szabályzatban előírt feltétel teljesítése határozza meg: a tagság a beírt ZRNO aktiválásával szerezhető meg olyan felhasználó által, akinek valóságát megerősítették, és megszűnik a ZRNO leírásával, a ZRNO szabad állapotba való visszahelyezésével, illetve a megerősített valóság megszűnésével. Az összetétel minden pillanatban meghatározható a Protokoll nyilvántartásából, és az elszámolási időszak alatt állandó.
 
 A Felső Kolo automatikusan jön létre a ZRNO aktiválásával — amint az első felhasználók a rendszer szabályai szerint beírják a ZRNO-t, ők alkotják a Felső Kolót.
 

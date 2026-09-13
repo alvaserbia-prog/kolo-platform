@@ -54,7 +54,9 @@ Uvođenje naknade za ustupljeno dobro predstavljalo bi gospodarsku djelatnost i 
 
 *Krug sudionika*
 
-U kolektivnoj nabavi sudjeluju punoljetni korisnici s aktivnim računom.
+U kolektivnoj nabavi sudjeluju punoljetni korisnici s aktivnim računom čija je stvarnost potvrđena kroz lanac potvrda (indeks stvarnosti najmanje 10%).
+
+Uvjet potvrđene stvarnosti proizlazi iz svrhe nabave: dobra se raspodjeljuju korisnicima programa u smislu članka 9. stavka 4. Statuta Zaklade, a to može biti samo osoba za koju je netko iz mreže stao i potvrdio da postoji. Bez tog uvjeta prag iz članka 21. bio bi dostižan ažuriranjem evidencije u korist novootvorenog računa, pa bi se dobra raspodjeljivala osobi čije postojanje nitko nije potvrdio.
 
 Maloljetni korisnici ne podnose prijedlog za nabavu, ne prijavljuju se na nabavu i ne preuzimaju dobra.
 

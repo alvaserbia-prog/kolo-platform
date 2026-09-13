@@ -26,7 +26,7 @@ Az e szabályzatban használt fogalmak a KOLO rendszerről szóló szabályzatba
 
 ### 3. cikk — Az adományozás joga
 
-A rendszer minden hitelesített felhasználója adományozhat pénzt az Alapítványnak dinárban vagy más valutában.
+A rendszer bármely felhasználója adományozhat pénzt az Alapítványnak dinárban vagy más devizában. A megerősítési láncban megerősített valóság nem feltétele sem az adományozásnak, sem a hozzájárulás annak alapján történő bejegyzésének.
 
 Az adományozás az Alapítvány számlájára történő befizetéssel valósul meg. Az Alapítvány az adományozó kérésére igazolást állít ki az adományról, a jogszabályokkal összhangban. Az adomány adójogi megítélése az adományozó státuszától, az Alapítvány bejegyzett státuszától és az adományozás időpontjában hatályos adójogszabályoktól függ.
 
@@ -34,7 +34,11 @@ Az adomány teljesítése kizárólag számláról az Alapítvány számlájára
 
 A hozzájárulás kizárólag annak a felhasználónak a bejegyzésében kerül nyilvántartásba, akinek az eszközeiből a befizetés történt. A más személy által teljesített befizetés nem kerül nyilvántartásba annak a felhasználónak a hozzájárulásaként, akinek a közleményszámára érkezett. Olyan személy befizetése, aki nem felhasználója a rendszernek, nem jár POEN nyilvántartásba vételével — az eszközöket az Alapítvány adományként fogadja el, és céljai megvalósítására fordítja.
 
-A bankszámlakivonat szerinti befizető adatát az adomány bejegyzése mellett és a nyilvántartásba vett POEN bejegyzése mellett rögzítik. Fizetési kártyával történő fizetés esetén az adományozó nyilatkozik arról, hogy a fizetési eszköz az ő nevére szól.
+A befizetőnek a bankkivonaton szereplő adatát az adomány bejegyzésénél és a bejegyzett POEN-ről szóló bejegyzésnél is rögzítik. Bankkártyás fizetésnél az adományozó kijelenti, hogy a fizetési eszköz az ő nevére szól.
+
+Ha az adományt külföldi devizában teljesítették, az Alapítvány számláján jóváírt dinárösszeg az irányadó. A hozzájárulást ezen összeg szerint jegyzik be, nem az adományozó által elküldött összeg szerint; a konverzióból és a fizetési forgalom költségeiből eredő különbözetet nem jegyzik be.
+
+Az adomány beérkezését az Alapítvány állapítja meg, a befizetőre vonatkozó adatokat a felhasználó fiókjával összevetve. A fizetési közvetítő teljesített kártyaterhelésről szóló jelentése nem a beérkezés megállapítása, hanem alap arra, hogy a fizetés bekerüljön ebbe az eljárásba; a hozzájárulást nem a terhelés pillanatában jegyzik be.
 
 Az adományozó minden adományozás alkalmával megválasztja, hogy az adomány nyilvános vagy névtelen legyen. A nyilvános adománnyal az adományozó hozzájárul ahhoz, hogy neve nyilvánosan megjelenjen a platform adománylistáján, és POEN kizárólag nyilvános adomány után kerül nyilvántartásba a 4. cikk szerint. A névtelen adomány nem jeleníti meg az adományozó nevét, és utána POEN nem kerül nyilvántartásba. A választás minden adomány esetében külön történik, és az e rendelkezések hatálybalépését követően teljesített adományokra alkalmazandó.
 
@@ -81,7 +85,9 @@ Az adomány nem ad jogot a kollektív beszerzésből származó javakra, nem biz
 
 POEN kizárólag a 3. cikk értelmében vett nyilvános adományok után kerül nyilvántartásba. Névtelen adományok után POEN nem kerül nyilvántartásba, és azok nem számítanak bele a 4. cikk szerinti halmozott adományszintbe.
 
-A POEN adomány alapján történő nyilvántartásba vétele a Protokoll automatikus aktusa a KOLO rendszerről szóló szabályzat 39. és 73. cikke értelmében. Nem számít bele a Protokoll Programjainak napi kibocsátási limitjébe.
+A POEN adomány jogcímén történő bejegyzése a Protokoll automatikus aktusa a KOLO rendszerről szóló szabályzat 39. és 73. cikke értelmében. Nem számít bele a Protokoll Programjainak napi kibocsátási korlátjába.
+
+Az automatizmus az összegre vonatkozik, nem az elindításra. A POEN-ek számát a Protokoll mérlegelés nélkül határozza meg, e szabályzat 4. cikke szerint; maga a bejegyzés csak azt követően indul el, hogy az Alapítvány a 3. cikk értelmében megállapította az adomány beérkezését. Az adomány tehát nem mód arra, hogy a POEN-t abban a pillanatban szerezzék meg, amikor szükség van rá.
 
 A nyilvántartásba vett POEN-ek ugyanolyan státusszal bírnak, mint a rendszer minden más POEN-je.
 

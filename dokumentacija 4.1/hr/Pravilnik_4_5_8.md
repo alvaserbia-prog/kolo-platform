@@ -212,11 +212,15 @@ Odredba prethodnoga stavka nije samo naziv nego posljedica svojstava zapisa. POE
 
 — ne otkupljuje se i ne konvertira (članak 73. ovoga pravilnika), pa iz njega ne postoji izlaz u novcu;
 
-— Zaklada ne utvrđuje njegovu cijenu i ne nudi ga na tržištu; orijentacijski odnos iz Uvjeta korištenja služi isključivo korisniku pri određivanju iznosa u vlastitom oglasu i Zaklada ga ne primjenjuje ni u jednom svojem postupku;
+— Zaklada ne utvrđuje njegovu cijenu i ne nudi ga na tržištu: ne objavljuje odnos POEN-a prema dinaru ni prema bilo kojoj drugoj valuti i nijedan takav odnos ne primjenjuje ni u jednom svom postupku. Iznos u oglasu određuje korisnik sam (članak 19. Uvjeta korištenja); ako pri tome pođe od vrijednosti izražene u novcu, to je njegova procjena koja ne obvezuje ni Zakladu ni drugu stranu;
 
 — ne postoji izvan evidencije Protokola i ne može se prenijeti na zapis koji Protokol ne vodi;
 
 — ne služi podmirenju novčanih obveza i ne može se ponuditi umjesto novca.
+
+Nitko nije dužan primiti POEN. Zaklada POEN ne prima, ne izražava u njemu nijedan svoj iznos i ne objavljuje cjenik u POEN-ima. Iznos u POEN-ima pri razmjeni određuju strane same i on ne obvezuje nijednog drugog korisnika.
+
+POEN se ne može pribaviti radi izvršenja razmjene. Doprinos po osnovi donacije ne evidentira se u trenutku uplate: evidentiranje pretpostavlja da Zaklada prethodno utvrdi činjenicu primitka uplate i osobu čijim je sredstvima izvršena (članak 15. i članak 39.).
 
 Po osnovi POEN-a Zaklada ne pruža platne usluge, ne drži novčana sredstva korisnika i ne izvršava platne transakcije. Ažuriranje evidencije među korisnicima iz članka 16. ovoga pravilnika nije prijenos novčane vrijednosti nego izmjena zapisa u evidenciji koju vodi Protokol.
 
@@ -288,6 +292,8 @@ Kanali pod točkama 1., 3., 4., 7. i 8. uređeni su Glavom VI. ovog pravilnika. 
 
 Financijski se doprinos ostvaruje u dinarima. Pokroviteljstvo se ostvaruje doniranjem novca, robe ili usluga. Dinarska sredstva ulaze u Zakladu i ne ulaze u obračunski okvir sustava. Po primitku donacije ili pokroviteljskog doprinosa, Protokol u zapisu odgovarajućeg korisnika evidentira doprinos u POEN-ima, prema parametrima evidentiranja utvrđenima posebnim pravilnikom. Evidentiranje POEN-a automatski je akt Protokola i ne zasniva ugovorni odnos između donatora i Zaklade.
 
+Dvije odluke u tom postupku su razdvojene. Činjenicu primitka uplate i osobu čijim je sredstvima izvršena utvrđuje Zaklada, uspoređujući podatke o uplatitelju s računom korisnika; sam izvještaj platnog posrednika o izvršenoj naplati ne pokreće evidentiranje. Broj POEN-a koji se evidentira određuje Protokol automatski, prema parametrima iz posebnog pravilnika, i on nije predmet ocjene nijednog aktera sustava.
+
 ### Članak 16.
 
 Korisnici unutar sustava razmjenjuju dobra i usluge. Svaku razmjenu Protokol evidentira ažuriranjem evidencije POEN-a: zapis korisnika koji daje dobro ili uslugu uvećava se, a zapis korisnika koji prima umanjuje se za isti iznos.
@@ -298,7 +304,9 @@ Razmjena nije platna transakcija. Ažuriranje evidencije POEN-a nije prijenos mo
 
 Za ispunjenje, kvalitetu, odgovornost i rizik u razmjeni odgovaraju korisnici koji u njoj sudjeluju, prema općim pravilima obveznog prava. Zaklada i Protokol ne posreduju u razmjeni i ne odgovaraju za ispunjenje obveza korisnika.
 
-Svi korisnici mogu razmjenjivati dobra i usluge. Iniciranje ažuriranja evidencije POEN-a u korist drugog korisnika (uz razmjenu ili bez protuusluge) dostupno je verificiranim korisnicima, pod uvjetima iz članka 28.
+Svi korisnici mogu razmjenjivati dobra i usluge. Iniciranje ažuriranja evidencije POEN-a u korist drugog korisnika dostupno je verificiranim korisnicima, pod uvjetima iz članka 28.
+
+Ažuriranje evidencije izvršeno radi posla kojim se POEN nudi, kupuje, prodaje ili se posreduje u njegovu prometu za vrijednost izvan sustava zabranjeno je i povlači mjere utvrđene Uvjetima korištenja. Takvo ažuriranje nije razmjena dobara i usluga u smislu ovoga članka.
 
 Pregled oglasa u platformskom prostoru za oglašavanje — sadržaj ponude ili zahtjeva, cijena, lokacija i pseudonim oglašivača — javan je i dostupan svim posjetiteljima radi pristupačnosti razmjene.
 
@@ -330,7 +338,9 @@ ZRNO upisuje i otpisuje isključivo Protokol, na zahtjev korisnika i prema pravi
 
 ### Članak 19.
 
-Verificirani korisnik upisuje ZRNO kada ispuni uvjete utvrđene pravilima sustava. Upisom ZRNA korisnik postaje nositelj ZRNA.
+ZRNO se upisuje iz evidentiranog doprinosa u zapisu korisnika, bez obzira na to je li taj doprinos evidentiran kroz kanal iz članka 15. ili je zapis uvećan razmjenom dobara i usluga s drugim korisnicima. Upisom ZRNA korisnik postaje nositelj ZRNA.
+
+Glas u Gornjem Kolu ne proizlazi iz upisanog nego iz aktiviranog ZRNA korisnika čija je stvarnost potvrđena kroz lanac potvrda (članak 21. i članak 45.). Korisnik čija stvarnost nije potvrđena ZRNO upisuje i drži, ali ga ne aktivira, ne otpisuje i ne delegira glas po njegovoj osnovi.
 
 Upis ZRNA pretpostavlja minimum od 20.000 evidentiranih POEN-a u zapisu korisnika. Korisnik u jednom obračunskom razdoblju može na upis ZRNA utrošiti najviše 1 % svojih evidentiranih POEN-a.
 
@@ -366,7 +376,7 @@ Razlika između obračunskog koeficijenta u trenutku upisa i u trenutku otpisa n
 
 ZRNO se ne može prenijeti drugom korisniku.
 
-ZRNO je vezano za korisnika čija je stvarnost potvrđena kroz lanac potvrda.
+ZRNO je vezano za korisnika u čijem je zapisu upisano i ne prenosi se — ni samo, ni zajedno s računom.
 
 Za ZRNO ne postoji tržište, ne postoji cijena ZRNA i ne postoji mogućnost trgovanja njime.
 
@@ -422,9 +432,13 @@ Neverificirani korisnik ima pravo pregleda javnog sadržaja sustava, uključuju�
 
 U ažuriranju evidencije POEN-a neverificirani korisnik može sudjelovati isključivo kao primatelj. Ažuriranje evidencije u korist drugog korisnika dostupno je po verifikaciji. Zapisi POEN-a evidentirani prije verifikacije ostaju punovažni i ne poništavaju se.
 
-Neverificiranom se korisniku doprinos može evidentirati isključivo kroz kanal doprinosa sadržaju platforme (članak 15. točka 8. i članak 40.a). Kroz ostale mu se kanale doprinos ne evidentira, niti može upisati ZRNO.
+Neverificiranom korisniku doprinos se evidentira kroz kanal doprinosa sadržaju platforme (članak 15. točka 8. i članak 40a), a korisniku iz stavka 6. ovoga članka i kroz kanal financijskog doprinosa (članak 15. točka 3.). Kroz ostale kanale doprinos mu se ne evidentira.
 
-Neverificirani korisnik ne može pristupati kontaktnim podacima oglašivača niti pokretati komunikaciju putem Platforme. Može odgovarati u razgovoru koji je verificirani korisnik pokrenuo povodom njegova oglasa.
+Neverificirani korisnik ne može pristupati kontakt podacima oglašivača niti pokretati komunikaciju putem Platforme. Može odgovarati u razgovoru koji je verificirani korisnik pokrenuo povodom njegova oglasa. Iznimka od zabrane pokretanja komunikacije uređena je stavkom 6. ovoga članka.
+
+Korisniku čiji je identitet utvrđen povodom donacije — time što je Zaklada usporedila podatke o uplatitelju s njegovim računom (članak 39.) — dostupni su, pored prava iz prethodnih stavaka: oglas kojim se dobro ili usluga traži i veći broj istodobnih oglasa od broja utvrđenog Uvjetima korištenja za ostale neverificirane korisnike, pokretanje komunikacije povodom oglasa, sudjelovanje u zajedničkom prostoru za razgovor, pretraga korisnika uz pregled tuđeg profila sužen na pseudonim i objavljene oglase, te upis ZRNA pod uvjetima iz članka 19.
+
+Utvrđen identitet nije potvrda stvarnosti i ne zamjenjuje je. Korisnik iz prethodnog stavka ne inicira ažuriranje evidencije POEN-a, ne aktivira i ne otpisuje ZRNO, ne glasuje i ne delegira glas u Gornjem Kolu, ne potvrđuje stvarnost drugih korisnika i ne nadzire potvrde, ne sudjeluje u operativnom doprinosu, socijalnim programima ni kolektivnim nabavama i ne pristupa kontakt podacima oglašivača.
 
 ### Članak 29.
 
@@ -432,13 +446,15 @@ Verificirani korisnik osoba je čija je stvarnost potvrđena kroz lanac potvrda 
 
 Verificirani korisnik može razmjenjivati dobra i usluge, može mu se evidentirati doprinos u POEN-ima, može sudjelovati u kolektivnim oblicima i socijalnim programima te potvrđivati stvarnost drugih korisnika u lancu potvrda.
 
-Verificirani korisnik upisuje ZRNO kada ispuni uvjete za upis i time postaje nositelj ZRNA.
+Verificirani korisnik upisuje ZRNO kada ispuni uvjete iz članka 19. i time postaje nositelj ZRNA. Upis ZRNA nije isključivo njegovo pravo (članak 28. stavak 6.), ali su aktiviranje ZRNA i prava koja iz aktiviranja proizlaze vezani za potvrđenu stvarnost.
 
 ### Članak 30.
 
-Nositelj ZRNA verificirani je korisnik kojemu je u Protokolu upisano ZRNO. Prvi nositelji ZRNA pri početku sustava uspostavljaju se na način utvrđen prijelaznom odredbom ovog pravilnika (članak 82.).
+Nositelj ZRNA je korisnik kojemu je u Protokolu upisano ZRNO. Prvi nositelji ZRNA pri početku sustava uspostavljaju se na način utvrđen prijelaznom odredbom ovoga pravilnika (članak 82.).
 
-Nositelj ZRNA ima sva prava verificiranog korisnika. Osim toga, aktiviranjem ZRNA sudjeluje u upravljanju sustavom kroz Gornje Kolo i ima položaj u obračunskom sustavu, te trajni kapacitet potvrđivanja stvarnosti drugih korisnika.
+Nositelj ZRNA čija je stvarnost potvrđena ima sva prava verificiranog korisnika. Pored toga, aktiviranjem ZRNA sudjeluje u upravljanju sustavom kroz Gornje Kolo i ima položaj u obračunskom sustavu, te trajni kapacitet potvrđivanja stvarnosti drugih korisnika.
+
+Nositelj ZRNA čija stvarnost nije potvrđena ZRNO drži, ali ga ne aktivira; iz upisanog ZRNA ne proizlaze ni glas, ni delegiranje, ni kapacitet potvrđivanja. Njegova su prava ona utvrđena člankom 28. stavkom 6., a upisano ZRNO aktivira se kada mu stvarnost bude potvrđena.
 
 Nositelj ZRNA čije je ZRNO u cijelosti otpisano ponovno ima status verificiranog korisnika.
 
@@ -459,6 +475,8 @@ Svaki korisnik ima indeks stvarnosti — brojčanu vrijednost koja izražava stu
 Skup potvrda u lancu potvrda čini graf verifikacija. Graf verifikacija evidencija je osobnih podataka; vodi se na infrastrukturi na kojoj radi Protokol, uz minimizaciju podataka. Graf obuhvaća i podatke o nadzoru — ishod nadzora, a uz izraženu sumnju i subjekt sumnje i šifru razloga (članak 11 Pravilnika o dokazu stvarnosti). Ti podaci nisu javni i na njih se primjenjuje članak 67 ovoga pravilnika.
 
 Kontakt nužan za provođenje verifikacije neverificirani korisnik uspostavlja kroz platformski prostor za oglašavanje (članak 16.): objavom oglasa kojim nudi dobro ili uslugu predstavlja se mreži postojećih verificiranih korisnika. Postojanje tog puta ne mijenja prirodu, postupak ni uvjete verifikacije utvrđene ovim pravilnikom i Pravilnikom o dokazu stvarnosti. Pravila objavljivanja, sadržaja i obrade podataka utvrđuju se Uvjetima korištenja i Politikom privatnosti.
+
+Učinjena donacija nije osnova za potvrdu stvarnosti i ne zamjenjuje neposredno osobno poznavanje iz članka 5. Pravilnika o dokazu stvarnosti. Utvrđenje identiteta uplatitelja povodom donacije (članak 39.) ne ulazi u lanac potvrda, ne uvećava indeks stvarnosti i ne obvezuje nijednog korisnika da potvrdi stvarnost donatora.
 
 Pravila izračunavanja indeksa stvarnosti, pravila širenja mreže potvrda i mjere protiv zlouporabe lanca potvrda utvrđuju se posebnim pravilnikom.
 
@@ -534,7 +552,9 @@ Kada dinarski priljevi premaše operativne troškove Zaklade, višak se usmjerav
 
 Donacija fizičke osobe dinarski je priljev u Zakladu po osnovi ugovora o donaciji.
 
-Po primitku donacije, Protokol evidentira doprinos u zapisu donatora u POEN-ima, prema parametrima evidentiranja utvrđenima posebnim pravilnikom. Evidentiranje POEN-a automatski je akt Protokola i ne zasniva ugovorni odnos između donatora i Zaklade u pogledu POEN-a.
+Primitak donacije utvrđuje Zaklada, uspoređujući podatke o uplatitelju s računom korisnika. Izvještaj platnog posrednika o izvršenoj naplati nije utvrđenje primitka nego osnova da se uplata unese u taj postupak.
+
+Po utvrđenom primitku donacije Protokol evidentira doprinos u zapisu donatora u POEN-ima, prema parametrima evidentiranja utvrđenim posebnim pravilnikom. Evidentiranje POEN-a automatski je akt Protokola i ne zasniva ugovorni odnos između donatora i Zaklade u pogledu POEN-a.
 
 Zaklada izdaje potvrdu o donaciji na zahtjev donatora, u skladu sa zakonom. Porezni tretman donacije ovisi o statusu donatora, registriranom statusu Zaklade i važećim poreznim propisima u trenutku donacije.
 
@@ -658,9 +678,9 @@ U obračunskoj logici, prag od milijun evidentiranih POEN-a odgovara stanju zapi
 
 ### Članak 45.
 
-Gornje Kolo upravno je tijelo sustava koje čine svi nositelji ZRNA.
+Gornje Kolo je upravno tijelo sustava koje čine nositelji aktiviranog ZRNA čija je stvarnost potvrđena kroz lanac potvrda.
 
-Sastav Gornjeg Kola ne utvrđuje se imenovanjem, nego ispunjenjem uvjeta propisanoga ovim pravilnikom: članstvo se stječe upisom i aktiviranjem ZRNA, a prestaje njihovim otpisom, odnosno vraćanjem ZRNA u slobodno stanje. Sastav je u svakom trenutku odrediv iz evidencije Protokola i konstantan tijekom obračunskog razdoblja.
+Sastav Gornjeg Kola ne utvrđuje se imenovanjem, već ispunjenjem uvjeta propisanog ovim pravilnikom: članstvo se stječe aktiviranjem upisanog ZRNA od strane korisnika čija je stvarnost potvrđena, a prestaje otpisom ZRNA, vraćanjem ZRNA u slobodno stanje odnosno prestankom potvrđene stvarnosti. Sastav je u svakom trenutku odrediv iz evidencije Protokola i konstantan tijekom obračunskog razdoblja.
 
 Gornje Kolo nastaje automatski s aktivacijom ZRNA — čim prvi korisnici upišu ZRNO po pravilima sustava, oni čine Gornje Kolo.
 

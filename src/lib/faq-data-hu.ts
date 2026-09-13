@@ -164,7 +164,7 @@ A POEN csak a Protokollban létezik. A bejegyzést a Protokoll vezeti, és nem v
 
 A POEN nem pénz. Nem fizetőeszköz, nem elektronikus pénz, nem digitális vagyon, nem pénzügyi eszköz, és nem az Alapítvány feléd fennálló tartozása. A rendszeren kívül nincs értéke: nem váltható dinárra, nem adható tovább, és az Alapítvány nem vásárolja vissza.
 
-Van-e akkor pénzben kifejezett értéke? Árfolyam nincs. De hogy te és a másik fél meg tudjatok állapodni abban, mi mennyit ér, a rendszerben az összegeket olyan arányban fejezzük ki, amelyben 1 POEN 1 dinárnak felel meg. Ez a rendszeren belüli összehasonlítás mérőskálája — ahogy a súlyt kilogrammban fejezed ki —, nem pedig árfolyam, amelyen valamit pénzre váltanak. Ez az arány kizárólag téged szolgál, amikor hirdetést adsz fel: az Alapítvány egyetlen saját eljárásában sem alkalmazza, nem vesz nyilvántartásba hozzájárulást annak alapján, és nem határoz meg annak alapján egyetlen szabályzati összeget sem. Az Alapítvány a POEN semmilyen értékét nem szavatolja, és nem váltja vissza.`,
+Van-e akkor pénzben kifejezett értéke? Árfolyam nincs, és az Alapítvány semmilyen POEN–dinár arányt nem tesz közzé. A hirdetésben az összeget te magad határozod meg. A legtöbben abból indulnak ki, amennyit az adott áruért vagy szolgáltatásért amúgy is tudnak — ez a te becslésed, arra a hirdetésre érvényes, a másik felet nem kötelezi, és nem árfolyam. Az Alapítvány ezt a számítást nem végzi el helyetted: nem vesz nyilvántartásba hozzájárulást annak alapján, nem határoz meg annak alapján szabályzati összeget, a POEN semmilyen értékét nem szavatolja, és nem váltja vissza.`,
       },
       {
         id: 2,
@@ -200,7 +200,7 @@ Mi nem a ZRNO. Nem üzletrész, nem részvény, nem digitális vagyon, nem pénz
         pitanje: `Mi a helyzet az adóval és a nyugtaadással?`,
         odgovor: `Az Alapítvány nem számol el helyetted adót, és nem állít ki a nevedben adóügyi nyugtát. A POEN nem pénz és nem törvényes fizetőeszköz, a POEN átírása pedig nem pénzforgalmi művelet a pénzforgalmi szolgáltatásokra vonatkozó szabályok értelmében.
 
-A POEN nem pénzbeli jövedelem. Nem kerül kifizetésre, nem váltható dinárra, és nem hagyhatja el a Protokollt. Az 1 POEN = 1 dinár arány a rendszeren belüli mérőskála, nem ár és nem árfolyam — a POEN-nek nincs piaca, amelyen a rendszeren kívüli érték kialakulna.
+A POEN nem pénzbeli jövedelem. Nem kerül kifizetésre, nem váltható dinárra, és nem hagyhatja el a Protokollt. Az Alapítvány nem tesz közzé POEN–dinár arányt; ha az emberek a megállapodáskor dinárban kifejezett árhoz hasonlítják, az az ő becslésük, nem ár és nem árfolyam — a POEN-nek nincs piaca, amelyen a rendszeren kívüli érték kialakulna.
 
 De a KOLO nem szünteti meg a meglévő kötelezettségeidet. Ha alkalmanként továbbadod a feleslegedet vagy segítesz valakinek, semmi nem változik. Ha áruk értékesítéséből vagy szolgáltatásnyújtásból élsz, ugyanazok a szabályok érvényesek, mint a KOLO-n kívül — függetlenül attól, hogy a megállapodás POEN-ben van-e rögzítve.
 
@@ -696,7 +696,7 @@ Ha a Piacon keresztül tevékenységet folytatsz, az általános szabályok szer
         pitanje: `Hogyan határozom meg a termékeim árát és mennyiségét, és ki értékeli őket?`,
         odgovor: `A javaidért és szolgáltatásaidért járó POEN-összeget magad határozod meg, szabadon. A platform nem állapítja meg, nem korlátozza és nem ellenőrzi, és senki nem értékeli helyetted az árudat — te tudod a legjobban, mit kínálsz és mennyit ér.
 
-Csak egy iránymutató van: egy POEN nagyjából egy dinárnak felel meg. Ez mérőskála, amely segít eligazodni az összeg meghatározásakor, de semmire nem kötelez, és nem hivatalos árfolyam.
+Hivatalos arány nincs, és az Alapítvány nem tesz közzé ilyet. Az összeget te határozod meg, és a legkönnyebben úgy igazodsz el, ha abból indulsz ki, amennyit az adott áruért amúgy is tudsz: ez a becslés a te hirdetésedre érvényes, és senki mást nem kötelez.
 
 Amit elvárunk, az a tisztesség: a javak vagy a szolgáltatás pontos és világos leírása, valós mennyiség és valós POEN-összeg, valamint a csere minden feltétele. Nem megengedett a hamis vagy megtévesztő tartalom, amely tévesen mutatja be a kínált dolog jellegét, minőségét vagy mennyiségét.
 
@@ -809,7 +809,7 @@ Az adomány azért nem rejtett POEN-vásárlás, mert ez két jogilag független
 
 Az adományból nem keletkezik követelésed — sem az a jog, hogy az Alapítványtól POEN rögzítését követeld, sem az, hogy visszakérd a pénzt. A POEN rögzítése nem ellenszolgáltatás az adományért.
 
-Tájékozódás végett nagyjából 1 POEN = 1 dinár mérőskála használatos, de az Alapítvány ezt az értéket nem szavatolja, és a POEN-t nem váltja pénzre.`,
+Az Alapítvány nem tesz közzé POEN–dinár arányt; a hirdetésben az összeget maga a felhasználó határozza meg. Az Alapítvány a POEN semmilyen értékét nem szavatolja, és a POEN-t nem váltja pénzre.`,
       },
       {
         id: 98,

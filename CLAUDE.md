@@ -101,6 +101,32 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-13 (dvadeset deveti put):** na **4.5.8** idu **ČETIRI akta** —
+Pravilnik o KOLO sistemu (sa 4.5.7), Uslovi korišćenja (sa 4.5.4), Pravilnik o
+pokroviteljstvu i donacijama (sa 4.5.5) i Pravilnik o projektima i kolektivnim
+nabavkama (sa 4.5.4). Ostalih trinaest ostaje gde jeste. Povod je **R-01 iz NOVOG
+registra rizika** (POEN kao virtuelna valuta / digitalna imovina). Sadržinski, vidi
+sekciju „Novcem se dobija položaj, ne kupovna moć i ne glas" ispod.
+
+🔴 **Numeracija rizika se od 12.09.2026. RAZLIKUJE.** Postoje dva registra: stari
+(R-01…R-20, opisan u ovom fajlu) i nov, nezavisan
+(`docs/registar-rizika-regulatori-2026-09.md`, nastao analizom kroz deset regulatora).
+**Ne poklapaju se.** Kad se od sada kaže „R-01", misli se na rizik iz NOVOG registra
+— POEN kao virtuelna valuta. Stari R-01 je bio druga stvar.
+
+🟡 **Zašto 4.5.8, a ne 4.5.7:** 4.5.7 je već objavljen 11.09. za dva akta (R-20); da
+su ovi dobili isti broj, dva različita događaja objave delila bi jednu šifru. Isto
+pravilo kao kod operativnog doprinosa (4.4.4) i nabavki (4.4.7).
+
+🟢 **DPIA i Registar radnji obrade NISU dirani** (odluka vlasnika, D-5):
+`identitetUtvrdjenAt` i ključ uplatioca izvedeni su iz podataka koji se već obrađuju
+(uplatilac je uveden uz stari R-19), pa nova radnja obrade ne nastaje. Ostaje za
+obradu rizika Poverenika iz novog registra (R-03, R-06, R-18).
+
+🟡 **Zaostala unakrsna upućivanja — i dalje ŠEST, nijedno novo.** Bumpovani akti se
+ovim potezom ponovo objavljuju, ali nijedan od preostalih trinaest ne upućuje na njih
+po šifri; briše ih bump celog seta na 5.0.
+
 **AŽURIRANO 2026-09-11 (dvadeset osmi put):** na **4.5.7** idu **DVA akta** —
 Pravilnik o KOLO sistemu (sa 4.5.6) i Pravilnik o učešću dece (sa 4.5.3). Ostalih
 petnaest ostaje gde jeste. Povod je **analiza rizika R-20** (kod ima više izuzetaka
@@ -1250,6 +1276,209 @@ dali prava, to davanje više liči na prodaju. 🟢 **Rešeno setom 4.5.4** tako
 ne ide kroz korisnikovo pravo prema Fondaciji nego kroz **obavezu Fondacije prema
 sopstvenom programu** (čl. 30 st. 5) i kroz **ispravku evidencije**, koja nije
 povraćaj naknade (čl. 30a st. 6). Odbrana besplatnosti time ostaje netaknuta.
+
+### Novcem se dobija položaj, ne kupovna moć i ne glas (R-01, 2026-09-13)
+
+Sprovođenje rizika **R-01 iz novog registra** (`docs/registar-rizika-regulatori-2026-09.md`)
+— POEN kao virtuelna valuta / digitalna imovina, zatečena ocena **9**, po merama **5**.
+Najveći jednokratni potez posle uvođenja modula Deca: menja copy na pet jezika, četiri
+akta, dve migracije i gejtove na petnaest mesta u kodu.
+
+🔴 **Numeracija:** „R-01" od 12.09.2026. znači rizik iz NOVOG registra. Stari R-01 je
+bila druga stvar. Dva registra se ne poklapaju i ne treba ih mešati.
+
+**Odluka vlasnika („opcija B") u jednoj rečenici:** nepotvrđen član koji je donirao
+**upisuje ZRNO, ali ne dobija glas**. Novcem se dobija položaj u zajedničkom dobru, ne
+kupovna moć i ne glas.
+
+#### Šta je bilo, a više nije
+
+🔴 **Kartični callback je upisivao POEN u realnom vremenu.** `placanje/povratak` je po
+verifikovanom odgovoru banke odmah zvao `evidentirajDonaciju` — između uplate i upisa
+POEN-a nije bilo nijedne ljudske odluke. To je tačna slika pribavljanja digitalne
+imovine uz naknadu, po objavljenoj tabeli. Sada callback prevodi zapis u nov status
+**`NAPLACENO`** i javlja adminima; POEN nastaje tek potvrdom u admin tabu, uz obavezan
+uplatilac iz izvoda (mera **M-4a**). 🔴 **Ne vraćati automatsko evidentiranje** — to je
+projektantska odluka uz R-01, ne privremeno rešenje.
+
+🔴 **Kurs je postojao, bio objavljen, i držala ga je sama Fondacija.** Uslovi čl. 19 su
+propisivali **1 POEN ≈ 1 RSD**, ekran donacija je koeficijent prikazivao kao **„POEN/RSD"**
+sa kolonom **„Od (RSD)"**, naslovna je broj POEN-a **izvodila iz dinarske cene**
+(„Teglu inače prodaje za 800 dinara…"), a en i hu su koeficijent zvali **`Rate`**
+odnosno **`Árfolyam`** — doslovno *devizni kurs*. Sve je uklonjeno (mere **M-1, M-6,
+M-7a**).
+🔴 **Odnos se pri tome NE prećutkuje** — mera M-7b je odbijena („prećutan odnos je gori
+od imenovanog"). Akt i FAQ sada kažu da Fondacija **ne objavljuje** odnos, a da korisnik
+pri određivanju iznosa polazi od cene koju zna: **to je njegova procena**. Fondacija je
+prestala da bude autor kursa, a praksa se ne krije.
+🟡 Posledica koju treba znati: Pravilnik čl. 13 je morao da prestane da upućuje na
+„orijentacioni odnos iz Uslova" — taj institut više ne postoji kao broj. Formulacija iz
+R-19 M-1 („ne prećutkivati odnos") ostaje ispunjena, samo drugim rečima.
+
+🔴 **`/pravna-pozicija` je pogrešno prepričavala zakonsku definiciju.** `zdi_tekst` je
+definiciju svodio na „prenositi, čuvati ili njime trgovati" i tvrdio da POEN „ne
+ispunjava nijednu od te tri pretpostavke" — ispali su *kupovati*, *prodavati*,
+*razmenjivati* i cela polovina „koristi se kao sredstvo razmene", dakle baš elementi
+koje ispunjavamo; uz to su elementi tretirani kumulativno, a definicija je disjunktivna.
+Ista stranica je tvrdila da se POEN **„ne prenosi"**, dok čl. 16 ceo uređuje prepis.
+Prepisano (mera **M-3**): definicija se navodi cela, kaže se da su elementi
+**alternativni**, i **otvoreno se priznaje** šta POEN ispunjava (nije ga izdala
+centralna banka; na Pijaci se prihvata kao sredstvo razmene).
+
+#### Ko je „identifikovan član" i šta sme
+
+Nosilac je **`User.identitetUtvrdjenAt`** — postavlja se kad čovek potvrdi donaciju
+**poredeći uplatioca iz izvoda sa nalogom**. 🔴 **NIJE četvrti status korisnika**:
+`TipKorisnika` ostaje `NEVERIFIKOVAN` dok ga neko iz mreže ne potvrdi.
+
+🔴 **Ne prikazivati kao javnu oznaku na profilu.** Jedini put do tog svojstva je
+donacija, pa bi oznaka odala i **anonimnog donatora**, kome Politika obećava suprotno.
+Vidi ga sam korisnik i Fondacija.
+
+| Otvoreno (mera M-9) | Zatvoreno i posle donacije |
+|---|---|
+| oglas POTRAŽNJA, više od tri oglasa | **prepis POEN-a** (čl. 28 st. 2) |
+| pokretanje razgovora, Pričaonica | **aktiviranje i otpis ZRNA** (odluka D-1) |
+| pretraga članova, **oljušten** tuđi profil | glas i delegiranje u Gornjem Kolu |
+| **upis ZRNA bez glasa** | potvrđivanje drugih, nadzor potvrda |
+| donacija i POEN po njoj | operativni doprinos, socijalni programi |
+| doprinos sadržaju platforme (1.000 POEN) | kolektivna nabavka, pokroviteljstvo, telefon oglašivača |
+
+**Odluka je na JEDNOM mestu — `smeProsireno` u `dozvole.ts`.** Kroz njega prolaze sve
+otvorene staze. 🔴 Pouka je u ovom fajlu zapisana tri puta (oglas deteta, zatvoren
+profil, lanac potvrda): ispravno pravilo ne vredi ništa dok svaki prikaz ne prođe kroz
+njega. Brana je `__tests__/identifikovan-clan-izvor.test.ts`, koja gleda IZVOR — i šta
+je otvoreno i šta je ostalo zatvoreno.
+
+🔴 **Otpis ZRNA je ZATVOREN (odluka D-1).** Otpis je jedino mesto u sistemu gde pozicija
+donosi prinos (upis po nižem, otpis po višem koeficijentu); otvoren identifikovanom
+članu dao bi lanac *novac → POEN → ZRNO → više POEN-a* čoveku koji nije uradio ništa
+osim što je platio, i podigao bi i R-01 i R-04. Njegov položaj je **jednosmeran** dok ga
+neko ne potvrdi. 🟢 Zaobilaznice nema: `DELETE /api/profil` otpisuje ZRNO **bez emisije
+POEN-a** (čl. 34 st. 1).
+
+🔴 **Ime „nosilac ZRNA" se NE menja (odluka D-2).** Umesto nove imenice uveden je pridev
+na zatečenom institutu (čl. 21): **upisano** ZRNO drži svako u čijem je zapisu,
+**aktivirano** samo potvrđen korisnik, a „nosilac ZRNA" ostaje ime uloge i znači nosioca
+**aktiviranog** ZRNA. Preimenovanje bi pogodilo 53 mesta u aktima (27 u samom
+Pravilniku) × 5 jezika, enum u bazi, FAQ, whitepaper i lestvicu statusa — nesrazmerno za
+**prelazan** položaj. Odbačena varijanta: „član Gornjeg Kola" kao ime uloge (meša
+kolektivno telo sa pojedinačnim funkcijama — nadzor i objavljivanje zadataka nisu odluke
+Gornjeg Kola).
+
+#### 🔴 Tri nalaza u kodu koje je ovaj rizik otkrio
+
+1. **`NOSILAC_ZRNA` je status koji NADJAČAVA indeks, ne opis činjenice.**
+   `dokaz-stvarnosti.ts` daje tom statusu **neograničen** verifikacioni kapacitet,
+   izuzima njegove potvrde od nadzora i daje pun pristup operativnom doprinosu i
+   socijalnim programima **bez obzira na indeks**. Dodeljen nepotvrđenom nalogu pri
+   upisu ZRNA, oborio bi opciju B u jednoj liniji. Do ovog seta ga je štitio **slučajan
+   `if (tipKorisnika === REGULARNI)`** — nigde zapisan.
+2. **Unapređenje se dešavalo SAMO u trenutku upisa** (`zrno.ts`). Član koji ZRNO upiše
+   kao identifikovan pa ga **kasnije neko potvrdi** ostao bi zauvek `REGULARNI` —
+   ispunio bi oba uslova za glas, a glas ne bi dobio. Sada ga status sustiže u
+   `verifikacija-service.ts` (`drziZrno`).
+3. **Glasanje nije proveravalo potvrdu uopšte** — obe rute su gledale samo
+   `stanje.aktivno > 0`, pa bi glasao i onaj kome je potvrda poništena pošto je ZRNO već
+   aktivirao. Sada `smeGlasati` traži **aktivirano ZRNO I potvrđenu stvarnost**.
+   🟢 `zakljucaj`/`otkljucaj`/`delegiraj`/`otpis` su i pre ovoga tražili `verified`, a
+   `session.user.verified` već nosi funkcionalni prag indeksa (≥ 10%).
+
+#### Dve rupe zatvorene usput
+
+🔴 **P-1 — kolektivna nabavka nije tražila potvrđenu stvarnost.** `smeUcestvovati` je
+gledala samo `maloletan`, `deaktiviranAt` i `status`, pa je prag od 20.000 POEN-a bio
+dostižan **prepisom** na svež nepotvrđen nalog: novac → POEN → roba, bez ijedne provere
+identiteta. Postojalo je nezavisno od svega ostalog u riziku.
+
+🔴 **P-2 — gašenje naloga je bilo drugi ulaz za prepis.** `DELETE /api/profil` prima
+`prenesPoen` i **ceo balans prebacuje drugom korisniku kao `TRANSFER`**, bez ijedne
+provere statusa. Član kome je prepis zabranjen mogao je da ugasi nalog i sve prepiše
+kome hoće. Sada prenos sme samo potvrđen član; ostalima POEN ide Protokolu.
+
+#### Kapa na kartici i put iz inostranstva
+
+**Kapa po jednoj kartičnoj uplati: 100.000 RSD** (sa zatečenih `MAX_RSD = 2_000_000`),
+uz **brzinsku kočnicu** od tri kartične uplate dnevno po nalogu (mera **M-11**).
+🔴 Dve kočnice mere različite stvari: kapa štiti od **jednog velikog chargeback-a**
+(rok za osporavanje ide mesecima posle evidentiranja, a mera M-12 je odbijena, pa POEN
+tada **ostaje**), a brzinska od **card testinga** — provere ukradenih brojeva nizom
+sitnih donacija, protiv koje kapa po transakciji ne radi ništa. Uz to **izjava o
+nepovratnosti pre naplate**, snimljena na zapis kao dokaz u sporu.
+🟡 Posle mere M-4a kapa **ne štiti POEN** — to radi ljudska potvrda.
+
+**Fondacija otvara devizni račun u EUR i USD** (odluka D-4), pa strani donator ima put i
+bez kartice: doznaka (SWIFT/IBAN) ili Wise/Revolut. **IPS QR je domaći** i za stranca ne
+postoji — zato kartica i jeste jedini trenutan put iz inostranstva, i zato kapa na njoj
+pogađa baš njega. 🔴 U donacije čl. 3: kod devizne doznake **merodavan je dinarski iznos
+odobren na računu Fondacije**, ne poslati iznos — banka konvertuje po svom kursu na dan
+priliva. 🔴 **PayPal se ne nudi** dok banka odnosno knjigovođa ne potvrdi da je primanje
+na račun u Srbiji moguće. Kripto je zabranjena tema.
+
+#### C-1 — uplatilac kao ključ za duplikat
+
+Uplatilac je **jedini spoljni identitet koji sistem ima**: uplatu prima banka, koja je
+identifikaciju već sprovela. Normalizovan ključ (mala slova, bez dijakritike, reči
+sortirane — pa se „Petar Petrović" i „PETROVIĆ PETAR" poklapaju) upisuje se na zapis i
+pri potvrdi poredi sa svim ostalim nalozima. 🔴 **Ne blokira samo od sebe** — poklapanje
+zaustavlja evidentiranje dok čovek izričito ne potvrdi (postoji legitiman slučaj:
+zajednički porodični račun), a ta potvrda ide u revizijski dnevnik. 🟢 Donatorski put je
+time **stroži po jedinstvenosti od lanca potvrda**.
+
+#### 🔴 Zabranjene teme uz R-01 — ne otvarati bez izričitog naloga
+
+1. **Vraćanje automatskog upisa POEN-a po callback-u banke** (M-4a je odluka, ne
+   privremeno rešenje). Komentar u `ips-qr.ts` koji je to nagoveštavao je prepisan.
+2. **Otvaranje prepisa POEN-a identifikovanom članu** — to je razlika između R-01 = 5 i
+   R-01 = 9. Prepis je jedina radnja kojom POEN prestaje da bude zapis i postaje sredstvo
+   u rukama čoveka koji ga je pribavio novcem.
+3. **Otvaranje otpisa ZRNA identifikovanom članu** (D-1) i **prenos POEN-a pri gašenju
+   naloga bez potvrde** (P-2) — to je prepis na drugom ulazu.
+4. **Otvaranje glasa identifikovanom članu (C′)** — odbijeno 13.09.2026; povlači
+   prepisivanje četiri teksta (čl. 46 st. 3, FAQ 43, `zasto4_tekst`, whitepaper) i
+   podiže R-04, R-10 i R-17 za po jedan bod.
+5. **Ubrzan put do potvrde stvarnosti za donatore** — brana uz M-9. Donacija NIJE osnov
+   za potvrdu stvarnosti (Pravilnik čl. 32).
+6. **Kvadratni koren (čl. 46) i kapa od 1% po periodu (čl. 19)** — jedine kapitalne
+   kočnice koje ostaju i kad se glas jednom stekne.
+7. **Prećutati odnos POEN-a prema dinaru** (M-7b) — odbijeno: prećutan odnos je prvi
+   protivargument.
+
+#### 🟡 Svesno prihvaćeni ostaci
+
+1. **Chargeback ostaje bez osnova za poništenje POEN-a** (M-12 odbijena). Pokriva se
+   zaobilazno: chargeback pokreće sumnju po donacije čl. 13c → isključenje po Uslovima
+   čl. 28 → poništenje po čl. 34. Ako nije zloupotreba, **POEN ostaje**; izloženost se
+   drži kapom od 100.000. 🔴 Ako kartični promet naraste, ovo se mora vratiti na sto.
+2. **Element „lica ga prihvataju kao sredstvo razmene" ostaje ispunjen** dok Pijaca radi
+   kako radi. Mera M-5 ga ublažava, ne obara. To je najiskreniji nalaz celog R-01 i
+   razlog zašto je pod ocene **5**, a ne niže.
+3. **Pravo identifikovanog člana na ZRNO zavisi od tuđe volje** — dok ga niko ne potvrdi,
+   ZRNO drži a glas nema, i niko nije dužan da ga potvrdi. Prigovor vlasnika je tačan i
+   prihvaćen kao cena; mera koja bi ga ublažila pretvorila bi potvrdu stvarnosti u
+   obavezu i ne uvodi se bez naloga.
+4. **Zabrana prodaje POEN-a i dalje nema detekciju** (praćenje obrazaca prepisa odbijeno
+   uz stari R-19).
+5. **Uslovi čl. 17 i dalje kažu da je javnost donacije „uslov za evidentiranje POEN-a"**,
+   dok donacije čl. 5a taj isti podatak obrazlaže **proverljivošću**. Nije dirano — van
+   obima R-01; ako se dira, ide u pravcu čl. 5a, ne obrnuto.
+
+🟡 **Ekrana za upis/otpis ZRNA u aplikaciji NEMA** (ZRNO stranica prikazuje stanja,
+glasanje i delegaciju), pa upozorenje uz upis koje traži odluka D-1 („upisano ZRNO ne
+možeš da otpišeš ni da aktiviraš dok te neko ne potvrdi") nema gde da stoji dok se taj
+ekran ne napravi. Rute su međutim zatvorene, pa nema šta da se zaobiđe.
+
+🟡 **Nije napravljeno iz mere M-4a:** grupna potvrda donacija i uvoz bankovnog izvoda.
+To su olakšice za rad, ne mere koje smanjuju rizik; admin tab prikazuje status i ime sa
+naloga uz polje za uplatioca, pa se poređenje radi.
+
+**Kod:** `donacija-pravila.ts` (`MAX_KARTICNA_UPLATA_RSD`, `MAX_KARTICNIH_UPLATA_DNEVNO`,
+`normalizujUplatioca`), `protokol/donacija.ts` (`proveriDuplikatUplatioca`,
+`identitetUtvrdjenAt`), `dozvole.ts` (`smeProsireno`, `smeGlasati`), `nabavka-pravila.ts`
+(`smeUcestvovati` + indeks), `profil/[id]/route.ts` (`suzen`), `profil/route.ts` (P-2).
+Migracije `20260913120000_donacija_naplaceno` (samo enum vrednost, ZASEBAN fajl) →
+`20260913120100_identitet_utvrdjen`. Brane: `donacija-karticno-izvor.test.ts` (17) i
+`identifikovan-clan-izvor.test.ts` (26), obe gledaju IZVOR.
 
 ### Peti izuzetak: prevođenje naloga je dobilo osnov (2026-09-11)
 

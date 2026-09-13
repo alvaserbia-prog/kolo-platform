@@ -108,7 +108,11 @@ A nem hitelesített felhasználó megtekintheti a csereterület hirdetéseit, ja
 
 A POEN-nyilvántartás frissítésében a nem hitelesített felhasználó kizárólag fogadó félként vesz részt. Nem kezdeményezheti a POEN-nyilvántartás más felhasználó javára történő frissítését; ez a lehetőség a hitelesítést követően nyílik meg (a KOLO rendszerről szóló szabályzat 28. cikke). A hitelesítés előtt nyilvántartásba vett POEN-bejegyzések érvényben maradnak.
 
-A nem hitelesített felhasználó nem hitelesíthet más felhasználókat. Hozzájárulás kizárólag a platform tartalmához való hozzájárulás csatornáján keresztül vehető nyilvántartásba a javára (a KOLO rendszerről szóló szabályzat 40.a cikke); a többi csatornán keresztül nem.
+A nem hitelesített felhasználó nem hitelesíthet más felhasználókat. Hozzájárulását a platform tartalmához való hozzájárulás csatornáján jegyzik be (a KOLO rendszerről szóló szabályzat 40a. cikke), és ha személyazonosságát adomány kapcsán megállapították, a pénzügyi hozzájárulás csatornáján is; a többi csatornán nem lehetséges.
+
+Annak a felhasználónak, akinek személyazonosságát adomány kapcsán megállapították — azzal, hogy az Alapítvány a befizetőre vonatkozó adatokat összevetette a fiókjával —, elérhető továbbá: árut vagy szolgáltatást kereső hirdetés, a 16. cikk szerinti hirdetésszám-korlátozás nélkül, a hirdetés kapcsán a kommunikáció kezdeményezése, a közös beszélgetőtérben való részvétel, a felhasználók keresése más profiljának álnévre és közzétett hirdetésekre szűkített megtekintésével, valamint a ZRNO beírása (a KOLO rendszerről szóló szabályzat 28. cikkének 6. bekezdése).
+
+A megállapított személyazonosság nem hitelesítés, és azt nem helyettesíti. Az ilyen felhasználó nem kezdeményez POEN-nyilvántartás-frissítést, nem aktiválja és nem írja le a ZRNO-t, nem szavaz a Felső Kolóban, nem hitelesít másokat, nem vesz részt az operatív hozzájárulásban, a szociális programokban és a kollektív beszerzésekben, és nem fér hozzá a hirdetők kapcsolattartási adataihoz. Az adomány nem alapja a hitelesítésnek, és egyetlen felhasználót sem kötelez a hitelesítésére.
 
 ### 15. cikk — Hitelesített felhasználó és ZRNO-tulajdonos
 
@@ -116,7 +120,9 @@ A hitelesített felhasználó olyan személy, akinek valóságát a megerősít�
 
 A hitelesített felhasználó teljes hozzáféréssel rendelkezik a Platformhoz: javakat és szolgáltatásokat cserélhet a csereterületen, hozzájárulása POEN-ben nyilvántartásba vehető, a valóságbizonyíték szabályai szerint más felhasználókat hitelesíthet, adományozhat az Alapítványnak, és részt vehet a kollektív formákban, amint azok aktiválódnak. A hitelesített felhasználó betekintést nyer valamennyi felhasználó álnevébe, a POEN-számlaegyenlegekbe és minden tranzakcióba a felek álnevével együtt.
 
-A ZRNO-tulajdonost megilleti a hitelesített felhasználó valamennyi joga. Ezen túlmenően a ZRNO aktiválásával jogot szerez a rendszer irányításában való részvételre a Felső Kolón keresztül, amint az aktiválódik, továbbá elszámolási rendszerbeli pozíciót és tartós kapacitást szerez más felhasználók valóságának megerősítésére.
+Az a ZRNO-tulajdonos, akinek valóságát megerősítették, a hitelesített felhasználó minden jogával rendelkezik. Ezen felül a ZRNO aktiválásával jogot szerez a rendszer irányításában való részvételre a Felső Kolón keresztül, amikor az aktiválásra kerül, helyet az elszámolási rendszerben, valamint tartós képességet mások valóságának megerősítésére.
+
+Az a ZRNO-tulajdonos, akinek valóságát nem erősítették meg, a ZRNO-t tartja, de nem aktiválja és nem írja le; az aktiválásból eredő jogokkal nem rendelkezik (a KOLO rendszerről szóló szabályzat 30. cikke).
 
 ### 16. cikk — A nem hitelesített felhasználó hirdetése
 
@@ -126,7 +132,7 @@ A nem hitelesített felhasználó nem tehet közzé javat vagy szolgáltatást k
 
 A nem hitelesített felhasználó hirdetésének meg kell felelnie a tartalmi minimumnak: cím, leírás, legalább egy fénykép, kategória és helység, azzal, hogy a cím és a leírás hossza nem feltétel. Az a hirdetés, amely a tartalmi minimumnak nem felel meg, nem kerül közzétételre. Ugyanez a feltétel vonatkozik a már közzétett hirdetés módosítására is.
 
-A nem hitelesített felhasználónak egyidejűleg legfeljebb három aktív hirdetése lehet.
+A nem hitelesített felhasználónak egyidejűleg legfeljebb három aktív hirdetése lehet. Az e cikk szerinti korlátozások nem alkalmazandók arra a felhasználóra, akinek személyazonosságát adomány kapcsán megállapították (14. cikk).
 
 A nem hitelesített felhasználó hirdetése látható jelölést visel arról, hogy a hirdető nincs hitelesítve a megerősítési láncban. A jelölés mindenki számára elérhető, akinek maga a hirdetés is elérhető, ideértve a be nem jelentkezett személyeket is.
 
@@ -166,21 +172,21 @@ A csereterület a Platform azon része, amely javakra és szolgáltatásokra von
 
 A csereterület hirdetéseinek megtekintése — az ajánlat vagy kereslet tartalma, az ár, a helység és a hirdető álneve — nyilvános, és minden látogató számára hozzáférhető.
 
-A javat vagy szolgáltatást kínáló hirdetés közzététele valamennyi regisztrált felhasználó számára elérhető; a nem hitelesített felhasználó számára a 16. cikkben foglalt feltételek és korlátozások szerint. A javat vagy szolgáltatást kereső hirdetés közzététele, a hirdető kapcsolattartási adataihoz való hozzáférés és a hirdetés kapcsán történő kommunikáció kezdeményezése kizárólag a hitelesített felhasználók és a ZRNO-tulajdonosok számára elérhető.
+Árut vagy szolgáltatást kínáló hirdetés feladása minden regisztrált felhasználó számára elérhető; nem hitelesített felhasználó számára a 16. cikk feltételeivel és korlátozásaival. Árut vagy szolgáltatást kereső hirdetés feladása és a hirdetés kapcsán a kommunikáció kezdeményezése a hitelesített felhasználók, a ZRNO-tulajdonosok, valamint az a felhasználó számára elérhető, akinek személyazonosságát adomány kapcsán megállapították (14. cikk). A hirdetők kapcsolattartási adataihoz való hozzáférés kizárólag a hitelesített felhasználók és a ZRNO-tulajdonosok számára elérhető.
 
 A hirdető álneve a csereterületen a be nem jelentkezett és a nem hitelesített személyek számára nem kapcsolódik össze a hozzájárulás-nyilvántartással vagy a felhasználó profiljával.
 
 Az Alapítvány nem fél a cserében, és abban nem közvetít. A jogviszony kizárólag a javakat és szolgáltatásokat cserélő felhasználók között jön létre.
 
-### 19. cikk — Tájékoztató arány és a hirdetésben szereplő összeg meghatározása
+### 19. cikk — Az összeg meghatározása a hirdetésben
 
-A hirdetésben szereplő összeg könnyebb meghatározása érdekében tájékoztató arányként azt vesszük alapul, hogy egy POEN egy szerb dinárnak felel meg (1 POEN ≈ 1 RSD). A tájékoztató arány kizárólag a felhasználót szolgálja a saját hirdetésében szereplő összeg meghatározásakor.
+A hirdetésben az összeget POEN-ben fejezik ki, és azt a hirdetést feladó felhasználó határozza meg. Az Alapítvány nem tesz közzé POEN–dinár vagy bármely más deviza szerinti arányt, és nem ajánl arányt, amely szerint a felhasználónak az összeget meg kellene határoznia.
 
-Az Alapítvány a tájékoztató arányt egyetlen saját eljárásában sem alkalmazza: nem vesz nyilvántartásba hozzájárulást annak alapján, nem állapít meg annak alapján a szabályzatokban előírt egyetlen összeget sem, és nem határozza meg annak alapján a POEN számát a projektekben és a kollektív beszerzésekben. A szabályzatokban előírt összegek POEN-ben vannak kifejezve, és nem dinárból vezethetők le.
+Ha a felhasználó az összeg meghatározásakor pénzben kifejezett értékből indul ki, az az ő saját becslése. Csak arra a hirdetésre érvényes, a másik felet nem kötelezi, és nem olyan arány, amelyet az Alapítvány megállapít, közzétesz vagy alkalmaz.
 
-A tájékoztató arány a csere egyik felét sem kötelezi, nem jelent konvertibilitási garanciát, nem minősül árfolyamnak a pénzforgalmi szolgáltatásokra vonatkozó jogszabályok értelmében, és nem változtatja meg a POEN Szabályzatban meghatározott jogi természetét. Az Alapítvány ezt az értéket nem szavatolja és nem tartja fenn.
+Az Alapítvány semmilyen POEN–pénz arányt nem alkalmaz egyetlen saját eljárásában sem: nem vesz nyilvántartásba hozzájárulást annak alapján, nem állapít meg a szabályzatokban előírt összeget, és nem határozza meg a POEN-ek számát a projektekben és a kollektív beszerzésekben. A szabályzatokban előírt összegek POEN-ben vannak kifejezve, és nem dinárból származtatottak.
 
-Az Alapítvány nem váltja vissza a POEN-t és a ZRNO-t, és nem biztosítja azok dinárra vagy más fizetőeszközre való átváltását. Dinár POEN-re történő cseréjéről szóló szerződés nem létezik.
+Az e cikk 2. bekezdése szerinti becslés nem az átválthatóság garanciája, nem minősül árfolyamnak a fizetési szolgáltatásokra vonatkozó előírások értelmében, és nem változtatja meg a POEN-nek a szabályzatban megállapított jogi természetét. Az Alapítvány a POEN semmilyen értékét nem szavatolja és nem tartja fenn.
 
 A felhasználók szabadon határozzák meg az általuk kínált javakért és szolgáltatásokért járó összeget. A Platform az összegeket nem határozza meg, nem korlátozza és nem ellenőrzi.
 

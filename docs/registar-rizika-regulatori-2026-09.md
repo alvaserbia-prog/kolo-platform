@@ -371,6 +371,7 @@ izmena Statuta radi Gornjeg Kola, podizanje donje granice uzrasta) zabeležene s
 | Rizik | Datum | Ishod | Nova ocena |
 |---|---|---|---|
 | **R-01** | 12–13.09.2026. | Obrađen. Odobreno M-1…M-9, M-11, P-1, C-1, C-3 i **opcija B** (odluka vlasnika: identifikovanom članu se otvara **upis ZRNA bez glasa**, uz *oljušten profil*; prepis POEN-a, nabavka i programi ostaju zatvoreni). Odbijeno M-7b, M-10, M-12, **C-2**, **C′** i R22-M4. | 9 → **5** |
+| **R-01** (sprovedeno) | 13.09.2026. | Sve odobrene mere su u kodu i u aktima. Set 4.5.8 (Pravilnik, Uslovi, donacije, nabavke × 5 jezika). Migracije `20260913120000_donacija_naplaceno` i `20260913120100_identitet_utvrdjen`. Brane: `donacija-karticno-izvor.test.ts`, `identifikovan-clan-izvor.test.ts`, dopunjen `pravni-dokumenti.test.ts`. 🟡 Nije radjeno iz M-4a: grupna potvrda i uvoz izvoda (olaksice, ne mere). | **5** |
 | **R-01** (dopune) | 13.09.2026. | Uz sprovođenje: D-1…D-5 i P-2 (vidi DEO III). Otpis ZRNA zatvoren, ime „nosilac ZRNA“ ostaje uz pridev *aktivirano*, kapa na kartici 100.000 RSD, devizni račun EUR/USD, gašenje naloga bez potvrde ide Protokolu. | 9 → **5** |
 | **R-22** | 13.09.2026. | Otvoren po nalogu vlasnika. Nacrt mera zabeležen; obrada u svom redu. | 7 → **5** (procena) |
 

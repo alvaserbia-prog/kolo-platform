@@ -168,7 +168,7 @@ POEN postoji samo u Protokolu. Zapis se vodi na Protokolu i ne može se izneti i
 
 POEN nije novac. Nije sredstvo plaćanja, nije elektronski novac, nije digitalna imovina, nije finansijski instrument i ne predstavlja dug Fondacije prema tebi. Nema vrednost van sistema: ne menja se za dinare, ne preprodaje se i Fondacija ga ne otkupljuje.
 
-Ima li onda vrednost u dinarima? Nema kurs. Ali da biste ti i druga strana mogli da se dogovorite koliko nešto vredi, Uslovi korišćenja daju orijentacioni odnos: jedan POEN odgovara jednom dinaru (1 POEN ≈ 1 RSD). To je merna skala za poređenje unutar sistema (kao kad težinu izražavaš u kilogramima) a ne kurs po kome se nešto menja za novac. Taj odnos služi samo tebi kad postavljaš oglas — Fondacija ga ne primenjuje ni u jednom svom postupku, ne evidentira po njemu doprinos i ne određuje po njemu nijedan iznos iz pravilnika. Fondacija ne garantuje nikakvu vrednost POENA i ne otkupljuje ga.`,
+Ima li onda vrednost u dinarima? Nema kurs, i Fondacija nijedan odnos POENA prema dinaru ne objavljuje. Iznos u oglasu određuješ ti sam. Većina ljudi se pri tome snađe tako što pođe od cene koju za to dobro ili uslugu ionako zna — to je tvoja procena, važi za taj oglas, drugu stranu ne obavezuje i nije kurs. Fondacija taj račun ne radi umesto tebe: ne evidentira po njemu doprinos, ne određuje po njemu nijedan iznos iz pravilnika, ne garantuje nikakvu vrednost POENA i ne otkupljuje ga.`,
       },
       {
         id: 2,
@@ -204,7 +204,7 @@ Kako daje glas. Upisano ZRNO zaključavaš da bi postalo aktivno, tek aktivno ZR
         pitanje: `Kakav je odnos prema porezu i fiskalizaciji?`,
         odgovor: `Fondacija ti ne obračunava porez i ne izdaje fiskalne račune u tvoje ime. POEN nije novac ni zakonsko sredstvo plaćanja, a prepis POENA nije platna transakcija u smislu propisa o platnim uslugama.
 
-POEN nije prihod u novcu. Ne isplaćuje se, ne menja se za dinare i ne može izaći iz Protokola. Referentna vrednost od približno jednog dinara po POENU je merna skala unutar sistema, a ne cena ni kurs. POEN nema tržište na kome bi se utvrđivala vrednost van sistema.
+POEN nije prihod u novcu. Ne isplaćuje se, ne menja se za dinare i ne može izaći iz Protokola. Fondacija ne objavljuje odnos POENA prema dinaru; ako ga ljudi pri dogovoru porede sa dinarskom cenom, to je njihova procena, a ne cena ni kurs. POEN nema tržište na kome bi se utvrđivala vrednost van sistema.
 
 Ali KOLO ti ne ukida obaveze koje već imaš. Ako povremeno daš viškove ili nekome pomogneš, ništa se ne menja. Ako od prodaje robe ili pružanja usluga živiš, važe isti propisi kao i van KOLA, bez obzira na to da li se dogovor beleži u POENIMA.
 
@@ -700,7 +700,7 @@ Ako kroz Pijacu obavljaš delatnost, tvoje poreske i fiskalne obaveze po opštim
         pitanje: `Kako određujem cenu i količine svojih proizvoda i ko ih vrednuje?`,
         odgovor: `Iznos u POENIMA za svoja dobra i usluge određuješ sam, slobodno. Platforma ga ne utvrđuje, ne ograničava i ne kontroliše, niti iko vrednuje tvoju robu umesto tebe, ti najbolje znaš šta nudiš i koliko vredi.
 
-Postoji samo orijentir: jedan POEN otprilike odgovara jednom dinaru. To je merna skala koja pomaže da se snađeš pri određivanju iznosa, ali te ni na šta ne obavezuje i nije zvaničan kurs.
+Zvaničnog odnosa nema i Fondacija ga ne objavljuje. Iznos određuješ ti, a najlakše se snađeš ako pođeš od cene koju za to dobro ionako znaš — ta procena važi za tvoj oglas i nikoga drugog ne obavezuje.
 
 Ono što se traži jeste poštenje: tačan i jasan opis dobra ili usluge, realna količina i realan iznos u POENIMA, i svi uslovi razmene. Nije dozvoljen lažan ili obmanjujuć sadržaj koji pogrešno predstavlja prirodu, kvalitet ili količinu onoga što nudiš.
 
@@ -815,7 +815,7 @@ Donacija nije skrivena kupovina POENA zato što su to dva pravno nezavisna akta.
 
 Iz donacije ne nastaje tvoje potraživanje, ni pravo da od Fondacije tražiš upis POENA, ni pravo da tražiš novac nazad. Upis POENA nije protivusluga za donaciju.
 
-Radi orijentacije koristi se merna skala od otprilike 1 POEN za 1 dinar, ali Fondacija tu vrednost ne garantuje i ne menja POEN za novac.`,
+Fondacija ne objavljuje odnos POENA prema dinaru; iznos u oglasu određuje sam korisnik. Fondacija nikakvu vrednost POENA ne garantuje i ne menja POEN za novac.`,
       },
       {
         id: 98,

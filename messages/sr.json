@@ -960,7 +960,7 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "4.5.4"
+      "ver": "4.5.8"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
@@ -988,7 +988,7 @@
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
-      "ver": "4.5.7",
+      "ver": "4.5.8",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -1008,7 +1008,7 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja · KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.5.4",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.5.8",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
     "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.5",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
@@ -1022,7 +1022,7 @@
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.6",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.5.7",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.5.8",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sistemu",

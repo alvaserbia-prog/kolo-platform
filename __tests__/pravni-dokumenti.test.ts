@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_5_7.md`, `uslovi_koriscenja_4_5_4.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_5_8.md`, `uslovi_koriscenja_4_5_8.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,17 +27,17 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_5_7.md",
+  "Pravilnik_4_5_8.md",
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_5_2.md",
   "radnje_obrade_4_5_5.md",
-  "uslovi_koriscenja_4_5_4.md",
+  "uslovi_koriscenja_4_5_8.md",
   "politika_4_5_5.md",
   "statut_4_1_0.md",
   "whitepaper_4_4_6.md",
   "rizici_4_5_5.md",
   "hijerarhija_4_4_6.md",
-  "donacije_4_5_5.md",
+  "donacije_4_5_8.md",
   "operativni_4_4_4.md",
   "osnivacki_4_4_5.md",
   "gornje_kolo_4_4_6.md",
@@ -45,7 +45,7 @@ const AKTI = [
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce_dece_4_5_7.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
-  "projekti_nabavke_4_5_4.md",
+  "projekti_nabavke_4_5_8.md",
 ];
 
 /**
@@ -62,8 +62,38 @@ const AKTI = [
  * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_5_7.md": {
+  "Pravilnik_4_5_8.md": {
     sr: [
+      // ═══ 4.5.8 (R-01 — POEN kao virtuelna valuta) ═══
+      // 🔴 Mera M-5: bez ovoga čl. 13 tvrdi da se POEN ne može pribaviti kupovinom,
+      // a ćuti o tome da se do njega dolazi uplatom u realnom vremenu. Druga
+      // rečenica je istinita SAMO uz meru M-4a (ljudska potvrda prijema) — ide
+      // zajedno ili nikako.
+      "Niko nije dužan da primi POEN",
+      "POEN se ne može pribaviti radi izvršenja razmene",
+      // 🔴 Mera M-4a: dve odluke su razdvojene — Fondacija utvrđuje ČINJENICU
+      // prijema, Protokol bez diskrecije određuje IZNOS. Do 4.5.8 je kartični
+      // callback banke upisivao POEN odmah, bez ijedne ljudske odluke između
+      // uplate i upisa; to je slika pribavljanja digitalne imovine uz naknadu.
+      "Dve odluke u tom postupku su razdvojene",
+      "sam izveštaj platnog posrednika o izvršenoj naplati ne pokreće evidentiranje",
+      // 🔴 Mera M-8: zabrana prometa POEN-a dobija uporište u PRAVILNIKU, ne samo
+      // u Uslovima; uz to je iz čl. 16 st. 5 izbačena zagrada „(uz razmenu ili bez
+      // protivusluge)", koja je prepis opisivala kao moguće samostalno davanje.
+      "Takvo ažuriranje nije razmena dobara i usluga u smislu ovog člana",
+      // 🔴 Odluka B: ZRNO se upisuje iz evidentiranog doprinosa, a glas traži
+      // AKTIVIRANO ZRNO korisnika čija je stvarnost potvrđena. Ako iz akta padne,
+      // ostaje da se glas u telu koje obavezujuće odlučuje o pravilima Protokola
+      // dobija uplatom.
+      "ZRNO se upisuje iz evidentiranog doprinosa u zapisu korisnika",
+      "ne aktivira, ne otpisuje i ne delegira glas po osnovu njega",
+      "nosioci aktiviranog ZRNA čija je stvarnost potvrđena",
+      // 🔴 Mera M-9 i njena brana: obim prava identifikovanog člana i izričito da
+      // donacija NIJE osnov za potvrdu stvarnosti. Bez brane se donatorski put
+      // čita kao kupovina mesta u lancu potvrda.
+      "Utvrđen identitet nije potvrda stvarnosti i ne zamenjuje je",
+      "Učinjena donacija nije osnov za potvrdu stvarnosti",
+      "ne obavezuje nijednog korisnika da potvrdi stvarnost donatora",
       // 🔴 4.5.6 (R-19, M-1) — čl. 13 ne sme ostati na goloj etiketi „nije digitalna
       // imovina". Odbrana koja pobija STATUS NOVCA ne odgovara na prigovor, jer
       // definicija virtuelne valute status novca izričito isključuje; nosivo je
@@ -134,6 +164,17 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Sastav Gornjeg Kola ne utvrđuje se imenovanjem",
     ],
     en: [
+      "No one is obliged to accept POEN",
+      "POEN cannot be acquired for the purpose of performing an exchange",
+      "Two decisions in that procedure are separate",
+      "does not itself trigger recording",
+      "is not an exchange of goods and services within the meaning of this Article",
+      "ZRNO is inscribed from the contribution recorded in the user's record",
+      "does not activate it, does not write it off, and does not delegate a vote on its basis",
+      "the holders of activated ZRNO whose reality has been confirmed",
+      "An established identity is not a confirmation of reality and does not replace it",
+      "A donation made is not a ground for confirming reality",
+      "does not oblige any user to confirm the donor's reality",
       "does not meet the elements by which digital assets, that is a virtual currency, are determined",
       "it cannot be acquired by purchase",
       "provides no payment services",
@@ -163,6 +204,17 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "The composition of the Upper Kolo is not established by appointment",
     ],
     ru: [
+      "Никто не обязан принимать ПОЕН",
+      "ПОЕН нельзя приобрести ради исполнения обмена",
+      "Два решения в этой процедуре разделены",
+      "учёт не запускает",
+      "не является обменом товаров и услуг в смысле настоящей статьи",
+      "ЗРНО вносится из учтённого вклада в записи пользователя",
+      "не активирует его, не списывает и не делегирует голос по его основанию",
+      "держатели активированного ЗРНО, реальность которых подтверждена",
+      "Установленная личность не является подтверждением реальности и его не заменяет",
+      "Сделанное пожертвование не является основанием для подтверждения реальности",
+      "не обязывает ни одного пользователя подтвердить реальность жертвователя",
       "не отвечает элементам, по которым определяется цифровое имущество",
       "его нельзя приобрести покупкой",
       "не оказывает платёжных услуг",
@@ -314,8 +366,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // jedan", sistem je sam objavljivao koliko POEN vredi u dinarima, pa se tabela
   // koeficijenta donacija čitala kao cenovnik. Zato se sada traži suprotno:
   // odsustvo pariteta i prisustvo odredbe da broj nije cena dobra.
-  "projekti_nabavke_4_5_4.md": {
+  "projekti_nabavke_4_5_8.md": {
     sr: [
+      // 🔴 4.5.8 (R-01, mera P-1) — nabavka traži POTVRĐENU STVARNOST. Bez toga je
+      // prag od 20.000 POEN-a dostižan prepisom na svež nepotvrđen nalog, pa se
+      // dobra raspodeljuju licu čije postojanje niko nije potvrdio.
+      "čija je stvarnost potvrđena kroz lanac potvrda (indeks stvarnosti najmanje 10%)",
       "### Član 27",
       "tri operativna troška Fondacije za prethodni mesec",
       "Koeficijent trošenja iznosi 1,00",
@@ -365,6 +421,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Nepreuzeti delovi se ne prodaju",
     ],
     en: [
+      "whose reality has been confirmed through the chain of confirmations (a reality index of at least 10%)",
       "The spending coefficient is 1.00",
       "### Article 30a",
       "within seven days of the notification of collection",
@@ -394,6 +451,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "The collection period is three days",
     ],
     ru: [
+      "реальность которых подтверждена через цепь подтверждений (индекс реальности не менее 10%)",
       "Коэффициент расходования составляет 1,00",
       "### Статья 30a",
       "в срок семи дней со дня уведомления о получении",
@@ -427,7 +485,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
   // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
   // počiva upravo na tome da takav promet nije dopušten.
-  "uslovi_koriscenja_4_5_4.md": {
+  "uslovi_koriscenja_4_5_8.md": {
     sr: [
       "Oglas neverifikovanog korisnika",
       // R-18 — prigovor kao jedan institut sa svojim članom. Do 4.5.4 su ga
@@ -440,12 +498,21 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "posreduje u prometu POEN-a ili ZRNA",
       "načelu nekonvertibilnosti",
       "ne stiče nivo donacija",
-      // 🔴 Orijentacioni odnos 1 POEN ≈ 1 RSD OSTAJE, ali samo kao pomoć korisniku
-      // pri postavljanju oglasa. Rečenica da ga Fondacija ne primenjuje ni u jednom
-      // svom postupku je ono što ga razlikuje od kursa: bez nje sistem sam objavljuje
-      // koliko POEN vredi u dinarima i primenjuje to na sopstvene radnje.
-      "ne primenjuje ni u jednom svom postupku",
+      // 🔴 4.5.8 (R-01, mera M-7a) — BROJKA 1 POEN ≈ 1 RSD je izbrisana iz akta.
+      // Nalaz koji je to pokrenuo: kurs je postojao, bio je objavljen, i držala ga
+      // je sama Fondacija u svom tekstu — a to je najjači dokaz protiv tvrdnje da
+      // POEN nije virtuelna valuta. Odnos se pri tome NE prećutkuje (mera M-7b je
+      // odbijena, jer je prećutan odnos gori od imenovanog): akt priznaje da
+      // korisnik pri određivanju iznosa polazi od vrednosti u novcu, ali to je
+      // NJEGOVA procena, a Fondacija nijedan takav odnos ne objavljuje.
+      "ne objavljuje odnos POEN-a prema dinaru",
+      "to je njegova sopstvena procena",
+      "nijedan odnos POEN-a prema novcu ne primenjuje ni u jednom svom postupku",
       "ne izvode se iz dinara",
+      // R-01, mera M-9 — obim prava člana čiji je identitet utvrđen na donatorskom
+      // putu. Bez ovoga kod otvara funkcije koje akt ne poznaje.
+      "Utvrđen identitet nije verifikacija i ne zamenjuje je",
+      "Donacija nije osnov za verifikaciju",
       // 🔴 Nalog je neprenosiv. Bez ove zabrane se neprenosivost ZRNA (čl. 22
       // Pravilnika) zaobilazi u jednom potezu — proda se ceo nalog sa ZRNOM u njemu.
       "ustupi, iznajmi ili proda pristup svom nalogu",
@@ -460,8 +527,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "brokering the transfer of POEN or ZRNO",
       "principle of non-convertibility",
       "acquires no donation tier",
-      "does not apply the orientation ratio in any of its own procedures",
+      "publishes no ratio of POEN to the dinar",
+      "that is their own estimate",
+      "applies no ratio of POEN to money in any of its own procedures",
       "are not derived from dinars",
+      "An established identity is not verification and does not replace it",
+      "A donation is not a ground for verification",
       "assigning, renting out, or selling access to their account",
       "is not transferable",
     ],
@@ -474,8 +545,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "посредничать в их обороте",
       "принципу неконвертируемости",
       "не получает уровня пожертвований",
-      "не применяет ориентировочное соотношение ни в одной своей процедуре",
+      "не публикует соотношения ПОЕН к динару",
+      "это его собственная оценка",
+      "не применяет никакого соотношения ПОЕН к деньгам ни в одной своей процедуре",
       "не выводятся из динаров",
+      "Установленная личность не является верификацией и её не заменяет",
+      "Пожертвование не является основанием для верификации",
       "уступать, сдавать в аренду или продавать доступ",
       "не является передаваемой",
     ],
@@ -483,8 +558,16 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 4.4.3 — obrazloženje koeficijenta evidencije. Tabela nivoa (1,00–2,00) bez
   // obrazloženja čita se kao cenovnik; odredba da se donacijom NIŠTA ne pribavlja
   // je ono što razliku u koeficijentu drži izvan pojma popusta, pa se traži doslovno.
-  "donacije_4_5_5.md": {
+  "donacije_4_5_8.md": {
     sr: [
+      // 🔴 4.5.8 (R-01) — donirati sme i član koga niko nije potvrdio (M-9), a
+      // evidentiranje NIJE trenutno: pokreće se tek pošto Fondacija utvrdi prijem
+      // (M-4a). Bez te rečenice donacija je način da se POEN pribavi na zahtev.
+      "Potvrđena stvarnost u lancu potvrda nije uslov za donaciju",
+      "Automatizam se odnosi na iznos, ne na pokretanje",
+      "Donacija zato nije način da se POEN pribavi u trenutku u kome je potreban",
+      // Devizna doznaka: merodavan je iznos ODOBREN na računu, ne poslati iznos.
+      "merodavan je dinarski iznos odobren na računu Fondacije",
       "nije cena POEN-a i nije popust na donaciju",
       "Donacijom se ništa ne pribavlja",
       "veću meru priznanja doprinosa",
@@ -536,6 +619,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Za donaciju ispod praga ta izjava se ne traži",
     ],
     en: [
+      "Reality confirmed in the chain of confirmations is not a condition for donating",
+      "The automatism concerns the amount, not the initiation",
+      "the dinar amount credited to the Foundation's account is authoritative",
       "is not a price of POEN and is not a discount on a donation",
       "Nothing is acquired by a donation",
       "greater measure of recognition of the contribution",
@@ -557,6 +643,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "This Rulebook establishes no new ground for annulment",
     ],
     ru: [
+      "Подтверждённая в цепи подтверждений реальность не является условием пожертвования",
+      "Автоматизм относится к сумме, а не к запуску",
+      "определяющей является динарская сумма, зачисленная на счёт Фонда",
       "не является ценой ПОЕН и не является скидкой",
       "Пожертвованием ничего не приобретается",
       "большую меру признания вклада",
@@ -1099,7 +1188,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_5_7.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_5_8.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });

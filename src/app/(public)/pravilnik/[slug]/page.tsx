@@ -26,8 +26,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // u maloletni (čl. 4d Pravilnika o učešću dece). Kod je taj minus pravio od
   // 2026-08-23, a akt ga je izričito zabranjivao — R-20.
   "kolo-sistem": {
-    fajl: "Pravilnik_4_5_7.md",
-    verzija: "4.5.7",
+    fajl: "Pravilnik_4_5_8.md",
+    verzija: "4.5.8",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.
@@ -45,8 +45,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // (čl. 4). Petlja donacija → POEN → red za robu vidi se iz OVOG akta, pa brana
   // mora stajati i ovde, ne samo u pravilniku o nabavkama.
   "pokroviteljstvo-donacije": {
-    fajl: "donacije_4_5_5.md",
-    verzija: "4.5.5",
+    fajl: "donacije_4_5_8.md",
+    verzija: "4.5.8",
   },
   // 4.4.4 — pravna priroda operativnog doprinosa (čl. 27): nema naručioca, nema
   // naknade, rezultat ide u zajedničko dobro pod licencama iz Glave II. Brisan
@@ -98,8 +98,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // delatnost, zabranjena naknada za ustupljeno dobro (nov čl. 3a); oslobođen deo
   // ide sledećem u redu i ne prodaje se (čl. 29); godišnji zbir projekata (čl. 31).
   "projekti-nabavke": {
-    fajl: "projekti_nabavke_4_5_4.md",
-    verzija: "4.5.4",
+    fajl: "projekti_nabavke_4_5_8.md",
+    verzija: "4.5.8",
   },
 };
 

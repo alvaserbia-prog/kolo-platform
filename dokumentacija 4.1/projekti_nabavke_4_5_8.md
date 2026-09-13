@@ -52,7 +52,9 @@ Uvođenje naknade za ustupljeno dobro predstavljalo bi privrednu delatnost i nij
 
 *Krug učesnika*
 
-U kolektivnoj nabavci učestvuju punoletni korisnici sa aktivnim nalogom.
+U kolektivnoj nabavci učestvuju punoletni korisnici sa aktivnim nalogom čija je stvarnost potvrđena kroz lanac potvrda (indeks stvarnosti najmanje 10%).
+
+Uslov potvrđene stvarnosti proizlazi iz svrhe nabavke: dobra se raspodeljuju korisnicima programa u smislu člana 9 stav 4 Statuta Fondacije, a to može biti samo lice za koje je neko iz mreže stao i potvrdio da postoji. Bez tog uslova prag iz člana 21 bio bi dostižan ažuriranjem evidencije u korist novootvorenog naloga, pa bi se dobra raspodeljivala licu čije postojanje niko nije potvrdio.
 
 Maloletni korisnici ne podnose predlog za nabavku, ne prijavljuju se na nabavku i ne preuzimaju dobra.
 

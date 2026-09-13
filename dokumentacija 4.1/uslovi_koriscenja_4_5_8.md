@@ -106,7 +106,11 @@ Neverifikovani korisnik može da pregleda oglase u prostoru za razmenu, da razme
 
 U ažuriranju evidencije POEN-a neverifikovani korisnik učestvuje isključivo kao primalac. Ne može da inicira ažuriranje evidencije POEN-a u korist drugog korisnika; ta mogućnost otvara se po verifikaciji (Član 28 Pravilnika o KOLO sistemu). Zapisi POEN-a evidentirani pre verifikacije ostaju punovažni.
 
-Neverifikovani korisnik ne može da verifikuje druge korisnike. Doprinos mu se može evidentirati isključivo kroz kanal doprinosa sadržaju platforme (Član 40a Pravilnika o KOLO sistemu); kroz ostale kanale ne može.
+Neverifikovani korisnik ne može da verifikuje druge korisnike. Doprinos mu se evidentira kroz kanal doprinosa sadržaju platforme (Član 40a Pravilnika o KOLO sistemu) i, ako mu je identitet utvrđen povodom donacije, kroz kanal finansijskog doprinosa; kroz ostale kanale ne može.
+
+Korisniku čiji je identitet utvrđen povodom donacije — time što je Fondacija uporedila podatke o uplatiocu sa njegovim nalogom — dostupni su i: oglas kojim se dobro ili usluga traži, bez ograničenja broja oglasa iz Člana 16, pokretanje komunikacije povodom oglasa, učešće u zajedničkom prostoru za razgovor, pretraga korisnika uz pregled tuđeg profila sužen na pseudonim i objavljene oglase, i upis ZRNA (Član 28 stav 6 Pravilnika o KOLO sistemu).
+
+Utvrđen identitet nije verifikacija i ne zamenjuje je. Takav korisnik ne inicira ažuriranje evidencije POEN-a, ne aktivira i ne otpisuje ZRNO, ne glasa u Gornjem Kolu, ne verifikuje druge, ne učestvuje u operativnom doprinosu, socijalnim programima ni kolektivnim nabavkama i ne pristupa kontakt podacima oglašivača. Donacija nije osnov za verifikaciju i ne obavezuje nijednog korisnika da ga verifikuje.
 
 ### Član 15 — Verifikovani korisnik i nosilac ZRNA
 
@@ -114,7 +118,9 @@ Verifikovani korisnik je lice čija je stvarnost potvrđena kroz lanac potvrda i
 
 Verifikovani korisnik ima pun pristup Platformi: može da razmenjuje dobra i usluge u prostoru za razmenu, da mu se evidentira doprinos u POEN-ima, da verifikuje druge korisnike u skladu sa pravilima o dokazu stvarnosti, da donira Fondaciji i da učestvuje u kolektivnim oblicima kada budu aktivirani. Verifikovani korisnik ima uvid u pseudonime svih korisnika, stanja POEN računa i sve transakcije sa pseudonimima strana.
 
-Nosilac ZRNA ima sva prava verifikovanog korisnika. Pored toga, aktiviranjem ZRNA stiče pravo učešća u upravljanju sistemom kroz Gornje Kolo kada se ono aktivira, položaj u obračunskom sistemu i trajni kapacitet da potvrđuje stvarnost drugih korisnika.
+Nosilac ZRNA čija je stvarnost potvrđena ima sva prava verifikovanog korisnika. Pored toga, aktiviranjem ZRNA stiče pravo učešća u upravljanju sistemom kroz Gornje Kolo kada se ono aktivira, položaj u obračunskom sistemu i trajni kapacitet da potvrđuje stvarnost drugih korisnika.
+
+Nosilac ZRNA čija stvarnost nije potvrđena ZRNO drži, ali ga ne aktivira i ne otpisuje; prava koja proizlaze iz aktiviranja on nema (Član 30 Pravilnika o KOLO sistemu).
 
 ### Član 16 — Oglas neverifikovanog korisnika
 
@@ -124,7 +130,7 @@ Neverifikovani korisnik ne može da postavi oglas kojim se dobro ili usluga tra�
 
 Oglas neverifikovanog korisnika mora da ispuni sadržinski minimum: naslov, opis, najmanje jednu fotografiju, kategoriju i mesto, pri čemu dužina naslova i opisa nije uslov. Oglas koji ne ispunjava sadržinski minimum ne objavljuje se. Isti uslov važi i pri izmeni objavljenog oglasa.
 
-Neverifikovani korisnik može istovremeno imati najviše tri aktivna oglasa.
+Neverifikovani korisnik može istovremeno imati najviše tri aktivna oglasa. Ograničenja iz ovog člana ne primenjuju se na korisnika čiji je identitet utvrđen povodom donacije (Član 14).
 
 Oglas neverifikovanog korisnika nosi vidljivu oznaku da oglašivač nije verifikovan u lancu potvrda. Oznaka je dostupna svima kojima je dostupan i sam oglas, uključujući neprijavljena lica.
 
@@ -164,19 +170,21 @@ Prostor za razmenu je deo Platforme namenjen oglašavanju ponuda i zahteva za do
 
 Pregled oglasa u prostoru za razmenu — sadržaj ponude ili zahteva, cena, lokacija i pseudonim oglašivača — javan je i dostupan svim posetiocima.
 
-Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je svim registrovanim korisnicima; neverifikovanom korisniku pod uslovima i ograničenjima iz Člana 16. Postavljanje oglasa kojim se dobro ili usluga traži, pristup kontakt podacima oglašivača i pokretanje komunikacije povodom oglasa dostupni su isključivo verifikovanim korisnicima i nosiocima ZRNA.
+Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je svim registrovanim korisnicima; neverifikovanom korisniku pod uslovima i ograničenjima iz Člana 16. Postavljanje oglasa kojim se dobro ili usluga traži i pokretanje komunikacije povodom oglasa dostupni su verifikovanim korisnicima, nosiocima ZRNA i korisniku čiji je identitet utvrđen povodom donacije (Član 14). Pristup kontakt podacima oglašivača dostupan je isključivo verifikovanim korisnicima i nosiocima ZRNA.
 
 Pseudonim oglašivača u prostoru za razmenu ne povezuje se, za neprijavljena i neverifikovana lica, sa evidencijom doprinosa ni profilom korisnika.
 
 Fondacija nije strana u razmeni i ne posreduje u njoj. Pravni odnos nastaje isključivo između korisnika koji razmenjuju dobra i usluge.
 
-### Član 19 — Orijentacioni odnos i određivanje iznosa u oglasu
+### Član 19 — Određivanje iznosa u oglasu
 
-Radi lakšeg određivanja iznosa u oglasu, kao orijentacioni odnos uzima se da jedan POEN odgovara jednom srpskom dinaru (1 POEN ≈ 1 RSD). Orijentacioni odnos služi isključivo korisniku pri određivanju iznosa u sopstvenom oglasu.
+Iznos u oglasu izražava se u POEN-ima i određuje ga korisnik koji oglas postavlja. Fondacija ne objavljuje odnos POEN-a prema dinaru ni prema bilo kojoj drugoj valuti i ne preporučuje po kom odnosu korisnik treba da odredi iznos.
 
-Fondacija orijentacioni odnos ne primenjuje ni u jednom svom postupku: po njemu ne evidentira doprinos, ne utvrđuje nijedan iznos propisan pravilnicima i ne određuje broj POEN-a u projektima i kolektivnim nabavkama. Iznosi koje pravilnici propisuju izraženi su u POEN-ima i ne izvode se iz dinara.
+Ako korisnik pri određivanju iznosa pođe od vrednosti izražene u novcu, to je njegova sopstvena procena. Ona važi samo za taj oglas, ne obavezuje drugu stranu i nije odnos koji Fondacija utvrđuje, objavljuje ili primenjuje.
 
-Orijentacioni odnos ne obavezuje nijednu stranu u razmeni, nije garancija konvertibilnosti, ne predstavlja kurs u smislu propisa o platnim uslugama i ne menja pravnu prirodu POEN-a utvrđenu Pravilnikom. Fondacija tu vrednost ne garantuje i ne održava.
+Fondacija nijedan odnos POEN-a prema novcu ne primenjuje ni u jednom svom postupku: po njemu ne evidentira doprinos, ne utvrđuje nijedan iznos propisan pravilnicima i ne određuje broj POEN-a u projektima i kolektivnim nabavkama. Iznosi koje pravilnici propisuju izraženi su u POEN-ima i ne izvode se iz dinara.
+
+Procena iz stava 2 ovog člana nije garancija konvertibilnosti, ne predstavlja kurs u smislu propisa o platnim uslugama i ne menja pravnu prirodu POEN-a utvrđenu Pravilnikom. Fondacija nikakvu vrednost POEN-a ne garantuje i ne održava.
 
 Fondacija ne vrši otkup POEN-a niti ZRNA i ne obezbeđuje njihovu konverziju u dinare ili drugo sredstvo plaćanja. Ne postoji ugovor o razmeni dinara za POEN.
 
