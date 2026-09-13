@@ -11,6 +11,13 @@ import CenaUnos from "@/components/CenaUnos";
 import PodeliOglas from "@/components/PodeliOglas";
 import { formatCenaGlavni, prikaziJedinicuCene, parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
 import { kategorijaKljuc, kategorijaEmoji } from "@/lib/kategorije";
+import {
+  MAX_SLIKA,
+  MAX_UKUPNO,
+  porukaIzOdgovora,
+  pripremiSliku,
+  ukupnaVelicina,
+} from "@/lib/slika-upload";
 
 interface OglasProps {
   id: string;
@@ -538,6 +545,7 @@ function IzmeniOglas({
   );
   const [noveSlike, setNoveSlike] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
+  const [obrada, setObrada] = useState(false);
   const [error, setError] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -547,14 +555,37 @@ function IzmeniOglas({
     setKeepIndices((prev) => prev.filter((i) => i !== idx));
   }
 
-  function handleNoveSlike(e: React.ChangeEvent<HTMLInputElement>) {
+  // Iste pripreme kao pri objavi novog oglasa. Ranije ih ovde NIJE bilo: slika sa
+  // telefona išla je u izvornoj veličini, pa je izmena oglasa sa dve fotografije
+  // premašivala telo zahteva koje platforma prima i padala bez objašnjenja.
+  async function handleNoveSlike(e: React.ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files ?? []);
-    const combined = [...noveSlike, ...files].slice(0, 5 - keepIndices.length);
-    for (const f of combined) {
-      if (f.size > 5 * 1024 * 1024) { setError(t("slika_prevelika")); return; }
-    }
-    setNoveSlike(combined);
+    e.target.value = "";
+    if (files.length === 0) return;
+
+    const slobodno = MAX_SLIKA - keepIndices.length - noveSlike.length;
+    if (slobodno <= 0) return;
+
+    setObrada(true);
     setError("");
+    try {
+      const ishodi = await Promise.all(files.slice(0, slobodno).map(pripremiSliku));
+      const validne = ishodi.flatMap((i) => (i.ok ? [i.file] : []));
+
+      if (ishodi.some((i) => !i.ok && i.razlog === "format")) setError(t("slika_format"));
+      else if (ishodi.some((i) => !i.ok)) setError(t("slika_prevelika"));
+
+      if (validne.length > 0) {
+        const sledece = [...noveSlike, ...validne].slice(0, MAX_SLIKA - keepIndices.length);
+        if (ukupnaVelicina(sledece) > MAX_UKUPNO) {
+          setError(t("slike_ukupno_prevelike"));
+          return;
+        }
+        setNoveSlike(sledece);
+      }
+    } finally {
+      setObrada(false);
+    }
   }
 
   function ukloniNovu(i: number) {
@@ -584,8 +615,16 @@ function IzmeniOglas({
       noveSlike.forEach((f, i) => fd.append(`nova_slika_${i}`, f));
 
       const res = await fetch(`/api/pijaca/${oglas.id}`, { method: "PATCH", body: fd });
-      const data = await res.json();
-      if (!res.ok) { setError(data.error ?? t("greska_generalna")); return; }
+      if (!res.ok) {
+        const poruka = await porukaIzOdgovora(res);
+        setError(
+          poruka ??
+            (res.status === 413
+              ? t("slike_ukupno_prevelike")
+              : `${t("greska_generalna")} (${res.status})`)
+        );
+        return;
+      }
       onSuccess();
     } catch {
       setError(t("greska_cuvanje"));
@@ -688,13 +727,20 @@ function IzmeniOglas({
               </div>
             ))}
             {/* Dodaj novu */}
-            {ukupnoSlika < 5 && (
+            {ukupnoSlika < MAX_SLIKA && (
               <button
                 type="button"
                 onClick={() => fileRef.current?.click()}
-                className="w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl"
+                disabled={obrada}
+                className="w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl disabled:opacity-50"
               >
-                +
+                {obrada ? (
+                  <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" strokeLinecap="round" />
+                  </svg>
+                ) : (
+                  "+"
+                )}
               </button>
             )}
           </div>
@@ -709,7 +755,7 @@ function IzmeniOglas({
             className="flex-1 py-3 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-semibold hover:bg-kolo-border transition-colors">
             {t("otkazi_btn")}
           </button>
-          <button type="submit" disabled={loading}
+          <button type="submit" disabled={loading || obrada}
             className="flex-1 py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50">
             {loading ? t("cuvam") : t("sacuvaj_izmene")}
           </button>

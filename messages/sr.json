@@ -1743,7 +1743,9 @@
     "dete_ceka_odobrenje": "Kad mama ili tata odobre tvoj nalog, moći ćeš da mu pišeš.",
     "dete_odrasli_zabranjeni": "Sa odraslima pišeš tek kad ti mama ili tata to uključe.",
     "dete_ceka_kratko": "čeka odobrenje",
-    "dete_odrasli_kratko": "treba dozvola roditelja"
+    "dete_odrasli_kratko": "treba dozvola roditelja",
+    "slika_format": "Neka slika nije u podržanom formatu. Fotografiju sa iPhone-a (HEIC) sačuvaj kao JPG pa je dodaj ponovo.",
+    "slike_ukupno_prevelike": "Slike su zajedno prevelike za jedno slanje. Dodaj manje slika ili ih zameni manjima."
   },
   "pocetna": {
     "dobrodoslice": "Zdravo, <ime>{pseudonim}</ime>",
@@ -3018,7 +3020,9 @@
     "zahtev_vise_nije_aktivan": "Zahtev više nije aktivan.",
     "zastitni_veto_mora_imati_obrazlozenje_koje_upucuje_na_konkretnu_pretnju_odrzivos": "Zaštitni veto mora imati obrazloženje koje upućuje na konkretnu pretnju održivosti (čl. 18).",
     "zatvoren_oglas_ne_moze_da_se_menja": "Zatvoren oglas ne može da se menja.",
-    "zrno_trziste_nije_aktivno": "Upis i otpis ZRNA još nisu aktivni."
+    "zrno_trziste_nije_aktivno": "Upis i otpis ZRNA još nisu aktivni.",
+    "slika_mora_biti_jpg_png_ili_webp_fotografiju_sa_iphone_a_heic_sacuvaj_kao_jpg": "Slika mora biti JPG, PNG ili WebP. Fotografiju sa iPhone-a (HEIC) sačuvaj kao JPG.",
+    "slike_su_prevelike_za_jedno_slanje_ukloni_jednu_ili_posalji_manje_fotografije": "Slike su prevelike za jedno slanje. Ukloni jednu ili pošalji manje fotografije."
   },
   "deca": {
     "naslov": "Moja deca",

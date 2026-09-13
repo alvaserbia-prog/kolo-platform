@@ -1743,7 +1743,9 @@
     "dete_ceka_odobrenje": "Once your mum or dad approves your account, you can write to them.",
     "dete_odrasli_zabranjeni": "You can write to adults only when your mum or dad turns that on.",
     "dete_ceka_kratko": "waiting for approval",
-    "dete_odrasli_kratko": "needs a parent's permission"
+    "dete_odrasli_kratko": "needs a parent's permission",
+    "slika_format": "One of the images is not in a supported format. Save an iPhone photo (HEIC) as JPG and add it again.",
+    "slike_ukupno_prevelike": "The images are too large to send together. Add fewer images or replace them with smaller ones."
   },
   "pocetna": {
     "dobrodoslice": "Hello, <ime>{pseudonim}</ime>",
@@ -3018,7 +3020,9 @@
     "zahtev_vise_nije_aktivan": "The request is no longer active.",
     "zastitni_veto_mora_imati_obrazlozenje_koje_upucuje_na_konkretnu_pretnju_odrzivos": "A protective veto must state reasons pointing to a concrete threat to sustainability (Art. 18).",
     "zatvoren_oglas_ne_moze_da_se_menja": "A closed listing cannot be edited.",
-    "zrno_trziste_nije_aktivno": "Recording and writing off ZRNO is not active yet."
+    "zrno_trziste_nije_aktivno": "Recording and writing off ZRNO is not active yet.",
+    "slika_mora_biti_jpg_png_ili_webp_fotografiju_sa_iphone_a_heic_sacuvaj_kao_jpg": "The image must be JPG, PNG or WebP. Save an iPhone photo (HEIC) as JPG.",
+    "slike_su_prevelike_za_jedno_slanje_ukloni_jednu_ili_posalji_manje_fotografije": "The images are too large to send at once. Remove one or send smaller photos."
   },
   "deca": {
     "naslov": "My children",

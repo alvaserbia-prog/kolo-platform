@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
+import { MAX_PO_SLICI, MAX_SLIKA } from "@/lib/slika-upload";
 import { parsirajCenu } from "@/lib/cena-oglas";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { oglasIspunjavaMinimum } from "@/lib/protokol/doprinos-sadrzaju";
@@ -13,8 +14,8 @@ import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
 
-const MAX_IMAGES = 5;
-const MAX_SIZE = 5 * 1024 * 1024;
+const MAX_IMAGES = MAX_SLIKA;
+const MAX_SIZE = MAX_PO_SLICI;
 
 // GET /api/pijaca/[id] — jedan oglas
 // Pregled oglasa je javan (Pravilnik čl. 16), ali kontakt oglašivača (telefon)
@@ -164,8 +165,15 @@ export async function PATCH(
       if (!minimum.ok) return await greska(minimum.razlog, minimum.status);
     }
 
-    // Nove slike — R2 u produkciji, fallback na lokalni disk za dev.
+    // Nove slike — R2 u produkciji, fallback na lokalni disk za dev. Na
+    // serverless-u je disk samo za čitanje, pa nepodešeno skladište mora da se
+    // kaže rečenicom, a ne da stigne kao EROFS iz `writeFile`.
     const useR2 = r2Konfigurisan();
+    const imaNovih = Array.from({ length: MAX_IMAGES - ukupno }, (_, i) =>
+      fd.get(`nova_slika_${i}`) as File | null,
+    ).some((f) => f && f.size > 0);
+    if (!useR2 && imaNovih && process.env.VERCEL)
+      return await greska("Skladište slika nije konfigurisano (Cloudflare R2).", 503);
     const noveSlike: string[] = [];
     for (let i = 0; i < MAX_IMAGES - ukupno; i++) {
       const file = fd.get(`nova_slika_${i}`) as File | null;
@@ -173,7 +181,10 @@ export async function PATCH(
       if (file.size > MAX_SIZE)
         return await greska("Slika je prevelika (max 5MB).", 400);
       if (!["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(file.type))
-        return await greska("Dozvoljeni formati: JPG, PNG, WebP.", 400);
+        return await greska(
+          "Slika mora biti JPG, PNG ili WebP. Fotografiju sa iPhone-a (HEIC) sačuvaj kao JPG.",
+          400,
+        );
 
       const ext = file.type === "image/png" ? ".png" : file.type === "image/webp" ? ".webp" : ".jpg";
       const fname = `${randomUUID()}${ext}`;

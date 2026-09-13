@@ -1743,7 +1743,9 @@
     "dete_ceka_odobrenje": "Когда мама или папа разрешат твой аккаунт, ты сможешь ему написать.",
     "dete_odrasli_zabranjeni": "Взрослым ты пишешь только когда мама или папа это включат.",
     "dete_ceka_kratko": "ждёт разрешения",
-    "dete_odrasli_kratko": "нужно разрешение родителей"
+    "dete_odrasli_kratko": "нужно разрешение родителей",
+    "slika_format": "Одно из изображений в неподдерживаемом формате. Сохрани фотографию с iPhone (HEIC) как JPG и добавь её снова.",
+    "slike_ukupno_prevelike": "Изображения вместе слишком большие для одной отправки. Добавь меньше изображений или замени их меньшими."
   },
   "pocetna": {
     "dobrodoslice": "Привет, <ime>{pseudonim}</ime>",
@@ -3018,7 +3020,9 @@
     "zahtev_vise_nije_aktivan": "Заявка больше неактивна.",
     "zastitni_veto_mora_imati_obrazlozenje_koje_upucuje_na_konkretnu_pretnju_odrzivos": "Защитное вето должно быть обосновано указанием на конкретную угрозу устойчивости (ст. 18).",
     "zatvoren_oglas_ne_moze_da_se_menja": "Закрытое объявление изменить нельзя.",
-    "zrno_trziste_nije_aktivno": "Внесение и списание ЗРНА пока не активны."
+    "zrno_trziste_nije_aktivno": "Внесение и списание ЗРНА пока не активны.",
+    "slika_mora_biti_jpg_png_ili_webp_fotografiju_sa_iphone_a_heic_sacuvaj_kao_jpg": "Изображение должно быть в формате JPG, PNG или WebP. Фотографию с iPhone (HEIC) сохрани как JPG.",
+    "slike_su_prevelike_za_jedno_slanje_ukloni_jednu_ili_posalji_manje_fotografije": "Изображения слишком велики для одной отправки. Удали одно или отправь фотографии меньшего размера."
   },
   "deca": {
     "naslov": "Мои дети",
