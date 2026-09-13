@@ -326,27 +326,28 @@ Ocena 1–10 = verovatnoća da regulator zauzme taj stav × težina posledice.
 
 | # | Rizik | Primarni regulator | Ocena | Status |
 |---|---|---|---|---|
-| **R-01** | **POEN se kvalifikuje kao virtuelna valuta / digitalna imovina** — prihvata se kao sredstvo razmene na Pijaci, ima objavljen odnos prema dinaru i pribavlja se karticom u realnom vremenu po objavljenoj tabeli | NBS | **9** | u obradi |
+| **R-01** | **POEN se kvalifikuje kao virtuelna valuta / digitalna imovina** — prihvata se kao sredstvo razmene na Pijaci, ima objavljen odnos prema dinaru i pribavlja se karticom u realnom vremenu po objavljenoj tabeli | NBS | **9** | ✅ **obrađen** → 6 (DEO III) |
 | **R-02** | **POEN evidentiran kroz kanale i primljen u razmeni kvalifikuje se kao prihod korisnika** (uklj. prihod u naturi); Fondacija propustila obračun po odbitku kao isplatilac | Poreska uprava | **9** | — |
 | **R-03** | **Javna pseudonimna evidencija otkriva posebne kategorije i podatke dece** — naziv programa uz pseudonim svakom redovnom članu, ime donatora u feedu široj publici nego što Politika kaže, pregled dece po školama | Poverenik | **9** | — |
-| **R-04** | **ZRNO se čita kao investicioni instrument** — dnevna serija kursa, `zrnaKupljeno`/`poenPlaceno`, whitepaper i `/pravna-pozicija` sami opisuju razliku u kursu kao podsticaj i koriste reč „uložio" | Komisija za HOV | **8** | — |
+| **R-04** | **ZRNO se čita kao investicioni instrument** — dnevna serija kursa, `zrnaKupljeno`/`poenPlaceno`, whitepaper i `/pravna-pozicija` sami opisuju razliku u kursu kao podsticaj i koriste reč „uložio" | Komisija za HOV | **8** | 🔴 **9** posle C′ |
 | **R-05** | **PDV i fiskalizacija** — razmena kao trampa između lica koja obavljaju delatnost; poništenje POEN-a pri nabavci kao moguća naknada; nepostojanje fiskalnih računa u prometu koji platforma promoviše | Poreska uprava | **8** | — |
 | **R-06** | **Ne postoji dokaz pristanka ni dokaz zaključenja ugovora**; uz to **DPO u sukobu interesa sa privatnom kontakt adresom** | Poverenik | **8** | — |
 | **R-07** | **Nelojalna i obmanjujuća poslovna praksa** — isti broj je u aktu „nije cena, nije kurs, nije popust", a na ekranu „POEN/RSD", „Od (RSD)" i „povoljniji koeficijent" | Zaštita potrošača | **8** | — |
 | **R-08** | **Strukturna hiperinflacija POEN-a uz objavljen odnos 1:1** — dnevni limit je 10% opticaja koji sam raste tim emisijama; socijalni programi bez gornje granice; osnivački kanal se prazni u nedeljama | Zaštita potrošača / sistemski | **8** | — |
 | **R-09** | **Deca u sistemu** — samostalna registracija od 7 godina, dečji oglasi vidljivi punoletnima od 15, razmena sa odraslima, samostalan prepis do 5.000 odn. 20.000 POEN, negativan zapis kod deteta, nepostojanje provere uzrasta u oba smera | Inspektorat za rad + socijalna zaštita | **8** | — |
-| **R-10** | **Fondacija: Gornje Kolo kao de facto skupština u bezčlanskoj formi i ~24% evidencije zatvorenom krugu osnivača** | Nadzor nad fondacijama | **8** | — |
+| **R-10** | **Fondacija: Gornje Kolo kao de facto skupština u bezčlanskoj formi i ~24% evidencije zatvorenom krugu osnivača** | Nadzor nad fondacijama | **8** | 🔴 **9** posle C′ |
 | **R-11** | **Prepis POEN-a kao platna usluga / POEN kao elektronski novac** | NBS | **7** | — |
 | **R-12** | **Sprečavanje pranja novca** — kontrola uplatioca ne radi kod kartice i IPS-a, zabrana prodaje POEN-a bez detekcije, otvorena petlja donacija→POEN→roba, trostrana konstrukcija pokroviteljstva | APML | **7** | — |
 | **R-13** | **Operativni doprinos kao neprijavljen rad** — u Fazi 1 Fondacija je jedini objavljivač, verifikator i korisnik rada; „procena obima rada" + „predloženi POEN" + odnos 1:1 = satnica | Inspektorat za rad | **7** | — |
 | **R-14** | **Bezbednost hrane i akcize u sadržaju Pijace** — platforma reklamira med, sir, zimnicu i rakiju, bez ijedne provere registracije proizvođača | Poljoprivredne i sanitarne inspekcije, Uprava carina | **7** | — |
 | **R-15** | **EU: GDPR čl. 3 st. 2 i DSA** — hrvatski i mađarski prevodi kao dokaz usmerenosti; nema predstavnika u Uniji, nema DSA okvira, a deca od 7 godina su korisnici | Evropski nadzor | **7** | — |
 | **R-16** | **Čitanje osnivačkog kanala kao lančane šeme** — rast koji finansiraju novi učesnici automatski puni zatvoren krug koji je ušao prvi | Zaštita potrošača | **7** | — |
-| **R-17** | **Porez na dobit i status Fondacije** — donacija sa rastućim koeficijentom kao teretni posao; upitno da li svrha ulazi u krug za priznavanje rashoda; višak prihoda nad rashodima | Poreska uprava | **7** | — |
+| **R-17** | **Porez na dobit i status Fondacije** — donacija sa rastućim koeficijentom kao teretni posao; upitno da li svrha ulazi u krug za priznavanje rashoda; višak prihoda nad rashodima | Poreska uprava | **7** | 🔴 **8** posle C′ |
 | **R-18** | **Prekogranični prenos bez prikupljenih ugovora o obradi** — Politika čl. 9 sama propisuje obavezu čuvanja i godišnje provere; obaveza nije izvršena | Poverenik | **6** | — |
 | **R-19** | **Socijalni programi i državna davanja** — prihod u naturi koji može uticati na prava po osnovu socijalne zaštite i penzijskog osiguranja; kriterijumi po uzrastu i broju dece kao pitanje zabrane diskriminacije | Socijalna zaštita / Poverenik za ravnopravnost | **6** | — |
 | **R-20** | **Nedokazane mere bezbednosti iz Politike čl. 14** — MFA za administrativni pristup ne postoji u kodu, obuke i penetraciono testiranje bez traga | Poverenik | **5** | — |
 | **R-21** | **Odgovornost za sadržaj i zabranjena dobra** — reaktivna moderacija bez preventivnih mera, uz listu zabranjenih dobara koja se ne kontroliše | Tržišna inspekcija | **5** | — |
+| **R-22** | **„Jedna osoba — jedan korisnik“ se ne dokazuje ničim** — Uslovi čl. 8 zabranjuju, dokaz stvarnosti čl. 5 tvrdi da verifikator potvrđuje jedinstvenost, kod ne proverava, a verifikator to ne može ni da zna | dokaz stvarnosti / integritet glasanja | **7** | nacrt mera u DEO III |
 
 ## Zavisnosti između rizika
 
@@ -369,4 +370,221 @@ izmena Statuta radi Gornjeg Kola, podizanje donje granice uzrasta) zabeležene s
 
 | Rizik | Datum | Ishod | Nova ocena |
 |---|---|---|---|
-| — | — | — | — |
+| **R-01** | 12–13.09.2026. | Obrađen. Odobreno M-1…M-9, M-11, P-1, C-1, C-3 i **C′** (odluka vlasnika: ZRNO i glas identifikovanom članu; prepis, nabavka i programi ostaju zatvoreni). Odbijeno M-7b, M-10, M-12, R22-M4 i opcija B. ⏳ C-2 čeka potvrdu. | 9 → **6** |
+| **R-22** | 13.09.2026. | Otvoren po nalogu vlasnika. Nacrt mera zabeležen; obrada u svom redu. | 7 → **5** (procena) |
+
+---
+
+# DEO III — OBRAĐENI RIZICI
+
+## R-01 — POEN kao virtuelna valuta / digitalna imovina
+
+**Obrađen 12–13.09.2026.** Zatečena ocena **9**. Ocena po sprovođenju svih odluka: **6**.
+
+### Nalazi (uz mesta)
+
+1. **Odbrana pobija elemente koje nam niko ne prigovara.** Čl. 13 st. 4 nabraja šest
+   elemenata koji nedostaju; tri se tiču statusa novca, koji definicija virtuelne valute
+   **sama isključuje**. Element *„lica ga prihvataju kao sredstvo razmene"* — koji je na
+   Pijaci ispunjen — akt ne dodiruje uopšte.
+2. **Kartični callback je davao POEN u realnom vremenu.**
+   `src/app/api/donacije/placanje/povratak/route.ts:88` zove `evidentirajDonaciju` odmah
+   po verifikovanom odgovoru banke. Između uplate i upisa nije bilo nijedne ljudske odluke.
+3. **Ekran donacija je nosio kurs kao jedinicu.** `donacije.kurs_opis` = „POEN/RSD";
+   `donacije.do_nivoa` = „…(koeficijent {kurs} POEN/RSD)…"; `donacije.tabela_do` = „Od (RSD)";
+   `donacije.rang_pojasnjenje` = „Viši rang znači **povoljniji** koeficijent" — a čl. 4
+   Pravilnika o donacijama izričito kaže da razlika **nije popust**.
+4. **Opis transakcije: „Bonus za donaciju"** (`donacija.ts:194`, `transakcije.donacija`).
+5. **Naslovna stranica izvodi POEN iz dinara.** `landing.primer_korak_1_opis`:
+   *„Teglu inače prodaje za 800 dinara, pa su se dogovorili da pet tegli vredi 4.000 POENA."*
+   Čl. 19 Uslova kaže da Fondacija odnos *„ne primenjuje ni u jednom svom postupku"*.
+6. 🔴 **`/pravna-pozicija` pogrešno prepričava zakonsku definiciju.** `zdi_tekst` definiciju
+   svodi na *„prenositi, čuvati ili njime trgovati"* i tvrdi da POEN *„ne ispunjava nijednu
+   od te tri pretpostavke"*. Ispalo je *kupovati*, *prodavati*, *razmenjivati* i cela polovina
+   *„koristi se kao sredstvo razmene ili u svrhu ulaganja"* — dakle baš elementi koje
+   ispunjavamo. Uz to se elementi tretiraju **kumulativno**, a definicija je disjunktivna.
+7. 🔴 **Ista stranica tvrdi da se POEN „ne prenosi"** (`zdi_tekst`, `ztk_tekst`), a čl. 16
+   ceo uređuje prenos, UI ga zove „Prepiši POEN", a `Transaction` ima `fromWalletId → toWalletId`.
+8. **Dve rečenice na toj stranici nisu gramatički završene** — pogrešno postavljene zagrade
+   u `sporno1_tekst` i `sporno2_tekst` progutale su nabrajanja.
+9. **Zabrana prodaje POEN-a (Uslovi čl. 24) je nesprovedena** — praćenje obrazaca prepisa
+   je ranije odbijeno kao neizvodljivo, a čl. 13 se na tu zabranu poziva kao na dokaz.
+10. 🔴 **Kolektivna nabavka nije tražila potvrđenu stvarnost.** `smeUcestvovati`
+    (`nabavka-pravila.ts:308`) gleda samo `maloletan`, `deaktiviranAt` i `status`; nabavke
+    čl. 4 isto. Prag od 20.000 POEN je dostižan **prepisom** na svež nepotvrđen nalog →
+    novac → roba bez ijedne provere identiteta. Postojalo je nezavisno od svega ostalog.
+
+### Odobrene mere
+
+| Mera | Šta |
+|---|---|
+| **M-1** | Ekran donacija: brisati jedinicu „POEN/RSD", „Od (RSD)" → „Kumulativni doprinos", brisati reč „povoljniji", preformulisati `donacije.objasnjenje` da upis ne bude uslovljen uplatom. 5 jezika. |
+| **M-2** | „Bonus za donaciju" → „Evidentiran doprinos po donaciji". `donacija.ts` + `transakcije.donacija` i `transakcije.donacija_uplatilac`, 5 jezika. |
+| **M-3** | `/pravna-pozicija`: tačno navesti definiciju sa svim elementima i naglasiti da su **alternativni**; priznati elemente koje ispunjavamo; brisati tvrdnju „ne prenosi se" i zameniti sa „ne može se preneti izvan evidencije koju vodi Protokol"; ispraviti zagrade u `sporno1_tekst` i `sporno2_tekst`. 5 jezika. |
+| **M-4 (a)** | **Detekcija automatska, potvrda ljudska.** Callback banke prestaje da zove `evidentirajDonaciju`; upisuje `bankRef` i prevodi zapis u nov status **`NAPLACENO`** (zaseban migracioni fajl za enum vrednost). POEN nastaje tek potvrdom u admin tabu, kroz zatečeni `POST /api/admin/donacija` uz obavezan `uplatilac` iz izvoda. Admin tab dobija grupnu potvrdu i poređenje „uplatilac (izvod)" vs „donator (nalog)". Uvoz izvoda dok nema bankovnog API-ja. Uz to: dopuniti čl. 15 i čl. 39 — Fondacija utvrđuje **činjenicu prijema**, Protokol automatski i bez diskrecije određuje **iznos**. |
+| **M-5** | Čl. 13, nov stav: niko nije dužan da primi POEN; Fondacija ga ne prima, ne izražava u njemu nijedan svoj iznos i ne objavljuje cenovnik u POEN-ima; iznos u razmeni određuju strane i ne obavezuje nikoga; **POEN se ne može pribaviti radi izvršenja razmene**. 🔴 Druga rečenica je istinita samo uz M-4 — ide zajedno ili nikako. |
+| **M-6** | `landing.primer_korak_1_opis`: broj POEN-a se **ne izvodi** iz dinarske cene. 5 jezika. |
+| **M-7a** | **Uslovi čl. 19 gubi brojku.** Briše se *„jedan POEN odgovara jednom srpskom dinaru (1 POEN ≈ 1 RSD)"*; ostaje pravilo da iznos određuje korisnik i da Fondacija odnos ne primenjuje. Isto na tri mesta u FAQ-u (`faq-data.ts:171, 703, 818`) × 5 jezika. 🟢 Provereno: **nijedna linija koda ne konvertuje POEN↔RSD 1:1** — mera nema funkcionalnu cenu. |
+| **M-8** | Čl. 16 st. 5: briše se zagrada *„(uz razmenu ili bez protivusluge)"*; dodaje se stav da ažuriranje izvršeno radi posla zabranjenog čl. 24 Uslova povlači mere iz tih uslova — čime zabrana prometa POEN-a dobija uporište u **Pravilniku**, ne samo u Uslovima. |
+| **M-11** | Paket protiv chargeback-a: 3DS ostaje obavezan (već je `3d_pay_hosting`); prepoznatljiv opis na izvodu kartice; **kvačica pre naplate** („donacija je nepovratna, njome ne dobijam robu ni uslugu") snimljena na zapis; potvrda mejlom sa linkom na ugovor; **kapa po kartičnoj uplati** (predlog 50.000 RSD, veće isključivo prenosom); ugovor iz čl. 5b se koristi kao dokaz u sporu. |
+| **P-1** | **Kolektivna nabavka traži potvrđenu stvarnost.** `smeUcestvovati` dobija uslov indeksa ≥ 10%; nabavke čl. 4 se dopunjava. Obrazloženje u aktu: dobra se raspodeljuju korisnicima programa u smislu čl. 9 st. 4 Statuta, a to mora biti lice čija je stvarnost potvrđena. |
+| **M-9** | **Donacija nepotvrđenog člana.** Gejt `!verified` skida se sa `donacije/route.ts:12`, `placanje/zapocni:25`, `donacije/ips:46`. **POEN se evidentira odmah** po potvrdi uplate (odluka vlasnika — beleženje odbijeno kao nepotrebno komplikovano). Svojstvo **`User.identitetUtvrdjenAt`**, ne četvrti status. Akti: čl. 28, čl. 32, donacije čl. 3 i 5, Uslovi čl. 14 i 16. |
+| **Brane uz M-9** | (1) **nema nove table** — koristi se zatečena lista donacija, ne pravi se zamena za ukinutu tablu jemstva; (2) **nema poziva na potvrdu** — samo oznaka i pseudonim, bez dugmeta „potvrdi ovog člana"; (3) **odredba u čl. 32**: *„Učinjena donacija nije osnov za potvrdu stvarnosti i ne zamenjuje neposredno lično poznavanje iz čl. 5 Pravilnika o dokazu stvarnosti."* |
+| **C′** | **Odluka vlasnika, vidi ispod.** |
+| **C-1** | **Jedinstvenost se proverava na donatorskom putu.** Normalizovan uplatilac (hash) se pri potvrdi poredi sa svim nalozima; poklapanje zaustavlja evidentiranje do ljudske odluke. 🟢 Time je donatorski put **stroži po jedinstvenosti od lanca potvrda**. |
+| **C-3** | **Kvadratni koren (čl. 46) i kapa od 1% po periodu (čl. 19) se ne diraju — nikad.** Uz C′ to su jedine kočnice na upravljanje po kapitalu. Zabranjena tema za buduće izmene. |
+
+### 🔴 Odluka vlasnika: C′ — ZRNO i glas otvoreni identifikovanom članu
+
+Nepotvrđen član koji je donirao **upisuje ZRNO i dobija glas u Gornjem Kolu**, bez ulaska
+u lanac potvrda. Ostaju **zatvoreni**: prepis POEN-a (#7), kolektivna nabavka (#13),
+socijalni programi (#9).
+
+**Sažeto: novcem se dobija položaj, ne kupovna moć.** POEN takvog člana nikad ne postaje
+nešto što on potroši, pa za njega ostaje zapis, a ne sredstvo razmene.
+
+**Obrazloženje vlasnika:** (a) ulaganje pretpostavlja materijalizaciju u novac sa profitom,
+a POEN se nikada ne može materijalizovati; (b) opcija B (ZRNO bez glasa) ima stvaran defekt —
+pravo koje zavisi od toga hoće li ga neko potvrditi nije pravo, a moglo bi se i dogovoriti
+da se ne potvrdi; (c) Gornje Kolo je faktički savetodavno.
+
+🔴 **Ispravka uz (c), zabeležena:** Gornje Kolo je savetodavno **samo za dinare**
+(čl. 51 st. 5, GK čl. 20). Za **pravila Protokola** je obavezujuće — čl. 51 st. 2:
+*„Upravni odbor je dužan da taj akt donese bez odlaganja i pri tome ne ceni celishodnost
+odluke"*, uz zatvorenu listu od četiri razloga za odbijanje. A „pravila Protokola" obuhvataju
+i **tabelu koeficijenata donacija** (donacije čl. 15), dnevni limit (operativni čl. 26),
+prag za ZRNO i kapu od 1%. Dakle donator sa glasovima glasa o tabeli po kojoj se njegove
+sopstvene donacije evidentiraju.
+
+### 🔴 Cena C′ — četiri teksta MORAJU da se prepišu
+
+Bez ovoga bi akti tvrdili suprotno od onoga što mehanizam radi.
+
+| Gde | Sada | Postaje |
+|---|---|---|
+| **Pravilnik čl. 46 st. 3** | *„Glasačka moć proizlazi iz evidentiranog ZRNA, ne iz broja POEN-a i **ne iz dinarskih donacija**."* | *„…proizlazi iz upisanog i aktiviranog ZRNA. ZRNO se upisuje iz evidentiranog doprinosa, bez obzira kroz koji je kanal iz čl. 15 evidentiran."* |
+| **FAQ 43** | *„A novcem se ne kupuje ni glas u odlukama: glas nosi ZRNO, ne POEN."* | 🔴 **briše se**; zamenjuje se tačnim opisom — doprinos novcem vodi do ZRNA kao i doprinos radom, a glasačka moć je kvadratni koren, ne srazmera |
+| **`/pravna-pozicija`, `zasto4_tekst`** | *„Veza „više uloženo, više moći" namerno je prekinuta."* | *„…nije srazmerna: ko ima sto ZRNA ima deset glasova, ne sto."* |
+| **Whitepaper, „Šta KOLO nije"** | *„doprinos je jedini način sticanja pozicije u sistemu"* | ostaje tačno **samo ako prođe C-2** |
+
+### ⏳ Otvoreno iz R-01 — mora se rešiti pre sprovođenja C′
+
+🔴 **C-2 — otvoriti operativni doprinos (#8) identifikovanom članu.** Nije izričito
+potvrđeno. **Bez nje je glas cenovan**: za člana van lanca potvrda do praga od 20.000 POEN
+vodi isključivo novac, jer čl. 40a i 40b daju najviše 5.000. Tada se čl. 46 st. 3 ne može
+odbraniti nijednom formulacijom. Uz C-2 postoje dva puta do ZRNA — rad i doprinos novcem —
+i oba su otvorena svakome. Moj prvobitni prigovor na #8 (jedinstvenost) rešava C-1.
+
+### Obim prava identifikovanog člana (posle C′)
+
+**Otvoreno:** oglas POTRAŽNJA (#1), više od tri oglasa (#2), pokretanje razgovora (#3),
+Pričaonica (#4), donacija i POEN (#5), profili drugih (#16), pretraga članova (#17),
+**upis ZRNA i glas** (C′). Uz C-2 i operativni doprinos (#8).
+
+**Zatvoreno:** telefon oglašivača (#6 — Politika 4.8 obećala *„isključivo verifikovanim"*,
+širenje bi prešlo dati pristanak), **prepis POEN-a (#7)**, socijalni programi (#9),
+potvrđivanje stvarnosti drugih (#10), kolektivna nabavka (#13), pseudonimi strana u
+evidenciji (#14), stanja računa drugih (#15), oglas bez sadržinskog minimuma (#18).
+
+🟡 **Tačna formulacija koja mora u copy:** identifikovan član *„može da prima POEN i da nudi
+dobra i usluge, ali ne može da prepisuje POEN drugima"*. Ne sme stajati da „može da
+razmenjuje" — u razmeni plaća onaj ko prima dobro, a to traži iniciranje prepisa.
+
+### Odbijene mere — ne predlagati ponovo
+
+| Mera | Razlog vlasnika |
+|---|---|
+| **M-7b** — prećutati orijentacioni odnos | moj predlog povučen: prećutan odnos je gori od imenovanog, prvi protivargument |
+| **M-10** — ukinuti kartični kanal donacija | *„ne bih izbacivao karticu"* |
+| **M-12** — šesti izuzetak u čl. 14 za otpis po vraćenoj donaciji | *„ja to ne bih unosio u akte, malo mi je glupo"* — 🟡 posledica ispod |
+| **R22-M4** — pitanje verifikatoru pri potvrdi („je li ovo neko koga si već potvrdio") | *„glupost"* |
+| **Opcija B** — ZRNO bez glasa | pravo koje zavisi od tuđe volje nije pravo |
+| Automatski cron koji evidentira POEN u paketu bez ljudske odluke | odbijeno u korist M-4(a) |
+
+### 🟡 Svesno prihvaćeni ostaci
+
+1. **Chargeback ostaje bez osnova za poništenje POEN-a** (M-12 odbijena). Pokriva se
+   zaobilazno: chargeback pokreće sumnju po donacije čl. 13c → ako je zloupotreba,
+   isključenje po Uslovima čl. 28 → poništenje po čl. 34. Ako nije zloupotreba, **POEN
+   ostaje**. Izloženost se drži malom kapom iz M-11. 🔴 Ako kartični promet naraste,
+   ovo se mora vratiti na sto.
+2. **Zabrana prodaje POEN-a nema detekciju** — praćenje obrazaca prepisa odbijeno ranije.
+3. **Element „prihvataju kao sredstvo razmene" ostaje ispunjen** dok Pijaca radi kako radi.
+   M-5 ga ublažava, ne obara. To je najiskreniji nalaz celog R-01.
+4. **Strani donator sa glasom o pravilima srpske fondacije** je tipski profil za FATF/NPO
+   nadzor (R-12). Donacije čl. 13b t. 4 već traže da UO utvrdi identitet i osnov.
+
+### Ocene
+
+| Stanje | R-01 | Napomena |
+|---|---|---|
+| zatečeno | **9** | |
+| sve mere + opcija A ili B | 5 | |
+| **sve mere + C′ (odlučeno)** | **6** | novac donosi položaj, ne kupovnu moć |
+| sve mere + puna C (prepis otvoren) | 9 | odbijeno |
+
+🔴 **Pod od 6 drži Uslovi čl. 19** — dok god Fondacija objavljuje odnos prema dinaru, niže
+ne ide. M-7a briše brojku iz akta, ali pojava na Pijaci ostaje.
+
+🔴 **C′ podiže druge rizike:** R-04 (ZRNO kao investicioni instrument) **8 → 9**,
+R-10 (Fondacija/Gornje Kolo) **8 → 9**, R-17 (poreski položaj — donacija uz zadržan uticaj
+na trošenje) **7 → 8**. Ti rizici se obrađuju posebno, sa ovim kao ulaznim podatkom.
+
+---
+
+## R-22 — „Jedna osoba — jedan korisnik" se ne dokazuje ničim
+
+**Nalog vlasnika, 13.09.2026.** Nacrt zabeležen; rizik se obrađuje u svom redu.
+Preliminarna ocena **7**, po merama **5**.
+
+### Nalaz
+
+Uslovi čl. 8 zabranjuju više naloga. Dokaz stvarnosti čl. 5 st. 1 kaže da verifikator
+potvrđuje *„jedinstvenost (nema drugi nalog u sistemu)"*, a čl. 5 st. 7 čini **lažnom
+verifikacijom** onu kojom je potvrđeno lice koje *„nije jedinstveno"*.
+
+🔴 **Ništa u kodu ne proverava jedinstvenost**, a verifikator to **ne može da zna** — poznaje
+čoveka, ne poznaje njegove druge pseudonime. Akt traži izjavu o činjenici koja se ne može
+proveriti, i kažnjava je kao lažnu verifikaciju.
+
+Nalaz je vlasnikov: *„potvrda u lancu takođe ne dokazuje da li lice ima drugi nalog."*
+
+### 🔴 Jedinstvenost se ne može dokazati bez identifikacionog dokumenta
+
+Jedini dokaz bi bio vezivanje naloga za JMBG ili ispravu — što je **namerno odbijeno**
+(čl. 31 Pravilnika) i što nosi celu odbranu po ZZPL-u i princip minimizacije.
+**Zato cilj nije dokaz nego: zabrana + detekcija + posledica.**
+
+### Nacrt mera
+
+| | Mera |
+|---|---|
+| **R22-M1** 🔴 | **Uskladiti izjavu verifikatora sa onim što se može znati.** Čl. 5: verifikator potvrđuje stvarnost i kontinuitet, i izjavljuje *da mu nije poznato* da verifikovani ima drugi nalog. Jedinstvenost prelazi u zabranu (Uslovi čl. 8), detekciju i posledicu. **Najvažnija mera — akt prestaje da tvrdi dokaz koji ne postoji.** |
+| **R22-M2** 🟢 | **Uplatilac kao ključ za duplikat** (= C-1 iz R-01). Jedini spoljni identitet u sistemu. Dva naloga sa uplatama istog uplatioca = isti čovek. Ne blokira automatski — traži ljudsku odluku. |
+| **R22-M3** 🟢 | **Telefon kao mek jedinstven ključ.** Ostaje dobrovoljan (čl. 74, minimizacija), ali kad se navede mora biti jedinstven — hash sa `@unique` indeksom. |
+| **R22-M5** 🟡 | **Pojačati zatečenu detekciju** u `nadzor-integriteta.ts`: obrazac „dva naloga koja se nikad ne pojavljuju istovremeno, dele mesto, nemaju nijednu zajedničku vezu u grafu". Pokriveno Politikom 4.9 (legitimni interes). |
+| **R22-M6** 🟢 | **Zabeležiti šta već radi:** socijalni programi traže potvrdu **svih** verifikatora pod punom odgovornošću (programi podrške čl. 4), pa bi duplikat morao ceo drugi skup verifikatora — što anti-cirkularno pravilo otežava. Najveća novčana vrednost duplikata je već zatvorena. Uz P-1 i status-gejt za ZRNO, isto važi i za nabavku. |
+
+**Odbijeno:** R22-M4 (pitanje verifikatoru pri potvrdi) — *„glupost"*.
+
+🔴 **C′ podiže hitnost R-22.** Uz kvadratni koren, tri naloga daju 3×√33 = 15 glasova naspram
+√100 = 10 za istog čoveka u jednom nalogu. Koren kažnjava koncentraciju u jednom nalogu;
+duplikati ga zaobilaze. R22-M2 je zato uslov da C′ bude odbranjiv.
+
+---
+
+## 🔴 Zabranjene teme — ne otvarati bez izričitog naloga
+
+1. **Kvadratni koren (čl. 46) i kapa od 1% po obračunskom periodu (čl. 19)** — uz C′ jedine
+   kočnice na upravljanje po kapitalu.
+2. **Reči „ulaganje", „investiranje" i „udeo" ne ulaze ni u akte, ni u copy, ni u FAQ.**
+   Čl. 18 izričito kaže da ZRNO **nije udeo**. Mehanizam se sme menjati; rečnik ne.
+   Odbranjiva formulacija: *„doprinos mu se evidentira; iz evidentiranog doprinosa, kao i kod
+   svakog drugog člana, može proizaći položaj u zajedničkom dobru."*
+3. **Vraćanje automatskog upisa POEN-a po callback-u banke** — M-4(a) je projektantska
+   odluka uz R-01, ne privremeno rešenje. 🔴 Komentar u `src/lib/placanje/ips-qr.ts`
+   („*Kasnije se isti zapis može auto-potvrditi PSP/bankarskim callback-om*") mora se
+   prepisati, da ga neko ne „dovrši".
+4. **Otvaranje prepisa POEN-a (#7) identifikovanom članu** — to je razlika između R-01 = 6
+   i R-01 = 9.
+5. **Ubrzan put do potvrde stvarnosti za donatore** — brana 3 uz M-9.
