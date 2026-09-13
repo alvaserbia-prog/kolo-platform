@@ -191,8 +191,8 @@ export async function evidentirajDonaciju(
       poen,
       TransactionType.EMISIJA_DONACIJA,
       uplatilac
-        ? `Bonus za donaciju iznos ${poen.toLocaleString("sr-RS")} — uplatilac: ${uplatilac}`
-        : `Bonus za donaciju iznos ${poen.toLocaleString("sr-RS")}`,
+        ? `Evidentiran doprinos po donaciji: ${poen.toLocaleString("sr-RS")} POEN — uplatilac: ${uplatilac}`
+        : `Evidentiran doprinos po donaciji: ${poen.toLocaleString("sr-RS")} POEN`,
       uplatilac
         ? { kljuc: "transakcije.donacija_uplatilac", parametri: { iznos: poen, uplatilac } }
         : { kljuc: "transakcije.donacija", parametri: { iznos: poen } }
