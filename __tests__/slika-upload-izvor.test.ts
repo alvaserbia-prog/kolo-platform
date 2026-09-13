@@ -171,3 +171,27 @@ describe("IZVOR — memorija na telefonu", () => {
     expect(izvor).toMatch(/for \(const s of \w+\.current\) oslobodiPregled\(s\)/);
   });
 });
+
+describe("IZVOR — birač slika se otvara nativno", () => {
+  it.each(OBRASCI)("%s koristi <label>, ne programski klik na skriveni input", (_ime, rel) => {
+    const izvor = procitaj(rel);
+    // 🔴 Ovo je kvar zbog kog „ne radi ni sa jednom slikom": na iOS Safariju
+    // `display:none` polje otvoreno preko `fileRef.click()` vrati coveka na
+    // obrazac BEZ ijednog `change` dogadjaja — nema slicica, nema poruke.
+    expect(izvor).not.toMatch(/fileRef\.current\?\.click\(\)/);
+    expect(izvor).not.toMatch(/type="file"[^>]*className="hidden"/);
+    expect(izvor).toMatch(/type="file"[\s\S]{0,200}className="sr-only"/);
+    expect(izvor).toContain("htmlFor=");
+  });
+});
+
+describe("IZVOR — vrh memorije pri jednoj slici", () => {
+  it("dekodiranje smanjuje sliku odmah, ne posle punog raspakivanja", () => {
+    const izvor = procitaj("src/lib/slika-upload.ts");
+    // Bez `resizeWidth` fotografija od 12 MP zauzme ~48MB pre nego sto stigne do
+    // platna — dovoljno da stariji iPhone odbaci karticu i kod JEDNE slike, pa
+    // sekvencijalna obrada tu ne pomaze nicim.
+    expect(izvor).toContain("resizeWidth");
+    expect(izvor).toContain("PRAG_SMANJENJA_PRI_DEKODIRANJU");
+  });
+});

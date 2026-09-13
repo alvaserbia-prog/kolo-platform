@@ -20,6 +20,9 @@ import {
 
 const MAX_IMAGES = MAX_SLIKA;
 
+/** Veza <label> → <input type="file">; birač otvara pretraživač, ne JavaScript. */
+const ID_UNOSA = "pijaca-slike-unos";
+
 export default function NoviOglasForma({
   defaultLocation = "",
   defaultPhone = "",
@@ -367,12 +370,18 @@ export default function NoviOglasForma({
                 </button>
               </div>
             ))}
+            {/* 🔴 Dodavanje slike ide preko <label>, ne preko dugmeta koje programski
+                klikne skriveni <input>. Na iOS Safariju se birač tako otvori, čovek
+                izabere fotografiju — i `change` nikad ne stigne do stranice: nema
+                sličica, nema poruke, ostane na obrascu. Isto sa jednom kao sa pet
+                slika, pa se ne vidi kao problem sa slikom nego kao „ne radi".
+                Uz `<label htmlFor>` birač otvara sam pretraživač, bez ijedne linije
+                JavaScripta u tom putu. NE VRAĆATI `onClick={() => fileRef.click()}`. */}
             {slike.length < MAX_IMAGES && (
-              <button
-                type="button"
-                onClick={() => fileRef.current?.click()}
-                disabled={obrada}
-                className="w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex flex-col items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl disabled:opacity-50"
+              <label
+                htmlFor={ID_UNOSA}
+                aria-disabled={obrada}
+                className={`w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex flex-col items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl cursor-pointer ${obrada ? "opacity-50 pointer-events-none" : ""}`}
               >
                 {obrada ? (
                   <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
@@ -381,15 +390,19 @@ export default function NoviOglasForma({
                 ) : (
                   "+"
                 )}
-              </button>
+              </label>
             )}
           </div>
+          {/* 🔴 `sr-only`, a NE `hidden`: polje sa `display: none` iOS ume da odseče
+              od stranice pa izbor fotografije nigde ne stigne. Ovako je nevidljivo,
+              a i dalje je živo polje obrasca. */}
           <input
+            id={ID_UNOSA}
             ref={fileRef}
             type="file"
             accept="image/*"
             multiple
-            className="hidden"
+            className="sr-only"
             onChange={handleFiles}
           />
         </div>

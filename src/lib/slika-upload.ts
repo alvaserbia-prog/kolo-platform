@@ -52,13 +52,22 @@ export const MAX_PO_SLICI = 5 * 1024 * 1024;
  */
 export const MAX_UKUPNO = 4 * 1024 * 1024;
 
+/** Najveća strana pripremljene slike. */
+const MAX_DIM = 1600;
+
+/**
+ * Iznad ove veličine datoteke slika se smanjuje već pri dekodiranju.
+ * Ispod nje se ne dira — mala slika bi se `resizeWidth`-om uvećavala.
+ */
+const PRAG_SMANJENJA_PRI_DEKODIRANJU = 1024 * 1024;
+
 /** Ciljna veličina jedne pripremljene slike — pet takvih staje u `MAX_UKUPNO`. */
 const CILJ_PO_SLICI = 700 * 1024;
 
 /** Lestvica [najveća dimenzija, kvalitet] — ide se redom dok slika ne stane u cilj. */
 const LESTVICA: ReadonlyArray<readonly [number, number]> = [
-  [1600, 0.82],
-  [1600, 0.7],
+  [MAX_DIM, 0.82],
+  [MAX_DIM, 0.7],
   [1280, 0.68],
   [1024, 0.62],
 ];
@@ -80,6 +89,27 @@ type Izvor = {
  */
 async function dekodiraj(file: File): Promise<Izvor | null> {
   if (typeof createImageBitmap === "function") {
+    // 🔴 Smanjenje PRI dekodiranju, pre svega ostalog. Bez njega se fotografija
+    // od 12 MP raspakuje u punoj rezoluciji (4032×3024×4B ≈ 48MB) pa tek onda
+    // smanjuje na platnu — a taj vrh je dovoljan da stariji iPhone odbaci
+    // karticu i kod JEDNE slike. Sa `resizeWidth` dekoder odmah daje umanjenu
+    // sliku i vrh pada na ~1MB.
+    //
+    // Prag po veličini datoteke: fotografija preko 1MB je u praksi uvek šira od
+    // `MAX_DIM`, pa nema uvećavanja male slike. Pretraživač koji ove opcije ne
+    // poznaje ih ignoriše — tada se ponaša kao i pre, bez greške.
+    if (file.size > PRAG_SMANJENJA_PRI_DEKODIRANJU) {
+      try {
+        const bmp = await createImageBitmap(file, {
+          imageOrientation: "from-image",
+          resizeWidth: MAX_DIM,
+          resizeQuality: "high",
+        });
+        return { slika: bmp, sirina: bmp.width, visina: bmp.height, oslobodi: () => bmp.close?.() };
+      } catch {
+        /* opcije nisu podržane — ide se punim putem ispod */
+      }
+    }
     try {
       const bmp = await createImageBitmap(file, { imageOrientation: "from-image" });
       return { slika: bmp, sirina: bmp.width, visina: bmp.height, oslobodi: () => bmp.close?.() };
