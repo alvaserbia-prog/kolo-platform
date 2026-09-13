@@ -92,8 +92,8 @@
     "mesto_iz_spiska": "Odaberi mjesto s ponuđenog popisa naselja, upiši samo jedno mjesto."
   },
   "seo": {
-    "site_naslov": "KOLO. Sustav uzajamnosti utemeljen na doprinosu zajedničkom dobru",
-    "site_opis": "KOLO je sustav evidencije doprinosa zajedničkom dobru, utemeljen na uzajamnosti. POEN bilježi tvoj doprinos i sudjelovanje, ZRNO ti daje glas u odlukama. Članstvo je besplatno."
+    "site_naslov": "KOLO — razmjena rada, dobara i znanja u tvojoj zajednici",
+    "site_opis": "U KOLU ljudi razmjenjuju rad, dobra i znanje bez novca: ono što jedni imaju, drugima treba. Svaki doprinos ostaje zabilježen. Bez članarine i bez provizije."
   },
   "login": {
     "naslov": "Prijava",
@@ -2734,7 +2734,7 @@
     "obavestenje_naslov": "Prije nego što uneseš išta o djetetu",
     "obavestenje_1": "Evidentiraju se samo pseudonim i datum rođenja djeteta. Ništa više.",
     "obavestenje_2": "Suglasnost daješ jednom. Ne odobravaš svaki djetetov potez.",
-    "obavestenje_3": "Ne vidiš djetetove poruke. Vidiš njegov profil, razmjene i oglase, i svaki oglas možeš ukloniti.",
+    "obavestenje_3": "Razgovore s drugom djecom ne čitaš, vidiš popis prijatelja i, uz svakoga od njih, koliko su poruka razmijenili i kada je bila posljednja. Razgovore s odraslima čitaš, a njih otvaraš prekidačem koji je zadano isključen. Vidiš i profil, razmjene i oglase, i svaki oglas možeš ukloniti.",
     "obavestenje_4": "Odgovaraš za sve što dijete objavi dok to ne ukloniš.",
     "obavestenje_posledica": "Ljudi koji su potvrdili tvoju stvarnost bit će zamoljeni da potvrde da imaš dijete te dobi. Tko se ne izjasni u roku od 30 dana, gubi svoju potvrdu tvoje stvarnosti, a tebi zbog toga pada indeks.",
     "dugme_razumem": "Razumijem, nastavi",
@@ -2777,7 +2777,7 @@
     "sakrij_lozinku": "Sakrij lozinku",
     "pseudonim_pravilo": "Pseudonim: 3–30 znakova, samo latinična slova (a–z), brojevi i _ . -, bez razmaka i bez č, ć, š, ž, đ. Ne smije počinjati ni završavati razdjelnikom.",
     "razgovori_naslov": "Razgovori",
-    "razgovori_opis": "Vidiš što dijete piše i tko mu piše. Ne možeš se ubaciti u razgovor, s druge strane je tuđe dijete.",
+    "razgovori_opis": "Ovdje vidiš što dijete piše i tko mu piše u razgovorima s punoljetnim članovima. U njima ne pišeš, s druge strane je odrasla osoba, a te razgovore otvaraš i zatvaraš prekidačem iznad. Razgovore s drugom djecom ne vidiš.",
     "razgovori_prazno": "Nema razgovora.",
     "uvid_obavestenje": "Mama i tata ne čitaju što pišeš prijateljima. Vide samo s kim se dopisuješ. Ako pišeš s nekim odraslim, to čitaju.",
     "stanje_na_cekanju": "čeka roditelja",
@@ -2801,7 +2801,7 @@
     "pregled_poruka": "{broj} poruka",
     "polje_datum_raspon": "Unesi datum rođenja djeteta, dijete mora imati između 7 i 18 godina.",
     "lozinka_naslov": "Nova lozinka za dijete",
-    "lozinka_opis": "Račun djeteta nema e-mail adresu, pa dijete ne može samo zatražiti novu lozinku. Ovdje je postavljaš ti.",
+    "lozinka_opis": "Ako dijete nije upisalo svoju e-mail adresu, ne može samo zatražiti novu lozinku. Ovdje je postavljaš ti, staru ne moraš znati, a dijete dobiva obavijest da si je promijenio.",
     "lozinka_polje": "Nova lozinka",
     "lozinka_dugme": "Postavi lozinku",
     "lozinka_pravilo": "Najmanje {broj} znakova. Zapiši je i reci djetetu.",

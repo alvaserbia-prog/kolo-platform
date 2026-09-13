@@ -30,18 +30,28 @@ je tu najmanji deo istog poteza, ne zaseban posao. Akt i njegovi prevodi idu
 **zajedno, kao do sada**.
 
 🔴 **Razlog nije samo obim nego kvar koji se već desio.** Da srpski akt dobije novu
-šifru a prevod ostane na staroj, `ucitajPravniDokument` bi **tiho servirao srpski
-tekst** engleskom čitaocu — fallback je namerno nem (vidi `src/lib/pravni-dokument.ts`),
-a upravo tako su hrvatski i mađarski posetioci do 4.1.0 mesecima dobijali srpske akte.
-Uz to je „jedan događaj objave = jedna šifra" pravilo koje je već tri puta branjeno
-(4.4.4 umesto 4.4.3, 4.4.7 umesto 4.4.6, 4.5.5 umesto 4.5.4): **šifra u imenu fajla
-JESTE objava, ne radna oznaka.**
+šifru a prevod ostane na staroj, `ucitajPravniDokument` bi servirao **srpski tekst**
+engleskom čitaocu, a upravo tako su hrvatski i mađarski posetioci do 4.1.0 mesecima
+dobijali srpske akte. Uz to je „jedan događaj objave = jedna šifra" pravilo koje je
+već tri puta branjeno (4.4.4 umesto 4.4.3, 4.4.7 umesto 4.4.6, 4.5.5 umesto 4.5.4):
+**šifra u imenu fajla JESTE objava, ne radna oznaka.**
 
-🟢 **Branu za akte nosi `__tests__/pravni-dokumenti.test.ts`**, i ona je jača od duga:
-`fs.access` traži da svaki akt **fizički postoji** na svih pet jezika, bez fallbacka,
-pa polovičan bump pada odmah. To je apsolutna provera, a `npm run prevodi` meri samo
-razliku prema produkciji — zato se akti tamo **ne mere uopšte** (drugo bi bilo
-dupliranje sa slabijom proverom).
+🟢 **Fallback VIŠE NIJE NEM (2026-09-13).** Do tada je `ucitajPravniDokument` pri
+nedostajućem prevodu vraćao srpski original **bez ijedne reči o tome** — ranije je
+ovde pisalo da je to namerno. Sada srpski original ide uz **napomenu na jeziku
+čitaoca** („Translation not yet published" / „Перевод ещё не опубликован" /
+„Prijevod još nije objavljen" / „A fordítás még nem jelent meg", blockquote na vrhu)
+i uz `console.warn`. 🔴 Fallback se **ne ukida** — pad bi značio 500 na javnoj pravnoj
+stranici, što je za čitaoca gore od obeleženog originala. 🔴 Napomena **ne sme** da
+sadrži zvaničan disklejmer prevoda („Neslužbeni prijevod", „Nem hivatalos fordítás"):
+po njemu test razlikuje serviran prevod od fallbacka.
+
+🟢 **Branu za akte nosi `__tests__/pravni-dokumenti.test.ts`**, i ona je dvostruka:
+`fs.access` traži da svaki akt **fizički postoji** na svih pet jezika, pa polovičan
+bump pada odmah (apsolutna provera, jača od duga), a blok „fallback kad prevod akta
+nedostaje" traži da se fallback **vidi** ako se ipak desi. Prva brana sprečava,
+druga razotkriva. `npm run prevodi` meri samo razliku prema produkciji — zato se akti
+tamo **ne mere uopšte** (drugo bi bilo dupliranje sa slabijom proverom).
 
 **Mapiranje komandi se time proširuje:**
 - „pošalji na test" → commit + push na `main`. Prevodi **copy-ja** ne moraju biti

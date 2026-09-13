@@ -92,8 +92,8 @@
     "mesto_iz_spiska": "Choose a place from the offered list of settlements — enter only one place."
   },
   "seo": {
-    "site_naslov": "KOLO — A system of mutuality based on contribution to the common good",
-    "site_opis": "KOLO is a system for recording contributions to the common good, based on mutuality. POEN records your contribution and participation; ZRNO gives you a voice in decisions. Membership is free."
+    "site_naslov": "KOLO — exchanging work, goods and knowledge in your community",
+    "site_opis": "In KOLO people exchange work, goods and knowledge without money: what some have, others need. Every contribution stays recorded. No membership fee and no commission."
   },
   "login": {
     "naslov": "Sign In",
@@ -1002,21 +1002,21 @@
       "oSistemu": "About the system (summary)",
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
-    "meta_uslovi_title": "Terms of Use — KOLO",
+    "meta_uslovi_title": "Terms of Use · KOLO",
     "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.5.4",
-    "meta_privatnost_title": "Privacy Policy — KOLO",
+    "meta_privatnost_title": "Privacy Policy · KOLO",
     "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.5.5",
-    "meta_statut_title": "KOLO Foundation Statute — KOLO",
+    "meta_statut_title": "KOLO Foundation Statute · KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
-    "meta_dpia_title": "DPIA — KOLO",
+    "meta_dpia_title": "DPIA · KOLO",
     "meta_dpia_desc": "Data Protection Impact Assessment, version 4.5.2",
-    "meta_radnje_title": "Register of Processing Activities — KOLO",
+    "meta_radnje_title": "Register of Processing Activities · KOLO",
     "meta_radnje_desc": "Register of personal data processing activities, version 4.5.5",
-    "meta_rizici_title": "Risk Acceptance Statement — KOLO",
+    "meta_rizici_title": "Risk Acceptance Statement · KOLO",
     "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.5.5",
-    "meta_whitepaper_title": "Whitepaper — KOLO",
+    "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.6",
-    "meta_pravilnik_title": "KOLO System Rulebooks — KOLO",
+    "meta_pravilnik_title": "KOLO System Rulebooks · KOLO",
     "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.5.7",
     "rb": {
       "kolo-sistem": {
@@ -1476,7 +1476,7 @@
     "cta_licence": "Software: AGPL-3.0 · Content: CC BY-SA 4.0 · Common good and licences"
   },
   "vestiPage": {
-    "meta_title": "News — KOLO Foundation",
+    "meta_title": "News · KOLO Foundation",
     "meta_desc": "What is happening in KOLO: new features, Foundation decisions and changes to the system.",
     "hero_naslov": "News",
     "hero_opis": "What is happening in KOLO and what the Foundation is doing.",
@@ -1644,7 +1644,7 @@
     "n8_opis": "Children from the age of seven have their own space, separate from the rest of the system. A friendship is formed in person, by scanning a code, and 500 POINTS are recorded for each child — but only once at least one parent of each child is a regular member. Governed by the Rulebook on the Participation of Children."
   },
   "pokroviteljPage": {
-    "meta_title": "Sponsors — KOLO",
+    "meta_title": "Sponsors · KOLO",
     "meta_desc": "KOLO community sponsors — legal entities and entrepreneurs who support the system by contributing to the Foundation (money, goods or services). View active sponsors and their tiers.",
     "naslov": "Sponsors",
     "opis": "Sponsors are legal entities and sole traders that support the KOLO system through a contribution to the Foundation — in money, goods or services.",
@@ -1655,7 +1655,7 @@
     "postani_cta": "Find out more →"
   },
   "zajednickoDobroPage": {
-    "meta_title": "Common good and licences — KOLO",
+    "meta_title": "Common good and licences · KOLO",
     "meta_desc": "The KOLO system's common good — software under AGPL-3.0 and content under CC BY-SA 4.0. It belongs to all members; no one holds a property right over it.",
     "naslov": "Common good and licences",
     "opis": "The common good of the KOLO system comprises the system software, the system rules, the contribution and participation ledger, and content created within the system.",
@@ -1677,7 +1677,7 @@
     "principi_3_opis": "The AGPL-3.0 and CC BY-SA 4.0 licences cannot be replaced with more restrictive ones — not even by a decision of the Upper Kolo."
   },
   "osnivackiDoprinosPage": {
-    "meta_title": "Founding contribution — KOLO",
+    "meta_title": "Founding contribution · KOLO",
     "meta_desc": "KOLO founding contribution — retrospective recording of the work of preparing the platform. Follow the channel's status, the completed steps and how POEN is distributed among the founders.",
     "naslov": "Founding contribution",
     "opis": "The founding contribution is the retrospective recording of work carried out on the design and preparation of the KOLO system before the platform opened.",
@@ -1700,7 +1700,7 @@
     "aria_sta_je": "What is {termin}"
   },
   "cestoPage": {
-    "meta_title": "Frequently asked questions — KOLO",
+    "meta_title": "Frequently asked questions · KOLO",
     "meta_desc": "Answers to the most common questions about the KOLO system — POEN, ZRNO, confirmation, Protocol, Foundation and the marketplace.",
     "naslov": "Frequently asked questions",
     "opis": "Answers to the most common questions about the KOLO system. Click on a question to expand the answer, or search by keyword.",
@@ -1727,7 +1727,7 @@
     "otkazi": "Cancel",
     "greska": "Error.",
     "gost_tekst": "Take a look at what the Marketplace offers and register to take part.",
-    "meta_title": "Marketplace — KOLO",
+    "meta_title": "Marketplace · KOLO",
     "meta_desc": "The KOLO Marketplace — goods, services and crafts from your area, exchanged directly between people. You can post your first listings without confirmation.",
     "prijavi_se": "Sign in",
     "registruj_se": "Register",
@@ -2324,8 +2324,8 @@
     "otvori_u_aplikaciji": "Open in the app",
     "lozinka_reset_naslov": "Password reset",
     "lozinka_postavi_naslov": "Set a password",
-    "lozinka_reset_subject": "Password reset — KOLO",
-    "lozinka_postavi_subject": "Set a password — KOLO",
+    "lozinka_reset_subject": "Password reset · KOLO",
+    "lozinka_postavi_subject": "Set a password · KOLO",
     "lozinka_reset_dugme": "Set a new password",
     "lozinka_postavi_dugme": "Set password",
     "lozinka_reset_uvod": "We received a request to reset the password for your KOLO account.",
@@ -2734,7 +2734,7 @@
     "obavestenje_naslov": "Before you enter anything about the child",
     "obavestenje_1": "Only the child's pseudonym and date of birth are recorded. Nothing else.",
     "obavestenje_2": "You give consent once. You do not approve each of the child's actions.",
-    "obavestenje_3": "You do not see the child's messages. You see their profile, exchanges and listings, and you may remove any listing.",
+    "obavestenje_3": "You do not read conversations with other children; you see the list of friends and, for each of them, how many messages they exchanged and when the last one was. Conversations with adults you do read, and you open those with a switch that is off by default. You also see the profile, the exchanges and the listings, and you may remove any listing.",
     "obavestenje_4": "You are answerable for everything the child publishes until you remove it.",
     "obavestenje_posledica": "The people who confirmed your reality will be asked to confirm that you have a child of that age. Anyone who does not respond within 30 days loses their confirmation of your reality — and your index falls as a result.",
     "dugme_razumem": "I understand, continue",
@@ -2777,7 +2777,7 @@
     "sakrij_lozinku": "Hide password",
     "pseudonim_pravilo": "Pseudonym: 3–30 characters, Latin letters (a–z), digits and _ . - only — no spaces and no č, ć, š, ž, đ. It may not start or end with a separator.",
     "razgovori_naslov": "Conversations",
-    "razgovori_opis": "You see what the child writes and who writes to them. You cannot join the conversation — the other side is someone else's child.",
+    "razgovori_opis": "Here you see what the child writes and who writes to them in conversations with adult members. You do not write in them; on the other side is a grown person, and you open and close these conversations with the switch above. Conversations with other children you do not see.",
     "razgovori_prazno": "No conversations.",
     "uvid_obavestenje": "Your mum and dad do not read what you write to friends. They only see who you write with. If you write with an adult — they read that.",
     "stanje_na_cekanju": "waiting for a parent",
@@ -2801,7 +2801,7 @@
     "pregled_poruka": "{broj} messages",
     "polje_datum_raspon": "Enter the child's date of birth — the child must be between 7 and 18 years old.",
     "lozinka_naslov": "New password for your child",
-    "lozinka_opis": "A child account has no e-mail address, so the child cannot request a new password. You set it here.",
+    "lozinka_opis": "If the child has not entered an e-mail address of their own, they cannot request a new password themselves. You set it here; you do not need to know the old one, and the child is notified that you changed it.",
     "lozinka_polje": "New password",
     "lozinka_dugme": "Set password",
     "lozinka_pravilo": "At least {broj} characters. Write it down and tell your child.",
@@ -3014,7 +3014,7 @@
     "status_PLACENA": "Collection under way",
     "status_ZAVRSENA": "Completed",
     "status_OBUSTAVLJENA": "Suspended",
-    "kartica_deo": "Share: {velicina} × {jedinica} — {poen} POEN",
+    "kartica_deo": "Share: {velicina} × {jedinica}, {poen} POEN in total",
     "moja_PRIJAVLJEN": "You have applied.",
     "moja_POZVAN": "You are invited — confirm your collection day.",
     "moja_POTVRDIO": "Confirmed — you have a collection code.",

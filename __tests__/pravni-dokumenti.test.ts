@@ -1200,3 +1200,58 @@ describe("region izvršavanja", () => {
     expect(config.regions).toContain("fra1");
   });
 });
+
+/**
+ * 🔴 Fallback na srpski original SME da postoji, ali NE SME da bude nem.
+ *
+ * `ucitajPravniDokument` pri nedostajućem prevodu vraća srpski original — pad bi
+ * značio 500 na javnoj pravnoj stranici, što je za čitaoca gore. Ali do 2026-09-13
+ * je taj fallback bio potpuno bez traga: čitalac na engleskom dobije srpski tekst
+ * bez ijedne reči o tome. Upravo tako su hrvatski i mađarski posetioci mesecima
+ * dobijali srpske akte, a polovičan bump (sr na novoj šifri, prevod na staroj) daje
+ * isti ishod.
+ *
+ * Ovo je DRUGA brana, uz `fs.access` proveru postojanja iznad: ta traži da se
+ * polovičan bump uopšte ne desi, ova da se vidi ako se desi.
+ */
+describe("fallback kad prevod akta nedostaje", () => {
+  const PROBNI = "PROBA_bez_prevoda_0_0_0.md";
+  const TELO = "# Probni akt\n\nOvo je probni srpski original.\n";
+
+  /** Zvaničan disklejmer prevoda — po njemu se serviran prevod razlikuje od fallbacka. */
+  const DISKLEJMER: Record<string, string> = {
+    hr: "Neslužbeni prijevod",
+    hu: "Nem hivatalos fordítás",
+  };
+
+  /** Napomena mora da bude na jeziku čitaoca — srpska rečenica ne bi rešila ništa. */
+  const OCEKIVANO: Record<string, RegExp> = {
+    en: /Translation not yet published/,
+    ru: /Перевод ещё не опубликован/,
+    hr: /Prijevod još nije objavljen/,
+    hu: /A fordítás még nem jelent meg/,
+  };
+
+  it.each(Object.keys(OCEKIVANO))("%s: nedostajući prevod nosi napomenu, a original ostaje ispod", async (jez) => {
+    await fs.writeFile(path.join(BAZA, PROBNI), TELO);
+    try {
+      const tekst = await ucitajPravniDokument(PROBNI, jez);
+      expect(tekst, `${jez}: fallback je nem`).toMatch(OCEKIVANO[jez]);
+      expect(tekst, `${jez}: original je izgubljen`).toContain("Ovo je probni srpski original.");
+      // Napomena ne sme da liči na zvaničan disklejmer prevoda — inače bi provera
+      // „loader servira prevod kad postoji" iznad počela da laže.
+      if (DISKLEJMER[jez]) expect(tekst).not.toContain(DISKLEJMER[jez]);
+    } finally {
+      await fs.unlink(path.join(BAZA, PROBNI));
+    }
+  });
+
+  it("srpski original se servira bez napomene", async () => {
+    await fs.writeFile(path.join(BAZA, PROBNI), TELO);
+    try {
+      expect(await ucitajPravniDokument(PROBNI, "sr")).toBe(TELO);
+    } finally {
+      await fs.unlink(path.join(BAZA, PROBNI));
+    }
+  });
+});

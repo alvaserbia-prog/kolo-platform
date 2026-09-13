@@ -85,8 +85,8 @@
     "mesto_iz_spiska": "Válassz egy települést a felkínált listából — csak egy helyet adj meg."
   },
   "seo": {
-    "site_naslov": "KOLO — A közjóhoz való hozzájáruláson alapuló kölcsönösségi rendszer",
-    "site_opis": "A KOLO a közjóhoz való hozzájárulás nyilvántartásának rendszere, amely a kölcsönösségen alapul. A POEN rögzíti a hozzájárulásodat és a részvételedet, a ZRNO pedig szavazatot ad neked a döntésekben. A tagság ingyenes."
+    "site_naslov": "KOLO — munka, javak és tudás cseréje a közösségedben",
+    "site_opis": "A KOLO-ban az emberek pénz nélkül cserélnek munkát, javakat és tudást: amijük egyeseknek van, arra másoknak van szükségük. Minden hozzájárulás feljegyezve marad. Tagdíj és jutalék nélkül."
   },
   "login": {
     "naslov": "Bejelentkezés",
@@ -995,21 +995,21 @@
       "oSistemu": "A rendszerről (összefoglaló)",
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
-    "meta_uslovi_title": "Felhasználási feltételek — KOLO",
+    "meta_uslovi_title": "Felhasználási feltételek · KOLO",
     "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.5.4-es verzió",
-    "meta_privatnost_title": "Adatvédelmi szabályzat — KOLO",
+    "meta_privatnost_title": "Adatvédelmi szabályzat · KOLO",
     "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.5-es verzió",
-    "meta_statut_title": "A KOLO Alapítvány alapszabálya — KOLO",
+    "meta_statut_title": "A KOLO Alapítvány alapszabálya · KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
-    "meta_dpia_title": "DPIA — KOLO",
+    "meta_dpia_title": "DPIA · KOLO",
     "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.5.2-es verzió",
-    "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása — KOLO",
+    "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása · KOLO",
     "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.5-es verzió",
-    "meta_rizici_title": "Kockázatvállalási nyilatkozat — KOLO",
+    "meta_rizici_title": "Kockázatvállalási nyilatkozat · KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.5.5-es verzió",
-    "meta_whitepaper_title": "Whitepaper — KOLO",
+    "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.6-es verzió",
-    "meta_pravilnik_title": "KOLO rendszer szabályzatai — KOLO",
+    "meta_pravilnik_title": "KOLO rendszer szabályzatai · KOLO",
     "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.5.7-es verzió",
     "rb": {
       "kolo-sistem": {
@@ -1469,7 +1469,7 @@
     "cta_licence": "Szoftver: AGPL-3.0 · Tartalom: CC BY-SA 4.0 · Közjó és licencek"
   },
   "vestiPage": {
-    "meta_title": "Hírek — KOLO Alapítvány",
+    "meta_title": "Hírek · KOLO Alapítvány",
     "meta_desc": "Mi történik a KOLO-ban: új funkciók, alapítványi döntések és a rendszer változásai.",
     "hero_naslov": "Hírek",
     "hero_opis": "Mi történik a KOLO-ban, és mit csinál az Alapítvány.",
@@ -1637,7 +1637,7 @@
     "n8_opis": "A hétéves kortól a gyerekeknek saját terük van, elkülönítve a rendszer többi részétől. A barátság személyesen, kód beolvasásával jön létre, és mindkét gyereknek 500 POEN kerül bejegyzésre — de csak akkor, ha mindkettőjük legalább egyik szülője rendes tag. A gyermekek részvételéről szóló szabályzat rendezi."
   },
   "pokroviteljPage": {
-    "meta_title": "Pártfogók — KOLO",
+    "meta_title": "Pártfogók · KOLO",
     "meta_desc": "A KOLO közösség pártfogói — jogi személyek és vállalkozók, akik az Alapítványhoz való hozzájárulással (pénz, áru vagy szolgáltatás) támogatják a rendszert.",
     "naslov": "Pártfogók",
     "opis": "A pártfogók jogi személyek és vállalkozók, akik az Alapítványnak nyújtott hozzájárulással — pénzben, áruban vagy szolgáltatásban — támogatják a KOLO rendszert.",
@@ -1648,7 +1648,7 @@
     "nivo": "szint"
   },
   "zajednickoDobroPage": {
-    "meta_title": "Közjó és licenszek — KOLO",
+    "meta_title": "Közjó és licenszek · KOLO",
     "meta_desc": "A KOLO rendszer közjava — szoftver AGPL-3.0 alatt, tartalom CC BY-SA 4.0 alatt. Minden tagé; senkinek nincs rajta tulajdonjoga.",
     "naslov": "Közjó és licenszek",
     "opis": "A KOLO nyílt forráskód és szabad tartalom elvein alapul",
@@ -1670,7 +1670,7 @@
     "principi_3_opis": "Az AGPL-3.0 és CC BY-SA 4.0 licenszek nem válthatók fel szigorúbb licenszekre – még a Felső KOLO döntése alapján sem."
   },
   "osnivackiDoprinosPage": {
-    "meta_title": "Alapítói hozzájárulás — KOLO",
+    "meta_title": "Alapítói hozzájárulás · KOLO",
     "meta_desc": "A KOLO rendszer alapítói hozzájárulása — a platform előkészítésén végzett munka utólagos rögzítése. Kövesd a csatorna állapotát, az elvégzett lépéseket és a POEN elosztását az alapítók között.",
     "naslov": "Alapítói hozzájárulás",
     "opis": "Az indulás előtti munka utólagos rögzítése",
@@ -1693,7 +1693,7 @@
     "aria_sta_je": "Mi az a {termin}"
   },
   "cestoPage": {
-    "meta_title": "Gyakran ismételt kérdések — KOLO",
+    "meta_title": "Gyakran ismételt kérdések · KOLO",
     "meta_desc": "Válaszok a KOLO rendszerrel kapcsolatos leggyakoribb kérdésekre — POEN, ZRNO, ellenőrzés, Protokoll, Alapítvány és a piac.",
     "naslov": "Gyakran ismételt kérdések",
     "opis": "A KOLO rendszerrel kapcsolatos leggyakoribb kérdések és válaszok",
@@ -1837,7 +1837,7 @@
     "slike_label_potraznja": "Képek (referencia)",
     "objavi_potraznja": "Kereslet közzététele",
     "uspeh_dugme": "Tovább a Piactérre",
-    "meta_title": "Piac — KOLO",
+    "meta_title": "Piac · KOLO",
     "meta_desc": "A KOLO Piaca — javak, szolgáltatások és mesterségek a környékedről, közvetlen csere emberek között. Az első hirdetéseket megerősítés nélkül is feladhatod.",
     "neverif_objava_hint": "Ajánlatot a megerősítés előtt is közzétehetsz — így látnak meg a környékedről való tagok.",
     "neverif_naslov": "Tedd közzé a hirdetést a megerősítés előtt",
@@ -2317,8 +2317,8 @@
     "otvori_u_aplikaciji": "Megnyitás az alkalmazásban",
     "lozinka_reset_naslov": "Jelszó visszaállítása",
     "lozinka_postavi_naslov": "Jelszó beállítása",
-    "lozinka_reset_subject": "Jelszó visszaállítása — KOLO",
-    "lozinka_postavi_subject": "Jelszó beállítása — KOLO",
+    "lozinka_reset_subject": "Jelszó visszaállítása · KOLO",
+    "lozinka_postavi_subject": "Jelszó beállítása · KOLO",
     "lozinka_reset_dugme": "Új jelszó beállítása",
     "lozinka_postavi_dugme": "Jelszó beállítása",
     "lozinka_reset_uvod": "Kérelmet kaptunk a KOLO fiókod jelszavának visszaállítására.",
@@ -2734,7 +2734,7 @@
     "obavestenje_naslov": "Mielőtt bármit megadnál a gyermekről",
     "obavestenje_1": "Csak a gyermek álneve és születési dátuma kerül nyilvántartásba. Semmi más.",
     "obavestenje_2": "A hozzájárulást egyszer adod meg. Nem hagyod jóvá a gyermek minden lépését.",
-    "obavestenje_3": "Nem látod a gyermek üzeneteit. Látod a profilját, cseréit és hirdetéseit, és bármely hirdetést eltávolíthatsz.",
+    "obavestenje_3": "A többi gyermekkel folytatott beszélgetéseket nem olvasod, a barátok listáját látod, és mindegyiküknél azt, hány üzenetet váltottak és mikor volt az utolsó. A felnőttekkel folytatott beszélgetéseket olvasod, ezeket egy kapcsolóval nyitod meg, amely alapértelmezés szerint ki van kapcsolva. Látod a profilt, a cseréket és a hirdetéseket is, és bármely hirdetést eltávolíthatsz.",
     "obavestenje_4": "Mindenért felelsz, amit a gyermek közzétesz, amíg el nem távolítod.",
     "obavestenje_posledica": "Azokat, akik a te valóságodat megerősítették, megkérjük, erősítsék meg, hogy van ilyen korú gyermeked. Aki 30 napon belül nem nyilatkozik, elveszíti a te valóságodról adott megerősítését — és emiatt a te indexed csökken.",
     "dugme_razumem": "Értem, tovább",
@@ -2777,7 +2777,7 @@
     "sakrij_lozinku": "Jelszó elrejtése",
     "pseudonim_pravilo": "Álnév: 3–30 karakter, csak latin betűk (a–z), számok és _ . - — szóköz nélkül, valamint č, ć, š, ž, đ nélkül. Nem kezdődhet és nem végződhet elválasztóval.",
     "razgovori_naslov": "Beszélgetések",
-    "razgovori_opis": "Látod, mit ír a gyermek és ki ír neki. A beszélgetésbe nem szólhatsz bele — a másik oldalon más gyermeke van.",
+    "razgovori_opis": "Itt látod, mit ír a gyermek és ki ír neki a nagykorú tagokkal folytatott beszélgetésekben. Ezekbe nem írsz, a másik oldalon felnőtt ember van, és ezeket a beszélgetéseket a fenti kapcsolóval nyitod meg és zárod le. A többi gyermekkel folytatott beszélgetéseket nem látod.",
     "razgovori_prazno": "Nincs beszélgetés.",
     "uvid_obavestenje": "Anya és apa nem olvassa, amit a barátaidnak írsz. Csak azt látják, kivel leveleztek. Ha felnőttel írsz — azt olvassák.",
     "stanje_na_cekanju": "szülőre vár",
@@ -2801,7 +2801,7 @@
     "pregled_poruka": "{broj} üzenet",
     "polje_datum_raspon": "Add meg a gyermek születési dátumát — a gyermeknek 7 és 18 év között kell lennie.",
     "lozinka_naslov": "Új jelszó a gyermeknek",
-    "lozinka_opis": "A gyermek fiókjához nem tartozik e-mail cím, ezért a gyermek nem tud új jelszót kérni. Itt te állítod be.",
+    "lozinka_opis": "Ha a gyermek nem adta meg a saját e-mail címét, nem tud magától új jelszót kérni. Itt te állítod be, a régit nem kell tudnod, a gyermek pedig értesítést kap arról, hogy megváltoztattad.",
     "lozinka_polje": "Új jelszó",
     "lozinka_dugme": "Jelszó beállítása",
     "lozinka_pravilo": "Legalább {broj} karakter. Írd fel, és mondd el a gyermekednek.",
@@ -3014,7 +3014,7 @@
     "status_PLACENA": "Az átvétel folyamatban",
     "status_ZAVRSENA": "Lezárva",
     "status_OBUSTAVLJENA": "Felfüggesztve",
-    "kartica_deo": "Rész: {velicina} × {jedinica} — {poen} POEN",
+    "kartica_deo": "Rész: {velicina} × {jedinica}, összesen {poen} POEN",
     "moja_PRIJAVLJEN": "Jelentkeztél.",
     "moja_POZVAN": "Meghívást kaptál — erősítsd meg az átvétel napját.",
     "moja_POTVRDIO": "Megerősítve — van átvételi kódod.",
