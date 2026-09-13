@@ -233,6 +233,34 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-13 (trideset drugi put):** na **4.6.1** idu **DVA akta** —
+Pravilnik o KOLO sistemu (sa 4.6.0) i Whitepaper (sa 4.6.0). Ostalih petnaest ostaje
+gde jeste. Povod je **R-04 iz NOVOG registra rizika** (ZRNO kao investicioni
+instrument, Komisija za HOV). Sadržinski, vidi sekciju „ZRNO nije ulaganje: odgovor
+po elementima, ne etiketa" ispod.
+
+🟡 **Zašto 4.6.1, a ne 4.6.0:** 4.6.0 je istog dana objavljen na `main`-u za osam
+akata (R-02); da su ovi dobili isti broj, dva različita događaja objave delila bi
+jednu šifru. Isto pravilo kao kod operativnog doprinosa (4.4.4) i R-19 (4.5.5).
+
+🟢 **Whitepaper je morao uz Pravilnik i nije bilo izbora.** Nosio je istu
+aritmetičku grešku kao čl. 23 (upis ZRNA tobože diže koeficijent) i uz to na dva
+mesta sam nazivao razliku u koeficijentu **podsticajem**. To je dokument koji
+spoljni čitalac otvara prvi i koji je izričito namenjen regulatornim telima.
+🔴 Pouka je stara i ovde se ponovila: **pri izmeni odredbe u Pravilniku OBAVEZNO
+proveriti whitepaper** — on istu tvrdnju po pravilu ponavlja svojim rečima, a ovde
+ju je ponavljao u goroj varijanti.
+
+🟢 **Izjava o prihvatanju rizika NIJE dirana** — čl. 4 je već u najjačem obliku
+(„nijedan korisnik, nijedna institucija i nijedan akter sistema ne kontroliše
+koeficijent"). To je usput i akt koji je R-02 istog dana bumpovao, pa je kolizija
+izbegnuta bez gubitka.
+
+🔴 **Zaostala unakrsna upućivanja — sada ih ima SEDAM, jedno novo.**
+`ucesce_dece_4_6_0` upućuje na `Pravilnik o KOLO sistemu (v4.6.0)`, što je bilo
+tačno do ovog bumpa; taj akt se ne menja, pa se ne prepravlja (isti postupak kao
+`gornje_kolo_4_4_6`). Briše ih bump celog seta na 5.0.
+
 **AŽURIRANO 2026-09-13 (trideset prvi put):** na **4.6.0** ide **OSAM akata** —
 Pravilnik o KOLO sistemu (sa 4.5.9), Pravilnik o programima podrške (sa 4.5.0),
 Pravilnik o operativnom doprinosu (sa 4.4.4), Pravilnik o projektima i kolektivnim
@@ -1631,6 +1659,128 @@ zaključane u `pravni-dokumenti.test.ts` na sr/en/ru.
 🟡 **Usput ispravljen zatečen pad testa:** `donacija-uplatilac-izvor.test.ts` je
 tražio namespace `admin` u prevodima, a on od 13.09.2026. živi **isključivo u sr**
 (`request.ts` ga dodaje pri učitavanju). Test je od te odluke bio crven.
+
+### ZRNO nije ulaganje: odgovor po elementima, ne etiketa (R-04, 2026-09-13)
+
+Sprovođenje rizika **R-04 iz novog registra** (`docs/registar-rizika-regulatori-2026-09.md`)
+— ZRNO kao investicioni instrument, Komisija za hartije od vrednosti, zatečena ocena
+**8**, po merama **4**. Na **4.6.1** idu Pravilnik o KOLO sistemu i Whitepaper.
+
+🔴 **Prigovor nije „ZRNO je hartija od vrednosti".** To pada lako — ZRNO je
+neprenosivo, nema mehanizma prenosa, nema tržišta (čl. 22). Opasan je **test
+investicionog ugovora**, i u njemu smo **tri od četiri elementa priznavali
+sopstvenim rečima**: zajednički poduhvat (čl. 23 st. 1 — koeficijent je količnik
+dva zbira cele evidencije), očekivanje dobiti (FAQ 52 je prinos **predviđao**) i
+napor drugih (čl. 25 st. 4 doslovno: *„posledica aktivnosti drugih korisnika"*).
+Ceo teret nosio je četvrti element, i to samo preko nekonvertibilnosti — dakle
+**R-04 stoji na istom temelju kao R-01 i pada zajedno sa njim.**
+
+#### 🔴 Aritmetički nalaz koji je pokrenuo pola posla
+
+Koeficijent je `|Protokol minus| ÷ (1.000.000 − ZRNA kod korisnika)`. Tri mesta su
+tvrdila da **upis ZRNA diže koeficijent** — Pravilnik čl. 23 st. 3, whitepaper 6.4
+i FAQ 52. **Netačno.** Pri upisu se u istoj srazmeri umanjuju i brojilac (POEN
+odlazi Protokolu i izlazi iz opticaja) i imenilac:
+
+```
+k' = (T − Z·k) / (R − Z) = k(R − Z)/(R − Z) = k
+```
+
+🔴 **Upis i otpis ZRNA su po konstrukciji NEUTRALNI.** Koeficijent pomeraju samo
+**emisije POEN-a** (naviše) i **poništenja POEN-a** (naniže: čl. 34, otpis pri
+nabavci, otpis prijateljstva, prevod u maloletni). Nije monoton i **može da padne**.
+🟢 Tačna tvrdnja je ujedno **jača odbrana**: nosilac sopstvenim potezom koeficijent
+ne pomera, pa nema ni trgovanja, ni tajminga, ni instrumenta. Netačna rečenica nam
+je baš taj argument oduzimala. **Ne vraćati je ni u akt, ni u whitepaper, ni u FAQ.**
+🟡 Posledica: pravilo od 1% po periodu **ne ograničava rast koeficijenta** (kako je
+whitepaper tvrdio) nego brzinu kojom se raspoloživa ZRNA preuzimaju — čime čuva
+pristup kasnijih učesnika i drži koeficijent manje osetljivim na pojedinačne emisije.
+
+#### Šta akti sada kažu
+
+- **Pravilnik čl. 23 st. 3 prepisan** — tačna mehanika, uz izričito „koeficijent
+  nije predodređen da raste".
+- 🔴 **Pravilnik čl. 25 — nov stav sa odgovorom po elementima.** Isti obrazac kojim
+  je R-01 prepisao čl. 13 (prestao da nabraja šta POEN *nije* i počeo da nabraja
+  koji **elementi definicije nedostaju**): nema ulaganja sredstava (čl. 22), nema
+  prinosa koji se može ostvariti (čl. 71), nema napora drugog lica usmerenog na
+  korist nosioca (čl. 23), i **nosilac nije odvojen od upravljanja** (čl. 45, 46).
+- 🔴 **Četvrti element je najjači i nigde ga ranije nismo koristili:** investicioni
+  ugovor pretpostavlja ulagača **bez** upravljanja, a nosilac aktiviranog ZRNA
+  glasa o pravilima sistema. Uz to čl. 46 st. 2 prisiljava na izbor — ko hoće glas
+  gubi otpis, ko hoće otpis nema glas. **Ne brisati taj stav.**
+- **Uz to stoji brana iz R-01:** korisnik čija stvarnost nije potvrđena ZRNO upisuje
+  ali ga **ne otpisuje** (čl. 19, odluka D-1), pa lanac *novac → POEN → ZRNO → više
+  POEN-a* ne postoji.
+
+#### Kod i baza — repo je javan, šema je prvi dokument koji se čita
+
+🔴 **Akt je govorio jedno, a `schema.prisma` drugo**, i to pod AGPL-om:
+`ZrnoTrziste` (uz čl. 22: *„za ZRNO ne postoji tržište"*, sa prekidačem u admin
+panelu), `ZrnoDailyRate.kurs` (uz čl. 23: *„nije kurs"*), `zrnaKupljeno` i
+`poenPlaceno` (uz čl. 19: doprinos se *umanjuje*), `poenDobijeno` (uz čl. 21:
+Protokol *evidentira*). Sada: `ZrnoKanal`, `ZrnoDnevniKoeficijent.koeficijent`,
+`zrnaUpisana`/`utrosenoPoen`, `evidentiranoPoen`; funkcije `trendsKurs` i
+`poslednjiKurs` → `tekuciKoeficijent` i `poslednjiKoeficijent`.
+🔴 **Ne vraćati nijedno staro ime.** Migracija `20260913130000_zrno_bez_trzista_i_kursa`
+je isključivo RENAME — nijedan red se ne menja.
+🟢 **Dnevni snimak koeficijenta se NE briše** — on je dokaz da koeficijent
+izračunava Protokol automatski i bez diskrecije (čl. 23 st. 2). Brani se ime, ne
+postojanje.
+
+🔴 **Opis ZRNO transakcije je bio jedino mesto gde reč „kurs" još izlazi na ekran**
+(istorija POEN-a i GDPR izvoz), i uz to **jedini tip transakcije koji je propustila
+migracija `20260805130000`** — pa se na svih pet jezika prikazivao na srpskom. Sada
+ide kroz `transakcije.zrno_upis`/`zrno_otpis`; backfill u migraciji
+`20260913130100_zrno_opis_kljuc`. 🟢 **Istorija se NE prepravlja** — `description`
+ostaje kao rezerva, a prikaz ide preko ključa, isto kao „Bonus za donaciju" uz R-01.
+
+🟡 **Sedmodnevna serija koeficijenta više se ne dohvata ni ne prosleđuje** (M-4).
+Bila je mrtav kod: `zrno/page.tsx` ju je čitao iz baze na svako otvaranje i slao
+klijentu, koji ju je pominjao samo u deklaraciji tipa. Grafikona nije ni bilo i
+**ne uvodi se** — nijedan put ka prikazu istorije koeficijenta više ne postoji.
+
+#### Copy i FAQ
+
+🔴 **FAQ 52 je predviđao prinos, i to netačno:** *„Pošto koeficijent raste kako
+sistem raste, otpisom **najčešće dobiješ više POENA** nego što si upisom uložio."*
+Tri greške u jednoj rečenici — tvrdnja o rastu (netačna), predviđanje dobiti (treći
+element testa) i reč „ulog" (prvi element). Ograda *„nije zagarantovano"* to ne
+popravlja: prospekt koji obeća prinos pa doda ogradu i dalje je prospekt.
+🟢 **Otvorenost je zadržana** (*„i to ti kažemo otvoreno"*) — menja se oblik, ne
+iskrenost; sakriti razliku bilo bi ono što je odbijeno uz R-01 kao mera M-7b.
+🔴 **Ne vraćati predviđanje ni u jednom obliku.**
+
+Uz to: „ulog" izlazi iz FAQ 4, a `pravnaPozicija.sporno2_tekst` postaje simetričan i
+dobija četvrti argument (neutralnost upisa i otpisa); naslov *„Otpis pri višem
+koeficijentu"* je pretpostavljao rast.
+
+🟡 **Usput ispravljeno:** oznaka koeficijenta na ekranu glasila je na **en „Rate"**,
+a na **hu „Árfolyam"** (= devizni kurs), uz čl. 23 koji kaže „nije kurs" — R-01 je
+to ispravio kod donacija, kod ZRNA je preživelo. Tela tekstova su i pre ovoga
+koristila „coefficient"/„együttható", pa je ispravljena samo oznaka. Uz to slovna
+greška `trzisjeAktivno` na tri mesta.
+
+#### 🔴 Odbijene mere — ne predlagati ponovo
+
+Stari R-03 je bio isti predmet i vlasnik je 07.09.2026. odbio tri poteza; oni ostaju
+odbijeni: **otpis po koeficijentu iz upisa**, **period vezivanja pre otpisa**,
+**tvrda kapa na glasačku moć**. Zato nijedna mera uz R-04 ne dira mehaniku ZRNA —
+sve su o jeziku, imenima i tačnosti. Razlika u koeficijentu ostaje kakva jeste;
+prestajemo da je opisujemo kao podsticaj i prestajemo da je predviđamo.
+
+#### 🟡 Svesno prihvaćeni ostaci
+
+1. **Elementi 1, 2 i 4 testa ostaju strukturno ispunjeni** — mere ih razgraničavaju,
+   ne uklanjaju. Teret i dalje nosi nekonvertibilnost, pa **R-04 pada zajedno sa
+   R-01** ako ta odbrana ikad padne.
+2. **Razlika u koeficijentu je stvarna i ostaje** (odluka vlasnika), i u aktima se
+   priznaje otvoreno.
+3. Snimak koeficijenta ostaje u bazi, pod novim imenom — namerno.
+
+**Brana:** `__tests__/zrno-nije-instrument-izvor.test.ts` (17 provera, gleda IZVOR:
+šema, opis transakcije i prevodni ključ, odsustvo serije, FAQ, `/pravna-pozicija`,
+whitepaper) + odredbe akata u `pravni-dokumenti.test.ts` na sr/en/ru.
 
 ### Novcem se dobija položaj, ne kupovna moć i ne glas (R-01, 2026-09-13)
 
