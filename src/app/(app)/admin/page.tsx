@@ -48,7 +48,7 @@ export default async function AdminPage({
       orderBy: { createdAt: "asc" },
     }),
     Promise.all([
-      prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } }),
+      prisma.zrnoKanal.findUnique({ where: { id: "singleton" } }),
       prisma.protokolProgram.findMany(),
       prisma.programEnrollment.findMany({ where: { status: "PENDING" }, include: { user: { select: { pseudonim: true } } }, orderBy: { createdAt: "asc" } }),
       prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
@@ -197,7 +197,7 @@ export default async function AdminPage({
         createdAt: z.createdAt.toISOString(),
       }))}
       adminProgrami={{
-        zrnoTrzisjeAktivno: adminProgrami[0]?.isActive ?? false,
+        zrnoKanalAktivan: adminProgrami[0]?.isActive ?? false,
         programi: SVI_PROGRAMI.map((type) => {
           const bp = adminProgrami[1].find((p) => p.type === type);
           return { type, label: labelPrograma(type), isActive: bp?.isActive ?? false, activatedAt: bp?.activatedAt?.toISOString() ?? null };

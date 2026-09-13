@@ -707,10 +707,10 @@
     "slobodno_opis": "can be sold",
     "aktivno": "Active",
     "aktivno_opis": "voting power",
-    "kurs": "Rate",
-    "kurs_opis": "POEN/ZRNO",
+    "koeficijent": "Coefficient",
+    "koeficijent_opis": "POEN/ZRNO",
     "glasacka_moc_formula": "Voting power: √{aktivno} rounded down = {moc} votes",
-    "trziste_neaktivno": "ZRNO is not active yet. It activates when the Protocol reaches −1,000,000 POEN.",
+    "kanal_neaktivan": "ZRNO is not active yet. It activates when the Protocol reaches −1,000,000 POEN.",
     "zakljucaj": "Activate (max {max})",
     "otkljucaj": "Deactivate (max {max})",
     "posalji_zahtev": "Submit request",
@@ -725,7 +725,7 @@
     "opis": "ZRNO records your position in the community and from it derives your vote in decision-making. Here you subscribe and redeem ZRNO and manage your vote.",
     "zakazana_promena": "Scheduled: → <ime>{pseudonim}</ime> — takes effect at midnight",
     "zakazan_opoziv": "Revocation scheduled — takes effect at midnight",
-    "kurs_objasnjenje": "The ratio between the total POEN and the ZRNO available to be recorded — it shows how much POEN you need for one ZRNO. It is not a price and does not express value.",
+    "koeficijent_objasnjenje": "The ratio between the total POEN and the ZRNO available to be recorded — it shows how much POEN you need for one ZRNO. It is not a price and does not express value.",
     "greska_delegiranje": "Error while delegating. Try again.",
     "upravljanje_naslov": "Recording and writing off ZRNO",
     "upis_naslov": "Record ZRNO",
@@ -2348,7 +2348,9 @@
     "prevod_u_maloletni_otpis": "Reversal of POEN recorded through the channels (account converted to a child account)",
     "prevod_u_maloletni_potvrda": "Reversal of POEN from a lapsed confirmation ({pseudonim} converted to a child account)",
     "nabavka": "Collective procurement — {dobro}",
-    "nabavka_ispravka": "Ledger correction, collective procurement {dobro}"
+    "nabavka_ispravka": "Ledger correction, collective procurement {dobro}",
+    "zrno_upis": "Recording of {zrna} ZRNO at coefficient {koeficijent}",
+    "zrno_otpis": "Write-off of {zrna} ZRNO at coefficient {koeficijent}"
   },
   "mejl": {
     "pozdrav": "Hello",
@@ -2724,6 +2726,7 @@
     "unesite_pozitivan_iznos_poen": "Enter a positive amount of POEN.",
     "unesite_pseudonim_delegata": "Enter the delegate's pseudonym.",
     "uo_je_vec_odgovorio_na_ovu_preporuku": "The Board has already replied to this recommendation.",
+    "upis_i_otpis_zrna_jos_nisu_aktivni": "Recording and writing off ZRNO is not active yet.",
     "vasa_prijava_za_ovaj_zadatak_nije_primljena": "Your application for this task was not accepted.",
     "vec_imate_aktivan_zahtev_povucite_ga_pre_objave_novog": "You already have an active request. Withdraw it before posting a new one.",
     "vec_postoji_aktivan_zahtev_za_otpis_danas": "There is already an active write-off request for today.",
@@ -2751,8 +2754,7 @@
     "zahtev_nije_pronadjen_ili_nije_na_cekanju": "The request was not found or is not pending.",
     "zahtev_vise_nije_aktivan": "The request is no longer active.",
     "zastitni_veto_mora_imati_obrazlozenje_koje_upucuje_na_konkretnu_pretnju_odrzivos": "A protective veto must state reasons pointing to a concrete threat to sustainability (Art. 18).",
-    "zatvoren_oglas_ne_moze_da_se_menja": "A closed listing cannot be edited.",
-    "zrno_trziste_nije_aktivno": "Recording and writing off ZRNO is not active yet."
+    "zatvoren_oglas_ne_moze_da_se_menja": "A closed listing cannot be edited."
   },
   "deca": {
     "naslov": "My children",

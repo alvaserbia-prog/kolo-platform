@@ -1271,7 +1271,12 @@ model OglasEvidencija {
 
 // ─── ZRNO sistem ─────────────────────────────────────────────────────────────
 
-model ZrnoTrziste {
+/// Prekidač kanala upisa i otpisa ZRNA (Pravilnik čl. 19, 21; faza-sistema.ts).
+/// 🔴 Model se do 13.09.2026. zvao `ZrnoTrziste` — ime je uklonjeno uz R-04, jer
+/// Pravilnik čl. 22 st. 3 izričito kaže da za ZRNO tržište ne postoji. Repo je
+/// javan pod AGPL-om, pa je šema prvo mesto koje se čita; ime modela ne sme da
+/// govori suprotno od akta. Ne vraćati „tržište" ni u jedan identifikator.
+model ZrnoKanal {
   id          String    @id @default("singleton")
   isActive    Boolean   @default(false)
   activatedAt DateTime?
@@ -1287,6 +1292,9 @@ model ZrnoStanje {
   updatedAt DateTime @updatedAt
 }
 
+/// 🔴 Polja su se do 13.09.2026. zvala `zrnaKupljeno` i `poenPlaceno` — uklonjeno
+/// uz R-04. ZRNO se ne kupuje i POEN se ne plaća: upisom se evidentirani doprinos
+/// korisnika umanjuje prema obračunskom koeficijentu (Pravilnik čl. 19 st. 6).
 model ZrnoUpisZahtev {
   id           String           @id @default(uuid())
   userId       String
@@ -1294,23 +1302,25 @@ model ZrnoUpisZahtev {
   poenIznos    Int
   date         DateTime         @db.Date
   status       ZrnoZahtevStatus @default(PENDING)
-  zrnaKupljeno Int?
-  poenPlaceno  Int?
+  zrnaUpisana  Int?
+  utrosenoPoen Int?
   createdAt    DateTime         @default(now())
 
   @@unique([userId, date])
   @@index([date, status])
 }
 
+/// Pri otpisu Protokol evidentira POEN-e nosiocu (Pravilnik čl. 21 st. 2) — otud
+/// `evidentiranoPoen`; polje se do 13.09.2026. zvalo `poenDobijeno`.
 model ZrnoOtpisZahtev {
-  id           String           @id @default(uuid())
-  userId       String
-  user         User             @relation(fields: [userId], references: [id])
-  kolicina     Int
-  date         DateTime         @db.Date
-  status       ZrnoZahtevStatus @default(PENDING)
-  poenDobijeno Int?
-  createdAt    DateTime         @default(now())
+  id               String           @id @default(uuid())
+  userId           String
+  user             User             @relation(fields: [userId], references: [id])
+  kolicina         Int
+  date             DateTime         @db.Date
+  status           ZrnoZahtevStatus @default(PENDING)
+  evidentiranoPoen Int?
+  createdAt        DateTime         @default(now())
 
   @@unique([userId, date])
   @@index([date, status])
@@ -1329,9 +1339,15 @@ model ZrnoStatusZahtev {
   @@index([date, status])
 }
 
-model ZrnoDailyRate {
+/// Dnevni snimak obračunskog koeficijenta (Pravilnik čl. 23, 24).
+/// 🔴 Model se do 13.09.2026. zvao `ZrnoDailyRate`, a polje `kurs` — oba imena su
+/// uklonjena uz R-04. Čl. 23 st. 4: koeficijent „nije cena, nije kurs i nije
+/// indeks performansi".
+/// 🟢 Snimak se NE briše: on je dokaz da koeficijent izračunava Protokol
+/// automatski i bez diskrecije (čl. 23 st. 2). Menja se ime, ne postojanje.
+model ZrnoDnevniKoeficijent {
   date           DateTime @unique @db.Date
-  kurs           Decimal  @db.Decimal(20, 2)
+  koeficijent    Decimal  @db.Decimal(20, 2)
   protokolMinus  Int
   zrnaUProtokolu Int
   createdAt      DateTime @default(now())

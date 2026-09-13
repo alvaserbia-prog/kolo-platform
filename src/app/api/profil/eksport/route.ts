@@ -79,12 +79,12 @@ export async function GET() {
     }),
     prisma.zrnoUpisZahtev.findMany({
       where: { userId },
-      select: { id: true, poenIznos: true, date: true, status: true, zrnaKupljeno: true, poenPlaceno: true, createdAt: true },
+      select: { id: true, poenIznos: true, date: true, status: true, zrnaUpisana: true, utrosenoPoen: true, createdAt: true },
       orderBy: { createdAt: "desc" },
     }),
     prisma.zrnoOtpisZahtev.findMany({
       where: { userId },
-      select: { id: true, kolicina: true, date: true, status: true, poenDobijeno: true, createdAt: true },
+      select: { id: true, kolicina: true, date: true, status: true, evidentiranoPoen: true, createdAt: true },
       orderBy: { createdAt: "desc" },
     }),
     prisma.zrnoStatusZahtev.findMany({

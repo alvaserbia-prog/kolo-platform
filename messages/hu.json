@@ -700,10 +700,10 @@
     "slobodno_opis": "eladható",
     "aktivno": "Aktív",
     "aktivno_opis": "szavazati erő",
-    "kurs": "Árfolyam",
-    "kurs_opis": "POEN/ZRNO",
+    "koeficijent": "Együttható",
+    "koeficijent_opis": "POEN/ZRNO",
     "glasacka_moc_formula": "Szavazati erő: √{aktivno} lefelé kerekítve = {moc} szavazat",
-    "trziste_neaktivno": "A ZRNO még nem aktív. Akkor aktiválódik, amikor a Protokoll eléri a −1.000.000 POEN-t.",
+    "kanal_neaktivan": "A ZRNO még nem aktív. Akkor aktiválódik, amikor a Protokoll eléri a −1.000.000 POEN-t.",
     "zakljucaj": "Aktiválás (max {max})",
     "otkljucaj": "Deaktiválás (max {max})",
     "posalji_zahtev": "Kérelem beküldése",
@@ -718,7 +718,7 @@
     "opis": "A ZRNO a közösségben elfoglalt helyzetedet rögzíti, és ebből ered a szavazatod a döntéshozatalban. Itt jegyzed be és írod vissza a ZRNO-t, és itt kezeled a szavazatodat.",
     "zakazana_promena": "Ütemezve: → <ime>{pseudonim}</ime> — éjfélkor lép hatályba",
     "zakazan_opoziv": "Visszavonás ütemezve — éjfélkor lép hatályba",
-    "kurs_objasnjenje": "A POEN teljes száma és a bejegyzésre rendelkezésre álló ZRNO aránya — megmutatja, mennyi POEN kell egy ZRNO-hoz. Nem ár, és nem fejez ki értéket.",
+    "koeficijent_objasnjenje": "A POEN teljes száma és a bejegyzésre rendelkezésre álló ZRNO aránya — megmutatja, mennyi POEN kell egy ZRNO-hoz. Nem ár, és nem fejez ki értéket.",
     "greska_delegiranje": "Hiba a delegáláskor. Próbáld újra.",
     "upravljanje_naslov": "ZRNO bejegyzése és leírása",
     "upis_naslov": "ZRNO bejegyzése",
@@ -2341,7 +2341,9 @@
     "prevod_u_maloletni_otpis": "A csatornákon bejegyzett POEN visszavonása (a fiók gyerekfiókká vált)",
     "prevod_u_maloletni_potvrda": "Megszűnt megerősítésből származó POEN visszavonása ({pseudonim} gyerekfiókká vált)",
     "nabavka": "Kollektív beszerzés — {dobro}",
-    "nabavka_ispravka": "Nyilvántartás helyesbítése, kollektív beszerzés {dobro}"
+    "nabavka_ispravka": "Nyilvántartás helyesbítése, kollektív beszerzés {dobro}",
+    "zrno_upis": "{zrna} ZRNO bejegyzése {koeficijent} együttható szerint",
+    "zrno_otpis": "{zrna} ZRNO leírása {koeficijent} együttható szerint"
   },
   "mejl": {
     "pozdrav": "Üdvözlünk",
@@ -2717,6 +2719,7 @@
     "unesite_pozitivan_iznos_poen": "Adj meg pozitív POEN összeget.",
     "unesite_pseudonim_delegata": "Add meg a küldött álnevét.",
     "uo_je_vec_odgovorio_na_ovu_preporuku": "A kuratórium már válaszolt erre az ajánlásra.",
+    "upis_i_otpis_zrna_jos_nisu_aktivni": "A ZRNO bejegyzése és leírása még nem aktív.",
     "vasa_prijava_za_ovaj_zadatak_nije_primljena": "A jelentkezésed erre a feladatra nem lett elfogadva.",
     "vec_imate_aktivan_zahtev_povucite_ga_pre_objave_novog": "Már van aktív kérelmed. Vond vissza, mielőtt újat adsz fel.",
     "vec_postoji_aktivan_zahtev_za_otpis_danas": "Mára már van aktív leírási kérelem.",
@@ -2744,8 +2747,7 @@
     "zahtev_nije_pronadjen_ili_nije_na_cekanju": "A kérelem nem található vagy nincs függőben.",
     "zahtev_vise_nije_aktivan": "A kérelem már nem aktív.",
     "zastitni_veto_mora_imati_obrazlozenje_koje_upucuje_na_konkretnu_pretnju_odrzivos": "A védelmi vétót a fenntarthatóság konkrét veszélyére hivatkozva indokolni kell (18. cikk).",
-    "zatvoren_oglas_ne_moze_da_se_menja": "Lezárt hirdetés nem módosítható.",
-    "zrno_trziste_nije_aktivno": "A ZRNO bejegyzése és leírása még nem aktív."
+    "zatvoren_oglas_ne_moze_da_se_menja": "Lezárt hirdetés nem módosítható."
   },
   "push": {
     "na_telefonu": "Értesítések a telefonon",

@@ -12,8 +12,8 @@ export async function POST(req: NextRequest) {
   if (!session) return await greska("Nije prijavljen.", 401);
   if (!session.user.verified) return await greska("Verifikacija potrebna.", 403);
 
-  const trziste = await prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } });
-  if (!trziste?.isActive) return await greska("ZRNO tržište nije aktivno.", 400);
+  const kanal = await prisma.zrnoKanal.findUnique({ where: { id: "singleton" } });
+  if (!kanal?.isActive) return await greska("Upis i otpis ZRNA još nisu aktivni.", 400);
 
   const stanje = await prisma.zrnoStanje.findUnique({ where: { userId: session.user.id } });
   if (!stanje || stanje.slobodno <= 0)
