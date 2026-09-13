@@ -45,29 +45,43 @@ function flat(locale) {
 
 /**
  * Vrednosti koje SMEJU biti iste kao engleske — nisu neprevedene, nego se ne
- * prevode: lična imena, nazivi brendova. Držati spisak kratkim; sve ostalo što
- * je identično engleskom je propušten prevod.
+ * prevode: lična imena, nazivi brendova, oznake i puka interpunkcija. Držati
+ * spisak kratkim; sve ostalo što je identično engleskom je propušten prevod.
  */
 const DOZVOLJENO_ISTO_KAO_EN = new Set([
   "oSistemu.topla_voda_citat_izvor",
   "oSistemu.margaret_izvor",
+  // Oznaka jedinice uz cenu na javnoj početnoj: „1.500 POEN" na srpskom, „1.500 P"
+  // na ostalim jezicima. Skraćeno namerno, nije propušten prevod.
+  "landing.pijaca_poen",
+  // Naslovi stranica čiji se naziv ne prevodi („DPIA", „Whitepaper"); razlika
+  // prema srpskom je samo separator (· naspram —), pa hu slučajno ispadne
+  // identičan engleskom.
+  "pravne.meta_dpia_title",
+  "pravne.meta_whitepaper_title",
 ]);
 
 /**
- * Namespace-ovi koji se NAMERNO ne prevode — vrednost mora da bude identična
- * srpskoj u svakom jeziku.
+ * Namespace-ovi koji se NE prevode — postoje ISKLJUČIVO u `sr.json`, a
+ * `src/i18n/request.ts` ih dodaje svakom drugom jeziku pri učitavanju poruka.
  *
- * `admin` = panel UO Fondacije: terminologija mora da prati akte (srpski
- * original), a UO radi na srpskom. Odluka vlasnika.
+ * `admin` = panel UO Fondacije: terminologija mu preslikava akte, a merodavan je
+ * srpski original. Uz to akti namerno razdvajaju institute koje prevod lako slepi
+ * u jednu reč (prigovor / prijava razmene / prijava oglasa / nadzorni predmet), pa
+ * bi loš prevod vodio ka odluci po pogrešnom institutu.
  *
- * Bez ove provere se pravilo tiho gubilo: paritet ključeva prolazi, provera
- * „ostalo na engleskom" ne pogađa prevod na hrvatski/ruski, pa je svaki nov
- * admin ekran ulazio preveden. Zatečeno stanje pre uvođenja: hr 162 prevedene
- * vrednosti (Lijevak, Vijesti, Financije…), en 382, ru 17 (ceo tab Levak).
+ * 🔴 Do 2026-09-13 je namespace stajao u sva četiri prevoda i tražio identičnu
+ * srpsku vrednost. To se nije održavalo: bio je NAPOLA preveden (177 od 450
+ * ključeva u en/ru/hu, 80 u hr), pa je isti red tabova glasio „Overview, Members,
+ * … Razmene, Nabavke" — noviji ekrani su ulazili na srpskom jer ih niko ne
+ * prevodi. Izostavljanjem iz prevoda razlika fizički ne može da nastane.
  */
-const SAMO_SRPSKI_NS = ["admin"];
+const NEPREVEDENI_NS = ["admin"];
+const jeNeprevedeni = (k) => NEPREVEDENI_NS.some((ns) => k === ns || k.startsWith(ns + "."));
 
-const izvorKeys = new Set(leafKeys(load(IZVOR)));
+// Ključevi koji se od ciljnih jezika OČEKUJU. Neprevedeni namespace nije među
+// njima — u prevodu ne sme ni da postoji (proverava se zasebno, ispod).
+const izvorKeys = new Set(leafKeys(load(IZVOR)).filter((k) => !jeNeprevedeni(k)));
 const srV = flat(IZVOR);
 const enV = flat("en");
 let greske = 0;
@@ -109,20 +123,16 @@ for (const cilj of CILJEVI) {
     }
   }
 
-  // Obrnut smer: namespace koji NE sme da bude preveden.
-  const ciljSve = flat(cilj);
-  const prevedeno = [...ciljKeys].filter(
-    (k) =>
-      SAMO_SRPSKI_NS.some((ns) => k.startsWith(ns + ".")) &&
-      typeof srV[k] === "string" &&
-      ciljSve[k] !== srV[k],
-  );
-  if (prevedeno.length) {
+  // Obrnut smer: namespace koji se ne prevodi ne sme ni da POSTOJI u prevodu.
+  // Ranije se tražila identična srpska vrednost; time je ista rečenica živela pet
+  // puta i razilazila se pri svakoj zameni. Sada je nema — `request.ts` je dodaje.
+  const visakNS = [...ciljKeys].filter(jeNeprevedeni);
+  if (visakNS.length) {
     greske++;
     console.error(
-      `\n✗ ${cilj}.json — ${prevedeno.length} vrednost(i) u [${SAMO_SRPSKI_NS.join(", ")}] je prevedeno, a ne sme: ${prevedeno.slice(0, 20).join(", ")}${prevedeno.length > 20 ? " …" : ""}`,
+      `\n✗ ${cilj}.json — ${visakNS.length} ključ(eva) iz [${NEPREVEDENI_NS.join(", ")}] ne sme da postoji u prevodu: ${visakNS.slice(0, 20).join(", ")}${visakNS.length > 20 ? " …" : ""}`,
     );
-    console.error(`  Prepiši srpsku vrednost iz ${IZVOR}.json (admin panel se ne prevodi — odluka vlasnika).`);
+    console.error(`  Obriši ih — taj namespace živi samo u ${IZVOR}.json, a dodaje ga src/i18n/request.ts.`);
   }
 }
 
