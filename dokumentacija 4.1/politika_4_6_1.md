@@ -1,0 +1,429 @@
+# Politika privatnosti KOLO platforme
+
+Ova politika privatnosti donosi se na osnovu člana 66 stav 2 i člana 81 stav 4 Pravilnika o KOLO sistemu i u skladu sa Zakonom o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL).
+
+### Član 1 — Rukovalac podacima
+
+Rukovalac podacima o ličnosti u smislu ZZPL-a je:
+
+**KOLO Fondacija**
+
+Sedište: Šetalište 16, 25000 Sombor, Republika Srbija
+
+Matični broj: 28836627
+
+PIB: 115840443
+
+Email: privatnost@ekolo.rs
+
+KOLO Fondacija određuje svrhe i sredstva obrade podataka o ličnosti u KOLO sistemu. Fondacija je rukovalac i kada ne čuva podatke korisnika fizički u sopstvenim bazama — pravno relevantan kriterijum je određivanje svrhe i sredstava obrade, ne fizičko skladištenje podataka (čl. 2 st. 1 t. 8 ZZPL-a). KOLO Protokol je tehničko sredstvo obrade.
+
+Lice za zaštitu podataka (DPO): Nikola Šarić, dostupan na alva.serbia@gmail.com.
+
+Za sva pitanja u vezi sa obradom podataka o ličnosti možete se obratiti na gorenavedene adrese.
+
+### Član 2 — Primena
+
+Ova politika privatnosti primenjuje se na sva lica koja koriste KOLO platformu (u daljem tekstu: Platforma), uključujući fizička lica registrovana na Platformi i kontakt osobe pravnih lica koja su u kontaktu sa Fondacijom.
+
+Platforma je namenjena punoletnim licima, a maloletnim licima koja su navršila sedam godina pod posebnim režimom uređenim **Pravilnikom o učešću dece**, po aktiviranju Modula 4 (Deca) u skladu sa čl. 58 Pravilnika o KOLO sistemu i uz primenu pojačanih zahteva iz čl. 16 ZZPL-a. Obrada podataka maloletnog korisnika bliže je opisana u pododeljku 4.7.
+
+Ova politika privatnosti dopunjuje odredbe Glave IX Pravilnika o KOLO sistemu i primenjuje se zajedno sa Registrom radnji obrade. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.
+
+### Član 3 — Principi obrade
+
+Zaštita podataka u KOLO sistemu zasnovana je na zaštiti po dizajnu i po podrazumevanoj vrednosti (čl. 50 ZZPL-a) i počiva na tri dizajnerske odluke.
+
+Prva je pseudonimnost evidencije. Zapisi u evidenciji doprinosa vezani su za pseudonime, ne za lična imena korisnika. Ne postoji centralizovana tabela koja povezuje pseudonime sa ličnim identitetima korisnika. Pseudonimnost nije anonimnost — pseudonimizovani podaci ostaju lični podaci u smislu ZZPL-a jer se, uz dodatne informacije, mogu povezati sa identifikovanom osobom.
+
+Druga je razdvajanje podataka. Fondacija ne čuva lične podatke korisnika platforme u sopstvenim bazama — svi podaci korisnika čuvaju se na infrastrukturi Protokola. Fondacija direktno čuva samo bankovnu dokumentaciju donacija i evidenciju o vezi između pravnog lica pokrovitelja i korisnika na čiji zapis se doprinos evidentira.
+
+Treća je minimizacija podataka. Platforma prikuplja samo podatke neophodne za funkcionisanje sistema. Minimizacija podataka je strukturni princip KOLO sistema koji se ne može ukinuti nijednom upravljačkom odlukom.
+
+### Član 4 — Kategorije podataka, svrha i pravni osnov obrade
+
+KOLO sistem obrađuje sledeće kategorije ličnih podataka.
+
+**4.1 Podaci o korisnicima platforme**
+
+Prilikom registracije prikupljamo sledeće podatke: pseudonim (korisničko ime) koji korisnik bira samostalno, email adresu, lozinku koja se čuva isključivo u hashovanom obliku i datum pristupanja sistemu.
+
+Svrha obrade: funkcionisanje sistema, identifikacija korisnika u sistemu, komunikacija i verifikacija naloga, bezbednost pristupa.
+
+Pravni osnov: izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2 ZZPL-a) — korisnik pristupanjem sistemu prihvata pravila korišćenja koja čine ugovorni odnos sa Fondacijom kao rukovaocem.
+
+Korisnik je odgovoran da pseudonim ne sadrži lične podatke koji bi mogli dovesti do njegove identifikacije.
+
+**4.2 Podaci dokaza stvarnosti**
+
+Dokaz stvarnosti je model verifikacije korisnika zasnovan na ličnom poznavanju u lancu potvrda — postojeći verifikovani korisnici potvrđuju stvarnost novih korisnika na osnovu neposrednog poznavanja. Dokaz stvarnosti ne zahteva prikupljanje ličnih dokumenata, broja lične karte ni jedinstvenog matičnog broja građana.
+
+U okviru dokaza stvarnosti prikupljamo: graf verifikacija (evidenciju o tome ko je koga verifikovao, u pseudonimnom obliku), indeks stvarnosti (numeričku vrednost koja izražava stepen verifikovanosti korisnika) i verifikacione zapise (pseudonim verifikatora, redni broj verifikacije, pseudonim verifikovanog, vremenski žig i pseudonim nadzornika).
+
+Svrha obrade: obezbeđivanje principa jedna osoba — jedan korisnik i integriteta evidencije zajedničkog dobra.
+
+Pravni osnov: izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2 ZZPL-a).
+
+Graf verifikacija, čak i u pseudonimnom obliku, predstavlja obradu podataka o ličnosti u smislu ZZPL-a.
+
+**4.3 Dobrovoljno uneti podaci**
+
+Korisnik može, na sopstvenu inicijativu, uneti dodatne podatke radi lakšeg korišćenja Platforme: ime i prezime, broj telefona, adresu ili druge kontakt podatke, profilnu sliku (avatar) i opis. Unošenje ovih podataka nije uslov za dokaz stvarnosti niti za pristup funkcijama sistema.
+
+Profilne slike (avatari) i slike koje korisnik prilaže uz oglase čuvaju se kod obrađivača za skladište slika (član 8); u bazu podataka upisuje se samo internet-adresa (URL) slike, ne sama slika. Slike se brišu pri brisanju naloga, odnosno uklanjanju oglasa.
+
+Svrha obrade: olakšano korišćenje Platforme i komunikacija među korisnicima, prema izboru korisnika.
+
+Pravni osnov: pristanak korisnika (čl. 12 st. 1 t. 1 ZZPL-a).
+
+Pristanak je dobrovoljan i može se povući u svakom trenutku. Povlačenje pristanka ne utiče na zakonitost obrade pre povlačenja. Korisnik može u svakom trenutku izbrisati dobrovoljno unete podatke.
+
+**4.4 Podaci o aktivnosti**
+
+U toku korišćenja Platforme automatski se evidentiraju podaci o razmenama i doprinosima u pseudonimnom obliku: iznos ažuriranja evidencije POEN-a, vreme ažuriranja i pseudonimi strana.
+
+Svrha obrade: vođenje evidencije zajedničkog dobra i funkcionisanje obračunskog okvira sistema.
+
+Pravni osnov: izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2 ZZPL-a) dok korisnik učestvuje u sistemu. Nakon prestanka statusa korisnika, identifikacioni podaci se brišu, a zapisi koji ostaju u evidenciji nisu lični podaci u smislu ZZPL-a jer se više ne mogu povezati sa identifikovanom ili odredivom osobom.
+
+**4.5 Podaci o donacijama i pokroviteljstvu**
+
+Za donacije fizičkih lica prikupljamo: iznos donacije, datum donacije i identitet donatora. Identifikacija donatora obezbeđuje se kroz bankovni sistem — Fondacija prima donacije sa verifikovanih bankovnih računa. Ove podatke čuva Fondacija. Za javne donacije (u smislu Pravilnika o pokroviteljstvu i donacijama) javno objavljujemo ime i prezime donatora uz iznos i datum donacije, u listi donacija dostupnoj verifikovanim korisnicima. Pravni osnov je pristanak donatora (čl. 12 ZZPL), koji se daje izborom javne donacije radi evidentiranja POEN-a. Za anonimne donacije ime donatora se ne objavljuje i POEN se ne evidentira; takva donacija ulazi u listu isključivo iznosom i datumom, bez imena, bez pseudonima i bez veze ka profilu, pa se donator iz nje ne može utvrditi. Ime donatora javne donacije objavljuje se u listi donacija i ne unosi se u opis zapisa o evidentiranom POEN-u, koji je vidljiv širem krugu od same liste; u tom zapisu stoje samo iznos i osnov. Donator je svestan da javno povezivanje imena sa donacijom omogućava povezivanje njegovog pseudonimnog zapisa sa identitetom; otkrivanje je dobrovoljno. POEN se za anonimnu donaciju ne evidentira zato što se upis koji se ne može pripisati nijednom licu ne može proveriti (član 5a Pravilnika o pokroviteljstvu i donacijama), a ne zato što Fondacija objavljivanje postavlja kao uslov.
+
+Uz zapis donacije beleži se i podatak o uplatiocu iz bankovnog izvoda. Doprinos se evidentira isključivo korisniku čijim je sredstvima uplata izvršena, pa taj podatak služi proveri da se uplatilac i donator poklapaju i sprečavanju zloupotrebe sistema. Za donaciju koja pređe prag utvrđen odlukom Upravnog odbora obrađuje se i izjava donatora o poreklu sredstava, data u ugovoru o donaciji; za donaciju ispod praga ta izjava se ne traži i ne prikuplja. Pravni osnov je legitimni interes Fondacije (čl. 12 st. 1 t. 6 ZZPL-a) i zakonska obaveza finansijskog izveštavanja. Mere koje Fondacija u toj svrhi primenjuje utvrđene su glavom IV Pravilnika o pokroviteljstvu i donacijama i propisane su dobrovoljno — Fondacija nije obveznik u smislu propisa o sprečavanju pranja novca i finansiranja terorizma.
+
+Svrha obrade: ispunjenje zakonske obaveze finansijskog izveštavanja.
+
+Pravni osnov: zakonska obaveza (čl. 12 st. 1 t. 3 ZZPL-a).
+
+Za pokroviteljstvo pravnih lica prikupljamo: podatke o doprinosu pravnog lica i vezu između pravnog lica pokrovitelja i korisnika na čiji zapis u sistemu se doprinos evidentira. Ovo je jedina tačka u sistemu gde Fondacija čuva podatak koji povezuje eksternu i internu evidenciju.
+
+Svrha obrade: evidencija pokroviteljstva i ispunjenje obaveze finansijskog izveštavanja.
+
+Pravni osnov: legitimni interes Fondacije (čl. 12 st. 1 t. 6 ZZPL-a) i zakonska obaveza vođenja finansijske evidencije.
+
+**4.6 Posebne kategorije podataka**
+
+Aktiviranjem Modula 3 (Socijalni programi) u skladu sa čl. 57 Pravilnika o KOLO sistemu, sistem može obrađivati posebne kategorije podataka: status roditelja, starosnu dob, invaliditet, studentski status ili pripadnost drugoj kvalifikovanoj grupi.
+
+Kod podrške majkama obrađuje se podatak o licu koje samo nije korisnik Platforme — datum rođenja Vašeg deteta. Pravni osnov je saglasnost roditelja odnosno zakonskog zastupnika (čl. 16 ZZPL-a), koju dajete Vi kao podnosilac prijave; obrađuje se isključivo datum rođenja, bez imena deteta i bez ijednog drugog podatka o njemu, a briše se kada prijava prestane da važi.
+
+Fondacija ne čuva kopije podnesene dokumentacije. U sistemu se evidentira samo minimum potreban za obračun prava: za podršku majkama datumi rođenja dece (bez imena dece), za podršku starijima datum rođenja korisnika, za invaliditet datum rešenja nadležnog organa (bez broja rešenja, dijagnoze i medicinske dokumentacije), za školovanje obrazovna ustanova i smer. Pristup tim podacima ograničen je na lice koje u Fondaciji obrađuje prijavu — verifikatori i drugi korisnici nemaju uvid u njih, a podaci se vode pseudonimizovano, vezani za pseudonim korisnika, a ne za ime i prezime.
+
+Prijava na socijalni program i traženje potvrde od verifikatora vrše se isključivo uz Vaš izričit pristanak i uz indeks stvarnosti od najmanje 10%. Pre odobravanja, ispunjenost uslova potvrđuju Vaši verifikatori — lica koja Vas lično poznaju — pod punom odgovornošću i bez uvida u unete podatke; prijava se ne odobrava dok svi ne potvrde, a odbijanje zahteva obrazloženje. Pristanak se traži pre nego što se od bilo koga zatraži potvrda, a u njemu se navodi koliko će lica biti zamoljeno. Ta lica saznaju o kom je programu reč, što im može otkriti pripadnost posebnoj kategoriji; obaveštavaju se isključivo unutar Platforme — u poruci koja se šalje elektronskom poštom ili na Vaš uređaj ne navode se ni naziv programa ni pseudonim. To je jedino otkrivanje pripadnosti programu koje prijava nosi; ako ni na njega ne pristajete, prijava se ne može podneti, jer se ispunjenost uslova bez potvrde tih lica ne utvrđuje.
+
+Zapis o evidentiranom POEN-u ne imenuje program. Pojedinačno evidentiranje doprinosa po socijalnom programu ne prikazuje se u javnom pregledu evidencije, a opis takvog zapisa ne sadrži naziv programa. Umesto pojedinačnih zapisa objavljuje se dnevni zbir po programu — broj korisnika i ukupan broj evidentiranih POEN-a — iz kog se ne može utvrditi ni ko je korisnik ni koliki je njegov pojedinačni iznos; dan u kome je u jednom programu doprinos evidentiran samo jednom korisniku ne objavljuje se, jer bi zbir tada bio jednak pojedinačnom iznosu.
+
+Proverljivost evidencije time ostaje potpuna: ukupan broj POEN-a je javan, zbir zapisa u Protokolu je nula, a zbir objavljenih dnevnih iznosa zajedno sa ostalim kanalima evidentiranja daje promenu tog ukupnog broja. Ono što iz javnog prikaza nestaje jeste veza između određenog korisnika, osnova po kome mu je doprinos evidentiran i iznosa.
+
+Ovakvo rešenje ne počiva samo na nazivu programa. Iznos dnevnog evidentiranja izvodi se iz podataka na osnovu kojih je pravo utvrđeno i sam bi ih odao: kod podrške starijima iznos je jednoznačno određen godinom rođenja korisnika, a kod podrške majkama brojem dece i njihovim uzrastom. Objavljen pojedinačan iznos otkrio bi te podatke i bez ijedne reči uz njega, pa uklanjanje naziva bez uklanjanja iznosa ne bi bilo dovoljno.
+
+Razlaganje po programu dostupno je Vama, u Vašem nalogu, uz sam program, i Fondaciji u meri potrebnoj za vođenje programa.
+
+Pristanak možete povući u svakom trenutku, bez navođenja razloga, radnjom koja Vam je dostupna uz sam program. Povlačenjem se postupak prekida, evidentiranje POEN-a prestaje, a podaci koje ste uneli se brišu. Uneti podaci brišu se i kada prijava prestane da važi na drugi način — odbijanjem, obustavom pri reviziji statusa ili prestankom Vašeg svojstva korisnika. Već evidentiran POEN se ne poništava, jer bi to izmenilo evidenciju koja mora ostati proverljiva.
+
+Svrha obrade: automatsko evidentiranje doprinosa u POEN-ima za korisnike koji pripadaju kvalifikovanim grupama, uz zaštitu integriteta programa od neistinitih prijava.
+
+Pravni osnov: izričit pristanak korisnika (čl. 17 st. 2 t. 1 ZZPL-a). Pristanak se može povući u svakom trenutku, sa posledicom prestanka automatskog evidentiranja POEN-a. Povlačenje pristanka ne utiče na zakonitost obrade pre povlačenja.
+
+Aktiviranje ovog modula zahteva prethodno ažuriranje procene uticaja na zaštitu podataka.
+
+**4.7 Podaci maloletnih lica**
+
+Aktiviranjem Modula 4 (Deca) u skladu sa čl. 58 Pravilnika o KOLO sistemu, sistem obrađuje podatke maloletnih korisnika. Uslovi i obim obrade uređeni su **Pravilnikom o učešću dece**.
+
+**Dva ulaza.** Nalog maloletnog korisnika otvara roditelj iz sopstvenog naloga, ili ga maloletno lice otvara samo. U drugom slučaju nalog do preuzimanja od roditelja ima profil i može sklapati prijateljstva; Pričaonica, oglasi, komunikacija sa punoletnim licima i evidentiranje POEN-a su zatvoreni. O maloletnom licu se do tada obrađuju pseudonim, podaci neophodni za pristup nalogu, elektronska adresa roditelja i zapisi o sklopljenim prijateljstvima sa datumima. Nalog koji niko ne preuzme u roku od četrnaest dana se briše, zajedno sa tim zapisima. Maloletni korisnik može sam obrisati takav nalog u svakom trenutku.
+
+**Pravni osnov u razdoblju do preuzimanja.** Do preuzimanja naloga saglasnost roditelja još ne postoji, pa se podaci maloletnog korisnika u tom razdoblju obrađuju po osnovu legitimnog interesa (čl. 12 st. 1 t. 6 ZZPL-a), u svrsi uspostavljanja kontakta sa roditeljem radi pribavljanja saglasnosti koju zakon traži. Obim je sveden na ono što je za tu svrhu neophodno, razdoblje je ograničeno na četrnaest dana, funkcije koje bi maloletnog korisnika izložile punoletnim licima su zatvorene, a maloletni korisnik u svakom trenutku može sam obrisati nalog. Preuzimanjem naloga osnov postaje saglasnost roditelja iz čl. 16 ZZPL-a.
+
+**Elektronska adresa roditelja** koju unosi maloletno lice podatak je o trećem licu. Obrađuje se po osnovu legitimnog interesa (čl. 12 st. 1 t. 6 ZZPL-a), radi pribavljanja saglasnosti koju zakon traži, i isključivo radi upućivanja jedne poruke sa pozivom za preuzimanje naloga. U toj poruci navodi se samo pseudonim maloletnog korisnika — nikad ime — jer tačnost adrese nije proverena. Adresa se ne upisuje kao adresa naloga maloletnog korisnika i ne otvara put za prijavu ni za oporavak lozinke.
+
+**Elektronska adresa maloletnog korisnika.** Maloletni korisnik može navesti sopstvenu elektronsku adresu. Navođenje je dobrovoljno i nije uslov za korišćenje naloga. Adresa se obrađuje isključivo radi ponovnog pristupa nalogu — postavljanja nove lozinke kada je maloletni korisnik zaboravi; na nju se ne šalju obaveštenja. Adresa se upisuje tek pošto je maloletni korisnik potvrdi otvaranjem veze poslate na samu adresu, a do potvrde ne proizvodi dejstvo; time se sprečava da pogrešno navedena adresa otvori put ka nalogu maloletnog korisnika. Adresa se uklanja u svakom trenutku. Ako maloletni korisnik nema sopstvenu adresu, novu lozinku postavlja roditelj sa profila svog deteta; prethodna lozinka se pri tom ne traži, a maloletni korisnik se o promeni obaveštava.
+
+**Kategorije podataka:** pseudonim; podaci neophodni za pristup nalogu (lozinka u kriptovanom obliku); elektronska adresa roditelja; sopstvena elektronska adresa maloletnog korisnika, ako je navede; datum rođenja koji upisuje roditelj; veza sa jednim ili dvoje roditelja; graf prijateljstava sa datumima; poruke u dečjoj Pričaonici i u razgovorima; zapisi POEN-a; oglasi; škola koju navodi sam maloletni korisnik.
+
+**Svrha obrade:** omogućavanje učešća maloletnih korisnika u sistemu pod posebnim režimom ograničenja i evidentiranje njihovog doprinosa (čl. 15 t. 9 Pravilnika o KOLO sistemu).
+
+**Pravni osnov:** pristanak roditelja ili zakonskog zastupnika (čl. 16 ZZPL-a), sa dodatnim ograničenjima za lica mlađa od petnaest godina; za elektronsku adresu roditelja i za podatke maloletnog korisnika u razdoblju do preuzimanja naloga — legitimni interes (čl. 12 st. 1 t. 6 ZZPL-a), kako je opisano iznad.
+
+**Uvid roditelja je namerno ograničen.** Roditelj **ne čita** razgovore koje njegovo dete vodi sa drugim maloletnim korisnicima — vidi spisak prijateljstava sa datumima i spisak razgovora bez sadržaja. Razlog je što uvid u takav razgovor dodiruje i drugo dete, čiji roditelj taj uvid nije dao. Razgovor maloletnog korisnika sa punoletnim korisnikom roditelj čita, a punoletnom sagovorniku se u tom razgovoru prikazuje obaveštenje da razgovor čita roditelj.
+
+**Zašto je saglasnost ovde jača od uobičajene.** Roditelj ne potvrđuje saglasnost samo pritiskom na dugme u poruci: nalog maloletnog korisnika dobija pun pristup tek kada roditelj postane verifikovan korisnik kroz lanac potvrda, dakle kada njegov identitet potvrdi treće lice u stvarnom svetu. To je iznad standarda razumnog napora iz čl. 16 st. 2 ZZPL-a.
+
+**Škola i pregled po školama.** Maloletni korisnik može sam navesti školu koju pohađa, izborom sa spiska. Platforma objavljuje zbirni pregled po školama — broj maloletnih korisnika čiji je bar jedan roditelj redovan član i njihov udeo u broju upisanih učenika — koji ne sadrži podatke o ličnosti i dostupan je svakome. Pregled maloletnih korisnika jedne škole, sa pseudonimom i stanjem zapisa, dostupan je isključivo maloletnom korisniku te iste škole čiji je bar jedan roditelj redovan član; punoletnim korisnicima, neprijavljenim licima, maloletnom korisniku koji još čeka da roditelj preuzme nalog i maloletnom korisniku druge škole taj pregled se ne prikazuje. Navedena škola menja se najviše jednom u trideset dana, a podatak se briše sticanjem punoletstva i pri prestanku statusa; istorija ranijih izbora se ne čuva.
+
+**Profil maloletnog korisnika nije dostupan punoletnim korisnicima.** Umesto profila prikazuje se obaveštenje sa pseudonimom maloletnog korisnika i pseudonimom njegovog roditelja. Ovo je sužavanje u odnosu na raniji obim: do ove izmene profil je bio dostupan svakom verifikovanom korisniku. Saglasnost roditelja ne otvara profil — ona uređuje komunikaciju i razmenu. Podatak o tome ko su roditelji maloletnog korisnika, odnosno ko su deca punoletnog korisnika, dostupan je prijavljenim korisnicima.
+
+Aktiviranje ovog modula zahteva prethodno ažuriranje procene uticaja na zaštitu podataka i donošenje Pravilnika o učešću dece.
+
+**Potvrda postojanja deteta.** Roditelj koji otvara ili preuzima nalog daje izjavu pod punom odgovornošću da ima dete navedenog uzrasta; tekst izjave se čuva i posle davanja se ne menja. Lica koja su potvrdila stvarnost roditelja pozivaju se da to potvrde i ona; njima se ne prikazuju podaci o detetu. Ako se u roku ne izjasni jedna od strana, potvrda stvarnosti roditelja se poništava i POEN evidentiran povodom nje otpisuje se svakom licu koje ga je po tom osnovu dobilo. Pre isteka roka obaveštava se svako lice koje bi poništenjem bilo pogođeno, a protiv poništenja stoji prigovor o kome odlučuje ovlašćeno lice Fondacije.
+
+**4.8 Podaci u oglasu neverifikovanog korisnika**
+
+Neverifikovani korisnik može da postavi oglas kojim nudi dobro ili uslugu (član 16 Uslova korišćenja). Objavom takvog oglasa predstavlja se mreži verifikovanih korisnika i time uspostavlja kontakt neophodan za sprovođenje verifikacije iz člana 5 Pravilnika o dokazu stvarnosti.
+
+Oglas sadrži: pseudonim oglašivača, naslov i opis dobra ili usluge, kategoriju, cenu, mesto (naselje iz šifarnika), fotografije koje korisnik sam prilaže i, po sopstvenom izboru, broj telefona.
+
+Oglas je javno vidljiv svim posetiocima Platforme, uključujući neprijavljena lica, i indeksira se od strane pretraživača. Broj telefona nije javan — dostupan je isključivo verifikovanim korisnicima. Oglas nosi vidljivu oznaku da oglašivač nije verifikovan u lancu potvrda.
+
+Korisnik sam bira šta će objaviti. Fotografija lica, ime i prezime nisu traženi ni potrebni; korisnik koji ih uključi u oglas čini to na sopstvenu inicijativu i time ih objavljuje javno.
+
+Verifikovani korisnik može, polazeći od objavljenog oglasa, da započne neposredan razgovor (poruke) sa oglašivačem. Neverifikovani oglašivač može u tako započetom razgovoru da odgovara iako još nije verifikovan; ne može sam da započne razgovor niti da se obraća korisnicima koji ga nisu kontaktirali. Sadržaj razgovora obrađuje se radi dogovaranja razmene i uspostavljanja kontakta radi verifikacije. Pravni osnov obrade sadržaja razgovora je legitimni interes uspostavljanja kontakta radi razmene i verifikacije (čl. 12 st. 1 t. 6 ZZPL-a); poruke se brišu u skladu sa članom 10 ove politike.
+
+Verifikovani korisnik koji ima pravo verifikacije može oglašivača verifikovati jednokratnim kodom koji oglašivač sam generiše. Po sprovedenoj verifikaciji korisnik koji je verifikovan dobija obaveštenje sa identifikatorom (pseudonimom) verifikatora i mogućnošću da verifikaciju prijavi ako ne poznaje verifikatora. Prijava se obrađuje radi zaštite integriteta sistema u smislu pododeljke 4.9 ove politike.
+
+Svrha obrade: objavljivanje ponude radi razmene dobara i usluga i uspostavljanje kontakta između neverifikovanog korisnika i potencijalnih verifikatora radi sprovođenja verifikacije.
+
+Pravni osnov: pristanak korisnika (čl. 12 st. 1 t. 1 ZZPL-a), dat objavom oglasa, sa upozorenjem da je oglas javno vidljiv. Pristanak je dobrovoljan i može se povući u svakom trenutku uklanjanjem oglasa, bez posledica po status korisnika u sistemu. Povlačenje pristanka ne utiče na zakonitost obrade pre povlačenja.
+
+*Napomena o izmeni.* Ovom verzijom politike ukinuta je ranija obrada „podaci objavljeni na tabli zahteva za jemstvo" (kartica prepoznavanja: ime, prezime, godište, mesto, nadimak, opis zanimanja, broj telefona i saglasnost za pozivanje). Tabla zahteva za jemstvo prestala je da postoji, a svi podaci prikupljeni tim putem su obrisani.
+
+**4.9 Zaštita integriteta sistema**
+
+Radi sprečavanja zloupotreba sistema dokaza stvarnosti — lažnih ili „farmovanih" verifikacija, umnožavanja naloga i drugih obrazaca koji bi obezvredili evidenciju i glasanje — Fondacija analizira obrasce u grafu verifikacija i evidenciji doprinosa. Ova obrada ne prikuplja nove podatke: koristi isključivo postojeće pseudonimne podatke (graf verifikacija, metapodaci evidencije POEN-a, indikatori aktivnosti naloga) i izvedeni zapis o riziku (oznake prekršenih pravila i numerički skor), dostupan isključivo ovlašćenim licima.
+
+Svrha obrade: zaštita integriteta dokaza stvarnosti, evidencije zajedničkog dobra i glasanja.
+
+Pravni osnov: legitimni interes Fondacije i poštenih korisnika (čl. 12 st. 1 t. 6 ZZPL-a).
+
+Sistem ne donosi automatske odluke u smislu čl. 38 ZZPL-a — on samo označava nalog ili grupu naloga radi pregleda, a svaku meru preispituje i donosi ovlašćeno lice. Označavanje prioritetizuje odsustvo stvarne aktivnosti, a ne gustinu veza, kako zbijena stvarna zajednica ne bi bila pogrešno tretirana. Imate pravo na prigovor na ovu obradu u skladu sa članom 13 ove politike.
+
+**4.10 Upit povodom oglasa i putanja doprinosa razmeni**
+
+Doprinos sadržaju platforme evidentira se kroz putanju od pet koraka (Član 40b Pravilnika o KOLO sistemu). Da bi se utvrdilo koji je korak pređen, obrađuju se dve vrste podataka.
+
+Prvo, zapisi o ažuriranju evidencije POEN-a između Vas i drugih korisnika — iznos i vreme zapisa i pseudonim druge strane. To su podaci koje sistem već obrađuje u okviru evidencije doprinosa (pododeljka 4.4); putanja ih samo očitava i ne prikuplja ništa novo.
+
+Drugo, upit povodom oglasa: kada povodom nečijeg oglasa pokrenete razgovor, beleži se da ste se Vi javili i povodom kog oglasa, uz vreme. Sadržaj poruke se u tu svrhu ne obrađuje i ne čuva se u ovom zapisu. Ponovljeno javljanje istom oglasu ne stvara nov zapis.
+
+Svrha obrade: utvrđivanje ispunjenosti uslova za evidentiranje doprinosa kroz kanal iz člana 15 tačka 8 Pravilnika, i sprečavanje da se taj doprinos ostvari bez stvarne razmene.
+
+Pravni osnov: izvršenje ugovornog odnosa između Vas i Fondacije (čl. 12 st. 1 t. 2 ZZPL-a) — evidentiranje doprinosa je sadržina odnosa po kome koristite sistem.
+
+Vidljivost: pređene i preostale korake putanje vidite isključivo Vi, na svom nalogu. Oglašivač vidi da ste mu se javili — to proizlazi iz samog razgovora — ali ne vidi ničiji napredak na putanji. Podaci o upitima ne objavljuju se javno i ne ulaze u javne agregate.
+
+Za utvrđivanje da li je druga strana van Vašeg kruga poznanstava koristi se postojeći graf verifikacija (pododeljka 4.2). Nov podatak se ni tu ne prikuplja.
+
+Sistem ne donosi automatske odluke o Vama u smislu čl. 38 ZZPL-a: evidentiranje doprinosa je primena javno objavljenih pravila i ne proizvodi pravne posledice po Vaš status. Imate pravo na prigovor u skladu sa članom 13 ove politike.
+
+**4.11 Predlog za nabavku i učešće u kolektivnoj nabavci**
+
+Kolektivna nabavka je projekat kojim Fondacija dinarskim sredstvima nabavlja dobra, a korisnici ih preuzimaju u jednakim delovima uz poništenje zapisa POEN-a (Član 14a i Član 51a Pravilnika o KOLO sistemu). U tu svrhu obrađuju se dve grupe podataka.
+
+Prvo, predlog za nabavku: naziv dobra koji navedete i vreme upisa. Predlog ne sadrži količinu, cenu ni obrazloženje. Svaki korisnik ima najviše jedan aktivan predlog. Registar predloga objavljuje se **zbirno — samo naziv dobra i broj korisnika koji su ga predložili, bez pseudonima**.
+
+Drugo, učešće u objavljenoj nabavci: podatak da ste se prijavili, Vaše mesto u redu, dan preuzimanja koji ste upisali, kod za preuzimanje i vreme preuzimanja. Broj POEN-a po kome se utvrđuje red ne prikuplja se iznova — očitava se iz evidencije doprinosa (pododeljka 4.4).
+
+Kriterijumi učešća se ne postavljaju i **ne prikupljaju se nikakvi dokazi o Vašem statusu, delatnosti ni imovini**. Prijava je otvorena svakom punoletnom korisniku sa aktivnim nalogom.
+
+Svrha obrade: utvrđivanje potreba zajednice radi odlučivanja o nabavci i sprovođenje odlučene nabavke.
+
+Pravni osnov: izvršenje ugovornog odnosa između Vas i Fondacije (čl. 12 st. 1 t. 2 ZZPL-a). Podnošenje predloga i prijava su dobrovoljni i njihov izostanak nema posledica po Vaš status.
+
+Vidljivost: **dobavljaču se dostavlja isključivo spisak kodova za preuzimanje — ne i pseudonimi ni bilo koji drugi podatak o Vama**. Verifikovani korisnici vide spisak onih koji su preuzeli deo, sa pseudonimom i mestom u redu; **broj POEN-a u Vašem zapisu se uz taj spisak ne objavljuje**. Vaš pojedinačni predlog se ne objavljuje.
+
+Utvrđivanje reda je primena javno objavljenih pravila i ne predstavlja automatizovano odlučivanje u smislu čl. 38 ZZPL-a: ono ne proizvodi pravne posledice po Vaš status. Protiv utvrđenog reda i ishoda nabavke imate pravo prigovora u skladu sa članom 13 ove politike, o kome odlučuje čovek.
+
+### Član 5 — Tehnički podaci
+
+Radi bezbednosti Platforme i sprečavanja zloupotreba, na nivou hosting infrastrukture beleže se IP adresa, podaci o uređaju i pretraživaču i vreme pristupa.
+
+Unutar Platforme, administrativne radnje nad podacima korisnika i započinjanje razgovora povodom oglasa beleže se u revizijskom dnevniku (ko je izvršio radnju, kada i koju). Revizijski dnevnik dostupan je licu za zaštitu podataka (DPO).
+
+Svrha obrade: bezbednost Platforme, sprečavanje zloupotreba, detekcija neovlašćenog pristupa, tehnička podrška.
+
+Pravni osnov: legitimni interes (čl. 12 st. 1 t. 6 ZZPL-a).
+
+### Član 6 — Vidljivost podataka na Platformi
+
+KOLO Platforma primenjuje model vidljivosti koji odgovara statusu korisnika u sistemu.
+
+Neverifikovani korisnici — lica registrovana na Platformi čija stvarnost nije potvrđena kroz lanac potvrda — mogu videti opšte pokazatelje sistema, upoznati se sa pravilima, pregledati oglase i postaviti oglas kojim nude dobro ili uslugu, u obimu utvrđenom ovim članom. Nemaju uvid u pseudonime drugih korisnika, pojedinačne transakcije ni stanja računa.
+
+Verifikovani korisnici — lica čija je stvarnost potvrđena i čiji je indeks stvarnosti najmanje 10% — mogu videti pseudonime svih korisnika, iznose i vremenske oznake svih POEN transakcija, pseudonime strana u svakoj transakciji i stanja POEN računa.
+
+Nosioci ZRNA imaju isti uvid kao verifikovani korisnici.
+
+Prostor za razmenu (oglašavanje). Izuzetak od gradirane vidljivosti iz ovog člana čini platformski prostor za razmenu: sadržaj oglasa — opis ponude ili zahteva, cena izražena u POEN-ima, lokacija i pseudonim oglašivača — javno je vidljiv svim posetiocima, uključujući neprijavljena lica, radi pristupačnosti razmene. Kontakt podaci oglašivača i mogućnost komunikacije povodom oglasa dostupni su isključivo verifikovanim korisnicima, po izričitom otkrivanju. Za neprijavljena i neverifikovana lica pseudonim oglašivača u prostoru za razmenu ne povezuje se sa evidencijom doprinosa, stanjem računa ni profilom korisnika. Oglašivač objavu pokreće na sopstvenu inicijativu i svestan je da je oglas javno vidljiv.
+
+Oglas neverifikovanog korisnika. Podaci iz pododeljke 4.8 — pseudonim, naslov, opis, kategorija, cena, mesto i fotografije — javno su dostupni svim posetiocima Platforme, uključujući neprijavljena lica, i indeksiraju se od strane pretraživača. Broj telefona oglašivača dostupan je isključivo verifikovanim korisnicima. Oglas nosi vidljivu oznaku da oglašivač nije verifikovan. Verifikovani korisnik može, polazeći od oglasa, započeti neposredan razgovor (poruke) u kojem neverifikovani oglašivač može da učestvuje i pre verifikacije, u skladu sa pododeljkom 4.8 ove politike i Članom 16 Uslova korišćenja.
+
+Korisnik može, na sopstvenu inicijativu i u svakom trenutku, odabrati da njegovo ime i prezime i broj telefona budu vidljivi svim verifikovanim korisnicima Platforme. Ovo otkrivanje je u potpunosti dobrovoljno i može se povući u svakom trenutku, nakon čega se podaci više ne prikazuju drugim korisnicima. Povlačenje ne utiče na podatke koji su eventualno već zabeleženi van Platforme od strane trećih lica.
+
+Posebno od ovog dobrovoljnog otkrivanja, kod javne donacije ime i prezime donatora objavljuju se u listi donacija, na osnovu pristanka iz odeljka 4.5, radi provere osnova po kome je POEN upisan. Ovo objavljivanje vezano je za konkretnu donaciju i njen pseudonimni zapis.
+
+Izuzeci od prikaza pojedinačnih transakcija. Iz pregleda evidencije izostavljaju se dve vrste zapisa, bez obzira na status posmatrača. Prvo, pojedinačno evidentiranje doprinosa po socijalnom programu — umesto njega objavljuje se dnevni zbir po programu, iz razloga i na način utvrđen odeljkom 4.6 ove politike. Drugo, transakcija u kojoj je bilo koja strana maloletni korisnik — dečji prostor nije javan (član 13 Pravilnika o učešću dece), pa bi prikaz takve transakcije otkrio pseudonim deteta i verifikovanom posmatraču.
+
+Bez obzira na status korisnika i bez obzira na dobrovoljna otkrivanja, sledeći podaci nisu nikada javno dostupni: email adresa, tehnički logovi i evidencija pristupa, graf verifikacija, dobrovoljno uneti podaci koji nisu izričito otkriveni i posebne kategorije podataka, uključujući podatak o tome da je korisnik u određenom socijalnom programu.
+
+Javnost pseudonimne evidencije doprinosa je strukturalna karakteristika sistema, a ne opcija koju korisnik može isključiti. Korisnik koji ne prihvata ovaj uslov ne može koristiti Platformu. Za razliku od pseudonimne evidencije, javno prikazivanje imena i prezimena donatora jeste opciono — donator ga bira izborom između javne i anonimne donacije.
+
+I uz pseudonimnost, kombinacija iznosa, vremena i učestalosti transakcija može u određenim slučajevima omogućiti posrednu identifikaciju korisnika. Korisnik je svestan ovog ograničenja i prihvata ga registracijom.
+
+### Član 7 — Kolačići
+
+Platforma koristi neophodne kolačiće koji su neophodni za funkcionisanje Platforme — prijava, održavanje sesije, bezbednosne postavke. Ovi kolačići nisu podložni pristanku jer su neophodni za pružanje usluge.
+
+Platforma koristi i analitičke kolačiće radi merenja posećenosti i razumevanja načina korišćenja Platforme: Google Analytics (Google Ireland Limited / Google LLC). Ovi kolačići obrađuju se na osnovu pristanka korisnika (čl. 12 st. 1 t. 1 ZZPL-a), koji se daje pre postavljanja analitičkih kolačića i može se povući u svakom trenutku kroz podešavanja kolačića. Uskraćivanje ili povlačenje pristanka na analitičke kolačiće ne utiče na mogućnost korišćenja Platforme. Podaci prikupljeni ovim kolačićima mogu se prenositi obrađivačima u Sjedinjenim Američkim Državama (videti član 9).
+
+Uz to Platforma meri posećenost i bez kolačića, servisom Vercel Analytics (Vercel Inc.). Taj servis ne postavlja kolačiće, ne čita podatke sa uređaja korisnika i ne prati korisnika između različitih sajtova; obrađuje se samo zbirni broj poseta pojedinih stranica. Osnov je legitimni interes Fondacije da zna koliko se Platforma koristi (čl. 12 st. 1 t. 6 ZZPL-a), a korisnik na tu obradu ima pravo prigovora po članu 13.
+
+### Član 8 — Primaoci podataka i obrađivači
+
+Vaši podaci se ne prodaju, ne iznajmljuju niti ustupaju trećim licima u komercijalne svrhe.
+
+Ako Fondacija angažuje treća lica za održavanje infrastrukture, ta lica su obrađivači podataka u smislu čl. 45 ZZPL-a. Odnos između Fondacije i obrađivača uređuje se ugovorom o obradi podataka.
+
+Podaci mogu biti dostupni sledećim primaocima:
+
+Hosting i isporuka aplikacije — Vercel Inc. (društvo sa sedištem u Sjedinjenim Američkim Državama; aplikacija se izvršava u Evropskoj uniji, region Frankfurt) — isključivo u svrhu tehničkog funkcionisanja Platforme, na osnovu ugovora o obradi podataka.
+
+Baza podataka — Neon Inc. (društvo sa sedištem u Sjedinjenim Američkim Državama; baza podataka se nalazi u Evropskoj uniji, region Frankfurt) — čuvanje evidencionih i identifikacionih podataka, na osnovu ugovora o obradi podataka.
+
+Skladište slika — Cloudflare, Inc. (servis Cloudflare R2, Sjedinjene Američke Države) — čuvanje profilnih slika (avatara) i slika oglasa; u bazu se upisuje samo javni internet-adresa (URL) slike, ne sama slika. Na osnovu ugovora o obradi podataka.
+
+Email servis — Resend, Inc. (Sjedinjene Američke Države) — isključivo za dostavljanje sistemskih obaveštenja (na primer poruke za resetovanje lozinke). Obaveštenje o novoj poruci sadrži isečak te poruke, pa i taj isečak prolazi kroz ovaj servis.
+
+Kanal upozorenja Fondaciji — Telegram Messenger Inc. (Sjedinjene Američke Države) — isključivo radi obaveštavanja Fondacije o događajima koji traže njeno postupanje. Upozorenje sadrži pseudonim i vrstu događaja; ne sadrži podatke unete u prijavi na program podrške niti sadržaj poruka korisnika. Isto upozorenje ide i elektronskom poštom.
+
+Merenje posećenosti — Google Ireland Limited odnosno Google LLC (Sjedinjene Američke Države), isključivo po pristanku korisnika, i Vercel Inc. bez kolačića (član 7).
+
+Obrada plaćanja platnom karticom — poslovna banka Fondacije i njen posrednik za plaćanje na internetu (Republika Srbija) — kada korisnik donaciju izvršava platnom karticom. Podatke o platnoj kartici Fondacija ne prima i ne čuva.
+
+Nadležni državni organi — kada je to zakonska obaveza, uključujući Poresku upravu, Upravu za sprečavanje pranja novca i druge organe u skladu sa zakonom.
+
+Navedeni obrađivači za izvršavanje pojedinih radnji angažuju sopstvene podobrađivače, pre svega provajdere data centara. Aktuelne spiskove podobrađivača objavljuju sami obrađivači na svojim internet stranicama.
+
+### Član 9 — Prenos podataka van Srbije
+
+**Gde se podaci nalaze.** Aplikacija se izvršava i baza podataka se nalazi u Evropskoj uniji, u regionu Frankfurt. Evropska unija je na listi država koje obezbeđuju primereni nivo zaštite podataka o ličnosti, pa se za te podatke ne primenjuju posebni uslovi iz čl. 65–69 ZZPL-a.
+
+Vercel Inc. i Neon Inc. su društva sa sedištem u Sjedinjenim Američkim Državama. Zbog toga je moguć pristup podacima iz treće zemlje u administrativne i tehničke svrhe — podršku, održavanje i sistemske dnevnike.
+
+**Šta se stvarno obrađuje u Sjedinjenim Američkim Državama:** slike koje korisnici postavljaju (Cloudflare R2), elektronske poruke koje Platforma šalje, uključujući isečak nove poruke u obaveštenju (Resend), upozorenja koja se šalju Fondaciji (Telegram) i podaci za merenje posećenosti (Google, isključivo po pristanku).
+
+**Osnov prenosa.** Sjedinjene Američke Države nisu na listi država za koje je utvrđen primereni nivo zaštite. Fondacija zato podatke prenosi isključivo obrađivaču sa kojim je zaključen ugovor o obradi podataka koji sadrži standardne ugovorne klauzule ili druge odgovarajuće mere zaštite iz čl. 65 ZZPL-a. Obrađivaču sa kojim takav ugovor nije zaključen podaci se ne prenose.
+
+**Provera.** Fondacija čuva primerak ugovora o obradi za svakog obrađivača iz člana 8 i najmanje jednom godišnje proverava da li je ugovor na snazi i da li se spisak podobrađivača promenio.
+
+**Izbor provajdera.** Pri izboru provajdera infrastrukture Fondacija uzima u obzir lokaciju servera i primenjiv pravni okvir za zaštitu podataka u jurisdikciji u kojoj se serveri nalaze. Iz tog razloga se aplikacija i baza podataka izvršavaju u Evropskoj uniji.
+
+### Član 10 — Rokovi čuvanja podataka
+
+Podaci se čuvaju u sledećim rokovima:
+
+Podaci aktivnog naloga čuvaju se dok nalog ostaje aktivan.
+
+Podaci o aktivnosti — evidencija POEN transakcija — čuvaju se u pseudonimnom obliku u skladu sa poreskim i računovodstvenim propisima, 10 godina od nastanka.
+
+Podaci o donacijama čuvaju se u skladu sa rokovima propisanim poreskim propisima i Zakonom o računovodstvu, 10 godina od nastanka.
+
+Tehnički logovi (IP adresa, pristup, uređaj) čuvaju se 12 meseci.
+
+Podaci u oglasu neverifikovanog korisnika (pododeljka 4.8) čuvaju se dok korisnik oglas ne ukloni ili dok oglas ne bude uklonjen u skladu sa Uslovima korišćenja. Rok trajanja oglasa i pravila deaktivacije uređeni su Uslovima korišćenja. Po uklanjanju, oglas prestaje da bude javno dostupan.
+
+Zapis o upitu povodom oglasa (pododeljka 4.10) briše se sa oglasom na koji se odnosi. Po prestanku statusa korisnika briše se odnosno anonimizuje zajedno sa ostalim podacima tog naloga.
+
+Poruke u razgovorima između korisnika brišu se kada bar jedna strana ugasi nalog, odnosno kada od poslednje poruke u razgovoru prođu 24 meseca.
+
+Podaci maloletnog korisnika (pododeljka 4.7) čuvaju se dok nalog ostaje aktivan. Elektronska adresa roditelja i poziv za preuzimanje naloga brišu se sa nalogom koji niko nije preuzeo u roku od četrnaest dana, odnosno gube svrhu po preuzimanju i brišu se sa nalogom pri prestanku statusa. Prijateljstva se brišu sticanjem punoletstva korisnika i pri brisanju naloga. Podatak o školi briše se sticanjem punoletstva i pri prestanku statusa; istorija ranijih izbora se ne čuva. Sopstvena elektronska adresa maloletnog korisnika čuva se dok je ne ukloni ili dok ne prestane svojstvo korisnika; prelaskom u punoletni nalog se zadržava. Nepotvrđena adresa i veza za potvrdu gube dejstvo posle dvadeset četiri sata.
+
+Po isteku roka, podaci se brišu ili trajno anonimizuju na način koji onemogućava identifikaciju lica. Fondacija najmanje jednom godišnje proverava da li je za neku kategoriju podataka rok čuvanja istekao i briše odnosno anonimizuje podatke kojima jeste.
+
+Predlog za nabavku (pododeljka 4.11) briše se kada Vi izaberete drugi naziv ili predlog uklonite, kada bude sprovedena nabavka izabranog naziva dobra, i najkasnije po isteku dvanaest meseci od upisa. Podaci o učešću u nabavci i o preuzimanju čuvaju se deset godina, uz računovodstvenu dokumentaciju nabavke.
+
+### Član 11 — Prestanak statusa i pseudonimizacija podataka
+
+Prestankom statusa korisnika — bilo istupanjem, isključenjem ili smrću — pokreće se postupak pseudonimizacije u skladu sa čl. 34 Pravilnika o KOLO sistemu.
+
+Brišu se elektronska adresa, svi dobrovoljno uneti podaci i podaci u objavljenim oglasima, uključujući naslov, opis, mesto i fotografije; oglasi se uklanjaju sa prostora za oglašavanje, a fotografije se brišu iz skladišta. Briše se i slobodan tekst unet uz prepis POEN-a, kako onaj koji je uneo sam korisnik tako i onaj koji je uneo njegov sagovornik. Anonimizuju se veze korisnika u grafu potvrda.
+
+Zapisi POEN-a korisnika poništavaju se, a numerička istorija zadržava se pod pseudonimom koji ne upućuje na ime. Taj postupak je pseudonimizacija, a ne anonimizacija: Fondacija zadržava interni identifikator naloga, pa zadržani zapisi i dalje predstavljaju podatke o ličnosti u smislu ZZPL-a i uživaju punu zaštitu po ovoj politici. Zadržavaju se zato što brisanje nije neograničeno pravo — po čl. 30 st. 3 ZZPL-a ono se ne primenjuje kada je obrada nužna radi ispunjenja zakonske obaveze čuvanja i radi podnošenja, ostvarivanja ili odbrane pravnog zahteva.
+
+Posle prestanka statusa javno ostaju: numerički zapisi evidencije uz pseudonim koji ne upućuje na ime, osnov po kome je POEN upisan, i ime i prezime uz javnu donaciju. Ime donatora se po čl. 5a Pravilnika o pokroviteljstvu i donacijama čuva kao trajan deo zapisa donacije i ne uklanja se iz liste ni prestankom svojstva korisnika. Za korisnika koji je donirao javno, povezivanje njegove pseudonimne evidencije sa identitetom ostaje moguće i posle gašenja naloga; na tu posledicu se upozorava pre svake javne donacije, a alternativa je anonimna donacija.
+
+Ovo razdvajanje identifikacionih i obračunskih podataka rešava tenziju između prava korisnika na brisanje ličnih podataka (čl. 30 ZZPL-a) i integriteta evidencije zajedničkog dobra. Evidencija doprinosa je po dizajnu konzistentna — brisanje zapisa jednog korisnika bi narušilo konzistentnost celokupne evidencije koja je zajedničko dobro svih učesnika. Razdvajanjem podataka obezbeđuje se i poštovanje prava korisnika i očuvanje integriteta evidencije.
+
+Deaktivacija korisničkog naloga ne povlači automatski brisanje svih podataka. Određeni podaci čuvaju se i nakon prestanka statusa u zakonom propisanim rokovima:
+
+Podaci o donacijama — u skladu sa rokovima propisanim poreskim propisima i Zakonom o računovodstvu.
+
+Podaci koji su predmet zakonske obaveze čuvanja — u rokovima propisanim zakonom.
+
+Po isteku zakonskih rokova, podaci se trajno brišu ili anonimizuju. Korisnik nema pravo da zahteva brisanje podataka pre isteka zakonskih rokova čuvanja.
+
+### Član 12 — Automatizovano odlučivanje
+
+KOLO Platforma koristi automatizovane algoritme za sledeće obrade.
+
+Emisija POEN-a — Protokol automatski izračunava i evidentira POEN jedinice na osnovu evidentiranih doprinosa, u skladu sa pravilima sistema i parametrima utvrđenim Pravilnikom o KOLO sistemu.
+
+Izračunavanje obračunskog koeficijenta — Protokol automatski izračunava obračunski koeficijent na osnovu deterministički definisane javne formule, jednom dnevno na kraju obračunskog perioda.
+
+Automatska evidencija u socijalnim programima — po aktiviranju Modula 3, Protokol automatski upisuje zapise POEN-a za korisnike koji pripadaju kvalifikovanim grupama, bez potrebe za konkretnom aktivnošću korisnika.
+
+Poništenje potvrde stvarnosti zbog neaktivnosti — kada se o postojanju deteta u roku ne izjasni jedna od strana veze, Protokol automatski poništava tu potvrdu i otpisuje POEN evidentiran povodom nje svakom licu koje ga je po tom osnovu dobilo, i kada zapis time pređe u negativnu vrednost (čl. 6 Pravilnika o učešću dece). Ovo je jedina automatizovana obrada u sistemu koja dira status korisnika, pa pre isteka roka obaveštavamo svako lice koje bi poništenjem bilo pogođeno, a protiv poništenja stoji prigovor o kome odlučuje ovlašćeno lice Fondacije.
+
+Ove automatizovane obrade mogu pravno ili značajno uticati na lice u smislu čl. 38 ZZPL-a. Svaki korisnik ima pravo da zatraži objašnjenje logike automatizovane obrade, zatraži ljudski uvid u konkretnu odluku i uloži prigovor na automatizovanu odluku.
+
+Zahtevi se upućuju na email adresu rukovaoca iz Člana 1 ili na adresu lica za zaštitu podataka.
+
+### Član 13 — Prava korisnika
+
+U skladu sa ZZPL-om imate sledeća prava:
+
+Pravo na pristup (čl. 26 ZZPL-a) — možete zatražiti potvrdu da li obrađujemo vaše podatke i dobiti kopiju tih podataka.
+
+Pravo na ispravku (čl. 29 ZZPL-a) — možete zahtevati ispravku netačnih ili dopunu nepotpunih podataka. Zahtev se podnosi u Platformi, prigovorom vrste „Ispravka podatka“, ili na adresu iz Člana 1.
+
+Pravo na brisanje (čl. 30 ZZPL-a) — možete zahtevati brisanje podataka kada je svrha obrade ispunjena, kada ste povukli pristanak ili kada obrada nije zakonita. Ovo pravo je ograničeno u dva slučaja: kada postoji zakonska obaveza čuvanja podataka i kada bi brisanje narušilo integritet evidencije zajedničkog dobra — u tom slučaju se primenjuje postupak pseudonimizacije iz Člana 11 ove politike.
+
+Pravo na ograničenje obrade (čl. 31 ZZPL-a) — možete zahtevati privremeno ograničenje obrade dok se rešava prigovor ili dok se podaci ne isprave.
+
+Pravo na prenosivost (čl. 36 ZZPL-a) — možete zatražiti vaše podatke u strukturisanom, mašinski čitljivom formatu.
+
+Pravo na prigovor (čl. 37 ZZPL-a) — možete uložiti prigovor na obradu zasnovanu na legitimnom interesu. Fondacija će razmotriti prigovor i prestati sa obradom osim ako ne dokaže da postoje zakoniti razlozi za obradu koji pretežu nad interesima korisnika.
+
+Pravo na povlačenje pristanka — za obradu zasnovanu na pristanku (dobrovoljno uneti podaci, podaci u objavljenom oglasu, posebne kategorije podataka), pristanak možete povući u svakom trenutku. Povlačenje pristanka ne utiče na zakonitost obrade pre povlačenja. Povlačenje pristanka u pogledu objavljenog oglasa sprovodi se uklanjanjem oglasa u korisničkom interfejsu i ne zahteva podnošenje pisanog zahteva iz ovog člana.
+
+Kako ostvariti prava: zahtev se podnosi pisanim putem na email adresu iz Člana 1 ili na adresu lica za zaštitu podataka. Odgovorićemo u roku od 30 dana od prijema zahteva. Rok može biti produžen za dodatnih 60 dana u složenim slučajevima, o čemu ćemo vas obavestiti uz navođenje razloga produženja.
+
+Pravo na pritužbu: ako smatrate da je obrada vaših podataka nezakonita, možete podneti pritužbu Povereniku za informacije od javnog značaja i zaštitu podataka o ličnosti, Bulevar kralja Aleksandra 15, Beograd, www.poverenik.rs.
+
+### Član 14 — Bezbednost podataka
+
+Fondacija primenjuje tehničke i organizacione mere zaštite podataka primerene riziku, u skladu sa čl. 51 ZZPL-a.
+
+Tehničke mere obuhvataju: šifrovanje podataka u prenosu TLS enkripcijom (minimalno verzija 1.2), šifrovanje podataka u mirovanju na nivou hosting infrastrukture, pseudonimizaciju evidencije (zapisi su vezani za pseudonim, ne za ime i prezime) i razdvajanje identifikacionih od obračunskih podataka u zasebne evidencije.
+
+Organizacione mere obuhvataju: kontrolu pristupa po principu minimalne neophodnosti — svaki korisnik sistema, administrator i proces ima pristup samo onim podacima koji su neophodni za obavljanje njegove funkcije; višefaktorsku autentifikaciju za administrativni pristup infrastrukturi; obavezu čuvanja poverljivosti za sva lica koja imaju pristup podacima korisnika; redovnu obuku zaposlenih i saradnika o zaštiti podataka; redovne bezbednosne provere i penetraciono testiranje sistema.
+
+Integritet evidencije doprinosa u Protokolu štiti se zero-sum invarijantom — zbir svih stanja u sistemu uvek je jednak nuli i automatski se proverava — uz atomaran (sve-ili-ništa) upis svake promene i vremensko označavanje zapisa; administrativne radnje beleže se u revizijskom dnevniku. Svako odstupanje od zero-sum invarijante je vidljivo i predmet je provere.
+
+U slučaju povrede zaštite podataka koja može ugroziti prava i slobode korisnika, obavestitićemo Poverenika u roku od 72 sata od saznanja za incident (čl. 52 ZZPL-a), a vas bez nepotrebnog odlaganja ako incident može prouzrokovati visok rizik za vaša prava i slobode (čl. 53 ZZPL-a).
+
+### Član 15 — Procena uticaja na zaštitu podataka
+
+Fondacija sprovodi procenu uticaja na zaštitu podataka (DPIA) pre početka obrade, u skladu sa čl. 54 ZZPL-a.
+
+DPIA se ažurira pre aktiviranja svakog modula koji uvodi obradu novih kategorija podataka, posebno Modula 3 (Socijalni programi) koji uvodi obradu posebnih kategorija podataka (čl. 17 ZZPL-a) i Modula 4 (Deca) koji uvodi obradu podataka maloletnih lica (čl. 16 ZZPL-a).
+
+Rezultati DPIA dostupni su licu za zaštitu podataka i služe kao osnov za primenu odgovarajućih mera zaštite.
+
+### Član 16 — Izmene Politike privatnosti
+
+Ovu politiku možemo menjati u skladu sa razvojem Platforme i sistema.
+
+O izmenama koje sužavaju vaša prava ili proširuju obradu podataka o ličnosti bićete obavešteni bez odlaganja, putem email adrese registrovane na nalogu. Takve izmene stupaju na snagu danom donošenja.
+
+Ostale izmene stupaju na snagu danom donošenja, uz obaveštavanje bez odlaganja. To su naročito: otklanjanje grešaka i jezičke ispravke, izmene koje proširuju vaša prava ili sužavaju obradu podataka o ličnosti, izmene nametnute propisom ili odlukom nadležnog organa, i usklađivanje opisa obrade sa izmenama izgleda i funkcija Platforme koje ne menjaju kategorije podataka, svrhe ni pravni osnov obrade.
+
+Možemo zatražiti da izmenjenu politiku izričito prihvatite pri prvoj narednoj prijavi na nalog i da do prihvatanja ograničimo pristup nalogu. Ograničenje ne dira u ostvarivanje vaših prava iz Člana 13 ove politike — pre svega prava na pristup, prenosivost i brisanje: preuzimanje podataka i brisanje naloga ostaju dostupni i pre prihvatanja.
+
+Prihvatanje ove politike nije pristanak za obrade čiji je pravni osnov pristanak (Član 4). Te pristanke dajete odvojeno, dobrovoljni su i možete ih povući u svakom trenutku; odbijanje ili povlačenje takvog pristanka ne može biti razlog za ograničenje pristupa nalogu.
+
+Aktuelna verzija uvek je dostupna na Platformi.
+
+### Član 17 — Merodavno pravo
+
+Ova politika privatnosti uređena je pravom Republike Srbije. Za sve sporove nadležan je sud u Somboru, osim ako zakonom nije drugačije određena mesna nadležnost. U pitanjima zaštite podataka o ličnosti merodavan je ZZPL.

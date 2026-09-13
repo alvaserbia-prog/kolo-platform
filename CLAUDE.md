@@ -233,15 +233,27 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
-**AŽURIRANO 2026-09-13 (trideset drugi put):** na **4.6.1** idu **DVA akta** —
+**AŽURIRANO 2026-09-13 (trideset treći put):** na **4.6.2** idu **DVA akta** —
 Pravilnik o KOLO sistemu (sa 4.6.0) i Whitepaper (sa 4.6.0). Ostalih petnaest ostaje
 gde jeste. Povod je **R-04 iz NOVOG registra rizika** (ZRNO kao investicioni
 instrument, Komisija za HOV). Sadržinski, vidi sekciju „ZRNO nije ulaganje: odgovor
 po elementima, ne etiketa" ispod.
 
-🟡 **Zašto 4.6.1, a ne 4.6.0:** 4.6.0 je istog dana objavljen na `main`-u za osam
-akata (R-02); da su ovi dobili isti broj, dva različita događaja objave delila bi
-jednu šifru. Isto pravilo kao kod operativnog doprinosa (4.4.4) i R-19 (4.5.5).
+🟡 **Zašto 4.6.2, a ne 4.6.0 ili 4.6.1:** istog dana su na `main`-u objavljena
+**dva** ranija seta — 4.6.0 za osam akata (R-02) i 4.6.1 za šest (R-03). Da su ovi
+dobili neki od ta dva broja, tri različita događaja objave delila bi dve šifre. Isto
+pravilo kao kod operativnog doprinosa (4.4.4) i R-19 (4.5.5).
+
+🔴 **Tri rizika su 13.09. rađena paralelno, u odvojenim sesijama, i to je proizvelo
+tri poteza koja se ponavljaju — zapisano da se sledeći put očekuje:** (1) `main` se
+pomerio DVAPUT dok je R-04 bio u radu, pa je grana dvaput dovlačena i šifra dvaput
+pomerana; (2) **migracije su dobile identične vremenske oznake** u dve sesije
+(`20260913130000` i `20260913130100` postoje i za R-03 i za R-04) — Prisma ih ređa
+leksikografski po imenu foldera, pa je redosled određen i SQL je nezavisan, ali se
+oznake **NE smeju naknadno preimenovati** jer su migracije već primenjene na test
+bazu preview buildom grane; (3) svaka sesija dopisuje svoj red u `CLAUDE.md` i u
+registar rizika, pa je konflikt tamo očekivan i rešava se **spajanjem oba reda**, ne
+biranjem jednog.
 
 🟢 **Whitepaper je morao uz Pravilnik i nije bilo izbora.** Nosio je istu
 aritmetičku grešku kao čl. 23 (upis ZRNA tobože diže koeficijent) i uz to na dva
@@ -297,6 +309,26 @@ programi podrške (`v4.5.0`, dva mesta) i → Whitepaper (`v4.4.6`). Nisu isprav
 objavljen fajl ne sme da govori nešto drugo nego kad je objavljen. Briše ih bump celog
 seta na 5.0. 🟢 Upućivanje `ucesce_dece` → Pravilnik JESTE ispravljeno na v4.6.0, jer
 se taj akt ovim potezom ponovo objavljuje.
+
+**AŽURIRANO 2026-09-13 (trideset drugi put):** na **4.6.1** ide **ŠEST akata** —
+Politika privatnosti (sa 4.5.9), DPIA (sa 4.5.2), Registar radnji obrade (sa 4.5.9),
+Uslovi korišćenja (sa 4.5.9), Pravilnik o programima podrške (sa 4.6.0) i Pravilnik
+o učešću dece (sa 4.6.0). Povod je **R-03 iz NOVOG registra rizika** (posebne
+kategorije i podaci dece u javnoj evidenciji). Sadržinski, vidi sekciju „Posebne
+kategorije izlaze iz javne evidencije" ispod.
+
+🔴 **Zašto 4.6.1, a ne 4.6.0:** 4.6.0 je **istog dana** uzeo R-02 za osam akata, i
+dva od njih (programi podrške, učešće dece) menja i ovaj potez. Dva različita
+događaja objave ne smeju da dele šifru — isto pravilo kao 4.4.4, 4.4.7, 4.5.5 i
+4.5.9. 🟡 **Pouka za paralelan rad:** pre bumpa obavezno `git fetch origin main` i
+spajanje, jer se šifra u međuvremenu zauzima; bez toga bump kreće od fajlova koji na
+`main`-u više ne postoje i tiho poništava tuđi set.
+
+🟢 **Unakrsna upućivanja ispravljena su samo u aktima koji se ovim potezom ponovo
+objavljuju** (DPIA i Registar → Pravilnik v4.6.0, Politika/Registar/programi v4.6.1,
+whitepaper v4.6.0). 🔴 Upućivanje na **Pravilnik o hijerarhiji akata ostaje na
+v4.4.6** — taj se akt nije menjao; istorijska upućivanja (DPIA v4.3.0, registar
+v4.5.1) netaknuta.
 
 **AŽURIRANO 2026-09-13 (trideseti put):** na **4.5.9** idu **ČETIRI akta** —
 Pravilnik o KOLO sistemu (sa 4.5.8), Uslovi korišćenja (sa 4.5.8), Politika
@@ -2010,6 +2042,87 @@ naloga uz polje za uplatioca, pa se poređenje radi.
 Migracije `20260913120000_donacija_naplaceno` (samo enum vrednost, ZASEBAN fajl) →
 `20260913120100_identitet_utvrdjen`. Brane: `donacija-karticno-izvor.test.ts` (17) i
 `identifikovan-clan-izvor.test.ts` (26), obe gledaju IZVOR.
+
+### Posebne kategorije izlaze iz javne evidencije (R-03, 2026-09-13)
+
+Sprovođenje rizika **R-03 iz novog registra** (`docs/registar-rizika-regulatori-2026-09.md`)
+— javna pseudonimna evidencija otkriva posebne kategorije i podatke dece, zatečena
+ocena **9**, po merama **4**. Akti idu na **4.6.1**; 4.6.0 je istog dana uzeo R-02.
+
+🔴 **Nalaz koji je odredio sve mere: IZNOS sam odaje posebnu kategoriju.**
+`izracunajStariji` (`protokol/programi.ts`) daje `1000 + 100 × (godine − 50)` — javan
+iznos od **2.500 POEN znači tačno 65 godina**. `izracunajMajke` iz jednog broja
+jednoznačno vraća **broj dece i uzrast svakog**. Zato mera koja samo prepravlja tekst
+opisa ne rešava ništa: **red mora da izađe iz javnog prikaza ceo.** To je razlika
+između R-03 = 4 i R-03 = 6. 🟡 Srazmerno smanjenje pri dnevnom limitu nije zaštita —
+koeficijent je isti za sve tog dana i izvodi se iz samog feeda.
+
+**Šta je urađeno:**
+- 🔴 **M-1 — socijalni programi izlaze iz pojedinačnog javnog prikaza.** Umesto
+  redova ide **dnevni zbir po programu** (`dnevniPregledPrograma`), iz zatečenog
+  `DailyEmissionSummary.breakdown` — bez novog modela. 🔴 **Dan sa jednim korisnikom
+  se preskače** (`korisnika < 2`): zbir bi tada BIO pojedinačan iznos, pa bi agregat
+  vratio upravo ono što mera sklanja. Proverljivost ostaje potpuna — zbir agregata sa
+  ostalim kanalima daje promenu opticaja.
+- 🔴 **Opis zapisa dobija opštu oznaku** (`OPIS_SOCIJALNOG_PROGRAMA`). **Ovo obara
+  odluku od 07.09.2026.** („mora biti osnov programa i tip") — tada se nije znalo da
+  iznos invertuje godište. Sa M-1 red ionako ne izlazi, pa je oznaka **druga brana**.
+- 🔴 **Operativni doprinos se NE dira** i dobija sopstveni tip `EMISIJA_OPERATIVNI`.
+  🔴 Backfill je namerno u tom smeru: promašen red ostaje `EMISIJA_PROGRAM` i biva
+  **sakriven**; obrnut smer bi promašen red **otkrio**.
+- **Lično razlaganje** — `ProgramEnrollment.isplacenoPoen`, prikazano na kartici
+  programa. 🔴 Backfill iz opisa mora PRE migracije koja opise briše.
+- **M-3a** lista tuđih donacija traži potvrdu; **M-3b** ime uplatioca izlazi iz opisa
+  emisije (obara obrazloženje iz R-19, koje je počivalo na tome da je ime ionako u
+  listi — a lista se ovom merom sužava); **M-3c** anonimna donacija se prikazuje
+  **samo iznosom**. Uz javno ime u listi stoje pseudonim i link (Uslovi čl. 17).
+- **M-4** spisak dece jedne škole: posmatrač mora biti u stanju `AKTIVNO` **i** iz te
+  iste škole. **M-5** `suzen` skida `roditelji`/`deca`. **M-6** deca korisnika koja
+  nisu korisnici imenovana kao kategorija lica (osnov čl. 16 ZZPL-a), bez izmene koda.
+
+🔴 **Nalazi u kodu koje je rizik otkrio:**
+1. **`/sistem` je bio drugi kanal istog curenja** — iste transakcije je dizao
+   **sopstvenim upitom**, sa `description` koji se i **prikazuje**, i **bez
+   isključivanja dece**, dok ih feed izričito krije. Uslov sada živi na jednom mestu
+   (`BEZ_DECE` u `protokol/deca.ts`) i oba upita ga uvoze. **Svaki nov spisak
+   transakcija uzima taj uslov, ne svoju kopiju.**
+2. **Anonimna donacija se prikazivala SA PSEUDONIMOM** — `sistem/page.tsx` je gledao
+   samo `status`, polje `javno` nije gledao uopšte; uz to je kolona POEN stajala na 0,
+   jedini takav red, dakle dodatna oznaka „ovaj je donirao anonimno".
+3. **Spisak dece po školi otvarao se svakom „detetu"** — uslov je bio goli
+   `maloletan`, a `maloletan: true` se upisuje odmah, i nalogu u stanju `NA_CEKANJU`.
+4. **`suzen` je propustio vezu roditelj–dete**; **lista donacija nije bila zatvorena**
+   (gejt je bio samo `if (!session)`).
+
+🟡 **Zatečen kvar ispravljen usput:** `donacija-uplatilac-izvor.test.ts` je čitao
+`m.admin.*` na svih pet jezika i padao od uklanjanja admin namespace-a iz prevoda —
+**četiri testa su bila crvena i na `main`-u**. R-02 je isti kvar našao nezavisno.
+
+🔴 **DPIA: R11 sa 3×3=9 na 2×3=6.** Krug primalaca se vraća na sopstvene verifikatore
+— tačno ono na čemu je ocena od 9 počivala. Zbir rizika se ne menja (R11 ostaje
+srednji). U Politici je rečenica **„Zapis o evidentiranom POEN-u nije skriven"
+BRISANA** i zaključana u `UKINUTO` bloku na svih pet jezika.
+
+🔴 **ZABRANJENE TEME uz R-03 — ne otvarati bez izričitog naloga:** vraćanje naziva
+programa u opis ili u javni prikaz; objavljivanje **pojedinačnog iznosa** po
+socijalnom programu (iznos je nosilac posebne kategorije jednako kao naziv);
+objavljivanje dana sa jednim korisnikom; otvaranje spiska dece po školi punoletnim
+nalozima ili nalogu na čekanju; vraćanje imena uplatioca u opis emisije.
+
+🟡 **Svesno prihvaćeni ostaci:** Uslovi čl. 17 (pseudonimna evidencija je strukturna
+i ne može se isključiti — otud 4, a ne niže); pripadnost programu ostaje poznata
+sopstvenim verifikatorima; javna veza roditelj↔dete; ime javnog donatora ostaje u
+listi i posle gašenja naloga (R-14); operativni doprinos ostaje u feedu sa nazivom
+zadatka (to je R-13).
+
+**Kod:** `protokol/programi.ts` (`OPIS_SOCIJALNOG_PROGRAMA`, `SOCIJALNI_PROGRAMI`,
+`dnevniPregledPrograma`), `protokol/deca.ts` (`BEZ_DECE`), `deca-pravila.ts`
+(`smeVidetiSpisakSkole`, `Ucesnik.skolaSifra`), `api/donacije/route.ts`,
+`api/javno/feed/route.ts`, `(app)/sistem/page.tsx`, `api/skole/[sifra]/route.ts`,
+`api/profil/[id]/route.ts`. Migracije `20260913130000_emisija_operativni_enum` →
+`130100_backfill` → `130150_program_isplaceno` → `130200_opisi_bez_posebnih_kategorija`
+(redosled je bitan). Brana: `__tests__/r03-posebne-kategorije-izvor.test.ts` (19
+provera, gleda IZVOR).
 
 ### Javnost donacije nije uslov, nego proverljivost (2026-09-13)
 

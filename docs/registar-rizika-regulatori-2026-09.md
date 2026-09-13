@@ -328,7 +328,7 @@ Ocena 1–10 = verovatnoća da regulator zauzme taj stav × težina posledice.
 |---|---|---|---|---|
 | **R-01** | **POEN se kvalifikuje kao virtuelna valuta / digitalna imovina** — prihvata se kao sredstvo razmene na Pijaci, ima objavljen odnos prema dinaru i pribavlja se karticom u realnom vremenu po objavljenoj tabeli | NBS | **9** | ✅ **obrađen** → 5 (DEO III) |
 | **R-02** | **POEN evidentiran kroz kanale i primljen u razmeni kvalifikuje se kao prihod korisnika** (uklj. prihod u naturi); Fondacija propustila obračun po odbitku kao isplatilac | Poreska uprava | **9** | ✅ **obrađen** → 6 (DEO III) |
-| **R-03** | **Javna pseudonimna evidencija otkriva posebne kategorije i podatke dece** — naziv programa uz pseudonim svakom redovnom članu, ime donatora u feedu široj publici nego što Politika kaže, pregled dece po školama | Poverenik | **9** | — |
+| **R-03** | **Javna pseudonimna evidencija otkriva posebne kategorije i podatke dece** — naziv programa uz pseudonim svakom redovnom članu, ime donatora u feedu široj publici nego što Politika kaže, pregled dece po školama | Poverenik | **9** | ✅ **obrađen** → 4 (DEO III) |
 | **R-04** | **ZRNO se čita kao investicioni instrument** — dnevna serija kursa, `zrnaKupljeno`/`poenPlaceno`, whitepaper i `/pravna-pozicija` sami opisuju razliku u kursu kao podsticaj i koriste reč „uložio" | Komisija za HOV | **8** | ✅ **obrađen** → 4 (DEO III) |
 | **R-05** | **PDV i fiskalizacija** — razmena kao trampa između lica koja obavljaju delatnost; poništenje POEN-a pri nabavci kao moguća naknada; nepostojanje fiskalnih računa u prometu koji platforma promoviše | Poreska uprava | **8** | — |
 | **R-06** | **Ne postoji dokaz pristanka ni dokaz zaključenja ugovora**; uz to **DPO u sukobu interesa sa privatnom kontakt adresom** | Poverenik | **8** | — |
@@ -375,7 +375,8 @@ izmena Statuta radi Gornjeg Kola, podizanje donje granice uzrasta) zabeležene s
 | **R-01** (dopune) | 13.09.2026. | Uz sprovođenje: D-1…D-5 i P-2 (vidi DEO III). Otpis ZRNA zatvoren, ime „nosilac ZRNA“ ostaje uz pridev *aktivirano*, kapa na kartici 100.000 RSD, devizni račun EUR/USD, gašenje naloga bez potvrde ide Protokolu. | 9 → **5** |
 | **R-01** (zaostatak) | 13.09.2026. | Zatvoren svesno prihvaćen ostatak br. 5: javnost donacije više nije „uslov za evidentiranje POEN-a“ (Uslovi čl. 17, Politika 4.5 i 4.9, Registar radnja 9) nego posledica proverljivosti (donacije čl. 5a); prošireni obim prava vezan je za **javnu** donaciju (Pravilnik čl. 28 st. 6, Uslovi čl. 14), čime je uklonjena razlika prema kodu, koji identitet postavlja samo uz `javno && uplatilac`. Set **4.5.9** (Pravilnik, Uslovi, Politika, Registar × 5 jezika). Kod nije menjan. | **5** |
 | **R-22** | 13.09.2026. | Otvoren po nalogu vlasnika. Nacrt mera zabeležen; obrada u svom redu. | 7 → **5** (procena) |
-| **R-04** | 13.09.2026. | Obrađen. Odobreno M-1…M-11 (sve predložene). Nijedna ne dira mehaniku ZRNA — sve su o jeziku, imenima i tačnosti, jer su tri mere za mehaniku odbijene još uz stari R-03 (07.09.2026) i ostaju odbijene. Ključno: čl. 25 dobija odgovor po **elementima testa investicionog ugovora** umesto etikete „nije prinos“, a četvrti element (nosilac ZRNA **sam upravlja**, čl. 45/46) prvi put je upotrebljen. Usput ispravljena aritmetička greška na tri mesta (upis ZRNA **ne** diže koeficijent). Set **4.6.1** (Pravilnik, Whitepaper × 5 jezika). Migracije `20260913130000_zrno_bez_trzista_i_kursa` (samo RENAME) i `20260913130100_zrno_opis_kljuc`. Brana `zrno-nije-instrument-izvor.test.ts`. | 8 → **4** |
+| **R-03** | 13.09.2026. | Obrađen i sproveden. Odobreno M-1 (socijalni programi izlaze iz pojedinačnog javnog prikaza, opšta oznaka u zapisu, dnevni agregat), M-3a/b/c (lista donacija redovnim članovima, ime izlazi iz opisa emisije, anonimna donacija samo iznosom uz pseudonim i link uz javno ime), M-4 (spisak škole samo punopravnom detetu svoje škole), M-5 (`suzen` skida vezu roditelj–dete) i M-6 (deca kao kategorija lica u aktima). Set **4.6.1** (Politika, DPIA, Registar, Uslovi, programi podrške, učešće dece × 5 jezika). Migracije `20260913130000/130100/130150/130200`. Brana `r03-posebne-kategorije-izvor.test.ts` (19 provera). | 9 → **4** |
+| **R-04** | 13.09.2026. | Obrađen. Odobreno M-1…M-11 (sve predložene). Nijedna ne dira mehaniku ZRNA — sve su o jeziku, imenima i tačnosti, jer su tri mere za mehaniku odbijene još uz stari R-03 (07.09.2026) i ostaju odbijene. Ključno: čl. 25 dobija odgovor po **elementima testa investicionog ugovora** umesto etikete „nije prinos“, a četvrti element (nosilac ZRNA **sam upravlja**, čl. 45/46) prvi put je upotrebljen. Usput ispravljena aritmetička greška na tri mesta (upis ZRNA **ne** diže koeficijent). Set **4.6.2** (Pravilnik, Whitepaper × 5 jezika). Migracije `20260913130000_zrno_bez_trzista_i_kursa` (samo RENAME) i `20260913130100_zrno_opis_kljuc`. Brana `zrno-nije-instrument-izvor.test.ts`. | 8 → **4** |
 | **R-02** | 13.09.2026. | Obrađen. Odobreno M-1…M-12, D-2 (godišnja granica 100.000 RSD po korisniku) i **opcija A** (nabavka ostaje raspodela po doprinosu; davanje se vodi kao **poklon**). Odbijeno: humanitarna nabavka po ZPDG čl. 9 st. 1 t. 11, i **svaka dinarska kapa na POEN**. Set 4.6.0 — osam akata × 5 jezika. | 9 → **6** |
 
 ---
@@ -643,6 +644,90 @@ za R-04 to znači da instrument nema nijedno pravo upravljanja, za R-10 da se sa
 Gornjeg Kola ne širi uplatama, a za R-17 da donator ne zadržava uticaj na trošenje.
 
 ---
+
+## R-03 — Posebne kategorije i podaci dece u javnoj evidenciji
+
+**Regulator:** Poverenik · **ZZPL čl. 17, 15, 16** · zatečena ocena **9**, po merama **4**.
+
+### 🔴 Nalaz koji je promenio ceo pristup — iznos sam odaje posebnu kategoriju
+
+Nije u prvobitnom registru. `izracunajStariji` (`protokol/programi.ts`) daje
+`1000 + 100 × (godine − 50)` — funkcija je **invertibilna**, pa javan iznos od
+**2.500 POEN znači tačno 65 godina**. `izracunajMajke` iz jednog broja u većini
+slučajeva jednoznačno vraća **koliko dece korisnica ima i koliko je svako staro**.
+
+Posledica: **svaka mera koja samo prepravlja tekst opisa ne rešava ništa.** Zato red
+mora da izađe iz javnog prikaza ceo, ne samo njegov naziv. To je razlika između
+R-03 = 4 i R-03 = 6.
+
+🟡 Srazmerno smanjenje pri dnevnom limitu (`min(1, L/P)`) nije zaštita — koeficijent
+je isti za sve tog dana i izvodi se iz samog feeda.
+
+### Odobrene mere
+
+| | Šta je urađeno |
+|---|---|
+| **M-1** | Socijalni programi izlaze iz pojedinačnog javnog prikaza; umesto njih dnevni zbir po programu iz `DailyEmissionSummary.breakdown`. Dan sa **jednim** korisnikom se ne objavljuje — zbir bi tada BIO pojedinačan iznos. Opis zapisa dobija opštu oznaku; operativni doprinos dobija sopstveni tip `EMISIJA_OPERATIVNI` i ostaje vidljiv. Lično razlaganje na kartici programa (`ProgramEnrollment.isplacenoPoen`). |
+| **M-3a** | Lista tuđih donacija traži potvrđenu stvarnost; sopstvene donacije vidi svako. |
+| **M-3b** | Ime uplatioca izlazi iz opisa emisije. |
+| **M-3c** | Anonimna donacija se prikazuje **samo iznosom** — bez pseudonima i linka. |
+| **M-4** | Spisak dece jedne škole: posmatrač mora biti u stanju `AKTIVNO` **i** iz te iste škole. |
+| **M-5** | `suzen` pregled profila skida i `roditelji`/`deca`. |
+| **M-6** | Deca korisnika koja nisu korisnici imenovana kao kategorija lica (Politika, Registar, DPIA), osnov čl. 16 ZZPL-a. Bez izmene koda — minimizacija je već bila uredna. |
+
+### 🔴 Odluke vlasnika
+
+1. **Opšta oznaka u zapisu transakcije** — obara odluku od 07.09.2026. („mora biti
+   osnov programa i tip"). Tada se nije znalo da iznos invertuje godište.
+2. **M-1 važi SAMO za socijalne programe** — operativni doprinos se ne dira.
+3. **Lično razlaganje ide u odeljak Programi**, ne u istoriju POEN-a.
+4. **Ne pravi se nov tab za donacije** — lista već postoji, samo se sužava.
+5. **Anonimne donacije se prikazuju kao anonimne, sa iznosom** — ne uklanjaju se iz
+   liste, jer iznos ulazi u zbir.
+6. **Pseudonim i link uz javno ime u listi donacija** — bez novog izlaganja: isti
+   krug već na `/sistem` vidi pseudonim uz isti iznos i datum.
+
+### 🔴 Nalazi u kodu koje je ovaj rizik otkrio
+
+1. **`/sistem` je bio drugi kanal istog curenja** — dizao je iste transakcije
+   **sopstvenim upitom**, sa `description` koji se i **prikazuje** (mobilna kartica),
+   i **bez isključivanja dece**, dok ih `/api/javno/feed` izričito krije. Uslov je
+   sada jedan (`BEZ_DECE` u `protokol/deca.ts`) i oba upita ga uvoze.
+2. **Anonimna donacija se prikazivala sa pseudonimom** — `sistem/page.tsx` je
+   filtrirao samo `status: CONFIRMED`, polje `javno` nije gledao uopšte. Uz to je
+   kolona POEN stajala na 0 — jedini takav red, dakle dodatna oznaka.
+3. **Spisak dece po školi otvarao se svakom „detetu"** — uslov je bio goli
+   `maloletan`, a takav nalog se otvara za dva minuta sa tuđim imejlom i
+   `maloletan: true` se upisuje odmah, i nalogu u stanju `NA_CEKANJU`.
+4. **`suzen` je propustio vezu roditelj–dete** — R-01 je oljuštio sve ostalo.
+5. **Lista donacija nije bila zatvorena** — gejt je bio samo `if (!session)`.
+
+🟢 **Zatečen kvar ispravljen usput:** `donacija-uplatilac-izvor.test.ts` je čitao
+`m.admin.*` na svih pet jezika i padao od uklanjanja admin namespace-a iz prevoda —
+četiri testa su bila crvena i na `main`-u. R-02 je isti kvar našao nezavisno.
+
+### 🟡 Svesno prihvaćeni ostaci
+
+1. **Uslovi čl. 17: pseudonimna evidencija je strukturna i ne može se isključiti.**
+   Poverenik i dalje može reći da pristanak dat pod tim uslovom nije slobodan. To ne
+   skida nijedna mera koja ne ruši sam sistem — otud ocena 4, a ne niže.
+2. **Pripadnost programu ostaje poznata sopstvenim verifikatorima**, i posle
+   prestanka prijave. Ne može se ukloniti bez ukidanja mehanizma potvrde.
+3. **Javna veza roditelj↔dete** prema potvrđenim članovima (odluka od 2026-08).
+4. **Ime javnog donatora ostaje u listi i posle gašenja naloga** (odluka uz R-14).
+5. **Operativni doprinos ostaje u feedu sa nazivom zadatka** — nije posebna
+   kategorija, ali jeste podatak o radu. To je R-13.
+
+### 🔴 Zabranjene teme uz R-03 — ne otvarati bez izričitog naloga
+
+1. **Vraćanje naziva programa u opis transakcije ili u javni prikaz.**
+2. **Objavljivanje pojedinačnog iznosa po socijalnom programu** — iznos je nosilac
+   posebne kategorije jednako kao naziv.
+3. **Objavljivanje dana sa jednim korisnikom u programu** — zbir je tada pojedinačan
+   iznos.
+4. **Otvaranje spiska dece po školi punoletnim nalozima ili nalogu na čekanju.**
+5. **Vraćanje imena uplatioca u opis emisije** (obara M-3b i deo R-13).
+
 
 ## R-22 — „Jedna osoba — jedan korisnik" se ne dokazuje ničim
 

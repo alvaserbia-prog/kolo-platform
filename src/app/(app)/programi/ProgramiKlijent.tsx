@@ -21,6 +21,8 @@ interface ProgramInfo {
     approvedAt: string | null;
     rejectionReason: string | null;
     ocekivaniDnevni: number;
+    /** Zbir evidentiranog POEN-a po ovom programu (R-03, mera M-1). */
+    isplacenoPoen: number;
   } | null;
 }
 
@@ -263,6 +265,17 @@ const ProgramKartica = memo(function ProgramKartica({
           {enStatus === "ACTIVE" && p.enrollment!.ocekivaniDnevni > 0 && (
             <p className="text-sm text-kolo-green-700 font-medium mt-1">
               {p.enrollment!.ocekivaniDnevni.toLocaleString(intlTag(locale))} {tc("poen_dan")}
+            </p>
+          )}
+          {/* Lično razlaganje po programu (R-03, mera M-1). Opis transakcije više
+              ne imenuje program — naziv je posebna kategorija po ZZPL čl. 17 i
+              zapis je trajan — pa korisnik sopstveni zbir vidi ovde, gde mu je i
+              kontekst. Vidi ga isključivo vlasnik naloga. */}
+          {p.enrollment && p.enrollment.isplacenoPoen > 0 && (
+            <p className="text-xs text-kolo-muted mt-0.5">
+              {t("isplaceno_ukupno", {
+                iznos: p.enrollment.isplacenoPoen.toLocaleString(intlTag(locale)),
+              })}
             </p>
           )}
           <p className="text-xs text-kolo-muted mt-0.5">{opisPrograma(p.type, t)}</p>

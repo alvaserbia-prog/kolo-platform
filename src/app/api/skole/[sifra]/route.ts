@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { MODUL_DECA_AKTIVAN, PORUKA_MODUL_UGASEN } from "@/lib/moduli";
 import { ucitajUcesnika } from "@/lib/protokol/deca";
+import { smeVidetiSpisakSkole } from "@/lib/deca-pravila";
 import {
   decaSkole,
   pozicijaPoBroju,
@@ -17,8 +18,10 @@ import {
 /**
  * Jedna škola: mesto na obe nacionalne liste i spisak njene dece.
  *
- * 🔴 Spisak dece vidi SAMO DETE (odluka vlasnika, 31.08.2026). Punoletnom nalogu
- * i gostu se ne šalje uopšte — vraćaju se samo brojevi i mesto na listama.
+ * 🔴 Spisak dece vidi SAMO PUNOPRAVNO DETE SVOJE ŠKOLE (odluka vlasnika,
+ * 31.08.2026; suženo uz R-03, 13.09.2026). Punoletnom nalogu, gostu, detetu koje
+ * još čeka roditelja i detetu druge škole se ne šalje uopšte — vraćaju se samo
+ * brojevi i mesto na listama. Oba uslova i razlozi: `smeVidetiSpisakSkole`.
  *
  * Dotad ga je dobijao svako ko je prijavljen, dakle i nalog otvoren pre dva
  * minuta, i to sa PSEUDONIMOM, SLIČICOM i TEKUĆIM STANJEM POENA, poređan od
@@ -52,7 +55,9 @@ export async function GET(
 
   const session = await getServerSession(authOptions);
   const posmatrac = session ? await ucitajUcesnika(session.user.id) : null;
-  const deca = posmatrac?.maloletan ? await decaSkole(skola.sifra) : null;
+  const deca = smeVidetiSpisakSkole(posmatrac, skola.sifra)
+    ? await decaSkole(skola.sifra)
+    : null;
 
   return NextResponse.json({
     skola,

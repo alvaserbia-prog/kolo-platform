@@ -31,14 +31,14 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // radnog odnosa, naročito ne ugovor o delu); čl. 57 st. 5 briše „nije socijalna
   // pomoć" — ta rečenica je sama zatvarala izuzeće iz čl. 9 ZPDG i protivrečila
   // čl. 6 Statuta. Ostaje „nije naknada".
-  // 4.6.1 — R-04: čl. 23 st. 3 je tvrdio da upis i otpis ZRNA pomeraju
+  // 4.6.2 — R-04: čl. 23 st. 3 je tvrdio da upis i otpis ZRNA pomeraju
   // koeficijent (netačno — oba člana se menjaju u istoj srazmeri, pa je količnik
   // isti); čl. 25 dobija odgovor po elementima testa investicionog ugovora
-  // umesto etikete „nije prinos". 4.6.0 je istog dana objavljen za R-02, pa dva
-  // događaja objave ne dele šifru.
+  // umesto etikete „nije prinos". 🟡 Istog dana su 4.6.0 (R-02) i 4.6.1 (R-03)
+  // već objavljeni na `main`-u, pa dva različita događaja objave ne dele šifru.
   "kolo-sistem": {
-    fajl: "Pravilnik_4_6_1.md",
-    verzija: "4.6.1",
+    fajl: "Pravilnik_4_6_2.md",
+    verzija: "4.6.2",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.
@@ -90,8 +90,11 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // 4.5.9 — R-02: čl. 2 briše „nije socijalna pomoć"; nov čl. 6a (priroda
   // evidentiranja) — nema isplate, nema prelaza imovine, nije naknada, program se
   // sprovodi u ostvarivanju cilja iz čl. 6 Statuta.
-    fajl: "programi_podrske_4_6_0.md",
-    verzija: "4.6.0",
+  // 4.6.1 — R-03 (mera M-1): čl. 4 — pojedinačno evidentiranje po programu se ne
+  // objavljuje nego dnevni zbir; izostavlja se i iznos, jer se izvodi iz godine
+  // rođenja odnosno broja i uzrasta dece i sam bi ih odao.
+    fajl: "programi_podrske_4_6_1.md",
+    verzija: "4.6.1",
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
   // 4.5.2 — postupak potvrde postojanja deteta (R-15, čl. 6 prepisan): izjašnjavaju
@@ -108,8 +111,10 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   "ucesce-dece": {
   // 4.5.9 — čl. 14b (R-02): upis iz kanala čl. 15 t. 9 nije naknada i ne donosi
   // maloletnom korisniku ni novac ni stvar.
-    fajl: "ucesce_dece_4_6_0.md",
-    verzija: "4.6.0",
+  // 4.6.1 — R-03 (mera M-4): čl. 15a — spisak dece jedne škole vidi samo
+  // punopravno dete te iste škole; nalog koji čeka roditelja ga ne dobija.
+    fajl: "ucesce_dece_4_6_1.md",
+    verzija: "4.6.1",
   },
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
   // 4.4.3 — broj POEN-a po delu je parametar odluke o nabavci (čl. 17), a ne izvod

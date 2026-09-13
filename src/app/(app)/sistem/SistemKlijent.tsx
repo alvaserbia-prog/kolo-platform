@@ -57,10 +57,20 @@ interface EmisijaChart {
   limit: number;
 }
 
+interface ProgramPregled {
+  datum: string;
+  program: string;
+  label: string;
+  korisnika: number;
+  poen: number;
+}
+
 interface DonacijaItem {
   id: string;
-  userId: string;
-  pseudonim: string;
+  /** 🔴 Kod anonimne donacije oba `null` — lice se ne identifikuje (R-03, M-3c). */
+  userId: string | null;
+  pseudonim: string | null;
+  anonimno: boolean;
   amountRSD: number;
   poenEmitted: number;
   level: number;
@@ -99,6 +109,8 @@ interface Props {
   donacije: DonacijaItem[];
   pokrovitelji: PokroviteljItem[];
   emisijeChart: EmisijaChart[];
+  /** Dnevni zbir po socijalnom programu (R-03, M-1) — stoji umesto pojedinačnih redova. */
+  programiPregled: ProgramPregled[];
   /** Zapisi Protokola — sve što nije prepis između korisnika. */
   protokolTx: Transakcija[];
   /** Prepisi između korisnika (TRANSFER) — kartica „Ukupno razmena". */
@@ -131,6 +143,7 @@ export default function SistemKlijent({
   pokrovitelji,
   emisijeChart,
   protokolTx,
+  programiPregled,
   razmene,
   clanovi,
   pocetnaSekcija,
@@ -367,6 +380,7 @@ export default function SistemKlijent({
           danasLimit={danasLimit}
           emisijeChart={emisijeChart}
           protokolTx={protokolTx}
+          programiPregled={programiPregled}
         />
       )}
       {sekcija === "clanovi" && (
@@ -750,12 +764,14 @@ function PregledSekcija({
   danasLimit,
   emisijeChart,
   protokolTx,
+  programiPregled,
 }: {
   verified: boolean;
   danasEmitovano: number;
   danasLimit: number;
   emisijeChart: EmisijaChart[];
   protokolTx: Transakcija[];
+  programiPregled: ProgramPregled[];
 }) {
   const locale = useLocale();
   const t = useTranslations("sistem");
@@ -767,6 +783,63 @@ function PregledSekcija({
       {/* Traka „Napredak do Faze 2" preseljena je u sekciju Faza sistema (2026-09-03):
           prag od 1.000.000 POENA je granica između Faze 1 i Faze 2, pa stoji tamo
           gde su faze i nabrojane, a ne uz spisak zapisa Protokola. */}
+      {/* Socijalni programi — dnevni zbir po programu.
+          🔴 Stoji UMESTO pojedinačnih emisija, koje su merom M-1 (R-03) izašle iz
+          spiska ispod: naziv programa je posebna kategorija po ZZPL čl. 17, a
+          iznos sam invertuje godište (Podrška starijima: 1000 + 100 × (godine −
+          50)) i broj i uzrast dece (Podrška majkama). Zbir uz broj korisnika to
+          ne odaje, a proverljivost ostaje potpuna — zbir agregata plus ostali
+          kanali daju promenu opticaja. */}
+      {programiPregled.length > 0 && (
+        <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
+          <div className="px-5 py-3 border-b border-kolo-border">
+            <p className="text-sm font-semibold text-kolo-text">{t("programi_zbir_naslov")}</p>
+            <p className="text-xs text-kolo-muted mt-0.5">{t("programi_zbir_opis")}</p>
+          </div>
+          <div className="hidden sm:grid grid-cols-[9rem_1fr_7rem_7rem] gap-x-3 px-4 py-2 border-b border-kolo-border bg-kolo-bg">
+            <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("col_datum")}</span>
+            <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide">{t("programi_zbir_program")}</span>
+            <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide text-right">{t("programi_zbir_korisnika")}</span>
+            <span className="text-xs font-semibold text-kolo-muted uppercase tracking-wide text-right">{tc("poen")}</span>
+          </div>
+          {programiPregled.map((r, i) => (
+            <div
+              key={`${r.datum}-${r.program}`}
+              className={`px-4 py-2.5 ${i < programiPregled.length - 1 ? "border-b border-kolo-border/30" : ""}`}
+            >
+              <div className="hidden sm:grid grid-cols-[9rem_1fr_7rem_7rem] gap-x-3 items-center text-sm">
+                <span className="text-kolo-muted">
+                  {new Date(r.datum).toLocaleDateString(intlTag(locale), {
+                    day: "2-digit", month: "2-digit", year: "2-digit",
+                  })}
+                </span>
+                <span className="text-kolo-text">{r.label}</span>
+                <span className="text-right text-kolo-muted">{r.korisnika}</span>
+                <span className="text-right font-bold text-kolo-text">
+                  {r.poen.toLocaleString(intlTag(locale))}
+                </span>
+              </div>
+              <div className="sm:hidden space-y-0.5">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-sm text-kolo-text">{r.label}</span>
+                  <span className="text-sm font-bold text-kolo-text">
+                    {r.poen.toLocaleString(intlTag(locale))} {tc("poen")}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 text-xs text-kolo-muted">
+                  <span>
+                    {new Date(r.datum).toLocaleDateString(intlTag(locale), {
+                      day: "2-digit", month: "2-digit", year: "2-digit",
+                    })}
+                  </span>
+                  <span className="ml-auto">{t("programi_zbir_korisnika")}: {r.korisnika}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Zapisi Protokola */}
       <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden">
         <div className="px-5 py-3 border-b border-kolo-border flex justify-between items-center">
@@ -1520,12 +1593,16 @@ function DonacijeSekcija({
           <div key={d.id} className={i < donacije.length - 1 ? "border-b border-kolo-border/30" : ""}>
             {/* Desktop */}
             <div className="hidden sm:grid grid-cols-[1fr_100px_110px_72px_110px] gap-4 px-5 py-3 items-center text-sm">
-              <Link
-                href={profilHref({ id: d.userId, pseudonim: d.pseudonim })}
-                className="font-medium text-kolo-green-700 hover:underline truncate"
-              >
-                <Pseudonim>{d.pseudonim}</Pseudonim>
-              </Link>
+              {d.anonimno || !d.pseudonim ? (
+                <span className="font-medium text-kolo-muted truncate">{t("donacija_anonimna")}</span>
+              ) : (
+                <Link
+                  href={profilHref({ id: d.userId ?? "", pseudonim: d.pseudonim })}
+                  className="font-medium text-kolo-green-700 hover:underline truncate"
+                >
+                  <Pseudonim>{d.pseudonim}</Pseudonim>
+                </Link>
+              )}
               <span className="text-right">
                 {d.amountRSD.toLocaleString(intlTag(locale))}
               </span>
@@ -1544,9 +1621,13 @@ function DonacijeSekcija({
             {/* Mobilna kartica */}
             <div className="sm:hidden px-4 py-3 space-y-1">
               <div className="flex items-center justify-between">
-                <Link href={profilHref({ id: d.userId, pseudonim: d.pseudonim })} className="font-semibold text-kolo-green-700 hover:underline">
-                  <Pseudonim>{d.pseudonim}</Pseudonim>
-                </Link>
+                {d.anonimno || !d.pseudonim ? (
+                  <span className="font-semibold text-kolo-muted">{t("donacija_anonimna")}</span>
+                ) : (
+                  <Link href={profilHref({ id: d.userId ?? "", pseudonim: d.pseudonim })} className="font-semibold text-kolo-green-700 hover:underline">
+                    <Pseudonim>{d.pseudonim}</Pseudonim>
+                  </Link>
+                )}
                 <span className="text-sm font-bold text-kolo-text">
                   {d.poenEmitted.toLocaleString(intlTag(locale))} {tc("poen")}
                 </span>

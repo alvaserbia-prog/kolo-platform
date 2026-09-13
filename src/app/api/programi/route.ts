@@ -48,6 +48,9 @@ export async function GET() {
             approvedAt: enrollment.approvedAt?.toISOString() ?? null,
             rejectionReason: enrollment.rejectionReason,
             ocekivaniDnevni,
+            // Lično razlaganje po programu (R-03, mera M-1): opis transakcije
+            // više ne imenuje program, pa korisnik sopstveni zbir vidi ovde.
+            isplacenoPoen: enrollment.isplacenoPoen,
           }
         : null,
     };

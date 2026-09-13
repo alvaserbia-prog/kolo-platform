@@ -270,6 +270,10 @@
     "kartica_donacije_opis": "potvrđenih donacija",
     "kartica_promet": "Ukupno prepisa",
     "kartica_promet_opis": "POEN između članova",
+    "programi_zbir_naslov": "Socijalni programi — dnevni zbroj",
+    "programi_zbir_opis": "Pojedinačne isplate socijalnih programa se ne objavljuju. Objavljuje se dnevni zbroj po programu, uz broj korisnika — zbroj svih kanala i dalje daje ukupan broj evidentiranih POENA.",
+    "programi_zbir_program": "Program",
+    "programi_zbir_korisnika": "Korisnika",
     "protokol_tx_naslov": "Zapisi Protokola",
     "ukupno": "ukupno",
     "rast_opticaja_objasnjenje": "Kada zajednica evidentira 1.000.000 POEN-a doprinosa, sustav prelazi u Fazu 2 i aktivira se Gornje Kolo (zajedničko odlučivanje). Prag mjeri aktivnost zajednice. POEN nema cijenu ni vrijednost izvan sustava.",
@@ -284,6 +288,7 @@
     "donacije_pregled_blokiran": "Pregled donacija dostupan je redovnim članovima.",
     "nema_donacija": "Nema potvrđenih donacija.",
     "prikazanih_donacija": "{count} prikazanih donacija",
+    "donacija_anonimna": "Anonimna donacija",
     "col_donator": "Donator",
     "col_nivo": "Razina",
     "col_datum": "Datum",
@@ -787,6 +792,7 @@
     "opis_starijima": "1.000 + 100 × (godine − 50) POEN/dan · dostupno članovima od 50 godina",
     "opis_posebna_briga": "2.000 POEN/dan · osobe s invaliditetom · rješenje nadležnog tijela",
     "opis_skolovanje": "Iznos postavlja admin · ponovna provjera svakih 6 mjeseci",
+    "isplaceno_ukupno": "Evidentirano po ovom programu: {iznos} POEN",
     "nepun_indeks": "Za socijalni program potrebna je najmanje jedna potvrda, indeks stvarnosti od 10 %. Cijeli tvoj lanac potvrđuje ispunjenost uvjeta prije odobravanja.",
     "posebna_briga_datum_resenja": "Datum donošenja rješenja o invaliditetu",
     "posebna_briga_datum_isteka": "Datum isteka rješenja (opcionalno, ostavi prazno ako je trajno)",
@@ -925,6 +931,7 @@
     "lista_naslov": "Lista donacija",
     "lista_opis": "Javni donatori prikazani su imenom i prezimenom; anonimni donatori se ne identificiraju.",
     "lista_prazno": "Još nema evidentiranih donacija.",
+    "lista_zakljucana": "Popis donacija vide redovni članovi. Vlastite donacije vidiš iznad, bez obzira na status.",
     "lista_anoniman": "Anonimni donator",
     "ips_naslov": "Doniraj putem IPS QR koda (instant)",
     "ips_opis": "Skeniraj QR mobilnom bankom, uplata u dinarima stiže za par sekundi, bez provizije platforme. POEN se evidentira nakon što Fondacija potvrdi priljev.",
@@ -987,11 +994,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uvjeti korištenja KOLO platforme",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -999,11 +1006,11 @@
     },
     "dpia": {
       "naslov": "DPIA. Procjena učinka na zaštitu osobnih podataka",
-      "ver": "4.5.2"
+      "ver": "4.6.1"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade osobnih podataka",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "rizici": {
       "naslov": "Izjava o prihvaćanju rizika",
@@ -1011,11 +1018,11 @@
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.6.1"
+      "ver": "4.6.2"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sustava",
-      "ver": "4.6.1",
+      "ver": "4.6.2",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -1035,21 +1042,21 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sustavu"
     },
     "meta_uslovi_title": "Uvjeti korištenja · KOLO",
-    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.5.9",
+    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.6.1",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.9",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.1",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.5.2",
+    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.6.1",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.5.9",
+    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.6.1",
     "meta_rizici_title": "Izjava o prihvaćanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.6.0",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.1",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.2",
     "meta_pravilnik_title": "Pravilnici KOLO sustava · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.6.1",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.6.2",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sustavu",
@@ -2335,12 +2342,13 @@
     "primljena_verifikacija": "Primljena potvrda od {pseudonim}",
     "nadzor": "Nadzor potvrde {verifikator} → {verifikovani}",
     "donacija": "Evidentiran doprinos po donaciji: {iznos} POEN",
-    "donacija_uplatilac": "Evidentiran doprinos po donaciji: {iznos} POEN — uplatitelj: {uplatilac}",
+    "donacija_uplatilac": "Evidentiran doprinos po donaciji: {iznos} POEN",
     "pokroviteljstvo": "Evidentiran doprinos po pokroviteljstvu: {iznos} POEN",
     "osnivacki": "Osnivački doprinos, korak {korak}/{ukupno}",
     "krug_bonus": "Rast Kruga „{krug}”, {clanovi} članova",
     "krug_osnivanje": "Osnivanje Kruga „{krug}”",
     "program": "Program {program}",
+    "socijalni_program": "Socijalni program",
     "doprinos_sadrzaju": "Doprinos sadržaju platforme",
     "doprinos_razmeni": "Doprinos razmjeni, korak {korak}",
     "prijateljstvo": "Prijateljstvo s {pseudonim}",

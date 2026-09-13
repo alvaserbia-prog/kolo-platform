@@ -53,14 +53,25 @@ describe("M-4a — detekcija automatska, potvrda ljudska", () => {
 });
 
 describe("M-9 — donirati sme i član bez potvrde", () => {
-  it("nijedna donaciona ruta ne traži potvrđenu stvarnost", () => {
+  it("nijedna donaciona ruta ne traži potvrđenu stvarnost za samo doniranje", () => {
+    // 🔴 Sužено uz R-03 (13.09.2026). Brana i dalje čuva ono zbog čega je
+    // postavljena — da doniranje ostane otvoreno nalogu bez potvrde — ali više ne
+    // zabranjuje POMEN `verified` u `donacije/route.ts`: mera M-3a tamo uvodi
+    // gejt nad LISTOM TUĐIH donacija, što je druga stvar od doniranja. Da bi se
+    // razlika videla iz same brane, dva su uslova ispod: liste ima samo uz
+    // potvrdu, a sopstvene donacije i podaci za uplatu stižu svakome.
     for (const p of [
-      "src/app/api/donacije/route.ts",
       "src/app/api/donacije/ips/route.ts",
       "src/app/api/donacije/placanje/zapocni/route.ts",
     ]) {
       expect(izvor(p)).not.toContain("session.user.verified");
     }
+    const lista = izvor("src/app/api/donacije/route.ts");
+    expect(lista).toContain("const verifikovan = !!session.user.verified");
+    // Gejt sme da stoji SAMO nad listom tuđih donacija.
+    expect(lista).toContain("const javneDonacije = verifikovan");
+    // Sopstvene donacije i poziv na broj se ne uslovljavaju potvrdom.
+    expect(lista).not.toContain("if (!verifikovan) return");
   });
 
   it("evidentiranje ne odbija nepotvrđen nalog", () => {
