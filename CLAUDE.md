@@ -9,11 +9,63 @@ Vercel **Production Branch = `production`**. Podela okruženja:
 - Podrazumevano radi i guraj na **`main`** (= test). NIKAD ne guraj direktno na `production` osim kad vlasnik eksplicitno kaže „objavi na ekolo.rs" / „pošalji na produkciju".
 - Vlasnik ne barata gitom. Mapiranje komandi:
   - „pošalji na test" → commit + push na `main`.
-  - „objavi na ekolo.rs" → merge `main` → `production` + push na `production`.
+  - „objavi na ekolo.rs" → **prvo `npm run prevodi:objava`** (vidi „Tekst se menja SAMO na srpskom" ispod), pa merge `main` → `production` + push na `production`.
 - Pre „objave" proveri da je `main` čist i da test izgleda ispravno.
 - **Posle puša NE proveravati Vercel buildove** (nema `list_deployments`/`get_deployment` u petlji, nema čekanja da build pređe u READY). Push je kraj posla — javi šta je gurnuto i na koju granu, i tu stani. Vlasnik sam gleda sajt; ako nešto pukne, reći će. Buildove proveravati **samo kad vlasnik izričito pita** („da li je prošlo", „puca li build") ili kad je promena takva da build realno može da padne (migracija, izmena `vercel.json`/`package.json`, nova env varijabla).
 - **Napomena o git okruženju:** u remote kontejneru lokalni `main` može biti zastareo (klon u trenutku startovanja). Pre poređenja uvek `git fetch origin main` i poredi sa **`origin/main`**, ne sa lokalnim `main`.
 - 🔴 **NIKAD ne povlačiti tuđe izmene na `main` ni na `production` — guraju se ISKLJUČIVO sopstvene izmene iz tekuće sesije.** Konkretno: ne merge-ovati, ne cherry-pick-ovati i ne rebase-ovati tuđe grane, PR-ove, forkove ni „zalutale" commit-e u `main`/`production`, čak i kad deluju gotovo ili kad se pominju u zadatku. Ako se u toku rada naiđe na tuđe commit-e (npr. na grani sa koje se kreće, ili u konfliktu), prijaviti vlasniku i **sačekati izričito odobrenje** — ne uvlačiti ih samoinicijativno. Isto važi i pri rešavanju konflikata: uzeti svoju izmenu i tekuće stanje grane, ne uvlačiti dodatni tuđi rad usput. Merge `main` → `production` pri „objavi" je jedini dozvoljeni merge, i on prenosi samo ono što je već ranije gurnuto na `main` kroz ovo pravilo.
+
+
+### 🔴 Tekst se menja SAMO na srpskom; prevodi idu pre objave (2026-09-13)
+
+Odluka vlasnika. **Tokom rada se menja isključivo srpski original** — `messages/sr.json`,
+`src/lib/faq-data.ts` i akti u korenu `dokumentacija 4.1/`. Prevodi na **en/ru/hr/hu**
+rade se **na kraju, pre merge-a `main` → `production`**, u jednom prolazu.
+
+**Mapiranje komandi se time proširuje:**
+- „pošalji na test" → commit + push na `main`. Prevodi **ne moraju** biti urađeni.
+- „objavi na ekolo.rs" → **prvo `npm run prevodi:objava`**, pa tek onda merge `main` → `production`.
+  🔴 Ako ta komanda padne, objava **staje** dok se prevodi ne urade. To je jedina tačka
+  u kojoj se dug naplaćuje.
+
+**Alat:** `scripts/prevodi.mjs`, tri komande:
+
+| Komanda | Šta radi |
+|---|---|
+| `npm run prevodi` | izveštaj o dugu, **uvek prolazi** — svakodnevni rad |
+| `npm run prevodi:objava` | isto, ali **pada** ako dug postoji — pred objavu |
+| `npm run prevodi:potvrdi` | upisuje stavke kojima prevod NE treba menjati |
+
+🔴 **Meri se RAZLIKA prema `origin/production`, ne apsolutno stanje.** Ključ je nov,
+ili je srpska vrednost izmenjena a prevod ostao identičan onome na produkciji. Bez
+diferencijalnog merenja bi zatečeni dug iz ranijih sesija zauvek obarao svaku objavu,
+pa bi se brana prvog dana isključila. Zato je pre poređenja obavezan
+`git fetch origin production` (u remote kontejneru grana ume da fali).
+
+🔴 **Paritet ključeva NE hvata zastareo prevod** i to je razlog zašto ova provera
+postoji pored `npm run i18n:check`. Ključ postoji u svih pet fajlova, vrednost je stara —
+prevod tada **govori nešto drugo nego original**, a nijedan zatečeni test to ne vidi.
+Zatečeno stanje pri uvođenju brane: **204 ključa** u `en`, `ru` i `hu` nose tekst od pre
+izmena na `main` (npr. `novcanik.qr_opis` — srpski i hrvatski su dobili izmenu, ostala
+tri jezika nisu). Dve provere, dve svrhe — **ne spajati ih**:
+- `npm run i18n:check` — apsolutno stanje (paritet ključeva, vrednosti ostale na
+  engleskom, `admin` namespace koji se **ne prevodi**).
+- `npm run prevodi` — dug tekućeg rada prema produkciji.
+
+**Kad izmena srpskog ne traži izmenu prevoda** (ispravljena interpunkcija, reč koja se
+ionako ne prevodi): pregledati spisak pa `npm run prevodi:potvrdi`. Upisuje se **heš
+srpske vrednosti** u `scripts/prevodi-provereno.json`, pa se stavka **sama vraća u dug**
+čim se srpski ponovo promeni. 🔴 Ne pokretati tu komandu da bi spisak bio prazan — time
+se brana gasi bez traga da je išta pregledano.
+
+🟡 **Brana NIJE u Vercel build-u, i to namerno.** Vercel radi plitak klon bez svih grana,
+pa `git show origin/production:…` tamo ne radi; uz to bi provera na `production` grani
+poredila granu sa samom sobom. Mesto brane je **sesija, pre merge-a** — `--auto` mod
+postoji u skripti ako se ikad uveže u build, ali se za sada ne koristi.
+
+🟡 **Šta brana NE pokriva:** izmene teksta koje žive direktno u komponentama
+(hardkodovan copy van `messages/`). Ako se takav tekst pojavi, ide u `messages/` — to je
+pravilo koje je i inače na snazi.
 
 ### Vercel topologija — JEDAN projekat `kolo` (od 2026-06-04; kolo-peach re-pointovan 2026-06-12)
 **PROMENA 2026-06-04:** stari `kolo-platform` projekat (`prj_F8dvteluVkzxlGzIMfpvXqWJD2yC`) je **isključen** — više ne gradi (poslednji deploy `d8bc6fc`, ~3. jun). Sada **jedan projekat `kolo`** (`prj_xVaJlVaSzPl7rYnF1lM4WXwE6Y8m`, team `team_YswkbIApgJlmqdQLJJu8SLDE`) gradi **obe grane** istog repoa (`alvaserbia-prog/kolo-platform`).

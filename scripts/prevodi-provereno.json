@@ -1,0 +1,4 @@
+{
+  "_opis": "Stavke pregledane pri prevođenju kojima prevod NE treba menjati. Vrednost je heš srpskog teksta — čim se srpski ponovo promeni, stavka se sama vraća u dug. Upisuje `npm run prevodi:potvrdi`; upisati TEK pošto je spisak stvarno pregledan.",
+  "stavke": {}
+}
