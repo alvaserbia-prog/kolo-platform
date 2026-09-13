@@ -346,9 +346,17 @@ export function smeUcestvovati(u: UcesnikProvera): boolean {
  * jer zavisi od propisa koji se menjaju nezavisno od pravilnika. Isti razlog iz
  * kog u aktima nema poreskih stopa ni `PRAG_PROVERE_POREKLA_RSD` iz AML glave.
  *
- * Danas 100.000 RSD — iznos do kog davanje jednog davaoca u kalendarskoj godini
- * ostaje van oporezivanja po propisima o porezima na imovinu. Proveriti kao
- * važeći na dan primene; menja se izmenom ove konstante, ne izmenom akta.
+ * 100.000 RSD — iznos do kog davanje jednog davaoca u jednoj kalendarskoj godini
+ * ostaje van oporezivanja po propisima o porezima na imovinu.
+ *
+ * 🟢 Iznos je FIKSAN, ne usklađuje se godišnje (odluka vlasnika uz potvrdu, 13.09.2026).
+ * Godišnje usklađivanje indeksom potrošačkih cena, koje se objavljuje svakog januara i
+ * primenjuje od 1. februara, obuhvata ISKLJUČIVO iznose iz Zakona o porezu na dohodak
+ * građana; ovaj iznos u tom spisku ne stoji.
+ *
+ * 🔴 „Fiksan" ne znači nepromenljiv: iznos se menjao izmenama samog zakona (ranije
+ * 9.000, pa 30.000 dinara). Zato se NE proverava svakog februara, nego pri izmeni
+ * propisa. Menja se izmenom ove konstante, ne izmenom akta.
  */
 export const GODISNJA_GRANICA_VREDNOSTI_RSD = 100_000;
 

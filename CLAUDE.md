@@ -1558,11 +1558,17 @@ kvalifikacija ipak padne na „drugi prihod", najgori ishod je ~16% od najviše 
 
 #### 🟡 Svesno prihvaćeni ostaci
 
-1. **Kvalifikacija davanja iz nabavke nije potvrđena** — poklon (prag 100.000, 2,5%,
-   plaća primalac) ili drugi prihod (bez praga, ~16%, obračunava isplatilac). Akti su
-   pisani u prilog poklonu. **Pitanje za knjigovođu; ne pisati kao tvrdnju.**
-2. **Da li je iznos od 100.000 fiksan ili se usklađuje** — proveriti pre nego što ga
-   UO usvoji kao granicu.
+1. 🟢 **Davanje iz nabavke vodi se kao POKLON** (odluka vlasnika, 13.09.2026). To je
+   **pozicija Fondacije, ne utvrđenje nadležnog organa** — on može zauzeti drugačiji
+   stav i primeniti režim „drugih prihoda" (bez praga, ~16%, obračunava isplatilac).
+   🔴 **U aktima se reč „poklon" i dalje NE piše** — pišu se činjenice koje je čine.
+   Ne pisati nigde da je poreski tretman utvrđen; Izjava o rizicima čl. 10 izričito
+   kaže da Fondacija poreski tretman ne garantuje.
+2. 🟢 **Iznos od 100.000 RSD je FIKSAN** (odluka vlasnika uz proveru, 13.09.2026).
+   Godišnje usklađivanje indeksom potrošačkih cena obuhvata **samo** iznose iz ZPDG-a;
+   ovaj u tom spisku ne stoji. 🔴 „Fiksan" ne znači nepromenljiv — menjao se izmenama
+   zakona (ranije 9.000, pa 30.000), pa se **proverava pri izmeni propisa, ne svakog
+   februara**.
 3. **Prag od 20.000 POEN-a je uslov na strani primaoca**, a poklon po definiciji uslov
    nema. Najtanja tačka u celom R-02; brani ga čl. 19.
 4. **Petlja donacija → POEN → prag → roba ostaje otvorena** (poreklo POEN-a se ne

@@ -837,6 +837,7 @@ kao poreske stope u donacijama čl. 10.
 | **D-1** | **Prestaje poricanje da je pomoć; poricanje da je naknada OSTAJE.** Ne tvrdi se ni da jeste socijalna pomoć — navode se činjenice, ne zaključak. |
 | **Poklon** | **Davanje iz nabavke se vodi kao poklon.** Obrazloženje vlasnika, doslovno: *„on ne daje POEN koje je pribavio nego evidenciju doprinosa koji je već dao."* Zapis se gasi i ne prelazi Fondaciji; nije jedinica pribavljena radi preuzimanja. |
 | **D-2** | **Kapa na dinarsku vrednost preuzetih dobara po korisniku godišnje.** Danas 100.000 RSD, u kodu (`GODISNJA_GRANICA_VREDNOSTI_RSD`), ne u aktu. |
+| **D-3** | **Iznos granice je fiksan** — ne prati godišnje usklađivanje, jer ono pokriva samo iznose iz ZPDG-a. Proverava se pri izmeni propisa, ne svakog februara. |
 
 🔴 **Zašto kapa radi dvostruko:** ispod 100.000 nema poreza na poklon uopšte; ako
 kvalifikacija ipak padne na „drugi prihod", najgori ishod je ~16% od najviše 100.000,
@@ -900,12 +901,20 @@ dakle **do ~16.000 RSD po korisniku godišnje** — gornja granica cele izložen
 
 ### 🟡 Svesno prihvaćeni ostaci
 
-1. **Ostaje otvoreno kako će nadležni organ kvalifikovati davanje iz nabavke** —
-   poklon (prag 100.000, 2,5%, plaća primalac) ili drugi prihod (bez praga, ~16%,
-   obračunava isplatilac). Akti su pisani u prilog poklonu; nije potvrđeno.
-   **Pitanje za knjigovođu, ne pisati kao tvrdnju.**
-2. **Da li je iznos od 100.000 fiksan ili se usklađuje** — proveriti pre nego što ga
-   UO usvoji kao granicu.
+1. 🟢 **ZATVORENO 13.09.2026 (odluka vlasnika): davanje iz nabavke vodi se kao
+   POKLON.** To je **pozicija Fondacije**, ne utvrđenje nadležnog organa — akti su
+   pisani u prilog toj kvalifikaciji (davanje bez naknade, bez protivčinidbe, zapis
+   se gasi i ne prelazi Fondaciji), ali sam organ može zauzeti drugačiji stav i tada
+   se primenjuje režim „drugih prihoda" (bez praga, ~16%, obračunava isplatilac).
+   🔴 **U aktima se reč „poklon" i dalje NE piše** — pišu se činjenice koje je čine.
+   Samokvalifikacija je slaba i ume da se okrene protiv nas; upravo je „nije socijalna
+   pomoć" sama sebi zatvorila vrata.
+2. 🟢 **ZATVORENO 13.09.2026: iznos od 100.000 RSD je FIKSAN.** Provereno: godišnje
+   usklađivanje indeksom potrošačkih cena (objavljuje se u januaru, primenjuje od
+   1. februara) obuhvata **isključivo** iznose iz Zakona o porezu na dohodak građana —
+   ovaj u tom spisku ne stoji. 🔴 „Fiksan" ne znači nepromenljiv: iznos se menjao
+   izmenama samog zakona (ranije 9.000, pa 30.000 dinara). Zato se **ne proverava
+   svakog februara nego pri izmeni propisa**.
 3. **Petlja donacija → POEN → prag → roba ostaje otvorena** (poreklo POEN-a se ne
    ispituje, odluka uz R-10).
 4. **Trostrana konstrukcija pokroviteljstva** (firma daje, POEN dobija fizičko lice)
