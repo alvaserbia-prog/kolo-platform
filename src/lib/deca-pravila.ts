@@ -579,7 +579,7 @@ export function danaDoIsteka(rokDo: Date, sada: Date): number {
  * 500. Ne broje se raskinuta prijateljstva (njihovih 500 je već otpisano — inače bi
  * isti POEN bio oduzet dvaput), prijateljstva sa braćom i sestrama (nikad nisu
  * nosila POEN) ni prijateljstva na čekanju (druga strana nikad nije postala
- * aktivna). Sve to nosi jedno polje: `Prijateljstvo.poenIsplacen`.
+ * aktivna). Sve to nosi jedno polje: `Prijateljstvo.poenEvidentiran`.
  *
  * Razlog za otpis je uravnoteženje kanala. Prijateljstvo nosi 500 za trideset
  * sekundi u istoj prostoriji; potvrda stvarnosti nosi 1.000, ali traži da tvrdiš

@@ -104,9 +104,17 @@ describe("IZVOR — prevodi za uplatioca postoje na svih pet jezika", () => {
     it(jezik, () => {
       const m = JSON.parse(izvor(`messages/${jezik}.json`));
       expect(m.transakcije.donacija_uplatilac).toContain("{uplatilac}");
+      expect(m.donacije.karticno_sopstvena_kartica.length).toBeGreaterThan(20);
+      // 🔴 Namespace `admin` živi ISKLJUČIVO u sr (odluka od 2026-09-13) —
+      // `src/i18n/request.ts` ga dodaje svakom drugom jeziku pri učitavanju
+      // poruka. Provera nad `m.admin` u prevodima je zato tražila ključ koji po
+      // pravilu ne sme da postoji; to je test obaralo od te odluke naovamo.
+      if (jezik !== "sr") {
+        expect(m.admin).toBeUndefined();
+        return;
+      }
       expect(m.admin.donacije_uplatilac_obavezan.length).toBeGreaterThan(5);
       expect(m.admin.donacije_strani_priliv.length).toBeGreaterThan(5);
-      expect(m.donacije.karticno_sopstvena_kartica.length).toBeGreaterThan(20);
     });
   }
 });

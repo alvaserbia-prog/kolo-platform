@@ -35,6 +35,10 @@ import {
   krajPeriodaPreuzimanja,
   danJeUPeriodu,
   smeUcestvovati,
+  GODISNJA_GRANICA_VREDNOSTI_RSD,
+  vrednostDelaRSD,
+  uGodisnjojGranici,
+  preostaloDoGraniceRSD,
   ispunjavaPrag,
   PRAG_POENA_ZA_UCESCE,
   utvrdiIzbor,
@@ -408,13 +412,45 @@ export async function objaviNabavku(nabavkaId: string, ulaz: ObjavaUlaz) {
 
 // ─── Prijava (čl. 21) ─────────────────────────────────────────────────────────
 
+/** Prvi trenutak kalendarske godine kojoj datum pripada. */
+function pocetakGodine(sada = new Date()): Date {
+  return new Date(Date.UTC(sada.getUTCFullYear(), 0, 1));
+}
+
+/**
+ * Ukupna dinarska vrednost dobara koja je korisnik preuzeo u tekućoj kalendarskoj
+ * godini (čl. 21a st. 2).
+ *
+ * 🔴 Meri se sa RAČUNA dobavljača — `placenoRSD ÷ brojDelova` — nikad iz broja
+ * POEN-a. Vrednost izvedena iz POEN-a bila bi odnos POEN-a prema dinaru, dakle
+ * upravo ono što Uslovi čl. 19 i Pravilnik čl. 13 kažu da Fondacija ne utvrđuje.
+ *
+ * Broje se samo preuzeti delovi: rezervacija i poziv ne prenose nijedno dobro, pa
+ * ne troše granicu.
+ */
+export async function preuzetaVrednostUGodini(userId: string, sada = new Date()): Promise<number> {
+  const prijave = await prisma.nabavkaPrijava.findMany({
+    where: { userId, status: "PREUZEO", preuzetoAt: { gte: pocetakGodine(sada) } },
+    select: { nabavka: { select: { placenoRSD: true, brojDelova: true } } },
+  });
+  let zbir = 0;
+  for (const p of prijave) {
+    const v = vrednostDelaRSD(
+      p.nabavka.placenoRSD == null ? null : Number(p.nabavka.placenoRSD),
+      p.nabavka.brojDelova,
+    );
+    if (v != null) zbir += v;
+  }
+  return zbir;
+}
+
 export async function prijaviSe(userId: string, nabavkaId: string) {
   const [korisnik, n] = await Promise.all([
     prisma.user.findUnique({
       where: { id: userId },
       select: { maloletan: true, deaktiviranAt: true, status: true, verified: true, indeksStvarnosti: true, wallet: { select: { balance: true } } },
     }),
-    prisma.nabavka.findUnique({ where: { id: nabavkaId }, select: { status: true, prijaveDo: true } }),
+    prisma.nabavka.findUnique({ where: { id: nabavkaId }, select: { status: true, prijaveDo: true, placenoRSD: true, brojDelova: true } }),
   ]);
   if (!korisnik) throw new NabavkaGreska("Korisnik nije pronađen.", 404);
   if (!n) throw new NabavkaGreska("Nabavka nije pronađena.", 404);
@@ -429,6 +465,23 @@ export async function prijaviSe(userId: string, nabavkaId: string) {
       403
     );
   }
+  // Čl. 21a — godišnja granica dinarske vrednosti preuzetih dobara po korisniku.
+  // Proverava se PRI PRIJAVI, ne pri preuzimanju: čovek koji je već iscrpeo granicu
+  // ne treba da zauzme mesto u redu i da ga tek na kraju izgubi.
+  const vecPreuzeto = await preuzetaVrednostUGodini(userId);
+  const vrednostDela = vrednostDelaRSD(
+    n.placenoRSD == null ? null : Number(n.placenoRSD),
+    n.brojDelova,
+  );
+  if (!uGodisnjojGranici(vecPreuzeto, vrednostDela)) {
+    const preostalo = preostaloDoGraniceRSD(vecPreuzeto);
+    throw new NabavkaGreska(
+      `Godišnja granica vrednosti preuzetih dobara je ${GODISNJA_GRANICA_VREDNOSTI_RSD.toLocaleString("sr-RS")} RSD po korisniku (čl. 21a). ` +
+        `U ovoj kalendarskoj godini vam je preostalo ${Math.floor(preostalo).toLocaleString("sr-RS")} RSD; pravo se obnavlja početkom naredne godine.`,
+      403
+    );
+  }
+
   if (n.status !== "OBJAVLJENA") throw new NabavkaGreska("Prijave nisu otvorene.");
   if (n.prijaveDo && n.prijaveDo.getTime() <= Date.now()) throw new NabavkaGreska("Rok za prijavu je istekao.");
 

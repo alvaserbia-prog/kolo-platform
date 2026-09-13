@@ -1007,15 +1007,15 @@
     },
     "rizici": {
       "naslov": "Izjava o prihvaćanju rizika",
-      "ver": "4.5.5"
+      "ver": "4.5.9"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.4.6"
+      "ver": "4.5.9"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sustava",
-      "ver": "4.5.8",
+      "ver": "4.5.9",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -1045,11 +1045,11 @@
     "meta_radnje_title": "Registar radnji obrade · KOLO",
     "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.5.5",
     "meta_rizici_title": "Izjava o prihvaćanju rizika · KOLO",
-    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.5.5",
+    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.5.9",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.4.6",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.5.9",
     "meta_pravilnik_title": "Pravilnici KOLO sustava · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.5.8",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.5.9",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sustavu",
@@ -1568,7 +1568,9 @@
     "licence_tekst": "Softver je otvoren pod AGPL-3.0, sadržaj pod CC BY-SA 4.0. Licence se ne mogu zamijeniti restriktivnijima, ni odlukom Zaklade ni odlukom Gornjeg Kola.",
     "gde_naslov": "Gdje piše detaljno",
     "gde_uvod": "Svaka tvrdnja s ove stranice ima osnovu u objavljenim aktima. Mjerodavan je njihov tekst, ne ovaj pregled.",
-    "nazad_link": "Natrag na Kako sustav radi"
+    "nazad_link": "Natrag na Kako sustav radi",
+    "porez_naslov": "Porezni propisi",
+    "porez_tekst": "Porez na dohodak građana oporezuje dohotke iz svih izvora, uključujući dohodak ostvaren u nenovčanom obliku. Nije, dakle, sporno je li nešto naknada — sporno je je li korisnik nešto primio.\n\nKod POEN-a nije. Upisom se ne prima ni novac ni stvar, ništa ne prelazi iz imovine Zaklade u imovinu korisnika, nastali se zapis ne može unovčiti, ustupiti niti naplatiti, a Zaklada ne utvrđuje niti objavljuje njegovu vrijednost izraženu u novcu. Zaklada korisniku ni po jednoj osnovi ne isplaćuje novac.\n\nKod kolektivne nabave jest, i to se ne krije: korisnik prima dobro kupljeno dinarskim sredstvima Zaklade. Dobro se ustupa bez naknade i bez ikakve protučinidbe, u ostvarivanju upisanih ciljeva Zaklade. Poništeni se zapis gasi i ne prelazi Zakladi; on nije jedinica pribavljena radi preuzimanja nego evidencija doprinosa koji je korisnik zajedničkom dobru već učinio. Ukupna vrijednost koju jedan korisnik može preuzeti u kalendarskoj godini je ograničena.\n\nŠto ostaje sporno: kako će nadležno tijelo kvalificirati to davanje. Zaklada ne pruža porezni savjet i porezni tretman ne jamči; za vlastite porezne obveze odgovara korisnik."
   },
   "kakoFunkcionisePage": {
     "poen_nije_kratko": "POEN je zapis o tome što si dao, kao upis u knjigu, a ne kao novac koji se drži. Ne postoji način da ga kupiš ili prodaš za dinare, ni od nas ni od bilo koga.",
@@ -2334,9 +2336,9 @@
     "nadzor": "Nadzor potvrde {verifikator} → {verifikovani}",
     "donacija": "Evidentiran doprinos po donaciji: {iznos} POEN",
     "donacija_uplatilac": "Evidentiran doprinos po donaciji: {iznos} POEN — uplatitelj: {uplatilac}",
-    "pokroviteljstvo": "Bonus za pokroviteljstvo: {iznos} POEN",
+    "pokroviteljstvo": "Evidentiran doprinos po pokroviteljstvu: {iznos} POEN",
     "osnivacki": "Osnivački doprinos, korak {korak}/{ukupno}",
-    "krug_bonus": "Bonus Kruga „{krug}”, {clanovi} članova",
+    "krug_bonus": "Rast Kruga „{krug}”, {clanovi} članova",
     "krug_osnivanje": "Osnivanje Kruga „{krug}”",
     "program": "Program {program}",
     "doprinos_sadrzaju": "Doprinos sadržaju platforme",
@@ -2891,7 +2893,7 @@
     "greska_slanje": "Nije uspjelo. Pokušaj ponovno.",
     "greska_ucitavanje": "Učitavanje nije uspjelo.",
     "na_cekanju": "{iznos} POEN te čeka. Stiže kad i tvoji prijatelji dobiju odobrenje.",
-    "oznaka_isplaceno": "500 POEN upisano",
+    "oznaka_evidentirano": "500 POEN upisano",
     "oznaka_bez_poena": "brat ili sestra: bez POENA",
     "dugme_raskini": "Raskini",
     "raskid_potvrda": "Da {pseudonim} više ne bude tvoj prijatelj? Prestajete se i dopisivati.",
@@ -3095,6 +3097,9 @@
     "preuzeli": "Preuzeli",
     "preuzeli_napomena": "Prikazuju se pseudonim i mjesto u redoslijedu. Broj POEN-a u zapisu se ne objavljuje.",
     "broj_prijava": "Prijavljenih: {broj}",
-    "ispravka_pouka": "Ako dio nisi preuzeo ili nije ispravan, imaš 7 dana da podneseš prigovor sa svojeg profila."
+    "ispravka_pouka": "Ako dio nisi preuzeo ili nije ispravan, imaš 7 dana da podneseš prigovor sa svojeg profila.",
+    "dinarska_naslov": "Dinarska strana nabave",
+    "dinarska_opis": "Dio izvješća o raspolaganju sredstvima Zaklade. Stoji odvojeno od kalkulacije zato što broj POEN-a po dijelu nije cijena dobra i ne izvodi se iz nje.",
+    "granica_pregled": "Vrijednost dobara koja si preuzeo ove godine: {preuzeto} od {granica} RSD (čl. 21.a)."
   }
 }

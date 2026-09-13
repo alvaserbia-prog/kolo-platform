@@ -65,6 +65,10 @@ export default async function PravnaPozicijaPage() {
     { naslov: t("zdi_naslov"), tekst: t("zdi_tekst") },
     { naslov: t("zps_naslov"), tekst: t("zps_tekst") },
     { naslov: t("ztk_naslov"), tekst: t("ztk_tekst") },
+    // 🔴 Poreski odeljak dodat uz R-02. Do tada stranica nije imala nijednu reč o
+    // porezu — a Poreska uprava je po sopstvenoj proceni registra rizika regulator
+    // koji najpre zaista dođe, jer ne mora da pobija ništa konceptualno.
+    { naslov: t("porez_naslov"), tekst: t("porez_tekst") },
   ];
   // Dva mesta koja mehanika sama otvara. Stoje NA STRANI, ne u fusnoti: ko ih
   // uoči sam, a ne nađe odgovor, zaključiće da odgovora nema.

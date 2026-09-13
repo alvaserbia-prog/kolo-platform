@@ -66,7 +66,7 @@
  * 🟡 Vraćanje naloga na dan registracije (`reset-korisnika.ts`) i dalje staje na
  * nuli: tamo je reč o probi korisničkog puta, ne o poništenju emisije.
  *
- * Otpis pri punoletstvu (čl. 19 st. 2) meri se po `Prijateljstvo.poenIsplacen`, a
+ * Otpis pri punoletstvu (čl. 19 st. 2) meri se po `Prijateljstvo.poenEvidentiran`, a
  * ovaj nalog nijedno prijateljstvo nema — pa mu se na 18. rođendan neće poništiti
  * ništa što ovde nije nastalo.
  *

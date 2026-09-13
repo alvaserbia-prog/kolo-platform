@@ -156,11 +156,11 @@ export async function poveziPoTokenu(skenerId: string, token: string) {
   }
 
   // Isplata ide VAN transakcije — `emitujPoen` otvara sopstvenu. Ne baca: veza je
-  // upisana i ne sme da padne zbog kanala, a nenaplaćena isplata se nadoknađuje pri
+  // upisana i ne sme da padne zbog kanala, a neizvršeno evidentiranje se nadoknađuje pri
   // svakoj sledećoj promeni stanja (i noćnim poslom).
-  const isplata = await probajIsplatiti(prijateljstvoId);
+  const evidentiranje = await probajEvidentirati(prijateljstvoId);
 
-  return { pseudonim: b.pseudonim, isplaceno: isplata };
+  return { pseudonim: b.pseudonim, evidentirano: evidentiranje };
 }
 
 // ── Isplata (čl. 14b) ─────────────────────────────────────────────────────────
@@ -171,7 +171,7 @@ async function ucesniciPrijateljstva(prijateljstvoId: string) {
     where: { id: prijateljstvoId },
     select: {
       id: true,
-      poenIsplacen: true,
+      poenEvidentiran: true,
       raskinutAt: true,
       a: { select: { ...IZBOR_UCESNIKA, pseudonim: true, deaktiviranAt: true } },
       b: { select: { ...IZBOR_UCESNIKA, pseudonim: true, deaktiviranAt: true } },
@@ -184,23 +184,23 @@ async function ucesniciPrijateljstva(prijateljstvoId: string) {
 /**
  * Upisuje 500 POEN obema stranama, ako su uslovi ispunjeni. Idempotentno.
  *
- * Prelaz se REZERVIŠE uslovnim `updateMany` pre emisije (`poenIsplacen: false` →
+ * Prelaz se REZERVIŠE uslovnim `updateMany` pre emisije (`poenEvidentiran: false` →
  * `true`); ako emisija pukne, rezervacija se vraća. Bez toga bi dva uporedna poziva
  * (skeniranje i noćni posao u istom trenutku) isplatila isti par dvaput.
  *
  * Ne baca — pozivna mesta su verifikacija, preuzimanje naloga i skeniranje koda, i
  * nijedno ne sme da padne zbog ovog kanala.
  */
-export async function probajIsplatiti(prijateljstvoId: string): Promise<boolean> {
+export async function probajEvidentirati(prijateljstvoId: string): Promise<boolean> {
   try {
     const p = await ucesniciPrijateljstva(prijateljstvoId);
-    if (!p || p.poenIsplacen || p.raskinutAt) return false;
+    if (!p || p.poenEvidentiran || p.raskinutAt) return false;
     if (p.a.deaktiviranAt || p.b.deaktiviranAt) return false;
     if (!prijateljstvoNosiPoen(p.ucesnikA, p.ucesnikB)) return false;
 
     const rezervisano = await prisma.prijateljstvo.updateMany({
-      where: { id: prijateljstvoId, poenIsplacen: false, raskinutAt: null },
-      data: { poenIsplacen: true, isplacenAt: new Date() },
+      where: { id: prijateljstvoId, poenEvidentiran: false, raskinutAt: null },
+      data: { poenEvidentiran: true, evidentiranAt: new Date() },
     });
     if (rezervisano.count === 0) return false;
 
@@ -224,7 +224,7 @@ export async function probajIsplatiti(prijateljstvoId: string): Promise<boolean>
       // rezervacije bi sledeći prolaz emitovao ponovo i prva strana bi dobila 1.000
       // umesto 500. Nesklad se prijavljuje Fondaciji i ispravlja se ručno; manja je
       // šteta da jednoj strani 500 nedostaje nego da druga dobije dvaput.
-      console.error("[prijateljstva] INCIDENT: isplata pukla posle rezervacije", {
+      console.error("[prijateljstva] INCIDENT: evidentiranje puklo posle rezervacije", {
         prijateljstvoId,
         error: e,
       });
@@ -267,16 +267,16 @@ export async function osveziPrijateljstvaDeteta(deteId: string): Promise<number>
     const redovi = await prisma.prijateljstvo.findMany({
       where: {
         OR: [{ aId: deteId }, { bId: deteId }],
-        poenIsplacen: false,
+        poenEvidentiran: false,
         raskinutAt: null,
       },
       select: { id: true },
     });
-    let isplaceno = 0;
+    let evidentirano = 0;
     for (const r of redovi) {
-      if (await probajIsplatiti(r.id)) isplaceno += 1;
+      if (await probajEvidentirati(r.id)) evidentirano += 1;
     }
-    return isplaceno;
+    return evidentirano;
   } catch (e) {
     console.error("[prijateljstva] Osvežavanje deteta nije uspelo", deteId, e);
     return 0;
@@ -364,7 +364,7 @@ export async function raskiniPrijateljstvo(korisnikId: string, prijateljstvoId: 
       id: true,
       aId: true,
       bId: true,
-      poenIsplacen: true,
+      poenEvidentiran: true,
       raskinutAt: true,
       a: { select: { pseudonim: true, maloletan: true } },
       b: { select: { pseudonim: true, maloletan: true } },
@@ -378,7 +378,7 @@ export async function raskiniPrijateljstvo(korisnikId: string, prijateljstvoId: 
   // Rezerviši raskid uslovno — dva uporedna klika ne smeju da otpišu dvaput.
   const rezervisano = await prisma.prijateljstvo.updateMany({
     where: { id: prijateljstvoId, raskinutAt: null },
-    data: { raskinutAt: new Date(), raskinuoId: korisnikId, poenIsplacen: false },
+    data: { raskinutAt: new Date(), raskinuoId: korisnikId, poenEvidentiran: false },
   });
   if (rezervisano.count === 0) throw new PrijateljGreska("Prijateljstvo je već raskinuto.", 409);
 
@@ -386,7 +386,7 @@ export async function raskiniPrijateljstvo(korisnikId: string, prijateljstvoId: 
   const jaPseudonim = p.aId === korisnikId ? p.a.pseudonim : p.b.pseudonim;
   const drugiPseudonim = p.aId === korisnikId ? p.b.pseudonim : p.a.pseudonim;
 
-  if (p.poenIsplacen) {
+  if (p.poenEvidentiran) {
     await otpisiPoen(
       korisnikId,
       PRIJATELJSTVO_POEN,
@@ -405,18 +405,18 @@ export async function raskiniPrijateljstvo(korisnikId: string, prijateljstvoId: 
 
   await obavesti(drugiId, {
     tip: "prijateljstvo_raskinuto",
-    kljuc: p.poenIsplacen
+    kljuc: p.poenEvidentiran
       ? "notifikacije.prijateljstvo_raskinuto_poen"
       : "notifikacije.prijateljstvo_raskinuto",
     parametri: { pseudonim: jaPseudonim, iznos: PRIJATELJSTVO_POEN },
     naslov: "Prijateljstvo je raskinuto",
-    tekst: p.poenIsplacen
+    tekst: p.poenEvidentiran
       ? `Prijateljstvo sa ${jaPseudonim} je raskinuto. Otpisano ti je ${PRIJATELJSTVO_POEN} POEN.`
       : `Prijateljstvo sa ${jaPseudonim} je raskinuto.`,
     link: "/prijatelji",
   }).catch(() => {});
 
-  return { ok: true, otpisano: p.poenIsplacen ? PRIJATELJSTVO_POEN : 0 };
+  return { ok: true, otpisano: p.poenEvidentiran ? PRIJATELJSTVO_POEN : 0 };
 }
 
 /**
@@ -466,7 +466,7 @@ export async function dohvatiPrijatelje(korisnikId: string) {
       select: {
         id: true,
         createdAt: true,
-        poenIsplacen: true,
+        poenEvidentiran: true,
         a: { select: { ...IZBOR_UCESNIKA, pseudonim: true, avatar: true, deaktiviranAt: true } },
         b: { select: { ...IZBOR_UCESNIKA, pseudonim: true, avatar: true, deaktiviranAt: true } },
       },
@@ -489,10 +489,10 @@ export async function dohvatiPrijatelje(korisnikId: string) {
         pseudonim: x.drugi.pseudonim,
         avatar: x.drugi.avatar,
         od: x.red.createdAt.toISOString(),
-        isplaceno: x.red.poenIsplacen,
+        evidentirano: x.red.poenEvidentiran,
         bezPoena: braca,
         // Zašto čeka: drugi nalog još nema roditelja koji je redovan član.
-        naCekanju: !x.red.poenIsplacen && !braca,
+        naCekanju: !x.red.poenEvidentiran && !braca,
         drugiStanje: drugiUcesnik.stanje,
       };
     });

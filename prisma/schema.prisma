@@ -2179,8 +2179,8 @@ model Prijateljstvo {
   // budu aktivne, pa red često stoji neisplaćen. Ovo polje je jedini izvor istine
   // o tome duguje li se otpis pri raskidu i pri punoletstvu — broj transakcija se
   // ne prebrojava unazad.
-  poenIsplacen Boolean   @default(false)
-  isplacenAt   DateTime?
+  poenEvidentiran Boolean   @default(false)
+  evidentiranAt   DateTime?
   // Raskid (čl. 14c). Raskinuti može samo dete, bilo koje od dvoje; roditelj ne
   // može. `raskinuoId` je zato uvek jedna od dve strane.
   raskinutAt   DateTime?

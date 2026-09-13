@@ -827,9 +827,9 @@ The Foundation does not provide tax advice and is not a party to your exchange: 
       {
         id: 49,
         pitanje: `Does taking part in KOLO / POEN affect my pension or social benefits?`,
-        odgovor: `From the system's side — no. POEN is not money, not earnings and not income: it is an internal record of what you have given the community, and it cannot be turned into anything with value outside the system. The Foundation pays you no monetary compensation and reports POEN nowhere as your income.
+        odgovor: `From the system's side — no. POEN is not money, not earnings and not income: it is an internal record of what you have given the community, and it cannot be turned into anything with value outside the system. The Foundation pays you no money on any basis: the recording brings you neither money nor goods, nothing passes from its assets into yours, and the record cannot be turned into money, assigned or collected. There is therefore no amount expressed in money on that basis.
 
-If POEN is recorded for you through one of the social programmes (as a primary carer, an elderly member or through Schooling, for example), that too is neither social assistance nor a benefit — it is an automatic update of the record that gives such participation an equal place in the system.
+If POEN is recorded for you through one of the social programmes (as a primary carer, an elderly member or through Schooling, for example), that too is not remuneration — it pays for no work or service and nothing is asked of you in return. It is an automatic update of the record that gives such participation an equal place in the system, and the programme is carried out in pursuit of the Foundation's objectives under its statute.
 
 You should, however, distinguish POEN from what you do outside the system. Everything you charge for in money is your own activity, governed by the general regulations — and that may have consequences for your status, depending on what you do and on what scale.
 

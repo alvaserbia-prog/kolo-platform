@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_5_8.md`, `uslovi_koriscenja_4_5_8.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_5_9.md`, `uslovi_koriscenja_4_5_8.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,25 +27,25 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_5_8.md",
+  "Pravilnik_4_5_9.md",
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_5_2.md",
   "radnje_obrade_4_5_5.md",
   "uslovi_koriscenja_4_5_8.md",
   "politika_4_5_5.md",
   "statut_4_1_0.md",
-  "whitepaper_4_4_6.md",
-  "rizici_4_5_5.md",
+  "whitepaper_4_5_9.md",
+  "rizici_4_5_9.md",
   "hijerarhija_4_4_6.md",
   "donacije_4_5_8.md",
-  "operativni_4_4_4.md",
-  "osnivacki_4_4_5.md",
+  "operativni_4_5_9.md",
+  "osnivacki_4_5_9.md",
   "gornje_kolo_4_4_6.md",
-  "programi_podrske_4_5_0.md",
+  "programi_podrske_4_5_9.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
-  "ucesce_dece_4_5_7.md",
+  "ucesce_dece_4_5_9.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
-  "projekti_nabavke_4_5_8.md",
+  "projekti_nabavke_4_5_9.md",
 ];
 
 /**
@@ -62,8 +62,20 @@ const AKTI = [
  * na stanje u kome doprinos naloga bez potvrde nastaje bez ijedne ljudske odluke.
  */
 const UVEDENO: Record<string, Record<string, string[]>> = {
-  "Pravilnik_4_5_8.md": {
+  "Pravilnik_4_5_9.md": {
     sr: [
+      // ═══ 4.5.9 (R-02 — POEN kao prihod korisnika, Poreska uprava) ═══
+      // Odbrana je do 4.5.9 pobijala pojam „naknade", a porez na dohodak oporezuje
+      // PRIHODE iz svih izvora, uključujući prihod u naturi. Zato čl. 13 sada nabraja
+      // elemente pojma prihoda koji nedostaju — isti obrazac kao odbrana od virtuelne valute.
+      "u odnosu na pojam prihoda korisnika",
+      // Čl. 36 st. 4 je do 4.5.9 pobijao SAMO radni odnos; opasna kvalifikacija je
+      // ugovor o delu, kome subordinacija nije ni potrebna. Operativni čl. 27 je to
+      // rešio još u 4.4.4, a glavni Pravilnik ga tek sada sustiže.
+      "naročito ne ugovor o delu",
+      // 🔴 Čl. 57: „nije socijalna pomoć" je BRISANO (vidi UKINUTO). Umesto poricanja
+      // stoji statutarni cilj — bez njega akt sam sebi zatvara izuzeće iz čl. 9 ZPDG.
+      "socijalne zaštite i solidarne podrške ranjivim društvenim grupama",
       // ═══ 4.5.8 (R-01 — POEN kao virtuelna valuta) ═══
       // 🔴 Mera M-5: bez ovoga čl. 13 tvrdi da se POEN ne može pribaviti kupovinom,
       // a ćuti o tome da se do njega dolazi uplatom u realnom vremenu. Druga
@@ -164,6 +176,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Sastav Gornjeg Kola ne utvrđuje se imenovanjem",
     ],
     en: [
+      "bear on the notion of a user's income",
+      "in particular not a contract for work",
+      "social protection and solidarity support for vulnerable social groups",
       "No one is obliged to accept POEN",
       "POEN cannot be acquired for the purpose of performing an exchange",
       "Two decisions in that procedure are separate",
@@ -204,6 +219,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "The composition of the Upper Kolo is not established by appointment",
     ],
     ru: [
+      "для понятия дохода пользователя",
+      "не является договором подряда",
+      "социальной защиты и солидарной поддержки уязвимых общественных групп",
       "Никто не обязан принимать ПОЕН",
       "ПОЕН нельзя приобрести ради исполнения обмена",
       "Два решения в этой процедуре разделены",
@@ -366,8 +384,22 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // jedan", sistem je sam objavljivao koliko POEN vredi u dinarima, pa se tabela
   // koeficijenta donacija čitala kao cenovnik. Zato se sada traži suprotno:
   // odsustvo pariteta i prisustvo odredbe da broj nije cena dobra.
-  "projekti_nabavke_4_5_8.md": {
+  "projekti_nabavke_4_5_9.md": {
     sr: [
+      // ═══ 4.5.9 (R-02) ═══
+      // 🔴 Nosivo za kvalifikaciju davanja: zapis se GASI, ne prelazi Fondaciji, i nije
+      // jedinica pribavljena radi preuzimanja nego evidencija ranije učinjenog doprinosa.
+      // Bez te dve rečenice se preuzimanje čita kao razmena, a onda pada i odbrana iz
+      // čl. 3a (nije privredna delatnost) zajedno sa pitanjem PDV-a.
+      "Poništeni zapis ne prelazi Fondaciji",
+      "evidencija doprinosa koji je zajedničkom dobru već učinio",
+      // Čl. 20 — kalkulacija je do 4.5.9 u ISTOM dokumentu nosila broj POEN-a po delu i
+      // ukupan dinarski trošak, pa se odnos POEN:RSD čitao deljenjem. Jedino preostalo
+      // mesto na kome je Fondacija sama objavljivala kurs.
+      "ne sme se čitati kao njen izraz",
+      "Godišnja granica po korisniku",
+      // 🔴 Granica se meri sa RAČUNA dobavljača, ne iz POEN-a — inače bi sama bila kurs.
+      "granica nije odnos POEN-a prema novcu",
       // 🔴 4.5.8 (R-01, mera P-1) — nabavka traži POTVRĐENU STVARNOST. Bez toga je
       // prag od 20.000 POEN-a dostižan prepisom na svež nepotvrđen nalog, pa se
       // dobra raspodeljuju licu čije postojanje niko nije potvrdio.
@@ -421,6 +453,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Nepreuzeti delovi se ne prodaju",
     ],
     en: [
+      "The annulled record does not pass to the Foundation",
+      "the record of a contribution they had already made",
+      "must not be read as an expression of it",
+      "Annual limit per user",
+      "the limit is not a ratio of POEN to money",
       "whose reality has been confirmed through the chain of confirmations (a reality index of at least 10%)",
       "The spending coefficient is 1.00",
       "### Article 30a",
@@ -451,6 +488,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "The collection period is three days",
     ],
     ru: [
+      "Аннулированная запись не переходит Фонду",
+      "учёт вклада, который он уже внёс",
+      "не должно читаться как её выражение",
+      "Годовой предел на одного пользователя",
+      "предел не является соотношением ПОЕН к деньгам",
       "реальность которых подтверждена через цепь подтверждений (индекс реальности не менее 10%)",
       "Коэффициент расходования составляет 1,00",
       "### Статья 30a",
@@ -669,8 +711,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   },
   // 4.4.3 — upozorenje o pribavljanju POEN-a mimo sistema. Ekonomski deo (ne stiče
   // nivo, ne pomera koeficijent) je ono što zabranu iz Uslova čini samoodrživom.
-  "rizici_4_5_5.md": {
+  "rizici_4_5_9.md": {
     sr: [
+      // 4.5.9 (R-02) — najjača poreska činjenica seli se iz čl. 11a (AML) u čl. 10.
+      "ni po jednom osnovu ne isplaćuje novac",
       "ne pribavlja od drugih korisnika za novac",
       "ne pomera koeficijent evidencije",
       "a ne protivčinidbu za donaciju",
@@ -697,6 +741,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ne daje pravo da Fondacija donese određeni akt",
     ],
     en: [
+      "pays no money to a user on any basis",
       "not acquired from other users for money",
       "does not move the recording coefficient",
       "not consideration for the donation",
@@ -709,6 +754,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "the circle of founders is closed and cannot be expanded",
     ],
     ru: [
+      "ни по одному основанию не выплачивает деньги",
       "не приобретается у других пользователей за деньги",
       "не сдвигает коэффициент учёта",
       "а не встречное предоставление за пожертвование",
@@ -734,8 +780,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // svakom potvrđenom članu. Ako ta odredba ispadne iz akta, kod nastavi da
   // zatvara profil bez osnova, a pregled po školama ostane bez ijednog pravila o
   // tome šta se sme objaviti — pa se traži doslovno, na sva tri jezika.
-  "ucesce_dece_4_5_7.md": {
+  "ucesce_dece_4_5_9.md": {
     sr: [
+      // 4.5.9 (R-02) — kanal iz čl. 15 t. 9 upisuje detetu; priroda upisa mora da stoji.
+      "maloletni korisnik ne prima ni novac ni stvar",
       // 🔴 4.5.7 (R-20) — čl. 4d. Prevođenje je do ovog seta postojalo samo u kodu:
       // nalog je izlazio iz lanca potvrda, gubio ZRNO i emitovan POEN, a zapis je
       // išao u minus i njemu i trećim licima — bez ijedne odredbe. Peta tačka
@@ -805,6 +853,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "prestaje kada maloletni korisnik upiše i potvrdi sopstvenu elektronsku adresu",
     ],
     en: [
+      "the minor user receives neither money nor goods",
       // R-20 — cl. 4d (vidi sr).
       "### Article 4d",
       "correction of an incorrectly stated age",
@@ -840,6 +889,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ceases once the minor user enters and confirms their own e-mail address",
     ],
     ru: [
+      "несовершеннолетний пользователь не получает ни денег, ни вещи",
       // R-20 — ст. 4d (vidi sr).
       "### Статья 4d",
       "исправлением неверно указанного возраста",
@@ -946,8 +996,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // je u normi a ne u kodu; a zapis o evidentiranom POEN-u sa nazivom programa
   // vidljiv je svim verifikovanim korisnicima, o čemu pristanak nije govorio ništa.
   // Traže se sva tri, jer bi se svako lako izgubilo bez ijednog vidljivog kvara.
-  "programi_podrske_4_5_0.md": {
+  "programi_podrske_4_5_9.md": {
     sr: [
+      // 4.5.9 (R-02) — nov čl. 6a. „Nije socijalna pomoć" je brisano iz čl. 2.
+      "Priroda evidentiranja",
+      "Korisnik programa nije zaposlen kod Fondacije",
       "indeksom stvarnosti od najmanje 10%",
       "koliko će lica biti zamoljeno da potvrdi",
       "vidljiv uz pseudonim podnosioca svim verifikovanim korisnicima",
@@ -956,6 +1009,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Uneti podaci brišu se kada prijava prestane da važi",
     ],
     en: [
+      "Nature of the recording",
+      "A program beneficiary is not employed by the Foundation",
       "reality index of at least 10%",
       "how many persons will be asked to confirm",
       "visible alongside the applicant's pseudonym to all verified users",
@@ -964,6 +1019,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "The entered data are deleted when the application ceases to be valid",
     ],
     ru: [
+      "Природа учёта",
+      "Участник программы не состоит в трудовых отношениях с Фондом",
       "индексом реальности не менее 10 %",
       "сколько лиц будет приглашено подтвердить",
       "видна рядом с псевдонимом заявителя всем верифицированным пользователям",
@@ -985,8 +1042,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // JEDAN korak, ali ne i za zbirni udeo, koji stoji na ~19–24% i blago RASTE.
   // Test čuva i obrazloženje granice: bez njega je najveća alokacija u sistemu
   // jedini krupan parametar bez ijedne rečenice razloga.
-  "osnivacki_4_4_5.md": {
+  "osnivacki_4_5_9.md": {
     sr: [
+      // 4.5.9 (R-02) — jedini kanal koji sam sebe u aktu naziva „radom".
+      "nije rad naručen od Fondacije",
       "Granica je mera doprinosa koji je prethodio sistemu",
       "uložili sopstvena novčana sredstva i sopstveno vreme",
       // Aritmetički razlog: dnevni limit operativnog kanala je 10% opticaja, pa je
@@ -999,6 +1058,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ulazi u zajedničko dobro pod licencama",
     ],
     en: [
+      "is not work commissioned by the Foundation",
       "The limit is a measure of the contribution that preceded the system",
       "invested their own monetary resources and their own time",
       "while that number is zero, the limit is likewise zero",
@@ -1008,6 +1068,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "enters the common good under the licences",
     ],
     ru: [
+      "не является работой, заказанной Фондом",
       "Предел является мерой вклада, предшествовавшего системе",
       "вложили в проектирование, создание и юридическую и организационную подготовку системы собственные денежные средства",
       "пока это число равно нулю, лимит также равен нулю",
@@ -1017,8 +1078,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "поступает в общее благо под лицензиями",
     ],
   },
-  "operativni_4_4_4.md": {
+  "operativni_4_5_9.md": {
     sr: [
+      // 4.5.9 (R-02) — „nije naknada" je pobijalo pogrešan pojam; sada i elementi prihoda.
+      "ne utvrđuje nijedan iznos izražen u novcu",
       "nema naručioca",
       "nije pravno lice, nema organe i ne može biti strana ugovora",
       "Fondacija nije naručilac dela i nije korisnik činidbe izvršioca",
@@ -1031,6 +1094,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ne izražava se kao vrednost jedinice vremena rada",
     ],
     en: [
+      "determines no amount expressed in money",
       "there is no commissioning party",
       "is not a legal person, has no bodies, and cannot be a party to a contract",
       "The Foundation is not the party ordering a work",
@@ -1040,6 +1104,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "is not expressed as a value per unit of working time",
     ],
     ru: [
+      "не определяет никакой суммы, выраженной в деньгах",
       "отсутствует заказчик",
       "не является юридическим лицом, не имеет органов и не может быть стороной договора",
       "Фонд не является заказчиком работы",
@@ -1067,11 +1132,15 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
  * NEISTINITE IZJAVE i nigde ne stavlja verifikatora na tuđe mesto.
  */
 const UKINUTO: Record<string, RegExp[]> = {
-  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+ne\s+upravljačka/i],
-  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i, /executive,?\s+not\s+governance/i],
-  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i, /исполнительной,?\s+а\s+не\s+управленческой/i],
-  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+a\s+ne\s+upravljačka/i],
-  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i, /végrehajtói,?\s+nem\s+irányítói/i],
+  // 🔴 R-02: „nije socijalna pomoć" je uklonjeno iz Pravilnika čl. 57 i programa
+  // podrške čl. 2. Ta rečenica je sama zatvarala izuzeće iz čl. 9 ZPDG (organizovana
+  // socijalna i humanitarna pomoć) i protivrečila čl. 6 Statuta, koji socijalnu
+  // zaštitu upisuje kao cilj Fondacije. „Nije naknada" OSTAJE i ne dira se.
+  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i],
+  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i, /executive,?\s+not\s+governance/i, /is\s+not\s+social\s+assistance/i],
+  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i, /исполнительной,?\s+а\s+не\s+управленческой/i, /не\s+является\s+социальной\s+помощью/i],
+  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+a\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i],
+  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i, /végrehajtói,?\s+nem\s+irányítói/i, /nem\s+szociális\s+segély/i],
 };
 
 /** Napomene o izmeni namerno pominju ukinutu tablu — one se izuzimaju iz provere. */
@@ -1188,7 +1257,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_5_8.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_5_9.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });
