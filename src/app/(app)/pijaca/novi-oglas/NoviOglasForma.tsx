@@ -405,6 +405,9 @@ export default function NoviOglasForma({
             className="sr-only"
             onChange={handleFiles}
           />
+          {slike.length >= MAX_IMAGES && (
+            <p className="mt-1.5 text-xs text-kolo-muted">{t("slike_popunjeno", { max: MAX_IMAGES })}</p>
+          )}
         </div>
 
         {error && (
