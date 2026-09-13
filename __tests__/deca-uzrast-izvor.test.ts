@@ -34,7 +34,7 @@ function dete(godine: number | null, o: Partial<Ucesnik> = {}): Ucesnik {
     godine,
     dozvolaOdrasli: true,
     roditeljIds: ["r1"],
-    stanje: "AKTIVNO",
+    skolaSifra: null, stanje: "AKTIVNO",
     ...o,
   };
 }
@@ -44,7 +44,7 @@ const odrastao: Ucesnik = {
   godine: null,
   dozvolaOdrasli: false,
   roditeljIds: [],
-  stanje: "AKTIVNO",
+  skolaSifra: null, stanje: "AKTIVNO",
 };
 const roditelj: Ucesnik = { ...odrastao, id: "r1" };
 

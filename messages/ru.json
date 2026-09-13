@@ -2333,7 +2333,7 @@
     "primljena_verifikacija": "Получена подтверждение от {pseudonim}",
     "nadzor": "Надзор за подтверждением {verifikator} → {verifikovani}",
     "donacija": "Учтённый вклад по пожертвованию: {iznos} ПОЕН",
-    "donacija_uplatilac": "Учтённый вклад по пожертвованию: {iznos} ПОЕН — плательщик: {uplatilac}",
+    "donacija_uplatilac": "Учтённый вклад по пожертвованию: {iznos} ПОЕН",
     "pokroviteljstvo": "Бонус за покровительство: {iznos} ПОЕН",
     "osnivacki": "Учредительный вклад — шаг {korak}/{ukupno}",
     "krug_bonus": "Бонус Круга «{krug}» — {clanovi} участников",

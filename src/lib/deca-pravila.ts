@@ -213,7 +213,38 @@ export type Ucesnik = {
   roditeljIds: string[];
   /** Kod punoletnog korisnika uvek `AKTIVNO` — stanja se odnose samo na decu. */
   stanje: StanjeDeteta;
+  /** Škola koju je dete samo izabralo (čl. 7). `null` kod punoletnog naloga. */
+  skolaSifra: string | null;
 };
+
+/**
+ * Da li posmatrač sme da vidi SPISAK DECE jedne škole (čl. 15a, 15b).
+ *
+ * Dva uslova, oba nužna:
+ *
+ * 1. 🔴 **Punopravno dete, ne bilo koji maloletan nalog.** Do R-03 je uslov bio
+ *    samo `maloletan`, a maloletan nalog se otvara za dva minuta — pseudonim,
+ *    lozinka i TUĐ imejl — i `maloletan: true` se upisuje odmah, dakle i nalogu u
+ *    stanju `NA_CEKANJU`, iza koga ne stoji niko. Odrastao je tako izlistavao
+ *    decu sa slikama i iznosima. `AKTIVNO` traži bar jednog roditelja koji je
+ *    redovan član, dakle čoveka koga je treće lice potvrdilo u stvarnom svetu —
+ *    ista brana koju Pričaonica već ima iz istog razloga (čl. 18 st. 2).
+ *
+ * 2. 🔴 **Samo SVOJA škola.** Spisak je zajednica u kojoj se deca ionako znaju
+ *    uživo; dete iz Vranja nema razlog da lista decu škole u Somboru. Bez ovog
+ *    uslova jedan nalog vidi decu svih 1.888 škola.
+ *
+ * Nacionalne liste i svi brojevi ostaju svima — one pokreću ceo mehanizam i ne
+ * imenuju nikoga.
+ */
+export function smeVidetiSpisakSkole(
+  posmatrac: Ucesnik | null,
+  sifra: string
+): boolean {
+  if (!posmatrac?.maloletan) return false;
+  if (posmatrac.stanje !== "AKTIVNO") return false;
+  return posmatrac.skolaSifra === sifra;
+}
 
 // ── Stanje naloga ─────────────────────────────────────────────────────────────
 

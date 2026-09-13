@@ -2326,7 +2326,7 @@
     "primljena_verifikacija": "Megerősítés érkezett tőle: {pseudonim}",
     "nadzor": "Megerősítés felügyelete: {verifikator} → {verifikovani}",
     "donacija": "Adomány alapján bejegyzett hozzájárulás: {iznos} POEN",
-    "donacija_uplatilac": "Adomány alapján bejegyzett hozzájárulás: {iznos} POEN — befizető: {uplatilac}",
+    "donacija_uplatilac": "Adomány alapján bejegyzett hozzájárulás: {iznos} POEN",
     "pokroviteljstvo": "Patronálási bónusz: {iznos} POEN",
     "osnivacki": "Alapítói hozzájárulás — {korak}/{ukupno} lépés",
     "krug_bonus": "Kör bónusz „{krug}” — {clanovi} tag",

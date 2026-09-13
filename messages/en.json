@@ -2333,7 +2333,7 @@
     "primljena_verifikacija": "Confirmation received from {pseudonim}",
     "nadzor": "Supervision of confirmation {verifikator} → {verifikovani}",
     "donacija": "Contribution recorded for a donation: {iznos} POEN",
-    "donacija_uplatilac": "Contribution recorded for a donation: {iznos} POEN — payer: {uplatilac}",
+    "donacija_uplatilac": "Contribution recorded for a donation: {iznos} POEN",
     "pokroviteljstvo": "Sponsorship bonus: {iznos} POEN",
     "osnivacki": "Founding contribution — step {korak}/{ukupno}",
     "krug_bonus": "Circle bonus “{krug}” — {clanovi} members",

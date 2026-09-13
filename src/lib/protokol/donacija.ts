@@ -195,19 +195,24 @@ export async function evidentirajDonaciju(
   }
 
   if (poen > 0) {
-    // Uplatilac stoji i na zapisu o evidentiranom POEN-u (čl. 3 st. 5). Zapis je
-    // javan prijavljenim korisnicima, ali POEN nosi samo JAVNA donacija, čije je
-    // ime ionako u listi donacija — anonimna donacija nema transakciju.
+    // 🔴 IME UPLATIOCA NE IDE U OPIS TRANSAKCIJE (R-03, mera M-3b).
+    //
+    // Do ovog seta je opis glasio „… — uplatilac: Petar Petrović", uz obrazloženje
+    // iz R-19 da je ime ionako u listi donacija. To obrazloženje je palo sa merom
+    // M-3a: lista donacija se sužava na redovne članove, a zapis transakcije ide
+    // SVAKOM prijavljenom nalogu, uključujući nepotvrđene, kojima je pseudonim
+    // strane maskiran (`/api/javno/feed`). Ime i prezime u opisu identifikuje
+    // jače nego pseudonim koji je sakriven — opis je time postao širi kanal od
+    // onoga na koji je pristanak dat (Uslovi čl. 17).
+    //
+    // Uplatilac ostaje na `DonationRecord.uplatilac` — tamo mu je mesto po čl. 3
+    // st. 5 (AML trag iz R-19), i vidi ga samo Fondacija.
     await emitujPoen(
       user.wallet.id,
       poen,
       TransactionType.EMISIJA_DONACIJA,
-      uplatilac
-        ? `Evidentiran doprinos po donaciji: ${poen.toLocaleString("sr-RS")} POEN — uplatilac: ${uplatilac}`
-        : `Evidentiran doprinos po donaciji: ${poen.toLocaleString("sr-RS")} POEN`,
-      uplatilac
-        ? { kljuc: "transakcije.donacija_uplatilac", parametri: { iznos: poen, uplatilac } }
-        : { kljuc: "transakcije.donacija", parametri: { iznos: poen } }
+      `Evidentiran doprinos po donaciji: ${poen.toLocaleString("sr-RS")} POEN`,
+      { kljuc: "transakcije.donacija", parametri: { iznos: poen } }
     );
   }
 

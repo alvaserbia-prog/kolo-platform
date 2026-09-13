@@ -67,7 +67,17 @@ enum TransactionType {
   EMISIJA_POKROVITELJ
   EMISIJA_KRUG_OSNIVANJE
   EMISIJA_KRUG_BONUS
+  /// Socijalni programi (Podrška majkama, Podrška starijima, Posebna briga,
+  /// Školovanje). 🔴 Naziv programa NE ide u opis transakcije i pojedinačan red
+  /// NE izlazi u javne prikaze (R-03, mera M-1): naziv je posebna kategorija po
+  /// ZZPL čl. 17, a iznos sam invertuje godište (Podrška starijima) odnosno broj
+  /// i uzrast dece (Podrška majkama). Javno se objavljuje dnevni agregat po
+  /// programu iz `DailyEmissionSummary.breakdown`.
   EMISIJA_PROGRAM
+  /// Operativni doprinos (čl. 36). Do R-03 je delio tip sa socijalnim programima,
+  /// pa se u javnom prikazu nije mogao razdvojiti od njih. Nije posebna kategorija
+  /// i ostaje vidljiv pojedinačno.
+  EMISIJA_OPERATIVNI
   UPIS_ZRNO
   OTPIS_ZRNO
   EMISIJA_OSNIVACKI
@@ -1157,6 +1167,14 @@ model ProgramEnrollment {
   approvedAt            DateTime?
   rejectionReason       String?
   nextReverifikacija    DateTime?
+  /// Zbir POEN-a evidentiranog po OVOM programu (R-03, mera M-1).
+  ///
+  /// 🔴 Postoji zato što opis transakcije više ne imenuje program: naziv je
+  /// posebna kategorija po ZZPL čl. 17, pa je iz zapisa izašao. Bez ovog zbira bi
+  /// korisnik izgubio uvid u sopstveni podatak — u istoriji POEN-a vidi redove
+  /// „Socijalni program" i ne zna koji je koji. Razlaganje se zato prikazuje na
+  /// kartici programa, gde mu je i kontekst.
+  isplacenoPoen         Int              @default(0)
   createdAt             DateTime         @default(now())
   updatedAt             DateTime         @updatedAt
   potvrde               ProgramPotvrda[]

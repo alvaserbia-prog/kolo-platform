@@ -226,8 +226,14 @@ export async function GET(
     pseudonim: korisnik.pseudonim,
     maloletan: korisnik.maloletan,
     skola: skola ? { sifra: skola.sifra, naziv: skola.naziv, mesto: skola.mesto } : null,
-    roditelji: korisnik.roditeljstvaKaoDete.map((r) => r.roditelj),
-    deca: korisnik.roditeljstvaKaoRoditelj.map((r) => r.dete),
+    // 🔴 Veza roditelj–dete se suženom pregledu NE prikazuje (R-03, mera M-5).
+    // Uz R-01 je oljušteno sve ostalo (zrno, rang, transakcije, telefon), a ova
+    // dva polja su propuštena — pa je čovek koji je samo uplatio novac i koga
+    // niko nije potvrdio otvarao tuđi profil i dobijao spisak njegove dece sa
+    // pseudonimima i linkovima. Javnost te veze je prihvaćena PREMA POTVRĐENIM
+    // članovima, ne prema nalogu bez ijedne potvrde.
+    roditelji: suzen ? [] : korisnik.roditeljstvaKaoDete.map((r) => r.roditelj),
+    deca: suzen ? [] : korisnik.roditeljstvaKaoRoditelj.map((r) => r.dete),
     verified: korisnik.verified,
     verifiedAt: suzen ? null : korisnik.verifiedAt,
     status: korisnik.status,

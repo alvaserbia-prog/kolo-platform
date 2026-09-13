@@ -2333,7 +2333,7 @@
     "primljena_verifikacija": "Primljena potvrda od {pseudonim}",
     "nadzor": "Nadzor potvrde {verifikator} → {verifikovani}",
     "donacija": "Evidentiran doprinos po donaciji: {iznos} POEN",
-    "donacija_uplatilac": "Evidentiran doprinos po donaciji: {iznos} POEN — uplatitelj: {uplatilac}",
+    "donacija_uplatilac": "Evidentiran doprinos po donaciji: {iznos} POEN",
     "pokroviteljstvo": "Bonus za pokroviteljstvo: {iznos} POEN",
     "osnivacki": "Osnivački doprinos, korak {korak}/{ukupno}",
     "krug_bonus": "Bonus Kruga „{krug}”, {clanovi} članova",

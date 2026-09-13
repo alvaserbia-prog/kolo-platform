@@ -83,8 +83,19 @@ describe("IZVOR — uplatilac se traži i upisuje", () => {
     expect(servis).toContain("straniPriliv");
   });
 
-  it("uplatilac stoji i u opisu transakcije POEN-a", () => {
-    expect(servis).toContain("transakcije.donacija_uplatilac");
+  it("🔴 uplatilac NE stoji u opisu transakcije POEN-a (R-03, mera M-3b)", () => {
+    // Brana je OKRENUTA 13.09.2026. Uz R-19 je tražila suprotno, sa obrazloženjem
+    // da je ime javnog donatora „ionako u listi donacija". To obrazloženje je palo
+    // sa merom M-3a: lista se sužava na redovne članove, a zapis transakcije ide
+    // svakom prijavljenom nalogu, uključujući nepotvrđene, kojima je pseudonim
+    // strane maskiran. Ime i prezime u opisu identifikuje jače nego ono što je
+    // sakriveno, pa je opis postao širi kanal od onoga na koji je pristanak dat.
+    //
+    // Uplatilac ostaje gde mu je mesto — na `DonationRecord` (AML trag, čl. 3
+    // st. 5), i vidi ga samo Fondacija. To čuvaju testovi iznad.
+    expect(servis).not.toContain("transakcije.donacija_uplatilac");
+    expect(servis).not.toContain("uplatilac: ${uplatilac}");
+    expect(servis).toContain('kljuc: "transakcije.donacija"');
   });
 
   it("ugovor nosi izjavu o poreklu samo kad je prag pređen", () => {
@@ -99,13 +110,24 @@ describe("IZVOR — uplatilac se traži i upisuje", () => {
   });
 });
 
-describe("IZVOR — prevodi za uplatioca postoje na svih pet jezika", () => {
+describe("IZVOR — tekstovi uz uplatioca", () => {
+  // 🔴 Admin namespace se od 13.09.2026. NE prevodi — živi samo u `sr.json`, a
+  // `src/i18n/request.ts` ga dodaje ostalim jezicima pri učitavanju. Ovaj blok je
+  // do tada čitao `m.admin.*` na svih pet jezika i od te odluke je PADAO na
+  // en/ru/hr/hu; zatečen kvar, ispravljen uz R-03.
+  it("admin poruke uz uplatioca postoje u srpskom originalu", () => {
+    const sr = JSON.parse(izvor("messages/sr.json"));
+    expect(sr.admin.donacije_uplatilac_obavezan.length).toBeGreaterThan(5);
+    expect(sr.admin.donacije_strani_priliv.length).toBeGreaterThan(5);
+  });
+
   for (const jezik of ["sr", "en", "ru", "hr", "hu"]) {
     it(jezik, () => {
       const m = JSON.parse(izvor(`messages/${jezik}.json`));
-      expect(m.transakcije.donacija_uplatilac).toContain("{uplatilac}");
-      expect(m.admin.donacije_uplatilac_obavezan.length).toBeGreaterThan(5);
-      expect(m.admin.donacije_strani_priliv.length).toBeGreaterThan(5);
+      // 🔴 Ime uplatioca je izašlo iz opisa transakcije (R-03, M-3b), pa parametar
+      // `{uplatilac}` ne sme da preživi ni u jednom prevodu: next-intl baca kad
+      // prevod traži parametar koji kod ne šalje.
+      expect(m.transakcije.donacija_uplatilac ?? "").not.toContain("{uplatilac}");
       expect(m.donacije.karticno_sopstvena_kartica.length).toBeGreaterThan(20);
     });
   }

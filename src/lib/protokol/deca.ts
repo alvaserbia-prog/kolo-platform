@@ -18,7 +18,7 @@
  */
 import { prisma } from "@/lib/prisma";
 import { TipKorisnika, TransactionType, UserStatus, WalletType } from "@/generated/prisma/client";
-import type { PrismaClient, RoditeljstvoPotvrdaStatus } from "@/generated/prisma/client";
+import type { Prisma, PrismaClient, RoditeljstvoPotvrdaStatus } from "@/generated/prisma/client";
 import { poljaPseudonima } from "@/lib/pseudonim";
 import { beogradskiDan } from "./obracunski-dan";
 import {
@@ -81,6 +81,7 @@ export const IZBOR_UCESNIKA = {
   maloletan: true,
   datumRodjenja: true,
   dozvolaOdrasli: true,
+  skolaSifra: true,
   roditeljstvaKaoDete: {
     select: {
       roditeljId: true,
@@ -96,6 +97,7 @@ type RedUcesnika = {
   maloletan: boolean;
   datumRodjenja: Date | null;
   dozvolaOdrasli: boolean;
+  skolaSifra: string | null;
   roditeljstvaKaoDete: {
     roditeljId: string;
     roditelj: {
@@ -117,6 +119,7 @@ export function ucesnikIzReda(red: RedUcesnika): Ucesnik {
     // `smeSaOdraslima` pada na stroži režim, što je ovde ispravno.
     godine: red.maloletan && red.datumRodjenja ? uzrast(red.datumRodjenja, beogradskiDan()) : null,
     dozvolaOdrasli: red.dozvolaOdrasli,
+    skolaSifra: red.skolaSifra,
     roditeljIds: red.roditeljstvaKaoDete.map((r) => r.roditeljId),
     // Punoletan korisnik nema stanje — `AKTIVNO` je jedina vrednost koja ništa ne
     // ograničava, pa se ostatak koda ne mora granati na „je li ovo dete".
@@ -1315,3 +1318,23 @@ export async function pristupProfiluDeteta(
     },
   };
 }
+
+/**
+ * Prisma uslov nad `Wallet`-om: zapis koji NE pripada maloletnom korisniku.
+ *
+ * Dečji prostor nije javan (Pravilnik o učešću dece čl. 13), pa se transakcija u
+ * kojoj je bilo koja strana maloletna ne prikazuje ni verifikovanom posmatraču —
+ * feed bi mu inače otkrio pseudonim deteta.
+ *
+ * 🔴 Zapis Protokola i zapis Kruga nemaju korisnika; uslov ih mora PROPUSTITI,
+ * inače bi svaka emisija ispala iz spiska.
+ *
+ * 🔴 Živi na jednom mestu namerno (R-03). Do tog seta je uslov postojao samo u
+ * `/api/javno/feed`, dok je stranica `/sistem` dizala iste transakcije sopstvenim
+ * upitom bez njega — pa je pseudonim deteta izlazio na ekran koji istu proveru
+ * dva fajla dalje izričito sprovodi. Svaki nov spisak transakcija uzima OVAJ
+ * uslov, ne svoju kopiju.
+ */
+export const BEZ_DECE: Prisma.WalletWhereInput = {
+  OR: [{ user: { is: null } }, { user: { is: { maloletan: false } } }],
+};

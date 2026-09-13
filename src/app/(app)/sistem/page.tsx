@@ -4,6 +4,8 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { nivoZaKumulativ } from "@/lib/protokol/donacija";
 import { dohvatiSaldoFondacije } from "@/lib/protokol/fondacija";
+import { BEZ_DECE } from "@/lib/protokol/deca";
+import { dnevniPregledPrograma, labelPrograma } from "@/lib/protokol/programi";
 import { USLOV_AKTIVNO_DETE } from "@/lib/protokol/skole";
 import SistemKlijent from "./SistemKlijent";
 import { SEKCIJE, type Sekcija } from "./sekcije";
@@ -68,7 +70,23 @@ export default async function SistemPage({
     // korisnika. Tu spada i poništenje prepisa: ono se dešava između dva
     // korisnička zapisa, ali je akt Fondacije, ne razmena.
     prisma.transaction.findMany({
-      where: { type: { not: "TRANSFER" } },
+      where: {
+        type: { notIn: ["TRANSFER", "EMISIJA_PROGRAM"] },
+        // 🔴 Socijalni programi ne izlaze pojedinačno (R-03, mera M-1) — naziv
+        // programa je posebna kategorija (ZZPL čl. 17), a iznos sam invertuje
+        // godište i broj dece. Umesto redova stoji dnevni zbir po programu
+        // (`dnevniPregledPrograma`). Operativni doprinos je na sopstvenom tipu
+        // `EMISIJA_OPERATIVNI` i ostaje vidljiv.
+        //
+        // 🔴 Deca izlaze iz spiska, kao i u `/api/javno/feed`. Ovaj upit tu
+        // proveru nije imao, pa je pseudonim deteta izlazio uz emisije iz dečjeg
+        // prostora — dok isti podatak feed izričito krije (Modul Deca, čl. 13).
+        // Zapis Protokola i zapis Kruga nemaju korisnika i moraju da prođu.
+        AND: [
+          { OR: [{ fromWalletId: null }, { fromWallet: { is: BEZ_DECE } }] },
+          { toWallet: { is: BEZ_DECE } },
+        ],
+      },
       orderBy: { createdAt: "desc" },
       take: 100,
       include: {
@@ -78,7 +96,13 @@ export default async function SistemPage({
     }),
     // „Ukupno razmena" → isključivo prepisi između korisnika (TRANSFER).
     prisma.transaction.findMany({
-      where: { type: "TRANSFER" },
+      where: {
+        type: "TRANSFER",
+        AND: [
+          { OR: [{ fromWalletId: null }, { fromWallet: { is: BEZ_DECE } }] },
+          { toWallet: { is: BEZ_DECE } },
+        ],
+      },
       orderBy: { createdAt: "desc" },
       take: 100,
       include: {
@@ -137,6 +161,13 @@ export default async function SistemPage({
       _sum: { amount: true },
       where: { type: "TRANSFER", createdAt: { gte: danas } },
     }),
+    // 🔴 Anonimna donacija ULAZI u spisak, ali bez pseudonima i bez linka
+    // (R-03, mera M-3c). Do ovog seta je uslov bio samo `status: CONFIRMED` —
+    // polje `javno` se nije gledalo uopšte, pa se donator koji je izabrao
+    // anonimnost prikazivao SA PSEUDONIMOM, iznosom i datumom, svakom redovnom
+    // članu. Pseudonim vodi na profil, a kolona POEN mu je stajala na 0 (anonimna
+    // donacija ne nosi POEN) — jedini takav red u tabeli, dakle i oznaka „ovaj je
+    // donirao anonimno". Donacije čl. 5a i Uslovi čl. 17 obećavaju suprotno.
     prisma.donationRecord.findMany({
       where: { status: "CONFIRMED" },
       orderBy: { confirmedAt: "desc" },
@@ -177,8 +208,10 @@ export default async function SistemPage({
   const danasIznosTx = danasIznosTxRaw._sum.amount ?? 0;
   const donacije = donacijeLista.map((d) => ({
     id: d.id,
-    userId: d.userId,
-    pseudonim: d.user.pseudonim,
+    // Anonimna donacija: iznos ulazi u zbir, lice ne izlazi nigde.
+    userId: d.javno ? d.userId : null,
+    pseudonim: d.javno ? d.user.pseudonim : null,
+    anonimno: !d.javno,
     amountRSD: Number(d.amountRSD),
     poenEmitted: d.poenEmitted,
     level: d.level,
@@ -230,6 +263,11 @@ export default async function SistemPage({
     };
   });
 
+  // Socijalni programi: dnevni zbir po programu stoji UMESTO pojedinačnih redova,
+  // koji su merom M-1 (R-03) izašli iz spiska zapisa Protokola. Proverljivost
+  // ostaje potpuna — zbir agregata plus ostali kanali daju promenu opticaja.
+  const programiPregled = await dnevniPregledPrograma(14);
+
   const emisijeChart = emisije
     .slice(0, 14)
     .reverse()
@@ -263,6 +301,7 @@ export default async function SistemPage({
       donacije={donacije}
       pokrovitelji={pokrovitelji}
       emisijeChart={emisijeChart}
+      programiPregled={programiPregled.map((r) => ({ ...r, label: labelPrograma(r.program) }))}
       protokolTx={protokolTx}
       razmene={razmene}
       clanovi={clanovi}
