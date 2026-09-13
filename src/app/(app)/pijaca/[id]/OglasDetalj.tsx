@@ -11,6 +11,9 @@ import CenaUnos from "@/components/CenaUnos";
 import PodeliOglas from "@/components/PodeliOglas";
 import { formatCenaGlavni, prikaziJedinicuCene, parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
 import { kategorijaKljuc, kategorijaEmoji } from "@/lib/kategorije";
+
+/** Veza <label> → <input type="file"> pri izmeni oglasa. */
+const ID_UNOSA_IZMENA = "pijaca-izmena-slike-unos";
 import {
   MAX_SLIKA,
   MAX_UKUPNO,
@@ -750,12 +753,13 @@ function IzmeniOglas({
               </div>
             ))}
             {/* Dodaj novu */}
+            {/* Isti razlog kao na obrascu za nov oglas: birač otvara <label>, ne
+                programski klik na skriveni <input> (iOS tada ne vrati izbor). */}
             {ukupnoSlika < MAX_SLIKA && (
-              <button
-                type="button"
-                onClick={() => fileRef.current?.click()}
-                disabled={obrada}
-                className="w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl disabled:opacity-50"
+              <label
+                htmlFor={ID_UNOSA_IZMENA}
+                aria-disabled={obrada}
+                className={`w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl cursor-pointer ${obrada ? "opacity-50 pointer-events-none" : ""}`}
               >
                 {obrada ? (
                   <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
@@ -764,10 +768,10 @@ function IzmeniOglas({
                 ) : (
                   "+"
                 )}
-              </button>
+              </label>
             )}
           </div>
-          <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleNoveSlike} />
+          <input id={ID_UNOSA_IZMENA} ref={fileRef} type="file" accept="image/*" multiple className="sr-only" onChange={handleNoveSlike} />
           <p className="mt-1.5 text-xs text-kolo-muted">{t("slike_hint")}</p>
         </div>
 
