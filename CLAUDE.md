@@ -18,12 +18,34 @@ Vercel **Production Branch = `production`**. Podela okruženja:
 
 ### 🔴 Tekst se menja SAMO na srpskom; prevodi idu pre objave (2026-09-13)
 
-Odluka vlasnika. **Tokom rada se menja isključivo srpski original** — `messages/sr.json`,
-`src/lib/faq-data.ts` i akti u korenu `dokumentacija 4.1/`. Prevodi na **en/ru/hr/hu**
-rade se **na kraju, pre merge-a `main` → `production`**, u jednom prolazu.
+Odluka vlasnika. **Tokom rada se menja isključivo srpski original** — `messages/sr.json`
+i `src/lib/faq-data.ts`. Prevodi na **en/ru/hr/hu** rade se **na kraju, pre merge-a
+`main` → `production`**, u jednom prolazu.
+
+🔴 **AKTI SU IZUZETI iz ovog pravila** (odluka vlasnika, 2026-09-13). Akt u
+`dokumentacija 4.1/` se **ne menja usput**: menja se namernim potezom (po pravilu uz
+analizu rizika), a **bump ionako dodiruje pet imena fajlova, mapu u
+`pravilnik/[slug]`, verzijske labele u `messages` i spisak `AKTI` u testu** — prevod
+je tu najmanji deo istog poteza, ne zaseban posao. Akt i njegovi prevodi idu
+**zajedno, kao do sada**.
+
+🔴 **Razlog nije samo obim nego kvar koji se već desio.** Da srpski akt dobije novu
+šifru a prevod ostane na staroj, `ucitajPravniDokument` bi **tiho servirao srpski
+tekst** engleskom čitaocu — fallback je namerno nem (vidi `src/lib/pravni-dokument.ts`),
+a upravo tako su hrvatski i mađarski posetioci do 4.1.0 mesecima dobijali srpske akte.
+Uz to je „jedan događaj objave = jedna šifra" pravilo koje je već tri puta branjeno
+(4.4.4 umesto 4.4.3, 4.4.7 umesto 4.4.6, 4.5.5 umesto 4.5.4): **šifra u imenu fajla
+JESTE objava, ne radna oznaka.**
+
+🟢 **Branu za akte nosi `__tests__/pravni-dokumenti.test.ts`**, i ona je jača od duga:
+`fs.access` traži da svaki akt **fizički postoji** na svih pet jezika, bez fallbacka,
+pa polovičan bump pada odmah. To je apsolutna provera, a `npm run prevodi` meri samo
+razliku prema produkciji — zato se akti tamo **ne mere uopšte** (drugo bi bilo
+dupliranje sa slabijom proverom).
 
 **Mapiranje komandi se time proširuje:**
-- „pošalji na test" → commit + push na `main`. Prevodi **ne moraju** biti urađeni.
+- „pošalji na test" → commit + push na `main`. Prevodi **copy-ja** ne moraju biti
+  urađeni; **prevodi akata moraju**, jer se objavljuju zajedno sa bumpom.
 - „objavi na ekolo.rs" → **prvo `npm run prevodi:objava`**, pa tek onda merge `main` → `production`.
   🔴 Ako ta komanda padne, objava **staje** dok se prevodi ne urade. To je jedina tačka
   u kojoj se dug naplaćuje.
@@ -63,9 +85,9 @@ pa `git show origin/production:…` tamo ne radi; uz to bi provera na `productio
 poredila granu sa samom sobom. Mesto brane je **sesija, pre merge-a** — `--auto` mod
 postoji u skripti ako se ikad uveže u build, ali se za sada ne koristi.
 
-🟡 **Šta brana NE pokriva:** izmene teksta koje žive direktno u komponentama
-(hardkodovan copy van `messages/`). Ako se takav tekst pojavi, ide u `messages/` — to je
-pravilo koje je i inače na snazi.
+🟡 **Šta brana NE pokriva:** akte (izuzeti su, vidi gore) i izmene teksta koje žive
+direktno u komponentama (hardkodovan copy van `messages/`). Ako se takav tekst pojavi,
+ide u `messages/` — to je pravilo koje je i inače na snazi.
 
 
 #### 🔴 `admin` namespace se NE prevodi — i više ne postoji u prevodima (2026-09-13)

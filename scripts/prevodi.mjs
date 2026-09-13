@@ -3,9 +3,18 @@
  * DUG PREVODA — meri koliko je srpski original odmakao od prevoda.
  *
  * PRAVILO RADA (odluka vlasnika, 2026-09-13): tokom rada se menja ISKLJUČIVO
- * srpski original — `messages/sr.json`, `src/lib/faq-data.ts` i akti u korenu
- * `dokumentacija 4.1/`. Prevodi na en/ru/hr/hu rade se NA KRAJU, pre objave na
- * ekolo.rs.
+ * srpski original — `messages/sr.json` i `src/lib/faq-data.ts`. Prevodi na
+ * en/ru/hr/hu rade se NA KRAJU, pre objave na ekolo.rs.
+ *
+ * 🔴 AKTI SU IZUZETI (odluka vlasnika, 2026-09-13) i ovde se NE mere. Akt se ne
+ * menja usput: menja se namernim potezom, a bump ionako dodiruje pet imena
+ * fajlova, mapu u `pravilnik/[slug]`, verzijske labele u `messages` i spisak
+ * `AKTI` u testu — prevod je tu najmanji deo istog poteza, ne zaseban posao.
+ * Uz to bi polovičan bump (sr na novoj šifri, prevod na staroj) značio da
+ * `ucitajPravniDokument` TIHO servira srpski tekst engleskom čitaocu — kvar koji
+ * se već desio (hr i hu do 4.1.0). Branu nosi `pravni-dokumenti.test.ts`, koji
+ * `fs.access`-om traži da svaki akt fizički postoji na svih pet jezika; to je
+ * apsolutna provera i jača je od diferencijalnog duga.
  *
  * Ova skripta je brana tog pravila. Bez nje se razlaz ne vidi: paritet KLJUČEVA
  * prolazi i kad je vrednost zastarela, pa prevod tiho govori nešto drugo nego
@@ -30,7 +39,7 @@
  * namespace koji se NE prevodi) postoji zaseban alat: `npm run i18n:check`.
  * Dve provere, dve svrhe — ne spajati ih.
  */
-import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
@@ -44,7 +53,6 @@ const CILJEVI = ["en", "ru", "hr", "hu"];
 // pravilu ne sme da postoji, pa bi objava stajala na poslu koji se ne radi.
 const NEPREVEDENI_NS = ["admin"];
 const jeNeprevedeni = (k) => NEPREVEDENI_NS.some((ns) => k === ns || k.startsWith(ns + "."));
-const AKTI = "dokumentacija 4.1";
 const PROVERENO = join(ROOT, "scripts", "prevodi-provereno.json");
 
 const argv = process.argv.slice(2);
@@ -138,28 +146,7 @@ for (const jezik of CILJEVI) {
   }
 }
 
-// --- 2. akti (dokumentacija 4.1/) -----------------------------------------
-// Akt traži prevod kad mu se promeni sadržaj ili ime fajla (bump verzije).
-for (const akt of existsSync(join(ROOT, AKTI)) ? readdirSync(join(ROOT, AKTI)).filter((f) => f.endsWith(".md")) : []) {
-  const sadSr = citaj(`${AKTI}/${akt}`);
-  if (sadSr === izOsnove(`${AKTI}/${akt}`)) continue; // akt nije diran
-  for (const jezik of CILJEVI) {
-    const sadC = citaj(`${AKTI}/${jezik}/${akt}`);
-    const nema = sadC == null;
-    if (!nema && sadC !== izOsnove(`${AKTI}/${jezik}/${akt}`)) continue; // prevod dirnut
-    const id = `${jezik}|akt:${akt}`;
-    if (jePotvrdjeno(id, sadSr)) continue;
-    dug.push({
-      id,
-      izvor: `${AKTI}/${akt}`,
-      opis: nema ? "prevod akta ne postoji" : "akt izmenjen, prevod nije",
-      kljuc: jezik,
-      hes: hes(sadSr),
-    });
-  }
-}
-
-// --- 3. FAQ ---------------------------------------------------------------
+// --- 2. FAQ ---------------------------------------------------------------
 // FAQ živi u .ts fajlovima, pa se poredi ceo fajl. Brojeve pitanja i prazne
 // odgovore po jeziku čuva `__tests__/faq-paritet.test.ts`.
 const faqSr = citaj("src/lib/faq-data.ts");
