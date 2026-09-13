@@ -6,6 +6,12 @@
  * je telefon sam ponudio, i preveliko UKUPNO telo zahteva, koje platforma odbija
  * pre rute, pa `res.json()` na ekranu pukne i ostane samo „Greška pri slanju".
  *
+ * Treći uzrok, prijavljen sa iPhone-a: čim se slike štikliraju, karticu izbaci i
+ * sličice se ne pojave. Fotografija od 12 MP dekodirana zauzima ≈48MB, a sve
+ * izabrane su se dekodirale ODJEDNOM; uz to je `URL.createObjectURL` stajao u
+ * renderu, pa je pri svakom iscrtavanju nastajala nova blob adresa i nijedna se
+ * nije oslobađala. iOS Safari na tu memoriju odbaci stranicu.
+ *
  * Test gleda IZVOR, kao `oglasi-vidljivost-izvor.test.ts`: pravilo u
  * `slika-upload.ts` ne vredi ništa dok svaki obrazac ne prođe kroz njega, a
  * upravo to se već dešavalo (obrazac za IZMENU oglasa nije imao nikakvu pripremu).
@@ -21,11 +27,14 @@ import {
   ukupnaVelicina,
 } from "@/lib/slika-upload";
 
+const OBRASCI: ReadonlyArray<readonly [string, string]> = [
+  ["nov oglas", "src/app/(app)/pijaca/novi-oglas/NoviOglasForma.tsx"],
+  ["izmena oglasa", "src/app/(app)/pijaca/[id]/OglasDetalj.tsx"],
+];
+
 const koren = process.cwd();
 const procitaj = (rel: string) => readFileSync(path.join(koren, rel), "utf-8");
 
-const NOV_OGLAS = "src/app/(app)/pijaca/novi-oglas/NoviOglasForma.tsx";
-const IZMENA = "src/app/(app)/pijaca/[id]/OglasDetalj.tsx";
 const RUTA_POST = "src/app/api/pijaca/route.ts";
 const RUTA_PATCH = "src/app/api/pijaca/[id]/route.ts";
 
@@ -70,30 +79,21 @@ describe("porukaIzOdgovora", () => {
 });
 
 describe("IZVOR — oba obrasca pripremaju slike kroz isto pravilo", () => {
-  it.each([
-    ["nov oglas", NOV_OGLAS],
-    ["izmena oglasa", IZMENA],
-  ])("%s zove pripremiSliku i meri ukupnu veličinu", (_ime, rel) => {
+  it.each(OBRASCI)("%s zove zajedničku pripremu i meri ukupnu veličinu", (_ime, rel) => {
     const izvor = procitaj(rel);
     expect(izvor).toContain("@/lib/slika-upload");
-    expect(izvor).toContain("pripremiSliku");
+    expect(izvor).toContain("pripremiSlike");
     expect(izvor).toContain("ukupnaVelicina");
     expect(izvor).toContain("MAX_UKUPNO");
   });
 
-  it.each([
-    ["nov oglas", NOV_OGLAS],
-    ["izmena oglasa", IZMENA],
-  ])("%s razlikuje odbijen FORMAT od prevelike slike", (_ime, rel) => {
+  it.each(OBRASCI)("%s razlikuje odbijen FORMAT od prevelike slike", (_ime, rel) => {
     const izvor = procitaj(rel);
     expect(izvor).toContain("slika_format");
     expect(izvor).toContain("slike_ukupno_prevelike");
   });
 
-  it.each([
-    ["nov oglas", NOV_OGLAS],
-    ["izmena oglasa", IZMENA],
-  ])("%s proverava res.ok pre čitanja tela odgovora", (_ime, rel) => {
+  it.each(OBRASCI)("%s proverava res.ok pre čitanja tela odgovora", (_ime, rel) => {
     const izvor = procitaj(rel);
     // Slanje slika ide kao multipart (`body: fd`). Obrazac koji pada je
     // `const data = await res.json();` odmah iza tog fetch-a: preveliko telo
@@ -146,5 +146,28 @@ describe("prevodi za nove poruke postoje na svih pet jezika", () => {
     expect(
       poruke.greske.slika_mora_biti_jpg_png_ili_webp_fotografiju_sa_iphone_a_heic_sacuvaj_kao_jpg?.trim(),
     ).toBeTruthy();
+  });
+});
+
+describe("IZVOR — memorija na telefonu", () => {
+  it.each(OBRASCI)("%s dekodira slike JEDNU PO JEDNU, ne odjednom", (_ime, rel) => {
+    const izvor = procitaj(rel);
+    // 🔴 `Promise.all` nad pripremom slika je tačan kvar zbog kog iPhone izbacuje
+    // karticu: pet fotografija od 12 MP traži ~240MB u jednom trenutku.
+    expect(izvor).not.toMatch(/Promise\.all\([^)]*pripremiSlik/);
+    expect(izvor).toContain("pripremiSlike(");
+  });
+
+  it.each(OBRASCI)("%s ne pravi blob adresu u renderu", (_ime, rel) => {
+    const izvor = procitaj(rel);
+    // Adresa sličice se pravi jednom (`zaPregled`) i oslobađa (`oslobodiPregled`).
+    // U `src={...}` ide zapamćena vrednost, nikad nov `createObjectURL`.
+    expect(izvor).not.toMatch(/src=\{\s*URL\.createObjectURL/);
+    expect(izvor).toContain("oslobodiPregled");
+  });
+
+  it.each(OBRASCI)("%s oslobađa sličice kad ekran ode", (_ime, rel) => {
+    const izvor = procitaj(rel);
+    expect(izvor).toMatch(/for \(const s of \w+\.current\) oslobodiPregled\(s\)/);
   });
 });

@@ -14,9 +14,11 @@ import { kategorijaKljuc, kategorijaEmoji } from "@/lib/kategorije";
 import {
   MAX_SLIKA,
   MAX_UKUPNO,
+  oslobodiPregled,
   porukaIzOdgovora,
-  pripremiSliku,
+  pripremiSlike,
   ukupnaVelicina,
+  type IzabranaSlika,
 } from "@/lib/slika-upload";
 
 interface OglasProps {
@@ -543,13 +545,24 @@ function IzmeniOglas({
   const [keepIndices, setKeepIndices] = useState<number[]>(
     oglas.images.map((_, i) => i)
   );
-  const [noveSlike, setNoveSlike] = useState<File[]>([]);
+  const [noveSlike, setNoveSlike] = useState<IzabranaSlika[]>([]);
   const [loading, setLoading] = useState(false);
   const [obrada, setObrada] = useState(false);
   const [error, setError] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
+  const noveSlikeRef = useRef<IzabranaSlika[]>([]);
 
   const ukupnoSlika = keepIndices.length + noveSlike.length;
+
+  // Blob adrese sličica se oslobađaju kad obrazac ode sa ekrana.
+  useEffect(() => {
+    noveSlikeRef.current = noveSlike;
+  }, [noveSlike]);
+  useEffect(() => {
+    return () => {
+      for (const s of noveSlikeRef.current) oslobodiPregled(s);
+    };
+  }, []);
 
   function ukloniPostojecu(idx: number) {
     setKeepIndices((prev) => prev.filter((i) => i !== idx));
@@ -569,26 +582,36 @@ function IzmeniOglas({
     setObrada(true);
     setError("");
     try {
-      const ishodi = await Promise.all(files.slice(0, slobodno).map(pripremiSliku));
-      const validne = ishodi.flatMap((i) => (i.ok ? [i.file] : []));
+      let tekuce = noveSlike;
+      let prekoracenje = false;
 
-      if (ishodi.some((i) => !i.ok && i.razlog === "format")) setError(t("slika_format"));
-      else if (ishodi.some((i) => !i.ok)) setError(t("slika_prevelika"));
+      const { formatOdbijen, velicinaOdbijena } = await pripremiSlike(
+        files.slice(0, slobodno),
+        (slika) => {
+          const sledece = [...tekuce, slika];
+          if (
+            keepIndices.length + sledece.length > MAX_SLIKA ||
+            ukupnaVelicina(sledece.map((s) => s.file)) > MAX_UKUPNO
+          ) {
+            oslobodiPregled(slika);
+            prekoracenje = true;
+            return;
+          }
+          tekuce = sledece;
+          setNoveSlike(sledece);
+        },
+      );
 
-      if (validne.length > 0) {
-        const sledece = [...noveSlike, ...validne].slice(0, MAX_SLIKA - keepIndices.length);
-        if (ukupnaVelicina(sledece) > MAX_UKUPNO) {
-          setError(t("slike_ukupno_prevelike"));
-          return;
-        }
-        setNoveSlike(sledece);
-      }
+      if (prekoracenje) setError(t("slike_ukupno_prevelike"));
+      else if (formatOdbijen) setError(t("slika_format"));
+      else if (velicinaOdbijena) setError(t("slika_prevelika"));
     } finally {
       setObrada(false);
     }
   }
 
   function ukloniNovu(i: number) {
+    oslobodiPregled(noveSlike[i]);
     setNoveSlike((prev) => prev.filter((_, idx) => idx !== i));
   }
 
@@ -612,7 +635,7 @@ function IzmeniOglas({
       fd.append("location", location.trim());
       fd.append("phone", phone.trim());
       fd.append("keepImages", JSON.stringify(keepIndices));
-      noveSlike.forEach((f, i) => fd.append(`nova_slika_${i}`, f));
+      noveSlike.forEach((s, i) => fd.append(`nova_slika_${i}`, s.file));
 
       const res = await fetch(`/api/pijaca/${oglas.id}`, { method: "PATCH", body: fd });
       if (!res.ok) {
@@ -713,10 +736,10 @@ function IzmeniOglas({
               )
             ))}
             {/* Nove slike */}
-            {noveSlike.map((f, i) => (
-              <div key={`n-${i}`} className="relative w-20 h-20 rounded-xl border border-kolo-green-100 overflow-hidden bg-kolo-bg">
+            {noveSlike.map((s, i) => (
+              <div key={s.pregled} className="relative w-20 h-20 rounded-xl border border-kolo-green-100 overflow-hidden bg-kolo-bg">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={URL.createObjectURL(f)} alt="" className="w-full h-full object-cover" />
+                <img src={s.pregled} alt="" className="w-full h-full object-cover" />
                 <button
                   type="button"
                   onClick={() => ukloniNovu(i)}

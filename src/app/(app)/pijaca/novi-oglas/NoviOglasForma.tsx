@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import LokacijaSearch from "@/components/LokacijaSearch";
@@ -11,9 +11,11 @@ import { IZNOS, oglasIspunjavaMinimum } from "@/lib/doprinos-pravila";
 import {
   MAX_SLIKA,
   MAX_UKUPNO,
+  oslobodiPregled,
   porukaIzOdgovora,
-  pripremiSliku,
+  pripremiSlike,
   ukupnaVelicina,
+  type IzabranaSlika,
 } from "@/lib/slika-upload";
 
 const MAX_IMAGES = MAX_SLIKA;
@@ -42,12 +44,24 @@ export default function NoviOglasForma({
   const [category, setCategory] = useState("");
   const [location, setLocation] = useState(defaultLocation);
   const [phone, setPhone] = useState(defaultPhone);
-  const [slike, setSlike] = useState<File[]>([]);
+  const [slike, setSlike] = useState<IzabranaSlika[]>([]);
   const [loading, setLoading] = useState(false);
   const [obrada, setObrada] = useState(false);
   const [error, setError] = useState("");
   const [uspeh, setUspeh] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const slikeRef = useRef<IzabranaSlika[]>([]);
+
+  // Sličice se oslobađaju kad ekran ode — inače blob adrese ostaju u memoriji
+  // kartice i posle objave oglasa.
+  useEffect(() => {
+    slikeRef.current = slike;
+  }, [slike]);
+  useEffect(() => {
+    return () => {
+      for (const s of slikeRef.current) oslobodiPregled(s);
+    };
+  }, []);
 
   async function handleFiles(e: React.ChangeEvent<HTMLInputElement>) {
     const izabrane = Array.from(e.target.files ?? []);
@@ -61,29 +75,45 @@ export default function NoviOglasForma({
     setObrada(true);
     setError("");
     try {
-      const ishodi = await Promise.all(izabrane.slice(0, slobodno).map(pripremiSliku));
-      const validne = ishodi.flatMap((i) => (i.ok ? [i.file] : []));
+      // Zbir se vodi lokalno kroz petlju: `slike` iz stanja je snimak sa početka
+      // obrade, a slike stižu jedna po jedna. Samo ovaj rukovalac menja spisak
+      // dok obrada traje, pa je lokalni zbir tačan.
+      let tekuce = slike;
+      let prekoracenje = false;
+
+      // Jedna po jedna, sa sličicom čim je slika gotova. Paralelno dekodiranje je
+      // obaralo karticu na iPhone-u (vidi `slika-upload.ts`), a čekanje na sve
+      // odjednom je značilo da se do tada ne vidi ništa.
+      const { formatOdbijen, velicinaOdbijena } = await pripremiSlike(
+        izabrane.slice(0, slobodno),
+        (slika) => {
+          // Zbir se meri ODMAH, a ne pri slanju: platforma odbija preveliko telo
+          // pre nego što ruta krene, pa bi se to inače videlo tek kao neuspelo
+          // objavljivanje bez objašnjenja.
+          const sledece = [...tekuce, slika];
+          if (sledece.length > MAX_IMAGES || ukupnaVelicina(sledece.map((s) => s.file)) > MAX_UKUPNO) {
+            oslobodiPregled(slika);
+            prekoracenje = true;
+            return;
+          }
+          tekuce = sledece;
+          setSlike(sledece);
+        },
+      );
 
       // 🔴 Razlog odbijanja mora da se vidi. Ranije je svaka neuspela slika
       // dobijala poruku „prevelika", pa je čovek uzalud tražio manju fotografiju
       // iako je problem bio format (HEIC sa telefona).
-      if (ishodi.some((i) => !i.ok && i.razlog === "format")) setError(t("slika_format"));
-      else if (ishodi.some((i) => !i.ok)) setError(t("slika_prevelika"));
-
-      if (validne.length > 0) {
-        const sledece = [...slike, ...validne].slice(0, MAX_IMAGES);
-        // Zbir se meri ODMAH, a ne pri slanju: platforma odbija preveliko telo
-        // pre nego što ruta krene, pa bi se to inače videlo tek kao neuspelo
-        // objavljivanje bez objašnjenja.
-        if (ukupnaVelicina(sledece) > MAX_UKUPNO) setError(t("slike_ukupno_prevelike"));
-        else setSlike(sledece);
-      }
+      if (prekoracenje) setError(t("slike_ukupno_prevelike"));
+      else if (formatOdbijen) setError(t("slika_format"));
+      else if (velicinaOdbijena) setError(t("slika_prevelika"));
     } finally {
       setObrada(false);
     }
   }
 
   function ukloniSliku(i: number) {
+    oslobodiPregled(slike[i]);
     setSlike((prev) => prev.filter((_, idx) => idx !== i));
   }
 
@@ -98,7 +128,7 @@ export default function NoviOglasForma({
     description,
     category,
     location: location.trim() || null,
-    images: slike.map((f) => f.name),
+    images: slike.map((s) => s.file.name),
   });
   const canSubmit =
     title.trim().length >= 3 && cena.ok && !!category && (verifikovan || minimum.ok);
@@ -126,7 +156,7 @@ export default function NoviOglasForma({
       fd.append("category", category);
       fd.append("location", location.trim());
       fd.append("phone", phone.trim());
-      slike.forEach((f, i) => fd.append(`slika_${i}`, f));
+      slike.forEach((s, i) => fd.append(`slika_${i}`, s.file));
 
       const res = await fetch("/api/pijaca", { method: "POST", body: fd });
 
@@ -320,11 +350,11 @@ export default function NoviOglasForma({
             {jePotraznja ? t("slike_label_potraznja") : t("slike_label")} <span className="text-kolo-muted font-normal">{t("slike_do", { max: MAX_IMAGES })}</span>
           </label>
           <div className="flex flex-wrap gap-2">
-            {slike.map((f, i) => (
-              <div key={i} className="relative w-20 h-20 rounded-xl border border-kolo-border overflow-hidden bg-kolo-bg">
+            {slike.map((s, i) => (
+              <div key={s.pregled} className="relative w-20 h-20 rounded-xl border border-kolo-border overflow-hidden bg-kolo-bg">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={URL.createObjectURL(f)}
+                  src={s.pregled}
                   alt=""
                   className="w-full h-full object-cover"
                 />
