@@ -8,48 +8,15 @@ import CenaUnos from "@/components/CenaUnos";
 import { KATEGORIJE, kategorijaEmoji, kategorijaKljuc } from "@/lib/kategorije";
 import { parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
 import { IZNOS, oglasIspunjavaMinimum } from "@/lib/doprinos-pravila";
+import {
+  MAX_SLIKA,
+  MAX_UKUPNO,
+  porukaIzOdgovora,
+  pripremiSliku,
+  ukupnaVelicina,
+} from "@/lib/slika-upload";
 
-const MAX_IMAGES = 5;
-const MAX_SIZE = 5 * 1024 * 1024;
-// Najveća dimenzija (px) na koju smanjujemo sliku pre uploada. Fotografije sa
-// telefona su često 4000×3000 i 4–12MB — bez ovoga bi premašile limit od 5MB.
-const MAX_DIM = 1600;
-
-// Smanji i kompresuj sliku u browseru (canvas → JPEG). Vraća original ako
-// kompresija nije moguća (npr. nepodržan format). Time fotografije sa telefona
-// pouzdano stanu ispod limita, a upload je brži na mobilnom internetu.
-async function kompresujSliku(file: File): Promise<File> {
-  if (!file.type.startsWith("image/")) return file;
-  try {
-    let bitmap: ImageBitmap;
-    try {
-      bitmap = await createImageBitmap(file, { imageOrientation: "from-image" });
-    } catch {
-      bitmap = await createImageBitmap(file);
-    }
-    let { width, height } = bitmap;
-    if (width > MAX_DIM || height > MAX_DIM) {
-      const scale = Math.min(MAX_DIM / width, MAX_DIM / height);
-      width = Math.round(width * scale);
-      height = Math.round(height * scale);
-    }
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) { bitmap.close?.(); return file; }
-    ctx.drawImage(bitmap, 0, 0, width, height);
-    bitmap.close?.();
-    const blob = await new Promise<Blob | null>((resolve) =>
-      canvas.toBlob((b) => resolve(b), "image/jpeg", 0.82)
-    );
-    if (!blob || blob.size >= file.size) return file;
-    const naziv = file.name.replace(/\.[^.]+$/, "") + ".jpg";
-    return new File([blob], naziv, { type: "image/jpeg" });
-  } catch {
-    return file;
-  }
-}
+const MAX_IMAGES = MAX_SLIKA;
 
 export default function NoviOglasForma({
   defaultLocation = "",
@@ -94,10 +61,23 @@ export default function NoviOglasForma({
     setObrada(true);
     setError("");
     try {
-      const obradjene = await Promise.all(izabrane.slice(0, slobodno).map(kompresujSliku));
-      const validne = obradjene.filter((f) => f.size <= MAX_SIZE);
-      if (validne.length < obradjene.length) setError(t("slika_prevelika"));
-      if (validne.length > 0) setSlike((prev) => [...prev, ...validne].slice(0, MAX_IMAGES));
+      const ishodi = await Promise.all(izabrane.slice(0, slobodno).map(pripremiSliku));
+      const validne = ishodi.flatMap((i) => (i.ok ? [i.file] : []));
+
+      // 🔴 Razlog odbijanja mora da se vidi. Ranije je svaka neuspela slika
+      // dobijala poruku „prevelika", pa je čovek uzalud tražio manju fotografiju
+      // iako je problem bio format (HEIC sa telefona).
+      if (ishodi.some((i) => !i.ok && i.razlog === "format")) setError(t("slika_format"));
+      else if (ishodi.some((i) => !i.ok)) setError(t("slika_prevelika"));
+
+      if (validne.length > 0) {
+        const sledece = [...slike, ...validne].slice(0, MAX_IMAGES);
+        // Zbir se meri ODMAH, a ne pri slanju: platforma odbija preveliko telo
+        // pre nego što ruta krene, pa bi se to inače videlo tek kao neuspelo
+        // objavljivanje bez objašnjenja.
+        if (ukupnaVelicina(sledece) > MAX_UKUPNO) setError(t("slike_ukupno_prevelike"));
+        else setSlike(sledece);
+      }
     } finally {
       setObrada(false);
     }
@@ -149,9 +129,21 @@ export default function NoviOglasForma({
       slike.forEach((f, i) => fd.append(`slika_${i}`, f));
 
       const res = await fetch("/api/pijaca", { method: "POST", body: fd });
-      const data = await res.json();
 
-      if (!res.ok) { setError(data.error ?? t("greska_objavljivanje")); return; }
+      if (!res.ok) {
+        // Odgovor ne mora biti naš JSON: preveliko telo (413) i prekoračeno vreme
+        // obara platforma pre rute. Zato se poruka bira ovde, a status se ispisuje
+        // da bi prijava kvara imala za šta da se uhvati.
+        const poruka = await porukaIzOdgovora(res);
+        setError(
+          poruka ??
+            (res.status === 413
+              ? t("slike_ukupno_prevelike")
+              : `${t("greska_objavljivanje")} (${res.status})`)
+        );
+        return;
+      }
+      await res.json().catch(() => ({}));
       // Potvrda + redirect na Pijacu (ne direktno na detalj oglasa).
       setUspeh(true);
       setTimeout(() => router.push("/pijaca"), 1800);
