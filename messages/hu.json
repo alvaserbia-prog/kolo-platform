@@ -263,6 +263,10 @@
     "kartica_donacije_opis": "visszaigazolt adomány",
     "kartica_promet": "Összes átírás",
     "kartica_promet_opis": "POEN a tagok között",
+    "programi_zbir_naslov": "Szociális programok — napi összeg",
+    "programi_zbir_opis": "A szociális programok egyedi kifizetései nem kerülnek közzétételre. Programonkénti napi összeg jelenik meg a felhasználók számával együtt — az összes csatorna összege továbbra is a nyilvántartásba vett POEN teljes számát adja.",
+    "programi_zbir_program": "Program",
+    "programi_zbir_korisnika": "Felhasználó",
     "protokol_tx_naslov": "Protocol transactions",
     "ukupno": "összesen",
     "rast_opticaja_objasnjenje": "Amikor a közösség 1.000.000 POEN hozzájárulást rögzít, a rendszer a 2. szakaszba lép, és aktiválódik a Felső Kör (közös döntéshozatal). A küszöb a közösség aktivitását méri — a POEN-nek nincs ára és nincs értéke a rendszeren kívül.",
@@ -277,6 +281,7 @@
     "donacije_pregled_blokiran": "Az adományok megtekintése csak rendes tagok számára érhető el.",
     "nema_donacija": "Nincs visszaigazolt adomány.",
     "prikazanih_donacija": "{count} adomány megjelenítve",
+    "donacija_anonimna": "Névtelen adomány",
     "col_donator": "Adományozó",
     "col_nivo": "Szint",
     "col_datum": "Dátum",
@@ -780,6 +785,7 @@
     "opis_starijima": "1.000 + 100 × (életkor − 50) POEN/nap · 50 éves kortól elérhető a tagoknak",
     "opis_posebna_briga": "2 000 POEN/nap · rokkantság vagy krónikus betegség · dokumentáció szükséges",
     "opis_skolovanje": "Az összeget az admin állítja be · 6 havonta újraellenőrzés",
+    "isplaceno_ukupno": "E program alapján nyilvántartva: {iznos} POEN",
     "nepun_indeks": "A szociális programhoz legalább egy megerősítés szükséges — 10 %-os valóságindex. A jóváhagyás előtt a teljes láncod megerősíti, hogy a jogosultsági feltétel teljesül.",
     "posebna_briga_datum_resenja": "A fogyatékosságot megállapító határozat kelte",
     "posebna_briga_datum_isteka": "A határozat lejárati dátuma (nem kötelező — hagyd üresen, ha végleges)",
@@ -918,6 +924,7 @@
     "lista_naslov": "Adományok listája",
     "lista_opis": "A nyilvános adományozók vezeték- és keresztnévvel jelennek meg; a névtelen adományozókat nem azonosítjuk.",
     "lista_prazno": "Még nincs rögzített adomány.",
+    "lista_zakljucana": "Az adománylistát a rendes tagok látják. Saját adományaidat fent látod, állapottól függetlenül.",
     "lista_anoniman": "Névtelen adományozó",
     "ips_naslov": "Adományozás IPS QR-kóddal (azonnali)",
     "ips_opis": "Olvasd be a QR-kódot mobilbankkal — a dináros befizetés pár másodperc alatt megérkezik, platformdíj nélkül. A POEN azután kerül rögzítésre, hogy az Alapítvány visszaigazolja a beérkezést.",
@@ -980,11 +987,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -992,11 +999,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.5.2"
+      "ver": "4.6.1"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
@@ -1028,15 +1035,15 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek · KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.5.9-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.1-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat · KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.9-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.6.1-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya · KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.5.2-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.6.1-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása · KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.9-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.6.1-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat · KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.0-es verzió",
     "meta_whitepaper_title": "Whitepaper · KOLO",
@@ -2334,6 +2341,7 @@
     "krug_bonus": "A Kör növekedése „{krug}” — {clanovi} tag",
     "krug_osnivanje": "A „{krug}” Kör alapítása",
     "program": "Program: {program}",
+    "socijalni_program": "Szociális program",
     "doprinos_sadrzaju": "Hozzájárulás a platform tartalmához",
     "doprinos_razmeni": "Hozzájárulás a cseréhez — {korak}. lépés",
     "prijateljstvo": "Barátság vele: {pseudonim}",

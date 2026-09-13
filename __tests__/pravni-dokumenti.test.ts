@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_6_0.md`, `uslovi_koriscenja_4_5_9.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_6_0.md`, `uslovi_koriscenja_4_6_1.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -29,10 +29,10 @@ const AKTI = [
   // reference na verziju koja kao dokument više ne postoji.
   "Pravilnik_4_6_0.md",
   "dokaz_stvarnosti_4_4_1.md",
-  "DPIA_4_5_2.md",
-  "radnje_obrade_4_5_9.md",
-  "uslovi_koriscenja_4_5_9.md",
-  "politika_4_5_9.md",
+  "DPIA_4_6_1.md",
+  "radnje_obrade_4_6_1.md",
+  "uslovi_koriscenja_4_6_1.md",
+  "politika_4_6_1.md",
   "statut_4_1_0.md",
   "whitepaper_4_6_0.md",
   "rizici_4_6_0.md",
@@ -41,9 +41,9 @@ const AKTI = [
   "operativni_4_6_0.md",
   "osnivacki_4_6_0.md",
   "gornje_kolo_4_4_6.md",
-  "programi_podrske_4_6_0.md",
+  "programi_podrske_4_6_1.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
-  "ucesce_dece_4_6_0.md",
+  "ucesce_dece_4_6_1.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
   "projekti_nabavke_4_6_0.md",
 ];
@@ -274,7 +274,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_5_9.md": {
+  "radnje_obrade_4_6_1.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16", "Radnja obrade br. 17"],
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16", "Processing activity No. 17"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16", "Операция обработки № 17"],
@@ -289,7 +289,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // (`vercel.json` → regions: fra1, Neon endpoint u EU). Ako se region ikad vrati u
   // SAD, ocena i mere iz 5.13 postaju netačne — zato se traže doslovno, uz nov zbir
   // srednjih i niskih rizika.
-  "DPIA_4_5_2.md": {
+  "DPIA_4_6_1.md": {
     sr: [
       "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
       "Pet rizika je na srednjem nivou (R1, R2, R11, R13, R16)",
@@ -298,12 +298,16 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Mere za prekogranični prenos",
       "region Frankfurt",
       "najmanje jednom godišnje",
-      // 4.5.0 (R-13) — R11 je prerastao krug verifikatora: isti podatak nosi i javan
-      // zapis o evidentiranom POEN-u, pa verovatnoća ide sa 2 na 3 (ocena 9, i dalje
-      // srednji). Traži se i prihvaćena posledica — bez nje ocena ponovo počiva na
-      // opisu užem od sistema, što je isti kvar koji je R-11 ispravio kod R16.
-      "| 3 | 3 | 9 |",
-      "Prihvaćena posledica javnosti evidencije",
+      // 4.6.1 (R-03, mera M-1) — R11 se vraća u krug verifikatora: pojedinačno
+      // evidentiranje po programu izašlo je iz javnog pregleda i opis ne imenuje
+      // program, pa verovatnoća pada sa 3 na 2 (ocena 6, i dalje srednji).
+      // 🔴 Ocena od 9 (verovatnoća 3), uvedena uz R-13, počivala je upravo na tome
+      // što krug primalaca NIJE bio ograničen na verifikatore. Traži se i razlog
+      // izostavljanja SAMOG IZNOSA — bez njega bi uklonjen naziv ostavio podatak
+      // koji se iz iznosa i dalje čita (godina rođenja, broj i uzrast dece).
+      "| 2 | 3 | 6 |",
+      "Izostavljanje pojedinačnog zapisa iz javnog pregleda",
+      "Saglasnost roditelja za podatak o detetu",
       "## 5.14.",
       "sedamnaest radnji obrade",
       "Zatvaranje postupka",
@@ -316,8 +320,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Measures for Cross-Border Transfer",
       "Frankfurt region",
       "at least once a year",
-      "| 3 | 3 | 9 |",
-      "Accepted consequence of the ledger's publicity",
+      "| 2 | 3 | 6 |",
+      "Omission of the individual record from the public overview",
+      "Parental consent for data concerning a child",
       "## 5.14.",
       "seventeen processing activities",
       "Closing the procedure",
@@ -330,8 +335,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Меры для трансграничной передачи",
       "регион Франкфурт",
       "не реже одного раза в год",
-      "| 3 | 3 | 9 |",
-      "Принятое следствие публичности реестра",
+      "| 2 | 3 | 6 |",
+      "Исключение отдельной записи из публичного обзора",
+      "Согласие родителя на данные о ребёнке",
       "## 5.14.",
       "семнадцать операций обработки",
       "Закрытие процедуры",
@@ -534,7 +540,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
   // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
   // počiva upravo na tome da takav promet nije dopušten.
-  "uslovi_koriscenja_4_5_9.md": {
+  "uslovi_koriscenja_4_6_1.md": {
     sr: [
       // 4.5.9 — javnost donacije VIŠE NIJE „uslov za evidentiranje POEN-a". Ta
       // formulacija je strukturu činila „platiš → dobiješ vidljivost" i pravila
@@ -575,6 +581,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // Pravilnika) zaobilazi u jednom potezu — proda se ceo nalog sa ZRNOM u njemu.
       "ustupi, iznajmi ili proda pristup svom nalogu",
       "nije prenosiv",
+      // 4.6.1 (R-03) — lista donacija se sužava na redovne članove (M-3a),
+      // anonimna donacija ulazi samo iznosom (M-3c), a socijalni programi izlaze
+      // iz pojedinačnog prikaza evidencije (M-1).
+      "Lista donacija dostupna je verifikovanim korisnicima",
+      "ulazi u listu isključivo iznosom i datumom",
+      "ne prikazuju pojedinačno nego kao dnevni zbir po programu",
     ],
     en: [
       "does not set it as a condition on which it agrees to record a contribution",
@@ -800,7 +812,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // svakom potvrđenom članu. Ako ta odredba ispadne iz akta, kod nastavi da
   // zatvara profil bez osnova, a pregled po školama ostane bez ijednog pravila o
   // tome šta se sme objaviti — pa se traži doslovno, na sva tri jezika.
-  "ucesce_dece_4_6_0.md": {
+  "ucesce_dece_4_6_1.md": {
     sr: [
       // 4.5.9 (R-02) — kanal iz čl. 15 t. 9 upisuje detetu; priroda upisa mora da stoji.
       "maloletni korisnik ne prima ni novac ni stvar",
@@ -871,6 +883,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "20.000 POEN",
       "u roku od sedam dana",
       "prestaje kada maloletni korisnik upiše i potvrdi sopstvenu elektronsku adresu",
+      // 4.6.1 (R-03, mera M-4) — spisak dece jedne škole vidi samo punopravno dete
+      // te iste škole; nalog koji čeka roditelja iza sebe nema nikoga.
+      "čiji nalog ima stanje aktivnog naloga u smislu člana 4c",
+      "maloletnom korisniku druge škole taj pregled se ne prikazuje",
     ],
     en: [
       "the minor user receives neither money nor goods",
@@ -945,7 +961,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "прекращается, когда несовершеннолетний пользователь укажет и подтвердит собственный электронный адрес",
     ],
   },
-  "politika_4_5_9.md": {
+  "politika_4_6_1.md": {
     sr: [
       // 4.5.9 — isto što i u Uslovima čl. 17: objavljivanje nije uslov koji
       // Fondacija postavlja, nego posledica proverljivosti upisa.
@@ -963,10 +979,17 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "region Frankfurt",
       "najmanje jednom godišnje",
       "Telegram Messenger Inc.",
-      // 4.5.0 (R-13) — javnost zapisa se ne prećutkuje. Naziv programa uz pseudonim
-      // vidi svaki verifikovan korisnik, trajno; Politika je do tada opisivala samo
-      // krug verifikatora. Uz to: povlačenje pristanka i brisanje unetih podataka.
-      "Zapis o evidentiranom POEN-u nije skriven",
+      // 4.6.1 (R-03, mera M-1) — zapis više NE imenuje program i pojedinačno
+      // evidentiranje izlazi iz javnog pregleda; umesto njega ide dnevni zbir.
+      // 🔴 Traži se i razlog za izostavljanje SAMOG IZNOSA: kod podrške starijima
+      // iznos je jednoznačno određen godinom rođenja, pa uklonjen naziv bez
+      // uklonjenog iznosa ne bi sakrio ništa. Ranija formulacija („nije skriven",
+      // uvedena uz R-13) zabranjena je u bloku UKINUTO.
+      "Zapis o evidentiranom POEN-u ne imenuje program",
+      "jednoznačno određen godinom rođenja korisnika",
+      "dnevni zbir po programu",
+      "saglasnost roditelja odnosno zakonskog zastupnika",
+      "Izuzeci od prikaza pojedinačnih transakcija",
       // 4.5.1 (R-14) — prestanak statusa. Akt je obećavao brisanje oglasa koje
       // kod nije radio, a zadržane zapise je zvao anonimizovanima i iz toga
       // izvodio da prestaju da budu podaci o ličnosti. Traži se tačna
@@ -975,7 +998,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "čl. 30 st. 3 ZZPL-a",
       "oglasi se uklanjaju sa prostora za oglašavanje",
       "Poruke u razgovorima između korisnika brišu se kada bar jedna strana ugasi nalog",
-      "jedina mogućnost je da se na program ne prijavite",
+      // 4.6.1 (R-03) — posle mere M-1 javan zapis više ne otkriva program, pa
+      // jedino preostalo otkrivanje jesu sopstveni verifikatori. Rečenica o
+      // alternativi seli se na to mesto; u DPIA 5.6 stoji i dalje.
+      "jedino otkrivanje pripadnosti programu koje prijava nosi",
       "podaci koje ste uneli se brišu",
     ],
     en: [
@@ -986,12 +1012,15 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Frankfurt region",
       "at least once a year",
       "Telegram Messenger Inc.",
-      "The record of POEN recorded is not hidden",
+      "The record of POEN recorded does not name the program",
+      "uniquely determined by the user's year of birth",
+      "a daily total per program",
+      "Exceptions to the display of individual transactions",
       "pseudonymization, not anonymization",
       "Art. 30 para. 3 LPDP",
       "the listings are removed from the advertising space",
       "Messages in conversations between users are deleted when at least one party closes their account",
-      "the only option is not to apply for the program",
+      "the only disclosure of membership in a program that the application entails",
       "deletes the data you entered",
     ],
     ru: [
@@ -1002,12 +1031,15 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "регион Франкфурт",
       "не реже одного раза в год",
       "Telegram Messenger Inc.",
-      "Запись об учтённых ПОЕН не скрыта",
+      "Запись об учтённых ПОЕН не называет программу",
+      "однозначно определяется годом рождения пользователя",
+      "дневная сумма по программе",
+      "Исключения из отображения отдельных операций",
       "псевдонимизацией, а не анонимизацией",
       "ч. 3 ст. 30 ЗЗПЛ",
       "объявления снимаются с площадки для размещения",
       "Сообщения в переписках между пользователями удаляются",
-      "единственная возможность — не подавать заявку на программу",
+      "единственное раскрытие принадлежности к программе, которое влечёт заявка",
       "внесённые Вами данные удаляются",
     ],
   },
@@ -1021,14 +1053,17 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // je u normi a ne u kodu; a zapis o evidentiranom POEN-u sa nazivom programa
   // vidljiv je svim verifikovanim korisnicima, o čemu pristanak nije govorio ništa.
   // Traže se sva tri, jer bi se svako lako izgubilo bez ijednog vidljivog kvara.
-  "programi_podrske_4_6_0.md": {
+  "programi_podrske_4_6_1.md": {
     sr: [
       // 4.5.9 (R-02) — nov čl. 6a. „Nije socijalna pomoć" je brisano iz čl. 2.
       "Priroda evidentiranja",
       "Korisnik programa nije zaposlen kod Fondacije",
       "indeksom stvarnosti od najmanje 10%",
       "koliko će lica biti zamoljeno da potvrdi",
-      "vidljiv uz pseudonim podnosioca svim verifikovanim korisnicima",
+      // 4.6.1 (R-03, mera M-1) — pristanak više ne saopštava javnost zapisa uz
+      // pseudonim, nego da se objavljuje samo dnevni zbir po programu.
+      "dnevni zbir po programu, bez imena i pseudonima korisnika",
+      "Zapis o evidentiranom POEN-u po socijalnom programu ne imenuje program",
       "ne navode se ni naziv programa ni pseudonim podnosioca",
       "podaci uneti u prijavu se brišu",
       "Uneti podaci brišu se kada prijava prestane da važi",
@@ -1038,7 +1073,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "A program beneficiary is not employed by the Foundation",
       "reality index of at least 10%",
       "how many persons will be asked to confirm",
-      "visible alongside the applicant's pseudonym to all verified users",
+      "a daily total per programme, without the names or pseudonyms of users",
+      "does not name the programme and is not displayed individually",
       "states neither the name of the programme nor the applicant's pseudonym",
       "deletes the data entered in the application",
       "The entered data are deleted when the application ceases to be valid",
@@ -1048,7 +1084,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Участник программы не состоит в трудовых отношениях с Фондом",
       "индексом реальности не менее 10 %",
       "сколько лиц будет приглашено подтвердить",
-      "видна рядом с псевдонимом заявителя всем верифицированным пользователям",
+      "дневная сумма по программе, без имён и псевдонимов пользователей",
+      "не называет программу и не отображается отдельно",
       "не указываются ни название программы, ни псевдоним заявителя",
       "удаление данных, внесённых в заявку",
       "Внесённые данные удаляются, когда заявка перестаёт действовать",
@@ -1163,11 +1200,15 @@ const UKINUTO: Record<string, RegExp[]> = {
   // zaštitu upisuje kao cilj Fondacije. „Nije naknada" OSTAJE i ne dira se.
   // 🔴 Zaostatak uz R-01: „uslov za evidentiranje POEN-a" — javnost donacije nije
   // uslov nego proverljivost; uslovljen pristanak po ZZPL-u nije slobodan pristanak.
-  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uslov\s+za\s+evidentiranje\s+POEN/i],
-  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i, /executive,?\s+not\s+governance/i, /is\s+not\s+social\s+assistance/i, /condition\s+for\s+the\s+recording\s+of\s+POEN/i],
-  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i, /исполнительной,?\s+а\s+не\s+управленческой/i, /не\s+является\s+социальной\s+помощью/i, /услови[ем]\s+учёта\s+ПОЕН/i],
-  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+a\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uvjet\s+za\s+evidentiranje\s+POEN/i],
-  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i, /végrehajtói,?\s+nem\s+irányítói/i, /nem\s+szociális\s+segély/i, /feltétele\s+a\s+POEN/i],
+  // 🔴 R-03 (mera M-1): „zapis nije skriven" je BRISANO. Ta rečenica je javnost
+  // naziva socijalnog programa uz pseudonim opisivala kao meru proverljivosti, a
+  // naziv je posebna kategorija po ZZPL čl. 17. Vraćena, obarala bi i meru M-1 i
+  // ocenu R11 u DPIA, i to bez ijednog vidljivog kvara.
+  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uslov\s+za\s+evidentiranje\s+POEN/i, /zapis\s+o\s+evidentiranom\s+POEN-u\s+nije\s+skriven/i],
+  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i, /executive,?\s+not\s+governance/i, /is\s+not\s+social\s+assistance/i, /condition\s+for\s+the\s+recording\s+of\s+POEN/i, /record\s+of\s+POEN\s+recorded\s+is\s+not\s+hidden/i],
+  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i, /исполнительной,?\s+а\s+не\s+управленческой/i, /не\s+является\s+социальной\s+помощью/i, /услови[ем]\s+учёта\s+ПОЕН/i, /Запись\s+об\s+учтённых\s+ПОЕН\s+не\s+скрыта/i],
+  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+a\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uvjet\s+za\s+evidentiranje\s+POEN/i, /zapis\s+o\s+evidentiranom\s+POEN-u\s+nije\s+skriven/i],
+  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i, /végrehajtói,?\s+nem\s+irányítói/i, /nem\s+szociális\s+segély/i, /feltétele\s+a\s+POEN/i, /POEN\s+bejegyzése\s+nem\s+rejtett/i],
 };
 
 /** Napomene o izmeni namerno pominju ukinutu tablu — one se izuzimaju iz provere. */

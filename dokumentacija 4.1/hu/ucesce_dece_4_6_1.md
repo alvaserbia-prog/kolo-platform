@@ -276,7 +276,11 @@ A 7. cikk szerinti iskolát maga a kiskorú felhasználó választja ki az iskol
 
 A Platform iskolánkénti áttekintést tesz közzé: azon kiskorú felhasználók számát, akiknek legalább az egyik szülője rendes tag, valamint arányukat az iskolába beiratkozott tanulók számához képest. Ez az áttekintés nem tartalmaz személyes adatot, és mindenki számára elérhető.
 
-Egyetlen iskola kiskorú felhasználóinak áttekintése — álnévvel és a POEN-bejegyzés egyenlegével — a bejelentkezett felhasználók számára érhető el. Ebből az áttekintésből nem nyílik hozzáférés a kiskorú felhasználó profiljához (15b. cikk).
+Egyetlen iskola kiskorú felhasználóinak áttekintése — álnévvel és a POEN-bejegyzés egyenlegével — kizárólag ugyanazon iskola olyan kiskorú felhasználója számára érhető el, akinek a fiókja a 4c. cikk értelmében aktív állapotban van. Nagykorú felhasználónak, be nem jelentkezett személynek, olyan kiskorú felhasználónak, akinek a fiókja még átvételre vár, valamint másik iskola kiskorú felhasználójának ez az áttekintés nem jelenik meg.
+
+Az előző bekezdés két feltétele egymástól független. Az aktív fiókállapot azért szükséges, mert az átvételre váró fiókkal rendelkező kiskorú felhasználó mögött egyetlen nagykorú személy sem áll — a fiók önállóan nyílik meg, a kiskorú felhasználói minőség pedig azonnal bejegyzésre kerül —, így e feltétel nélkül egy nagykorú személy kiskorú felhasználónak adhatná ki magát, és álneveket, képeket és összegeket tartalmazó áttekintést szerezhetne. A saját iskolára való korlátozás azért szükséges, mert az áttekintés olyan közösséget szolgál, amelyben a kiskorú felhasználók amúgy is ismerik egymást; enélkül egyetlen fiók minden iskola kiskorú felhasználóinak áttekintését megkapná.
+
+Ebből az áttekintésből nem nyílik hozzáférés a kiskorú felhasználó profiljához (15b. cikk).
 
 A megadott iskola legfeljebb harminc naponta egyszer változtatható meg. Az iskolára vonatkozó adat a nagykorú fiókba való átlépéskor és a felhasználói minőség megszűnésekor törlődik; a korábbi választások előzményei nem kerülnek megőrzésre.
 

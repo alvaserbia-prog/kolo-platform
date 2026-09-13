@@ -274,7 +274,11 @@ Maloletni korisnik ne upisuje ZRNO i ne učestvuje u odlučivanju u Gornjem Kolu
 
 Platforma objavljuje pregled po školama: broj maloletnih korisnika čiji je bar jedan roditelj redovan član i njihov udeo u broju upisanih učenika škole. Taj pregled ne sadrži podatke o ličnosti i dostupan je svakome.
 
-Pregled maloletnih korisnika jedne škole, sa pseudonimom i stanjem zapisa POEN-a, dostupan je prijavljenim korisnicima. Sa tog pregleda se ne pristupa profilu maloletnog korisnika (član 15b).
+Pregled maloletnih korisnika jedne škole, sa pseudonimom i stanjem zapisa POEN-a, dostupan je isključivo maloletnom korisniku te iste škole čiji nalog ima stanje aktivnog naloga u smislu člana 4c. Punoletnom korisniku, neprijavljenom licu, maloletnom korisniku čiji nalog čeka preuzimanje i maloletnom korisniku druge škole taj pregled se ne prikazuje.
+
+Oba uslova iz prethodnog stava su samostalna. Stanje aktivnog naloga traži se zato što iza maloletnog korisnika čiji nalog čeka preuzimanje ne stoji nijedno punoletno lice — nalog se otvara samostalno, a svojstvo maloletnog korisnika upisuje se odmah — pa bi bez tog uslova punoletno lice moglo da se predstavi kao maloletni korisnik i pribavi pregled sa pseudonimima, slikama i iznosima. Ograničenje na sopstvenu školu traži se zato što pregled služi zajednici u kojoj se maloletni korisnici i inače poznaju; bez njega bi jedan nalog dobio pregled maloletnih korisnika svake škole.
+
+Sa tog pregleda se ne pristupa profilu maloletnog korisnika (član 15b).
 
 Navedena škola menja se najviše jednom u trideset dana. Podatak o školi briše se prelaskom u punoletni nalog i prestankom svojstva korisnika; istorija ranijih izbora se ne čuva.
 

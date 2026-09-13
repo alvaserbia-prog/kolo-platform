@@ -797,7 +797,7 @@
     "posebna_briga_datum_resenja": "Datum donošenja rešenja o invaliditetu",
     "posebna_briga_datum_isteka": "Datum isteka rešenja (opciono, ostavi prazno ako je trajno)",
     "posebna_briga_napomena2": "Evidentira se samo datum rešenja nadležnog organa, ne traži se broj rešenja, naziv organa, medicinska dokumentacija ni dijagnoza.",
-    "pristanak_tekst": "Pristajem da {broj} ljudi iz mog lanca bude zamoljeno da pod punom odgovornošću potvrdi da ispunjavam uslov za ovaj program. Oni saznaju o kom je programu reč — što može otkriti podatak o zdravlju, porodici ili godinama — ali ne vide unete podatke. Zapis o evidentiranju POEN-a po ovom programu vidljiv je svim redovnim članovima uz moj pseudonim. Prijavu odobrava Fondacija tek kada svi potvrde. Pristanak mogu povući u svakom trenutku.",
+    "pristanak_tekst": "Pristajem da {broj} ljudi iz mog lanca bude zamoljeno da pod punom odgovornošću potvrdi da ispunjavam uslov za ovaj program. Oni saznaju o kom je programu reč — što može otkriti podatak o zdravlju, porodici ili godinama — ali ne vide unete podatke. Pojedinačno evidentiranje POEN-a po ovom programu ne objavljuje se javno i zapis ne imenuje program — objavljuje se samo dnevni zbir po programu, bez imena i pseudonima korisnika. Prijavu odobrava Fondacija tek kada svi potvrde. Pristanak mogu povući u svakom trenutku.",
     "potvrde_naslov": "Zahtevi za potvrdu",
     "potvrde_opis": "Ljudi iz tvog lanca prijavili su se za socijalni program i naveli tebe. Potvrdi pod punom odgovornošću da osoba ispunjava uslov, ili obrazloži zašto ne možeš. Ne vidiš unete podatke prijave.",
     "potvrde_prazno": "Trenutno nemaš zahteva za potvrdu.",
@@ -994,11 +994,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -1006,11 +1006,11 @@
     },
     "dpia": {
       "naslov": "DPIA. Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "4.5.2"
+      "ver": "4.6.1"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
@@ -1042,15 +1042,15 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja · KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.5.9",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.6.1",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.9",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.1",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.5.2",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.6.1",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.5.9",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.6.1",
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.6.0",
     "meta_whitepaper_title": "Whitepaper · KOLO",

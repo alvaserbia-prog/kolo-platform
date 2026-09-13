@@ -276,7 +276,11 @@ The school referred to in Article 7 is chosen by the minor user themselves, from
 
 The Platform publishes an overview by school: the number of minor users having at least one parent who is a full member, and their share in the number of pupils enrolled at that school. This overview contains no personal data and is available to everyone.
 
-An overview of the minor users of a single school, with their pseudonym and the balance of their POEN record, is available to signed-in users. That overview does not give access to a minor user's profile (Article 15b).
+An overview of the minor users of a single school, with their pseudonym and the balance of their POEN record, is available exclusively to a minor user of that same school whose account is in the active state within the meaning of Article 4c. It is not shown to adult users, to persons who are not signed in, to a minor user whose account is still awaiting take-over, or to a minor user of another school.
+
+The two conditions in the preceding paragraph are independent of one another. The active account state is required because no adult person stands behind a minor user whose account is awaiting take-over — the account is opened independently and the minor-user attribute is recorded immediately — so without that condition an adult could present themselves as a minor user and obtain an overview containing pseudonyms, pictures and amounts. The restriction to one's own school is required because the overview serves a community in which the minor users already know one another; without it, a single account would obtain an overview of the minor users of every school.
+
+That overview does not give access to a minor user's profile (Article 15b).
 
 The stated school may be changed at most once every thirty days. The school datum is deleted upon transition to an adult account and upon termination of the capacity of user; no history of earlier choices is kept.
 
