@@ -921,7 +921,11 @@
     "ugovor_stampaj": "Print",
     "ugovor_nazad": "Back to donations",
     "ugovor_napomena": "The agreement was drawn up at the moment the donation was confirmed and has not changed since. The Serbian original is authoritative.",
-    "karticno_sopstvena_kartica": "By paying you confirm that the card is issued in your name. A contribution is recorded solely for the user with whose funds the payment was made."
+    "karticno_sopstvena_kartica": "By paying you confirm that the card is issued in your name. A contribution is recorded solely for the user with whose funds the payment was made.",
+    "karticno_kapa": "A card payment can be at most {max} RSD. For a larger amount use a bank transfer or an international remittance.",
+    "karticno_kapa_napomena": "Card payments go up to {max} RSD. A larger amount goes by bank transfer (domestic) or international remittance (from abroad).",
+    "karticno_nepovratnost": "I confirm that the donation is non-refundable and that I receive no goods or services for it.",
+    "karticno_nepovratnost_obavezna": "Confirm that the donation is non-refundable before you continue."
   },
   "poruke": {
     "naslov": "Messages",
@@ -2576,7 +2580,10 @@
     "donacije_uplatilac_placeholder": "Name from the incoming payment",
     "donacije_uplatilac_pomoc": "A contribution is recorded solely for the user with whose funds the payment was made. Compare the name on the payment with the member before confirming.",
     "donacije_uplatilac_obavezan": "Enter the payer's name from the statement.",
-    "donacije_strani_priliv": "Payment from an account opened abroad"
+    "donacije_strani_priliv": "Payment from an account opened abroad",
+    "donacije_status_naplaceno": "Charged to card — POEN awaits confirmation",
+    "donacije_donator_nalog": "On the account: {ime}",
+    "donacije_duplikat_ipak": "Confirm anyway (payment from a joint account)"
   },
   "kolacici": {
     "aria": "Cookie consent",

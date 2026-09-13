@@ -9,21 +9,32 @@ import {
   dohvatiNestpayConfig,
   pripremiZahtev,
 } from "@/lib/placanje/nestpay";
+import {
+  MAX_KARTICNA_UPLATA_RSD,
+  MAX_KARTICNIH_UPLATA_DNEVNO,
+} from "@/lib/donacija-pravila";
 
 const MIN_RSD = 100;
-const MAX_RSD = 2_000_000;
 
 /**
  * Inicira kartično plaćanje donacije. Kreira PENDING zapis donacije sa
  * jedinstvenim `oid`-om i vraća polja forme koja klijent (auto-)POST-uje na
- * NestPay gateway banke. POEN se NE emituje ovde — tek po verifikovanom
- * povratku banke (`/api/donacije/placanje/povratak`).
+ * NestPay gateway banke. POEN se NE emituje ovde — niti po povratku banke:
+ * callback samo prevodi zapis u NAPLACENO, a POEN nastaje tek ljudskom potvrdom
+ * u admin tabu (R-01, mera M-4a).
+ *
+ * Dve kočnice iz mere M-11, i one mere različite stvari: kapa po jednoj uplati
+ * ograničava najgori pojedinačan gubitak po osporenoj transakciji, a brzinska
+ * kočnica pokriva *card testing* — proveru ukradenih brojeva nizom sitnih
+ * donacija, protiv koje kapa po transakciji ne radi ništa.
+ *
+ * Potvrda uplate više ne traži potvrđenu stvarnost (mera M-9): donirati sme i
+ * član koga niko nije potvrdio. Time se ne otvara ništa drugo — prepis POEN-a,
+ * nabavka i socijalni programi ostaju zatvoreni.
  */
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
-  if (!session.user.verified)
-    return await greska("Samo verifikovani korisnik može da donira.", 403);
 
   if (!placanjeAktivno()) {
     return NextResponse.json(
@@ -40,7 +51,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  let body: { iznosRSD?: unknown; javno?: unknown };
+  let body: { iznosRSD?: unknown; javno?: unknown; nepovratnost?: unknown };
   try {
     body = await req.json();
   } catch {
@@ -48,10 +59,22 @@ export async function POST(req: NextRequest) {
   }
 
   const iznosRSD = Math.round(Number(body.iznosRSD));
-  if (!Number.isFinite(iznosRSD) || iznosRSD < MIN_RSD || iznosRSD > MAX_RSD) {
+  if (!Number.isFinite(iznosRSD) || iznosRSD < MIN_RSD || iznosRSD > MAX_KARTICNA_UPLATA_RSD) {
     return NextResponse.json(
-      { error: `Iznos mora biti između ${MIN_RSD.toLocaleString("sr-RS")} i ${MAX_RSD.toLocaleString("sr-RS")} RSD.` },
+      {
+        error: `Iznos mora biti između ${MIN_RSD.toLocaleString("sr-RS")} i ${MAX_KARTICNA_UPLATA_RSD.toLocaleString("sr-RS")} RSD. Veći iznos ide uplatom na račun ili deviznom doznakom.`,
+        kapa: MAX_KARTICNA_UPLATA_RSD,
+      },
       { status: 400 }
+    );
+  }
+
+  // Izjava o nepovratnosti (mera M-11) — dokaz u sporu po osporenoj transakciji.
+  // Traži se PRE naplate i snima na zapis; posle naplate se ne može pribaviti.
+  if (body.nepovratnost !== true) {
+    return await greska(
+      "Potvrdite da je donacija nepovratna i da njome ne dobijate robu ni uslugu.",
+      400
     );
   }
 
@@ -83,6 +106,21 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Brzinska kočnica (mera M-11). Broje se SVI kartični zapisi od ponoći, bez
+  // obzira na ishod — neuspeli pokušaji su ovde signal, ne izuzetak, jer se
+  // ukradeni brojevi kartica proveravaju upravo neuspesima.
+  const ponoc = new Date();
+  ponoc.setHours(0, 0, 0, 0);
+  const danasKartica = await prisma.donationRecord.count({
+    where: { userId: user.id, nacinUplate: "KARTICA", createdAt: { gte: ponoc } },
+  });
+  if (danasKartica >= MAX_KARTICNIH_UPLATA_DNEVNO) {
+    return await greska(
+      `Dostigli ste dnevno ograničenje kartičnih uplata (${MAX_KARTICNIH_UPLATA_DNEVNO}). Pokušajte sutra ili uplatite na račun.`,
+      429
+    );
+  }
+
   // Jedinstveni broj porudžbine (oid) — bez separatora, alfanumerički.
   const oid = `KOLO${Date.now().toString(36).toUpperCase()}${crypto
     .randomBytes(4)
@@ -101,6 +139,7 @@ export async function POST(req: NextRequest) {
       nacinUplate: "KARTICA",
       provajder: cfg.provajder,
       oid,
+      nepovratnostPotvrdjenaAt: new Date(),
     },
   });
 

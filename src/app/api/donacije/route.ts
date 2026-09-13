@@ -9,7 +9,8 @@ import { dohvatiIpsConfig, pozivNaBrojZaClana, prikazPozivNaBroj } from "@/lib/p
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
-  if (!session.user.verified) return await greska("Nije verifikovan.", 403);
+  // Donirati sme i član koga niko nije potvrdio (R-01, mera M-9). Vidi
+  // `evidentirajDonaciju` za ono što se time NE otvara.
 
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },

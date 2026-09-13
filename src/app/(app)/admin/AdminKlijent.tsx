@@ -193,6 +193,10 @@ interface DonacijaItem {
   nacinUplate: string;
   referenceNumber: string | null;
   createdAt: string;
+  /** PENDING = najavljena uplata; NAPLACENO = kartica naplaćena, POEN čeka potvrdu (M-4a). */
+  status: string;
+  /** Ime sa naloga — stoji uz polje za uplatioca da bi se to dvoje uporedilo (M-4a). */
+  donatorIme: string | null;
 }
 
 interface PrigovorItem {
@@ -1380,6 +1384,8 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
   const t = useTranslations("admin");
   const [loading, setLoading] = useState<string | null>(null);
   const [poruke, setPoruke] = useState<Record<string, { text: string; ok: boolean }>>({});
+  const [duplikati, setDuplikati] = useState<Record<string, boolean>>({});
+  const [izvodDuplikat, setIzvodDuplikat] = useState(false);
   // Iznos za potvrdu — prefill iz najave, admin koriguje prema stvarnom prilivu
   // iz izvoda (IPS/uplatnica mogu stići sa drugačijim iznosom od najavljenog).
   const [iznosi, setIznosi] = useState<Record<string, string>>({});
@@ -1396,7 +1402,7 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
   const [izvodLoading, setIzvodLoading] = useState(false);
   const [izvodPoruka, setIzvodPoruka] = useState<{ text: string; ok: boolean } | null>(null);
 
-  async function potvrdi(d: DonacijaItem) {
+  async function potvrdi(d: DonacijaItem, potvrdiDuplikat = false) {
     const iznos = Math.round(Number(iznosi[d.id] ?? d.amountRSD));
     if (!Number.isFinite(iznos) || iznos <= 0) {
       setPoruke((p) => ({ ...p, [d.id]: { text: t("emisija_iznos_nevalidan"), ok: false } }));
@@ -1416,15 +1422,19 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
         amountRSD: iznos,
         uplatilac: up,
         straniPriliv: strani[d.id] === true,
+        potvrdiDuplikat,
       }),
     });
     const data = await res.json();
     setLoading(null);
+    // Poklapanje uplatioca sa drugim nalogom (mera C-1) ne blokira samo od sebe —
+    // traži izričitu ljudsku odluku, pa se nudi dugme za ponovnu potvrdu.
+    setDuplikati((p) => ({ ...p, [d.id]: res.status === 409 && data.duplikat === true }));
     setPoruke((p) => ({ ...p, [d.id]: { text: res.ok ? t("donacije_potvrdjena_msg", { poen: data.poenEmitted?.toLocaleString(intlTag(locale)) }) : (data.error ?? t("greska_generalna")), ok: res.ok } }));
     if (res.ok) setTimeout(onDone, 1200);
   }
 
-  async function evidentirajIzIzvoda(e: { preventDefault: () => void }) {
+  async function evidentirajIzIzvoda(e: { preventDefault: () => void }, potvrdiDuplikat = false) {
     e.preventDefault();
     setIzvodPoruka(null);
     const iznos = Math.round(Number(izvodIznos));
@@ -1446,10 +1456,12 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
         javno: !izvodAnonimna,
         uplatilac: izvodUplatilac.trim(),
         straniPriliv: izvodStrani,
+        potvrdiDuplikat,
       }),
     });
     const data = await res.json();
     setIzvodLoading(false);
+    setIzvodDuplikat(res.status === 409 && data.duplikat === true);
     setIzvodPoruka({
       text: res.ok
         ? t("donacije_potvrdjena_msg", { poen: data.poenEmitted?.toLocaleString(intlTag(locale)) })
@@ -1519,6 +1531,12 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
             {t("donacije_strani_priliv")}
           </label>
           {izvodPoruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${izvodPoruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{izvodPoruka.text}</p>}
+          {izvodDuplikat && (
+            <button type="button" onClick={(e) => evidentirajIzIzvoda(e, true)} disabled={izvodLoading}
+              className="px-4 py-2 rounded-xl border border-kolo-danger text-kolo-danger text-xs font-semibold hover:bg-kolo-danger-light disabled:opacity-60">
+              {t("donacije_duplikat_ipak")}
+            </button>
+          )}
         </form>
       </div>
 
@@ -1536,6 +1554,9 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
                   {d.referenceNumber ? ` · ${d.referenceNumber}` : ""}
                   {" · "}{new Date(d.createdAt).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "short", year: "numeric" })}
                 </p>
+                {d.status === "NAPLACENO" && (
+                  <p className="text-xs font-semibold text-kolo-gold-600 mt-1">{t("donacije_status_naplaceno")}</p>
+                )}
                 <p className="text-xs text-kolo-muted mt-1">{t("donacije_kumulativ", { val: d.cumulativeRSD.toLocaleString(intlTag(locale)) })}</p>
               </div>
               <div className="shrink-0 text-right">
@@ -1565,7 +1586,13 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
                 placeholder={t("donacije_uplatilac_placeholder")}
                 className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500 transition-colors"
               />
-              <p className="text-xs text-kolo-muted">{t("donacije_uplatilac_pomoc")}</p>
+              <p className="text-xs text-kolo-muted">
+                {t("donacije_uplatilac_pomoc")}
+                {" "}
+                <span className="font-semibold text-kolo-text">
+                  {t("donacije_donator_nalog", { ime: d.donatorIme ?? "—" })}
+                </span>
+              </p>
               <label className="flex items-center gap-2 text-xs text-kolo-muted cursor-pointer">
                 <input
                   type="checkbox"
@@ -1576,6 +1603,12 @@ function DonacijeTab({ donacije, onDone }: { donacije: DonacijaItem[]; onDone: (
               </label>
             </div>
             {poruka && <p className={`text-xs px-3 py-1.5 rounded-lg ${poruka.ok ? "bg-kolo-green-100 text-kolo-green-700" : "bg-kolo-danger-light text-kolo-danger"}`}>{poruka.text}</p>}
+            {duplikati[d.id] && (
+              <button onClick={() => potvrdi(d, true)} disabled={loading === d.id}
+                className="px-4 py-2 rounded-xl border border-kolo-danger text-kolo-danger text-xs font-semibold hover:bg-kolo-danger-light disabled:opacity-60">
+                {t("donacije_duplikat_ipak")}
+              </button>
+            )}
           </div>
         );
       })}

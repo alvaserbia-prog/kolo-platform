@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { evidentirajDonaciju } from "@/lib/protokol/donacija";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 import {
   dohvatiNestpayConfig,
   verifikujOdgovor,
@@ -14,7 +14,16 @@ import {
  * donacije, a autentičnost poruke preko verifikacije HASH-a (tajni store key).
  *
  * Tok: verifikuj HASH → nađi zapis po oid → proveri iznos → (idempotentno)
- * priznaj donaciju i emituj POEN → preusmeri korisnika na stranicu rezultata.
+ * prevedi zapis u NAPLACENO → preusmeri korisnika na stranicu rezultata.
+ *
+ * 🔴 POEN SE OVDE NE EVIDENTIRA (R-01, mera M-4a). Detekcija je automatska,
+ * potvrda je ljudska: zapis čeka u admin tabu dok čovek ne uporedi uplatioca sa
+ * nalogom i ne potvrdi ga kroz `POST /api/admin/donacija`. Do te izmene je
+ * callback banke zvao `evidentirajDonaciju` odmah, pa između uplate i upisa
+ * POEN-a nije bilo nijedne ljudske odluke — a to je tačno ono što se čita kao
+ * pribavljanje digitalne imovine uz naknadu, u realnom vremenu, po objavljenoj
+ * tabeli. Ne vraćati automatsko evidentiranje: to je projektantska odluka uz
+ * R-01, ne privremeno rešenje.
  */
 export async function POST(req: NextRequest) {
   const base =
@@ -45,8 +54,8 @@ export async function POST(req: NextRequest) {
     return rezultat("greska");
   }
 
-  // Idempotencija: ako je već priznata, ne emituj POEN ponovo.
-  if (zapis.status === "CONFIRMED") {
+  // Idempotencija: naplaćen ili već potvrđen zapis se ne dira ponovo.
+  if (zapis.status === "NAPLACENO" || zapis.status === "CONFIRMED") {
     return rezultat("uspeh");
   }
 
@@ -69,40 +78,28 @@ export async function POST(req: NextRequest) {
     return rezultat("greska");
   }
 
-  // ATOMSKA IDEMPOTENCIJA: preuzmi zapis iz PENDING u CONFIRMED jednim uslovnim
+  // ATOMSKA IDEMPOTENCIJA: preuzmi zapis iz PENDING u NAPLACENO jednim uslovnim
   // upitom. Banke znaju da pošalju callback više puta (mrežni retry); samo jedan
-  // poziv može da preuzme zapis i emituje POEN — ostali otpadaju (count !== 1).
+  // poziv može da preuzme zapis — ostali otpadaju (count !== 1).
   const preuzeto = await prisma.donationRecord.updateMany({
     where: { id: zapis.id, status: "PENDING" },
-    data: { status: "CONFIRMED" },
+    data: {
+      status: "NAPLACENO",
+      bankRef: params["AuthCode"] || params["TransId"] || "OK",
+    },
   });
   if (preuzeto.count !== 1) {
-    // Drugi (paralelni) callback je već preuzeo i obrađuje/obradio ovaj zapis.
+    // Drugi (paralelni) callback je već preuzeo ovaj zapis.
     return rezultat("uspeh");
   }
 
-  // Priznaj donaciju i emituj POEN (koeficijentni model). Koristi iznos iz zapisa.
-  // Napomena: kumulativ u `evidentirajDonaciju` isključuje upravo ovaj zapis (postavljen
-  // je na CONFIRMED gore), pa nema dvostrukog brojanja tekuće donacije.
-  try {
-    await evidentirajDonaciju(zapis.userId, ocekivaniIznos, {
-      existingRecordId: zapis.id,
-      javno: zapis.javno,
-    });
-    await prisma.donationRecord.update({
-      where: { id: zapis.id },
-      data: { bankRef: params["AuthCode"] || params["TransId"] || "OK" },
-    });
-  } catch {
-    return rezultat("greska");
-  }
+  // Bez ovog javljanja zapis bi čekao u admin tabu a niko ne bi znao da čeka —
+  // ista greška koja je jednom već napravljena kod prvih oglasa (čl. 40a).
+  void posaljiAdminAlert(
+    "Kartična donacija naplaćena — čeka potvrdu",
+    `Iznos: ${ocekivaniIznos.toLocaleString("sr-RS")} RSD\nZapis: ${zapis.id}\n` +
+      "POEN nije evidentiran. Uporedite uplatioca sa nalogom i potvrdite u admin tabu Donacije."
+  );
 
   return rezultat("uspeh");
-}
-
-// Banka uvek POST-uje rezultat; GET samo vraća korisnika na stranicu donacija.
-export async function GET(req: NextRequest) {
-  const base =
-    process.env.APP_BASE_URL || process.env.NEXTAUTH_URL || new URL(req.url).origin;
-  return NextResponse.redirect(`${base.replace(/\/$/, "")}/donacije`, 303);
 }

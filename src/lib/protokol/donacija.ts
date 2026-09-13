@@ -5,6 +5,7 @@ import {
   izracunajPoenZaDonaciju,
   nivoZaKumulativ,
   trebaIzjavaOPoreklu,
+  normalizujUplatioca,
   PROZOR_PRAGA_MESECI,
 } from "@/lib/donacija-pravila";
 import { generisiUgovorODonaciji } from "@/lib/donacija-ugovor";
@@ -23,6 +24,9 @@ export {
   pragZaNivo,
   koeficijentZaNivo,
   tabelaZaPrikaz,
+  normalizujUplatioca,
+  MAX_KARTICNA_UPLATA_RSD,
+  MAX_KARTICNIH_UPLATA_DNEVNO,
 } from "@/lib/donacija-pravila";
 
 /**
@@ -90,7 +94,12 @@ export async function evidentirajDonaciju(
 
   if (!user) throw new Error("Korisnik nije pronađen.");
   if (!user.wallet) throw new Error("Korisnik nema zapis u Protokolu.");
-  if (!user.verified) throw new Error("Korisnik nije verifikovan.");
+  // 🔴 Uslov potvrđene stvarnosti je UKLONJEN (R-01, mera M-9): donirati sme i
+  // član koga niko nije potvrdio, i POEN mu se evidentira. Time se NE otvara
+  // ništa drugo — prepis POEN-a (čl. 28 st. 2), kolektivna nabavka i socijalni
+  // programi ostaju zatvoreni, a upisano ZRNO ne nosi glas dok stvarnost ne
+  // bude potvrđena. Učinjena donacija NIJE osnov za potvrdu stvarnosti i ne
+  // zamenjuje neposredno lično poznavanje (čl. 32, čl. 5 dokaza stvarnosti).
 
   const dosadaRSD = user.donations.reduce((sum, d) => sum + Number(d.amountRSD), 0);
 
@@ -124,6 +133,7 @@ export async function evidentirajDonaciju(
   // plaćanje), upisuje se ime samog korisnika — akt traži da platni instrument
   // glasi na donatora, pa je to ono što zapis tvrdi.
   const uplatilac = options?.uplatilac?.trim() || user.podaci?.punoIme?.trim() || null;
+  const uplatilacKljuc = normalizujUplatioca(uplatilac);
 
   // Ugovor o donaciji (čl. 5b) — sačinjava se pri potvrdi i SNIMA se na zapis.
   // Jedno mesto za sva tri puta (ručna evidencija, potvrda PENDING zapisa,
@@ -154,6 +164,7 @@ export async function evidentirajDonaciju(
         javno,
         donatorIme,
         uplatilac,
+        uplatilacKljuc,
         straniPriliv: options.straniPriliv ?? false,
         ugovorTekst,
         status: DonationStatus.CONFIRMED,
@@ -173,6 +184,7 @@ export async function evidentirajDonaciju(
         javno,
         donatorIme,
         uplatilac,
+        uplatilacKljuc,
         straniPriliv: options?.straniPriliv ?? false,
         ugovorTekst,
         status: DonationStatus.CONFIRMED,
@@ -199,5 +211,49 @@ export async function evidentirajDonaciju(
     );
   }
 
+  // Identitet utvrđen na donatorskom putu (mera M-9). Postavlja se JEDNOM, pri
+  // prvoj potvrđenoj donaciji: čovek je uporedio uplatioca iz izvoda sa nalogom.
+  // 🔴 Vezuje se za uplatioca, ne za javnost donacije — i anonimna donacija
+  // prolazi istu proveru, a ona samo znači da se ime ne objavljuje.
+  if (uplatilac && !user.identitetUtvrdjenAt) {
+    await prisma.user.updateMany({
+      where: { id: userId, identitetUtvrdjenAt: null },
+      data: { identitetUtvrdjenAt: new Date() },
+    });
+  }
+
   return { poenEmitted: poen, noviNivo, noviKumulativ, kurs, zapisId };
+}
+
+/**
+ * Provera duplikata po uplatiocu (mera C-1 uz R-01).
+ *
+ * Uplatilac je JEDINI spoljni identitet koji sistem uopšte ima: uplata prolazi
+ * kroz banku, koja je identifikaciju već sprovela. Dva naloga sa uplatama istog
+ * uplatioca su, po pravilu, isti čovek — što Uslovi čl. 8 zabranjuju, a lanac
+ * potvrda ne može da otkrije (verifikator ne zna koliko naloga neko ima).
+ *
+ * 🔴 Ne blokira samo od sebe — vraća nalaz, a odluku donosi čovek. Legitiman
+ * slučaj postoji (uplata sa zajedničkog porodičnog računa), pa bi tvrda zabrana
+ * pogađala i njega. Poklapanje zaustavlja evidentiranje dok ga čovek izričito
+ * ne potvrdi, i to potvrđivanje ide u revizijski dnevnik.
+ */
+export async function proveriDuplikatUplatioca(
+  userId: string,
+  uplatilac: string | null | undefined
+): Promise<{ sudar: boolean; pseudonimi: string[] }> {
+  const kljuc = normalizujUplatioca(uplatilac);
+  if (!kljuc) return { sudar: false, pseudonimi: [] };
+
+  const zapisi = await prisma.donationRecord.findMany({
+    where: {
+      uplatilacKljuc: kljuc,
+      status: DonationStatus.CONFIRMED,
+      userId: { not: userId },
+    },
+    select: { user: { select: { pseudonim: true } } },
+    take: 20,
+  });
+  const pseudonimi = [...new Set(zapisi.map((z) => z.user.pseudonim))];
+  return { sudar: pseudonimi.length > 0, pseudonimi };
 }

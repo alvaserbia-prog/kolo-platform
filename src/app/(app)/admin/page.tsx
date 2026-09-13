@@ -121,7 +121,9 @@ export default async function AdminPage({
       include: { author: { select: { pseudonim: true } } },
     }),
     prisma.donationRecord.findMany({
-      where: { status: "PENDING" },
+      // NAPLACENO = kartična uplata prošla kroz banku, POEN čeka ljudsku potvrdu
+      // (R-01, mera M-4a). Stoji u istom redu čekanja kao najavljena uplata.
+      where: { status: { in: ["PENDING", "NAPLACENO"] } },
       include: { user: { select: { pseudonim: true } } },
       orderBy: { createdAt: "asc" },
     }),
@@ -172,6 +174,7 @@ export default async function AdminPage({
         cumulativeRSD: Number(d.cumulativeRSD), level: d.level, poenEmitted: d.poenEmitted,
         nacinUplate: d.nacinUplate, referenceNumber: d.referenceNumber,
         createdAt: d.createdAt.toISOString(),
+        status: d.status, donatorIme: d.donatorIme,
       }))}
       otvoreniPrigovori={otvoreniPrigovori.map((p) => ({
         id: p.id, pseudonim: p.user.pseudonim, opis: p.opis, tipOdluke: p.tipOdluke,

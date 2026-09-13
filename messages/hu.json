@@ -914,7 +914,11 @@
     "ugovor_stampaj": "Nyomtatás",
     "ugovor_nazad": "Vissza az adományokhoz",
     "ugovor_napomena": "A szerződés az adomány megerősítésének pillanatában készült, és azóta nem változott. A szerb eredeti az irányadó.",
-    "karticno_sopstvena_kartica": "A fizetéssel megerősíted, hogy a kártya a te nevedre szól. A hozzájárulás kizárólag annak a felhasználónak kerül nyilvántartásba, akinek az eszközeiből a befizetés történt."
+    "karticno_sopstvena_kartica": "A fizetéssel megerősíted, hogy a kártya a te nevedre szól. A hozzájárulás kizárólag annak a felhasználónak kerül nyilvántartásba, akinek az eszközeiből a befizetés történt.",
+    "karticno_kapa": "A kártyás befizetés legfeljebb {max} RSD lehet. Nagyobb összeghez használj banki átutalást vagy devizaátutalást.",
+    "karticno_kapa_napomena": "Kártyával {max} RSD-ig lehet fizetni. Nagyobb összeg banki átutalással (belföldről) vagy devizaátutalással (külföldről) megy.",
+    "karticno_nepovratnost": "Megerősítem, hogy az adomány vissza nem téríthető, és hogy érte árut vagy szolgáltatást nem kapok.",
+    "karticno_nepovratnost_obavezna": "Erősítsd meg, hogy az adomány vissza nem téríthető, mielőtt folytatod."
   },
   "poruke": {
     "naslov": "Üzenetek",
@@ -2569,7 +2573,10 @@
     "donacije_uplatilac_placeholder": "A jóváírás szerinti név",
     "donacije_uplatilac_pomoc": "A hozzájárulás kizárólag annak a felhasználónak kerül nyilvántartásba, akinek az eszközeiből a befizetés történt. A megerősítés előtt vesd össze a jóváírás szerinti nevet a taggal.",
     "donacije_uplatilac_obavezan": "Add meg a befizető nevét a kivonat szerint.",
-    "donacije_strani_priliv": "Külföldön nyitott számláról érkező befizetés"
+    "donacije_strani_priliv": "Külföldön nyitott számláról érkező befizetés",
+    "donacije_status_naplaceno": "Kártyáról levonva — a POEN megerősítésre vár",
+    "donacije_donator_nalog": "A fiókon: {ime}",
+    "donacije_duplikat_ipak": "Mégis megerősítem (közös számláról érkezett)"
   },
   "kolacici": {
     "aria": "Süti-hozzájárulás",

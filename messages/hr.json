@@ -921,7 +921,11 @@
     "ugovor_stampaj": "Ispiši",
     "ugovor_nazad": "Natrag na donacije",
     "ugovor_napomena": "Ugovor je sastavljen u trenutku potvrde donacije i od tada se ne mijenja. Mjerodavan je srpski izvornik.",
-    "karticno_sopstvena_kartica": "Plaćanjem potvrđuješ da kartica glasi na tvoje ime. Doprinos se evidentira isključivo korisniku čijim je sredstvima uplata izvršena."
+    "karticno_sopstvena_kartica": "Plaćanjem potvrđuješ da kartica glasi na tvoje ime. Doprinos se evidentira isključivo korisniku čijim je sredstvima uplata izvršena.",
+    "karticno_kapa": "Kartična uplata ide najviše do {max} RSD. Za veći iznos koristi uplatu na račun ili deviznu doznaku.",
+    "karticno_kapa_napomena": "Karticom se uplaćuje do {max} RSD. Veći iznos ide uplatom na račun (u zemlji) ili deviznom doznakom (iz inozemstva).",
+    "karticno_nepovratnost": "Potvrđujem da je donacija nepovratna i da njome ne dobivam robu ni uslugu.",
+    "karticno_nepovratnost_obavezna": "Potvrdi da je donacija nepovratna prije nego što nastaviš."
   },
   "poruke": {
     "naslov": "Poruke",
@@ -2576,7 +2580,10 @@
     "donacije_uplatilac_placeholder": "Ime i prezime s priljeva",
     "donacije_uplatilac_pomoc": "Doprinos se evidentira isključivo korisniku čijim je sredstvima uplata izvršena. Usporedi ime s priljeva s članom prije potvrde.",
     "donacije_uplatilac_obavezan": "Unesite ime uplatitelja iz izvatka.",
-    "donacije_strani_priliv": "Uplata s računa otvorenog u inozemstvu"
+    "donacije_strani_priliv": "Uplata s računa otvorenog u inozemstvu",
+    "donacije_status_naplaceno": "Naplaćeno karticom — POEN čeka potvrdu",
+    "donacije_donator_nalog": "Na računu: {ime}",
+    "donacije_duplikat_ipak": "Ipak potvrdi (uplata sa zajedničkog računa)"
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",

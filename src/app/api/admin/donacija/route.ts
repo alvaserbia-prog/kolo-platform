@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
-import { evidentirajDonaciju } from "@/lib/protokol/donacija";
+import { evidentirajDonaciju, proveriDuplikatUplatioca } from "@/lib/protokol/donacija";
 import { prisma } from "@/lib/prisma";
 import { gdePseudonim } from "@/lib/pseudonim";
 import { logAdminAkcija } from "@/lib/audit";
@@ -30,6 +30,9 @@ export async function POST(req: NextRequest) {
   // donator. Provera je ljudska (čovek gleda izvod); polje je trag da je urađena.
   const uplatilac = typeof body.uplatilac === "string" ? body.uplatilac.trim() : "";
   const straniPriliv = body.straniPriliv === true;
+  // Izričita potvrda da se evidentira i pored poklapanja uplatioca sa drugim
+  // nalogom (mera C-1). Bez nje se evidentiranje zaustavlja i vraća nalaz.
+  const potvrdiDuplikat = body.potvrdiDuplikat === true;
 
   if (!amountRSD) {
     return await greska("Iznos je obavezan.", 400);
@@ -53,10 +56,29 @@ export async function POST(req: NextRequest) {
     });
     if (!donation) return await greska("Donacija nije pronađena.", 404);
     if (donation.status === "CONFIRMED") return await greska("Donacija je već potvrđena.", 400);
+    // NAPLACENO = kartična uplata je prošla kroz banku, ali POEN još nije
+    // evidentiran (mera M-4a). Potvrđuje se istim putem kao najavljena uplata.
 
     // Vidljivost je određena pri kreiranju zapisa (kartica/forma).
     if (donation.javno && !donation.user.podaci?.punoIme?.trim()) {
       return await greska("Javna donacija zahteva da donator ima uneto ime i prezime u profilu.", 400);
+    }
+
+    // Mera C-1: uplatilac je jedini spoljni identitet koji sistem ima, pa je
+    // poklapanje sa drugim nalogom najjeftiniji dokaz o dva naloga istog čoveka
+    // (Uslovi čl. 8). Ne blokira samo od sebe — traži izričitu ljudsku odluku.
+    if (!potvrdiDuplikat) {
+      const dup = await proveriDuplikatUplatioca(donation.userId, uplatilac);
+      if (dup.sudar) {
+        return NextResponse.json(
+          {
+            error: `Isti uplatilac već stoji uz nalog: ${dup.pseudonimi.join(", ")}. Uslovi čl. 8 zabranjuju više naloga istog lica. Potvrdite izričito ako je uplata sa zajedničkog računa.`,
+            duplikat: true,
+            pseudonimi: dup.pseudonimi,
+          },
+          { status: 409 }
+        );
+      }
     }
 
     try {
@@ -69,7 +91,7 @@ export async function POST(req: NextRequest) {
       });
 
       await logAdminAkcija(session.user.id, "DONACIJA_POTVRDJENA", donation.userId,
-        `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN; uplatilac: ${uplatilac}${straniPriliv ? "; strani priliv" : ""}`);
+        `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN; uplatilac: ${uplatilac}${straniPriliv ? "; strani priliv" : ""}${potvrdiDuplikat ? "; potvrđeno uprkos poklapanju uplatioca (C-1)" : ""}`);
       await obavesti(donation.userId, {
         tip: "donacija_potvrdjena",
         kljuc: "notifikacije.donacija_potvrdjena",
@@ -116,6 +138,20 @@ export async function POST(req: NextRequest) {
     return await greska("Javna donacija zahteva da donator ima uneto ime i prezime u profilu (ili evidentirajte kao anonimnu).", 400);
   }
 
+  if (!potvrdiDuplikat) {
+    const dup = await proveriDuplikatUplatioca(user.id, uplatilac);
+    if (dup.sudar) {
+      return NextResponse.json(
+        {
+          error: `Isti uplatilac već stoji uz nalog: ${dup.pseudonimi.join(", ")}. Uslovi čl. 8 zabranjuju više naloga istog lica. Potvrdite izričito ako je uplata sa zajedničkog računa.`,
+          duplikat: true,
+          pseudonimi: dup.pseudonimi,
+        },
+        { status: 409 }
+      );
+    }
+  }
+
   try {
     const result = await evidentirajDonaciju(user.id, iznos, {
       adminId: session.user.id,
@@ -125,7 +161,7 @@ export async function POST(req: NextRequest) {
     });
 
     await logAdminAkcija(session.user.id, "DONACIJA_RUCNO_EVIDENTIRANA", user.id,
-      `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN; uplatilac: ${uplatilac}${straniPriliv ? "; strani priliv" : ""}`);
+      `${iznos.toLocaleString("sr-RS")} RSD → ${result.poenEmitted} POEN; uplatilac: ${uplatilac}${straniPriliv ? "; strani priliv" : ""}${potvrdiDuplikat ? "; potvrđeno uprkos poklapanju uplatioca (C-1)" : ""}`);
     await obavesti(user.id, {
       tip: "donacija_potvrdjena",
       kljuc: "notifikacije.donacija_potvrdjena",
