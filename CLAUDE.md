@@ -233,27 +233,55 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
-**AŽURIRANO 2026-09-13 (trideseti put):** na **4.5.9** ide **OSAM akata** — Pravilnik
-o KOLO sistemu (sa 4.5.8), Pravilnik o programima podrške (sa 4.5.0), Pravilnik o
-operativnom doprinosu (sa 4.4.4), Pravilnik o projektima i kolektivnim nabavkama
-(sa 4.5.8), Pravilnik o osnivačkom doprinosu (sa 4.4.5), Izjava o prihvatanju rizika
-(sa 4.5.5), Pravilnik o učešću dece (sa 4.5.7) i Whitepaper (sa 4.4.6). Ostalih devet
-ostaje gde jeste. Povod je **R-02 iz novog registra rizika** (POEN i dobra kao prihod
-korisnika, Poreska uprava). Sadržinski, vidi sekciju „Porez: POEN nije prihod, a roba
-iz nabavke je poklon" ispod.
+**AŽURIRANO 2026-09-13 (trideset prvi put):** na **4.6.0** ide **OSAM akata** —
+Pravilnik o KOLO sistemu (sa 4.5.9), Pravilnik o programima podrške (sa 4.5.0),
+Pravilnik o operativnom doprinosu (sa 4.4.4), Pravilnik o projektima i kolektivnim
+nabavkama (sa 4.5.8), Pravilnik o osnivačkom doprinosu (sa 4.4.5), Izjava o
+prihvatanju rizika (sa 4.5.5), Pravilnik o učešću dece (sa 4.5.7) i Whitepaper
+(sa 4.4.6). Ostalih devet ostaje gde jeste. Povod je **R-02 iz novog registra rizika**
+(POEN i dobra kao prihod korisnika, Poreska uprava). Sadržinski, vidi sekciju
+„Porez: POEN nije prihod, a roba iz nabavke je poklon" ispod.
 
 🔴 **Whitepaper je uhvaćen TESTOM, ne pregledom — treći put ista pouka.** Rečenica
 „Automatska evidencija … nije socijalna pomoć ni naknada" brisana je iz Pravilnika
 čl. 57 i iz programa podrške, a whitepaper ju je nosio doslovno; `UKINUTO` blok je
 pao na whitepaperu. **Pri brisanju rečenice iz akta OBAVEZNO proveriti whitepaper.**
 
-🟡 **Zašto 4.5.9, a ne 4.6.0:** 4.5.8 je objavljen istog dana za R-01, pa je 4.5.9
-prva slobodna šifra. Ovo NIJE bump celog seta — devet akata ostaje na svojim
-šiframa, a 5.0 i dalje ostaje poslednji potez, posle poslednjeg rizika.
+🔴 **Zašto 4.6.0, a ne 4.5.9 — sudar dve sesije, četvrti put ista pouka.** Ovaj set je
+napravljen nad osnovom na kojoj je poslednja šifra bila 4.5.8, pa je ciljao 4.5.9. Dok
+je rađen, druga sesija je na `main` objavila 4.5.9 za četiri akta (zaostatak uz R-01) —
+među njima i **glavni Pravilnik**, koji menja i ovaj set. Grana je zato dovučena na
+`main`, izmene R-02 su prenete **na main-ovu 4.5.9 verziju Pravilnika** (ne na 4.5.8,
+što bi tiho poništilo R-01 zaostatak), a ceo R-02 set je dobio **narednu slobodnu
+šifru 4.6.0**. Ne 4.5.10 — dvocifren treći član kvari imena fajlova i zatečene `grep`
+provere. Isti postupak kao kod sudara 4.3.2/4.3.3.
 
-🟢 **DPIA, Registar radnji obrade i Politika privatnosti NISU dirani** — nijedna mera
-ne uvodi nov podatak o ličnosti ni novu radnju obrade. Godišnja granica se računa iz
-podataka koji već postoje (`placenoRSD`, `brojDelova`, `NabavkaPrijava.preuzetoAt`).
+🟢 **DPIA, Registar radnji obrade i Politika privatnosti NISU dirani ovim setom** —
+nijedna mera R-02 ne uvodi nov podatak o ličnosti ni novu radnju obrade. Godišnja
+granica se računa iz podataka koji već postoje (`placenoRSD`, `brojDelova`,
+`NabavkaPrijava.preuzetoAt`). Registar i Politika ostaju na 4.5.9, gde ih je ostavio
+zaostatak uz R-01.
+
+**AŽURIRANO 2026-09-13 (trideseti put):** na **4.5.9** idu **ČETIRI akta** —
+Pravilnik o KOLO sistemu (sa 4.5.8), Uslovi korišćenja (sa 4.5.8), Politika
+privatnosti (sa 4.5.5) i Registar radnji obrade (sa 4.5.5). Ostalih trinaest ostaje
+gde jeste. Povod je **zaostatak uz R-01**: javnost donacije prestaje da bude „uslov
+za evidentiranje POEN-a", a prošireni obim prava vezuje se za **javnu** donaciju.
+Sadržinski, vidi sekciju „Javnost donacije nije uslov, nego proverljivost" ispod.
+
+🟡 **Zašto 4.5.9:** 4.5.8 je istog dana objavljen na `main`-u za četiri akta (R-01);
+da su ovi dobili isti broj, dva različita događaja objave delila bi jednu šifru.
+🔴 **Naredna slobodna šifra posle 4.5.9 NIJE 4.5.10** — dvocifren treći član kvari
+imena fajlova i zatečene `grep` provere; ide se na **4.6.0**, kao što se sa 4.4.9
+išlo na 4.5.0.
+
+🟢 **DPIA (4.5.2) i Izjava o prihvatanju rizika (4.5.5) nisu dirani.** Registar
+radnji obrade jeste — nosio je istu rečenicu u napomeni uz radnju br. 9.
+
+🟡 **Zaostala unakrsna upućivanja — i dalje ŠEST, nijedno novo.** U Registru su
+upućivanja na Pravilnik i Politiku ispravljena na 4.5.9 (taj akt se ovim potezom
+ponovo objavljuje); upućivanje na programe podrške ostaje na 4.5.0, jer se taj akt
+nije menjao. Istorijsko „Modul 3 aktiviran DPIA v4.3.0" namerno je ostavljeno.
 
 **AŽURIRANO 2026-09-13 (dvadeset deveti put):** na **4.5.8** idu **ČETIRI akta** —
 Pravilnik o KOLO sistemu (sa 4.5.7), Uslovi korišćenja (sa 4.5.4), Pravilnik o
@@ -1796,9 +1824,10 @@ time **stroži po jedinstvenosti od lanca potvrda**.
    obavezu i ne uvodi se bez naloga.
 4. **Zabrana prodaje POEN-a i dalje nema detekciju** (praćenje obrazaca prepisa odbijeno
    uz stari R-19).
-5. **Uslovi čl. 17 i dalje kažu da je javnost donacije „uslov za evidentiranje POEN-a"**,
-   dok donacije čl. 5a taj isti podatak obrazlaže **proverljivošću**. Nije dirano — van
-   obima R-01; ako se dira, ide u pravcu čl. 5a, ne obrnuto.
+5. 🟢 **PREVAZIĐENO setom 4.5.9 (13.09.2026).** Ovde je stajalo da Uslovi čl. 17 i
+   dalje kažu kako je javnost donacije „uslov za evidentiranje POEN-a" i da to nije
+   dirano jer je van obima R-01. Sada jeste dirano, i to u pravcu čl. 5a — vidi
+   sekciju „Javnost donacije nije uslov, nego proverljivost" ispod.
 
 🟢 **Ekran za upis i otpis ZRNA je NAPRAVLJEN (13.09.2026).** Do tada ga nije bilo:
 ZRNO stranica je prikazivala stanja, glasanje i delegaciju, a rute
@@ -1823,6 +1852,48 @@ naloga uz polje za uplatioca, pa se poređenje radi.
 Migracije `20260913120000_donacija_naplaceno` (samo enum vrednost, ZASEBAN fajl) →
 `20260913120100_identitet_utvrdjen`. Brane: `donacija-karticno-izvor.test.ts` (17) i
 `identifikovan-clan-izvor.test.ts` (26), obe gledaju IZVOR.
+
+### Javnost donacije nije uslov, nego proverljivost (2026-09-13)
+
+Zaostatak zabeležen uz **R-01** kao svesno prihvaćen ostatak br. 5. Na **4.5.9** idu
+Pravilnik o KOLO sistemu, Uslovi korišćenja, Politika privatnosti i Registar radnji
+obrade. **Kod NIJE menjan** — akt je sustignut, kao kod R-20.
+
+🔴 **Prvi nalaz: „uslov za evidentiranje POEN-a" je opisivao strukturu koju sam
+sistem odbija.** Uslovi čl. 17, Politika 4.5 i 4.9 i Registar (napomena uz radnju
+br. 9) govorili su da je objava imena donatora **uslov** za evidentiranje POEN-a,
+dok isti podatak Pravilnik o pokroviteljstvu i donacijama čl. 5a od 08.09.2026.
+obrazlaže **proverljivošću** (ukupan broj POEN-a je javan i zbir zapisa u Protokolu
+je nula, pa upis koji se ne može pripisati nijednom licu nije proverljiv). Dva akta
+su o istoj činjenici govorila suprotno, i to ono koje je gore: „platiš → dobiješ
+vidljivost" je oblik sponzorstva, a uslovljen pristanak po ZZPL-u **nije slobodan
+pristanak**, pa je ta rečenica potkopavala sopstveni pravni osnov obrade.
+🔴 Zato sada sva četiri mesta kažu da Fondacija objavljivanje **ne postavlja kao
+uslov** i da izostanak evidentiranja kod anonimne donacije **nije posledica
+uskraćenog pristanka**. Zaključano testom, u oba smera: traži se nova formulacija, a
+`UKINUTO` obara build ako se stara vrati (sr/en/ru/hr/hu).
+
+🔴 **Drugi nalaz: akt je bio ŠIRI od koda.** Pravilnik čl. 28 st. 6 i Uslovi čl. 14
+vezivali su prošireni obim prava za „identitet utvrđen **povodom donacije**", a
+`evidentirajDonaciju` ga postavlja samo uz **javnu** donaciju (`javno && uplatilac`,
+ispravka od 13.09.2026). Po slovu akta bi ta prava pripala i donatoru po čijoj se
+donaciji POEN uopšte ne evidentira. Sada oba akta kažu **javne donacije**, a
+Pravilnik uz to nosi i razlog: po anonimnoj donaciji doprinos se ne evidentira, pa
+ne nastaje položaj koji bi prava pratila, a utvrđenje bi učinilo vidljivim upravo
+ono što anonimna donacija ne otkriva.
+
+🔴 **Rečenica je dopisana UNUTAR čl. 28 st. 6, ne kao nov stav.** Kao zaseban stav
+postala bi st. 7, pa bi „Korisnik iz prethodnog stava" u dotadašnjem st. 7 pokazivao
+na nju umesto na st. 6 — i Uslovi čl. 14 bi upućivali na pogrešan stav. Isti razlog
+zbog kog se članovi ne prenumerišu pri dopunama.
+
+🟢 **Uz izmenu je u Uslove čl. 17 preneto i ono što Politika čl. 11 već kaže od
+R-14** — ime javnog donatora ostaje u listi i pošto korisnik ugasi nalog. Uslovi su
+mesto na kome se pristanak daje, pa posledica treba da stoji tamo gde se prihvata.
+
+🟡 **Šta NIJE dirano:** Izjava o prihvatanju rizika (4.5.5) i DPIA (4.5.2) tu
+rečenicu ne nose. Donacije čl. 5a se ne dira — on je izvor formulacije, ne njena
+žrtva.
 
 ### Peti izuzetak: prevođenje naloga je dobilo osnov (2026-09-11)
 

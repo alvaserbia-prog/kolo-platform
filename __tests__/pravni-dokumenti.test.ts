@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_5_9.md`, `uslovi_koriscenja_4_5_8.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_5_9.md`, `uslovi_koriscenja_4_5_9.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -30,9 +30,9 @@ const AKTI = [
   "Pravilnik_4_5_9.md",
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_5_2.md",
-  "radnje_obrade_4_5_5.md",
-  "uslovi_koriscenja_4_5_8.md",
-  "politika_4_5_5.md",
+  "radnje_obrade_4_5_9.md",
+  "uslovi_koriscenja_4_5_9.md",
+  "politika_4_5_9.md",
   "statut_4_1_0.md",
   "whitepaper_4_5_9.md",
   "rizici_4_5_9.md",
@@ -76,6 +76,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // 🔴 Čl. 57: „nije socijalna pomoć" je BRISANO (vidi UKINUTO). Umesto poricanja
       // stoji statutarni cilj — bez njega akt sam sebi zatvara izuzeće iz čl. 9 ZPDG.
       "socijalne zaštite i solidarne podrške ranjivim društvenim grupama",
+      // 4.5.9 — anonimna donacija ne utvrđuje identitet iz čl. 28 st. 6. Bez toga
+      // je akt bio širi od koda: proširena prava bi po slovu akta pripala i
+      // donatoru po čijoj donaciji se POEN uopšte ne evidentira.
+      "Anonimna donacija identitet u smislu ovog stava ne utvrđuje",
+      "identitet utvrđen povodom javne donacije",
       // ═══ 4.5.8 (R-01 — POEN kao virtuelna valuta) ═══
       // 🔴 Mera M-5: bez ovoga čl. 13 tvrdi da se POEN ne može pribaviti kupovinom,
       // a ćuti o tome da se do njega dolazi uplatom u realnom vremenu. Druga
@@ -179,6 +184,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "bear on the notion of a user's income",
       "in particular not a contract for work",
       "social protection and solidarity support for vulnerable social groups",
+      "An anonymous donation does not establish identity within the meaning of this paragraph",
       "No one is obliged to accept POEN",
       "POEN cannot be acquired for the purpose of performing an exchange",
       "Two decisions in that procedure are separate",
@@ -222,6 +228,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "для понятия дохода пользователя",
       "не является договором подряда",
       "социальной защиты и солидарной поддержки уязвимых общественных групп",
+      "Анонимное пожертвование личность в смысле настоящего пункта не устанавливает",
       "Никто не обязан принимать ПОЕН",
       "ПОЕН нельзя приобрести ради исполнения обмена",
       "Два решения в этой процедуре разделены",
@@ -267,7 +274,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_5_5.md": {
+  "radnje_obrade_4_5_9.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16", "Radnja obrade br. 17"],
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16", "Processing activity No. 17"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16", "Операция обработки № 17"],
@@ -527,8 +534,17 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
   // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
   // počiva upravo na tome da takav promet nije dopušten.
-  "uslovi_koriscenja_4_5_8.md": {
+  "uslovi_koriscenja_4_5_9.md": {
     sr: [
+      // 4.5.9 — javnost donacije VIŠE NIJE „uslov za evidentiranje POEN-a". Ta
+      // formulacija je strukturu činila „platiš → dobiješ vidljivost" i pravila
+      // pristanak neslobodnim; razlog nosi proverljivost (donacije čl. 5a).
+      "Fondacija ga ne postavlja kao uslov pod kojim pristaje da evidentira doprinos",
+      "izostanak evidentiranja nije posledica uskraćenog pristanka",
+      // 4.5.9 — prošireni obim prava vezan je za JAVNU donaciju. Kod to sprovodi
+      // od 13.09.2026 (`javno && uplatilac`), a akt je do tada bio širi od koda.
+      "identitet utvrđen povodom javne donacije",
+      "Anonimna donacija identitet u ovom smislu ne utvrđuje",
       "Oglas neverifikovanog korisnika",
       // R-18 — prigovor kao jedan institut sa svojim članom. Do 4.5.4 su ga
       // Uslovi pominjali samo uz isključenje, a razmena i nabavka nisu imale
@@ -561,6 +577,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "nije prenosiv",
     ],
     en: [
+      "does not set it as a condition on which it agrees to record a contribution",
+      "An anonymous donation does not establish identity in this sense",
       "Listing by an Unverified User",
       "### Article 37a — Complaint to the Foundation",
       "A user may have at most three open complaints per type",
@@ -579,6 +597,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "is not transferable",
     ],
     ru: [
+      "не ставит её как условие, при котором соглашается учесть вклад",
+      "Анонимное пожертвование личность в этом смысле не устанавливает",
       "Объявление неверифицированного пользователя",
       "### Статья 37a — Возражение Фонду",
       "не более трёх открытых возражений по каждому виду",
@@ -925,8 +945,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "прекращается, когда несовершеннолетний пользователь укажет и подтвердит собственный электронный адрес",
     ],
   },
-  "politika_4_5_5.md": {
+  "politika_4_5_9.md": {
     sr: [
+      // 4.5.9 — isto što i u Uslovima čl. 17: objavljivanje nije uslov koji
+      // Fondacija postavlja, nego posledica proverljivosti upisa.
+      "a ne zato što Fondacija objavljivanje postavlja kao uslov",
       "nije pristanak za obrade čiji je pravni osnov pristanak",
       // 4.4.8 — Politika je do tada opisivala razdoblje pre pristanka uže nego
       // što sistem radi („bez pristupa funkcijama", „samo pseudonim i adresa").
@@ -956,6 +979,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "podaci koje ste uneli se brišu",
     ],
     en: [
+      "and not because the Foundation sets publication as a condition",
       "is not consent for processing whose legal basis is consent",
       "Legal basis in the period before takeover",
       "the account has a profile and may form friendships",
@@ -971,6 +995,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "deletes the data you entered",
     ],
     ru: [
+      "а не потому, что Фонд ставит публикацию условием",
       "не является согласием на обработку",
       "Правовое основание в период до принятия",
       "имеет профиль и может заключать дружбы",
@@ -1136,11 +1161,13 @@ const UKINUTO: Record<string, RegExp[]> = {
   // podrške čl. 2. Ta rečenica je sama zatvarala izuzeće iz čl. 9 ZPDG (organizovana
   // socijalna i humanitarna pomoć) i protivrečila čl. 6 Statuta, koji socijalnu
   // zaštitu upisuje kao cilj Fondacije. „Nije naknada" OSTAJE i ne dira se.
-  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i],
-  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i, /executive,?\s+not\s+governance/i, /is\s+not\s+social\s+assistance/i],
-  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i, /исполнительной,?\s+а\s+не\s+управленческой/i, /не\s+является\s+социальной\s+помощью/i],
-  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+a\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i],
-  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i, /végrehajtói,?\s+nem\s+irányítói/i, /nem\s+szociális\s+segély/i],
+  // 🔴 Zaostatak uz R-01: „uslov za evidentiranje POEN-a" — javnost donacije nije
+  // uslov nego proverljivost; uslovljen pristanak po ZZPL-u nije slobodan pristanak.
+  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uslov\s+za\s+evidentiranje\s+POEN/i],
+  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i, /executive,?\s+not\s+governance/i, /is\s+not\s+social\s+assistance/i, /condition\s+for\s+the\s+recording\s+of\s+POEN/i],
+  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i, /исполнительной,?\s+а\s+не\s+управленческой/i, /не\s+является\s+социальной\s+помощью/i, /услови[ем]\s+учёта\s+ПОЕН/i],
+  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+a\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uvjet\s+za\s+evidentiranje\s+POEN/i],
+  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i, /végrehajtói,?\s+nem\s+irányítói/i, /nem\s+szociális\s+segély/i, /feltétele\s+a\s+POEN/i],
 };
 
 /** Napomene o izmeni namerno pominju ukinutu tablu — one se izuzimaju iz provere. */

@@ -106,9 +106,9 @@ Neverifikovani korisnik može da pregleda oglase u prostoru za razmenu, da razme
 
 U ažuriranju evidencije POEN-a neverifikovani korisnik učestvuje isključivo kao primalac. Ne može da inicira ažuriranje evidencije POEN-a u korist drugog korisnika; ta mogućnost otvara se po verifikaciji (Član 28 Pravilnika o KOLO sistemu). Zapisi POEN-a evidentirani pre verifikacije ostaju punovažni.
 
-Neverifikovani korisnik ne može da verifikuje druge korisnike. Doprinos mu se evidentira kroz kanal doprinosa sadržaju platforme (Član 40a Pravilnika o KOLO sistemu) i, ako mu je identitet utvrđen povodom donacije, kroz kanal finansijskog doprinosa; kroz ostale kanale ne može.
+Neverifikovani korisnik ne može da verifikuje druge korisnike. Doprinos mu se evidentira kroz kanal doprinosa sadržaju platforme (Član 40a Pravilnika o KOLO sistemu) i, ako mu je identitet utvrđen povodom javne donacije, kroz kanal finansijskog doprinosa; kroz ostale kanale ne može.
 
-Korisniku čiji je identitet utvrđen povodom donacije — time što je Fondacija uporedila podatke o uplatiocu sa njegovim nalogom — dostupni su i: oglas kojim se dobro ili usluga traži, bez ograničenja broja oglasa iz Člana 16, pokretanje komunikacije povodom oglasa, učešće u zajedničkom prostoru za razgovor, pretraga korisnika uz pregled tuđeg profila sužen na pseudonim i objavljene oglase, i upis ZRNA (Član 28 stav 6 Pravilnika o KOLO sistemu).
+Korisniku čiji je identitet utvrđen povodom javne donacije — time što je Fondacija uporedila podatke o uplatiocu sa njegovim nalogom — dostupni su i: oglas kojim se dobro ili usluga traži, bez ograničenja broja oglasa iz Člana 16, pokretanje komunikacije povodom oglasa, učešće u zajedničkom prostoru za razgovor, pretraga korisnika uz pregled tuđeg profila sužen na pseudonim i objavljene oglase, i upis ZRNA (Član 28 stav 6 Pravilnika o KOLO sistemu). Anonimna donacija identitet u ovom smislu ne utvrđuje.
 
 Utvrđen identitet nije verifikacija i ne zamenjuje je. Takav korisnik ne inicira ažuriranje evidencije POEN-a, ne aktivira i ne otpisuje ZRNO, ne glasa u Gornjem Kolu, ne verifikuje druge, ne učestvuje u operativnom doprinosu, socijalnim programima ni kolektivnim nabavkama i ne pristupa kontakt podacima oglašivača. Donacija nije osnov za verifikaciju i ne obavezuje nijednog korisnika da ga verifikuje.
 
@@ -130,7 +130,7 @@ Neverifikovani korisnik ne može da postavi oglas kojim se dobro ili usluga tra�
 
 Oglas neverifikovanog korisnika mora da ispuni sadržinski minimum: naslov, opis, najmanje jednu fotografiju, kategoriju i mesto, pri čemu dužina naslova i opisa nije uslov. Oglas koji ne ispunjava sadržinski minimum ne objavljuje se. Isti uslov važi i pri izmeni objavljenog oglasa.
 
-Neverifikovani korisnik može istovremeno imati najviše tri aktivna oglasa. Ograničenja iz ovog člana ne primenjuju se na korisnika čiji je identitet utvrđen povodom donacije (Član 14).
+Neverifikovani korisnik može istovremeno imati najviše tri aktivna oglasa. Ograničenja iz ovog člana ne primenjuju se na korisnika čiji je identitet utvrđen povodom javne donacije (Član 14).
 
 Oglas neverifikovanog korisnika nosi vidljivu oznaku da oglašivač nije verifikovan u lancu potvrda. Oznaka je dostupna svima kojima je dostupan i sam oglas, uključujući neprijavljena lica.
 
@@ -156,7 +156,7 @@ Verifikovani korisnici i nosioci ZRNA imaju pun uvid u pseudonime svih korisnika
 
 Korisnik može, na sopstvenu inicijativu i u svakom trenutku, odabrati da njegovo ime i prezime i broj telefona budu vidljivi svim verifikovanim korisnicima. Ovo otkrivanje je dobrovoljno i može se povući u svakom trenutku.
 
-Korisnik koji izabere javnu donaciju (u smislu Pravilnika o pokroviteljstvu i donacijama) saglasan je da se njegovo ime i prezime, uz iznos i datum donacije, objave u javnoj listi donacija Fondacije, zajedno sa njegovim pseudonimom i vezom (linkom) ka njegovom javnom profilu. Iznosi potvrđenih donacija i pokroviteljstava javno su dostupni. Ovo objavljivanje vezano je za konkretnu donaciju i predstavlja uslov za evidentiranje POEN-a po osnovu te donacije; za anonimnu donaciju ime se ne objavljuje i POEN se ne evidentira.
+Korisnik koji izabere javnu donaciju (u smislu Pravilnika o pokroviteljstvu i donacijama) saglasan je da se njegovo ime i prezime, uz iznos i datum donacije, objave u javnoj listi donacija Fondacije, zajedno sa njegovim pseudonimom i vezom (linkom) ka njegovom javnom profilu. Iznosi potvrđenih donacija i pokroviteljstava javno su dostupni. Ime i prezime beleže se uz donaciju u trenutku evidentiranja i ostaju u listi i pošto korisnik ugasi nalog. Objavljivanje služi transparentnosti raspolaganja sredstvima Fondacije i proveri osnova po kome je POEN upisan; Fondacija ga ne postavlja kao uslov pod kojim pristaje da evidentira doprinos. Za anonimnu donaciju ime se ne objavljuje i POEN se ne evidentira, jer upis koji se ne može pripisati nijednom licu nije proverljiv (član 5a Pravilnika o pokroviteljstvu i donacijama); izostanak evidentiranja nije posledica uskraćenog pristanka.
 
 Vidljivost pseudonimne evidencije doprinosa je strukturalna karakteristika sistema koju korisnik ne može isključiti. Korisnik koji ne prihvata transparentnost evidencije ne može koristiti Platformu.
 
@@ -170,7 +170,7 @@ Prostor za razmenu je deo Platforme namenjen oglašavanju ponuda i zahteva za do
 
 Pregled oglasa u prostoru za razmenu — sadržaj ponude ili zahteva, cena, lokacija i pseudonim oglašivača — javan je i dostupan svim posetiocima.
 
-Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je svim registrovanim korisnicima; neverifikovanom korisniku pod uslovima i ograničenjima iz Člana 16. Postavljanje oglasa kojim se dobro ili usluga traži i pokretanje komunikacije povodom oglasa dostupni su verifikovanim korisnicima, nosiocima ZRNA i korisniku čiji je identitet utvrđen povodom donacije (Član 14). Pristup kontakt podacima oglašivača dostupan je isključivo verifikovanim korisnicima i nosiocima ZRNA.
+Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je svim registrovanim korisnicima; neverifikovanom korisniku pod uslovima i ograničenjima iz Člana 16. Postavljanje oglasa kojim se dobro ili usluga traži i pokretanje komunikacije povodom oglasa dostupni su verifikovanim korisnicima, nosiocima ZRNA i korisniku čiji je identitet utvrđen povodom javne donacije (Član 14). Pristup kontakt podacima oglašivača dostupan je isključivo verifikovanim korisnicima i nosiocima ZRNA.
 
 Pseudonim oglašivača u prostoru za razmenu ne povezuje se, za neprijavljena i neverifikovana lica, sa evidencijom doprinosa ni profilom korisnika.
 

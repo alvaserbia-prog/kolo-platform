@@ -108,9 +108,9 @@ An unverified user may view listings in the exchange space, exchange goods and s
 
 In POEN ledger updates an unverified user participates exclusively as a receiver. They may not initiate a POEN ledger update in favor of another user; that possibility opens upon verification (Art. 28 of the Rulebook on the KOLO System). POEN records made before verification remain valid.
 
-An unverified user may not verify other users. A contribution is recorded for them through the channel of contribution to platform content (Art. 40a of the Rulebook on the KOLO System) and, if their identity has been established on account of a donation, through the channel of financial contribution; through the other channels it cannot be.
+An unverified user may not verify other users. A contribution is recorded for them through the channel of contribution to platform content (Art. 40a of the Rulebook on the KOLO System) and, if their identity has been established on account of a public donation, through the channel of financial contribution; through the other channels it cannot be.
 
-A user whose identity has been established on account of a donation — in that the Foundation compared the payer's details with their account — also has available: a listing seeking a good or a service, without the limit on the number of listings under Article 16, initiating communication on account of a listing, participation in the shared conversation space, searching for users with a view of another's profile narrowed to the pseudonym and published listings, and the inscription of ZRNO (Art. 28 para. 6 of the Rulebook on the KOLO System).
+A user whose identity has been established on account of a public donation — in that the Foundation compared the payer's details with their account — also has available: a listing seeking a good or a service, without the limit on the number of listings under Article 16, initiating communication on account of a listing, participation in the shared conversation space, searching for users with a view of another's profile narrowed to the pseudonym and published listings, and the inscription of ZRNO (Art. 28 para. 6 of the Rulebook on the KOLO System). An anonymous donation does not establish identity in this sense.
 
 An established identity is not verification and does not replace it. Such a user does not initiate POEN ledger updates, does not activate or write off ZRNO, does not vote in the Upper Kolo, does not verify others, does not participate in operational contribution, social programs, or collective procurements, and does not access advertisers' contact details. A donation is not a ground for verification and obliges no user to verify them.
 
@@ -132,7 +132,7 @@ An unverified user may not post a listing seeking a good or a service.
 
 A listing posted by an unverified user must meet the content minimum: a title, a description, at least one photograph, a category, and a place, whereby the length of the title and the description is not a condition. A listing that does not meet the content minimum is not published. The same condition applies when an already published listing is edited.
 
-An unverified user may have at most three active listings at any one time. The limitations under this Article do not apply to a user whose identity has been established on account of a donation (Article 14).
+An unverified user may have at most three active listings at any one time. The limitations under this Article do not apply to a user whose identity has been established on account of a public donation (Article 14).
 
 A listing posted by an unverified user carries a visible mark indicating that the advertiser is not verified in the chain of confirmations. The mark is available to everyone to whom the listing itself is available, including non-registered persons.
 
@@ -158,7 +158,7 @@ Verified users and ZRNO Holders have full access to the pseudonyms of all users,
 
 The user may, on their own initiative and at any time, choose to make their name and surname and telephone number visible to all verified users. This disclosure is voluntary and may be withdrawn at any time.
 
-A user who chooses a public donation (within the meaning of the Rulebook on Sponsorship and Donations) consents to their name and surname, together with the amount and date of the donation, being published in the Foundation's public list of donations, along with their pseudonym and a link to their public profile. The amounts of confirmed donations and sponsorships are publicly available. This publication is tied to the specific donation and constitutes a condition for the recording of POENs on the basis of that donation; for an anonymous donation, the name is not published and no POEN is recorded.
+A user who chooses a public donation (within the meaning of the Rulebook on Sponsorship and Donations) consents to their name and surname, together with the amount and date of the donation, being published in the Foundation's public list of donations, along with their pseudonym and a link to their public profile. The amounts of confirmed donations and sponsorships are publicly available. The name and surname are recorded alongside the donation at the time it is recorded and remain in the list even after the user closes their account. The publication serves the transparency of the Foundation's disposal of funds and the verification of the ground on which POEN was recorded; the Foundation does not set it as a condition on which it agrees to record a contribution. For an anonymous donation the name is not published and no POEN is recorded, because a record that cannot be attributed to any person is not verifiable (Art. 5a of the Rulebook on Sponsorship and Donations); the absence of recording is not a consequence of consent being withheld.
 
 The visibility of the pseudonymous contribution ledger is a structural characteristic of the system that the user may not disable. A user who does not accept ledger transparency may not use the Platform.
 
@@ -172,7 +172,7 @@ The exchange space is the part of the Platform intended for advertising offers a
 
 Browsing listings in the exchange space — the content of an offer or request, price, location, and the advertiser's pseudonym — is public and accessible to all visitors.
 
-Posting a listing offering a good or a service is available to all registered users; to an unverified user under the conditions and limitations of Article 16. Posting a listing seeking a good or a service and initiating communication on account of a listing are available to verified users, ZRNO Holders, and a user whose identity has been established on account of a donation (Article 14). Access to advertisers' contact details is available exclusively to verified users and ZRNO Holders.
+Posting a listing offering a good or a service is available to all registered users; to an unverified user under the conditions and limitations of Article 16. Posting a listing seeking a good or a service and initiating communication on account of a listing are available to verified users, ZRNO Holders, and a user whose identity has been established on account of a public donation (Article 14). Access to advertisers' contact details is available exclusively to verified users and ZRNO Holders.
 
 For non-registered and unverified persons, the advertiser's pseudonym in the exchange space is not linked to the contribution ledger or the user's profile.
 

@@ -25,13 +25,13 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // 4.5.7 — čl. 14 st. 3 dobija PETI izuzetak: otpis po prevođenju punoletnog naloga
   // u maloletni (čl. 4d Pravilnika o učešću dece). Kod je taj minus pravio od
   // 2026-08-23, a akt ga je izričito zabranjivao — R-20.
-  "kolo-sistem": {
   // 4.5.9 — R-02 (Poreska uprava): čl. 13 dobija stav o pojmu prihoda (upisom se
   // ne prima ni novac ni stvar, ništa ne prelazi iz imovine Fondacije, osnovica u
   // novcu se ne utvrđuje); čl. 36 st. 4 sustiže operativni čl. 27 (ni rad van
   // radnog odnosa, naročito ne ugovor o delu); čl. 57 st. 5 briše „nije socijalna
   // pomoć" — ta rečenica je sama zatvarala izuzeće iz čl. 9 ZPDG i protivrečila
   // čl. 6 Statuta. Ostaje „nije naknada".
+  "kolo-sistem": {
     fajl: "Pravilnik_4_5_9.md",
     verzija: "4.5.9",
   },

@@ -2,7 +2,7 @@
 
 # Records of Processing Activities of Personal Data
 
-*These Records are adopted on the basis of Art. 47 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP), Art. 62 and 63 of the Rulebook on the KOLO System (version 4.5.2), and Art. 9 of the Rulebook on the Hierarchy of Acts of the KOLO System. They are applied together with the Privacy Policy of the KOLO Platform (version 4.5.2) and the Rulebook on Support Programmes (version 4.5.0).*
+*These Records are adopted on the basis of Art. 47 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP), Art. 62 and 63 of the Rulebook on the KOLO System (version 4.5.9), and Art. 9 of the Rulebook on the Hierarchy of Acts of the KOLO System. They are applied together with the Privacy Policy of the KOLO Platform (version 4.5.9) and the Rulebook on Support Programmes (version 4.5.0).*
 
 **CONTROLLER DETAILS**
 
@@ -177,7 +177,7 @@
 | **Transfer to a third country** | No for the data in the database — the application and the database are executed in the European Union (Frankfurt region), which provides an adequate level of protection. Vercel Inc. and Neon Inc. are US companies, so access from a third country is possible for administrative and technical purposes, subject to the measures under Art. 9 of the Privacy Policy. |
 | **Retention period** | As for donation data — 10 years, in accordance with tax and accounting regulations. The name is not removed from the list even upon the cessation of the capacity of user (Art. 5a of the Rulebook on Patronage and Donations), so for that user linking the pseudonymous ledger to their identity remains possible even after the account is closed. |
 | **Protection measures** | The choice is voluntary and made per individual donation; a clear warning before a public donation; the anonymous option without POEN as an alternative; the rule applies only prospectively; TLS encryption, access control. |
-| **Note** | Publicly linking the name to a donation makes it possible to connect the donor's pseudonymous record with their identity; the disclosure is voluntary and constitutes a condition for the recording of POEN on account of the donation. |
+| **Note** | Publicly linking the name to a donation makes it possible to connect the donor's pseudonymous record with their identity; the disclosure is voluntary. No POEN is recorded for an anonymous donation because a record that cannot be attributed to any person cannot be verified (Art. 5a of the Rulebook on Sponsorship and Donations), and not because the Foundation sets publication as a condition. |
 
 **Processing activity No. 14 — Supervision case (supervision outcome of a verification)**
 
