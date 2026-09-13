@@ -187,13 +187,13 @@ A lejárat nincs örökre kizárva: a POEN „öregedésének" mechanizmusa, ame
       {
         id: 4,
         pitanje: `Mi az a ZRNO, és mire való?`,
-        odgovor: `A ZRNO a POEN-től elkülönült bejegyzés. Míg a POEN azt rögzíti, mit adtál a közösségnek, a ZRNO azt mutatja, ebből mennyit fektettél vissza bele — és ebből a részesedésből ered a szavad a rendszer szabályairól szóló döntésekben.
+        odgovor: `A ZRNO a POEN-től elkülönült bejegyzés. Míg a POEN azt rögzíti, mit adtál a közösségnek, a ZRNO a benne elfoglalt helyzetedet rögzíti — és ebből a helyzetből ered a szavad a rendszer szabályairól szóló döntésekben.
 
 Hogyan szerezhető. A ZRNO-t a már meglévő POEN-eddel jegyzed be. Hogy egy ZRNO hány POEN-be kerül, azt a koefficiens mutatja. A ZRNO le is írható.
 
 Hogyan ad szavazatot. A bejegyzett ZRNO-t lezárod, hogy aktívvá váljon — csak az aktív ZRNO hordoz szavazóerőt. A szavazat nem egyenes vonalban nő: a szavazatok száma az aktív ZRNO-k négyzetgyöke, így akinek százszor több ZRNO-ja van, annak tízszer több szavazata van, nem százszor. Így senki nem veheti át a döntéshozatalt felhalmozással.
 
-Mi nem a ZRNO. Nem üzletrész, nem részvény, nem digitális vagyon, nem pénzügyi eszköz. Nem hoz kamatot és osztalékot, senki nem fizet ki rá semmit, és nem írható át másik tagnak. Azt mutatja, mennyit fektettél a közösségbe, nem azt, hogy az mennyivel tartozik neked.`,
+Mi nem a ZRNO. Nem üzletrész, nem részvény, nem digitális vagyon, nem pénzügyi eszköz. Nem hoz kamatot és osztalékot, senki nem fizet ki rá semmit, és nem írható át másik tagnak. A közösségben elfoglalt helyzetedet mutatja, nem azt, hogy az mennyivel tartozik neked.`,
       },
       {
         id: 5,
@@ -247,15 +247,17 @@ A rendszer nélkülünk is folytatódhat. A kód, amelyen a KOLO fut, nyilvános
       {
         id: 52,
         pitanje: `Mire jó az 1.000.000 ZRNO felső korlát, ha a ZRNO-val nem lehet kereskedni? Van staking vagy hozam?`,
-        odgovor: `Mire jó a korlát. Összesen 1.000.000 ZRNO létezik, és ez a szám sem nem növelhető, sem nem csökkenthető. Így a döntéshozatal nem hígítható fel: senki nem hozhat létre utólag új ZRNO-t, és nem értéktelenítheti el azok szavazatát, akik már itt vannak. Minden bejegyzéssel csökken a Protokollban rendelkezésre álló ZRNO száma, így a koefficiens magasabb.
+        odgovor: `Mire jó a korlát. Összesen 1.000.000 ZRNO létezik, és ez a szám sem nem növelhető, sem nem csökkenthető. Így a döntéshozatal nem hígítható fel: senki nem hozhat létre utólag új ZRNO-t, és nem értéktelenítheti el azok szavazatát, akik már itt vannak. Minden bejegyzéssel csökken a Protokollban rendelkezésre álló ZRNO száma — de ezzel egyidejűleg csökken a forgalomban lévő POEN-ek száma is, mert a ZRNO bejegyzésére fordított POEN visszakerül a Protokollhoz. Ezért maga a bejegyzés nem mozdítja el a koefficienst.
 
 A ZRNO-val nem kereskednek. Nem írható át másik tagnak, és nem hagyja el a Protokollt. A közös jóban elfoglalt helyzetedet rögzíti, amelyből a Felső Kolóban való szavazatod ered.
 
-A lezárás nem staking. A bejegyzett ZRNO-t csak azért zárod le, hogy a szavazatod beszámítson — csak az aktív ZRNO hordoz szavazóerőt. A lezárás nem hoz neked sem POEN-t, sem kamatot, sem semmilyen díjazást. A koefficiens ugyanúgy nő, akár le van zárva a ZRNO-d, akár szabad — a lezárással a szavazaton kívül semmit nem nyersz.
+A lezárás nem staking. A bejegyzett ZRNO-t csak azért zárod le, hogy a szavazatod beszámítson — csak az aktív ZRNO hordoz szavazóerőt. A lezárás nem hoz neked sem POEN-t, sem kamatot, sem semmilyen díjazást. A koefficiens ugyanúgy változik, akár le van zárva a ZRNO-d, akár szabad; a lezárással a szavazaton kívül semmit nem nyersz.
 
-A leírás nem ugyanazt az összeget adja vissza — ezt is nyíltan megmondjuk. A leírás az adott pillanatban érvényes koefficiens szerint történik. Mivel a koefficiens a rendszerrel együtt nő, a leírásnál rendszerint több POEN-t kapsz, mint amennyit a bejegyzéskor beletettél. Ez a különbözet nem garantált, senki nem ígéri, és senki nem fizeti ki.
+A leírás nem ugyanannyi POEN-t ad vissza — ezt is nyíltan megmondjuk. A leírás az adott pillanatban érvényes koefficiens szerint történik, a koefficiens pedig addigra mindkét irányban megváltozhatott. Nő, amikor a rendszerben új POEN-eket jegyeznek be a hozzájárulás csatornáin keresztül. Csökken, amikor POEN-eket megsemmisítenek — amikor valaki megszünteti a fiókját, amikor a POEN a közösségi beszerzésből való átvétellel megsemmisül, vagy amikor a gyermektérben felbomlik egy barátság.
 
-De ez nem jövedelem. A különbözet kizárólag POEN-ben áll fenn, amelynek a rendszeren kívül nincs értéke, nem váltható dinárra, és nem hagyhatja el a Protokollt. Nincs nyereséged és nincs pénzbeli jövedelmed — nagyobb bejegyzésed van a hozzájárulások nyilvántartásában. Ezért a ZRNO-t nem azért jegyzed be, mert megéri, hanem mert szavad akar lenni a döntésekben.`,
+A saját bejegyzésed és leírásod nem mozdítja el. Bejegyzéskor egyszerre csökken a forgalomban lévő POEN-ek száma és a rendelkezésre álló ZRNO-k száma is, így a hányados változatlan marad. Ezért itt nincs sem kereskedés, sem megfelelő pillanat a belépésre és a kilépésre: a különbözet, ha van, annak számtani következménye, amit az egész rendszer időközben rögzített. Senki nem ígéri, senki nem szavatolja, és senki nem fizeti ki.
+
+De ez nem jövedelem. A különbözet kizárólag POEN-ben áll fenn, amelynek a rendszeren kívül nincs értéke, nem váltható dinárra, és nem hagyhatja el a Protokollt. Nincs nyereséged és nincs pénzbeli jövedelmed — más bejegyzésed van a hozzájárulások nyilvántartásában. Ezért a ZRNO-t nem azért jegyzed be, mert megéri, hanem mert szavad akar lenni a döntésekben.`,
       },
       {
         id: 53,

@@ -123,6 +123,19 @@ describe("IZVOR — copy ne predviđa prinos", () => {
     expect(t).toContain("sopstveni upis i otpis koeficijent ne pomeraju");
     expect(t).not.toContain("pri nižem koeficijentu a otpiše ga pri višem");
   });
+
+  // 🔴 Prevodi su ovde rađeni ODMAH, ne pred objavu: `npm run prevodi` ovu izmenu
+  // NE vidi, jer meri samo razliku prema `origin/production`, a prevodi tih ključeva
+  // su tamo već bili izmenjeni ranijim radom (R-01/R-02). Gate bi prošao, a strani
+  // čitalac bi zadržao predviđanje prinosa koje je R-04 upravo uklonio.
+  for (const jezik of JEZICI) {
+    it(`prevod ne predviđa prinos — ${jezik}`, () => {
+      const m = JSON.parse(izvor(`messages/${jezik}.json`));
+      const t = m.pravnaPozicija.sporno2_tekst as string;
+      // Svaka verzija nabraja ČETIRI razloga, ne tri — četvrti je neutralnost upisa.
+      expect(t).toMatch(/Četiri|Four|Четыре|Négy/);
+    });
+  }
 });
 
 describe("IZVOR — whitepaper ne zove razliku podsticajem", () => {
