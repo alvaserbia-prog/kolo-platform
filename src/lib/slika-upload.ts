@@ -18,6 +18,14 @@
  * Provera po jednoj slici (5MB) tu ne pomaže: pet slika od po 3MB svaka prolazi
  * pojedinačnu proveru, a zajedno se ne mogu poslati. Zato se ovde meri UKUPNO.
  *
+ * 🔴 **Memorija na iPhone-u.** Fotografija sa telefona je po pravilu 12 MP
+ * (4032×3024); dekodirana zauzima ≈48MB. Ranije su se SVE izabrane slike
+ * dekodirale ODJEDNOM (`Promise.all`), pa je pet fotografija tražilo ~240MB u
+ * jednom trenutku. iOS Safari na to odbacuje stranicu i učitava je iznova — sa
+ * strane korisnika to izgleda kao „štikliram slike i izbaci me, ikonice se ne
+ * pojave". Zato `pripremiSlike` ide JEDNU PO JEDNU, oslobađa svaku pre nego što
+ * uzme sledeću i prepušta nit između njih.
+ *
  * Fajl je bez ijednog uvoza i koriste ga i ekran i (za konstante) rute.
  */
 
@@ -182,6 +190,56 @@ export async function pripremiSliku(file: File): Promise<Pripremljena> {
   } finally {
     izvor.oslobodi();
   }
+}
+
+/**
+ * Izabrana slika spremna za slanje, uz adresu za sličicu.
+ *
+ * 🔴 Adresa se pravi TAČNO JEDNOM po slici i mora se osloboditi
+ * (`URL.revokeObjectURL`) kad slika ode sa ekrana. Ranije je stajala u samom
+ * renderu (`src={URL.createObjectURL(f)}`), pa je pri svakom iscrtavanju
+ * nastajala nova, nijedna se nije oslobađala i svaka je držala celu datoteku u
+ * memoriji — na telefonu dovoljno da stranica bude odbačena.
+ */
+export type IzabranaSlika = { file: File; pregled: string };
+
+export function zaPregled(file: File): IzabranaSlika {
+  return { file, pregled: URL.createObjectURL(file) };
+}
+
+export function oslobodiPregled(slika: IzabranaSlika | undefined): void {
+  if (slika) URL.revokeObjectURL(slika.pregled);
+}
+
+/**
+ * Pripremi izabrane slike JEDNU PO JEDNU.
+ *
+ * `nasledna` se zove posle svake uspešne slike, pa sličica izlazi na ekran čim
+ * je gotova — čovek vidi da se nešto dešava i, ako obrada stane, ostaje mu ono
+ * što je do tada pripremljeno.
+ *
+ * Redosled je namerno sekvencijalan: paralelno dekodiranje je ono što obara
+ * karticu na telefonu (vidi uvodni komentar).
+ */
+export async function pripremiSlike(
+  datoteke: readonly File[],
+  naSvaku: (slika: IzabranaSlika) => void,
+): Promise<{ formatOdbijen: boolean; velicinaOdbijena: boolean }> {
+  let formatOdbijen = false;
+  let velicinaOdbijena = false;
+
+  for (const datoteka of datoteke) {
+    const ishod = await pripremiSliku(datoteka);
+    if (ishod.ok) naSvaku(zaPregled(ishod.file));
+    else if (ishod.razlog === "format") formatOdbijen = true;
+    else velicinaOdbijena = true;
+
+    // Predah pre sledeće slike: daje pretraživaču priliku da oslobodi memoriju
+    // prethodne i da iscrta sličicu pre nego što se nit opet zauzme.
+    await new Promise((nastavi) => setTimeout(nastavi, 0));
+  }
+
+  return { formatOdbijen, velicinaOdbijena };
 }
 
 /** Zbir veličina — meri se pre slanja, jer platforma odbija preveliko telo bez JSON odgovora. */
