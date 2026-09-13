@@ -25,9 +25,15 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // 4.5.7 — čl. 14 st. 3 dobija PETI izuzetak: otpis po prevođenju punoletnog naloga
   // u maloletni (čl. 4d Pravilnika o učešću dece). Kod je taj minus pravio od
   // 2026-08-23, a akt ga je izričito zabranjivao — R-20.
+  // 4.5.9 — R-02 (Poreska uprava): čl. 13 dobija stav o pojmu prihoda (upisom se
+  // ne prima ni novac ni stvar, ništa ne prelazi iz imovine Fondacije, osnovica u
+  // novcu se ne utvrđuje); čl. 36 st. 4 sustiže operativni čl. 27 (ni rad van
+  // radnog odnosa, naročito ne ugovor o delu); čl. 57 st. 5 briše „nije socijalna
+  // pomoć" — ta rečenica je sama zatvarala izuzeće iz čl. 9 ZPDG i protivrečila
+  // čl. 6 Statuta. Ostaje „nije naknada".
   "kolo-sistem": {
-    fajl: "Pravilnik_4_5_9.md",
-    verzija: "4.5.9",
+    fajl: "Pravilnik_4_6_0.md",
+    verzija: "4.6.0",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.
@@ -53,8 +59,10 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // vremenski ekvivalent (čl. 6), upozorenje verifikatora (čl. 13) i gornja
   // granica predloženog POEN-a (raniji čl. 26).
   "operativni": {
-    fajl: "operativni_4_4_4.md",
-    verzija: "4.4.4",
+  // 4.5.9 — čl. 27 st. 6 (R-02): odbrana više ne pobija samo pojam „naknade" nego
+  // nabraja elemente pojma prihoda koji nedostaju.
+    fajl: "operativni_4_6_0.md",
+    verzija: "4.6.0",
   },
   // 4.4.5 — osnov gornje granice (čl. 5): utrošena sopstvena sredstva i vreme, uz
   // aritmetički razlog zašto taj rad operativni kanal ne može da evidentira (limit
@@ -62,8 +70,10 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // opada uticaj JEDNOG koraka, a zbirni udeo stoji na ~19–24%. Čl. 4: rezultat
   // ulazi u zajedničko dobro pod licencama iz Glave II.
   "osnivacki": {
-    fajl: "osnivacki_4_4_5.md",
-    verzija: "4.4.5",
+  // 4.5.9 — čl. 4 (R-02): osnivački rad nije naručen posao ni ugovor o delu.
+  // Jedini kanal koji sam sebe u aktu naziva radom, pa mu je odbrana bila nužna.
+    fajl: "osnivacki_4_6_0.md",
+    verzija: "4.6.0",
   },
   // 4.4.6 — statutarni osnov (čl. 2), dinamičan sastav bez imenovanja (čl. 4),
   // sprovođenje odluke aktom UO (čl. 17), izmenu pravilnika donosi UO (čl. 23).
@@ -72,8 +82,11 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
     verzija: "4.4.6",
   },
   "programi-podrske": {
-    fajl: "programi_podrske_4_5_0.md",
-    verzija: "4.5.0",
+  // 4.5.9 — R-02: čl. 2 briše „nije socijalna pomoć"; nov čl. 6a (priroda
+  // evidentiranja) — nema isplate, nema prelaza imovine, nije naknada, program se
+  // sprovodi u ostvarivanju cilja iz čl. 6 Statuta.
+    fajl: "programi_podrske_4_6_0.md",
+    verzija: "4.6.0",
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
   // 4.5.2 — postupak potvrde postojanja deteta (R-15, čl. 6 prepisan): izjašnjavaju
@@ -88,8 +101,10 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // uzrasta, izlazak iz lanca potvrda, poništenje doprinosa iz kanala čl. 15 uz
   // minus na obe strane, obaveštenje i prigovor.
   "ucesce-dece": {
-    fajl: "ucesce_dece_4_5_7.md",
-    verzija: "4.5.7",
+  // 4.5.9 — čl. 14b (R-02): upis iz kanala čl. 15 t. 9 nije naknada i ne donosi
+  // maloletnom korisniku ni novac ni stvar.
+    fajl: "ucesce_dece_4_6_0.md",
+    verzija: "4.6.0",
   },
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
   // 4.4.3 — broj POEN-a po delu je parametar odluke o nabavci (čl. 17), a ne izvod
@@ -98,8 +113,13 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // delatnost, zabranjena naknada za ustupljeno dobro (nov čl. 3a); oslobođen deo
   // ide sledećem u redu i ne prodaje se (čl. 29); godišnji zbir projekata (čl. 31).
   "projekti-nabavke": {
-    fajl: "projekti_nabavke_4_5_8.md",
-    verzija: "4.5.8",
+  // 4.5.9 — R-02: čl. 19 — poništeni zapis ne prelazi Fondaciji, a zapis koji se
+  // poništava je evidencija ranije učinjenog doprinosa, ne jedinica pribavljena
+  // radi preuzimanja; čl. 20 — kalkulacija se deli, dinarska strana ide uz čl. 31
+  // (inače se odnos POEN:RSD čita deljenjem); nov čl. 21a — godišnja granica
+  // dinarske vrednosti preuzetih dobara po korisniku.
+    fajl: "projekti_nabavke_4_6_0.md",
+    verzija: "4.6.0",
   },
 };
 

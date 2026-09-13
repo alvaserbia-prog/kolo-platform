@@ -1000,15 +1000,15 @@
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.5.5"
+      "ver": "4.6.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.4.6"
+      "ver": "4.6.0"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.5.9",
+      "ver": "4.6.0",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -1038,11 +1038,11 @@
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása · KOLO",
     "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.9-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat · KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.5.5-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.0-es verzió",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.4.6-es verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.0-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai · KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.5.9-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.0-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -1561,7 +1561,9 @@
     "licence_tekst": "A szoftver AGPL-3.0, a tartalom CC BY-SA 4.0 alatt nyílt. A licencek nem cserélhetők szigorúbbra — sem az Alapítvány, sem a Felső Kolo döntésével.",
     "gde_naslov": "Hol olvasható részletesen",
     "gde_uvod": "E lap minden állítása közzétett aktuson alapul. Azok szövege az irányadó, nem ez az áttekintés.",
-    "nazad_link": "Vissza a Hogyan működik a rendszer oldalra"
+    "nazad_link": "Vissza a Hogyan működik a rendszer oldalra",
+    "porez_naslov": "Adójogi előírások",
+    "porez_tekst": "A személyi jövedelemadó minden forrásból származó jövedelmet terhel, ideértve a nem pénzbeli formában szerzett jövedelmet is. Nem az tehát a kérdés, hogy valami térítés-e, hanem az, hogy a felhasználó kapott-e egyáltalán valamit.\n\nA POEN esetében nem. A bejegyzéssel sem pénzt, sem dolgot nem kap, semmi nem kerül át az Alapítvány vagyonából a felhasználó vagyonába, a keletkezett bejegyzés nem tehető pénzzé, nem engedményezhető és nem érvényesíthető, az Alapítvány pedig a POEN pénzben kifejezett értékét nem állapítja meg és nem teszi közzé. Az Alapítvány a felhasználónak semmilyen jogcímen nem fizet pénzt.\n\nA közösségi beszerzés esetében igen, és ezt nem is rejtjük el: a felhasználó az Alapítvány dináreszközeiből vásárolt jószágot kap. A jószágot ellenszolgáltatás és bármiféle viszontszolgáltatás nélkül juttatják, az Alapítvány bejegyzett céljainak megvalósítása keretében. Az érvénytelenített bejegyzés megszűnik, és nem száll át az Alapítványra; nem a rész átvétele céljából megszerzett egység, hanem annak a hozzájárulásnak a nyilvántartása, amelyet a felhasználó a közjó javára már megtett. Az az összérték, amelyet egy felhasználó egy naptári évben átvehet, korlátozott.\n\nAmi vitatott marad: hogyan minősíti az illetékes hatóság ezt a juttatást. Az Alapítvány nem nyújt adótanácsadást és nem szavatolja az adójogi megítélést; saját adókötelezettségeiért a felhasználó felel."
   },
   "kakoFunkcionisePage": {
     "poen_nije_kratko": "A POEN annak a bejegyzése, amit adtál — sor a könyvben, nem pedig pénz, amit tartasz. Nincs mód dinárért megvenni vagy eladni, sem tőlünk, sem mástól.",
@@ -2327,9 +2329,9 @@
     "nadzor": "Megerősítés felügyelete: {verifikator} → {verifikovani}",
     "donacija": "Adomány alapján bejegyzett hozzájárulás: {iznos} POEN",
     "donacija_uplatilac": "Adomány alapján bejegyzett hozzájárulás: {iznos} POEN",
-    "pokroviteljstvo": "Patronálási bónusz: {iznos} POEN",
+    "pokroviteljstvo": "Nyilvántartott hozzájárulás patronálás jogcímén: {iznos} POEN",
     "osnivacki": "Alapítói hozzájárulás — {korak}/{ukupno} lépés",
-    "krug_bonus": "Kör bónusz „{krug}” — {clanovi} tag",
+    "krug_bonus": "A Kör növekedése „{krug}” — {clanovi} tag",
     "krug_osnivanje": "A „{krug}” Kör alapítása",
     "program": "Program: {program}",
     "doprinos_sadrzaju": "Hozzájárulás a platform tartalmához",
@@ -2891,7 +2893,7 @@
     "greska_slanje": "Nem sikerült. Próbáld újra.",
     "greska_ucitavanje": "A betöltés nem sikerült.",
     "na_cekanju": "{iznos} POEN vár rád. Akkor érkezik, ha a barátaid is jóváhagyást kapnak.",
-    "oznaka_isplaceno": "500 POEN bejegyezve",
+    "oznaka_evidentirano": "500 POEN bejegyezve",
     "oznaka_bez_poena": "testvér: POEN nélkül",
     "dugme_raskini": "Megszüntetés",
     "raskid_potvrda": "{pseudonim} ne legyen többé a barátod? Egymásnak írni is abbahagyjátok.",
@@ -3095,6 +3097,9 @@
     "preuzeli": "Átvették",
     "preuzeli_napomena": "Az álnév és a sorrendbeli hely látszik. A bejegyzésben szereplő POEN-szám nem kerül közzétételre.",
     "broj_prijava": "Jelentkezők: {broj}",
-    "ispravka_pouka": "Ha a részt nem vetted át, vagy hibás, 7 napod van kifogást benyújtani a profilodról."
+    "ispravka_pouka": "Ha a részt nem vetted át, vagy hibás, 7 napod van kifogást benyújtani a profilodról.",
+    "dinarska_naslov": "A beszerzés dinárban kifejezett oldala",
+    "dinarska_opis": "Az Alapítvány eszközeivel való rendelkezésről szóló jelentés része. A kalkulációtól elkülönítve szerepel, mert az egy részre eső POEN száma nem a jószág ára, és abból nem is vezethető le.",
+    "granica_pregled": "Az idén átvett javak értéke: {preuzeto} / {granica} RSD (21a. cikk)."
   }
 }

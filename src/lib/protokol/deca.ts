@@ -542,7 +542,7 @@ export async function dohvatiPregledDeteta(roditeljId: string, deteId: string) {
       orderBy: { createdAt: "desc" },
       select: {
         createdAt: true,
-        poenIsplacen: true,
+        poenEvidentiran: true,
         a: { select: { id: true, pseudonim: true, deaktiviranAt: true } },
         b: { select: { id: true, pseudonim: true, deaktiviranAt: true } },
       },
@@ -571,13 +571,13 @@ export async function dohvatiPregledDeteta(roditeljId: string, deteId: string) {
       .map((p) => ({
         drugi: p.a.id === dete.id ? p.b : p.a,
         createdAt: p.createdAt,
-        poenIsplacen: p.poenIsplacen,
+        poenEvidentiran: p.poenEvidentiran,
       }))
       .filter((p) => !p.drugi.deaktiviranAt)
       .map((p) => ({
         pseudonim: p.drugi.pseudonim,
         od: p.createdAt.toISOString(),
-        poenIsplacen: p.poenIsplacen,
+        poenEvidentiran: p.poenEvidentiran,
       })),
     // 🔴 Bez ijedne poruke — samo sa kim i kada. Sadržaj razgovora među decom
     // roditelj ne vidi.

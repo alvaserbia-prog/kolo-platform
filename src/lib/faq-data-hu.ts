@@ -838,9 +838,9 @@ Az Alapítvány nem ad adótanácsot, és nem részese a cserédnek: a teljesít
       {
         id: 49,
         pitanje: `Hat-e a KOLO-ban való részvétel / a POEN a nyugdíjamra vagy a szociális juttatásaimra?`,
-        odgovor: `A rendszer felől nézve — nem. A POEN nem pénz, nem kereset és nem jövedelem: belső nyilvántartási bejegyzés arról, mit adtál a közösségnek, és nem alakítható át a rendszeren kívül értékkel bíró eszközzé. Az Alapítvány semmilyen pénzbeli juttatást nem fizet neked, és a POEN-t sehol nem jelenti be a jövedelmedként.
+        odgovor: `A rendszer felől nézve — nem. A POEN nem pénz, nem kereset és nem jövedelem: belső nyilvántartási bejegyzés arról, mit adtál a közösségnek, és nem alakítható át a rendszeren kívül értékkel bíró eszközzé. Az Alapítvány semmilyen jogcímen nem fizet neked pénzt: a bejegyzéssel sem pénzt, sem dolgot nem kapsz, semmi nem kerül át a vagyonából a tiédbe, a bejegyzés pedig nem tehető pénzzé, nem engedményezhető és nem érvényesíthető. Ezen a jogcímen ezért pénzben kifejezett összeg sincs.
 
-Ha a POEN valamelyik szociális programon keresztül rögzül neked (például elsődleges gondviselőként, idősebb tagként vagy a Tanulás révén), az sem szociális segély és nem juttatás, hanem a nyilvántartás automatikus frissítése, amely az ilyen részvételnek egyenrangú helyet ad a rendszerben.
+Ha a POEN valamelyik szociális programon keresztül rögzül neked (például elsődleges gondviselőként, idősebb tagként vagy a Tanulás révén), az sem térítés — nem fizet meg semmilyen munkát vagy szolgáltatást, és cserébe semmit nem kérnek tőled. Ez a nyilvántartás automatikus frissítése, amely az ilyen részvételnek egyenrangú helyet ad a rendszerben, a programot pedig az Alapítvány alapszabály szerinti céljainak megvalósítása érdekében hajtják végre.
 
 Meg kell azonban különböztetni a POEN-t attól, amit a rendszeren kívül csinálsz. Mindaz, amiért pénzt kérsz, a te tevékenységed, amelyre az általános szabályok vonatkoznak — és ennek következményei lehetnek a jogállásodra nézve, attól függően, mit és milyen mértékben csinálsz.
 

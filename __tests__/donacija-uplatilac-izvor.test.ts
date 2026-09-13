@@ -111,24 +111,25 @@ describe("IZVOR — uplatilac se traži i upisuje", () => {
 });
 
 describe("IZVOR — tekstovi uz uplatioca", () => {
-  // 🔴 Admin namespace se od 13.09.2026. NE prevodi — živi samo u `sr.json`, a
-  // `src/i18n/request.ts` ga dodaje ostalim jezicima pri učitavanju. Ovaj blok je
-  // do tada čitao `m.admin.*` na svih pet jezika i od te odluke je PADAO na
-  // en/ru/hr/hu; zatečen kvar, ispravljen uz R-03.
-  it("admin poruke uz uplatioca postoje u srpskom originalu", () => {
-    const sr = JSON.parse(izvor("messages/sr.json"));
-    expect(sr.admin.donacije_uplatilac_obavezan.length).toBeGreaterThan(5);
-    expect(sr.admin.donacije_strani_priliv.length).toBeGreaterThan(5);
-  });
-
   for (const jezik of ["sr", "en", "ru", "hr", "hu"]) {
     it(jezik, () => {
       const m = JSON.parse(izvor(`messages/${jezik}.json`));
-      // 🔴 Ime uplatioca je izašlo iz opisa transakcije (R-03, M-3b), pa parametar
-      // `{uplatilac}` ne sme da preživi ni u jednom prevodu: next-intl baca kad
-      // prevod traži parametar koji kod ne šalje.
+      // 🔴 Ime uplatioca je IZAŠLO iz opisa transakcije (R-03, mera M-3b), pa
+      // parametar `{uplatilac}` ne sme da preživi ni u jednom prevodu: next-intl
+      // baca kad prevod traži parametar koji kod ne šalje. Tvrdnja je okrenuta —
+      // uz R-19 je tražila suprotno; razlog obrta stoji uz proveru servisa iznad.
       expect(m.transakcije.donacija_uplatilac ?? "").not.toContain("{uplatilac}");
       expect(m.donacije.karticno_sopstvena_kartica.length).toBeGreaterThan(20);
+      // 🔴 Namespace `admin` živi ISKLJUČIVO u sr (odluka od 2026-09-13) —
+      // `src/i18n/request.ts` ga dodaje svakom drugom jeziku pri učitavanju
+      // poruka. Provera nad `m.admin` u prevodima je zato tražila ključ koji po
+      // pravilu ne sme da postoji; to je test obaralo od te odluke naovamo.
+      if (jezik !== "sr") {
+        expect(m.admin).toBeUndefined();
+        return;
+      }
+      expect(m.admin.donacije_uplatilac_obavezan.length).toBeGreaterThan(5);
+      expect(m.admin.donacije_strani_priliv.length).toBeGreaterThan(5);
     });
   }
 });

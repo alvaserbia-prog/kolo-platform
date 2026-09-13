@@ -21,6 +21,16 @@ type Nabavka = {
 };
 
 /**
+ * Godišnja granica dinarske vrednosti preuzetih dobara (čl. 21a).
+ *
+ * 🔴 Broj je ČINJENICA sa računa dobavljača, ne poreska osnovica. Uz njega se ne
+ * piše nijedna reč o porezu i ne pominje se nijedan prag — kvalifikacija davanja
+ * nije naša da je saopštavamo (Izjava o rizicima čl. 10), a poreski savet
+ * Fondacija ne pruža.
+ */
+type Granica = { godisnjaRSD: number; preuzetoRSD: number; preostaloRSD: number };
+
+/**
  * Registar predloga i spisak nabavki.
  *
  * Predlog je JEDNA REČ iz rečnika, jedan po članu (Pravilnik o projektima i
@@ -35,6 +45,7 @@ export default function NabavkeKlijent() {
   const [nabavke, setNabavke] = useState<Nabavka[]>([]);
   const [moj, setMoj] = useState<{ naziv: string } | null>(null);
   const [projekti, setProjekti] = useState<Projekti | null>(null);
+  const [granica, setGranica] = useState<Granica | null>(null);
   const [unos, setUnos] = useState("");
   const [predlozi, setPredlozi] = useState<{ id: string; naziv: string }[]>([]);
   const [ucitava, setUcitava] = useState(true);
@@ -54,6 +65,7 @@ export default function NabavkeKlijent() {
         setRegistar(d.registar ?? []);
         setNabavke(d.nabavke ?? []);
         setProjekti(d.projekti ?? null);
+        setGranica(d.granica ?? null);
       }
       if (b.ok) {
         const d = await b.json();
@@ -137,6 +149,14 @@ export default function NabavkeKlijent() {
               godina: projekti.godina,
               iznos: projekti.utrosenoRSD.toLocaleString("sr-RS"),
               broj: projekti.brojNabavki,
+            })}
+          </p>
+        )}
+        {granica && granica.preuzetoRSD > 0 && (
+          <p className="mt-1 text-xs text-kolo-muted">
+            {t("granica_pregled", {
+              preuzeto: granica.preuzetoRSD.toLocaleString("sr-RS"),
+              granica: granica.godisnjaRSD.toLocaleString("sr-RS"),
             })}
           </p>
         )}
