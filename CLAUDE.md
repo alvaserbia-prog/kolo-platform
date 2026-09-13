@@ -67,6 +67,54 @@ postoji u skripti ako se ikad uveže u build, ali se za sada ne koristi.
 (hardkodovan copy van `messages/`). Ako se takav tekst pojavi, ide u `messages/` — to je
 pravilo koje je i inače na snazi.
 
+
+#### 🔴 `admin` namespace se NE prevodi — i više ne postoji u prevodima (2026-09-13)
+
+Odluka vlasnika. Namespace `admin` (**450 ključeva, 13,4% fajla**) živi **isključivo
+u `messages/sr.json`**; `src/i18n/request.ts` ga dodaje svakom drugom jeziku pri
+učitavanju poruka (`{ ...messages, admin: sr.admin }`).
+
+🔴 **Razlog nije ušteda nego tačnost.** Admin panel je alat Upravnog odbora —
+terminologija mu preslikava akte, a **merodavan je srpski original** (to sami
+prevodi akata kažu u disklejmeru). Uz to akti namerno razdvajaju institute koje
+prevod lako slepi u jednu reč — **prigovor** (Uslovi čl. 37a), **prijava razmene**,
+**prijava oglasa**, **nadzorni predmet** — a na tri mesta u ovom fajlu stoji „tri
+različite odluke, tri taba, ne spajati ih". Loš prevod tu ne kvari stil nego vodi ka
+odluci po pogrešnom institutu.
+
+🔴 **Zatečeno stanje koje je ovo pokrenulo: namespace je bio NAPOLA preveden** —
+177 od 450 ključeva u `en`/`ru`/`hu` i 80 u `hr`. Videlo se u istom redu tabova:
+*„Overview, Members, … Razmene, Nabavke"*. Stariji ekrani su prevedeni, a svaki nov
+tab (Razmene 08., Nabavke 09. mesec) ulazio je na srpskom jer ga niko ne prevodi.
+Dakle pravilo se faktički sprovodilo samo, samo neuredno.
+
+🔴 **Zašto IZOSTAVLJANJE, a ne prepisivanje srpske vrednosti u četiri fajla.**
+Prepisana vrednost živi **pet puta** i razilazi se pri svakoj sledećoj zameni — isti
+kvar koji je ovde već dvaput zapisan („ne prepisivati tabele u ekrane", „ne raditi
+blanket zamenu verzija"). Izostavljena vrednost **fizički ne može da odluta**:
+pravilo prestaje da bude provera koju neko mora da pokrene i postaje svojstvo
+strukture. Usput su prevodi manji za ~120 KB ukupno.
+
+🟡 **`sr-Cyrl` ovde ne ulazi** — izvor mu je `sr`, pa admin blok već ima i prolazi
+kroz `lat2cyrDeep` zajedno sa ostatkom. Ćirilica nije prevod nego pismo.
+
+🟡 **Poznata posledica:** ko prebaci jezik na engleski dobija srpski admin panel
+usred prevedenog sajta. To je **i pre ovoga bio slučaj**, samo unutar jednog reda
+tabova; sada je bar dosledno i predvidivo.
+
+**Brana je dvostruka** (`__tests__/admin-namespace.test.ts`): da prevod ne nastane
+(nijedan od četiri fajla ne sme da ima ključ `admin`) **i da merge ne nestane**
+(`request.ts` mora da ga dodaje). Bez druge polovine bi brisanje jedne linije
+ostavilo admin panel bez teksta na četiri jezika, a build bi prošao.
+`npm run i18n:check` izuzima namespace iz pariteta (`NEPREVEDENI_NS`), a
+`npm run prevodi` iz duga — inače bi svaka izmena admin panela tražila prevod koji
+po pravilu ne sme da postoji, pa bi objava stajala na poslu koji se ne radi.
+
+🟡 **Usput:** `npm run i18n:check` **prvi put prolazi čist**. Tri preostale prijave
+bile su lažne (`landing.pijaca_poen` — oznaka „1.500 P" umesto „1.500 POEN", i dva
+naslova gde je razlika samo separator `·` naspram `—`) i upisane su u
+`DOZVOLJENO_ISTO_KAO_EN`.
+
 ### Vercel topologija — JEDAN projekat `kolo` (od 2026-06-04; kolo-peach re-pointovan 2026-06-12)
 **PROMENA 2026-06-04:** stari `kolo-platform` projekat (`prj_F8dvteluVkzxlGzIMfpvXqWJD2yC`) je **isključen** — više ne gradi (poslednji deploy `d8bc6fc`, ~3. jun). Sada **jedan projekat `kolo`** (`prj_xVaJlVaSzPl7rYnF1lM4WXwE6Y8m`, team `team_YswkbIApgJlmqdQLJJu8SLDE`) gradi **obe grane** istog repoa (`alvaserbia-prog/kolo-platform`).
 

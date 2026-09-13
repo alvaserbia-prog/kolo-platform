@@ -23,8 +23,23 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   const messages = (await import(`../../messages/${izvorLocale}.json`)).default;
 
+  // Namespace `admin` se NE prevodi (odluka vlasnika) i postoji ISKLJUČIVO u
+  // `sr.json`. Admin panel je alat Upravnog odbora — terminologija mu preslikava
+  // akte, a merodavan je srpski original; četiri paralelne pravne terminologije
+  // niko ne bi održavao. Do ove izmene je namespace stajao u sva četiri prevoda i
+  // bio NAPOLA preveden (177 od 450 ključeva), pa je isti red tabova glasio
+  // „Overview, Members, … Razmene, Nabavke". Izostavljanjem prevoda ta razlika
+  // fizički ne može da nastane.
+  //
+  // `sr-Cyrl` ovde ne ulazi: izvor mu je `sr`, pa admin blok već ima i prolazi
+  // kroz transliteraciju zajedno sa ostatkom — ćirilica nije prevod, nego pismo.
+  const sveporuke =
+    izvorLocale === "sr"
+      ? messages
+      : { ...messages, admin: (await import("../../messages/sr.json")).default.admin };
+
   return {
     locale,
-    messages: isCyrl ? lat2cyrDeep(messages) : messages,
+    messages: isCyrl ? lat2cyrDeep(sveporuke) : sveporuke,
   };
 });

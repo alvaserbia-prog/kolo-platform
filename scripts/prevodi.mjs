@@ -39,6 +39,11 @@ import { dirname, join } from "node:path";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const IZVOR = "sr";
 const CILJEVI = ["en", "ru", "hr", "hu"];
+// Namespace koji se NE prevodi (vidi `check-i18n-parity.mjs` i `src/i18n/request.ts`).
+// Ne ulazi u dug — inače bi svaka izmena admin panela tražila prevod koji po
+// pravilu ne sme da postoji, pa bi objava stajala na poslu koji se ne radi.
+const NEPREVEDENI_NS = ["admin"];
+const jeNeprevedeni = (k) => NEPREVEDENI_NS.some((ns) => k === ns || k.startsWith(ns + "."));
 const AKTI = "dokumentacija 4.1";
 const PROVERENO = join(ROOT, "scripts", "prevodi-provereno.json");
 
@@ -108,7 +113,7 @@ const dug = []; // { id, izvor, jezik, opis, kljuc, hesSrpskog }
 // --- 1. messages/*.json ---------------------------------------------------
 const srSad = flat(citaj(`messages/${IZVOR}.json`));
 const srOsn = flat(izOsnove(`messages/${IZVOR}.json`)) ?? {};
-const srKljucevi = Object.keys(srSad);
+const srKljucevi = Object.keys(srSad).filter((k) => !jeNeprevedeni(k));
 const dirnuti = srKljucevi.filter((k) => srSad[k] !== srOsn[k]);
 
 for (const jezik of CILJEVI) {
