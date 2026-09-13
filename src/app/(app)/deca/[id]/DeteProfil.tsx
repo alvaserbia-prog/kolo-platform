@@ -375,7 +375,7 @@ function BrisanjeNaloga({
 }
 
 type Pregledi = {
-  prijatelji: { pseudonim: string; od: string; poenIsplacen: boolean }[];
+  prijatelji: { pseudonim: string; od: string; poenEvidentiran: boolean }[];
   razgovori: { id: string; drugi: string; poruka: number; poslednja: string }[];
 };
 

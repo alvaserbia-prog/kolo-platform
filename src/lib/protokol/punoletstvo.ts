@@ -114,7 +114,7 @@ async function najaviPunoletstvo(
   sada: Date
 ) {
   const prijateljstva = await prisma.prijateljstvo.findMany({
-    where: { OR: [{ aId: deteId }, { bId: deteId }], raskinutAt: null, poenIsplacen: true },
+    where: { OR: [{ aId: deteId }, { bId: deteId }], raskinutAt: null, poenEvidentiran: true },
     select: { aId: true, bId: true },
   });
   const iznos = otpisPriPunoletstvu(prijateljstva.length);
@@ -185,9 +185,9 @@ async function prevediUPunoletni(deteId: string) {
   // Broje se SAMO živa isplaćena prijateljstva. Ne broje se: raskinuta (njihovih 500
   // je već otpisano — inače bi isti POEN bio oduzet dvaput), prijateljstva sa braćom
   // i sestrama (nikad nisu nosila POEN) i prijateljstva na čekanju (druga strana
-  // nikad nije postala aktivna). Sve tri grupe nosi jedno polje: `poenIsplacen`.
+  // nikad nije postala aktivna). Sve tri grupe nosi jedno polje: `poenEvidentiran`.
   const isplacena = await prisma.prijateljstvo.findMany({
-    where: { OR: [{ aId: deteId }, { bId: deteId }], raskinutAt: null, poenIsplacen: true },
+    where: { OR: [{ aId: deteId }, { bId: deteId }], raskinutAt: null, poenEvidentiran: true },
     select: { aId: true, bId: true },
   });
   const iznos = otpisPriPunoletstvu(isplacena.length);

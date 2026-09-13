@@ -233,6 +233,43 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-13 (trideset prvi put):** na **4.6.0** ide **OSAM akata** —
+Pravilnik o KOLO sistemu (sa 4.5.9), Pravilnik o programima podrške (sa 4.5.0),
+Pravilnik o operativnom doprinosu (sa 4.4.4), Pravilnik o projektima i kolektivnim
+nabavkama (sa 4.5.8), Pravilnik o osnivačkom doprinosu (sa 4.4.5), Izjava o
+prihvatanju rizika (sa 4.5.5), Pravilnik o učešću dece (sa 4.5.7) i Whitepaper
+(sa 4.4.6). Ostalih devet ostaje gde jeste. Povod je **R-02 iz novog registra rizika**
+(POEN i dobra kao prihod korisnika, Poreska uprava). Sadržinski, vidi sekciju
+„Porez: POEN nije prihod, a roba iz nabavke je poklon" ispod.
+
+🔴 **Whitepaper je uhvaćen TESTOM, ne pregledom — treći put ista pouka.** Rečenica
+„Automatska evidencija … nije socijalna pomoć ni naknada" brisana je iz Pravilnika
+čl. 57 i iz programa podrške, a whitepaper ju je nosio doslovno; `UKINUTO` blok je
+pao na whitepaperu. **Pri brisanju rečenice iz akta OBAVEZNO proveriti whitepaper.**
+
+🔴 **Zašto 4.6.0, a ne 4.5.9 — sudar dve sesije, četvrti put ista pouka.** Ovaj set je
+napravljen nad osnovom na kojoj je poslednja šifra bila 4.5.8, pa je ciljao 4.5.9. Dok
+je rađen, druga sesija je na `main` objavila 4.5.9 za četiri akta (zaostatak uz R-01) —
+među njima i **glavni Pravilnik**, koji menja i ovaj set. Grana je zato dovučena na
+`main`, izmene R-02 su prenete **na main-ovu 4.5.9 verziju Pravilnika** (ne na 4.5.8,
+što bi tiho poništilo R-01 zaostatak), a ceo R-02 set je dobio **narednu slobodnu
+šifru 4.6.0**. Ne 4.5.10 — dvocifren treći član kvari imena fajlova i zatečene `grep`
+provere. Isti postupak kao kod sudara 4.3.2/4.3.3.
+
+🟢 **DPIA, Registar radnji obrade i Politika privatnosti NISU dirani ovim setom** —
+nijedna mera R-02 ne uvodi nov podatak o ličnosti ni novu radnju obrade. Godišnja
+granica se računa iz podataka koji već postoje (`placenoRSD`, `brojDelova`,
+`NabavkaPrijava.preuzetoAt`). Registar i Politika ostaju na 4.5.9, gde ih je ostavio
+zaostatak uz R-01.
+
+🟡 **Zaostala unakrsna upućivanja — ŠEST novih.** Bumpom na 4.6.0 zastarela su
+upućivanja iz akata koji se ovim potezom NE objavljuju: Registar (4.5.9) → Pravilnik
+(„verzija 4.5.9") i → programi podrške („verzija 4.5.0", dva mesta), DPIA (4.5.2) →
+programi podrške (`v4.5.0`, dva mesta) i → Whitepaper (`v4.4.6`). Nisu ispravljena —
+objavljen fajl ne sme da govori nešto drugo nego kad je objavljen. Briše ih bump celog
+seta na 5.0. 🟢 Upućivanje `ucesce_dece` → Pravilnik JESTE ispravljeno na v4.6.0, jer
+se taj akt ovim potezom ponovo objavljuje.
+
 **AŽURIRANO 2026-09-13 (trideseti put):** na **4.5.9** idu **ČETIRI akta** —
 Pravilnik o KOLO sistemu (sa 4.5.8), Uslovi korišćenja (sa 4.5.8), Politika
 privatnosti (sa 4.5.5) i Registar radnji obrade (sa 4.5.5). Ostalih trinaest ostaje
@@ -1429,6 +1466,171 @@ dali prava, to davanje više liči na prodaju. 🟢 **Rešeno setom 4.5.4** tako
 ne ide kroz korisnikovo pravo prema Fondaciji nego kroz **obavezu Fondacije prema
 sopstvenom programu** (čl. 30 st. 5) i kroz **ispravku evidencije**, koja nije
 povraćaj naknade (čl. 30a st. 6). Odbrana besplatnosti time ostaje netaknuta.
+
+### Porez: POEN nije prihod, a roba iz nabavke je poklon (R-02, 2026-09-13)
+
+Sprovođenje rizika **R-02 iz novog registra** (`docs/registar-rizika-regulatori-2026-09.md`)
+— POEN i dobra kao prihod korisnika, zatečena ocena **9**, po merama **6**.
+
+🔴 **Rizik je PODELJEN na dva i to je nosiva ispravka.** Držani zajedno, traže
+suprotne mere:
+
+| | **POEN iz kanala** | **Roba iz kolektivne nabavke** |
+|---|---|---|
+| Šta korisnik primi | zapis | stvar |
+| Dinarski iznos | 🟢 ne postoji nigde u sistemu | 🔴 postoji, na računu dobavljača |
+| Kape u dinarima | 🔴 **nikad** | 🟢 dopuštene |
+
+**Pravilo: dinar nikad ne dodiruje POEN — dodiruje samo račun.**
+
+🔴 **ZABRANJENA TEMA — dinarska kapa ili prag na POEN, u bilo kom kanalu.** Odbijeno
+izričito (*„POEN nije vezan za dinar"*). Svaka takva mera je preračun POEN → dinar,
+dakle povratak odnosa 1:1 koji je R-01 uklonio iz Uslova čl. 19 (M-7a). Iz istog
+razloga se **ne traže izuzeća iz čl. 9 ZPDG za POEN** — sva su izražena u dinarima i
+pretpostavljaju isplatu, pa bi pozivanje na njih bilo priznanje vrednosti.
+
+#### Šta je bilo, a više nije
+
+🔴 **Odbrana je pobijala pogrešan pojam.** Operativni čl. 27 st. 6 je glasio da POEN
+„ne predstavlja **naknadu** u smislu … propisa o porezu na dohodak građana". Porez na
+dohodak ne oporezuje naknade nego **prihode iz svih izvora**, izričito i one u naturi,
+uz rezidualnu kategoriju „drugi prihodi". Sada čl. 13 Pravilnika i čl. 27 operativnog
+nabrajaju **elemente pojma prihoda koji nedostaju** — isti obrazac kao odbrana od
+virtuelne valute: ne prima se ni novac ni stvar, ništa ne prelazi iz imovine
+Fondacije, zapis se ne može unovčiti, ustupiti ni naplatiti, pa iznos u novcu po tom
+osnovu ne nastaje.
+
+🔴 **„Nije socijalna pomoć" je BRISANO** iz Pravilnika čl. 57 st. 5 i programa podrške
+čl. 2 st. 2. Ta rečenica je sama zatvarala izuzeće za **organizovanu socijalnu i
+humanitarnu pomoć** (ZPDG čl. 9 st. 1 t. 11) i protivrečila **Statutu čl. 6 al. 4**
+(„socijalna zaštita i solidarna podrška ranjivim društvenim grupama") i **čl. 7 t. b)**
+— pravilnik nižeg ranga poricao je ono što osnovni akt upisuje kao svrhu.
+🟢 **„Nije naknada" OSTAJE i ne dira se.** Ne tvrdi se ni da jeste socijalna pomoć —
+navode se činjenice, ne zaključak. Zaključano `UKINUTO` blokom na svih pet jezika.
+
+🔴 **Kalkulacija nabavke je objavljivala kurs.** Čl. 20 je u ISTOM dokumentu tražio
+broj POEN-a po delu i ukupan dinarski trošak, pa se odnos dobija deljenjem — jedino
+preostalo mesto na kome je Fondacija sama objavljivala odnos POEN-a prema dinaru,
+posle svega što je R-01 uklonio. Sada je dinarska strana u izveštaju o raspolaganju
+sredstvima (čl. 31), a ekran ima dve sekcije. **Ne vraćati dinarske redove u tabelu
+sa brojem POEN-a** — zaključano `porez-izvor.test.ts`.
+
+🔴 **Dečji kanal je u šemi nosio reč „isplata"** — `poenIsplacen`, `isplacenAt`,
+`probajIsplatiti`, i to baš u jedinom kanalu čiji su primaoci maloletnici. Sada
+`poenEvidentiran` / `evidentiranAt` / `probajEvidentirati` (migracija
+`20260913140000_prijateljstvo_evidentiran`, samo `RENAME COLUMN`).
+
+🔴 **Osnivački je jedini kanal koji sam sebe u aktu naziva RADOM** (Pravilnik čl. 37,
+osnivački čl. 5). Čl. 4 je zato dobio odbranu iz operativnog čl. 27: nije naručen
+posao ni ugovor o delu, osnivači su ga preduzeli po sopstvenoj zamisli.
+
+#### Roba iz nabavke — poklon, i zašto
+
+🔴 **Kod nabavke dobro STVARNO prelazi iz imovine Fondacije** i to se u aktu ne
+poriče (primedba vlasnika, i tačna je). Prelaz se **kvalifikuje**: čl. 19 sada kaže da
+se poništeni zapis gasi i **ne prelazi Fondaciji**, da nije uslov ni protivčinidba, i
+— nosivo — da **nije jedinica pribavljena radi preuzimanja nego evidencija doprinosa
+koji je korisnik zajedničkom dobru već učinio**. Formulacija vlasnika: *„on ne daje
+POEN koje je pribavio nego evidenciju doprinosa koji je već dao."*
+
+🔴 **U aktu se NE piše reč „poklon" ni bilo koja poreska kvalifikacija** — pišu se
+činjenice koje je čine. Samokvalifikacija u aktu je slaba i ume da se okrene protiv
+nas; upravo je „nije socijalna pomoć" sama sebi zatvorila vrata.
+
+**Poreski okvir koji stoji iza odluke** (provereno 13.09.2026, brojevi se usklađuju
+svake godine 1. februara i **ne idu u akte**):
+
+| Osnov | Pokriva robu | Kapa | Ko plaća |
+|---|---|---|---|
+| ZPDG čl. 9 t. 30 — pomoć licu koje nije zaposleno kod davaoca | 🔴 ne — izričito **„novčane pomoći"** | ~19.000 RSD godišnje | — |
+| ZPDG čl. 9 t. 11 — organizovana socijalna i humanitarna pomoć | 🟢 da | 🟢 zakon je ne propisuje | — |
+| „drugi prihodi" (ZPDG) | da | 🔴 nema praga | **isplatilac**, po odbitku |
+| porez na poklon (Zakon o porezima na imovinu) | 🟢 da | 🟢 **100.000 RSD godišnje od istog davaoca** | **primalac**, 2,5% preko praga |
+
+🔴 **Poklon i prihod se međusobno isključuju** — poklonom se ne smatra ono što je po
+ZPDG-u predmet oporezivanja ili je iz dohotka izuzeto.
+
+🟡 **Izuzeće po t. 11 traži da se primalac bira po NEVOLJI, ne po doprinosu.** Naš red
+se pravi po broju POEN-a, pa to izuzeće nama ne stoji na raspolaganju. 🔴 **ODBIJENO
+(odluka vlasnika): humanitarna nabavka** — red po potrebi, bez praga od 20.000 POEN-a
+i bez poništenja POEN-a. *„Ne radimo takve nabavke."* Vrata ostaju poznata i otvorena
+ako se ikad poželi; ne predlagati ponovo bez naloga.
+
+#### Godišnja granica po korisniku (nabavke čl. 21a)
+
+**Danas 100.000 RSD** dinarske vrednosti preuzetih dobara po korisniku po kalendarskoj
+godini. 🔴 **Iznos NE ide u akt** (čl. 21a st. 3: utvrđuje ga odluka UO i objavljuje
+se) nego živi kao `GODISNJA_GRANICA_VREDNOSTI_RSD` u `nabavka-pravila.ts` — isti
+razlog iz kog u aktima nema poreskih stopa ni `PRAG_PROVERE_POREKLA_RSD`.
+
+🔴 **Vrednost se meri ISKLJUČIVO sa računa dobavljača** (`placenoRSD ÷ brojDelova`),
+nikad iz broja POEN-a. Kapa izražena u POEN-ima bila bi preračun POEN → dinar.
+
+🟢 **Kapa radi dvostruko:** ispod 100.000 nema poreza na poklon uopšte; ako
+kvalifikacija ipak padne na „drugi prihod", najgori ishod je ~16% od najviše 100.000
+— **do ~16.000 RSD po korisniku godišnje**, gornja granica cele izloženosti.
+
+- Provera je **pri prijavi** (`prijaviSe`), ne pri preuzimanju: ko je iscrpeo granicu
+  ne treba da zauzme mesto u redu pa da ga na kraju izgubi.
+- Broje se **samo preuzeti delovi** — rezervacija i poziv ne prenose nijedno dobro.
+- Nepoznata vrednost dela (nabavka još nije plaćena) **ne zatvara** prijavu: odbijanje
+  na osnovu neutvrđenog broja bilo bi odbijanje bez razloga.
+- Korisnik na `/nabavke` vidi **vrednost dobara koju je preuzeo ove godine**. 🔴 To je
+  **činjenica sa računa, ne poreska osnovica** — uz broj ne ide nijedna reč o porezu i
+  nijedan prag. Kvalifikacija davanja nije naša da je saopštavamo (Izjava o rizicima
+  čl. 10), a poreski savet Fondacija ne pruža. Zaključano testom.
+
+#### Copy
+
+- **`/pravna-pozicija` dobija poreski odeljak.** Do ovog seta reč „porez" se u
+  `messages/sr.json` (249 KB) nije pojavljivala **nijednom**, a stranica je imala
+  odeljke za ZDI, ZPS i ZTK — dok je Poreska uprava po sopstvenoj proceni registra
+  regulator koji najpre zaista dođe. Tekst otvoreno kaže šta ostaje sporno.
+- **FAQ 49** — brisana gola konstatacija *„Fondacija … ne prijavljuje POEN nigde kao
+  tvoj prihod"* (čitala se kao priznanje propuštene radnje); umesto nje ide razlog.
+  Drugi pasus više ne kaže „nije socijalna pomoć".
+- **„Bonus" izlazi** iz `transakcije.pokroviteljstvo` i `transakcije.krug_bonus` —
+  zaostatak mere M-2 uz R-01, koja je „Bonus za donaciju" već bila sredila.
+
+#### 🟡 Svesno prihvaćeni ostaci
+
+1. 🟢 **Davanje iz nabavke vodi se kao POKLON** (odluka vlasnika, 13.09.2026). To je
+   **pozicija Fondacije, ne utvrđenje nadležnog organa** — on može zauzeti drugačiji
+   stav i primeniti režim „drugih prihoda" (bez praga, ~16%, obračunava isplatilac).
+   🔴 **U aktima se reč „poklon" i dalje NE piše** — pišu se činjenice koje je čine.
+   Ne pisati nigde da je poreski tretman utvrđen; Izjava o rizicima čl. 10 izričito
+   kaže da Fondacija poreski tretman ne garantuje.
+2. 🟢 **Iznos od 100.000 RSD je FIKSAN** (odluka vlasnika uz proveru, 13.09.2026).
+   Godišnje usklađivanje indeksom potrošačkih cena obuhvata **samo** iznose iz ZPDG-a;
+   ovaj u tom spisku ne stoji. 🔴 „Fiksan" ne znači nepromenljiv — menjao se izmenama
+   zakona (ranije 9.000, pa 30.000), pa se **proverava pri izmeni propisa, ne svakog
+   februara**.
+3. **Prag od 20.000 POEN-a je uslov na strani primaoca**, a poklon po definiciji uslov
+   nema. Najtanja tačka u celom R-02; brani ga čl. 19.
+4. **Petlja donacija → POEN → prag → roba ostaje otvorena** (poreklo POEN-a se ne
+   ispituje, odluka uz R-10).
+5. **Prihod u naturi kod nabavke je stvaran** i tekstom se ne obara — samo svrstava u
+   izuzeće ili drži ispod praga. Zato ocena po merama stoji na **6**, ne niže.
+
+🔴 **Zabranjene teme uz R-02 — ne otvarati bez izričitog naloga:** dinarska kapa na
+POEN (vidi gore); pozivanje na izuzeća čl. 9 ZPDG za POEN; **dobrovoljan obračun
+poreza po odbitku i PPP-PD prijave** (priznanje da je prihod, a nema iz čega da se
+obustavi — Fondacija bi plaćala iz svojih dinara, unazad); **godišnja potvrda
+korisniku o evidentiranom POEN-u** (izgleda kao obračunski list; GDPR izvoz već
+postoji); humanitarna nabavka po t. 11; vraćanje dinarskog troška u tabelu sa brojem
+POEN-a po delu.
+
+**Kod:** `nabavka-pravila.ts` (`GODISNJA_GRANICA_VREDNOSTI_RSD`, `vrednostDelaRSD`,
+`uGodisnjojGranici`, `preostaloDoGraniceRSD`), `protokol/nabavka.ts`
+(`preuzetaVrednostUGodini` + provera u `prijaviSe`), `api/nabavke/route.ts`,
+`NabavkeKlijent.tsx`, `NabavkaDetaljKlijent.tsx`, `protokol/prijateljstva.ts` i
+prateći fajlovi (M-8). Migracija `20260913140000_prijateljstvo_evidentiran`.
+**Brana:** `__tests__/porez-izvor.test.ts` (27 provera, gleda IZVOR) + odredbe
+zaključane u `pravni-dokumenti.test.ts` na sr/en/ru.
+
+🟡 **Usput ispravljen zatečen pad testa:** `donacija-uplatilac-izvor.test.ts` je
+tražio namespace `admin` u prevodima, a on od 13.09.2026. živi **isključivo u sr**
+(`request.ts` ga dodaje pri učitavanju). Test je od te odluke bio crven.
 
 ### Novcem se dobija položaj, ne kupovna moć i ne glas (R-01, 2026-09-13)
 

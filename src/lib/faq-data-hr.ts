@@ -827,9 +827,9 @@ Fondacija ne pruža porezni savjet i nije strana u tvojoj razmjeni: za ispunjenj
       {
         id: 49,
         pitanje: `Utječe li sudjelovanje u KOLU / POEN na moju mirovinu ili socijalna davanja?`,
-        odgovor: `Sa strane sustava, ne. POEN nije novac, nije zarada ni prihod: to je interni zapis u evidenciji o tome što si dao zajednici, i ne može se pretvoriti u sredstvo s vrijednošću izvan sustava. Fondacija ti ne isplaćuje nikakvu novčanu naknadu i ne prijavljuje POEN nigdje kao tvoj prihod.
+        odgovor: `Sa strane sustava, ne. POEN nije novac, nije zarada ni prihod: to je interni zapis u evidenciji o tome što si dao zajednici, i ne može se pretvoriti u sredstvo s vrijednošću izvan sustava. Zaklada ti ni po jednoj osnovi ne isplaćuje novac: upisom ne primaš ni novac ni stvar, ništa ne prelazi iz njezine imovine u tvoju, a zapis se ne može unovčiti, ustupiti ni naplatiti. Zato po toj osnovi i nema iznosa izraženog u novcu.
 
-Ako ti se POEN upisuje kroz neki od socijalnih programa (na primjer kao primarnom skrbniku, starijem članu ili kroz Školovanje), ni to nije socijalna pomoć ni naknada, nego automatsko ažuriranje evidencije koje takvom sudjelovanju daje ravnopravno mjesto u sustavu.
+Ako ti se POEN upisuje kroz neki od socijalnih programa (na primjer kao primarnom skrbniku, starijem članu ili kroz Školovanje), ni to nije naknada — njome se ne plaća nijedan rad ni usluga i od tebe se zauzvrat ne traži ništa. To je automatsko ažuriranje evidencije koje takvom sudjelovanju daje ravnopravno mjesto u sustavu, a program se provodi u ostvarivanju ciljeva Zaklade iz njezina statuta.
 
 Treba, međutim, razlikovati POEN od onoga što radiš izvan sustava. Sve što naplaćuješ u novcu tvoja je djelatnost za koju vrijede opći propisi, i to može imati posljedice za tvoj status, ovisno o tome što i u kojem opsegu radiš.
 

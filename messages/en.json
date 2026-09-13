@@ -1007,15 +1007,15 @@
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "4.5.5"
+      "ver": "4.6.0"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.4.6"
+      "ver": "4.6.0"
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.5.9",
+      "ver": "4.6.0",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -1045,11 +1045,11 @@
     "meta_radnje_title": "Register of Processing Activities · KOLO",
     "meta_radnje_desc": "Register of personal data processing activities, version 4.5.9",
     "meta_rizici_title": "Risk Acceptance Statement · KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.5.5",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.6.0",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.4.6",
+    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.6.0",
     "meta_pravilnik_title": "KOLO System Rulebooks · KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.5.9",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.6.0",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -1568,7 +1568,9 @@
     "licence_tekst": "The software is open under AGPL-3.0, the content under CC BY-SA 4.0. The licences cannot be replaced with more restrictive ones — neither by the Foundation nor by the Upper Circle.",
     "gde_naslov": "Where it is set out in full",
     "gde_uvod": "Every statement on this page rests on a published act. Their text governs, not this overview.",
-    "nazad_link": "Back to How the system works"
+    "nazad_link": "Back to How the system works",
+    "porez_naslov": "Tax regulations",
+    "porez_tekst": "Personal income tax applies to income from all sources, including income realised in non-monetary form. The question is therefore not whether something is remuneration — it is whether the user received anything at all.\n\nWith POEN, they did not. The recording brings neither money nor goods, nothing passes from the Foundation's assets into the user's assets, the record so created cannot be turned into money, assigned or collected, and the Foundation neither determines nor publishes a value of POEN expressed in money. The Foundation pays no money to a user on any basis.\n\nWith a collective procurement, they did — and this is not concealed: the user receives a good purchased with the Foundation's dinar funds. The good is provided free of charge and without any consideration, in pursuit of the Foundation's registered objectives. The annulled record is extinguished and does not pass to the Foundation; it is not a unit acquired in order to collect the share, but the record of a contribution the user had already made to the common good. The total value a single user may collect in a calendar year is limited.\n\nWhat remains contested: how the competent authority will qualify that provision. The Foundation gives no tax advice and guarantees no tax treatment; users are responsible for their own tax obligations."
   },
   "kakoFunkcionisePage": {
     "poen_nije_kratko": "POEN is a record of what you gave — an entry in a ledger, not money you hold. There is no way to buy it or sell it for dinars, neither from us nor from anyone else.",
@@ -2334,9 +2336,9 @@
     "nadzor": "Supervision of confirmation {verifikator} → {verifikovani}",
     "donacija": "Contribution recorded for a donation: {iznos} POEN",
     "donacija_uplatilac": "Contribution recorded for a donation: {iznos} POEN — payer: {uplatilac}",
-    "pokroviteljstvo": "Sponsorship bonus: {iznos} POEN",
+    "pokroviteljstvo": "Contribution recorded for sponsorship: {iznos} POEN",
     "osnivacki": "Founding contribution — step {korak}/{ukupno}",
-    "krug_bonus": "Circle bonus “{krug}” — {clanovi} members",
+    "krug_bonus": "Circle growth “{krug}” — {clanovi} members",
     "krug_osnivanje": "Founding of Circle “{krug}”",
     "program": "Programme {program}",
     "doprinos_sadrzaju": "Contribution to platform content",
@@ -2893,7 +2895,7 @@
     "greska_slanje": "That did not work. Try again.",
     "greska_ucitavanje": "Loading failed.",
     "na_cekanju": "{iznos} POEN is waiting for you. It arrives once your friends are approved too.",
-    "oznaka_isplaceno": "500 POEN recorded",
+    "oznaka_evidentirano": "500 POEN recorded",
     "oznaka_bez_poena": "brother or sister: no POEN",
     "dugme_raskini": "End",
     "raskid_potvrda": "Stop being friends with {pseudonim}? You will also stop writing to each other.",
@@ -3097,6 +3099,9 @@
     "preuzeli": "Collected by",
     "preuzeli_napomena": "The pseudonym and position in the order are shown. The number of POEN in the record is not published.",
     "broj_prijava": "Applicants: {broj}",
-    "ispravka_pouka": "If you did not collect the share, or it is defective, you have 7 days to lodge a complaint from your profile."
+    "ispravka_pouka": "If you did not collect the share, or it is defective, you have 7 days to lodge a complaint from your profile.",
+    "dinarska_naslov": "The dinar side of the procurement",
+    "dinarska_opis": "Part of the report on the disposal of the Foundation's funds. It is kept apart from the calculation because the number of POEN per share is not the price of the good and is not derived from it.",
+    "granica_pregled": "Value of goods you have collected this year: {preuzeto} of {granica} RSD (Article 21a)."
   }
 }
