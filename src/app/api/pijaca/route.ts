@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { sacuvajNaR2, r2Konfigurisan } from "@/lib/skladiste";
+import { MAX_PO_SLICI, MAX_SLIKA, MAX_UKUPNO, ukupnaVelicina } from "@/lib/slika-upload";
 import { parsirajCenu } from "@/lib/cena-oglas";
 import { jeKategorija, parsirajKatParam } from "@/lib/kategorije";
 import { emitujNoviOglas } from "@/lib/oglas-dogadjaji";
@@ -17,8 +18,8 @@ import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
 
-const MAX_IMAGES = 5;
-const MAX_SIZE = 5 * 1024 * 1024;
+const MAX_IMAGES = MAX_SLIKA;
+const MAX_SIZE = MAX_PO_SLICI;
 
 // GET /api/pijaca — lista aktivnih oglasa
 //
@@ -130,9 +131,20 @@ export async function POST(req: NextRequest) {
   for (const file of imageFiles) {
     if (file.size > MAX_SIZE)
       return await greska("Svaka slika može biti najviše 5MB.", 400);
+    // 🔴 Poruka NAMERNO imenuje HEIC. Polje za izbor stoji na `image/*`, pa
+    // telefon ponudi i format koji ovde ne prolazi; bez te reči čovek dobija
+    // spisak dozvoljenih formata a ne zna u koji od njih je upao.
     if (!["image/jpeg", "image/jpg", "image/png", "image/webp"].includes(file.type))
-      return await greska("Dozvoljeni formati: JPG, PNG, WebP.", 400);
+      return await greska(
+        "Slika mora biti JPG, PNG ili WebP. Fotografiju sa iPhone-a (HEIC) sačuvaj kao JPG.",
+        400,
+      );
   }
+  // Zbir se proverava i ovde, iako ga ekran već meri: platforma odbija preveliko
+  // telo pre rute, pa ova provera hvata samo pozive mimo ekrana — ali tada vraća
+  // rečenicu umesto praznog odgovora.
+  if (ukupnaVelicina(imageFiles) > MAX_UKUPNO)
+    return await greska("Slike su prevelike za jedno slanje. Ukloni jednu ili pošalji manje fotografije.", 413);
 
   // Prava objave se čitaju IZ BAZE, ne iz sesije: `verified` u tokenu se osvežava
   // sa zakašnjenjem, pa bi tek verifikovan korisnik još neko vreme dobijao pravila
@@ -196,6 +208,11 @@ export async function POST(req: NextRequest) {
     // Cloudflare R2 u produkciji (read-only/efemeran FS na serverless),
     // fallback na lokalni disk za dev kad R2 nije konfigurisan.
     const useR2 = r2Konfigurisan();
+    // Na serverless-u je datotečni sistem samo za čitanje, pa bi zapis na disk
+    // pukao sa EROFS i stigao do korisnika kao „Interna greška". Kad skladište
+    // nije podešeno, to se kaže odmah i imenom.
+    if (!useR2 && process.env.VERCEL)
+      return await greska("Skladište slika nije konfigurisano (Cloudflare R2).", 503);
     let dir: string | null = null;
     if (!useR2) {
       dir = path.join(process.cwd(), "storage", "oglasi", listingId);
