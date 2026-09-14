@@ -33,8 +33,6 @@ export const JAVNE_RUTE = [
   "/privatnost", "/m", "/politika-prihvati", "/pokrovitelji", "/o-nama", "/o-sistemu",
   "/cesto-postavljena-pitanja", "/pravilnik", "/statut", "/uskoro", "/odrzavanje",
   "/whitepaper", "/dpia", "/radnje-obrade", "/rizici", "/osnivacki-doprinos", "/zajednicko-dobro",
-  // 🟡 PRIVREMENO: dijagnostika izbora slika na telefonu. Briše se sa stranicom.
-  "/proba-slika",
 ];
 
 /**
