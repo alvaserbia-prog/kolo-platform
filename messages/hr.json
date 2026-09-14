@@ -270,6 +270,10 @@
     "kartica_donacije_opis": "potvrđenih donacija",
     "kartica_promet": "Ukupno prepisa",
     "kartica_promet_opis": "POEN između članova",
+    "programi_zbir_naslov": "Socijalni programi — dnevni zbroj",
+    "programi_zbir_opis": "Pojedinačne isplate socijalnih programa se ne objavljuju. Objavljuje se dnevni zbroj po programu, uz broj korisnika — zbroj svih kanala i dalje daje ukupan broj evidentiranih POENA.",
+    "programi_zbir_program": "Program",
+    "programi_zbir_korisnika": "Korisnika",
     "protokol_tx_naslov": "Zapisi Protokola",
     "ukupno": "ukupno",
     "rast_opticaja_objasnjenje": "Kada zajednica evidentira 1.000.000 POEN-a doprinosa, sustav prelazi u Fazu 2 i aktivira se Gornje Kolo (zajedničko odlučivanje). Prag mjeri aktivnost zajednice. POEN nema cijenu ni vrijednost izvan sustava.",
@@ -284,6 +288,7 @@
     "donacije_pregled_blokiran": "Pregled donacija dostupan je redovnim članovima.",
     "nema_donacija": "Nema potvrđenih donacija.",
     "prikazanih_donacija": "{count} prikazanih donacija",
+    "donacija_anonimna": "Anonimna donacija",
     "col_donator": "Donator",
     "col_nivo": "Razina",
     "col_datum": "Datum",
@@ -704,10 +709,10 @@
     "slobodno_opis": "može se otpisati",
     "aktivno": "Aktivno",
     "aktivno_opis": "glasačka moć",
-    "kurs": "Koeficijent",
-    "kurs_opis": "POEN/ZRNO",
+    "koeficijent": "Koeficijent",
+    "koeficijent_opis": "POEN/ZRNO",
     "glasacka_moc_formula": "Glasačka moć: √{aktivno} zaokruženo naniže = {moc} glasova",
-    "trziste_neaktivno": "ZRNO još nije aktivno. Aktivira se kada Protokol dostigne −1.000.000 POEN-a.",
+    "kanal_neaktivan": "ZRNO još nije aktivno. Aktivira se kada Protokol dostigne −1.000.000 POEN-a.",
     "zakljucaj": "Aktiviraj (max {max})",
     "otkljucaj": "Deaktiviraj (max {max})",
     "posalji_zahtev": "Pošalji zahtjev",
@@ -722,7 +727,7 @@
     "opis": "ZRNO bilježi tvoj položaj u zajednici i iz njega proizlazi tvoj glas u odlučivanju. Ovdje upisuješ i otpisuješ ZRNO i upravljaš svojim glasom.",
     "zakazana_promena": "Zakazano: → <ime>{pseudonim}</ime>, stupa na snagu u ponoć",
     "zakazan_opoziv": "Zakazan opoziv, stupa na snagu u ponoć",
-    "kurs_objasnjenje": "Odnos ukupnog broja POEN-a i ZRNA raspoloživih za upis, pokazuje koliko ti je POEN-a potrebno za jedno ZRNO. Nije cijena i ne izražava vrijednost.",
+    "koeficijent_objasnjenje": "Odnos ukupnog broja POEN-a i ZRNA raspoloživih za upis, pokazuje koliko ti je POEN-a potrebno za jedno ZRNO. Nije cijena i ne izražava vrijednost.",
     "greska_delegiranje": "Greška pri delegiranju. Pokušaj ponovno.",
     "upravljanje_naslov": "Upis i otpis ZRNA",
     "upis_naslov": "Upiši ZRNO",
@@ -784,6 +789,7 @@
     "opis_starijima": "1.000 + 100 × (godine − 50) POEN/dan · dostupno članovima od 50 godina",
     "opis_posebna_briga": "2.000 POEN/dan · osobe s invaliditetom · rješenje nadležnog tijela",
     "opis_skolovanje": "Iznos postavlja admin · ponovna provjera svakih 6 mjeseci",
+    "isplaceno_ukupno": "Evidentirano po ovom programu: {iznos} POEN",
     "nepun_indeks": "Za socijalni program potrebna je najmanje jedna potvrda, indeks stvarnosti od 10 %. Cijeli tvoj lanac potvrđuje ispunjenost uvjeta prije odobravanja.",
     "posebna_briga_datum_resenja": "Datum donošenja rješenja o invaliditetu",
     "posebna_briga_datum_isteka": "Datum isteka rješenja (opcionalno, ostavi prazno ako je trajno)",
@@ -922,6 +928,7 @@
     "lista_naslov": "Lista donacija",
     "lista_opis": "Javni donatori prikazani su imenom i prezimenom; anonimni donatori se ne identificiraju.",
     "lista_prazno": "Još nema evidentiranih donacija.",
+    "lista_zakljucana": "Popis donacija vide redovni članovi. Vlastite donacije vidiš iznad, bez obzira na status.",
     "lista_anoniman": "Anonimni donator",
     "ips_naslov": "Doniraj putem IPS QR koda (instant)",
     "ips_opis": "Skeniraj QR mobilnom bankom, uplata u dinarima stiže za par sekundi, bez provizije platforme. POEN se evidentira nakon što Fondacija potvrdi priljev.",
@@ -984,11 +991,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uvjeti korištenja KOLO platforme",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -996,23 +1003,23 @@
     },
     "dpia": {
       "naslov": "DPIA. Procjena učinka na zaštitu osobnih podataka",
-      "ver": "4.5.2"
+      "ver": "4.6.1"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade osobnih podataka",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "rizici": {
       "naslov": "Izjava o prihvaćanju rizika",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.6.0"
+      "ver": "4.6.2"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sustava",
-      "ver": "4.6.0",
+      "ver": "4.6.2",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -1032,21 +1039,21 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sustavu"
     },
     "meta_uslovi_title": "Uvjeti korištenja · KOLO",
-    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.6.1",
+    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.6.3",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.9",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.1",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.5.2",
+    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.6.1",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.5.9",
+    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.6.1",
     "meta_rizici_title": "Izjava o prihvaćanju rizika · KOLO",
-    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.6.1",
+    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.6.3",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.0",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.2",
     "meta_pravilnik_title": "Pravilnici KOLO sustava · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.6.0",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.6.2",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sustavu",
@@ -1555,8 +1562,8 @@
     "sporno_uvod": "Dvije stvari u mehanici same traže odgovor. Obje su razmotrene i obje imaju izričito obrazloženje.",
     "sporno1_naslov": "Donacija → POEN → ZRNO",
     "sporno1_tekst": "Tko donira dinare Zakladi, dobiva evidentiran POEN koji ga može približiti pragu za upis ZRNA. Tri stvari razbijaju čitanje tog lanca kao investicijskog ugovora: donacija je nepovratna i pravno odvojena od evidentiranja — donator je ne može uvjetovati evidencijom ni tražiti povrat; donacija nije ni nužan ni povlašten put do ZRNA, jer se isti prag od 20.000 POENA doseže razmjenom, doprinosom i potvrdama, bez ijednog dinara; i odnos između iznosa donacije i broja POENA nije fiksni konverzijski tečaj nego parametar sustava.",
-    "sporno2_naslov": "Otpis pri višem koeficijentu",
-    "sporno2_tekst": "Tko upiše ZRNO pri nižem koeficijentu a otpiše ga pri višem, dobiva više POENA nego što je upisao. Tri stvari razbijaju čitanje te razlike kao prinosa: dobiveni POEN nema vrijednost izvan sustava, ne može se konvertirati, iznijeti ni unovčiti; rast koeficijenta nije zajamčen i ovisi o aktivnosti cijele zajednice, a ne o naporu trećih osoba; i ne postoji izdavatelj koji rast obećava ni institucija koja razliku isplaćuje. Uz to, tko želi glas mora aktivirati ZRNO i time gubi mogućnost otpisa, pasivno držanje i upravljanje se isključuju.",
+    "sporno2_naslov": "Razlika u koeficijentu između upisa i otpisa",
+    "sporno2_tekst": "Tko upiše ZRNO pri jednom koeficijentu a otpiše ga pri drugom, dobiva drugačiji broj POENA nego što je upisom utrošio — u oba smjera, jer koeficijent raste od novih zapisa POEN-a a pada od njihova poništenja. Četiri stvari razbijaju čitanje te razlike kao prinosa: dobiveni POEN nema vrijednost izvan sustava — ne može se konvertirati, iznijeti ni unovčiti; promjena koeficijenta nije zajamčena i ovisi o stanju evidencije cijele zajednice, a ne o naporu trećih osoba; vlastiti upis i otpis koeficijent ne pomiču, jer se pri upisu istodobno umanjuju i broj POENA u optjecaju i broj raspoloživih ZRNA — pa nema ni trgovanja ni pravog trenutka; i ne postoji izdavatelj koji rast obećava ni institucija koja razliku isplaćuje. Uz to, tko želi glas mora aktivirati ZRNO i time gubi mogućnost otpisa — pasivno držanje i upravljanje se isključuju.",
     "principi_naslov": "Nekonvertibilnost nosi sve ostalo",
     "principi_tekst": "Svi gornji argumenti počivaju na tome da POEN nema vrijednost izvan sustava, a to stoji samo dok ne postoji mehanizam konverzije. Zato je nekonvertibilnost prvi od četiri principa na kojima počiva pravna pozicija (čl. 70), uz odsutnost imovinskog prava nad zapisima, nepovratnost donacija i minimizaciju podataka. Ta četiri principa strukturni su limiti: ne mogu se izmijeniti ni ukinuti nijednom upravljačkom odlukom, uključujući odluku Gornjeg Kola. Povreda bilo kojeg od njih mijenja pravnu prirodu sustava.",
     "fondacija_naslov": "Tko stoji iza sustava",
@@ -1893,7 +1900,10 @@
     "dete_ceka_odobrenje": "Kad mama ili tata odobre tvoj profil, moći ćeš mu pisati.",
     "dete_odrasli_zabranjeni": "S odraslima pišeš tek kad ti mama ili tata to uključe.",
     "dete_ceka_kratko": "čeka odobrenje",
-    "dete_odrasli_kratko": "treba dopuštenje roditelja"
+    "dete_odrasli_kratko": "treba dopuštenje roditelja",
+    "slika_format": "Neka slika nije u podržanom formatu. Fotografiju s iPhonea (HEIC) spremi kao JPG pa je dodaj ponovno.",
+    "slike_ukupno_prevelike": "Slike su zajedno prevelike za jedno slanje. Dodaj manje slika ili ih zamijeni manjima.",
+    "slike_popunjeno": "Dosegnut je najveći broj slika ({max}). Ukloni jednu klikom na × pa dodaj novu."
   },
   "pocetna": {
     "dobrodoslice": "Bok, <ime>{pseudonim}</ime>",
@@ -2334,12 +2344,13 @@
     "primljena_verifikacija": "Primljena potvrda od {pseudonim}",
     "nadzor": "Nadzor potvrde {verifikator} → {verifikovani}",
     "donacija": "Evidentiran doprinos po donaciji: {iznos} POEN",
-    "donacija_uplatilac": "Evidentiran doprinos po donaciji: {iznos} POEN — uplatitelj: {uplatilac}",
+    "donacija_uplatilac": "Evidentiran doprinos po donaciji: {iznos} POEN",
     "pokroviteljstvo": "Evidentiran doprinos po pokroviteljstvu: {iznos} POEN",
     "osnivacki": "Osnivački doprinos, korak {korak}/{ukupno}",
     "krug_bonus": "Rast Kruga „{krug}”, {clanovi} članova",
     "krug_osnivanje": "Osnivanje Kruga „{krug}”",
     "program": "Program {program}",
+    "socijalni_program": "Socijalni program",
     "doprinos_sadrzaju": "Doprinos sadržaju platforme",
     "doprinos_razmeni": "Doprinos razmjeni, korak {korak}",
     "prijateljstvo": "Prijateljstvo s {pseudonim}",
@@ -2349,7 +2360,9 @@
     "prevod_u_maloletni_otpis": "Poništenje POENA upisanih kroz kanale (račun preveden u dječji)",
     "prevod_u_maloletni_potvrda": "Poništenje POENA iz pale potvrde ({pseudonim} preveden u dječji račun)",
     "nabavka": "Kolektivna nabava, {dobro}",
-    "nabavka_ispravka": "Ispravak evidencije, kolektivna nabava {dobro}"
+    "nabavka_ispravka": "Ispravak evidencije, kolektivna nabava {dobro}",
+    "zrno_upis": "Upis {zrna} ZRNA po koeficijentu {koeficijent}",
+    "zrno_otpis": "Otpis {zrna} ZRNA po koeficijentu {koeficijent}"
   },
   "mejl": {
     "pozdrav": "Pozdrav",
@@ -2725,6 +2738,7 @@
     "unesite_pozitivan_iznos_poen": "Unesi pozitivan iznos POEN-a.",
     "unesite_pseudonim_delegata": "Unesi pseudonim delegata.",
     "uo_je_vec_odgovorio_na_ovu_preporuku": "UO je već odgovorio na ovu preporuku.",
+    "upis_i_otpis_zrna_jos_nisu_aktivni": "Upis i otpis ZRNA još nisu aktivni.",
     "vasa_prijava_za_ovaj_zadatak_nije_primljena": "Tvoja prijava za ovaj zadatak nije primljena.",
     "vec_imate_aktivan_zahtev_povucite_ga_pre_objave_novog": "Već imaš aktivan zahtjev. Povuci ga prije objave novog.",
     "vec_postoji_aktivan_zahtev_za_otpis_danas": "Već postoji aktivan zahtjev za otpis danas.",
@@ -2753,7 +2767,8 @@
     "zahtev_vise_nije_aktivan": "Zahtjev više nije aktivan.",
     "zastitni_veto_mora_imati_obrazlozenje_koje_upucuje_na_konkretnu_pretnju_odrzivos": "Zaštitni veto mora imati obrazloženje koje upućuje na konkretnu prijetnju održivosti (čl. 18).",
     "zatvoren_oglas_ne_moze_da_se_menja": "Zatvoren oglas ne može da se menja.",
-    "zrno_trziste_nije_aktivno": "Upis i otpis ZRNA još nisu aktivni."
+    "slika_mora_biti_jpg_png_ili_webp_fotografiju_sa_iphone_a_heic_sacuvaj_kao_jpg": "Slika mora biti JPG, PNG ili WebP. Fotografiju s iPhonea (HEIC) spremi kao JPG.",
+    "slike_su_prevelike_za_jedno_slanje_ukloni_jednu_ili_posalji_manje_fotografije": "Slike su prevelike za jedno slanje. Ukloni jednu ili pošalji manje fotografije."
   },
   "deca": {
     "naslov": "Moja djeca",

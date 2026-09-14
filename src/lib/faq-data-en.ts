@@ -176,13 +176,13 @@ An expiry is not ruled out forever: a mechanism for POEN to "age", which would e
       {
         id: 4,
         pitanje: `What is ZRNO and what is it for?`,
-        odgovor: `ZRNO is a record separate from POEN. Where POEN records what you have given the community, ZRNO shows how much of that you have put back into it — and from that stake comes your say in decisions about the rules of the system.
+        odgovor: `ZRNO is a record separate from POEN. Where POEN records what you have given the community, ZRNO records your standing in it — and from that standing comes your say in decisions about the rules of the system.
 
 How it is acquired. You record ZRNO with POEN you already have. How much POEN one ZRNO takes is shown by the coefficient. You can also write ZRNO off.
 
 How it gives you a vote. You lock recorded ZRNO to make it active — only active ZRNO carries voting power. The vote does not grow in a straight line: the number of votes is the square root of the number of active ZRNO, so someone with a hundred times more ZRNO has ten times more votes, not a hundred. That way no one can take over decision-making by accumulating.
 
-What ZRNO is not. It is not a share, not a stock, not digital assets, not a financial instrument. It bears no interest and no dividend, no one pays you anything on account of it, and it is not re-registered to another member. It shows how much you have put into the community, not how much it owes you.`,
+What ZRNO is not. It is not a share, not a stock, not digital assets, not a financial instrument. It bears no interest and no dividend, no one pays you anything on account of it, and it is not re-registered to another member. It shows your standing in the community, not how much it owes you.`,
       },
       {
         id: 5,
@@ -236,15 +236,17 @@ The system can carry on without us. The code KOLO runs on is public and publishe
       {
         id: 52,
         pitanje: `Why a ceiling of 1,000,000 ZRNO if ZRNO cannot be traded? Is there staking or a yield?`,
-        odgovor: `Why the ceiling. There are 1,000,000 ZRNO in total and that number can neither be increased nor decreased. That way decision-making cannot be diluted: no one can create new ZRNO later and thereby devalue the vote of those already here. With every recording, the number of ZRNO available in the Protocol falls, so the coefficient is higher.
+        odgovor: `Why the ceiling. There are 1,000,000 ZRNO in total and that number can neither be increased nor decreased. That way decision-making cannot be diluted: no one can create new ZRNO later and thereby devalue the vote of those already here. With every recording, the number of ZRNO available in the Protocol falls — but at the same time the number of POEN in circulation falls too, because the POEN used to record the ZRNO returns to the Protocol. That is why recording itself does not shift the coefficient.
 
 ZRNO is not traded. It is not re-registered to another member and it does not leave the Protocol. It records your standing in the common good, from which your vote in the Upper Kolo follows.
 
-Locking is not staking. You lock recorded ZRNO only so that your vote can be counted — only active ZRNO carries voting power. Locking brings you no POEN, no interest and no compensation of any kind. The coefficient grows the same whether your ZRNO is locked or free — locking gains you nothing but the vote.
+Locking is not staking. You lock recorded ZRNO only so that your vote can be counted — only active ZRNO carries voting power. Locking brings you no POEN, no interest and no compensation of any kind. The coefficient changes the same whether your ZRNO is locked or free; locking gains you nothing but the vote.
 
-Writing off does not return the same amount — and we say that plainly. A write-off goes at the coefficient in force at that moment. Since the coefficient grows as the system grows, a write-off will usually give you more POEN than you put in. That difference is not guaranteed, no one promises it, and no person pays it out.
+Writing off does not return the same number of POEN — and we say that plainly. A write-off goes at the coefficient in force at that moment, and by then the coefficient may have changed — in either direction. It rises when new POEN are recorded in the system through the channels of contribution. It falls when POEN are annulled — when someone closes their account, when POEN is annulled on collection from a collective procurement, or when a friendship in the children's space is ended.
 
-But that is not income. The difference exists solely in POEN, which has no value outside the system, is not exchanged for money and cannot leave the Protocol. You have no profit and no income in money — you have a larger record in the ledger of contributions. So you do not record ZRNO because it pays off, but because you want a say in decisions.`,
+Your own recording and write-off do not shift it. Upon recording, both the number of POEN in circulation and the number of available ZRNO fall at the same time, so the quotient stays the same. So there is no trading here and no right moment to enter or exit: the difference, if there is one, is an arithmetic consequence of what the whole system has recorded in the meantime. No one promises it, no one guarantees it, and no person pays it out.
+
+But that is not income. The difference exists solely in POEN, which has no value outside the system, is not exchanged for money and cannot leave the Protocol. You have no profit and no income in money — you have a different record in the ledger of contributions. So you do not record ZRNO because it pays off, but because you want a say in decisions.`,
       },
       {
         id: 53,

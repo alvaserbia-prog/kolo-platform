@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 import { intlTag } from "@/lib/format";
 import { useTranslations, useLocale } from "next-intl";
 import IpsQrPlacanje from "./IpsQrPlacanje";
@@ -22,6 +25,9 @@ interface JavnaDonacija {
   id: string;
   ime: string | null;
   anonimno: boolean;
+  /** 🔴 Kod anonimne donacije su oba `null` — ni pseudonim ni link (R-03, M-3c). */
+  pseudonim: string | null;
+  userId: string | null;
   amountRSD: number;
   level: number;
   poenEmitted: number;
@@ -42,6 +48,7 @@ interface DonacijeData {
   pozivNaBroj: string; // trajni broj člana za uplate, prikaz "42-15" (model 97)
   racun: string | null; // iz IPS konfiguracije (18 cifara) — null dok se račun ne otvori
   donacije: Donacija[];
+  listaZakljucana: boolean;
   listaDonacija: JavnaDonacija[];
   rangTabela: RangRed[];
 }
@@ -419,7 +426,11 @@ export default function DonacijeKlijent() {
       <div>
         <h2 className="text-base font-semibold text-kolo-text mb-1">{t("lista_naslov")}</h2>
         <p className="text-xs text-kolo-muted mb-3">{t("lista_opis")}</p>
-        {data.listaDonacija.length === 0 ? (
+        {data.listaZakljucana ? (
+          <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 text-center text-sm text-kolo-muted">
+            {t("lista_zakljucana")}
+          </div>
+        ) : data.listaDonacija.length === 0 ? (
           <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 text-center text-sm text-kolo-muted">
             {t("lista_prazno")}
           </div>
@@ -434,6 +445,14 @@ export default function DonacijeKlijent() {
                   <p className="text-sm font-medium text-kolo-text">
                     {d.anonimno ? t("lista_anoniman") : d.ime || t("lista_anoniman")}
                   </p>
+                  {!d.anonimno && d.pseudonim && (
+                    <Link
+                      href={profilHref({ id: d.userId ?? "", pseudonim: d.pseudonim })}
+                      className="text-xs text-kolo-green-700 hover:underline"
+                    >
+                      <Pseudonim>{d.pseudonim}</Pseudonim>
+                    </Link>
+                  )}
                   <p className="text-xs text-kolo-muted mt-0.5">
                     {new Date(d.createdAt).toLocaleDateString(intlTag(locale))} · {d.amountRSD.toLocaleString(intlTag(locale))} RSD
                   </p>

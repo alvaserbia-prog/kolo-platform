@@ -3,7 +3,7 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { glasackaMoc, poslednjiKurs, UKUPNO_ZRNA } from "@/lib/protokol/zrno";
+import { glasackaMoc, poslednjiKoeficijent, UKUPNO_ZRNA } from "@/lib/protokol/zrno";
 import { beogradskiDan } from "@/lib/protokol/obracunski-dan";
 
 // GET /api/zrno — stanje ZRNA korisnika
@@ -13,7 +13,7 @@ export async function GET() {
 
   const danas = beogradskiDan();
 
-  const [stanje, upisZahtev, otpisZahtev, statusZahtevi, delegacija, kurs, trziste] = await Promise.all([
+  const [stanje, upisZahtev, otpisZahtev, statusZahtevi, delegacija, koeficijent, kanal] = await Promise.all([
     prisma.zrnoStanje.findUnique({ where: { userId: session.user.id } }),
     prisma.zrnoUpisZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
     prisma.zrnoOtpisZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
@@ -22,8 +22,8 @@ export async function GET() {
       where: { delegatorId: session.user.id },
       include: { delegat: { select: { pseudonim: true } }, zakazaniDelegat: { select: { pseudonim: true } } },
     }),
-    poslednjiKurs(),
-    prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } }),
+    poslednjiKoeficijent(),
+    prisma.zrnoKanal.findUnique({ where: { id: "singleton" } }),
   ]);
 
   const slobodno = stanje?.slobodno ?? 0;
@@ -34,8 +34,8 @@ export async function GET() {
     aktivno,
     ukupno: slobodno + aktivno,
     glasackaMoc: glasackaMoc(aktivno),
-    kurs,
-    trzisjeAktivno: trziste?.isActive ?? false,
+    koeficijent,
+    kanalAktivan: kanal?.isActive ?? false,
     upisZahtev: upisZahtev ? { id: upisZahtev.id, poenIznos: upisZahtev.poenIznos, status: upisZahtev.status } : null,
     otpisZahtev: otpisZahtev ? { id: otpisZahtev.id, kolicina: otpisZahtev.kolicina, status: otpisZahtev.status } : null,
     statusZahtevi: statusZahtevi.map((z) => ({ id: z.id, kolicina: z.kolicina, akcija: z.akcija })),

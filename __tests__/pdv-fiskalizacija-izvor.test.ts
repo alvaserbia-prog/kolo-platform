@@ -110,8 +110,8 @@ describe("M-5 — Fondacija ne objavljuje odnos POEN-a prema dinaru", () => {
     };
     for (const j of JEZICI) {
       const put = j === "sr"
-        ? "dokumentacija 4.1/uslovi_koriscenja_4_6_1.md"
-        : `dokumentacija 4.1/${j}/uslovi_koriscenja_4_6_1.md`;
+        ? "dokumentacija 4.1/uslovi_koriscenja_4_6_3.md"
+        : `dokumentacija 4.1/${j}/uslovi_koriscenja_4_6_3.md`;
       expect(izvor(put), j).toMatch(traze[j]);
     }
   });

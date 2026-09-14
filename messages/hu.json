@@ -263,6 +263,10 @@
     "kartica_donacije_opis": "visszaigazolt adomány",
     "kartica_promet": "Összes átírás",
     "kartica_promet_opis": "POEN a tagok között",
+    "programi_zbir_naslov": "Szociális programok — napi összeg",
+    "programi_zbir_opis": "A szociális programok egyedi kifizetései nem kerülnek közzétételre. Programonkénti napi összeg jelenik meg a felhasználók számával együtt — az összes csatorna összege továbbra is a nyilvántartásba vett POEN teljes számát adja.",
+    "programi_zbir_program": "Program",
+    "programi_zbir_korisnika": "Felhasználó",
     "protokol_tx_naslov": "Protocol transactions",
     "ukupno": "összesen",
     "rast_opticaja_objasnjenje": "Amikor a közösség 1.000.000 POEN hozzájárulást rögzít, a rendszer a 2. szakaszba lép, és aktiválódik a Felső Kör (közös döntéshozatal). A küszöb a közösség aktivitását méri — a POEN-nek nincs ára és nincs értéke a rendszeren kívül.",
@@ -277,6 +281,7 @@
     "donacije_pregled_blokiran": "Az adományok megtekintése csak rendes tagok számára érhető el.",
     "nema_donacija": "Nincs visszaigazolt adomány.",
     "prikazanih_donacija": "{count} adomány megjelenítve",
+    "donacija_anonimna": "Névtelen adomány",
     "col_donator": "Adományozó",
     "col_nivo": "Szint",
     "col_datum": "Dátum",
@@ -697,10 +702,10 @@
     "slobodno_opis": "eladható",
     "aktivno": "Aktív",
     "aktivno_opis": "szavazati erő",
-    "kurs": "Árfolyam",
-    "kurs_opis": "POEN/ZRNO",
+    "koeficijent": "Együttható",
+    "koeficijent_opis": "POEN/ZRNO",
     "glasacka_moc_formula": "Szavazati erő: √{aktivno} lefelé kerekítve = {moc} szavazat",
-    "trziste_neaktivno": "A ZRNO még nem aktív. Akkor aktiválódik, amikor a Protokoll eléri a −1.000.000 POEN-t.",
+    "kanal_neaktivan": "A ZRNO még nem aktív. Akkor aktiválódik, amikor a Protokoll eléri a −1.000.000 POEN-t.",
     "zakljucaj": "Aktiválás (max {max})",
     "otkljucaj": "Deaktiválás (max {max})",
     "posalji_zahtev": "Kérelem beküldése",
@@ -715,7 +720,7 @@
     "opis": "A ZRNO a közösségben elfoglalt helyzetedet rögzíti, és ebből ered a szavazatod a döntéshozatalban. Itt jegyzed be és írod vissza a ZRNO-t, és itt kezeled a szavazatodat.",
     "zakazana_promena": "Ütemezve: → <ime>{pseudonim}</ime> — éjfélkor lép hatályba",
     "zakazan_opoziv": "Visszavonás ütemezve — éjfélkor lép hatályba",
-    "kurs_objasnjenje": "A POEN teljes száma és a bejegyzésre rendelkezésre álló ZRNO aránya — megmutatja, mennyi POEN kell egy ZRNO-hoz. Nem ár, és nem fejez ki értéket.",
+    "koeficijent_objasnjenje": "A POEN teljes száma és a bejegyzésre rendelkezésre álló ZRNO aránya — megmutatja, mennyi POEN kell egy ZRNO-hoz. Nem ár, és nem fejez ki értéket.",
     "greska_delegiranje": "Hiba a delegáláskor. Próbáld újra.",
     "upravljanje_naslov": "ZRNO bejegyzése és leírása",
     "upis_naslov": "ZRNO bejegyzése",
@@ -777,6 +782,7 @@
     "opis_starijima": "1.000 + 100 × (életkor − 50) POEN/nap · 50 éves kortól elérhető a tagoknak",
     "opis_posebna_briga": "2 000 POEN/nap · rokkantság vagy krónikus betegség · dokumentáció szükséges",
     "opis_skolovanje": "Az összeget az admin állítja be · 6 havonta újraellenőrzés",
+    "isplaceno_ukupno": "E program alapján nyilvántartva: {iznos} POEN",
     "nepun_indeks": "A szociális programhoz legalább egy megerősítés szükséges — 10 %-os valóságindex. A jóváhagyás előtt a teljes láncod megerősíti, hogy a jogosultsági feltétel teljesül.",
     "posebna_briga_datum_resenja": "A fogyatékosságot megállapító határozat kelte",
     "posebna_briga_datum_isteka": "A határozat lejárati dátuma (nem kötelező — hagyd üresen, ha végleges)",
@@ -915,6 +921,7 @@
     "lista_naslov": "Adományok listája",
     "lista_opis": "A nyilvános adományozók vezeték- és keresztnévvel jelennek meg; a névtelen adományozókat nem azonosítjuk.",
     "lista_prazno": "Még nincs rögzített adomány.",
+    "lista_zakljucana": "Az adománylistát a rendes tagok látják. Saját adományaidat fent látod, állapottól függetlenül.",
     "lista_anoniman": "Névtelen adományozó",
     "ips_naslov": "Adományozás IPS QR-kóddal (azonnali)",
     "ips_opis": "Olvasd be a QR-kódot mobilbankkal — a dináros befizetés pár másodperc alatt megérkezik, platformdíj nélkül. A POEN azután kerül rögzítésre, hogy az Alapítvány visszaigazolja a beérkezést.",
@@ -977,11 +984,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -989,23 +996,23 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.5.2"
+      "ver": "4.6.1"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.6.0"
+      "ver": "4.6.2"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.6.0",
+      "ver": "4.6.2",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -1025,21 +1032,21 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek · KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.1-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.3-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat · KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.9-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.6.1-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya · KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.5.2-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.6.1-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása · KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.9-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.6.1-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat · KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.1-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.3-es verzió",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.0-es verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.2-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai · KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.0-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.2-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -1548,8 +1555,8 @@
     "sporno_uvod": "A mechanika két eleme maga hívja ki a kérdést. Mindkettőt megvizsgáltuk, és mindkettőre van kifejezett válasz.",
     "sporno1_naslov": "Adomány → POEN → ZRNO",
     "sporno1_tekst": "Aki dinárt adományoz az Alapítványnak, rögzített POEN-t kap, ami közelebb viheti a ZRNO beírásának küszöbéhez. Három dolog dönti meg e lánc befektetési szerződésként való olvasatát: az adomány visszafordíthatatlan és jogilag elkülönül a rögzítéstől — az adományozó sem feltételhez nem kötheti, sem visszatérítést nem követelhet; az adomány nem szükséges és nem is kiváltságos út a ZRNO-hoz — ugyanaz a 20.000 POEN-es küszöb elérhető cserével, hozzájárulással és megerősítésekkel, egyetlen dinár nélkül; és az adomány összege és a POEN száma közötti arány nem rögzített átváltási árfolyam, hanem rendszerparaméter.",
-    "sporno2_naslov": "Leírás magasabb együtthatónál",
-    "sporno2_tekst": "Aki alacsonyabb együtthatónál írja be a ZRNO-t és magasabbnál írja le, több POEN-t kap, mint amennyit beírt. Három dolog dönti meg e különbözet hozamként való olvasatát: a kapott POEN-nek a rendszeren kívül nincs értéke — nem váltható, nem vihető ki és nem tehető pénzzé; az együttható emelkedése nem garantált, és az egész közösség tevékenységétől függ, nem harmadik felek erőfeszítésétől; és nincs kibocsátó, aki emelkedést ígérne, sem intézmény, amely a különbözetet kifizetné. Ráadásul aki szavazatot akar, annak aktiválnia kell a ZRNO-t, és ezzel elveszíti a leírás lehetőségét — a passzív tartás és a kormányzás kizárja egymást.",
+    "sporno2_naslov": "Az együttható különbözete a beírás és a leírás között",
+    "sporno2_tekst": "Aki egy együtthatónál írja be a ZRNO-t és egy másiknál írja le, más számú POEN-t kap, mint amennyit a beíráskor felhasznált — mindkét irányban, mivel az együttható az új POEN-bejegyzésektől nő és azok megsemmisítésétől csökken. Négy dolog dönti meg e különbözet hozamként való olvasatát: a kapott POEN-nek a rendszeren kívül nincs értéke — nem váltható, nem vihető ki és nem tehető pénzzé; az együttható változása nem garantált, és az egész közösség nyilvántartásának állapotától függ, nem harmadik felek erőfeszítésétől; a saját beírás és leírás nem mozdítja el az együtthatót, mert beíráskor egyszerre csökken a forgalomban lévő POEN-ek és a rendelkezésre álló ZRNO-k száma is — így nincs sem kereskedés, sem megfelelő pillanat; és nincs kibocsátó, aki emelkedést ígérne, sem intézmény, amely a különbözetet kifizetné. Ezen felül aki szavazatot akar, annak aktiválnia kell a ZRNO-t, és ezzel elveszíti a leírás lehetőségét — a passzív tartás és az irányítás kizárják egymást.",
     "principi_naslov": "Mindent a nem-átválthatóság tart",
     "principi_tekst": "A fenti érvek mind azon nyugszanak, hogy a POEN-nek a rendszeren kívül nincs értéke — ez pedig csak addig áll, amíg nincs átváltási mechanizmus. Ezért a nem-átválthatóság az első a négy alapelv közül, amelyeken a jogi helyzet nyugszik (70. cikk), a bejegyzések feletti tulajdonjog hiánya, az adományok visszafordíthatatlansága és az adattakarékosság mellett. E négy alapelv szerkezeti korlát: semmilyen kormányzási döntéssel nem módosítható és nem szüntethető meg, a Felső Kolo döntésével sem. Bármelyik megsértése megváltoztatja a rendszer jogi természetét.",
     "fondacija_naslov": "Ki áll a rendszer mögött",
@@ -1886,7 +1893,10 @@
     "dete_ceka_odobrenje": "Amikor anya vagy apa jóváhagyja a fiókodat, írhatsz neki.",
     "dete_odrasli_zabranjeni": "Felnőtteknek csak akkor írhatsz, ha anya vagy apa bekapcsolja.",
     "dete_ceka_kratko": "jóváhagyásra vár",
-    "dete_odrasli_kratko": "szülői engedély kell"
+    "dete_odrasli_kratko": "szülői engedély kell",
+    "slika_format": "Az egyik kép formátuma nem támogatott. Az iPhone-fotót (HEIC) mentsd JPG-ként, majd add hozzá újra.",
+    "slike_ukupno_prevelike": "A képek együtt túl nagyok egyetlen küldéshez. Adj hozzá kevesebb képet, vagy cseréld őket kisebbekre.",
+    "slike_popunjeno": "Elérted a képek maximális számát ({max}). Távolíts el egyet a × gombbal, és adj hozzá újat."
   },
   "pocetna": {
     "dobrodoslice": "Szia, <ime>{pseudonim}</ime>",
@@ -2327,12 +2337,13 @@
     "primljena_verifikacija": "Megerősítés érkezett tőle: {pseudonim}",
     "nadzor": "Megerősítés felügyelete: {verifikator} → {verifikovani}",
     "donacija": "Adomány alapján bejegyzett hozzájárulás: {iznos} POEN",
-    "donacija_uplatilac": "Adomány alapján bejegyzett hozzájárulás: {iznos} POEN — befizető: {uplatilac}",
+    "donacija_uplatilac": "Adomány alapján bejegyzett hozzájárulás: {iznos} POEN",
     "pokroviteljstvo": "Nyilvántartott hozzájárulás patronálás jogcímén: {iznos} POEN",
     "osnivacki": "Alapítói hozzájárulás — {korak}/{ukupno} lépés",
     "krug_bonus": "A Kör növekedése „{krug}” — {clanovi} tag",
     "krug_osnivanje": "A „{krug}” Kör alapítása",
     "program": "Program: {program}",
+    "socijalni_program": "Szociális program",
     "doprinos_sadrzaju": "Hozzájárulás a platform tartalmához",
     "doprinos_razmeni": "Hozzájárulás a cseréhez — {korak}. lépés",
     "prijateljstvo": "Barátság vele: {pseudonim}",
@@ -2342,7 +2353,9 @@
     "prevod_u_maloletni_otpis": "A csatornákon bejegyzett POEN visszavonása (a fiók gyerekfiókká vált)",
     "prevod_u_maloletni_potvrda": "Megszűnt megerősítésből származó POEN visszavonása ({pseudonim} gyerekfiókká vált)",
     "nabavka": "Kollektív beszerzés — {dobro}",
-    "nabavka_ispravka": "Nyilvántartás helyesbítése, kollektív beszerzés {dobro}"
+    "nabavka_ispravka": "Nyilvántartás helyesbítése, kollektív beszerzés {dobro}",
+    "zrno_upis": "{zrna} ZRNO bejegyzése {koeficijent} együttható szerint",
+    "zrno_otpis": "{zrna} ZRNO leírása {koeficijent} együttható szerint"
   },
   "mejl": {
     "pozdrav": "Üdvözlünk",
@@ -2718,6 +2731,7 @@
     "unesite_pozitivan_iznos_poen": "Adj meg pozitív POEN összeget.",
     "unesite_pseudonim_delegata": "Add meg a küldött álnevét.",
     "uo_je_vec_odgovorio_na_ovu_preporuku": "A kuratórium már válaszolt erre az ajánlásra.",
+    "upis_i_otpis_zrna_jos_nisu_aktivni": "A ZRNO bejegyzése és leírása még nem aktív.",
     "vasa_prijava_za_ovaj_zadatak_nije_primljena": "A jelentkezésed erre a feladatra nem lett elfogadva.",
     "vec_imate_aktivan_zahtev_povucite_ga_pre_objave_novog": "Már van aktív kérelmed. Vond vissza, mielőtt újat adsz fel.",
     "vec_postoji_aktivan_zahtev_za_otpis_danas": "Mára már van aktív leírási kérelem.",
@@ -2746,7 +2760,8 @@
     "zahtev_vise_nije_aktivan": "A kérelem már nem aktív.",
     "zastitni_veto_mora_imati_obrazlozenje_koje_upucuje_na_konkretnu_pretnju_odrzivos": "A védelmi vétót a fenntarthatóság konkrét veszélyére hivatkozva indokolni kell (18. cikk).",
     "zatvoren_oglas_ne_moze_da_se_menja": "Lezárt hirdetés nem módosítható.",
-    "zrno_trziste_nije_aktivno": "A ZRNO bejegyzése és leírása még nem aktív."
+    "slika_mora_biti_jpg_png_ili_webp_fotografiju_sa_iphone_a_heic_sacuvaj_kao_jpg": "A képnek JPG, PNG vagy WebP formátumúnak kell lennie. Az iPhone-fotót (HEIC) mentsd JPG-ként.",
+    "slike_su_prevelike_za_jedno_slanje_ukloni_jednu_ili_posalji_manje_fotografije": "A képek túl nagyok egyetlen küldéshez. Távolíts el egyet, vagy küldj kisebb fotókat."
   },
   "push": {
     "na_telefonu": "Értesítések a telefonon",

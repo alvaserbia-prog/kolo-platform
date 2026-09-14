@@ -9,7 +9,7 @@
  * od −1.000.000). Dostizanje praga istovremeno aktivira mogućnost upisa ZRNA
  * i uspostavlja Gornje Kolo.
  *
- * Aktivacija ZrnoTrziste.isActive je jednosmerni proces — kada se postavi na
+ * Aktivacija ZrnoKanal.isActive je jednosmerni proces — kada se postavi na
  * true, ostaje true (Gornje Kolo postoji od trenutka aktivacije pa nadalje).
  */
 
@@ -26,8 +26,8 @@ export interface FazaStatus {
   faza: FazaSistema;
   ukupnoPoenEvidentirano: number;
   prag: number;
-  trzisteAktivno: boolean;
-  trzisteAktiviranoAt: Date | null;
+  kanalAktivan: boolean;
+  kanalAktiviranAt: Date | null;
   preslaNaFazu2SadasnjomProverom: boolean;
 }
 
@@ -53,25 +53,25 @@ export async function ukupnoEvidentiranoPoen(): Promise<number> {
  */
 export async function proveriIAktivirajFazu2(): Promise<FazaStatus> {
   const ukupno = await ukupnoEvidentiranoPoen();
-  const trziste = await prisma.zrnoTrziste.findUnique({
+  const kanal = await prisma.zrnoKanal.findUnique({
     where: { id: "singleton" },
   });
 
-  const trzisteVecAktivno = trziste?.isActive ?? false;
+  const kanalVecAktivan = kanal?.isActive ?? false;
   let preslaSada = false;
-  let trzisteAktiviranoAt = trziste?.activatedAt ?? null;
+  let kanalAktiviranAt = kanal?.activatedAt ?? null;
 
-  if (ukupno >= PRAG_FAZE_2_POEN && !trzisteVecAktivno) {
+  if (ukupno >= PRAG_FAZE_2_POEN && !kanalVecAktivan) {
     const sada = new Date();
-    await prisma.zrnoTrziste.upsert({
+    await prisma.zrnoKanal.upsert({
       where: { id: "singleton" },
       create: { id: "singleton", isActive: true, activatedAt: sada },
       update: { isActive: true, activatedAt: sada },
     });
     preslaSada = true;
-    trzisteAktiviranoAt = sada;
+    kanalAktiviranAt = sada;
     console.log(
-      `[faza-sistema] PRELAZ FAZA_1 → FAZA_2: ukupno ${ukupno.toLocaleString("sr-RS")} POEN, prag ${PRAG_FAZE_2_POEN.toLocaleString("sr-RS")}. ZRNO tržište aktivirano.`
+      `[faza-sistema] PRELAZ FAZA_1 → FAZA_2: ukupno ${ukupno.toLocaleString("sr-RS")} POEN, prag ${PRAG_FAZE_2_POEN.toLocaleString("sr-RS")}. Kanal upisa i otpisa ZRNA otvoren.`
     );
   }
 
@@ -79,8 +79,8 @@ export async function proveriIAktivirajFazu2(): Promise<FazaStatus> {
     faza: ukupno >= PRAG_FAZE_2_POEN ? "FAZA_2" : "FAZA_1",
     ukupnoPoenEvidentirano: ukupno,
     prag: PRAG_FAZE_2_POEN,
-    trzisteAktivno: preslaSada || trzisteVecAktivno,
-    trzisteAktiviranoAt,
+    kanalAktivan: preslaSada || kanalVecAktivan,
+    kanalAktiviranAt,
     preslaNaFazu2SadasnjomProverom: preslaSada,
   };
 }
@@ -90,15 +90,15 @@ export async function proveriIAktivirajFazu2(): Promise<FazaStatus> {
  */
 export async function dohvatiFazuStatus(): Promise<FazaStatus> {
   const ukupno = await ukupnoEvidentiranoPoen();
-  const trziste = await prisma.zrnoTrziste.findUnique({
+  const kanal = await prisma.zrnoKanal.findUnique({
     where: { id: "singleton" },
   });
   return {
     faza: ukupno >= PRAG_FAZE_2_POEN ? "FAZA_2" : "FAZA_1",
     ukupnoPoenEvidentirano: ukupno,
     prag: PRAG_FAZE_2_POEN,
-    trzisteAktivno: trziste?.isActive ?? false,
-    trzisteAktiviranoAt: trziste?.activatedAt ?? null,
+    kanalAktivan: kanal?.isActive ?? false,
+    kanalAktiviranAt: kanal?.activatedAt ?? null,
     preslaNaFazu2SadasnjomProverom: false,
   };
 }

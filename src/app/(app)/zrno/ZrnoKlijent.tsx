@@ -30,8 +30,8 @@ interface Props {
   aktivno: number;
   glasackaMoc: number;
   poenBalans: number;
-  kurs: number;
-  trzisjeAktivno: boolean;
+  koeficijent: number;
+  kanalAktivan: boolean;
   isVerified: boolean;
   /**
    * Identifikovan član — javan donator čiji je uplatilac upoređen sa nalogom
@@ -51,7 +51,6 @@ interface Props {
     imaZakazano: boolean;
     zakazaniPseudonim: string | null;
   } | null;
-  poslednjiKursovi: { date: string; kurs: number }[];
   predlozi: Predlog[];
 }
 
@@ -89,12 +88,12 @@ export default function ZrnoKlijent(props: Props) {
         <div className="bg-white rounded-2xl border border-kolo-border p-3 sm:p-4">
           <p className="text-xs text-kolo-muted mb-1">
             <Pojam
-              termin={t("kurs")}
-              objasnjenje={t("kurs_objasnjenje")}
+              termin={t("koeficijent")}
+              objasnjenje={t("koeficijent_objasnjenje")}
             />
           </p>
-          <p className="text-lg sm:text-xl font-bold text-kolo-green-700">{props.kurs.toLocaleString(intlTag(locale), { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-          <p className="text-xs text-kolo-muted mt-0.5">{t("kurs_opis")}</p>
+          <p className="text-lg sm:text-xl font-bold text-kolo-green-700">{props.koeficijent.toLocaleString(intlTag(locale), { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("koeficijent_opis")}</p>
         </div>
       </div>
 
@@ -105,9 +104,9 @@ export default function ZrnoKlijent(props: Props) {
         </div>
       )}
 
-      {!props.trzisjeAktivno && (
+      {!props.kanalAktivan && (
         <div className="box-warning text-sm">
-          {t("trziste_neaktivno")}
+          {t("kanal_neaktivan")}
         </div>
       )}
 
@@ -145,8 +144,8 @@ function UpisOtpisSekcija({
   slobodno,
   aktivno,
   poenBalans,
-  kurs,
-  trzisjeAktivno,
+  koeficijent,
+  kanalAktivan,
   isVerified,
   identitetUtvrdjen,
   minimumPoenZaUpis,
@@ -190,7 +189,7 @@ function UpisOtpisSekcija({
     [onRefresh, t]
   );
 
-  if (!trzisjeAktivno) return null;
+  if (!kanalAktivan) return null;
 
   const brojCls =
     "w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-gold-600";
@@ -284,7 +283,7 @@ function UpisOtpisSekcija({
               <>
                 <p className="text-xs text-kolo-muted">
                   {t("otpis_priblizno", {
-                    poen: Math.floor(Number(otpisKolicina || 0) * kurs).toLocaleString(intlTag(locale)),
+                    poen: Math.floor(Number(otpisKolicina || 0) * koeficijent).toLocaleString(intlTag(locale)),
                   })}
                 </p>
                 <input

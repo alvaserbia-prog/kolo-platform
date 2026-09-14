@@ -42,11 +42,11 @@ export async function GET(
     prisma.zrnoStanje.findUnique({ where: { userId }, select: { slobodno: true, aktivno: true } }),
     prisma.zrnoUpisZahtev.findMany({
       where: { userId },
-      select: { id: true, poenIznos: true, date: true, status: true, zrnaKupljeno: true, createdAt: true },
+      select: { id: true, poenIznos: true, date: true, status: true, zrnaUpisana: true, createdAt: true },
     }),
     prisma.zrnoOtpisZahtev.findMany({
       where: { userId },
-      select: { id: true, kolicina: true, date: true, status: true, poenDobijeno: true, createdAt: true },
+      select: { id: true, kolicina: true, date: true, status: true, evidentiranoPoen: true, createdAt: true },
     }),
     prisma.politikaPrihvatanje.findMany({
       where: { userId },

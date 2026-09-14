@@ -54,6 +54,7 @@ export default async function ProgramiPage() {
             approvedAt: enrollment.approvedAt?.toISOString() ?? null,
             rejectionReason: enrollment.rejectionReason,
             ocekivaniDnevni,
+            isplacenoPoen: enrollment.isplacenoPoen,
           }
         : null,
     };

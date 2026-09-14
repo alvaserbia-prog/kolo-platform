@@ -83,8 +83,19 @@ describe("IZVOR — uplatilac se traži i upisuje", () => {
     expect(servis).toContain("straniPriliv");
   });
 
-  it("uplatilac stoji i u opisu transakcije POEN-a", () => {
-    expect(servis).toContain("transakcije.donacija_uplatilac");
+  it("🔴 uplatilac NE stoji u opisu transakcije POEN-a (R-03, mera M-3b)", () => {
+    // Brana je OKRENUTA 13.09.2026. Uz R-19 je tražila suprotno, sa obrazloženjem
+    // da je ime javnog donatora „ionako u listi donacija". To obrazloženje je palo
+    // sa merom M-3a: lista se sužava na redovne članove, a zapis transakcije ide
+    // svakom prijavljenom nalogu, uključujući nepotvrđene, kojima je pseudonim
+    // strane maskiran. Ime i prezime u opisu identifikuje jače nego ono što je
+    // sakriveno, pa je opis postao širi kanal od onoga na koji je pristanak dat.
+    //
+    // Uplatilac ostaje gde mu je mesto — na `DonationRecord` (AML trag, čl. 3
+    // st. 5), i vidi ga samo Fondacija. To čuvaju testovi iznad.
+    expect(servis).not.toContain("transakcije.donacija_uplatilac");
+    expect(servis).not.toContain("uplatilac: ${uplatilac}");
+    expect(servis).toContain('kljuc: "transakcije.donacija"');
   });
 
   it("ugovor nosi izjavu o poreklu samo kad je prag pređen", () => {
@@ -99,11 +110,15 @@ describe("IZVOR — uplatilac se traži i upisuje", () => {
   });
 });
 
-describe("IZVOR — prevodi za uplatioca postoje na svih pet jezika", () => {
+describe("IZVOR — tekstovi uz uplatioca", () => {
   for (const jezik of ["sr", "en", "ru", "hr", "hu"]) {
     it(jezik, () => {
       const m = JSON.parse(izvor(`messages/${jezik}.json`));
-      expect(m.transakcije.donacija_uplatilac).toContain("{uplatilac}");
+      // 🔴 Ime uplatioca je IZAŠLO iz opisa transakcije (R-03, mera M-3b), pa
+      // parametar `{uplatilac}` ne sme da preživi ni u jednom prevodu: next-intl
+      // baca kad prevod traži parametar koji kod ne šalje. Tvrdnja je okrenuta —
+      // uz R-19 je tražila suprotno; razlog obrta stoji uz proveru servisa iznad.
+      expect(m.transakcije.donacija_uplatilac ?? "").not.toContain("{uplatilac}");
       expect(m.donacije.karticno_sopstvena_kartica.length).toBeGreaterThan(20);
       // 🔴 Namespace `admin` živi ISKLJUČIVO u sr (odluka od 2026-09-13) —
       // `src/i18n/request.ts` ga dodaje svakom drugom jeziku pri učitavanju

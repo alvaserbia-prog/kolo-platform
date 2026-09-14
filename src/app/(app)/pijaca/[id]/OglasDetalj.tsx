@@ -12,6 +12,18 @@ import PodeliOglas from "@/components/PodeliOglas";
 import { formatCenaGlavni, prikaziJedinicuCene, parsirajCenu, type CenaTip } from "@/lib/cena-oglas";
 import { kategorijaKljuc, kategorijaEmoji } from "@/lib/kategorije";
 
+/** Veza <label> → <input type="file"> pri izmeni oglasa. */
+const ID_UNOSA_IZMENA = "pijaca-izmena-slike-unos";
+import {
+  MAX_SLIKA,
+  MAX_UKUPNO,
+  oslobodiPregled,
+  porukaIzOdgovora,
+  pripremiSlike,
+  ukupnaVelicina,
+  type IzabranaSlika,
+} from "@/lib/slika-upload";
+
 interface OglasProps {
   id: string;
   title: string;
@@ -531,28 +543,73 @@ function IzmeniOglas({
   const [keepIndices, setKeepIndices] = useState<number[]>(
     oglas.images.map((_, i) => i)
   );
-  const [noveSlike, setNoveSlike] = useState<File[]>([]);
+  const [noveSlike, setNoveSlike] = useState<IzabranaSlika[]>([]);
   const [loading, setLoading] = useState(false);
+  const [obrada, setObrada] = useState(false);
   const [error, setError] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
+  const noveSlikeRef = useRef<IzabranaSlika[]>([]);
 
   const ukupnoSlika = keepIndices.length + noveSlike.length;
+
+  // Blob adrese sličica se oslobađaju kad obrazac ode sa ekrana.
+  useEffect(() => {
+    noveSlikeRef.current = noveSlike;
+  }, [noveSlike]);
+  useEffect(() => {
+    return () => {
+      for (const s of noveSlikeRef.current) oslobodiPregled(s);
+    };
+  }, []);
 
   function ukloniPostojecu(idx: number) {
     setKeepIndices((prev) => prev.filter((i) => i !== idx));
   }
 
-  function handleNoveSlike(e: React.ChangeEvent<HTMLInputElement>) {
+  // Iste pripreme kao pri objavi novog oglasa. Ranije ih ovde NIJE bilo: slika sa
+  // telefona išla je u izvornoj veličini, pa je izmena oglasa sa dve fotografije
+  // premašivala telo zahteva koje platforma prima i padala bez objašnjenja.
+  async function handleNoveSlike(e: React.ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files ?? []);
-    const combined = [...noveSlike, ...files].slice(0, 5 - keepIndices.length);
-    for (const f of combined) {
-      if (f.size > 5 * 1024 * 1024) { setError(t("slika_prevelika")); return; }
-    }
-    setNoveSlike(combined);
+    e.target.value = "";
+    if (files.length === 0) return;
+
+    const slobodno = MAX_SLIKA - keepIndices.length - noveSlike.length;
+    if (slobodno <= 0) return;
+
+    setObrada(true);
     setError("");
+    try {
+      let tekuce = noveSlike;
+      let prekoracenje = false;
+
+      const { formatOdbijen, velicinaOdbijena } = await pripremiSlike(
+        files.slice(0, slobodno),
+        (slika) => {
+          const sledece = [...tekuce, slika];
+          if (
+            keepIndices.length + sledece.length > MAX_SLIKA ||
+            ukupnaVelicina(sledece.map((s) => s.file)) > MAX_UKUPNO
+          ) {
+            oslobodiPregled(slika);
+            prekoracenje = true;
+            return;
+          }
+          tekuce = sledece;
+          setNoveSlike(sledece);
+        },
+      );
+
+      if (prekoracenje) setError(t("slike_ukupno_prevelike"));
+      else if (formatOdbijen) setError(t("slika_format"));
+      else if (velicinaOdbijena) setError(t("slika_prevelika"));
+    } finally {
+      setObrada(false);
+    }
   }
 
   function ukloniNovu(i: number) {
+    oslobodiPregled(noveSlike[i]);
     setNoveSlike((prev) => prev.filter((_, idx) => idx !== i));
   }
 
@@ -576,11 +633,19 @@ function IzmeniOglas({
       fd.append("location", location.trim());
       fd.append("phone", phone.trim());
       fd.append("keepImages", JSON.stringify(keepIndices));
-      noveSlike.forEach((f, i) => fd.append(`nova_slika_${i}`, f));
+      noveSlike.forEach((s, i) => fd.append(`nova_slika_${i}`, s.file));
 
       const res = await fetch(`/api/pijaca/${oglas.id}`, { method: "PATCH", body: fd });
-      const data = await res.json();
-      if (!res.ok) { setError(data.error ?? t("greska_generalna")); return; }
+      if (!res.ok) {
+        const poruka = await porukaIzOdgovora(res);
+        setError(
+          poruka ??
+            (res.status === 413
+              ? t("slike_ukupno_prevelike")
+              : `${t("greska_generalna")} (${res.status})`)
+        );
+        return;
+      }
       onSuccess();
     } catch {
       setError(t("greska_cuvanje"));
@@ -669,10 +734,10 @@ function IzmeniOglas({
               )
             ))}
             {/* Nove slike */}
-            {noveSlike.map((f, i) => (
-              <div key={`n-${i}`} className="relative w-20 h-20 rounded-xl border border-kolo-green-100 overflow-hidden bg-kolo-bg">
+            {noveSlike.map((s, i) => (
+              <div key={s.pregled} className="relative w-20 h-20 rounded-xl border border-kolo-green-100 overflow-hidden bg-kolo-bg">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={URL.createObjectURL(f)} alt="" className="w-full h-full object-cover" />
+                <img src={s.pregled} alt="" className="w-full h-full object-cover" />
                 <button
                   type="button"
                   onClick={() => ukloniNovu(i)}
@@ -683,17 +748,30 @@ function IzmeniOglas({
               </div>
             ))}
             {/* Dodaj novu */}
-            {ukupnoSlika < 5 && (
-              <button
-                type="button"
-                onClick={() => fileRef.current?.click()}
-                className="w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl"
+            {/* Isti razlog kao na obrascu za nov oglas: birač otvara <label>, ne
+                programski klik na skriveni <input> (iOS tada ne vrati izbor). */}
+            {ukupnoSlika < MAX_SLIKA && (
+              <label
+                htmlFor={ID_UNOSA_IZMENA}
+                aria-disabled={obrada}
+                className={`w-20 h-20 rounded-xl border-2 border-dashed border-kolo-border flex items-center justify-center text-kolo-muted hover:border-kolo-muted transition-colors text-xl cursor-pointer ${obrada ? "opacity-50 pointer-events-none" : ""}`}
               >
-                +
-              </button>
+                {obrada ? (
+                  <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" strokeLinecap="round" />
+                  </svg>
+                ) : (
+                  "+"
+                )}
+              </label>
             )}
           </div>
-          <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={handleNoveSlike} />
+          <input id={ID_UNOSA_IZMENA} ref={fileRef} type="file" accept="image/*" multiple className="sr-only" onChange={handleNoveSlike} />
+          {/* Kad je maksimum dostignut, dugme „+" nestane — bez ove rečenice to
+              izgleda kao da dodavanje slika ne radi, a ne kao da je popunjeno. */}
+          {ukupnoSlika >= MAX_SLIKA && (
+            <p className="mt-1.5 text-xs text-kolo-muted">{t("slike_popunjeno", { max: MAX_SLIKA })}</p>
+          )}
           <p className="mt-1.5 text-xs text-kolo-muted">{t("slike_hint")}</p>
         </div>
 
@@ -704,7 +782,7 @@ function IzmeniOglas({
             className="flex-1 py-3 rounded-xl bg-kolo-bg text-kolo-muted text-sm font-semibold hover:bg-kolo-border transition-colors">
             {t("otkazi_btn")}
           </button>
-          <button type="submit" disabled={loading}
+          <button type="submit" disabled={loading || obrada}
             className="flex-1 py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50">
             {loading ? t("cuvam") : t("sacuvaj_izmene")}
           </button>

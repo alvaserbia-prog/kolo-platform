@@ -110,7 +110,7 @@ interface EmisionaSumarija {
 }
 
 interface AdminProgramiData {
-  zrnoTrzisjeAktivno: boolean;
+  zrnoKanalAktivan: boolean;
   programi: ProgramInfo[];
   pendingEnrollments: PendingEnrollment[];
   poslednjeEmisije: EmisionaSumarija[];
@@ -922,7 +922,7 @@ function AdminProgramiTab({ data, opticaj, sme, onDone }: { data: AdminProgramiD
   const [loadingZrno, setLoadingZrno] = useState(false);
   const dnevniLimit = Math.floor(opticaj * 0.1);
 
-  async function toggleZrnoTrziste() {
+  async function toggleZrnoKanal() {
     setLoadingZrno(true);
     await fetch("/api/admin/zrno/nocna", { method: "PATCH" });
     setLoadingZrno(false);
@@ -999,9 +999,9 @@ function AdminProgramiTab({ data, opticaj, sme, onDone }: { data: AdminProgramiD
       {/* ZRNO tržište */}
       <div className="bg-white rounded-2xl border border-kolo-border px-5 py-4 flex justify-between items-center">
         <div>
-          <p className="text-sm font-semibold text-kolo-muted">{t("programi_zrno_trziste_naslov")}</p>
+          <p className="text-sm font-semibold text-kolo-muted">{t("programi_zrno_kanal_naslov")}</p>
           <p className="text-xs text-kolo-muted mt-0.5">
-            {data.zrnoTrzisjeAktivno ? t("programi_zrno_aktivno") : t("programi_zrno_neaktivno")}
+            {data.zrnoKanalAktivan ? t("programi_zrno_aktivno") : t("programi_zrno_neaktivno")}
           </p>
         </div>
         <div className="flex gap-2 shrink-0 ml-4">
@@ -1009,9 +1009,9 @@ function AdminProgramiTab({ data, opticaj, sme, onDone }: { data: AdminProgramiD
             className="px-3 py-1.5 bg-kolo-gold-600 text-white text-xs font-semibold rounded-xl hover:bg-kolo-gold-400 disabled:opacity-60 transition-colors">
             {loadingZrno ? "..." : t("programi_zrno_obrada_btn")}
           </button>
-          <button onClick={toggleZrnoTrziste} disabled={loadingZrno}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors disabled:opacity-60 ${data.zrnoTrzisjeAktivno ? "bg-kolo-danger-light text-kolo-danger hover:bg-kolo-danger-light" : "bg-kolo-gold-100 text-kolo-gold-600 hover:bg-kolo-gold-100"}`}>
-            {data.zrnoTrzisjeAktivno ? t("programi_deaktiviraj") : t("programi_aktiviraj")}
+          <button onClick={toggleZrnoKanal} disabled={loadingZrno}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-xl transition-colors disabled:opacity-60 ${data.zrnoKanalAktivan ? "bg-kolo-danger-light text-kolo-danger hover:bg-kolo-danger-light" : "bg-kolo-gold-100 text-kolo-gold-600 hover:bg-kolo-gold-100"}`}>
+            {data.zrnoKanalAktivan ? t("programi_deaktiviraj") : t("programi_aktiviraj")}
           </button>
         </div>
       </div>

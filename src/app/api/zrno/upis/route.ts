@@ -19,8 +19,8 @@ export async function POST(req: NextRequest) {
   // prinos, pa bi otvoren dao prinos na uplaćen novac.
   if (!smeProsireno(session.user)) return await greska("Mora biti potvrđen član ili imati utvrđen identitet.", 403);
 
-  const trziste = await prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } });
-  if (!trziste?.isActive) return await greska("ZRNO tržište nije aktivno.", 400);
+  const kanal = await prisma.zrnoKanal.findUnique({ where: { id: "singleton" } });
+  if (!kanal?.isActive) return await greska("Upis i otpis ZRNA još nisu aktivni.", 400);
 
   const wallet = await prisma.wallet.findUnique({ where: { userId: session.user.id }, select: { balance: true } });
   if (!wallet || wallet.balance < MINIMUM_POEN_ZA_UPIS_ZRNA)
