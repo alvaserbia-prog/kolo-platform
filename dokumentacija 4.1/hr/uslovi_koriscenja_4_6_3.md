@@ -52,7 +52,9 @@ Ovi će Uvjeti biti ažurirani u skladu s razvojem sustava. O izmjenama će kori
 
 ### Članak 6. — Prihvaćanje Uvjeta
 
-Korištenjem Platforme korisnik potvrđuje da je pročitao, razumio i u cijelosti prihvatio ove Uvjete, zajedno s Politikom privatnosti Platforme. Uvjeti i Politika privatnosti prihvaćaju se označavanjem polja za potvrdu prilikom registracije.
+Korištenjem Platforme korisnik potvrđuje da je pročitao, razumio i u cijelosti prihvatio ove Uvjete, zajedno s Politikom privatnosti Platforme. Uvjeti i Politika privatnosti prihvaćaju se označavanjem polja za potvrdu prilikom registracije, i to odvojeno, jer se odnose na različita pitanja.
+
+Prihvaćanje se bilježi. Uz njega se bilježe trenutak prihvaćanja, oznaka verzije akta koji je prihvaćen i tekst koji je korisniku bio prikazan. Bez tako zabilježenog prihvaćanja račun se ne otvara. Način vođenja tog zapisa i podaci koji se uz njega ne bilježe utvrđeni su Člankom 4a. Politike privatnosti.
 
 Korisnik potvrđuje da je upoznat s Pravilnikom o KOLO sustavu, koji je javno dostupan na Platformi.
 
@@ -74,7 +76,9 @@ Svaka fizička osoba može imati isključivo jedan korisnički račun na Platfor
 
 ### Članak 9. — Postupak registracije
 
-Prilikom registracije korisnik bira pseudonim, unosi elektroničku adresu i postavlja lozinku. Korisnik potvrđuje račun putem verifikacijske poruke na unesenoj elektroničkoj adresi.
+Prilikom registracije korisnik bira pseudonim, unosi elektroničku adresu i postavlja lozinku.
+
+Na unesenu elektroničku adresu upućuje se poruka s poveznicom za potvrdu adrese. Potvrda nije uvjet za korištenje računa — račun radi u punom opsegu i prije nje. Potvrdom se utvrđuje da adresa pripada korisniku koji je račun otvorio, čime se osigurava da ga obavijesti iz Članka 40. ovih Uvjeta stvarno dosegnu i da mu pristup bude povratan ako izgubi lozinku.
 
 Pseudonim je jedini identifikator korisnika vidljiv drugim korisnicima, u opsegu koji ovisi o statusu promatrača. Korisnik je odgovoran da pseudonim ne sadrži osobne podatke koji bi mogli dovesti do njegove identifikacije.
 

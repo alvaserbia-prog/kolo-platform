@@ -52,7 +52,9 @@ A jelen Feltételek a rendszer fejlődésének megfelelően frissülnek. A módo
 
 ### 6. cikk — A Feltételek elfogadása
 
-A Platform használatával a felhasználó megerősíti, hogy a jelen Feltételeket a Platform Adatvédelmi szabályzatával együtt teljes egészében elolvasta, megértette és elfogadta. A Feltételek és az Adatvédelmi szabályzat elfogadása a regisztráció során a jelölőnégyzet bejelölésével történik.
+A Platform használatával a felhasználó megerősíti, hogy a jelen Feltételeket a Platform Adatvédelmi szabályzatával együtt teljes egészében elolvasta, megértette és elfogadta. A Feltételek és az Adatvédelmi szabályzat elfogadása a regisztráció során a jelölőnégyzet bejelölésével történik, mégpedig külön-külön, mivel eltérő kérdésekre vonatkoznak.
+
+Az elfogadás rögzítésre kerül. Mellette rögzítésre kerül az elfogadás időpontja, az elfogadott akt változatának jelölése és az a szöveg, amelyet a felhasználónak megjelenítettek. Ilyen rögzített elfogadás nélkül a fiók nem jön létre. E bejegyzés vezetésének módját és azokat az adatokat, amelyek mellette nem kerülnek rögzítésre, az Adatvédelmi szabályzat 4a. cikke határozza meg.
 
 A felhasználó megerősíti, hogy megismerte a KOLO rendszerről szóló szabályzatot, amely a Platformon nyilvánosan hozzáférhető.
 
@@ -74,7 +76,9 @@ Minden természetes személy kizárólag egy felhasználói fiókkal rendelkezhe
 
 ### 9. cikk — A regisztráció folyamata
 
-A regisztráció során a felhasználó álnevet választ, elektronikus címet ad meg és jelszót állít be. A felhasználó a megadott elektronikus címre küldött hitelesítő üzenettel erősíti meg a fiókot.
+A regisztráció során a felhasználó álnevet választ, elektronikus címet ad meg és jelszót állít be.
+
+A megadott elektronikus címre a cím megerősítésére szolgáló hivatkozást tartalmazó üzenet kerül kiküldésre. A megerősítés nem feltétele a fiók használatának — a fiók azelőtt is teljes körűen működik. A megerősítés azt állapítja meg, hogy a cím a fiókot létrehozó felhasználóhoz tartozik, ezzel biztosítva, hogy a jelen Feltételek 40. cikke szerinti értesítések ténylegesen eljussanak hozzá, és hogy a hozzáférése visszaszerezhető legyen, ha elveszíti a jelszavát.
 
 Az álnév a felhasználó egyetlen olyan azonosítója, amely más felhasználók számára látható, a megfigyelő státuszától függő mértékben. A felhasználó felelős azért, hogy az álnév ne tartalmazzon olyan személyes adatot, amely az azonosításához vezethet.
 

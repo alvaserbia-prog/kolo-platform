@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import { MojiPristanci } from "@/components/profil/MojiPristanci";
 import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
@@ -928,6 +929,9 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
               {t("eksport_dugme")}
             </a>
           </div>
+
+          {/* Šta sam prihvatio i kada (R-06) */}
+          <MojiPristanci />
 
           {/* Gašenje profila (brisanje naloga) */}
           <div className="bg-white rounded-2xl border border-red-200 p-6">

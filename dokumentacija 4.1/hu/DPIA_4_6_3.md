@@ -16,10 +16,10 @@
 | **Törzsszám / adószám** | 28836627 / 115840443 |
 | **Székhely** | Šetalište 16, 25000 Zombor (Sombor), Szerb Köztársaság |
 | **Adatvédelmi e-mail** | privatnost@ekolo.rs |
-| **Adatvédelmi tisztviselő (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
+| **Adatvédelmi tisztviselő (DPO)** | Nincs kinevezve (Adatvédelmi szabályzat, 1. cikk). Adatvédelmi kapcsolattartás: privatnost@ekolo.rs |
 | **Készítés dátuma** | 2026.05.23. (utolsó módosítás 2026.06.16.) |
-| **A vizsgálat tárgya** | KOLO rendszer — 1. szakasz, az 1–15. sz. aktív adatkezelési tevékenység, ideértve az aktivált 3. modult (Szociális programok hitelesítői megerősítéssel), a hitelesítési rendszer integritásának felügyeletét, az adományok nyilvános listáját, a felügyeleti ügyet, a cseréhez való hozzájárulás útját és az **aktivált 4. modult — Gyermekek (11. sz. tevékenység)** |
-| **Kapcsolódó dokumentumok** | Szabályzat a KOLO rendszerről (v4.6.0), Adatvédelmi szabályzat (v4.6.1), Az adatkezelési tevékenységek nyilvántartása (v4.6.1), Szabályzat a támogatási programokról (v4.6.1), Szabályzat az aktusok hierarchiájáról (v4.4.6), Alapszabály (v4.1), Whitepaper (v4.6.0) |
+| **A vizsgálat tárgya** | KOLO rendszer — 1. szakasz, az 1–18. sz. aktív adatkezelési tevékenység, ideértve az aktivált 3. modult (Szociális programok hitelesítői megerősítéssel), a hitelesítési rendszer integritásának felügyeletét, az adományok nyilvános listáját, a felügyeleti ügyet, a cseréhez való hozzájárulás útját és az **aktivált 4. modult — Gyermekek (11. sz. tevékenység)** |
+| **Kapcsolódó dokumentumok** | Szabályzat a KOLO rendszerről (v4.6.2), Adatvédelmi szabályzat (v4.6.3), Az adatkezelési tevékenységek nyilvántartása (v4.6.3), Felhasználási feltételek (v4.6.3), Szabályzat a támogatási programokról (v4.6.1), Szabályzat az aktusok hierarchiájáról (v4.4.6), Alapszabály (v4.1), Whitepaper (v4.6.2) |
 | **Következő felülvizsgálat** | A szociális programok megerősítési mechanizmusának módosításakor, a gyermektér szabályainak módosításakor, vagy legkésőbb az utolsó módosítástól számított 12 hónapon belül |
 
 Ez az adatvédelmi hatásvizsgálat (a továbbiakban: DPIA) a személyes adatok védelméről szóló törvény („SZK Hivatalos Közlönye”, 87/2018. szám, a továbbiakban: ZZPL) 54. cikkével összhangban készül. A DPIA a KOLO rendszerről szóló szabályzat IX. fejezetének rendelkezésein (60–67. cikk), a KOLO platform adatvédelmi szabályzatán és a személyes adatok kezelési tevékenységeinek nyilvántartásán alapul.
@@ -46,7 +46,7 @@ Harmadik tervezési döntés — adattakarékosság. A platform kizárólag a re
 
 ## 2.3. Az adatkezelési tevékenységek áttekintése
 
-A rendszer az 1. szakaszban tizenhét, az adatkezelési tevékenységek nyilvántartásában (v4.6.1) meghatározott tevékenységet foglal magában. Valamennyi tevékenység aktív. A 17. tevékenység a felhasználók közötti magánkommunikációt fedi le, amelyet e nyilvántartásig kezeltek, de külön nem tartottak nyilván. A 16. tevékenység a beszerzési javaslatot és a kollektív beszerzésben való részvételt öleli fel, amelyeket a KOLO rendszerről szóló szabályzat 14a. és 51a. cikke vezetett be. A 3. modult (Szociális programok) e vizsgálat korábbi változata aktiválta; a 13. tevékenység az adományok nyilvános listáját, a 14. tevékenység a valóság bizonyításáról szóló szabályzat 4.2.1 által bevezetett felügyeleti ügyet, a 15. tevékenység pedig a KOLO rendszerről szóló szabályzat 40.b cikke által bevezetett, cseréhez való hozzájárulás útját foglalja magában. **A 11. tevékenységet (4. modul — Gyermekek) ez a vizsgálat aktiválja**, a gyermekek részvételéről szóló szabályzattal együtt.
+A rendszer az 1. szakaszban tizennyolc, az adatkezelési tevékenységek nyilvántartásában (v4.6.3) meghatározott tevékenységet foglal magában. Valamennyi tevékenység aktív. A 18. tevékenység a hozzájárulás bizonyítását és a szerződéses jogviszony létrejöttének bizonyítását fedi le, amelyeket ez a vizsgálat vezetett be. A 17. tevékenység a felhasználók közötti magánkommunikációt fedi le, amelyet a v4.5.1 nyilvántartásig kezeltek, de külön nem tartottak nyilván. A 16. tevékenység a beszerzési javaslatot és a kollektív beszerzésben való részvételt öleli fel, amelyeket a KOLO rendszerről szóló szabályzat 14a. és 51a. cikke vezetett be. A 3. modult (Szociális programok) e vizsgálat korábbi változata aktiválta; a 13. tevékenység az adományok nyilvános listáját, a 14. tevékenység a valóság bizonyításáról szóló szabályzat 4.2.1 által bevezetett felügyeleti ügyet, a 15. tevékenység pedig a KOLO rendszerről szóló szabályzat 40.b cikke által bevezetett, cseréhez való hozzájárulás útját foglalja magában. **A 11. tevékenységet (4. modul — Gyermekek) ez a vizsgálat aktiválja**, a gyermekek részvételéről szóló szabályzattal együtt.
 
 | **Tevékenység** | **Megnevezés** | **Jogalap** | **Állapot** |
 | --- | --- | --- | --- |
@@ -66,7 +66,7 @@ A rendszer az 1. szakaszban tizenhét, az adatkezelési tevékenységek nyilván
 | 14. sz. | Felügyeleti ügy (a hitelesítés felügyeletének eredménye) | Szerződéses jogviszony teljesítése (12. cikk 1. bek. 2. pont) | Aktív |
 | 15. sz. | A hirdetés kapcsán tett megkeresés és a cseréhez való hozzájárulás útja | Szerződéses jogviszony teljesítése (12. cikk 1. bek. 2. pont) | Aktív |
 
-Az egyes adatkezelési tevékenységekhez tartozó részletes adatkategóriákat, érintetti kategóriákat, címzetteket, megőrzési időket és védelmi intézkedéseket az adatkezelési tevékenységek nyilvántartása (v4.6.1) állapítja meg, amely e vizsgálattal együtt alkalmazandó.
+Az egyes adatkezelési tevékenységekhez tartozó részletes adatkategóriákat, érintetti kategóriákat, címzetteket, megőrzési időket és védelmi intézkedéseket az adatkezelési tevékenységek nyilvántartása (v4.6.3) állapítja meg, amely e vizsgálattal együtt alkalmazandó.
 
 ## 2.4. Az adatáramlás
 
@@ -126,7 +126,7 @@ A kockázatok a valószínűség × súlyosság mátrix szerint kerülnek érté
 | R4 — A hitelesítési gráffal való visszaélés | 2 | 2 | 4 | A szociális gráf feltérképezése annak elemzésével, ki kit hitelesített. Intézkedések: a bejegyzések álnevessége, a kapcsolatok anonimizálása a jogállás megszűnésekor, korlátozott hozzáférés. |
 | R5 — A nem hitelesített felhasználó hirdetésének nyilvános láthatósága | 2 | 2 | 4 | A hirdetés nyilvánosan látható és indexelésre kerül. A tartalmat a felhasználó választja meg; azonosító adatok nem kérendők. Intézkedések: tartalmi minimum személyes adatok helyett, a telefonszám nem nyilvános, legfeljebb három aktív hirdetés, bármikori eltávolítás. |
 | R6 — Hibák az automatizált döntéshozatalban | 1 | 3 | 3 | A POEN téves elszámolása befolyásolhatja a felhasználó helyzetét. A státuszra automatikus következménnyel jár a megerősítés inaktivitás miatti érvénytelenítése is (a gyermekek részvételéről szóló szabályzat 6. cikke). Intézkedések: nyilvános determinisztikus képlet, magyarázathoz és kifogáshoz való jog, emberi felülvizsgálat; a megerősítés érvénytelenítése esetén továbbá valamennyi érintett értesítése a határidő lejárta előtt, és kifejezett kifogásolási jog, amelyről ember dönt. |
-| R7 — A technikai naplók jogosulatlan felhasználása | 1 | 2 | 2 | A naplók IP-címeket és eszközadatokat tartalmaznak. Intézkedések: a hozzáférés a DPO-ra és a biztonsági adminisztrátorokra korlátozódik, 12 hónapos megőrzési idő, TLS, védett formátum. |
+| R7 — A technikai naplók jogosulatlan felhasználása | 1 | 2 | 2 | A naplók IP-címeket és eszközadatokat tartalmaznak. Intézkedések: a hozzáférés az Alapítványban az adatvédelemért felelős személyre és a biztonsági adminisztrátorokra korlátozódik, 12 hónapos megőrzési idő, TLS, védett formátum. |
 | R8 — Határokon átnyúló adattovábbítás | 1 | 3 | 3 | Az adatkezelés egy része a Szerb Köztársaságon kívül történik. Intézkedések, valamennyi végrehajtva: az alkalmazás és az adatbázis az Európai Unióban (frankfurti régió) fut, amely megfelelő védelmi szintet biztosít, így az adatok nagyobb része egyáltalán nem hagyja el ezt a kört; harmadik országba csak a képek, a Platform által küldött elektronikus levelek, az Alapítványnak küldött riasztások és a látogatottsági adatok kerülnek; az Alapítványnak küldött riasztás nem tartalmaz a támogatási programra benyújtott kérelemből származó adatot; adat kizárólag olyan adatfeldolgozónak kerül továbbításra, amellyel a ZZPL 65. cikke szerinti védelmi intézkedéseket tartalmazó adatfeldolgozási szerződést kötöttek; az Alapítvány minden ilyen szerződés egy példányát megőrzi, és legalább évente egyszer ellenőrzi, hogy hatályban van-e, és hogy a további adatfeldolgozók listája megváltozott-e. Lásd az 5.13. pontot. |
 | R9 — Az adományokra vonatkozó adatok megsértése | 1 | 3 | 3 | A banki dokumentáció közvetlenül az Alapítványnál marad. Intézkedések: fizikai és logikai védelem, hozzáférés-ellenőrzés, a platform adataitól elkülönített tárolás. |
 | R10 — A nyilvántartás integritásának megsértése | 1 | 4 | 4 | A bejegyzések visszamenőleges módosítása veszélyeztetné a közjót. Intézkedések: zéró összegű invariáns (valamennyi egyenleg összege nulla) automatikus ellenőrzéssel, a változások atomi bejegyzése, a bejegyzések időbélyegzése, az adminisztratív cselekmények auditnaplója és rendszeres konzisztencia-ellenőrzések. |
@@ -139,6 +139,7 @@ A kockázatok a valószínűség × súlyosság mátrix szerint kerülnek érté
 
 | R15 — A felhasználói magatartás követése az út számlálóján keresztül | 2 | 2 | 4 | A cseréhez való hozzájárulás útja kiolvassa, kivel cserélt a felhasználó POEN-t, milyen összegben, és ki kereste meg őt hirdetés kapcsán. Ezen adatok együttese megmutatja azoknak az embereknek a körét, akikkel a felhasználó üzletel, mégpedig azon túl, ami magához a cseréhez szükséges. Intézkedések: a megkeresés tényén kívül (az üzenet tartalma nélkül) új adatot nem gyűjtünk; az úton elért haladást kizárólag maga a felhasználó látja, és az nem nyilvános (a szabályzat 67. cikke); az adatokat nem használjuk profilalkotásra, ajánlásokra vagy hirdetésre; a megkeresés bejegyzését a hirdetéssel együtt töröljük; a ZZPL 38. cikke értelmében nincs automatizált döntéshozatal — a nyilvántartásba vétel a nyilvánosan közzétett szabályok alkalmazása, és nem érinti a felhasználó jogállását; a ZZPL 37. cikke szerinti tiltakozási jog. |
 
+| R18 — Adatkezelés bizonyítható hozzájárulás, illetve a szerződéses jogviszony létrejöttének bizonyítéka nélkül | 1 | 3 | 3 | Az adatkezelőnek képesnek kell lennie annak bizonyítására, hogy az érintett hozzájárulását adta (a ZZPL 15. cikkének (1) bekezdése). E vizsgálatig ilyen bejegyzés egyetlen hozzájáruláson alapuló adatkezelés esetében sem létezett, és nem volt bizonyíték arra sem, hogy létrejött az a szerződéses jogviszony, amelyen a többi adatkezelés túlnyomó része nyugszik. A valószínűség e vizsgálat alapján alacsonynak minősül, mivel a bejegyzés bevezetésre került és fiók nélküle nem jön létre; a súlyosság 3 marad, mivel vita esetén a bizonyíték hiánya az adatkezelés jogalapját egészében érintené. Intézkedések: lásd az 5.15. pontot. A fennmaradó kockázatot a meglévő felhasználói kör hordozza, akiknek fiókja a bejegyzés bevezetése előtt jött létre — esetükben az elfogadás kizárólag a jövőre nézve rögzíthető, a hozzájárulás következő, a jelen szabályzat 16. cikke szerinti kérésekor. |
 | R17 — A sorrend és a beszerzésben való részvétel adatainak közzététele | 1 | 3 | 3 | A sorrend POEN-szám szerinti megállapítása és a részt átvevők jegyzékének közzététele megmutatja a felhasználó viszonylagos helyzetét a hozzájárulások nyilvántartásában és részvételét az elosztásban. Intézkedések: a javaslat kizárólag a jószág megnevezését tartalmazza, mennyiség, ár és indokolás nélkül; a javaslatok nyilvántartása összesítve, álnevek nélkül kerül közzétételre; a POEN-szám nem kerül közzétételre az átvevők jegyzéke mellett; a szállító kizárólag az átvételi kódok jegyzékét kapja meg, álnevek és egyéb adatok nélkül; a státuszra, tevékenységre vagy vagyonra vonatkozó bizonyítékok nem kerülnek begyűjtésre; a POEN-szám nem kerül újból gyűjtésre, hanem a 4. sz. tevékenységből kerül kiolvasásra; a sorrend megállapítása a nyilvánosan közzétett szabályok alkalmazása, és nem érinti a felhasználó státuszát, így a ZZPL 38. cikke szerinti automatizált döntéshozatal nem áll fenn; kifogás joga a ZZPL 37. cikke és a szabályzat 30. cikke alapján, amelyről ember dönt. Lásd az 5.12. pontot. |
 *Színskála: zöld = alacsony kockázat (1–4), sárga = közepes kockázat (5–9), piros = magas kockázat (10–16). A rendszer jelenlegi konfigurációjában nincs azonosított magas kockázat.*
 
@@ -209,6 +210,28 @@ Pontosan megnevezett eljárás — a státusz megszűnésével a fiók álneves�
 
 A nyilvános adomány elfogadott következménye — ez az egyetlen eset, amelyben az álnevesített nyilvántartás a státusz megszűnése után is névhez kapcsolódik. Tudatosan elfogadott: az adomány melletti név nélkül a POEN nyilvántartásba vétele egyetlen személyhez sem volna hozzárendelhető, miközben a POEN teljes száma nyilvános, a Protokoll bejegyzéseinek összege pedig nulla. A csökkentést maga a választás hordozza — a névtelen adomány, azzal a közölt következménnyel, hogy nem jár POEN-nel.
 
+## 5.15. A hozzájárulás bizonyítására és a szerződéses jogviszony létrejöttének bizonyítására szolgáló intézkedések
+
+A hozzájárulás bejegyzése — minden olyan adatkezelés esetében, amelynek jogalapja a hozzájárulás, valamint a szerződéses jogviszonyt megalapozó Felhasználási feltételek elfogadása esetében rögzítésre kerül az időpont, az akt változata és az a szöveg, amelyet az érintettnek megjelenítettek, a megjelenítés nyelvén. E vizsgálatig ilyen bejegyzés nem létezett: a regisztrációkor megjelenő jelölőnégyzeteket kizárólag a böngésző ellenőrizte, így sem azt nem lehetett bizonyítani, hogy a hozzájárulást megadták, sem azt, hogy létrejött a szerződéses jogviszony, amely a 3. pont szerinti adatkezelések többségének jogalapja.
+
+Ellenőrzés az adatkezelő oldalán — rögzített elfogadás nélkül a fiók nem jön létre, az ellenőrzés pedig a kiszolgálón történik, nem a böngészőben. A bejegyzés ugyanabban az atomi műveletben keletkezik, mint a fiók, így bejegyzés nélküli fiók az írás megszakadása esetén sem jöhet létre.
+
+A nyilatkozatok elkülönítése — a Felhasználási feltételek elfogadása és az Adatvédelmi szabályzat elfogadása két külön nyilatkozatként kerül rögzítésre, mivel eltérő kérdésekre vonatkoznak (a ZZPL 15. cikkének (2) bekezdése).
+
+Annak a szövegnek a megváltoztathatatlansága, amelyre a hozzájárulás vonatkozik — az akt közzétett változata nem változik; a módosított akt új jelölést kap és külön dokumentumként jelenik meg. A hozzájárulásról szóló bejegyzés így tartósan arra a szövegre utal, amely a megadás pillanatában hatályos volt.
+
+Kifejezett hozzájárulás a különleges kategóriákhoz — a szociális programra benyújtott kérelem mellett maga a hozzájárulás szövege is rögzítésre kerül, nem csupán az a tény, hogy megadták. A szöveg tartalmazza azon személyek számát, akiket megerősítésre kérnek, ami kérelmezőnként eltérő, így pillanatkép nélkül nem lenne megállapítható, mihez járult hozzá az adott személy.
+
+A szülői hozzájárulás elkülönítése a gyermek létezéséről szóló nyilatkozattól — a gyermek adatainak kezeléséhez adott hozzájárulás elkülönítve kerül rögzítésre attól a nyilatkozattól, amellyel a szülő teljes felelősséggel állítja, hogy a gyermek létezik. A nyilatkozat tényállítás, és annak hiánya harmadik személyek felé fejt ki hatást; a hozzájárulás bármikor és bárki másra nézve következmények nélkül visszavonható. Amíg egyetlen szövegben álltak, a hozzájárulás visszavonása nem volt végrehajtható anélkül, hogy a gyermek létezéséről szóló állítást is megdöntötte volna.
+
+Nincs új adat a bizonyítás céljából — a hozzájárulásról szóló bejegyzés mellett nem kerül rögzítésre IP-cím, eszközadat vagy más azonosító. A nem feltétlenül szükséges sütikhez adott hozzájárulás esetében a be nem jelentkezett látogató számára nem jön létre azonosító; a döntés magában a sütiben kerül rögzítésre, azzal a tájékoztatási változattal együtt, amely alapján meghozták, a fiók melletti bejegyzést pedig csak bejelentkezett felhasználó esetében vezetjük, akinek a fiókja már létezik.
+
+A döntés megújítása módosítás esetén — a sütikről szóló tájékoztatás korábbi változata alapján hozott döntés nem kerül át az újra; az érintettet ismét megkérdezzük.
+
+Visszavonás és betekintés — a hozzájárulás ugyanolyan egyszerűen vonható vissza, ahogyan megadták, a megadott hozzájárulásról szóló bejegyzés eközben nem kerül törlésre, hanem abban a visszavonás időpontja is rögzítésre kerül, az érintett pedig a saját fiókjában és az adatexportban látja, mely hozzájárulásokat adta meg és milyen szöveggel.
+
+Az elektronikus cím megerősítése — a regisztrációkor megadott címre a megerősítésre szolgáló hivatkozást tartalmazó üzenet kerül kiküldésre. A megerősítés nem feltétele a fiók használatának; azt állapítja meg, hogy a cím ahhoz a személyhez tartozik, aki a fiókot létrehozta, amivel a hozzájárulásról szóló bejegyzés már nem pusztán a fiókról tanúskodik.
+
 ## 5.8. Fennmaradó kockázat
 
 Valamennyi felsorolt intézkedés alkalmazása után a fennmaradó kockázat elfogadhatónak minősül. A legmagasabb fennmaradó kockázatok az R1 (jogosulatlan hozzáférés), az R2 (újraazonosítás), az R11 (különleges kategóriához tartozás feltárása a hitelesítők előtt), az R13 (az adományozó anonimitásának megszűnése az adományok nyilvános listáján keresztül) és az R16 (gyermektér), mindegyik közepes szinten (5–9). Az R8 kockázat (határokon átnyúló továbbítás) alacsony szintre (3) csökken azáltal, hogy az alkalmazás és az adatbázis az Európai Unióban fut, így az adatok nagyobb része egyáltalán nem hagyja el a megfelelő védelmi szintet biztosító kört. Az R5 kockázat (a hirdetés nyilvános láthatósága) a tábla megszüntetésével és az adatkezelés szűkítésével alacsony szintre (4) csökken. E kockázatok folyamatos felügyelettel, rendszeres teszteléssel és az intézkedések frissítésével tovább csökkenthetők.
@@ -231,14 +254,17 @@ A KOLO rendszer felhasználóit megilleti minden, a ZZPL által biztosított jog
 
 Az anonimizálás mechanikája a jogállás megszűnésekor: az e-mail-cím törlődik, a hitelesítési gráf kapcsolatai anonimizálásra kerülnek, a nyilvántartás bejegyzései olyan azonosító alatt maradnak, amely már nem teszi lehetővé az azonosítást — ezzel megszűnnek személyes adatnak lenni a ZZPL értelmében, és tartósan megőrzésre kerülnek a közjó részeként.
 
-## 7. Konzultáció az adatvédelmi tisztviselővel
+## 7. Az adatkezelő felelős személyének értékelése
 
-| **A DPO véleménye** |
+Az Alapítvány nem nevezett ki adatvédelmi tisztviselőt, az Adatvédelmi szabályzat 1. cikkében kifejtett okokból, ezért a ZZPL 54. cikkének (5) bekezdése szerinti véleményt nem kéri be — az a rendelkezés a kötelezettséget ahhoz az esethez köti, amikor ilyen személy ki van nevezve.
+
+E vizsgálat korábbi változata olyan adatvédelmi tisztviselő véleményét tartalmazta, aki egyidejűleg az adatkezelés céljáról és eszközeiről is döntött. Az ilyen vélemény nem minősült független értékelésnek, és azt az adatkezelő felelős személyének értékelése váltotta fel, amely ekként is megjelölésre kerül.
+
+| **Az adatkezelő felelős személyének értékelése** |
 | --- |
-| **DPO** | Nikola Šarić |
-| **A konzultáció dátuma** | 2026.06.16. |
-| **Vélemény** | Az 5. pont szerinti technikai és szervezési intézkedések alkalmazása után a fennmaradó kockázat elfogadhatónak minősül. Az adatkezelés megkezdhető az intézkedések rendszeres nyomon követése és e vizsgálat frissítése mellett a 8. pont szerinti esetekben (különösen a 4. modul aktiválása előtt, valamint az infrastruktúra vagy az adatfeldolgozók jelentős változása esetén). |
-| **A DPO aláírása** | Nikola Šarić |
+| **Az értékelés dátuma** | 2026.09.14. |
+| **Értékelés** | Az 5. pont szerinti technikai és szervezési intézkedések alkalmazása után a fennmaradó kockázat elfogadhatónak minősül. Az adatkezelés folytatható az intézkedések rendszeres nyomon követése és e vizsgálat frissítése mellett a 8. pont szerinti esetekben, valamint az Adatvédelmi szabályzat 1. cikke szerinti, adatvédelmi tisztviselő kinevezésére vonatkozó kötelezettség felülvizsgálata mellett. |
+| **Aláírás** |  |
 
 ## 8. Terv a később aktiválandó modulokra
 
@@ -270,7 +296,7 @@ További kockázatok: a kiskorúak különösen kiszolgáltatott csoport; a bar�
 
 A lefolytatott vizsgálat alapján:
 
-Tizenhét, az érintettek jogaira és szabadságaira vonatkozó kockázat került azonosításra. Egyetlen kockázat sem minősült magasnak. Öt kockázat közepes szintű (R1, R2, R11, R13, R16), tizenkettő pedig alacsony (R3, R4, R5, R6, R7, R8, R9, R10, R12, R14, R15, R17).
+Tizennyolc, az érintettek jogaira és szabadságaira vonatkozó kockázat került azonosításra. Egyetlen kockázat sem minősült magasnak. Öt kockázat közepes szintű (R1, R2, R11, R13, R16), tizenhárom pedig alacsony (R3, R4, R5, R6, R7, R8, R9, R10, R12, R14, R15, R17, R18).
 
 Minden azonosított kockázathoz megfelelő technikai és szervezési védelmi intézkedések kerültek alkalmazásra. Az intézkedések alkalmazása utáni fennmaradó kockázat elfogadhatónak minősül.
 
@@ -285,8 +311,8 @@ Ez a DPIA a következő esetekben frissítendő: a 4. modul (Gyermekek) aktivál
 | **Jóváhagyta — az IT elnöke** |  |
 | **Aláírás** |  |
 | **A jóváhagyás dátuma** |  |
-| **A DPO véleménye** | Elfogadható / Ajánlásokkal elfogadható / Nem elfogadható |
-| **A DPO aláírása** |  |
+| **Az adatkezelő felelős személyének értékelése** | Elfogadható / Ajánlásokkal elfogadható / Nem elfogadható |
+| **Aláírás** |  |
 
 Kelt Zomborban (Sombor), 2026.05.23. napján.
 

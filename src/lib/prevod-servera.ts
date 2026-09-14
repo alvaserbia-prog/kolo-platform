@@ -1,6 +1,8 @@
 import sr from "../../messages/sr.json";
 import en from "../../messages/en.json";
 import ru from "../../messages/ru.json";
+import hr from "../../messages/hr.json";
+import hu from "../../messages/hu.json";
 import { lat2cyr } from "./lat2cyr";
 import { fmtBroj } from "./format";
 
@@ -14,7 +16,13 @@ import { fmtBroj } from "./format";
  * Podržava samo `{parametar}` zamenu — obaveštenja nemaju množinu ni izbore.
  * Ako zatreba puna ICU sintaksa, koristiti next-intl tamo gde kontekst postoji.
  */
-const PORUKE: Record<string, unknown> = { sr, en, ru };
+// 🔴 Svih pet jezika iz `src/i18n/routing.ts`. Do 14.09.2026. su ovde stajala samo
+// `sr`, `en` i `ru`, pa su hrvatski i mađarski korisnici dobijali SRPSKI tekst u
+// svakoj poruci greške i u svakom obaveštenju — isti kvar koji je do 4.1.0 pogađao
+// same akte, jer ih loader nije mapirao. Uz tekst pristanka to više nije samo
+// neuredno: ZZPL čl. 15 st. 2 traži da pristanak bude na jasnom i razumljivom
+// jeziku onoga ko ga daje.
+const PORUKE: Record<string, unknown> = { sr, en, ru, hr, hu };
 
 /** Vrednost po putanji "a.b.c", ili undefined. */
 function dohvati(izvor: unknown, put: string): string | undefined {

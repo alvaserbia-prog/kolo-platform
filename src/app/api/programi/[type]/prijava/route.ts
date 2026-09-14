@@ -14,6 +14,8 @@ import {
   KLJUC_ZAHTEV_POTVRDA,
 } from "@/lib/protokol/program-potvrda";
 import { labelPrograma } from "@/lib/protokol/programi";
+import { getLocale } from "next-intl/server";
+import { prevedi } from "@/lib/prevod-servera";
 
 // PED (operativni doprinos) ne ide kroz enrollment — prijava se vrši na konkretan
 // zadatak kroz /api/doprinos-oglasi/[id]/prijavi (Pravilnik o operativnom doprinosu).
@@ -77,6 +79,22 @@ export async function POST(
   if (verifikatori.length === 0)
     return await greska("Nemate verifikatore koji mogu da potvrde prijavu.", 403);
 
+  // Tekst izričitog pristanka, SKLOPLJEN NA SERVERU (R-06).
+  //
+  // 🔴 Do seta 4.6.3 se snimalo samo `pristanakVerifikatori: true`. Logička
+  // vrednost dokazuje DA je pristanak dat, ali ne i NA ŠTA — a ovde je reč o
+  // izričitom pristanku za posebne kategorije podataka (ZZPL čl. 17 st. 2 t. 1),
+  // gde je sadržina pristanka ceo njegov domet. Tekst se uz to menjao (10.09.2026,
+  // R-13) i nosi broj verifikatora različit za svakog čoveka.
+  //
+  // 🔴 Sklapa se ovde, iz istog ključa iz kog ga ekran prikazuje, a ne prima se od
+  // klijenta: tekst koji šalje pretraživač dokazuje samo šta je pretraživač poslao.
+  const jezik = await getLocale();
+  const pristanakTekst = prevedi(jezik, "programi.pristanak_tekst", {
+    broj: verifikatori.length,
+  });
+  const pristanakAt = new Date();
+
   // Ponovna prijava: raščisti zatečen postupak (nedovršene potvrde + obaveštenja
   // ranijeg kruga), da verifikatorima ne ostanu dva zahteva za istu prijavu.
   if (mozeReapply && vec) await zatvoriPostupakPotvrda(vec.id);
@@ -91,6 +109,11 @@ export async function POST(
           status: "PENDING",
           metadata,
           pristanakVerifikatori: true,
+          // 🔴 Ponovna prijava upisuje NOV pristanak — ne zadržava stari. Tekst se
+          // u međuvremenu mogao promeniti, a i broj verifikatora se menja.
+          pristanakTekst,
+          pristanakAt,
+          pristanakJezik: jezik,
           rejectionReason: null,
           approvedAt: null,
           approvedById: null,
@@ -101,7 +124,15 @@ export async function POST(
       await tx.programPotvrda.deleteMany({ where: { enrollmentId } });
     } else {
       const enr = await tx.programEnrollment.create({
-        data: { userId: session.user.id, type: programType, metadata, pristanakVerifikatori: true },
+        data: {
+          userId: session.user.id,
+          type: programType,
+          metadata,
+          pristanakVerifikatori: true,
+          pristanakTekst,
+          pristanakAt,
+          pristanakJezik: jezik,
+        },
       });
       enrollmentId = enr.id;
     }

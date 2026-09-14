@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { AKT_POLITIKA, AKT_USLOVI } from "@/lib/verzije-akata";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -84,7 +85,9 @@ export default function RegistracijaPage() {
     const res = await fetch("/api/registracija", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: form.email, pseudonim: form.pseudonim, password: form.password, location: mesto.trim() || undefined }),
+      // 🔴 Pristanak se šalje serveru i tamo se proverava ponovo (R-06). Kvačica u
+      // pretraživaču je obaveštenje čoveku, ne brana — brana je na serveru.
+      body: JSON.stringify({ email: form.email, pseudonim: form.pseudonim, password: form.password, location: mesto.trim() || undefined, prihvatamUslove: uslovi, prihvatamPolitiku: privatnost }),
     });
     const data = await res.json();
     setLoading(false);
@@ -200,20 +203,26 @@ export default function RegistracijaPage() {
             <p className="mt-1 text-xs text-kolo-muted">{t("mesto_opis")}</p>
           </div>
 
-          {/* Checkbox-ovi */}
+          {/* Kvačice.
+              🔴 Uz svaki akt stoji i VERZIJA (R-06). Bez nje čovek ne zna na šta
+              pristaje, a mi u zapisu pristanka ne bismo mogli da pokažemo da smo
+              mu to rekli. Verzija se čita iz `verzije-akata.ts` — istog izvora iz
+              kog je čita i zapis, pa se to dvoje ne može razići. */}
           <div className="space-y-2 pt-1">
             <label className="flex items-start gap-2.5 cursor-pointer group">
               <input type="checkbox" checked={uslovi} onChange={(e) => setUslovi(e.target.checked)}
                 className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
               <span className="text-xs text-kolo-muted">
-                {t("uslovi")} <Link href="/uslovi" target="_blank" className="text-kolo-green-700 underline">{t("uslovi_link")}</Link>
+                {t("uslovi")} <Link href="/uslovi" target="_blank" className="text-kolo-green-700 underline">{t("uslovi_link")}</Link>{" "}
+                <span className="text-kolo-muted/70">(v{AKT_USLOVI.verzija})</span>
               </span>
             </label>
             <label className="flex items-start gap-2.5 cursor-pointer">
               <input type="checkbox" checked={privatnost} onChange={(e) => setPrivatnost(e.target.checked)}
                 className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
               <span className="text-xs text-kolo-muted">
-                {t("uslovi")} <Link href="/privatnost" target="_blank" className="text-kolo-green-700 underline">{t("privatnost_link")}</Link>
+                {t("uslovi")} <Link href="/privatnost" target="_blank" className="text-kolo-green-700 underline">{t("privatnost_link")}</Link>{" "}
+                <span className="text-kolo-muted/70">(v{AKT_POLITIKA.verzija})</span>
               </span>
             </label>
           </div>

@@ -20,7 +20,15 @@ Email: privatnost@ekolo.rs
 
 The KOLO Foundation determines the purposes and means of personal data processing in the KOLO system. The Foundation is the controller even when it does not physically store user data in its own databases — the legally relevant criterion is the determination of the purpose and means of processing, not the physical storage of data (Art. 2 para. 1 item 8 LPDP). The KOLO Protocol is the technical means of processing.
 
-Data Protection Officer (DPO): Nikola Šarić, reachable at alva.serbia@gmail.com.
+**Data Protection Officer (DPO).** The Foundation has not, at this time, appointed a data protection officer.
+
+The obligation to appoint one exists where the controller carries out processing as a public authority, where the core activities of the controller consist of processing operations which, by virtue of their nature, scope or purposes, require regular and systematic monitoring of a large number of individuals, or where the core activities consist of processing special categories of data on a large scale (Art. 56 paragraph 2 of the LPDP). The Foundation is not a public authority, and the number of individuals whose data is processed and the scale of processing of special categories of data do not at this time reach the threshold set by that provision.
+
+The Foundation reviews this assessment at least once a year, as well as upon activation of any new module within the meaning of Chapter VIII of the Rulebook on the KOLO System. The criteria under which the obligation is deemed to have arisen are established and published by a decision of the Managing Board; once the obligation arises, the Foundation appoints a data protection officer, publishes their contact details and submits them to the Commissioner in accordance with Art. 56 paragraph 8 of the LPDP.
+
+The earlier arrangement, in which a data protection officer was appointed while at the same time deciding on the purposes and means of processing, did not ensure the independence required by Art. 56 paragraph 6 of the LPDP. The Foundation therefore abolished that arrangement rather than retaining it in a form in which that independence cannot be achieved.
+
+**Data protection contact.** All questions regarding the processing of personal data and all requests for the exercise of rights under Article 13 of this Policy are to be addressed to **privatnost@ekolo.rs**. The Foundation responds to them within the time limits set out in Article 13. This address does not cease to apply upon the appointment of a data protection officer.
 
 For all questions relating to the processing of personal data, you may contact us at the above addresses.
 
@@ -226,11 +234,27 @@ Visibility: **the supplier is provided solely with a list of collection codes �
 
 The establishment of the order is the application of publicly published rules and does not constitute automated decision-making within the meaning of Art. 38 of the LPDP: it produces no legal consequences for your status. Against the established order and the outcome of a procurement you have the right of objection in accordance with Article 13 of this Policy, decided upon by a human being.
 
+### Article 4a — Consent and proof of consent
+
+For processing whose legal basis is consent (Article 4 of this Policy), as well as for the acceptance of the Terms of Use by which the contractual relationship is established, the Foundation records that consent has been given. The record contains: what was accepted, when, the version of the act to which the acceptance relates, and the text that was displayed to the user, in the language in which it was displayed.
+
+The version of the act is recorded because a published version is immutable — an amended act receives a new designation and is published as a separate document, while the earlier one remains available in the form in which it was accepted. The record of consent therefore permanently refers to the text that was in force at that moment.
+
+Alongside the record of consent, the IP address, device data and other data by which the user would be additionally identified are **not** recorded. Collecting such data for the purpose of proving consent would constitute an extension of processing contrary to the principle of data minimisation under Article 3 of this Policy.
+
+Acceptance of the Terms of Use and acceptance of this Policy are recorded separately, as two statements, because they relate to different matters.
+
+Consent may be withdrawn at any time, without giving reasons and as easily as it was given. Withdrawal does not affect the lawfulness of processing carried out before the withdrawal, so the record of the consent given is not deleted; instead, the moment of withdrawal is recorded in it as well.
+
+The user may at any time see which consents they have given and by which text, in their account and in the data export under Article 13.
+
+For consent to non-essential cookies (Article 7), the decision is recorded in the cookie itself, together with the version of the notice under which it was made; for a logged-in user it is also recorded alongside their account. For a visitor who is not logged in, no identifier whatsoever is established for the purpose of keeping such a record, for the reason stated in paragraph 3 of this Article.
+
 ### Article 5 — Technical Data
 
 For the security of the Platform and the prevention of misuse, the hosting infrastructure level logs the IP address, device and browser data, and the time of access.
 
-Within the Platform, administrative actions on user data and the initiation of conversations regarding a listing are logged in the audit trail (who performed the action, when, and what). The audit trail is accessible to the data protection officer (DPO).
+Within the Platform, administrative actions on user data and the initiation of conversations regarding a listing are logged in the audit trail (who performed the action, when, and what). The audit trail is accessible to the person responsible for data protection within the Foundation.
 
 Purpose of processing: Platform security, prevention of misuse, detection of unauthorized access, technical support.
 

@@ -50,7 +50,9 @@ Ovi Uslovi biće ažurirani u skladu sa razvojem sistema. O izmenama korisnici �
 
 ### Član 6 — Prihvatanje Uslova
 
-Korišćenjem Platforme korisnik potvrđuje da je pročitao, razumeo i prihvatio ove Uslove u celosti, zajedno sa Politikom privatnosti Platforme. Uslovi i Politika privatnosti prihvataju se označavanjem polja za potvrdu prilikom registracije.
+Korišćenjem Platforme korisnik potvrđuje da je pročitao, razumeo i prihvatio ove Uslove u celosti, zajedno sa Politikom privatnosti Platforme. Uslovi i Politika privatnosti prihvataju se označavanjem polja za potvrdu prilikom registracije, i to odvojeno, jer se odnose na različita pitanja.
+
+Prihvatanje se beleži. Uz njega se beleže trenutak prihvatanja, oznaka verzije akta koji je prihvaćen i tekst koji je korisniku bio prikazan. Bez tako zabeleženog prihvatanja nalog se ne otvara. Način vođenja tog zapisa i podaci koji se uz njega ne beleže utvrđeni su Članom 4a Politike privatnosti.
 
 Korisnik potvrđuje da je upoznat sa Pravilnikom o KOLO sistemu, koji je javno dostupan na Platformi.
 
@@ -72,7 +74,9 @@ Svako fizičko lice može imati isključivo jedan korisnički nalog na Platformi
 
 ### Član 9 — Proces registracije
 
-Prilikom registracije korisnik bira pseudonim, unosi elektronsku adresu i postavlja lozinku. Korisnik potvrđuje nalog putem verifikacione poruke na unetoj elektronskoj adresi.
+Prilikom registracije korisnik bira pseudonim, unosi elektronsku adresu i postavlja lozinku.
+
+Na unetu elektronsku adresu upućuje se poruka sa linkom za potvrdu adrese. Potvrda nije uslov za korišćenje naloga — nalog radi u punom obimu i pre nje. Potvrdom se utvrđuje da adresa pripada korisniku koji je nalog otvorio, čime se obezbeđuje da ga obaveštenja iz Člana 40 ovih Uslova stvarno dosegnu i da mu pristup bude povratan ako izgubi lozinku.
 
 Pseudonim je jedini identifikator korisnika vidljiv drugim korisnicima, u obimu koji zavisi od statusa posmatrača. Korisnik je odgovoran da pseudonim ne sadrži lične podatke koji bi mogli dovesti do njegove identifikacije.
 

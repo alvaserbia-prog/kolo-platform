@@ -28,6 +28,7 @@ export async function GET() {
     glasovi,
     poruke,
     politikaPristanci,
+    zapisiPristanka,
     prigovori,
     programEnrollments,
     donacije,
@@ -121,6 +122,13 @@ export async function GET() {
       },
       orderBy: { createdAt: "desc" },
     }),
+    // Dokaz pristanka (R-06). Izlazi u izvoz jer je to podatak O KORISNIKU — on
+    // ima pravo da vidi na šta je pristao, kada i kojim tekstom, isto kao mi.
+    prisma.zapisPristanka.findMany({
+      where: { userId },
+      select: { vrsta: true, verzija: true, tekst: true, jezik: true, datAt: true, povucenAt: true },
+      orderBy: { datAt: "desc" },
+    }),
     prisma.prigovorNaOdluku.findMany({
       where: { userId },
       select: { id: true, tipOdluke: true, opis: true, status: true, odgovor: true, createdAt: true },
@@ -128,7 +136,18 @@ export async function GET() {
     }),
     prisma.programEnrollment.findMany({
       where: { userId },
-      select: { type: true, status: true, dailyAmount: true, approvedAt: true, createdAt: true },
+      select: {
+        type: true,
+        status: true,
+        dailyAmount: true,
+        approvedAt: true,
+        createdAt: true,
+        // Tekst izričitog pristanka za posebne kategorije (R-06) — korisnik ima
+        // pravo da vidi na šta je pristao, ne samo da je pristao.
+        pristanakTekst: true,
+        pristanakAt: true,
+        pristanakPovucenAt: true,
+      },
       orderBy: { createdAt: "desc" },
     }),
     prisma.donationRecord.findMany({
@@ -159,6 +178,7 @@ export async function GET() {
     poruke,
     saglasnosti: {
       politikaPristanci,
+      zapisiPristanka,
     },
     prigovori,
     programEnrollments,

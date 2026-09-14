@@ -2,7 +2,7 @@
 
 # Records of Processing Activities of Personal Data
 
-*These Records are adopted on the basis of Art. 47 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP), Art. 62 and 63 of the Rulebook on the KOLO System (version 4.6.0), and Art. 9 of the Rulebook on the Hierarchy of Acts of the KOLO System. They are applied together with the Privacy Policy of the KOLO Platform (version 4.6.1) and the Rulebook on Support Programmes (version 4.6.1).*
+*These Records are adopted on the basis of Art. 47 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP), Art. 62 and 63 of the Rulebook on the KOLO System (version 4.6.2), and Art. 9 of the Rulebook on the Hierarchy of Acts of the KOLO System. They are applied together with the Privacy Policy of the KOLO Platform (version 4.6.3) and the Rulebook on Support Programmes (version 4.6.1).*
 
 **CONTROLLER DETAILS**
 
@@ -12,7 +12,7 @@
 | **Registration number** | 28836627 |
 | **Tax ID (PIB)** | 115840443 |
 | **Email** | privatnost@ekolo.rs |
-| **Data Protection Officer** | Nikola Šarić, alva.serbia@gmail.com |
+| **Data Protection Officer** | Not appointed — the obligation under Art. 56 paragraph 2 of the LPDP is not met; the assessment is reviewed at least once a year (Privacy Policy, Article 1). Data protection contact: privatnost@ekolo.rs |
 
 **Processing activity no. 1 — Registration and user account management**
 
@@ -20,11 +20,11 @@
 | --- | --- |
 | **Categories of data subjects** | Users of the KOLO Platform. |
 | **Categories of data** | Pseudonym (username), email address, password (stored exclusively in hashed form), date of joining the system. |
-| **Legal basis** | Execution of a contractual relationship (Art. 12 para. 1 item 2 LPDP) — by joining the system, the user accepts the terms of use. |
+| **Legal basis** | Execution of a contractual relationship (Art. 12 para. 1 item 2 LPDP) — by joining the system, the user accepts the terms of use. Acceptance of the Terms of Use and of the Privacy Policy is recorded upon creation of the account, separately for each act, together with the moment, the version designation, and the text displayed to the user (Art. 4a of the Privacy Policy); without that record the account is not created. |
 | **Recipients / processors** | Vercel Inc. (hosting, executed in the European Union) and Neon Inc. (database, region in the European Union), on the basis of a processing agreement in accordance with the law. |
 | **Transfer to a third country** | No for the data in the database — the application and the database are executed in the European Union (Frankfurt region), which provides an adequate level of protection. Vercel Inc. and Neon Inc. are US companies, so access from a third country is possible for administrative and technical purposes, subject to the measures under Art. 9 of the Privacy Policy. |
 | **Retention period** | While the user account remains active. Upon termination of status, the email address, voluntarily entered data, the content and photographs of listings, and the free text alongside re-registrations of POEN are deleted, and the remaining data are pseudonymized in accordance with Art. 34 of the Rulebook and Art. 11 of the Privacy Policy. Pseudonymization is not anonymization: the Foundation retains the account's internal identifier, so the retained records remain personal data. |
-| **Protection measures** | Password hashing, TLS encryption in transit (min. version 1.2), encryption at rest at the hosting infrastructure level, access control based on the principle of minimum necessity, multi-factor authentication for administrative access. |
+| **Protection measures** | Password hashing, TLS encryption in transit (min. version 1.2), encryption at rest at the hosting infrastructure level, access control based on the principle of minimum necessity, multi-factor authentication for administrative access. The record of acceptance of the acts is kept without an IP address and device data; a message with a confirmation link is sent to the address entered at registration, which is not a condition for using the account. |
 
 **Processing activity no. 2 — Proof of reality (user verification)**
 
@@ -230,6 +230,19 @@
 | **Retention period** | Messages are deleted when at least one party closes their account, or when 24 months have passed since the last message in the conversation. |
 | **Protection measures** | The conversation is closed to third parties; the content of messages does not enter any public display or aggregate. A conversation can be initiated only by a verified user. The content of a message is not copied into the audit log upon removal. An adult counterparty of a minor user is shown that the conversation is read by a parent. TLS encryption, encryption at rest, access control. |
 | **Note** | This activity was entered into the Records by Records v4.5.1. The processing existed from the start of the Platform's operation but was not separately recorded — communication was listed only as one of the purposes of activity No. 1, without its own categories of data and without a retention period. |
+
+**Processing Activity No. 18 — Proof of consent and proof that a contractual relationship was established**
+
+| **Purpose of processing** | Demonstrating that the individual has given consent for processing for which consent is the legal basis, and that a contractual relationship has been established by acceptance of the Terms of Use (Art. 15 paragraph 1 of the LPDP — the burden of proof lies with the controller). |
+| --- | --- |
+| **Categories of individuals** | Platform users; parents or legal guardians of minor users. |
+| **Categories of data** | Type of act or consent accepted, version designation, the text displayed to the individual, language of display, moment of giving and, if it occurred, the moment of withdrawal. No IP address, device data, or other identifiers are recorded alongside the record. |
+| **Legal basis** | Compliance with the controller's legal obligations (Art. 12 paragraph 1 item 3 of the LPDP) — the obligation to demonstrate consent under Art. 15 paragraph 1 of the LPDP. |
+| **Recipients / processors** | Vercel Inc. (hosting, execution in the European Union) and Neon Inc. (database, region in the European Union), on the basis of processing agreements. |
+| **Transfer to a third country** | Not for data in the database — the application and the database are executed in the European Union (Frankfurt region), which ensures an adequate level of protection. Vercel Inc. and Neon Inc. are US companies, so access from a third country for administrative and technical purposes is possible, subject to the measures in Art. 9 of the Privacy Policy. |
+| **Retention period** | For as long as the processing for which the consent was given lasts, and thereafter for the period within which a legal claim on that basis may be asserted or contested. The record is not deleted upon withdrawal of consent, since withdrawal does not affect the lawfulness of processing carried out before the withdrawal (Art. 15 paragraph 3 of the LPDP), so proof that the consent existed must remain for that period. |
+| **Protection measures** | The record is created in the same atomic operation as the account; verification is performed on the controller's side, not in the browser; acceptance of each act is recorded separately; the version refers to a published text that is not changed; no additional identifiers are collected; the individual sees the record in their account and in the data export. |
+| **Note** | For consent to non-essential cookies, a record alongside an account is kept solely for a logged-in user; for a visitor who is not logged in, no identifier is established, and the decision is recorded in the cookie itself, together with the version of the notice under which it was made. |
 
 **FINAL PROVISIONS**
 

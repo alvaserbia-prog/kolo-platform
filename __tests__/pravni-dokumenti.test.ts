@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_6_2.md`, `uslovi_koriscenja_4_6_1.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_6_2.md`, `uslovi_koriscenja_4_6_3.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -29,10 +29,10 @@ const AKTI = [
   // reference na verziju koja kao dokument više ne postoji.
   "Pravilnik_4_6_2.md",
   "dokaz_stvarnosti_4_4_1.md",
-  "DPIA_4_6_1.md",
-  "radnje_obrade_4_6_1.md",
-  "uslovi_koriscenja_4_6_1.md",
-  "politika_4_6_1.md",
+  "DPIA_4_6_3.md",
+  "radnje_obrade_4_6_3.md",
+  "uslovi_koriscenja_4_6_3.md",
+  "politika_4_6_3.md",
   "statut_4_1_0.md",
   "whitepaper_4_6_2.md",
   "rizici_4_6_0.md",
@@ -320,7 +320,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
     en: ["### Article 11a", "### Article 20b", "### Article 20c"],
     ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
   },
-  "radnje_obrade_4_6_1.md": {
+  "radnje_obrade_4_6_3.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16", "Radnja obrade br. 17"],
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16", "Processing activity No. 17"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16", "Операция обработки № 17"],
@@ -335,7 +335,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // (`vercel.json` → regions: fra1, Neon endpoint u EU). Ako se region ikad vrati u
   // SAD, ocena i mere iz 5.13 postaju netačne — zato se traže doslovno, uz nov zbir
   // srednjih i niskih rizika.
-  "DPIA_4_6_1.md": {
+  "DPIA_4_6_3.md": {
     sr: [
       "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
       "Pet rizika je na srednjem nivou (R1, R2, R11, R13, R16)",
@@ -355,7 +355,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Izostavljanje pojedinačnog zapisa iz javnog pregleda",
       "Saglasnost roditelja za podatak o detetu",
       "## 5.14.",
-      "sedamnaest radnji obrade",
+      // R-06: registar dobija radnju br. 18 (dokaz pristanka), pa ih je osamnaest.
+      "osamnaest radnji obrade",
       "Zatvaranje postupka",
     ],
     en: [
@@ -370,7 +371,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Omission of the individual record from the public overview",
       "Parental consent for data concerning a child",
       "## 5.14.",
-      "seventeen processing activities",
+      "eighteen processing activities",
       "Closing the procedure",
     ],
     ru: [
@@ -385,7 +386,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Исключение отдельной записи из публичного обзора",
       "Согласие родителя на данные о ребёнке",
       "## 5.14.",
-      "семнадцать операций обработки",
+      "восемнадцать операций обработки",
       "Закрытие процедуры",
     ],
   },
@@ -586,7 +587,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
   // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
   // počiva upravo na tome da takav promet nije dopušten.
-  "uslovi_koriscenja_4_6_1.md": {
+  "uslovi_koriscenja_4_6_3.md": {
     sr: [
       // 4.5.9 — javnost donacije VIŠE NIJE „uslov za evidentiranje POEN-a". Ta
       // formulacija je strukturu činila „platiš → dobiješ vidljivost" i pravila
@@ -1007,8 +1008,22 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "прекращается, когда несовершеннолетний пользователь укажет и подтвердит собственный электронный адрес",
     ],
   },
-  "politika_4_6_1.md": {
+  "politika_4_6_3.md": {
     sr: [
+      // 4.6.3 (R-06) — dokaz pristanka i dokaz zasnivanja ugovornog odnosa.
+      // 🔴 Traži se i ono što se NE beleži: bez te rečenice bi se pri sledećoj
+      // izmeni lako dopisao IP „radi jačeg dokaza", a to je proširenje obrade
+      // suprotno čl. 3, gde minimizacija stoji kao strukturni princip.
+      "### Član 4a — Pristanak i dokaz pristanka",
+      "tekst koji je korisniku bio prikazan, na jeziku na kom mu je prikazan",
+      "**ne beleže se** IP adresa, podaci o uređaju",
+      "beleže se odvojeno, kao dve izjave",
+      "ne uspostavlja se nikakav identifikator",
+      // 🔴 DPO: opcija C — funkcija se ne određuje, ali se piše ZAŠTO i kada
+      // obaveza nastaje. Bez procene bi ukidanje bilo prećutan potez.
+      "nije odredila lice za zaštitu podataka",
+      "član 56 stav 2 ZZPL-a",
+      "nije obezbeđivao nezavisnost koju zahteva član 56 stav 6 ZZPL-a",
       // 4.5.9 — isto što i u Uslovima čl. 17: objavljivanje nije uslov koji
       // Fondacija postavlja, nego posledica proverljivosti upisa.
       "a ne zato što Fondacija objavljivanje postavlja kao uslov",
@@ -1051,6 +1066,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "podaci koje ste uneli se brišu",
     ],
     en: [
+      // 4.6.3 (R-06) — vidi srpski blok iznad.
+      "### Article 4a — Consent and proof of consent",
+      "are **not** recorded",
+      "has not, at this time, appointed a data protection officer",
+      "did not ensure the independence required by Art. 56 paragraph 6",
       "and not because the Foundation sets publication as a condition",
       "is not consent for processing whose legal basis is consent",
       "Legal basis in the period before takeover",
@@ -1070,6 +1090,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "deletes the data you entered",
     ],
     ru: [
+      // 4.6.3 (R-06) — vidi srpski blok iznad.
+      "### Статья 4a — Согласие и доказательство согласия",
+      "**не** фиксируются IP-адрес",
+      "Фонд не назначил лицо по защите данных",
+      "не обеспечивал независимость, которой требует статья 56 часть 6",
       "а не потому, что Фонд ставит публикацию условием",
       "не является согласием на обработку",
       "Правовое основание в период до принятия",

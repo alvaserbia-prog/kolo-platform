@@ -987,11 +987,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -999,11 +999,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
@@ -1035,15 +1035,15 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek · KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.1-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.3-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat · KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.6.1-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.6.3-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya · KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.6.1-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.6.3-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása · KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.6.1-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.6.3-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat · KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.0-es verzió",
     "meta_whitepaper_title": "Whitepaper · KOLO",
@@ -3111,5 +3111,28 @@
     "dinarska_naslov": "A beszerzés dinárban kifejezett oldala",
     "dinarska_opis": "Az Alapítvány eszközeivel való rendelkezésről szóló jelentés része. A kalkulációtól elkülönítve szerepel, mert az egy részre eső POEN száma nem a jószág ára, és abból nem is vezethető le.",
     "granica_pregled": "Az idén átvett javak értéke: {preuzeto} / {granica} RSD (21a. cikk)."
+  },
+  "pristanak": {
+    "zapis_akt": "Elfogadom a következőt: {naziv}, {verzija} verzió.",
+    "saglasnost_roditelja": "Szülőként, illetve törvényes képviselőként hozzájárulok a(z) „{pseudonim}” kiskorú felhasználó adatainak kezeléséhez a Gyermekek részvételéről szóló szabályzatban és az Adatvédelmi szabályzatban meghatározott terjedelemben és célból. Tudom, hogy ezt a hozzájárulást bármikor, indokolás nélkül visszavonhatom a gyermek fiókjának törlésével, és hogy a visszavonás nem érinti a visszavonás előtt végzett adatkezelés jogszerűségét.",
+    "moji_naslov": "Amit elfogadtam",
+    "moji_opis": "Az általad adott hozzájárulások áttekintése, azzal a szöveggel, amely akkor előtted állt.",
+    "moji_prikazi": "Mutasd",
+    "moji_sakrij": "Elrejtés",
+    "moji_ucitavam": "Betöltés…",
+    "moji_greska": "A betöltés nem sikerült. Próbáld újra.",
+    "moji_prazno": "Egyelőre nincs rögzített hozzájárulás.",
+    "moji_povucen": "visszavonva: {datum}",
+    "vrsta_USLOVI_KORISCENJA": "Felhasználási feltételek",
+    "vrsta_POLITIKA_PRIVATNOSTI": "Adatvédelmi szabályzat",
+    "vrsta_KOLACICI_ANALITIKA": "Analitikai sütik"
+  },
+  "emailPotvrda": {
+    "naslov": "Erősítsd meg a címedet — KOLO",
+    "telo1": "Üdv a KOLO-ban. A(z) <strong>{pseudonim}</strong> fiók megnyílt és teljes körűen működik.",
+    "telo2": "Erősítsd meg ezt a címet, hogy tudjuk, a tiéd. Megerősítés nélkül is működik a fiók — a megerősítés azt szolgálja, hogy az értesítések eljussanak hozzád, és vissza tudd szerezni a hozzáférést, ha elfelejted a jelszót.",
+    "telo3": "A hivatkozás {sati} óráig érvényes.",
+    "telo4": "Ha nem te voltál, ne csinálj semmit.",
+    "dugme": "Cím megerősítése"
   }
 }

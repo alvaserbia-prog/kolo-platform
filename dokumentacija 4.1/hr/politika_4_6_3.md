@@ -20,7 +20,15 @@ Email: privatnost@ekolo.rs
 
 KOLO Zaklada određuje svrhe i sredstva obrade osobnih podataka u KOLO sustavu. Zaklada je voditelj obrade i kada podatke korisnika fizički ne čuva u vlastitim bazama — pravno je relevantan kriterij određivanje svrhe i sredstava obrade, a ne fizičko pohranjivanje podataka (čl. 2. st. 1. t. 8. ZZPL-a). KOLO Protokol tehničko je sredstvo obrade.
 
-Službenik za zaštitu podataka (DPO): Nikola Šarić, dostupan na alva.serbia@gmail.com.
+**Službenik za zaštitu podataka (DPO).** Zaklada u ovom trenutku nije imenovala službenika za zaštitu podataka.
+
+Obveza imenovanja postoji kada voditelj obradu provodi kao tijelo javne vlasti, kada se osnovne aktivnosti voditelja sastoje u radnjama obrade koje po svojoj naravi, opsegu odnosno svrhama zahtijevaju redovito i sustavno praćenje velikog broja osoba, ili kada se osnovne aktivnosti sastoje u obradi posebnih kategorija podataka u velikoj mjeri (članak 56. stavak 2. ZZPL-a). Zaklada nije tijelo javne vlasti, a broj osoba čiji se podaci obrađuju i opseg obrade posebnih kategorija podataka u ovom trenutku ne dosežu mjeru iz te odredbe.
+
+Zaklada ovu procjenu preispituje najmanje jednom godišnje, kao i pri svakom aktiviranju novog modula u smislu Glave VIII. Pravilnika o KOLO sustavu. Mjerila po kojima se obveza smatra nastalom utvrđuje i objavljuje odluka Upravnog odbora; kada obveza nastane, Zaklada imenuje službenika za zaštitu podataka, objavljuje njegove kontaktne podatke i dostavlja ih Povjereniku u skladu s člankom 56. stavkom 8. ZZPL-a.
+
+Raniji raspored, u kojem je službenik za zaštitu podataka bio imenovan a istodobno je odlučivao o svrsi i sredstvima obrade, nije osiguravao neovisnost koju zahtijeva članak 56. stavak 6. ZZPL-a. Zaklada je stoga taj raspored ukinula umjesto da ga zadrži u obliku u kojem se ta neovisnost ne može ostvariti.
+
+**Kontakt za zaštitu podataka.** Sva pitanja u vezi s obradom osobnih podataka i svi zahtjevi za ostvarivanje prava iz Članka 13. ove politike upućuju se na **privatnost@ekolo.rs**. Zaklada na njih odgovara u rokovima utvrđenima Člankom 13. Ova adresa ne prestaje vrijediti imenovanjem službenika za zaštitu podataka.
 
 Za sva pitanja u vezi s obradom osobnih podataka možete se obratiti na gore navedene adrese.
 
@@ -226,11 +234,27 @@ Vidljivost: **dobavljaču se dostavlja isključivo popis kodova za preuzimanje �
 
 Utvrđivanje redoslijeda primjena je javno objavljenih pravila i ne predstavlja automatizirano odlučivanje u smislu čl. 38. ZZPL-a: ono ne proizvodi pravne posljedice po Vaš status. Protiv utvrđenog redoslijeda i ishoda nabave imate pravo prigovora u skladu s člankom 13. ove politike, o kojem odlučuje čovjek.
 
+### Članak 4a. — Privola i dokaz privole
+
+Za obrade čija je pravna osnova privola (Članak 4. ove politike), kao i za prihvaćanje Uvjeta korištenja kojim se zasniva ugovorni odnos, Zaklada bilježi da je privola dana. Zapis sadrži: što je prihvaćeno, kada, verziju akta na koju se prihvaćanje odnosi i tekst koji je korisniku bio prikazan, na jeziku na kojem mu je prikazan.
+
+Verzija akta bilježi se zato što je objavljena verzija nepromjenjiva — izmijenjen akt dobiva novu oznaku i objavljuje se kao zaseban dokument, a raniji ostaje dostupan u obliku u kojem je i bio prihvaćen. Zapis o privoli time trajno upućuje na tekst koji je u tom trenutku vrijedio.
+
+Uz zapis o privoli **ne bilježe se** IP adresa, podaci o uređaju ni drugi podaci kojima se korisnik dodatno identificira. Prikupljanje takvih podataka radi dokazivanja privole predstavljalo bi proširenje obrade suprotno načelu minimizacije iz Članka 3. ove politike.
+
+Prihvaćanje Uvjeta korištenja i prihvaćanje ove politike bilježe se odvojeno, kao dvije izjave, jer se odnose na različita pitanja.
+
+Privola se povlači u svakom trenutku, bez navođenja razloga i jednako jednostavno kao što je i dana. Povlačenje ne utječe na zakonitost obrade provedene prije povlačenja, pa se zapis o danoj privoli ne briše nego se u njemu bilježi i trenutak povlačenja.
+
+Korisnik u svakom trenutku može vidjeti koje je privole dao i kojim tekstom, u svojem računu i u izvozu podataka iz Članka 13.
+
+Za privolu na kolačiće koji nisu nužni (Članak 7.) odluka se bilježi u samom kolačiću, zajedno s verzijom obavijesti po kojoj je donesena; kod prijavljenog korisnika bilježi se i uz njegov račun. Za posjetitelja koji nije prijavljen ne uspostavlja se nikakav identifikator radi vođenja tog zapisa, iz razloga navedenog u stavku 3. ovoga članka.
+
 ### Članak 5. — Tehnički podaci
 
 Radi sigurnosti Platforme i sprječavanja zlouporabe, na razini hosting infrastrukture bilježe se IP adresa, podaci o uređaju i pregledniku te vrijeme pristupa.
 
-Unutar Platforme, administrativne radnje nad podacima korisnika i započinjanje razgovora povodom oglasa bilježe se u revizijskom dnevniku (tko je izvršio radnju, kada i koju). Revizijski je dnevnik dostupan službeniku za zaštitu podataka (DPO).
+Unutar Platforme, administrativne radnje nad podacima korisnika i započinjanje razgovora povodom oglasa bilježe se u revizijskom dnevniku (tko je izvršio radnju, kada i koju). Revizijski je dnevnik dostupan osobi koja u Zakladi odgovara za zaštitu podataka.
 
 Svrha obrade: sigurnost Platforme, sprječavanje zlouporabe, otkrivanje neovlaštenog pristupa, tehnička podrška.
 

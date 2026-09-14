@@ -233,6 +233,32 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-14 (trideset četvrti put):** na **4.6.3** idu **ČETIRI akta** —
+Politika privatnosti (sa 4.6.1), Uslovi korišćenja (sa 4.6.1), DPIA (sa 4.6.1) i
+Registar radnji obrade (sa 4.6.1). Ostalih trinaest ostaje gde jeste. Povod je
+**R-06 iz NOVOG registra rizika** (ne postoji dokaz pristanka ni dokaz zaključenja
+ugovora; DPO u sukobu interesa sa privatnom kontakt adresom). Sadržinski, vidi
+sekciju „Dokaz pristanka: kvačica koja nije stizala do servera" ispod.
+
+🟡 **Prvi bump posle 13.09. — šifra je bila slobodna.** Tog dana su objavljena tri
+seta (4.6.0 za R-02, 4.6.1 za R-03, 4.6.2 za R-04), pa je 4.6.3 naredna slobodna.
+Grana je pre rada bila **bajt u bajt jednaka `origin/main`**, tako da sudara kakav
+se desio 13.09. ovde nije bilo.
+
+🔴 **Registar radnji obrade od ovog seta ima OSAMNAEST radnji** — nova je br. 18
+(dokaz pristanka i dokaz zasnivanja ugovornog odnosa). DPIA zbir je usklađen i
+dobija **rizik R18** (ocena 3, nizak), pa je rizika sada osamnaest: pet srednjih i
+trinaest niskih.
+
+🟢 **Pravilnik o KOLO sistemu NIJE diran.** Dokaz pristanka nije institut
+Pravilnika — Politika ga uređuje po sopstvenom čl. 66 st. 2, a Uslovi kao način
+prihvatanja. Bump glavnog Pravilnika povlači ispravke u DPIA i Pravilniku o učešću
+dece, pa se ne otvara bez potrebe.
+
+🟡 **Zaostala unakrsna upućivanja:** nijedno novo. U četiri bumpovana akta upućivanja
+su ispravljena (Pravilnik → v4.6.2, Politika/Registar/Uslovi → v4.6.3, Whitepaper →
+v4.6.2); upućivanja na **programe podrške (v4.6.1)** ostaju jer se taj akt ne menja.
+
 **AŽURIRANO 2026-09-13 (trideset treći put):** na **4.6.2** idu **DVA akta** —
 Pravilnik o KOLO sistemu (sa 4.6.0) i Whitepaper (sa 4.6.0). Ostalih petnaest ostaje
 gde jeste. Povod je **R-04 iz NOVOG registra rizika** (ZRNO kao investicioni
@@ -1691,6 +1717,195 @@ zaključane u `pravni-dokumenti.test.ts` na sr/en/ru.
 🟡 **Usput ispravljen zatečen pad testa:** `donacija-uplatilac-izvor.test.ts` je
 tražio namespace `admin` u prevodima, a on od 13.09.2026. živi **isključivo u sr**
 (`request.ts` ga dodaje pri učitavanju). Test je od te odluke bio crven.
+
+### Dokaz pristanka: kvačica koja nije stizala do servera (R-06, 2026-09-14)
+
+Sprovođenje rizika **R-06 iz novog registra** (`docs/registar-rizika-regulatori-2026-09.md`)
+— ne postoji dokaz pristanka ni dokaz zaključenja ugovora, uz DPO u sukobu interesa,
+zatečena ocena **8**, po merama **4**. Na **4.6.3** idu Politika, Uslovi, DPIA i
+Registar radnji obrade.
+
+🔴 **Prigovor nije „nemate pristanak" nego obrnuto: svaka obrada ima uredno imenovan
+pravni osnov, a ni za jedan nije postojao dokaz da je ispunjen.** ZZPL čl. 15 st. 1
+prebacuje teret dokazivanja na rukovaoca — pred Poverenikom nije na njemu da dokaže
+da pristanka nema, nego na nama da dokažemo da ga ima.
+
+#### Nalazi
+
+1. 🔴 **Registracija nije ostavljala nijedan trag.** `POST /api/registracija` nije
+   primao nijedno polje o prihvatanju i nije upisivao nijedan red; kvačice `uslovi`
+   i `privatnost` živele su **samo u pretraživaču** (`canSubmit`). Nalog se otvarao
+   `curl`-om bez ijedne kvačice. Isto na OAuth putu. Time nije nedostajao samo dokaz
+   pristanka nego i **dokaz da je ugovor zaključen** — a „izvršenje ugovornog odnosa"
+   je osnov za četiri obrade u Politici čl. 4.
+2. 🔴 **Mehanizam je postojao i bio prazan.** `PolitikaVerzija`/`PolitikaPrihvatanje`
+   i ruta `/api/politika/prihvati` rade, ali registracija ih **nikad nije dirala** —
+   ni dok je prekidač bio upaljen. 🔴 Razgraničenje koje mora da ostane jasno:
+   `PRISTANAK_NA_AKTE_TRAZI_SE` uređuje **ponovni** pristanak na IZMENE akata (gejt
+   ekran koji je smetao novima); dokaz **prvobitnog** pristanka je drugi posao i
+   prekidač se zbog njega **ne pali**. Ostaje `false`.
+3. 🔴 **Izričit pristanak za posebne kategorije imao je samo `true`.**
+   `ProgramEnrollment.pristanakVerifikatori` je Boolean — dokazuje DA je pristanak
+   dat, ali ne i NA ŠTA. Tekst je pri tom **menjan 10.09.2026** (R-13) i nosi broj
+   verifikatora koji je različit za svakog čoveka (`{broj}`), pa se bez snimka ne
+   može utvrditi šta je tom licu pisalo. Najteža tačka celog rizika: čl. 17 ZZPL.
+4. 🔴 **Saglasnost roditelja je bila SLEPLJENA sa izjavom o postojanju deteta.**
+   Ovo je ispravka prvobitnog nalaza („ne postoji"): rečenica *„pristajem na obradu
+   njegovih podataka"* stajala je u `generisiIzjavuRoditelja`. Ali to su **dve izjave
+   različitog dejstva** — izjava o postojanju deteta je tvrdnja o činjenici, daje se
+   pod punom odgovornošću i njen izostanak obara potvrde **trećih lica** (čl. 6
+   st. 3), dok se saglasnost na obradu povlači u svakom trenutku i bez posledica po
+   bilo koga drugog. Spojene, **opoziv saglasnosti se nije mogao izvršiti a da ne
+   obori i tvrdnju o postojanju deteta** — pravo na opoziv faktički nije postojalo.
+5. **Pristanak na kolačiće u `localStorage`** — ne stiže do servera nikad i gubi se
+   čišćenjem keša, pa se banner vraćao onome ko je već odlučio, a dokaza nije bilo.
+6. 🔴 **Uslovi čl. 9 su obećavali potvrdu naloga imejlom, a kod je nije radio.**
+   `User` nije imao polje, registracija nije slala nijednu poruku. Isti obrazac koji
+   je registar našao na još pet mesta.
+7. 🔴 **DPO.** Politika čl. 1 je nosila **ličnu Gmail adresu** (tri reda ispod
+   `privatnost@ekolo.rs`), a nosilac je `SUPERADMIN` i osnivač — dakle lice koje
+   određuje svrhu i sredstva obrade, jedino vidi unete podatke socijalnih prijava i
+   resetuje naloge. **Sukob je bio vidljiv iz našeg sopstvenog dokumenta:** DPIA
+   tačka 7 — *„Mišljenje DPO-a … prihvatljiv. Potpis: Nikola Šarić"*. Projektant
+   obrade sam sebi izdaje mišljenje da je obrada prihvatljiva.
+
+#### Šta je urađeno
+
+**Nov model `ZapisPristanka`** (vrsta, verzija, **snimljen tekst**, jezik, izvor,
+`datAt`, `povucenAt`), `@@unique([userId, vrsta, verzija])` — idempotentno.
+
+🔴 **Bez IP adrese i podataka o uređaju.** Prikupljanje otiska radi dokazivanja
+pristanka na obradu je proširenje obrade suprotno čl. 3 Politike, gde minimizacija
+stoji kao *„strukturni princip koji se ne može ukinuti nijednom upravljačkom
+odlukom"*. Dokaz nosi verzija akta, snimljen tekst i trenutak. Zaključano testom, i
+u kodu i u šemi.
+
+🟢 **Zašto je dovoljno snimiti VERZIJU, a ne ceo akt:** pravilo bumpovanja već
+obezbeđuje da objavljen fajl nikad ne promeni sadržaj — šifra u imenu fajla JESTE
+objava. `uslovi_koriscenja_4_6_3.md` zato i za deset godina govori ono što je
+govorio na dan pristanka. Verzija je pokazivač na nepromenljiv dokument.
+
+🔴 **Nov `src/lib/verzije-akata.ts` — JEDAN izvor istine za verziju.** Do sada
+verzija Uslova i Politike **nije postojala nigde u kodu**: ime fajla je bilo
+otkucano u samoj stranici, a broj je živeo odvojeno u `messages` labelama. Zapis
+pristanka bi bio treća prepisana kopija. Sada i stranice čitaju odatle.
+🔴 **Pri svakom bumpu Uslova ili Politike menja se i ta datoteka** — zaključano
+testom (fajl mora postojati na svih pet jezika, broj se mora poklapati sa imenom).
+
+🔴 **Provera je na SERVERU, a upis u ISTOJ transakciji sa `user.create`.** Nalog bez
+zapisa pristanka je tačno stanje koje se uklanja; upis posle transakcije bi ga pri
+padu vratio tiho, jer bi korisnik i dalje dobio uspešan odgovor. OAuth ima **tri**
+puta kojima nalog dolazi do pseudonima (legacy red, idempotentna grana po imejlu,
+nov nalog) — sva tri upisuju; zaključano brojanjem u testu.
+
+🔴 **DVA reda, ne jedan** (ZZPL čl. 15 st. 2 — pristanak koji pokriva više pitanja
+mora biti razdvojen). Uz kvačicu na ekranu sada stoji i **verzija akta**: bez nje
+čovek ne zna na šta pristaje, a mi ne možemo da pokažemo da smo mu to rekli.
+
+**Pristanak na program nosi tekst** (`pristanakTekst`, `pristanakAt`,
+`pristanakJezik`). 🔴 Sklapa se **na serveru**, iz istog ključa iz kog ga ekran
+prikazuje, sa stvarnim brojem verifikatora; tekst koji pošalje pretraživač dokazuje
+samo šta je pretraživač poslao. Ponovna prijava upisuje **nov** pristanak.
+🔴 Pri povlačenju se upisuje `pristanakPovucenAt`, a `pristanakVerifikatori`
+**ostaje `true`** — opoziv po čl. 15 st. 3 ne utiče na zakonitost ranije obrade, pa
+gašenje logičke vrednosti tvrdi da pristanka nikad nije ni bilo.
+
+**Saglasnost roditelja izdvojena** u `Roditeljstvo.saglasnostAt`/`saglasnostTekst`,
+odvojeno od `izjava*`. Daje se istim potezom (otvaranje naloga, preuzimanje,
+prevođenje), pa roditelj ne radi dvaput. 🔴 **Saglasnost ide na JEZIKU RODITELJA**, a
+izjava ostaje na srpskom na svim jezicima — izjava je pravni dokument po srpskom
+pravu, a pristanak po čl. 15 st. 2 mora biti jezikom razumljivim onome ko ga daje.
+**Ne ujednačavati ih.** 🟡 Zatečene veze ostaju prazne — retroaktivno upisana „data
+saglasnost" bila bi netačan dokument (isto pravilo kao `ugovorTekst`).
+
+**Kolačići: `localStorage` → kolačić**, sa odlukom, trenutkom i **verzijom teksta**.
+🔴 Odluka po staroj verziji vraća `null` i čovek se pita ponovo. Prijavljen korisnik
+dobija i `ZapisPristanka`; 🔴 **za neprijavljenog posetioca se NE pravi nikakav
+identifikator** — to bi bio nov podatak o njemu radi dokazivanja pristanka na
+obradu, kružno i protiv čl. 3. Za njega dokaz nosi sam mehanizam.
+🟢 Banner je i pre ovoga bio ispravan (oba dugmeta jednim klikom, bez tamnog
+obrasca) — **ne dirati taj raspored**, zaključan je testom: ako „Odbij" ode u
+podmeni, pristanak prestaje da bude slobodan i cela mera pada.
+
+**Potvrda adrese — meko** (odluka vlasnika): poruka sa linkom ide pri registraciji,
+`User.emailPotvrdjenAt`, a **nalog radi u punom obimu i bez klika**. 🔴 Ne uvoditi
+uskraćivanje funkcija zbog nepotvrđene adrese bez izričitog naloga. Tok je izdvojen
+u `potvrda-adrese.ts` i **zajednički** je sa nalogom deteta (koje adresu tek dobija);
+ruta više ne pada na 410 kad je Modul Deca ugašen.
+
+#### 🔴 DPO — opcija C: funkcija se NE određuje
+
+Odluka vlasnika (14.09.2026), pošto drugo lice za sada ne postoji.
+
+- Politika čl. 1 sada kaže da DPO **nije određen**, uz **napisanu procenu** po
+  čl. 56 st. 2 (nismo organ vlasti; broj lica i obim obrade posebnih kategorija ne
+  dostižu meru), uz **godišnje preispitivanje** i preispitivanje pri svakom
+  aktiviranju modula, i uz obavezu da se po nastanku obaveze DPO odredi, objavi i
+  **dostavi Povereniku** (čl. 56 st. 8).
+- 🔴 Piše se i **zašto je raniji raspored ukinut**: lice je bilo određeno a
+  istovremeno je odlučivalo o svrsi i sredstvima obrade, što ne obezbeđuje
+  nezavisnost iz čl. 56 st. 6. Prećutan potez bi se čitao kao slabljenje; napisan,
+  čita se kao ispravka.
+- **Kontakt ostaje** `privatnost@ekolo.rs` na sva tri mesta (Politika, DPIA,
+  Registar) — lična Gmail adresa je uklonjena.
+- 🔴 **DPIA tačka 7 je PREPISANA, ne obrisana**: „Mišljenje DPO-a" → „Procena
+  odgovornog lica rukovaoca", uz napomenu da DPO nije određen i da se mišljenje iz
+  čl. 54 st. 5 zato ne pribavlja (ta odredba obavezu vezuje za slučaj u kome je
+  takvo lice određeno). Brisanje bi ostavilo rupu u numerisanom dokumentu.
+
+🔴 **Opcija C ima rok trajanja i to treba znati.** KOLO po svojoj prirodi **jeste**
+sistematsko praćenje (graf potvrda, svaka transakcija, svaki oglas, mreža
+poznanstava); jedino što danas spasava jeste „**velikog broja** lica", a to je
+pitanje vremena. Isto i za posebne kategorije. Zato je merilo upisano u akt, a sam
+broj ide u **odluku UO** — isto pravilo kao `PRAG_PROVERE_POREKLA_RSD` i godišnja
+granica od 100.000 RSD.
+
+🟡 **Spoljni DPO kao usluga je jača varijanta i ostaje otvorena** za trenutak kad
+sistem krene. Nije odbijena — samo za sada nema ko.
+
+#### 🟡 Usput ispravljeno
+
+🔴 **`prevod-servera.ts` je uvozio samo `sr`, `en` i `ru`** — hrvatski i mađarski
+korisnici dobijali su **srpski tekst u svakoj poruci greške i u svakom
+obaveštenju**, isti kvar koji je do 4.1.0 pogađao same akte. Dodati su `hr` i `hu`.
+Uz tekst pristanka to više nije bilo samo neuredno: čl. 15 st. 2 traži jezik
+razumljiv onome ko pristanak daje.
+
+#### 🔴 Zabranjene teme uz R-06 — ne otvarati bez izričitog naloga
+
+1. **Dopisivanje IP adrese ili otiska uređaja uz zapis pristanka** „radi jačeg
+   dokaza" — to je proširenje obrade radi dokazivanja pristanka na obradu.
+2. **Serverski zapis pristanka na kolačiće za NEPRIJAVLJENOG posetioca** — traži
+   identifikator posetioca, dakle isto kružno proširenje.
+3. **Sklanjanje „Odbij" iz prvog nivoa bannera** (podmeni, dodatni korak) — pristanak
+   tada nije slobodno dat.
+4. **Uskraćivanje funkcija naloga zbog nepotvrđene adrese** — odbijena varijanta
+   „tvrdo"; potvrda je meka po odluci vlasnika.
+5. **Vraćanje saglasnosti roditelja u tekst izjave o postojanju deteta** — time
+   pravo na opoziv ponovo prestaje da postoji.
+6. **Paljenje `PRISTANAK_NA_AKTE_TRAZI_SE` radi R-06** — to je drugi institut
+   (ponovni pristanak na izmene). Jednokratno paljenje zbog **zatečenih naloga** je
+   zasebna odluka vlasnika, koja još nije doneta (vidi ostatak br. 1).
+
+#### 🟡 Svesno prihvaćeni ostaci
+
+1. 🔴 **Zatečeni nalozi ostaju bez dokaza pristanka i to se ne može napraviti
+   unazad.** Najveći preostali ostatak i razlog zašto ocena stoji na 4, a ne na 3.
+   Jedini put je da se pristanak zatraži pri prvoj narednoj prijavi — dakle
+   jednokratno paljenje prekidača uz nov red `PolitikaVerzija`. **Odluka vlasnika
+   se čeka.** Uz M-1 to bi pogodilo samo zatečene naloge; novi pristanak daju pri
+   registraciji i ekran ne bi ni videli.
+2. Pristanak na kolačiće neprijavljenog posetioca i dalje se ne dokazuje **po licu**
+   — svesno, jer je alternativa nov podatak o posetiocu.
+3. Opcija C nosi rizik da je procena o obavezi pogrešna, i ima rok trajanja (gore).
+
+**Kod:** `verzije-akata.ts`, `pristanak.ts` (ČISTE funkcije), `protokol/pristanak.ts`
+(servisne), `protokol/potvrda-adrese.ts`, `cookieConsent.ts`, `components/profil/MojiPristanci.tsx`,
+rute `POST /api/pristanak/kolacici` i `GET /api/profil/pristanci`. Migracije
+`20260914120000_vrsta_pristanka_enum` (ZASEBAN fajl, samo enum) →
+`20260914120100_zapis_pristanka`. **Brana:** `__tests__/pristanak-izvor.test.ts`
+(30 provera, gleda IZVOR) + odredbe zaključane u `pravni-dokumenti.test.ts` na
+sr/en/ru.
 
 ### ZRNO nije ulaganje: odgovor po elementima, ne etiketa (R-04, 2026-09-13)
 
