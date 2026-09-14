@@ -170,7 +170,7 @@ Az Alapítvány nem felel azokért a következményekért, amelyek abból eredne
 
 A csereterület a Platform azon része, amely javakra és szolgáltatásokra vonatkozó ajánlatok és keresletek hirdetésére, valamint a felhasználók közötti cserék megbeszélésére szolgál.
 
-A csereterület hirdetéseinek megtekintése — az ajánlat vagy kereslet tartalma, az ár, a helység és a hirdető álneve — nyilvános, és minden látogató számára hozzáférhető.
+A csereterület hirdetéseinek megtekintése — az ajánlat vagy kereslet tartalma, a POEN-ben kifejezett összeg, a helység és a hirdető álneve — nyilvános, és minden látogató számára hozzáférhető.
 
 Árut vagy szolgáltatást kínáló hirdetés feladása minden regisztrált felhasználó számára elérhető; nem hitelesített felhasználó számára a 16. cikk feltételeivel és korlátozásaival. Árut vagy szolgáltatást kereső hirdetés feladása és a hirdetés kapcsán a kommunikáció kezdeményezése a hitelesített felhasználók, a ZRNO-tulajdonosok, valamint az a felhasználó számára elérhető, akinek személyazonosságát nyilvános adomány kapcsán megállapították (14. cikk). A hirdetők kapcsolattartási adataihoz való hozzáférés kizárólag a hitelesített felhasználók és a ZRNO-tulajdonosok számára elérhető.
 
@@ -204,6 +204,10 @@ Tilos az olyan javak és szolgáltatások kínálata és cseréje, amelyek forga
 
 Tilos továbbá az olyan hirdetés, amelynek tárgya a POEN vagy a ZRNO — azok kínálata, keresése, megvásárlása vagy eladása pénzért vagy a rendszeren kívüli más értékért (24. cikk).
 
+Tilos a javak és szolgáltatások kínálata a rendszeren kívüli pénzben vagy más eszközben történő fizetés kérésével, valamint a pénzben kifejezett összeg megjelölése a csere feltételeként vagy annak alternatívájaként. A csereterület a javak és szolgáltatások cseréjére szolgál a POEN-nyilvántartás frissítésével (22. cikk).
+
+Azokat a javakat, amelyek forgalmát jogszabály nyilvántartásba vételhez, engedélyhez vagy különös feltételekhez köti — különösen az alkoholtartalmú italokat és az állati eredetű élelmiszereket —, kizárólag olyan felhasználó kínálhatja, aki e feltételeknek megfelel. Az Alapítvány e feltételek teljesülését nem ellenőrzi és nem igazolja.
+
 A tiltott kategóriák felsorolása nem kimerítő. Az Alapítvány eltávolíthatja azt a bejegyzést, amelyről megállapítja, hogy sérti a jogszabályt, a jelen Feltételeket vagy a Szabályzatot, és az eltávolításról az indok megjelölésével értesíti a felhasználót.
 
 ### 22. cikk — A csere teljesítése
@@ -222,7 +226,9 @@ Ez különösen érvényes a nem hitelesített felhasználó hirdetése alapján
 
 A Platform nem kívánja meg a felhasználóktól, hogy a cserét külön megjelöljék, megerősítsék vagy értékeljék. A cseréről az egyetlen nyilvántartás a POEN-nyilvántartás frissítése, amelyet a felhasználók maguk hajtanak végre; ebből olvasható ki a cseréhez való hozzájárulás útja is (a KOLO rendszerről szóló szabályzat 40.b cikke).
 
-Az a felhasználó, aki nem teljesült csere miatt POEN-t írt át, a jelen Feltételek 37a. cikkével összhangban, a saját profiljáról kifogást nyújt be az Alapítványhoz. A kifogásról való döntés a Protokoll nyilvántartásában szereplő bejegyzésre vonatkozik; nem teszi az Alapítványt a csere felévé, és e cikk (5) bekezdése értelmében nem jelent közvetítést a cserében.
+Az Alapítvány a felhasználók közötti cserében nem állít ki számlát, nem vezet nyilvántartást a felhasználó forgalmáról, nem számít fel és nem von le adót vagy más közterhet, és nem adóügyi közvetítő.
+
+Az a felhasználó, aki nem teljesült csere miatt POEN-t írt át, a jelen Feltételek 37a. cikkével összhangban, a saját profiljáról kifogást nyújt be az Alapítványhoz. A kifogásról való döntés a Protokoll nyilvántartásában szereplő bejegyzésre vonatkozik; nem teszi az Alapítványt a csere felévé, és e cikk (6) bekezdése értelmében nem jelent közvetítést a cserében.
 
 E cikk rendelkezései a felhasználók közötti cserére vonatkoznak. Nem alkalmazandók a kollektív beszerzésre, amelyben az Alapítvány a szállítóval szemben a vevő és a szerződő fél.
 

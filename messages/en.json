@@ -653,17 +653,14 @@
     "aktivni_oglasi": "Active listings",
     "status_suspendovan": "Suspended",
     "oglas_aktivan": "Active",
-    "oglas_prodat": "Exchanged",
     "oglas_istekao": "Expired",
     "cena_po_dogovoru": "Negotiable",
     "novi_oglas": "New listing",
     "filter_svi": "All",
     "filter_aktivni": "Active",
-    "filter_prodati": "Exchanged",
     "nema_oglasa_jos": "You don't have any listings yet.",
     "objavite_prvi": "Post the first one!",
     "nema_oglasa_filter": "No listings match this filter.",
-    "prodato": "Exchanged",
     "ukloni": "Remove",
     "pratim_kategorije_naslov": "Categories I follow",
     "pratim_kategorije_opis": "Choose the Marketplace categories that interest you — the choice is saved immediately. On the Marketplace you switch them on with the “Followed only” filter.",
@@ -987,7 +984,7 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
@@ -1007,7 +1004,7 @@
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
-      "ver": "4.6.0"
+      "ver": "4.6.1"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
@@ -1035,7 +1032,7 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use · KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.5.9",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.6.1",
     "meta_privatnost_title": "Privacy Policy · KOLO",
     "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.5.9",
     "meta_statut_title": "KOLO Foundation Statute · KOLO",
@@ -1045,7 +1042,7 @@
     "meta_radnje_title": "Register of Processing Activities · KOLO",
     "meta_radnje_desc": "Register of personal data processing activities, version 4.5.9",
     "meta_rizici_title": "Risk Acceptance Statement · KOLO",
-    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.6.0",
+    "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.6.1",
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 4.6.0",
     "meta_pravilnik_title": "KOLO System Rulebooks · KOLO",
@@ -1208,7 +1205,7 @@
     "primer_most": "At the start they did not know one another. Now they are in the same circle.",
     "primer_napomena_bold": "POEN is not money.",
     "primer_napomena_1": "It is a record of what each person has given to the community.",
-    "primer_napomena_2": "The honey, the repair and the burek in this example are real. The amount in POEN is proposed by whoever posts the listing and agreed between the two sides. A price in dinars only serves as a reference point for that agreement. POEN is not bought for money and is not exchanged for money.",
+    "primer_napomena_2": "The honey, the repair and the burek in this example are real. The amount in POEN is proposed by whoever posts the listing and agreed between the two sides. The Foundation neither publishes nor recommends a ratio of POEN to the dinar. POEN is not bought for money and is not exchanged for money.",
     "kako_funkcionise_naslov": "How it works, in short",
     "kako_funkcionise_link": "Detailed explanation",
     "kako_funkcionise_link_postupak": "The whole process, step by step",
@@ -1570,7 +1567,9 @@
     "gde_uvod": "Every statement on this page rests on a published act. Their text governs, not this overview.",
     "nazad_link": "Back to How the system works",
     "porez_naslov": "Tax regulations",
-    "porez_tekst": "Personal income tax applies to income from all sources, including income realised in non-monetary form. The question is therefore not whether something is remuneration — it is whether the user received anything at all.\n\nWith POEN, they did not. The recording brings neither money nor goods, nothing passes from the Foundation's assets into the user's assets, the record so created cannot be turned into money, assigned or collected, and the Foundation neither determines nor publishes a value of POEN expressed in money. The Foundation pays no money to a user on any basis.\n\nWith a collective procurement, they did — and this is not concealed: the user receives a good purchased with the Foundation's dinar funds. The good is provided free of charge and without any consideration, in pursuit of the Foundation's registered objectives. The annulled record is extinguished and does not pass to the Foundation; it is not a unit acquired in order to collect the share, but the record of a contribution the user had already made to the common good. The total value a single user may collect in a calendar year is limited.\n\nWhat remains contested: how the competent authority will qualify that provision. The Foundation gives no tax advice and guarantees no tax treatment; users are responsible for their own tax obligations."
+    "porez_tekst": "Personal income tax applies to income from all sources, including income realised in non-monetary form. The question is therefore not whether something is remuneration — it is whether the user received anything at all.\n\nWith POEN, they did not. The recording brings neither money nor goods, nothing passes from the Foundation's assets into the user's assets, the record so created cannot be turned into money, assigned or collected, and the Foundation neither determines nor publishes a value of POEN expressed in money. The Foundation pays no money to a user on any basis.\n\nWith a collective procurement, they did — and this is not concealed: the user receives a good purchased with the Foundation's dinar funds. The good is provided free of charge and without any consideration, in pursuit of the Foundation's registered objectives. The annulled record is extinguished and does not pass to the Foundation; it is not a unit acquired in order to collect the share, but the record of a contribution the user had already made to the common good. The total value a single user may collect in a calendar year is limited.\n\nWhat remains contested: how the competent authority will qualify that provision. The Foundation gives no tax advice and guarantees no tax treatment; users are responsible for their own tax obligations.",
+    "pdv_naslov": "VAT and fiscalisation",
+    "pdv_tekst": "Value added tax and the fiscal receipt attach to supply — to the delivery of goods or services for consideration. The Foundation generates no supply of its own: a donation is not a delivery of goods or services, and buying goods is an input, not an output. The VAT registration threshold is measured against a taxable person's own supply, so it cannot be computed from donations received or funds spent.\n\nIn a collective procurement, the value added tax calculated in the price is borne by the Foundation as a cost and is not deducted as input tax. This is not a formality: a free-of-charge disposal from business assets is treated as a supply for consideration precisely where input tax has been deducted. The Foundation also maintains no point of sale or retail outlet, does not display the goods for sale, and accepts no payments from users, so no retail supply — and hence no fiscal receipt obligation — arises.\n\nIn an exchange between users, the Foundation does not issue invoices, does not keep records of a user's turnover, does not calculate or withhold taxes or other levies, and is not a tax intermediary. Amounts in listings are expressed in POEN; the Foundation neither publishes nor recommends a ratio of POEN to the dinar, and the Terms prohibit offering goods while seeking payment in money outside the system. For goods whose trade the law conditions upon registration, a permit, or special requirements — in particular alcoholic beverages and food of animal origin — the advertiser is responsible; the Foundation does not check or confirm that those requirements are met.\n\nWhat remains open: whether a competent authority may qualify the cancellation of a POEN record upon collecting a procurement share as consideration. If it could, the ceding of goods would be a supply by the Foundation and the whole conclusion above would fall with it. The Foundation does not provide tax advice and does not guarantee tax treatment; the user is responsible for their own tax obligations."
   },
   "kakoFunkcionisePage": {
     "poen_nije_kratko": "POEN is a record of what you gave — an entry in a ledger, not money you hold. There is no way to buy it or sell it for dinars, neither from us nor from anyone else.",
@@ -1792,7 +1791,6 @@
     "objavljeno": "Posted",
     "pregleda": "Views",
     "kontakt_telefon_label": "Contact phone:",
-    "oglas_prodat": "The listing has been exchanged",
     "oglas_deaktiviran": "This listing has been deactivated",
     "oglas_uklonjen": "This listing has been removed",
     "oglas_uklonjen_razlog": "Reason: {razlog}",
@@ -1803,6 +1801,7 @@
     "prijava_razlog_uvredljivo": "Offensive or threatening content",
     "prijava_razlog_licni_podaci": "Personal data of a third party",
     "prijava_razlog_prevara": "Fraud",
+    "prijava_razlog_placanje_van_sistema": "Requests payment in money outside the system",
     "prijava_razlog_drugo": "Other",
     "prijava_opis_placeholder": "Brief explanation (optional)",
     "prijava_posalji": "Send report",

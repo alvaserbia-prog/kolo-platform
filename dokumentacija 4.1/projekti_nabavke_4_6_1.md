@@ -44,6 +44,8 @@ Kolektivnom nabavkom ostvaruju se ciljevi Fondacije utvrđeni članom 6 Statuta,
 
 Kolektivna nabavka nije privredna delatnost. Fondacija po osnovu nabavke ne ostvaruje prihod ni dobit, dobra ne nudi na tržištu neodređenom krugu lica i po osnovu njihovog ustupanja ne stiče nikakvu vrednost. Sredstva kojima se dobra nabavljaju potiču iz donacija i pokroviteljskih doprinosa.
 
+Fondacija ne drži prodajno mesto ni maloprodajni objekat, dobra ne izlaže na prodaju i od korisnika ne prima uplate.
+
 Fondacija za ustupljeno dobro ne sme primiti naknadu u novcu ni u drugom obliku, ni od korisnika ni od trećeg lica.
 
 Uvođenje naknade za ustupljeno dobro predstavljalo bi privrednu delatnost i nije dopušteno bez izmene Statuta i upisa delatnosti u registar u skladu sa zakonom.
@@ -362,7 +364,7 @@ Odredba člana 22 Uslova korišćenja, prema kojoj Fondacija nije strana u razme
 
 Korisnik sa dobavljačem ne stupa u ugovorni odnos. Preuzimanje dela nije kupovina i ne zasniva ugovorni odnos između korisnika i Fondacije u pogledu POEN-a.
 
-Nabavka se izvršava kod registrovanog pravnog lica odnosno preduzetnika, po računu koji Fondacija čuva. Porez na dodatu vrednost obračunat u ceni Fondacija snosi kao trošak nabavke i ne odbija ga kao prethodni porez.
+Nabavka se izvršava kod registrovanog pravnog lica odnosno preduzetnika, po računu koji Fondacija čuva. Porez na dodatu vrednost obračunat u ceni Fondacija snosi kao trošak nabavke i ne odbija ga kao prethodni porez. Dobavljač promet dobara izvršava prema Fondaciji i po tom osnovu izdaje račun; predaja dela korisniku je izvršenje obaveze dobavljača prema Fondaciji, a ne promet prema korisniku, i korisnik dobavljaču ništa ne plaća. Odluka kojom se nabavka pokreće i prihvaćena ponuda sadrže tu odredbu.
 
 Fondacija prema dobavljaču ugovara i ostvaruje prava po osnovu nedostatka dobra u korist korisnika programa. Kada korisnik prijavi nedostatak, Fondacija bez odlaganja istupa prema dobavljaču i o ishodu obaveštava korisnika. Dobro koje dobavljač zameni Fondacija ustupa istom korisniku, bez novog poništenja zapisa POEN-a.
 

@@ -118,8 +118,12 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // radi preuzimanja; čl. 20 — kalkulacija se deli, dinarska strana ide uz čl. 31
   // (inače se odnos POEN:RSD čita deljenjem); nov čl. 21a — godišnja granica
   // dinarske vrednosti preuzetih dobara po korisniku.
-    fajl: "projekti_nabavke_4_6_0.md",
-    verzija: "4.6.0",
+  // 4.6.1 — R-05: čl. 3a — Fondacija ne drži prodajno mesto i ne prima uplate
+  // (fiskalizacija i PDV vezuju se za promet na malo, koji time ne postoji);
+  // čl. 30 — predaja dela korisniku je izvršenje obaveze dobavljača prema
+  // Fondaciji, a ne njegov promet prema korisniku.
+    fajl: "projekti_nabavke_4_6_1.md",
+    verzija: "4.6.1",
   },
 };
 

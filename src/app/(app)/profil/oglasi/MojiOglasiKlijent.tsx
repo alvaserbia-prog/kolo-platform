@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
 import { kategorijaKljuc } from "@/lib/kategorije";
 
@@ -18,20 +17,17 @@ interface Oglas {
   status: string;
   slike: number;
   createdAt: string;
-  soldAt: string | null;
   /** Razlog uklanjanja od strane Fondacije (Uslovi čl. 25 st. 2). */
   uklonjenRazlog: string | null;
 }
 
 const statusBoja: Record<string, string> = {
   ACTIVE:   "bg-kolo-green-100 text-kolo-green-700",
-  SOLD:     "bg-kolo-info-light text-kolo-info",
   EXPIRED:  "bg-kolo-bg text-kolo-muted",
   UKLONJEN: "bg-kolo-danger-light text-kolo-danger",
 };
 
 export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
-  const locale = useLocale();
   const t = useTranslations("profil");
   const tPijaca = useTranslations("pijaca");
   const router = useRouter();
@@ -40,14 +36,12 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
 
   const statusLabela: Record<string, string> = {
     ACTIVE: t("oglas_aktivan"),
-    SOLD: t("oglas_prodat"),
     EXPIRED: t("oglas_istekao"),
     UKLONJEN: tPijaca("oglas_uklonjen"),
   };
 
   const filtrirani = listings.filter((l) => {
     if (filter === "aktivni") return l.status === "ACTIVE";
-    if (filter === "prodati") return l.status === "SOLD";
     return true;
   });
 
@@ -82,7 +76,6 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
         {([
           ["sve", t("filter_svi")],
           ["aktivni", t("filter_aktivni")],
-          ["prodati", t("filter_prodati")],
         ] as [string, string][]).map(([val, lab]) => (
           <button
             key={val}
@@ -118,12 +111,6 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
                   <span className="text-xs text-kolo-muted">{tPijaca(`kategorija_${kategorijaKljuc(l.category)}`)}</span>
                   <span className="text-xs text-kolo-border">·</span>
                   <span className="text-xs font-semibold text-kolo-green-700">{formatCenaGlavni(l, t("cena_po_dogovoru"))}{prikaziJedinicuCene(l) ? " POEN" : ""}</span>
-                  {l.soldAt && (
-                    <>
-                      <span className="text-xs text-kolo-border">·</span>
-                      <span className="text-xs text-kolo-muted">{t("prodato")}: {new Date(l.soldAt).toLocaleDateString(intlTag(locale))}</span>
-                    </>
-                  )}
                 </div>
                 {/* Razlog uklanjanja — vlasnik mora da zna zašto (Uslovi čl. 25 st. 2). */}
                 {l.status === "UKLONJEN" && l.uklonjenRazlog && (

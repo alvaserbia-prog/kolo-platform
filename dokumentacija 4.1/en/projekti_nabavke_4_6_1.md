@@ -46,6 +46,8 @@ Collective procurement pursues the purposes of the Foundation established by Art
 
 Collective procurement is not an economic activity. The Foundation derives no revenue and no profit from the procurement, does not offer the goods on the market to an indeterminate circle of persons, and acquires no value whatsoever on the basis of ceding them. The funds used to acquire the goods originate from donations and patronage contributions.
 
+The Foundation maintains no point of sale or retail outlet, does not display the goods for sale, and accepts no payments from users.
+
 The Foundation may not receive consideration for a ceded good, whether in money or in any other form, either from users or from a third party.
 
 Introducing consideration for a ceded good would constitute an economic activity and is not permitted without amending the Statute and registering that activity in accordance with the law.
@@ -364,7 +366,7 @@ The provision of Article 22 of the Terms of Use, according to which the Foundati
 
 The user does not enter into a contractual relationship with the supplier. Collection of a share is not a purchase and does not establish a contractual relationship between the user and the Foundation with respect to POEN.
 
-The procurement is executed with a registered legal entity or entrepreneur, on the basis of an invoice which the Foundation retains. The value added tax calculated in the price is borne by the Foundation as a cost of procurement and is not deducted as input tax.
+The procurement is executed with a registered legal entity or entrepreneur, on the basis of an invoice which the Foundation retains. The value added tax calculated in the price is borne by the Foundation as a cost of procurement and is not deducted as input tax. The supplier effects the supply of the goods to the Foundation and issues the invoice on that basis; the handover of a share to a user is the performance of the supplier's obligation towards the Foundation and not a supply to the user, and the user pays the supplier nothing. The decision initiating the procurement and the accepted bid contain that provision.
 
 In relation to the supplier, the Foundation contracts for and exercises the rights arising from a defect in the goods for the benefit of the users of the programme. Where a user reports a defect, the Foundation acts without delay towards the supplier and informs the user of the outcome. Goods replaced by the supplier are made available by the Foundation to the same user, without a new annulment of POEN records.
 

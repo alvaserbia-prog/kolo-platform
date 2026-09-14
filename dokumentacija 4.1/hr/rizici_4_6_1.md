@@ -92,6 +92,8 @@ Zaklada korisniku ni po jednoj osnovi ne isplaćuje novac. Upisom POEN-a korisni
 
 Iznimka je preuzimanje dijela iz kolektivne nabave, u kojem korisnik prima dobro. Ono se ustupa bez naknade i bez protučinidbe, u ostvarivanju ciljeva Zaklade, a ukupna vrijednost koju jedan korisnik može preuzeti u kalendarskoj godini je ograničena (članak 21.a Pravilnika o projektima i kolektivnim nabavama).
 
+Za dobra čiji promet zakon uvjetuje registracijom, dozvolom ili posebnim uvjetima važi članak 21. Uvjeta korištenja: takva dobra može nuditi samo korisnik koji te uvjete ispunjava, a Zaklada njihovu ispunjenost ne provjerava i ne potvrđuje.
+
 Zaklada ne pruža porezni savjet i ne može jamčiti porezni tretman aktivnosti korisnika u sustavu. Korisnik je odgovoran za vlastite porezne obveze koje mogu nastati u vezi sa sudjelovanjem u sustavu i preporučuje mu se da se posavjetuje s poreznim savjetnikom.
 
 ### Članak 11. — Regulatorni rizik

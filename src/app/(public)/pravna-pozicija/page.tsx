@@ -69,6 +69,10 @@ export default async function PravnaPozicijaPage() {
     // porezu — a Poreska uprava je po sopstvenoj proceni registra rizika regulator
     // koji najpre zaista dođe, jer ne mora da pobija ništa konceptualno.
     { naslov: t("porez_naslov"), tekst: t("porez_tekst") },
+    // 🔴 PDV i fiskalizacija dodati uz R-05. Odvojeni od poreza na dohodak
+    // namerno: tamo je pitanje da li korisnik nešto PRIMA, ovde da li Fondacija
+    // ima SOPSTVENI promet. Dve različite odbrane, dva različita obveznika.
+    { naslov: t("pdv_naslov"), tekst: t("pdv_tekst") },
   ];
   // Dva mesta koja mehanika sama otvara. Stoje NA STRANI, ne u fusnoti: ko ih
   // uoči sam, a ne nađe odgovor, zaključiće da odgovora nema.

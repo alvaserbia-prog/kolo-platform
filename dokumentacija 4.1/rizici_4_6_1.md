@@ -90,6 +90,8 @@ Fondacija korisniku ni po jednom osnovu ne isplaćuje novac. Upisom POEN-a koris
 
 Izuzetak je preuzimanje dela iz kolektivne nabavke, u kome korisnik prima dobro. Ono se ustupa bez naknade i bez protivčinidbe, u ostvarivanju ciljeva Fondacije, a ukupna vrednost koju jedan korisnik može preuzeti u kalendarskoj godini je ograničena (član 21a Pravilnika o projektima i kolektivnim nabavkama).
 
+Za dobra čiji promet zakon uslovljava registracijom, dozvolom ili posebnim uslovima važi član 21 Uslova korišćenja: takva dobra može nuditi samo korisnik koji te uslove ispunjava, a Fondacija njihovu ispunjenost ne proverava i ne potvrđuje.
+
 Fondacija ne pruža poreski savet i ne može garantovati poreski tretman aktivnosti korisnika u sistemu. Korisnik je odgovoran za sopstvene poreske obaveze koje mogu nastati u vezi sa učešćem u sistemu i preporučuje mu se da se konsultuje sa poreskim savetnikom.
 
 ### Član 11 — Regulatorni rizik

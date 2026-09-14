@@ -646,17 +646,14 @@
     "aktivni_oglasi": "Aktív hirdetések",
     "status_suspendovan": "Felfüggesztve",
     "oglas_aktivan": "Aktív",
-    "oglas_prodat": "Elcserélve",
     "oglas_istekao": "Lejárt",
     "cena_po_dogovoru": "Megegyezés szerint",
     "novi_oglas": "Új hirdetés",
     "filter_svi": "Mind",
     "filter_aktivni": "Aktív",
-    "filter_prodati": "Elcserélt",
     "nema_oglasa_jos": "Még nincs hirdetésed.",
     "objavite_prvi": "Add fel az elsőt!",
     "nema_oglasa_filter": "Ennek a szűrőnek nem felel meg hirdetés.",
-    "prodato": "Elcserélve",
     "ukloni": "Eltávolítás",
     "pratim_kategorije_naslov": "Követett kategóriák",
     "pratim_kategorije_opis": "Válaszd ki a Piac téged érdeklő kategóriáit — a választás azonnal mentődik. A Piacon a „Csak követettek” szűrővel kapcsolod be őket.",
@@ -980,7 +977,7 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
@@ -1000,7 +997,7 @@
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
-      "ver": "4.6.0"
+      "ver": "4.6.1"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
@@ -1028,7 +1025,7 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek · KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.5.9-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.1-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat · KOLO",
     "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.5.9-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya · KOLO",
@@ -1038,7 +1035,7 @@
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása · KOLO",
     "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.5.9-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat · KOLO",
-    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.0-es verzió",
+    "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.1-es verzió",
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.0-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai · KOLO",
@@ -1201,7 +1198,7 @@
     "primer_most": "Az elején nem ismerték egymást. Most ugyanabban a körben vannak.",
     "primer_napomena_bold": "A POEN nem pénz.",
     "primer_napomena_1": "Feljegyzés arról, ki mit adott a közösségnek.",
-    "primer_napomena_2": "A méz, a javítás és a burek ebben a példában valódi. A POEN-ben kifejezett összeget az javasolja, aki a hirdetést feladja, és a két fél állapodik meg róla. A dinárban megadott ár csak tájékoztató a megállapodáshoz. A POEN nem vásárolható meg pénzért, és nem váltható pénzre.",
+    "primer_napomena_2": "A méz, a javítás és a burek ebben a példában valódi. A POEN-ben kifejezett összeget az javasolja, aki a hirdetést feladja, és a két fél állapodik meg róla. Az Alapítvány a POEN és a dinár arányát nem teszi közzé és nem ajánlja. A POEN nem vásárolható meg pénzért, és nem váltható pénzre.",
     "kako_funkcionise_naslov": "Hogyan működik, röviden",
     "kako_funkcionise_link": "Részletes magyarázat",
     "kako_funkcionise_link_postupak": "A teljes folyamat, lépésről lépésre",
@@ -1563,7 +1560,9 @@
     "gde_uvod": "E lap minden állítása közzétett aktuson alapul. Azok szövege az irányadó, nem ez az áttekintés.",
     "nazad_link": "Vissza a Hogyan működik a rendszer oldalra",
     "porez_naslov": "Adójogi előírások",
-    "porez_tekst": "A személyi jövedelemadó minden forrásból származó jövedelmet terhel, ideértve a nem pénzbeli formában szerzett jövedelmet is. Nem az tehát a kérdés, hogy valami térítés-e, hanem az, hogy a felhasználó kapott-e egyáltalán valamit.\n\nA POEN esetében nem. A bejegyzéssel sem pénzt, sem dolgot nem kap, semmi nem kerül át az Alapítvány vagyonából a felhasználó vagyonába, a keletkezett bejegyzés nem tehető pénzzé, nem engedményezhető és nem érvényesíthető, az Alapítvány pedig a POEN pénzben kifejezett értékét nem állapítja meg és nem teszi közzé. Az Alapítvány a felhasználónak semmilyen jogcímen nem fizet pénzt.\n\nA közösségi beszerzés esetében igen, és ezt nem is rejtjük el: a felhasználó az Alapítvány dináreszközeiből vásárolt jószágot kap. A jószágot ellenszolgáltatás és bármiféle viszontszolgáltatás nélkül juttatják, az Alapítvány bejegyzett céljainak megvalósítása keretében. Az érvénytelenített bejegyzés megszűnik, és nem száll át az Alapítványra; nem a rész átvétele céljából megszerzett egység, hanem annak a hozzájárulásnak a nyilvántartása, amelyet a felhasználó a közjó javára már megtett. Az az összérték, amelyet egy felhasználó egy naptári évben átvehet, korlátozott.\n\nAmi vitatott marad: hogyan minősíti az illetékes hatóság ezt a juttatást. Az Alapítvány nem nyújt adótanácsadást és nem szavatolja az adójogi megítélést; saját adókötelezettségeiért a felhasználó felel."
+    "porez_tekst": "A személyi jövedelemadó minden forrásból származó jövedelmet terhel, ideértve a nem pénzbeli formában szerzett jövedelmet is. Nem az tehát a kérdés, hogy valami térítés-e, hanem az, hogy a felhasználó kapott-e egyáltalán valamit.\n\nA POEN esetében nem. A bejegyzéssel sem pénzt, sem dolgot nem kap, semmi nem kerül át az Alapítvány vagyonából a felhasználó vagyonába, a keletkezett bejegyzés nem tehető pénzzé, nem engedményezhető és nem érvényesíthető, az Alapítvány pedig a POEN pénzben kifejezett értékét nem állapítja meg és nem teszi közzé. Az Alapítvány a felhasználónak semmilyen jogcímen nem fizet pénzt.\n\nA közösségi beszerzés esetében igen, és ezt nem is rejtjük el: a felhasználó az Alapítvány dináreszközeiből vásárolt jószágot kap. A jószágot ellenszolgáltatás és bármiféle viszontszolgáltatás nélkül juttatják, az Alapítvány bejegyzett céljainak megvalósítása keretében. Az érvénytelenített bejegyzés megszűnik, és nem száll át az Alapítványra; nem a rész átvétele céljából megszerzett egység, hanem annak a hozzájárulásnak a nyilvántartása, amelyet a felhasználó a közjó javára már megtett. Az az összérték, amelyet egy felhasználó egy naptári évben átvehet, korlátozott.\n\nAmi vitatott marad: hogyan minősíti az illetékes hatóság ezt a juttatást. Az Alapítvány nem nyújt adótanácsadást és nem szavatolja az adójogi megítélést; saját adókötelezettségeiért a felhasználó felel.",
+    "pdv_naslov": "ÁFA és fiskalizáció",
+    "pdv_tekst": "A hozzáadottérték-adó és a nyugtaadás a forgalomhoz kötődik — javak vagy szolgáltatások ellenérték fejében történő értékesítéséhez. Az Alapítványnak saját forgalma nincs: az adomány nem javak vagy szolgáltatások értékesítése, a javak megvásárlása pedig beszerzés, nem értékesítés. Az áfaalanyiság küszöbét az adóalany saját forgalmán mérik, ezért a kapott adományokból és az elköltött eszközökből nem számítható ki.\n\nA kollektív beszerzésnél az árban felszámított hozzáadottérték-adót az Alapítvány költségként viseli, és azt előzetesen felszámított adóként nem vonja le. Ez nem formalitás: az üzleti vagyonból történő ingyenes átadás éppen akkor minősül ellenérték fejében történő értékesítésnek, ha az előzetesen felszámított adót levonták. Az Alapítvány továbbá nem tart fenn eladási helyet vagy kiskereskedelmi üzletet, a javakat nem állítja ki eladásra, és a felhasználóktól nem fogad el befizetést, így kiskereskedelmi forgalom — és ezzel nyugtaadási kötelezettség — nem keletkezik.\n\nA felhasználók közötti cserében az Alapítvány nem állít ki számlát, nem vezet nyilvántartást a felhasználó forgalmáról, nem számít fel és nem von le adót vagy más közterhet, és nem adóügyi közvetítő. A hirdetésekben szereplő összegek POEN-ben vannak megadva; az Alapítvány a POEN és a dinár arányát nem teszi közzé és nem ajánlja, a rendszeren kívüli pénzbeli fizetés kérésével történő kínálatot pedig a Feltételek tiltják. Azokért a javakért, amelyek forgalmát jogszabály nyilvántartásba vételhez, engedélyhez vagy különös feltételekhez köti — különösen az alkoholtartalmú italokért és az állati eredetű élelmiszerekért — a hirdető felel; az Alapítvány e feltételek teljesülését nem ellenőrzi és nem igazolja.\n\nAmi nyitott marad: minősítheti-e az illetékes szerv a POEN-bejegyzés törlését a beszerzési rész átvételekor ellenértéknek. Ha igen, a javak átengedése az Alapítvány forgalma lenne, és a fenti következtetés vele együtt dőlne meg. Az Alapítvány nem nyújt adótanácsadást, és az adójogi megítélést nem szavatolja; a saját adókötelezettségeiért a felhasználó felel."
   },
   "kakoFunkcionisePage": {
     "poen_nije_kratko": "A POEN annak a bejegyzése, amit adtál — sor a könyvben, nem pedig pénz, amit tartasz. Nincs mód dinárért megvenni vagy eladni, sem tőlünk, sem mástól.",
@@ -1783,7 +1782,6 @@
     "objavljeno": "Közzétéve",
     "pregleda": "Megtekintés",
     "kontakt_telefon_label": "Kapcsolattartó telefonszám:",
-    "oglas_prodat": "A hirdetés elcserélve",
     "oglas_deaktiviran": "Ezt a hirdetést inaktiválták",
     "oglas_uklonjen": "Ezt a hirdetést eltávolították",
     "oglas_uklonjen_razlog": "Indok: {razlog}",
@@ -1794,6 +1792,7 @@
     "prijava_razlog_uvredljivo": "Sértő vagy fenyegető tartalom",
     "prijava_razlog_licni_podaci": "Harmadik személy személyes adatai",
     "prijava_razlog_prevara": "Csalás",
+    "prijava_razlog_placanje_van_sistema": "A rendszeren kívüli pénzbeli fizetést kér",
     "prijava_razlog_drugo": "Egyéb",
     "prijava_opis_placeholder": "Rövid magyarázat (nem kötelező)",
     "prijava_posalji": "Bejelentés küldése",

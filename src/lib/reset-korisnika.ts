@@ -25,7 +25,6 @@
  */
 import { prisma } from "@/lib/prisma";
 import {
-  ListingStatus,
   PredlogStatus,
   TipKorisnika,
   UserStatus,
@@ -191,11 +190,6 @@ export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezult
     select: { id: true, images: true },
   });
   const obrisanoOglasa = prebroj(await prisma.marketplaceListing.deleteMany({ where: { sellerId: userId } }));
-  // Oglasi drugih ljudi koje je ovaj nalog „kupio" vraćaju se u ponudu.
-  await prisma.marketplaceListing.updateMany({
-    where: { buyerId: userId },
-    data: { buyerId: null, soldAt: null, status: ListingStatus.ACTIVE },
-  });
   prebroj(await prisma.oglasUpit.deleteMany({ where: { posiljacId: userId } }));
   prebroj(await prisma.prijavaOglasa.deleteMany({ where: { prijaviocId: userId } }));
   prebroj(await prisma.followedCategory.deleteMany({ where: { userId } }));

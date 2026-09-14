@@ -233,6 +233,28 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-14 (trideset drugi put):** na **4.6.1** idu **TRI akta** —
+Uslovi korišćenja (sa 4.5.9), Pravilnik o projektima i kolektivnim nabavkama (sa
+4.6.0) i Izjava o prihvatanju rizika (sa 4.6.0). Ostalih četrnaest ostaje gde jeste.
+Povod je **R-05 iz novog registra rizika** (PDV i fiskalizacija). Sadržinski, vidi
+sekciju „PDV i fiskalizacija: dinarskog prometa nema" ispod.
+
+🟢 **Nijedno unakrsno upućivanje nije zastarelo** — provereno: nijedan od preostalih
+akata ne upućuje na ta tri po šifri, a sami ta tri ne nose verzijska upućivanja.
+Prvi bump u nizu koji ne ostavlja slomljen pokazivač.
+
+🟢 **Politika, DPIA i Registar radnji obrade NISU dirani** — nijedna mera ne uvodi
+nov podatak o ličnosti ni novu radnju obrade; nov razlog prijave oglasa je vrednost
+u zatečenom enumu radnje koja je već popisana, a brisanje mrtvih polja oglasa
+**sužava** zatečeni obim.
+
+🔴 **Glavni Pravilnik NIJE bumpovan, i to je odluka.** Čl. 16 nosi istu formulaciju
+koju je M-6 ispravio u Uslovima čl. 18 („sadržaj ponude ili zahteva, **cena**,
+lokacija"), ali bump glavnog Pravilnika povlači ispravke upućivanja u DPIA i
+Pravilniku o učešću dece — pa i njihov bump. Zato brana za tu reč gleda **samo
+Uslove**, ne ceo set; širi se kad se Pravilnik jednom bumpuje. Uslovi koji govore
+„iznos u POEN-ima" nisu u suprotnosti sa Pravilnikom, samo su tačniji.
+
 **AŽURIRANO 2026-09-13 (trideset prvi put):** na **4.6.0** ide **OSAM akata** —
 Pravilnik o KOLO sistemu (sa 4.5.9), Pravilnik o programima podrške (sa 4.5.0),
 Pravilnik o operativnom doprinosu (sa 4.4.4), Pravilnik o projektima i kolektivnim
@@ -1466,6 +1488,158 @@ dali prava, to davanje više liči na prodaju. 🟢 **Rešeno setom 4.5.4** tako
 ne ide kroz korisnikovo pravo prema Fondaciji nego kroz **obavezu Fondacije prema
 sopstvenom programu** (čl. 30 st. 5) i kroz **ispravku evidencije**, koja nije
 povraćaj naknade (čl. 30a st. 6). Odbrana besplatnosti time ostaje netaknuta.
+
+### PDV i fiskalizacija: dinarskog prometa nema (R-05, 2026-09-14)
+
+Sprovođenje rizika **R-05 iz novog registra** (`docs/registar-rizika-regulatori-2026-09.md`)
+— PDV i fiskalizacija, zatečena ocena **8** (stvarno **7** na dan obrade), po merama **4**.
+
+🔴 **Rizik je PODELJEN na tri grane** i to je nosiva ispravka — unutra su tri različita
+obveznika i tri različite odbrane:
+
+| | **A — korisnik na Pijaci** | **B — Fondacija** | **C — dobavljač** |
+|---|---|---|---|
+| Rizik | razmena kao promet, fiskalni račun | poništenje POEN-a kao naknada | predaja robe u njegovom objektu |
+| Odbrana | odsustvo dinara u sistemu | čl. 3a i 19 nabavki (zatečene) | ugovor i odluka o nabavci |
+| Po merama | **4** | 3 | 2 |
+
+**Pravilo za ceo R-05: nijedna mera ne uvodi dinarski iznos uz POEN, dinarski prag za
+POEN, ni proveru statusa korisnika.** Prvo obara M-7a iz R-01, drugo je zabranjena
+tema uz R-02, treće je odbijena mera uz R-10.
+
+#### Šta je bilo, a više nije
+
+🔴 **Oglas je mogao da traži dinare i to je bila najteža tačka.** Uslovi čl. 19
+propisuje da se *iznos u oglasu* izražava u POEN-ima — ali to je pravilo o **polju za
+iznos**, ne o opisu, a opis je slobodan tekst; čl. 21 st. 2 zabranjuje oglase čiji je
+**predmet POEN** (obrnut smer). Oglas *„10 kg meda — 5.000 POENA ili 5.000 dinara"* bio
+je dopušten. PDV i fiskalizacija vezuju se za **dinarski** promet: dok su iznosi u
+POEN-ima, prag nema iz čega da se izračuna, a čim se traže dinari, Platforma je mesto
+na kome se dinarski promet oglašava i dogovara. Sada zabranjeno (**čl. 21**, nov stav),
+uz nov razlog prijave `PLACANJE_VAN_SISTEMA`.
+🔴 **Bez filtera reči.** Ne skenira se opis na „din"/„RSD"/„€" — automatska filtracija
+je odbijena odlukom od 2026-08-04, a regularni izraz bi lažno pogađao bezazlene
+rečenice. Zabrana + korisnička prijava + uklanjanje, isto kao ostatak čl. 21.
+🟡 Uz to takav oglas ne koristi Protokol: ne evidentira doprinos, ne ulazi u zero-sum
+i ne otvara nijedan korak putanje razmene (čl. 40b).
+
+🔴 **Landing je još objavljivao dinarski orijentir** — `landing.primer_napomena_2`:
+*„Dinarska cena služi samo kao orijentir pri dogovoru."* Zaostatak posle R-01 M-7a.
+„Služi kao orijentir" je **Fondacija koja preporučuje odnos**, dakle utvrđena vrednost
+POEN-a u novcu — a to je i PDV osnovica po tržišnoj vrednosti i element definicije
+virtuelne valute. Sada: *„Fondacija odnos POENA prema dinaru ne objavljuje i ne
+preporučuje."* 🔴 Odnos se time **ne prećutkuje** (M-7b je odbijena uz R-01) — menja se
+ko za njim stoji. Zaključano `pdv-fiskalizacija-izvor.test.ts` na pet jezika.
+
+🔴 **Šema je nosila dokaz prodaje koji sistem nikad ne pravi.** `MarketplaceListing` je
+imao `buyerId`, `soldAt`, `jedinica`, `kolicina` i status `SOLD`, a **nijedna ruta ih
+nije postavljala**: tok `/api/pijaca/[id]/kupi` ne postoji, `PATCH` menja status samo na
+`EXPIRED`, i jedino mesto koje je `soldAt` dodirivalo bio je reset naloga — koji ga
+nuluje. Uz to su **tri mesta u UI-u** ta polja prikazivala („Prodato: datum", filter
+„prodati", grana po `SOLD`). Obrisano (migracija `20260914120100_pijaca_mrtva_polja`):
+gasi `seller`/`buyer`/`price`/`soldAt` sliku iz koje se oglašavanje čita kao
+posredovanje u prodaji, i skida poreski dokaz koji nikad nije ni nastao.
+🔴 **`UPDATE SOLD → EXPIRED` ide PRE zamene enum tipa** — Postgres ne zna da izbaci
+vrednost iz enuma, pa se tip zamenjuje novim, a zamena pada ako ijedan red drži staru
+vrednost.
+
+#### Šta akti sada kažu
+
+- **Uslovi čl. 21** — nov stav sa zabranom dinarskog plaćanja (gore) i nov stav:
+  dobra čiji promet zakon uslovljava registracijom, dozvolom ili posebnim uslovima —
+  **naročito alkoholna pića i hranu životinjskog porekla** — sme nuditi samo korisnik
+  koji te uslove ispunjava, a **Fondacija ispunjenost ne proverava i ne potvrđuje**.
+  🔴 Ta druga polovina mora da stoji: prećutana, akt bi stvorio očekivanje provere i
+  time odgovornost koju Fondacija po čl. 25 st. 1 nema.
+- **Uslovi čl. 22** — nov stav: Fondacija u razmeni **ne izdaje račune, ne vodi
+  evidencije o prometu korisnika, ne obračunava i ne obustavlja poreze i nije poreski
+  posrednik**. Bez toga je po difoltu čitamo kao isplatioca (isto što R-02 obara).
+- **Uslovi čl. 18 st. 2** — „cena" → „iznos u POEN-ima" (jedina takva reč u tom delu
+  akta, i stajala je baš u stavu o tome šta je javno svakom posetiocu).
+- **Nabavke čl. 3a** — Fondacija **ne drži prodajno mesto ni maloprodajni objekat**,
+  dobra ne izlaže na prodaju i od korisnika ne prima uplate. 🔴 Tri činjenice, **bez
+  reči „fiskalizacija" i bez poreske kvalifikacije** — isto pravilo po kome se uz R-02
+  u akt nije upisala reč „poklon". Nosi ga to što obaveza fiskalnog računa visi o tome
+  da li Fondacija vrši **promet na malo**, a promet pretpostavlja naknadu i prodajno
+  mesto.
+- **Nabavke čl. 30** — dobavljač promet izvršava **prema Fondaciji** i po tom osnovu
+  izdaje račun; **predaja dela korisniku je izvršenje te obaveze, a ne promet prema
+  korisniku**, i korisnik dobavljaču ništa ne plaća; odluka o nabavci i prihvaćena
+  ponuda to sadrže. 🔴 Poslednja rečenica je nosiva — bez nje odredba živi samo u
+  pravilniku koji dobavljač nikad ne čita, a roba fizički prelazi stotinama ljudi u
+  njegovom objektu.
+- **Izjava o rizicima čl. 10** — uputno na čl. 21 Uslova za dobra sa posebnim uslovima.
+
+🟢 **Grana B je zatečena uređena** (čl. 3a, 19, 30 st. 4 i godišnja granica iz čl. 21a) i
+R-05 je nije dirao u supstanci. 🔴 Rečenica da Fondacija PDV **snosi kao trošak i ne
+odbija kao prethodni porez** nije formalnost nego odbrana: besplatno davanje iz poslovne
+imovine izjednačava se sa prometom uz naknadu **samo kad je prethodni porez korišćen**.
+Ne skraćivati je na „Fondacija plaća PDV" — tako napisano, čita se kao da ima sopstveni
+promet.
+
+#### Copy
+
+**`/pravna-pozicija` dobija odeljak „PDV i fiskalizacija"**, odvojen od poreskog odeljka
+iz R-02 namerno: tamo je pitanje da li korisnik nešto **prima**, ovde da li Fondacija ima
+**sopstveni promet**. Dva obveznika, dve odbrane. Odeljak otvoreno kaže šta ostaje sporno
+(kvalifikacija poništenja POEN-a kao naknade) i da Fondacija poreski tretman ne garantuje.
+
+🔴 **FAQ 48 se NE dira** — već kaže da KOLO ne izdaje fiskalne račune i ne vodi knjige i
+da za alkohol i hranu postoje posebni propisi, pa je usklađen sa čl. 21 bez ijedne
+izmene.
+
+#### 🔴 Odluke vlasnika — i šta se iz njih NE sme izvesti
+
+1. 🔴 **Opšta obaveza registracije delatnosti NE ide u akte** — *„ovo je sve domaća
+   proizvodnja i ne bih naglašavao da su nam neophodni pravilnici ako to neko trguje baš
+   na malo."* Mera M-1 je time svedena sa obaveze korisnika na **razgraničenje
+   Fondacije**. Nije protivrečno sa alkoholom i mesom: ne propisuje se ništa o obimu i
+   maloprodaji, nego samo ono što se tiče **rizičnih dobara**.
+2. 🔴 **Upozorenje pri objavi oglasa se NE uvodi** — *„ne bih da odbijam ljude tom
+   informacijom."* Posledicu znati: obaveza iz čl. 21 od sada živi samo u Uslovima, pa
+   će takav oglas ponekad biti objavljen i skinut naknadno.
+3. 🟢 **Pozicija vlasnika: fizičko lice kroz platformu nije obveznik PDV-a.** U praksi
+   drži (prag nema dinarsku osnovicu, sporadično davanje viškova nije delatnost po
+   suštini). 🔴 **Ne upisuje se u akt** ni u jednom obliku — to je poreska kvalifikacija
+   **tuđe** obaveze, koju Izjava čl. 10 izričito ne daje. Isto pravilo koje je sprečilo
+   da se u akt upiše „Fondacija je oslobođena poreza".
+4. 🔴 **„Dinar kao merna jedinica" je odbijeno i ne predlagati ponovo.** Merne jedinice
+   propisuje metrologija, a dinar je zakonsko sredstvo plaćanja — netačna tvrdnja na
+   mestu gde smo inače u pravu. I da prođe, poreski organ ne meri ime jedinice nego
+   **postojanje odredljive vrednosti u novcu**, pa bi „POEN se meri dinarom" bio upravo
+   objavljen odnos: jedna takva rečenica vratila bi bod na R-01, R-02, R-05, R-07 i R-08
+   odjednom.
+
+🔴 **ZABRANJENE TEME uz R-05 — ne otvarati bez izričitog naloga:** opšta obaveza
+registracije delatnosti u aktima (D-1); dinar kao merna jedinica ili bilo koja
+formulacija po kojoj Fondacija odnos objavljuje ili preporučuje (D-4); tvrdnja u aktu da
+korisnik nije obveznik PDV-a (D-3); provera statusa, delatnosti ili registracije
+oglašivača; filter reči nad opisima oglasa; vraćanje `buyerId`/`soldAt`/`SOLD`.
+
+#### 🟡 Svesno prihvaćeni ostaci
+
+1. 🟡 **Glavni Pravilnik čl. 16 nosi „cena" na istom mestu** — nije dirano (vidi
+   obrazloženje uz bump iznad). Brana gleda samo Uslove.
+2. **Platforma promoviše domaću proizvodnju bez ijedne provere registracije**, namerno
+   (D-1, D-2). Mere daju obavezu, FAQ i osnov za uklanjanje — ne daju kontrolu.
+3. **Alkohol i hrana ostaju stvarno neprovereni** i posle čl. 21. Mera premešta
+   odgovornost, ne uklanja izloženost — i to je najiskreniji nalaz, jer je tu posledica
+   zdravlje ljudi a ne poreska prijava.
+4. **Kvalifikacija poništenja POEN-a kao naknade** ostaje pitanje nadležnog organa —
+   isti ostatak koji nose R-02 i R-10. Ako padne, i PDV i fiskalizacija padaju sa njim.
+5. **Obaveza informisanja o tome da li je druga strana trgovac** (ZZP) nije ispunjena i
+   ne može biti, jer se podatak namerno ne prikuplja. To je predmet **R-07**.
+
+🟡 **Put ka 3 je poznat i NE predlaže se:** alkoholna pića van Pijace u celini plus kapa
+na broj aktivnih oglasa za redovnog člana (danas je kapa od tri oglasa samo za
+nepotvrđenog, `MAX_AKTIVNIH_OGLASA`). Oba su restrikcije koje pogađaju obične članove.
+
+**Kod:** `src/lib/moderacija.ts` (`PLACANJE_VAN_SISTEMA`), `OglasDetalj.tsx`,
+`MojiOglasiKlijent.tsx`, `profil/oglasi/page.tsx`, `reset-korisnika.ts`,
+`pravna-pozicija/page.tsx`, `prisma/schema.prisma`. Migracije
+`20260914120000_prijava_placanje_van_sistema` (samo enum vrednost, ZASEBAN fajl) i
+`20260914120100_pijaca_mrtva_polja`. **Brana:** `__tests__/pdv-fiskalizacija-izvor.test.ts`
+(19 provera, gleda IZVOR) + odredbe zaključane u `pravni-dokumenti.test.ts` na sr/en/ru.
 
 ### Porez: POEN nije prihod, a roba iz nabavke je poklon (R-02, 2026-09-13)
 

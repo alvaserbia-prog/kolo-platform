@@ -653,17 +653,14 @@
     "aktivni_oglasi": "Aktivni oglasi",
     "status_suspendovan": "Suspendiran",
     "oglas_aktivan": "Aktivan",
-    "oglas_prodat": "Razmijenjen",
     "oglas_istekao": "Istekao",
     "cena_po_dogovoru": "Po dogovoru",
     "novi_oglas": "Novi oglas",
     "filter_svi": "Svi",
     "filter_aktivni": "Aktivni",
-    "filter_prodati": "Razmijenjeni",
     "nema_oglasa_jos": "Još nemaš oglasa.",
     "objavite_prvi": "Objavi prvi!",
     "nema_oglasa_filter": "Nema oglasa u ovom filteru.",
-    "prodato": "Razmijenjeno",
     "ukloni": "Ukloni",
     "pratim_kategorije_naslov": "Kategorije koje pratim",
     "pratim_kategorije_opis": "Izaberi kategorije Pijace koje te zanimaju, izbor se sprema odmah. Na Pijaci ih uključuješ filtrom „Samo praćene”.",
@@ -987,7 +984,7 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uvjeti korištenja KOLO platforme",
-      "ver": "4.5.9"
+      "ver": "4.6.1"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
@@ -1007,7 +1004,7 @@
     },
     "rizici": {
       "naslov": "Izjava o prihvaćanju rizika",
-      "ver": "4.6.0"
+      "ver": "4.6.1"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
@@ -1035,7 +1032,7 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sustavu"
     },
     "meta_uslovi_title": "Uvjeti korištenja · KOLO",
-    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.5.9",
+    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.6.1",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
     "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.5.9",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
@@ -1045,7 +1042,7 @@
     "meta_radnje_title": "Registar radnji obrade · KOLO",
     "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.5.9",
     "meta_rizici_title": "Izjava o prihvaćanju rizika · KOLO",
-    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.6.0",
+    "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.6.1",
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.0",
     "meta_pravilnik_title": "Pravilnici KOLO sustava · KOLO",
@@ -1208,7 +1205,7 @@
     "primer_most": "Na početku se nisu poznavali. Sad su u istom krugu.",
     "primer_napomena_bold": "POEN nije novac.",
     "primer_napomena_1": "To je zapis o tome što je tko dao zajednici.",
-    "primer_napomena_2": "Med, popravak i burek u ovom primjeru su stvarni. Iznos u POEN-ima predlaže onaj tko postavlja oglas, a dogovaraju ga dvije strane. Cijena u dinarima služi samo kao orijentir pri dogovoru. POEN se ne kupuje za novac i ne mijenja se za novac.",
+    "primer_napomena_2": "Med, popravak i burek u ovom primjeru su stvarni. Iznos u POEN-ima predlaže onaj tko postavlja oglas, a dogovaraju ga dvije strane. Zaklada odnos POEN-a prema dinaru ne objavljuje i ne preporučuje. POEN se ne kupuje za novac i ne mijenja se za novac.",
     "kako_funkcionise_naslov": "Kako funkcionira, ukratko",
     "kako_funkcionise_link": "Detaljno objašnjenje",
     "kako_funkcionise_link_postupak": "Cijeli postupak, korak po korak",
@@ -1570,7 +1567,9 @@
     "gde_uvod": "Svaka tvrdnja s ove stranice ima osnovu u objavljenim aktima. Mjerodavan je njihov tekst, ne ovaj pregled.",
     "nazad_link": "Natrag na Kako sustav radi",
     "porez_naslov": "Porezni propisi",
-    "porez_tekst": "Porez na dohodak građana oporezuje dohotke iz svih izvora, uključujući dohodak ostvaren u nenovčanom obliku. Nije, dakle, sporno je li nešto naknada — sporno je je li korisnik nešto primio.\n\nKod POEN-a nije. Upisom se ne prima ni novac ni stvar, ništa ne prelazi iz imovine Zaklade u imovinu korisnika, nastali se zapis ne može unovčiti, ustupiti niti naplatiti, a Zaklada ne utvrđuje niti objavljuje njegovu vrijednost izraženu u novcu. Zaklada korisniku ni po jednoj osnovi ne isplaćuje novac.\n\nKod kolektivne nabave jest, i to se ne krije: korisnik prima dobro kupljeno dinarskim sredstvima Zaklade. Dobro se ustupa bez naknade i bez ikakve protučinidbe, u ostvarivanju upisanih ciljeva Zaklade. Poništeni se zapis gasi i ne prelazi Zakladi; on nije jedinica pribavljena radi preuzimanja nego evidencija doprinosa koji je korisnik zajedničkom dobru već učinio. Ukupna vrijednost koju jedan korisnik može preuzeti u kalendarskoj godini je ograničena.\n\nŠto ostaje sporno: kako će nadležno tijelo kvalificirati to davanje. Zaklada ne pruža porezni savjet i porezni tretman ne jamči; za vlastite porezne obveze odgovara korisnik."
+    "porez_tekst": "Porez na dohodak građana oporezuje dohotke iz svih izvora, uključujući dohodak ostvaren u nenovčanom obliku. Nije, dakle, sporno je li nešto naknada — sporno je je li korisnik nešto primio.\n\nKod POEN-a nije. Upisom se ne prima ni novac ni stvar, ništa ne prelazi iz imovine Zaklade u imovinu korisnika, nastali se zapis ne može unovčiti, ustupiti niti naplatiti, a Zaklada ne utvrđuje niti objavljuje njegovu vrijednost izraženu u novcu. Zaklada korisniku ni po jednoj osnovi ne isplaćuje novac.\n\nKod kolektivne nabave jest, i to se ne krije: korisnik prima dobro kupljeno dinarskim sredstvima Zaklade. Dobro se ustupa bez naknade i bez ikakve protučinidbe, u ostvarivanju upisanih ciljeva Zaklade. Poništeni se zapis gasi i ne prelazi Zakladi; on nije jedinica pribavljena radi preuzimanja nego evidencija doprinosa koji je korisnik zajedničkom dobru već učinio. Ukupna vrijednost koju jedan korisnik može preuzeti u kalendarskoj godini je ograničena.\n\nŠto ostaje sporno: kako će nadležno tijelo kvalificirati to davanje. Zaklada ne pruža porezni savjet i porezni tretman ne jamči; za vlastite porezne obveze odgovara korisnik.",
+    "pdv_naslov": "PDV i fiskalizacija",
+    "pdv_tekst": "Porez na dodanu vrijednost i fiskalni račun vezani su za promet — za isporuku dobara ili usluga uz naknadu. Zaklada vlastiti promet ne ostvaruje: donacija nije isporuka dobara ni usluga, a kupnja dobara je ulaz, ne izlaz. Prag za ulazak u sustav PDV-a mjeri se na vlastiti promet poreznog obveznika, pa se iz primljenih donacija i iz potrošenih sredstava ne izračunava.\n\nKod kolektivne nabave porez na dodanu vrijednost obračunat u cijeni Zaklada snosi kao trošak i ne odbija ga kao pretporez. To nije formalnost: besplatno davanje iz poslovne imovine izjednačava se s prometom uz naknadu upravo kada je pretporez korišten. Uz to Zaklada ne drži prodajno mjesto ni prodavaonicu, dobra ne izlaže na prodaju i od korisnika ne prima uplate, pa promet na malo — a time ni obveza fiskalnog računa — ne nastaje.\n\nU razmjeni između korisnika Zaklada ne izdaje račune, ne vodi evidencije o prometu korisnika, ne obračunava i ne obustavlja poreze ni druga javna davanja i nije porezni posrednik. Iznosi u oglasima izraženi su u POEN-ima; Zaklada odnos POEN-a prema dinaru ne objavljuje i ne preporučuje, a nuđenje dobara uz traženje plaćanja u novcu izvan sustava Uvjeti zabranjuju. Za dobra čiji promet zakon uvjetuje registracijom, dozvolom ili posebnim uvjetima — osobito alkoholna pića i hranu životinjskog podrijetla — odgovara oglašivač; Zaklada ispunjenost tih uvjeta ne provjerava i ne potvrđuje.\n\nŠto ostaje sporno: može li nadležno tijelo poništenje zapisa POEN-a pri preuzimanju dijela iz nabave kvalificirati kao naknadu. Kad bi moglo, ustupanje dobara bilo bi promet Zaklade i cijeli zaključak iznad pao bi s njim. Zaklada ne pruža porezni savjet i porezni tretman ne jamči; za vlastite porezne obveze odgovara korisnik."
   },
   "kakoFunkcionisePage": {
     "poen_nije_kratko": "POEN je zapis o tome što si dao, kao upis u knjigu, a ne kao novac koji se drži. Ne postoji način da ga kupiš ili prodaš za dinare, ni od nas ni od bilo koga.",
@@ -1792,7 +1791,6 @@
     "objavljeno": "Objavljeno",
     "pregleda": "Pregleda",
     "kontakt_telefon_label": "Kontakt telefon:",
-    "oglas_prodat": "Oglas je razmijenjen",
     "oglas_deaktiviran": "Oglas je deaktiviran",
     "oglas_uklonjen": "Oglas je uklonjen",
     "oglas_uklonjen_razlog": "Razlog: {razlog}",
@@ -1803,6 +1801,7 @@
     "prijava_razlog_uvredljivo": "Uvredljiv ili prijeteći sadržaj",
     "prijava_razlog_licni_podaci": "Osobni podaci treće osobe",
     "prijava_razlog_prevara": "Prijevara",
+    "prijava_razlog_placanje_van_sistema": "Traži plaćanje u novcu izvan sustava",
     "prijava_razlog_drugo": "Drugo",
     "prijava_opis_placeholder": "Kratko objašnjenje (neobavezno)",
     "prijava_posalji": "Pošalji prijavu",

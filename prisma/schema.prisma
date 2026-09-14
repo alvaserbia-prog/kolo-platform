@@ -39,7 +39,6 @@ enum ProjectType {
 
 enum ListingStatus {
   ACTIVE
-  SOLD
   EXPIRED
   UKLONJEN // Fondacija uklonila zbog povrede Uslova/Pravilnika/zakona
 }
@@ -396,7 +395,6 @@ model User {
   oglasPrijave                     OglasPrijava[]            @relation("OglasPrijave")
   oglasEvidencije                  OglasEvidencija[]         @relation("OglasEvidencije")
   listings                         MarketplaceListing[]      @relation("SellerListings")
-  purchases                        MarketplaceListing[]      @relation("BuyerListings")
   prijaveOglasa                    PrijavaOglasa[]           @relation("PrijaviocOglasa")
   prijaveRazmene                   PrijavaRazmene[]          @relation("PrijaviocRazmene")
   prijavljeneRazmene               PrijavaRazmene[]          @relation("ProtivRazmene")
@@ -860,8 +858,6 @@ model MarketplaceListing {
   id             String        @id @default(uuid())
   sellerId       String
   seller         User          @relation("SellerListings", fields: [sellerId], references: [id])
-  buyerId        String?
-  buyer          User?         @relation("BuyerListings", fields: [buyerId], references: [id])
   // Smer oglasa (ponuda vs potražnja). Kod POTRAZNJA je cenaTip uvek DOGOVOR.
   tip            TipOglasa     @default(PONUDA)
   title          String
@@ -874,16 +870,11 @@ model MarketplaceListing {
   cenaTip        CenaTip       @default(FIKSNA)
   price          Int?
   cenaDo         Int?
-  // Opciona jedinica mere za cenu (kom, kg, g, l, ml, m, pak) i stanje na zalihama.
-  // Oba su informativna — ne utiču na tok kupovine (oglas se i dalje kupuje u celosti).
-  jedinica       String?
-  kolicina       Int?
   category       String
   images         String[]
   location       String?
   phone          String?
   status         ListingStatus @default(ACTIVE)
-  soldAt         DateTime?
   // Broj otvaranja stranice oglasa. Ne broje se pregledi samog oglašivača, a
   // isti posetilac se broji jednom dnevno (guard je u pretraživaču). Vidi ga
   // SAMO oglašivač — povratna informacija da oglas nije otišao u prazno.
@@ -939,6 +930,7 @@ enum PrijavaRazlog {
   UVREDLJIVO // čl. 22 — uznemiravanje, pretnje, diskriminacija
   LICNI_PODACI // čl. 24 — lični podaci trećih lica
   PREVARA // čl. 24 — prevara, manipulacija, nezakonita aktivnost
+  PLACANJE_VAN_SISTEMA // čl. 21 — traženje plaćanja u novcu ili drugom sredstvu van sistema
   DRUGO
 }
 

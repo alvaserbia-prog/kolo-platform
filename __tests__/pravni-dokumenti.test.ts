@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_6_0.md`, `uslovi_koriscenja_4_5_9.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_6_0.md`, `uslovi_koriscenja_4_6_1.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -31,11 +31,11 @@ const AKTI = [
   "dokaz_stvarnosti_4_4_1.md",
   "DPIA_4_5_2.md",
   "radnje_obrade_4_5_9.md",
-  "uslovi_koriscenja_4_5_9.md",
+  "uslovi_koriscenja_4_6_1.md",
   "politika_4_5_9.md",
   "statut_4_1_0.md",
   "whitepaper_4_6_0.md",
-  "rizici_4_6_0.md",
+  "rizici_4_6_1.md",
   "hijerarhija_4_4_6.md",
   "donacije_4_5_8.md",
   "operativni_4_6_0.md",
@@ -45,7 +45,7 @@ const AKTI = [
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce_dece_4_6_0.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
-  "projekti_nabavke_4_6_0.md",
+  "projekti_nabavke_4_6_1.md",
 ];
 
 /**
@@ -391,8 +391,19 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // jedan", sistem je sam objavljivao koliko POEN vredi u dinarima, pa se tabela
   // koeficijenta donacija čitala kao cenovnik. Zato se sada traži suprotno:
   // odsustvo pariteta i prisustvo odredbe da broj nije cena dobra.
-  "projekti_nabavke_4_6_0.md": {
+  "projekti_nabavke_4_6_1.md": {
     sr: [
+      // ═══ 4.6.1 (R-05) ═══
+      // 🔴 PDV i fiskalizacija vezuju se za promet na malo. Odbrana nije poreska
+      // kvalifikacija u aktu (to je zabranjeno pravilom uz R-02) nego činjenica iz
+      // koje sledi: Fondacija nema prodajno mesto i ne prima uplate, pa prometa nema.
+      "ne drži prodajno mesto ni maloprodajni objekat",
+      "od korisnika ne prima uplate",
+      // 🔴 Dobavljač: predaja dela korisniku je izvršenje obaveze prema Fondaciji, a
+      // ne njegov promet prema korisniku. Bez toga sto ljudi uzima robu u njegovom
+      // objektu bez ijednog fiskalnog računa — po uputstvu iz našeg pravilnika.
+      "izvršenje obaveze dobavljača prema Fondaciji",
+      "Odluka kojom se nabavka pokreće i prihvaćena ponuda sadrže tu odredbu",
       // ═══ 4.5.9 (R-02) ═══
       // 🔴 Nosivo za kvalifikaciju davanja: zapis se GASI, ne prelazi Fondaciji, i nije
       // jedinica pribavljena radi preuzimanja nego evidencija ranije učinjenog doprinosa.
@@ -460,6 +471,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Nepreuzeti delovi se ne prodaju",
     ],
     en: [
+      // 4.6.1 (R-05)
+      "maintains no point of sale or retail outlet",
+      "the performance of the supplier's obligation towards the Foundation",
       "The annulled record does not pass to the Foundation",
       "the record of a contribution they had already made",
       "must not be read as an expression of it",
@@ -495,6 +509,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "The collection period is three days",
     ],
     ru: [
+      // 4.6.1 (R-05)
+      "не содержит места продажи и розничного объекта",
+      "исполнением обязательства поставщика перед Фондом",
       "Аннулированная запись не переходит Фонду",
       "учёт вклада, который он уже внёс",
       "не должно читаться как её выражение",
@@ -534,8 +551,24 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
   // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
   // počiva upravo na tome da takav promet nije dopušten.
-  "uslovi_koriscenja_4_5_9.md": {
+  "uslovi_koriscenja_4_6_1.md": {
     sr: [
+      // ═══ 4.6.1 (R-05) ═══
+      // 🔴 Zabrana traženja dinara u oglasu. Do 4.6.1 je oglas „5.000 POENA ili
+      // 5.000 dinara" bio dopušten, čime bi Platforma postala mesto na kome se
+      // organizuje DINARSKI promet — a i PDV i fiskalizacija vezuju se za njega.
+      "uz traženje plaćanja u novcu ili drugom sredstvu van sistema",
+      "kao uslova razmene ili kao alternative razmeni",
+      // Dobra sa posebnim uslovima: obaveza oglašivača, bez provere Fondacije.
+      // „Ne proverava i ne potvrđuje" mora da stoji — prećutano, akt bi stvorio
+      // očekivanje provere i time odgovornost koju Fondacija nema (čl. 25 st. 1).
+      "naročito alkoholna pića i hranu životinjskog porekla",
+      "Fondacija ispunjenost tih uslova ne proverava i ne potvrđuje",
+      // 🔴 Razgraničenje Fondacije od isplatioca i poreskog posrednika.
+      "ne obračunava i ne obustavlja poreze ni druge dažbine i nije poreski posrednik",
+      // Čl. 18 st. 2 više ne naziva iznos „cenom" (isti broj je u čl. 19 i 20
+      // „iznos u POEN-ima"; „cena" je stajala baš u stavu o tome šta je javno).
+      "sadržaj ponude ili zahteva, iznos u POEN-ima, lokacija",
       // 4.5.9 — javnost donacije VIŠE NIJE „uslov za evidentiranje POEN-a". Ta
       // formulacija je strukturu činila „platiš → dobiješ vidljivost" i pravila
       // pristanak neslobodnim; razlog nosi proverljivost (donacije čl. 5a).
@@ -577,6 +610,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "nije prenosiv",
     ],
     en: [
+      // 4.6.1 (R-05)
+      "while seeking payment in money or in any other means outside the system",
+      "in particular alcoholic beverages and food of animal origin",
+      "The Foundation neither verifies nor confirms that those requirements are met",
+      "does not calculate or withhold taxes or other levies, and is not a tax intermediary",
       "does not set it as a condition on which it agrees to record a contribution",
       "An anonymous donation does not establish identity in this sense",
       "Listing by an Unverified User",
@@ -597,6 +635,11 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "is not transferable",
     ],
     ru: [
+      // 4.6.1 (R-05)
+      "с требованием оплаты деньгами или иным средством вне системы",
+      "в частности алкогольные напитки и пищевые продукты животного происхождения",
+      "Фонд соответствие этим требованиям не проверяет и не подтверждает",
+      "не исчисляет и не удерживает налоги и иные обязательные платежи и не является налоговым посредником",
       "не ставит её как условие, при котором соглашается учесть вклад",
       "Анонимное пожертвование личность в этом смысле не устанавливает",
       "Объявление неверифицированного пользователя",
@@ -731,8 +774,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   },
   // 4.4.3 — upozorenje o pribavljanju POEN-a mimo sistema. Ekonomski deo (ne stiče
   // nivo, ne pomera koeficijent) je ono što zabranu iz Uslova čini samoodrživom.
-  "rizici_4_6_0.md": {
+  "rizici_4_6_1.md": {
     sr: [
+      // ═══ 4.6.1 (R-05) ═══
+      // Upućivanje na čl. 21 Uslova za dobra sa posebnim uslovima. Ovde stoji zato
+      // što je Izjava akt koji korisnik čita kao spisak rizika, a ne kao zabrane.
+      "važi član 21 Uslova korišćenja",
       // 4.5.9 (R-02) — najjača poreska činjenica seli se iz čl. 11a (AML) u čl. 10.
       "ni po jednom osnovu ne isplaćuje novac",
       "ne pribavlja od drugih korisnika za novac",
@@ -761,6 +808,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ne daje pravo da Fondacija donese određeni akt",
     ],
     en: [
+      // 4.6.1 (R-05)
+      "Article 21 of the Terms of Use applies",
       "pays no money to a user on any basis",
       "not acquired from other users for money",
       "does not move the recording coefficient",
@@ -774,6 +823,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "the circle of founders is closed and cannot be expanded",
     ],
     ru: [
+      // 4.6.1 (R-05)
+      "применяется статья 21 Условий пользования",
       "ни по одному основанию не выплачивает деньги",
       "не приобретается у других пользователей за деньги",
       "не сдвигает коэффициент учёта",

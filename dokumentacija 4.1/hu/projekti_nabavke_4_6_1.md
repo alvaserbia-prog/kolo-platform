@@ -46,6 +46,8 @@ A kollektív beszerzés az Alapítványnak az Alapszabály 6. cikkében megálla
 
 A kollektív beszerzés nem gazdasági tevékenység. Az Alapítvány a beszerzés jogcímén sem bevételt, sem nyereséget nem szerez, a javakat nem kínálja a piacon meghatározatlan személyi körnek, és azok átengedése jogcímén semmilyen értéket nem szerez. A javak beszerzésére fordított eszközök adományokból és patronálói hozzájárulásokból származnak.
 
+Az Alapítvány nem tart fenn eladási helyet vagy kiskereskedelmi üzletet, a javakat nem állítja ki eladásra, és a felhasználóktól nem fogad el befizetést.
+
 Az Alapítvány az átengedett jószágért nem fogadhat el ellenszolgáltatást sem pénzben, sem más formában, sem a felhasználóktól, sem harmadik személytől.
 
 Az átengedett jószágért járó ellenszolgáltatás bevezetése gazdasági tevékenységnek minősülne, és az Alapszabály módosítása, valamint a tevékenységnek a jogszabályokkal összhangban történő nyilvántartásba vétele nélkül nem megengedett.
@@ -364,7 +366,7 @@ A Felhasználási feltételek 22. cikkének rendelkezése, amely szerint az Alap
 
 A felhasználó a szállítóval szerződéses viszonyba nem lép. A rész átvétele nem vásárlás, és a POEN tekintetében nem hoz létre szerződéses viszonyt a felhasználó és az Alapítvány között.
 
-A beszerzés bejegyzett jogi személynél, illetve egyéni vállalkozónál kerül végrehajtásra, olyan számla alapján, amelyet az Alapítvány megőriz. Az árban felszámított hozzáadottérték-adót az Alapítvány a beszerzés költségeként viseli, és azt előzetesen felszámított adóként nem vonja le.
+A beszerzés bejegyzett jogi személynél, illetve egyéni vállalkozónál kerül végrehajtásra, olyan számla alapján, amelyet az Alapítvány megőriz. Az árban felszámított hozzáadottérték-adót az Alapítvány a beszerzés költségeként viseli, és azt előzetesen felszámított adóként nem vonja le. A szállító a javak értékesítését az Alapítvány felé teljesíti, és ezen a jogcímen állítja ki a számlát; a rész átadása a felhasználónak a szállító Alapítvány felé fennálló kötelezettségének teljesítése, nem pedig a felhasználó felé történő értékesítés, és a felhasználó a szállítónak semmit nem fizet. A beszerzést elindító határozat és az elfogadott ajánlat ezt a rendelkezést tartalmazza.
 
 A szállítóval szemben az Alapítvány a jószág hibájából eredő jogokat a program felhasználóinak javára köti ki és érvényesíti. Ha a felhasználó hibát jelent be, az Alapítvány késedelem nélkül fellép a szállítóval szemben, és az eredményről tájékoztatja a felhasználót. A szállító által kicserélt jószágot az Alapítvány ugyanannak a felhasználónak engedi át, a POEN-bejegyzés újabb érvénytelenítése nélkül.
 

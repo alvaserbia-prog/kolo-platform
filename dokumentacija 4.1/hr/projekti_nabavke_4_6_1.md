@@ -46,6 +46,8 @@ Kolektivnom nabavom ostvaruju se ciljevi Zaklade utvrđeni člankom 6. Statuta, 
 
 Kolektivna nabava nije gospodarska djelatnost. Zaklada po osnovi nabave ne ostvaruje prihod ni dobit, dobra ne nudi na tržištu neodređenom krugu osoba i po osnovi njihova ustupanja ne stječe nikakvu vrijednost. Sredstva kojima se dobra nabavljaju potječu iz donacija i pokroviteljskih doprinosa.
 
+Zaklada ne drži prodajno mjesto ni prodavaonicu, dobra ne izlaže na prodaju i od korisnika ne prima uplate.
+
 Zaklada za ustupljeno dobro ne smije primiti naknadu u novcu ni u drugom obliku, ni od korisnika ni od treće osobe.
 
 Uvođenje naknade za ustupljeno dobro predstavljalo bi gospodarsku djelatnost i nije dopušteno bez izmjene Statuta i upisa djelatnosti u registar u skladu sa zakonom.
@@ -364,7 +366,7 @@ Odredba članka 22. Uvjeta korištenja, prema kojoj Zaklada nije strana u razmje
 
 Korisnik s dobavljačem ne stupa u ugovorni odnos. Preuzimanje dijela nije kupnja i ne zasniva ugovorni odnos između korisnika i Zaklade u pogledu POEN-a.
 
-Nabava se izvršava kod registrirane pravne osobe odnosno obrtnika, po računu koji Zaklada čuva. Porez na dodanu vrijednost obračunat u cijeni Zaklada snosi kao trošak nabave i ne odbija ga kao pretporez.
+Nabava se izvršava kod registrirane pravne osobe odnosno obrtnika, po računu koji Zaklada čuva. Porez na dodanu vrijednost obračunat u cijeni Zaklada snosi kao trošak nabave i ne odbija ga kao pretporez. Dobavljač promet dobara izvršava prema Zakladi i po toj osnovi izdaje račun; predaja dijela korisniku je izvršenje obveze dobavljača prema Zakladi, a ne promet prema korisniku, i korisnik dobavljaču ništa ne plaća. Odluka kojom se nabava pokreće i prihvaćena ponuda sadrže tu odredbu.
 
 Zaklada prema dobavljaču ugovara i ostvaruje prava po osnovi nedostatka dobra u korist korisnika programa. Kada korisnik prijavi nedostatak, Zaklada bez odgode istupa prema dobavljaču i o ishodu obavješćuje korisnika. Dobro koje dobavljač zamijeni Zaklada ustupa istom korisniku, bez novog poništenja zapisa POEN-a.
 

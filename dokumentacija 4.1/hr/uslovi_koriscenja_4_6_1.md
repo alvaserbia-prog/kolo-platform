@@ -170,7 +170,7 @@ Zaklada ne odgovara za posljedice koje nastanu ako korisnik sam otkrije svoj ide
 
 Prostor za razmjenu dio je Platforme namijenjen oglašavanju ponuda i zahtjeva za dobra i usluge te dogovaranju razmjena između korisnika.
 
-Pregled oglasa u prostoru za razmjenu — sadržaj ponude ili zahtjeva, cijena, lokacija i pseudonim oglašivača — javan je i dostupan svim posjetiteljima.
+Pregled oglasa u prostoru za razmjenu — sadržaj ponude ili zahtjeva, iznos u POEN-ima, lokacija i pseudonim oglašivača — javan je i dostupan svim posjetiteljima.
 
 Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je svim registriranim korisnicima; neverificiranom korisniku pod uvjetima i ograničenjima iz Članka 16. Postavljanje oglasa kojim se dobro ili usluga traži i pokretanje komunikacije povodom oglasa dostupni su verificiranim korisnicima, nositeljima ZRNA i korisniku čiji je identitet utvrđen povodom javne donacije (Članak 14.). Pristup kontakt podacima oglašivača dostupan je isključivo verificiranim korisnicima i nositeljima ZRNA.
 
@@ -204,6 +204,10 @@ Zabranjeno je nuđenje i razmjena dobara i usluga čiji je promet zabranjen zako
 
 Zabranjeno je i oglašavanje čiji su predmet POEN ili ZRNO — njihovo nuđenje, traženje, kupnja ili prodaja za novac ili drugu vrijednost izvan sustava (Članak 24.).
 
+Zabranjeno je nuđenje dobara i usluga uz traženje plaćanja u novcu ili drugom sredstvu izvan sustava, kao i navođenje iznosa u novcu kao uvjeta razmjene ili kao alternative razmjeni. Prostor za razmjenu namijenjen je razmjeni dobara i usluga uz ažuriranje evidencije POEN-a (Članak 22.).
+
+Dobra čiji promet zakon uvjetuje registracijom, dozvolom ili posebnim uvjetima — osobito alkoholna pića i hranu životinjskog podrijetla — može nuditi samo korisnik koji te uvjete ispunjava. Zaklada ispunjenost tih uvjeta ne provjerava i ne potvrđuje.
+
 Popis zabranjenih kategorija nije konačan. Zaklada može ukloniti objavu za koju utvrdi da krši zakon, ove Uvjete ili Pravilnik i obavještava korisnika o uklanjanju uz navođenje razloga.
 
 ### Članak 22. — Izvršenje razmjene
@@ -222,7 +226,9 @@ To osobito vrijedi za razmjenu po oglasu neverificiranog korisnika: stvarnost og
 
 Platforma ne traži od korisnika da razmjenu posebno označe, potvrde ni ocijene. Jedini je zapis o razmjeni ažuriranje evidencije POEN-a koje korisnici sami provedu; po njemu se očitava i putanja doprinosa razmjeni (Članak 40.b Pravilnika o KOLO sustavu).
 
-Korisnik koji je prepisao POEN povodom razmjene koja nije ispunjena podnosi prigovor Zakladi u skladu s Člankom 37a ovih Uvjeta, sa svojeg profila. Odlučivanje po prigovoru odnosi se na zapis u evidenciji Protokola; ono ne čini Zakladu stranom u razmjeni i ne predstavlja posredovanje u razmjeni u smislu stavka 5. ovoga članka.
+Zaklada u razmjeni između korisnika ne izdaje račune, ne vodi evidencije o prometu korisnika, ne obračunava i ne obustavlja poreze ni druga javna davanja i nije porezni posrednik.
+
+Korisnik koji je prepisao POEN povodom razmjene koja nije ispunjena podnosi prigovor Zakladi u skladu s Člankom 37a ovih Uvjeta, sa svojeg profila. Odlučivanje po prigovoru odnosi se na zapis u evidenciji Protokola; ono ne čini Zakladu stranom u razmjeni i ne predstavlja posredovanje u razmjeni u smislu stavka 6. ovoga članka.
 
 Odredbe ovoga članka odnose se na razmjenu između korisnika. One se ne primjenjuju na kolektivnu nabavu, u kojoj je Zaklada prema dobavljaču kupac i ugovorna strana.
 

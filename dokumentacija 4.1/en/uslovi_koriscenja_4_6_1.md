@@ -170,7 +170,7 @@ The Foundation is not responsible for the consequences arising if the user thems
 
 The exchange space is the part of the Platform intended for advertising offers and requests for goods and services and arranging exchanges between users.
 
-Browsing listings in the exchange space — the content of an offer or request, price, location, and the advertiser's pseudonym — is public and accessible to all visitors.
+Browsing listings in the exchange space — the content of an offer or request, the amount in POEN, location, and the advertiser's pseudonym — is public and accessible to all visitors.
 
 Posting a listing offering a good or a service is available to all registered users; to an unverified user under the conditions and limitations of Article 16. Posting a listing seeking a good or a service and initiating communication on account of a listing are available to verified users, ZRNO Holders, and a user whose identity has been established on account of a public donation (Article 14). Access to advertisers' contact details is available exclusively to verified users and ZRNO Holders.
 
@@ -204,6 +204,10 @@ The offering and exchange of goods and services whose trade is prohibited by law
 
 Listings whose subject is POEN or ZRNO are likewise prohibited — offering, seeking, buying, or selling them for money or for any other value outside the system (Article 24).
 
+The offering of goods and services while seeking payment in money or in any other means outside the system is prohibited, as is stating an amount in money as a condition of the exchange or as an alternative to it. The exchange space is intended for the exchange of goods and services with an update of the POEN ledger (Article 22).
+
+Goods whose trade the law conditions upon registration, a permit, or special requirements — in particular alcoholic beverages and food of animal origin — may be offered only by a user who meets those requirements. The Foundation neither verifies nor confirms that those requirements are met.
+
 The list of prohibited categories is not exhaustive. The Foundation may remove a listing it determines to be in violation of the law, these Terms, or the Rulebook, and notifies the user of the removal, stating the reason.
 
 ### Article 22 — Execution of Exchange
@@ -222,7 +226,9 @@ This applies in particular to an exchange based on a listing by an unverified us
 
 The Platform does not require users to separately mark, confirm, or rate an exchange. The only record of an exchange is the update of the POEN ledger which the users carry out themselves; the exchange contribution path is also read from it (Art. 40b of the Rulebook on the KOLO System).
 
-A user who has re-registered POEN on account of an exchange that has not been fulfilled lodges a complaint with the Foundation in accordance with Article 37a of these Terms, from their own profile. Deciding on the complaint concerns the record in the Protocol's ledger; it does not make the Foundation a party to the exchange and does not constitute mediation in the exchange within the meaning of paragraph 5 of this Article.
+In an exchange between users, the Foundation does not issue invoices, does not keep records of a user's turnover, does not calculate or withhold taxes or other levies, and is not a tax intermediary.
+
+A user who has re-registered POEN on account of an exchange that has not been fulfilled lodges a complaint with the Foundation in accordance with Article 37a of these Terms, from their own profile. Deciding on the complaint concerns the record in the Protocol's ledger; it does not make the Foundation a party to the exchange and does not constitute mediation in the exchange within the meaning of paragraph 6 of this Article.
 
 The provisions of this Article relate to exchange between users. They do not apply to collective procurement, in which the Foundation is the buyer and the contracting party in relation to the supplier.
 

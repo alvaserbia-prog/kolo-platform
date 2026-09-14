@@ -92,6 +92,8 @@ Az Alapítvány a felhasználónak semmilyen jogcímen nem fizet pénzt. A POEN 
 
 Kivétel a közösségi beszerzésből való résznek az átvétele, amelynek során a felhasználó jószágot kap. Azt ellenszolgáltatás nélkül és ellenérték nélkül juttatják, az Alapítvány céljainak megvalósítása keretében, és az az összérték, amelyet egy felhasználó egy naptári évben átvehet, korlátozott (a projektekről és a közösségi beszerzésekről szóló szabályzat 21a. cikke).
 
+Azokra a javakra, amelyek forgalmát jogszabály nyilvántartásba vételhez, engedélyhez vagy különös feltételekhez köti, a Használati feltételek 21. cikke alkalmazandó: ilyen javakat kizárólag olyan felhasználó kínálhat, aki e feltételeknek megfelel, az Alapítvány pedig azok teljesülését nem ellenőrzi és nem igazolja.
+
 Az Alapítvány nem nyújt adótanácsadást, és nem tudja szavatolni a felhasználó rendszerbeli tevékenységének adójogi megítélését. A felhasználó felelős a rendszerben való részvétellel összefüggésben esetlegesen keletkező saját adókötelezettségeiért, és javasoljuk, hogy konzultáljon adótanácsadóval.
 
 ### 11. cikk — Szabályozási kockázat

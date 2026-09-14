@@ -271,11 +271,6 @@ export default function OglasDetalj({
           )}
 
           {/* Status badge */}
-          {oglas.status === "SOLD" && (
-            <div className="bg-kolo-bg rounded-xl px-4 py-3 text-center text-sm font-semibold text-kolo-muted">
-              {t("oglas_prodat")}
-            </div>
-          )}
           {oglas.status === "EXPIRED" && (
             <div className="bg-kolo-bg rounded-xl px-4 py-3 text-center text-sm font-semibold text-kolo-muted">
               {t("oglas_deaktiviran")}
@@ -415,7 +410,7 @@ export default function OglasDetalj({
 
 // ── Prijava oglasa ─────────────────────────────────────────────────────────────
 
-const RAZLOZI = ["ZABRANJENO_DOBRO", "OBMANA", "UVREDLJIVO", "LICNI_PODACI", "PREVARA", "DRUGO"] as const;
+const RAZLOZI = ["ZABRANJENO_DOBRO", "OBMANA", "UVREDLJIVO", "LICNI_PODACI", "PREVARA", "PLACANJE_VAN_SISTEMA", "DRUGO"] as const;
 
 function PrijaviOglas({ oglasId }: { oglasId: string }) {
   const t = useTranslations("pijaca");

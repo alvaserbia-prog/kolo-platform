@@ -168,7 +168,7 @@ Fondacija ne odgovara za posledice koje nastanu ako korisnik sam otkrije svoj id
 
 Prostor za razmenu je deo Platforme namenjen oglašavanju ponuda i zahteva za dobra i usluge i dogovaranju razmena između korisnika.
 
-Pregled oglasa u prostoru za razmenu — sadržaj ponude ili zahteva, cena, lokacija i pseudonim oglašivača — javan je i dostupan svim posetiocima.
+Pregled oglasa u prostoru za razmenu — sadržaj ponude ili zahteva, iznos u POEN-ima, lokacija i pseudonim oglašivača — javan je i dostupan svim posetiocima.
 
 Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je svim registrovanim korisnicima; neverifikovanom korisniku pod uslovima i ograničenjima iz Člana 16. Postavljanje oglasa kojim se dobro ili usluga traži i pokretanje komunikacije povodom oglasa dostupni su verifikovanim korisnicima, nosiocima ZRNA i korisniku čiji je identitet utvrđen povodom javne donacije (Član 14). Pristup kontakt podacima oglašivača dostupan je isključivo verifikovanim korisnicima i nosiocima ZRNA.
 
@@ -204,6 +204,10 @@ Zabranjeno je nuđenje i razmena dobara i usluga čiji je promet zabranjen zakon
 
 Zabranjeno je i oglašavanje čiji su predmet POEN ili ZRNO — njihovo nuđenje, traženje, kupovina ili prodaja za novac ili drugu vrednost van sistema (Član 24).
 
+Zabranjeno je nuđenje dobara i usluga uz traženje plaćanja u novcu ili drugom sredstvu van sistema, kao i navođenje iznosa u novcu kao uslova razmene ili kao alternative razmeni. Prostor za razmenu namenjen je razmeni dobara i usluga uz ažuriranje evidencije POEN-a (Član 22).
+
+Dobra čiji promet zakon uslovljava registracijom, dozvolom ili posebnim uslovima — naročito alkoholna pića i hranu životinjskog porekla — može nuditi samo korisnik koji te uslove ispunjava. Fondacija ispunjenost tih uslova ne proverava i ne potvrđuje.
+
 Lista zabranjenih kategorija nije konačna. Fondacija može ukloniti objavu za koju utvrdi da krši zakon, ove Uslove ili Pravilnik i obaveštava korisnika o uklanjanju uz navođenje razloga.
 
 ### Član 22 — Izvršenje razmene
@@ -222,7 +226,9 @@ Ovo posebno važi za razmenu po oglasu neverifikovanog korisnika: stvarnost ogla
 
 Platforma ne traži od korisnika da razmenu posebno označe, potvrde ni ocene. Jedini zapis o razmeni je ažuriranje evidencije POEN-a koje korisnici sami sprovedu; po njemu se očitava i putanja doprinosa razmeni (Član 40b Pravilnika o KOLO sistemu).
 
-Korisnik koji je prepisao POEN povodom razmene koja nije ispunjena podnosi prigovor Fondaciji u skladu sa Članom 37a ovih Uslova, sa svog profila. Odlučivanje po prigovoru odnosi se na zapis u evidenciji Protokola; ono ne čini Fondaciju stranom u razmeni i ne predstavlja posredovanje u razmeni u smislu stava 5 ovog člana.
+Fondacija u razmeni između korisnika ne izdaje račune, ne vodi evidencije o prometu korisnika, ne obračunava i ne obustavlja poreze ni druge dažbine i nije poreski posrednik.
+
+Korisnik koji je prepisao POEN povodom razmene koja nije ispunjena podnosi prigovor Fondaciji u skladu sa Članom 37a ovih Uslova, sa svog profila. Odlučivanje po prigovoru odnosi se na zapis u evidenciji Protokola; ono ne čini Fondaciju stranom u razmeni i ne predstavlja posredovanje u razmeni u smislu stava 6 ovog člana.
 
 Odredbe ovog člana odnose se na razmenu između korisnika. One se ne primenjuju na kolektivnu nabavku, u kojoj je Fondacija prema dobavljaču kupac i ugovorna strana.
 

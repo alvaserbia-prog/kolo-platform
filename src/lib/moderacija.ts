@@ -36,6 +36,7 @@ export type PrijavaRazlogKod =
   | "UVREDLJIVO"
   | "LICNI_PODACI"
   | "PREVARA"
+  | "PLACANJE_VAN_SISTEMA"
   | "DRUGO";
 
 export const PRIJAVA_RAZLOZI: PrijavaRazlogKod[] = [
@@ -44,6 +45,7 @@ export const PRIJAVA_RAZLOZI: PrijavaRazlogKod[] = [
   "UVREDLJIVO",
   "LICNI_PODACI",
   "PREVARA",
+  "PLACANJE_VAN_SISTEMA",
   "DRUGO",
 ];
 
@@ -54,6 +56,9 @@ export const RAZLOG_OPIS: Record<PrijavaRazlogKod, string> = {
   UVREDLJIVO: "Uvredljiv, preteći ili diskriminatorski sadržaj (Uslovi čl. 22)",
   LICNI_PODACI: "Lični podaci trećeg lica (Uslovi čl. 24)",
   PREVARA: "Prevara ili druga nezakonita aktivnost (Uslovi čl. 24)",
+  // R-05: oglas koji traži dinare ne koristi Protokol i čini Platformu mestom na
+  // kome se organizuje dinarski promet (Uslovi čl. 21 st. 3).
+  PLACANJE_VAN_SISTEMA: "Traži plaćanje u novcu van sistema (Uslovi čl. 21)",
   DRUGO: "Drugo",
 };
 

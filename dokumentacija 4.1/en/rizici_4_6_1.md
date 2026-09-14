@@ -92,6 +92,8 @@ The Foundation pays no money to a user on any basis. By the recording of POEN th
 
 The exception is the collection of a share from a collective procurement, in which the user receives a good. It is provided free of charge and without consideration, in pursuit of the Foundation's objectives, and the total value that a single user may collect in a calendar year is limited (Article 21a of the Rulebook on Projects and Collective Procurements).
 
+For goods whose trade the law conditions upon registration, a permit, or special requirements, Article 21 of the Terms of Use applies: such goods may be offered only by a user who meets those requirements, and the Foundation neither verifies nor confirms that they are met.
+
 The Foundation does not provide tax advice and cannot guarantee the tax treatment of users' activities in the system. The user is responsible for their own tax obligations that may arise in connection with participation in the system and is advised to consult a tax adviser.
 
 ### Article 11 — Regulatory risk
