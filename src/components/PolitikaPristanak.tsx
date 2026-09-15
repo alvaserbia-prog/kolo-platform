@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { intlTag } from "@/lib/format";
 import { useMePatch, ME_KEY } from "@/hooks/useMe";
+import { AKT_POLITIKA, AKT_USLOVI } from "@/lib/verzije-akata";
 
 interface Verzija {
   id: string;
@@ -50,6 +51,12 @@ export default function PolitikaPristanak({
   const [error, setError] = useState("");
   const [prihvatanje, setPrihvatanje] = useState(false);
   const [ucitavanjePuklo, setUcitavanjePuklo] = useState(false);
+  // 🔴 DVE kvačice, kao pri registraciji (ZZPL čl. 15 st. 2 — pristanak koji se
+  // odnosi na više pitanja mora biti razdvojen). Do R-06 je ovde stajalo jedno
+  // dugme za ceo set; iz jednog klika se ne može upisati dokaz da je razdvojenost
+  // postojala, a upravo taj dokaz zatečenim nalozima nedostaje.
+  const [uslovi, setUslovi] = useState(false);
+  const [politika, setPolitika] = useState(false);
 
   // 🔴 `onGotovo` stiže kao inline funkcija sa stranice, dakle NOVA pri svakom
   // iscrtavanju. U zavisnostima `useCallback`-a ispod bi zato rušio stabilnost
@@ -106,13 +113,14 @@ export default function PolitikaPristanak({
 
   async function prihvati() {
     if (!verzija) return;
+    if (!uslovi || !politika) { setError(t("greska_kvacice")); return; }
     setPrihvatanje(true);
     setError("");
     try {
       const res = await fetch("/api/politika/prihvati", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ verzijaId: verzija.id }),
+        body: JSON.stringify({ verzijaId: verzija.id, prihvatamUslove: uslovi, prihvatamPolitiku: politika }),
       });
       if (!res.ok) throw new Error("Neuspeo upis");
       zavrsi();
@@ -186,13 +194,36 @@ export default function PolitikaPristanak({
           {t("ne_slazete_se")}
         </p>
 
+        {/* Uz svaki akt stoji i VERZIJA, iz istog izvora iz kog je čita zapis
+            pristanka (`verzije-akata.ts`) — pa se to dvoje ne može razići. */}
+        <div className="space-y-2 mb-6">
+          <label className="flex items-start gap-2.5 cursor-pointer">
+            <input type="checkbox" checked={uslovi} onChange={(e) => setUslovi(e.target.checked)}
+              className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
+            <span className="text-xs text-kolo-muted">
+              {t("kvacica_uslovi")}{" "}
+              <Link href="/uslovi" target="_blank" className="text-kolo-green-700 underline">{t("uslovi_link")}</Link>{" "}
+              <span className="text-kolo-muted/70">(v{AKT_USLOVI.verzija})</span>
+            </span>
+          </label>
+          <label className="flex items-start gap-2.5 cursor-pointer">
+            <input type="checkbox" checked={politika} onChange={(e) => setPolitika(e.target.checked)}
+              className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
+            <span className="text-xs text-kolo-muted">
+              {t("kvacica_uslovi")}{" "}
+              <Link href="/privatnost" target="_blank" className="text-kolo-green-700 underline">{t("privatnost_link")}</Link>{" "}
+              <span className="text-kolo-muted/70">(v{AKT_POLITIKA.verzija})</span>
+            </span>
+          </label>
+        </div>
+
         {error && (
           <p className="text-sm text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2 mb-4">{error}</p>
         )}
 
         <button
           onClick={prihvati}
-          disabled={prihvatanje}
+          disabled={prihvatanje || !uslovi || !politika}
           className="w-full py-3 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-800 transition-colors disabled:opacity-60"
         >
           {prihvatanje ? t("dugme_prihvatam_loading") : t("dugme_prihvatam")}

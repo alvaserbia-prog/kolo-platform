@@ -45,6 +45,40 @@ export async function upisiPristankeRegistracije(
     })),
     skipDuplicates: true,
   });
+
+  await upisiPrihvatanjeTekuceVerzije(tx, userId);
+}
+
+/**
+ * Upisuje i `PolitikaPrihvatanje` za tekuću `PolitikaVerzija`, u istoj transakciji.
+ *
+ * 🔴 Ovo nije duplikat `ZapisPristanka` nego most ka gejtu. `pristanakStatus()`
+ * čita ISKLJUČIVO `PolitikaPrihvatanje`; bez ovog upisa bi paljenje prekidača
+ * `PRISTANAK_NA_AKTE_TRAZI_SE` prikazalo ekran „Sistem je unapređen" i onome ko je
+ * pristanak upravo dao pri registraciji — dakle svakom novom čoveku, iako je
+ * kvačicu čekirao pre trideset sekundi. Prekidač je upaljen zbog ZATEČENIH naloga
+ * i sme da pogodi samo njih.
+ *
+ * 🔴 Redosled je isti kao u `pristanakStatus()` (`efektivnaOd`, `createdAt`, `id`)
+ * i mora takav da ostane: `orderBy` samo po `efektivnaOd` je neodređen kad dve
+ * verzije dele isti trenutak, pa bi se upis i provera mogli razići — a razlaz
+ * ovde znači isti bljesak ekrana koji je jednom već opisan u `politika.ts`.
+ *
+ * Nema verzije u bazi → nema šta da se prihvati; `pristanakStatus` tada ionako
+ * vraća `potrebno: false`.
+ */
+async function upisiPrihvatanjeTekuceVerzije(tx: Tx, userId: string): Promise<void> {
+  const najnovija = await tx.politikaVerzija.findFirst({
+    where: { efektivnaOd: { lte: new Date() } },
+    orderBy: [{ efektivnaOd: "desc" }, { createdAt: "desc" }, { id: "desc" }],
+    select: { id: true },
+  });
+  if (!najnovija) return;
+
+  await tx.politikaPrihvatanje.createMany({
+    data: [{ userId, verzijaId: najnovija.id, prihvacen: true }],
+    skipDuplicates: true,
+  });
 }
 
 /**

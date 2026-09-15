@@ -331,7 +331,7 @@ Ocena 1–10 = verovatnoća da regulator zauzme taj stav × težina posledice.
 | **R-03** | **Javna pseudonimna evidencija otkriva posebne kategorije i podatke dece** — naziv programa uz pseudonim svakom redovnom članu, ime donatora u feedu široj publici nego što Politika kaže, pregled dece po školama | Poverenik | **9** | ✅ **obrađen** → 4 (DEO III) |
 | **R-04** | **ZRNO se čita kao investicioni instrument** — dnevna serija kursa, `zrnaKupljeno`/`poenPlaceno`, whitepaper i `/pravna-pozicija` sami opisuju razliku u kursu kao podsticaj i koriste reč „uložio" | Komisija za HOV | **8** | ✅ **obrađen** → 4 (DEO III) |
 | **R-05** | **PDV i fiskalizacija** — razmena kao trampa između lica koja obavljaju delatnost; poništenje POEN-a pri nabavci kao moguća naknada; nepostojanje fiskalnih računa u prometu koji platforma promoviše | Poreska uprava | **8** | — |
-| **R-06** | **Ne postoji dokaz pristanka ni dokaz zaključenja ugovora**; uz to **DPO u sukobu interesa sa privatnom kontakt adresom** | Poverenik | **8** | ✅ **obrađen** → 4 (DEO III) |
+| **R-06** | **Ne postoji dokaz pristanka ni dokaz zaključenja ugovora**; uz to **DPO u sukobu interesa sa privatnom kontakt adresom** | Poverenik | **8** | ✅ **obrađen** → 3 (DEO III) |
 | **R-07** | **Nelojalna i obmanjujuća poslovna praksa** — isti broj je u aktu „nije cena, nije kurs, nije popust", a na ekranu „POEN/RSD", „Od (RSD)" i „povoljniji koeficijent" | Zaštita potrošača | **8** | — |
 | **R-08** | **Strukturna hiperinflacija POEN-a uz objavljen odnos 1:1** — dnevni limit je 10% opticaja koji sam raste tim emisijama; socijalni programi bez gornje granice; osnivački kanal se prazni u nedeljama | Zaštita potrošača / sistemski | **8** | — |
 | **R-09** | **Deca u sistemu** — samostalna registracija od 7 godina, dečji oglasi vidljivi punoletnima od 15, razmena sa odraslima, samostalan prepis do 5.000 odn. 20.000 POEN, negativan zapis kod deteta, nepostojanje provere uzrasta u oba smera | Inspektorat za rad + socijalna zaštita | **8** | — |
@@ -378,7 +378,7 @@ izmena Statuta radi Gornjeg Kola, podizanje donje granice uzrasta) zabeležene s
 | **R-03** | 13.09.2026. | Obrađen i sproveden. Odobreno M-1 (socijalni programi izlaze iz pojedinačnog javnog prikaza, opšta oznaka u zapisu, dnevni agregat), M-3a/b/c (lista donacija redovnim članovima, ime izlazi iz opisa emisije, anonimna donacija samo iznosom uz pseudonim i link uz javno ime), M-4 (spisak škole samo punopravnom detetu svoje škole), M-5 (`suzen` skida vezu roditelj–dete) i M-6 (deca kao kategorija lica u aktima). Set **4.6.1** (Politika, DPIA, Registar, Uslovi, programi podrške, učešće dece × 5 jezika). Migracije `20260913130000/130100/130150/130200`. Brana `r03-posebne-kategorije-izvor.test.ts` (19 provera). | 9 → **4** |
 | **R-04** | 13.09.2026. | Obrađen. Odobreno M-1…M-11 (sve predložene). Nijedna ne dira mehaniku ZRNA — sve su o jeziku, imenima i tačnosti, jer su tri mere za mehaniku odbijene još uz stari R-03 (07.09.2026) i ostaju odbijene. Ključno: čl. 25 dobija odgovor po **elementima testa investicionog ugovora** umesto etikete „nije prinos“, a četvrti element (nosilac ZRNA **sam upravlja**, čl. 45/46) prvi put je upotrebljen. Usput ispravljena aritmetička greška na tri mesta (upis ZRNA **ne** diže koeficijent). Set **4.6.2** (Pravilnik, Whitepaper × 5 jezika). Migracije `20260913130000_zrno_bez_trzista_i_kursa` (samo RENAME) i `20260913130100_zrno_opis_kljuc`. Brana `zrno-nije-instrument-izvor.test.ts`. | 8 → **4** |
 | **R-02** | 13.09.2026. | Obrađen. Odobreno M-1…M-12, D-2 (godišnja granica 100.000 RSD po korisniku) i **opcija A** (nabavka ostaje raspodela po doprinosu; davanje se vodi kao **poklon**). Odbijeno: humanitarna nabavka po ZPDG čl. 9 st. 1 t. 11, i **svaka dinarska kapa na POEN**. Set 4.6.0 — osam akata × 5 jezika. | 9 → **6** |
-| **R-06** | 14.09.2026. | Obrađen i sproveden. Odobreno M-1…M-5, M-6 (meka varijanta: poruka sa linkom pri registraciji, potvrda NIJE uslov za rad naloga), M-7, M-8 (**opcija C** — DPO se ne određuje, uz napisanu procenu po čl. 56 st. 2, merilo nastanka obaveze i godišnje preispitivanje), M-9 i M-10. Google Analytics **ostaje** (odluka vlasnika), pa je dokaz za kolačiće rešen kolačićem sa verzijom i zapisom uz nalog prijavljenog korisnika, bez ijednog novog podatka o posetiocu. Usput ispravljena dva zatečena kvara: saglasnost roditelja bila je **slepljena** sa izjavom o postojanju deteta (pa se opoziv nije mogao izvršiti), a `prevod-servera.ts` je hrvatskim i mađarskim korisnicima slao **srpski tekst** u svakoj poruci. Set **4.6.3** (Politika, Uslovi, DPIA, Registar × 5 jezika); Registar dobija radnju br. 18, DPIA rizik R18. Migracije `20260914120000/120100`. Brana `pristanak-izvor.test.ts` (30 provera). | 8 → **4** |
+| **R-06** | 14.09.2026. | Obrađen i sproveden. Odobreno M-1…M-5, M-6 (meka varijanta: poruka sa linkom pri registraciji, potvrda NIJE uslov za rad naloga), M-7, M-8 (**opcija C** — DPO se ne određuje, uz napisanu procenu po čl. 56 st. 2, merilo nastanka obaveze i godišnje preispitivanje), M-9 i M-10. Google Analytics **ostaje** (odluka vlasnika), pa je dokaz za kolačiće rešen kolačićem sa verzijom i zapisom uz nalog prijavljenog korisnika, bez ijednog novog podatka o posetiocu. Usput ispravljena dva zatečena kvara: saglasnost roditelja bila je **slepljena** sa izjavom o postojanju deteta (pa se opoziv nije mogao izvršiti), a `prevod-servera.ts` je hrvatskim i mađarskim korisnicima slao **srpski tekst** u svakoj poruci. Set **4.6.3** (Politika, Uslovi, DPIA, Registar × 5 jezika); Registar dobija radnju br. 18, DPIA rizik R18. Migracije `20260914120000/120100`. Brana `pristanak-izvor.test.ts` (30 provera). **Istog dana dopunjeno (odluka vlasnika):** i zatečeni nalozi daju pristanak — `PRISTANAK_NA_AKTE_TRAZI_SE = true` uz migraciju `20260914130000_pristanak_4_6_3`; registracija u istoj transakciji upisuje i `PolitikaPrihvatanje`, pa nov čovek ekran ne vidi; gejt dobija dve kvačice, serversku proveru i upis `ZapisPristanka`. Brana narasla na 35 provera. | 8 → **3** |
 
 ---
 
@@ -1059,7 +1059,7 @@ imenovan pravni osnov, a ni za jedan nije postojao dokaz da je ispunjen. ZZPL
 | **M-5** | `localStorage` → kolačić sa odlukom, trenutkom i **verzijom**; stara verzija → pita ponovo; zapis uz nalog samo za prijavljenog. GA ostaje (odluka vlasnika). |
 | **M-6** | Meka potvrda adrese: poruka sa linkom pri registraciji, `emailPotvrdjenAt`, **nalog radi i bez klika**. Tok izdvojen u `potvrda-adrese.ts`, zajednički sa nalogom deteta. |
 | **M-7** | `alva.serbia@gmail.com` → `privatnost@ekolo.rs` u Politici, DPIA i Registru, na pet jezika. |
-| **M-8** | **Opcija C** — DPO se ne određuje, uz napisanu procenu po čl. 56 st. 2, merilo nastanka obaveze (broj u odluci UO), godišnje preispitivanje i obavezu dostave Povereniku po nastanku. DPIA tačka 7 **prepisana**, ne obrisana. |
+| **M-8** | **Opcija C** — DPO se ne određuje, uz napisanu procenu po čl. 56 st. 2, merilo nastanka obaveze (broj u odluci UO — predlog: **5.000** aktivnih naloga, odn. **500** aktivnih prijava na socijalne programe, šta pre nastupi), godišnje preispitivanje i obavezu dostave Povereniku po nastanku. DPIA tačka 7 **prepisana**, ne obrisana. |
 | **M-9** | Opoziv upisuje `povucenAt`; red se ne briše, jer opoziv ne dira zakonitost ranije obrade (čl. 15 st. 3). |
 | **M-10** | Pregled datih pristanaka na profilu sa **snimljenim** tekstom + izlazak u GDPR izvoz. |
 
@@ -1081,13 +1081,17 @@ imenovan pravni osnov, a ni za jedan nije postojao dokaz da je ispunjen. ZZPL
 3. Sklanjanje „Odbij" iz prvog nivoa bannera.
 4. Uskraćivanje funkcija naloga zbog nepotvrđene adrese.
 5. Vraćanje saglasnosti roditelja u tekst izjave o postojanju deteta.
-6. Paljenje `PRISTANAK_NA_AKTE_TRAZI_SE` radi R-06 (drugi institut; vidi ostatak 1).
+6. 🟢 **Prevaziđeno 14.09.2026** — prekidač je upaljen odlukom vlasnika, zbog zatečenih
+   naloga. Razgraničenje stoji (gejt uređuje ponovni pristanak na izmene), ali je to
+   jedini mehanizam kojim zatečen nalog uopšte može da da pristanak. 🔴 Sada se ne
+   **gasi** bez naloga: gašenjem bi ti nalozi ostali bez dokaza zauvek.
 
 ### 🟡 Svesno prihvaćeni ostaci
 
-1. 🔴 **Zatečeni nalozi ostaju bez dokaza** i to se ne može napraviti unazad — otud
-   4, a ne 3. Jedini put je jednokratno paljenje prekidača uz nov red
-   `PolitikaVerzija`; **odluka vlasnika se čeka.**
+1. 🟢 **REŠENO 14.09.2026** — zatečeni nalozi daju pristanak na gejtu, pri prvoj
+   narednoj prijavi. Ostaje da dokaz za njih nosi **datum te prijave**, ne datum
+   otvaranja naloga: za razdoblje između to nije dokaz pristanka nego dokaz potonje
+   potvrde. Ocena time ide sa 4 na **3**.
 2. Pristanak na kolačiće neprijavljenog posetioca ne dokazuje se po licu — svesno.
 3. Opcija C nosi rizik pogrešne procene i **ima rok trajanja**: KOLO jeste
    sistematsko praćenje, pa sa rastom broja korisnika obaveza gotovo sigurno nastaje.
@@ -1096,4 +1100,4 @@ imenovan pravni osnov, a ni za jedan nije postojao dokaz da je ispunjen. ZZPL
 
 | | Pre | Posle |
 |---|---|---|
-| Dokaz pristanka i dokaz ugovora | 8 | **4** |
+| Dokaz pristanka i dokaz ugovora | 8 | **3** |

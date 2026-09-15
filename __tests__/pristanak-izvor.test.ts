@@ -289,3 +289,61 @@ describe("IZVOR: potvrda adrese nije uslov za rad naloga", () => {
     expect(ruta).not.toContain("MODUL_DECA_AKTIVAN");
   });
 });
+
+describe("IZVOR: gejt za zatečene naloge (R-06)", () => {
+  const MODULI = citaj("src/lib/moduli.ts");
+  const GEJT_RUTA = citaj("src/app/api/politika/prihvati/route.ts");
+  const GEJT_EKRAN = citaj("src/components/PolitikaPristanak.tsx");
+
+  it("prekidač je upaljen — zatečeni nalozi nemaju drugi put do dokaza", () => {
+    expect(MODULI).toMatch(/export const PRISTANAK_NA_AKTE_TRAZI_SE = true;/);
+  });
+
+  it("migracija upisuje red PolitikaVerzija za 4.6.3", () => {
+    const sql = citaj("prisma/migrations/20260914130000_pristanak_4_6_3/migration.sql");
+    expect(sql).toContain('INSERT INTO "PolitikaVerzija"');
+    expect(sql).toContain("'4.6.3'");
+    // Ponovljen deploy ne sme da napravi drugi red — gejt bi tada tražio pristanak
+    // na verziju koja je već prihvaćena.
+    expect(sql).toContain('ON CONFLICT ("verzija") DO NOTHING');
+  });
+
+  it("registracija upisuje i PolitikaPrihvatanje — nov čovek ekran NE vidi", () => {
+    // Most ka gejtu: `pristanakStatus()` čita isključivo `PolitikaPrihvatanje`.
+    // Bez ovoga bi upaljen prekidač pogodio i onoga ko je kvačicu čekirao pre
+    // trideset sekundi, a upaljen je zbog zatečenih naloga.
+    expect(SERVIS).toContain("upisiPrihvatanjeTekuceVerzije(tx, userId)");
+    expect(SERVIS).toContain("tx.politikaPrihvatanje.createMany");
+    // Redosled mora biti isti kao u `pristanakStatus()`, inače se upis i provera
+    // razilaze kad dve verzije dele isti trenutak stupanja na snagu.
+    expect(SERVIS).toMatch(
+      /orderBy: \[\{ efektivnaOd: "desc" \}, \{ createdAt: "desc" \}, \{ id: "desc" \}\]/,
+    );
+    const politika = citaj("src/lib/politika.ts");
+    expect(politika).toMatch(
+      /orderBy: \[\{ efektivnaOd: "desc" \}, \{ createdAt: "desc" \}, \{ id: "desc" \}\]/,
+    );
+  });
+
+  it("gejt traži DVE kvačice i proverava ih na serveru", () => {
+    // ZZPL čl. 15 st. 2 — razdvojen pristanak. Do R-06 je ovde bilo jedno dugme
+    // za ceo set; iz jednog klika se ne može upisati dokaz o razdvojenosti.
+    expect(GEJT_EKRAN).toContain('t("kvacica_uslovi")');
+    expect(GEJT_EKRAN).toContain("AKT_USLOVI.verzija");
+    expect(GEJT_EKRAN).toContain("AKT_POLITIKA.verzija");
+    expect(GEJT_EKRAN).toContain("prihvatamUslove: uslovi");
+    expect(GEJT_EKRAN).toContain("prihvatamPolitiku: politika");
+    // Pretraživač nije poslednja reč.
+    expect(GEJT_RUTA).toContain("oba(prihvatamUslove, prihvatamPolitiku)");
+  });
+
+  it("gejt upisuje ZapisPristanka, ne samo otključanje ekrana", () => {
+    // Za zatečen nalog je ovo JEDINO mesto na kome dokaz može da nastane.
+    expect(GEJT_RUTA).toContain("upisiPristankeRegistracije(tx, userId, jezik, \"gejt\")");
+    // Oba upisa u istoj transakciji — nalog koji je prošao gejt a nema zapis je
+    // tačno stanje koje se uklanja.
+    expect(GEJT_RUTA).toMatch(/prisma\.\$transaction\(async \(tx\) => \{[\s\S]*politikaPrihvatanje\.upsert[\s\S]*upisiPristankeRegistracije/);
+    // I ovde bez otiska: dokaz nosi verzija, tekst i trenutak.
+    expect(GEJT_RUTA).not.toMatch(/klijentIP|userAgent/);
+  });
+});

@@ -1860,6 +1860,39 @@ pitanje vremena. Isto i za posebne kategorije. Zato je merilo upisano u akt, a s
 broj ide u **odluku UO** — isto pravilo kao `PRAG_PROVERE_POREKLA_RSD` i godišnja
 granica od 100.000 RSD.
 
+🔴 **„Veliki broj lica" — koliki je to broj (14.09.2026).** ZZPL ga **ne definiše
+brojem** i to je namerno: zakon traži procenu srazmere prema obimu, vrsti i svrsi
+obrade, a ne prelazak praga. Zato se broj ne može pročitati iz propisa nego se
+utvrđuje odlukom, i zato u aktu stoji **merilo**, a broj u odluci UO.
+
+**Ono što postoji kao orijentir** (evropske smernice za čl. 37 GDPR-a, na kojima
+je i naš čl. 56 pisan) nisu pragovi nego primeri obrade koja se **po pravilu**
+smatra velikom: banke sa svojim klijentima, operatori, bolnice, osiguranje,
+pretraživači sa ciljanim oglašavanjem. Izričito se navodi da pojedinačan lekar i
+pojedinačan advokat, i pored posebnih kategorija, u to **ne ulaze**. Merila su
+četiri: broj lica (apsolutno ili kao udeo u populaciji), količina podataka po
+licu, trajanje obrade i geografski obim.
+
+**Predlog za odluku UO — obaveza nastaje čim nastupi bilo šta od:**
+
+| Merilo | Predlog | Zašto taj broj |
+|---|---:|---|
+| aktivni nalozi | **5.000** | red veličine iznad „pojedinačnog pružaoca"; ispod toga smo bliži advokatskoj kancelariji nego operatoru |
+| aktivne prijave na socijalne programe | **500** | posebne kategorije (čl. 17) traže niži prag od običnih podataka |
+| aktivni maloletni nalozi | **1.000** | podaci dece nose isti pooštren režim |
+
+🔴 **Nijedan od ta tri broja ne ide u akt** — isto pravilo kao poreske stope i
+`PRAG_PROVERE_POREKLA_RSD`: broj se menja, akt bi zastario bez ijedne izmene.
+Politika čl. 1 zato kaže da merilo utvrđuje odluka UO i da se objavljuje.
+
+🟡 **Brojevi su konzervativni namerno.** Greška u jednom smeru znači da smo
+odredili DPO-a ranije nego što je moralo — trošak. Greška u drugom smeru znači da
+smo obrađivali podatke bez DPO-a kad je bio obavezan — prekršaj. Cena nije ista,
+pa ni prag ne treba da bude na sredini. 🔴 Uz to: merilo **nije jedini okidač** —
+obaveza nastaje i ako se uvede obrada koja sama po sebi menja sliku (aktiviranje
+modula sa novom obradom, saradnja sa organom vlasti), pa Politika traži
+preispitivanje i pri **svakom aktiviranju modula**, ne samo godišnje.
+
 🟡 **Spoljni DPO kao usluga je jača varijanta i ostaje otvorena** za trenutak kad
 sistem krene. Nije odbijena — samo za sada nema ko.
 
@@ -1883,18 +1916,23 @@ razumljiv onome ko pristanak daje.
    „tvrdo"; potvrda je meka po odluci vlasnika.
 5. **Vraćanje saglasnosti roditelja u tekst izjave o postojanju deteta** — time
    pravo na opoziv ponovo prestaje da postoji.
-6. **Paljenje `PRISTANAK_NA_AKTE_TRAZI_SE` radi R-06** — to je drugi institut
-   (ponovni pristanak na izmene). Jednokratno paljenje zbog **zatečenih naloga** je
-   zasebna odluka vlasnika, koja još nije doneta (vidi ostatak br. 1).
+6. 🟢 **PREVAZIĐENO 14.09.2026 — prekidač JE upaljen, odlukom vlasnika, zbog
+   zatečenih naloga** (vidi „Zatečeni nalozi: gejt je jedini put do dokaza"). Ovde
+   je stajalo da se paljenje ne otvara jer je to drugi institut. Razgraničenje i
+   dalje stoji — gejt uređuje **ponovni** pristanak na izmene — ali je to ujedno
+   jedini mehanizam kojim zatečen nalog uopšte može da da pristanak, pa je
+   iskorišćen za to. 🔴 **Prekidač se sada ne GASI** bez izričitog naloga: gašenjem
+   bi zatečeni nalozi ostali bez dokaza, a ekran im se više nikad ne bi pojavio.
 
 #### 🟡 Svesno prihvaćeni ostaci
 
-1. 🔴 **Zatečeni nalozi ostaju bez dokaza pristanka i to se ne može napraviti
-   unazad.** Najveći preostali ostatak i razlog zašto ocena stoji na 4, a ne na 3.
-   Jedini put je da se pristanak zatraži pri prvoj narednoj prijavi — dakle
-   jednokratno paljenje prekidača uz nov red `PolitikaVerzija`. **Odluka vlasnika
-   se čeka.** Uz M-1 to bi pogodilo samo zatečene naloge; novi pristanak daju pri
-   registraciji i ekran ne bi ni videli.
+1. 🟢 **REŠENO 14.09.2026 — zatečeni nalozi daju pristanak na gejtu.** Ovde je
+   stajalo da dokaza za njih nema i da je to razlog zbog kog ocena stoji na 4.
+   Ostaje tačno da se pristanak **ne može napraviti unazad**; put je da se zatraži
+   pri prvoj narednoj prijavi, i on je sada otvoren. **Ocena time ide na 3.**
+   Ostatak koji od toga preživljava: dokaz za zatečen nalog nosi datum prve
+   naredne prijave, ne datum otvaranja naloga — pa za razdoblje između to nije
+   dokaz pristanka nego dokaz potonje potvrde.
 2. Pristanak na kolačiće neprijavljenog posetioca i dalje se ne dokazuje **po licu**
    — svesno, jer je alternativa nov podatak o posetiocu.
 3. Opcija C nosi rizik da je procena o obavezi pogrešna, i ima rok trajanja (gore).
@@ -1903,9 +1941,46 @@ razumljiv onome ko pristanak daje.
 (servisne), `protokol/potvrda-adrese.ts`, `cookieConsent.ts`, `components/profil/MojiPristanci.tsx`,
 rute `POST /api/pristanak/kolacici` i `GET /api/profil/pristanci`. Migracije
 `20260914120000_vrsta_pristanka_enum` (ZASEBAN fajl, samo enum) →
-`20260914120100_zapis_pristanka`. **Brana:** `__tests__/pristanak-izvor.test.ts`
-(30 provera, gleda IZVOR) + odredbe zaključane u `pravni-dokumenti.test.ts` na
+`20260914120100_zapis_pristanka` → `20260914130000_pristanak_4_6_3` (red
+`PolitikaVerzija`, vidi ispod). **Brana:** `__tests__/pristanak-izvor.test.ts`
+(35 provera, gleda IZVOR) + odredbe zaključane u `pravni-dokumenti.test.ts` na
 sr/en/ru.
+
+#### 🔴 Zatečeni nalozi: gejt je jedini put do dokaza (14.09.2026)
+
+Odluka vlasnika, doneta pošto je ostatak R-06 br. 1 iznet na sto. Nalog otvoren
+pre seta 4.6.3 nema `ZapisPristanka` i ne može ga dobiti unazad — retroaktivno
+upisan pristanak bio bi netačan dokument (isto pravilo kao `DonationRecord.ugovorTekst`
+i `Roditeljstvo.saglasnostAt`). Jedini put je da se pristanak **zatraži pri prvoj
+narednoj prijavi**, a taj mehanizam u sistemu već postoji: ekran „Sistem je
+unapređen — novi akti".
+
+- **`PRISTANAK_NA_AKTE_TRAZI_SE = true`** (`moduli.ts`) + migracija
+  `20260914130000_pristanak_4_6_3`, koja upisuje red `PolitikaVerzija` „4.6.3"
+  (presedan: `20260810170000_pristanak_4_2_1`). 🔴 `ON CONFLICT DO NOTHING` — drugi
+  red bi tražio pristanak na verziju koja je već prihvaćena.
+- 🔴 **Nov čovek ekran NE vidi, i to je moralo da se doda.** `pristanakStatus()`
+  čita **isključivo `PolitikaPrihvatanje`**, a M-1 je upisivao samo
+  `ZapisPristanka` — golo paljenje prekidača bi ekran pokazalo i onome ko je
+  kvačicu čekirao pre trideset sekundi. Zato `upisiPristankeRegistracije` sada u
+  **istoj transakciji** upisuje i `PolitikaPrihvatanje` za tekuću verziju
+  (`upisiPrihvatanjeTekuceVerzije`), pa prekidač pogađa samo zatečene naloge.
+  🔴 Redosled (`efektivnaOd`, `createdAt`, `id`) je isti kao u `pristanakStatus()`
+  i mora takav da ostane — `orderBy` samo po `efektivnaOd` je neodređen kad dve
+  verzije dele isti trenutak, a razlaz upisa i provere znači isti bljesak ekrana
+  koji je već opisan u `politika.ts`.
+- 🔴 **Gejt je dobio DVE kvačice i serversku proveru.** Do sada je bio jedno dugme
+  „Pristajem" za ceo set, a ruta je primala goli `verzijaId` — pristanak je mogao
+  da nastane zahtevom koji nijedna kvačica nije pratila. Iz jednog klika se uz to
+  ne može upisati dokaz da je razdvojenost postojala (ZZPL čl. 15 st. 2). Sada su
+  Uslovi i Politika odvojeni, uz verziju iz `verzije-akata.ts`, a ruta odbija bez
+  `oba(...)` — isto što radi registracija.
+- 🔴 **Gejt upisuje i `ZapisPristanka`** (izvor `gejt`), u istoj transakciji sa
+  `PolitikaPrihvatanje`. Bez toga bi zatečen nalog prošao ekran a dokaz i dalje ne
+  bi postojao — dakle ceo potez bi otključao pristup i ne bi zatvorio rizik.
+- 🟡 **Posledica koju treba znati:** svaka naredna izmena akata traži **nov red
+  `PolitikaVerzija`** (Uslovi čl. 40, Politika čl. 16). Bez njega ekran ćuti, jer
+  je zatečena verzija već prihvaćena — prekidač sam po sebi ništa ne prikazuje.
 
 ### ZRNO nije ulaganje: odgovor po elementima, ne etiketa (R-04, 2026-09-13)
 

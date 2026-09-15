@@ -34,7 +34,11 @@ import { AKT_POLITIKA, AKT_USLOVI, VERZIJA_PRISTANKA_KOLACICI } from "./verzije-
 export type VrstaPristankaKod = "USLOVI_KORISCENJA" | "POLITIKA_PRIVATNOSTI" | "KOLACICI_ANALITIKA";
 
 /** Gde je pristanak dat — ide u `ZapisPristanka.izvor`. */
-export type IzvorPristanka = "registracija" | "oauth" | "kolacici";
+/**
+ * Odakle je pristanak stigao. `gejt` je ekran „Sistem je unapređen" — jedini
+ * put kojim dokaz pristanka može da nastane za nalog otvoren pre R-06.
+ */
+export type IzvorPristanka = "registracija" | "oauth" | "kolacici" | "gejt";
 
 export type StavkaPristanka = {
   vrsta: VrstaPristankaKod;
