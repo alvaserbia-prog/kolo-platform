@@ -310,7 +310,7 @@ Minden felhasználó cserélhet árut és szolgáltatást. A POEN-nyilvántartá
 
 Tilos és a Felhasználási feltételekben megállapított intézkedéseket vonja maga után az a nyilvántartás-frissítés, amelyet olyan ügylet érdekében hajtanak végre, amellyel a POEN-t a rendszeren kívüli értékért kínálják, veszik, eladják, vagy forgalmában közvetítenek. Az ilyen frissítés e cikk értelmében nem áru- és szolgáltatáscsere.
 
-A platform hirdetési terében a hirdetések megtekintése — az ajánlat vagy kérés tartalma, ára, helye és a hirdető álneve — nyilvános és valamennyi látogató számára elérhető a csere hozzáférhetősége érdekében.
+A platform hirdetési terében a hirdetések megtekintése — az ajánlat vagy kérés tartalma, a POEN-ben kifejezett összeg, helye és a hirdető álneve — nyilvános és valamennyi látogató számára elérhető a csere hozzáférhetősége érdekében.
 
 Javat vagy szolgáltatást kínáló hirdetés közzététele a nem hitelesített felhasználók számára is elérhető, a Felhasználási feltételekben megállapított feltételek és korlátozások mellett. Javat vagy szolgáltatást kereső hirdetés közzététele, a hirdető elérhetőségi adataihoz való hozzáférés és a hirdetés kapcsán történő kommunikáció kezdeményezése kizárólag hitelesített felhasználók számára elérhető. A nem hitelesített hirdető válaszolhat abban a beszélgetésben, amelyet hitelesített felhasználó indított a hirdetése kapcsán.
 

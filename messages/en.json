@@ -994,7 +994,7 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.6.3"
+      "ver": "4.6.4"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
@@ -1022,7 +1022,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.6.2",
+      "ver": "4.6.4",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -1042,7 +1042,7 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use · KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.6.3",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.6.4",
     "meta_privatnost_title": "Privacy Policy · KOLO",
     "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.6.3",
     "meta_statut_title": "KOLO Foundation Statute · KOLO",
@@ -1056,7 +1056,7 @@
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 4.6.2",
     "meta_pravilnik_title": "KOLO System Rulebooks · KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.6.2",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.6.4",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",

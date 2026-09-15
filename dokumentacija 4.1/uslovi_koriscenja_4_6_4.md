@@ -144,6 +144,8 @@ Verifikovani korisnik koji ima pravo verifikacije može verifikovati oglašivač
 
 Za prvi oglas kojim nudi dobro ili uslugu i koji ispunjava sadržinski minimum korisniku se evidentira doprinos sadržaju platforme pod uslovima iz Člana 40a Pravilnika o KOLO sistemu. Verifikovanom korisniku doprinos se evidentira pri objavi. Neverifikovanom korisniku oglas se objavljuje odmah, a doprinos se evidentira kada Fondacija odobri oglas — ili ranije, ako nastupi neki od okidača utvrđenih tim članom. Ako doprinos ne bude odobren, korisnik dobija obaveštenje sa razlogom, a oglas ostaje objavljen.
 
+Korisnik koji nudi dobro ili uslugu odgovara za ispunjenje propisa koji se na to dobro ili uslugu odnose — uključujući propise o registraciji delatnosti, o proizvodnji i prometu, o bezbednosti hrane i poreske propise. Ti propisi važe i kada se razmena dogovara posredstvom Platforme. Fondacija ispunjenost tih uslova ne proverava, ne potvrđuje i po njoj ne odgovara.
+
 Taj doprinos je prvi korak putanje doprinosa razmeni (Član 40b Pravilnika o KOLO sistemu). Kada korisnik povodom oglasa pokrene razgovor, Platforma beleži činjenicu upita — koji korisnik se javio i povodom kog oglasa — jer je to jedan od uslova te putanje. Sadržaj poruka se u tu svrhu ne obrađuje. Obrada je bliže uređena Politikom privatnosti Platforme.
 
 Fondacija može ukloniti oglas koji krši ove Uslove, Pravilnik ili zakon, uz obaveštenje korisniku i navođenje razloga (Član 21 i Član 25). Ako oglas bude uklonjen pre nego što doprinos bude evidentiran, zabeleženi doprinos se poništava.
@@ -172,7 +174,7 @@ Fondacija ne odgovara za posledice koje nastanu ako korisnik sam otkrije svoj id
 
 Prostor za razmenu je deo Platforme namenjen oglašavanju ponuda i zahteva za dobra i usluge i dogovaranju razmena između korisnika.
 
-Pregled oglasa u prostoru za razmenu — sadržaj ponude ili zahteva, cena, lokacija i pseudonim oglašivača — javan je i dostupan svim posetiocima.
+Pregled oglasa u prostoru za razmenu — sadržaj ponude ili zahteva, iznos u POEN-ima, lokacija i pseudonim oglašivača — javan je i dostupan svim posetiocima.
 
 Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je svim registrovanim korisnicima; neverifikovanom korisniku pod uslovima i ograničenjima iz Člana 16. Postavljanje oglasa kojim se dobro ili usluga traži i pokretanje komunikacije povodom oglasa dostupni su verifikovanim korisnicima, nosiocima ZRNA i korisniku čiji je identitet utvrđen povodom javne donacije (Član 14). Pristup kontakt podacima oglašivača dostupan je isključivo verifikovanim korisnicima i nosiocima ZRNA.
 
@@ -208,6 +210,10 @@ Zabranjeno je nuđenje i razmena dobara i usluga čiji je promet zabranjen zakon
 
 Zabranjeno je i oglašavanje čiji su predmet POEN ili ZRNO — njihovo nuđenje, traženje, kupovina ili prodaja za novac ili drugu vrednost van sistema (Član 24).
 
+Zabranjeno je da maloletni korisnik nudi ili pribavlja dobra čije je davanje maloletnim licima zakonom zabranjeno ili ograničeno — naročito alkoholna pića, duvanske i srodne proizvode, uključujući elektronske cigarete i tečnosti za njih, energetska pića, lekove i dodatke ishrani, pirotehnička sredstva i oštre predmete. Zabrana važi bez obzira na saglasnost roditelja i bez obzira na to da li je razmena dogovorena putem oglasa na Platformi ili na drugi način.
+
+Kod dobara čiji je promet dozvoljen ali posebnim propisima ograničen, korisnik koji ih nudi dužan je da poštuje ta ograničenja, uključujući zabranu davanja maloletnim licima i ograničenja oglašavanja.
+
 Lista zabranjenih kategorija nije konačna. Fondacija može ukloniti objavu za koju utvrdi da krši zakon, ove Uslove ili Pravilnik i obaveštava korisnika o uklanjanju uz navođenje razloga.
 
 ### Član 22 — Izvršenje razmene
@@ -241,6 +247,14 @@ Deo se preuzima neposredno kod dobavljača, uz kod za preuzimanje. Preuzimanjem 
 Prema dobavljaču je Fondacija kupac i ugovorna strana; korisnik sa dobavljačem ne stupa u ugovorni odnos. Preuzimanje dela nije kupovina i ne zasniva potraživanje prema Fondaciji.
 
 Postupak, rokovi, način utvrđivanja reda i način obračuna broja POEN-a uređeni su Pravilnikom o projektima i kolektivnim nabavkama.
+
+### Član 22b — Odnos prema propisima o zaštiti potrošača
+
+Fondacija prema korisnicima ne nastupa na tržištu: ne nudi im dobra ni usluge uz naknadu, ne naplaćuje korišćenje Platforme, ne posreduje u razmeni i po osnovu razmene između korisnika ne prima nikakvu vrednost.
+
+Kada dobro ili uslugu nudi lice koje to čini u okviru delatnosti, na odnos sa korisnikom koji ih pribavlja za sopstvene potrebe primenjuju se propisi o zaštiti potrošača, bez obzira na to što je razmena dogovorena posredstvom Platforme.
+
+Prava iz tih propisa ostvaruju se prema tom licu. Fondacija nije strana u razmeni, ne odgovara za njihovo ispunjenje i ne utvrđuje u kom svojstvu korisnik nastupa.
 
 ## V — Pravila ponašanja na platformi
 

@@ -146,6 +146,8 @@ Verificirani korisnik koji ima pravo verifikacije može verificirati oglašivač
 
 Za prvi oglas kojim nudi dobro ili uslugu i koji ispunjava sadržajni minimum korisniku se evidentira doprinos sadržaju platforme pod uvjetima iz Članka 40.a Pravilnika o KOLO sustavu. Verificiranom korisniku doprinos se evidentira pri objavi. Neverificiranom korisniku oglas se objavljuje odmah, a doprinos se evidentira kada Zaklada odobri oglas — ili ranije, ako nastupi neki od okidača utvrđenih tim člankom. Ako doprinos ne bude odobren, korisnik dobiva obavijest s razlogom, a oglas ostaje objavljen.
 
+Korisnik koji nudi dobro ili uslugu odgovara za ispunjenje propisa koji se na to dobro ili uslugu odnose — uključujući propise o registraciji djelatnosti, o proizvodnji i prometu, o sigurnosti hrane i porezne propise. Ti propisi vrijede i kada se razmjena dogovara posredstvom Platforme. Zaklada ispunjenost tih uvjeta ne provjerava, ne potvrđuje i za nju ne odgovara.
+
 Taj je doprinos prvi korak putanje doprinosa razmjeni (Članak 40.b Pravilnika o KOLO sustavu). Kada korisnik povodom oglasa pokrene razgovor, Platforma bilježi činjenicu upita — koji se korisnik javio i povodom kojega oglasa — jer je to jedan od uvjeta te putanje. Sadržaj se poruka u tu svrhu ne obrađuje. Obrada je pobliže uređena Politikom privatnosti Platforme.
 
 Zaklada može ukloniti oglas koji krši ove Uvjete, Pravilnik ili zakon, uz obavijest korisniku i navođenje razloga (Članak 21. i Članak 25.). Ako oglas bude uklonjen prije nego što doprinos bude evidentiran, zabilježeni se doprinos poništava.
@@ -174,7 +176,7 @@ Zaklada ne odgovara za posljedice koje nastanu ako korisnik sam otkrije svoj ide
 
 Prostor za razmjenu dio je Platforme namijenjen oglašavanju ponuda i zahtjeva za dobra i usluge te dogovaranju razmjena između korisnika.
 
-Pregled oglasa u prostoru za razmjenu — sadržaj ponude ili zahtjeva, cijena, lokacija i pseudonim oglašivača — javan je i dostupan svim posjetiteljima.
+Pregled oglasa u prostoru za razmjenu — sadržaj ponude ili zahtjeva, iznos u POEN-ima, lokacija i pseudonim oglašivača — javan je i dostupan svim posjetiteljima.
 
 Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je svim registriranim korisnicima; neverificiranom korisniku pod uvjetima i ograničenjima iz Članka 16. Postavljanje oglasa kojim se dobro ili usluga traži i pokretanje komunikacije povodom oglasa dostupni su verificiranim korisnicima, nositeljima ZRNA i korisniku čiji je identitet utvrđen povodom javne donacije (Članak 14.). Pristup kontakt podacima oglašivača dostupan je isključivo verificiranim korisnicima i nositeljima ZRNA.
 
@@ -207,6 +209,10 @@ Sadržajni minimum oglasa — naslov, opis, najmanje jedna fotografija, kategori
 Zabranjeno je nuđenje i razmjena dobara i usluga čiji je promet zabranjen zakonom, uključujući opojne droge i prekursore, oružje i eksplozivne tvari čiji promet nije dopušten, ukradenu robu ili robu za koju postoji sumnja da potječe iz kaznenog djela, osobne dokumente i službene isprave, osobne podatke trećih osoba, sadržaj koji potiče mržnju, nasilje ili diskriminaciju te financijske instrumente ili sheme čiji je cilj zaobilaženje propisa.
 
 Zabranjeno je i oglašavanje čiji su predmet POEN ili ZRNO — njihovo nuđenje, traženje, kupnja ili prodaja za novac ili drugu vrijednost izvan sustava (Članak 24.).
+
+Zabranjeno je da maloljetni korisnik nudi ili pribavlja dobra čije je davanje maloljetnim osobama zakonom zabranjeno ili ograničeno — osobito alkoholna pića, duhanske i srodne proizvode, uključujući elektroničke cigarete i tekućine za njih, energetska pića, lijekove i dodatke prehrani, pirotehnička sredstva i oštre predmete. Zabrana vrijedi bez obzira na suglasnost roditelja i bez obzira na to je li razmjena dogovorena putem oglasa na Platformi ili na drugi način.
+
+Kod dobara čiji je promet dopušten ali posebnim propisima ograničen, korisnik koji ih nudi dužan je poštovati ta ograničenja, uključujući zabranu davanja maloljetnim osobama i ograničenja oglašavanja.
 
 Popis zabranjenih kategorija nije konačan. Zaklada može ukloniti objavu za koju utvrdi da krši zakon, ove Uvjete ili Pravilnik i obavještava korisnika o uklanjanju uz navođenje razloga.
 
@@ -241,6 +247,14 @@ Dio se preuzima neposredno kod dobavljača, uz kod za preuzimanje. Preuzimanjem 
 Prema dobavljaču je Zaklada kupac i ugovorna strana; korisnik s dobavljačem ne stupa u ugovorni odnos. Preuzimanje dijela nije kupnja i ne zasniva potraživanje prema Zakladi.
 
 Postupak, rokovi, način utvrđivanja redoslijeda i način obračuna broja POEN-a uređeni su Pravilnikom o projektima i kolektivnim nabavama.
+
+### Članak 22b — Odnos prema propisima o zaštiti potrošača
+
+Zaklada prema korisnicima ne nastupa na tržištu: ne nudi im dobra ni usluge uz naknadu, ne naplaćuje korištenje Platforme, ne posreduje u razmjeni i po osnovi razmjene između korisnika ne prima nikakvu vrijednost.
+
+Kada dobro ili uslugu nudi osoba koja to čini u okviru djelatnosti, na odnos s korisnikom koji ih pribavlja za vlastite potrebe primjenjuju se propisi o zaštiti potrošača, bez obzira na to što je razmjena dogovorena posredstvom Platforme.
+
+Prava iz tih propisa ostvaruju se prema toj osobi. Zaklada nije strana u razmjeni, ne odgovara za njihovo ispunjenje i ne utvrđuje u kojem svojstvu korisnik nastupa.
 
 ## V — Pravila ponašanja na platformi
 

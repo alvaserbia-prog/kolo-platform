@@ -994,7 +994,7 @@
     "otvoriDokument": "Открыть документ →",
     "uslovi": {
       "naslov": "Условия пользования платформой КОЛО",
-      "ver": "4.6.3"
+      "ver": "4.6.4"
     },
     "privatnost": {
       "naslov": "Политика конфиденциальности платформы КОЛО",
@@ -1022,7 +1022,7 @@
     },
     "pravilnik": {
       "naslov": "Правила системы КОЛО",
-      "ver": "4.6.2",
+      "ver": "4.6.4",
       "sviPravilnici": "← Все правила",
       "pravilnici": "Правила"
     },
@@ -1042,7 +1042,7 @@
       "pravilnikKoloSistem": "Правила системы КОЛО"
     },
     "meta_uslovi_title": "Условия пользования · КОЛО",
-    "meta_uslovi_desc": "Условия пользования платформой КОЛО, версия 4.6.3",
+    "meta_uslovi_desc": "Условия пользования платформой КОЛО, версия 4.6.4",
     "meta_privatnost_title": "Политика конфиденциальности · КОЛО",
     "meta_privatnost_desc": "Политика конфиденциальности платформы КОЛО, версия 4.6.3",
     "meta_statut_title": "Устав Фонда КОЛО · КОЛО",
@@ -1056,7 +1056,7 @@
     "meta_whitepaper_title": "Whitepaper · КОЛО",
     "meta_whitepaper_desc": "KOLO Whitepaper, версия 4.6.2",
     "meta_pravilnik_title": "Правила системы КОЛО · КОЛО",
-    "meta_pravilnik_desc": "Указатель правил системы КОЛО, версия 4.6.2",
+    "meta_pravilnik_desc": "Указатель правил системы КОЛО, версия 4.6.4",
     "rb": {
       "kolo-sistem": {
         "naziv": "Правила системы КОЛО",

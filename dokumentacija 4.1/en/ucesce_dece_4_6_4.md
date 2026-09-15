@@ -2,7 +2,7 @@
 
 # Rulebook on the Participation of Children
 
-*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.6.0), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
+*This Rulebook governs the participation of minors in the KOLO system — accession, the scope of activities, the relationship with the parent, the contribution from the children's space, and the transition to an adult account. It is adopted on the basis of Article 58 of the KOLO System Rulebook (v4.6.4), which expressly refers to this act. In the event of inconsistency, the provisions of the KOLO System Rulebook shall prevail.*
 
 ## I — General Provisions
 
@@ -203,6 +203,8 @@ A minor user undertakes legal transactions within the limits of their contractua
 The Foundation is not a party to the exchange and does not mediate in it (Article 22 of the Terms of Use). The relationship between the parties is governed by the general rules of the law of obligations and, where one party is a minor user, also by the regulations on contractual capacity.
 
 The annulment of a legal transaction under those regulations is effected between the parties. The Platform does not carry out the annulment of an exchange and does not overturn the update of the POEN record on that ground (Article 14, paragraph 8).
+
+The exchange referred to in paragraph 1 of this Article relates exclusively to goods which a minor is permitted by law to acquire. The prohibition laid down in Article 21 of the Terms of Use applies also to exchange between minor users, regardless of whether it was arranged through a listing on the Platform or in another way.
 
 ### Article 13
 

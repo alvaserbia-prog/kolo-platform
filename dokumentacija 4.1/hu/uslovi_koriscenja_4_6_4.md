@@ -146,6 +146,8 @@ Az a hitelesített felhasználó, aki hitelesítési joggal rendelkezik, hiteles
 
 Az első olyan hirdetésért, amellyel javat vagy szolgáltatást kínál, és amely megfelel a tartalmi minimumnak, a felhasználó javára a platform tartalmához való hozzájárulás kerül nyilvántartásba a KOLO rendszerről szóló szabályzat 40.a cikkében foglalt feltételek szerint. Hitelesített felhasználó esetében a hozzájárulás a közzétételkor kerül nyilvántartásba. Nem hitelesített felhasználó esetében a hirdetés azonnal megjelenik, a hozzájárulás pedig akkor kerül nyilvántartásba, amikor az Alapítvány jóváhagyja a hirdetést — vagy korábban, ha az említett cikkben meghatározott kiváltó események valamelyike bekövetkezik. Ha a hozzájárulást nem hagyják jóvá, a felhasználó indokolással ellátott értesítést kap, a hirdetés pedig közzétéve marad.
 
+Az a felhasználó, aki javat vagy szolgáltatást kínál, felel az arra a javra vagy szolgáltatásra vonatkozó jogszabályok betartásáért — ideértve a tevékenység bejegyzésére, az előállításra és forgalmazásra, az élelmiszer-biztonságra vonatkozó és az adójogszabályokat. Ezek a jogszabályok akkor is érvényesek, ha a cserét a Platformon keresztül egyeztetik. Az Alapítvány e feltételek teljesülését nem ellenőrzi, nem igazolja, és azért nem felel.
+
 E hozzájárulás a cseréhez való hozzájárulás útjának első lépése (a KOLO rendszerről szóló szabályzat 40.b cikke). Amikor a felhasználó egy hirdetés kapcsán beszélgetést kezdeményez, a Platform feljegyzi a megkeresés tényét — melyik felhasználó jelentkezett és melyik hirdetés kapcsán —, mivel ez az említett út egyik feltétele. Az üzenetek tartalmát e célból nem kezeljük. Az adatkezelést részletesebben a Platform Adatvédelmi szabályzata rendezi.
 
 Az Alapítvány eltávolíthatja azt a hirdetést, amely sérti a jelen Feltételeket, a Szabályzatot vagy a jogszabályt, a felhasználó értesítése és az indok megjelölése mellett (21. és 25. cikk). Ha a hirdetést azelőtt távolítják el, hogy a hozzájárulás nyilvántartásba került volna, a feljegyzett hozzájárulás érvényét veszti.
@@ -174,7 +176,7 @@ Az Alapítvány nem felel azokért a következményekért, amelyek abból eredne
 
 A csereterület a Platform azon része, amely javakra és szolgáltatásokra vonatkozó ajánlatok és keresletek hirdetésére, valamint a felhasználók közötti cserék megbeszélésére szolgál.
 
-A csereterület hirdetéseinek megtekintése — az ajánlat vagy kereslet tartalma, az ár, a helység és a hirdető álneve — nyilvános, és minden látogató számára hozzáférhető.
+A csereterület hirdetéseinek megtekintése — az ajánlat vagy kereslet tartalma, a POEN-ben kifejezett összeg, a helység és a hirdető álneve — nyilvános, és minden látogató számára hozzáférhető.
 
 Árut vagy szolgáltatást kínáló hirdetés feladása minden regisztrált felhasználó számára elérhető; nem hitelesített felhasználó számára a 16. cikk feltételeivel és korlátozásaival. Árut vagy szolgáltatást kereső hirdetés feladása és a hirdetés kapcsán a kommunikáció kezdeményezése a hitelesített felhasználók, a ZRNO-tulajdonosok, valamint az a felhasználó számára elérhető, akinek személyazonosságát nyilvános adomány kapcsán megállapították (14. cikk). A hirdetők kapcsolattartási adataihoz való hozzáférés kizárólag a hitelesített felhasználók és a ZRNO-tulajdonosok számára elérhető.
 
@@ -207,6 +209,10 @@ A hirdetés tartalmi minimuma — cím, leírás, legalább egy fénykép, kateg
 Tilos az olyan javak és szolgáltatások kínálata és cseréje, amelyek forgalmát jogszabály tiltja, ideértve a kábítószereket és prekurzorokat, azokat a fegyvereket és robbanóanyagokat, amelyek forgalma nem engedélyezett, a lopott árut vagy azt az árut, amelyről feltehető, hogy bűncselekményből származik, a személyi okmányokat és hivatalos iratokat, harmadik személyek személyes adatait, a gyűlöletre, erőszakra vagy megkülönböztetésre uszító tartalmat, valamint azokat a pénzügyi eszközöket vagy konstrukciókat, amelyek célja a jogszabályok megkerülése.
 
 Tilos továbbá az olyan hirdetés, amelynek tárgya a POEN vagy a ZRNO — azok kínálata, keresése, megvásárlása vagy eladása pénzért vagy a rendszeren kívüli más értékért (24. cikk).
+
+Tilos, hogy a kiskorú felhasználó olyan javakat kínáljon vagy szerezzen be, amelyek kiskorúak részére történő átadását jogszabály tiltja vagy korlátozza — különösen alkoholtartalmú italokat, dohányterméket és hasonló termékeket, ideértve az elektronikus cigarettát és a hozzá való folyadékokat, energiaitalokat, gyógyszereket és étrend-kiegészítőket, pirotechnikai termékeket és éles tárgyakat. A tilalom a szülői hozzájárulástól függetlenül érvényes, és attól függetlenül is, hogy a cserét a Platformon közzétett hirdetés útján vagy más módon egyeztették.
+
+Olyan javak esetében, amelyek forgalma megengedett, de külön jogszabályok korlátozzák, az azokat kínáló felhasználó köteles e korlátozásokat betartani, ideértve a kiskorúak részére történő átadás tilalmát és a reklámozás korlátozásait.
 
 A tiltott kategóriák felsorolása nem kimerítő. Az Alapítvány eltávolíthatja azt a bejegyzést, amelyről megállapítja, hogy sérti a jogszabályt, a jelen Feltételeket vagy a Szabályzatot, és az eltávolításról az indok megjelölésével értesíti a felhasználót.
 
@@ -241,6 +247,14 @@ A részt közvetlenül a szállítónál kell átvenni, átvételi kóddal. Az �
 A szállítóval szemben az Alapítvány a vevő és a szerződő fél; a felhasználó a szállítóval szerződéses viszonyba nem lép. A rész átvétele nem vásárlás, és nem keletkeztet követelést az Alapítvánnyal szemben.
 
 Az eljárást, a határidőket, a sorrend megállapításának módját és a POEN-szám kiszámításának módját a projektekről és a kollektív beszerzésekről szóló szabályzat rendezi.
+
+### 22b. cikk — Viszony a fogyasztóvédelmi szabályokhoz
+
+Az Alapítvány a felhasználók felé nem lép fel a piacon: nem kínál nekik árut vagy szolgáltatást ellenszolgáltatásért, nem számít fel díjat a Platform használatáért, nem közvetít a cserében, és a felhasználók közötti csere alapján semmilyen értéket nem kap.
+
+Ha az árut vagy a szolgáltatást olyan személy kínálja, aki ezt tevékenysége keretében teszi, a saját szükségletére beszerző felhasználóval fennálló viszonyra a fogyasztóvédelmi szabályok alkalmazandók, függetlenül attól, hogy a cserét a Platformon keresztül egyeztették.
+
+Az e szabályok szerinti jogokat az adott személlyel szemben kell érvényesíteni. Az Alapítvány nem részese a cserének, azok teljesítéséért nem felel, és nem állapítja meg, milyen minőségben lép fel a felhasználó.
 
 ## V — Magatartási szabályok a platformon
 

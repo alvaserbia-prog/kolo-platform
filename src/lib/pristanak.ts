@@ -18,7 +18,7 @@
  * Tekst koji je čovek video, na jeziku na kom mu je prikazan, uz verziju akta.
  *
  * 🟢 Ne snima se ceo akt: pravilo bumpovanja obezbeđuje da objavljen fajl nikad ne
- * promeni sadržaj, pa `uslovi_koriscenja_4_6_3.md` trajno govori ono što je govorio
+ * promeni sadržaj, pa `uslovi_koriscenja_4_6_4.md` trajno govori ono što je govorio
  * na dan pristanka. Verzija je pokazivač na nepromenljiv dokument.
  *
  * 🔴 Tekst se sklapa iz ISTIH prevodnih ključeva iz kojih se prikazuje. Prepisan

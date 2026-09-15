@@ -1,6 +1,6 @@
 # Pravilnik o učešću dece
 
-*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.6.0), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
+*Ovaj pravilnik uređuje učešće maloletnih lica u KOLO sistemu — pristupanje, obim aktivnosti, odnos sa roditeljem, doprinos iz dečjeg prostora i prelazak u punoletni nalog. Donosi se na osnovu člana 58 Pravilnika o KOLO sistemu (v4.6.4), koji izričito upućuje na ovaj akt. U slučaju nesaglasnosti, odredbe Pravilnika o KOLO sistemu imaju prednost.*
 
 ## I — Opšte odredbe
 
@@ -201,6 +201,8 @@ Maloletni korisnik pravne poslove preduzima u granicama svoje poslovne sposobnos
 Fondacija nije strana u razmeni i ne posreduje u njoj (član 22 Uslova korišćenja). Odnos između strana uređuje se prema opštim pravilima obligacionog prava, a kada je jedna strana maloletni korisnik — i prema propisima o poslovnoj sposobnosti.
 
 Poništenje pravnog posla po tim propisima ostvaruje se između strana. Platforma ne sprovodi poništenje razmene i po tom osnovu ne obara ažuriranje evidencije POEN-a (član 14 stav 8).
+
+Razmena iz stava 1 ovog člana odnosi se isključivo na dobra koja maloletno lice po propisima sme da pribavi. Zabrana iz člana 21 Uslova korišćenja primenjuje se i na razmenu između maloletnih korisnika, bez obzira na to da li je dogovorena putem oglasa na Platformi ili na drugi način.
 
 ### Član 13
 

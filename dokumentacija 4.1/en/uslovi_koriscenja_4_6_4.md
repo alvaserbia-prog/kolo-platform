@@ -146,6 +146,8 @@ A verified user who has the right to verify may verify the advertiser if they kn
 
 For the first listing in which they offer a good or a service and which meets the content minimum, a contribution to platform content is recorded for the user under the conditions set out in Art. 40a of the Rulebook on the KOLO System. For a verified user, the contribution is recorded upon posting. For an unverified user, the listing is published immediately, while the contribution is recorded when the Foundation approves the listing — or earlier, if one of the triggers established by that Article occurs. If the contribution is not approved, the user receives a notification with a statement of reasons, and the listing remains published.
 
+A user who offers a good or a service is responsible for complying with the rules that apply to that good or service — including rules on business registration, on production and trade, on food safety, and tax rules. Those rules apply also where the exchange is arranged through the Platform. The Foundation does not verify or confirm compliance with those requirements and bears no responsibility for it.
+
 That contribution is the first step of the exchange contribution path (Art. 40b of the Rulebook on the KOLO System). When a user initiates a conversation in relation to a listing, the Platform records the fact of the enquiry — which user made contact and in relation to which listing — as that is one of the conditions of that path. The content of the messages is not processed for that purpose. The processing is regulated in more detail by the Platform's Privacy Policy.
 
 The Foundation may remove a listing that breaches these Terms, the Rulebook, or the law, with notice to the user stating the reason (Article 21 and Article 25). If the listing is removed before the contribution has been recorded, the noted contribution is annulled.
@@ -174,7 +176,7 @@ The Foundation is not responsible for the consequences arising if the user thems
 
 The exchange space is the part of the Platform intended for advertising offers and requests for goods and services and arranging exchanges between users.
 
-Browsing listings in the exchange space — the content of an offer or request, price, location, and the advertiser's pseudonym — is public and accessible to all visitors.
+Browsing listings in the exchange space — the content of an offer or request, the amount in POEN, location, and the advertiser's pseudonym — is public and accessible to all visitors.
 
 Posting a listing offering a good or a service is available to all registered users; to an unverified user under the conditions and limitations of Article 16. Posting a listing seeking a good or a service and initiating communication on account of a listing are available to verified users, ZRNO Holders, and a user whose identity has been established on account of a public donation (Article 14). Access to advertisers' contact details is available exclusively to verified users and ZRNO Holders.
 
@@ -207,6 +209,10 @@ The content minimum for a listing — a title, a description, at least one photo
 The offering and exchange of goods and services whose trade is prohibited by law is forbidden, including narcotic drugs and precursors, weapons and explosives whose trade is not permitted, stolen goods or goods for which there is a suspicion that they originate from a criminal act, personal documents and official papers, personal data of third parties, content that incites hatred, violence, or discrimination, and financial instruments or schemes designed to circumvent regulations.
 
 Listings whose subject is POEN or ZRNO are likewise prohibited — offering, seeking, buying, or selling them for money or for any other value outside the system (Article 24).
+
+A minor user must not offer or acquire goods whose provision to minors is prohibited or restricted by law — in particular alcoholic beverages, tobacco and related products, including electronic cigarettes and liquids for them, energy drinks, medicines and food supplements, pyrotechnic articles, and sharp objects. The prohibition applies regardless of parental consent and regardless of whether the exchange was arranged through a listing on the Platform or in another way.
+
+For goods whose trade is permitted but restricted by special regulations, a user offering them is obliged to observe those restrictions, including the prohibition of provision to minors and restrictions on advertising.
 
 The list of prohibited categories is not exhaustive. The Foundation may remove a listing it determines to be in violation of the law, these Terms, or the Rulebook, and notifies the user of the removal, stating the reason.
 
@@ -241,6 +247,14 @@ A share is collected directly from the supplier, using a collection code. Upon c
 In relation to the supplier, the Foundation is the buyer and the contracting party; the user does not enter into a contractual relationship with the supplier. Collection of a share is not a purchase and does not establish a claim against the Foundation.
 
 The procedure, the deadlines, the manner of establishing the order, and the manner of calculating the number of POEN are governed by the Rulebook on Projects and Collective Procurement.
+
+### Article 22b — Relation to Consumer Protection Rules
+
+The Foundation does not act on the market towards users: it does not offer them goods or services for consideration, does not charge for use of the Platform, does not mediate in exchange, and receives no value on account of exchange between users.
+
+Where a good or a service is offered by a person doing so within a business activity, consumer protection rules apply to the relationship with a user acquiring them for their own needs, regardless of the fact that the exchange was arranged through the Platform.
+
+Rights under those rules are exercised against that person. The Foundation is not a party to the exchange, bears no responsibility for their fulfilment, and does not establish in what capacity a user is acting.
 
 ## Chapter V — Rules of Conduct on the Platform
 
