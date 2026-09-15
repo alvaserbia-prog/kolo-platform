@@ -39,7 +39,7 @@ import {
   otvoriPostupakPotvrde,
   poljaDeteta,
 } from "./deca";
-import { generisiIzjavuRoditelja } from "@/lib/deca-izjava";
+import { generisiIzjavuRoditelja, generisiSaglasnostRoditelja } from "@/lib/deca-izjava";
 import { osveziPrijateljstvaDeteta } from "./prijateljstva";
 import {
   ROK_PREUZIMANJA_DANA,
@@ -298,7 +298,7 @@ async function poveziRoditelja(
   const [roditelj, dete] = await Promise.all([
     prisma.user.findUnique({
       where: { id: roditeljId },
-      select: { id: true, pseudonim: true, maloletan: true, status: true, deaktiviranAt: true },
+      select: { id: true, pseudonim: true, maloletan: true, status: true, deaktiviranAt: true, jezik: true },
     }),
     prisma.user.findUnique({
       where: { id: deteId },
@@ -350,6 +350,13 @@ async function poveziRoditelja(
         roditeljId,
         izjavaAt: sada,
         izjavaTekst: generisiIzjavuRoditelja({ pseudonimDeteta: dete.pseudonim, godine }),
+        // Saglasnost na obradu podataka deteta (ZZPL čl. 16) — ODVOJENA od izjave
+        // iznad, iako se daje istim potezom. Vidi `deca-izjava.ts` (R-06).
+        saglasnostAt: sada,
+        saglasnostTekst: generisiSaglasnostRoditelja(
+          { pseudonimDeteta: dete.pseudonim },
+          roditelj.jezik ?? "sr",
+        ),
       },
     });
     if (!dete.datumRodjenja && datumRodjenja) {

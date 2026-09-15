@@ -16,10 +16,10 @@
 | **Matični broj / PIB** | 28836627 / 115840443 |
 | **Sjedište** | Šetalište 16, 25000 Sombor, Republika Srbija |
 | **E-pošta za zaštitu podataka** | privatnost@ekolo.rs |
-| **Službenik za zaštitu podataka (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
+| **Službenik za zaštitu podataka (DPO)** | Nije imenovan (Politika privatnosti, članak 1.). Kontakt za zaštitu podataka: privatnost@ekolo.rs |
 | **Datum izrade** | 23.05.2026. (posljednja izmjena 16.06.2026.) |
 | **Predmet procjene** | KOLO sustav — Faza 1., aktivne radnje obrade br. 1.–15., uključujući aktivirani Modul 3. (Socijalni programi s verifikatorskom potvrdom), Nadzor integriteta sustava verifikacija, javni popis donacija, nadzorni predmet, putanju doprinosa razmjeni i **aktivirani Modul 4. — Djeca (radnja br. 11)** |
-| **Povezani dokumenti** | Pravilnik o KOLO sustavu (v4.6.0), Politika privatnosti (v4.6.1), Registar radnji obrade (v4.6.1), Pravilnik o programima podrške (v4.6.1), Pravilnik o hijerarhiji akata (v4.4.6), Statut (v4.1), Whitepaper (v4.6.0) |
+| **Povezani dokumenti** | Pravilnik o KOLO sustavu (v4.6.2), Politika privatnosti (v4.6.3), Registar radnji obrade (v4.6.3), Uvjeti korištenja (v4.6.3), Pravilnik o programima podrške (v4.6.1), Pravilnik o hijerarhiji akata (v4.4.6), Statut (v4.1), Whitepaper (v4.6.2) |
 | **Sljedeća revizija** | Pri izmjeni mehanizma potvrde socijalnih programa, pri izmjeni pravila dječjeg prostora, ili najkasnije 12 mjeseci od posljednje izmjene |
 
 Ova procjena učinka na zaštitu osobnih podataka (u daljnjem tekstu: DPIA) izrađuje se u skladu s čl. 54. Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljnjem tekstu: ZZPL). DPIA se temelji na odredbama Glave IX. Pravilnika o KOLO sustavu (čl. 60.–67.), Politici privatnosti KOLO platforme i Registru radnji obrade osobnih podataka.
@@ -46,7 +46,7 @@ Treća dizajnerska odluka — minimizacija podataka. Platforma prikuplja samo po
 
 ## 2.3. Pregled radnji obrade
 
-Sustav u Fazi 1. obuhvaća sedamnaest radnji obrade utvrđenih Registrom radnji obrade (v4.6.1). Sve su radnje aktivne. Radnja 17. obuhvaća privatnu komunikaciju između korisnika, koja je do tog registra bila obrađivana, ali nije bila zasebno popisana. Radnja 16. obuhvaća prijedlog za nabavu i sudjelovanje u kolektivnoj nabavi, uvedene člancima 14a i 51a Pravilnika o KOLO sustavu. Modul 3. (Socijalni programi) aktiviran je prethodnom verzijom ove procjene; radnja 13. obuhvaća javni popis donacija, radnja 14. nadzorni predmet uveden Pravilnikom o dokazu stvarnosti 4.2.1, a radnja 15. putanju doprinosa razmjeni uvedenu člankom 40.b Pravilnika o KOLO sustavu. **Radnja 11. (Modul 4. — Djeca) aktivira se ovom procjenom**, uz Pravilnik o sudjelovanju djece.
+Sustav u Fazi 1. obuhvaća osamnaest radnji obrade utvrđenih Registrom radnji obrade (v4.6.3). Sve su radnje aktivne. Radnja 18. obuhvaća dokaz privole i dokaz zasnivanja ugovornog odnosa, uvedene ovom procjenom. Radnja 17. obuhvaća privatnu komunikaciju između korisnika, koja je do registra v4.5.1 bila obrađivana, ali nije bila zasebno popisana. Radnja 16. obuhvaća prijedlog za nabavu i sudjelovanje u kolektivnoj nabavi, uvedene člancima 14a i 51a Pravilnika o KOLO sustavu. Modul 3. (Socijalni programi) aktiviran je prethodnom verzijom ove procjene; radnja 13. obuhvaća javni popis donacija, radnja 14. nadzorni predmet uveden Pravilnikom o dokazu stvarnosti 4.2.1, a radnja 15. putanju doprinosa razmjeni uvedenu člankom 40.b Pravilnika o KOLO sustavu. **Radnja 11. (Modul 4. — Djeca) aktivira se ovom procjenom**, uz Pravilnik o sudjelovanju djece.
 
 | **Radnja** | **Naziv** | **Pravni temelj** | **Status** |
 | --- | --- | --- | --- |
@@ -66,7 +66,7 @@ Sustav u Fazi 1. obuhvaća sedamnaest radnji obrade utvrđenih Registrom radnji 
 | Br. 14 | Nadzorni predmet (ishod nadzora verifikacije) | Izvršenje ugovornog odnosa (čl. 12. st. 1. t. 2.) | Aktivno |
 | Br. 15 | Upit povodom oglasa i putanja doprinosa razmjeni | Izvršenje ugovornog odnosa (čl. 12. st. 1. t. 2.) | Aktivno |
 
-Detaljne kategorije podataka, kategorije osoba, primatelji, rokovi čuvanja i mjere zaštite za svaku radnju obrade utvrđeni su Registrom radnji obrade (v4.6.1) koji se primjenjuje zajedno s ovom procjenom.
+Detaljne kategorije podataka, kategorije osoba, primatelji, rokovi čuvanja i mjere zaštite za svaku radnju obrade utvrđeni su Registrom radnji obrade (v4.6.3) koji se primjenjuje zajedno s ovom procjenom.
 
 ## 2.4. Tijek podataka
 
@@ -126,7 +126,7 @@ Rizici se procjenjuju prema matrici vjerojatnost × ozbiljnost, pri čemu se raz
 | R4 — Zlouporaba grafa verifikacija | 2 | 2 | 4 | Mapiranje socijalnog grafa kroz analizu tko je koga verificirao. Mjere: pseudonimnost zapisa, anonimizacija veza prestankom statusa, ograničen pristup. |
 | R5 — Javna vidljivost oglasa neverificiranog korisnika | 2 | 2 | 4 | Oglas je javno vidljiv i indeksira se. Sadržaj bira korisnik; identificirajući se podaci ne traže. Mjere: sadržajni minimum umjesto osobnih podataka, broj telefona nije javan, najviše tri aktivna oglasa, uklanjanje u svakom trenutku. |
 | R6 — Pogreške u automatiziranom odlučivanju | 1 | 3 | 3 | Pogrešan obračun POEN-a može utjecati na položaj korisnika. Automatsku posljedicu za status ima i poništenje potvrde zbog neaktivnosti (čl. 6. Pravilnika o sudjelovanju djece). Mjere: javna deterministička formula, pravo na objašnjenje i prigovor, ljudski uvid; kod poništenja potvrde još i obavijest svim pogođenima prije isteka roka i izričito pravo prigovora o kojem odlučuje čovjek. |
-| R7 — Neovlašteno korištenje tehničkih zapisnika | 1 | 2 | 2 | Zapisnici sadrže IP adrese i podatke o uređaju. Mjere: pristup ograničen na DPO-a i administratore sigurnosti, rok čuvanja 12 mjeseci, TLS, zaštićen format. |
+| R7 — Neovlašteno korištenje tehničkih zapisnika | 1 | 2 | 2 | Zapisnici sadrže IP adrese i podatke o uređaju. Mjere: pristup ograničen na osobu koja u Zakladi odgovara za zaštitu podataka i administratore sigurnosti, rok čuvanja 12 mjeseci, TLS, zaštićen format. |
 | R8 — Prekogranični prijenos podataka | 1 | 3 | 3 | Dio obrade odvija se izvan Republike Srbije. Mjere, sve provedene: aplikacija i baza podataka izvršavaju se u Europskoj uniji (regija Frankfurt), koja osigurava primjerenu razinu zaštite, pa najveći dio podataka uopće ne izlazi iz tog kruga; u treću zemlju odlaze samo slike, elektronička pošta koju Platforma šalje, upozorenja Zakladi i podaci o posjećenosti; upozorenje Zakladi ne sadrži podatke iz prijave na program podrške; podaci se prenose isključivo izvršitelju obrade s kojim je sklopljen ugovor o obradi s mjerama zaštite iz čl. 65. ZZPL-a; Zaklada čuva primjerak svakog takvog ugovora i najmanje jednom godišnje provjerava je li na snazi i je li se popis podizvršitelja promijenio. Vidi točku 5.13. |
 | R9 — Povreda podataka o donacijama | 1 | 3 | 3 | Bankovna se dokumentacija čuva izravno u Zakladi. Mjere: fizička i logička zaštita, kontrola pristupa, odvojeno čuvanje od podataka platforme. |
 | R10 — Narušavanje integriteta evidencije | 1 | 4 | 4 | Retroaktivna promjena zapisa ugrozila bi zajedničko dobro. Mjere: zero-sum invarijanta (zbroj svih stanja jednak nuli) s automatskom provjerom, atomaran upis promjena, vremensko označavanje zapisa, revizijski dnevnik administrativnih radnji i redovite provjere dosljednosti. |
@@ -139,6 +139,7 @@ Rizici se procjenjuju prema matrici vjerojatnost × ozbiljnost, pri čemu se raz
 
 | R15 — Praćenje ponašanja korisnika kroz brojač putanje | 2 | 2 | 4 | Putanja doprinosa razmjeni očitava s kim je korisnik razmijenio POEN, u kojem iznosu i tko mu se javio povodom oglasa. Skup tih podataka pokazuje krug ljudi s kojima korisnik posluje, i to izvan onoga što je potrebno za samu razmjenu. Mjere: ne prikupljaju se novi podaci osim činjenice upita (bez sadržaja poruke); napredak na putanji vidi isključivo sam korisnik i nije javan (čl. 67. Pravilnika); podaci se ne koriste za profiliranje, preporuke ni oglašavanje; zapis o upitu briše se s oglasom; nema automatiziranog odlučivanja u smislu čl. 38. ZZPL-a — evidentiranje je primjena javno objavljenih pravila i ne dira status korisnika; pravo na prigovor po čl. 37. ZZPL-a. |
 
+| R18 — Obrada bez dokazive privole odnosno bez dokaza o zasnivanju ugovornog odnosa | 1 | 3 | 3 | Voditelj obrade dužan je biti u stanju dokazati da je osoba dala privolu (čl. 15. st. 1. ZZPL-a). Do ove procjene takav zapis nije postojao ni za jednu obradu utemeljenu na privoli, niti je postojao dokaz da je zasnovan ugovorni odnos na kojem počiva većina ostalih obrada. Vjerojatnost se ovom procjenom ocjenjuje niskom jer je zapis uveden i račun se bez njega ne otvara; težina ostaje 3, jer bi u slučaju spora izostanak dokaza pogodio pravnu osnovu obrade u cjelini. Mjere: vidi točku 5.15. Preostali rizik nosi zatečeni krug korisnika, čiji su računi otvoreni prije uvođenja zapisa — za njih se prihvaćanje može zabilježiti isključivo ubuduće, pri sljedećem traženju privole u smislu članka 16. ove politike. |
 | R17 — Objava redoslijeda i podataka o sudjelovanju u nabavi | 1 | 3 | 3 | Utvrđivanje redoslijeda po broju POEN-a i objava popisa onih koji su preuzeli dio pokazuju relativan položaj korisnika u evidenciji doprinosa i njegovo sudjelovanje u raspodjeli. Mjere: prijedlog sadrži samo naziv dobra, bez količine, cijene i obrazloženja; registar prijedloga objavljuje se zbirno, bez pseudonima; broj POEN-a ne objavljuje se uz popis preuzimatelja; dobavljaču se dostavlja isključivo popis kodova za preuzimanje, bez pseudonima i drugih podataka; ne prikupljaju se dokazi o statusu, djelatnosti ni imovini; broj POEN-a ne prikuplja se iznova nego se očitava iz radnje br. 4; utvrđivanje redoslijeda primjena je javno objavljenih pravila i ne dira status korisnika, pa nema automatiziranog odlučivanja u smislu čl. 38. ZZPL-a; pravo na prigovor po čl. 37. ZZPL-a i po članku 30. Pravilnika, o kojem odlučuje čovjek. Vidi točku 5.12. |
 *Ljestvica boja: zeleno = nizak rizik (1–4), žuto = srednji rizik (5–9), crveno = visok rizik (10–16). Nema utvrđenih visokih rizika u aktualnoj konfiguraciji sustava.*
 
@@ -209,6 +210,28 @@ Točno imenovan postupak — prestankom statusa račun se pseudonimizira, ne ano
 
 Prihvaćena posljedica javne donacije — to je jedini slučaj u kojem pseudonimna evidencija ostaje povezana s imenom i nakon prestanka statusa. Prihvaćeno je svjesno: bez imena uz donaciju upis POEN-a ne bi se mogao pripisati nijednoj osobi, a ukupan broj POEN-a je javan i zbroj zapisa u Protokolu je nula. Umanjenje nosi sam izbor — anonimna donacija, uz priopćenu posljedicu da ne nosi POEN.
 
+## 5.15. Mjere za dokaz privole i dokaz zasnivanja ugovornog odnosa
+
+Zapis o privoli — za svaku obradu čija je pravna osnova privola, kao i za prihvaćanje Uvjeta korištenja kojim se zasniva ugovorni odnos, bilježe se trenutak, verzija akta i tekst koji je osobi bio prikazan, na jeziku prikaza. Do ove procjene takav zapis nije postojao: polja za potvrdu pri registraciji provjeravana su isključivo u pregledniku, pa se nije moglo dokazati ni da je privola dana ni da je zasnovan ugovorni odnos, a on je pravna osnova većine obrada iz točke 3.
+
+Provjera na strani voditelja obrade — račun se ne otvara bez zabilježenog prihvaćanja, a provjera se provodi na poslužitelju, ne u pregledniku. Zapis nastaje u istoj atomskoj radnji kojom i račun, pa račun bez zapisa ne može nastati ni pri prekidu upisa.
+
+Odvojenost izjava — prihvaćanje Uvjeta korištenja i prihvaćanje Politike privatnosti bilježe se kao dvije odvojene izjave, jer se odnose na različita pitanja (čl. 15. st. 2. ZZPL-a).
+
+Nepromjenjivost teksta na koji se privola odnosi — objavljena verzija akta se ne mijenja; izmijenjen akt dobiva novu oznaku i objavljuje se kao zaseban dokument. Zapis o privoli time trajno upućuje na tekst koji je vrijedio u trenutku davanja.
+
+Izričita privola za posebne kategorije — uz prijavu na socijalni program bilježi se i sam tekst privole, a ne samo činjenica da je dana. Tekst sadrži broj osoba koje će biti zamoljene za potvrdu, različit za svakog podnositelja, pa se bez snimke ne bi moglo utvrditi na što je konkretna osoba pristala.
+
+Odvajanje privole roditelja od izjave o postojanju djeteta — privola na obradu podataka djeteta bilježi se odvojeno od izjave kojom roditelj pod punom odgovornošću tvrdi da dijete postoji. Izjava je tvrdnja o činjenici i njezin izostanak proizvodi učinak prema trećim osobama; privola se povlači u svakom trenutku i bez posljedica po bilo koga drugog. Dok su stajale u jednom tekstu, povlačenje privole nije se moglo provesti a da se ne obori i tvrdnja o postojanju djeteta.
+
+Bez novih podataka radi dokazivanja — uz zapis o privoli ne bilježe se IP adresa, podaci o uređaju ni drugi identifikatori. Kod privole na kolačiće koji nisu nužni, za posjetitelja koji nije prijavljen ne uspostavlja se identifikator; odluka se bilježi u samom kolačiću, zajedno s verzijom obavijesti po kojoj je donesena, a zapis uz račun vodi se samo za prijavljenog korisnika, kod kojeg račun već postoji.
+
+Obnavljanje odluke pri izmjeni — odluka donesena po ranijoj verziji obavijesti o kolačićima ne prenosi se na novu; osobu se pita ponovno.
+
+Povlačenje i uvid — privola se povlači jednako jednostavno kao što je i dana, zapis o danoj privoli se pritom ne briše nego se u njemu bilježi i trenutak povlačenja, a osoba u svojem računu i u izvozu podataka vidi koje je privole dala i kojim tekstom.
+
+Potvrda elektroničke adrese — na adresu unesenu pri registraciji upućuje se poruka s poveznicom za potvrdu. Potvrda nije uvjet za korištenje računa; njome se utvrđuje da adresa pripada osobi koja je račun otvorila, čime zapis o privoli prestaje svjedočiti samo o računu.
+
 ## 5.8. Rezidualni rizik
 
 Nakon primjene svih navedenih mjera, rezidualni se rizik ocjenjuje prihvatljivim. Najviši su rezidualni rizici R1 (neovlašten pristup), R2 (reidentifikacija), R11 (otkrivanje pripadnosti posebnoj kategoriji verifikatorima), R13 (deanonimizacija donatora kroz javni popis donacija) i R16 (dječji prostor), svi na srednjoj razini (5–9). Rizik R8 (prekogranični prijenos) pada na nisku razinu (3) time što se aplikacija i baza podataka izvršavaju u Europskoj uniji, pa najveći dio podataka uopće ne izlazi iz kruga s primjerenom razinom zaštite. Rizik R5 (javna vidljivost oglasa) ukidanjem ploče i sužavanjem obrade pada na nisku razinu (4). Ti se rizici dodatno umanjuju kontinuiranim nadzorom, redovitim testiranjem i ažuriranjem mjera.
@@ -231,14 +254,17 @@ Korisnici KOLO sustava imaju sva prava koja im ZZPL jamči. Zaklada osigurava pr
 
 Mehanika anonimizacije pri prestanku statusa: adresa e-pošte se briše, veze u grafu verifikacija se anonimiziraju, zapisi u evidenciji ostaju pod identifikatorom koji više ne omogućuje identifikaciju — čime prestaju biti osobni podaci u smislu ZZPL-a i čuvaju se trajno kao dio zajedničkog dobra.
 
-## 7. Konzultacija sa službenikom za zaštitu podataka
+## 7. Procjena odgovorne osobe voditelja obrade
 
-| **Mišljenje DPO-a** |
+Zaklada nije imenovala službenika za zaštitu podataka, iz razloga navedenih u članku 1. Politike privatnosti, pa se mišljenje iz članka 54. stavka 5. ZZPL-a ne pribavlja — ta odredba obvezu veže uz slučaj u kojem je takva osoba imenovana.
+
+Ranija verzija ove procjene sadržavala je mišljenje službenika za zaštitu podataka koji je istodobno odlučivao o svrsi i sredstvima obrade. Takvo mišljenje nije predstavljalo neovisnu ocjenu i zamijenjeno je procjenom odgovorne osobe voditelja obrade, koja se kao takva i označava.
+
+| **Procjena odgovorne osobe voditelja obrade** |
 | --- |
-| **DPO** | Nikola Šarić |
-| **Datum konzultacije** | 16.06.2026. |
-| **Mišljenje** | Nakon primjene tehničkih i organizacijskih mjera iz točke 5., rezidualni se rizik ocjenjuje prihvatljivim. Obrada može započeti uz redovito praćenje mjera i ažuriranje ove procjene u slučajevima iz točke 8. (osobito prije aktiviranja Modula 4. i pri znatnoj promjeni infrastrukture ili izvršitelja obrade). |
-| **Potpis DPO-a** | Nikola Šarić |
+| **Datum procjene** | 14.09.2026. |
+| **Procjena** | Nakon primjene tehničkih i organizacijskih mjera iz točke 5., rezidualni se rizik ocjenjuje prihvatljivim. Obrada se može nastaviti uz redovito praćenje mjera i ažuriranje ove procjene u slučajevima iz točke 8., kao i uz preispitivanje obveze imenovanja službenika za zaštitu podataka iz članka 1. Politike privatnosti. |
+| **Potpis** |  |
 
 ## 8. Plan za module koji se naknadno aktiviraju
 
@@ -270,7 +296,7 @@ Dodatni rizici: maloljetne osobe posebno su ranjiva kategorija; graf prijateljst
 
 Na temelju provedene procjene:
 
-Utvrđeno je sedamnaest rizika za prava i slobode osoba na koje se podaci odnose. Nijedan rizik nije ocijenjen visokim. Pet je rizika na srednjoj razini (R1, R2, R11, R13, R16), a dvanaest na niskoj (R3, R4, R5, R6, R7, R8, R9, R10, R12, R14, R15, R17).
+Utvrđeno je osamnaest rizika za prava i slobode osoba na koje se podaci odnose. Nijedan rizik nije ocijenjen visokim. Pet je rizika na srednjoj razini (R1, R2, R11, R13, R16), a trinaest na niskoj (R3, R4, R5, R6, R7, R8, R9, R10, R12, R14, R15, R17, R18).
 
 Za svaki utvrđeni rizik primijenjene su odgovarajuće tehničke i organizacijske mjere zaštite. Rezidualni se rizik nakon primjene mjera ocjenjuje prihvatljivim.
 
@@ -285,8 +311,8 @@ Ova se DPIA ažurira u sljedećim slučajevima: prije aktiviranja Modula 4. (Dje
 | **Odobrio — Predsjednik UO** |  |
 | **Potpis** |  |
 | **Datum odobrenja** |  |
-| **Mišljenje DPO-a** | Prihvatljivo / Prihvatljivo uz preporuke / Neprihvatljivo |
-| **Potpis DPO-a** |  |
+| **Procjena odgovorne osobe voditelja obrade** | Prihvatljivo / Prihvatljivo uz preporuke / Neprihvatljivo |
+| **Potpis** |  |
 
 U Somboru, dana 23.05.2026. godine.
 

@@ -390,9 +390,16 @@ model User {
   // Trajni token za odjavu iz mejlova bez prijave (link u podnožju svakog mejla).
   // Generiše se lenjo, pri prvom slanju. Ne otkriva identitet ni email adresu.
   emailOdjavaToken                 String?                   @unique
+  // Kad je korisnik kliknuo na link iz poruke poslate na svoju adresu (Uslovi
+  // cl. 9). 🔴 NIJE uslov za rad naloga — nalog radi u punom obimu i bez klika;
+  // potvrda postoji da bi se znalo da adresa pripada coveku koji je nalog otvorio,
+  // jer je adresa jedina veza sa njim (identitet se nigde ne proverava). Do
+  // 14.09.2026. akt je potvrdu propisivao, a kod je nije trazio ni slao (R-06).
+  emailPotvrdjenAt                 DateTime?
   deaktiviranAt                    DateTime?
   pristankiPolitike                PolitikaPrihvatanje[]
   pristankiPravilnika              PravilnikPrihvatanje[]
+  zapisiPristanka                  ZapisPristanka[]
   osnivacZapis                     Osnivac?                  @relation("Osnivac")
   kreiraniTroskovi                 FondacijaTrosak[]         @relation("KreiraoTrosak")
   wallet                           Wallet?
@@ -498,6 +505,24 @@ model Roditeljstvo {
   // sto je govorio u trenutku davanja. Ne generisati ga ponovo pri citanju.
   izjavaAt    DateTime?
   izjavaTekst String?
+  /// Saglasnost roditelja na obradu podataka deteta (ZZPL cl. 16; Politika 4.7),
+  /// ODVOJENO od izjave o postojanju deteta iznad (R-06).
+  ///
+  /// 🔴 Zasto se ne oslanja na izjavu, koja saglasnost usput pominje: to su dve
+  /// izjave razlicitog dejstva. Izjava o postojanju deteta je tvrdnja o cinjenici,
+  /// daje se pod punom odgovornoscu i njen izostanak obara potvrde TRECIH lica
+  /// (cl. 6 st. 3). Saglasnost na obradu se po ZZPL cl. 15 st. 3 povlaci u svakom
+  /// trenutku, bez razloga i bez posledica po bilo koga drugog. Spojene u jedan
+  /// tekst, opoziv saglasnosti ne bi mogao da se izvrsi a da ne obori i tvrdnju o
+  /// postojanju deteta — dakle pravo na opoziv faktycki ne bi postojalo.
+  ///
+  /// Daje se u istom potezu u kom i izjava (otvaranje naloga po cl. 4, preuzimanje
+  /// po cl. 4b), pa roditelj ne radi dvaput.
+  ///
+  /// 🟡 Zatecene veze ostaju prazne — retroaktivno upisana „data saglasnost" bila
+  /// bi netacan dokument, isto pravilo kao kod `izjavaTekst` i `ugovorTekst`.
+  saglasnostAt    DateTime?
+  saglasnostTekst String?
   // Popunjen samo kad izjava NEDOSTAJE i tece rok — jedini takav slucaj je
   // administrativno prevodjenje punoletnog naloga u maloletni, gde roditelj nije
   // izvrsio nijednu radnju kojom bi izjavu dao. Neaktivnost roditelja do ovog roka
@@ -1163,6 +1188,28 @@ model ProgramEnrollment {
   // Izričit pristanak da verifikatori budu zamoljeni da potvrde ispunjenost uslova
   // (Pravilnik o programima podrške čl. 4 — pravni osnov obrade je pristanak).
   pristanakVerifikatori Boolean          @default(false)
+  /// Tekst pristanka koji je korisnik video, SNIMLJEN, i trenutak davanja (R-06).
+  ///
+  /// 🔴 Do seta 4.6.3 je postojao samo `pristanakVerifikatori: true`. Logička
+  /// vrednost dokazuje DA je pristanak dat, ali ne i NA ŠTA — a ovde je reč o
+  /// izričitom pristanku za posebne kategorije podataka (ZZPL čl. 17 st. 2 t. 1),
+  /// gde je sadržina pristanka ceo njegov pravni domet. Tekst se uz to menjao
+  /// (10.09.2026, R-13) i nosi broj verifikatora koji je različit za svakog
+  /// korisnika, pa se bez snimka ne može utvrditi šta je tom čoveku pisalo.
+  ///
+  /// 🔴 Sklapa se NA SERVERU, iz istog izvora iz kog se prikazuje; klijent šalje
+  /// samo potvrdu. Ponovna prijava upisuje NOV pristanak — ne prepisuje stari.
+  pristanakTekst        String?
+  pristanakAt           DateTime?
+  /// Jezik na kom je tekst prikazan (vidi `ZapisPristanka.jezik`).
+  pristanakJezik        String?
+  /// Kad je pristanak povučen (ZZPL čl. 15 st. 3).
+  ///
+  /// 🔴 `pristanakVerifikatori` se pri povlačenju NE vraća na `false`: pristanak
+  /// jeste bio dat, a opoziv po čl. 15 st. 3 ne utiče na zakonitost obrade pre
+  /// opoziva — pa dokaz da je postojao mora da ostane, zajedno sa tekstom. Gašenje
+  /// logičke vrednosti tvrdilo bi da pristanka nikad nije ni bilo.
+  pristanakPovucenAt    DateTime?
   approvedById          String?
   approvedAt            DateTime?
   rejectionReason       String?
@@ -1720,6 +1767,74 @@ model PolitikaPrihvatanje {
 
   @@unique([userId, verzijaId])
   @@index([userId])
+}
+
+// ─── Dokaz pristanka (ZZPL cl. 15 st. 1, set 4.6.3 — R-06) ──────────────────
+
+/// Na sta je pristanak dat. Jedna vrsta = jedno pitanje na koje se pristaje:
+/// ZZPL cl. 15 st. 2 trazi da pristanak koji pokriva vise pitanja bude razdvojen,
+/// pa se dve kvacice pri registraciji upisuju kao DVA reda, nikad kao jedan.
+enum VrstaPristanka {
+  USLOVI_KORISCENJA
+  POLITIKA_PRIVATNOSTI
+  KOLACICI_ANALITIKA
+}
+
+/// Dokaz da je lice dalo pristanak (ZZPL cl. 15 st. 1 — teret dokazivanja je na
+/// rukovaocu, ne na licu).
+///
+/// Do seta 4.6.3 nije postojao nijedan zapis: kvacice pri registraciji zivele su
+/// iskljucivo u pretrazivacu, a `POST /api/registracija` nije primao nijedno polje
+/// o prihvatanju. Time nije nedostajao samo dokaz pristanka nego i dokaz da je
+/// ugovor zakljucen — a „izvrsenje ugovornog odnosa" je pravni osnov za vecinu
+/// obrada u Politici cl. 4.
+///
+/// 🔴 NEMA IP ADRESE NI PODATAKA O UREDJAJU. Prikupljanje otiska uredjaja radi
+/// dokazivanja pristanka na obradu bilo bi prosirenje obrade suprotno cl. 3
+/// Politike, gde minimizacija stoji kao „strukturni princip koji se ne moze ukinuti
+/// nijednom upravljackom odlukom". Dokaz nosi verzija akta, snimljen tekst i
+/// trenutak — ne otisak.
+///
+/// 🟢 Zasto je dovoljno snimiti VERZIJU, a ne ceo akt: pravilo bumpovanja
+/// (CLAUDE.md) obezbedjuje da objavljen fajl nikad ne promeni sadrzaj — sifra u
+/// imenu fajla JESTE objava. `uslovi_koriscenja_4_6_3.md` zato trajno govori ono
+/// sto je govorio na dan davanja pristanka. `tekst` nosi ono sto je covek stvarno
+/// procitao na ekranu (tekst kvacice odn. bannera), na jeziku na kom mu je
+/// prikazan.
+model ZapisPristanka {
+  id      String         @id @default(uuid())
+  userId  String
+  user    User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vrsta   VrstaPristanka
+  /// Verzija akta na koji se pristanak odnosi ("4.6.3"), odnosno verzija teksta
+  /// bannera za kolacice. Bez nje „pristao je na Politiku" ne znaci nista posle
+  /// prve izmene.
+  verzija String
+  /// Tekst koji je covek video, SNIMLJEN. Ne generisati ga ponovo pri citanju —
+  /// isti razlog kao `DonationRecord.ugovorTekst`, `OglasPrijava.izjavaTekst` i
+  /// `Roditeljstvo.izjavaTekst`.
+  tekst   String
+  /// Jezik na kom je tekst prikazan. 🔴 Obrnuto od ugovora o donaciji, koji je na
+  /// srpskom na svim jezicima: ugovor je pravni dokument po srpskom pravu, a
+  /// pristanak mora biti na jeziku razumljivom onome ko ga daje (ZZPL cl. 15 st. 2
+  /// — „jasan i jednostavan jezik").
+  jezik   String
+  /// Gde je dat: "registracija", "oauth", "kolacici".
+  izvor   String
+
+  datAt     DateTime  @default(now())
+  /// Popunjen kad je pristanak opozvan (ZZPL cl. 15 st. 3 — opoziv mora biti
+  /// jednako lak kao davanje). Red se NE brise: opoziv ne cini raniju obradu
+  /// nezakonitom, pa dokaz da je pristanak postojao mora da ostane.
+  povucenAt DateTime?
+
+  /// Jedan red po (korisnik, vrsta, verzija). Ponovljen pristanak na istu verziju
+  /// nije nov podatak nego isti — pa se upis ponasa idempotentno (dupli submit
+  /// registracije, ponovno prihvatanje kolacica posle opoziva). Ko pristanak da
+  /// posle opoziva, ozivljava isti red (`povucenAt` se brise, `datAt` se pomera).
+  @@unique([userId, vrsta, verzija])
+  @@index([userId])
+  @@index([userId, vrsta])
 }
 
 // ─── Verzionisanje Pravilnika (paralelno sa Politikom, v3.7.0) ───────────────

@@ -119,8 +119,20 @@ export const MODUL_DECA_AKTIVAN = true;
  * obaveštenje se šalje bez odlaganja. Nema više roka koji bi trebalo odbrojavati —
  * `true` znači samo „prikaži ekran i upiši pristanak", uz nov red `PolitikaVerzija`.
  * Ne vraćati rok u komentare ni u copy: akti ga više ne poznaju.
+ *
+ * 🔴 **UPALJEN 14.09.2026 zbog ZATEČENIH naloga (odluka vlasnika, uz R-06).**
+ * Od tog dana registracija i OAuth upisuju `ZapisPristanka` i `PolitikaPrihvatanje`
+ * u istoj transakciji u kojoj nastaje nalog (`upisiPristankeRegistracije`), pa nov
+ * čovek pristanak daje kvačicom i ekran NE vidi. Ostaju nalozi otvoreni pre te
+ * izmene — za njih dokaz pristanka ne postoji i ne može se napraviti unazad, pa se
+ * traži pri prvoj narednoj prijavi. To je jedini put kojim se taj dug naplaćuje.
+ *
+ * 🔴 **Prekidač se NE gasi dok gejt radi svoj posao.** Gašenje bi zatečene naloge
+ * vratilo u stanje bez dokaza pristanka, a ekran im se više nikad ne bi pojavio.
+ * Uz to: svaka naredna izmena akata traži nov red `PolitikaVerzija` (Uslovi čl. 40,
+ * Politika čl. 16) — bez njega ekran ćuti jer je zatečena verzija već prihvaćena.
  */
-export const PRISTANAK_NA_AKTE_TRAZI_SE = false;
+export const PRISTANAK_NA_AKTE_TRAZI_SE = true;
 
 /**
  * FAQ pitanja koja se ne prikazuju dok je odgovarajući modul ugašen.

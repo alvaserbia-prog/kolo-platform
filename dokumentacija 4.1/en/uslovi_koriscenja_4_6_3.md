@@ -52,7 +52,9 @@ These Terms will be updated in accordance with the development of the system. Us
 
 ### Article 6 — Acceptance of the Terms
 
-By using the Platform, the user confirms that they have read, understood, and accepted these Terms in their entirety, together with the Platform's Privacy Policy. The Terms and the Privacy Policy are accepted by checking the confirmation box during registration.
+By using the Platform, the user confirms that they have read, understood, and accepted these Terms in their entirety, together with the Platform's Privacy Policy. The Terms and the Privacy Policy are accepted by checking the confirmation box during registration, separately for each, because they relate to different matters.
+
+The acceptance is recorded. Alongside it, the moment of acceptance, the designation of the version of the act accepted, and the text displayed to the user are recorded. Without such a recorded acceptance, the account is not created. The manner in which that record is kept, and the data that are not recorded alongside it, are set out in Article 4a of the Privacy Policy.
 
 The user confirms that they are familiar with the Rulebook on the KOLO System, which is publicly available on the Platform.
 
@@ -74,7 +76,9 @@ Each natural person may hold exclusively one user account on the Platform. Regis
 
 ### Article 9 — Registration Process
 
-Upon registration, the user selects a pseudonym, enters an email address, and sets a password. The user confirms the account via a verification message sent to the entered email address.
+Upon registration, the user selects a pseudonym, enters an email address, and sets a password.
+
+A message with a confirmation link is sent to the email address entered. Confirmation is not a condition for using the account — the account operates in full even before it. Confirmation establishes that the address belongs to the user who created the account, thereby ensuring that notices under Article 40 of these Terms actually reach them and that their access is recoverable if they lose their password.
 
 The pseudonym is the only identifier of the user visible to other users, to the extent that depends on the status of the viewer. The user is responsible for ensuring that the pseudonym does not contain personal data that could lead to their identification.
 

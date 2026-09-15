@@ -994,11 +994,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -1006,11 +1006,11 @@
     },
     "dpia": {
       "naslov": "DPIA. Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "4.6.1"
+      "ver": "4.6.3"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
@@ -1042,15 +1042,15 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja · KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.6.1",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.6.3",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.1",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.3",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.6.1",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.6.3",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.6.1",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.6.3",
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.6.0",
     "meta_whitepaper_title": "Whitepaper · KOLO",
@@ -2153,6 +2153,10 @@
     "ne_slazete_se": ". Ako se ne slažeš, ne moraš prihvatiti, do prihvatanja pristup nalogu ostaje ograničen.",
     "pre_prihvatanja": "I pre prihvatanja možeš preuzeti svoje podatke ili ugasiti nalog u",
     "podesavanja_profila": "podešavanjima profila",
+    "kvacica_uslovi": "Prihvatam",
+    "uslovi_link": "Uslove korišćenja",
+    "privatnost_link": "Politiku privatnosti",
+    "greska_kvacice": "Da nastaviš, prihvati i Uslove korišćenja i Politiku privatnosti.",
     "dugme_prihvatam": "Pristajem",
     "dugme_prihvatam_loading": "Pristajem...",
     "greska_prihvatanje": "Greška pri prihvatanju. Pokušaj ponovo.",
@@ -3575,5 +3579,28 @@
     "dinarska_naslov": "Dinarska strana nabavke",
     "dinarska_opis": "Deo izveštaja o raspolaganju sredstvima Fondacije. Stoji odvojeno od kalkulacije zato što broj POEN-a po delu nije cena dobra i ne izvodi se iz nje.",
     "granica_pregled": "Vrednost dobara koja si preuzeo ove godine: {preuzeto} od {granica} RSD (čl. 21a)."
+  },
+  "pristanak": {
+    "zapis_akt": "Prihvatam {naziv}, verzija {verzija}.",
+    "saglasnost_roditelja": "Kao roditelj odnosno zakonski zastupnik pristajem da se podaci maloletnog korisnika „{pseudonim}“ obrađuju u obimu i za svrhe utvrđene Pravilnikom o učešću dece i Politikom privatnosti. Znam da ovaj pristanak mogu da povučem u svakom trenutku, bez navođenja razloga, brisanjem naloga deteta, i da povlačenje ne utiče na zakonitost obrade izvršene pre povlačenja.",
+    "moji_naslov": "Šta sam prihvatio",
+    "moji_opis": "Pregled pristanaka koje si dao, sa tekstom koji je tada stajao pred tobom.",
+    "moji_prikazi": "Prikaži",
+    "moji_sakrij": "Sakrij",
+    "moji_ucitavam": "Učitavam…",
+    "moji_greska": "Nije uspelo učitavanje. Pokušaj ponovo.",
+    "moji_prazno": "Za sada nema zabeleženih pristanaka.",
+    "moji_povucen": "povučen {datum}",
+    "vrsta_USLOVI_KORISCENJA": "Uslovi korišćenja",
+    "vrsta_POLITIKA_PRIVATNOSTI": "Politika privatnosti",
+    "vrsta_KOLACICI_ANALITIKA": "Analitički kolačići"
+  },
+  "emailPotvrda": {
+    "naslov": "Potvrdi svoju adresu — KOLO",
+    "telo1": "Dobro došao u KOLO. Nalog <strong>{pseudonim}</strong> je otvoren i radi u punom obimu.",
+    "telo2": "Potvrdi ovu adresu da bismo znali da je tvoja. Bez potvrde nalog i dalje radi — potvrda služi tome da ti obaveštenja stignu i da možeš da vratiš pristup ako zaboraviš lozinku.",
+    "telo3": "Link važi {sati} sata.",
+    "telo4": "Ako ovo nisi ti, nemoj ništa da radiš.",
+    "dugme": "Potvrdi adresu"
   }
 }

@@ -8,10 +8,18 @@ import { procitajPristanak, sacuvajPristanak } from "@/lib/cookieConsent";
 /**
  * Banner za pristanak na analitičke kolačiće (Politika privatnosti čl. 7).
  *
- * Prikazuje se samo dok korisnik nije odlučio. Odluka „Prihvati" omogućava
- * učitavanje analitike (Google Analytics) preko `Analitika`
+ * Prikazuje se samo dok korisnik nije odlučio po VAŽEĆOJ verziji teksta. Odluka
+ * „Prihvati" omogućava učitavanje analitike (Google Analytics) preko `Analitika`
  * komponente; „Odbij" trajno sprečava njihovo učitavanje. Neophodni (sesijski)
  * kolačići rade nezavisno od ovog izbora.
+ *
+ * 🔴 Oba dugmeta su jednim klikom i jednako dostupna — „Odbij" nije sakriven u
+ * podmeniju niti zahteva dodatni korak. Bez toga pristanak nije slobodno dat i
+ * cela mera pada, ma koliko dobar zapis o njoj vodili. Zaključano testom
+ * `pristanak-izvor.test.ts`: ne sklanjati „Odbij" iz prvog nivoa.
+ *
+ * Odluka se pamti u kolačiću (vidi `cookieConsent.ts`), a kod PRIJAVLJENOG
+ * korisnika se uz to beleži i uz nalog — bez ijednog novog podatka o posetiocu.
  */
 export function CookieConsent() {
   const t = useTranslations("kolacici");
@@ -26,6 +34,14 @@ export function CookieConsent() {
   function odluci(p: "prihvaceno" | "odbijeno") {
     sacuvajPristanak(p);
     setVidljiv(false);
+    // Zapis uz nalog — samo za prijavljenog korisnika; ruta gosta tiho propušta.
+    // Ide kao `void`: banner se zatvara odmah, a pad mreže ne sme da zadrži čoveka
+    // na ekranu koji je upravo rešio.
+    void fetch("/api/pristanak/kolacici", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pristanak: p }),
+    }).catch(() => {});
   }
 
   return (

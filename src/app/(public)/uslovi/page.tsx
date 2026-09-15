@@ -5,6 +5,9 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
+// 🔴 Ime fajla se NE kuca ovde: ista verzija ide i u zapis pristanka (R-06), pa
+// dve prepisane kopije broja ne smeju da postoje. Vidi `verzije-akata.ts`.
+import { AKT_USLOVI } from "@/lib/verzije-akata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("pravne");
@@ -18,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function UsloviPage() {
   const locale = await getLocale();
   const t = await getTranslations("pravne");
-  const sadrzaj = await ucitajPravniDokument("uslovi_koriscenja_4_6_1.md", locale);
+  const sadrzaj = await ucitajPravniDokument(AKT_USLOVI.fajl, locale);
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">

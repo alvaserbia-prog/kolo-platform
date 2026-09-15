@@ -9,6 +9,9 @@ import { poljaPseudonima, porukaZauzeca, proveriZauzece } from "@/lib/pseudonim"
 import { rateLimit, klijentIP } from "@/lib/rate-limit";
 import { obavestiAdmineNoviKorisnik } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { getLocale } from "next-intl/server";
+import { oba, PORUKA_PRISTANAK_OBAVEZAN, upisiPristankeRegistracije } from "@/lib/protokol/pristanak";
+import { posaljiPotvrduAdrese } from "@/lib/protokol/potvrda-adrese";
 
 function generateMemberHash(): string {
   const chars = "abcdefghijkmnpqrstuvwxyz23456789";
@@ -48,6 +51,14 @@ export async function POST(req: NextRequest) {
     if (location !== null && location.length > 80) {
       return await greska("Mesto je predugačko.", 400);
     }
+    // 🔴 Pristanak se proverava NA SERVERU (R-06). Do seta 4.6.3 su dve kvačice
+    // živele samo u pretraživaču (`canSubmit`), pa je nalog nastajao i bez ijedne
+    // — dovoljno je bilo zaobići obrazac. Time nije nedostajao samo dokaz
+    // pristanka (ZZPL čl. 15 st. 1) nego i dokaz da je ugovor zaključen, a
+    // „izvršenje ugovornog odnosa" je osnov za većinu obrada iz Politike čl. 4.
+    if (!oba(body.prihvatamUslove, body.prihvatamPolitiku)) {
+      return await greska(PORUKA_PRISTANAK_OBAVEZAN, 400);
+    }
     // Mesto je opciono, ali kad se navede mora biti JEDNO naselje iz šifarnika —
     // slobodan tekst („Stanišić (Sombor)") se ne poklapa ni sa filterom po mestu
     // ni sa koordinatama za udaljenost. Upisuje se kanonski naziv.
@@ -81,19 +92,34 @@ export async function POST(req: NextRequest) {
 
     const passwordHash = await bcrypt.hash(password, 12);
 
-    // Kreira korisnika + wallet
-    const user = await prisma.user.create({
-      data: {
-        email: emailNorm,
-        passwordHash,
-        ...poljaPseudonima(pseudonimClean),
-        memberHash: myHash,
-        location: mesto,
-        wallet: {
-          create: { type: WalletType.USER, balance: 0 },
+    const jezik = await getLocale();
+
+    // Kreira korisnika + wallet + ZAPIS PRISTANKA — sve u jednoj transakciji.
+    //
+    // 🔴 Pristanak ne sme da se upisuje posle: nalog bez zapisa pristanka je
+    // tačno stanje koje R-06 uklanja, a pad između dva upisa vratio bi ga tiho,
+    // jer bi korisnik i dalje dobio uspešan odgovor.
+    const user = await prisma.$transaction(async (tx) => {
+      const u = await tx.user.create({
+        data: {
+          email: emailNorm,
+          passwordHash,
+          ...poljaPseudonima(pseudonimClean),
+          memberHash: myHash,
+          location: mesto,
+          jezik,
+          wallet: {
+            create: { type: WalletType.USER, balance: 0 },
+          },
         },
-      },
+      });
+      await upisiPristankeRegistracije(tx, u.id, jezik, "registracija");
+      return u;
     });
+
+    // Potvrda adrese (Uslovi čl. 9). 🔴 NIJE uslov za rad naloga — nalog radi u
+    // punom obimu i bez klika, pa neuspelo slanje ne sme da obori registraciju.
+    void posaljiPotvrduAdrese(user.id, req.nextUrl.origin);
 
     // Obavesti admine o novom nalogu (ne sme da obori registraciju ako zakaže):
     //  - in-app bell za sve admine,

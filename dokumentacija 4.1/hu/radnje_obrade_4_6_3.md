@@ -2,7 +2,7 @@
 
 # Az adatkezelési tevékenységek nyilvántartása
 
-*E nyilvántartás a személyes adatok védelméről szóló törvény (Zakon o zaštiti podataka o ličnosti, „SZK Hivatalos Közlönye”, 87/2018. szám, a továbbiakban: ZZPL) 47. cikke, a KOLO rendszerről szóló szabályzat (4.6.0 verzió) 62. és 63. cikke, valamint a KOLO rendszer aktusainak hierarchiájáról szóló szabályzat 9. cikke alapján kerül elfogadásra. A KOLO platform adatvédelmi szabályzatával (4.6.1 verzió) és a támogatási programokról szóló szabályzattal (4.6.1 verzió) együtt alkalmazandó.*
+*E nyilvántartás a személyes adatok védelméről szóló törvény (Zakon o zaštiti podataka o ličnosti, „SZK Hivatalos Közlönye”, 87/2018. szám, a továbbiakban: ZZPL) 47. cikke, a KOLO rendszerről szóló szabályzat (4.6.2 verzió) 62. és 63. cikke, valamint a KOLO rendszer aktusainak hierarchiájáról szóló szabályzat 9. cikke alapján kerül elfogadásra. A KOLO platform adatvédelmi szabályzatával (4.6.3 verzió) és a támogatási programokról szóló szabályzattal (4.6.1 verzió) együtt alkalmazandó.*
 
 **AZ ADATKEZELŐ ADATAI**
 
@@ -12,7 +12,7 @@
 | **Törzsszám** | 28836627 |
 | **Adószám (PIB)** | 115840443 |
 | **E-mail** | privatnost@ekolo.rs |
-| **Adatvédelmi tisztviselő** | Nikola Šarić, alva.serbia@gmail.com |
+| **Adatvédelmi tisztviselő** | Nincs kinevezve — a ZZPL 56. cikkének (2) bekezdése szerinti kötelezettség nem áll fenn; az értékelés legalább évente felülvizsgálatra kerül (Adatvédelmi szabályzat, 1. cikk). Adatvédelmi kapcsolattartás: privatnost@ekolo.rs |
 
 **1. sz. adatkezelési tevékenység — Regisztráció és a felhasználói fiók kezelése**
 
@@ -20,11 +20,11 @@
 | --- | --- |
 | **Az érintettek kategóriái** | A KOLO platform felhasználói. |
 | **Az adatok kategóriái** | Álnév (felhasználónév), e-mail-cím, jelszó (kizárólag kivonatolt /hash/ formában tárolva), a rendszerhez való csatlakozás dátuma. |
-| **Jogalap** | Szerződéses jogviszony teljesítése (ZZPL 12. cikk 1. bek. 2. pont) — a felhasználó a rendszerhez csatlakozással elfogadja a felhasználási szabályokat. |
+| **Jogalap** | Szerződéses jogviszony teljesítése (ZZPL 12. cikk 1. bek. 2. pont) — a felhasználó a rendszerhez csatlakozással elfogadja a felhasználási szabályokat. A Felhasználási feltételek és az Adatvédelmi szabályzat elfogadása a fiók létrehozásakor kerül rögzítésre, aktusonként külön, az időponttal, a változat jelölésével és a felhasználónak megjelenített szöveggel együtt (az Adatvédelmi szabályzat 4a. cikke); e bejegyzés nélkül a fiók nem jön létre. |
 | **Címzettek / adatfeldolgozók** | Vercel Inc. (tárhely, végrehajtás az Európai Unióban) és Neon Inc. (adatbázis, régió az Európai Unióban), a törvénnyel összhangban kötött adatfeldolgozási szerződés alapján. |
 | **Harmadik országba történő továbbítás** | Az adatbázisban lévő adatok tekintetében nem — az alkalmazás és az adatbázis az Európai Unióban (frankfurti régió) fut, amely megfelelő védelmi szintet biztosít. A Vercel Inc. és a Neon Inc. egyesült államokbeli társaságok, ezért harmadik országból történő hozzáférés adminisztratív és technikai célból lehetséges, az adatvédelmi szabályzat 9. cikke szerinti intézkedések mellett. |
 | **Megőrzési idő** | Amíg a felhasználói fiók aktív marad. A jogállás megszűnésével törlődik az e-mail-cím, az önkéntesen megadott adatok, a hirdetések tartalma és fényképei, valamint a POEN átírásaihoz fűzött szabad szöveg, a fennmaradó adatok pedig álnevesítésre kerülnek a szabályzat 34. cikkével és az adatvédelmi szabályzat 11. cikkével összhangban. Az álnevesítés nem anonimizálás: az Alapítvány megőrzi a fiók belső azonosítóját, ezért a megőrzött bejegyzések személyes adatok maradnak. |
-| **Védelmi intézkedések** | Jelszókivonatolás, TLS titkosítás az átvitelben (legalább 1.2 verzió), nyugalmi állapotú titkosítás a tárhely-infrastruktúra szintjén, a minimális szükségesség elve szerinti hozzáférés-ellenőrzés, többtényezős hitelesítés az adminisztratív hozzáféréshez. |
+| **Védelmi intézkedések** | Jelszókivonatolás, TLS titkosítás az átvitelben (legalább 1.2 verzió), nyugalmi állapotú titkosítás a tárhely-infrastruktúra szintjén, a minimális szükségesség elve szerinti hozzáférés-ellenőrzés, többtényezős hitelesítés az adminisztratív hozzáféréshez. Az aktusok elfogadásáról szóló bejegyzés IP-cím és eszközadat nélkül kerül vezetésre; a regisztrációkor megadott címre megerősítő hivatkozást tartalmazó üzenet kerül kiküldésre, ami nem feltétele a fiók használatának. |
 
 **2. sz. adatkezelési tevékenység — Valóságbizonyíték (a felhasználó hitelesítése)**
 
@@ -230,6 +230,19 @@
 | **Megőrzési idő** | Az üzenetek törlődnek, amikor legalább az egyik fél megszünteti a fiókját, illetve amikor a beszélgetés utolsó üzenete óta 24 hónap eltelt. |
 | **Védelmi intézkedések** | A beszélgetés harmadik személyek elől zárt; az üzenetek tartalma egyetlen nyilvános megjelenítésbe és egyetlen összesítésbe sem kerül be. Beszélgetést csak hitelesített felhasználó kezdeményezhet. Az üzenet tartalma eltávolításkor nem kerül át az auditnaplóba. A kiskorú felhasználó nagykorú beszélgetőpartnere számára megjelenik, hogy a beszélgetést a szülő olvassa. TLS-titkosítás, nyugalmi állapotú titkosítás, hozzáférés-ellenőrzés. |
 | **Megjegyzés** | E tevékenységet a v4.5.1 nyilvántartás vette fel. Az adatkezelés a Platform működésének kezdete óta fennállt, de külön nem volt nyilvántartva — a kommunikáció csak az 1. sz. tevékenység egyik céljaként szerepelt, saját adatkategóriák és megőrzési idő nélkül. |
+
+**18. sz. adatkezelési tevékenység — A hozzájárulás bizonyítása és a szerződéses jogviszony létrejöttének bizonyítása**
+
+| **Az adatkezelés célja** | Annak bizonyítása, hogy az érintett hozzájárulását adta azon adatkezelésekhez, amelyeknek ez a jogalapja, és hogy a Felhasználási feltételek elfogadásával létrejött a szerződéses jogviszony (a ZZPL 15. cikkének (1) bekezdése — a bizonyítási teher az adatkezelőn van). |
+| --- | --- |
+| **Érintettek kategóriái** | A platform felhasználói; kiskorú felhasználók szülei, illetve törvényes képviselői. |
+| **Adatok kategóriái** | Az elfogadott akt, illetve hozzájárulás típusa, a változat jelölése, az érintettnek megjelenített szöveg, a megjelenítés nyelve, a megadás időpontja és — ha bekövetkezett — a visszavonás időpontja. A bejegyzés mellett nem kerül rögzítésre IP-cím, eszközadat vagy más azonosító. |
+| **Jogalap** | Az adatkezelő jogi kötelezettségeinek teljesítése (a ZZPL 12. cikke (1) bekezdésének 3. pontja) — a ZZPL 15. cikkének (1) bekezdése szerinti bizonyítási kötelezettség. |
+| **Címzettek / adatfeldolgozók** | Vercel Inc. (tárhely, végrehajtás az Európai Unióban) és Neon Inc. (adatbázis, európai uniós régió), adatfeldolgozási szerződések alapján. |
+| **Harmadik országba történő továbbítás** | Az adatbázisban lévő adatok tekintetében nem — az alkalmazás és az adatbázis az Európai Unióban (frankfurti régió) fut, amely megfelelő szintű védelmet biztosít. A Vercel Inc. és a Neon Inc. egyesült államokbeli társaságok, ezért adminisztratív és technikai célból lehetséges a harmadik országból történő hozzáférés, az Adatvédelmi szabályzat 9. cikke szerinti intézkedések mellett. |
+| **Megőrzési idő** | Ameddig az az adatkezelés tart, amelyhez a hozzájárulást megadták, azt követően pedig azon időtartamig, amelyen belül ezen az alapon jogi igény érvényesíthető vagy vitatható. A bejegyzés a hozzájárulás visszavonásakor nem kerül törlésre, mivel a visszavonás nem érinti a visszavonás előtt végzett adatkezelés jogszerűségét (a ZZPL 15. cikkének (3) bekezdése), ezért a hozzájárulás létezésének bizonyítéka erre az időszakra fenn kell maradjon. |
+| **Védelmi intézkedések** | A bejegyzés ugyanabban az atomi műveletben keletkezik, mint a fiók; az ellenőrzés az adatkezelő oldalán történik, nem a böngészőben; az egyes aktusok elfogadása külön kerül rögzítésre; a változat olyan közzétett szövegre utal, amely nem változik; további azonosítók nem kerülnek gyűjtésre; az érintett a bejegyzést a saját fiókjában és az adatexportban látja. |
+| **Megjegyzés** | A nem feltétlenül szükséges sütikhez adott hozzájárulás esetében a fiók melletti bejegyzést kizárólag bejelentkezett felhasználó esetében vezetjük; a be nem jelentkezett látogató esetében nem jön létre azonosító, a döntés pedig magában a sütiben kerül rögzítésre, azzal a tájékoztatási változattal együtt, amely alapján meghozták. |
 
 **ZÁRÓ RENDELKEZÉSEK**
 

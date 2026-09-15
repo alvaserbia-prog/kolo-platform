@@ -2,7 +2,7 @@
 
 # Registar radnji obrade osobnih podataka
 
-*Ovaj se registar donosi na temelju čl. 47. Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljnjem tekstu: ZZPL), čl. 62. i 63. Pravilnika o KOLO sustavu (verzija 4.6.0) i čl. 9. Pravilnika o hijerarhiji akata KOLO sustava. Primjenjuje se zajedno s Politikom privatnosti KOLO platforme (verzija 4.6.1) i Pravilnikom o programima podrške (verzija 4.6.1).*
+*Ovaj se registar donosi na temelju čl. 47. Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljnjem tekstu: ZZPL), čl. 62. i 63. Pravilnika o KOLO sustavu (verzija 4.6.2) i čl. 9. Pravilnika o hijerarhiji akata KOLO sustava. Primjenjuje se zajedno s Politikom privatnosti KOLO platforme (verzija 4.6.3) i Pravilnikom o programima podrške (verzija 4.6.1).*
 
 **PODACI O VODITELJU OBRADE**
 
@@ -12,7 +12,7 @@
 | **Matični broj** | 28836627 |
 | **PIB (porezni broj)** | 115840443 |
 | **E-pošta** | privatnost@ekolo.rs |
-| **Službenik za zaštitu podataka** | Nikola Šarić, alva.serbia@gmail.com |
+| **Službenik za zaštitu podataka** | Nije imenovan — obveza iz članka 56. stavka 2. ZZPL-a nije nastala; procjena se preispituje najmanje jednom godišnje (Politika privatnosti, članak 1.). Kontakt za zaštitu podataka: privatnost@ekolo.rs |
 
 **Radnja obrade br. 1 — Registracija i upravljanje korisničkim računom**
 
@@ -24,7 +24,7 @@
 | **Primatelji / izvršitelji obrade** | Vercel Inc. (hosting, izvršavanje u Europskoj uniji) i Neon Inc. (baza podataka, regija u Europskoj uniji), na temelju ugovora o obradi u skladu sa zakonom. |
 | **Prijenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Europskoj uniji (regija Frankfurt), koja osigurava primjerenu razinu zaštite. Vercel Inc. i Neon Inc. društva su iz SAD-a, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mjere iz čl. 9. Politike privatnosti. |
 | **Rok čuvanja** | Dok korisnički račun ostaje aktivan. Prestankom statusa brišu se adresa e-pošte, dobrovoljno uneseni podaci, sadržaj i fotografije oglasa te slobodan tekst uz prijenose POEN-a, a preostali se podaci pseudonimiziraju u skladu s čl. 34. Pravilnika i čl. 11. Politike privatnosti. Pseudonimizacija nije anonimizacija: Zaklada zadržava interni identifikator računa, pa zadržani zapisi ostaju osobni podaci. |
-| **Mjere zaštite** | Raspršivanje lozinke, TLS enkripcija u prijenosu (najm. verzija 1.2), enkripcija u mirovanju na razini hosting infrastrukture, kontrola pristupa po načelu minimalne nužnosti, višefaktorska autentifikacija za administrativni pristup. |
+| **Mjere zaštite** | Raspršivanje lozinke, TLS enkripcija u prijenosu (najm. verzija 1.2), enkripcija u mirovanju na razini hosting infrastrukture, kontrola pristupa po načelu minimalne nužnosti, višefaktorska autentifikacija za administrativni pristup. Zapis o prihvaćanju akata vodi se bez IP adrese i podataka o uređaju; na adresu unesenu pri registraciji upućuje se poruka s poveznicom za potvrdu, koja nije uvjet za korištenje računa. |
 
 **Radnja obrade br. 2 — Dokaz stvarnosti (verifikacija korisnika)**
 
@@ -198,7 +198,7 @@
 | --- | --- |
 | **Kategorije osoba** | Korisnik čiji se napredak na putanji utvrđuje; korisnik koji se javio povodom oglasa; korisnik s kojim je ažurirana evidencija POEN-a. |
 | **Kategorije podataka** | Upit povodom oglasa: pseudonim korisnika koji se javio, oznaka oglasa i vrijeme. Sadržaj se poruke u tu svrhu ne obrađuje. Ostalo se ne prikuplja iznova, već očitava iz postojećih radnji obrade: zapisa o ažuriranju evidencije POEN-a (radnja br. 4) i grafa verifikacija (radnja br. 2), radi utvrđivanja je li druga strana izvan kruga poznanstava. |
-| **Pravna osnova** | Izvršenje ugovornog odnosa (čl. 12. st. 1. t. 2. ZZPL-a) — evidentiranje doprinosa sadržaj je odnosa po kojem korisnik koristi sustav. |
+| **Pravna osnova** | Izvršenje ugovornog odnosa (čl. 12. st. 1. t. 2. ZZPL-a) — evidentiranje doprinosa sadržaj je odnosa po kojem korisnik koristi sustav. Prihvaćanje Uvjeta korištenja i Politike privatnosti bilježi se pri otvaranju računa, odvojeno za svaki akt, uz trenutak, oznaku verzije i tekst koji je korisniku bio prikazan (čl. 4a. Politike privatnosti); bez tog zapisa račun se ne otvara. |
 | **Primatelji / izvršitelji obrade** | Napredak na putanji vidi isključivo sam korisnik. Oglašivač saznaje da mu se netko javio iz samoga razgovora, ali ne vidi tuđi napredak. Podaci se ne objavljuju javno i ne ulaze u javne agregate. Infrastruktura: Vercel Inc. (hosting) i Neon Inc. (baza podataka), SAD. |
 | **Prijenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Europskoj uniji (regija Frankfurt), koja osigurava primjerenu razinu zaštite. Vercel Inc. i Neon Inc. društva su iz SAD-a, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mjere iz čl. 9. Politike privatnosti. |
 | **Rok čuvanja** | Zapis o upitu briše se s oglasom na koji se odnosi. Po prestanku statusa korisnika briše se odnosno anonimizira zajedno s ostalim podacima računa. Zapisi o evidentiranim koracima dijele sudbinu evidencije doprinosa (radnja br. 4). |
@@ -230,6 +230,19 @@
 | **Rok čuvanja** | Poruke se brišu kada barem jedna strana ugasi račun, odnosno kada od posljednje poruke u razgovoru prođu 24 mjeseca. |
 | **Mjere zaštite** | Razgovor je zatvoren za treće osobe; sadržaj poruka ne ulazi ni u jedan javni prikaz ni u agregate. Razgovor može pokrenuti samo verificiran korisnik. Sadržaj poruke ne prepisuje se u revizijski dnevnik pri uklanjanju. Punoljetnom sugovorniku maloljetnog korisnika prikazuje se da razgovor čita roditelj. TLS enkripcija, enkripcija u mirovanju, kontrola pristupa. |
 | **Napomena** | Ova je radnja u registar upisana registrom v4.5.1. Obrada je postojala od početka rada Platforme, ali nije bila zasebno popisana — komunikacija je bila navedena samo kao jedna od svrha radnje br. 1, bez vlastitih kategorija podataka i bez roka čuvanja. |
+
+**Radnja obrade br. 18 — Dokaz privole i dokaz zasnivanja ugovornog odnosa**
+
+| **Svrha obrade** | Dokazivanje da je osoba dala privolu za obrade čija je to pravna osnova i da je prihvaćanjem Uvjeta korištenja zasnovan ugovorni odnos (čl. 15. st. 1. ZZPL-a — teret dokazivanja je na voditelju obrade). |
+| --- | --- |
+| **Kategorije osoba** | Korisnici platforme; roditelji odnosno zakonski zastupnici maloljetnih korisnika. |
+| **Kategorije podataka** | Vrsta prihvaćenog akta odnosno privole, oznaka verzije, tekst koji je osobi bio prikazan, jezik prikaza, trenutak davanja i, ako je do njega došlo, trenutak povlačenja. Uz zapis se ne bilježe IP adresa, podaci o uređaju ni drugi identifikatori. |
+| **Pravna osnova** | Poštovanje pravnih obveza voditelja obrade (čl. 12. st. 1. t. 3. ZZPL-a) — obveza dokazivanja privole iz čl. 15. st. 1. ZZPL-a. |
+| **Primatelji / izvršitelji obrade** | Vercel Inc. (hosting, izvršavanje u Europskoj uniji) i Neon Inc. (baza podataka, regija u Europskoj uniji), na temelju ugovora o obradi. |
+| **Prijenos u treću zemlju** | Ne za podatke u bazi — aplikacija i baza podataka izvršavaju se u Europskoj uniji (regija Frankfurt), koja osigurava primjerenu razinu zaštite. Vercel Inc. i Neon Inc. društva su iz SAD-a, pa je moguć pristup iz treće zemlje u administrativne i tehničke svrhe, uz mjere iz čl. 9. Politike privatnosti. |
+| **Rok čuvanja** | Dok traje obrada za koju je privola dana i nakon toga u roku u kojem se po toj osnovi može isticati ili osporavati pravni zahtjev. Zapis se ne briše povlačenjem privole, jer povlačenje ne utječe na zakonitost obrade provedene prije povlačenja (čl. 15. st. 3. ZZPL-a), pa dokaz da je privola postojala mora ostati za to razdoblje. |
+| **Mjere zaštite** | Zapis nastaje u istoj atomskoj radnji kojom i račun; provjera se provodi na strani voditelja obrade, ne u pregledniku; prihvaćanje svakog akta bilježi se odvojeno; verzija upućuje na objavljen tekst koji se ne mijenja; ne prikupljaju se dodatni identifikatori; osoba zapis vidi u svojem računu i u izvozu podataka. |
+| **Napomena** | Za privolu na kolačiće koji nisu nužni zapis uz račun vodi se isključivo za prijavljenog korisnika; za posjetitelja koji nije prijavljen ne uspostavlja se identifikator, a odluka se bilježi u samom kolačiću, zajedno s verzijom obavijesti po kojoj je donesena. |
 
 **ZAVRŠNE ODREDBE**
 

@@ -16,10 +16,10 @@
 | **Registration number / PIB** | 28836627 / 115840443 |
 | **Registered address** | Šetalište 16, 25000 Sombor, Republic of Serbia |
 | **Email for data protection** | privatnost@ekolo.rs |
-| **Data Protection Officer (DPO)** | Nikola Šarić, alva.serbia@gmail.com |
+| **Data Protection Officer (DPO)** | Not appointed (Privacy Policy, Article 1). Data protection contact: privatnost@ekolo.rs |
 | **Date of preparation** | 23.05.2026. (last amended 16.06.2026.) |
-| **Subject of assessment** | KOLO system — Phase 1, active processing activities no. 1–15, including the activated Module 3 (Social Programs with verifier confirmation), Integrity Monitoring of the Verification System, the public list of donations, the supervision case, the exchange contribution path, and the **activated Module 4 — Children (activity no. 11)** |
-| **Related documents** | Rulebook on the KOLO System (v4.6.0), Privacy Policy (v4.6.1), Records of Processing Activities (v4.6.1), Rulebook on Support Programmes (v4.6.1), Rulebook on the Hierarchy of Acts (v4.4.6), Statute (v4.1), Whitepaper (v4.6.0) |
+| **Subject of assessment** | KOLO system — Phase 1, active processing activities no. 1–18, including the activated Module 3 (Social Programs with verifier confirmation), Integrity Monitoring of the Verification System, the public list of donations, the supervision case, the exchange contribution path, and the **activated Module 4 — Children (activity no. 11)** |
+| **Related documents** | Rulebook on the KOLO System (v4.6.2), Privacy Policy (v4.6.3), Records of Processing Activities (v4.6.3), Terms of Use (v4.6.3), Rulebook on Support Programmes (v4.6.1), Rulebook on the Hierarchy of Acts (v4.4.6), Statute (v4.1), Whitepaper (v4.6.2) |
 | **Next review** | Upon amendment of the social program confirmation mechanism, upon amendment of the rules of the children's space, or at the latest 12 months from the last amendment |
 
 This data protection impact assessment (hereinafter: DPIA) is prepared in accordance with Art. 54 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP). The DPIA is based on the provisions of Chapter IX of the Rulebook on the KOLO System (Art. 60–67), the Privacy Policy of the KOLO Platform, and the Records of Processing Activities of Personal Data.
@@ -46,7 +46,7 @@ Third design decision — data minimization. The Platform collects only the data
 
 ## 2.3. Overview of Processing Activities
 
-The system in Phase 1 encompasses seventeen processing activities defined by the Records of Processing Activities (v4.6.1). All activities are active. Activity 17 covers private communication between users, which until those Records was being processed but was not separately recorded. Activity 16 covers the procurement proposal and participation in collective procurement, introduced by Articles 14a and 51a of the KOLO System Rulebook. Module 3 (Social Programs) was activated by an earlier version of this assessment; activity 13 covers the public list of donations, activity 14 the supervision case introduced by the Rulebook on Proof of Reality 4.2.1, and activity 15 the exchange contribution path introduced by Article 40b of the Rulebook on the KOLO System. **Activity 11 (Module 4 — Children) is activated by this assessment**, together with the Rulebook on the Participation of Children.
+The system in Phase 1 encompasses eighteen processing activities defined by the Records of Processing Activities (v4.6.3). All activities are active. Activity 18 covers proof of consent and proof that a contractual relationship was established, introduced by this assessment. Activity 17 covers private communication between users, which until the Records v4.5.1 was being processed but was not separately recorded. Activity 16 covers the procurement proposal and participation in collective procurement, introduced by Articles 14a and 51a of the KOLO System Rulebook. Module 3 (Social Programs) was activated by an earlier version of this assessment; activity 13 covers the public list of donations, activity 14 the supervision case introduced by the Rulebook on Proof of Reality 4.2.1, and activity 15 the exchange contribution path introduced by Article 40b of the Rulebook on the KOLO System. **Activity 11 (Module 4 — Children) is activated by this assessment**, together with the Rulebook on the Participation of Children.
 
 | **Activity** | **Name** | **Legal basis** | **Status** |
 | --- | --- | --- | --- |
@@ -66,7 +66,7 @@ The system in Phase 1 encompasses seventeen processing activities defined by the
 | No. 14 | Supervision case (supervision outcome of a verification) | Performance of the contractual relationship (Art. 12(1)(2)) | Active |
 | No. 15 | Enquiry in relation to a listing and the exchange contribution path | Performance of the contractual relationship (Art. 12(1)(2)) | Active |
 
-Detailed categories of data, categories of data subjects, recipients, retention periods, and protection measures for each processing activity are established by the Records of Processing Activities (v4.6.1) applied together with this assessment.
+Detailed categories of data, categories of data subjects, recipients, retention periods, and protection measures for each processing activity are established by the Records of Processing Activities (v4.6.3) applied together with this assessment.
 
 ## 2.4. Data Flow
 
@@ -126,7 +126,7 @@ Risks are assessed according to the probability × severity matrix, whereby the 
 | R4 — Misuse of the verification graph | 2 | 2 | 4 | Mapping of social graph through analysis of who verified whom. Measures: pseudonymity of records, anonymization of connections upon status termination, restricted access. |
 | R5 — Public visibility of a listing by an unverified user | 2 | 2 | 4 | The listing is publicly visible and indexed. The user chooses the content; identifying data are not requested. Measures: content minimum instead of personal data, telephone number not public, at most three active listings, removal at any time. |
 | R6 — Errors in automated decision-making | 1 | 3 | 3 | Incorrect POEN calculation may affect the user's position. The annulment of a confirmation due to inactivity (Article 6 of the Rulebook on the Participation of Children) also has an automatic effect on status. Measures: public deterministic formula, right to explanation and objection, human review; for the annulment of a confirmation, additionally notification of all affected persons before the period expires and an express right of appeal decided upon by a human. |
-| R7 — Unauthorized use of technical logs | 1 | 2 | 2 | Logs contain IP addresses and device data. Measures: access restricted to DPO and security administrators, 12-month retention period, TLS, protected format. |
+| R7 — Unauthorized use of technical logs | 1 | 2 | 2 | Logs contain IP addresses and device data. Measures: access restricted to the person responsible for data protection within the Foundation and to security administrators, 12-month retention period, TLS, protected format. |
 | R8 — Cross-border data transfer | 1 | 3 | 3 | Part of the processing takes place outside the Republic of Serbia. Measures, all implemented: the application and the database are executed in the European Union (Frankfurt region), which provides an adequate level of protection, so the greater part of the data never leaves that circle at all; only images, the email sent by the Platform, alerts to the Foundation, and traffic data go to a third country; an alert to the Foundation contains no data from an application for a support programme; data are transferred exclusively to a processor with which a processing agreement containing the safeguards under Art. 65 LPDP has been concluded; the Foundation keeps a copy of each such agreement and verifies at least once a year whether it is in force and whether the list of sub-processors has changed. See section 5.13. |
 | R9 — Breach of donation data | 1 | 3 | 3 | Banking documentation is stored directly at the Foundation. Measures: physical and logical protection, access control, separate storage from platform data. |
 | R10 — Undermining of ledger integrity | 1 | 4 | 4 | Retroactive modification of records would endanger the common good. Measures: zero-sum invariant (sum of all balances equal to zero) with automatic verification, atomic recording of changes, timestamping of records, audit trail of administrative actions, and regular consistency checks. |
@@ -139,6 +139,7 @@ Risks are assessed according to the probability × severity matrix, whereby the 
 
 | R15 — Monitoring of user behaviour through the path counter | 2 | 2 | 4 | The exchange contribution path reads with whom a user exchanged POENs, in what amount, and who contacted them in relation to a listing. Taken together, those data show the circle of people with whom the user deals, beyond what the exchange itself requires. Measures: no new data are collected apart from the fact of the enquiry (without the content of the message); progress along the path is visible only to the user themselves and is not public (Art. 67 of the Rulebook); the data are not used for profiling, recommendations, or advertising; the enquiry record is deleted together with the listing; there is no automated decision-making within the meaning of Art. 38 LPDP — the recording is the application of publicly published rules and does not affect the user's status; right to object under Art. 37 LPDP. |
 
+| R18 — Processing without demonstrable consent or without proof that a contractual relationship was established | 1 | 3 | 3 | The controller must be able to demonstrate that the individual has given consent (Art. 15 paragraph 1 of the LPDP). Until this assessment, no such record existed for any processing based on consent, nor was there proof that the contractual relationship on which most other processing rests had been established. The likelihood is assessed as low under this assessment because the record has been introduced and an account is not created without it; the severity remains 3, since in the event of a dispute the absence of proof would affect the legal basis of the processing as a whole. Measures: see point 5.15. The residual risk is carried by the existing body of users, whose accounts were created before the record was introduced — for them acceptance can be recorded only going forward, when consent is next requested within the meaning of Article 16 of this Policy. |
 | R17 — Publication of the order and of participation data in a procurement | 1 | 3 | 3 | Establishing the order by the number of POEN and publishing the list of those who collected a share reveal a user's relative position in the record of contributions and their participation in the distribution. Measures: a proposal contains only the name of a good, without quantity, price, or reasoning; the register of proposals is published in aggregate, without pseudonyms; the number of POEN is not published alongside the list of collectors; the supplier is provided solely with a list of collection codes, without pseudonyms or other data; no evidence of status, occupation, or property is collected; the number of POEN is not collected anew but read from activity No. 4; establishing the order is the application of publicly published rules and does not affect user status, so there is no automated decision-making within the meaning of Art. 38 of the LPDP; the right of objection under Art. 37 of the LPDP and under Article 30 of the Rulebook, decided upon by a human being. See point 5.12. |
 *Color scale: green = low risk (1–4), yellow = medium risk (5–9), red = high risk (10–16). No high risks have been identified in the current system configuration.*
 
@@ -209,6 +210,28 @@ An accurately named procedure — upon termination of status the account is pseu
 
 The accepted consequence of a public donation — this is the only case in which the pseudonymous ledger remains linked to a name even after the termination of status. It is knowingly accepted: without the name alongside the donation, the recording of POEN could not be attributed to any person, while the total number of POEN is public and the sum of the records in the Protocol is zero. The mitigation lies in the choice itself — an anonymous donation, with the stated consequence that it carries no POEN.
 
+## 5.15. Measures for Proof of Consent and Proof that a Contractual Relationship Was Established
+
+Record of consent — for every processing whose legal basis is consent, as well as for the acceptance of the Terms of Use by which the contractual relationship is established, the moment, the version of the act, and the text displayed to the individual are recorded, in the language of display. Until this assessment no such record existed: the confirmation boxes at registration were checked solely in the browser, so it could be demonstrated neither that consent had been given nor that the contractual relationship had been established, and that relationship is the legal basis of most of the processing set out in Section 3.
+
+Verification on the controller's side — an account is not created without a recorded acceptance, and the check is performed on the server, not in the browser. The record is created in the same atomic operation as the account, so an account without a record cannot come into being even if the write is interrupted.
+
+Separation of statements — acceptance of the Terms of Use and acceptance of the Privacy Policy are recorded as two separate statements, because they relate to different matters (Art. 15 paragraph 2 of the LPDP).
+
+Immutability of the text to which the consent relates — a published version of an act is not changed; an amended act receives a new designation and is published as a separate document. The record of consent therefore permanently refers to the text in force at the moment it was given.
+
+Explicit consent for special categories — alongside an application for a social programme, the text of the consent itself is recorded, not merely the fact that it was given. The text contains the number of persons who will be asked to confirm, which differs for each applicant, so without a snapshot it could not be established what the particular individual consented to.
+
+Separation of the parent's consent from the statement on the existence of the child — the consent to the processing of the child's data is recorded separately from the statement by which the parent asserts, under full responsibility, that the child exists. The statement is an assertion of fact and its absence produces effects towards third parties; the consent may be withdrawn at any time and without consequences for anyone else. While they stood in a single text, withdrawal of the consent could not be carried out without also overturning the assertion of the child's existence.
+
+No new data for the purpose of proving — alongside the record of consent, no IP address, device data, or other identifiers are recorded. For consent to non-essential cookies, no identifier is established for a visitor who is not logged in; the decision is recorded in the cookie itself, together with the version of the notice under which it was made, and a record alongside an account is kept only for a logged-in user, for whom an account already exists.
+
+Renewal of the decision upon amendment — a decision made under an earlier version of the cookie notice is not carried over to the new one; the individual is asked again.
+
+Withdrawal and access — consent is withdrawn as easily as it was given, the record of the consent given is not deleted in the process but the moment of withdrawal is recorded in it, and the individual sees in their account and in the data export which consents they have given and by which text.
+
+Confirmation of the email address — a message with a confirmation link is sent to the address entered at registration. Confirmation is not a condition for using the account; it establishes that the address belongs to the individual who created the account, whereby the record of consent ceases to attest to the account alone.
+
 ## 5.8. Residual Risk
 
 After the application of all stated measures, the residual risk is assessed as acceptable. The highest residual risks are R1 (unauthorized access), R2 (re-identification), R11 (disclosure of special-category membership to verifiers), R13 (de-anonymization of a donor through the public list of donations), and R16 (the children's space), all at the medium level (5–9). Risk R8 (cross-border transfer) falls to a low level (3) because the application and the database are executed in the European Union, so the greater part of the data never leaves the circle with an adequate level of protection. Risk R5 (public visibility of a listing) falls to a low level (4) with the abolition of the board and the narrowing of the processing. These risks are further mitigated by continuous monitoring, regular testing, and updating of measures.
@@ -231,14 +254,17 @@ Users of the KOLO system have all the rights guaranteed to them by the LPDP. The
 
 Mechanics of anonymization upon status termination: the email address is deleted, connections in the verification graph are anonymized, records in the ledger remain under an identifier that no longer enables identification — whereby they cease to be personal data within the meaning of the LPDP and are retained permanently as part of the common good.
 
-## 7. Consultation with the Data Protection Officer
+## 7. Assessment of the controller's responsible person
 
-| **DPO's Opinion** |
+The Foundation has not appointed a data protection officer, for the reasons set out in Article 1 of the Privacy Policy, so the opinion referred to in Art. 54 paragraph 5 of the LPDP is not obtained — that provision ties the obligation to the case where such a person has been appointed.
+
+An earlier version of this assessment contained an opinion of a data protection officer who was at the same time deciding on the purposes and means of processing. Such an opinion did not constitute an independent assessment and has been replaced by an assessment of the controller's responsible person, designated as such.
+
+| **Assessment of the controller's responsible person** |
 | --- |
-| **DPO** | Nikola Šarić |
-| **Date of consultation** | 16.06.2026 |
-| **Opinion** | Following the application of the technical and organizational measures set out in Section 5, the residual risk is assessed as acceptable. Processing may commence subject to regular monitoring of the measures and updating of this assessment in the cases set out in Section 8 (in particular before the activation of Module 4 and upon any significant change of infrastructure or processors). |
-| **DPO's signature** | Nikola Šarić |
+| **Date of assessment** | 14.09.2026 |
+| **Assessment** | Following the application of the technical and organizational measures set out in Section 5, the residual risk is assessed as acceptable. Processing may continue subject to regular monitoring of the measures and updating of this assessment in the cases set out in Section 8, as well as subject to review of the obligation to appoint a data protection officer under Article 1 of the Privacy Policy. |
+| **Signature** | |
 
 ## 8. Plan for Modules Activated Subsequently
 
@@ -270,7 +296,7 @@ Additional risks: minors are a particularly vulnerable category; the friendship 
 
 On the basis of the assessment conducted:
 
-Seventeen risks to the rights and freedoms of data subjects have been identified. No risk has been assessed as high. Five risks are at the medium level (R1, R2, R11, R13, R16), and twelve at the low level (R3, R4, R5, R6, R7, R8, R9, R10, R12, R14, R15, R17).
+Eighteen risks to the rights and freedoms of data subjects have been identified. No risk has been assessed as high. Five risks are at the medium level (R1, R2, R11, R13, R16), and thirteen at the low level (R3, R4, R5, R6, R7, R8, R9, R10, R12, R14, R15, R17, R18).
 
 For each identified risk, appropriate technical and organizational protection measures have been applied. The residual risk after the application of measures is assessed as acceptable.
 
@@ -285,8 +311,8 @@ This DPIA is updated in the following cases: before the activation of Module 4 (
 | **Approved by — President of the Management Board** | |
 | **Signature** | |
 | **Date of approval** | |
-| **DPO's opinion** | Acceptable / Acceptable with recommendations / Not acceptable |
-| **DPO's signature** | |
+| **Assessment of the controller's responsible person** | Acceptable / Acceptable with recommendations / Not acceptable |
+| **Signature** | |
 
 In Sombor, on 23.05.2026.
 

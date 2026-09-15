@@ -18,9 +18,15 @@ Email: privatnost@ekolo.rs
 
 KOLO Fondacija određuje svrhe i sredstva obrade podataka o ličnosti u KOLO sistemu. Fondacija je rukovalac i kada ne čuva podatke korisnika fizički u sopstvenim bazama — pravno relevantan kriterijum je određivanje svrhe i sredstava obrade, ne fizičko skladištenje podataka (čl. 2 st. 1 t. 8 ZZPL-a). KOLO Protokol je tehničko sredstvo obrade.
 
-Lice za zaštitu podataka (DPO): Nikola Šarić, dostupan na alva.serbia@gmail.com.
+**Lice za zaštitu podataka (DPO).** Fondacija u ovom trenutku nije odredila lice za zaštitu podataka.
 
-Za sva pitanja u vezi sa obradom podataka o ličnosti možete se obratiti na gorenavedene adrese.
+Obaveza određivanja postoji kada rukovalac obradu vrši kao organ vlasti, kada se osnovne aktivnosti rukovaoca sastoje u radnjama obrade koje po svojoj prirodi, obimu odnosno svrhama zahtevaju redovan i sistematski nadzor velikog broja lica, ili kada se osnovne aktivnosti sastoje u obradi posebnih vrsta podataka u velikoj meri (član 56 stav 2 ZZPL-a). Fondacija nije organ vlasti, a broj lica čiji se podaci obrađuju i obim obrade posebnih vrsta podataka u ovom trenutku ne dostižu meru iz te odredbe.
+
+Fondacija ovu procenu preispituje najmanje jednom godišnje, kao i pri svakom aktiviranju novog modula u smislu Glave VIII Pravilnika o KOLO sistemu. Merila po kojima se obaveza smatra nastalom utvrđuje i objavljuje odluka Upravnog odbora; kada obaveza nastane, Fondacija određuje lice za zaštitu podataka, objavljuje njegove kontakt podatke i dostavlja ih Povereniku u skladu sa članom 56 stav 8 ZZPL-a.
+
+Raniji raspored, u kome je lice za zaštitu podataka bilo određeno a istovremeno je odlučivalo o svrsi i sredstvima obrade, nije obezbeđivao nezavisnost koju zahteva član 56 stav 6 ZZPL-a. Fondacija je zato taj raspored ukinula umesto da ga zadrži u obliku koji tu nezavisnost ne može da ostvari.
+
+**Kontakt za zaštitu podataka.** Sva pitanja u vezi sa obradom podataka o ličnosti i svi zahtevi za ostvarivanje prava iz Člana 13 ove politike upućuju se na **privatnost@ekolo.rs**. Fondacija na njih odgovara u rokovima utvrđenim Članom 13. Ova adresa ne prestaje da važi određivanjem lica za zaštitu podataka.
 
 ### Član 2 — Primena
 
@@ -224,11 +230,27 @@ Vidljivost: **dobavljaču se dostavlja isključivo spisak kodova za preuzimanje 
 
 Utvrđivanje reda je primena javno objavljenih pravila i ne predstavlja automatizovano odlučivanje u smislu čl. 38 ZZPL-a: ono ne proizvodi pravne posledice po Vaš status. Protiv utvrđenog reda i ishoda nabavke imate pravo prigovora u skladu sa članom 13 ove politike, o kome odlučuje čovek.
 
+### Član 4a — Pristanak i dokaz pristanka
+
+Za obrade čiji je pravni osnov pristanak (Član 4 ove politike), kao i za prihvatanje Uslova korišćenja kojim se zasniva ugovorni odnos, Fondacija beleži da je pristanak dat. Zapis sadrži: šta je prihvaćeno, kada, verziju akta na koju se prihvatanje odnosi i tekst koji je korisniku bio prikazan, na jeziku na kom mu je prikazan.
+
+Verzija akta beleži se zato što je objavljena verzija nepromenljiva — akt koji je izmenjen dobija novu oznaku i objavljuje se kao zaseban dokument, a raniji ostaje dostupan u obliku u kom je i bio prihvaćen. Zapis o pristanku time trajno upućuje na tekst koji je u tom trenutku važio.
+
+Uz zapis o pristanku **ne beleže se** IP adresa, podaci o uređaju ni drugi podaci kojima se korisnik dodatno identifikuje. Prikupljanje takvih podataka radi dokazivanja pristanka predstavljalo bi proširenje obrade suprotno principu minimizacije iz Člana 3 ove politike.
+
+Prihvatanje Uslova korišćenja i prihvatanje ove politike beleže se odvojeno, kao dve izjave, jer se odnose na različita pitanja.
+
+Pristanak se povlači u svakom trenutku, bez navođenja razloga i jednako jednostavno kao što je i dat. Povlačenje ne utiče na zakonitost obrade izvršene pre povlačenja, pa se zapis o datom pristanku ne briše nego se u njemu beleži i trenutak povlačenja.
+
+Korisnik u svakom trenutku može da vidi koje je pristanke dao i kojim tekstom, u svom nalogu i u izvozu podataka iz Člana 13.
+
+Za pristanak na kolačiće koji nisu neophodni (Član 7) odluka se beleži u samom kolačiću, zajedno sa verzijom obaveštenja po kojoj je doneta; kod prijavljenog korisnika beleži se i uz njegov nalog. Za posetioca koji nije prijavljen ne uspostavlja se nikakav identifikator radi vođenja tog zapisa, iz razloga navedenog u stavu 3 ovog člana.
+
 ### Član 5 — Tehnički podaci
 
 Radi bezbednosti Platforme i sprečavanja zloupotreba, na nivou hosting infrastrukture beleže se IP adresa, podaci o uređaju i pretraživaču i vreme pristupa.
 
-Unutar Platforme, administrativne radnje nad podacima korisnika i započinjanje razgovora povodom oglasa beleže se u revizijskom dnevniku (ko je izvršio radnju, kada i koju). Revizijski dnevnik dostupan je licu za zaštitu podataka (DPO).
+Unutar Platforme, administrativne radnje nad podacima korisnika i započinjanje razgovora povodom oglasa beleže se u revizijskom dnevniku (ko je izvršio radnju, kada i koju). Revizijski dnevnik dostupan je licu koje u Fondaciji odgovara za zaštitu podataka.
 
 Svrha obrade: bezbednost Platforme, sprečavanje zloupotreba, detekcija neovlašćenog pristupa, tehnička podrška.
 
@@ -366,7 +388,7 @@ Poništenje potvrde stvarnosti zbog neaktivnosti — kada se o postojanju deteta
 
 Ove automatizovane obrade mogu pravno ili značajno uticati na lice u smislu čl. 38 ZZPL-a. Svaki korisnik ima pravo da zatraži objašnjenje logike automatizovane obrade, zatraži ljudski uvid u konkretnu odluku i uloži prigovor na automatizovanu odluku.
 
-Zahtevi se upućuju na email adresu rukovaoca iz Člana 1 ili na adresu lica za zaštitu podataka.
+Zahtevi se upućuju na kontakt adresu za zaštitu podataka iz Člana 1.
 
 ### Član 13 — Prava korisnika
 
@@ -386,7 +408,7 @@ Pravo na prigovor (čl. 37 ZZPL-a) — možete uložiti prigovor na obradu zasno
 
 Pravo na povlačenje pristanka — za obradu zasnovanu na pristanku (dobrovoljno uneti podaci, podaci u objavljenom oglasu, posebne kategorije podataka), pristanak možete povući u svakom trenutku. Povlačenje pristanka ne utiče na zakonitost obrade pre povlačenja. Povlačenje pristanka u pogledu objavljenog oglasa sprovodi se uklanjanjem oglasa u korisničkom interfejsu i ne zahteva podnošenje pisanog zahteva iz ovog člana.
 
-Kako ostvariti prava: zahtev se podnosi pisanim putem na email adresu iz Člana 1 ili na adresu lica za zaštitu podataka. Odgovorićemo u roku od 30 dana od prijema zahteva. Rok može biti produžen za dodatnih 60 dana u složenim slučajevima, o čemu ćemo vas obavestiti uz navođenje razloga produženja.
+Kako ostvariti prava: zahtev se podnosi pisanim putem na kontakt adresu za zaštitu podataka iz Člana 1. Odgovorićemo u roku od 30 dana od prijema zahteva. Rok može biti produžen za dodatnih 60 dana u složenim slučajevima, o čemu ćemo vas obavestiti uz navođenje razloga produženja.
 
 Pravo na pritužbu: ako smatrate da je obrada vaših podataka nezakonita, možete podneti pritužbu Povereniku za informacije od javnog značaja i zaštitu podataka o ličnosti, Bulevar kralja Aleksandra 15, Beograd, www.poverenik.rs.
 

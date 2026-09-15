@@ -20,7 +20,15 @@ Email: privatnost@ekolo.rs
 
 A KOLO Alapítvány határozza meg a személyes adatok kezelésének céljait és eszközeit a KOLO rendszerben. Az Alapítvány akkor is adatkezelő, ha a felhasználók adatait fizikailag nem saját adatbázisaiban tárolja — a jogilag releváns szempont az adatkezelés céljának és eszközeinek meghatározása, nem pedig az adatok fizikai tárolása (ZZPL 2. cikk (1) bekezdés 8. pont). A KOLO Protokoll az adatkezelés technikai eszköze.
 
-Adatvédelmi tisztviselő (DPO): Nikola Šarić, elérhető az alva.serbia@gmail.com címen.
+**Adatvédelmi tisztviselő (DPO).** Az Alapítvány jelenleg nem nevezett ki adatvédelmi tisztviselőt.
+
+A kinevezési kötelezettség akkor áll fenn, ha az adatkezelő közhatalmi szervként végzi az adatkezelést, ha az adatkezelő alaptevékenységei olyan adatkezelési műveletekből állnak, amelyek jellegüknél, hatókörüknél vagy céljaiknál fogva nagyszámú személy rendszeres és szisztematikus megfigyelését teszik szükségessé, vagy ha az alaptevékenységek különleges adatok nagy számban történő kezeléséből állnak (a ZZPL 56. cikkének (2) bekezdése). Az Alapítvány nem közhatalmi szerv, és azon személyek száma, akiknek adatait kezeli, valamint a különleges adatok kezelésének mértéke jelenleg nem éri el az e rendelkezésben meghatározott mértéket.
+
+Az Alapítvány ezt az értékelést legalább évente egyszer, valamint a KOLO rendszerről szóló szabályzat VIII. fejezete szerinti minden új modul aktiválásakor felülvizsgálja. Azokat a kritériumokat, amelyek alapján a kötelezettséget keletkezettnek kell tekinteni, az Igazgatótanács határozata állapítja meg és teszi közzé; a kötelezettség keletkezésekor az Alapítvány adatvédelmi tisztviselőt nevez ki, közzéteszi elérhetőségét és a ZZPL 56. cikkének (8) bekezdése szerint megküldi azt a Biztosnak.
+
+A korábbi elrendezés, amelyben az adatvédelmi tisztviselő ki volt nevezve, ugyanakkor az adatkezelés céljáról és eszközeiről is döntött, nem biztosította a ZZPL 56. cikkének (6) bekezdése által megkövetelt függetlenséget. Az Alapítvány ezért megszüntette ezt az elrendezést ahelyett, hogy olyan formában tartotta volna fenn, amelyben ez a függetlenség nem valósítható meg.
+
+**Adatvédelmi kapcsolattartás.** A személyes adatok kezelésével kapcsolatos minden kérdést és a jelen szabályzat 13. cikke szerinti jogok gyakorlására irányuló minden kérelmet a **privatnost@ekolo.rs** címre kell küldeni. Az Alapítvány ezekre a 13. cikkben meghatározott határidőn belül válaszol. Ez a cím az adatvédelmi tisztviselő kinevezésével sem szűnik meg.
 
 A személyes adatok kezelésével kapcsolatos minden kérdésben a fenti címekhez fordulhat.
 
@@ -226,11 +234,27 @@ Láthatóság: **a szállító kizárólag az átvételi kódok jegyzékét kapj
 
 A sorrend megállapítása a nyilvánosan közzétett szabályok alkalmazása, és nem minősül a ZZPL 38. cikke szerinti automatizált döntéshozatalnak: az Ön státuszára nézve joghatást nem vált ki. A megállapított sorrenddel és a beszerzés eredményével szemben a jelen szabályzat 13. cikke szerinti kifogás joga illeti meg, amelyről ember dönt.
 
+### 4a. cikk — A hozzájárulás és a hozzájárulás bizonyítása
+
+Azon adatkezelések esetében, amelyek jogalapja a hozzájárulás (a jelen szabályzat 4. cikke), valamint a szerződéses jogviszonyt megalapozó Felhasználási feltételek elfogadása esetében az Alapítvány rögzíti, hogy a hozzájárulást megadták. A bejegyzés tartalmazza: mit fogadtak el, mikor, mely jogszabályi változatra vonatkozik az elfogadás, és azt a szöveget, amelyet a felhasználónak megjelenítettek, azon a nyelven, amelyen megjelent.
+
+A változat azért kerül rögzítésre, mert a közzétett változat megváltoztathatatlan — a módosított akt új jelölést kap és külön dokumentumként jelenik meg, a korábbi pedig abban a formában marad elérhető, amelyben elfogadták. A hozzájárulásról szóló bejegyzés így tartósan arra a szövegre utal, amely abban a pillanatban hatályos volt.
+
+A hozzájárulásról szóló bejegyzés mellett **nem** kerül rögzítésre az IP-cím, az eszközre vonatkozó adat, sem más olyan adat, amellyel a felhasználó további azonosítást nyerne. Ilyen adatok gyűjtése a hozzájárulás bizonyítása céljából az adatkezelés olyan kiterjesztése lenne, amely ellentétes a jelen szabályzat 3. cikke szerinti adattakarékosság elvével.
+
+A Felhasználási feltételek elfogadása és a jelen szabályzat elfogadása külön-külön, két nyilatkozatként kerül rögzítésre, mivel eltérő kérdésekre vonatkoznak.
+
+A hozzájárulás bármikor visszavonható, indokolás nélkül és ugyanolyan egyszerűen, ahogyan megadták. A visszavonás nem érinti a visszavonás előtt végzett adatkezelés jogszerűségét, ezért a megadott hozzájárulásról szóló bejegyzés nem kerül törlésre, hanem abban a visszavonás időpontja is rögzítésre kerül.
+
+A felhasználó bármikor megtekintheti, mely hozzájárulásokat adta meg és milyen szöveggel, a saját fiókjában és a 13. cikk szerinti adatexportban.
+
+A nem feltétlenül szükséges sütikhez adott hozzájárulás (7. cikk) esetében a döntés magában a sütiben kerül rögzítésre, azzal a tájékoztatási változattal együtt, amely alapján meghozták; bejelentkezett felhasználó esetében a fiókja mellett is rögzítésre kerül. A be nem jelentkezett látogató esetében e bejegyzés vezetése céljából semmilyen azonosító nem jön létre, a jelen cikk (3) bekezdésében megjelölt okból.
+
 ### 5. cikk — Technikai adatok
 
 A Platform biztonsága és a visszaélések megelőzése érdekében a hosting infrastruktúra szintjén rögzítésre kerül az IP-cím, az eszközre és a böngészőre vonatkozó adat, valamint a hozzáférés időpontja.
 
-A Platformon belül a felhasználói adatokon végzett adminisztratív műveletek és a hirdetés kapcsán indított beszélgetések az auditnaplóban rögzülnek (ki, mikor és milyen műveletet hajtott végre). Az auditnapló az adatvédelmi tisztviselő (DPO) számára hozzáférhető.
+A Platformon belül a felhasználói adatokon végzett adminisztratív műveletek és a hirdetés kapcsán indított beszélgetések az auditnaplóban rögzülnek (ki, mikor és milyen műveletet hajtott végre). Az auditnapló az Alapítványban az adatvédelemért felelős személy számára hozzáférhető.
 
 Az adatkezelés célja: a Platform biztonsága, a visszaélések megelőzése, a jogosulatlan hozzáférés észlelése, technikai támogatás.
 

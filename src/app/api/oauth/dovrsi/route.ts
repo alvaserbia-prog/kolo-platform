@@ -8,6 +8,9 @@ import { poljaPseudonima, porukaZauzeca, proveriZauzece } from "@/lib/pseudonim"
 import { WalletType } from "@/generated/prisma/client";
 import { obavestiAdmineNoviKorisnik } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { getLocale } from "next-intl/server";
+import { oba, PORUKA_PRISTANAK_OBAVEZAN, upisiPristankeRegistracije } from "@/lib/protokol/pristanak";
+import { posaljiPotvrduAdrese } from "@/lib/protokol/potvrda-adrese";
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -23,7 +26,14 @@ export async function POST(req: NextRequest) {
   if (!validanPseudonim(pseudonim)) {
     return await greska(PSEUDONIM_PRAVILO, 400);
   }
+  // 🔴 Isti uslov kao pri registraciji (R-06): kvačice na ovom obrascu žive samo u
+  // pretraživaču, pa server mora da ih traži sam. OAuth put nije izuzetak — ugovor
+  // se ovde zaključuje isto kao i na drugom ulazu.
+  if (!oba(body.prihvatamUslove, body.prihvatamPolitiku)) {
+    return await greska(PORUKA_PRISTANAK_OBAVEZAN, 400);
+  }
   const trimmed = pseudonim.trim();
+  const jezik = await getLocale();
 
   // Nalog se ovde tek dobija pseudonim (nije preimenovanje), pa se izuzima sopstveni
   // red — placeholder koji je eventualno stajao u njemu ne ide u istoriju napuštenih.
@@ -34,11 +44,15 @@ export async function POST(req: NextRequest) {
 
   // Legacy slučaj: red već postoji u bazi (stari tok ili napola dovršen nalog) — ažuriraj ga.
   if (session.user.id) {
-    await prisma.user.update({
-      where: { id: session.user.id },
-      data: { ...poljaPseudonima(trimmed), oauthPending: false },
+    const id = session.user.id;
+    await prisma.$transaction(async (tx) => {
+      await tx.user.update({
+        where: { id },
+        data: { ...poljaPseudonima(trimmed), oauthPending: false, jezik },
+      });
+      await upisiPristankeRegistracije(tx, id, jezik, "oauth");
     });
-    return NextResponse.json({ ok: true, userId: session.user.id });
+    return NextResponse.json({ ok: true, userId: id });
   }
 
   // Novi tok: nalog se kreira tek sada (do ovog koraka ničega nije bilo u bazi).
@@ -51,9 +65,12 @@ export async function POST(req: NextRequest) {
   // ne pravi duplikat — samo dovrši postojeći.
   const postojeci = await prisma.user.findUnique({ where: { email } });
   if (postojeci) {
-    await prisma.user.update({
-      where: { id: postojeci.id },
-      data: { ...poljaPseudonima(trimmed), oauthPending: false },
+    await prisma.$transaction(async (tx) => {
+      await tx.user.update({
+        where: { id: postojeci.id },
+        data: { ...poljaPseudonima(trimmed), oauthPending: false, jezik },
+      });
+      await upisiPristankeRegistracije(tx, postojeci.id, jezik, "oauth");
     });
     return NextResponse.json({ ok: true, userId: postojeci.id });
   }
@@ -70,6 +87,7 @@ export async function POST(req: NextRequest) {
         oauthPending: false,
         memberHash,
         avatar: session.user.pendingAvatar ?? undefined,
+        jezik,
         wallet: { create: { type: WalletType.USER, balance: 0 } },
       },
     });
@@ -78,6 +96,7 @@ export async function POST(req: NextRequest) {
         data: { userId: u.id, punoIme: session.user.pendingPunoIme },
       });
     }
+    await upisiPristankeRegistracije(tx, u.id, jezik, "oauth");
     return u;
   });
 
@@ -91,6 +110,7 @@ export async function POST(req: NextRequest) {
     "Nov korisnik se priključio",
     `Pseudonim: ${trimmed}\nNačin: ${session.user.pendingProvider ?? "OAuth"}\nVerifikovan: ne`,
   );
+  void posaljiPotvrduAdrese(created.id, req.nextUrl.origin);
 
   return NextResponse.json({ ok: true, userId: created.id });
 }

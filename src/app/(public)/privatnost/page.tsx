@@ -5,6 +5,8 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { pageMetadata } from "@/lib/seo";
 import { ucitajPravniDokument } from "@/lib/pravni-dokument";
+// 🔴 Vidi komentar u `uslovi/page.tsx` — verzija ima jedan izvor (R-06).
+import { AKT_POLITIKA } from "@/lib/verzije-akata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("pravne");
@@ -18,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function PolitikaPrivatnostiPage() {
   const locale = await getLocale();
   const t = await getTranslations("pravne");
-  const sadrzaj = await ucitajPravniDokument("politika_4_6_1.md", locale);
+  const sadrzaj = await ucitajPravniDokument(AKT_POLITIKA.fajl, locale);
 
   return (
     <div className="max-w-[800px] mx-auto pb-16">

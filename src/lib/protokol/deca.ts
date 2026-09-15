@@ -28,7 +28,7 @@ import {
   POEN_VERIFIKOVANI,
 } from "./dokaz-stvarnosti";
 import { ponistiVerifikaciju } from "./lazna-verifikacija";
-import { generisiIzjavuRoditelja } from "@/lib/deca-izjava";
+import { generisiIzjavuRoditelja, generisiSaglasnostRoditelja } from "@/lib/deca-izjava";
 import bcrypt from "bcryptjs";
 import { obavesti } from "@/lib/notifikacije";
 import {
@@ -259,6 +259,7 @@ export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
       status: true,
       deaktiviranAt: true,
       indeksStvarnosti: true,
+      jezik: true,
     },
   });
   if (!roditelj) throw new DecaGreska("Nalog ne postoji.", 401);
@@ -322,6 +323,13 @@ export async function otvoriNalogDeteta(ulaz: OtvaranjeUlaz) {
       data: {
         izjavaAt: sada,
         izjavaTekst: generisiIzjavuRoditelja({ pseudonimDeteta: kreirano.pseudonim, godine }),
+        // Saglasnost na obradu podataka deteta (ZZPL čl. 16) — ODVOJENA od izjave
+        // iznad, iako se daje istim potezom. Vidi `deca-izjava.ts` (R-06).
+        saglasnostAt: sada,
+        saglasnostTekst: generisiSaglasnostRoditelja(
+          { pseudonimDeteta: kreirano.pseudonim },
+          roditelj.jezik ?? "sr",
+        ),
       },
     });
 
@@ -841,6 +849,7 @@ export async function dajIzjavuRoditelja(roditeljId: string, deteId: string) {
       id: true,
       izjavaAt: true,
       dete: { select: { pseudonim: true, datumRodjenja: true } },
+      roditelj: { select: { jezik: true } },
     },
   });
   if (!veza) throw new DecaGreska("Nalog nije pronađen.", 404);
@@ -856,6 +865,14 @@ export async function dajIzjavuRoditelja(roditeljId: string, deteId: string) {
         pseudonimDeteta: veza.dete.pseudonim,
         godine,
       }),
+      // Saglasnost na obradu ide istim potezom (R-06). Ovo je jedini put na kome
+      // roditelj izjavu daje naknadno — pri administrativnom prevođenju naloga —
+      // pa i saglasnost do tog trenutka nije postojala.
+      saglasnostAt: new Date(),
+      saglasnostTekst: generisiSaglasnostRoditelja(
+        { pseudonimDeteta: veza.dete.pseudonim },
+        veza.roditelj.jezik ?? "sr",
+      ),
       izjavaRokDo: null,
     },
   });

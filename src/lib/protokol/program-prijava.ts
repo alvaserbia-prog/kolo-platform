@@ -40,7 +40,13 @@ export async function okoncajPrijavu(
       status: opcije.status,
       rejectionReason: opcije.razlog,
       metadata: Prisma.DbNull,
-      ...(opcije.povucenPristanak ? { pristanakVerifikatori: false } : {}),
+      // 🔴 Pri povlačenju se upisuje TRENUTAK, a `pristanakVerifikatori` ostaje
+      // `true` (R-06). Pristanak jeste bio dat, a opoziv po ZZPL čl. 15 st. 3 ne
+      // utiče na zakonitost obrade pre opoziva — pa dokaz da je postojao mora da
+      // ostane. Do 4.6.3 se logička vrednost gasila, čime je zapis tvrdio da
+      // pristanka nikad nije ni bilo. `pristanakTekst` se iz istog razloga ne briše
+      // zajedno sa `metadata`: tekst nije podatak o korisniku nego dokaz rukovaoca.
+      ...(opcije.povucenPristanak ? { pristanakPovucenAt: new Date() } : {}),
     },
   });
   await zatvoriPostupakPotvrda(enrollmentId);
