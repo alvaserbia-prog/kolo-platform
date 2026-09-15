@@ -283,7 +283,7 @@ export default function OglasDetalj({
           )}
 
           {/* Status badge */}
-          {oglas.status === "SOLD" && (
+          {oglas.status === "RAZMENJEN" && (
             <div className="bg-kolo-bg rounded-xl px-4 py-3 text-center text-sm font-semibold text-kolo-muted">
               {t("oglas_prodat")}
             </div>

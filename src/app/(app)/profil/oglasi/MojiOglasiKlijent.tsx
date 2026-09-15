@@ -18,14 +18,14 @@ interface Oglas {
   status: string;
   slike: number;
   createdAt: string;
-  soldAt: string | null;
+  razmenjenoAt: string | null;
   /** Razlog uklanjanja od strane Fondacije (Uslovi čl. 25 st. 2). */
   uklonjenRazlog: string | null;
 }
 
 const statusBoja: Record<string, string> = {
   ACTIVE:   "bg-kolo-green-100 text-kolo-green-700",
-  SOLD:     "bg-kolo-info-light text-kolo-info",
+  RAZMENJEN: "bg-kolo-info-light text-kolo-info",
   EXPIRED:  "bg-kolo-bg text-kolo-muted",
   UKLONJEN: "bg-kolo-danger-light text-kolo-danger",
 };
@@ -40,14 +40,14 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
 
   const statusLabela: Record<string, string> = {
     ACTIVE: t("oglas_aktivan"),
-    SOLD: t("oglas_prodat"),
+    RAZMENJEN: t("oglas_prodat"),
     EXPIRED: t("oglas_istekao"),
     UKLONJEN: tPijaca("oglas_uklonjen"),
   };
 
   const filtrirani = listings.filter((l) => {
     if (filter === "aktivni") return l.status === "ACTIVE";
-    if (filter === "prodati") return l.status === "SOLD";
+    if (filter === "prodati") return l.status === "RAZMENJEN";
     return true;
   });
 
@@ -118,10 +118,10 @@ export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
                   <span className="text-xs text-kolo-muted">{tPijaca(`kategorija_${kategorijaKljuc(l.category)}`)}</span>
                   <span className="text-xs text-kolo-border">·</span>
                   <span className="text-xs font-semibold text-kolo-green-700">{formatCenaGlavni(l, t("cena_po_dogovoru"))}{prikaziJedinicuCene(l) ? " POEN" : ""}</span>
-                  {l.soldAt && (
+                  {l.razmenjenoAt && (
                     <>
                       <span className="text-xs text-kolo-border">·</span>
-                      <span className="text-xs text-kolo-muted">{t("prodato")}: {new Date(l.soldAt).toLocaleDateString(intlTag(locale))}</span>
+                      <span className="text-xs text-kolo-muted">{t("prodato")}: {new Date(l.razmenjenoAt).toLocaleDateString(intlTag(locale))}</span>
                     </>
                   )}
                 </div>

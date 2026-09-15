@@ -1338,3 +1338,58 @@ export async function pristupProfiluDeteta(
 export const BEZ_DECE: Prisma.WalletWhereInput = {
   OR: [{ user: { is: null } }, { user: { is: { maloletan: false } } }],
 };
+
+// ── Obaveštenje roditelju o oglasu deteta (čl. 10 st. 6) ─────────────────────
+
+/**
+ * Javlja svakom roditelju da je dete objavilo oglas.
+ *
+ * 🔴 Uvedeno uz R-07 (nelojalna i obmanjujuća poslovna praksa), mera M-5″ t. 4.
+ * Nalaz koji ga je tražio: oglas koji postavi dete vidi SAMO druga deca (do 15.
+ * godine u celini, iznad toga i punoletni uz roditeljsku saglasnost —
+ * `usloviVidljivostiOglasa`). Dakle publika je pretežno ili isključivo maloletna,
+ * a jedini odrastao koji taj oglas uopšte vidi jeste roditelj.
+ *
+ * 🔴 Čl. 10 st. 6 Pravilnika o učešću dece čini roditelja odgovornim za sadržaj
+ * koji je dete objavilo **do trenutka uklanjanja** i za radnje deteta na Platformi.
+ * Ta odredba je neizvodljiva dok roditelj ne zna da je oglas objavljen — do ovog
+ * seta ga je video samo ako bi sam otvorio profil deteta. Obaveštenje pretvara
+ * pasivan uvid u aktivan; dugme „Ukloni" stoji tamo gde link vodi (čl. 10 st. 1).
+ *
+ * 🟡 Pokriva ono što je OBJAVLJENO. Razmena dogovorena mimo oglasa Platformi nije
+ * vidljiva i ne pokušava da bude — praćenje obrazaca prepisa je odbijeno uz stari
+ * R-19 („nemoguće je sprovesti kontrolu kada je transfer poena slobodan"). Zabranu
+ * iz čl. 21 Uslova zato nosi RADNJA, ne oglas, pa osnov za meru postoji i kada
+ * oglasa nema.
+ *
+ * Ne baca: objava oglasa ne sme da padne zato što obaveštenje nije otišlo.
+ */
+export async function javiRoditeljimaZaOglas(
+  deteId: string,
+  oglas: { id: string; title: string },
+): Promise<void> {
+  try {
+    const dete = await prisma.user.findUnique({
+      where: { id: deteId },
+      select: {
+        pseudonim: true,
+        maloletan: true,
+        roditeljstvaKaoDete: { select: { roditeljId: true } },
+      },
+    });
+    if (!dete?.maloletan) return;
+
+    for (const { roditeljId } of dete.roditeljstvaKaoDete) {
+      await obavesti(roditeljId, {
+        tip: "dete_oglas",
+        kljuc: "notifikacije.dete_oglas",
+        parametri: { pseudonim: dete.pseudonim, naslov: oglas.title },
+        naslov: `${dete.pseudonim} je objavio/la oglas`,
+        tekst: `Oglas „${oglas.title}". Na profilu deteta možeš da ga pogledaš i ukloniš.`,
+        link: `/deca/${deteId}`,
+      }).catch(() => {});
+    }
+  } catch (e) {
+    console.error("[deca] Obaveštenje roditelju o oglasu nije poslato", deteId, e);
+  }
+}

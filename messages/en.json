@@ -1151,7 +1151,7 @@
     "hero_podnaslov": "Work, goods and knowledge circulate among people in Sombor and the surrounding area — no middlemen, no money.",
     "hero_cta_priduzi": "Sign up free",
     "hero_cta_saznaj": "How it works",
-    "hero_badge": "Your local marketplace — paid in contribution, not money",
+    "hero_badge": "Your local marketplace — exchange for contribution, not for money",
     "problem_naslov": "The problems we all feel",
     "problem_1_naslov": "Food travels, while it grows right next to us.",
     "problem_1_opis": "We buy honey, eggs, cheese and vegetables that have crossed thousands of kilometres, while someone in the neighbourhood produces exactly that.",
@@ -1177,7 +1177,7 @@
     "alternativa_link_statut": "Read the Statute",
     "kome_naslov": "Who is KOLO for?",
     "kome_1_naslov": "Farmers and local producers",
-    "kome_1_opis": "Your produce goes straight to the people looking for it, with no middleman and no markup.",
+    "kome_1_opis": "Your produce goes straight to the people looking for it, with no middleman in between.",
     "kome_1_poenta": "Every bit of your effort is recorded and seen.",
     "kome_2_naslov": "Craftsmen and tradespeople",
     "kome_2_opis": "People where you live see what you do and recommend you for work you have actually done.",
@@ -1207,15 +1207,15 @@
     "kome_prikazi_manje": "Show less",
     "primer_naslov": "How it looks in practice",
     "primer_korak_1_naslov": "Ana and Milan meet through an exchange",
-    "primer_korak_1_opis": "Milan needs honey, Ana produces it. They agreed that five jars are worth 4,000 POEN — and that is what Milan re-registered to her.",
+    "primer_korak_1_opis": "Milan needs honey, Ana produces it. They agreed that five jars are worth 5,000 POEN — and that is what Milan re-registered to her.",
     "primer_korak_2_naslov": "Ana uses what she gave",
-    "primer_korak_2_opis": "Ana's washing machine broke down. Lazar repaired it, and Ana re-registered 4,000 POEN to him. She paid nothing in money, and Lazar now has a record of his work.",
+    "primer_korak_2_opis": "Ana's washing machine broke down. Lazar repaired it, and Ana re-registered 4,000 POEN to him. No money changed hands, and Lazar now has a record of his work.",
     "primer_korak_3_naslov": "The circle closes",
-    "primer_korak_3_opis": "Lazar felt like having burek. Marija baked him a tray of it, he re-registered 800 POEN to her, and she used them for a jar of Ana's honey.",
+    "primer_korak_3_opis": "Lazar felt like having burek. Marija baked him a tray of it, he re-registered 1,000 POEN to her, and she used them for a jar of Ana's honey.",
     "primer_most": "At the start they did not know one another. Now they are in the same circle.",
     "primer_napomena_bold": "POEN is not money.",
     "primer_napomena_1": "It is a record of what each person has given to the community.",
-    "primer_napomena_2": "The honey, the repair and the burek in this example are real. The amount in POEN is proposed by whoever posts the listing and agreed between the two sides. A price in dinars only serves as a reference point for that agreement. POEN is not bought for money and is not exchanged for money.",
+    "primer_napomena_2": "The amount in POEN is proposed by whoever posts the listing and agreed between the two sides. The Foundation publishes no ratio of POEN to the dinar, recommends none, and applies none in any of its own procedures. POEN is not bought for dinars and is not exchanged for dinars.",
     "kako_funkcionise_naslov": "How it works, in short",
     "kako_funkcionise_link": "Detailed explanation",
     "kako_funkcionise_link_postupak": "The whole process, step by step",
@@ -1577,7 +1577,9 @@
     "gde_uvod": "Every statement on this page rests on a published act. Their text governs, not this overview.",
     "nazad_link": "Back to How the system works",
     "porez_naslov": "Tax regulations",
-    "porez_tekst": "Personal income tax applies to income from all sources, including income realised in non-monetary form. The question is therefore not whether something is remuneration — it is whether the user received anything at all.\n\nWith POEN, they did not. The recording brings neither money nor goods, nothing passes from the Foundation's assets into the user's assets, the record so created cannot be turned into money, assigned or collected, and the Foundation neither determines nor publishes a value of POEN expressed in money. The Foundation pays no money to a user on any basis.\n\nWith a collective procurement, they did — and this is not concealed: the user receives a good purchased with the Foundation's dinar funds. The good is provided free of charge and without any consideration, in pursuit of the Foundation's registered objectives. The annulled record is extinguished and does not pass to the Foundation; it is not a unit acquired in order to collect the share, but the record of a contribution the user had already made to the common good. The total value a single user may collect in a calendar year is limited.\n\nWhat remains contested: how the competent authority will qualify that provision. The Foundation gives no tax advice and guarantees no tax treatment; users are responsible for their own tax obligations."
+    "porez_tekst": "Personal income tax applies to income from all sources, including income realised in non-monetary form. The question is therefore not whether something is remuneration — it is whether the user received anything at all.\n\nWith POEN, they did not. The recording brings neither money nor goods, nothing passes from the Foundation's assets into the user's assets, the record so created cannot be turned into money, assigned or collected, and the Foundation neither determines nor publishes a value of POEN expressed in money. The Foundation pays no money to a user on any basis.\n\nWith a collective procurement, they did — and this is not concealed: the user receives a good purchased with the Foundation's dinar funds. The good is provided free of charge and without any consideration, in pursuit of the Foundation's registered objectives. The annulled record is extinguished and does not pass to the Foundation; it is not a unit acquired in order to collect the share, but the record of a contribution the user had already made to the common good. The total value a single user may collect in a calendar year is limited.\n\nWhat remains contested: how the competent authority will qualify that provision. The Foundation gives no tax advice and guarantees no tax treatment; users are responsible for their own tax obligations.",
+    "zzp_naslov": "Consumer Protection Act",
+    "zzp_tekst": "Rules on unfair commercial practice bind a trader — a person acting on the market within their own business activity. The Foundation does not act that way towards users: it does not offer them goods or services for consideration, does not charge for use of the Platform, does not mediate in exchange, and receives no value on account of exchange between users. The amount in a listing is set by the user alone; the Foundation publishes no ratio of POEN to the dinar, recommends none, and applies none in any of its own procedures.\n\nBetween users, consumer protection rules apply just as they would off the Platform. Where goods or a service are offered by a person doing so within a business activity, a user acquiring them for their own needs has rights under those rules and exercises them against that person. Compliance with rules on business registration, on production and trade, on food safety and with tax rules is the responsibility of whoever offers the goods or service.\n\nWhat remains contestable: the Foundation does not establish in what capacity a user is acting and does not ask them to declare it, so the other side cannot tell from the listing. In its form the Platform is a place where goods and services are offered, and we do not hide that. This is our reading, stated openly; the assessment is for the competent authority."
   },
   "kakoFunkcionisePage": {
     "poen_nije_kratko": "POEN is a record of what you gave — an entry in a ledger, not money you hold. There is no way to buy it or sell it for dinars, neither from us nor from anyone else.",
@@ -1904,7 +1906,8 @@
     "dete_odrasli_kratko": "needs a parent's permission",
     "slika_format": "One of the images is not in a supported format. Save an iPhone photo (HEIC) as JPG and add it again.",
     "slike_ukupno_prevelike": "The images are too large to send together. Add fewer images or replace them with smaller ones.",
-    "slike_popunjeno": "You have reached the maximum number of images ({max}). Remove one with × to add another."
+    "slike_popunjeno": "You have reached the maximum number of images ({max}). Remove one with × to add another.",
+    "dete_zabranjeno": "You must not offer what children are not allowed to buy — cigarettes and e-cigarettes, alcohol, energy drinks, medicines, fireworks or sharp objects."
   },
   "pocetna": {
     "dobrodoslice": "Hello, <ime>{pseudonim}</ime>",
@@ -2338,7 +2341,9 @@
     "prijava_razmene_izjasni_naslov": "Your statement is requested",
     "prijava_razmene_izjasni_tekst": "A complaint has been lodged that the exchange for which POEN was re-registered to you was not fulfilled. You have {dana} days to make a statement before the Foundation decides. The statement is entered on your profile.",
     "nabavka_ispravka_naslov": "The ledger has been corrected",
-    "nabavka_ispravka_tekst": "Following your complaint about the share from the “{dobro}” procurement, the annulment has been removed and {poen} POEN has been returned to your record. Reasons: {obrazlozenje}"
+    "nabavka_ispravka_tekst": "Following your complaint about the share from the “{dobro}” procurement, the annulment has been removed and {poen} POEN has been returned to your record. Reasons: {obrazlozenje}",
+    "dete_oglas_naslov": "{pseudonim} has posted a listing",
+    "dete_oglas_tekst": "Listing “{naslov}”. You can review and remove it on your child's profile."
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",
@@ -2759,7 +2764,6 @@
     "vrednost_donacije_mora_biti_pozitivna": "The donation value must be positive.",
     "za_brisanje_naloga_otkucaj_pseudonim_deteta": "To delete the account, type the child's pseudonym.",
     "za_ovaj_zadatak_je_obavezan_plan_izvrsenja_najmanje_10_znakova": "This task requires an execution plan (at least 10 characters).",
-    "za_robu_i_usluge_obavezan_je_maloprodajni_cenovnik": "A retail price list is required for goods and services.",
     "zadatak_nije_aktivan": "The task is not active.",
     "zahtev_nije_aktivan": "The request is not active.",
     "zahtev_nije_na_cekanju": "The request is not pending.",
@@ -3106,7 +3110,7 @@
     "k_mesto": "Place of collection",
     "k_period": "Collection period",
     "k_obrazlozenje": "The number of POEN per share was established by the procurement decision: {obrazlozenje}",
-    "paritet_napomena": "The POEN per unit equals the retail reference price, one to one. POEN is not exchanged for goods and does not reach the supplier — the goods were bought with dinars, while POEN is annulled as a record of participation that has been used.",
+    "paritet_napomena": "The number of POEN per share is set by the decision that opens the procurement. It is not the price of the goods and is not derived from it. POEN is not exchanged for goods and does not reach the supplier — the goods were bought with the Foundation's dinar funds, while POEN is annulled as a record of participation that has been used.",
     "ponude": "Collected offers",
     "ponude_opis": "All are published, including those not selected.",
     "preuzeli": "Collected by",
