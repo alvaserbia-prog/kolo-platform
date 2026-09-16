@@ -233,6 +233,33 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-16 (trideset peti put):** na **4.6.4** idu **DVA akta** —
+Pravilnik o dokazu stvarnosti (sa 4.4.1) i Pravilnik o KOLO sistemu (sa 4.6.2).
+Ostalih petnaest ostaje gde jeste. Povod nije rizik iz registra nego **odluka
+vlasnika**: POEN po potvrdi (1.000 verifikatoru i 1.000 verifikovanom) više ne nastaje
+u trenutku potvrde nego kad potvrđeni korisnik ostvari **prvi potvrđen doprinos**.
+Sadržinski, vidi sekciju „POEN po potvrdi čeka prvi doprinos" ispod.
+
+🟢 **Whitepaper NIJE bumpovan — i to je provereno, ne pretpostavljeno.** On o kanalu
+verifikacije govori uopšteno („Protokol evidentira doprinos kad korisnik doprinese…
+verifikacijom drugih korisnika") i nigde ne tvrdi da upis nastupa odmah. To je provera
+koja je u ovom projektu **tri puta bila propust** (R-08, R-09, R-02), pa se od tada radi
+uvek — ovde je ispala negativna.
+
+🔴 **Zašto je glavni Pravilnik morao uz dokaz stvarnosti.** Dva razloga, oba tvrda:
+čl. 15 t. 2 imenuje kanal verifikacije i mora da kaže kada po njemu nastupa upis, a
+čl. 40a je morao da proširi odobrenje na **svakog** korisnika — inače bi potvrda i
+dalje evidentirala oglas koji čovek iz UO nikad nije pogledao, a nastao bi i krug
+(potvrda otključava čl. 40a, čl. 40a otključava POEN po potvrdi).
+
+🟡 **Zaostala unakrsna upućivanja:** nijedno novo od ovog bumpa. Oba akta se ovim
+potezom ponovo objavljuju, pa su upućivanja u njima tačna; akti koji na njih upućuju po
+šifri (`ucesce_dece` → Pravilnik v4.6.0, DPIA → v4.6.2) nisu dirani, po pravilu.
+
+🟢 **DPIA i Registar radnji obrade nisu dirani** — nema novog podatka o ličnosti ni nove
+radnje obrade. Stanje čekanja je zapis o odnosu koji već postoji (`VerifikacionaVeza`),
+a ne nov podatak o čoveku.
+
 **AŽURIRANO 2026-09-14 (trideset četvrti put):** na **4.6.3** idu **ČETIRI akta** —
 Politika privatnosti (sa 4.6.1), Uslovi korišćenja (sa 4.6.1), DPIA (sa 4.6.1) i
 Registar radnji obrade (sa 4.6.1). Ostalih trinaest ostaje gde jeste. Povod je
@@ -1717,6 +1744,168 @@ zaključane u `pravni-dokumenti.test.ts` na sr/en/ru.
 🟡 **Usput ispravljen zatečen pad testa:** `donacija-uplatilac-izvor.test.ts` je
 tražio namespace `admin` u prevodima, a on od 13.09.2026. živi **isključivo u sr**
 (`request.ts` ga dodaje pri učitavanju). Test je od te odluke bio crven.
+
+### POEN po potvrdi čeka prvi doprinos (2026-09-16)
+
+Odluka vlasnika. Do seta 4.6.4 je Protokol po evidentiranju verifikacionog zapisa
+upisivao **1.000 verifikatoru i 1.000 verifikovanom odmah**, automatski, bez ijedne
+ljudske odluke i bez ijednog traga da je potvrđeni išta doprineo. Sada se POEN
+**beleži**, a upisuje kad potvrđeni korisnik ostvari prvi **potvrđen** doprinos.
+
+🔴 **SAM ČIN POTVRDE SE NE MENJA I NE SME DA SE VEŽE ZA USLOV.** Indeks raste za
+10 p.p. odmah, nalog je redovan član istog časa, pun pristup od tog trenutka. Čeka
+**samo zapis POEN-a**. Razlog nije blagost: pristup ide iz **poverenja** (ko je stao
+iza tebe), a POEN iz **doprinosa** (šta si dao), i ta dva se ne spajaju. Spojena, čovek
+koji tek uđe ne bi mogao ni da se javi nekome kako bi dogovorio razmenu kojom bi uslov
+ispunio, socijalni programi bi stali (traže indeks ≥ 10%), a dečji nalozi bi ostali u
+stanju `POVEZANO`, jer ono traži roditelja koji je **redovan član**.
+
+**Četiri uslova, i sva četiri imaju isto svojstvo:**
+
+| | Uslov | Ko potvrđuje | Meri se |
+|---|---|---|---|
+| **A** | prvi **oglas** (ponuda, sadržinski minimum) | Fondacija — odobrenje | `EMISIJA_SADRZAJ` |
+| **B** | **javna donacija** | Fondacija — iz izvoda | `EMISIJA_DONACIJA` |
+| **C** | **pokroviteljstvo** | Fondacija — potvrda prijave | `EMISIJA_POKROVITELJ` |
+| **D** | **operativni doprinos** | nosilac ZRNA / UO | `EMISIJA_OPERATIVNI` |
+
+> POEN po potvrdi upisuje se kad korisnik ostvari **doprinos koji je neko potvrdio**.
+
+Nijedan se ne može sam sebi izdati, i to je cela definicija — ne spisak.
+
+🔴 **Meri se POSTOJANJE EMISIJE, ne postojanje prijave ili zapisa u pratećoj tabeli.**
+Time se **anonimna donacija isključuje sama od sebe**: za nju se POEN ne evidentira
+(donacije čl. 5a), pa `EMISIJA_DONACIJA` transakcija ni ne nastane. Nema posebne
+provere polja `javno` koja bi mogla da se raziđe sa tim pravilom.
+🟡 Anonimna donacija se **namerno** ne računa i iz drugog razloga: POEN za potvrdu je
+javan zapis u knjizi, pa bi se pojavio a na Pijaci ne bi osvanuo nijedan nov oglas —
+posmatrač zaključuje da je čovek donirao. To je tačno ono što anonimna donacija krije.
+
+🔴 **ŠTA NAMERNO NIJE USLOV, i zašto** (odluka vlasnika, sužavano u dva koraka):
+- **prepis POEN-a** — dogovaraju ga dve strane privatno, bez ikoga trećeg; dva naloga
+  mogu da ga proizvedu sama, pa ne dokazuje ništa;
+- **osnivački doprinos** — automatski akt vezan za opticaj, ne za radnju;
+- **socijalni programi** — nisu doprinos nego **podrška**: korisnik prima, ne daje.
+
+🔴 **USLOV NIJE „evidentiran doprinos po čl. 40a" u ranijem obliku.** Čl. 40a je do
+ovog seta imao i okidače `VERIFIKACIJA` i `PRIMLJEN_POEN`, pa bi potvrda otključavala
+čl. 40a, a čl. 40a potvrdu — brana bi bila prazna. Zato su **oba okidača uklonjena** i
+ostalo je samo `ODOBRENJE`. Enum vrednosti ostaju u bazi (nose ih zatečeni zapisi).
+
+🔴 **Svaki prvi oglas od ovog seta ide na odobrenje — i potvrđenog člana.** Ranije se
+verifikovanom doprinos evidentirao odmah pri objavi. Razlog za proširenje: odobren oglas
+sada otključava i POEN po potvrdi, pa jedan klik upisuje **najmanje 3.000 POEN-a** (a
+posle 100.000 opticaja, kad čovek može primiti do deset potvrda, i do 7.000). Takav upis
+ne sme da nastane bez ijedne ljudske odluke, a oglas koji formalno ispunjava sadržinski
+minimum ne mora biti stvarna ponuda. Zato dugme u tabu **Prvi oglasi** mora da pokaže
+**ukupan iznos koji će se upisati**.
+🔴 **Odobrenje NIJE diskreciona odluka da se nekome dâ POEN.** Fondacija **utvrđuje da
+je uslov ispunjen** — proverava minimum i stvarnu ponudu (čl. 40a). Razlika nije stilska:
+odbrana iz čl. 13 i operativnog čl. 27 počiva na tome da POEN nije naknada i da niko o
+njemu ne odlučuje. **Ne pisati nigde da Fondacija POEN „dodeljuje".**
+
+🔴 **NADZORNIKOVIH 500 SE NE DIRA.** Njih emituje `nadzor-service` pri evidentiranju
+ishoda (čl. 7 st. 2), nezavisno od ovog kanala — dakle postoje i kad POEN po potvrdi još
+čeka. Prva verzija ove izmene ih je stavila pod isti uslov i **to je bila greška**:
+poništenje bi ostavilo u opticaju POEN koji je Protokol stvarno emitovao. Zaključano
+`potvrda-uslov-izvor.test.ts`.
+
+🔴 **PUNOLETSTVO JE IZUZETO** (`bezUslovaZaPoen`). Detetu se na 18. rođendan istog dana
+poništava POEN iz prijateljstava, često u minus; da i roditeljske potvrde iz čl. 19 st. 3
+čekaju prvi oglas, rođendan bi bio čist minus bez ijedne protivteže. Ne otvarati taj put
+ničemu drugom.
+
+🔴 **Kaskade moraju da znaju za `ZABELEZEN`.** Veza u tom stanju nije ništa emitovala, pa
+se pri obaranju **samo gasi** — bez protivzapisa i bez nadoknade po čl. 20b. Pokriveno na
+pet mesta: `lazna-verifikacija.ts`, `verifikacije-naloga.ts` (a time i reset naloga i
+prevod u maloletni), `DELETE /api/profil` i `deca.ts`. U `deca.ts` je uz to ispravljeno
+**obaveštenje**: spisak pogođenih nosi iznose koji se javljaju ljudima, pa kad oduzimanja
+nema, ne sme da stigne ni poruka da ga ima.
+
+**Interfejs.** POEN ekran dobija **zaseban red „Zabeležene potvrde"**, odvojen od
+„Zabeleženog doprinosa" iako oba čekaju — čekaju različite stvari: doprinos po čl. 40a
+čeka **tvoj** oglas, a potvrda koju si DAO čeka **tuđi** prvi doprinos. Spojeni u jedan
+broj, rekli bi čoveku da o svemu tome odlučuje sam. 🔴 Naziv je „zabeležena potvrda",
+nikad „POEN na čekanju" (čl. 12) — zaključano testom. Stranica Potvrde nosi spisak sa
+dugmadima „Objavi ponudu" i „Doniraj".
+
+**Admin tab „Potvrde"** — dva odvojena odeljka:
+- **VENTIL**: ručni upis po pojedinačnoj potvrdi, uz **obavezan razlog** u revizijskom
+  dnevniku. Postoji zbog ljudi koje četiri uslova ne pokrivaju — onaj ko samo kupuje,
+  stariji član na programu podrške. Bez njega bi njima i njihovim potvrđivačima POEN
+  čekao zauvek.
+- **USKLAĐIVANJE ZATEČENIH**: jednokratna prelazna radnja, **Izračunaj → Sprovedi**,
+  gde se broj POEN-a iz pregleda **otkucava rukom** (ista brana kao otkucan pseudonim pri
+  resetovanju naloga). 🔴 Pregled i sprovođenje idu kroz **istu funkciju**
+  (`suviHod: true/false`) — dve odvojene računice bi se razišle; sprovođenje ne veruje
+  otkucanom broju nego računa iznova i staje ako se stanje promenilo.
+- 🔴 **Tab NEMA broj uz naziv i ne ulazi u sidebar badge.** Zabeležena potvrda ne traži
+  radnju administratora nego se sama razrešava; broj koji nikad ne padne na nulu uči
+  ljude da ignorišu i one badge-ove koji nešto znače.
+
+🔴 **Usklađivanje povlači NAJVIŠE DO NULE, nikad u minus** (odluka vlasnika, varijanta 2).
+Ovo nije sankcija nego usklađivanje — niko nije prekršio pravilo koje je tada važilo, pa
+se ne primenjuje ono što važi kod otpisa prijateljstva, poništenog prepisa i prevoda u
+maloletni, gde minus postoji baš zato što je neko nešto skrivio. 🟡 Posledica: ko je POEN
+već potrošio prolazi bolje od onoga ko ga je sačuvao — prihvaćeno.
+🔴 **Uslov se pri povlačenju meri BLAGO:** računa se svaki evidentiran doprinos po
+čl. 40a, bez obzira kojim je okidačem nastao. Zatečeni oglasi potvrđenih članova nikad
+nisu prolazili kroz odobrenje jer se ono tada nije tražilo — traženje odobrenja unazad
+bilo bi kažnjavanje po pravilu koje nije postojalo.
+Protivzapis ide **novim tipom `USKLADJIVANJE_POTVRDE`**, da se u istoriji vidi da to nije
+ni poništenje lažne potvrde ni otpis. Radnja je **dugme, ne migracija** — emisija mora
+kroz zapis transakcije, a pad opticaja je trenutak koji bira čovek (isti razlog kao kod
+`evidentirajZateceneVerifikovane`). Pregled izričito javlja kad pad opticaja prelazi
+**osnivački prag** unazad: već upaljeni koraci ostaju, ali sledeći čeka da opticaj ponovo
+naraste.
+
+🟡 **Okidači + noćni prolaz, oba namerno.** Okidač je jedna linija u tuđem toku i lako je
+promaši nova putanja ka istom kanalu — a tada bi POEN čekao zauvek, bez ijedne greške i
+bez ikoga ko bi primetio. Uz to okidač ne hvata pad emisije. Isti razlog iz kog je
+`glasanje-zatvaranje` morao da dobije cron pored lenjog poziva iz tri ekrana.
+Cron: `/api/cron/potvrde-uslov`, dnevno u **05:30**.
+
+**Kod:** `src/lib/potvrda-uslov.ts` (ČISTE funkcije), `src/lib/protokol/potvrda-poen.ts`
+(servisne; 🔴 **zaseban modul zbog ciklusa uvoza** — `verifikacija-service` uvozi
+`doprinos-sadrzaju`, a `doprinos-sadrzaju` mora da zove otključavanje),
+`src/lib/protokol/potvrde-uskladjivanje.ts`, rute `/api/admin/potvrde-na-cekanju`,
+`/api/admin/potvrde-uskladjivanje`, cron `/api/cron/potvrde-uslov`, admin
+`PotvrdeTab.tsx`. Migracije `20260916120000_potvrda_poen_enumi` →
+`20260916120100_potvrda_poen_uslov` (🔴 **backfill zatečenih na `EVIDENTIRAN` je
+obavezan** — bez njega bi okidači emitovali POEN drugi put svakom zatečenom članu) →
+`20260916130000_uskladjivanje_potvrde_enum` → `20260916130100_pristanak_4_6_4`.
+**Brane:** `potvrda-uslov.test.ts` (pravila) i `potvrda-uslov-izvor.test.ts` (12 provera,
+gleda IZVOR) + odredbe u `pravni-dokumenti.test.ts`, uz `UKINUTO` obrazac za staru
+formulaciju „Protokol automatski upisuje" na svih pet jezika.
+
+🔴 **Uticaj na registar rizika** (ocene se NE menjaju — R-08 i R-16 nisu obrađeni, pa se
+preračunavaju kad dođu na red):
+- 🟢 **R-08** (strukturna hiperinflacija POEN-a) — najveći dobitak. Kanal potvrde je bio
+  jedini koji emituje 2.000–2.500 bez ijedne provere i bez ijedne radnje, a dnevni limit
+  od 10% računa se iz opticaja koji te emisije same podižu.
+- 🟢 **R-16** (osnivački kanal kao lančana šema) — POEN više ne teče iz **broja dovedenih
+  glava** nego traži potvrđen doprinos dovedenog.
+- 🟢 **R-22** („jedna osoba, jedan korisnik") — lanac lažnih naloga prestaje da se
+  isplati: svaki bi morao da dobije odobren oglas, dakle da prođe kroz čoveka.
+- 🔴 **R-02** (POEN kao prihod) — može se **pogoršati ako se loše napiše**. Vidi pravilo o
+  odobrenju iznad: Fondacija utvrđuje da je uslov ispunjen, ne odlučuje o davanju.
+- 🔴 **R-07** (obmanjujuća praksa) — svaki ekran koji bi i dalje obećavao „za potvrdu
+  dobijaš 1.000" postaje neistinit. Pročešljano u istom potezu (landing, kako-funkcioniše,
+  onboarding, POEN ekran, Potvrde, četiri FAQ odgovora).
+
+🔴 **FAQ 53 („je li ovo provizija za regrutovanje") je prepisan i to je najosetljiviji
+tekst u celom potezu.** Izmena zaoštrava upravo to pitanje, pa odgovor mora da ga primi
+direktno: provizija se plaća za dovedenu glavu i raste sa onim što dovedeni potroši, uz
+nivoe kroz koje novac teče naviše; ovde je iznos **fiksan, isti za obe strane, jednokratan
+po osobi**, prag je **jedan te isti za svakoga**, i onaj ko je potvrdio tvog potvrđivača
+**ne dobija ništa**. Uslov ne postoji da bi se nagradilo dovođenje ljudi nego da POEN ne
+bi nastajao bez traga učešća. **Ne skraćivati taj odgovor.**
+
+🟡 **Zatečeno dugme „Evidentiraj zatečene" (tab Osnivači) nije menjano**, ali treba znati
+šta sada radi: ono i dalje evidentira zabeležene doprinose potvrđenih članova bez pregleda
+pojedinačnog oglasa, a od ovog seta time otključava i POEN po potvrdi. To je i dalje
+svesna radnja superadmina nad zatečenim redom čekanja; ako počne da smeta, mesto je da se
+ograniči na naloge koji već imaju odobren oglas — ne da se ukloni.
 
 ### Dokaz pristanka: kvačica koja nije stizala do servera (R-06, 2026-09-14)
 
