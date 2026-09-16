@@ -13,7 +13,7 @@
  * na dan registracije i prevođenje naloga u maloletni.
  */
 import { prisma } from "@/lib/prisma";
-import { TipKorisnika, TransactionType } from "@/generated/prisma/client";
+import { PotvrdaPoenStatus, TipKorisnika, TransactionType } from "@/generated/prisma/client";
 import {
   POEN_NADZORNIK,
   POEN_VERIFIKATOR,
@@ -90,6 +90,9 @@ export async function oboriVerifikacijeNaloga(
        * minus, uz protivzapis u istoriji — negativan zapis menja šta čovek sme sa
        * POEN-om i ne sme da se pojavi bez ijednog traga o tome odakle je došao.
        */
+      // 🔴 Zove se ISKLJUČIVO za veze u stanju EVIDENTIRAN. Od seta 4.6.4 POEN po
+      // potvrdi čeka trag stvarnog učešća (dokaz stvarnosti čl. 7), pa veza u stanju
+      // ZABELEZEN nema šta da vrati — Protokol po njoj nije emitovao ništa.
       async function vratiPoenProtokolu(targetUserId: string, iznos: number) {
         if (iznos <= 0) return;
         const w = await tx.wallet.findUnique({ where: { userId: targetUserId } });
@@ -121,9 +124,12 @@ export async function oboriVerifikacijeNaloga(
 
       // 1) Veze u kojima je ovaj nalog VERIFIKATOR — pada verifikovani.
       for (const v of vezeKaoVerifikator) {
-        await vratiPoenProtokolu(v.verifikovaniId, POEN_VERIFIKOVANI);
+        if (v.poenStatus === PotvrdaPoenStatus.EVIDENTIRAN) {
+          await vratiPoenProtokolu(v.verifikovaniId, POEN_VERIFIKOVANI);
+        }
+        // 🔴 Nadzornikovih 500 NISU pod tim uslovom: emituje ih `nadzor-service` pri
+        // evidentiranju ishoda (čl. 7 st. 2), nezavisno od upisa POEN-a po potvrdi.
         if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
-          // Nadzornikovih 500 pada samo ako je ishod bio UREDNO (čl. 20a).
           await vratiPoenProtokolu(v.nadzornikId, POEN_NADZORNIK);
         }
 
@@ -159,7 +165,10 @@ export async function oboriVerifikacijeNaloga(
 
       // 2) Veze u kojima je ovaj nalog VERIFIKOVANI — pada verifikator.
       for (const v of vezeKaoVerifikovani) {
-        await vratiPoenProtokolu(v.verifikatorId, POEN_VERIFIKATOR);
+        if (v.poenStatus === PotvrdaPoenStatus.EVIDENTIRAN) {
+          await vratiPoenProtokolu(v.verifikatorId, POEN_VERIFIKATOR);
+        }
+        // Nadzornikovih 500 — vidi napomenu u petlji iznad.
         if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
           await vratiPoenProtokolu(v.nadzornikId, POEN_NADZORNIK);
         }

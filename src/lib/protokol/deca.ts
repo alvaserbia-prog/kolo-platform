@@ -17,7 +17,7 @@
  * mu je jedini put da prvo ubedi roditelja, ono odustaje.
  */
 import { prisma } from "@/lib/prisma";
-import { TipKorisnika, TransactionType, UserStatus, WalletType } from "@/generated/prisma/client";
+import { PotvrdaPoenStatus, TipKorisnika, TransactionType, UserStatus, WalletType } from "@/generated/prisma/client";
 import type { Prisma, PrismaClient, RoditeljstvoPotvrdaStatus } from "@/generated/prisma/client";
 import { poljaPseudonima } from "@/lib/pseudonim";
 import { beogradskiDan } from "./obracunski-dan";
@@ -955,18 +955,29 @@ async function pogodjeniVezom(vezaId: string) {
       nadzornikId: true,
       podlezeNadzoru: true,
       nadzorIshod: true,
+      poenStatus: true,
       verifikator: { select: { pseudonim: true } },
       verifikovani: { select: { pseudonim: true } },
     },
   });
   if (!v) return null;
+  // 🔴 POEN po potvrdi se od seta 4.6.4 upisuje tek kad potvrđeni ostvari doprinos
+  // (dokaz stvarnosti čl. 7). Ako je veza još u stanju ZABELEZEN, poništenje nikome
+  // ništa ne oduzima — pa obaveštenje ne sme da tvrdi suprotno. Ovaj spisak nosi
+  // iznose koji se javljaju ljudima; prazan spisak znači da javljanja o oduzimanju
+  // nema, jer oduzimanja nema.
+  const upisan = v.poenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
   const stavke: { userId: string; iznos: number; uloga: "potvrdjivac" | "roditelj" | "nadzornik" }[] =
-    [
-      { userId: v.verifikatorId, iznos: POEN_VERIFIKATOR, uloga: "potvrdjivac" },
-      { userId: v.verifikovaniId, iznos: POEN_VERIFIKOVANI, uloga: "roditelj" },
-    ];
+    upisan
+      ? [
+          { userId: v.verifikatorId, iznos: POEN_VERIFIKATOR, uloga: "potvrdjivac" },
+          { userId: v.verifikovaniId, iznos: POEN_VERIFIKOVANI, uloga: "roditelj" },
+        ]
+      : [];
   // Nadzornikovih 500 pada samo uz ishod „uredno" (čl. 20a st. 2) — ko je sumnju
   // prijavio i bio u pravu ne sme da prođe gore od onoga ko se nije javio.
+  // Nadzornikovih 500 emituje `nadzor-service` pri evidentiranju ishoda (čl. 7 st. 2),
+  // nezavisno od upisa POEN-a po potvrdi — zato NISU pod uslovom `upisan`.
   if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
     stavke.push({ userId: v.nadzornikId, iznos: POEN_NADZORNIK, uloga: "nadzornik" });
   }

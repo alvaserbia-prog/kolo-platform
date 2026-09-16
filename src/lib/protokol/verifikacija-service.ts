@@ -378,7 +378,8 @@ function mapTransakcijaGreska(e: unknown): never {
  * korisnika, pa ime „emituj" više ne bi bilo tačno.
  */
 async function dovrsiVerifikaciju(
-  fazaJedan: FazaJedan
+  fazaJedan: FazaJedan,
+  opcije?: { bezUslovaZaPoen?: boolean }
 ): Promise<IzvrsiVerifikacijuRezultat> {
   const {
     verifikacijaId,
@@ -403,7 +404,9 @@ async function dovrsiVerifikaciju(
   // Ne baca: potvrda je u bazi i slot je iskorišćen, pa upis POEN-a ne sme da je obori.
   // Raniji kod je ovde bacao `VerifikacijaGreska` kad emisija pukne; sada pad emisije
   // ostavlja potvrdu u stanju ZABELEZEN i sledeći okidač je pokupi.
-  const upis = await probajUpisatiPotvrdu(verifikacijaId);
+  const upis = await probajUpisatiPotvrdu(verifikacijaId, {
+    bezUslova: opcije?.bezUslovaZaPoen === true,
+  });
   if (!upis.upisano) {
     // Obe strane moraju da saznaju da POEN čeka i šta ga otključava — inače potvrda
     // izgleda kao kvar: indeks skoči, POEN-a nema, i niko ne kaže zašto.
@@ -554,11 +557,18 @@ export async function izvrsiVerifikaciju(
  * Sve provere jezgra ostaju na snazi — zabranjena zona (pa i ona koja spreči drugog
  * roditelja kad su roditelji u istom lancu), slot, prelazno ograničenje iz čl. 22.
  * Pozivalac hvata `VerifikacijaGreska` i preskače tu potvrdu.
+ *
+ * 🔴 `bezUslovaZaPoen` — POEN po potvrdi se upisuje ODMAH, bez traga stvarnog
+ * učešća iz dokaza stvarnosti čl. 7. Koristi ga ISKLJUČIVO prelazak u punoletstvo:
+ * istog dana se detetu poništava POEN evidentiran po prijateljstvima, često u
+ * minus, pa bi rođendan bez ovoga bio čist minus bez ijedne protivteže. Ne
+ * otvarati ga ničemu drugom.
  */
 export async function izvrsiVerifikacijuBezTokena(
   verifikatorId: string,
   verifikovaniId: string,
-  oznaka?: string
+  oznaka?: string,
+  opcije?: { bezUslovaZaPoen?: boolean }
 ): Promise<IzvrsiVerifikacijuRezultat> {
   let fazaJedan: FazaJedan;
   try {
@@ -569,7 +579,7 @@ export async function izvrsiVerifikacijuBezTokena(
   } catch (e) {
     mapTransakcijaGreska(e);
   }
-  return dovrsiVerifikaciju(fazaJedan);
+  return dovrsiVerifikaciju(fazaJedan, opcije);
 }
 
 /**

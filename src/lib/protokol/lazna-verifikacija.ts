@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { TransactionType, UserStatus } from "@/generated/prisma/client";
+import { PotvrdaPoenStatus, TransactionType, UserStatus } from "@/generated/prisma/client";
 import {
   POEN_NADZORNIK,
   POEN_VERIFIKATOR,
@@ -140,16 +140,38 @@ async function ponistiVezu(
     `Poništavanje lažne verifikacije ${v.verifikator.pseudonim} → ${v.verifikovani.pseudonim} (čl. 20a)`;
   const bezNadoknade = opcije?.bezNadoknade === true;
 
+  // 🔴 POEN PO OVOJ POTVRDI MOŽDA NIKAD NIJE NI UPISAN (dokaz stvarnosti čl. 7, set
+  // 4.6.4): upis čeka trag stvarnog učešća potvrđenog korisnika. Dok je veza u stanju
+  // ZABELEZEN, nema šta da se poništi — protivzapis bi bio LAŽAN: oduzeo bi POEN koji
+  // Protokol nikad nije emitovao, gurnuo bi ljude u minus bez ijednog upisa iza toga
+  // i pokvario zero-sum. Iz istog razloga tu nema ni nadoknade po čl. 20b: ona pokriva
+  // nepokriven deo PONIŠTENOG upisa, a poništenja nema.
+  //
+  // 🔴 Nadzornikovih 500 su IZUZETAK i vraćaju se uvek: njih emituje `nadzor-service`
+  // pri evidentiranju ishoda (čl. 7 st. 2), nezavisno od ovog kanala.
+  //
+  // Veza se i tada briše i indeks se preračunava — to je posledica pada potvrde, ne
+  // POEN-a. Potvrda zabeležena a neupisana tako naprosto nestaje.
+  const poenUpisan = v.poenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
+
   // 1. Verifikovani — najviše do nule; nepokriveni deo tereti verifikatora (čl. 20c st. 2).
   //    Bez nadoknade: pun iznos, i njegov zapis sme u minus.
-  const podelaVerifikovani = bezNadoknade
-    ? { saKorisnika: POEN_VERIFIKOVANI, naVerifikatora: 0 }
-    : podelaTereta(await stanje(tx, v.verifikovaniId), POEN_VERIFIKOVANI);
-  await uProtokol(tx, v.verifikovaniId, podelaVerifikovani.saKorisnika, opis);
+  let podelaVerifikovani = { saKorisnika: 0, naVerifikatora: 0 };
+  if (poenUpisan) {
+    podelaVerifikovani = bezNadoknade
+      ? { saKorisnika: POEN_VERIFIKOVANI, naVerifikatora: 0 }
+      : podelaTereta(await stanje(tx, v.verifikovaniId), POEN_VERIFIKOVANI);
+    await uProtokol(tx, v.verifikovaniId, podelaVerifikovani.saKorisnika, opis);
+  }
 
   // 2. Nadzornik — samo ako je ishod bio „uredno" (čl. 20a st. 2). Ko je evidentirao
   //    „za proveru" ili „sporno" zadržava svojih 500. Pravilo važi u oba režima:
   //    ko je sumnju prijavio i bio u pravu ne sme da prođe gore od onoga ko je ćutao.
+  //
+  // 🔴 NIJE pod uslovom `poenUpisan`, i to je bitno: nadzornikovih 500 ne emituje ovaj
+  // kanal nego `nadzor-service` u trenutku evidentiranja ishoda (čl. 7 st. 2). Ona
+  // dakle postoje i kad POEN po samoj potvrdi još čeka trag učešća, pa bi izostanak
+  // povraćaja ostavio u opticaju POEN koji je Protokol stvarno emitovao.
   let podelaNadzornik = { saKorisnika: 0, naVerifikatora: 0 };
   if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
     podelaNadzornik = bezNadoknade
@@ -159,7 +181,9 @@ async function ponistiVezu(
   }
 
   // 3. Verifikator — pun iznos, bez ograničenja.
-  await uProtokol(tx, v.verifikatorId, POEN_VERIFIKATOR, opis);
+  if (poenUpisan) {
+    await uProtokol(tx, v.verifikatorId, POEN_VERIFIKATOR, opis);
+  }
 
   // 4. Nadoknada — nepokriveni delovi prelaze na verifikatora (čl. 20b st. 2).
   //    U režimu bez nadoknade oba sabirka su nula, pa se ovde ništa ne dešava.
