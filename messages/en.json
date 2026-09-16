@@ -371,7 +371,11 @@
     "rezervisano_nabavka": "Reserved for procurement",
     "rezervisano_nabavka_opis": "Reserved until the goods are collected. Annulled upon collection, not before; if you do not collect, it returns to your record.",
     "send_ceka_naslov": "Waiting for a parent's approval",
-    "send_ceka_opis": "{iznos} POEN to member {pseudonim} is waiting for a parent to approve. Until then nothing is deducted from your record."
+    "send_ceka_opis": "{iznos} POEN to member {pseudonim} is waiting for a parent to approve. Until then nothing is deducted from your record.",
+    "zabelezene_potvrde_naslov": "Recorded confirmations",
+    "zabelezene_potvrde_opis": "Recorded once the person the confirmation concerns makes their first contribution: an offer listing approved by the Foundation, a donation, a patronage, or completed operational work. Until then it is not a POEN record and is not part of your balance.",
+    "zabelezene_potvrde_moje": "Your {iznos} POEN — awaiting your first contribution",
+    "zabelezene_potvrde_tudje": "{iznos} POEN for confirmations you gave — awaiting the first contribution of those you confirmed"
   },
   "verifikacija": {
     "naslov": "Proof of reality",
@@ -443,7 +447,13 @@
     "pijaca_neverifikovan_opis": "If you do not know anyone in KOLO, post your ad so that members can contact you, get to know you and confirm that you are a real person. The ad appears on the Marketplace right away, and 1,000 POEN is recorded to you once the ad is approved.",
     "pijaca_neverifikovan_dugme": "Post your first ads",
     "tip_bez_pristupa": "No access",
-    "tip_dete": "Child"
+    "tip_dete": "Child",
+    "ceka_naslov": "Recorded confirmations",
+    "ceka_opis": "The confirmation stands and your index is recorded. POEN is recorded once the confirmed member makes their first contribution: an offer listing approved by the Foundation, a donation, a patronage, or completed operational work.",
+    "ceka_moja": "{iznos} POEN is waiting for you — post your first offer or donate.",
+    "ceka_dao": "You confirmed {pseudonim} — {iznos} POEN is recorded for you once they make their first contribution.",
+    "ceka_dugme_oglas": "Post an offer",
+    "ceka_dugme_donacija": "Donate"
   },
   "graf": {
     "naslov": "Confirmation network",
@@ -2342,7 +2352,11 @@
     "prijava_razmene_izjasni_naslov": "Your statement is requested",
     "prijava_razmene_izjasni_tekst": "A complaint has been lodged that the exchange for which POEN was re-registered to you was not fulfilled. You have {dana} days to make a statement before the Foundation decides. The statement is entered on your profile.",
     "nabavka_ispravka_naslov": "The ledger has been corrected",
-    "nabavka_ispravka_tekst": "Following your complaint about the share from the “{dobro}” procurement, the annulment has been removed and {poen} POEN has been returned to your record. Reasons: {obrazlozenje}"
+    "nabavka_ispravka_tekst": "Following your complaint about the share from the “{dobro}” procurement, the annulment has been removed and {poen} POEN has been returned to your record. Reasons: {obrazlozenje}",
+    "potvrda_poen_potvrdjivac": "Member “{pseudonim}”, whose reality you confirmed, has made their first contribution, so {iznos} POEN has been recorded for you under that confirmation.",
+    "potvrda_poen_potvrdjeni": "Under the confirmation given to you by member “{pseudonim}”, {iznos} POEN has been recorded for you.",
+    "potvrda_poen_ceka_potvrdjivac": "You confirmed the reality of member “{pseudonim}”. {iznos} POEN will be recorded for you once they make their first contribution — post an offer approved by the Foundation, donate, become a patron, or complete operational work.",
+    "potvrda_poen_ceka_potvrdjeni": "Member “{pseudonim}” has confirmed your reality. {iznos} POEN will be recorded for you once you make your first contribution — post an offer approved by the Foundation, donate, become a patron, or complete operational work."
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",

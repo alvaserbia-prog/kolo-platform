@@ -364,7 +364,11 @@
     "rezervisano_nabavka": "Beszerzésre foglalva",
     "rezervisano_nabavka_opis": "Az áru átvételéig foglalva. Az átvételkor kerül érvénytelenítésre, nem korábban; ha nem veszed át, visszakerül a bejegyzésedbe.",
     "send_ceka_naslov": "Az átírás a szülő jóváhagyására vár",
-    "send_ceka_opis": "{iznos} POEN {pseudonim} tagnak a szülő jóváhagyására vár. Addig a nyilvántartásodból semmi nem kerül levonásra."
+    "send_ceka_opis": "{iznos} POEN {pseudonim} tagnak a szülő jóváhagyására vár. Addig a nyilvántartásodból semmi nem kerül levonásra.",
+    "zabelezene_potvrde_naslov": "Feljegyzett megerősítések",
+    "zabelezene_potvrde_opis": "Akkor kerül bejegyzésre, amikor az, akire a megerősítés vonatkozik, megteszi az első hozzájárulását: az Alapítvány által jóváhagyott ajánlati hirdetés, adomány, pártfogás vagy teljesített operatív hozzájárulás. Addig ez nem POEN-bejegyzés, és nem része az egyenlegednek.",
+    "zabelezene_potvrde_moje": "A te {iznos} POEN-ed — az első hozzájárulásodra vár",
+    "zabelezene_potvrde_tudje": "{iznos} POEN az általad adott megerősítésekért — azok első hozzájárulására vár, akiket megerősítettél"
   },
   "verifikacija": {
     "naslov": "Személyazonosság-ellenőrzés",
@@ -436,7 +440,13 @@
     "pijaca_neverifikovan_opis": "Ha senkit sem ismersz a KOLO-ban, tedd közzé a hirdetésedet, hogy a tagok felvegyék veled a kapcsolatot, megismerjenek és megerősítsék, hogy valódi ember vagy. A hirdetés azonnal megjelenik a Piacon, az 1.000 POEN pedig a hirdetés jóváhagyása után kerül bejegyzésre.",
     "pijaca_neverifikovan_dugme": "Tedd közzé az első hirdetéseidet",
     "tip_bez_pristupa": "Nincs hozzáférés",
-    "tip_dete": "Gyermek"
+    "tip_dete": "Gyermek",
+    "ceka_naslov": "Feljegyzett megerősítések",
+    "ceka_opis": "A megerősítés érvényes, és az index be van jegyezve. A POEN akkor kerül bejegyzésre, amikor a megerősített tag megteszi az első hozzájárulását: az Alapítvány által jóváhagyott ajánlati hirdetés, adomány, pártfogás vagy teljesített operatív hozzájárulás.",
+    "ceka_moja": "{iznos} POEN vár rád — tedd közzé az első ajánlatodat vagy adományozz.",
+    "ceka_dao": "Megerősítetted őt: {pseudonim} — {iznos} POEN akkor kerül bejegyzésre neked, amikor ő megteszi az első hozzájárulását.",
+    "ceka_dugme_oglas": "Ajánlat közzététele",
+    "ceka_dugme_donacija": "Adományozás"
   },
   "graf": {
     "naslov": "Megerősítési hálózat",
@@ -2335,7 +2345,11 @@
     "prijava_razmene_izjasni_naslov": "A nyilatkozatodat kérjük",
     "prijava_razmene_izjasni_tekst": "Kifogást nyújtottak be, hogy a csere, amely miatt POEN-t írtak át neked, nem teljesült. {dana} napod van nyilatkozni, mielőtt az Alapítvány dönt. A nyilatkozat a profilodon adható meg.",
     "nabavka_ispravka_naslov": "A nyilvántartás helyesbítésre került",
-    "nabavka_ispravka_tekst": "A „{dobro}” beszerzésből származó részre vonatkozó kifogásod nyomán az érvénytelenítés megszüntetésre került, és {poen} POEN visszakerült a bejegyzésedbe. Indokolás: {obrazlozenje}"
+    "nabavka_ispravka_tekst": "A „{dobro}” beszerzésből származó részre vonatkozó kifogásod nyomán az érvénytelenítés megszüntetésre került, és {poen} POEN visszakerült a bejegyzésedbe. Indokolás: {obrazlozenje}",
+    "potvrda_poen_potvrdjivac": "„{pseudonim}” tag, akinek a valódiságát megerősítetted, megtette az első hozzájárulását, ezért e megerősítés alapján {iznos} POEN került bejegyzésre neked.",
+    "potvrda_poen_potvrdjeni": "A „{pseudonim}” tag által neked adott megerősítés alapján {iznos} POEN került bejegyzésre neked.",
+    "potvrda_poen_ceka_potvrdjivac": "Megerősítetted „{pseudonim}” tag valódiságát. {iznos} POEN akkor kerül bejegyzésre neked, amikor ő megteszi az első hozzájárulását — közzétesz egy, az Alapítvány által jóváhagyott ajánlatot, adományoz, pártfogó lesz, vagy operatív hozzájárulást teljesít.",
+    "potvrda_poen_ceka_potvrdjeni": "„{pseudonim}” tag megerősítette a valódiságodat. {iznos} POEN akkor kerül bejegyzésre neked, amikor megteszed az első hozzájárulásodat — közzéteszel egy, az Alapítvány által jóváhagyott ajánlatot, adományozol, pártfogó leszel, vagy operatív hozzájárulást teljesítesz."
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",

@@ -371,7 +371,11 @@
     "rezervisano_nabavka": "Rezervirano za nabavu",
     "rezervisano_nabavka_opis": "Rezervirano do preuzimanja robe. Poništava se pri preuzimanju, ne prije; ako ne preuzmeš, vraća se u tvoj zapis.",
     "send_ceka_naslov": "Prepis čeka odobrenje roditelja",
-    "send_ceka_opis": "{iznos} POEN članu {pseudonim} čeka da roditelj odobri. POEN ti se do tada ne skida sa zapisa."
+    "send_ceka_opis": "{iznos} POEN članu {pseudonim} čeka da roditelj odobri. POEN ti se do tada ne skida sa zapisa.",
+    "zabelezene_potvrde_naslov": "Zabilježene potvrde",
+    "zabelezene_potvrde_opis": "Upisuje se kad se pojavi prvi doprinos onoga na koga se potvrda odnosi: objavljena ponuda koju Zaklada odobri, donacija, pokroviteljstvo ili izvršen operativni doprinos. Do tada to nije zapis POENA i ne ulazi u tvoje stanje.",
+    "zabelezene_potvrde_moje": "Tvojih {iznos} POENA — čeka tvoj prvi doprinos",
+    "zabelezene_potvrde_tudje": "{iznos} POENA za potvrde koje si dao — čeka prvi doprinos onih koje si potvrdio"
   },
   "verifikacija": {
     "naslov": "Potvrda stvarnosti",
@@ -443,7 +447,13 @@
     "pijaca_neverifikovan_opis": "Ako ne poznaješ nikoga u KOLU, objavi svoj oglas kako bi te članovi kontaktirali, upoznali i potvrdili da si stvarna osoba. Oglas se vidi na Tržnici odmah, a 1.000 POENA upisuje ti se nakon odobrenja oglasa.",
     "pijaca_neverifikovan_dugme": "Postavi svoje prve oglase",
     "tip_bez_pristupa": "Nema pristup",
-    "tip_dete": "Dijete"
+    "tip_dete": "Dijete",
+    "ceka_naslov": "Zabilježene potvrde",
+    "ceka_opis": "Potvrda vrijedi i indeks je upisan. POEN se upisuje kad potvrđeni član ostvari svoj prvi doprinos: objavi ponudu koju Zaklada odobri, donira, postane pokrovitelj ili izvrši operativni doprinos.",
+    "ceka_moja": "Tebe čeka {iznos} POENA — objavi prvu ponudu ili doniraj.",
+    "ceka_dao": "Potvrdio si {pseudonim} — {iznos} POENA upisuje ti se kad on ostvari svoj prvi doprinos.",
+    "ceka_dugme_oglas": "Objavi ponudu",
+    "ceka_dugme_donacija": "Doniraj"
   },
   "graf": {
     "naslov": "Mreža potvrda",
@@ -2342,7 +2352,11 @@
     "prijava_razmene_izjasni_naslov": "Traži se tvoje očitovanje",
     "prijava_razmene_izjasni_tekst": "Podnesen je prigovor da razmjena povodom koje ti je prepisan POEN nije ispunjena. Imaš {dana} dana da se očituješ prije nego što Zaklada odluči. Očitovanje se unosi na profilu.",
     "nabavka_ispravka_naslov": "Evidencija je ispravljena",
-    "nabavka_ispravka_tekst": "Po tvom prigovoru na dio iz nabave „{dobro}” poništenje je otklonjeno i u tvoj zapis je vraćeno {poen} POENA. Obrazloženje: {obrazlozenje}"
+    "nabavka_ispravka_tekst": "Po tvom prigovoru na dio iz nabave „{dobro}” poništenje je otklonjeno i u tvoj zapis je vraćeno {poen} POENA. Obrazloženje: {obrazlozenje}",
+    "potvrda_poen_potvrdjivac": "Član „{pseudonim}“, čiju si stvarnost potvrdio, ostvario je svoj prvi doprinos, pa ti je upisano {iznos} POENA po toj potvrdi.",
+    "potvrda_poen_potvrdjeni": "Po potvrdi koju ti je dao član „{pseudonim}“ upisano ti je {iznos} POENA.",
+    "potvrda_poen_ceka_potvrdjivac": "Potvrdio si stvarnost člana „{pseudonim}“. {iznos} POENA upisuje ti se kad on ostvari svoj prvi doprinos — objavi ponudu koju Zaklada odobri, donira, postane pokrovitelj ili izvrši operativni doprinos.",
+    "potvrda_poen_ceka_potvrdjeni": "Član „{pseudonim}“ potvrdio je tvoju stvarnost. {iznos} POENA upisuje ti se kad ostvariš svoj prvi doprinos — objaviš ponudu koju Zaklada odobri, doniraš, postaneš pokrovitelj ili izvršiš operativni doprinos."
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",
