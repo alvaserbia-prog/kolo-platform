@@ -290,7 +290,7 @@ Nove zapise POEN-a Protokol upisuje kroz sljedeće kanale evidentiranja doprinos
 
 Kanal pod točkom 8. obuhvaća doprinos prvim oglasom (članak 40.a) i putanju doprinosa razmjeni (članak 40.b).
 
-Kanali pod točkama 1., 3., 4., 7. i 8. uređeni su Glavom VI. ovog pravilnika. Kanal pod točkom 2. uređen je Pravilnikom o dokazu stvarnosti. Kanali pod točkama 5., 6. i 9. uređeni su Glavom VIII. kao moduli sustava; kanal pod točkom 9. bliže je uređen Pravilnikom o sudjelovanju djece. Evidentiranje po kanalu pod točkom 9. automatski je akt Protokola i ne ulazi u dnevni limit Programa Protokola; upisani POEN ulazi u ukupan broj evidentiranih POEN-a i time u obračunski okvir sustava. Parametri evidentiranja, uvjeti i ograničenja za svaki kanal utvrđuju se posebnim pravilnicima, osobito Pravilnikom o operativnom doprinosu, Pravilnikom o dokazu stvarnosti, Pravilnikom o donacijama, Pravilnikom o pokroviteljstvu, Pravilnikom o kolektivnim oblicima, pravilnicima Programa Podrške i Pravilnikom o osnivačkom doprinosu.
+Kanali pod točkama 1., 3., 4., 7. i 8. uređeni su Glavom VI. ovog pravilnika. Kanal pod točkom 2. uređen je Pravilnikom o dokazu stvarnosti. Upis POEN-a po tom kanalu nastupa kada verificirani korisnik ostvari prvi potvrđeni doprinos, pod uvjetima utvrđenima člankom 7. toga pravilnika; do upisa doprinos je zabilježen i ne ulazi u ukupan broj evidentiranih POEN-a. Kanali pod točkama 5., 6. i 9. uređeni su Glavom VIII. kao moduli sustava; kanal pod točkom 9. bliže je uređen Pravilnikom o sudjelovanju djece. Evidentiranje po kanalu pod točkom 9. automatski je akt Protokola i ne ulazi u dnevni limit Programa Protokola; upisani POEN ulazi u ukupan broj evidentiranih POEN-a i time u obračunski okvir sustava. Parametri evidentiranja, uvjeti i ograničenja za svaki kanal utvrđuju se posebnim pravilnicima, osobito Pravilnikom o operativnom doprinosu, Pravilnikom o dokazu stvarnosti, Pravilnikom o donacijama, Pravilnikom o pokroviteljstvu, Pravilnikom o kolektivnim oblicima, pravilnicima Programa Podrške i Pravilnikom o osnivačkom doprinosu.
 
 Financijski se doprinos ostvaruje u dinarima. Pokroviteljstvo se ostvaruje doniranjem novca, robe ili usluga. Dinarska sredstva ulaze u Zakladu i ne ulaze u obračunski okvir sustava. Po primitku donacije ili pokroviteljskog doprinosa, Protokol u zapisu odgovarajućeg korisnika evidentira doprinos u POEN-ima, prema parametrima evidentiranja utvrđenima posebnim pravilnikom. Evidentiranje POEN-a automatski je akt Protokola i ne zasniva ugovorni odnos između donatora i Zaklade.
 
@@ -596,13 +596,13 @@ Korisniku se evidentira doprinos u iznosu od 1.000 POEN-a za prvi oglas kojim nu
 
 Doprinos iz prethodnoga stavka prvi je korak putanje doprinosa razmjeni iz članka 40.b.
 
-Verificiranom korisniku doprinos se evidentira u trenutku objave oglasa.
+Oglas se objavljuje odmah, a doprinos se u trenutku objave bilježi i evidentira se u Protokolu kada Zaklada odobri oglas. To vrijedi za svakog korisnika, bez obzira na to je li njegova stvarnost potvrđena.
 
-Neverificiranom korisniku oglas se objavljuje odmah, a doprinos se u trenutku objave bilježi i evidentira se u Protokolu kada Zaklada odobri oglas. Doprinos se evidentira i bez odobrenja ako prije toga nastupi verifikacija korisnika u lancu potvrda ili ažuriranje evidencije POEN-a u korist tog korisnika. Do evidentiranja doprinos ne predstavlja zapis POEN-a i ne ulazi u ukupan broj evidentiranih POEN-a u sustavu.
+Do evidentiranja doprinos ne predstavlja zapis POEN-a i ne ulazi u ukupan broj evidentiranih POEN-a u sustavu. Bez odobrenja Zaklade doprinos se ne evidentira; verifikacija korisnika u lancu potvrda i ažuriranje evidencije POEN-a u njegovu korist nisu osnova za evidentiranje.
 
 Zaklada odlučuje o odobrenju u razumnom roku, provjerom da oglas ispunjava sadržajni minimum i da predstavlja stvarnu ponudu dobra ili usluge. Ako doprinos ne bude odobren, korisnik se obavještava uz navođenje razloga; oglas se time ne uklanja, a doprinos se ponovno razmatra povodom dopunjenoga ili novog oglasa istog korisnika.
 
-Razlikovanje iz prethodnih stavaka služi tome da računi čija stvarnost nije potvrđena ne uvećavaju ukupan broj evidentiranih POEN-a prije nego što se u sustavu pojavi trag stvarnog sudjelovanja.
+Odobrenje služi tome da ukupan broj evidentiranih POEN-a ne raste prije nego što se u sustavu pojavi trag stvarnog sudjelovanja. Odobrenjem Zaklada utvrđuje da je uvjet ispunjen — da oglas ispunjava sadržajni minimum i da predstavlja stvarnu ponudu — i ne odlučuje o tome hoće li korisniku evidentirati doprinos. Odobren oglas ujedno je jedan od oblika doprinosa po kojima se upisuje POEN evidentiran za verifikaciju (članak 7. Pravilnika o dokazu stvarnosti), pa se jednom odlukom upisuje više zapisa.
 
 Ako oglas bude uklonjen zbog povrede Uvjeta korištenja prije nego što doprinos bude evidentiran, zabilježeni se doprinos poništava. Već evidentiran doprinos uklanjanjem se oglasa ne poništava.
 

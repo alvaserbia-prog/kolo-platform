@@ -84,15 +84,43 @@ The verification record forms part of the record of the common good. Verificatio
 
 *POEN ledger entry for verification*
 
-Upon the recording of a verification record, the Protocol automatically enters new POEN records: 1,000 POEN to the verifier and 1,000 POEN to the verified user.
+Upon the recording of a verification record, the Protocol notes new POEN records: 1,000 POEN to the verifier and 1,000 POEN to the verified user.
+
+A noted contribution is entered in the Protocol once the verified user makes their first confirmed contribution to the common good, namely:
+
+1) the first listing by which they offer a good or a service, approved within the meaning of Article 40a of the Rulebook on the KOLO System;
+
+2) a donation to the Foundation with publication of the donor's details, upon receipt of which the contribution is recorded within the meaning of Article 5a of the Rulebook on Patronage and Donations;
+
+3) patronage under which the contribution has been recorded in the record of the user who submitted the application;
+
+4) an operational contribution whose performance has been verified within the meaning of the Rulebook on Operational Contribution.
+
+What all the forms in the preceding paragraph have in common is that the contribution has been confirmed by the Foundation or by a ZRNO holder — none of them can be brought about by the user's own decision. Updating the POEN ledger between users (Article 16 of the Rulebook on the KOLO System) is not a contribution within the meaning of this Article.
+
+Where the condition under paragraph 2 is met before the verification record is recorded, the entry occurs at the moment that record is recorded.
+
+Until entered, a noted contribution does not constitute a POEN record: it forms no part of any user's record, nor of the total number of POEN recorded in the system.
+
+The verification record, the reality index and the rights arising from them come into being upon the recording of the verification record and do not depend on the POEN entry under this Article.
+
+The condition under paragraph 2 does not apply to verifications given by parents upon a minor user's transition to an adult account (Article 19 of the Rulebook on the Participation of Children); in that case the entry occurs at the moment the verification record is recorded.
+
+If the verification record ceases to be valid before the entry, the noted contribution lapses. The annulment of POEN records and the compensation under Article 20b do not apply, since no entry was ever made.
+
+The Foundation may enter a noted contribution even where the condition under paragraph 2 is not met, subject to a statement of reasons that is recorded. That possibility exists for users who contribute to the common good in a manner not achieved through any of the forms under paragraph 2.
 
 If the verification is subject to supervision, the Protocol enters 500 POEN to the first supervisor who records a supervision outcome (Article 11), regardless of which outcome was recorded. The entry occurs at the moment the outcome is recorded, not at the moment of verification; until then no supervisor has been designated.
+
+The condition under paragraph 2 does not apply to the entry made to the supervisor: it records the supervisor's work, performed independently of the verified user's contribution.
 
 A supervisor to whom the record is forwarded following the outcome "needs review" receives no POEN. At most one entry of 500 POEN is recorded per verification.
 
 Where the verification is not subject to supervision, the total entry amounts to 2,000 POEN. Where it is subject to supervision, the total entry upon the recording of the first supervision outcome amounts to 2,500 POEN.
 
 What is recorded is the supervisor's work, not their agreement with the verification. A supervisor who finds that something is wrong performs the same work as one who finds nothing objectionable, so the entry is the same; tying the entry to an affirmative outcome would encourage looking the other way.
+
+POEN records a contribution to the common good. A verification record establishes that the user is a real person, but in itself contains no contribution — which is why a POEN record comes into being once the first confirmed trace of that user's participation appears in the system. This also prevents the total number of recorded POEN from growing on account of accounts that have made no contribution whatsoever.
 
 The recording of POEN for verification is an automatic act of the Protocol within the meaning of Article 15 item 2 of the Rulebook on the KOLO System.
 

@@ -84,15 +84,43 @@ Verifikacijski je zapis dio evidencije kolektivnog dobra. Verifikacijski zapisi 
 
 *Evidencija POEN-a za verifikaciju*
 
-Po evidentiranju verifikacijskog zapisa Protokol automatski upisuje nove zapise POEN-a: verifikatoru 1.000 POEN-a i verificiranome 1.000 POEN-a.
+Po evidentiranju verifikacijskog zapisa Protokol bilježi nove zapise POEN-a: verifikatoru 1.000 POEN-a i verificiranome 1.000 POEN-a.
+
+Zabilježeni se doprinos upisuje u Protokolu kada verificirani korisnik ostvari prvi potvrđeni doprinos zajedničkom dobru, a to je:
+
+1) prvi oglas kojim nudi dobro ili uslugu, odobren u smislu članka 40a Pravilnika o KOLO sustavu;
+
+2) donacija Zakladi uz objavljivanje podataka o donatoru, po čijem je primitku doprinos evidentiran u smislu članka 5a Pravilnika o pokroviteljstvu i donacijama;
+
+3) pokroviteljstvo po kojem je doprinos evidentiran u zapisu korisnika koji je prijavu podnio;
+
+4) operativni doprinos čije je izvršenje verificirano u smislu Pravilnika o operativnom doprinosu.
+
+Zajedničko je svojstvo svih oblika iz prethodnoga stavka to što je doprinos potvrdila Zaklada odnosno nositelj ZRNA — nijedan se ne ostvaruje odlukom samoga korisnika. Ažuriranje evidencije POEN-a između korisnika (članak 16. Pravilnika o KOLO sustavu) nije doprinos u smislu ovoga članka.
+
+Ako je uvjet iz stavka 2. ispunjen prije evidentiranja verifikacijskog zapisa, upis nastupa u trenutku evidentiranja toga zapisa.
+
+Do upisa zabilježeni doprinos ne predstavlja zapis POEN-a: ne ulazi ni u zapis ijednoga korisnika ni u ukupan broj evidentiranih POEN-a u sustavu.
+
+Verifikacijski zapis, indeks stvarnosti i prava koja iz njih proizlaze nastaju evidentiranjem verifikacijskog zapisa i ne ovise o upisu POEN-a iz ovoga članka.
+
+Uvjet iz stavka 2. ne primjenjuje se na verifikacije koje roditelji daju pri prijelazu maloljetnoga korisnika u punoljetni račun (članak 19. Pravilnika o sudjelovanju djece); u tom slučaju upis nastupa u trenutku evidentiranja verifikacijskog zapisa.
+
+Ako verifikacijski zapis prestane vrijediti prije upisa, zabilježeni se doprinos gasi. Poništenje zapisa POEN-a i naknada iz članka 20b ne primjenjuju se jer upisa nije ni bilo.
+
+Zaklada može upisati zabilježeni doprinos i kad uvjet iz stavka 2. nije ispunjen, uz obrazloženje koje se evidentira. Ta mogućnost postoji za korisnike koji zajedničkom dobru doprinose na način koji se ne ostvaruje nijednim od oblika iz stavka 2.
 
 Ako verifikacija podliježe nadzoru, Protokol upisuje 500 POEN-a prvom nadzorniku koji evidentira ishod nadzora (članak 11.), bez obzira na to koji je ishod evidentirao. Upis nastupa u trenutku evidentiranja ishoda, a ne u trenutku verifikacije; do tada nadzornik nije ni određen.
+
+Uvjet iz stavka 2. ne primjenjuje se na upis nadzorniku: njime se evidentira rad nadzornika, izvršen neovisno o doprinosu verificiranoga korisnika.
 
 Nadzorniku kojemu je zapis proslijeđen po ishodu „za provjeru“ ne upisuju se POEN-i. Po jednoj se verifikaciji evidentira najviše jedan upis od 500 POEN-a.
 
 Kada verifikacija ne podliježe nadzoru, ukupna evidencija iznosi 2.000 POEN-a. Kada podliježe nadzoru, ukupna evidencija po evidentiranju prvog ishoda nadzora iznosi 2.500 POEN-a.
 
 Evidentira se rad nadzornika, ne suglasnost s verifikacijom. Nadzornik koji utvrdi da nešto nije u redu obavlja isti posao kao i onaj koji ne nađe ništa sporno, pa je i evidencija ista; vezivanje evidencije za potvrdan ishod poticalo bi na propuštanje.
+
+POEN evidentira doprinos zajedničkom dobru. Verifikacijski zapis utvrđuje da je korisnik stvarna osoba, ali sam po sebi ne sadrži doprinos — zato zapis POEN-a nastaje kad se u sustavu pojavi prvi potvrđeni trag sudjelovanja toga korisnika. Time se ujedno sprječava da ukupan broj evidentiranih POEN-a raste po osnovi računa koji u sustavu nisu ostvarili nijedan doprinos.
 
 Evidentiranje POEN-a za verifikaciju automatski je akt Protokola u smislu članka 15. točke 2. Pravilnika o KOLO sustavu.
 

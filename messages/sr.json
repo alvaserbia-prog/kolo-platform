@@ -1032,7 +1032,7 @@
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
-      "ver": "4.6.2",
+      "ver": "4.6.4",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -1066,7 +1066,7 @@
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.2",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.6.2",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.6.4",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sistemu",
