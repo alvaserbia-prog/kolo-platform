@@ -2349,7 +2349,8 @@
     "potvrda_poen_potvrdjivac": "„{pseudonim}” tag, akinek a valódiságát megerősítetted, megtette az első hozzájárulását, ezért e megerősítés alapján {iznos} POEN került bejegyzésre neked.",
     "potvrda_poen_potvrdjeni": "A „{pseudonim}” tag által neked adott megerősítés alapján {iznos} POEN került bejegyzésre neked.",
     "potvrda_poen_ceka_potvrdjivac": "Megerősítetted „{pseudonim}” tag valódiságát. {iznos} POEN akkor kerül bejegyzésre neked, amikor ő megteszi az első hozzájárulását — közzétesz egy, az Alapítvány által jóváhagyott ajánlatot, adományoz, pártfogó lesz, vagy operatív hozzájárulást teljesít.",
-    "potvrda_poen_ceka_potvrdjeni": "„{pseudonim}” tag megerősítette a valódiságodat. {iznos} POEN akkor kerül bejegyzésre neked, amikor megteszed az első hozzájárulásodat — közzéteszel egy, az Alapítvány által jóváhagyott ajánlatot, adományozol, pártfogó leszel, vagy operatív hozzájárulást teljesítesz."
+    "potvrda_poen_ceka_potvrdjeni": "„{pseudonim}” tag megerősítette a valódiságodat. {iznos} POEN akkor kerül bejegyzésre neked, amikor megteszed az első hozzájárulásodat — közzéteszel egy, az Alapítvány által jóváhagyott ajánlatot, adományozol, pártfogó leszel, vagy operatív hozzájárulást teljesítesz.",
+    "potvrda_uskladjena": "A szabály megváltozott: a megerősítés utáni POEN akkor kerül bejegyzésre, amikor a megerősített tag megteszi az első hozzájárulását. Ezért {iznos} POEN visszakerült a nyilvántartásodból, és feljegyzett állapotban áll. Bejegyzésre kerül, amint a feltétel teljesül."
   },
   "transakcije": {
     "verifikacija": "Megerősítés: {pseudonim}",
@@ -2374,7 +2375,8 @@
     "nabavka": "Kollektív beszerzés — {dobro}",
     "nabavka_ispravka": "Nyilvántartás helyesbítése, kollektív beszerzés {dobro}",
     "zrno_upis": "{zrna} ZRNO bejegyzése {koeficijent} együttható szerint",
-    "zrno_otpis": "{zrna} ZRNO leírása {koeficijent} együttható szerint"
+    "zrno_otpis": "{zrna} ZRNO leírása {koeficijent} együttható szerint",
+    "uskladjivanje_potvrde": "Megerősítés összehangolása — a POEN visszakerült feljegyzett állapotba"
   },
   "mejl": {
     "pozdrav": "Üdvözlünk",

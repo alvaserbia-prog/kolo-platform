@@ -100,6 +100,12 @@ enum TransactionType {
   // PONISTENJE_PREPISA: tamo se POEN seli između dva korisnička zapisa, ovde
   // nestaje iz sistema zato što je iskorišćen.
   OTPIS_NABAVKA
+  /// Jednokratno usklađivanje zatečenih potvrda sa dokazom stvarnosti čl. 7 (set
+  /// 4.6.4): POEN upisan po ranijem pravilu vraća se u „zabeleženo" onima koji nemaju
+  /// nijedan trag učešća. Zaseban tip, da se u istoriji vidi da to NIJE ni poništenje
+  /// lažne potvrde (čl. 20a) ni otpis — nego prelazna radnja, i da se može prebrojati.
+  /// Povlači se najviše do nule; zapis nikad ne ide u minus.
+  USKLADJIVANJE_POTVRDE
   /// Ispravka poništenja po iskorišćenju kad uslov iskorišćenja nije bio ispunjen
   /// (Pravilnik čl. 14a, nabavke čl. 30a). Protokol → korisnik; NIJE upis kroz
   /// kanal iz čl. 15 nego otklanjanje poništenja izvršenog bez osnova.

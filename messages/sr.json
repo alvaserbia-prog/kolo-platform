@@ -2637,7 +2637,27 @@
     "donacije_strani_priliv": "Uplata sa računa otvorenog u inostranstvu",
     "donacije_status_naplaceno": "Naplaćeno karticom — POEN čeka potvrdu",
     "donacije_donator_nalog": "Na nalogu: {ime}",
-    "donacije_duplikat_ipak": "Potvrdi ipak (uplata sa zajedničkog računa)"
+    "donacije_duplikat_ipak": "Potvrdi ipak (uplata sa zajedničkog računa)",
+    "tab_potvrde": "Potvrde",
+    "potvrde_naslov": "Potvrde koje čekaju prvi doprinos",
+    "potvrde_opis": "POEN po potvrdi upisuje se kad potvrđeni član ostvari svoj prvi doprinos: objavi ponudu koju Fondacija odobri, donira, postane pokrovitelj ili izvrši operativni doprinos (dokaz stvarnosti čl. 7). Ovde se upisuje ručno, za slučajeve koje ta četiri uslova ne pokrivaju — čovek koji samo kupuje, stariji član na programu podrške. Razlog je obavezan i ide u revizijski dnevnik.",
+    "potvrde_prazno": "Nijedna potvrda ne čeka.",
+    "potvrde_upisi": "Upiši POEN",
+    "potvrde_razlog": "Razlog (obavezno, najmanje 10 znakova)",
+    "potvrde_uskladjivanje_naslov": "Usklađivanje zatečenih potvrda",
+    "potvrde_uskladjivanje_opis": "Jednokratna prelazna radnja. Zatečene potvrde su POEN upisale po ranijem pravilu, bez ijednog traga da je potvrđeni išta doprineo. Ovim se one dovode na isto pravilo koje važi za nove: kome nijedan uslov nije ispunjen, POEN se vraća u zabeleženo. Povlači se najviše do nule — nikad u minus, jer ovo nije sankcija nego usklađivanje. Nadzornikovih 500 se ne dira.",
+    "potvrde_izracunaj": "Izračunaj",
+    "potvrde_sprovedi": "Sprovedi",
+    "potvrde_potvrda_broja": "Otkucaj broj POENA koji se poništava, tačno kako piše u pregledu",
+    "potvrde_pregled_ukupno": "Potvrda sa upisanim POENOM",
+    "potvrde_pregled_ostaje": "Ostaje upisano",
+    "potvrde_pregled_povlaci": "Povlači se",
+    "potvrde_pregled_ponisten": "POENA se poništava",
+    "potvrde_pregled_propada": "Ne može da se pokrije (već potrošeno)",
+    "potvrde_pregled_ljudi": "Pogođenih ljudi",
+    "potvrde_pregled_opticaj": "Opticaj posle radnje",
+    "potvrde_pregled_prag": "🔴 Pad opticaja prelazi osnivački prag od {prag} POENA unazad — već upaljeni koraci ostaju, ali sledeći čeka da opticaj ponovo naraste.",
+    "potvrde_sprovedeno": "Usklađivanje je sprovedeno."
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",
@@ -2811,7 +2831,8 @@
     "potvrda_poen_potvrdjivac": "Član „{pseudonim}“, čiju si stvarnost potvrdio, ostvario je svoj prvi doprinos, pa ti je upisano {iznos} POENA po toj potvrdi.",
     "potvrda_poen_potvrdjeni": "Po potvrdi koju ti je dao član „{pseudonim}“ upisano ti je {iznos} POENA.",
     "potvrda_poen_ceka_potvrdjivac": "Potvrdio si stvarnost člana „{pseudonim}“. {iznos} POENA upisuje ti se kad on ostvari svoj prvi doprinos — objavi ponudu koju Fondacija odobri, donira, postane pokrovitelj ili izvrši operativni doprinos.",
-    "potvrda_poen_ceka_potvrdjeni": "Član „{pseudonim}“ potvrdio je tvoju stvarnost. {iznos} POENA upisuje ti se kad ostvariš svoj prvi doprinos — objaviš ponudu koju Fondacija odobri, doniraš, postaneš pokrovitelj ili izvršiš operativni doprinos."
+    "potvrda_poen_ceka_potvrdjeni": "Član „{pseudonim}“ potvrdio je tvoju stvarnost. {iznos} POENA upisuje ti se kad ostvariš svoj prvi doprinos — objaviš ponudu koju Fondacija odobri, doniraš, postaneš pokrovitelj ili izvršiš operativni doprinos.",
+    "potvrda_uskladjena": "Pravilo je izmenjeno: POEN po potvrdi upisuje se kad potvrđeni član ostvari svoj prvi doprinos. Sa tvog zapisa je zato vraćeno {iznos} POENA i stoji zabeleženo. Upisuje se čim uslov bude ispunjen."
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",
@@ -2836,7 +2857,8 @@
     "nabavka": "Kolektivna nabavka, {dobro}",
     "nabavka_ispravka": "Ispravka evidencije, kolektivna nabavka {dobro}",
     "zrno_upis": "Upis {zrna} ZRNA po koeficijentu {koeficijent}",
-    "zrno_otpis": "Otpis {zrna} ZRNA po koeficijentu {koeficijent}"
+    "zrno_otpis": "Otpis {zrna} ZRNA po koeficijentu {koeficijent}",
+    "uskladjivanje_potvrde": "Usklađivanje potvrde — POEN vraćen u zabeleženo"
   },
   "mejl": {
     "pozdrav": "Pozdrav",

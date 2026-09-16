@@ -2356,7 +2356,8 @@
     "potvrda_poen_potvrdjivac": "Member “{pseudonim}”, whose reality you confirmed, has made their first contribution, so {iznos} POEN has been recorded for you under that confirmation.",
     "potvrda_poen_potvrdjeni": "Under the confirmation given to you by member “{pseudonim}”, {iznos} POEN has been recorded for you.",
     "potvrda_poen_ceka_potvrdjivac": "You confirmed the reality of member “{pseudonim}”. {iznos} POEN will be recorded for you once they make their first contribution — post an offer approved by the Foundation, donate, become a patron, or complete operational work.",
-    "potvrda_poen_ceka_potvrdjeni": "Member “{pseudonim}” has confirmed your reality. {iznos} POEN will be recorded for you once you make your first contribution — post an offer approved by the Foundation, donate, become a patron, or complete operational work."
+    "potvrda_poen_ceka_potvrdjeni": "Member “{pseudonim}” has confirmed your reality. {iznos} POEN will be recorded for you once you make your first contribution — post an offer approved by the Foundation, donate, become a patron, or complete operational work.",
+    "potvrda_uskladjena": "The rule has changed: POEN under a confirmation is recorded once the confirmed member makes their first contribution. {iznos} POEN has therefore been returned from your record and is now held as recorded. It will be entered as soon as the condition is met."
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",
@@ -2381,7 +2382,8 @@
     "nabavka": "Collective procurement — {dobro}",
     "nabavka_ispravka": "Ledger correction, collective procurement {dobro}",
     "zrno_upis": "Recording of {zrna} ZRNO at coefficient {koeficijent}",
-    "zrno_otpis": "Write-off of {zrna} ZRNO at coefficient {koeficijent}"
+    "zrno_otpis": "Write-off of {zrna} ZRNO at coefficient {koeficijent}",
+    "uskladjivanje_potvrde": "Confirmation alignment — POEN returned to recorded state"
   },
   "mejl": {
     "pozdrav": "Hello",

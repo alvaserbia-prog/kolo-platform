@@ -2356,7 +2356,8 @@
     "potvrda_poen_potvrdjivac": "Član „{pseudonim}“, čiju si stvarnost potvrdio, ostvario je svoj prvi doprinos, pa ti je upisano {iznos} POENA po toj potvrdi.",
     "potvrda_poen_potvrdjeni": "Po potvrdi koju ti je dao član „{pseudonim}“ upisano ti je {iznos} POENA.",
     "potvrda_poen_ceka_potvrdjivac": "Potvrdio si stvarnost člana „{pseudonim}“. {iznos} POENA upisuje ti se kad on ostvari svoj prvi doprinos — objavi ponudu koju Zaklada odobri, donira, postane pokrovitelj ili izvrši operativni doprinos.",
-    "potvrda_poen_ceka_potvrdjeni": "Član „{pseudonim}“ potvrdio je tvoju stvarnost. {iznos} POENA upisuje ti se kad ostvariš svoj prvi doprinos — objaviš ponudu koju Zaklada odobri, doniraš, postaneš pokrovitelj ili izvršiš operativni doprinos."
+    "potvrda_poen_ceka_potvrdjeni": "Član „{pseudonim}“ potvrdio je tvoju stvarnost. {iznos} POENA upisuje ti se kad ostvariš svoj prvi doprinos — objaviš ponudu koju Zaklada odobri, doniraš, postaneš pokrovitelj ili izvršiš operativni doprinos.",
+    "potvrda_uskladjena": "Pravilo je izmijenjeno: POEN po potvrdi upisuje se kad potvrđeni član ostvari svoj prvi doprinos. S tvojega zapisa je zato vraćeno {iznos} POENA i stoji zabilježeno. Upisuje se čim uvjet bude ispunjen."
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",
@@ -2381,7 +2382,8 @@
     "nabavka": "Kolektivna nabava, {dobro}",
     "nabavka_ispravka": "Ispravak evidencije, kolektivna nabava {dobro}",
     "zrno_upis": "Upis {zrna} ZRNA po koeficijentu {koeficijent}",
-    "zrno_otpis": "Otpis {zrna} ZRNA po koeficijentu {koeficijent}"
+    "zrno_otpis": "Otpis {zrna} ZRNA po koeficijentu {koeficijent}",
+    "uskladjivanje_potvrde": "Usklađivanje potvrde — POEN vraćen u zabilježeno"
   },
   "mejl": {
     "pozdrav": "Pozdrav",
