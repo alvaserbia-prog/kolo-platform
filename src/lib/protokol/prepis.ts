@@ -1,7 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { TransactionType, DoprinosOkidac } from "@/generated/prisma/client";
+import { TransactionType } from "@/generated/prisma/client";
 import { obavesti } from "@/lib/notifikacije";
-import { probajEvidentirati } from "@/lib/protokol/doprinos-sadrzaju";
 import { probajEvidentiratiKorake, probajNapredovati } from "@/lib/protokol/doprinos-razmeni";
 
 /**
@@ -51,10 +50,14 @@ export async function izvrsiPrepis(
     });
   });
 
-  // Primljen POEN je jedan od dva okidača za evidentiranje doprinosa sadržaju
-  // (čl. 40a st. 3). Zove se VAN transakcije — `emitujPoen()` otvara sopstvenu.
-  // Ne baca: prenos je već upisan i ne sme da padne zbog ovog kanala.
-  await probajEvidentirati(primalac.id, DoprinosOkidac.PRIMLJEN_POEN, posiljac.id);
+  // 🔴 PRIMLJEN POEN VIŠE NIJE OKIDAČ ZA ČL. 40a (set 4.6.4). Od tog seta svaki prvi
+  // oglas ide na odobrenje Fondacije, pa bi prepis evidentirao doprinos povodom oglasa
+  // koji čovek iz UO nikad nije pogledao. Uz to prepis ništa ne dokazuje: dogovaraju ga
+  // dve strane privatno, bez ikoga trećeg, pa dva naloga mogu da ga proizvedu sama.
+  // Iz istog razloga prepis NIJE ni uslov za upis POEN-a po potvrdi (`potvrda-uslov.ts`).
+  //
+  // Koraci 2–5 putanje doprinosa razmeni (čl. 40b) nisu dirani — oni po svojoj prirodi
+  // mere razmenu i imaju sopstvena sita (prag od 1.000 POEN, van kruga poznanstava).
   await probajEvidentiratiKorake(primalac.id);
 
   // Prepis pomera brojač putanje doprinosa razmeni OBEMA stranama.

@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
+import { probajEvidentiratiPotvrde } from "./potvrda-poen";
 import { VrstaDonacije } from "@/generated/prisma/client";
 import { nivoPokroviteljstvaZaKumulativ } from "@/lib/donacija-pravila";
 
@@ -36,7 +37,7 @@ export async function evidentirajDoprinos(params: {
   const { pokroviteljId, rsdIznos, tip, evidentiraoId, napomena } = params;
 
   // Korak 1: DB transakcija
-  const { noviNivoi, vlasnikWalletId } = await prisma.$transaction(async (tx) => {
+  const { noviNivoi, vlasnikWalletId, vlasnikId } = await prisma.$transaction(async (tx) => {
     const pokrovitelj = await tx.pokrovitelj.findUniqueOrThrow({
       where: { id: pokroviteljId },
       include: { vlasnik: { include: { wallet: true } } },
@@ -86,6 +87,7 @@ export async function evidentirajDoprinos(params: {
     return {
       noviNivoi,
       vlasnikWalletId: pokrovitelj.vlasnik.wallet!.id,
+      vlasnikId: pokrovitelj.vlasnikId,
     };
   });
 
@@ -107,6 +109,12 @@ export async function evidentirajDoprinos(params: {
         data: { transactionId: transaction.id },
       });
     }
+
+    // Pokroviteljstvo je jedan od četiri traga učešća koji otključavaju POEN po potvrdi
+    // (dokaz stvarnosti čl. 7). Doprinos se evidentira u zapisu vlasnika odnosno
+    // preduzetnika koji je prijavu podneo (donacije čl. 11), pa se i uslov meri njemu.
+    // Ne baca: doprinos je već evidentiran.
+    await probajEvidentiratiPotvrde(vlasnikId);
   }
 
   return { noviNivoi };
