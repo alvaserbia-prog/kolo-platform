@@ -2052,6 +2052,26 @@ model VerifikacionaVeza {
   nadzorZapisi       NadzorZapis[]
   nadzorniPredmet    NadzorniPredmet?
 
+
+  // ── POEN po potvrdi čeka trag stvarnog učešća (dokaz stvarnosti čl. 7) ──────────
+  // Do seta 4.6.4 je Protokol upisivao 1.000 + 1.000 ODMAH po potvrdi, automatski i
+  // bez ijednog traga da je potvrđeni išta uradio. Sada se POEN beleži, a upisuje kad
+  // potvrđeni ostvari doprinos koji je NEKO POTVRDIO — Fondacija (odobren prvi oglas,
+  // javna donacija, pokroviteljstvo) ili nosilac ZRNA odn. UO (operativni doprinos).
+  //
+  // 🔴 Sam čin potvrde se ne menja: indeks se puni odmah, nalog je redovan član istog
+  // časa. Čeka SAMO zapis POEN-a. Pravila su u `src/lib/potvrda-uslov.ts`.
+  //
+  // 🔴 Nadzornikovih 500 ovo NE dodiruje — po čl. 7 st. 2 već imaju svoj trenutak
+  // (evidentiranje ishoda nadzora) i svoj razlog (plaća se rad, ne pečat).
+  poenStatus         PotvrdaPoenStatus @default(ZABELEZEN)
+  poenEvidentiranAt  DateTime?
+  /// Koji je uslov otključao upis — da se iz zapisa vidi šta se dogodilo.
+  poenUslov          PotvrdaPoenUslov?
+  /// Transakcije kojima je POEN upisan (postoje tek u EVIDENTIRAN).
+  verifikatorTxId    String?
+  verifikovaniTxId   String?
+
   @@unique([verifikatorId, redniBroj])
   // K6: isti verifikator ne sme dvaput da verifikuje istog korisnika (anti-inflacija
   // indeksa + zatvara race na anti-cirkularnoj proveri kod recipročnih/duplih veza).
@@ -2059,6 +2079,9 @@ model VerifikacionaVeza {
   @@index([verifikatorId])
   @@index([verifikovaniId])
   @@index([nadzornikId])
+  // Noćni prolaz `/api/cron/potvrde-uslov` i pregled u admin tabu traže zabeležene
+  // potvrde po potvrđenom korisniku.
+  @@index([verifikovaniId, poenStatus])
 }
 
 // ─── Nadzor verifikacija — ishod i predmet (dokaz stvarnosti 4.2.0) ──────────
@@ -2139,6 +2162,26 @@ model NadzorniPredmet {
 // i sinhronizuje u istoj transakciji sa svakim upisom, poništavanjem ili
 // prestankom statusa. Skup je monoton pri upisu (unije), a pri poništavanju se
 // NE oduzima inkrementalno (unija nije invertibilna) nego preračunava od nule.
+/// Stanje upisa POEN-a po potvrdi (dokaz stvarnosti čl. 7).
+/// ZABELEZEN = potvrda važi i indeks je upisan, ali POEN još nije zapis — ne ulazi ni
+/// u jedno stanje, ni u opticaj, ni u javne agregate. Isti odnos kao `DoprinosStatus`.
+enum PotvrdaPoenStatus {
+  ZABELEZEN
+  EVIDENTIRAN
+  /// Potvrda je oborena pre nego što je POEN upisan — tada se samo gasi, BEZ
+  /// protivzapisa i BEZ nadoknade po čl. 20b: nema šta da se poništi.
+  PONISTEN
+}
+
+/// Trag učešća koji je otključao upis. Vrednosti prate `UslovPotvrde` iz
+/// `src/lib/potvrda-uslov.ts` — menjaju se zajedno.
+enum PotvrdaPoenUslov {
+  OGLAS
+  DONACIJA
+  POKROVITELJSTVO
+  OPERATIVNI
+}
+
 model VerifikacionaZona {
   userId          String
   user            User   @relation("ZonaVlasnik", fields: [userId], references: [id], onDelete: Cascade)
