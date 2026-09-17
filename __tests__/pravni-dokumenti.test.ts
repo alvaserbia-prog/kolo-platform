@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_6_4.md`, `uslovi_koriscenja_4_6_4.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_6_5.md`, `uslovi_koriscenja_4_6_4.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,8 +27,8 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_6_4.md",
-  "dokaz_stvarnosti_4_4_1.md",
+  "Pravilnik_4_6_5.md",
+  "dokaz_stvarnosti_4_6_5.md",
   "DPIA_4_6_3.md",
   "radnje_obrade_4_6_3.md",
   "uslovi_koriscenja_4_6_4.md",
@@ -83,7 +83,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Эта возможность не является стимулом",
     ],
   },
-  "Pravilnik_4_6_4.md": {
+  "Pravilnik_4_6_5.md": {
     sr: [
       // ═══ 4.6.1 (R-04 — ZRNO kao investicioni instrument, Komisija za HOV) ═══
       // 🔴 Čl. 23 st. 3 je do 4.6.1 tvrdio da „upis i otpis ZRNA pomeraju
@@ -165,7 +165,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // ISCRPNO. Traži se sva tri, jer je do 4.3.0 akt poznavao samo prvi, a kod
       // radio sa tri; ako iz teksta padne bilo koji, kod opet radi bez osnova.
       "20b Pravilnika o dokazu stvarnosti",
-      "Izuzetaka je pet i navedeni su ovde iscrpno",
+      "Izuzetaka je šest i navedeni su ovde iscrpno",
       // R-15 — četvrti izuzetak: otpis po poništenju potvrde zbog neaktivnosti
       // (čl. 6 Pravilnika o učešću dece). Bez njega taj otpis nema osnov, jer
       // st. 6 zabranjuje ustanovljavanje drugog osnova bilo kojim drugim aktom.
@@ -177,7 +177,14 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // nije naveden. Dok je lista brojala četiri, kod je radio protiv akta — to je
       // bila jedina dokazana protivrečnost u setu. Ako tačka padne, vraća se.
       "otpis po prevođenju punoletnog naloga u maloletni",
-      "Na negativan zapis po svakom od pet osnova",
+      "Na negativan zapis po svakom od šest osnova",
+      // 🔴 ŠESTI izuzetak: otpis po usklađivanju zatečenih potvrda (čl. 22a dokaza
+      // stvarnosti). `potvrde-uskladjivanje.ts` od 17.09.2026. povlači PUN iznos i
+      // pušta zapis u minus — kapiranje na nulu je odbačeno jer bi onoga ko je POEN
+      // potrošio nagradilo u odnosu na onoga ko ga je sačuvao. Bez ove tačke ta
+      // radnja nema osnov, a čl. 14 st. 7 zabranjuje osnov koji ovde nije naveden.
+      "otpis po usklađivanju zatečenih potvrda",
+      "22a Pravilnika o dokazu stvarnosti",
       // R-18 — ispravka poništenja izvršenog bez osnova (čl. 14a). Uvećava ukupan
       // broj POEN-a VAN kanala iz čl. 15, pa je čl. 14 morao da dobije izričit
       // osnov; bez njega bi poseban pravilnik probijao zatvorenu listu.
@@ -251,7 +258,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "allows it seven days to make a statement",
       "does not constitute mediation in the exchange",
       "Article 20b of the Rulebook on Proof of Reality",
-      "There are five exceptions, and they are listed here exhaustively",
+      "There are six exceptions, and they are listed here exhaustively",
+      "write-off upon the alignment of existing confirmations",
       // R-20 — peti izuzetak (vidi sr).
       "write-off upon the conversion of an adult account into a minor's account",
       "write-off upon annulment of a confirmation due to inactivity",
@@ -299,7 +307,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "предоставляет ей срок семи дней",
       "не является посредничеством в обмене",
       "статьёй 20b Правил о доказательстве реальности",
-      "Исключений пять, и здесь они перечислены исчерпывающе",
+      "Исключений шесть, и здесь они перечислены исчерпывающе",
+      "списание при согласовании ранее внесённых подтверждений",
       // R-20 — пятое исключение (vidi sr).
       "списание при переводе совершеннолетнего аккаунта в несовершеннолетний",
       "списание при аннулировании подтверждения из-за неактивности",
@@ -315,10 +324,52 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Состав Верхнего Коло определяется не назначением",
     ],
   },
-  "dokaz_stvarnosti_4_4_1.md": {
-    sr: ["### Član 11a", "### Član 20b", "### Član 20c"],
-    en: ["### Article 11a", "### Article 20b", "### Article 20c"],
-    ru: ["### Статья 11a", "### Статья 20b", "### Статья 20c"],
+  // 4.6.4 — čl. 7: POEN po potvrdi se BELEŽI, a upisuje kad potvrđeni korisnik
+  // ostvari prvi potvrđen doprinos. Odredbe se traže doslovno zato što kod bez njih
+  // radi nešto što akt ne propisuje — tačno onaj razred kvara koji je R-20 ispravljao
+  // (kod je imao više izuzetaka od zabrane negativnog zapisa nego akt).
+  //
+  // Traži se i da je upis odvojen od PRAVA: indeks i pun pristup nastaju potvrdom i
+  // ne čekaju ništa. Bez te rečenice bi se odlaganje POEN-a moglo pročitati kao
+  // odlaganje članstva, što nije ni odlučeno ni sprovedeno.
+  "dokaz_stvarnosti_4_6_5.md": {
+    sr: [
+      "### Član 11a", "### Član 20b", "### Član 20c",
+      "prvi potvrđen doprinos zajedničkom dobru",
+      "ne zavise od upisa POEN-a iz ovog člana",
+      "Uslov iz stava 2 primenjuje se i na upis nadzorniku",
+      "Fondacija može upisati zabeleženi doprinos i kad uslov iz stava 2 nije ispunjen",
+      // 🔴 čl. 22a — usklađivanje zatečenih verifikacija. Bez njega prelazna radnja
+      // iz `potvrde-uskladjivanje.ts` nema osnov, a minus koji ona pravi bio bi
+      // šesti izuzetak bez odredbe — tačno ono što čl. 14 st. 7 glavnog Pravilnika
+      // zabranjuje. Traži se i obrazloženje zašto se NE kapira na nulu.
+      "### Član 22a",
+      "Otpis se izvršava i kada zapis time postane negativan",
+      "Zabeleženi doprinos usklađivanjem se ne gasi",
+      "Usklađivanje nije mera prema korisniku",
+    ],
+    en: [
+      "### Article 11a", "### Article 20b", "### Article 20c",
+      "first confirmed contribution to the common good",
+      "do not depend on the POEN entry under this Article",
+      "also applies to the entry made to the supervisor",
+      "may enter a noted contribution even where the condition under paragraph 2 is not met",
+      "### Article 22a",
+      "The write-off is executed even where the record thereby becomes negative",
+      "The alignment does not extinguish the recorded contribution",
+      "The alignment is not a measure against the user",
+    ],
+    ru: [
+      "### Статья 11a", "### Статья 20b", "### Статья 20c",
+      "первый подтверждённый вклад в общее благо",
+      "не зависят от внесения ПОЕН по настоящей статье",
+      "применяется и к внесению надзорному",
+      "может внести отмеченный вклад и тогда, когда условие пункта 2 не выполнено",
+      "### Статья 22a",
+      "Списание производится и тогда, когда запись при этом становится отрицательной",
+      "Согласование не погашает отмеченный вклад",
+      "Согласование не является мерой в отношении пользователя",
+    ],
   },
   "radnje_obrade_4_6_3.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16", "Radnja obrade br. 17"],
@@ -1326,11 +1377,11 @@ const UKINUTO: Record<string, RegExp[]> = {
   // naziva socijalnog programa uz pseudonim opisivala kao meru proverljivosti, a
   // naziv je posebna kategorija po ZZPL čl. 17. Vraćena, obarala bi i meru M-1 i
   // ocenu R11 u DPIA, i to bez ijednog vidljivog kvara.
-  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uslov\s+za\s+evidentiranje\s+POEN/i, /zapis\s+o\s+evidentiranom\s+POEN-u\s+nije\s+skriven/i],
-  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i, /executive,?\s+not\s+governance/i, /is\s+not\s+social\s+assistance/i, /condition\s+for\s+the\s+recording\s+of\s+POEN/i, /record\s+of\s+POEN\s+recorded\s+is\s+not\s+hidden/i],
-  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i, /исполнительной,?\s+а\s+не\s+управленческой/i, /не\s+является\s+социальной\s+помощью/i, /услови[ем]\s+учёта\s+ПОЕН/i, /Запись\s+об\s+учтённых\s+ПОЕН\s+не\s+скрыта/i],
-  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+a\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uvjet\s+za\s+evidentiranje\s+POEN/i, /zapis\s+o\s+evidentiranom\s+POEN-u\s+nije\s+skriven/i],
-  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i, /végrehajtói,?\s+nem\s+irányítói/i, /nem\s+szociális\s+segély/i, /feltétele\s+a\s+POEN/i, /POEN\s+bejegyzése\s+nem\s+rejtett/i],
+  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uslov\s+za\s+evidentiranje\s+POEN/i, /zapis\s+o\s+evidentiranom\s+POEN-u\s+nije\s+skriven/i, /Po\s+evidentiranju\s+verifikacionog\s+zapisa,?\s+Protokol\s+automatski\s+upisuje/i],
+  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i, /executive,?\s+not\s+governance/i, /is\s+not\s+social\s+assistance/i, /condition\s+for\s+the\s+recording\s+of\s+POEN/i, /record\s+of\s+POEN\s+recorded\s+is\s+not\s+hidden/i, /[Uu]pon\s+the\s+recording\s+of\s+a\s+verification\s+record,?\s+the\s+Protocol\s+automatically\s+enters/i],
+  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i, /исполнительной,?\s+а\s+не\s+управленческой/i, /не\s+является\s+социальной\s+помощью/i, /услови[ем]\s+учёта\s+ПОЕН/i, /Запись\s+об\s+учтённых\s+ПОЕН\s+не\s+скрыта/i, /По\s+учёту\s+верификационной\s+записи\s+Протокол\s+автоматически\s+вносит/i],
+  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+a\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uvjet\s+za\s+evidentiranje\s+POEN/i, /zapis\s+o\s+evidentiranom\s+POEN-u\s+nije\s+skriven/i, /Po\s+evidentiranju\s+verifikacijskog\s+zapisa\s+Protokol\s+automatski\s+upisuje/i],
+  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i, /végrehajtói,?\s+nem\s+irányítói/i, /nem\s+szociális\s+segély/i, /feltétele\s+a\s+POEN/i, /POEN\s+bejegyzése\s+nem\s+rejtett/i, /A\s+hitelesítési\s+bejegyzés\s+rögzítésével\s+a\s+Protokoll\s+automatikusan/i],
 };
 
 /** Napomene o izmeni namerno pominju ukinutu tablu — one se izuzimaju iz provere. */
@@ -1411,7 +1462,7 @@ describe("kanonski set akata 4.3.3", () => {
       hu: /véglegesen átveszi/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_4_1.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_6_5.md", jez);
       expect(tekst, `${jez} još opisuje zonu kao trajnu`).not.toMatch(TRAJNO[jez]);
     }
   });
@@ -1429,7 +1480,7 @@ describe("kanonski set akata 4.3.3", () => {
       hu: /a hamis hitelesítő által végzett összes hitelesítés érvénytelen/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_4_1.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_6_5.md", jez);
       expect(tekst, `${jez} još obara sve verifikacije verifikatora`).not.toMatch(STARO[jez]);
     }
   });
@@ -1447,7 +1498,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_6_4.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_6_5.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });

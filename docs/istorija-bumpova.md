@@ -1,7 +1,7 @@
-# Istorija bumpova akata — hronologija 4.1.0 → 4.6.4
+# Istorija bumpova akata — hronologija 4.1.0 → 4.6.5
 
 > **Šta je ovo.** Zapisi o svakom pojedinačnom bumpu akata, izdvojeni iz `CLAUDE.md`
-> 16.09.2026. da taj fajl ne bi nosio ~27.000 tokena hronologije u svakoj sesiji.
+> 17.09.2026. da taj fajl ne bi nosio ~27.000 tokena hronologije u svakoj sesiji.
 >
 > 🔴 **NIJE normativa i NIJE spisak aktivnih pravila.** Sva pravila koja i dalje
 > važe — postupak bumpovanja, odluka o 5.0, pouke iz sudara sesija, odbijene mere —
@@ -11,10 +11,57 @@
 > `ls "dokumentacija 4.1"/*.md`. To je izvor istine, jer po pravilu bumpovanja šifra
 > u imenu fajla JESTE objava.
 >
+> 🔴 **Uz svaki nov bump zapis se dopisuje OVDE**, na vrh, a u `CLAUDE.md` samo ako je
+> bump proizveo pouku koje u konsolidovanom spisku nema.
+>
 > **Kada ovo čitati:** kad treba da se rekonstruiše zašto je neki akt dobio baš tu
 > šifru, ili kad se traži tekst odluke uz konkretan bump. Za svakodnevni rad — ne.
 
 ---
+
+**AŽURIRANO 2026-09-16 (trideset šesti put):** na **4.6.5** idu **DVA akta** —
+Pravilnik o dokazu stvarnosti (sa 4.4.1) i Pravilnik o KOLO sistemu (sa 4.6.2).
+Ostalih petnaest ostaje gde jeste. Povod nije rizik iz registra nego **odluka
+vlasnika**: POEN po potvrdi (1.000 verifikatoru i 1.000 verifikovanom) više ne nastaje
+u trenutku potvrde nego kad potvrđeni korisnik ostvari **prvi potvrđen doprinos**.
+Sadržinski, vidi sekciju „POEN po potvrdi čeka prvi doprinos" ispod.
+
+🔴 **Zašto 4.6.5, a ne 4.6.4 — šesti put isti sudar.** Set je rađen nad osnovom na
+kojoj je poslednja šifra bila 4.6.2. Dok je bio u radu, druga sesija je na `main`
+objavila **4.6.4** za R-07 (Uslovi, Pravilnik, učešće dece) — među njima i **glavni
+Pravilnik**, koji menja i ovaj set. Grana je zato dovučena na `main`, izmene su
+prenete **na main-ovu 4.6.4 verziju Pravilnika** (ne na 4.6.2, što bi tiho poništilo
+ispravku čl. 16 iz R-07), a ceo set je dobio narednu slobodnu šifru. Isti postupak
+kao 4.6.0 naspram 4.5.9 i 4.6.1 naspram 4.6.0.
+
+🟢 **Whitepaper NIJE bumpovan — i to je provereno, ne pretpostavljeno.** On o kanalu
+verifikacije govori uopšteno („Protokol evidentira doprinos kad korisnik doprinese…
+verifikacijom drugih korisnika") i nigde ne tvrdi da upis nastupa odmah. To je provera
+koja je u ovom projektu **tri puta bila propust** (R-08, R-09, R-02), pa se od tada radi
+uvek — ovde je ispala negativna.
+
+🔴 **Zašto je glavni Pravilnik morao uz dokaz stvarnosti.** Dva razloga, oba tvrda:
+čl. 15 t. 2 imenuje kanal verifikacije i mora da kaže kada po njemu nastupa upis, a
+čl. 40a je morao da proširi odobrenje na **svakog** korisnika — inače bi potvrda i
+dalje evidentirala oglas koji čovek iz UO nikad nije pogledao, a nastao bi i krug
+(potvrda otključava čl. 40a, čl. 40a otključava POEN po potvrdi).
+
+🔴 **DOPUNA ISTOG SETA, 17.09.2026 (šifra se NE menja).** Odlukom vlasnika usklađivanje
+zatečenih potvrda povlači **pun iznos i pušta zapis u minus**, pa su ista dva akta
+dobila još po jednu odredbu: **dokaz stvarnosti čl. 22a** (prelazna odredba o
+usklađivanju) i **Pravilnik čl. 14 st. 3 t. 6** (šesti izuzetak od zabrane negativnog
+zapisa; lista sada broji šest, a rečenica o režimu glasi „po svakom od šest osnova").
+Set 4.6.5 do tog trenutka nije bio objavljen na produkciji, pa nije reč o dva događaja
+objave nego o jednom — nov bump bi tvrdio suprotno. 🔴 Da je set bio objavljen, ovo bi
+tražilo **4.6.6**.
+
+🟡 **Zaostala unakrsna upućivanja:** nijedno novo od ovog bumpa. Oba akta se ovim
+potezom ponovo objavljuju, pa su upućivanja u njima tačna; akti koji na njih upućuju po
+šifri (`ucesce_dece` → Pravilnik v4.6.0, DPIA → v4.6.2) nisu dirani, po pravilu.
+
+🟢 **DPIA i Registar radnji obrade nisu dirani** — nema novog podatka o ličnosti ni nove
+radnje obrade. Stanje čekanja je zapis o odnosu koji već postoji (`VerifikacionaVeza`),
+a ne nov podatak o čoveku.
 
 **AŽURIRANO 2026-09-15 (trideset peti put):** na **4.6.4** idu **TRI akta** —
 Uslovi korišćenja (sa 4.6.3), Pravilnik o KOLO sistemu (sa 4.6.2) i Pravilnik o
@@ -232,6 +279,8 @@ prevođenje naloga je dobilo osnov" ispod.
 nabraja osnove za negativan zapis **iscrpno** i zatvara listu („Drugi osnov… ne može
 se ustanoviti — ni ovim pravilnikom bez izmene ovog člana, ni bilo kojim drugim
 aktom"). Peti osnov se zato ne može uvesti nigde drugde. **Izuzetaka je sada pet.**
+🔴 **PREVAZIĐENO 17.09.2026 — ima ih ŠEST.** Šesti je otpis po usklađivanju zatečenih
+potvrda (čl. 22a dokaza stvarnosti); vidi „POEN po potvrdi čeka prvi doprinos".
 
 🟡 **Zaostala unakrsna upućivanja — sada ih ima ŠEST, jedno manje nego pre.**
 `ucesce_dece` je prestalo da bude slomljeno jer se taj akt ovim potezom ponovo

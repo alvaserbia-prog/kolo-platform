@@ -49,7 +49,9 @@ POEN ti se upisuje i bez ijednog dinara. Dobijaš ga kroz potvrdu i dokaz stvarn
       {
         id: 44,
         pitanje: `Koji je moj prvi korak i kako dalje prikupljam POEN?`,
-        odgovor: `Prvi korak je potvrda stvarnosti. Neko ko te lično poznaje i sam ima dokaz stvarnosti potvrdi da si stvarna osoba, na osnovu tog poznanstva, bez ijednog dokumenta. Protokol tada upiše po 1.000 POENA i tebi i njemu, jednokratno i u istom iznosu za oboje.
+        odgovor: `Prvi korak je potvrda stvarnosti. Neko ko te lično poznaje i sam ima dokaz stvarnosti potvrdi da si stvarna osoba, na osnovu tog poznanstva, bez ijednog dokumenta. Potvrda deluje odmah: indeks ti raste za 10 odsto i postaješ redovan član istog časa.
+
+Po 1.000 POENA upisuje se i tebi i njemu, jednokratno i u istom iznosu za oboje, kad ostvariš svoj prvi doprinos — objaviš ponudu koju Fondacija odobri, doniraš, postaneš pokrovitelj ili izvršiš operativni doprinos. Do tada doprinos stoji zabeležen i vidiš ga u svom zapisu.
 
 Do tada ti nije zatvoreno ništa bitno: prvi oglas kojim nešto nudiš već ti nosi POEN.
 
@@ -57,7 +59,7 @@ Kad stekneš dokaz stvarnosti, otvaraju ti se četiri puta.
 
 Razmena. Ne moraš ništa da prodaješ. Razmena obuhvata i usluge i znanje, možeš nekome pomoći oko posla, podučiti ga, pričuvati decu. Druga strana ti tada prepiše POEN za to što si učinio.
 
-Potvrđivanje drugih. Kad ti potvrdiš nekoga koga stvarno poznaješ, po 1.000 POENA se upisuje i tebi i njemu, jednom po osobi. Potvrđuješ samo to da ta osoba postoji i da nema drugi nalog, pa se potvrda daje jedino za ljude koje zaista poznaješ.
+Potvrđivanje drugih. Kad ti potvrdiš nekoga koga stvarno poznaješ, po 1.000 POENA se upisuje i tebi i njemu, jednom po osobi, kad ta osoba ostvari svoj prvi doprinos. Potvrđuješ samo to da ta osoba postoji i da nema drugi nalog, pa se potvrda daje jedino za ljude koje zaista poznaješ.
 
 Operativni doprinos. Rad za zajedničko dobro po objavljenom zadatku. Zadatke postavlja Fondacija u početnoj fazi, a po aktivaciji nosioci ZRNA i Gornje Kolo. Kad izvršiš zadatak i nosilac ZRNA potvrdi izvršenje, POEN ti se upisuje.
 
@@ -270,6 +272,8 @@ Ali to nije prihod. Razlika postoji isključivo u POENIMA, koji nemaju vrednost 
 
 Upis je simetričan. Kad te neko potvrdi, Protokol upiše po 1.000 POENA i tebi i njemu, jednokratno i u istom iznosu. Nema nivoa iznad tebe ni ispod tebe i ništa ne teče naviše kroz mrežu ljudi koji bi se okoristili tvojom potvrdom.
 
+Zašto upis čeka tvoj prvi doprinos, a to nije provizija. Provizija za regrutovanje plaća se za dovedenu glavu i po pravilu raste sa onim što dovedeni potroši, uz nivoe kroz koje novac teče naviše. Ovde iznos ne zavisi ni od čega što ti radiš posle: fiksan je, isti za obe strane, jednokratan po osobi, i prag je jedan te isti za svakoga — da si uopšte nešto doprineo. Onaj ko je potvrdio tvog potvrđivača ne dobija ništa. Uslov ne postoji da bi se nagradilo dovođenje ljudi, nego da POEN ne bi nastajao bez ijednog traga stvarnog učešća.
+
 Upis nije naknada. Ni za tvoj rad, ni za tvoje podatke. To je automatski akt Protokola po unapred zapisanom pravilu: kad nastane zapis o potvrdi, POEN se upiše bez ugovora i bez pogađanja.
 
 Zašto farmanje nema smisla:
@@ -327,7 +331,11 @@ Dokumenti se ne traže ni od koga. Ni lična karta, ni pasoš, ni JMBG, ni fotog
 
 Već prva potvrda, dakle indeks od 10%, otvara glavne funkcije: upis POENA kroz donacije i pokroviteljstvo, upis ZRNA, učešće u Programima, punu Pijacu i komunikaciju sa ostalim članovima. Time postaješ redovan član i sam možeš potvrđivati druge.
 
-Šta se upisuje. Kada se potvrda evidentira, Protokol upisuje 1.000 POENA tebi i 1.000 onome ko te je potvrdio. Ako potvrda podleže nadzoru, prvi nadzornik koji upiše ishod dobija 500 POENA.
+Šta se upisuje. Protokol beleži 1.000 POENA tebi i 1.000 onome ko te je potvrdio, a upisuje ih kad ostvariš svoj prvi doprinos: objaviš ponudu koju Fondacija odobri, doniraš, postaneš pokrovitelj ili izvršiš operativni doprinos. Dok doprinos stoji zabeležen, to nije zapis POENA i ne ulazi ni u tvoje stanje ni u ukupan broj POENA u sistemu.
+
+Zašto se čeka. POEN beleži doprinos zajedničkom dobru. Potvrda kaže da si stvaran čovek, ali sama još ne govori da si išta doprineo — pa zapis nastaje kad se pojavi prvi trag stvarnog učešća. Indeks i pun pristup ne čekaju ništa, dobijaš ih odmah.
+
+Nadzor je izuzetak: ako potvrda podleže nadzoru, prvih 500 POENA nadzorniku upisuje se odmah po upisu ishoda, jer je to plaćen njegov rad, a ne tvoj doprinos.
 
 Zašto potvrda nešto vredi. Ko potvrdi osobu koja nije stvarna, gubi tih 1.000 POENA, a ako ih je u međuvremenu potrošio, ostaje mu nadoknada na zapisu. Uz to sledi sankcija: gubitak prava da dalje potvrđuje druge i, pošto je lažna potvrda Uslovima korišćenja izričito navedena kao teža povreda, gubitak prava na učešće u mreži. Potvrda zato nosi odgovornost za tuđi identitet i ne daje se olako.`,
       },

@@ -238,57 +238,71 @@ usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 fajla JESTE objava. 🔴 **Ne prepisivati tabelu verzija u `CLAUDE.md`** — razišla bi se
 sa folderom pri prvom sledećem bumpu (isti kvar kao prepisane tabele u ekranima).
 
-📄 **Hronologija svih 35 bumpova je u `docs/istorija-bumpova.md`** (izdvojena
+📄 **Hronologija svih 36 bumpova je u `docs/istorija-bumpova.md`** (izdvojena
 16.09.2026). Tamo se ide samo kad treba rekonstruisati zašto je neki akt dobio baš
 tu šifru. Pravila koja iz te hronologije proizlaze su ispod — ona se ne čitaju iz
-arhive.
+arhive. 🔴 **Uz svaki nov bump zapis ide u arhivu, ne ovde** — ovde se dopisuje samo
+ako je bump proizveo NOVU pouku koje u spisku nema.
 
-**Trenutno stanje seta (16.09.2026):** 17 akata; Registar radnji obrade ima
-**osamnaest radnji**, DPIA **osamnaest rizika** (pet srednjih, trinaest niskih).
-🔴 Kad se doda radnja obrade, zbir u DPIA se usklađuje istim potezom.
+**Trenutno stanje seta:** 17 akata; Registar radnji obrade ima **osamnaest radnji**,
+DPIA **osamnaest rizika** (pet srednjih, trinaest niskih); izuzetaka od zabrane
+negativnog zapisa je **šest** (Pravilnik čl. 14 st. 3). 🔴 Kad se doda radnja obrade,
+zbir u DPIA se usklađuje istim potezom.
 
 #### 🔴 Pouke iz bumpovanja — sve su se već desile, po pravilu više puta
 
 1. 🔴 **Jedan događaj objave = jedna šifra. Pri sudaru dve sesije ide NAREDNA
-   SLOBODNA šifra** (branjeno šest puta: 4.4.4, 4.4.7, 4.5.5, 4.6.0, 4.6.1, 4.6.4).
-   Pre bumpa **obavezno `git fetch origin main`**. Ako je druga sesija u međuvremenu
-   zauzela šifru: dovuci granu na `main`, prenesi svoje izmene **na main-ovu noviju
-   verziju akta** — nikad na stariju osnovu sa koje je grana krenula, jer to **tiho
-   poništava tuđi set** — i uzmi narednu slobodnu šifru.
-2. 🔴 **Treći član šifre ostaje JEDNOCIFREN.** Posle 4.5.9 ide **4.6.0**, ne 4.5.10
+   SLOBODNA šifra** (branjeno sedam puta: 4.4.4, 4.4.7, 4.5.5, 4.6.0, 4.6.1, 4.6.4,
+   4.6.5). Pre bumpa **obavezno `git fetch origin main`**. Ako je druga sesija u
+   međuvremenu zauzela šifru: dovuci granu na `main`, prenesi svoje izmene **na
+   main-ovu noviju verziju akta** — nikad na stariju osnovu sa koje je grana krenula,
+   jer to **tiho poništava tuđi set** — i uzmi narednu slobodnu šifru.
+2. 🔴 **Dopuna seta koji NIJE objavljen ne menja šifru.** Tada je reč o jednom
+   događaju objave, pa bi nov bump tvrdio suprotno (presedan: Uslovi su ostali na
+   4.4.3 iako su menjani dvaput istog dana; dokaz stvarnosti i Pravilnik su ostali na
+   4.6.5 uz dopunu od 17.09). 🔴 **Da je set već objavljen, ista dopuna traži nov
+   bump.**
+3. 🔴 **Treći član šifre ostaje JEDNOCIFREN.** Posle 4.5.9 ide **4.6.0**, ne 4.5.10
    (isto kao 4.4.9 → 4.5.0). Dvocifren član kvari imena fajlova i sve zatečene
    `grep` provere verzija.
-3. 🔴 **Pri izmeni ILI brisanju odredbe u Pravilniku OBAVEZNO proveriti whitepaper.**
-   Uhvaćen **tri puta**, i sva tri puta **testom, ne pregledom** — whitepaper istu
-   tvrdnju po pravilu ponavlja svojim rečima, a dvaput ju je nosio u goroj varijanti.
-4. 🔴 **Ne raditi blanket zamenu verzija u aktima.** Regularni izraz ne zna na koji
+4. 🔴 **Pri izmeni ILI brisanju odredbe u Pravilniku OBAVEZNO proveriti whitepaper.**
+   Bio je **propust tri puta** (R-08, R-09, R-02), i sva tri puta ga je uhvatio
+   **test, ne pregled** — whitepaper istu tvrdnju po pravilu ponavlja svojim rečima, a
+   dvaput ju je nosio u goroj varijanti. Od 4.6.5 se proverava uvek; tada je provera
+   prvi put ispala negativna (whitepaper nije trebalo dirati) i **to je i dalje
+   uspešna provera**, ne izgubljen posao.
+5. 🔴 **Ne raditi blanket zamenu verzija u aktima.** Regularni izraz ne zna na koji
    akt pokazuje broj koji menja — pomerio je i upućivanja na akte koji se nisu
    menjali. Uhvaćeno i vraćeno, a ostatak se mesecima kasnije našao u hu DPIA.
-5. 🔴 **Zaostala unakrsna upućivanja se NE ispravljaju u aktima koji se ovim potezom
+6. 🔴 **Zaostala unakrsna upućivanja se NE ispravljaju u aktima koji se ovim potezom
    ne objavljuju.** Objavljen fajl ne sme da govori nešto drugo nego kad je
    objavljen. Cena je slomljen pokazivač i to je prihvaćeno; **briše ih odjednom bump
    celog seta na 5.0.** Ispravljaju se samo u aktima koji se ponovo objavljuju.
    🟡 Isto važi i za istorijska pozivanja („Modul 3 aktiviran DPIA v4.3.0") — ona su
    tačan podatak o danu donošenja i ne diraju se.
-6. 🔴 **Glavni Pravilnik MORA da se bumpuje kad se uvodi nov osnov za negativan zapis
+7. 🔴 **Glavni Pravilnik MORA da se bumpuje kad se uvodi nov osnov za negativan zapis
    ili nov osnov za uvećanje ukupnog broja POEN-a.** Čl. 14 st. 3 nabraja osnove
    **iscrpno** i zatvara listu izričito („ni ovim pravilnikom bez izmene ovog člana,
    ni bilo kojim drugim aktom"), pa poseban pravilnik to ne može sam. Dešavalo se
-   četiri puta (R-15, R-18, R-20, kolektivna nabavka). 🟡 Bump glavnog Pravilnika
-   povlači ispravke u DPIA i Pravilniku o učešću dece, pa se ne otvara bez potrebe.
-7. 🔴 **Numeracija rizika: postoje DVA registra i ne poklapaju se.** Stari
+   pet puta (R-15, R-18, R-20, kolektivna nabavka, usklađivanje zatečenih potvrda).
+   🟡 Bump glavnog Pravilnika povlači ispravke u DPIA i Pravilniku o učešću dece, pa
+   se ne otvara bez potrebe.
+8. 🔴 **Isto važi i kad akt imenuje KANAL:** čl. 15 imenuje kanale i mora da kaže
+   kada po kojem nastupa upis — pa izmena trenutka upisa u posebnom pravilniku
+   povlači i glavni Pravilnik (tako je 4.6.5 uzeo oba akta).
+9. 🔴 **Numeracija rizika: postoje DVA registra i ne poklapaju se.** Stari
    (R-01…R-20, opisan po sekcijama ovog fajla) i nov, nezavisan
-   (`docs/registar-rizika-regulatori-2026-09.md`). Kad se kaže „R-01", misli se na
-   **nov** registar.
-8. 🔴 **Paralelne sesije daju migracijama iste vremenske oznake.** Prisma ih ređa
-   leksikografski po imenu foldera, pa je redosled određen i SQL nezavisan — ali se
-   oznake **NE smeju naknadno preimenovati**, jer su migracije već primenjene na test
-   bazu preview buildom grane.
-9. 🔴 **Konflikt u `CLAUDE.md` i u registru rizika pri paralelnom radu rešava se
-   SPAJANJEM oba reda, ne biranjem jednog.** Svaka sesija dopisuje svoj zapis.
-10. 🟡 **Sadržinski nepromenjen akt se ne bumpuje.** Ako akt ne nosi spornu odredbu,
+   (`docs/registar-rizika-regulatori-2026-09.md`, 22 rizika). Kad se kaže „R-01",
+   misli se na **nov** registar.
+10. 🔴 **Paralelne sesije daju migracijama iste vremenske oznake.** Prisma ih ređa
+    leksikografski po imenu foldera, pa je redosled određen i SQL nezavisan — ali se
+    oznake **NE smeju naknadno preimenovati**, jer su migracije već primenjene na
+    test bazu preview buildom grane.
+11. 🔴 **Konflikt u `CLAUDE.md` i u registru rizika pri paralelnom radu rešava se
+    SPAJANJEM oba reda, ne biranjem jednog.** Svaka sesija dopisuje svoj zapis.
+12. 🟡 **Sadržinski nepromenjen akt se ne bumpuje.** Ako akt ne nosi spornu odredbu,
     ostaje na svojoj šifri — to nije previd nego tačan podatak.
-11. 🔴 **Gde nov institut SME da živi — hijerarhija čl. 7.** Poseban pravilnik može
+13. 🔴 **Gde nov institut SME da živi — hijerarhija čl. 7.** Poseban pravilnik može
     da uredi pitanje **samo kad KOLO Pravilnik izričito uputi** (čl. 7 st. 4), a
     razgraničenje između pravilnika ide **po predmetu** (čl. 7 st. 3) — predmet
     Gornjeg Kola je ORGAN, a nabavki PROCES, pa nabavke nisu mogle biti dopuna
@@ -301,7 +315,7 @@ arhive.
 
 🟢 **Kod je usklađen sa aktima; zatečeni GAP-ovi iz v3.7.x su rešeni.** Snimak
 usklađenosti iz maja–juna 2026. i spisak sedam rešenih GAP-ova izdvojeni su u
-`docs/istorija-uskladjenosti.md` (16.09.2026) — mereni su prema **v3.7.x**, pa su im
+`docs/istorija-uskladjenosti.md` (17.09.2026) — mereni su prema **v3.7.x**, pa su im
 brojevi i imena fajlova zastareli po devet verzija. 🔴 **Ne koristiti ih kao izvor.**
 
 Aktivni GAP-ovi i ono što se svesno ne radi su u sekciji **„Nezavršeni TODO /
@@ -717,6 +731,7 @@ emituje 10.000.000 POEN, a osnivački korak se pali na svakih 100.000 POEN optic
 (`osnivacki.ts`, `PRAG_SKOK`) uz ukupno 100 koraka — jedna takva donacija iscrpela bi
 ceo osnivački kanal odjednom. **Odluka vlasnika: ne rešava se sada.**
 
+
 🔴 **NE pisati da koeficijent nagrađuje istrajnost** — aritmetika to obara: 10.000 RSD
 odjednom daje 12.000 POEN, a pet uplata po 2.000 daje 10.800, jer se koeficijent
 novodostignutog nivoa primenjuje na CELU novu donaciju. Odbranjivo obrazloženje (čl. 4)
@@ -725,7 +740,6 @@ glasi da **veći pojedinačan doprinos ima veći značaj za zajednicu** i da se
 priznanja. 🔴 Definicija koeficijenta se ne sme vratiti na „broj POEN-a po jednom
 dinaru donacije" (čl. 2) — jedinična formulacija je **kotacija cene** i kursnija je od
 same tabele; glasi „broj kojim se uvećava evidentirani doprinos".
-
 ### Pokroviteljstvo: isprava, javno priznanje, razgraničenje prema firmi (2026-09-08)
 
 Odluke uz analizu rizika **R-05** (pokroviteljstvo pravnih lica i preduzetnika).
@@ -926,13 +940,13 @@ ne ide kroz korisnikovo pravo prema Fondaciji nego kroz **obavezu Fondacije prem
 sopstvenom programu** (čl. 30 st. 5) i kroz **ispravku evidencije**, koja nije
 povraćaj naknade (čl. 30a st. 6). Odbrana besplatnosti time ostaje netaknuta.
 
+
 🔴 **Korisnik pri preuzimanju NE DAJE ništa** — nema činidbe ni prema Fondaciji ni
 prema dobavljaču; menja se jedino **evidencija njegovog ranijeg doprinosa
 zajednici**, koja se umanjuje. Uz tu rečenicu **OBAVEZNO** ide brana iz istog stava:
 raniji doprinos **ne daje pravo na dobro** i nije potraživanje (čl. 13 Pravilnika), a
 pravo na učešće proizlazi iz odluke o nabavci, ne iz ranijeg davanja. Bez brane se
 donacija čita kao **unapred plaćena kupovina** — gore od svega što se ovim rešava.
-
 ### Porez: POEN nije prihod, a roba iz nabavke je poklon (R-02, 2026-09-13)
 
 Sprovođenje rizika **R-02 iz novog registra** (`docs/registar-rizika-regulatori-2026-09.md`)
@@ -1097,6 +1111,205 @@ zaključane u `pravni-dokumenti.test.ts` na sr/en/ru.
 🟡 **Usput ispravljen zatečen pad testa:** `donacija-uplatilac-izvor.test.ts` je
 tražio namespace `admin` u prevodima, a on od 13.09.2026. živi **isključivo u sr**
 (`request.ts` ga dodaje pri učitavanju). Test je od te odluke bio crven.
+
+### POEN po potvrdi čeka prvi doprinos (2026-09-16)
+
+Odluka vlasnika. Do seta 4.6.4 je Protokol po evidentiranju verifikacionog zapisa
+upisivao **1.000 verifikatoru i 1.000 verifikovanom odmah**, automatski, bez ijedne
+ljudske odluke i bez ijednog traga da je potvrđeni išta doprineo. Sada se POEN
+**beleži**, a upisuje kad potvrđeni korisnik ostvari prvi **potvrđen** doprinos.
+
+🔴 **SAM ČIN POTVRDE SE NE MENJA I NE SME DA SE VEŽE ZA USLOV.** Indeks raste za
+10 p.p. odmah, nalog je redovan član istog časa, pun pristup od tog trenutka. Čeka
+**samo zapis POEN-a**. Razlog nije blagost: pristup ide iz **poverenja** (ko je stao
+iza tebe), a POEN iz **doprinosa** (šta si dao), i ta dva se ne spajaju. Spojena, čovek
+koji tek uđe ne bi mogao ni da se javi nekome kako bi dogovorio razmenu kojom bi uslov
+ispunio, socijalni programi bi stali (traže indeks ≥ 10%), a dečji nalozi bi ostali u
+stanju `POVEZANO`, jer ono traži roditelja koji je **redovan član**.
+
+**Četiri uslova, i sva četiri imaju isto svojstvo:**
+
+| | Uslov | Ko potvrđuje | Meri se |
+|---|---|---|---|
+| **A** | prvi **oglas** (ponuda, sadržinski minimum) | Fondacija — odobrenje | `EMISIJA_SADRZAJ` |
+| **B** | **javna donacija** | Fondacija — iz izvoda | `EMISIJA_DONACIJA` |
+| **C** | **pokroviteljstvo** | Fondacija — potvrda prijave | `EMISIJA_POKROVITELJ` |
+| **D** | **operativni doprinos** | nosilac ZRNA / UO | `EMISIJA_OPERATIVNI` |
+
+> POEN po potvrdi upisuje se kad korisnik ostvari **doprinos koji je neko potvrdio**.
+
+Nijedan se ne može sam sebi izdati, i to je cela definicija — ne spisak.
+
+🔴 **Meri se POSTOJANJE EMISIJE, ne postojanje prijave ili zapisa u pratećoj tabeli.**
+Time se **anonimna donacija isključuje sama od sebe**: za nju se POEN ne evidentira
+(donacije čl. 5a), pa `EMISIJA_DONACIJA` transakcija ni ne nastane. Nema posebne
+provere polja `javno` koja bi mogla da se raziđe sa tim pravilom.
+🟡 Anonimna donacija se **namerno** ne računa i iz drugog razloga: POEN za potvrdu je
+javan zapis u knjizi, pa bi se pojavio a na Pijaci ne bi osvanuo nijedan nov oglas —
+posmatrač zaključuje da je čovek donirao. To je tačno ono što anonimna donacija krije.
+
+🔴 **ŠTA NAMERNO NIJE USLOV, i zašto** (odluka vlasnika, sužavano u dva koraka):
+- **prepis POEN-a** — dogovaraju ga dve strane privatno, bez ikoga trećeg; dva naloga
+  mogu da ga proizvedu sama, pa ne dokazuje ništa;
+- **osnivački doprinos** — automatski akt vezan za opticaj, ne za radnju;
+- **socijalni programi** — nisu doprinos nego **podrška**: korisnik prima, ne daje.
+
+🔴 **USLOV NIJE „evidentiran doprinos po čl. 40a" u ranijem obliku.** Čl. 40a je do
+ovog seta imao i okidače `VERIFIKACIJA` i `PRIMLJEN_POEN`, pa bi potvrda otključavala
+čl. 40a, a čl. 40a potvrdu — brana bi bila prazna. Zato su **oba okidača uklonjena** i
+ostalo je samo `ODOBRENJE`. Enum vrednosti ostaju u bazi (nose ih zatečeni zapisi).
+
+🔴 **Svaki prvi oglas od ovog seta ide na odobrenje — i potvrđenog člana.** Ranije se
+verifikovanom doprinos evidentirao odmah pri objavi. Razlog za proširenje: odobren oglas
+sada otključava i POEN po potvrdi, pa jedan klik upisuje **najmanje 3.000 POEN-a** (a
+posle 100.000 opticaja, kad čovek može primiti do deset potvrda, i do 7.000). Takav upis
+ne sme da nastane bez ijedne ljudske odluke, a oglas koji formalno ispunjava sadržinski
+minimum ne mora biti stvarna ponuda. Zato dugme u tabu **Prvi oglasi** mora da pokaže
+**ukupan iznos koji će se upisati**.
+🔴 **Odobrenje NIJE diskreciona odluka da se nekome dâ POEN.** Fondacija **utvrđuje da
+je uslov ispunjen** — proverava minimum i stvarnu ponudu (čl. 40a). Razlika nije stilska:
+odbrana iz čl. 13 i operativnog čl. 27 počiva na tome da POEN nije naknada i da niko o
+njemu ne odlučuje. **Ne pisati nigde da Fondacija POEN „dodeljuje".**
+
+🔴 **NADZORNIKOVIH 500 ČEKAJU ISTI USLOV** (odluka vlasnika, 16.09.2026) — ali imaju
+**svoje stanje**, `nadzorPoenStatus`. Zaseban skup polja je nužan, ne kozmetika: ta
+emisija nastaje u **svom trenutku** (upis ishoda nadzora), a nadzornik ume da ishod
+upiše i pre i posle nego što uslov bude ispunjen. Sa jednim poljem se ne bi razlikovalo
+„nije upisano jer ishoda nema" od „nije upisano jer uslov nije ispunjen", pa bi kaskada
+vraćala POEN koji nikad nije emitovan.
+🔴 **Uslov se NE vezuje za ISHOD nadzora** — plaća se rad, ne saglasnost (čl. 7 st. 5).
+„Sporno" se upisuje isto kao „uredno", samo kad i ostali POEN po toj potvrdi. Vezivanje
+za ishod bi podsticalo na propuštanje i oborilo bi sopstveni član.
+🟡 **Posledicu znati:** nadzornik je od potvrđenog **dalji nego potvrđivač** — često ga
+i ne poznaje, pa mu upis zavisi od poteza stranca na koji ne može da utiče, dok
+potvrđivač bar može da podseti onoga koga je doveo. Prihvaćeno uz obrazloženje da je
+500 emitovanih povodom potvrde čoveka koji nikad ništa ne doprinese isto curenje kao i
+1.000, samo manje — i da pravilo tako ostaje jedna rečenica umesto rečenice sa
+izuzetkom. Zaključano `potvrda-uslov-izvor.test.ts`.
+
+🔴 **PUNOLETSTVO JE IZUZETO** (`bezUslovaZaPoen`). Detetu se na 18. rođendan istog dana
+poništava POEN iz prijateljstava, često u minus; da i roditeljske potvrde iz čl. 19 st. 3
+čekaju prvi oglas, rođendan bi bio čist minus bez ijedne protivteže. Ne otvarati taj put
+ničemu drugom.
+
+🔴 **Kaskade moraju da znaju za `ZABELEZEN`.** Veza u tom stanju nije ništa emitovala, pa
+se pri obaranju **samo gasi** — bez protivzapisa i bez nadoknade po čl. 20b. Pokriveno na
+pet mesta: `lazna-verifikacija.ts`, `verifikacije-naloga.ts` (a time i reset naloga i
+prevod u maloletni), `DELETE /api/profil` i `deca.ts`. U `deca.ts` je uz to ispravljeno
+**obaveštenje**: spisak pogođenih nosi iznose koji se javljaju ljudima, pa kad oduzimanja
+nema, ne sme da stigne ni poruka da ga ima.
+
+**Interfejs.** POEN ekran dobija **zaseban red „Zabeležene potvrde"**, odvojen od
+„Zabeleženog doprinosa" iako oba čekaju — čekaju različite stvari: doprinos po čl. 40a
+čeka **tvoj** oglas, a potvrda koju si DAO čeka **tuđi** prvi doprinos. Spojeni u jedan
+broj, rekli bi čoveku da o svemu tome odlučuje sam. 🔴 Naziv je „zabeležena potvrda",
+nikad „POEN na čekanju" (čl. 12) — zaključano testom. Stranica Potvrde nosi spisak sa
+dugmadima „Objavi ponudu" i „Doniraj".
+
+**Admin tab „Potvrde"** — dva odvojena odeljka:
+- **VENTIL**: ručni upis po pojedinačnoj potvrdi, uz **obavezan razlog** u revizijskom
+  dnevniku. Postoji zbog ljudi koje četiri uslova ne pokrivaju — onaj ko samo kupuje,
+  stariji član na programu podrške. Bez njega bi njima i njihovim potvrđivačima POEN
+  čekao zauvek.
+- **USKLAĐIVANJE ZATEČENIH**: jednokratna prelazna radnja, **Izračunaj → Sprovedi**,
+  gde se broj POEN-a iz pregleda **otkucava rukom** (ista brana kao otkucan pseudonim pri
+  resetovanju naloga). 🔴 Pregled i sprovođenje idu kroz **istu funkciju**
+  (`suviHod: true/false`) — dve odvojene računice bi se razišle; sprovođenje ne veruje
+  otkucanom broju nego računa iznova i staje ako se stanje promenilo.
+- 🔴 **Tab NEMA broj uz naziv i ne ulazi u sidebar badge.** Zabeležena potvrda ne traži
+  radnju administratora nego se sama razrešava; broj koji nikad ne padne na nulu uči
+  ljude da ignorišu i one badge-ove koji nešto znače.
+
+🔴 **Usklađivanje povlači PUN IZNOS — zapis SME u minus** (odluka vlasnika, 17.09.2026,
+posle uvida u spisak po članu: *„ne vidim da iko ima minus a trebalo bi jer su neki
+uzimali a uopšte nisu postavili svoj oglas"*). **Ovo OBARA raniju odluku o kapiranju na
+nulu** (varijanta 2), i razlog je aritmetički, ne strogost: kapirano povlačenje daje
+ishod **suprotan cilju radnje** — ko je POEN već potrošio zadržao bi ga, a ko ga je
+sačuvao vratio bi ga celog, pa bi usklađivanje nagradilo upravo ono ponašanje zbog kog
+se sprovodi. Isto pravilo već nosi otpis prijateljstva, poništen prepis po prijavi
+razmene i prevod u maloletni. **Povlače se i nadzornikovih 500**, po svom stanju
+(`nadzorPoenStatus`), pa veza ulazi u obradu i kad je upisan samo jedan od dva iznosa.
+
+🟢 **Minus se sam popunjava baš ponašanjem koje se traži**, i to je ono što ga razlikuje
+od sankcije: zabeležen doprinos od 1.000 **ostaje**, pa kad čovek objavi oglas i
+Fondacija ga odobri, upisuje mu se 1.000 po čl. 40a i 1.000 po potvrdi — dakle **2.000**,
+čime se minus od 1.000 gasi i čovek završava tamo gde bi i bio. Usklađivanje nije
+oduzimanje nego **pomeren trenutak upisa**.
+
+🔴 **Teret se ne prenosi ni na koga** — svako vraća isključivo ono što je povodom te
+potvrde njemu bilo evidentirano; **nadoknada iz čl. 20b se NE primenjuje** (tamo
+nepokriveni deo prelazi na verifikatora, ovde ne prelazi nikome). Ko ode u minus dobija
+**drugačije obaveštenje** (`notifikacije.potvrda_uskladjena_minus`, pet jezika) — minus
+menja šta sme sa zapisom i ne sme da se pojavi bez reči. Pregled pre dugmeta izričito
+javlja **koliko ljudi ide u minus i koliko ukupno**.
+
+🔴 **Akti to poznaju, i morali su:** osnov je **čl. 22a Pravilnika o dokazu stvarnosti**
+(prelazna odredba: jednokratnost, ko šta vraća, zašto se ne kapira, da zabeležen
+doprinos ostaje, da to nije mera prema korisniku i da ide prigovor po čl. 37a Uslova) uz
+**ŠESTI izuzetak u čl. 14 st. 3 t. 6 glavnog Pravilnika**. Bez te tačke bi minus bio
+osnov koji zatvarajuća odredba čl. 14 izričito zabranjuje („ni bilo kojim drugim
+aktom") — ista protivrečnost koju je R-20 ispravljao kod prevoda u maloletni.
+🟢 Šifra se time NE menja: 4.6.5 nije objavljen na produkciji, pa izmena ulazi u isti set.
+🔴 **Uslov se pri povlačenju meri BLAGO:** računa se svaki evidentiran doprinos po
+čl. 40a, bez obzira kojim je okidačem nastao. Zatečeni oglasi potvrđenih članova nikad
+nisu prolazili kroz odobrenje jer se ono tada nije tražilo — traženje odobrenja unazad
+bilo bi kažnjavanje po pravilu koje nije postojalo.
+Protivzapis ide **novim tipom `USKLADJIVANJE_POTVRDE`**, da se u istoriji vidi da to nije
+ni poništenje lažne potvrde ni otpis. Radnja je **dugme, ne migracija** — emisija mora
+kroz zapis transakcije, a pad opticaja je trenutak koji bira čovek (isti razlog kao kod
+`evidentirajZateceneVerifikovane`). Pregled izričito javlja kad pad opticaja prelazi
+**osnivački prag** unazad: već upaljeni koraci ostaju, ali sledeći čeka da opticaj ponovo
+naraste.
+
+🟡 **Okidači + noćni prolaz, oba namerno.** Okidač je jedna linija u tuđem toku i lako je
+promaši nova putanja ka istom kanalu — a tada bi POEN čekao zauvek, bez ijedne greške i
+bez ikoga ko bi primetio. Uz to okidač ne hvata pad emisije. Isti razlog iz kog je
+`glasanje-zatvaranje` morao da dobije cron pored lenjog poziva iz tri ekrana.
+Cron: `/api/cron/potvrde-uslov`, dnevno u **05:30**.
+
+**Kod:** `src/lib/potvrda-uslov.ts` (ČISTE funkcije), `src/lib/protokol/potvrda-poen.ts`
+(servisne; 🔴 **zaseban modul zbog ciklusa uvoza** — `verifikacija-service` uvozi
+`doprinos-sadrzaju`, a `doprinos-sadrzaju` mora da zove otključavanje),
+`src/lib/protokol/potvrde-uskladjivanje.ts`, rute `/api/admin/potvrde-na-cekanju`,
+`/api/admin/potvrde-uskladjivanje`, cron `/api/cron/potvrde-uslov`, admin
+`PotvrdeTab.tsx`. Migracije `20260916120000_potvrda_poen_enumi` →
+`20260916120100_potvrda_poen_uslov` (🔴 **backfill zatečenih na `EVIDENTIRAN` je
+obavezan** — bez njega bi okidači emitovali POEN drugi put svakom zatečenom članu) →
+`20260916130000_uskladjivanje_potvrde_enum` → `20260916130100_pristanak_4_6_4`.
+**Brane:** `potvrda-uslov.test.ts` (pravila) i `potvrda-uslov-izvor.test.ts` (13 provera,
+gleda IZVOR — među njima i da se povlačenje NE kapira na stanje zapisa, jer bi se
+kapiranje vratilo bez ijednog vidljivog kvara) + odredbe u `pravni-dokumenti.test.ts`
+(čl. 22a na sr/en/ru, šesta tačka i „Izuzetaka je šest" u glavnom Pravilniku), uz
+`UKINUTO` obrazac za staru formulaciju „Protokol automatski upisuje" na svih pet jezika.
+
+🔴 **Uticaj na registar rizika** (ocene se NE menjaju — R-08 i R-16 nisu obrađeni, pa se
+preračunavaju kad dođu na red):
+- 🟢 **R-08** (strukturna hiperinflacija POEN-a) — najveći dobitak. Kanal potvrde je bio
+  jedini koji emituje 2.000–2.500 bez ijedne provere i bez ijedne radnje, a dnevni limit
+  od 10% računa se iz opticaja koji te emisije same podižu.
+- 🟢 **R-16** (osnivački kanal kao lančana šema) — POEN više ne teče iz **broja dovedenih
+  glava** nego traži potvrđen doprinos dovedenog.
+- 🟢 **R-22** („jedna osoba, jedan korisnik") — lanac lažnih naloga prestaje da se
+  isplati: svaki bi morao da dobije odobren oglas, dakle da prođe kroz čoveka.
+- 🔴 **R-02** (POEN kao prihod) — može se **pogoršati ako se loše napiše**. Vidi pravilo o
+  odobrenju iznad: Fondacija utvrđuje da je uslov ispunjen, ne odlučuje o davanju.
+- 🔴 **R-07** (obmanjujuća praksa) — svaki ekran koji bi i dalje obećavao „za potvrdu
+  dobijaš 1.000" postaje neistinit. Pročešljano u istom potezu (landing, kako-funkcioniše,
+  onboarding, POEN ekran, Potvrde, četiri FAQ odgovora).
+
+🔴 **FAQ 53 („je li ovo provizija za regrutovanje") je prepisan i to je najosetljiviji
+tekst u celom potezu.** Izmena zaoštrava upravo to pitanje, pa odgovor mora da ga primi
+direktno: provizija se plaća za dovedenu glavu i raste sa onim što dovedeni potroši, uz
+nivoe kroz koje novac teče naviše; ovde je iznos **fiksan, isti za obe strane, jednokratan
+po osobi**, prag je **jedan te isti za svakoga**, i onaj ko je potvrdio tvog potvrđivača
+**ne dobija ništa**. Uslov ne postoji da bi se nagradilo dovođenje ljudi nego da POEN ne
+bi nastajao bez traga učešća. **Ne skraćivati taj odgovor.**
+
+🟡 **Zatečeno dugme „Evidentiraj zatečene" (tab Osnivači) nije menjano**, ali treba znati
+šta sada radi: ono i dalje evidentira zabeležene doprinose potvrđenih članova bez pregleda
+pojedinačnog oglasa, a od ovog seta time otključava i POEN po potvrdi. To je i dalje
+svesna radnja superadmina nad zatečenim redom čekanja; ako počne da smeta, mesto je da se
+ograniči na naloge koji već imaju odobren oglas — ne da se ukloni.
 
 ### Dokaz pristanka: kvačica koja nije stizala do servera (R-06, 2026-09-14)
 
@@ -3616,9 +3829,10 @@ razmene). Isto važi i za **druge ljude** kojima je POEN upisan povodom palih po
 završiti sa negativnim zapisom zbog tuđe omaške u uzrastu — zato mu ide **protivzapis
 u istoriju** (`OTPIS_PREVOD_U_MALOLETNI`) **i obaveštenje**; minus menja šta sme sa
 zapisom i ne sme da se pojavi bez reči. **Izuzetaka od zabrane negativnog zapisa
-(Pravilnik čl. 14 st. 3) ima PET** — nadoknada, poništen prepis, otpis prijateljstva,
-otpis po poništenju potvrde zbog neaktivnosti i ovo. Od seta **4.5.7** akt ih nabraja
-isto toliko; ovo je peta tačka, uređena čl. 4d Pravilnika o učešću dece.
+(Pravilnik čl. 14 st. 3) ima ŠEST** — nadoknada, poništen prepis, otpis prijateljstva,
+otpis po poništenju potvrde zbog neaktivnosti, ovo, i (od 17.09.2026) otpis po
+usklađivanju zatečenih potvrda. Od seta **4.5.7** akt ih nabraja isto toliko; ovo je
+peta tačka, uređena čl. 4d Pravilnika o učešću dece.
 
 🟡 **Reset naloga (`reset-korisnika.ts`) i dalje staje na nuli** — `dozvoliMinus` je
 podrazumevano `false`. Tamo je reč o probi korisničkog puta, ne o poništenju emisije.
@@ -4004,8 +4218,8 @@ Do ove izmene Fondacija **nije imala nijednu polugu nad tuđim sadržajem** osim
 ### Programi Protokola
 - **Operativni doprinos (Pravilnik čl. 36; Pravilnik o operativnom doprinosu):** zadatak objavljuje nosilac ZRNA odn. Gornje Kolo, a u Fazi 1 privremeno Fondacija **u ime zajednice** (čl. 4, od 4.4.4 — vidi „Operativni doprinos: nema naručioca, nema naknade"); korisnik (indeks ≥ 10%) se prijavljuje i izvršava; izvršenje **verifikuju nosioci ZRNA (Faza 2), odn. UO (Faza 1)** — **NIJE** međusobno potvrđivanje proizvoljnih korisnika. Model: predlagač zadaje **predloženi POEN** (težinski koeficijent), evidentirani POEN = predloženi × min(1, L/P) u okviru dnevnog limita. ✅ Implementirano u `programi.ts` (`raspodelaKoeficijent`, `evidentiraniPoen`); verifikacija nosilaca ZRNA/UO sa proverom sukoba interesa.
 - **Socijalni programi:** PODRSKA_MAJKAMA (i primarni staratelji), PODRSKA_STARIJIMA, POSEBNA_BRIGA, SKOLOVANJE — uslovi/koeficijenti u programskim pravilnicima.
-- Svi programi otvoreni verifikovanim korisnicima (indeks ≥ 10%), nezavisno od Kruga.
 - 🔴 **Školovanje: dokaz statusa je IZJAVA pod punom odgovornošću, ne isprava** (programi podrške čl. 13 st. 2 i 3, od 4.3.2). Za maloletnog korisnika daje je roditelj odnosno zakonski zastupnik i njome potvrđuje da je dete redovno upisano u školu odnosno na fakultet; punoletni korisnik daje je sam. 🔴 **Potvrde o upisu i druge isprave se NE traže** — ne dostavljaju se i ne prikupljaju. Neistinita izjava povlači mere iz Uslova (suspenzija, isključenje), prestanak evidentiranja i poništenje već evidentiranog POEN-a protivzapisom. Uz to važi i verifikatorska potvrda iz čl. 4. 🟡 Program obuhvata **i učenike osnovne i srednje škole**, ne samo studente; iznos je fiksnih 2.000 POEN dnevno (čl. 13).
+- Svi programi otvoreni verifikovanim korisnicima (indeks ≥ 10%), nezavisno od Kruga.
 - 🔴 **Socijalni program traži indeks ≥ 10% — jednu primljenu potvrdu (od seta 4.3.1, 2026-08-18).** Do tada je čl. 4 Pravilnika o programima podrške tražio **pun indeks (100%)**, pa su prijavu mogli da podnesu samo nalozi sa svih deset potvrda; u kodu je to bio zaseban `MAX_INDEKS` gejt u `POST /api/programi/[type]/prijava`, iznad već postojećeg `imaFunkcionalniPristup`. Taj gejt je uklonjen — prag sada drži jedno mesto. Isto važi i za obustavu: `razlogObustaveProgram` (`programi.ts`, cron `/api/cron/programi-revizija`) gasi ACTIVE prijavu tek kad indeks padne **ispod 10%**, ne ispod 100%; ranije je jedna poništena potvrda gasila program čoveku koji uslov i dalje ispunjava. UI prop se zove `imaPristupProgramima` (bio `imaPunIndeks`).
 - **Ostatak čl. 4 je netaknut:** izričit pristanak podnosioca i potvrda SVIH njegovih verifikatora pod punom odgovornošću, bez uvida u unete podatke; Fondacija ne odobrava dok svi ne potvrde. Copy (`programi.nepun_indeks`, `programi.pristanak_tekst`, 5 jezika) više ne pominje „svih deset" — broj verifikatora zavisi od indeksa.
 - Dnevni limit (10% opticaja), proporcionalno smanjenje pri prekoračenju.
@@ -4286,7 +4500,7 @@ Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)**
 
 ## Reference
 - **`dokumentacija 4.1/`** — kanonski set (17 akata, sr + en/ru/hr/hu). Verzije iz imena fajlova.
-- `docs/registar-rizika-regulatori-2026-09.md` — **nov** registar regulatornih rizika (radni materijal, nije normativa).
+- `docs/registar-rizika-regulatori-2026-09.md` — **nov** registar regulatornih rizika, 22 rizika (radni materijal, nije normativa).
 - `docs/istorija-bumpova.md` — hronologija svih bumpova akata (istorija, ne izvor).
 - `docs/istorija-uskladjenosti.md` — snimak usklađenosti v3.7.x i rešeni GAP-ovi (istorija, ne izvor).
 - `docs/` ostalo — interne radne beleške (FAQ analiza, glosar, model vidljivosti, obrađivači i prenos) — **nije normativa**.

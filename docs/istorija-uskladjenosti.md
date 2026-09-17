@@ -1,6 +1,6 @@
 # Arhiva rešenih i zastarelih zapisa iz CLAUDE.md
 
-> **Šta je ovo.** Zapisi izdvojeni iz `CLAUDE.md` 16.09.2026: snimak usklađenosti
+> **Šta je ovo.** Zapisi izdvojeni iz `CLAUDE.md` 17.09.2026: snimak usklađenosti
 > koda sa aktima v3.7.x (maj–jun 2026) i spisak GAP-ova koji su u međuvremenu
 > **rešeni**.
 >

@@ -82,15 +82,43 @@ Verifikacioni zapis je deo evidencije kolektivnog dobra. Verifikacioni zapisi č
 
 *Evidencija POEN-a za verifikaciju*
 
-Po evidentiranju verifikacionog zapisa, Protokol automatski upisuje nove zapise POEN-a: verifikatoru 1.000 POEN-a i verifikovanom 1.000 POEN-a.
+Po evidentiranju verifikacionog zapisa Protokol beleži nove zapise POEN-a: verifikatoru 1.000 POEN-a i verifikovanom 1.000 POEN-a.
+
+Zabeleženi doprinos upisuje se u Protokolu kada verifikovani korisnik ostvari prvi potvrđen doprinos zajedničkom dobru, a to je:
+
+1) prvi oglas kojim nudi dobro ili uslugu, odobren u smislu člana 40a Pravilnika o KOLO sistemu;
+
+2) donacija Fondaciji uz objavljivanje podataka o donatoru, po čijem je prijemu doprinos evidentiran u smislu člana 5a Pravilnika o pokroviteljstvu i donacijama;
+
+3) pokroviteljstvo po kome je doprinos evidentiran u zapisu korisnika koji je prijavu podneo;
+
+4) operativni doprinos čije je izvršenje verifikovano u smislu Pravilnika o operativnom doprinosu.
+
+Zajedničko svojstvo svih oblika iz prethodnog stava jeste da je doprinos potvrdila Fondacija odnosno nosilac ZRNA — nijedan se ne ostvaruje odlukom samog korisnika. Ažuriranje evidencije POEN-a između korisnika (član 16 Pravilnika o KOLO sistemu) nije doprinos u smislu ovog člana.
+
+Ako je uslov iz stava 2 ispunjen pre evidentiranja verifikacionog zapisa, upis nastupa u trenutku evidentiranja tog zapisa.
+
+Do upisa zabeleženi doprinos ne predstavlja zapis POEN-a: ne ulazi u zapis nijednog korisnika ni u ukupan broj evidentiranih POEN-a u sistemu.
+
+Verifikacioni zapis, indeks stvarnosti i prava koja iz njih proizlaze nastaju evidentiranjem verifikacionog zapisa i ne zavise od upisa POEN-a iz ovog člana.
+
+Uslov iz stava 2 ne primenjuje se na verifikacije koje roditelji daju pri prelasku maloletnog korisnika u punoletni nalog (član 19 Pravilnika o učešću dece); u tom slučaju upis nastupa u trenutku evidentiranja verifikacionog zapisa.
+
+Ako verifikacioni zapis prestane da važi pre upisa, zabeleženi doprinos se gasi. Poništenje zapisa POEN-a i nadoknada iz člana 20b se ne primenjuju, jer upisa nije ni bilo.
+
+Fondacija može upisati zabeleženi doprinos i kad uslov iz stava 2 nije ispunjen, uz obrazloženje koje se evidentira. Ta mogućnost postoji za korisnike koji zajedničkom dobru doprinose na način koji se ne ostvaruje nijednim od oblika iz stava 2.
 
 Ako verifikacija podleže nadzoru, Protokol upisuje 500 POEN-a prvom nadzorniku koji evidentira ishod nadzora (član 11), bez obzira na to koji je ishod evidentirao. Upis nastupa u trenutku evidentiranja ishoda, a ne u trenutku verifikacije; do tada nadzornik nije ni određen.
+
+Uslov iz stava 2 primenjuje se i na upis nadzorniku: i taj upis nastupa kad verifikovani korisnik ostvari prvi potvrđen doprinos. Uslov se ne vezuje za ishod nadzora — evidentira se obavljen rad, ne saglasnost sa verifikacijom.
 
 Nadzorniku kome je zapis prosleđen po ishodu „za proveru" ne upisuju se POEN-i. Po jednoj verifikaciji evidentira se najviše jedan upis od 500 POEN-a.
 
 Kada verifikacija ne podleže nadzoru, ukupna evidencija iznosi 2.000 POEN-a. Kada podleže nadzoru, ukupna evidencija po evidentiranju prvog ishoda nadzora iznosi 2.500 POEN-a.
 
 Evidentira se rad nadzornika, ne saglasnost sa verifikacijom. Nadzornik koji utvrdi da nešto nije u redu obavlja isti posao kao i onaj koji ne nađe ništa sporno, pa je i evidencija ista; vezivanje evidencije za potvrdan ishod podsticalo bi na propuštanje.
+
+POEN evidentira doprinos zajedničkom dobru. Verifikacioni zapis utvrđuje da je korisnik stvarno lice, ali sam po sebi ne sadrži doprinos — zato zapis POEN-a nastaje kad se u sistemu pojavi prvi potvrđen trag učešća tog korisnika. Time se ujedno sprečava da ukupan broj evidentiranih POEN-a raste po osnovu naloga koji u sistemu nisu ostvarili nijedan doprinos.
 
 Evidentiranje POEN-a za verifikaciju je automatski akt Protokola u smislu člana 15 tačka 2 Pravilnika o KOLO sistemu.
 
@@ -345,6 +373,24 @@ Dok ukupan opticaj ne dostigne 100.000 POEN-a, korisnik može primiti najviše j
 Ograničenje iz stava 1 primenjuje se prema stanju opticaja u trenutku verifikacije. Verifikacije primljene za vreme važenja ograničenja ostaju punovažne; po dostizanju opticaja od 100.000 POEN-a indeks stvarnosti raste po opštim pravilima ovog pravilnika, uključujući zabranjenu zonu iz Glave V.
 
 Svrha ograničenja je da se u početnom periodu mreža širi isključivo pristupanjem novih korisnika, a ne ponavljanjem verifikacija u istom delu mreže.
+
+### Član 22a
+
+*Usklađivanje zatečenih verifikacija*
+
+Doprinos evidentiran po verifikacijama izvršenim pre uvođenja uslova iz člana 7 stav 2 ovog pravilnika vraća se u zabeležen doprinos ako verifikovani korisnik do sprovođenja ove odredbe nije ostvario nijedan od oblika doprinosa iz tog stava.
+
+Usklađivanje se sprovodi jednokratno. Svakom pogođenom licu otpisuje se isključivo ono što mu je povodom te verifikacije bilo evidentirano — verifikatoru 1.000 POEN-a, verifikovanom 1.000 POEN-a i nadzorniku 500 POEN-a. Otpis se izvršava protivzapisom u korist Protokola; zbir svih zapisa i dalje iznosi nula, a ukupan broj evidentiranih POEN-a se umanjuje.
+
+Otpis se izvršava i kada zapis time postane negativan, po članu 14 stav 3 tačka 6 Pravilnika o KOLO sistemu. Teret se ne prenosi ni na jedno drugo lice; nadoknada iz člana 20b ovog pravilnika se po ovom osnovu ne primenjuje.
+
+Otpis ograničen na stanje zapisa se ne primenjuje zato što bi dao ishod suprotan svrsi usklađivanja: korisnik koji je evidentirani doprinos već upotrebio zadržao bi ga, a korisnik koji ga nije upotrebio vratio bi ga u celini.
+
+Zabeleženi doprinos usklađivanjem se ne gasi. On se upisuje kada uslov iz člana 7 stav 2 bude ispunjen, po istim pravilima koja važe za verifikacije izvršene posle uvođenja tog uslova.
+
+Usklađivanje nije mera prema korisniku. Ono ne pretpostavlja nepravilnost i ne pokreće postupak iz Glave VIII ovog pravilnika; verifikacioni zapis i indeks stvarnosti ostaju nepromenjeni.
+
+Svako pogođeno lice obaveštava se o izvršenom otpisu, uz navođenje broja POEN-a i stanja zapisa. Protiv otpisa se može podneti prigovor po članu 37a Uslova korišćenja.
 
 ### Član 23
 

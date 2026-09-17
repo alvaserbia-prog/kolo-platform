@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { emitujPoen } from "./emisija";
+import { probajEvidentiratiPotvrde } from "./potvrda-poen";
 import { danObracuna } from "./obracunski-dan";
 import { FUNKCIONALNI_PRAG_INDEKSA } from "./dokaz-stvarnosti";
 import { ProgramType, TipKorisnika, TransactionType } from "@/generated/prisma/client";
@@ -127,6 +128,8 @@ export function evidentiraniPoen(predlozeniPoen: number, koeficijent: number): n
 
 type EmisijaItem = {
   walletId: string;
+  /** Vlasnik zapisa — treba za otključavanje POEN-a po potvrdi kod operativnog (čl. 7). */
+  userId: string;
   amount: number;
   type: ProgramType;
   evidencijaId?: string;
@@ -175,7 +178,7 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
 
     const amount = izracunajDnevniIznos(en.type, en.metadata, en.dailyAmount, danas);
     if (amount > 0) {
-      items.push({ walletId: en.user.wallet.id, amount, type: en.type, enrollmentId: en.id });
+      items.push({ walletId: en.user.wallet.id, userId: en.user.id, amount, type: en.type, enrollmentId: en.id });
     }
   }
 
@@ -189,7 +192,13 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
     });
     for (const ev of evidencije) {
       if (!ev.user.wallet) continue;
-      items.push({ walletId: ev.user.wallet.id, amount: ev.predlozeniPoen, type: "PED", evidencijaId: ev.id });
+      items.push({
+        walletId: ev.user.wallet.id,
+        userId: ev.user.id,
+        amount: ev.predlozeniPoen,
+        type: "PED",
+        evidencijaId: ev.id,
+      });
     }
   }
 
@@ -233,6 +242,19 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
           ? { kljuc: "transakcije.program", parametri: { program: labelPrograma(item.type) } }
           : { kljuc: "transakcije.socijalni_program" }
       );
+
+      // 🔴 SAMO operativni doprinos otključava POEN po potvrdi (dokaz stvarnosti
+      // čl. 7). Socijalni program se namerno NE računa: to nije doprinos nego
+      // podrška — korisnik prima, ne daje. Ne dodavati ga ovde.
+      //
+      // Ne baca: emisija je već upisana i ne sme da padne zbog ovog kanala.
+      if (jeOperativni) {
+        try {
+          await probajEvidentiratiPotvrde(item.userId);
+        } catch (e) {
+          console.error("[programi] upis POEN-a po potvrdi nije uspeo", { userId: item.userId, e });
+        }
+      }
     }
 
     // Lični zbir po programu (R-03, M-1). Opis transakcije više ne imenuje program,

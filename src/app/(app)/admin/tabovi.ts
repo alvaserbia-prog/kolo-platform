@@ -12,5 +12,5 @@
 // potvrda preuzimanja. Nije moderacija („pijaca"), nije prigovor („prigovori") i
 // nije odluka o prepisu POEN-a („razmene") — ovde se troše dinarska sredstva i gasi
 // POEN po iskorišćenju (Pravilnik čl. 14a i 51a).
-export const ADMIN_TABOVI = ["dashboard", "programi", "ped", "pokrovitelji", "donacije", "prigovori", "korisnici", "pijaca", "prvi-oglasi", "razmene", "nabavke", "emisija", "osnivaci", "vesti", "obavestenja", "audit", "aktivnost", "levak", "nadzor", "odluke"] as const;
+export const ADMIN_TABOVI = ["dashboard", "programi", "ped", "pokrovitelji", "donacije", "prigovori", "korisnici", "pijaca", "prvi-oglasi", "potvrde", "razmene", "nabavke", "emisija", "osnivaci", "vesti", "obavestenja", "audit", "aktivnost", "levak", "nadzor", "odluke"] as const;
 export type Tab = (typeof ADMIN_TABOVI)[number];

@@ -2,29 +2,38 @@
  * Doprinos sadržaju platforme — osmi kanal evidentiranja POEN-a.
  * Osnov: Pravilnik o KOLO sistemu 4.1.1 čl. 15 tačka 8 i čl. 40a.
  *
- * Suština kanala je u tome što BELEŽENJE i EVIDENTIRANJE nisu isti trenutak —
- * ali samo za nalog čija stvarnost nije potvrđena:
+ * Suština kanala je u tome što BELEŽENJE i EVIDENTIRANJE nisu isti trenutak:
  *
- *   VERIFIKOVAN objavi oglas    →  EVIDENTIRAN odmah (čl. 40a st. 3)
+ *   objavljen oglas  →  ZABELEZEN — oglas je odmah na Pijaci, ali doprinos nije
+ *                       zapis POEN-a: ne ulazi ni u jedno stanje, ni u opticaj,
+ *                       ni u agregate
+ *   pa ODOBRENJE FONDACIJE (čl. 40a)  →  EVIDENTIRAN
  *
- *   NEVERIFIKOVAN objavi oglas  →  ZABELEZEN — oglas je odmah na Pijaci, ali
- *                                  doprinos nije zapis POEN-a: ne ulazi ni u
- *                                  jedno stanje, ni u opticaj, ni u agregate
- *   pa ODOBRENJE FONDACIJE (glavni put, čl. 40a st. 4) — ili verifikacija u
- *   lancu potvrda, ili primljen POEN  →  EVIDENTIRAN
+ * 🔴 Od seta 4.6.4 odobrenje važi za SVAKI prvi oglas — i potvrđenog i
+ * nepotvrđenog člana. Ranije se verifikovanom doprinos evidentirao odmah pri
+ * objavi, a čekanje je važilo samo za nalog bez potvrde.
  *
- * 🔴 Odobrenje Fondacije je uvedeno 2026-08-11 odlukom vlasnika i **glavni je
- * put** za nalog bez potvrde: čovek objavi oglas odmah, a 1.000 POEN dobija kad
- * admin pogleda oglas i odobri ga (admin tab „Prvi oglasi"). Bez toga bi pedeset
- * praznih naloga sa pedeset oglasa naduvalo opticaj — a opticaj okida osnivački
- * korak od 24.000 POEN-a i gasi prelazno ograničenje iz čl. 22 Pravilnika o
- * dokazu stvarnosti.
+ * Razlog za proširenje: odobren oglas od tog seta otključava i POEN po potvrdi
+ * (1.000 verifikatoru i 1.000 verifikovanom, dokaz stvarnosti čl. 7), pa jedan
+ * klik upisuje najmanje 3.000 POEN-a. Takav upis ne sme da nastane bez ijedne
+ * ljudske odluke, a oglas koji formalno ispunjava sadržinski minimum ne mora biti
+ * stvarna ponuda.
  *
- * Ostala dva okidača (verifikacija, primljen POEN) ostaju kao ranije: i jedno i
- * drugo je trag stvarnog učešća, pa odobrenje tada nije potrebno.
+ * 🔴 UKLONJENI OKIDAČI `VERIFIKACIJA` I `PRIMLJEN_POEN`. Bez toga bi odobrenje
+ * bilo šupljikavo: potvrda bi evidentirala oglas koji čovek iz UO nikad nije
+ * pogledao, a uz to bi nastao krug — potvrda otključava čl. 40a, a čl. 40a
+ * otključava POEN po potvrdi. Enum vrednosti ostaju u bazi jer ih nose zatečeni
+ * zapisi; kod ih više ne koristi.
  *
- * Čekanje se NE primenjuje na verifikovanog jer tu ne štiti ni od čega: nalog
- * čija je stvarnost potvrđena nije prazan nalog.
+ * 🔴 Odobrenje NIJE diskreciona odluka da se nekome dâ POEN. Fondacija utvrđuje
+ * da je uslov ispunjen — proverava sadržinski minimum i da je reč o stvarnoj
+ * ponudi (čl. 40a). Razlika nije stilska: POEN nije naknada i niko o njemu ne
+ * odlučuje (Pravilnik čl. 13, operativni čl. 27), pa se ni ovde ne sme pisati
+ * ni govoriti da ga Fondacija „dodeljuje".
+ *
+ * Bez čekanja bi pedeset praznih naloga sa pedeset oglasa naduvalo opticaj — a
+ * opticaj okida osnivački korak od 24.000 POEN-a i gasi prelazno ograničenje iz
+ * čl. 22 Pravilnika o dokazu stvarnosti.
  *
  * Obrazac poziva (obavezan):
  *   - DB promene u jednoj `prisma.$transaction()`
@@ -38,6 +47,7 @@ import { obavesti } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { DoprinosOkidac, DoprinosStatus, TransactionType } from "@/generated/prisma/client";
 import { IZNOS, oglasIspunjavaMinimum, type OglasMinimum } from "@/lib/doprinos-pravila";
+import { probajEvidentiratiPotvrde } from "./potvrda-poen";
 
 // Čista pravila (iznos, sadržinski minimum, ko sme da objavi/pošalje) žive u
 // `@/lib/doprinos-pravila` — bez Prisme, da ih forma oglasa može uvesti u
@@ -96,17 +106,21 @@ export async function zabeleziDoprinos(
 
   await logAdminAkcija(userId, "DOPRINOS_SADRZAJU_ZABELEZEN", oglas.id, `${IZNOS} POEN`);
 
-  // Uslov je TIP NALOGA, ne indeks: ko je jednom verifikovan ostaje verifikovan i
-  // ako mu indeks kasnije padne. Čita se iz baze — sesija se osvežava sa zakašnjenjem.
+  // 🔴 SVAKI prvi oglas ide na odobrenje — i potvrđenog i nepotvrđenog člana
+  // (set 4.6.4, čl. 40a). Do tada se verifikovanom doprinos evidentirao odmah pri
+  // objavi, a čekanje je važilo samo za nalog bez potvrde.
+  //
+  // Razlog za proširenje: od ovog seta odobren oglas otključava i POEN po potvrdi
+  // (1.000 verifikatoru i 1.000 verifikovanom, dokaz stvarnosti čl. 7), pa jedan klik
+  // upisuje najmanje 3.000 POEN-a. Takav upis ne sme da nastane bez ijedne ljudske
+  // odluke, a oglas koji formalno ispunjava sadržinski minimum ne mora biti stvarna
+  // ponuda. Odobrenje NIJE diskreciona odluka da se nekome dâ POEN — Fondacija
+  // utvrđuje da je uslov ispunjen (čl. 40a: proverava minimum i stvarnu ponudu).
   const korisnik = await prisma.user.findUnique({
     where: { id: userId },
-    select: { tipKorisnika: true, pseudonim: true },
+    select: { pseudonim: true },
   });
-  if (korisnik && korisnik.tipKorisnika !== "NEVERIFIKOVAN") {
-    await probajEvidentirati(userId, DoprinosOkidac.OBJAVA);
-  } else {
-    await najaviNaCekanju(userId, korisnik?.pseudonim ?? "", oglas.id);
-  }
+  await najaviNaCekanju(userId, korisnik?.pseudonim ?? "", oglas.id);
 
   return true;
 }
@@ -367,6 +381,10 @@ export async function probajEvidentirati(
     // Čovek mora da sazna da mu je POEN evidentiran — inače mu se stanje promeni
     // bez ijednog traga u zvoncetu. Ide POSLE emisije, jer se javlja o svršenom činu.
     await javiEvidentiran(userId, zabelezen.id, zabelezen.iznos);
+
+    // Odobren prvi oglas je jedan od četiri traga učešća koji otključavaju POEN po
+    // potvrdi (dokaz stvarnosti čl. 7). Ne baca — doprinos je već evidentiran.
+    await probajEvidentiratiPotvrde(userId);
     return true;
   } catch (e) {
     console.error("[doprinos-sadrzaju] evidentiranje nije uspelo", { userId, okidac, e });

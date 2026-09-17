@@ -84,15 +84,43 @@ A hitelesítési bejegyzés a közös jó nyilvántartásának része. A hiteles
 
 *A hitelesítésért járó POEN nyilvántartása*
 
-A hitelesítési bejegyzés rögzítésével a Protokoll automatikusan új POEN-bejegyzéseket ír be: a hitelesítőnek 1.000 POEN-t, a hitelesítettnek 1.000 POEN-t.
+A hitelesítési bejegyzés rögzítésével a Protokoll új POEN-bejegyzéseket jegyez fel: a hitelesítőnek 1.000 POEN-t, a hitelesítettnek 1.000 POEN-t.
+
+A feljegyzett hozzájárulás akkor kerül a Protokollban bejegyzésre, amikor a hitelesített felhasználó megteszi első megerősített hozzájárulását a közös jóhoz, éspedig:
+
+1) az első hirdetés, amellyel javat vagy szolgáltatást kínál, a KOLO rendszerről szóló szabályzat 40a. cikke értelmében jóváhagyva;
+
+2) az Alapítványnak nyújtott adomány az adományozó adatainak közzétételével, amelynek kézhezvételével a hozzájárulás a pártfogásról és adományokról szóló szabályzat 5a. cikke értelmében nyilvántartásba került;
+
+3) pártfogás, amely alapján a hozzájárulás a kérelmet benyújtó felhasználó nyilvántartásában rögzítésre került;
+
+4) operatív hozzájárulás, amelynek teljesítése az operatív hozzájárulásról szóló szabályzat értelmében hitelesítésre került.
+
+Az előző bekezdés valamennyi formájának közös tulajdonsága, hogy a hozzájárulást az Alapítvány, illetve egy ZRNO-birtokos erősítette meg — egyik sem valósul meg magának a felhasználónak a döntésével. A POEN-nyilvántartás felhasználók közötti frissítése (a KOLO rendszerről szóló szabályzat 16. cikke) e cikk értelmében nem hozzájárulás.
+
+Ha a 2. bekezdés szerinti feltétel a hitelesítési bejegyzés rögzítése előtt teljesül, a beírás e bejegyzés rögzítésének pillanatában történik.
+
+A beírásig a feljegyzett hozzájárulás nem minősül POEN-bejegyzésnek: nem része sem egyetlen felhasználó nyilvántartásának, sem a rendszerben nyilvántartott POEN teljes számának.
+
+A hitelesítési bejegyzés, a valóságindex és az ezekből eredő jogok a hitelesítési bejegyzés rögzítésével keletkeznek, és nem függnek az e cikk szerinti POEN-beírástól.
+
+A 2. bekezdés szerinti feltétel nem alkalmazandó azokra a hitelesítésekre, amelyeket a szülők a kiskorú felhasználó nagykorú fiókba való átmenetekor adnak (a gyermekek részvételéről szóló szabályzat 19. cikke); ebben az esetben a beírás a hitelesítési bejegyzés rögzítésének pillanatában történik.
+
+Ha a hitelesítési bejegyzés a beírás előtt hatályát veszti, a feljegyzett hozzájárulás megszűnik. A POEN-bejegyzések megsemmisítése és a 20b. cikk szerinti megtérítés nem alkalmazandó, mivel beírás nem is történt.
+
+Az Alapítvány a feljegyzett hozzájárulást akkor is beírhatja, ha a 2. bekezdés szerinti feltétel nem teljesül, nyilvántartásba vett indokolás mellett. Ez a lehetőség azon felhasználók számára áll fenn, akik a közös jóhoz olyan módon járulnak hozzá, amely a 2. bekezdés egyik formájával sem valósul meg.
 
 Ha a hitelesítés felügyelet alá esik, a Protokoll 500 POEN-t ír be annak az első felügyelőnek, aki felügyeleti eredményt rögzít (11. cikk), függetlenül attól, melyik eredményt rögzítette. A beírás az eredmény rögzítésének pillanatában történik, nem a hitelesítés pillanatában; addig felügyelő nincs is kijelölve.
+
+A 2. bekezdés szerinti feltétel a felügyelőnek történő beírásra is alkalmazandó: az a beírás is akkor történik, amikor a hitelesített felhasználó megteszi első megerősített hozzájárulását. A feltétel nem kötődik a felügyeleti eredményhez — az elvégzett munka kerül nyilvántartásba, nem a hitelesítéssel való egyetértés.
 
 Annak a felügyelőnek, akihez a bejegyzést az „ellenőrzésre“ eredmény nyomán továbbították, POEN nem kerül beírásra. Hitelesítésenként legfeljebb egy 500 POEN összegű beírás kerül nyilvántartásba.
 
 Ha a hitelesítés nem esik felügyelet alá, az összes nyilvántartás 2.000 POEN. Ha felügyelet alá esik, az első felügyeleti eredmény rögzítésével az összes nyilvántartás 2.500 POEN.
 
 A felügyelő munkája kerül nyilvántartásba, nem a hitelesítéssel való egyetértése. Az a felügyelő, aki megállapítja, hogy valami nincs rendben, ugyanazt a munkát végzi, mint az, aki semmi kifogásolhatót nem talál, ezért a nyilvántartás is azonos; a nyilvántartás megerősítő eredményhez kötése az elnézésre ösztönözne.
+
+A POEN a közös jóhoz való hozzájárulást tartja nyilván. A hitelesítési bejegyzés megállapítja, hogy a felhasználó valós személy, önmagában azonban nem tartalmaz hozzájárulást — ezért a POEN-bejegyzés akkor keletkezik, amikor a rendszerben megjelenik e felhasználó részvételének első megerősített nyoma. Ezzel egyúttal megelőzhető, hogy a nyilvántartott POEN teljes száma olyan fiókok révén növekedjék, amelyek a rendszerben egyetlen hozzájárulást sem tettek.
 
 A hitelesítésért járó POEN nyilvántartásba vétele a Protokoll automatikus aktusa a KOLO rendszerről szóló szabályzat 15. cikk 2. pontja értelmében.
 
@@ -347,6 +375,24 @@ Amíg a teljes forgalomban lévő mennyiség el nem éri a 100.000 POEN-t, a fel
 Az (1) bekezdés szerinti korlátozás a forgalomban lévő mennyiség hitelesítéskori állapota szerint alkalmazandó. A korlátozás hatálya alatt kapott hitelesítések érvényben maradnak; a 100.000 POEN forgalom elérésekor a valóságindex e szabályzat általános szabályai szerint növekszik, ideértve az V. fejezet szerinti tiltott zónát is.
 
 A korlátozás célja, hogy a kezdeti időszakban a háló kizárólag új felhasználók csatlakozásával bővüljön, ne pedig a háló ugyanazon részén belüli hitelesítések ismétlésével.
+
+### 22a. cikk
+
+*A korábban végzett hitelesítések összehangolása*
+
+Az e szabályzat 7. cikk (2) bekezdése szerinti feltétel bevezetése előtt végzett hitelesítések alapján nyilvántartásba vett hozzájárulás visszakerül a feljegyzett hozzájárulás állapotába, ha a hitelesített felhasználó e rendelkezés végrehajtásáig az említett bekezdés szerinti hozzájárulási formák egyikét sem valósította meg.
+
+Az összehangolásra egyszeri alkalommal kerül sor. Minden érintett személy javára kizárólag az kerül leírásra, ami e hitelesítés kapcsán a javára nyilvántartásba került — a hitelesítőnek 1.000 POEN, a hitelesítettnek 1.000 POEN, a felügyelőnek pedig 500 POEN. A leírás a Protokoll javára szóló ellenbejegyzéssel történik; az összes bejegyzés összege továbbra is nulla, a nyilvántartásba vett POEN-ek teljes száma pedig csökken.
+
+A leírás akkor is végrehajtásra kerül, ha a bejegyzés ezáltal negatívvá válik, a KOLO rendszerről szóló szabályzat 14. cikk (3) bekezdés 6. pontja szerint. A teher nem száll át semmilyen más személyre; az e szabályzat 20b. cikke szerinti megtérítés ezen a jogalapon nem alkalmazandó.
+
+A bejegyzés állapotára korlátozott leírás nem alkalmazandó, mert az összehangolás céljával ellentétes eredményre vezetne: az a felhasználó, aki a nyilvántartásba vett hozzájárulást már felhasználta, megtartaná azt, míg az, aki nem használta fel, teljes egészében visszaadná.
+
+Az összehangolás nem szünteti meg a feljegyzett hozzájárulást. Az akkor kerül bejegyzésre, amikor a 7. cikk (2) bekezdése szerinti feltétel teljesül, ugyanazon szabályok szerint, amelyek az e feltétel bevezetése után végzett hitelesítésekre vonatkoznak.
+
+Az összehangolás nem a felhasználóval szembeni intézkedés. Nem feltételez szabálytalanságot, és nem indítja meg az e szabályzat VIII. fejezete szerinti eljárást; a hitelesítési bejegyzés és a valóságindex változatlan marad.
+
+Minden érintett személyt értesíteni kell a végrehajtott leírásról, a POEN-ek számának és a bejegyzés állapotának megjelölésével. A leírás ellen a Felhasználási feltételek 37a. cikke szerint kifogás nyújtható be.
 
 ### 23. cikk
 

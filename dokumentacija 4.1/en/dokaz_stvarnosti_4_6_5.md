@@ -84,15 +84,43 @@ The verification record forms part of the record of the common good. Verificatio
 
 *POEN ledger entry for verification*
 
-Upon the recording of a verification record, the Protocol automatically enters new POEN records: 1,000 POEN to the verifier and 1,000 POEN to the verified user.
+Upon the recording of a verification record, the Protocol notes new POEN records: 1,000 POEN to the verifier and 1,000 POEN to the verified user.
+
+A noted contribution is entered in the Protocol once the verified user makes their first confirmed contribution to the common good, namely:
+
+1) the first listing by which they offer a good or a service, approved within the meaning of Article 40a of the Rulebook on the KOLO System;
+
+2) a donation to the Foundation with publication of the donor's details, upon receipt of which the contribution is recorded within the meaning of Article 5a of the Rulebook on Patronage and Donations;
+
+3) patronage under which the contribution has been recorded in the record of the user who submitted the application;
+
+4) an operational contribution whose performance has been verified within the meaning of the Rulebook on Operational Contribution.
+
+What all the forms in the preceding paragraph have in common is that the contribution has been confirmed by the Foundation or by a ZRNO holder — none of them can be brought about by the user's own decision. Updating the POEN ledger between users (Article 16 of the Rulebook on the KOLO System) is not a contribution within the meaning of this Article.
+
+Where the condition under paragraph 2 is met before the verification record is recorded, the entry occurs at the moment that record is recorded.
+
+Until entered, a noted contribution does not constitute a POEN record: it forms no part of any user's record, nor of the total number of POEN recorded in the system.
+
+The verification record, the reality index and the rights arising from them come into being upon the recording of the verification record and do not depend on the POEN entry under this Article.
+
+The condition under paragraph 2 does not apply to verifications given by parents upon a minor user's transition to an adult account (Article 19 of the Rulebook on the Participation of Children); in that case the entry occurs at the moment the verification record is recorded.
+
+If the verification record ceases to be valid before the entry, the noted contribution lapses. The annulment of POEN records and the compensation under Article 20b do not apply, since no entry was ever made.
+
+The Foundation may enter a noted contribution even where the condition under paragraph 2 is not met, subject to a statement of reasons that is recorded. That possibility exists for users who contribute to the common good in a manner not achieved through any of the forms under paragraph 2.
 
 If the verification is subject to supervision, the Protocol enters 500 POEN to the first supervisor who records a supervision outcome (Article 11), regardless of which outcome was recorded. The entry occurs at the moment the outcome is recorded, not at the moment of verification; until then no supervisor has been designated.
+
+The condition under paragraph 2 also applies to the entry made to the supervisor: that entry likewise occurs once the verified user makes their first confirmed contribution. The condition is not tied to the supervision outcome — what is recorded is the work performed, not agreement with the verification.
 
 A supervisor to whom the record is forwarded following the outcome "needs review" receives no POEN. At most one entry of 500 POEN is recorded per verification.
 
 Where the verification is not subject to supervision, the total entry amounts to 2,000 POEN. Where it is subject to supervision, the total entry upon the recording of the first supervision outcome amounts to 2,500 POEN.
 
 What is recorded is the supervisor's work, not their agreement with the verification. A supervisor who finds that something is wrong performs the same work as one who finds nothing objectionable, so the entry is the same; tying the entry to an affirmative outcome would encourage looking the other way.
+
+POEN records a contribution to the common good. A verification record establishes that the user is a real person, but in itself contains no contribution — which is why a POEN record comes into being once the first confirmed trace of that user's participation appears in the system. This also prevents the total number of recorded POEN from growing on account of accounts that have made no contribution whatsoever.
 
 The recording of POEN for verification is an automatic act of the Protocol within the meaning of Article 15 item 2 of the Rulebook on the KOLO System.
 
@@ -347,6 +375,24 @@ Until total circulation reaches 100,000 POEN, a user may receive at most one ver
 The limit under paragraph 1 is applied according to the state of circulation at the moment of verification. Verifications received while the limit is in force remain valid; once circulation reaches 100,000 POEN, the reality index grows under the general rules of this Rulebook, including the prohibited zone under Chapter V.
 
 The purpose of the limit is to ensure that, in the initial period, the network grows solely through the accession of new users, rather than through repeated verifications within the same part of the network.
+
+### Article 22a
+
+*Alignment of existing verifications*
+
+A contribution recorded under verifications performed before the introduction of the condition under Article 7 paragraph 2 of this Rulebook is returned to the state of a recorded contribution where the verified user has, up to the implementation of this provision, not achieved any of the forms of contribution under that paragraph.
+
+The alignment is carried out once. Each affected person has written off solely what was recorded to them on the occasion of that verification — 1,000 POEN to the verifier, 1,000 POEN to the verified user and 500 POEN to the supervisor. The write-off is executed by a counter-record in favour of the Protocol; the sum of all records remains zero, and the total number of recorded POENs decreases.
+
+The write-off is executed even where the record thereby becomes negative, under Article 14 paragraph 3 point 6 of the Rulebook on the KOLO System. The burden is not transferred to any other person; the compensation under Article 20b of this Rulebook does not apply on this ground.
+
+A write-off limited to the state of the record is not applied because it would produce an outcome contrary to the purpose of the alignment: a user who has already used the recorded contribution would keep it, while a user who has not used it would return it in full.
+
+The alignment does not extinguish the recorded contribution. It is entered when the condition under Article 7 paragraph 2 is met, under the same rules that apply to verifications performed after the introduction of that condition.
+
+The alignment is not a measure against the user. It does not presuppose an irregularity and does not initiate the procedure under Chapter VIII of this Rulebook; the verification record and the index of reality remain unchanged.
+
+Each affected person is notified of the executed write-off, stating the number of POENs and the state of the record. An objection against the write-off may be lodged under Article 37a of the Terms of Use.
 
 ### Article 23
 

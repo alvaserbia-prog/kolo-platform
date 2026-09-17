@@ -230,7 +230,7 @@ Zbir svih zapisa POEN-a u sistemu, uključujući zapis Protokola, u svakom trenu
 
 Protokol vodi zapis koji je u svakom trenutku negativan i predstavlja protivzapis svih POEN-a evidentiranih kod korisnika i organizacionih jedinica.
 
-Nijedan korisnik niti kolektivni oblik ne može imati negativan zapis POEN-a. Izuzetaka je pet i navedeni su ovde iscrpno:
+Nijedan korisnik niti kolektivni oblik ne može imati negativan zapis POEN-a. Izuzetaka je šest i navedeni su ovde iscrpno:
 
 1) **nadoknada po poništenju lažne verifikacije**, uređena članom 20b Pravilnika o dokazu stvarnosti: kada se poništenjem oduzimaju zapisi POEN-a koji su već potrošeni, nepokriveni deo prelazi u negativnu vrednost i prenosi se na verifikatora koji je nalog uveo;
 
@@ -240,9 +240,11 @@ Nijedan korisnik niti kolektivni oblik ne može imati negativan zapis POEN-a. Iz
 
 4) **otpis po poništenju potvrde zbog neaktivnosti**, uređen članom 6 Pravilnika o učešću dece: kada se potvrda stvarnosti roditelja poništava zato što se o postojanju deteta u roku nije izjasnila jedna od strana veze, svakom pogođenom licu otpisuje se ono što mu je povodom te potvrde bilo evidentirano, i otpis se izvršava i kada zapis time postane negativan; teret se ne prenosi na drugo lice;
 
-5) **otpis po prevođenju punoletnog naloga u maloletni**, uređen članom 4d Pravilnika o učešću dece: kada Fondacija utvrdi da iza naloga otvorenog kao punoletan stoji maloletno lice, poništava se doprinos koji je tom nalogu bio evidentiran kroz kanale iz člana 15 ovog pravilnika, kao i doprinos koji je drugim licima bio evidentiran povodom potvrda koje tim prevođenjem padaju; otpis se izvršava i kada zapis time postane negativan, svako vraća isključivo ono što je povodom toga bilo evidentirano, a teret se ne prenosi na drugo lice.
+5) **otpis po prevođenju punoletnog naloga u maloletni**, uređen članom 4d Pravilnika o učešću dece: kada Fondacija utvrdi da iza naloga otvorenog kao punoletan stoji maloletno lice, poništava se doprinos koji je tom nalogu bio evidentiran kroz kanale iz člana 15 ovog pravilnika, kao i doprinos koji je drugim licima bio evidentiran povodom potvrda koje tim prevođenjem padaju; otpis se izvršava i kada zapis time postane negativan, svako vraća isključivo ono što je povodom toga bilo evidentirano, a teret se ne prenosi na drugo lice;
 
-Na negativan zapis po svakom od pet osnova primenjuje se isti režim: on nije dug i ne naplaćuje se, POEN-i koji korisniku pristignu prvo ga popunjavaju, iniciranje ažuriranja evidencije u korist drugog korisnika moguće je tek kada zapis pređe nulu, a razmena dobara i usluga nije ograničena.
+6) **otpis po usklađivanju zatečenih potvrda**, uređen članom 22a Pravilnika o dokazu stvarnosti: kada se doprinos evidentiran po verifikacijama izvršenim pre uvođenja uslova iz člana 7 tog pravilnika vraća u zabeležen doprinos, svakom pogođenom licu otpisuje se ono što mu je povodom te verifikacije bilo evidentirano; otpis se izvršava i kada zapis time postane negativan, a teret se ne prenosi na drugo lice.
+
+Na negativan zapis po svakom od šest osnova primenjuje se isti režim: on nije dug i ne naplaćuje se, POEN-i koji korisniku pristignu prvo ga popunjavaju, iniciranje ažuriranja evidencije u korist drugog korisnika moguće je tek kada zapis pređe nulu, a razmena dobara i usluga nije ograničena.
 
 Drugi osnov za negativan zapis ne može se ustanoviti — ni ovim pravilnikom bez izmene ovog člana, ni bilo kojim drugim aktom.
 
@@ -288,7 +290,7 @@ Nove zapise POEN-a Protokol upisuje kroz sledeće kanale evidentiranja doprinosa
 
 Kanal pod tačkom 8 obuhvata doprinos prvim oglasom (član 40a) i putanju doprinosa razmeni (član 40b).
 
-Kanali pod tačkama 1, 3, 4, 7 i 8 uređeni su Glavom VI ovog pravilnika. Kanal pod tačkom 2 uređen je Pravilnikom o dokazu stvarnosti. Kanali pod tačkama 5, 6 i 9 uređeni su Glavom VIII kao moduli sistema; kanal pod tačkom 9 bliže je uređen Pravilnikom o učešću dece. Evidentiranje po kanalu pod tačkom 9 je automatski akt Protokola i ne ulazi u dnevni limit Programa Protokola; upisani POEN ulazi u ukupan broj evidentiranih POEN-a i time u obračunski okvir sistema. Parametri evidentiranja, uslovi i ograničenja za svaki kanal utvrđuju se posebnim pravilnicima, naročito Pravilnikom o operativnom doprinosu, Pravilnikom o dokazu stvarnosti, Pravilnikom o donacijama, Pravilnikom o pokroviteljstvu, Pravilnikom o kolektivnim oblicima, pravilnicima Programa Podrške i Pravilnikom o osnivačkom doprinosu.
+Kanali pod tačkama 1, 3, 4, 7 i 8 uređeni su Glavom VI ovog pravilnika. Kanal pod tačkom 2 uređen je Pravilnikom o dokazu stvarnosti. Upis POEN-a po tom kanalu nastupa kada verifikovani korisnik ostvari prvi potvrđen doprinos, pod uslovima utvrđenim članom 7 tog pravilnika; do upisa doprinos je zabeležen i ne ulazi u ukupan broj evidentiranih POEN-a. Kanali pod tačkama 5, 6 i 9 uređeni su Glavom VIII kao moduli sistema; kanal pod tačkom 9 bliže je uređen Pravilnikom o učešću dece. Evidentiranje po kanalu pod tačkom 9 je automatski akt Protokola i ne ulazi u dnevni limit Programa Protokola; upisani POEN ulazi u ukupan broj evidentiranih POEN-a i time u obračunski okvir sistema. Parametri evidentiranja, uslovi i ograničenja za svaki kanal utvrđuju se posebnim pravilnicima, naročito Pravilnikom o operativnom doprinosu, Pravilnikom o dokazu stvarnosti, Pravilnikom o donacijama, Pravilnikom o pokroviteljstvu, Pravilnikom o kolektivnim oblicima, pravilnicima Programa Podrške i Pravilnikom o osnivačkom doprinosu.
 
 Finansijski doprinos ostvaruje se u dinarima. Pokroviteljstvo se ostvaruje doniranjem novca, robe ili usluga. Dinarska sredstva ulaze u Fondaciju i ne ulaze u obračunski okvir sistema. Po prijemu donacije ili pokroviteljskog doprinosa, Protokol u zapisu odgovarajućeg korisnika evidentira doprinos u POEN-ima, prema parametrima evidentiranja utvrđenim posebnim pravilnikom. Evidentiranje POEN-a je automatski akt Protokola i ne zasniva ugovorni odnos između donatora i Fondacije.
 
@@ -594,13 +596,13 @@ Korisniku se evidentira doprinos u iznosu od 1.000 POEN-a za prvi oglas kojim nu
 
 Doprinos iz prethodnog stava je prvi korak putanje doprinosa razmeni iz člana 40b.
 
-Verifikovanom korisniku doprinos se evidentira u trenutku objave oglasa.
+Oglas se objavljuje odmah, a doprinos se u trenutku objave beleži i evidentira se u Protokolu kada Fondacija odobri oglas. Ovo važi za svakog korisnika, bez obzira na to da li je njegova stvarnost potvrđena.
 
-Neverifikovanom korisniku oglas se objavljuje odmah, a doprinos se u trenutku objave beleži i evidentira se u Protokolu kada Fondacija odobri oglas. Doprinos se evidentira i bez odobrenja ako pre toga nastupi verifikacija korisnika u lancu potvrda ili ažuriranje evidencije POEN-a u korist tog korisnika. Do evidentiranja doprinos ne predstavlja zapis POEN-a i ne ulazi u ukupan broj evidentiranih POEN-a u sistemu.
+Do evidentiranja doprinos ne predstavlja zapis POEN-a i ne ulazi u ukupan broj evidentiranih POEN-a u sistemu. Doprinos se bez odobrenja Fondacije ne evidentira; verifikacija korisnika u lancu potvrda i ažuriranje evidencije POEN-a u njegovu korist nisu osnov za evidentiranje.
 
 Fondacija odlučuje o odobrenju u razumnom roku, proverom da oglas ispunjava sadržinski minimum i da predstavlja stvarnu ponudu dobra ili usluge. Ako doprinos ne bude odobren, korisnik se obaveštava uz navođenje razloga; oglas se time ne uklanja, a doprinos se ponovo razmatra povodom dopunjenog ili novog oglasa istog korisnika.
 
-Razlikovanje iz prethodnih stavova služi tome da nalozi čija stvarnost nije potvrđena ne uvećavaju ukupan broj evidentiranih POEN-a pre nego što se u sistemu pojavi trag stvarnog učešća.
+Odobrenje služi tome da ukupan broj evidentiranih POEN-a ne raste pre nego što se u sistemu pojavi trag stvarnog učešća. Odobrenjem Fondacija utvrđuje da je uslov ispunjen — da oglas ispunjava sadržinski minimum i da predstavlja stvarnu ponudu — i ne odlučuje o tome da li će korisniku evidentirati doprinos. Odobren oglas je ujedno jedan od oblika doprinosa po kojima se upisuje POEN evidentiran za verifikaciju (član 7 Pravilnika o dokazu stvarnosti), pa se jednom odlukom upisuje više zapisa.
 
 Ako oglas bude uklonjen zbog povrede Uslova korišćenja pre nego što doprinos bude evidentiran, zabeleženi doprinos se poništava. Već evidentiran doprinos se uklanjanjem oglasa ne poništava.
 

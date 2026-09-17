@@ -351,7 +351,7 @@
     "zabelezen_opis": "Evidentira se kad Fondacija odobri tvoj prvi oglas, kad te netko potvrdi ili kad ti netko prepiše POEN. Do tada je samo zabilježeno, još nije dio tvog zapisa.",
     "samo_primalac": "Dok si nov član, POEN se može prepisivati u tvoj zapis. Prepis u tuđi zapis otvara se po potvrdi.",
     "nadoknada_naslov": "Naknada",
-    "nadoknada_opis": "Nastala je poništenjem zapisa koji nije bio pokriven (poništenom potvrdom koju si dao ili poništenim prepisom po prijavi razmjene. Nije dug i ne može se naplatiti) POEN-i koji ti se upišu ili prepišu prvo je popunjavaju. Razmjena dobara i usluga ti nije ograničena; prepis POEN-a drugome moguć je kad zapis prijeđe nulu.",
+    "nadoknada_opis": "Nastala je poništenjem zapisa koji nije bio pokriven — poništenom potvrdom koju si dao, poništenim prepisom po prijavi razmjene ili usklađivanjem zatečenih potvrda. Nije dug i ne može se naplatiti: POEN-i koji ti se upišu ili prepišu prvo je popunjavaju. Razmjena dobara i usluga ti nije ograničena; prepis POEN-a drugome moguć je kad zapis prijeđe nulu.",
     "putanja_naslov": "Doprinosi razmjeni",
     "putanja_opis": "Pet koraka, svaki po 1.000 POEN-a. Otključavaju se redom, a ukupno se po članu evidentira najviše 5.000 POEN-a.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
@@ -371,7 +371,12 @@
     "rezervisano_nabavka": "Rezervirano za nabavu",
     "rezervisano_nabavka_opis": "Rezervirano do preuzimanja robe. Poništava se pri preuzimanju, ne prije; ako ne preuzmeš, vraća se u tvoj zapis.",
     "send_ceka_naslov": "Prepis čeka odobrenje roditelja",
-    "send_ceka_opis": "{iznos} POEN članu {pseudonim} čeka da roditelj odobri. POEN ti se do tada ne skida sa zapisa."
+    "send_ceka_opis": "{iznos} POEN članu {pseudonim} čeka da roditelj odobri. POEN ti se do tada ne skida sa zapisa.",
+    "zabelezene_potvrde_naslov": "Zabilježene potvrde",
+    "zabelezene_potvrde_opis": "Upisuje se kad se pojavi prvi doprinos onoga na koga se potvrda odnosi: objavljena ponuda koju Zaklada odobri, donacija, pokroviteljstvo ili izvršen operativni doprinos. Do tada to nije zapis POENA i ne ulazi u tvoje stanje.",
+    "zabelezene_potvrde_moje": "Tvojih {iznos} POENA — čeka tvoj prvi doprinos",
+    "zabelezene_potvrde_tudje": "{iznos} POENA za potvrde koje si dao — čeka prvi doprinos onih koje si potvrdio",
+    "zabelezene_potvrde_nadzor": "{iznos} POENA za nadzor — čeka prvi doprinos potvrđenoga člana"
   },
   "verifikacija": {
     "naslov": "Potvrda stvarnosti",
@@ -443,7 +448,16 @@
     "pijaca_neverifikovan_opis": "Ako ne poznaješ nikoga u KOLU, objavi svoj oglas kako bi te članovi kontaktirali, upoznali i potvrdili da si stvarna osoba. Oglas se vidi na Tržnici odmah, a 1.000 POENA upisuje ti se nakon odobrenja oglasa.",
     "pijaca_neverifikovan_dugme": "Postavi svoje prve oglase",
     "tip_bez_pristupa": "Nema pristup",
-    "tip_dete": "Dijete"
+    "tip_dete": "Dijete",
+    "ceka_naslov": "Zabilježene potvrde",
+    "ceka_opis": "Potvrda vrijedi i indeks je upisan. POEN se upisuje kad potvrđeni član ostvari svoj prvi doprinos: objavi ponudu koju Zaklada odobri, donira, postane pokrovitelj ili izvrši operativni doprinos.",
+    "ceka_moja": "Tebe čeka {iznos} POENA — objavi prvu ponudu ili doniraj.",
+    "ceka_dao": "Potvrdio si {pseudonim} — {iznos} POENA upisuje ti se kad on ostvari svoj prvi doprinos.",
+    "ceka_dugme_oglas": "Objavi ponudu",
+    "ceka_dugme_donacija": "Doniraj",
+    "oznake_ceka": "čeka prvi doprinos",
+    "oznake_ceka_naslov": "POEN po ovoj potvrdi upisuje se kad ovaj član objavi ponudu koju Zaklada odobri, donira, postane pokrovitelj ili izvrši operativni doprinos.",
+    "oznake_ceka_opis": "Označeno je {broj} potvrda po kojima POEN još nije upisan — čeka se prvi doprinos onoga koga si potvrdio. Podsjeti ga da objavi ponudu; čim je Zaklada odobri, upisuje se i tebi i njemu."
   },
   "graf": {
     "naslov": "Mreža potvrda",
@@ -1022,7 +1036,7 @@
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sustava",
-      "ver": "4.6.4",
+      "ver": "4.6.5",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -1056,7 +1070,7 @@
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.2",
     "meta_pravilnik_title": "Pravilnici KOLO sustava · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.6.4",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.6.5",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sustavu",
@@ -2347,7 +2361,14 @@
     "nabavka_ispravka_naslov": "Evidencija je ispravljena",
     "nabavka_ispravka_tekst": "Po tvom prigovoru na dio iz nabave „{dobro}” poništenje je otklonjeno i u tvoj zapis je vraćeno {poen} POENA. Obrazloženje: {obrazlozenje}",
     "dete_oglas_naslov": "{pseudonim} je objavio/la oglas",
-    "dete_oglas_tekst": "Oglas „{naslov}“. Na profilu djeteta možeš ga pogledati i ukloniti."
+    "dete_oglas_tekst": "Oglas „{naslov}“. Na profilu djeteta možeš ga pogledati i ukloniti.",
+    "potvrda_poen_potvrdjivac": "Član „{pseudonim}“, čiju si stvarnost potvrdio, ostvario je svoj prvi doprinos, pa ti je upisano {iznos} POENA po toj potvrdi.",
+    "potvrda_poen_potvrdjeni": "Po potvrdi koju ti je dao član „{pseudonim}“ upisano ti je {iznos} POENA.",
+    "potvrda_poen_ceka_potvrdjivac": "Potvrdio si stvarnost člana „{pseudonim}“. {iznos} POENA upisuje ti se kad on ostvari svoj prvi doprinos — objavi ponudu koju Zaklada odobri, donira, postane pokrovitelj ili izvrši operativni doprinos.",
+    "potvrda_poen_ceka_potvrdjeni": "Član „{pseudonim}“ potvrdio je tvoju stvarnost. {iznos} POENA upisuje ti se kad ostvariš svoj prvi doprinos — objaviš ponudu koju Zaklada odobri, doniraš, postaneš pokrovitelj ili izvršiš operativni doprinos.",
+    "potvrda_uskladjena": "Pravilo je izmijenjeno: POEN po potvrdi upisuje se kad potvrđeni član ostvari svoj prvi doprinos. S tvojega zapisa je zato vraćeno {iznos} POENA i stoji zabilježeno. Upisuje se čim uvjet bude ispunjen.",
+    "potvrda_uskladjena_minus": "Pravilo je izmijenjeno: POEN po potvrdi upisuje se kad potvrđeni član ostvari svoj prvi doprinos. S tvojega zapisa je zato vraćeno {iznos} POENA i tvoj je zapis sada u minusu {minus} POENA. To nije dug i ne naplaćuje se — POEN-i koji ti pristignu prvo ga popunjavaju, razmjena dobara i usluga ti nije ograničena, a prepis drugome moguć je kad zapis prijeđe nulu. Zabilježeni doprinos ostaje i upisuje se čim uvjet bude ispunjen.",
+    "nadzor_poen_upisan": "Potvrda koju si nadzirao otključana je prvim doprinosom potvrđenoga člana, pa ti je upisano {iznos} POENA za obavljen nadzor."
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",
@@ -2372,7 +2393,8 @@
     "nabavka": "Kolektivna nabava, {dobro}",
     "nabavka_ispravka": "Ispravak evidencije, kolektivna nabava {dobro}",
     "zrno_upis": "Upis {zrna} ZRNA po koeficijentu {koeficijent}",
-    "zrno_otpis": "Otpis {zrna} ZRNA po koeficijentu {koeficijent}"
+    "zrno_otpis": "Otpis {zrna} ZRNA po koeficijentu {koeficijent}",
+    "uskladjivanje_potvrde": "Usklađivanje potvrde — POEN vraćen u zabilježeno"
   },
   "mejl": {
     "pozdrav": "Pozdrav",

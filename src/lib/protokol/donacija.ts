@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { TransactionType, DonationStatus } from "@/generated/prisma/client";
 import { emitujPoen } from "./emisija";
+import { probajEvidentiratiPotvrde } from "./potvrda-poen";
 import {
   izracunajPoenZaDonaciju,
   nivoZaKumulativ,
@@ -214,6 +215,16 @@ export async function evidentirajDonaciju(
       `Evidentiran doprinos po donaciji: ${poen.toLocaleString("sr-RS")} POEN`,
       { kljuc: "transakcije.donacija", parametri: { iznos: poen } }
     );
+
+    // Javna donacija je jedan od četiri traga učešća koji otključavaju POEN po potvrdi
+    // (dokaz stvarnosti čl. 7). 🔴 Stoji UNUTAR `if (poen > 0)`, pa anonimna donacija
+    // ne otključava ništa — i to je namerno: POEN za potvrdu je javan zapis u knjizi,
+    // pa bi se pojavio a na Pijaci ne bi osvanuo nijedan nov oglas, i posmatrač bi
+    // zaključio da je čovek donirao. To je tačno ono što anonimna donacija krije
+    // (čl. 5a). Anoniman donator otključava nekim od druga tri puta.
+    //
+    // Ne baca: donacija je već evidentirana i ne sme da padne zbog ovog kanala.
+    await probajEvidentiratiPotvrde(userId);
   }
 
   // Identitet utvrđen na donatorskom putu (mera M-9). Postavlja se JEDNOM, pri

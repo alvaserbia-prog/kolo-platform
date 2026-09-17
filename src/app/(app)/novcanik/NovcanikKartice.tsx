@@ -41,6 +41,12 @@ interface Props {
   prefillOpis?: string;
   /** Doprinos sadržaju koji čeka okidač (0 = nema). Nikad se ne sabira sa stanjem. */
   zabelezenDoprinos?: number;
+  /** POEN po potvrdama koji čeka prvi doprinos — tvoj (dokaz stvarnosti čl. 7). */
+  zabelezenePotvrdeMoje?: number;
+  /** POEN po potvrdama koje si dao — čeka TUĐI prvi doprinos. */
+  zabelezenePotvrdeTudje?: number;
+  /** POEN za obavljen nadzor — takođe čeka tuđi prvi doprinos (čl. 7 st. 2). */
+  zabelezenePotvrdeNadzor?: number;
   /** Rezervisano za kolektivnu nabavku. Nula = reda nema (odluka vlasnika). */
   rezervisanoNabavka?: number;
   /** Neverifikovani sme samo da prima — dugme za upis mu se ne prikazuje. */
@@ -53,7 +59,7 @@ interface Props {
   razlogZabrane?: "neverifikovan" | "ceka_roditelja";
 }
 
-export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis, zabelezenDoprinos = 0, rezervisanoNabavka = 0, smeDaSalje = true, razlogZabrane = "neverifikovan", maloletan = false }: Props) {
+export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis, zabelezenDoprinos = 0, zabelezenePotvrdeMoje = 0, zabelezenePotvrdeTudje = 0, zabelezenePotvrdeNadzor = 0, rezervisanoNabavka = 0, smeDaSalje = true, razlogZabrane = "neverifikovan", maloletan = false }: Props) {
   const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("novcanik");
@@ -135,6 +141,44 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
               </p>
             </div>
             <p className="text-sm text-kolo-muted mt-1">{t("zabelezen_opis")}</p>
+          </div>
+        )}
+
+        {/* Zabeležene potvrde — ZASEBAN red, ne sabran sa „Zabeleženim doprinosom"
+            iako oba čekaju. Razlog je što čekaju RAZLIČITE stvari: doprinos po
+            čl. 40a čeka tvoj oglas, a potvrda koju si DAO čeka tuđi prvi doprinos.
+            Spojeni u jedan broj, rekli bi čoveku da o svemu tome odlučuje sam.
+            Naziv je „Zabeležene potvrde", nikad „POEN na čekanju" (čl. 12). */}
+        {(zabelezenePotvrdeMoje > 0 || zabelezenePotvrdeTudje > 0 || zabelezenePotvrdeNadzor > 0) && (
+          <div className="mt-3 rounded-2xl border border-kolo-border bg-white px-5 py-4">
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="text-sm font-semibold text-kolo-text">{t("zabelezene_potvrde_naslov")}</p>
+              <p className="text-lg font-bold tabular-nums text-kolo-green-700">
+                {(zabelezenePotvrdeMoje + zabelezenePotvrdeTudje + zabelezenePotvrdeNadzor).toLocaleString(intlTag(locale))} {tc("poen")}
+              </p>
+            </div>
+            {zabelezenePotvrdeMoje > 0 && (
+              <p className="text-sm text-kolo-muted mt-1">
+                {t("zabelezene_potvrde_moje", {
+                  iznos: zabelezenePotvrdeMoje.toLocaleString(intlTag(locale)),
+                })}
+              </p>
+            )}
+            {zabelezenePotvrdeTudje > 0 && (
+              <p className="text-sm text-kolo-muted mt-1">
+                {t("zabelezene_potvrde_tudje", {
+                  iznos: zabelezenePotvrdeTudje.toLocaleString(intlTag(locale)),
+                })}
+              </p>
+            )}
+            {zabelezenePotvrdeNadzor > 0 && (
+              <p className="text-sm text-kolo-muted mt-1">
+                {t("zabelezene_potvrde_nadzor", {
+                  iznos: zabelezenePotvrdeNadzor.toLocaleString(intlTag(locale)),
+                })}
+              </p>
+            )}
+            <p className="text-sm text-kolo-muted mt-1">{t("zabelezene_potvrde_opis")}</p>
           </div>
         )}
 

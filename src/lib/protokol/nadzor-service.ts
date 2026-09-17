@@ -13,11 +13,14 @@
  *  3. Slot kapaciteta verifikatora dopunjava SAMO ishod „uredno". Roka za nadzor
  *     nema (odluka vlasnika 2026-08-09) — zapis bez ishoda čeka koliko treba.
  *
- * Pattern: DB promene u prisma.$transaction, emitujPoen() VAN nje.
+ * Pattern: DB promene u prisma.$transaction, upis POEN-a VAN nje.
+ *
+ * 🔴 Ovaj servis POEN VIŠE NE EMITUJE SAM. Od seta 4.6.5 nadzornikovih 500 idu kroz
+ * `probajUpisatiNadzor` (dokaz stvarnosti čl. 7), jer čekaju isti uslov kao i
+ * 1.000 + 1.000 po samoj potvrdi: prvi potvrđen doprinos potvrđenog korisnika.
  */
 import { prisma } from "@/lib/prisma";
-import { emitujPoen } from "@/lib/protokol/emisija";
-import { POEN_NADZORNIK } from "@/lib/protokol/dokaz-stvarnosti";
+import { probajUpisatiNadzor } from "@/lib/protokol/potvrda-poen";
 import { TransactionType } from "@/generated/prisma/client";
 import { mozeNadzor } from "@/lib/dozvole";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
@@ -212,49 +215,23 @@ export async function obaviNadzor(input: {
     };
   });
 
-  // POEN emisija za nadzornika — VAN transakcije, i samo za prvog (čl. 7 st. 2).
-  // Evidentira se RAD, ne saglasnost: i „sporno" se plaća isto kao „uredno".
+  // POEN za nadzornika — VAN transakcije, i samo za prvog koji upiše ishod (čl. 7
+  // st. 2). Evidentira se RAD, ne saglasnost: i „sporno" se plaća isto kao „uredno".
+  //
+  // 🔴 Od seta 4.6.5 upis ČEKA ISTI USLOV kao 1.000 + 1.000 po samoj potvrdi: POEN
+  // nastaje kad potvrđeni korisnik ostvari prvi potvrđen doprinos (odluka vlasnika,
+  // 16.09.2026). Ranije je nastajao odmah po upisu ishoda, nezavisno od toga da li je
+  // potvrđeni išta doprineo — a 500 emitovanih povodom potvrde čoveka koji nikad ništa
+  // ne doprinese je isto curenje kao i 1.000, samo manje.
+  //
+  // 🟡 Posledicu znati: nadzornik je od potvrđenog dalji nego potvrđivač — često ga i
+  // ne poznaje, pa mu upis zavisi od poteza na koji ne može da utiče, dok potvrđivač
+  // bar može da podseti onoga koga je doveo.
+  //
+  // Uslov se NE vezuje za ishod nadzora; to bi podsticalo na propuštanje i obaralo
+  // sopstveni čl. 7 st. 5.
   if (prviIshod) {
-    const nadzornikWallet = await prisma.wallet.findUnique({
-      where: { userId: nadzornikId },
-    });
-    if (nadzornikWallet) {
-      try {
-        await emitujPoen(
-          nadzornikWallet.id,
-          POEN_NADZORNIK,
-          TransactionType.EMISIJA_NADZOR,
-          `Nadzor verifikacije ${verifikatorPseudonim} → ${verifikovaniPseudonim}`,
-          {
-            kljuc: "transakcije.nadzor",
-            parametri: {
-              verifikator: verifikatorPseudonim,
-              verifikovani: verifikovaniPseudonim,
-            },
-          }
-        );
-      } catch (e) {
-        console.error("[nadzor-service] POEN emisija pukla — incident", {
-          verifikacijaId,
-          nadzornikId,
-          error: e,
-        });
-      }
-    } else {
-      console.warn("[nadzor-service] Nadzornik nema wallet — preskačem POEN emisiju", {
-        nadzornikId,
-      });
-    }
-  }
-
-  if (ishod === "SPORNO") {
-    // Ne blokira odgovor i ne baca — obaveštenje, ne mera.
-    void posaljiAdminAlert(
-      "Sporna verifikacija",
-      `Nadzornik ${nadzornikPseudonim} označio je kao SPORNU verifikaciju ` +
-        `${verifikatorPseudonim} → ${verifikovaniPseudonim} (razlog: ${razlog}). ` +
-        `Predmet čeka odluku u admin panelu → Odluke.`
-    ).catch(() => {});
+    await probajUpisatiNadzor(verifikacijaId);
   }
 
   return {

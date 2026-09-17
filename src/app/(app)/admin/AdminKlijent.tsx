@@ -22,6 +22,7 @@ const LevakTab = dynamic(() => import("./LevakTab"), { ssr: false });
 const ObavestenjaTab = dynamic(() => import("./ObavestenjaTab"), { ssr: false });
 const PijacaTab = dynamic(() => import("./PijacaTab"), { ssr: false });
 const PrviOglasiTab = dynamic(() => import("./PrviOglasiTab"), { ssr: false });
+const PotvrdeTab = dynamic(() => import("./PotvrdeTab"), { ssr: false });
 const RazmeneTab = dynamic(() => import("./RazmeneTab"), { ssr: false });
 const NabavkeTab = dynamic(() => import("./NabavkeTab"), { ssr: false });
 const OdlukeTab = dynamic(() => import("./OdlukeTab"), { ssr: false });
@@ -317,6 +318,11 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
     ["prigovori", `${t("tab_prigovori")}${ukupnoOtvoreniPrigovori > 0 ? ` (${ukupnoOtvoreniPrigovori})` : ""}`],
     ["pijaca", `${t("tab_pijaca")}${otvorenihPrijavaOglasa > 0 ? ` (${otvorenihPrijavaOglasa})` : ""}`],
     ["prvi-oglasi", `${t("tab_prvi_oglasi")}${prvihOglasaNaCekanju > 0 ? ` (${prvihOglasaNaCekanju})` : ""}`],
+    // 🔴 BEZ BROJA UZ NAZIV, za razliku od ostalih redova čekanja. Zabeležena
+    // potvrda ne traži radnju administratora — sama se razrešava kad potvrđeni
+    // ostvari doprinos. Broj koji nikad ne padne na nulu uči ljude da ignorišu
+    // i one badge-ove koji nešto znače. Iz istog razloga ne ulazi ni u sidebar.
+    ["potvrde", t("tab_potvrde")],
     ["razmene", `${t("tab_razmene")}${otvorenihPrijavaRazmene > 0 ? ` (${otvorenihPrijavaRazmene})` : ""}`],
     ["nabavke", t("tab_nabavke")],
     ["emisija", t("tab_emisija")],
@@ -417,6 +423,12 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
 
       {/* Prvi oglasi — odobravanje doprinosa iz čl. 40a (nalozi bez potvrde). */}
       {tab === "prvi-oglasi" && <PrviOglasiTab onDone={() => router.refresh()} />}
+
+      {/* Potvrde — POEN po potvrdi koji čeka trag učešća (dokaz stvarnosti čl. 7):
+          ručni upis kao ventil + jednokratno usklađivanje zatečenih. */}
+      {tab === "potvrde" && (
+        <PotvrdeTab jeSuperadmin={viewerJeSuperadmin} onDone={() => router.refresh()} />
+      )}
 
       {/* Razmene — prijave neispunjene razmene; odlučuje se o prepisu POEN-a. */}
       {tab === "razmene" && <RazmeneTab onDone={() => router.refresh()} />}

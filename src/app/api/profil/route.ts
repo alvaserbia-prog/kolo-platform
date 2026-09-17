@@ -3,7 +3,7 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { TipKorisnika, TransactionType, UserStatus } from "@/generated/prisma/client";
+import { PotvrdaPoenStatus, TipKorisnika, TransactionType, UserStatus } from "@/generated/prisma/client";
 import { obrisiSaR2 } from "@/lib/skladiste";
 import {
   POEN_NADZORNIK,
@@ -118,6 +118,17 @@ export async function DELETE(req: NextRequest) {
     where: { verifikovaniId: userId },
   });
 
+  // 🔴 Od seta 4.6.4 POEN po potvrdi čeka trag stvarnog učešća (dokaz stvarnosti
+  // čl. 7), pa veza u stanju ZABELEZEN nije ništa ni emitovala. Povraćaj se zato
+  // radi SAMO za veze u stanju EVIDENTIRAN — inače bi protivzapis oduzimao POEN
+  // koji ne postoji i pokvario zero-sum.
+  const jeUpisan = (v: { poenStatus: PotvrdaPoenStatus }) =>
+    v.poenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
+  // Nadzornikovih 500 imaju svoje stanje — od seta 4.6.5 i ona čekaju isti uslov, ali
+  // nastaju u svom trenutku (upis ishoda nadzora).
+  const nadzorUpisan = (v: { nadzorPoenStatus: PotvrdaPoenStatus }) =>
+    v.nadzorPoenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
+
   // Helper: skida POEN od jednog korisnika i vraća Protokolu, capped na balance
   // (Pravilnik čl. 14: nijedan korisnik ne može imati negativan zapis POEN-a).
   async function vratiPoenProtokolu(
@@ -155,15 +166,17 @@ export async function DELETE(req: NextRequest) {
       async (tx) => {
         // 2a) Veze gde je obrisani VERIFIKATOR
         for (const v of vezeKaoVerifikator) {
-          // POEN_VERIFIKOVANI se vraća Protokolu
-          await vratiPoenProtokolu(
-            tx,
-            v.verifikovaniId,
-            POEN_VERIFIKOVANI,
-            `Poništavanje verifikacije zbog brisanja verifikatora (čl. 34)`
-          );
-          // POEN_NADZORNIK se vraća ako je veza bila pod nadzorom
-          if (v.podlezeNadzoru && v.nadzornikId) {
+          if (jeUpisan(v)) {
+            // POEN_VERIFIKOVANI se vraća Protokolu
+            await vratiPoenProtokolu(
+              tx,
+              v.verifikovaniId,
+              POEN_VERIFIKOVANI,
+              `Poništavanje verifikacije zbog brisanja verifikatora (čl. 34)`
+            );
+          }
+          // POEN_NADZORNIK se proverava ZASEBNO — svoje stanje, svoj trenutak.
+          if (nadzorUpisan(v) && v.podlezeNadzoru && v.nadzornikId) {
             await vratiPoenProtokolu(
               tx,
               v.nadzornikId,
@@ -208,15 +221,17 @@ export async function DELETE(req: NextRequest) {
 
         // 2b) Veze gde je obrisani VERIFIKOVANI
         for (const v of vezeKaoVerifikovani) {
-          // POEN_VERIFIKATOR se vraća Protokolu
-          await vratiPoenProtokolu(
-            tx,
-            v.verifikatorId,
-            POEN_VERIFIKATOR,
-            `Poništavanje verifikacije zbog brisanja verifikovanog (čl. 34)`
-          );
-          // POEN_NADZORNIK se vraća ako je veza bila pod nadzorom
-          if (v.podlezeNadzoru && v.nadzornikId) {
+          if (jeUpisan(v)) {
+            // POEN_VERIFIKATOR se vraća Protokolu
+            await vratiPoenProtokolu(
+              tx,
+              v.verifikatorId,
+              POEN_VERIFIKATOR,
+              `Poništavanje verifikacije zbog brisanja verifikovanog (čl. 34)`
+            );
+          }
+          // POEN_NADZORNIK — vidi napomenu u petlji iznad.
+          if (nadzorUpisan(v) && v.podlezeNadzoru && v.nadzornikId) {
             await vratiPoenProtokolu(
               tx,
               v.nadzornikId,
