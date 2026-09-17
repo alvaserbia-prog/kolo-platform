@@ -376,6 +376,24 @@ Az (1) bekezdés szerinti korlátozás a forgalomban lévő mennyiség hitelesí
 
 A korlátozás célja, hogy a kezdeti időszakban a háló kizárólag új felhasználók csatlakozásával bővüljön, ne pedig a háló ugyanazon részén belüli hitelesítések ismétlésével.
 
+### 22a. cikk
+
+*A korábban végzett hitelesítések összehangolása*
+
+Az e szabályzat 7. cikk (2) bekezdése szerinti feltétel bevezetése előtt végzett hitelesítések alapján nyilvántartásba vett hozzájárulás visszakerül a feljegyzett hozzájárulás állapotába, ha a hitelesített felhasználó e rendelkezés végrehajtásáig az említett bekezdés szerinti hozzájárulási formák egyikét sem valósította meg.
+
+Az összehangolásra egyszeri alkalommal kerül sor. Minden érintett személy javára kizárólag az kerül leírásra, ami e hitelesítés kapcsán a javára nyilvántartásba került — a hitelesítőnek 1.000 POEN, a hitelesítettnek 1.000 POEN, a felügyelőnek pedig 500 POEN. A leírás a Protokoll javára szóló ellenbejegyzéssel történik; az összes bejegyzés összege továbbra is nulla, a nyilvántartásba vett POEN-ek teljes száma pedig csökken.
+
+A leírás akkor is végrehajtásra kerül, ha a bejegyzés ezáltal negatívvá válik, a KOLO rendszerről szóló szabályzat 14. cikk (3) bekezdés 6. pontja szerint. A teher nem száll át semmilyen más személyre; az e szabályzat 20b. cikke szerinti megtérítés ezen a jogalapon nem alkalmazandó.
+
+A bejegyzés állapotára korlátozott leírás nem alkalmazandó, mert az összehangolás céljával ellentétes eredményre vezetne: az a felhasználó, aki a nyilvántartásba vett hozzájárulást már felhasználta, megtartaná azt, míg az, aki nem használta fel, teljes egészében visszaadná.
+
+Az összehangolás nem szünteti meg a feljegyzett hozzájárulást. Az akkor kerül bejegyzésre, amikor a 7. cikk (2) bekezdése szerinti feltétel teljesül, ugyanazon szabályok szerint, amelyek az e feltétel bevezetése után végzett hitelesítésekre vonatkoznak.
+
+Az összehangolás nem a felhasználóval szembeni intézkedés. Nem feltételez szabálytalanságot, és nem indítja meg az e szabályzat VIII. fejezete szerinti eljárást; a hitelesítési bejegyzés és a valóságindex változatlan marad.
+
+Minden érintett személyt értesíteni kell a végrehajtott leírásról, a POEN-ek számának és a bejegyzés állapotának megjelölésével. A leírás ellen a Felhasználási feltételek 37a. cikke szerint kifogás nyújtható be.
+
 ### 23. cikk
 
 *A szabályzat módosítása*

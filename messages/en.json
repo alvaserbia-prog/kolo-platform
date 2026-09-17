@@ -351,7 +351,7 @@
     "zabelezen_opis": "It is recorded when the Foundation approves your first listing, when someone confirms you, or when someone re-registers POEN to you. Until then it is only noted — not yet part of your record.",
     "samo_primalac": "While you are a new member, POEN can be re-registered into your record. Re-registering into someone else's record opens up once you are confirmed.",
     "nadoknada_naslov": "Restitution",
-    "nadoknada_opis": "It arose from cancelling a record that was not covered — a cancelled confirmation you gave, or a re-registration cancelled after a report about an exchange. It is not a debt and cannot be collected — POEN recorded or re-registered to you fills it first. Exchanging goods and services is not restricted for you; re-registering POEN to someone else is possible once your record passes zero.",
+    "nadoknada_opis": "It arose from cancelling a record that was not covered — a cancelled confirmation you gave, a re-registration cancelled after a report about an exchange, or the alignment of existing confirmations. It is not a debt and cannot be collected: POEN recorded or re-registered to you fills it first. Exchanging goods and services is not restricted for you; re-registering POEN to someone else is possible once your record passes zero.",
     "putanja_naslov": "Exchange contributions",
     "putanja_opis": "Five steps, 1,000 POEN each. They unlock in order, and at most 5,000 POEN is recorded per member in total.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
@@ -2367,6 +2367,7 @@
     "potvrda_poen_ceka_potvrdjivac": "You confirmed the reality of member “{pseudonim}”. {iznos} POEN will be recorded for you once they make their first contribution — post an offer approved by the Foundation, donate, become a patron, or complete operational work.",
     "potvrda_poen_ceka_potvrdjeni": "Member “{pseudonim}” has confirmed your reality. {iznos} POEN will be recorded for you once you make your first contribution — post an offer approved by the Foundation, donate, become a patron, or complete operational work.",
     "potvrda_uskladjena": "The rule has changed: POEN under a confirmation is recorded once the confirmed member makes their first contribution. {iznos} POEN has therefore been returned from your record and is now held as recorded. It will be entered as soon as the condition is met.",
+    "potvrda_uskladjena_minus": "The rule has changed: POEN under a confirmation is recorded once the confirmed member makes their first contribution. {iznos} POEN has therefore been returned from your record, and your record is now {minus} POEN in the negative. This is not a debt and is not collected — POEN that arrives fills it first, exchanging goods and services is not restricted for you, and re-registering POEN to someone else becomes possible once your record passes zero. The recorded contribution remains and will be entered as soon as the condition is met.",
     "nadzor_poen_upisan": "The confirmation you supervised has been unlocked by the confirmed member's first contribution, so {iznos} POEN has been recorded for you for the supervision performed."
   },
   "transakcije": {

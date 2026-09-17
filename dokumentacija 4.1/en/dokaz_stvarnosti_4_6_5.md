@@ -376,6 +376,24 @@ The limit under paragraph 1 is applied according to the state of circulation at 
 
 The purpose of the limit is to ensure that, in the initial period, the network grows solely through the accession of new users, rather than through repeated verifications within the same part of the network.
 
+### Article 22a
+
+*Alignment of existing verifications*
+
+A contribution recorded under verifications performed before the introduction of the condition under Article 7 paragraph 2 of this Rulebook is returned to the state of a recorded contribution where the verified user has, up to the implementation of this provision, not achieved any of the forms of contribution under that paragraph.
+
+The alignment is carried out once. Each affected person has written off solely what was recorded to them on the occasion of that verification — 1,000 POEN to the verifier, 1,000 POEN to the verified user and 500 POEN to the supervisor. The write-off is executed by a counter-record in favour of the Protocol; the sum of all records remains zero, and the total number of recorded POENs decreases.
+
+The write-off is executed even where the record thereby becomes negative, under Article 14 paragraph 3 point 6 of the Rulebook on the KOLO System. The burden is not transferred to any other person; the compensation under Article 20b of this Rulebook does not apply on this ground.
+
+A write-off limited to the state of the record is not applied because it would produce an outcome contrary to the purpose of the alignment: a user who has already used the recorded contribution would keep it, while a user who has not used it would return it in full.
+
+The alignment does not extinguish the recorded contribution. It is entered when the condition under Article 7 paragraph 2 is met, under the same rules that apply to verifications performed after the introduction of that condition.
+
+The alignment is not a measure against the user. It does not presuppose an irregularity and does not initiate the procedure under Chapter VIII of this Rulebook; the verification record and the index of reality remain unchanged.
+
+Each affected person is notified of the executed write-off, stating the number of POENs and the state of the record. An objection against the write-off may be lodged under Article 37a of the Terms of Use.
+
 ### Article 23
 
 *Amendments to the Rulebook*

@@ -260,6 +260,15 @@ uvek — ovde je ispala negativna.
 dalje evidentirala oglas koji čovek iz UO nikad nije pogledao, a nastao bi i krug
 (potvrda otključava čl. 40a, čl. 40a otključava POEN po potvrdi).
 
+🔴 **DOPUNA ISTOG SETA, 17.09.2026 (šifra se NE menja).** Odlukom vlasnika usklađivanje
+zatečenih potvrda povlači **pun iznos i pušta zapis u minus**, pa su ista dva akta
+dobila još po jednu odredbu: **dokaz stvarnosti čl. 22a** (prelazna odredba o
+usklađivanju) i **Pravilnik čl. 14 st. 3 t. 6** (šesti izuzetak od zabrane negativnog
+zapisa; lista sada broji šest, a rečenica o režimu glasi „po svakom od šest osnova").
+Set 4.6.5 do tog trenutka nije bio objavljen na produkciji, pa nije reč o dva događaja
+objave nego o jednom — nov bump bi tvrdio suprotno. 🔴 Da je set bio objavljen, ovo bi
+tražilo **4.6.6**.
+
 🟡 **Zaostala unakrsna upućivanja:** nijedno novo od ovog bumpa. Oba akta se ovim
 potezom ponovo objavljuju, pa su upućivanja u njima tačna; akti koji na njih upućuju po
 šifri (`ucesce_dece` → Pravilnik v4.6.0, DPIA → v4.6.2) nisu dirani, po pravilu.
@@ -484,6 +493,8 @@ prevođenje naloga je dobilo osnov" ispod.
 nabraja osnove za negativan zapis **iscrpno** i zatvara listu („Drugi osnov… ne može
 se ustanoviti — ni ovim pravilnikom bez izmene ovog člana, ni bilo kojim drugim
 aktom"). Peti osnov se zato ne može uvesti nigde drugde. **Izuzetaka je sada pet.**
+🔴 **PREVAZIĐENO 17.09.2026 — ima ih ŠEST.** Šesti je otpis po usklađivanju zatečenih
+potvrda (čl. 22a dokaza stvarnosti); vidi „POEN po potvrdi čeka prvi doprinos".
 
 🟡 **Zaostala unakrsna upućivanja — sada ih ima ŠEST, jedno manje nego pre.**
 `ucesce_dece` je prestalo da bude slomljeno jer se taj akt ovim potezom ponovo
@@ -1897,13 +1908,36 @@ dugmadima „Objavi ponudu" i „Doniraj".
   radnju administratora nego se sama razrešava; broj koji nikad ne padne na nulu uči
   ljude da ignorišu i one badge-ove koji nešto znače.
 
-🔴 **Usklađivanje povlači NAJVIŠE DO NULE, nikad u minus** (odluka vlasnika, varijanta 2).
-Ovo nije sankcija nego usklađivanje — niko nije prekršio pravilo koje je tada važilo, pa
-se ne primenjuje ono što važi kod otpisa prijateljstva, poništenog prepisa i prevoda u
-maloletni, gde minus postoji baš zato što je neko nešto skrivio. **Povlače se i
-nadzornikovih 500**, po svom stanju (`nadzorPoenStatus`), pa veza ulazi u obradu i kad
-je upisan samo jedan od dva iznosa. 🟡 Posledica: ko je POEN
-već potrošio prolazi bolje od onoga ko ga je sačuvao — prihvaćeno.
+🔴 **Usklađivanje povlači PUN IZNOS — zapis SME u minus** (odluka vlasnika, 17.09.2026,
+posle uvida u spisak po članu: *„ne vidim da iko ima minus a trebalo bi jer su neki
+uzimali a uopšte nisu postavili svoj oglas"*). **Ovo OBARA raniju odluku o kapiranju na
+nulu** (varijanta 2), i razlog je aritmetički, ne strogost: kapirano povlačenje daje
+ishod **suprotan cilju radnje** — ko je POEN već potrošio zadržao bi ga, a ko ga je
+sačuvao vratio bi ga celog, pa bi usklađivanje nagradilo upravo ono ponašanje zbog kog
+se sprovodi. Isto pravilo već nosi otpis prijateljstva, poništen prepis po prijavi
+razmene i prevod u maloletni. **Povlače se i nadzornikovih 500**, po svom stanju
+(`nadzorPoenStatus`), pa veza ulazi u obradu i kad je upisan samo jedan od dva iznosa.
+
+🟢 **Minus se sam popunjava baš ponašanjem koje se traži**, i to je ono što ga razlikuje
+od sankcije: zabeležen doprinos od 1.000 **ostaje**, pa kad čovek objavi oglas i
+Fondacija ga odobri, upisuje mu se 1.000 po čl. 40a i 1.000 po potvrdi — dakle **2.000**,
+čime se minus od 1.000 gasi i čovek završava tamo gde bi i bio. Usklađivanje nije
+oduzimanje nego **pomeren trenutak upisa**.
+
+🔴 **Teret se ne prenosi ni na koga** — svako vraća isključivo ono što je povodom te
+potvrde njemu bilo evidentirano; **nadoknada iz čl. 20b se NE primenjuje** (tamo
+nepokriveni deo prelazi na verifikatora, ovde ne prelazi nikome). Ko ode u minus dobija
+**drugačije obaveštenje** (`notifikacije.potvrda_uskladjena_minus`, pet jezika) — minus
+menja šta sme sa zapisom i ne sme da se pojavi bez reči. Pregled pre dugmeta izričito
+javlja **koliko ljudi ide u minus i koliko ukupno**.
+
+🔴 **Akti to poznaju, i morali su:** osnov je **čl. 22a Pravilnika o dokazu stvarnosti**
+(prelazna odredba: jednokratnost, ko šta vraća, zašto se ne kapira, da zabeležen
+doprinos ostaje, da to nije mera prema korisniku i da ide prigovor po čl. 37a Uslova) uz
+**ŠESTI izuzetak u čl. 14 st. 3 t. 6 glavnog Pravilnika**. Bez te tačke bi minus bio
+osnov koji zatvarajuća odredba čl. 14 izričito zabranjuje („ni bilo kojim drugim
+aktom") — ista protivrečnost koju je R-20 ispravljao kod prevoda u maloletni.
+🟢 Šifra se time NE menja: 4.6.5 nije objavljen na produkciji, pa izmena ulazi u isti set.
 🔴 **Uslov se pri povlačenju meri BLAGO:** računa se svaki evidentiran doprinos po
 čl. 40a, bez obzira kojim je okidačem nastao. Zatečeni oglasi potvrđenih članova nikad
 nisu prolazili kroz odobrenje jer se ono tada nije tražilo — traženje odobrenja unazad
@@ -1930,9 +1964,11 @@ Cron: `/api/cron/potvrde-uslov`, dnevno u **05:30**.
 `20260916120100_potvrda_poen_uslov` (🔴 **backfill zatečenih na `EVIDENTIRAN` je
 obavezan** — bez njega bi okidači emitovali POEN drugi put svakom zatečenom članu) →
 `20260916130000_uskladjivanje_potvrde_enum` → `20260916130100_pristanak_4_6_4`.
-**Brane:** `potvrda-uslov.test.ts` (pravila) i `potvrda-uslov-izvor.test.ts` (12 provera,
-gleda IZVOR) + odredbe u `pravni-dokumenti.test.ts`, uz `UKINUTO` obrazac za staru
-formulaciju „Protokol automatski upisuje" na svih pet jezika.
+**Brane:** `potvrda-uslov.test.ts` (pravila) i `potvrda-uslov-izvor.test.ts` (13 provera,
+gleda IZVOR — među njima i da se povlačenje NE kapira na stanje zapisa, jer bi se
+kapiranje vratilo bez ijednog vidljivog kvara) + odredbe u `pravni-dokumenti.test.ts`
+(čl. 22a na sr/en/ru, šesta tačka i „Izuzetaka je šest" u glavnom Pravilniku), uz
+`UKINUTO` obrazac za staru formulaciju „Protokol automatski upisuje" na svih pet jezika.
 
 🔴 **Uticaj na registar rizika** (ocene se NE menjaju — R-08 i R-16 nisu obrađeni, pa se
 preračunavaju kad dođu na red):
@@ -4442,9 +4478,10 @@ razmene). Isto važi i za **druge ljude** kojima je POEN upisan povodom palih po
 završiti sa negativnim zapisom zbog tuđe omaške u uzrastu — zato mu ide **protivzapis
 u istoriju** (`OTPIS_PREVOD_U_MALOLETNI`) **i obaveštenje**; minus menja šta sme sa
 zapisom i ne sme da se pojavi bez reči. **Izuzetaka od zabrane negativnog zapisa
-(Pravilnik čl. 14 st. 3) ima PET** — nadoknada, poništen prepis, otpis prijateljstva,
-otpis po poništenju potvrde zbog neaktivnosti i ovo. Od seta **4.5.7** akt ih nabraja
-isto toliko; ovo je peta tačka, uređena čl. 4d Pravilnika o učešću dece.
+(Pravilnik čl. 14 st. 3) ima ŠEST** — nadoknada, poništen prepis, otpis prijateljstva,
+otpis po poništenju potvrde zbog neaktivnosti, ovo, i (od 17.09.2026) otpis po
+usklađivanju zatečenih potvrda. Od seta **4.5.7** akt ih nabraja isto toliko; ovo je
+peta tačka, uređena čl. 4d Pravilnika o učešću dece.
 
 🟡 **Reset naloga (`reset-korisnika.ts`) i dalje staje na nuli** — `dozvoliMinus` je
 podrazumevano `false`. Tamo je reč o probi korisničkog puta, ne o poništenju emisije.

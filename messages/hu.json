@@ -344,7 +344,7 @@
     "zabelezen_opis": "Akkor kerül rögzítésre, amikor az Alapítvány jóváhagyja az első hirdetésedet, amikor valaki megerősít, vagy amikor valaki POEN-t ír át neked. Addig csak fel van jegyezve — még nem része a bejegyzésednek.",
     "samo_primalac": "Amíg új tag vagy, a POEN átírható a bejegyzésedbe. A más bejegyzésébe való átírás a megerősítéssel nyílik meg.",
     "nadoknada_naslov": "Megtérítés",
-    "nadoknada_opis": "Fedezetlen bejegyzés visszavonásából keletkezett — egy általad adott, visszavont megerősítésből, vagy egy csere bejelentése nyomán visszavont átírásból. Nem tartozás és nem behajtható — a neked bejegyzett vagy átírt POEN először ezt tölti fel. Javak és szolgáltatások cseréje nincs korlátozva; POEN átírása másnak akkor lehetséges, amikor a bejegyzés átlépi a nullát.",
+    "nadoknada_opis": "Fedezetlen bejegyzés visszavonásából keletkezett — egy általad adott, visszavont megerősítésből, egy csere bejelentése nyomán visszavont átírásból, vagy a korábban bejegyzett megerősítések összehangolásából. Nem tartozás és nem behajtható: a neked bejegyzett vagy átírt POEN először ezt tölti fel. Javak és szolgáltatások cseréje nincs korlátozva; POEN átírása másnak akkor lehetséges, amikor a bejegyzés átlépi a nullát.",
     "putanja_naslov": "Cseréhez való hozzájárulások",
     "putanja_opis": "Öt lépés, egyenként 1.000 POEN. Sorban nyílnak meg, és tagonként összesen legfeljebb 5.000 POEN kerül rögzítésre.",
     "putanja_ukupno": "{evidentirano} / {kapa} POEN",
@@ -2360,6 +2360,7 @@
     "potvrda_poen_ceka_potvrdjivac": "Megerősítetted „{pseudonim}” tag valódiságát. {iznos} POEN akkor kerül bejegyzésre neked, amikor ő megteszi az első hozzájárulását — közzétesz egy, az Alapítvány által jóváhagyott ajánlatot, adományoz, pártfogó lesz, vagy operatív hozzájárulást teljesít.",
     "potvrda_poen_ceka_potvrdjeni": "„{pseudonim}” tag megerősítette a valódiságodat. {iznos} POEN akkor kerül bejegyzésre neked, amikor megteszed az első hozzájárulásodat — közzéteszel egy, az Alapítvány által jóváhagyott ajánlatot, adományozol, pártfogó leszel, vagy operatív hozzájárulást teljesítesz.",
     "potvrda_uskladjena": "A szabály megváltozott: a megerősítés utáni POEN akkor kerül bejegyzésre, amikor a megerősített tag megteszi az első hozzájárulását. Ezért {iznos} POEN visszakerült a nyilvántartásodból, és feljegyzett állapotban áll. Bejegyzésre kerül, amint a feltétel teljesül.",
+    "potvrda_uskladjena_minus": "A szabály megváltozott: a megerősítés utáni POEN akkor kerül bejegyzésre, amikor a megerősített tag megteszi az első hozzájárulását. Ezért {iznos} POEN visszakerült a nyilvántartásodból, és a nyilvántartásod most {minus} POEN mínuszban van. Ez nem tartozás és nem behajtható — a hozzád beérkező POEN először ezt tölti fel, javak és szolgáltatások cseréje nincs korlátozva, más részére való átírás pedig akkor lehetséges, ha a bejegyzés átlépi a nullát. A feljegyzett hozzájárulás megmarad, és bejegyzésre kerül, amint a feltétel teljesül.",
     "nadzor_poen_upisan": "Az általad felügyelt megerősítést a megerősített tag első hozzájárulása feloldotta, ezért az elvégzett felügyeletért {iznos} POEN került bejegyzésre neked."
   },
   "transakcije": {

@@ -165,7 +165,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // ISCRPNO. Traži se sva tri, jer je do 4.3.0 akt poznavao samo prvi, a kod
       // radio sa tri; ako iz teksta padne bilo koji, kod opet radi bez osnova.
       "20b Pravilnika o dokazu stvarnosti",
-      "Izuzetaka je pet i navedeni su ovde iscrpno",
+      "Izuzetaka je šest i navedeni su ovde iscrpno",
       // R-15 — četvrti izuzetak: otpis po poništenju potvrde zbog neaktivnosti
       // (čl. 6 Pravilnika o učešću dece). Bez njega taj otpis nema osnov, jer
       // st. 6 zabranjuje ustanovljavanje drugog osnova bilo kojim drugim aktom.
@@ -177,7 +177,14 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // nije naveden. Dok je lista brojala četiri, kod je radio protiv akta — to je
       // bila jedina dokazana protivrečnost u setu. Ako tačka padne, vraća se.
       "otpis po prevođenju punoletnog naloga u maloletni",
-      "Na negativan zapis po svakom od pet osnova",
+      "Na negativan zapis po svakom od šest osnova",
+      // 🔴 ŠESTI izuzetak: otpis po usklađivanju zatečenih potvrda (čl. 22a dokaza
+      // stvarnosti). `potvrde-uskladjivanje.ts` od 17.09.2026. povlači PUN iznos i
+      // pušta zapis u minus — kapiranje na nulu je odbačeno jer bi onoga ko je POEN
+      // potrošio nagradilo u odnosu na onoga ko ga je sačuvao. Bez ove tačke ta
+      // radnja nema osnov, a čl. 14 st. 7 zabranjuje osnov koji ovde nije naveden.
+      "otpis po usklađivanju zatečenih potvrda",
+      "22a Pravilnika o dokazu stvarnosti",
       // R-18 — ispravka poništenja izvršenog bez osnova (čl. 14a). Uvećava ukupan
       // broj POEN-a VAN kanala iz čl. 15, pa je čl. 14 morao da dobije izričit
       // osnov; bez njega bi poseban pravilnik probijao zatvorenu listu.
@@ -251,7 +258,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "allows it seven days to make a statement",
       "does not constitute mediation in the exchange",
       "Article 20b of the Rulebook on Proof of Reality",
-      "There are five exceptions, and they are listed here exhaustively",
+      "There are six exceptions, and they are listed here exhaustively",
+      "write-off upon the alignment of existing confirmations",
       // R-20 — peti izuzetak (vidi sr).
       "write-off upon the conversion of an adult account into a minor's account",
       "write-off upon annulment of a confirmation due to inactivity",
@@ -299,7 +307,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "предоставляет ей срок семи дней",
       "не является посредничеством в обмене",
       "статьёй 20b Правил о доказательстве реальности",
-      "Исключений пять, и здесь они перечислены исчерпывающе",
+      "Исключений шесть, и здесь они перечислены исчерпывающе",
+      "списание при согласовании ранее внесённых подтверждений",
       // R-20 — пятое исключение (vidi sr).
       "списание при переводе совершеннолетнего аккаунта в несовершеннолетний",
       "списание при аннулировании подтверждения из-за неактивности",
@@ -330,6 +339,14 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ne zavise od upisa POEN-a iz ovog člana",
       "Uslov iz stava 2 primenjuje se i na upis nadzorniku",
       "Fondacija može upisati zabeleženi doprinos i kad uslov iz stava 2 nije ispunjen",
+      // 🔴 čl. 22a — usklađivanje zatečenih verifikacija. Bez njega prelazna radnja
+      // iz `potvrde-uskladjivanje.ts` nema osnov, a minus koji ona pravi bio bi
+      // šesti izuzetak bez odredbe — tačno ono što čl. 14 st. 7 glavnog Pravilnika
+      // zabranjuje. Traži se i obrazloženje zašto se NE kapira na nulu.
+      "### Član 22a",
+      "Otpis se izvršava i kada zapis time postane negativan",
+      "Zabeleženi doprinos usklađivanjem se ne gasi",
+      "Usklađivanje nije mera prema korisniku",
     ],
     en: [
       "### Article 11a", "### Article 20b", "### Article 20c",
@@ -337,6 +354,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "do not depend on the POEN entry under this Article",
       "also applies to the entry made to the supervisor",
       "may enter a noted contribution even where the condition under paragraph 2 is not met",
+      "### Article 22a",
+      "The write-off is executed even where the record thereby becomes negative",
+      "The alignment does not extinguish the recorded contribution",
+      "The alignment is not a measure against the user",
     ],
     ru: [
       "### Статья 11a", "### Статья 20b", "### Статья 20c",
@@ -344,6 +365,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "не зависят от внесения ПОЕН по настоящей статье",
       "применяется и к внесению надзорному",
       "может внести отмеченный вклад и тогда, когда условие пункта 2 не выполнено",
+      "### Статья 22a",
+      "Списание производится и тогда, когда запись при этом становится отрицательной",
+      "Согласование не погашает отмеченный вклад",
+      "Согласование не является мерой в отношении пользователя",
     ],
   },
   "radnje_obrade_4_6_3.md": {

@@ -376,6 +376,24 @@ Ograničenje iz stavka 1. primjenjuje se prema stanju optjecaja u trenutku verif
 
 Svrha je ograničenja da se u početnom razdoblju mreža širi isključivo pristupanjem novih korisnika, a ne ponavljanjem verifikacija u istom dijelu mreže.
 
+### Članak 22a.
+
+*Usklađivanje zatečenih verifikacija*
+
+Doprinos evidentiran po verifikacijama izvršenim prije uvođenja uvjeta iz članka 7. stavak 2. ovog pravilnika vraća se u zabilježen doprinos ako verificirani korisnik do provedbe ove odredbe nije ostvario nijedan od oblika doprinosa iz tog stavka.
+
+Usklađivanje se provodi jednokratno. Svakoj pogođenoj osobi otpisuje se isključivo ono što joj je povodom te verifikacije bilo evidentirano — verifikatoru 1.000 POEN-a, verificiranom 1.000 POEN-a i nadzorniku 500 POEN-a. Otpis se izvršava protuzapisom u korist Protokola; zbroj svih zapisa i dalje iznosi nula, a ukupan broj evidentiranih POEN-a se umanjuje.
+
+Otpis se izvršava i kada zapis time postane negativan, po članku 14. stavak 3. točka 6. Pravilnika o KOLO sustavu. Teret se ne prenosi ni na jednu drugu osobu; naknada iz članka 20b ovog pravilnika po ovoj osnovi se ne primjenjuje.
+
+Otpis ograničen na stanje zapisa ne primjenjuje se zato što bi dao ishod suprotan svrsi usklađivanja: korisnik koji je evidentirani doprinos već upotrijebio zadržao bi ga, a korisnik koji ga nije upotrijebio vratio bi ga u cijelosti.
+
+Zabilježeni doprinos usklađivanjem se ne gasi. On se upisuje kada uvjet iz članka 7. stavak 2. bude ispunjen, po istim pravilima koja vrijede za verifikacije izvršene nakon uvođenja tog uvjeta.
+
+Usklađivanje nije mjera prema korisniku. Ono ne pretpostavlja nepravilnost i ne pokreće postupak iz Glave VIII ovog pravilnika; verifikacijski zapis i indeks stvarnosti ostaju nepromijenjeni.
+
+Svaka pogođena osoba obavještava se o izvršenom otpisu, uz navođenje broja POEN-a i stanja zapisa. Protiv otpisa se može podnijeti prigovor po članku 37a Uvjeta korištenja.
+
 ### Članak 23.
 
 *Izmjene pravilnika*

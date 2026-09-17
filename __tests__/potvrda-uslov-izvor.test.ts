@@ -138,6 +138,21 @@ describe("kaskade ne prave protivzapis za POEN koji nije upisan", () => {
     expect(ns, "nadzor-service ne sme sam da emituje POEN").not.toContain("emitujPoen(");
   });
 
+  it("usklađivanje povlači PUN iznos — zapis sme u minus", () => {
+    // 🔴 Odluka vlasnika 17.09.2026, posle uvida u spisak po članu: kapiranje na nulu
+    // je odbačeno jer daje ishod suprotan cilju radnje — ko je POEN već potrošio
+    // zadržao bi ga, a ko ga je sačuvao vratio bi ga celog. Osnov je čl. 22a dokaza
+    // stvarnosti i čl. 14 st. 3 t. 6 Pravilnika. Ako se kapiranje ikad vrati, minus
+    // nestaje bez ijednog vidljivog kvara, pa se traži IZVOR.
+    const s = citaj("src/lib/protokol/potvrde-uskladjivanje.ts");
+    expect(s, "povlačenje ne sme da se kapira na stanje zapisa").not.toContain(
+      "Math.min(w.balance",
+    );
+    expect(s, "pregled mora da prijavi koliko ljudi ide u minus").toContain("ljudiUMinusu");
+    // Minus menja šta čovek sme sa zapisom i ne sme da se pojavi bez reči.
+    expect(s).toContain("potvrda_uskladjena_minus");
+  });
+
   it("punoletstvo upisuje bez uslova", () => {
     const s = citaj("src/lib/protokol/punoletstvo.ts");
     expect(s, "roditeljske potvrde iz čl. 19 st. 3 ne smeju da čekaju prvi oglas").toContain(

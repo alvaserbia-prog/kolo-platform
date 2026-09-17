@@ -32,8 +32,9 @@ type Pregled = {
   ostaje: number;
   povlaci: number;
   poenPonisten: number;
-  poenPunIznos: number;
   pogodjenihLjudi: number;
+  ljudiUMinusu: number;
+  ukupanMinus: number;
   opticajPre: number;
   opticajPosle: number;
   osnivackiPragPredjen: number | null;
@@ -214,11 +215,15 @@ export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boo
               <p>{t("potvrde_pregled_ostaje")}: <strong>{broj(pregled.ostaje)}</strong></p>
               <p>{t("potvrde_pregled_povlaci")}: <strong>{broj(pregled.povlaci)}</strong></p>
               <p>{t("potvrde_pregled_ponisten")}: <strong>{broj(pregled.poenPonisten)}</strong></p>
-              <p>
-                {t("potvrde_pregled_propada")}:{" "}
-                <strong>{broj(pregled.poenPunIznos - pregled.poenPonisten)}</strong>
-              </p>
               <p>{t("potvrde_pregled_ljudi")}: <strong>{broj(pregled.pogodjenihLjudi)}</strong></p>
+              {pregled.ljudiUMinusu > 0 && (
+                <p className="text-red-700">
+                  {t("potvrde_pregled_minus", {
+                    ljudi: broj(pregled.ljudiUMinusu),
+                    poen: broj(pregled.ukupanMinus),
+                  })}
+                </p>
+              )}
               <p>
                 {t("potvrde_pregled_opticaj")}: <strong>{broj(pregled.opticajPosle)}</strong>{" "}
                 (sada {broj(pregled.opticajPre)})
