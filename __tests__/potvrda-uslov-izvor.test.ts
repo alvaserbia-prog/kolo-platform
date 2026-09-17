@@ -116,16 +116,26 @@ describe("kaskade ne prave protivzapis za POEN koji nije upisan", () => {
     }
   });
 
-  it("nadzornikovih 500 NISU pod tim uslovom", () => {
-    // 🔴 Njih emituje `nadzor-service` pri evidentiranju ishoda (čl. 7 st. 2), dakle
-    // nezavisno od ovog kanala. Ako se stave pod `poenStatus`, poništenje ostavlja u
-    // opticaju POEN koji je Protokol stvarno emitovao. Prva verzija ove izmene je
-    // upravo to i uradila.
-    const s = citaj("src/lib/protokol/verifikacije-naloga.ts");
-    const posle = s.slice(s.indexOf("vezeKaoVerifikator"));
-    expect(posle).toMatch(
-      /if \(v\.podlezeNadzoru && v\.nadzornikId && v\.nadzorIshod === "UREDNO"\) \{\s*\n\s*await vratiPoenProtokolu/,
-    );
+  it("nadzornikovih 500 imaju SVOJE stanje, ne dele `poenStatus`", () => {
+    // 🔴 Od seta 4.6.5 i ona čekaju isti uslov, ali nastaju u SVOM trenutku — pri upisu
+    // ishoda nadzora. Veza ume da ima upisan POEN po potvrdi a nadzor koji čeka, i
+    // obrnuto; sa jednim poljem se to ne bi razlikovalo, pa bi kaskada vraćala POEN
+    // koji nikad nije emitovan.
+    for (const fajl of [
+      "src/lib/protokol/verifikacije-naloga.ts",
+      "src/lib/protokol/lazna-verifikacija.ts",
+      "src/lib/protokol/deca.ts",
+      "src/app/api/profil/route.ts",
+      "src/lib/protokol/potvrde-uskladjivanje.ts",
+    ]) {
+      expect(citaj(fajl), `${fajl} ne proverava nadzorPoenStatus`).toContain(
+        "nadzorPoenStatus",
+      );
+    }
+    // Emisija vise ne sme da zivi u `nadzor-service` — ide kroz pravilo.
+    const ns = citaj("src/lib/protokol/nadzor-service.ts");
+    expect(ns).toContain("probajUpisatiNadzor");
+    expect(ns, "nadzor-service ne sme sam da emituje POEN").not.toContain("emitujPoen(");
   });
 
   it("punoletstvo upisuje bez uslova", () => {

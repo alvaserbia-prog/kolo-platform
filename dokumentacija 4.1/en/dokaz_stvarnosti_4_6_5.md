@@ -112,7 +112,7 @@ The Foundation may enter a noted contribution even where the condition under par
 
 If the verification is subject to supervision, the Protocol enters 500 POEN to the first supervisor who records a supervision outcome (Article 11), regardless of which outcome was recorded. The entry occurs at the moment the outcome is recorded, not at the moment of verification; until then no supervisor has been designated.
 
-The condition under paragraph 2 does not apply to the entry made to the supervisor: it records the supervisor's work, performed independently of the verified user's contribution.
+The condition under paragraph 2 also applies to the entry made to the supervisor: that entry likewise occurs once the verified user makes their first confirmed contribution. The condition is not tied to the supervision outcome — what is recorded is the work performed, not agreement with the verification.
 
 A supervisor to whom the record is forwarded following the outcome "needs review" receives no POEN. At most one entry of 500 POEN is recorded per verification.
 

@@ -375,7 +375,8 @@
     "zabelezene_potvrde_naslov": "Zabilježene potvrde",
     "zabelezene_potvrde_opis": "Upisuje se kad se pojavi prvi doprinos onoga na koga se potvrda odnosi: objavljena ponuda koju Zaklada odobri, donacija, pokroviteljstvo ili izvršen operativni doprinos. Do tada to nije zapis POENA i ne ulazi u tvoje stanje.",
     "zabelezene_potvrde_moje": "Tvojih {iznos} POENA — čeka tvoj prvi doprinos",
-    "zabelezene_potvrde_tudje": "{iznos} POENA za potvrde koje si dao — čeka prvi doprinos onih koje si potvrdio"
+    "zabelezene_potvrde_tudje": "{iznos} POENA za potvrde koje si dao — čeka prvi doprinos onih koje si potvrdio",
+    "zabelezene_potvrde_nadzor": "{iznos} POENA za nadzor — čeka prvi doprinos potvrđenoga člana"
   },
   "verifikacija": {
     "naslov": "Potvrda stvarnosti",
@@ -2362,7 +2363,8 @@
     "potvrda_poen_potvrdjeni": "Po potvrdi koju ti je dao član „{pseudonim}“ upisano ti je {iznos} POENA.",
     "potvrda_poen_ceka_potvrdjivac": "Potvrdio si stvarnost člana „{pseudonim}“. {iznos} POENA upisuje ti se kad on ostvari svoj prvi doprinos — objavi ponudu koju Zaklada odobri, donira, postane pokrovitelj ili izvrši operativni doprinos.",
     "potvrda_poen_ceka_potvrdjeni": "Član „{pseudonim}“ potvrdio je tvoju stvarnost. {iznos} POENA upisuje ti se kad ostvariš svoj prvi doprinos — objaviš ponudu koju Zaklada odobri, doniraš, postaneš pokrovitelj ili izvršiš operativni doprinos.",
-    "potvrda_uskladjena": "Pravilo je izmijenjeno: POEN po potvrdi upisuje se kad potvrđeni član ostvari svoj prvi doprinos. S tvojega zapisa je zato vraćeno {iznos} POENA i stoji zabilježeno. Upisuje se čim uvjet bude ispunjen."
+    "potvrda_uskladjena": "Pravilo je izmijenjeno: POEN po potvrdi upisuje se kad potvrđeni član ostvari svoj prvi doprinos. S tvojega zapisa je zato vraćeno {iznos} POENA i stoji zabilježeno. Upisuje se čim uvjet bude ispunjen.",
+    "nadzor_poen_upisan": "Potvrda koju si nadzirao otključana je prvim doprinosom potvrđenoga člana, pa ti je upisano {iznos} POENA za obavljen nadzor."
   },
   "transakcije": {
     "verifikacija": "Potvrda {pseudonim}",

@@ -22,7 +22,7 @@ import { obavesti } from "@/lib/notifikacije";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { logAdminAkcija } from "@/lib/audit";
 import { PotvrdaPoenStatus, PotvrdaPoenUslov, TransactionType } from "@/generated/prisma/client";
-import { POEN_VERIFIKATOR, POEN_VERIFIKOVANI } from "./dokaz-stvarnosti";
+import { POEN_NADZORNIK, POEN_VERIFIKATOR, POEN_VERIFIKOVANI } from "./dokaz-stvarnosti";
 import { uslovPotvrde, BEZ_TRAGA, type TragUcesca, type UslovPotvrde } from "@/lib/potvrda-uslov";
 
 export * from "@/lib/potvrda-uslov";
@@ -79,6 +79,9 @@ async function podaciZaUpis(vezaId: string) {
     select: {
       id: true,
       poenStatus: true,
+      nadzorPoenStatus: true,
+      nadzoranAt: true,
+      nadzornikId: true,
       verifikator: { select: { id: true, pseudonim: true, wallet: { select: { id: true } } } },
       verifikovani: { select: { id: true, pseudonim: true, wallet: { select: { id: true } } } },
     },
@@ -192,6 +195,94 @@ export async function probajUpisatiPotvrdu(
 }
 
 /**
+ * Pokušava da upiše nadzornikovih 500 (čl. 7 st. 2).
+ *
+ * 🔴 ISTI USLOV kao za 1.000 + 1.000, ali SVOJE stanje (`nadzorPoenStatus`) — odluka
+ * vlasnika 16.09.2026. Zaseban skup polja je nužan zato što ta emisija ima svoj
+ * trenutak nastanka: nadzornik ume da upiše ishod i pre i posle nego što uslov bude
+ * ispunjen. Sa jednim poljem se ne bi razlikovalo „nije upisano jer ishoda nema" od
+ * „nije upisano jer uslov nije ispunjen", pa bi kaskada vraćala POEN koji ne postoji.
+ *
+ * 🔴 Uslov se NE vezuje za ISHOD nadzora — plaća se rad, ne saglasnost (čl. 7 st. 5).
+ * „Sporno" se upisuje isto kao „uredno", samo kad i ostali POEN po toj potvrdi.
+ *
+ * Ne baca.
+ */
+export async function probajUpisatiNadzor(
+  vezaId: string,
+  opcije?: { bezUslova?: boolean; trag?: TragUcesca },
+): Promise<boolean> {
+  try {
+    const veza = await podaciZaUpis(vezaId);
+    if (!veza) return false;
+    // Bez upisanog ishoda nadzornik nije ni određen — nema šta da se upiše.
+    if (!veza.nadzoranAt || !veza.nadzornikId) return false;
+    if (veza.nadzorPoenStatus !== PotvrdaPoenStatus.ZABELEZEN) return false;
+
+    const trag = opcije?.trag ?? (await dohvatiTragUcesca(veza.verifikovani.id));
+    if (!opcije?.bezUslova && !uslovPotvrde(trag)) return false;
+
+    const wallet = await prisma.wallet.findUnique({
+      where: { userId: veza.nadzornikId },
+      select: { id: true },
+    });
+    if (!wallet) return false;
+
+    const rezervisano = await prisma.verifikacionaVeza.updateMany({
+      where: { id: vezaId, nadzorPoenStatus: PotvrdaPoenStatus.ZABELEZEN },
+      data: { nadzorPoenStatus: PotvrdaPoenStatus.EVIDENTIRAN, nadzorPoenEvidentiranAt: new Date() },
+    });
+    if (rezervisano.count !== 1) return false;
+
+    let nadzorTxId: string;
+    try {
+      const { transaction } = await emitujPoen(
+        wallet.id,
+        POEN_NADZORNIK,
+        TransactionType.EMISIJA_NADZOR,
+        `Nadzor verifikacije ${veza.verifikator.pseudonim} → ${veza.verifikovani.pseudonim}`,
+        {
+          kljuc: "transakcije.nadzor",
+          parametri: {
+            verifikator: veza.verifikator.pseudonim,
+            verifikovani: veza.verifikovani.pseudonim,
+          },
+        },
+      );
+      nadzorTxId = transaction.id;
+    } catch (e) {
+      await prisma.verifikacionaVeza.updateMany({
+        where: { id: vezaId, nadzorPoenStatus: PotvrdaPoenStatus.EVIDENTIRAN },
+        data: { nadzorPoenStatus: PotvrdaPoenStatus.ZABELEZEN, nadzorPoenEvidentiranAt: null },
+      });
+      console.error("[potvrda-poen] emisija nadzora pukla, vraćeno u ZABELEZEN", { vezaId, e });
+      return false;
+    }
+
+    await prisma.verifikacionaVeza.update({ where: { id: vezaId }, data: { nadzorTxId } });
+    await logAdminAkcija(veza.nadzornikId, "NADZOR_POEN_UPISAN", vezaId, `${POEN_NADZORNIK} POEN`);
+    try {
+      await obavesti(veza.nadzornikId, {
+        tip: "potvrda_poen",
+        kljuc: "notifikacije.nadzor_poen_upisan",
+        parametri: { iznos: POEN_NADZORNIK.toLocaleString("sr-RS") },
+        naslov: `Upisan ti je doprinos od ${POEN_NADZORNIK.toLocaleString("sr-RS")} POEN`,
+        tekst:
+          `Potvrda koju si nadzirao otključana je prvim doprinosom potvrđenog člana, pa ti je ` +
+          `upisano ${POEN_NADZORNIK.toLocaleString("sr-RS")} POEN za obavljen nadzor.`,
+        link: "/novcanik",
+      });
+    } catch (e) {
+      console.error("[potvrda-poen] obaveštenje nadzorniku nije poslato", { vezaId, e });
+    }
+    return true;
+  } catch (e) {
+    console.error("[potvrda-poen] upis nadzora nije uspeo", { vezaId, e });
+    return false;
+  }
+}
+
+/**
  * Otključava SVE zabeležene potvrde u kojima je dati korisnik potvrđeni.
  *
  * Zove se sa svakog okidača (odobren prvi oglas, potvrđena javna donacija, potvrđeno
@@ -205,7 +296,15 @@ export async function probajUpisatiPotvrdu(
 export async function probajEvidentiratiPotvrde(verifikovaniId: string): Promise<number> {
   try {
     const zabelezene = await prisma.verifikacionaVeza.findMany({
-      where: { verifikovaniId, poenStatus: PotvrdaPoenStatus.ZABELEZEN },
+      where: {
+        verifikovaniId,
+        // Nadzornikovih 500 imaju svoje stanje, pa veza ulazi u obradu i kad je POEN
+        // po samoj potvrdi već upisan a nadzor čeka — i obrnuto.
+        OR: [
+          { poenStatus: PotvrdaPoenStatus.ZABELEZEN },
+          { nadzorPoenStatus: PotvrdaPoenStatus.ZABELEZEN, nadzoranAt: { not: null } },
+        ],
+      },
       select: { id: true },
       orderBy: { vremenskiZig: "asc" },
     });
@@ -218,6 +317,7 @@ export async function probajEvidentiratiPotvrde(verifikovaniId: string): Promise
     for (const veza of zabelezene) {
       const ishod = await probajUpisatiPotvrdu(veza.id, { trag });
       if (ishod.upisano) upisano += 1;
+      if (await probajUpisatiNadzor(veza.id, { trag })) upisano += 1;
     }
     return upisano;
   } catch (e) {
@@ -232,18 +332,28 @@ export async function dohvatiZabelezenePotvrde(userId: string): Promise<{
   kaoPotvrdjeni: number;
   /** Koliko POEN-a čeka kao potvrđivaču — čeka TUĐI potez. */
   kaoPotvrdjivac: number;
+  /** Koliko POEN-a čeka kao nadzorniku — takođe TUĐI potez (čl. 7 st. 2). */
+  kaoNadzornik: number;
 }> {
-  const [primljene, obavljene] = await Promise.all([
+  const [primljene, obavljene, nadzori] = await Promise.all([
     prisma.verifikacionaVeza.count({
       where: { verifikovaniId: userId, poenStatus: PotvrdaPoenStatus.ZABELEZEN },
     }),
     prisma.verifikacionaVeza.count({
       where: { verifikatorId: userId, poenStatus: PotvrdaPoenStatus.ZABELEZEN },
     }),
+    prisma.verifikacionaVeza.count({
+      where: {
+        nadzornikId: userId,
+        nadzoranAt: { not: null },
+        nadzorPoenStatus: PotvrdaPoenStatus.ZABELEZEN,
+      },
+    }),
   ]);
   return {
     kaoPotvrdjeni: primljene * POEN_VERIFIKOVANI,
     kaoPotvrdjivac: obavljene * POEN_VERIFIKATOR,
+    kaoNadzornik: nadzori * POEN_NADZORNIK,
   };
 }
 

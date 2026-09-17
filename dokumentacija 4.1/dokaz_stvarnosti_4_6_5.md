@@ -110,7 +110,7 @@ Fondacija može upisati zabeleženi doprinos i kad uslov iz stava 2 nije ispunje
 
 Ako verifikacija podleže nadzoru, Protokol upisuje 500 POEN-a prvom nadzorniku koji evidentira ishod nadzora (član 11), bez obzira na to koji je ishod evidentirao. Upis nastupa u trenutku evidentiranja ishoda, a ne u trenutku verifikacije; do tada nadzornik nije ni određen.
 
-Uslov iz stava 2 se na upis nadzorniku ne primenjuje: njime se evidentira rad nadzornika, izvršen nezavisno od doprinosa verifikovanog korisnika.
+Uslov iz stava 2 primenjuje se i na upis nadzorniku: i taj upis nastupa kad verifikovani korisnik ostvari prvi potvrđen doprinos. Uslov se ne vezuje za ishod nadzora — evidentira se obavljen rad, ne saglasnost sa verifikacijom.
 
 Nadzorniku kome je zapis prosleđen po ishodu „za proveru" ne upisuju se POEN-i. Po jednoj verifikaciji evidentira se najviše jedan upis od 500 POEN-a.
 

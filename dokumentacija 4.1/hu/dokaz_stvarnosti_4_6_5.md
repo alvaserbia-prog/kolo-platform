@@ -112,7 +112,7 @@ Az Alapítvány a feljegyzett hozzájárulást akkor is beírhatja, ha a 2. beke
 
 Ha a hitelesítés felügyelet alá esik, a Protokoll 500 POEN-t ír be annak az első felügyelőnek, aki felügyeleti eredményt rögzít (11. cikk), függetlenül attól, melyik eredményt rögzítette. A beírás az eredmény rögzítésének pillanatában történik, nem a hitelesítés pillanatában; addig felügyelő nincs is kijelölve.
 
-A 2. bekezdés szerinti feltétel a felügyelőnek történő beírásra nem alkalmazandó: az a felügyelő munkáját veszi nyilvántartásba, amelyet a hitelesített felhasználó hozzájárulásától függetlenül végzett el.
+A 2. bekezdés szerinti feltétel a felügyelőnek történő beírásra is alkalmazandó: az a beírás is akkor történik, amikor a hitelesített felhasználó megteszi első megerősített hozzájárulását. A feltétel nem kötődik a felügyeleti eredményhez — az elvégzett munka kerül nyilvántartásba, nem a hitelesítéssel való egyetértés.
 
 Annak a felügyelőnek, akihez a bejegyzést az „ellenőrzésre“ eredmény nyomán továbbították, POEN nem kerül beírásra. Hitelesítésenként legfeljebb egy 500 POEN összegű beírás kerül nyilvántartásba.
 

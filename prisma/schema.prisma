@@ -2077,6 +2077,16 @@ model VerifikacionaVeza {
   /// Transakcije kojima je POEN upisan (postoje tek u EVIDENTIRAN).
   verifikatorTxId    String?
   verifikovaniTxId   String?
+  // Nadzornikovih 500 (čl. 7 st. 2) čekaju ISTI uslov, ali imaju SVOJE stanje —
+  // odluka vlasnika 16.09.2026. Zaseban skup polja je nužan zato što ta emisija
+  // ima svoj trenutak nastanka (upis ishoda nadzora), različit od trenutka potvrde:
+  // nadzornik ume da upiše ishod pre nego što uslov bude ispunjen, i posle toga.
+  // Sa jednim poljem se ne bi moglo razlikovati „nije upisano jer nema ishoda" od
+  // „nije upisano jer uslov nije ispunjen", pa bi kaskada vraćala POEN koji ne
+  // postoji.
+  nadzorPoenStatus        PotvrdaPoenStatus @default(ZABELEZEN)
+  nadzorPoenEvidentiranAt DateTime?
+  nadzorTxId              String?
 
   @@unique([verifikatorId, redniBroj])
   // K6: isti verifikator ne sme dvaput da verifikuje istog korisnika (anti-inflacija

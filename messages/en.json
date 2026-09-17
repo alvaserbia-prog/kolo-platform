@@ -375,7 +375,8 @@
     "zabelezene_potvrde_naslov": "Recorded confirmations",
     "zabelezene_potvrde_opis": "Recorded once the person the confirmation concerns makes their first contribution: an offer listing approved by the Foundation, a donation, a patronage, or completed operational work. Until then it is not a POEN record and is not part of your balance.",
     "zabelezene_potvrde_moje": "Your {iznos} POEN — awaiting your first contribution",
-    "zabelezene_potvrde_tudje": "{iznos} POEN for confirmations you gave — awaiting the first contribution of those you confirmed"
+    "zabelezene_potvrde_tudje": "{iznos} POEN for confirmations you gave — awaiting the first contribution of those you confirmed",
+    "zabelezene_potvrde_nadzor": "{iznos} POEN for supervision — awaiting the confirmed member's first contribution"
   },
   "verifikacija": {
     "naslov": "Proof of reality",
@@ -2362,7 +2363,8 @@
     "potvrda_poen_potvrdjeni": "Under the confirmation given to you by member “{pseudonim}”, {iznos} POEN has been recorded for you.",
     "potvrda_poen_ceka_potvrdjivac": "You confirmed the reality of member “{pseudonim}”. {iznos} POEN will be recorded for you once they make their first contribution — post an offer approved by the Foundation, donate, become a patron, or complete operational work.",
     "potvrda_poen_ceka_potvrdjeni": "Member “{pseudonim}” has confirmed your reality. {iznos} POEN will be recorded for you once you make your first contribution — post an offer approved by the Foundation, donate, become a patron, or complete operational work.",
-    "potvrda_uskladjena": "The rule has changed: POEN under a confirmation is recorded once the confirmed member makes their first contribution. {iznos} POEN has therefore been returned from your record and is now held as recorded. It will be entered as soon as the condition is met."
+    "potvrda_uskladjena": "The rule has changed: POEN under a confirmation is recorded once the confirmed member makes their first contribution. {iznos} POEN has therefore been returned from your record and is now held as recorded. It will be entered as soon as the condition is met.",
+    "nadzor_poen_upisan": "The confirmation you supervised has been unlocked by the confirmed member's first contribution, so {iznos} POEN has been recorded for you for the supervision performed."
   },
   "transakcije": {
     "verifikacija": "Confirmation of {pseudonim}",

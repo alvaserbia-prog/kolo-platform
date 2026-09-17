@@ -124,6 +124,10 @@ export async function DELETE(req: NextRequest) {
   // koji ne postoji i pokvario zero-sum.
   const jeUpisan = (v: { poenStatus: PotvrdaPoenStatus }) =>
     v.poenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
+  // Nadzornikovih 500 imaju svoje stanje — od seta 4.6.5 i ona čekaju isti uslov, ali
+  // nastaju u svom trenutku (upis ishoda nadzora).
+  const nadzorUpisan = (v: { nadzorPoenStatus: PotvrdaPoenStatus }) =>
+    v.nadzorPoenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
 
   // Helper: skida POEN od jednog korisnika i vraća Protokolu, capped na balance
   // (Pravilnik čl. 14: nijedan korisnik ne može imati negativan zapis POEN-a).
@@ -171,10 +175,8 @@ export async function DELETE(req: NextRequest) {
               `Poništavanje verifikacije zbog brisanja verifikatora (čl. 34)`
             );
           }
-          // 🔴 POEN_NADZORNIK se vraća bez obzira na `jeUpisan`: njega emituje
-          // `nadzor-service` pri evidentiranju ishoda (čl. 7 st. 2), nezavisno od
-          // upisa POEN-a po samoj potvrdi.
-          if (v.podlezeNadzoru && v.nadzornikId) {
+          // POEN_NADZORNIK se proverava ZASEBNO — svoje stanje, svoj trenutak.
+          if (nadzorUpisan(v) && v.podlezeNadzoru && v.nadzornikId) {
             await vratiPoenProtokolu(
               tx,
               v.nadzornikId,
@@ -229,7 +231,7 @@ export async function DELETE(req: NextRequest) {
             );
           }
           // POEN_NADZORNIK — vidi napomenu u petlji iznad.
-          if (v.podlezeNadzoru && v.nadzornikId) {
+          if (nadzorUpisan(v) && v.podlezeNadzoru && v.nadzornikId) {
             await vratiPoenProtokolu(
               tx,
               v.nadzornikId,

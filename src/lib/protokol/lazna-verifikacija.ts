@@ -147,8 +147,8 @@ async function ponistiVezu(
   // i pokvario zero-sum. Iz istog razloga tu nema ni nadoknade po čl. 20b: ona pokriva
   // nepokriven deo PONIŠTENOG upisa, a poništenja nema.
   //
-  // 🔴 Nadzornikovih 500 su IZUZETAK i vraćaju se uvek: njih emituje `nadzor-service`
-  // pri evidentiranju ishoda (čl. 7 st. 2), nezavisno od ovog kanala.
+  // 🔴 Nadzornikovih 500 imaju SVOJE stanje (`nadzorPoenStatus`) i proveravaju se
+  // odvojeno — od seta 4.6.5 i ona čekaju isti uslov, ali u svom trenutku.
   //
   // Veza se i tada briše i indeks se preračunava — to je posledica pada potvrde, ne
   // POEN-a. Potvrda zabeležena a neupisana tako naprosto nestaje.
@@ -168,12 +168,13 @@ async function ponistiVezu(
   //    „za proveru" ili „sporno" zadržava svojih 500. Pravilo važi u oba režima:
   //    ko je sumnju prijavio i bio u pravu ne sme da prođe gore od onoga ko je ćutao.
   //
-  // 🔴 NIJE pod uslovom `poenUpisan`, i to je bitno: nadzornikovih 500 ne emituje ovaj
-  // kanal nego `nadzor-service` u trenutku evidentiranja ishoda (čl. 7 st. 2). Ona
-  // dakle postoje i kad POEN po samoj potvrdi još čeka trag učešća, pa bi izostanak
-  // povraćaja ostavio u opticaju POEN koji je Protokol stvarno emitovao.
+  // 🔴 NIJE pod uslovom `poenUpisan` nego pod SVOJIM: od seta 4.6.5 nadzornikovih 500
+  // čekaju isti uslov, ali imaju zasebno stanje (`nadzorPoenStatus`), jer nastaju u
+  // svom trenutku — pri upisu ishoda nadzora. Veza ume da ima upisan POEN po potvrdi
+  // a nadzor koji čeka, i obrnuto; jedno polje to ne bi razlikovalo.
   let podelaNadzornik = { saKorisnika: 0, naVerifikatora: 0 };
-  if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
+  const nadzorUpisan = v.nadzorPoenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
+  if (nadzorUpisan && v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
     podelaNadzornik = bezNadoknade
       ? { saKorisnika: POEN_NADZORNIK, naVerifikatora: 0 }
       : podelaTereta(await stanje(tx, v.nadzornikId), POEN_NADZORNIK);

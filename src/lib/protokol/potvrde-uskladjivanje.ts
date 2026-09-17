@@ -17,8 +17,10 @@
  * 🟡 Poznata posledica: ko je POEN već potrošio prolazi bolje od onoga ko ga je
  * sačuvao. Prihvaćeno — vidi rečenicu iznad.
  *
- * 🔴 NADZORNIKOVIH 500 SE NE DIRA. Njih emituje `nadzor-service` pri evidentiranju
- * ishoda (čl. 7 st. 2), nezavisno od ovog kanala — nisu predmet ovog pravila.
+ * 🔴 NADZORNIKOVIH 500 SE POVLAČE ISTO (odluka vlasnika, 16.09.2026). Od seta 4.6.5 i
+ * ona čekaju isti uslov, samo imaju svoje stanje (`nadzorPoenStatus`), jer nastaju u
+ * svom trenutku — pri upisu ishoda nadzora. Zato se i ovde proveravaju odvojeno: veza
+ * ume da ima upisan POEN po potvrdi a nadzor koji čeka, i obrnuto.
  *
  * 🔴 USLOV SE MERI BLAGO, i to je namerno: računa se SVAKI evidentiran doprinos po
  * čl. 40a, bez obzira kojim je okidačem nastao. Zatečeni oglasi potvrđenih članova
@@ -32,7 +34,7 @@
  */
 import { prisma } from "@/lib/prisma";
 import { PotvrdaPoenStatus, TransactionType } from "@/generated/prisma/client";
-import { POEN_VERIFIKATOR, POEN_VERIFIKOVANI } from "./dokaz-stvarnosti";
+import { POEN_NADZORNIK, POEN_VERIFIKATOR, POEN_VERIFIKOVANI } from "./dokaz-stvarnosti";
 import { dohvatiTragUcesca, uslovPotvrde } from "./potvrda-poen";
 import { PRAG_SKOK } from "./osnivacki";
 import { logAdminAkcija } from "@/lib/audit";
@@ -43,7 +45,7 @@ const PROTOKOL_WALLET_ID = "banka-singleton";
 export type UskladjivanjeUcesnik = {
   id: string;
   pseudonim: string;
-  uloga: "potvrdjivac" | "potvrdjeni";
+  uloga: "potvrdjivac" | "potvrdjeni" | "nadzornik";
   /** Stanje zapisa pre radnje. */
   stanje: number;
   /** Koliko bi mu stvarno bilo oduzeto (kapirano na nulu). */
@@ -92,11 +94,23 @@ export async function uskladiZatecenePotvrde(opcije: {
   adminId?: string;
 }): Promise<UskladjivanjeIshod> {
   const upisane = await prisma.verifikacionaVeza.findMany({
-    where: { poenStatus: PotvrdaPoenStatus.EVIDENTIRAN },
+    // Veza ulazi u obradu ako je upisan bilo koji od tri iznosa po njoj.
+    where: {
+      OR: [
+        { poenStatus: PotvrdaPoenStatus.EVIDENTIRAN },
+        { nadzorPoenStatus: PotvrdaPoenStatus.EVIDENTIRAN },
+      ],
+    },
     select: {
       id: true,
       verifikatorId: true,
       verifikovaniId: true,
+      poenStatus: true,
+      nadzorPoenStatus: true,
+      nadzornikId: true,
+      nadzorIshod: true,
+      podlezeNadzoru: true,
+      nadzornik: { select: { pseudonim: true } },
       verifikator: { select: { pseudonim: true } },
       verifikovani: { select: { pseudonim: true } },
     },
@@ -118,8 +132,13 @@ export async function uskladiZatecenePotvrde(opcije: {
   // dve potvrde koje padaju ne sme da vrati više nego što na zapisu ima.
   const idevi = new Set<string>();
   for (const v of zaPovlacenje) {
-    idevi.add(v.verifikatorId);
-    idevi.add(v.verifikovaniId);
+    if (v.poenStatus === PotvrdaPoenStatus.EVIDENTIRAN) {
+      idevi.add(v.verifikatorId);
+      idevi.add(v.verifikovaniId);
+    }
+    if (v.nadzorPoenStatus === PotvrdaPoenStatus.EVIDENTIRAN && v.nadzornikId) {
+      idevi.add(v.nadzornikId);
+    }
   }
   const walleti = await prisma.wallet.findMany({
     where: { userId: { in: [...idevi] } },
@@ -155,11 +174,25 @@ export async function uskladiZatecenePotvrde(opcije: {
     return oduzeto;
   }
 
-  const planPoVezi = zaPovlacenje.map((v) => ({
-    veza: v,
-    odVerifikatora: obracunaj(v.verifikatorId, v.verifikator.pseudonim, "potvrdjivac", POEN_VERIFIKATOR),
-    odVerifikovanog: obracunaj(v.verifikovaniId, v.verifikovani.pseudonim, "potvrdjeni", POEN_VERIFIKOVANI),
-  }));
+  const planPoVezi = zaPovlacenje.map((v) => {
+    const poenUpisan = v.poenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
+    const nadzorUpisan =
+      v.nadzorPoenStatus === PotvrdaPoenStatus.EVIDENTIRAN && v.nadzornikId !== null;
+    return {
+      veza: v,
+      poenUpisan,
+      nadzorUpisan,
+      odVerifikatora: poenUpisan
+        ? obracunaj(v.verifikatorId, v.verifikator.pseudonim, "potvrdjivac", POEN_VERIFIKATOR)
+        : 0,
+      odVerifikovanog: poenUpisan
+        ? obracunaj(v.verifikovaniId, v.verifikovani.pseudonim, "potvrdjeni", POEN_VERIFIKOVANI)
+        : 0,
+      odNadzornika: nadzorUpisan
+        ? obracunaj(v.nadzornikId!, v.nadzornik?.pseudonim ?? "", "nadzornik", POEN_NADZORNIK)
+        : 0,
+    };
+  });
 
   const pre = await opticaj();
   const posle = pre - poenPonisten;
@@ -186,26 +219,43 @@ export async function uskladiZatecenePotvrde(opcije: {
   if (opcije.suviHod) return ishod;
 
   // ── Sprovođenje ────────────────────────────────────────────────────────────
-  for (const { veza, odVerifikatora, odVerifikovanog } of planPoVezi) {
+  for (const { veza, poenUpisan, nadzorUpisan, odVerifikatora, odVerifikovanog, odNadzornika } of planPoVezi) {
     await prisma.$transaction(async (tx) => {
       // Rezerviši prelaz — ako je u međuvremenu nešto otključalo pa opet oborilo,
-      // uslovan update sprečava dvostruko povlačenje.
-      const vraceno = await tx.verifikacionaVeza.updateMany({
-        where: { id: veza.id, poenStatus: PotvrdaPoenStatus.EVIDENTIRAN },
-        data: {
-          poenStatus: PotvrdaPoenStatus.ZABELEZEN,
-          poenEvidentiranAt: null,
-          poenUslov: null,
-          verifikatorTxId: null,
-          verifikovaniTxId: null,
-        },
-      });
-      if (vraceno.count !== 1) return;
+      // uslovan update sprečava dvostruko povlačenje. Dva iznosa, dva stanja.
+      let ista = 0;
+      if (poenUpisan) {
+        const v1 = await tx.verifikacionaVeza.updateMany({
+          where: { id: veza.id, poenStatus: PotvrdaPoenStatus.EVIDENTIRAN },
+          data: {
+            poenStatus: PotvrdaPoenStatus.ZABELEZEN,
+            poenEvidentiranAt: null,
+            poenUslov: null,
+            verifikatorTxId: null,
+            verifikovaniTxId: null,
+          },
+        });
+        ista += v1.count;
+      }
+      if (nadzorUpisan) {
+        const v2 = await tx.verifikacionaVeza.updateMany({
+          where: { id: veza.id, nadzorPoenStatus: PotvrdaPoenStatus.EVIDENTIRAN },
+          data: {
+            nadzorPoenStatus: PotvrdaPoenStatus.ZABELEZEN,
+            nadzorPoenEvidentiranAt: null,
+            nadzorTxId: null,
+          },
+        });
+        ista += v2.count;
+      }
+      if (ista === 0) return;
 
       for (const [userId, iznos] of [
-        [veza.verifikatorId, odVerifikatora],
-        [veza.verifikovaniId, odVerifikovanog],
+        [veza.verifikatorId, poenUpisan ? odVerifikatora : 0],
+        [veza.verifikovaniId, poenUpisan ? odVerifikovanog : 0],
+        [veza.nadzornikId ?? "", nadzorUpisan ? odNadzornika : 0],
       ] as const) {
+        if (!userId) continue;
         if (iznos <= 0) continue;
         const w = await tx.wallet.findUnique({ where: { userId }, select: { id: true, balance: true } });
         if (!w) continue;

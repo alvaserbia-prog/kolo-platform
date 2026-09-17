@@ -127,9 +127,12 @@ export async function oboriVerifikacijeNaloga(
         if (v.poenStatus === PotvrdaPoenStatus.EVIDENTIRAN) {
           await vratiPoenProtokolu(v.verifikovaniId, POEN_VERIFIKOVANI);
         }
-        // 🔴 Nadzornikovih 500 NISU pod tim uslovom: emituje ih `nadzor-service` pri
-        // evidentiranju ishoda (čl. 7 st. 2), nezavisno od upisa POEN-a po potvrdi.
-        if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
+        // 🔴 Nadzornikovih 500 imaju SVOJE stanje: od seta 4.6.5 čekaju isti uslov,
+        // ali nastaju u svom trenutku (upis ishoda), pa se proveravaju odvojeno.
+        if (
+          v.nadzorPoenStatus === PotvrdaPoenStatus.EVIDENTIRAN &&
+          v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO"
+        ) {
           await vratiPoenProtokolu(v.nadzornikId, POEN_NADZORNIK);
         }
 
@@ -169,7 +172,10 @@ export async function oboriVerifikacijeNaloga(
           await vratiPoenProtokolu(v.verifikatorId, POEN_VERIFIKATOR);
         }
         // Nadzornikovih 500 — vidi napomenu u petlji iznad.
-        if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
+        if (
+          v.nadzorPoenStatus === PotvrdaPoenStatus.EVIDENTIRAN &&
+          v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO"
+        ) {
           await vratiPoenProtokolu(v.nadzornikId, POEN_NADZORNIK);
         }
         const verifikator = await tx.user.findUnique({

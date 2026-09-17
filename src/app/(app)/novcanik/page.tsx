@@ -73,6 +73,7 @@ export default async function NovcanikPage({
         zabelezenDoprinos={maloletan ? 0 : zabelezenDoprinos}
         zabelezenePotvrdeMoje={maloletan ? 0 : zabelezenePotvrde.kaoPotvrdjeni}
         zabelezenePotvrdeTudje={maloletan ? 0 : zabelezenePotvrde.kaoPotvrdjivac}
+        zabelezenePotvrdeNadzor={maloletan ? 0 : zabelezenePotvrde.kaoNadzornik}
         // Maloletni nalog ne učestvuje u nabavci (čl. 4), pa reda ni nema.
         rezervisanoNabavka={maloletan ? 0 : rezervisano}
         maloletan={maloletan}

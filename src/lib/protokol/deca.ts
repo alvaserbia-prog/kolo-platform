@@ -956,6 +956,7 @@ async function pogodjeniVezom(vezaId: string) {
       podlezeNadzoru: true,
       nadzorIshod: true,
       poenStatus: true,
+      nadzorPoenStatus: true,
       verifikator: { select: { pseudonim: true } },
       verifikovani: { select: { pseudonim: true } },
     },
@@ -976,9 +977,12 @@ async function pogodjeniVezom(vezaId: string) {
       : [];
   // Nadzornikovih 500 pada samo uz ishod „uredno" (čl. 20a st. 2) — ko je sumnju
   // prijavio i bio u pravu ne sme da prođe gore od onoga ko se nije javio.
-  // Nadzornikovih 500 emituje `nadzor-service` pri evidentiranju ishoda (čl. 7 st. 2),
-  // nezavisno od upisa POEN-a po potvrdi — zato NISU pod uslovom `upisan`.
-  if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
+  // Nadzornikovih 500 imaju SVOJE stanje: od seta 4.6.5 čekaju isti uslov, ali nastaju
+  // u svom trenutku (upis ishoda nadzora), pa se proveravaju odvojeno od `upisan`.
+  if (
+    v.nadzorPoenStatus === PotvrdaPoenStatus.EVIDENTIRAN &&
+    v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO"
+  ) {
     stavke.push({ userId: v.nadzornikId, iznos: POEN_NADZORNIK, uloga: "nadzornik" });
   }
   return { veza: v, stavke };

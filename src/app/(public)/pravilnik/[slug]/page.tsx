@@ -57,7 +57,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   },
   // 4.6.5 — čl. 7: POEN po potvrdi se beleži, a upisuje kad potvrđeni korisnik
   // ostvari prvi potvrđen doprinos (odobren oglas, javna donacija, pokroviteljstvo,
-  // operativni doprinos). Punoletstvo je izuzeto; nadzornikovih 500 čekaju isti uslov.
+  // operativni doprinos). Isti uslov važi i za nadzornikovih 500, po svom stanju;
+  // izuzeto je samo punoletstvo (roditeljske potvrde iz čl. 19 st. 3).
   "dokaz-stvarnosti": {
     fajl: "dokaz_stvarnosti_4_6_5.md",
     verzija: "4.6.5",

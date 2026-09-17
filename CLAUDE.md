@@ -1848,11 +1848,21 @@ je uslov ispunjen** — proverava minimum i stvarnu ponudu (čl. 40a). Razlika n
 odbrana iz čl. 13 i operativnog čl. 27 počiva na tome da POEN nije naknada i da niko o
 njemu ne odlučuje. **Ne pisati nigde da Fondacija POEN „dodeljuje".**
 
-🔴 **NADZORNIKOVIH 500 SE NE DIRA.** Njih emituje `nadzor-service` pri evidentiranju
-ishoda (čl. 7 st. 2), nezavisno od ovog kanala — dakle postoje i kad POEN po potvrdi još
-čeka. Prva verzija ove izmene ih je stavila pod isti uslov i **to je bila greška**:
-poništenje bi ostavilo u opticaju POEN koji je Protokol stvarno emitovao. Zaključano
-`potvrda-uslov-izvor.test.ts`.
+🔴 **NADZORNIKOVIH 500 ČEKAJU ISTI USLOV** (odluka vlasnika, 16.09.2026) — ali imaju
+**svoje stanje**, `nadzorPoenStatus`. Zaseban skup polja je nužan, ne kozmetika: ta
+emisija nastaje u **svom trenutku** (upis ishoda nadzora), a nadzornik ume da ishod
+upiše i pre i posle nego što uslov bude ispunjen. Sa jednim poljem se ne bi razlikovalo
+„nije upisano jer ishoda nema" od „nije upisano jer uslov nije ispunjen", pa bi kaskada
+vraćala POEN koji nikad nije emitovan.
+🔴 **Uslov se NE vezuje za ISHOD nadzora** — plaća se rad, ne saglasnost (čl. 7 st. 5).
+„Sporno" se upisuje isto kao „uredno", samo kad i ostali POEN po toj potvrdi. Vezivanje
+za ishod bi podsticalo na propuštanje i oborilo bi sopstveni član.
+🟡 **Posledicu znati:** nadzornik je od potvrđenog **dalji nego potvrđivač** — često ga
+i ne poznaje, pa mu upis zavisi od poteza stranca na koji ne može da utiče, dok
+potvrđivač bar može da podseti onoga koga je doveo. Prihvaćeno uz obrazloženje da je
+500 emitovanih povodom potvrde čoveka koji nikad ništa ne doprinese isto curenje kao i
+1.000, samo manje — i da pravilo tako ostaje jedna rečenica umesto rečenice sa
+izuzetkom. Zaključano `potvrda-uslov-izvor.test.ts`.
 
 🔴 **PUNOLETSTVO JE IZUZETO** (`bezUslovaZaPoen`). Detetu se na 18. rođendan istog dana
 poništava POEN iz prijateljstava, često u minus; da i roditeljske potvrde iz čl. 19 st. 3
@@ -1890,7 +1900,9 @@ dugmadima „Objavi ponudu" i „Doniraj".
 🔴 **Usklađivanje povlači NAJVIŠE DO NULE, nikad u minus** (odluka vlasnika, varijanta 2).
 Ovo nije sankcija nego usklađivanje — niko nije prekršio pravilo koje je tada važilo, pa
 se ne primenjuje ono što važi kod otpisa prijateljstva, poništenog prepisa i prevoda u
-maloletni, gde minus postoji baš zato što je neko nešto skrivio. 🟡 Posledica: ko je POEN
+maloletni, gde minus postoji baš zato što je neko nešto skrivio. **Povlače se i
+nadzornikovih 500**, po svom stanju (`nadzorPoenStatus`), pa veza ulazi u obradu i kad
+je upisan samo jedan od dva iznosa. 🟡 Posledica: ko je POEN
 već potrošio prolazi bolje od onoga ko ga je sačuvao — prihvaćeno.
 🔴 **Uslov se pri povlačenju meri BLAGO:** računa se svaki evidentiran doprinos po
 čl. 40a, bez obzira kojim je okidačem nastao. Zatečeni oglasi potvrđenih članova nikad
