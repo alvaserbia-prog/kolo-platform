@@ -793,7 +793,7 @@
     "starijima_napomena": "Potrebno 50+ godina.",
     "ustanova": "Škola ili fakultet *",
     "smer": "Razred ili godina studija *",
-    "skolovanje_napomena": "Dnevni iznos je fiksan: 2.000 POENA. Ponovna provera svakih 6 meseci.",
+    "skolovanje_napomena": "Traženi dnevni iznos je 2.000 POENA, isti za sve korisnike programa. Ponovna provera svakih 6 meseci.",
     "deca_naslov": "Deca (datum rođenja)",
     "dete_ime": "{n}. dete",
     "dodaj_dete": "+ Dodaj dete",
@@ -806,6 +806,7 @@
     "opis_starijima": "1.000 + 100 × (godine − 50) POEN/dan · dostupno članovima od 50 godina",
     "opis_posebna_briga": "2.000 POEN/dan · osobe sa invaliditetom · rešenje nadležnog organa",
     "opis_skolovanje": "2.000 POENA/dan · ponovna provera svakih 6 meseci",
+    "srazmerno_napomena": "Iznos je traženi dnevni iznos, ne zagarantovan. Kada zbir svih traženih iznosa premaši dnevni limit, svi se srazmerno umanjuju, a razlika se ne prenosi u naredni dan.",
     "isplaceno_ukupno": "Evidentirano po ovom programu: {iznos} POEN",
     "nepun_indeks": "Za socijalni program potrebna je najmanje jedna potvrda, indeks stvarnosti od 10%. Ceo tvoj lanac potvrđuje ispunjenost uslova pre odobravanja.",
     "posebna_briga_datum_resenja": "Datum donošenja rešenja o invaliditetu",
@@ -1032,7 +1033,7 @@
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.6.2"
+      "ver": "4.6.6"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
@@ -1068,7 +1069,7 @@
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.6.0",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.2",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.6",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
     "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.6.5",
     "rb": {
@@ -1576,11 +1577,13 @@
     "ztk_naslov": "Zakon o tržištu kapitala",
     "ztk_tekst": "ZRNO nije prenosiva hartija od vrednosti jer je neprenosivo, ne postoji ni mehanizam prenosa, ni tržište, ni mogućnost trgovanja. Nije ni jedinica kolektivnog investiranja, jer ne predstavlja učešće u fondu čija vrednost zavisi od imovine u koju su sredstva uložena; ZRNO evidentira položaj u obračunskom sistemu koji nema imovinsku vrednost van sebe. POEN nije finansijski instrument jer nema nosioca, ne može se preneti izvan evidencije koju vodi Protokol i ne može se konvertovati u novac. Nijedan učesnik ne ulaže sredstva sa očekivanjem finansijskog prinosa.",
     "sporno_naslov": "Dva mesta koja izgledaju sporno",
-    "sporno_uvod": "Dve stvari u mehanici same traže odgovor. Obe su razmotrene i obe imaju izričito obrazloženje.",
+    "sporno_uvod": "Tri stvari u mehanici same traže odgovor. Sve tri su razmotrene i svaka ima izričito obrazloženje.",
     "sporno1_naslov": "Donacija → POEN → ZRNO",
     "sporno1_tekst": "Ko donira dinare Fondaciji, dobija evidentiran POEN koji ga može približiti pragu za upis ZRNA. Tri stvari razbijaju čitanje tog lanca kao investicionog ugovora: donacija je nepovratna i pravno odvojena od evidentiranja — donator ne može da je uslovi evidencijom ni da traži povraćaj; donacija nije ni neophodan ni privilegovan put do ZRNA, jer se isti prag od 20.000 POENA dostiže razmenom, doprinosom i potvrdama, bez ijednog dinara; i odnos između iznosa donacije i broja POENA nije fiksna konverziona stopa nego parametar sistema.",
     "sporno2_naslov": "Razlika u koeficijentu između upisa i otpisa",
     "sporno2_tekst": "Ko upiše ZRNO pri jednom koeficijentu a otpiše ga pri drugom, dobije drugačiji broj POENA nego što je upisom utrošio — u oba smera, jer koeficijent raste od novih zapisa POEN-a a pada od njihovog poništenja. Četiri stvari razbijaju čitanje te razlike kao prinosa: dobijeni POEN nema vrednost van sistema — ne može se konvertovati, izneti ni unovčiti; promena koeficijenta nije garantovana i zavisi od stanja evidencije cele zajednice, a ne od napora trećih lica; sopstveni upis i otpis koeficijent ne pomeraju, jer se pri upisu istovremeno umanjuju i broj POENA u opticaju i broj raspoloživih ZRNA — pa nema ni trgovanja ni pravog trenutka; i ne postoji izdavalac koji rast obećava ni institucija koja razliku isplaćuje. Uz to, ko hoće glas mora da aktivira ZRNO i time gubi mogućnost otpisa — pasivno držanje i upravljanje se isključuju.",
+    "sporno3_naslov": "Koliko POEN-a uopšte može da nastane",
+    "sporno3_tekst": "Ukupan broj POEN-a nije ograničen unapred određenim brojem, i to je namerno. Svaki zapis vezuje se za doprinos određenog lica, pa broj prati koliko ljudi učestvuje i koliko su uključeni — kao što broj upisa u matičnoj knjizi prati broj rođenih, a ne obrnuto. Broj nije ni jednosmeran: pet osnova poništava zapise i umanjuje ga — prestanak svojstva korisnika, preuzimanje dela u kolektivnoj nabavci, raskid prijateljstva u dečjem prostoru, prevođenje naloga u maloletni i poništenje potvrde stvarnosti. Jedini kanal sa apsolutnom gornjom granicom je osnivački doprinos, koji se trajno zatvara na 2.400.000 POEN-a.\n\nPravilo od 10% opticaja po obračunskom periodu često se čita kao gornja granica — nije. Ono deli emisiju tog perioda između operativnog doprinosa i programa podrške kada zbir traženih iznosa premaši limit: svi iznosi se tada srazmerno umanjuju, a razlika se ne prenosi u naredni period. Ograničava koliko se u jednom danu može evidentirati, ne koliko POEN-a ukupno postoji.\n\nŠta ostaje sporno. Ko traži jednu brojku kao odgovor, neće je dobiti, a granica se ne može uvesti a da ne bude proizvoljna. Uz to, dok je dnevni limit tesan — a to je po pravilu početni period, dok je opticaj mali — korisnik programa podrške dobija manje od iznosa koji propisuje formula. To je posledica koju sistem saopštava unapred, na samom ekranu programa.",
     "principi_naslov": "Nekonvertibilnost nosi sve ostalo",
     "principi_tekst": "Svi gornji argumenti počivaju na tome da POEN nema vrednost van sistema, a to stoji samo dok ne postoji mehanizam konverzije. Zato je nekonvertibilnost prvi od četiri principa na kojima počiva pravna pozicija (čl. 70), uz odsustvo imovinskog prava nad zapisima, nepovratnost donacija i minimizaciju podataka. Ta četiri principa su strukturni limiti: ne mogu se izmeniti ni ukinuti nijednom upravljačkom odlukom, uključujući odluku Gornjeg Kola. Povreda bilo kog od njih menja pravnu prirodu sistema.",
     "fondacija_naslov": "Ko stoji iza sistema",

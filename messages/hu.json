@@ -799,6 +799,7 @@
     "opis_starijima": "1.000 + 100 × (életkor − 50) POEN/nap · 50 éves kortól elérhető a tagoknak",
     "opis_posebna_briga": "2 000 POEN/nap · rokkantság vagy krónikus betegség · dokumentáció szükséges",
     "opis_skolovanje": "Az összeget az admin állítja be · 6 havonta újraellenőrzés",
+    "srazmerno_napomena": "Az összeg az igényelt napi összeg, nem garantált. Ha az igényelt összegek összege meghaladja a napi korlátot, mindegyik arányosan csökken, a különbség pedig nem vihető át a következő napra.",
     "isplaceno_ukupno": "E program alapján nyilvántartva: {iznos} POEN",
     "nepun_indeks": "A szociális programhoz legalább egy megerősítés szükséges — 10 %-os valóságindex. A jóváhagyás előtt a teljes láncod megerősíti, hogy a jogosultsági feltétel teljesül.",
     "posebna_briga_datum_resenja": "A fogyatékosságot megállapító határozat kelte",
@@ -1025,7 +1026,7 @@
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.6.2"
+      "ver": "4.6.6"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
@@ -1061,7 +1062,7 @@
     "meta_rizici_title": "Kockázatvállalási nyilatkozat · KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.0-es verzió",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.2-es verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.6-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai · KOLO",
     "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.5-es verzió",
     "rb": {
@@ -1569,11 +1570,13 @@
     "ztk_naslov": "A tőkepiaci törvény",
     "ztk_tekst": "A ZRNO nem átruházható értékpapír, mert nem ruházható át — nincs sem átruházási mechanizmus, sem piac, sem kereskedési lehetőség. Nem is kollektív befektetési egység, mivel nem jelent részesedést olyan alapban, amelynek értéke a befektetett eszközöktől függ; a ZRNO egy elszámolási rendszerbeli helyzetet rögzít, amelynek önmagán kívül nincs vagyoni értéke. A POEN nem pénzügyi eszköz, mert nincs birtokosa, a Protokoll által vezetett nyilvántartáson kívülre nem ruházható át, és nem váltható pénzre. Egyetlen résztvevő sem fektet be pénzügyi hozam reményében.",
     "sporno_naslov": "Két pont, amely vitathatónak tűnik",
-    "sporno_uvod": "A mechanika két eleme maga hívja ki a kérdést. Mindkettőt megvizsgáltuk, és mindkettőre van kifejezett válasz.",
+    "sporno_uvod": "A mechanika három eleme maga hívja ki a kérdést. Mindhármat megvizsgáltuk, és mindegyikre van kifejezett válasz.",
     "sporno1_naslov": "Adomány → POEN → ZRNO",
     "sporno1_tekst": "Aki dinárt adományoz az Alapítványnak, rögzített POEN-t kap, ami közelebb viheti a ZRNO beírásának küszöbéhez. Három dolog dönti meg e lánc befektetési szerződésként való olvasatát: az adomány visszafordíthatatlan és jogilag elkülönül a rögzítéstől — az adományozó sem feltételhez nem kötheti, sem visszatérítést nem követelhet; az adomány nem szükséges és nem is kiváltságos út a ZRNO-hoz — ugyanaz a 20.000 POEN-es küszöb elérhető cserével, hozzájárulással és megerősítésekkel, egyetlen dinár nélkül; és az adomány összege és a POEN száma közötti arány nem rögzített átváltási árfolyam, hanem rendszerparaméter.",
     "sporno2_naslov": "Az együttható különbözete a beírás és a leírás között",
     "sporno2_tekst": "Aki egy együtthatónál írja be a ZRNO-t és egy másiknál írja le, más számú POEN-t kap, mint amennyit a beíráskor felhasznált — mindkét irányban, mivel az együttható az új POEN-bejegyzésektől nő és azok megsemmisítésétől csökken. Négy dolog dönti meg e különbözet hozamként való olvasatát: a kapott POEN-nek a rendszeren kívül nincs értéke — nem váltható, nem vihető ki és nem tehető pénzzé; az együttható változása nem garantált, és az egész közösség nyilvántartásának állapotától függ, nem harmadik felek erőfeszítésétől; a saját beírás és leírás nem mozdítja el az együtthatót, mert beíráskor egyszerre csökken a forgalomban lévő POEN-ek és a rendelkezésre álló ZRNO-k száma is — így nincs sem kereskedés, sem megfelelő pillanat; és nincs kibocsátó, aki emelkedést ígérne, sem intézmény, amely a különbözetet kifizetné. Ezen felül aki szavazatot akar, annak aktiválnia kell a ZRNO-t, és ezzel elveszíti a leírás lehetőségét — a passzív tartás és az irányítás kizárják egymást.",
+    "sporno3_naslov": "Mennyi POEN keletkezhet egyáltalán",
+    "sporno3_tekst": "A POEN-ek teljes számát nem korlátozza előre meghatározott szám, és ez szándékos. Minden bejegyzés egy meghatározott személy hozzájárulásához kötődik, így a szám azt követi, hányan vesznek részt és mennyire vonódnak be — ahogy az anyakönyvi bejegyzések száma is a születések számát követi, nem fordítva. A szám nem is egyirányú: öt jogcím érvényteleníti a bejegyzéseket és csökkenti azt — a felhasználói minőség megszűnése, a rész átvétele a közös beszerzésben, a barátság megszüntetése a gyermektérben, a fiók kiskorúvá alakítása és a valódiság-igazolás érvénytelenítése. Az egyetlen abszolút felső határral rendelkező csatorna az alapítói hozzájárulás, amely 2 400 000 POEN-nél véglegesen lezárul.\n\nAz elszámolási időszakonkénti 10 %-os forgalmi szabályt gyakran felső határként olvassák — nem az. Az adott időszak kibocsátását osztja fel a működési hozzájárulás és a támogatási programok között, ha az igényelt összegek összege meghaladja a korlátot: ilyenkor minden összeg arányosan csökken, a különbség pedig nem vihető át a következő időszakra. Azt korlátozza, mennyi vehető nyilvántartásba egyetlen napon, nem azt, hogy összesen hány POEN létezik.\n\nAmi vitás marad. Aki egyetlen számot keres válaszként, nem fogja megkapni, és határt nem lehet úgy bevezetni, hogy ne legyen önkényes. Ezen felül, amíg a napi korlát szűk — ami rendszerint a kezdeti időszak, míg a forgalom kicsi —, a támogatási program felhasználója kevesebbet kap, mint amennyit a képlet előír. Ez olyan következmény, amelyet a rendszer előre közöl, magán a program képernyőjén.",
     "principi_naslov": "Mindent a nem-átválthatóság tart",
     "principi_tekst": "A fenti érvek mind azon nyugszanak, hogy a POEN-nek a rendszeren kívül nincs értéke — ez pedig csak addig áll, amíg nincs átváltási mechanizmus. Ezért a nem-átválthatóság az első a négy alapelv közül, amelyeken a jogi helyzet nyugszik (70. cikk), a bejegyzések feletti tulajdonjog hiánya, az adományok visszafordíthatatlansága és az adattakarékosság mellett. E négy alapelv szerkezeti korlát: semmilyen kormányzási döntéssel nem módosítható és nem szüntethető meg, a Felső Kolo döntésével sem. Bármelyik megsértése megváltoztatja a rendszer jogi természetét.",
     "fondacija_naslov": "Ki áll a rendszer mögött",

@@ -233,6 +233,33 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
+**AŽURIRANO 2026-09-17 (trideset sedmi put):** na **4.6.6** idu **DVA akta** —
+Pravilnik o programima podrške (sa 4.6.1) i Whitepaper (sa 4.6.2). Ostalih petnaest
+ostaje gde jeste. Povod je **R-08 iz NOVOG registra rizika** (količina POEN-a).
+Sadržinski, vidi sekciju „Količina POEN-a: granicu postavlja tip kolone, ne pravilo".
+
+🔴 **Whitepaper je morao uz programe podrške i nije bilo izbora.** Na **dva mesta**
+(pogl. 8 i prikaz Faze 1) tvrdio je da limit od 10% „štiti od inflatornog pritiska" —
+a procenat zaliha ne može da ograniči zalihu; on deli dnevnu emisiju među
+podnosiocima. To je dokument koji spoljni čitalac otvara prvi. **Četvrti put ista
+pouka:** pri izmeni odredbe u pravilniku OBAVEZNO proveriti whitepaper — on istu
+tvrdnju po pravilu ponavlja svojim rečima, a ovde ju je ponavljao u goroj varijanti.
+
+🟡 **Zašto 4.6.6, a ne 4.6.5:** 4.6.5 je objavljen 16.09. za dva akta, a 4.6.4 dan
+ranije za tri (R-07). Tri različita događaja objave ne smeju da dele šifru — isto
+pravilo kao 4.4.4, 4.4.7, 4.5.5, 4.5.9 i 4.6.1.
+
+🟢 **Pravilnik o KOLO sistemu NIJE diran.** Pravilo od 10% živi u čl. 23 Pravilnika o
+operativnom doprinosu i čl. 5 Pravilnika o programima podrške; glavni Pravilnik ga
+samo pominje u čl. 15 kao dnevni limit Programa Protokola, i ta rečenica ostaje tačna.
+DPIA, Politika i Registar radnji obrade takođe nisu dirani — nijedna mera ne uvodi nov
+podatak o ličnosti ni novu radnju obrade.
+
+🔴 **Zaostala unakrsna upućivanja — DVA nova.** DPIA (4.6.3) i Registar (4.6.3)
+upućuju na `Pravilnik o programima podrške (v4.6.1)`, a DPIA i na `Whitepaper
+(v4.6.2)`. Ti akti se ovim potezom ne objavljuju, pa se ne prepravljaju; briše ih bump
+celog seta na 5.0.
+
 **AŽURIRANO 2026-09-16 (trideset šesti put):** na **4.6.5** idu **DVA akta** —
 Pravilnik o dokazu stvarnosti (sa 4.4.1) i Pravilnik o KOLO sistemu (sa 4.6.2).
 Ostalih petnaest ostaje gde jeste. Povod nije rizik iz registra nego **odluka
@@ -1634,6 +1661,134 @@ dali prava, to davanje više liči na prodaju. 🟢 **Rešeno setom 4.5.4** tako
 ne ide kroz korisnikovo pravo prema Fondaciji nego kroz **obavezu Fondacije prema
 sopstvenom programu** (čl. 30 st. 5) i kroz **ispravku evidencije**, koja nije
 povraćaj naknade (čl. 30a st. 6). Odbrana besplatnosti time ostaje netaknuta.
+
+### Količina POEN-a: granicu postavlja tip kolone, ne pravilo (R-08, 2026-09-17)
+
+Sprovođenje rizika **R-08 iz novog registra** (`docs/registar-rizika-regulatori-2026-09.md`)
+— zatečena ocena **8**, po merama **3**. Na **4.6.6** idu Pravilnik o programima
+podrške (sa 4.6.1) i Whitepaper (sa 4.6.2).
+
+🔴 **Registar je rizik opisao pogrešno, i to je prvi nalaz.** Vodio ga je kao
+„strukturnu hiperinflaciju POEN-a uz objavljen odnos 1:1". **Obe premise su pale:**
+odnos 1 POEN ≈ 1 RSD uklonjen je iz Uslova čl. 19 setom 4.5.8 (R-01, mera M-7a), a
+„hiperinflacija" je pogrešan opis — primedba vlasnika, i tačna je. Ako sistem raste
+zato što raste broj članova i uključenost svakog, opticaj koji prati taj rast nije
+obezvređenje nego **evidencija koja raste sa onim što meri**. Uz to broj **nije
+jednosmeran**: pet osnova poništava zapise i umanjuje ga (čl. 34, otpis pri nabavci,
+otpis prijateljstva, prevođenje u maloletni, poništenje potvrde), pa je deflacija
+stvarna, ne teorijska — isto što je R-04 već utvrdio za koeficijent ZRNA.
+**Reč „hiperinflacija" je povučena i ne vraća se.**
+
+🟢 **Test kojim se to razlučuje, zapisan da se ne izvodi ponovo:** od čega zavisi
+emisija tog dana. Socijalni programi — od formule po osobi × broj ljudi. Operativni
+doprinos — od predloženog POEN-a po zadatku. Oba su **zapis**. Jedino pravilo od 10%
+**kad se zasiti** zavisi od zatečenog opticaja, dakle od same količine. Sistem nije
+inflatoran po konstrukciji; samo u tom jednom režimu prestaje da meri doprinos.
+
+🔴 **Ali u tom režimu kvar ide u SUPROTNOM smeru od inflacije: zapis je MANJI od
+doprinosa, a razlika se trajno gubi.** Oba akta to izričito kažu (programi podrške
+čl. 5, operativni čl. 22 i 24: *„ne prenosi se u naredni obračunski period i ne
+stvara obavezu sistema prema izvršiocu"*), a ekran je govorio drugo —
+`programi.skolovanje_napomena`: *„Dnevni iznos je **fiksan**: 2.000 POENA."* Pri
+opticaju od 200.000 i sto korisnika koeficijent je 0,100, pa čovek dobije **200**
+umesto 2.000. 🔴 **Zasićenje je tačno lansirno stanje** — dok je opticaj mali, limit
+je mali. R-08 time prestaje da bude sistemski rizik i postaje isti kvar kao R-07:
+akt kaže jedno, ekran drugo; samo što ovde ekran obećava previše.
+
+🔴 **Prenošenje razlike u naredni dan se NE uvodi.** Oba akta izričito kažu da se ne
+prenosi *i ne stvara obavezu sistema* — obaveza bi POEN pretvorila u potraživanje i
+oborila čl. 13 i ceo R-01. Rešenje je da se kaže, ne da se menja mehanika.
+
+#### Šta je urađeno
+
+- **M-1 — ekran prestaje da obećava fiksan iznos.** Nov ključ
+  `programi.srazmerno_napomena` (pet jezika) stoji uz **oba** mesta —
+  socijalne programe i operativni doprinos, jer dele **isti** dnevni limit
+  (programi podrške čl. 5). Iz srpskog `skolovanje_napomena` izlazi reč „fiksan".
+  🟡 Prevodi tog ključa na en/ru/hr/hu su zatečeno netačni na drugi način
+  („Admin sets daily amount" — nije tačno otkad iznos propisuje čl. 13), pa su
+  ostavljeni po pravilu „menja se samo srpski"; izmena srpskog ih stavlja u dug i
+  `npm run prevodi:objava` ih zaustavlja pred objavom.
+- **M-2 — whitepaper (dva mesta, pet jezika).** Tvrdnja da limit od 10% *„štiti od
+  inflatornog pritiska"* je netačna: procenat zaliha ne može da ograniči zalihu.
+  Zamenjena je **tačnom i jačom**: limit je ključ kojim se emisija tog perioda deli
+  kad potražnja premaši limit, a ukupan broj prati broj učesnika i nije jednosmeran.
+  🔴 Isti obrazac greške kao R-04 („upis ZRNA diže koeficijent") i R-08 iz starog
+  registra — tvrdnja koju sopstvena aritmetika obara.
+- **M-3 — programi podrške čl. 11, briše se *„Iznos nema gornju granicu"*.** Nalaz
+  vlasnika: rečenica **protivreči čl. 5 istog akta**, koji propisuje ograničenje od
+  10% i srazmerno umanjenje. 🔴 Briše se bez zamene — **ne izjašnjavamo se o
+  maksimalnom iznosu** (odluka vlasnika); čl. 5 već uređuje stvar.
+- **M-4 — FAQ 300 i `/pravna-pozicija`.** Briše se *„Tempo nije proizvoljan"*: u
+  Fazi 1 Fondacija objavljuje sve zadatke operativnog doprinosa i utvrđuje njihov
+  predloženi POEN, pa **ona određuje brzinu kojom se osnivački kanal prazni**. Sada
+  to i piše, otvoreno, uz granice koje ni ona ne može da pomeri. Na
+  `/pravna-pozicija` nov odeljak `sporno3` (pet jezika) — do ovog seta reč
+  „inflacija" nije postojala **nigde** u `messages/sr.json` ni u `faq-data.ts`.
+- **M-5 — osnivački kanal se NE dira.** Kapa „najviše jedan korak po periodu" je
+  odbijena 09.09.2026. i ostaje odbijena.
+
+#### 🔴 M-6 — granicu postavlja TIP KOLONE, i to niko nije birao
+
+`Wallet.balance` je `INTEGER` (migracija `20260407142817_init`), dakle 32-bitni ceo
+broj. Zapis Protokola je negativan i jednak −opticaj, pa je **tvrda granica opticaja
+2.147.483.647**. U celoj šemi nema nijednog `BigInt`, a u celom `src/` nije bilo
+nijedne provere prekoračenja.
+
+🔴 **Šta taj broj znači:** pri milion članova dozvoljava oko **2.147 POEN-a po
+čoveku** — otprilike dve potvrde stvarnosti. Dostiže se za 2,4 godine pri hiljadu
+aktivnih korisnika programa, a za 81 dan pri zasićenom limitu od 1.000.000.
+
+🟢 **Postgres ne prelama tiho** nego diže `integer out of range`, pa transakcija
+pukne cela i nema tihe štete — ali bi noćna emisija počela da puca bez ijednog
+upozorenja unapred.
+
+🔴 **Prelazak na `BIGINT` NIJE urađen i to je svesno.** Predložen je kao „migracija
+od nekoliko milisekundi" — **to je bilo pogrešno procenjeno.** Prisma `Int` → `BigInt`
+menja JS tip u `bigint`, što obara `Math.abs(balance)`, svaku aritmetiku koja meša
+`bigint` i `number`, i `JSON.stringify` (baca na bigint) — **158 dodirnih tačaka**,
+među njima zero-sum jezgro, najosetljiviji kod u sistemu. Refaktor tog obima zbog
+problema koji je godinama daleko, nad tek puštenim sistemom, je loš posao.
+
+**Umesto toga je urađena brana** (`src/lib/protokol/granica-zapisa.ts`, ČISTE
+funkcije): uzbuna Fondaciji na **80% granice** i razumljiv opis greške ako se granica
+ipak dotakne. Time „tihi tempirani sat" postaje kontrolisan zastoj sa godinu dana
+najave. 🔴 **Uzbuna ide iz noćne emisije, jednom dnevno — NE iz `emitujPoen`**: noćni
+prolaz emituje po korisniku, pa bi provera u jezgru poslala hiljade istih poruka u
+jednoj noći. Zaključano testom.
+
+🔴 **Broj 2.147.483.647 se NE piše ni u akt, ni u whitepaper, ni na sajt** — nije
+normativna granica nego trenutna tehnička, i prestaje da važi čim se kolona promeni.
+Isto pravilo kao kod poreskih stopa. Zaključano testom, na svih pet jezika.
+
+#### 🟡 Svesno prihvaćeni ostaci
+
+1. **Prelazak na `BIGINT` ostaje da se uradi** kad uzbuna sa 80% stigne — ili ranije,
+   kao zaseban posao sa sopstvenim testovima. Dok je kolona `INTEGER`, tvrdnja „broj
+   prati učešće" ima tehničku granicu o kojoj akt ćuti.
+2. **U lansirnoj fazi ljudi stvarno dobijaju deo obećanog**, i to pogađa najranjivije
+   korisnike. Posle M-1 to nije regulatorni nego **reputacioni** ostatak — sistem to
+   kaže unapred, akti su ga oduvek govorili, i nijedan dinar nije u igri.
+3. **Zaostala unakrsna upućivanja — DVA nova.** DPIA (4.6.3) i Registar radnji obrade
+   (4.6.3) upućuju na `Pravilnik o programima podrške (v4.6.1)`, a DPIA i na
+   `Whitepaper (v4.6.2)`. Ti akti se ovim potezom ne menjaju, pa se ne prepravljaju —
+   briše ih bump celog seta na 5.0.
+
+🔴 **ODBIJENE MERE UZ R-08 (odluka vlasnika, 2026-09-16) — ne predlagati ponovo:**
+- **Gornja granica predloženog POEN-a po izvršiocu** (bivši M-1) — povučeno pošto je
+  potvrđeno da operativni doprinos deli **isti** krov od 10% sa socijalnim programima,
+  pa nije nezavisan izvor rasta.
+- **Prvenstvo socijalnih programa unutar istih 10%** — odbijeno: *„operativni je
+  prioritet."* Redosled namirenja se ne dira; ostaje srazmerna raspodela preko celog
+  bazena. 🟡 Posledicu znati: jedan velik operativni zadatak srazmerno umanjuje i
+  Podršku majkama i Posebnu brigu tog dana.
+- **Drugi uslov za prelaz u Fazu 2 (minimalan broj nosilaca ZRNA)** — povučeno:
+  nosilaca već **ima pet**, i to su **osnivači** (`prisma/seed-prod.ts:11`), pa bi
+  uslov bio ispunjen u trenutku pisanja i samo bi formalizovao „Gornje Kolo =
+  osnivači". To je predmet R-10, ne R-08.
+
+**Brana:** `__tests__/r08-kolicina-poena-izvor.test.ts` (28 provera, gleda IZVOR) +
+odredbe akata zaključane u `pravni-dokumenti.test.ts`.
 
 ### Porez: POEN nije prihod, a roba iz nabavke je poklon (R-02, 2026-09-13)
 

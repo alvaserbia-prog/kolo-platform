@@ -806,6 +806,7 @@
     "opis_starijima": "1.000 + 100 × (godine − 50) POEN/dan · dostupno članovima od 50 godina",
     "opis_posebna_briga": "2.000 POEN/dan · osobe s invaliditetom · rješenje nadležnog tijela",
     "opis_skolovanje": "Iznos postavlja admin · ponovna provjera svakih 6 mjeseci",
+    "srazmerno_napomena": "Iznos je traženi dnevni iznos, ne zajamčen. Kada zbroj svih traženih iznosa premaši dnevni limit, svi se razmjerno umanjuju, a razlika se ne prenosi u sljedeći dan.",
     "isplaceno_ukupno": "Evidentirano po ovom programu: {iznos} POEN",
     "nepun_indeks": "Za socijalni program potrebna je najmanje jedna potvrda, indeks stvarnosti od 10 %. Cijeli tvoj lanac potvrđuje ispunjenost uvjeta prije odobravanja.",
     "posebna_briga_datum_resenja": "Datum donošenja rješenja o invaliditetu",
@@ -1032,7 +1033,7 @@
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.6.2"
+      "ver": "4.6.6"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sustava",
@@ -1068,7 +1069,7 @@
     "meta_rizici_title": "Izjava o prihvaćanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.6.0",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.2",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.6",
     "meta_pravilnik_title": "Pravilnici KOLO sustava · KOLO",
     "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.6.5",
     "rb": {
@@ -1576,11 +1577,13 @@
     "ztk_naslov": "Zakon o tržištu kapitala",
     "ztk_tekst": "ZRNO nije prenosivi vrijednosni papir jer je neprenosivo, ne postoji ni mehanizam prijenosa, ni tržište, ni mogućnost trgovanja. Nije ni jedinica kolektivnog ulaganja, jer ne predstavlja udio u fondu čija vrijednost ovisi o imovini u koju su sredstva uložena; ZRNO evidentira položaj u obračunskom sustavu koji nema imovinsku vrijednost izvan sebe. POEN nije financijski instrument jer nema nositelja, ne može se prenijeti izvan evidencije koju vodi Protokol i ne može se konvertirati u novac. Nijedan sudionik ne ulaže sredstva s očekivanjem financijskog prinosa.",
     "sporno_naslov": "Dva mjesta koja izgledaju sporno",
-    "sporno_uvod": "Dvije stvari u mehanici same traže odgovor. Obje su razmotrene i obje imaju izričito obrazloženje.",
+    "sporno_uvod": "Tri stvari u mehanici same traže odgovor. Sve tri su razmotrene i svaka ima izričito obrazloženje.",
     "sporno1_naslov": "Donacija → POEN → ZRNO",
     "sporno1_tekst": "Tko donira dinare Zakladi, dobiva evidentiran POEN koji ga može približiti pragu za upis ZRNA. Tri stvari razbijaju čitanje tog lanca kao investicijskog ugovora: donacija je nepovratna i pravno odvojena od evidentiranja — donator je ne može uvjetovati evidencijom ni tražiti povrat; donacija nije ni nužan ni povlašten put do ZRNA, jer se isti prag od 20.000 POENA doseže razmjenom, doprinosom i potvrdama, bez ijednog dinara; i odnos između iznosa donacije i broja POENA nije fiksni konverzijski tečaj nego parametar sustava.",
     "sporno2_naslov": "Razlika u koeficijentu između upisa i otpisa",
     "sporno2_tekst": "Tko upiše ZRNO pri jednom koeficijentu a otpiše ga pri drugom, dobiva drugačiji broj POENA nego što je upisom utrošio — u oba smjera, jer koeficijent raste od novih zapisa POEN-a a pada od njihova poništenja. Četiri stvari razbijaju čitanje te razlike kao prinosa: dobiveni POEN nema vrijednost izvan sustava — ne može se konvertirati, iznijeti ni unovčiti; promjena koeficijenta nije zajamčena i ovisi o stanju evidencije cijele zajednice, a ne o naporu trećih osoba; vlastiti upis i otpis koeficijent ne pomiču, jer se pri upisu istodobno umanjuju i broj POENA u optjecaju i broj raspoloživih ZRNA — pa nema ni trgovanja ni pravog trenutka; i ne postoji izdavatelj koji rast obećava ni institucija koja razliku isplaćuje. Uz to, tko želi glas mora aktivirati ZRNO i time gubi mogućnost otpisa — pasivno držanje i upravljanje se isključuju.",
+    "sporno3_naslov": "Koliko POEN-a uopće može nastati",
+    "sporno3_tekst": "Ukupan broj POEN-a nije ograničen unaprijed određenim brojem, i to je namjerno. Svaki se zapis veže uz doprinos određene osobe, pa broj prati koliko ljudi sudjeluje i koliko su uključeni — kao što broj upisa u matičnoj knjizi prati broj rođenih, a ne obrnuto. Broj nije ni jednosmjeran: pet osnova poništava zapise i umanjuje ga — prestanak svojstva korisnika, preuzimanje dijela u kolektivnoj nabavi, raskid prijateljstva u dječjem prostoru, prevođenje računa u maloljetnički i poništenje potvrde stvarnosti. Jedini kanal s apsolutnom gornjom granicom je osnivački doprinos, koji se trajno zatvara na 2.400.000 POEN-a.\n\nPravilo od 10 % optjecaja po obračunskom razdoblju često se čita kao gornja granica — nije. Ono dijeli emisiju tog razdoblja između operativnog doprinosa i programa podrške kada zbroj traženih iznosa premaši limit: svi se iznosi tada razmjerno umanjuju, a razlika se ne prenosi u sljedeće razdoblje. Ograničava koliko se u jednom danu može evidentirati, ne koliko POEN-a ukupno postoji.\n\nŠto ostaje sporno. Tko traži jednu brojku kao odgovor, neće je dobiti, a granica se ne može uvesti a da ne bude proizvoljna. Uz to, dok je dnevni limit tijesan — a to je u pravilu početno razdoblje, dok je optjecaj malen — korisnik programa podrške dobiva manje od iznosa koji propisuje formula. To je posljedica koju sustav priopćava unaprijed, na samom zaslonu programa.",
     "principi_naslov": "Nekonvertibilnost nosi sve ostalo",
     "principi_tekst": "Svi gornji argumenti počivaju na tome da POEN nema vrijednost izvan sustava, a to stoji samo dok ne postoji mehanizam konverzije. Zato je nekonvertibilnost prvi od četiri principa na kojima počiva pravna pozicija (čl. 70), uz odsutnost imovinskog prava nad zapisima, nepovratnost donacija i minimizaciju podataka. Ta četiri principa strukturni su limiti: ne mogu se izmijeniti ni ukinuti nijednom upravljačkom odlukom, uključujući odluku Gornjeg Kola. Povreda bilo kojeg od njih mijenja pravnu prirodu sustava.",
     "fondacija_naslov": "Tko stoji iza sustava",

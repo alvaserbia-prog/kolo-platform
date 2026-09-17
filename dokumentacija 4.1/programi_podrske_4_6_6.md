@@ -138,8 +138,6 @@ Pravo imaju korisnici od navršenih 50 godina. Dokaz statusa je datum rođenja.
 
 Dnevni iznos jednak je: 1.000 + 100 × (broj godina − 50). Tako korisnik od 65 godina ostvaruje 2.500 POEN dnevno, a korisnik od 80 godina 4.000 POEN dnevno.
 
-Iznos nema gornju granicu i raste sa brojem godina korisnika.
-
 ## V — Posebna Briga
 
 ### Član 12

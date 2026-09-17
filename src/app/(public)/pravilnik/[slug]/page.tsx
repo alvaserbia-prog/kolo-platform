@@ -106,8 +106,8 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // 4.6.1 — R-03 (mera M-1): čl. 4 — pojedinačno evidentiranje po programu se ne
   // objavljuje nego dnevni zbir; izostavlja se i iznos, jer se izvodi iz godine
   // rođenja odnosno broja i uzrasta dece i sam bi ih odao.
-    fajl: "programi_podrske_4_6_1.md",
-    verzija: "4.6.1",
+    fajl: "programi_podrske_4_6_6.md",
+    verzija: "4.6.6",
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
   // 4.5.2 — postupak potvrde postojanja deteta (R-15, čl. 6 prepisan): izjašnjavaju

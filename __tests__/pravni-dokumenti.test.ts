@@ -34,14 +34,14 @@ const AKTI = [
   "uslovi_koriscenja_4_6_4.md",
   "politika_4_6_3.md",
   "statut_4_1_0.md",
-  "whitepaper_4_6_2.md",
+  "whitepaper_4_6_6.md",
   "rizici_4_6_0.md",
   "hijerarhija_4_4_6.md",
   "donacije_4_5_8.md",
   "operativni_4_6_0.md",
   "osnivacki_4_6_0.md",
   "gornje_kolo_4_4_6.md",
-  "programi_podrske_4_6_1.md",
+  "programi_podrske_4_6_6.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce_dece_4_6_4.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
@@ -65,7 +65,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 🔴 Whitepaper je dokument koji spoljni čitalac — i regulator — otvara prvi, pa
   // je uz R-04 morao uz Pravilnik. Do 4.6.1 je na dva mesta sam nazivao razliku u
   // koeficijentu PODSTICAJEM, a u odeljku 6.4 tvrdio da upis ZRNA diže koeficijent.
-  "whitepaper_4_6_2.md": {
+  "whitepaper_4_6_6.md": {
     sr: [
       "Upis i otpis ZRNA takođe ne pomeraju koeficijent",
       "Koeficijent, dakle, nije monoton i nije predodređen da raste",
@@ -1226,7 +1226,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // je u normi a ne u kodu; a zapis o evidentiranom POEN-u sa nazivom programa
   // vidljiv je svim verifikovanim korisnicima, o čemu pristanak nije govorio ništa.
   // Traže se sva tri, jer bi se svako lako izgubilo bez ijednog vidljivog kvara.
-  "programi_podrske_4_6_1.md": {
+  "programi_podrske_4_6_6.md": {
     sr: [
       // 4.5.9 (R-02) — nov čl. 6a. „Nije socijalna pomoć" je brisano iz čl. 2.
       "Priroda evidentiranja",

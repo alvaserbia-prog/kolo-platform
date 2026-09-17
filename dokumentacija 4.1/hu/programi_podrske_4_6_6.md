@@ -140,8 +140,6 @@ Jogosultak a betöltött 50. életévtől a felhasználók. A jogállás igazol�
 
 A napi összeg: 1.000 + 100 × (életévek száma − 50). Így a 65 éves felhasználó napi 2.500 POEN-t, a 80 éves felhasználó pedig napi 4.000 POEN-t szerez.
 
-Az összegnek nincs felső határa, és a felhasználó életéveinek számával növekszik.
-
 ## V — Különleges Gondozás
 
 ### 12. cikk

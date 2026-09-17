@@ -301,7 +301,9 @@ Isti status kao svaki drugi POEN. Nekonvertibilan, bez vrednosti van sistema, be
 
 Osnivača je pet i krug je zatvoren. Utvrđeni su unapred internim aktom Fondacije i nijedna kasnija odluka ne može proširiti taj krug.
 
-Tempo nije proizvoljan. Jedan korak od 24.000 POENA upisuje se tek kad ukupan broj POENA u sistemu poraste za narednih 100.000, a u taj prag ulazi i sam osnivački upis. To znači da dok kanal traje, osnivački doprinos čini 24% svakog novoupisanog POENA. Kad se kanal isprazni na 2.400.000, sistem je porastao za 10.000.000 POENA i kanal se trajno i neopozivo zatvara. Odatle nadalje udeo osnivača samo pada, jer sistem nastavlja da raste a kanal više ne radi.
+Tempo prati rast sistema, ne kalendar. Jedan korak od 24.000 POENA upisuje se tek kad ukupan broj POENA u sistemu poraste za narednih 100.000, a u taj prag ulazi i sam osnivački upis. To znači da dok kanal traje, osnivački doprinos čini 24% svakog novoupisanog POENA. Kad se kanal isprazni na 2.400.000, sistem je porastao za 10.000.000 POENA i kanal se trajno i neopozivo zatvara. Odatle nadalje udeo osnivača samo pada, jer sistem nastavlja da raste a kanal više ne radi.
+
+Šta to znači u Fazi 1, otvoreno. Rast sistema najvećim delom proizvode kanali koje u ovoj fazi pokreće sama Fondacija: ona objavljuje zadatke operativnog doprinosa i utvrđuje koliko se POENA za njih predlaže. Dakle brzinu kojom se osnivački kanal prazni u ovoj fazi određuje Fondacija, a ne neka spoljna okolnost. Ono što ni Fondacija ne može da promeni jesu granice: pet osnivača, 24.000 po koraku, sto koraka i 2.400.000 ukupno. Kanal se ne može ni proširiti ni ponovo otvoriti.
 
 Veći saldo ne daje srazmerno veću moć. Glasanje u Gornjem Kolu je kvadratno: broj glasova je kvadratni koren broja aktivnih ZRNA. Ko ima sto puta više ZRNA ima deset puta više glasova, a ne sto, pa ni najveći saldo POENA ne daje kontrolu nad odlukama.
 

@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { TransactionType } from "@/generated/prisma/client";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
+import { MAX_ZAPIS } from "./granica-zapisa";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -60,6 +61,23 @@ export async function emitujPoen(
     await checkZeroSum(tx);
 
     return { protokol, wallet, transaction: tx_ };
+  }).catch((e) => {
+    // 🔴 R-08: `Wallet.balance` je INTEGER, pa opticaj ima tvrdu granicu od
+    // MAX_ZAPIS koju ne postavlja nijedno pravilo nego tip kolone. Postgres tu
+    // ne prelama tiho nego diže `integer out of range` — dakle nema tihe štete,
+    // transakcija se povuče cela. Ali gola Postgres poruka ne kaže ni šta se
+    // desilo ni šta je ispravka, pa se ovde prevodi. Uzbuna mnogo pre granice
+    // ide iz noćne emisije; vidi `granica-zapisa.ts`.
+    const poruka = e instanceof Error ? e.message : String(e);
+    if (/out of range/i.test(poruka) || /22003/.test(poruka)) {
+      const objasnjenje =
+        `Evidencija je dostigla tehničku granicu kolone (${MAX_ZAPIS.toLocaleString("sr-RS")} POEN). ` +
+        `Granicu postavlja tip kolone Wallet.balance (INTEGER), ne pravilo sistema. ` +
+        `Nijedan zapis nije izmenjen. Ispravka je prelazak kolone na BIGINT.`;
+      void posaljiAdminAlert("Dostignuta tehnička granica evidencije", objasnjenje);
+      throw new Error(objasnjenje);
+    }
+    throw e;
   });
 }
 

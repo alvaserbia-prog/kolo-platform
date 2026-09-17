@@ -204,6 +204,7 @@ function OperativniKartica({ aktivan }: { aktivan: boolean }) {
             )}
           </div>
           <p className="text-xs text-kolo-muted mt-0.5">{t("opis_operativni")}</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("srazmerno_napomena")}</p>
         </div>
         <div className="ml-4 shrink-0">
           <Link href="/doprinos-oglasi"
@@ -279,6 +280,7 @@ const ProgramKartica = memo(function ProgramKartica({
             </p>
           )}
           <p className="text-xs text-kolo-muted mt-0.5">{opisPrograma(p.type, t)}</p>
+          <p className="text-xs text-kolo-muted mt-0.5">{t("srazmerno_napomena")}</p>
         </div>
 
         {/* Akcija dugme */}

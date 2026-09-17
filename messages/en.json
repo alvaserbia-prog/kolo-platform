@@ -806,6 +806,7 @@
     "opis_starijima": "1,000 + 100 × (age − 50) POEN/day · available to members from the age of 50",
     "opis_posebna_briga": "2,000 POEN/day · persons with disabilities · decision of the competent authority",
     "opis_skolovanje": "Amount set by admin · re-confirmation every 6 months",
+    "srazmerno_napomena": "The amount is the requested daily amount, not a guaranteed one. When the sum of all requested amounts exceeds the daily limit, all of them are reduced proportionally, and the difference is not carried over to the next day.",
     "isplaceno_ukupno": "Recorded under this programme: {iznos} POEN",
     "nepun_indeks": "A social programme requires at least one confirmation — a reality index of 10%. Everyone in your chain confirms that the eligibility condition is met before approval.",
     "posebna_briga_datum_resenja": "Date of disability determination decision",
@@ -1032,7 +1033,7 @@
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.6.2"
+      "ver": "4.6.6"
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
@@ -1068,7 +1069,7 @@
     "meta_rizici_title": "Risk Acceptance Statement · KOLO",
     "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.6.0",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.6.2",
+    "meta_whitepaper_desc": "KOLO Whitepaper, version 4.6.6",
     "meta_pravilnik_title": "KOLO System Rulebooks · KOLO",
     "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.6.5",
     "rb": {
@@ -1576,11 +1577,13 @@
     "ztk_naslov": "Capital Markets Act",
     "ztk_tekst": "ZRNO is not a transferable security, because it is non-transferable — there is no transfer mechanism, no market and no possibility of trading. Nor is it a unit of collective investment, since it does not represent participation in a fund whose value depends on the assets the funds were invested in; ZRNO records a standing within an accounting system that has no asset value outside itself. POEN is not a financial instrument because it has no holder, cannot be transferred outside the ledger kept by the Protocol and cannot be converted into money. No participant invests funds expecting a financial return.",
     "sporno_naslov": "Two points that look contestable",
-    "sporno_uvod": "Two features of the mechanics invite the question themselves. Both have been examined and both have an explicit answer.",
+    "sporno_uvod": "Three features of the mechanics invite the question themselves. All three have been examined and each has an explicit answer.",
     "sporno1_naslov": "Donation → POEN → ZRNO",
     "sporno1_tekst": "Someone who donates dinars to the Foundation gets POEN recorded, which may bring them closer to the threshold for recording ZRNO. Three things break the reading of that chain as an investment contract: the donation is non-refundable and legally separate from the recording — a donor can neither condition it on the recording nor demand a refund; the donation is neither a necessary nor a privileged route to ZRNO — the same threshold of 20,000 POEN is reached through exchange, contribution and confirmations, without a single dinar; and the ratio between the donated amount and the number of POEN is not a fixed conversion rate but a system parameter.",
     "sporno2_naslov": "The difference in the coefficient between recording and write-off",
     "sporno2_tekst": "Someone who records ZRNO at one coefficient and writes it off at another receives a different number of POEN than they used when recording — in both directions, because the coefficient rises with new POEN records and falls when they are annulled. Four things break the reading of that difference as a yield: the POEN received has no value outside the system — it cannot be converted, taken out or cashed in; a change of the coefficient is not guaranteed and depends on the state of the whole community's ledger, not on the efforts of third parties; one's own recording and write-off do not shift the coefficient, because upon recording both the number of POEN in circulation and the number of available ZRNO fall at the same time — so there is neither trading nor a right moment; and there is no issuer promising a rise nor an institution paying the difference. On top of that, whoever wants a vote must activate their ZRNO and thereby loses the option of writing off — passive holding and governance exclude each other.",
+    "sporno3_naslov": "How many POENs can come into existence at all",
+    "sporno3_tekst": "The total number of POENs is not capped by any predetermined figure, and that is deliberate. Every entry is tied to the contribution of a specific person, so the number follows how many people take part and how involved they are — the way the number of entries in a register of births follows the number of births, not the other way round. Nor is the number one-directional: five grounds annul entries and reduce it — cessation of user status, collection of a share in a collective purchase, ending a friendship in the children's space, conversion of an account to a minor's account, and annulment of a proof-of-reality confirmation. The only channel with an absolute upper limit is the founding contribution, which closes permanently at 2,400,000 POENs.\n\nThe rule of 10% of circulation per accounting period is often read as an upper limit — it is not. It divides that period's issuance between operational contribution and support programmes when the sum of requested amounts exceeds the limit: all amounts are then reduced proportionally, and the difference is not carried over to the next period. It limits how much may be recorded in a single day, not how many POENs exist in total.\n\nWhat remains open. Anyone looking for a single figure as the answer will not get one, and a limit cannot be introduced without being arbitrary. Moreover, while the daily limit is tight — which is typically the early period, while circulation is small — a support programme user receives less than the amount the formula prescribes. That is a consequence the system states in advance, on the programme screen itself.",
     "principi_naslov": "Non-convertibility carries the rest",
     "principi_tekst": "Every argument above rests on POEN having no value outside the system — and that holds only as long as no conversion mechanism exists. Non-convertibility is therefore the first of the four principles the legal position rests on (art. 70), together with the absence of property rights over the entries, the non-refundability of donations, and data minimisation. Those four are structural limits: they cannot be amended or abolished by any governance decision, including a decision of the Upper Circle. Breaching any of them changes the legal nature of the system.",
     "fondacija_naslov": "Who stands behind the system",

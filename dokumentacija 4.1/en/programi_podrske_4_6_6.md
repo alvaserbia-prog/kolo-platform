@@ -140,8 +140,6 @@ The right is held by users who have reached the age of 50. Proof of status is th
 
 The daily amount equals: 1,000 + 100 × (age in years − 50). Thus a user aged 65 receives 2,500 POEN per day, and a user aged 80 receives 4,000 POEN per day.
 
-The amount has no upper limit and increases with the user's age.
-
 ## V — Special Care
 
 ### Article 12

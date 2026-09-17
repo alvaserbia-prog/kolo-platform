@@ -4,6 +4,8 @@ import { probajEvidentiratiPotvrde } from "./potvrda-poen";
 import { danObracuna } from "./obracunski-dan";
 import { FUNKCIONALNI_PRAG_INDEKSA } from "./dokaz-stvarnosti";
 import { ProgramType, TipKorisnika, TransactionType } from "@/generated/prisma/client";
+import { stanjeGranice, porukaUzbune } from "./granica-zapisa";
+import { posaljiAdminAlert } from "@/lib/adminAlert";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -145,6 +147,15 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
   const protokol = await prisma.wallet.findUnique({ where: { id: PROTOKOL_WALLET_ID } });
   const opticaj = Math.abs(protokol?.balance ?? 0);
   const limit = Math.floor(opticaj * 0.1);
+
+  // 🔴 R-08: tehnička granica kolone. Ukupan broj POEN-a nije ograničen nijednim
+  // pravilom, ali `Wallet.balance` je INTEGER, pa granica ipak postoji — postavlja
+  // je tip kolone. Uzbuna ide JEDNOM DNEVNO, odavde, a ne iz `emitujPoen`: noćni
+  // prolaz emituje po korisniku, pa bi provera u jezgru poslala hiljade istih
+  // poruka u jednoj noći. Vidi `granica-zapisa.ts`.
+  if (stanjeGranice(opticaj) !== "uredno") {
+    void posaljiAdminAlert("Opticaj se približio tehničkoj granici", porukaUzbune(opticaj));
+  }
 
   // K4: BRAVA DANA — `create` summary-ja za `danas` služi kao zaključavanje. Ako je
   // noćna emisija već pokrenuta (cron retry ili cron + ručni admin okidač), drugi poziv

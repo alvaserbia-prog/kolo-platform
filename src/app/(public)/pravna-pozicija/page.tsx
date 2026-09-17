@@ -76,11 +76,17 @@ export default async function PravnaPozicijaPage() {
     // odgovor na njega do ovog seta nije stajao ni u jednom od sedamnaest akata.
     { naslov: t("zzp_naslov"), tekst: t("zzp_tekst") },
   ];
-  // Dva mesta koja mehanika sama otvara. Stoje NA STRANI, ne u fusnoti: ko ih
+  // Tri mesta koja mehanika sama otvara. Stoje NA STRANI, ne u fusnoti: ko ih
   // uoči sam, a ne nađe odgovor, zaključiće da odgovora nema.
   const sporno = [
     { naslov: t("sporno1_naslov"), tekst: t("sporno1_tekst") },
     { naslov: t("sporno2_naslov"), tekst: t("sporno2_tekst") },
+    // 🔴 Količina POEN-a dodata uz R-08. Do tada reč „inflacija" nije postojala
+    // nigde u `messages` ni u FAQ-u, a „koliko toga uopšte može da nastane" je
+    // prvo pitanje koje ozbiljan čitalac postavi o svakoj obračunskoj jedinici.
+    // Odeljak otvoreno kaže i ono što ostaje sporno: jedne brojke nema, a dok je
+    // dnevni limit tesan korisnik programa dobija manje nego što formula kaže.
+    { naslov: t("sporno3_naslov"), tekst: t("sporno3_tekst") },
   ];
   const dokumenti = [
     { href: "/whitepaper", label: td("dok_whitepaper") },

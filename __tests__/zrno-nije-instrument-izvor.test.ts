@@ -139,7 +139,7 @@ describe("IZVOR — copy ne predviđa prinos", () => {
 });
 
 describe("IZVOR — whitepaper ne zove razliku podsticajem", () => {
-  const wp = izvor("dokumentacija 4.1/whitepaper_4_6_2.md");
+  const wp = izvor("dokumentacija 4.1/whitepaper_4_6_6.md");
 
   it("koeficijent više nema podsticajnu funkciju", () => {
     expect(wp).not.toContain("ima podsticajnu funkciju za rane učesnike");
