@@ -2,7 +2,7 @@
 
 # Szabályzat a gyermekek részvételéről
 
-*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.6.0) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
+*Ez a szabályzat a kiskorúak KOLO rendszerben való részvételét rendezi — a csatlakozást, a tevékenységek terjedelmét, a szülővel való viszonyt, a gyermektérből származó hozzájárulást és a nagykorú fiókba való átmenetet. A KOLO rendszerről szóló szabályzat (v4.6.4) 58. cikke alapján kerül elfogadásra, amely kifejezetten erre az aktusra utal. Eltérés esetén a KOLO rendszerről szóló szabályzat rendelkezései élveznek elsőbbséget.*
 
 ## I — Általános rendelkezések
 
@@ -203,6 +203,8 @@ A kiskorú felhasználó a jogügyleteket cselekvőképessége keretein belül k
 Az Alapítvány nem részese a cserének és nem közvetít benne (a Felhasználási feltételek 22. cikke). A felek közötti viszonyra a kötelmi jog általános szabályai irányadók, és ha az egyik fél kiskorú felhasználó, a cselekvőképességre vonatkozó jogszabályok is.
 
 A jogügylet e jogszabályok szerinti érvénytelenítése a felek között történik. A Platform nem hajtja végre a csere érvénytelenítését, és ezen a jogcímen nem dönti meg a POEN-nyilvántartás frissítését (14. cikk (8) bekezdés).
+
+Az e cikk (1) bekezdése szerinti csere kizárólag olyan javakra vonatkozik, amelyeket a kiskorú a jogszabályok szerint beszerezhet. A Felhasználási feltételek 21. cikkében foglalt tilalom a kiskorú felhasználók közötti cserére is vonatkozik, függetlenül attól, hogy azt a Platformon közzétett hirdetés útján vagy más módon egyeztették.
 
 ### 13. cikk
 

@@ -69,6 +69,12 @@ export default async function PravnaPozicijaPage() {
     // porezu — a Poreska uprava je po sopstvenoj proceni registra rizika regulator
     // koji najpre zaista dođe, jer ne mora da pobija ništa konceptualno.
     { naslov: t("porez_naslov"), tekst: t("porez_tekst") },
+    // 🔴 Odeljak o zaštiti potrošača dodat uz R-07. Do tada stranica nije pominjala
+    // ZZP nijednom — a to je regulator sa NAJNIŽIM pragom za dolazak: njegov test
+    // je objektivan („kako prosečan potrošač razume poruku") i pokreće ga jedna
+    // prijava. Prvo pitanje koje postavlja je da li je Fondacija uopšte trgovac;
+    // odgovor na njega do ovog seta nije stajao ni u jednom od sedamnaest akata.
+    { naslov: t("zzp_naslov"), tekst: t("zzp_tekst") },
   ];
   // Dva mesta koja mehanika sama otvara. Stoje NA STRANI, ne u fusnoti: ko ih
   // uoči sam, a ne nađe odgovor, zaključiće da odgovora nema.

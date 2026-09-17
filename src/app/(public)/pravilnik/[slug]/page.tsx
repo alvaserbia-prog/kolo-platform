@@ -36,12 +36,18 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // isti); čl. 25 dobija odgovor po elementima testa investicionog ugovora
   // umesto etikete „nije prinos". 🟡 Istog dana su 4.6.0 (R-02) i 4.6.1 (R-03)
   // već objavljeni na `main`-u, pa dva različita događaja objave ne dele šifru.
-  // 4.6.4 — POEN po potvrdi čeka prvi potvrđen doprinos potvrđenog korisnika
+  // 4.6.4 — R-07 (nelojalna i obmanjujuća poslovna praksa): čl. 16 više ne govori
+  // o „ceni" u opisu javnog pregleda oglasa nego o iznosu u POEN-ima. Ista rečenica
+  // stoji i u Uslovima čl. 18; da je ispravljena samo tamo, dva akta bi o istoj
+  // činjenici govorila različito.
+  // 4.6.5 — POEN po potvrdi čeka prvi potvrđen doprinos potvrđenog korisnika
   // (čl. 15 t. 2, upućivanje na čl. 7 dokaza stvarnosti), a odobrenje prvog oglasa
   // iz čl. 40a važi za SVAKOG korisnika, ne samo za nalog bez potvrde.
+  // 🟡 Šifru 4.6.4 je istog dana uzeo R-07 na `main`-u, pa dva različita događaja
+  // objave ne dele broj — isti postupak kao 4.6.0 naspram 4.5.9.
   "kolo-sistem": {
-    fajl: "Pravilnik_4_6_4.md",
-    verzija: "4.6.4",
+    fajl: "Pravilnik_4_6_5.md",
+    verzija: "4.6.5",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.
@@ -49,12 +55,12 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
     fajl: "hijerarhija_4_4_6.md",
     verzija: "4.4.6",
   },
-  // 4.6.4 — čl. 7: POEN po potvrdi se beleži, a upisuje kad potvrđeni korisnik
+  // 4.6.5 — čl. 7: POEN po potvrdi se beleži, a upisuje kad potvrđeni korisnik
   // ostvari prvi potvrđen doprinos (odobren oglas, javna donacija, pokroviteljstvo,
-  // operativni doprinos). Nadzornikovih 500 i punoletstvo su izuzeti.
+  // operativni doprinos). Punoletstvo je izuzeto; nadzornikovih 500 čekaju isti uslov.
   "dokaz-stvarnosti": {
-    fajl: "dokaz_stvarnosti_4_6_4.md",
-    verzija: "4.6.4",
+    fajl: "dokaz_stvarnosti_4_6_5.md",
+    verzija: "4.6.5",
   },
   // 4.4.3 — obrazloženje koeficijenta evidencije (čl. 4) i definicija koeficijenta
   // bez jedinične formulacije „po jednom dinaru" (čl. 2).
@@ -119,8 +125,12 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // maloletnom korisniku ni novac ni stvar.
   // 4.6.1 — R-03 (mera M-4): čl. 15a — spisak dece jedne škole vidi samo
   // punopravno dete te iste škole; nalog koji čeka roditelja ga ne dobija.
-    fajl: "ucesce_dece_4_6_1.md",
-    verzija: "4.6.1",
+  // 4.6.4 — R-07 (mera M-5″): čl. 12a — razmena maloletnog korisnika odnosi se samo
+  // na dobra koja po propisima sme da pribavi; zabrana iz Uslova čl. 21 važi i kad
+  // razmena nije dogovorena oglasom. Oglas deteta vide pretežno ili isključivo druga
+  // deca, pa je to prostor u kome publika nema nijednog odraslog posmatrača.
+    fajl: "ucesce_dece_4_6_4.md",
+    verzija: "4.6.4",
   },
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
   // 4.4.3 — broj POEN-a po delu je parametar odluke o nabavci (čl. 17), a ne izvod

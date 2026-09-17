@@ -39,7 +39,7 @@ enum ProjectType {
 
 enum ListingStatus {
   ACTIVE
-  SOLD
+  RAZMENJEN
   EXPIRED
   UKLONJEN // Fondacija uklonila zbog povrede Uslova/Pravilnika/zakona
 }
@@ -419,7 +419,7 @@ model User {
   oglasPrijave                     OglasPrijava[]            @relation("OglasPrijave")
   oglasEvidencije                  OglasEvidencija[]         @relation("OglasEvidencije")
   listings                         MarketplaceListing[]      @relation("SellerListings")
-  purchases                        MarketplaceListing[]      @relation("BuyerListings")
+  primljeniOglasi                  MarketplaceListing[]      @relation("PrimalacListings")
   prijaveOglasa                    PrijavaOglasa[]           @relation("PrijaviocOglasa")
   prijaveRazmene                   PrijavaRazmene[]          @relation("PrijaviocRazmene")
   prijavljeneRazmene               PrijavaRazmene[]          @relation("ProtivRazmene")
@@ -901,8 +901,8 @@ model MarketplaceListing {
   id             String        @id @default(uuid())
   sellerId       String
   seller         User          @relation("SellerListings", fields: [sellerId], references: [id])
-  buyerId        String?
-  buyer          User?         @relation("BuyerListings", fields: [buyerId], references: [id])
+  primalacId     String?
+  primalac       User?         @relation("PrimalacListings", fields: [primalacId], references: [id])
   // Smer oglasa (ponuda vs potražnja). Kod POTRAZNJA je cenaTip uvek DOGOVOR.
   tip            TipOglasa     @default(PONUDA)
   title          String
@@ -924,7 +924,7 @@ model MarketplaceListing {
   location       String?
   phone          String?
   status         ListingStatus @default(ACTIVE)
-  soldAt         DateTime?
+  razmenjenoAt   DateTime?
   // Broj otvaranja stranice oglasa. Ne broje se pregledi samog oglašivača, a
   // isti posetilac se broji jednom dnevno (guard je u pretraživaču). Vidi ga
   // SAMO oglašivač — povratna informacija da oglas nije otišao u prazno.

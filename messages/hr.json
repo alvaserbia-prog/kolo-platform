@@ -1004,7 +1004,7 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uvjeti korištenja KOLO platforme",
-      "ver": "4.6.3"
+      "ver": "4.6.4"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
@@ -1032,7 +1032,7 @@
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sustava",
-      "ver": "4.6.4",
+      "ver": "4.6.5",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -1052,7 +1052,7 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sustavu"
     },
     "meta_uslovi_title": "Uvjeti korištenja · KOLO",
-    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.6.3",
+    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.6.4",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
     "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.3",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
@@ -1066,7 +1066,7 @@
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.2",
     "meta_pravilnik_title": "Pravilnici KOLO sustava · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.6.4",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.6.5",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sustavu",
@@ -1161,7 +1161,7 @@
     "hero_podnaslov": "Rad, dobra i znanje kruže među ljudima u Somboru i okolini, bez posrednika i bez novca.",
     "hero_cta_priduzi": "Registriraj se besplatno",
     "hero_cta_saznaj": "Kako to funkcionira",
-    "hero_badge": "Na pijaci tvog kraja plaća se doprinosom, ne novcem",
+    "hero_badge": "Na pijaci tvog kraja razmjenjuje se za doprinos, ne za novac",
     "problem_naslov": "Problemi koje osjećamo",
     "problem_1_naslov": "Hrana putuje, a raste pokraj nas.",
     "problem_1_opis": "Kupujemo med, jaja, sir i povrće koje je prešlo tisuće kilometara, dok netko iz susjedstva proizvodi upravo to.",
@@ -1187,7 +1187,7 @@
     "alternativa_link_statut": "Pročitaj Statut",
     "kome_naslov": "Za koga je KOLO?",
     "kome_1_naslov": "Poljoprivrednici i lokalni proizvođači",
-    "kome_1_opis": "Tvoji proizvodi idu ravno ljudima koji ih traže, bez otkupljivača i bez marže.",
+    "kome_1_opis": "Tvoji proizvodi idu ravno ljudima koji ih traže, bez otkupljivača između vas.",
     "kome_1_poenta": "Svaki tvoj trud se bilježi i vidi.",
     "kome_2_naslov": "Obrtnici i majstori",
     "kome_2_opis": "Ljudi u tvom kraju vide što radiš i preporučuju te po onome što si stvarno napravio.",
@@ -1217,15 +1217,15 @@
     "kome_prikazi_manje": "Prikaži manje",
     "primer_naslov": "Kako to izgleda u praksi",
     "primer_korak_1_naslov": "Ana i Milan se upoznaju kroz razmjenu",
-    "primer_korak_1_opis": "Milanu treba med, Ana ga proizvodi. Dogovorili su se da pet staklenki vrijedi 4.000 POEN. Milan joj je toliko i prepisao.",
+    "primer_korak_1_opis": "Milanu treba med, Ana ga proizvodi. Dogovorili su se da pet staklenki vrijedi 5.000 POEN. Milan joj je toliko i prepisao.",
     "primer_korak_2_naslov": "Ana koristi ono što je dala",
-    "primer_korak_2_opis": "Ani se pokvarila perilica rublja. Lazar ju je popravio, a Ana mu je prepisala 4.000 POEN. Nije platila ništa u novcu, a Lazar sad ima zapis o svom radu.",
+    "primer_korak_2_opis": "Ani se pokvarila perilica rublja. Lazar ju je popravio, a Ana mu je prepisala 4.000 POEN. Nije dala ništa u novcu, a Lazar sad ima zapis o svom radu.",
     "primer_korak_3_naslov": "Krug se zatvara",
-    "primer_korak_3_opis": "Lazaru se jede burek. Marija mu je ispekla tepsiju, on joj je prepisao 800 POEN, a ona je za njih uzela jednu staklenku Anina meda.",
+    "primer_korak_3_opis": "Lazaru se jede burek. Marija mu je ispekla tepsiju, on joj je prepisao 1.000 POEN, a ona je za njih uzela jednu staklenku Anina meda.",
     "primer_most": "Na početku se nisu poznavali. Sad su u istom krugu.",
     "primer_napomena_bold": "POEN nije novac.",
     "primer_napomena_1": "To je zapis o tome što je tko dao zajednici.",
-    "primer_napomena_2": "Med, popravak i burek u ovom primjeru su stvarni. Iznos u POEN-ima predlaže onaj tko postavlja oglas, a dogovaraju ga dvije strane. Cijena u dinarima služi samo kao orijentir pri dogovoru. POEN se ne kupuje za novac i ne mijenja se za novac.",
+    "primer_napomena_2": "Iznos u POEN-ima predlaže onaj tko postavlja oglas, a dogovaraju ga dvije strane. Fondacija nijedan odnos POEN-a prema dinaru ne objavljuje, ne preporučuje i ni u jednom svom postupku ne primjenjuje. POEN se ne kupuje za dinare i ne mijenja za dinare.",
     "kako_funkcionise_naslov": "Kako funkcionira, ukratko",
     "kako_funkcionise_link": "Detaljno objašnjenje",
     "kako_funkcionise_link_postupak": "Cijeli postupak, korak po korak",
@@ -1587,7 +1587,9 @@
     "gde_uvod": "Svaka tvrdnja s ove stranice ima osnovu u objavljenim aktima. Mjerodavan je njihov tekst, ne ovaj pregled.",
     "nazad_link": "Natrag na Kako sustav radi",
     "porez_naslov": "Porezni propisi",
-    "porez_tekst": "Porez na dohodak građana oporezuje dohotke iz svih izvora, uključujući dohodak ostvaren u nenovčanom obliku. Nije, dakle, sporno je li nešto naknada — sporno je je li korisnik nešto primio.\n\nKod POEN-a nije. Upisom se ne prima ni novac ni stvar, ništa ne prelazi iz imovine Zaklade u imovinu korisnika, nastali se zapis ne može unovčiti, ustupiti niti naplatiti, a Zaklada ne utvrđuje niti objavljuje njegovu vrijednost izraženu u novcu. Zaklada korisniku ni po jednoj osnovi ne isplaćuje novac.\n\nKod kolektivne nabave jest, i to se ne krije: korisnik prima dobro kupljeno dinarskim sredstvima Zaklade. Dobro se ustupa bez naknade i bez ikakve protučinidbe, u ostvarivanju upisanih ciljeva Zaklade. Poništeni se zapis gasi i ne prelazi Zakladi; on nije jedinica pribavljena radi preuzimanja nego evidencija doprinosa koji je korisnik zajedničkom dobru već učinio. Ukupna vrijednost koju jedan korisnik može preuzeti u kalendarskoj godini je ograničena.\n\nŠto ostaje sporno: kako će nadležno tijelo kvalificirati to davanje. Zaklada ne pruža porezni savjet i porezni tretman ne jamči; za vlastite porezne obveze odgovara korisnik."
+    "porez_tekst": "Porez na dohodak građana oporezuje dohotke iz svih izvora, uključujući dohodak ostvaren u nenovčanom obliku. Nije, dakle, sporno je li nešto naknada — sporno je je li korisnik nešto primio.\n\nKod POEN-a nije. Upisom se ne prima ni novac ni stvar, ništa ne prelazi iz imovine Zaklade u imovinu korisnika, nastali se zapis ne može unovčiti, ustupiti niti naplatiti, a Zaklada ne utvrđuje niti objavljuje njegovu vrijednost izraženu u novcu. Zaklada korisniku ni po jednoj osnovi ne isplaćuje novac.\n\nKod kolektivne nabave jest, i to se ne krije: korisnik prima dobro kupljeno dinarskim sredstvima Zaklade. Dobro se ustupa bez naknade i bez ikakve protučinidbe, u ostvarivanju upisanih ciljeva Zaklade. Poništeni se zapis gasi i ne prelazi Zakladi; on nije jedinica pribavljena radi preuzimanja nego evidencija doprinosa koji je korisnik zajedničkom dobru već učinio. Ukupna vrijednost koju jedan korisnik može preuzeti u kalendarskoj godini je ograničena.\n\nŠto ostaje sporno: kako će nadležno tijelo kvalificirati to davanje. Zaklada ne pruža porezni savjet i porezni tretman ne jamči; za vlastite porezne obveze odgovara korisnik.",
+    "zzp_naslov": "Zakon o zaštiti potrošača",
+    "zzp_tekst": "Propisi o nepoštenoj poslovnoj praksi obvezuju trgovca — osobu koja nastupa na tržištu u okviru svoje djelatnosti. Fondacija prema korisnicima tako ne nastupa: ne nudi im dobra ni usluge uz naknadu, ne naplaćuje korištenje Platforme, ne posreduje u razmjeni i po osnovi razmjene između korisnika ne prima nikakvu vrijednost. Iznos u oglasu određuje korisnik sam; Fondacija nijedan odnos POEN-a prema dinaru ne objavljuje, ne preporučuje i ni u jednom svom postupku ne primjenjuje.\n\nIzmeđu korisnika propisi o zaštiti potrošača vrijede onako kako bi vrijedili i izvan Platforme. Kada dobro ili uslugu nudi osoba koja to čini u okviru djelatnosti, korisnik koji ih pribavlja za vlastite potrebe ima prava po tim propisima i ostvaruje ih prema toj osobi. Za ispunjenje propisa o registraciji djelatnosti, o proizvodnji i prometu, o sigurnosti hrane i poreznih propisa odgovara onaj tko dobro ili uslugu nudi.\n\nŠto ostaje sporno: Fondacija ne utvrđuje u kojem svojstvu korisnik nastupa i tu izjavu od njega ne traži, pa druga strana to iz oglasa ne može znati. Platforma po obliku jest mjesto na kojem se roba i usluge nude, i to ne skrivamo. Ovo je naše čitanje, izneseno otvoreno; ocjenu daje nadležno tijelo."
   },
   "kakoFunkcionisePage": {
     "poen_nije_kratko": "POEN je zapis o tome što si dao, kao upis u knjigu, a ne kao novac koji se drži. Ne postoji način da ga kupiš ili prodaš za dinare, ni od nas ni od bilo koga.",
@@ -1914,7 +1916,8 @@
     "dete_odrasli_kratko": "treba dopuštenje roditelja",
     "slika_format": "Neka slika nije u podržanom formatu. Fotografiju s iPhonea (HEIC) spremi kao JPG pa je dodaj ponovno.",
     "slike_ukupno_prevelike": "Slike su zajedno prevelike za jedno slanje. Dodaj manje slika ili ih zamijeni manjima.",
-    "slike_popunjeno": "Dosegnut je najveći broj slika ({max}). Ukloni jednu klikom na × pa dodaj novu."
+    "slike_popunjeno": "Dosegnut je najveći broj slika ({max}). Ukloni jednu klikom na × pa dodaj novu.",
+    "dete_zabranjeno": "Ne smiješ nuditi ono što djeca ne smiju kupiti — cigarete i e-cigarete, alkohol, energetska pića, lijekove, pirotehniku ni oštre predmete."
   },
   "pocetna": {
     "dobrodoslice": "Bok, <ime>{pseudonim}</ime>",
@@ -2353,6 +2356,8 @@
     "prijava_razmene_izjasni_tekst": "Podnesen je prigovor da razmjena povodom koje ti je prepisan POEN nije ispunjena. Imaš {dana} dana da se očituješ prije nego što Zaklada odluči. Očitovanje se unosi na profilu.",
     "nabavka_ispravka_naslov": "Evidencija je ispravljena",
     "nabavka_ispravka_tekst": "Po tvom prigovoru na dio iz nabave „{dobro}” poništenje je otklonjeno i u tvoj zapis je vraćeno {poen} POENA. Obrazloženje: {obrazlozenje}",
+    "dete_oglas_naslov": "{pseudonim} je objavio/la oglas",
+    "dete_oglas_tekst": "Oglas „{naslov}“. Na profilu djeteta možeš ga pogledati i ukloniti.",
     "potvrda_poen_potvrdjivac": "Član „{pseudonim}“, čiju si stvarnost potvrdio, ostvario je svoj prvi doprinos, pa ti je upisano {iznos} POENA po toj potvrdi.",
     "potvrda_poen_potvrdjeni": "Po potvrdi koju ti je dao član „{pseudonim}“ upisano ti je {iznos} POENA.",
     "potvrda_poen_ceka_potvrdjivac": "Potvrdio si stvarnost člana „{pseudonim}“. {iznos} POENA upisuje ti se kad on ostvari svoj prvi doprinos — objavi ponudu koju Zaklada odobri, donira, postane pokrovitelj ili izvrši operativni doprinos.",
@@ -2779,7 +2784,6 @@
     "vrednost_donacije_mora_biti_pozitivna": "Vrednost donacije mora biti pozitivna.",
     "za_brisanje_naloga_otkucaj_pseudonim_deteta": "Za brisanje računa utipkaj djetetov pseudonim.",
     "za_ovaj_zadatak_je_obavezan_plan_izvrsenja_najmanje_10_znakova": "Za ovaj zadatak je obavezan plan izvršenja (najmanje 10 znakova).",
-    "za_robu_i_usluge_obavezan_je_maloprodajni_cenovnik": "Za robu i usluge obavezan je maloprodajni cenovnik.",
     "zadatak_nije_aktivan": "Zadatak nije aktivan.",
     "zahtev_nije_aktivan": "Zahtjev nije aktivan.",
     "zahtev_nije_na_cekanju": "Zahtjev nije na čekanju.",
@@ -3126,7 +3130,7 @@
     "k_mesto": "Mjesto preuzimanja",
     "k_period": "Razdoblje preuzimanja",
     "k_obrazlozenje": "Broj POEN-a po dijelu utvrdila je odluka o nabavi: {obrazlozenje}",
-    "paritet_napomena": "POEN po jedinici jednak je maloprodajnoj referenci, jedan prema jedan. POEN se ne razmjenjuje za robu i ne dolazi do dobavljača, roba je kupljena dinarima, a POEN se poništava kao zapis o iskorištenom sudjelovanju.",
+    "paritet_napomena": "Broj POEN-a po dijelu utvrđuje odluka kojom se nabava pokreće. To nije cijena dobra i ne izvodi se iz nje. POEN se ne razmjenjuje za robu i ne dolazi do dobavljača — roba je kupljena dinarskim sredstvima Fondacije, a POEN se poništava kao zapis o iskorištenom sudjelovanju.",
     "ponude": "Prikupljene ponude",
     "ponude_opis": "Objavljuju se sve, i one koje nisu izabrane.",
     "preuzeli": "Preuzeli",

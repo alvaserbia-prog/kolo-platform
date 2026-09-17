@@ -308,7 +308,7 @@ Svi korisnici mogu da razmenjuju dobra i usluge. Iniciranje ažuriranja evidenci
 
 Ažuriranje evidencije izvršeno radi posla kojim se POEN nudi, kupuje, prodaje ili se posreduje u njegovom prometu za vrednost van sistema zabranjeno je i povlači mere utvrđene Uslovima korišćenja. Takvo ažuriranje nije razmena dobara i usluga u smislu ovog člana.
 
-Pregled oglasa u platformskom prostoru za oglašavanje — sadržaj ponude ili zahteva, cena, lokacija i pseudonim oglašivača — javan je i dostupan svim posetiocima radi pristupačnosti razmene.
+Pregled oglasa u platformskom prostoru za oglašavanje — sadržaj ponude ili zahteva, iznos u POEN-ima, lokacija i pseudonim oglašivača — javan je i dostupan svim posetiocima radi pristupačnosti razmene.
 
 Postavljanje oglasa kojim se nudi dobro ili usluga dostupno je i neverifikovanim korisnicima, pod uslovima i ograničenjima utvrđenim Uslovima korišćenja. Postavljanje oglasa kojim se dobro ili usluga traži, pristup kontakt podacima oglašivača i pokretanje komunikacije povodom oglasa dostupni su isključivo verifikovanim korisnicima. Neverifikovani oglašivač može da odgovara u razgovoru koji je verifikovani korisnik pokrenuo povodom njegovog oglasa.
 

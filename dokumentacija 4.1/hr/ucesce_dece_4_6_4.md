@@ -2,7 +2,7 @@
 
 # Pravilnik o sudjelovanju djece
 
-*Ovaj pravilnik uređuje sudjelovanje maloljetnih osoba u KOLO sustavu — pristupanje, obim aktivnosti, odnos s roditeljem, doprinos iz dječjeg prostora i prijelaz u punoljetni račun. Donosi se na temelju članka 58. Pravilnika o KOLO sustavu (v4.6.0), koji izričito upućuje na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
+*Ovaj pravilnik uređuje sudjelovanje maloljetnih osoba u KOLO sustavu — pristupanje, obim aktivnosti, odnos s roditeljem, doprinos iz dječjeg prostora i prijelaz u punoljetni račun. Donosi se na temelju članka 58. Pravilnika o KOLO sustavu (v4.6.4), koji izričito upućuje na ovaj akt. U slučaju nesuglasnosti, odredbe Pravilnika o KOLO sustavu imaju prednost.*
 
 ## I — Opće odredbe
 
@@ -203,6 +203,8 @@ Maloljetni korisnik pravne poslove poduzima u granicama svoje poslovne sposobnos
 Zaklada nije strana u razmjeni i ne posreduje u njoj (članak 22. Uvjeta korištenja). Odnos između strana uređuje se prema općim pravilima obveznog prava, a kada je jedna strana maloljetni korisnik — i prema propisima o poslovnoj sposobnosti.
 
 Poništenje pravnog posla po tim propisima ostvaruje se između strana. Platforma ne provodi poništenje razmjene i po toj osnovi ne obara ažuriranje evidencije POEN-a (članak 14. stavak 8.).
+
+Razmjena iz stavka 1. ovoga članka odnosi se isključivo na dobra koja maloljetna osoba prema propisima smije pribaviti. Zabrana iz članka 21. Uvjeta korištenja primjenjuje se i na razmjenu između maloljetnih korisnika, bez obzira na to je li dogovorena putem oglasa na Platformi ili na drugi način.
 
 ### Članak 13.
 

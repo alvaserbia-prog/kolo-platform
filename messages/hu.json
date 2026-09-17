@@ -997,7 +997,7 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.6.3"
+      "ver": "4.6.4"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
@@ -1025,7 +1025,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.6.4",
+      "ver": "4.6.5",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -1045,7 +1045,7 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek · KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.3-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.4-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat · KOLO",
     "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.6.3-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya · KOLO",
@@ -1059,7 +1059,7 @@
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.2-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai · KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.4-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.5-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -1154,7 +1154,7 @@
     "hero_podnaslov": "A munka, a javak és a tudás Zombor és környéke lakói között kering — közvetítők és pénz nélkül.",
     "hero_cta_priduzi": "Regisztrálj ingyen",
     "hero_cta_saznaj": "Hogyan működik",
-    "hero_badge": "A környék piaca — hozzájárulással fizetsz, nem pénzzel",
+    "hero_badge": "A környék piaca — hozzájárulásért cserélsz, nem pénzért",
     "problem_naslov": "Problémák, amelyeket mind érzünk",
     "problem_1_naslov": "Az élelmiszer messziről érkezik, pedig mellettünk terem.",
     "problem_1_opis": "Több ezer kilométert megtett mézet, tojást, sajtot és zöldséget veszünk, miközben valaki a szomszédságban pontosan ezt termeli.",
@@ -1180,7 +1180,7 @@
     "alternativa_link_statut": "Olvasd el az Alapszabályt",
     "kome_naslov": "Kinek szól a KOLO?",
     "kome_1_naslov": "Gazdálkodók és helyi termelők",
-    "kome_1_opis": "A termékeid egyenesen azokhoz jutnak, akik keresik őket, felvásárló és árrés nélkül.",
+    "kome_1_opis": "A termékeid egyenesen azokhoz jutnak, akik keresik őket, felvásárló nélkül, közvetlenül.",
     "kome_1_poenta": "Minden munkád feljegyzésre kerül és látszik.",
     "kome_2_naslov": "Kézművesek és mesteremberek",
     "kome_2_opis": "A környékbeliek látják, mit csinálsz, és az alapján ajánlanak, amit valóban elvégeztél.",
@@ -1210,15 +1210,15 @@
     "kome_prikazi_manje": "Mutass kevesebbet",
     "primer_naslov": "Hogyan néz ki ez a gyakorlatban",
     "primer_korak_1_naslov": "Ana és Milan a cserén keresztül ismerkedik meg",
-    "primer_korak_1_opis": "Milannak mézre van szüksége, Ana termeli. Megállapodtak, hogy öt üveg 4.000 POEN-t ér — Milan ennyit írt át rá.",
+    "primer_korak_1_opis": "Milannak mézre van szüksége, Ana termeli. Megállapodtak, hogy öt üveg 5.000 POEN-t ér — Milan ennyit írt át rá.",
     "primer_korak_2_naslov": "Ana felhasználja, amit adott",
-    "primer_korak_2_opis": "Anának elromlott a mosógépe. Lazar megjavította, Ana pedig 4.000 POEN-t írt át rá. Pénzben semmit nem fizetett, Lazarnak pedig most már van feljegyzése a munkájáról.",
+    "primer_korak_2_opis": "Anának elromlott a mosógépe. Lazar megjavította, Ana pedig 4.000 POEN-t írt át rá. Pénz nem cserélt gazdát, Lazarnak pedig most már van feljegyzése a munkájáról.",
     "primer_korak_3_naslov": "A kör bezárul",
-    "primer_korak_3_opis": "Lazarnak burekre támadt kedve. Marija sütött neki egy tepsivel, ő 800 POEN-t írt át rá, Marija pedig ezekért egy üveg mézet vett Anától.",
+    "primer_korak_3_opis": "Lazarnak burekre támadt kedve. Marija sütött neki egy tepsivel, ő 1.000 POEN-t írt át rá, Marija pedig ezekért egy üveg mézet vett Anától.",
     "primer_most": "Az elején nem ismerték egymást. Most ugyanabban a körben vannak.",
     "primer_napomena_bold": "A POEN nem pénz.",
     "primer_napomena_1": "Feljegyzés arról, ki mit adott a közösségnek.",
-    "primer_napomena_2": "A méz, a javítás és a burek ebben a példában valódi. A POEN-ben kifejezett összeget az javasolja, aki a hirdetést feladja, és a két fél állapodik meg róla. A dinárban megadott ár csak tájékoztató a megállapodáshoz. A POEN nem vásárolható meg pénzért, és nem váltható pénzre.",
+    "primer_napomena_2": "A POEN-ben kifejezett összeget az javasolja, aki a hirdetést feladja, és a két fél állapodik meg róla. Az Alapítvány a POEN dinárhoz viszonyított arányát nem teszi közzé, nem ajánlja, és egyetlen eljárásában sem alkalmazza. A POEN nem vásárolható meg dinárért, és nem váltható dinárra.",
     "kako_funkcionise_naslov": "Hogyan működik, röviden",
     "kako_funkcionise_link": "Részletes magyarázat",
     "kako_funkcionise_link_postupak": "A teljes folyamat, lépésről lépésre",
@@ -1580,7 +1580,9 @@
     "gde_uvod": "E lap minden állítása közzétett aktuson alapul. Azok szövege az irányadó, nem ez az áttekintés.",
     "nazad_link": "Vissza a Hogyan működik a rendszer oldalra",
     "porez_naslov": "Adójogi előírások",
-    "porez_tekst": "A személyi jövedelemadó minden forrásból származó jövedelmet terhel, ideértve a nem pénzbeli formában szerzett jövedelmet is. Nem az tehát a kérdés, hogy valami térítés-e, hanem az, hogy a felhasználó kapott-e egyáltalán valamit.\n\nA POEN esetében nem. A bejegyzéssel sem pénzt, sem dolgot nem kap, semmi nem kerül át az Alapítvány vagyonából a felhasználó vagyonába, a keletkezett bejegyzés nem tehető pénzzé, nem engedményezhető és nem érvényesíthető, az Alapítvány pedig a POEN pénzben kifejezett értékét nem állapítja meg és nem teszi közzé. Az Alapítvány a felhasználónak semmilyen jogcímen nem fizet pénzt.\n\nA közösségi beszerzés esetében igen, és ezt nem is rejtjük el: a felhasználó az Alapítvány dináreszközeiből vásárolt jószágot kap. A jószágot ellenszolgáltatás és bármiféle viszontszolgáltatás nélkül juttatják, az Alapítvány bejegyzett céljainak megvalósítása keretében. Az érvénytelenített bejegyzés megszűnik, és nem száll át az Alapítványra; nem a rész átvétele céljából megszerzett egység, hanem annak a hozzájárulásnak a nyilvántartása, amelyet a felhasználó a közjó javára már megtett. Az az összérték, amelyet egy felhasználó egy naptári évben átvehet, korlátozott.\n\nAmi vitatott marad: hogyan minősíti az illetékes hatóság ezt a juttatást. Az Alapítvány nem nyújt adótanácsadást és nem szavatolja az adójogi megítélést; saját adókötelezettségeiért a felhasználó felel."
+    "porez_tekst": "A személyi jövedelemadó minden forrásból származó jövedelmet terhel, ideértve a nem pénzbeli formában szerzett jövedelmet is. Nem az tehát a kérdés, hogy valami térítés-e, hanem az, hogy a felhasználó kapott-e egyáltalán valamit.\n\nA POEN esetében nem. A bejegyzéssel sem pénzt, sem dolgot nem kap, semmi nem kerül át az Alapítvány vagyonából a felhasználó vagyonába, a keletkezett bejegyzés nem tehető pénzzé, nem engedményezhető és nem érvényesíthető, az Alapítvány pedig a POEN pénzben kifejezett értékét nem állapítja meg és nem teszi közzé. Az Alapítvány a felhasználónak semmilyen jogcímen nem fizet pénzt.\n\nA közösségi beszerzés esetében igen, és ezt nem is rejtjük el: a felhasználó az Alapítvány dináreszközeiből vásárolt jószágot kap. A jószágot ellenszolgáltatás és bármiféle viszontszolgáltatás nélkül juttatják, az Alapítvány bejegyzett céljainak megvalósítása keretében. Az érvénytelenített bejegyzés megszűnik, és nem száll át az Alapítványra; nem a rész átvétele céljából megszerzett egység, hanem annak a hozzájárulásnak a nyilvántartása, amelyet a felhasználó a közjó javára már megtett. Az az összérték, amelyet egy felhasználó egy naptári évben átvehet, korlátozott.\n\nAmi vitatott marad: hogyan minősíti az illetékes hatóság ezt a juttatást. Az Alapítvány nem nyújt adótanácsadást és nem szavatolja az adójogi megítélést; saját adókötelezettségeiért a felhasználó felel.",
+    "zzp_naslov": "Fogyasztóvédelmi törvény",
+    "zzp_tekst": "A tisztességtelen kereskedelmi gyakorlatról szóló szabályok a kereskedőt kötelezik — azt a személyt, aki saját tevékenysége keretében lép fel a piacon. Az Alapítvány a felhasználók felé nem így lép fel: nem kínál nekik árut vagy szolgáltatást ellenszolgáltatásért, nem számít fel díjat a Platform használatáért, nem közvetít a cserében, és a felhasználók közötti csere alapján semmilyen értéket nem kap. A hirdetésben szereplő összeget a felhasználó maga határozza meg; az Alapítvány a POEN dinárhoz viszonyított arányát nem teszi közzé, nem ajánlja, és egyetlen eljárásában sem alkalmazza.\n\nA felhasználók között a fogyasztóvédelmi szabályok ugyanúgy érvényesek, ahogyan a Platformon kívül is érvényesek lennének. Ha az árut vagy a szolgáltatást olyan személy kínálja, aki ezt tevékenysége keretében teszi, a saját szükségletére beszerző felhasználót megilletik az e szabályok szerinti jogok, és azokat az adott személlyel szemben érvényesíti. A tevékenység bejegyzésére, az előállításra és forgalmazásra, az élelmiszer-biztonságra és az adózásra vonatkozó szabályok betartásáért az felel, aki az árut vagy a szolgáltatást kínálja.\n\nAmi vitatható marad: az Alapítvány nem állapítja meg, milyen minőségben lép fel a felhasználó, és ilyen nyilatkozatot nem kér tőle, így a másik fél ezt a hirdetésből nem tudhatja. A Platform formáját tekintve valóban olyan hely, ahol árut és szolgáltatást kínálnak, és ezt nem titkoljuk. Ez a mi olvasatunk, nyíltan kimondva; az értékelést az illetékes hatóság adja."
   },
   "kakoFunkcionisePage": {
     "poen_nije_kratko": "A POEN annak a bejegyzése, amit adtál — sor a könyvben, nem pedig pénz, amit tartasz. Nincs mód dinárért megvenni vagy eladni, sem tőlünk, sem mástól.",
@@ -1907,7 +1909,8 @@
     "dete_odrasli_kratko": "szülői engedély kell",
     "slika_format": "Az egyik kép formátuma nem támogatott. Az iPhone-fotót (HEIC) mentsd JPG-ként, majd add hozzá újra.",
     "slike_ukupno_prevelike": "A képek együtt túl nagyok egyetlen küldéshez. Adj hozzá kevesebb képet, vagy cseréld őket kisebbekre.",
-    "slike_popunjeno": "Elérted a képek maximális számát ({max}). Távolíts el egyet a × gombbal, és adj hozzá újat."
+    "slike_popunjeno": "Elérted a képek maximális számát ({max}). Távolíts el egyet a × gombbal, és adj hozzá újat.",
+    "dete_zabranjeno": "Nem kínálhatod azt, amit gyerekek nem vásárolhatnak — cigarettát és e-cigarettát, alkoholt, energiaitalt, gyógyszert, pirotechnikát és éles tárgyakat."
   },
   "pocetna": {
     "dobrodoslice": "Szia, <ime>{pseudonim}</ime>",
@@ -2346,6 +2349,8 @@
     "prijava_razmene_izjasni_tekst": "Kifogást nyújtottak be, hogy a csere, amely miatt POEN-t írtak át neked, nem teljesült. {dana} napod van nyilatkozni, mielőtt az Alapítvány dönt. A nyilatkozat a profilodon adható meg.",
     "nabavka_ispravka_naslov": "A nyilvántartás helyesbítésre került",
     "nabavka_ispravka_tekst": "A „{dobro}” beszerzésből származó részre vonatkozó kifogásod nyomán az érvénytelenítés megszüntetésre került, és {poen} POEN visszakerült a bejegyzésedbe. Indokolás: {obrazlozenje}",
+    "dete_oglas_naslov": "{pseudonim} hirdetést adott fel",
+    "dete_oglas_tekst": "A hirdetés: „{naslov}”. A gyermeked profilján megnézheted és eltávolíthatod.",
     "potvrda_poen_potvrdjivac": "„{pseudonim}” tag, akinek a valódiságát megerősítetted, megtette az első hozzájárulását, ezért e megerősítés alapján {iznos} POEN került bejegyzésre neked.",
     "potvrda_poen_potvrdjeni": "A „{pseudonim}” tag által neked adott megerősítés alapján {iznos} POEN került bejegyzésre neked.",
     "potvrda_poen_ceka_potvrdjivac": "Megerősítetted „{pseudonim}” tag valódiságát. {iznos} POEN akkor kerül bejegyzésre neked, amikor ő megteszi az első hozzájárulását — közzétesz egy, az Alapítvány által jóváhagyott ajánlatot, adományoz, pártfogó lesz, vagy operatív hozzájárulást teljesít.",
@@ -2772,7 +2777,6 @@
     "vrednost_donacije_mora_biti_pozitivna": "Az adomány értékének pozitívnak kell lennie.",
     "za_brisanje_naloga_otkucaj_pseudonim_deteta": "A fiók törléséhez írd be a gyerek álnevét.",
     "za_ovaj_zadatak_je_obavezan_plan_izvrsenja_najmanje_10_znakova": "Ehhez a feladathoz kötelező a teljesítési terv (legalább 10 karakter).",
-    "za_robu_i_usluge_obavezan_je_maloprodajni_cenovnik": "Áruk és szolgáltatások esetén kiskereskedelmi árlista kötelező.",
     "zadatak_nije_aktivan": "A feladat nem aktív.",
     "zahtev_nije_aktivan": "A kérelem nem aktív.",
     "zahtev_nije_na_cekanju": "A kérelem nincs függőben.",
@@ -3126,7 +3130,7 @@
     "k_mesto": "Az átvétel helye",
     "k_period": "Átvételi időszak",
     "k_obrazlozenje": "Az egy részre eső POEN számát a beszerzésről szóló határozat állapította meg: {obrazlozenje}",
-    "paritet_napomena": "Az egységenkénti POEN megegyezik a kiskereskedelmi referenciaárral, egy az egyhez. A POEN nem cserélődik árura és nem jut el a szállítóhoz — az árut dinárral vásárolták, a POEN pedig a felhasznált részvétel bejegyzéseként kerül érvénytelenítésre.",
+    "paritet_napomena": "A részenkénti POEN számát a beszerzést megnyitó döntés állapítja meg. Ez nem az áru ára, és nem is abból vezetik le. A POEN nem cserélődik árura és nem jut el a szállítóhoz — az árut az Alapítvány dinárjaiból vásárolták, a POEN pedig a felhasznált részvétel bejegyzéseként kerül érvénytelenítésre.",
     "ponude": "Begyűjtött ajánlatok",
     "ponude_opis": "Mind közzétételre kerül, a ki nem választottak is.",
     "preuzeli": "Átvették",

@@ -193,8 +193,8 @@ export async function resetujNalogNaPrviDan(userId: string): Promise<ResetRezult
   const obrisanoOglasa = prebroj(await prisma.marketplaceListing.deleteMany({ where: { sellerId: userId } }));
   // Oglasi drugih ljudi koje je ovaj nalog „kupio" vraćaju se u ponudu.
   await prisma.marketplaceListing.updateMany({
-    where: { buyerId: userId },
-    data: { buyerId: null, soldAt: null, status: ListingStatus.ACTIVE },
+    where: { primalacId: userId },
+    data: { primalacId: null, razmenjenoAt: null, status: ListingStatus.ACTIVE },
   });
   prebroj(await prisma.oglasUpit.deleteMany({ where: { posiljacId: userId } }));
   prebroj(await prisma.prijavaOglasa.deleteMany({ where: { prijaviocId: userId } }));

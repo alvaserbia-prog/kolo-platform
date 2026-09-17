@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_6_4.md`, `uslovi_koriscenja_4_6_3.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_6_5.md`, `uslovi_koriscenja_4_6_4.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,11 +27,11 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_6_4.md",
-  "dokaz_stvarnosti_4_6_4.md",
+  "Pravilnik_4_6_5.md",
+  "dokaz_stvarnosti_4_6_5.md",
   "DPIA_4_6_3.md",
   "radnje_obrade_4_6_3.md",
-  "uslovi_koriscenja_4_6_3.md",
+  "uslovi_koriscenja_4_6_4.md",
   "politika_4_6_3.md",
   "statut_4_1_0.md",
   "whitepaper_4_6_2.md",
@@ -43,7 +43,7 @@ const AKTI = [
   "gornje_kolo_4_4_6.md",
   "programi_podrske_4_6_1.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
-  "ucesce_dece_4_6_1.md",
+  "ucesce_dece_4_6_4.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
   "projekti_nabavke_4_6_0.md",
 ];
@@ -83,7 +83,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Эта возможность не является стимулом",
     ],
   },
-  "Pravilnik_4_6_4.md": {
+  "Pravilnik_4_6_5.md": {
     sr: [
       // ═══ 4.6.1 (R-04 — ZRNO kao investicioni instrument, Komisija za HOV) ═══
       // 🔴 Čl. 23 st. 3 je do 4.6.1 tvrdio da „upis i otpis ZRNA pomeraju
@@ -323,7 +323,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // Traži se i da je upis odvojen od PRAVA: indeks i pun pristup nastaju potvrdom i
   // ne čekaju ništa. Bez te rečenice bi se odlaganje POEN-a moglo pročitati kao
   // odlaganje članstva, što nije ni odlučeno ni sprovedeno.
-  "dokaz_stvarnosti_4_6_4.md": {
+  "dokaz_stvarnosti_4_6_5.md": {
     sr: [
       "### Član 11a", "### Član 20b", "### Član 20c",
       "prvi potvrđen doprinos zajedničkom dobru",
@@ -613,8 +613,31 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
   // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
   // počiva upravo na tome da takav promet nije dopušten.
-  "uslovi_koriscenja_4_6_3.md": {
+  "uslovi_koriscenja_4_6_4.md": {
     sr: [
+      // ── 4.6.4 — R-07 (nelojalna i obmanjujuća poslovna praksa) ──────────────
+      // 🔴 Čl. 22b prvi put odgovara na PRETHODNO pitanje celog rizika: da li je
+      // Fondacija uopšte trgovac. Propisi o nepoštenoj poslovnoj praksi obavezuju
+      // trgovca; ako Fondacija prema korisnicima ne nastupa na tržištu, ZZP se na
+      // nju formalno i ne primenjuje. Do ovog seta taj odgovor nije stajao ni u
+      // jednom od sedamnaest akata, pa je podrazumevano čitanje išlo protiv nas.
+      // Ista konstrukcija je već izdržala dvaput — nabavke čl. 3a i operativni
+      // čl. 27.
+      "### Član 22b — Odnos prema propisima o zaštiti potrošača",
+      "ne nastupa na tržištu",
+      "primenjuju se propisi o zaštiti potrošača",
+      "ne utvrđuje u kom svojstvu korisnik nastupa",
+      // Čl. 20 — obaveza je IMENOVANA i SMEŠTENA. Do 4.6.4 je postojala samo u
+      // FAQ pitanju 837, što nije norma i ništa ne prebacuje.
+      "propise o registraciji delatnosti",
+      "ispunjenost tih uslova ne proverava",
+      // 🔴 Čl. 21 — zabrana se vezuje za RADNJU, ne za oglas. Platforma vidi samo
+      // prepis POEN-a i ne zna šta je razmenjeno; da zabrana važi samo za oglas,
+      // pogađala bi jedino onoga ko ju je bio nespretan da napiše u oglas. Ovako
+      // povreda postoji i kad oglasa nema, pa mere iz čl. 27 i 28 imaju osnov.
+      "elektronske cigarete i tečnosti za njih",
+      "bez obzira na saglasnost roditelja i bez obzira na to da li je razmena dogovorena putem oglasa",
+      "zabranu davanja maloletnim licima i ograničenja oglašavanja",
       // 4.5.9 — javnost donacije VIŠE NIJE „uslov za evidentiranje POEN-a". Ta
       // formulacija je strukturu činila „platiš → dobiješ vidljivost" i pravila
       // pristanak neslobodnim; razlog nosi proverljivost (donacije čl. 5a).
@@ -662,6 +685,14 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ne prikazuju pojedinačno nego kao dnevni zbir po programu",
     ],
     en: [
+      // 4.6.4 — R-07: vidi obrazloženje uz srpske odredbe iznad.
+      "### Article 22b — Relation to Consumer Protection Rules",
+      "does not act on the market towards users",
+      "consumer protection rules apply",
+      "does not establish in what capacity a user is acting",
+      "rules on business registration",
+      "electronic cigarettes and liquids for them",
+      "regardless of parental consent",
       "does not set it as a condition on which it agrees to record a contribution",
       "An anonymous donation does not establish identity in this sense",
       "Listing by an Unverified User",
@@ -682,6 +713,14 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "is not transferable",
     ],
     ru: [
+      // 4.6.4 — R-07: vidi obrazloženje uz srpske odredbe iznad.
+      "### Статья 22b — Отношение к нормам о защите прав потребителей",
+      "не выступает на рынке",
+      "применяются нормы о защите прав потребителей",
+      "не устанавливает, в каком качестве выступает пользователь",
+      "нормы о регистрации деятельности",
+      "электронные сигареты и жидкости для них",
+      "независимо от согласия родителя",
       "не ставит её как условие, при котором соглашается учесть вклад",
       "Анонимное пожертвование личность в этом смысле не устанавливает",
       "Объявление неверифицированного пользователя",
@@ -885,8 +924,16 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // svakom potvrđenom članu. Ako ta odredba ispadne iz akta, kod nastavi da
   // zatvara profil bez osnova, a pregled po školama ostane bez ijednog pravila o
   // tome šta se sme objaviti — pa se traži doslovno, na sva tri jezika.
-  "ucesce_dece_4_6_1.md": {
+  "ucesce_dece_4_6_4.md": {
     sr: [
+      // 🔴 4.6.4 (R-07, mera M-5″) — čl. 12a. Oglas koji postavi dete vidi SAMO
+      // druga deca (do 15. godine u celini; iznad toga i punoletni, i to samo uz
+      // roditeljsku saglasnost). Publika je dakle pretežno ili isključivo maloletna,
+      // a nijedan odrastao je pasivno ne nadgleda. Zabrana mora da vezuje RADNJU,
+      // ne oglas: Platforma vidi samo prepis POEN-a i ne zna šta je razmenjeno, pa
+      // bi zabrana vezana za oglas pogađala jedino onoga ko ju je napisao u oglas.
+      "dobra koja maloletno lice po propisima sme da pribavi",
+      "bez obzira na to da li je dogovorena putem oglasa na Platformi ili na drugi način",
       // 4.5.9 (R-02) — kanal iz čl. 15 t. 9 upisuje detetu; priroda upisa mora da stoji.
       "maloletni korisnik ne prima ni novac ni stvar",
       // 🔴 4.5.7 (R-20) — čl. 4d. Prevođenje je do ovog seta postojalo samo u kodu:
@@ -962,6 +1009,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "maloletnom korisniku druge škole taj pregled se ne prikazuje",
     ],
     en: [
+      // 4.6.4 — R-07 mera M-5″ (vidi sr).
+      "goods which a minor is permitted by law to acquire",
       "the minor user receives neither money nor goods",
       // R-20 — cl. 4d (vidi sr).
       "### Article 4d",
@@ -998,6 +1047,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "ceases once the minor user enters and confirms their own e-mail address",
     ],
     ru: [
+      // 4.6.4 — R-07 mera M-5″ (vidi sr).
+      "которые несовершеннолетнее лицо по нормам вправе приобрести",
       "несовершеннолетний пользователь не получает ни денег, ни вещи",
       // R-20 — ст. 4d (vidi sr).
       "### Статья 4d",
@@ -1386,7 +1437,7 @@ describe("kanonski set akata 4.3.3", () => {
       hu: /véglegesen átveszi/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_6_4.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_6_5.md", jez);
       expect(tekst, `${jez} još opisuje zonu kao trajnu`).not.toMatch(TRAJNO[jez]);
     }
   });
@@ -1404,7 +1455,7 @@ describe("kanonski set akata 4.3.3", () => {
       hu: /a hamis hitelesítő által végzett összes hitelesítés érvénytelen/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_6_4.md", jez);
+      const tekst = await ucitajPravniDokument("dokaz_stvarnosti_4_6_5.md", jez);
       expect(tekst, `${jez} još obara sve verifikacije verifikatora`).not.toMatch(STARO[jez]);
     }
   });
@@ -1422,7 +1473,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_6_4.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_6_5.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });

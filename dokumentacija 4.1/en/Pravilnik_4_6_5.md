@@ -310,7 +310,7 @@ All users may exchange goods and services. Initiating a POEN ledger update in fa
 
 A ledger update carried out for the purpose of a transaction by which POEN is offered, bought, sold, or brokered for value outside the system is prohibited and entails the measures established by the Terms of Use. Such an update is not an exchange of goods and services within the meaning of this Article.
 
-The preview of listings in the platform's advertising space — the content of an offer or request, price, location, and pseudonym of the advertiser — is public and available to all visitors for the accessibility of exchange.
+The preview of listings in the platform's advertising space — the content of an offer or request, the amount in POEN, location, and pseudonym of the advertiser — is public and available to all visitors for the accessibility of exchange.
 
 Posting a listing offering a good or a service is available to unverified users as well, under the conditions and limitations established by the Terms of Use. Posting a listing seeking a good or a service, accessing the advertiser's contact details, and initiating communication regarding a listing are available exclusively to verified users. An unverified advertiser may reply within a conversation started by a verified user regarding their listing.
 

@@ -233,12 +233,20 @@ rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se 
 zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
 usput — 5.0 je poslednji potez, posle poslednjeg rizika.
 
-**AŽURIRANO 2026-09-16 (trideset peti put):** na **4.6.4** idu **DVA akta** —
+**AŽURIRANO 2026-09-16 (trideset šesti put):** na **4.6.5** idu **DVA akta** —
 Pravilnik o dokazu stvarnosti (sa 4.4.1) i Pravilnik o KOLO sistemu (sa 4.6.2).
 Ostalih petnaest ostaje gde jeste. Povod nije rizik iz registra nego **odluka
 vlasnika**: POEN po potvrdi (1.000 verifikatoru i 1.000 verifikovanom) više ne nastaje
 u trenutku potvrde nego kad potvrđeni korisnik ostvari **prvi potvrđen doprinos**.
 Sadržinski, vidi sekciju „POEN po potvrdi čeka prvi doprinos" ispod.
+
+🔴 **Zašto 4.6.5, a ne 4.6.4 — šesti put isti sudar.** Set je rađen nad osnovom na
+kojoj je poslednja šifra bila 4.6.2. Dok je bio u radu, druga sesija je na `main`
+objavila **4.6.4** za R-07 (Uslovi, Pravilnik, učešće dece) — među njima i **glavni
+Pravilnik**, koji menja i ovaj set. Grana je zato dovučena na `main`, izmene su
+prenete **na main-ovu 4.6.4 verziju Pravilnika** (ne na 4.6.2, što bi tiho poništilo
+ispravku čl. 16 iz R-07), a ceo set je dobio narednu slobodnu šifru. Isti postupak
+kao 4.6.0 naspram 4.5.9 i 4.6.1 naspram 4.6.0.
 
 🟢 **Whitepaper NIJE bumpovan — i to je provereno, ne pretpostavljeno.** On o kanalu
 verifikacije govori uopšteno („Protokol evidentira doprinos kad korisnik doprinese…
@@ -259,6 +267,42 @@ potezom ponovo objavljuju, pa su upućivanja u njima tačna; akti koji na njih u
 🟢 **DPIA i Registar radnji obrade nisu dirani** — nema novog podatka o ličnosti ni nove
 radnje obrade. Stanje čekanja je zapis o odnosu koji već postoji (`VerifikacionaVeza`),
 a ne nov podatak o čoveku.
+
+**AŽURIRANO 2026-09-15 (trideset peti put):** na **4.6.4** idu **TRI akta** —
+Uslovi korišćenja (sa 4.6.3), Pravilnik o KOLO sistemu (sa 4.6.2) i Pravilnik o
+učešću dece (sa 4.6.1). Ostalih četrnaest ostaje gde jeste. Povod je **R-07 iz NOVOG
+registra rizika** (nelojalna i obmanjujuća poslovna praksa, Ministarstvo trgovine).
+Sadržinski, vidi sekciju „Nelojalna praksa: ekran je prestao da protivreči aktu" ispod.
+
+🔴 **Zašto 4.6.4, a ne 4.6.3 — peti put isti sudar, i ovaj put je bio najbliži.**
+Ovaj set je rađen nad osnovom na kojoj je poslednja šifra bila 4.6.2. Dok je bio u
+radu, druga sesija je na `main` objavila **4.6.3 za R-06** — i među ta četiri akta
+su i **Uslovi korišćenja**, jedini akt koji ovaj set suštinski menja. Grana je zato
+dovučena na `main`, izmene R-07 su prenete **na main-ovu 4.6.3 verziju Uslova**
+(ne na 4.6.1, što bi tiho poništilo ceo R-06), a set je dobio narednu slobodnu
+šifru **4.6.4**.
+
+🔴 **R-06 je uz to uveo `src/lib/verzije-akata.ts` — JEDAN izvor istine za verziju
+Uslova i Politike.** Pri svakom sledećem bumpu Uslova ili Politike menja se i taj
+fajl, a `pristanak-izvor.test.ts` to zaključava. Ime fajla više NE stoji otkucano u
+`uslovi/page.tsx`.
+
+🟡 **Nov red `PolitikaVerzija` NIJE napravljen, i to je odluka po samom aktu.**
+Uslovi čl. 40 st. 4 kaže da Fondacija prihvatanje izmenjenih Uslova **„može"**
+zatražiti izričito, a st. 5 da se, ako nije zatraženo, nastavak korišćenja smatra
+prihvatanjem. Pošto je R-06 dan ranije upalio `PRISTANAK_NA_AKTE_TRAZI_SE = true`
+i ubacio red za 4.6.3, nov red bi svakome drugi put za dva dana otvorio isti ekran.
+🔴 **Ostaje obaveza iz čl. 40 st. 3: obaveštavanje bez odlaganja objavom na
+Platformi.** Izmene ne sužavaju prava i ne proširuju obradu podataka, pa se ne
+traži pojedinačno obaveštenje elektronskom adresom.
+
+🟢 **Unakrsno upućivanje ispravljeno je samo u aktu koji se ponovo objavljuje** —
+`ucesce_dece` → `Pravilnik o KOLO sistemu (v4.6.4)`.
+
+🔴 **Zaostala unakrsna upućivanja — DPIA i Registar su objavljeni juče i NE diraju se.**
+`DPIA_4_6_3` u „Povezanim dokumentima" navodi `Pravilnik (v4.6.2)` i `Uslovi (v4.6.3)`,
+a oba su sada 4.6.4. Nisu ispravljena iz istog razloga kao uvek: objavljen fajl ne sme
+da govori nešto drugo nego kad je objavljen. Briše ih bump celog seta na 5.0.
 
 **AŽURIRANO 2026-09-14 (trideset četvrti put):** na **4.6.3** idu **ČETIRI akta** —
 Politika privatnosti (sa 4.6.1), Uslovi korišćenja (sa 4.6.1), DPIA (sa 4.6.1) i
@@ -2521,6 +2565,216 @@ naloga uz polje za uplatioca, pa se poređenje radi.
 Migracije `20260913120000_donacija_naplaceno` (samo enum vrednost, ZASEBAN fajl) →
 `20260913120100_identitet_utvrdjen`. Brane: `donacija-karticno-izvor.test.ts` (17) i
 `identifikovan-clan-izvor.test.ts` (26), obe gledaju IZVOR.
+
+### Nelojalna praksa: ekran je prestao da protivreči aktu (R-07, 2026-09-15)
+
+Sprovođenje rizika **R-07 iz novog registra** (`docs/registar-rizika-regulatori-2026-09.md`)
+— nelojalna i obmanjujuća poslovna praksa, Ministarstvo trgovine / tržišna
+inspekcija, zatečena ocena **8**, po merama **4**. Na **4.6.4** idu Uslovi
+korišćenja, Pravilnik o KOLO sistemu i Pravilnik o učešću dece.
+
+🔴 **Ovo NIJE rizik da neko dokaže da je POEN novac** (to su R-01 i R-11) nego rizik
+jedan stepen niže i zato mnogo lakši za regulatora: nepoštena praksa se ceni po
+tome **kako prosečan potrošač razume poruku**, ne po tome šta piše u aktu koji on
+nikad neće otvoriti. Teret je time faktički obrnut — regulatoru je dovoljan
+**screenshot** na kome piše nešto što protivreči našem sopstvenom aktu. Prag za
+pokretanje je jedna prijava. Zato je R-07 najjeftiniji ulaz u sve ostale rizike.
+
+#### 🔴 Nalaz koji je pokrenuo ceo set: objavljen kurs je bio ŽIV
+
+`nabavke.paritet_napomena` je na **svih pet jezika** govorila:
+
+> „POEN po jedinici jednak je maloprodajnoj referenci, **jedan prema jedan**."
+
+Renderovano na `/nabavke/[id]`, **neposredno iznad** sekcije sa dinarskim iznosima.
+
+Zašto je to gore od svega što je R-01 uklonio:
+- **Institut koji opisuje ne postoji od seta 4.4.3** (07.09.2026) — tada je paritet
+  odvezan, a „maloprodajna referenca kao institut više ne postoji". Ekran je osam
+  dana govorio o pravilu koje je ukinuto.
+- **Poništavala je meru iz R-02.** R-02 je dinarsku stranu izmestio u zasebnu sekciju
+  baš da se odnos ne bi mogao izvesti deljenjem; ova rečenica ga je **izgovarala
+  naglas**, sa aritmetikom već urađenom.
+- **Mesto je najgore moguće** — nabavka je jedino mesto u sistemu gde dinarski račun
+  stvarno postoji (račun dobavljača). Odnos 1:1 objavljen baš tu nije orijentir nego
+  kurs sa dokazom.
+
+🔴 **Preživela je R-01, R-02 i R-04** zato što su sve tri provere tražile reči
+„kurs", „POEN/RSD", „Od (RSD)" i „Rate" — a nijednu reč kojom je ta rečenica
+napisana. **Pouka: pri ukidanju instituta brana mora da traži IZRAZ kojim je
+napisan, ne ime ključa ni reč iz prethodnog nalaza.** Ista pouka je već zapisana uz
+4.2.1 („цепь" naspram „цепочка").
+
+Uz nju je obrisan i mrtav ključ `greske.za_robu_i_usluge_obavezan_je_maloprodajni_cenovnik`
+— ostatak donacije robe, ukinute 08.09.2026, koji se nigde nije renderovao.
+
+#### Šta je još govorilo suprotno od akta
+
+- 🔴 **`landing.hero_badge`: „Na pijaci tvog kraja PLAĆA SE doprinosom, ne novcem."**
+  Prva rečenica koju čovek pročita na sajtu, a Pravilnik čl. 13 kaže da POEN „ne
+  služi izmirenju novčanih obaveza" i Uslovi čl. 22 st. 3 da ažuriranje evidencije
+  „ne predstavlja plaćanje". Sada: *„razmenjuje se za doprinos, ne za novac"*. Usput
+  i „Nije platila ni dinar" → „Nije dala nijedan dinar".
+- 🟠 **`landing.primer_napomena_2`: „Dinarska cena služi samo kao orijentir pri
+  dogovoru."** Deklarativno i autorski — dakle **preporuka Fondacije**, dok Uslovi
+  čl. 19 st. 1 izričito kažu da Fondacija „ne preporučuje po kom odnosu korisnik
+  treba da odredi iznos". Zamenjeno formulacijom koja preslikava čl. 19. 🟢 Usput je
+  izbačena i rečenica *„Med, popravka i burek u ovom primeru su stvarni"* — ona je
+  primere vezivala za stvarnost, pa je čitaocu potvrđivala da su i **iznosi** stvarni.
+- 🟡 **`landing.kome_1_opis`: „bez otkupljivača i bez marže."** „Marža" je trgovinski
+  pojam i uz to **uporedna tvrdnja o ceni** prema trećim licima, što je po ZZP
+  poseban i stroži režim. „Bez otkupljivača" ostaje — to je tačna poenta projekta.
+- 🟡 **Šema je govorila `buyerId` / `soldAt` / `SOLD`**, uz Uslove čl. 22 koji kažu da
+  Fondacija nije strana u razmeni i da razmena nije kupoprodaja. Repo je javan pod
+  AGPL-om, pa je `schema.prisma` prvi dokument koji ozbiljan čitalac otvori — isti
+  razred nalaza koji je R-04 rešio kod ZRNA. Sada `primalacId` / `razmenjenoAt` /
+  `RAZMENJEN`; migracija `20260915120000_oglas_bez_kupovine` je **isključivo RENAME**.
+
+🔴 **IZNOSI U PRIMERIMA NA NASLOVNOJ NAMERNO OSTAJU I NAMERNO DRŽE ODNOS 1:1**
+(odluka vlasnika, 15.09.2026). Pet tegli meda = 5.000, popravka veš mašine = 4.000,
+tepsija bureka = 1.000 — a 1.000 je i jedna tegla, pa se krug u primeru zatvara sam.
+Cilj je da odnos **čitalac sam izvede**, a da ga Fondacija nigde ne izgovori. To nije
+obmana: brojevi odgovaraju onome što korisnici stvarno rade, a akt izričito kaže da
+Fondacija nijedan odnos ne objavljuje, ne preporučuje i ne primenjuje. 🔴 **Ne
+uklanjati primere i ne „zaokruživati" iznose u nerealne** — prećutan odnos je prvi
+protivargument (mera M-7b odbijena uz R-01, isti razlog).
+
+#### Šta akti sada kažu
+
+- **Uslovi čl. 18 st. 2 i Pravilnik čl. 16** — u opisu javnog pregleda oglasa „cena"
+  → **„iznos u POEN-ima"**. 🔴 Ista rečenica stoji u oba akta; da je ispravljena samo
+  u Uslovima, dva akta bi o istoj činjenici govorila različito.
+- **Uslovi čl. 20, nov stav (M-4′)** — ko nudi dobro ili uslugu odgovara za propise
+  koji se na njih odnose (registracija delatnosti, proizvodnja i promet, bezbednost
+  hrane, poreski propisi); važe i kad se razmena dogovara preko Platforme; Fondacija
+  ih ne proverava, ne potvrđuje i po njima ne odgovara.
+- **Uslovi čl. 21, dva nova stava (M-5″)** — zabrana maloletnom korisniku da nudi ili
+  pribavlja dobra čije je davanje maloletnicima zabranjeno ili ograničeno (alkohol,
+  duvan i **elektronske cigarete**, energetska pića, lekovi i dodaci ishrani,
+  pirotehnika, oštri predmeti), i obaveza svakoga ko nudi ograničena dobra da poštuje
+  ta ograničenja.
+- **Uslovi, nov čl. 22b (M-6)** — Fondacija prema korisnicima **ne nastupa na
+  tržištu**; između korisnika propisi o zaštiti potrošača važe kao i van Platforme i
+  ostvaruju se prema tom licu; Fondacija ne utvrđuje u kom svojstvu korisnik nastupa.
+- **Pravilnik o učešću dece, dopuna čl. 12a** — razmena maloletnog korisnika odnosi se
+  isključivo na dobra koja po propisima sme da pribavi; zabrana iz Uslova čl. 21 važi
+  i između dvoje dece.
+
+#### 🔴 Zašto čl. 22b nosi ceo rizik
+
+Propisi o nepoštenoj poslovnoj praksi obavezuju **trgovca** — lice koje nastupa na
+tržištu u okviru svoje delatnosti. Ako Fondacija prema korisnicima tako ne nastupa,
+ZZP se na nju **formalno i ne primenjuje**; primenjuje se između korisnika, gde
+Fondacija ionako nije strana. To je razlika između „rizik se ne odnosi na nas" i
+„branimo se u postupku".
+
+🔴 **Do 4.6.4 taj odgovor nije stajao ni u jednom od sedamnaest akata**, pa je prvo
+pitanje inspektora bilo bez pripremljenog odgovora, a podrazumevano čitanje išlo je
+protiv nas — *držiš pijacu, dakle nastupaš na tržištu*. Konstrukcija je **treća
+upotreba** iste odbrane koja je već dvaput izdržala: nabavke čl. 3a („nije privredna
+delatnost — nema prihoda, nema dobiti, dobra se ne nude na tržištu") i operativni
+čl. 27 („nema naručioca, nema naknade").
+
+#### 🔴 Zašto kućica „nudim u okviru delatnosti" NIJE napravljena
+
+Predlog je bio da oglašivač izjavi da nudi u okviru registrovane delatnosti i da
+oglas dobije oznaku. **Odbijeno (odluka vlasnika, 15.09.2026) — i razlog obara
+predlog:** na Pijaci su fizička lica koja to rade sa strane, bez registrovane
+delatnosti. Skoro niko kućicu ne bi čekirao, i bio bi u pravu; uz to se „trgovac" po
+zakonu ne određuje registracijom nego **ponašanjem**, pa bi izjava tražila da čovek
+prizna status koji ni sam ne zna da ima.
+
+🟡 **Posledicu znati:** kupac iz oglasa i dalje ne može da zna u kom svojstvu druga
+strana nastupa. To je razlog zbog kog R-07 po merama staje na **4**, a ne niže.
+🔴 **Ne predlagati ponovo** bez izričitog naloga.
+
+#### Oglas deteta — publika bez ijednog odraslog posmatrača
+
+🔴 **Nalaz koji je odredio meru M-5″ je vlasnikov, i jači je od prvobitnog.** Prvi
+predlog je gledao smer *odrastao objavi → dete vidi*. Stvarni problem je obrnut:
+`usloviVidljivostiOglasa` (`deca.ts`) radi u oba smera, pa oglas koji postavi
+dvanaestogodišnjak vide **isključivo druga deca** — nijedan gost, nijedan redovan
+član, nijedan slučajni odrastao. Dete može drugom detetu ponuditi elektronsku
+cigaretu, a jedini odrastao koji taj oglas uopšte vidi jeste **roditelj**.
+
+🟢 **Odgovorno lice postoji i akt ga već imenuje** — Pravilnik o učešću dece **čl. 10
+st. 6**: roditelj odgovara za sadržaj koji je dete objavilo **do trenutka uklanjanja**
+i za radnje deteta na Platformi. Ranija radna teza da „u lancu nema odgovornog lica"
+je **netačna** i ne treba je ponavljati.
+
+🔴 **Ali ta odredba je bila neizvodljiva:** roditelj oglase vidi samo ako sam otvori
+profil deteta. Zato objava oglasa maloletnog naloga sada **javlja svakom roditelju**
+(`javiRoditeljimaZaOglas`, link vodi na profil deteta gde stoji dugme „Ukloni" iz
+čl. 10 st. 1). To je **jedina kodna izmena** u meri i najjeftinija brana koju sistem
+ima. Uz to, obrazac za oglas maloletnom nalogu iznad kategorije prikazuje šta ne sme
+da nudi (`pijaca.dete_zabranjeno`, pet jezika).
+
+🔴 **Filter reči se NE uvodi.** Moderacija je reaktivna, ne preventivna (Uslovi
+čl. 25 st. 1; zapisano u ovom fajlu 04.08.2026: „nema filtera reči ni pre-moderacije,
+ne uvoditi automatsku filtraciju"). Uz to bi bio beskoristan — „vejp", „puf",
+„tečnost" se pišu na dvadeset načina.
+
+🟢 **Kanal prijave za decu POSTOJI i provereno radi:** `POST /api/pijaca/[id]/prijavi`
+otvorena je **svakom prijavljenom nalogu**, bez uslova verifikacije. To je jedini put
+do Fondacije koji dečja soba ima otkad je prijava poruke ukinuta (04.09.2026).
+
+#### 🔴 Zabrana vezuje RADNJU, ne oglas — i to je namerno
+
+Nalaz vlasnika: *„svako može slobodno da šalje POEN i bez oglasa, pa neko može da
+prodaje e-cigarete a da ih ne objavi."* Tačno — Platforma vidi **samo prepis POEN-a**
+i ne zna šta je dato zauzvrat.
+
+🟢 **To je odbrana, ne slabost:** razmena se ne dešava na Platformi nego između dvoje
+ljudi uživo (Uslovi čl. 22), a regulator nas može držati samo za ono što Platforma
+**prikazuje** — što je tačno ono što Zakon o oglašavanju i dodiruje.
+
+🔴 **Ali norma mora da pokrije i nevidljivi slučaj**, inače zabrana pogađa samo onoga
+ko ju je bio nespretan da napiše u oglas. Zato i Uslovi čl. 21 i učešće dece čl. 12a
+kažu **„bez obzira na to da li je razmena dogovorena putem oglasa na Platformi ili na
+drugi način"** — povreda postoji i kad oglasa nema, pa mere iz čl. 27 i 28 imaju
+osnov kad izađe na videlo.
+
+🔴 **Praćenje obrazaca prepisa se NE uvodi** — odbijeno uz stari R-19 („nemoguće je
+sprovesti kontrolu kada je transfer poena slobodan") i ostaje odbijeno.
+
+#### Copy
+
+**`/pravna-pozicija` dobija odeljak o zaštiti potrošača.** Do ovog seta stranica je
+imala ZDI, ZPS, ZTK i (od R-02) poreski odeljak, a **ZZP se nije pominjao nijednom**
+— iako je to regulator sa najnižim pragom za dolazak. Isti obrazac koji je R-02 našao
+za porez. Tekst otvoreno kaže šta ostaje sporno (izjava o svojstvu se ne traži;
+Platforma po obliku jeste mesto gde se roba nudi).
+
+#### 🟡 Svesno prihvaćeni ostaci
+
+1. **Odnos 1:1 ostaje izvodljiv iz primera** (odluka vlasnika). Za R-07 to nije
+   obmana — brojevi odgovaraju stvarnoj praksi a mi odnos ne tvrdimo. 🔴 Ali **hrani
+   R-01, R-05 i R-08**, gde je to R-01-ov već prihvaćen ostatak br. 2.
+2. **Kupac ne zna u kom svojstvu druga strana nastupa** (kućica odbijena). Najveći
+   razlog zašto ocena staje na 4.
+3. **Platforma po obliku jeste pijaca** — oglasi, iznosi, kategorije, sortiranje po
+   iznosu. Mere to ublažavaju, ne obaraju.
+4. **Oglas za ograničena dobra može da stoji dok ga neko ne prijavi ili roditelj ne
+   ukloni.** Ista reaktivna moderacija kao svuda; norma, obaveštenje roditelju i
+   dugme za prijavu su ono što je dodato.
+5. **Razmena dogovorena mimo oglasa Platformi nije vidljiva** i ne pokušava da bude.
+   🔴 Taj ostatak ne pripada R-07 nego **R-21** (odgovornost za sadržaj i zabranjena
+   dobra) i **R-09** (deca) — upisan je tamo, ne sakriven ovde.
+
+🔴 **ZABRANJENE TEME uz R-07 — ne otvarati bez izričitog naloga:** kućica/izjava o
+delatnosti oglašivača; filter reči ili pre-moderacija oglasa; praćenje obrazaca
+prepisa POEN-a; uklanjanje ili „zaokruživanje" iznosa u primerima na naslovnoj;
+vraćanje bilo kog izraza za paritet u copy.
+
+**Kod:** `messages/*.json` (paritet, bedž, napomena, iznosi, marža, nov ZZP odeljak,
+obaveštenje roditelju, napomena u obrascu), `prisma/schema.prisma` + migracija
+`20260915120000_oglas_bez_kupovine` (samo RENAME), `src/lib/protokol/deca.ts`
+(`javiRoditeljimaZaOglas`), `src/app/api/pijaca/route.ts`,
+`src/app/(app)/pijaca/novi-oglas/{page,NoviOglasForma}.tsx`,
+`src/app/(public)/pravna-pozicija/page.tsx`, `src/lib/verzije-akata.ts`,
+`src/app/(public)/pravilnik/[slug]/page.tsx`.
+**Brana:** `__tests__/r07-obmanjujuca-praksa-izvor.test.ts` (41 provera, gleda IZVOR)
++ odredbe akata zaključane u `pravni-dokumenti.test.ts` na sr/en/ru.
 
 ### Posebne kategorije izlaze iz javne evidencije (R-03, 2026-09-13)
 
