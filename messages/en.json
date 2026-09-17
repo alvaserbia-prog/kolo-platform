@@ -454,7 +454,10 @@
     "ceka_moja": "{iznos} POEN is waiting for you — post your first offer or donate.",
     "ceka_dao": "You confirmed {pseudonim} — {iznos} POEN is recorded for you once they make their first contribution.",
     "ceka_dugme_oglas": "Post an offer",
-    "ceka_dugme_donacija": "Donate"
+    "ceka_dugme_donacija": "Donate",
+    "oznake_ceka": "awaiting first contribution",
+    "oznake_ceka_naslov": "POEN under this confirmation is recorded once this member posts an offer approved by the Foundation, donates, becomes a patron, or completes operational work.",
+    "oznake_ceka_opis": "{broj} confirmation(s) are marked where POEN has not yet been recorded — awaiting the first contribution of the person you confirmed. Remind them to post an offer; once the Foundation approves it, POEN is recorded for both of you."
   },
   "graf": {
     "naslov": "Confirmation network",

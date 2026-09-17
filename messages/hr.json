@@ -454,7 +454,10 @@
     "ceka_moja": "Tebe čeka {iznos} POENA — objavi prvu ponudu ili doniraj.",
     "ceka_dao": "Potvrdio si {pseudonim} — {iznos} POENA upisuje ti se kad on ostvari svoj prvi doprinos.",
     "ceka_dugme_oglas": "Objavi ponudu",
-    "ceka_dugme_donacija": "Doniraj"
+    "ceka_dugme_donacija": "Doniraj",
+    "oznake_ceka": "čeka prvi doprinos",
+    "oznake_ceka_naslov": "POEN po ovoj potvrdi upisuje se kad ovaj član objavi ponudu koju Zaklada odobri, donira, postane pokrovitelj ili izvrši operativni doprinos.",
+    "oznake_ceka_opis": "Označeno je {broj} potvrda po kojima POEN još nije upisan — čeka se prvi doprinos onoga koga si potvrdio. Podsjeti ga da objavi ponudu; čim je Zaklada odobri, upisuje se i tebi i njemu."
   },
   "graf": {
     "naslov": "Mreža potvrda",

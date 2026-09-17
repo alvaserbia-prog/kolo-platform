@@ -62,6 +62,9 @@ export default async function VerifikacijaPage() {
           oznakaVerifikatora: true,
           podlezeNadzoru: true,
           nadzornikId: true,
+          // Da li je POEN po toj potvrdi upisan (dokaz stvarnosti čl. 7). Zabeležena
+          // potvrda se u spisku obeležava, da se vidi koga treba podsetiti.
+          poenStatus: true,
           verifikovani: { select: { id: true, pseudonim: true } },
         },
       },
@@ -109,12 +112,18 @@ export default async function VerifikacijaPage() {
     })
   );
 
-  const mojeOznake: VerifikovanaOsoba[] = user.verifikacijeKojeSamObavio.map((v) => ({
-    verifikacijaId: v.id,
-    korisnikId: v.verifikovani.id,
-    pseudonim: v.verifikovani.pseudonim,
-    oznaka: v.oznakaVerifikatora,
-  }));
+  // 🔴 Zabeležene potvrde idu NA VRH spiska. Ceo smisao obeležavanja je da se vidi
+  // koga treba podsetiti da objavi ponudu; da su razbacane po spisku, čovek bi ih
+  // tražio umesto da ih vidi.
+  const mojeOznake: VerifikovanaOsoba[] = user.verifikacijeKojeSamObavio
+    .map((v) => ({
+      verifikacijaId: v.id,
+      korisnikId: v.verifikovani.id,
+      pseudonim: v.verifikovani.pseudonim,
+      oznaka: v.oznakaVerifikatora,
+      cekaDoprinos: v.poenStatus === PotvrdaPoenStatus.ZABELEZEN,
+    }))
+    .sort((a, b) => Number(b.cekaDoprinos) - Number(a.cekaDoprinos));
 
   const podnaslov =
     user.tipKorisnika === TipKorisnika.NEVERIFIKOVAN

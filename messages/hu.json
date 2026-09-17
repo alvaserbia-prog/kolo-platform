@@ -447,7 +447,10 @@
     "ceka_moja": "{iznos} POEN vár rád — tedd közzé az első ajánlatodat vagy adományozz.",
     "ceka_dao": "Megerősítetted őt: {pseudonim} — {iznos} POEN akkor kerül bejegyzésre neked, amikor ő megteszi az első hozzájárulását.",
     "ceka_dugme_oglas": "Ajánlat közzététele",
-    "ceka_dugme_donacija": "Adományozás"
+    "ceka_dugme_donacija": "Adományozás",
+    "oznake_ceka": "első hozzájárulásra vár",
+    "oznake_ceka_naslov": "Az e megerősítés szerinti POEN akkor kerül bejegyzésre, amikor ez a tag közzétesz egy, az Alapítvány által jóváhagyott ajánlatot, adományoz, pártfogó lesz, vagy operatív hozzájárulást teljesít.",
+    "oznake_ceka_opis": "{broj} megerősítés van megjelölve, amelyeknél a POEN még nem került bejegyzésre — az általad megerősített személy első hozzájárulására várnak. Emlékeztesd, hogy tegyen közzé ajánlatot; amint az Alapítvány jóváhagyja, mindkettőtöknek bejegyzésre kerül."
   },
   "graf": {
     "naslov": "Megerősítési hálózat",
