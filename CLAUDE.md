@@ -202,6 +202,33 @@ Preview scope, oba sa istim `DATABASE_URL`; jedan je pao sa `db_unreachable`
 Migracija je već bila primenjena, pa šteta nije nastala, ali **grana i `main` se ne
 guraju u istoj minuti** — prvo jedno, pa kad build prođe, drugo.
 
+### 🔴 PALA migracija zaustavlja SVE naredne buildove — P3009 (2026-09-18)
+
+Drugo lice istog kvara, i gore od njega. Ako migracija **padne** usred izvršavanja,
+red u `_prisma_migrations` ostaje u stanju FAILED, a `prisma migrate deploy` od tog
+trenutka odbija **svaku** narednu migraciju sa **P3009**, bez obzira na to što sa njima
+nema nikakve veze. Build pada pre `npm run build`, dakle **ništa se ne objavljuje**.
+
+Desilo se 15.09.2026: `20260915120000_oglas_bez_kupovine` (R-07, preimenovanje
+`SOLD` → `RAZMENJEN`) pala je sa `"SOLD" is not an existing enum label` — preimenovanje
+je u test bazi već bilo sprovedeno. Posledica: **svih deset buildova naredna tri dana**,
+i na granama i na `main`, palo je sa P3009, a `kolo-peach.vercel.app` je sve vreme
+služio build od 15.09. Ekran je izgledao ispravno, pa se kvar video **samo iz pošte** i
+iz build log-a — `kolo-peach` „radi" ne znači da se išta objavljuje.
+
+🔴 **Pad ne popravlja nov fajl.** Blokada nije u SQL-u nego u FAILED redu; dok se on ne
+razreši, nova migracija se ne pokušava. Zato je ovo **jedini slučaj u kojem se postojeći
+fajl migracije sme prepraviti** (pravilo „izmena ide u NOV fajl" važi za **primenjene**
+migracije, koje `migrate deploy` tiho preskače — ova nije primenjena).
+
+**Postupak:** (1) pala migracija se prepravlja da bude **idempotentna** — svaka naredba
+pod `IF EXISTS` proverom, jer se posle pada **ne zna** koliko je od nje prošlo; (2) u
+`buildCommand` se privremeno ubaci `prisma migrate resolve --rolled-back <ime> || true`
+pre `migrate deploy`; `|| true` je obavezno, jer na okruženju gde migracija nije u
+FAILED stanju (produkcija, ili test posle popravke) `resolve` baca grešku i bez toga bi
+sam oborio build; (3) kad build prođe, taj korak se **uklanja istim danom** — ostavljen,
+on je tiha brana koja bi sledeći pad iste migracije progutala bez traga.
+
 ### Migracije se primenjuju AUTOMATSKI pri deploy-u
 `vercel.json` → `buildCommand`: `if [ -n "$DATABASE_URL" ]; then prisma migrate deploy; fi && npm run build`.
 - Migracije se primenjuju **same** na bazu okruženja preko Vercel `DATABASE_URL` (prod→prod, test→test). **Nema više ručnog `npx prisma migrate deploy`** posle deploy-a.

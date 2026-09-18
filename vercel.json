@@ -1,5 +1,5 @@
 {
-  "buildCommand": "if [ -n \"$DATABASE_URL\" ]; then prisma migrate deploy; fi && npm run build",
+  "buildCommand": "if [ -n \"$DATABASE_URL\" ]; then prisma migrate resolve --rolled-back 20260915120000_oglas_bez_kupovine || true; prisma migrate deploy; fi && npm run build",
   "build": {
     "env": {
       "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"
