@@ -153,6 +153,24 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
           </div>
         </div>
 
+        {/* Forma za prepis POEN-a stoji ODMAH ispod kartice sa stanjem, a iznad
+            redova sa zabeleženim doprinosom i potvrdama. Razlog je redosled
+            radnje: dugme je na kartici, pa obrazac mora da se otvori uz njega —
+            ranije je stajao ispod svih zabeleženih redova, pa se na dužem ekranu
+            klik nije video i delovalo je kao da dugme ne radi. Redovi ispod su
+            stanje koje se čita, obrazac je radnja koja se izvodi. */}
+        {showSend && (
+          <div className="mt-3">
+            <SendForma
+              onClose={() => setShowSend(false)}
+              onSuccess={() => { setShowSend(false); window.dispatchEvent(new Event("balans-updated")); router.refresh(); }}
+              initialPseudonim={platiPseudonim}
+              initialIznos={prefillIznos}
+              initialOpis={prefillOpis}
+            />
+          </div>
+        )}
+
         {/* Nadoknada (čl. 20b) stoji ISPOD kartice, kao zaseban red. Nije prikazana
             kao negativno stanje jer nije dug: Fondacija po njoj nema potraživanje i
             ne može je naplatiti. Razmena dobara i usluga se njome ne ograničava —
@@ -253,17 +271,6 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
           </p>
         )}
       </div>
-
-      {/* Forma za upis POEN-a */}
-      {showSend && (
-        <SendForma
-          onClose={() => setShowSend(false)}
-          onSuccess={() => { setShowSend(false); window.dispatchEvent(new Event("balans-updated")); router.refresh(); }}
-          initialPseudonim={platiPseudonim}
-          initialIznos={prefillIznos}
-          initialOpis={prefillOpis}
-        />
-      )}
 
       {/* QR modal */}
       {showQR && (
