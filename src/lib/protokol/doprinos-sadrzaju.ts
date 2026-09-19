@@ -57,9 +57,14 @@ export * from "@/lib/doprinos-pravila";
 // ─── Servisne funkcije ───────────────────────────────────────────────────────
 
 /**
- * Beleži doprinos povodom objavljenog oglasa. Idempotentno: jednokratnost kanala
- * po čoveku obezbeđuje jedinstveni indeks nad `userId`, ne kod — dve paralelne
- * objave ne mogu da zabeleže dva doprinosa.
+ * Beleži doprinos povodom oglasa. Zove se pri OBJAVI i pri IZMENI oglasa:
+ * potvrđenom članu se sadržinski minimum pri objavi ne proverava, pa oglas ispod
+ * minimuma prolazi bez doprinosa — a dopuna izmenom ga tada vraća u red čekanja.
+ * Isto važi posle odbijanja, gde obaveštenje korisniku to izričito i obećava.
+ *
+ * Idempotentno: jednokratnost kanala po čoveku obezbeđuje jedinstveni indeks nad
+ * `userId`, ne kod — ni dve paralelne objave, ni izmena oglasa čiji je doprinos
+ * već zabeležen ili evidentiran, ne mogu da zabeleže drugi doprinos.
  *
  * VERIFIKOVANOM korisniku doprinos se odmah i evidentira (čl. 40a st. 3): čekanje
  * postoji da prazan nalog ne naduva opticaj, a nalog čija je stvarnost potvrđena
