@@ -5,9 +5,40 @@ import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
 import Pseudonim from "@/components/Pseudonim";
 import UspehKartica from "@/components/UspehKartica";
+import { profilHref } from "@/lib/profil-link";
 import { jeNadoknada, iznosNadoknade, raspolozivo } from "@/lib/protokol/nadoknada";
+
+/**
+ * Spisak ljudi čiji se prvi doprinos čeka, uz zabeleženu potvrdu odnosno nadzor.
+ *
+ * Namerno LINKOVI na profil, a ne goli tekst: podsetiti čoveka znači otići kod njega,
+ * pa put do njega mora biti jedan klik — inače spisak samo imenuje problem. Adresa ide
+ * kroz `profilHref` (u interfejsu pseudonim, interni id u svemu što se čuva).
+ *
+ * 🔴 Ne prikazuje ni iznos po čoveku ni datum potvrde. Iznos stoji jednom, u redu
+ * iznad: po vezi je uvek isti (1.000 odn. 500), pa bi ponovljen uz svako ime samo
+ * sugerisao da se o njemu pregovara. Spisak odgovara na jedno pitanje — koga podsetiti.
+ */
+function SpisakCekanja({ ljudi }: { ljudi: { id: string; pseudonim: string }[] }) {
+  if (ljudi.length === 0) return null;
+  return (
+    <ul className="mt-1.5 flex flex-wrap gap-1.5">
+      {ljudi.map((o) => (
+        <li key={o.id}>
+          <Link
+            href={profilHref({ id: o.id, pseudonim: o.pseudonim })}
+            className="inline-block rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-sm text-amber-900 hover:bg-amber-100"
+          >
+            @<Pseudonim>{o.pseudonim}</Pseudonim>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 // qrcode.react se deli sa html5-qrcode u isti veliki chunk (~361KB). Učitava se
 // LENJO — QR se prikazuje tek kad korisnik otvori karticu za upis POEN-a, pa ne
@@ -47,6 +78,16 @@ interface Props {
   zabelezenePotvrdeTudje?: number;
   /** POEN za obavljen nadzor — takođe čeka tuđi prvi doprinos (čl. 7 st. 2). */
   zabelezenePotvrdeNadzor?: number;
+  /**
+   * Ljudi čiji se prvi doprinos čeka. Iznos sam po sebi ne kaže vlasniku naloga šta
+   * može da uradi: taj POEN otključava TUĐI potez, pa je jedina radnja koja mu stoji
+   * na raspolaganju da podseti baš tog čoveka.
+   *
+   * 🔴 Ne otvara nijedan nov podatak — ista imena već stoje na stranici Potvrde
+   * odnosno Nadzor; vidi ih isključivo vlasnik naloga (čl. 67).
+   */
+  cekamPotvrdjene?: { id: string; pseudonim: string }[];
+  cekamNadzorom?: { id: string; pseudonim: string }[];
   /** Rezervisano za kolektivnu nabavku. Nula = reda nema (odluka vlasnika). */
   rezervisanoNabavka?: number;
   /** Neverifikovani sme samo da prima — dugme za upis mu se ne prikazuje. */
@@ -59,7 +100,7 @@ interface Props {
   razlogZabrane?: "neverifikovan" | "ceka_roditelja";
 }
 
-export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis, zabelezenDoprinos = 0, zabelezenePotvrdeMoje = 0, zabelezenePotvrdeTudje = 0, zabelezenePotvrdeNadzor = 0, rezervisanoNabavka = 0, smeDaSalje = true, razlogZabrane = "neverifikovan", maloletan = false }: Props) {
+export default function NovcanikKartice({ balance, pseudonim, memberHash, platiPseudonim, prefillIznos, prefillOpis, zabelezenDoprinos = 0, zabelezenePotvrdeMoje = 0, zabelezenePotvrdeTudje = 0, zabelezenePotvrdeNadzor = 0, cekamPotvrdjene = [], cekamNadzorom = [], rezervisanoNabavka = 0, smeDaSalje = true, razlogZabrane = "neverifikovan", maloletan = false }: Props) {
   const locale = useLocale();
   const router = useRouter();
   const t = useTranslations("novcanik");
@@ -165,18 +206,24 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
               </p>
             )}
             {zabelezenePotvrdeTudje > 0 && (
-              <p className="text-sm text-kolo-muted mt-1">
-                {t("zabelezene_potvrde_tudje", {
-                  iznos: zabelezenePotvrdeTudje.toLocaleString(intlTag(locale)),
-                })}
-              </p>
+              <div className="mt-1">
+                <p className="text-sm text-kolo-muted">
+                  {t("zabelezene_potvrde_tudje", {
+                    iznos: zabelezenePotvrdeTudje.toLocaleString(intlTag(locale)),
+                  })}
+                </p>
+                <SpisakCekanja ljudi={cekamPotvrdjene} />
+              </div>
             )}
             {zabelezenePotvrdeNadzor > 0 && (
-              <p className="text-sm text-kolo-muted mt-1">
-                {t("zabelezene_potvrde_nadzor", {
-                  iznos: zabelezenePotvrdeNadzor.toLocaleString(intlTag(locale)),
-                })}
-              </p>
+              <div className="mt-1">
+                <p className="text-sm text-kolo-muted">
+                  {t("zabelezene_potvrde_nadzor", {
+                    iznos: zabelezenePotvrdeNadzor.toLocaleString(intlTag(locale)),
+                  })}
+                </p>
+                <SpisakCekanja ljudi={cekamNadzorom} />
+              </div>
             )}
             <p className="text-sm text-kolo-muted mt-1">{t("zabelezene_potvrde_opis")}</p>
           </div>

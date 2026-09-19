@@ -74,6 +74,11 @@ export default async function NovcanikPage({
         zabelezenePotvrdeMoje={maloletan ? 0 : zabelezenePotvrde.kaoPotvrdjeni}
         zabelezenePotvrdeTudje={maloletan ? 0 : zabelezenePotvrde.kaoPotvrdjivac}
         zabelezenePotvrdeNadzor={maloletan ? 0 : zabelezenePotvrde.kaoNadzornik}
+        // Spisak ljudi čiji se prvi doprinos čeka — bez njega iznos ne kaže šta
+        // vlasnik naloga može da uradi (POEN otključava TUĐI potez, pa je jedina
+        // radnja podsetiti baš tog čoveka).
+        cekamPotvrdjene={maloletan ? [] : zabelezenePotvrde.cekamPotvrdjene}
+        cekamNadzorom={maloletan ? [] : zabelezenePotvrde.cekamNadzorom}
         // Maloletni nalog ne učestvuje u nabavci (čl. 4), pa reda ni nema.
         rezervisanoNabavka={maloletan ? 0 : rezervisano}
         maloletan={maloletan}
