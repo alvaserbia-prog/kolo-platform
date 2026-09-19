@@ -326,7 +326,37 @@ export async function probajEvidentiratiPotvrde(verifikovaniId: string): Promise
   }
 }
 
-/** Zabeležen a neupisan POEN po potvrdama — prikazuje se u POEN ekranu (čl. 67). */
+/** Čovek čiji se prvi doprinos čeka. Ništa preko pseudonima — ekran ga samo imenuje. */
+export type CekaDoprinos = { id: string; pseudonim: string };
+
+/**
+ * Isti čovek ume da se pojavi u više veza: nadzornik sme da nadzire više potvrda istog
+ * korisnika. Iznos se i dalje broji PO VEZI (svaka nosi svojih 500) — dedupliranje je
+ * samo u spisku, jer spisak odgovara na pitanje koga podsetiti, a čovek se podseća
+ * jednom. Kod potvrda koje si dao duplikata nema (`@@unique[verifikatorId, verifikovaniId]`),
+ * ali ista funkcija pokriva oba slučaja da se razlika ne bi morala pamtiti.
+ */
+function razlicitiLjudi(veze: { verifikovani: CekaDoprinos }[]): CekaDoprinos[] {
+  const po = new Map<string, CekaDoprinos>();
+  for (const v of veze) po.set(v.verifikovani.id, v.verifikovani);
+  return [...po.values()].sort((a, b) => a.pseudonim.localeCompare(b.pseudonim, "sr"));
+}
+
+/**
+ * Zabeležen a neupisan POEN po potvrdama — prikazuje se u POEN ekranu (čl. 67).
+ *
+ * Uz iznose vraća i SPISAK ljudi čiji se prvi doprinos čeka. Iznos bez imena ne kaže
+ * vlasniku naloga šta može da uradi: taj POEN otključava TUĐI potez, pa je jedina
+ * radnja koja mu stoji na raspolaganju da podseti baš tog čoveka. Bez spiska broj
+ * stoji na ekranu kao nešto što se samo čeka, a čeka se nešto na šta se može uticati.
+ *
+ * 🔴 Ne otvara nijedan nov podatak: pseudonim onoga koga si potvrdio već stoji u tvom
+ * lancu (stranica Potvrde), a pseudonim iz nadzora u ekranu Nadzor. Vidi ga isključivo
+ * vlasnik naloga (čl. 67), kao i sam iznos.
+ *
+ * 🔴 Za sopstvene potvrde (`kaoPotvrdjeni`) spiska NEMA i ne treba mu: tu se čeka
+ * doprinos samog vlasnika naloga, pa je odgovor na „ko" uvek on.
+ */
 export async function dohvatiZabelezenePotvrde(userId: string): Promise<{
   /** Koliko POEN-a čeka kao potvrđenom (njegovih 1.000 po svakoj potvrdi). */
   kaoPotvrdjeni: number;
@@ -334,26 +364,36 @@ export async function dohvatiZabelezenePotvrde(userId: string): Promise<{
   kaoPotvrdjivac: number;
   /** Koliko POEN-a čeka kao nadzorniku — takođe TUĐI potez (čl. 7 st. 2). */
   kaoNadzornik: number;
+  /** Koga si potvrdio a njegov prvi doprinos se čeka. */
+  cekamPotvrdjene: CekaDoprinos[];
+  /** Čiju si potvrdu nadzirao a njegov prvi doprinos se čeka. */
+  cekamNadzorom: CekaDoprinos[];
 }> {
+  const izborOsobe = { verifikovani: { select: { id: true, pseudonim: true } } } as const;
   const [primljene, obavljene, nadzori] = await Promise.all([
     prisma.verifikacionaVeza.count({
       where: { verifikovaniId: userId, poenStatus: PotvrdaPoenStatus.ZABELEZEN },
     }),
-    prisma.verifikacionaVeza.count({
+    prisma.verifikacionaVeza.findMany({
       where: { verifikatorId: userId, poenStatus: PotvrdaPoenStatus.ZABELEZEN },
+      select: izborOsobe,
     }),
-    prisma.verifikacionaVeza.count({
+    prisma.verifikacionaVeza.findMany({
       where: {
         nadzornikId: userId,
         nadzoranAt: { not: null },
         nadzorPoenStatus: PotvrdaPoenStatus.ZABELEZEN,
       },
+      select: izborOsobe,
     }),
   ]);
   return {
     kaoPotvrdjeni: primljene * POEN_VERIFIKOVANI,
-    kaoPotvrdjivac: obavljene * POEN_VERIFIKATOR,
-    kaoNadzornik: nadzori * POEN_NADZORNIK,
+    // 🔴 Iznos ide po VEZI, ne po čoveku iz spiska — vidi `razlicitiLjudi`.
+    kaoPotvrdjivac: obavljene.length * POEN_VERIFIKATOR,
+    kaoNadzornik: nadzori.length * POEN_NADZORNIK,
+    cekamPotvrdjene: razlicitiLjudi(obavljene),
+    cekamNadzorom: razlicitiLjudi(nadzori),
   };
 }
 
