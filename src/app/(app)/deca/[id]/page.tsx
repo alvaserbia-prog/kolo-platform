@@ -6,6 +6,7 @@ import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
 import { beogradskiDan } from "@/lib/protokol/obracunski-dan";
 import { uzrast } from "@/lib/deca-pravila";
 import DeteProfil from "./DeteProfil";
+import { prepisiNaCekanju } from "@/lib/protokol/prepis-odobrenje";
 
 /**
  * Profil deteta viđen od roditelja (Pravilnik o Modulu Deca, čl. 9 i 10).
@@ -32,10 +33,13 @@ export default async function DetePage({ params }: { params: Promise<{ id: strin
       avatar: true,
       datumRodjenja: true,
       maloletan: true,
-      roditeljstvaKaoDete: { select: { roditeljId: true } },
+      roditeljstvaKaoDete: {
+        select: { roditeljId: true, izjavaAt: true, izjavaRokDo: true },
+      },
       deaktiviranAt: true,
       createdAt: true,
       dozvolaOdrasli: true,
+      email: true,
       wallet: { select: { balance: true } },
     },
   });
@@ -44,6 +48,9 @@ export default async function DetePage({ params }: { params: Promise<{ id: strin
   if (!dete || !dete.maloletan || !jeMoje || dete.deaktiviranAt) {
     notFound();
   }
+
+  const mojaVeza = dete.roditeljstvaKaoDete.find((r) => r.roditeljId === session.user.id);
+  const prepisi = await prepisiNaCekanju(dete.id);
 
   const oglasi = await prisma.marketplaceListing.findMany({
     where: { sellerId: dete.id, uklonjenAt: null, status: "ACTIVE" },
@@ -61,6 +68,16 @@ export default async function DetePage({ params }: { params: Promise<{ id: strin
         clanOd: dete.createdAt.toISOString(),
         balans: dete.wallet?.balance ?? 0,
         dozvolaOdrasli: dete.dozvolaOdrasli,
+        // Izjava iz čl. 6 st. 1 duguje se samo kad rok teče — a teče jedino kad je
+        // nalog u maloletni preveo administrator (svuda drugde izjava nastaje pri
+        // otvaranju odnosno preuzimanju naloga).
+        izjavaRokDo:
+          mojaVeza && !mojaVeza.izjavaAt && mojaVeza.izjavaRokDo
+            ? mojaVeza.izjavaRokDo.toISOString()
+            : null,
+        // Sama adresa se NE šalje u pretraživač — merodavno je samo da li postoji
+        // (čl. 7a: adresa služi detetu za povratak u nalog, ne roditelju za uvid).
+        imaSvojuAdresu: dete.email !== null,
       }}
       oglasi={oglasi.map((o) => ({
         id: o.id,
@@ -69,6 +86,7 @@ export default async function DetePage({ params }: { params: Promise<{ id: strin
         cenaTip: o.cenaTip,
         imaSliku: o.images.length > 0,
       }))}
+      prepisi={prepisi}
     />
   );
 }

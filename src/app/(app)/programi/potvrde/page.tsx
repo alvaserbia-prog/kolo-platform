@@ -13,7 +13,10 @@ export default async function PotvrdePage() {
   if (!session) redirect("/login");
 
   const potvrde = await prisma.programPotvrda.findMany({
-    where: { verifikatorId: session.user.id, status: "CEKA" },
+    // Zatečeni redovi iz vremena pre `zatvoriPostupakPotvrda`: prijava je
+    // odavno rešena, a zahtev je verifikatoru i dalje stajao u spisku i dalje
+    // mu pokazivao naziv programa. Filter po stanju prijave to gasi i za njih.
+    where: { verifikatorId: session.user.id, status: "CEKA", enrollment: { status: "PENDING" } },
     orderBy: { createdAt: "asc" },
     select: {
       id: true,

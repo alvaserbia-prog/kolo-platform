@@ -15,7 +15,7 @@ type Prijatelj = {
   korisnikId: string;
   pseudonim: string;
   avatar: string | null;
-  isplaceno: boolean;
+  evidentirano: boolean;
   /** Braća i sestre: prijateljstvo radi, samo ne nosi POEN (čl. 14b st. 4). */
   bezPoena: boolean;
   /** Čeka drugu stranu da postane aktivna — „500 na čekanju". */
@@ -108,7 +108,7 @@ export default function PrijateljiKlijent() {
    * kontakt. Tekst mora da kaže oboje.
    */
   async function raskini(p: Prijatelj) {
-    const pitanje = p.isplaceno
+    const pitanje = p.evidentirano
       ? t("raskid_potvrda_poen", { pseudonim: p.pseudonim })
       : t("raskid_potvrda", { pseudonim: p.pseudonim });
     if (!confirm(pitanje)) return;
@@ -137,7 +137,7 @@ export default function PrijateljiKlijent() {
    */
   function koSeCeka(p: Prijatelj): string {
     if (p.bezPoena) return t("oznaka_bez_poena");
-    if (p.isplaceno) return t("oznaka_isplaceno");
+    if (p.evidentirano) return t("oznaka_evidentirano");
     const jaKocim = mojeStanje !== "AKTIVNO";
     const onKoci = p.drugiStanje !== "AKTIVNO";
     if (jaKocim && onKoci) return t("oznaka_ceka_oboje");

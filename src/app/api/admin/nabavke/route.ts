@@ -44,7 +44,6 @@ export async function GET() {
       status: n.status,
       dobavljac: n.dobavljac,
       nabavnaCena: n.nabavnaCena ? Number(n.nabavnaCena) : null,
-      maloprodajna: n.maloprodajna,
       brojDelova: n.brojDelova,
       velicinaDela: n.velicinaDela,
       poenPoDelu: n.poenPoDelu,

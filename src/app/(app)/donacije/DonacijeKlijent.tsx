@@ -1,9 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 import { intlTag } from "@/lib/format";
 import { useTranslations, useLocale } from "next-intl";
 import IpsQrPlacanje from "./IpsQrPlacanje";
+import { MAX_KARTICNA_UPLATA_RSD } from "@/lib/donacija-pravila";
 
 interface Donacija {
   id: string;
@@ -13,6 +17,7 @@ interface Donacija {
   poenEmitted: number;
   status: "PENDING" | "CONFIRMED";
   javno: boolean;
+  imaUgovor: boolean;
   createdAt: string;
 }
 
@@ -20,6 +25,9 @@ interface JavnaDonacija {
   id: string;
   ime: string | null;
   anonimno: boolean;
+  /** 🔴 Kod anonimne donacije su oba `null` — ni pseudonim ni link (R-03, M-3c). */
+  pseudonim: string | null;
+  userId: string | null;
   amountRSD: number;
   level: number;
   poenEmitted: number;
@@ -40,6 +48,7 @@ interface DonacijeData {
   pozivNaBroj: string; // trajni broj člana za uplate, prikaz "42-15" (model 97)
   racun: string | null; // iz IPS konfiguracije (18 cifara) — null dok se račun ne otvori
   donacije: Donacija[];
+  listaZakljucana: boolean;
   listaDonacija: JavnaDonacija[];
   rangTabela: RangRed[];
 }
@@ -63,6 +72,9 @@ export default function DonacijeKlijent() {
   const [javno, setJavno] = useState(true);
   const [karticaLoading, setKarticaLoading] = useState(false);
   const [karticaGreska, setKarticaGreska] = useState<string | null>(null);
+  // Izjava o nepovratnosti (R-01, mera M-11) — traži se PRE naplate i snima se
+  // na zapis donacije kao dokaz u sporu po osporenoj kartičnoj transakciji.
+  const [nepovratnost, setNepovratnost] = useState(false);
   const [ishod, setIshod] = useState<"uspeh" | "neuspeh" | "greska" | null>(null);
   useEffect(() => {
     fetch("/api/donacije")
@@ -80,12 +92,20 @@ export default function DonacijeKlijent() {
       setKarticaGreska(t("karticno_min_iznos"));
       return;
     }
+    if (iznos > MAX_KARTICNA_UPLATA_RSD) {
+      setKarticaGreska(t("karticno_kapa", { max: MAX_KARTICNA_UPLATA_RSD.toLocaleString(intlTag(locale)) }));
+      return;
+    }
+    if (!nepovratnost) {
+      setKarticaGreska(t("karticno_nepovratnost_obavezna"));
+      return;
+    }
     setKarticaLoading(true);
     try {
       const r = await fetch("/api/donacije/placanje/zapocni", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ iznosRSD: iznos, javno }),
+        body: JSON.stringify({ iznosRSD: iznos, javno, nepovratnost: true }),
       });
       const j = await r.json();
       if (!r.ok) {
@@ -201,6 +221,7 @@ export default function DonacijeKlijent() {
               inputMode="numeric"
               min={100}
               step={100}
+              max={MAX_KARTICNA_UPLATA_RSD}
               value={iznosKartica}
               onChange={(e) => setIznosKartica(e.target.value)}
               placeholder={t("karticno_iznos_placeholder")}
@@ -216,7 +237,23 @@ export default function DonacijeKlijent() {
             {karticaLoading ? t("karticno_otvaram") : t("karticno_plati")}
           </button>
         </div>
+        <label className="flex items-start gap-2 text-xs text-kolo-muted cursor-pointer">
+          <input
+            type="checkbox"
+            checked={nepovratnost}
+            onChange={(e) => setNepovratnost(e.target.checked)}
+            className="mt-0.5"
+          />
+          <span>{t("karticno_nepovratnost")}</span>
+        </label>
+        <p className="text-xs text-kolo-muted">
+          {t("karticno_kapa_napomena", { max: MAX_KARTICNA_UPLATA_RSD.toLocaleString(intlTag(locale)) })}
+        </p>
         {karticaGreska && <p className="text-xs text-red-500">{karticaGreska}</p>}
+        {/* Čl. 3 Pravilnika o pokroviteljstvu i donacijama: doprinos se evidentira
+            isključivo onome čijim je sredstvima uplata izvršena. Kod kartice se
+            uplatilac ne vidi iz izvoda, pa izjavu daje sam donator. */}
+        <p className="text-xs text-kolo-muted">{t("karticno_sopstvena_kartica")}</p>
       </div>
 
       {/* Instrukcije za uplatu */}
@@ -368,6 +405,16 @@ export default function DonacijeKlijent() {
                       +{d.poenEmitted.toLocaleString(intlTag(locale))} {tc("poen")}
                     </p>
                   )}
+                  {/* Ugovor o donaciji (čl. 5b) — samo za zapise koji ga imaju;
+                      zatečene donacije su nastale pre uvođenja ugovora. */}
+                  {d.imaUgovor && (
+                    <a
+                      href={`/donacije/${d.id}/ugovor`}
+                      className="text-xs text-kolo-muted underline hover:text-kolo-text mt-1 inline-block"
+                    >
+                      {t("ugovor_link")}
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
@@ -379,7 +426,11 @@ export default function DonacijeKlijent() {
       <div>
         <h2 className="text-base font-semibold text-kolo-text mb-1">{t("lista_naslov")}</h2>
         <p className="text-xs text-kolo-muted mb-3">{t("lista_opis")}</p>
-        {data.listaDonacija.length === 0 ? (
+        {data.listaZakljucana ? (
+          <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 text-center text-sm text-kolo-muted">
+            {t("lista_zakljucana")}
+          </div>
+        ) : data.listaDonacija.length === 0 ? (
           <div className="bg-white rounded-2xl card-shadow border border-kolo-border p-6 text-center text-sm text-kolo-muted">
             {t("lista_prazno")}
           </div>
@@ -394,6 +445,14 @@ export default function DonacijeKlijent() {
                   <p className="text-sm font-medium text-kolo-text">
                     {d.anonimno ? t("lista_anoniman") : d.ime || t("lista_anoniman")}
                   </p>
+                  {!d.anonimno && d.pseudonim && (
+                    <Link
+                      href={profilHref({ id: d.userId ?? "", pseudonim: d.pseudonim })}
+                      className="text-xs text-kolo-green-700 hover:underline"
+                    >
+                      <Pseudonim>{d.pseudonim}</Pseudonim>
+                    </Link>
+                  )}
                   <p className="text-xs text-kolo-muted mt-0.5">
                     {new Date(d.createdAt).toLocaleDateString(intlTag(locale))} · {d.amountRSD.toLocaleString(intlTag(locale))} RSD
                   </p>

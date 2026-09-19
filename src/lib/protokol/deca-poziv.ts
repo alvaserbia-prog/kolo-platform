@@ -32,7 +32,14 @@ import { gdePseudonim, poljaPseudonima } from "@/lib/pseudonim";
 import { bazniUrl, emailLayout, esc, posaljiEmailRaw } from "@/lib/email";
 import { obavesti } from "@/lib/notifikacije";
 import { beogradskiDan } from "./obracunski-dan";
-import { DecaGreska, obrisiDecjiNalog, poljaDeteta } from "./deca";
+import {
+  DecaGreska,
+  javiPotvrdjivacima,
+  obrisiDecjiNalog,
+  otvoriPostupakPotvrde,
+  poljaDeteta,
+} from "./deca";
+import { generisiIzjavuRoditelja, generisiSaglasnostRoditelja } from "@/lib/deca-izjava";
 import { osveziPrijateljstvaDeteta } from "./prijateljstva";
 import {
   ROK_PREUZIMANJA_DANA,
@@ -45,6 +52,14 @@ import {
 
 /** Najviše dva roditelja po detetu (čl. 4b st. 6) — otac i majka, ista ovlašćenja. */
 export const MAX_RODITELJA = 2;
+
+/**
+ * Najviše poziva koji istovremeno čekaju na jednoj adresi (čl. 4a).
+ *
+ * Troje dece iz iste porodice na istu adresu je uobičajeno; više od toga na
+ * adresu koju niko nije potvrdio je slanje pošte tuđem čoveku.
+ */
+export const MAX_POZIVA_PO_ADRESI = 3;
 
 /** Šest cifara, bez vodeće nule koja se gubi pri prepisivanju. */
 function generisiKod(): string {
@@ -116,6 +131,26 @@ export type RegistracijaDetetaUlaz = {
 export async function registrujDete(ulaz: RegistracijaDetetaUlaz) {
   const email = ulaz.roditeljEmail.trim().toLowerCase();
   const sada = new Date();
+
+  // 🔴 Ograničenje po ADRESI, ne po IP-u. Adresa roditelja je podatak trećeg lica
+  // koji unosi neko drugi — bez ove brane se na tuđu adresu može otvoriti
+  // proizvoljno mnogo naloga i poslati isto toliko poruka, a IP se menja u jednom
+  // potezu. Brojimo pozive koji još čekaju: iskorišćen ili istekao poziv se ne
+  // broji, pa ograničenje nikoga ne zaključava trajno.
+  const naCekanju = await prisma.roditeljPoziv.count({
+    where: {
+      email,
+      iskoriscenAt: null,
+      brisanjeDo: { gt: sada },
+      dete: { deaktiviranAt: null, roditeljstvaKaoDete: { none: {} } },
+    },
+  });
+  if (naCekanju >= MAX_POZIVA_PO_ADRESI) {
+    throw new DecaGreska(
+      "Na ovu adresu već čeka previše poziva. Zamoli roditelja da preuzme ili obriše postojeći nalog.",
+      429
+    );
+  }
 
   const dete = await prisma.$transaction(async (tx) => {
     const kreirano = await tx.user.create({
@@ -263,7 +298,7 @@ async function poveziRoditelja(
   const [roditelj, dete] = await Promise.all([
     prisma.user.findUnique({
       where: { id: roditeljId },
-      select: { id: true, pseudonim: true, maloletan: true, status: true, deaktiviranAt: true },
+      select: { id: true, pseudonim: true, maloletan: true, status: true, deaktiviranAt: true, jezik: true },
     }),
     prisma.user.findUnique({
       where: { id: deteId },
@@ -300,11 +335,37 @@ async function poveziRoditelja(
     if (!dozvoljen.ok) throw new DecaGreska(dozvoljen.razlog, dozvoljen.status);
   }
 
+  const sada = new Date();
+  const datumZaIzjavu = dete.datumRodjenja ?? datumRodjenja!;
+  const godine = uzrast(datumZaIzjavu, beogradskiDan());
+  let potvrdjivaci: string[] = [];
+
   await prisma.$transaction(async (tx) => {
-    await tx.roditeljstvo.create({ data: { deteId: dete.id, roditeljId } });
+    // Preuzimanje je radnja kojom roditelj preuzima odgovornost za nalog, pa
+    // izjava iz čl. 6 st. 1 nastaje ODMAH i rok mu ne teče. Tekst se snima i
+    // posle toga se ne menja.
+    await tx.roditeljstvo.create({
+      data: {
+        deteId: dete.id,
+        roditeljId,
+        izjavaAt: sada,
+        izjavaTekst: generisiIzjavuRoditelja({ pseudonimDeteta: dete.pseudonim, godine }),
+        // Saglasnost na obradu podataka deteta (ZZPL čl. 16) — ODVOJENA od izjave
+        // iznad, iako se daje istim potezom. Vidi `deca-izjava.ts` (R-06).
+        saglasnostAt: sada,
+        saglasnostTekst: generisiSaglasnostRoditelja(
+          { pseudonimDeteta: dete.pseudonim },
+          roditelj.jezik ?? "sr",
+        ),
+      },
+    });
     if (!dete.datumRodjenja && datumRodjenja) {
       await tx.user.update({ where: { id: dete.id }, data: { datumRodjenja } });
     }
+    // 🔴 Postupak potvrde iz čl. 6 do seta 4.5.2 na ovom putu NIJE ni otvaran.
+    // Dete koje se registrovalo samo i drugi roditelj prolazili su bez ijedne
+    // provere — a to je upravo ulaz iza koga ne stoji niko dok roditelj ne dođe.
+    potvrdjivaci = await otvoriPostupakPotvrde(dete.id, roditeljId, sada, tx);
     // Poziv je odradio posao. Red OSTAJE — u njemu živi šestocifreni kod kojim
     // ulazi drugi roditelj (čl. 4b st. 6) — ali se obeleži kao iskorišćen, pa
     // noćni posao više ne broji ovaj nalog kao nepreuzet.
@@ -313,6 +374,8 @@ async function poveziRoditelja(
       data: { iskoriscenAt: new Date(), odbijenAt: null },
     });
   });
+
+  await javiPotvrdjivacima(potvrdjivaci, roditelj.pseudonim, godine);
 
   await obavesti(dete.id, {
     tip: "dete_preuzet_nalog",
@@ -414,6 +477,40 @@ export async function obrisiPoTokenu(token: string) {
   }
   if (poziv.tokenDo < new Date()) throw new DecaGreska("Link je istekao.", 410);
   return obrisiDecjiNalog(poziv.dete.id, poziv.dete.pseudonim, null, "Modul Deca, čl. 4b st. 4");
+}
+
+/**
+ * Maloletni korisnik sam briše nalog koji čeka preuzimanje (čl. 4a st. 6).
+ *
+ * 🔴 Do 4.4.8 je jedini izlaz iz naloga na čekanju držao RODITELJ — dugmetom iz
+ * poruke ili istekom roka od četrnaest dana. Dete koje se predomisli nije imalo
+ * nijedan način da povuče sopstvene podatke, a u tom razdoblju saglasnost
+ * roditelja još ne postoji, pa obrada stoji na legitimnom interesu — kod koga je
+ * pravo na prigovor najjača protivteža. Sada dete izlazi samo, bez posredovanja.
+ *
+ * Ide kroz `obrisiDecjiNalog`, isto što radi istek roka: nalog se briše zaista,
+ * zajedno sa zapisima o prijateljstvima, ne anonimizuje se kao punoletni nalog.
+ *
+ * 🔴 Radnja je dostupna ISKLJUČIVO u stanju „na čekanju". Po preuzimanju naloga
+ * odgovornost je na roditelju (čl. 10) i brisanje ide preko njegovog profila —
+ * inače bi dete jednim potezom obrisalo nalog koji roditelj nadzire.
+ */
+export async function obrisiSopstveniNalogNaCekanju(userId: string) {
+  const dete = await prisma.user.findUnique({
+    where: { id: userId },
+    select: {
+      pseudonim: true,
+      maloletan: true,
+      deaktiviranAt: true,
+      roditeljstvaKaoDete: { select: { roditeljId: true } },
+    },
+  });
+  if (!dete || dete.deaktiviranAt) throw new DecaGreska("Nalog nije pronađen.", 404);
+  if (!dete.maloletan) throw new DecaGreska("Radnja je namenjena maloletnom nalogu.", 403);
+  if (dete.roditeljstvaKaoDete.length > 0) {
+    throw new DecaGreska("Nalog je preuzet — briše ga roditelj sa profila deteta.", 409);
+  }
+  return obrisiDecjiNalog(userId, dete.pseudonim, null, "Modul Deca, čl. 4a st. 6");
 }
 
 // ── Primarni put: predlog veze pri registraciji roditelja ────────────────────

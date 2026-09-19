@@ -1,0 +1,323 @@
+# Procena uticaja na zaštitu podataka o ličnosti (DPIA)
+
+*u skladu sa čl. 54 Zakona o zaštiti podataka o ličnosti*
+
+*(„Sl. glasnik RS“, br. 87/2018)*
+
+*Klasifikacija: Interno*
+
+## 1. Opšti podaci
+
+| **Podaci o rukovaocu i dokumentu** |
+| --- |
+| **Rukovalac** | KOLO Fondacija |
+| **Matični broj / PIB** | 28836627 / 115840443 |
+| **Sedište** | Šetalište 16, 25000 Sombor, Republika Srbija |
+| **Email za zaštitu podataka** | privatnost@ekolo.rs |
+| **Lice za zaštitu podataka (DPO)** | Nije određeno (Politika privatnosti, član 1). Kontakt za zaštitu podataka: privatnost@ekolo.rs |
+| **Datum izrade** | 23.05.2026. (poslednja izmena 14.09.2026.) |
+| **Predmet procene** | KOLO sistem — Faza 1, aktivne radnje obrade br. 1–18, uključujući aktivirani Modul 3 (Socijalni programi sa verifikatorskom potvrdom), Nadzor integriteta sistema verifikacija, javnu listu donacija, nadzorni predmet, putanju doprinosa razmeni i **aktivirani Modul 4 — Deca (radnja br. 11)** |
+| **Povezani dokumenti** | Pravilnik o KOLO sistemu (v4.6.2), Politika privatnosti (v4.6.3), Registar radnji obrade (v4.6.3), Uslovi korišćenja (v4.6.3), Pravilnik o programima podrške (v4.6.1), Pravilnik o hijerarhiji akata (v4.4.6), Statut (v4.1), Whitepaper (v4.6.2) |
+| **Sledeća revizija** | Pri izmeni mehanizma potvrde socijalnih programa, pri izmeni pravila dečjeg prostora, ili najkasnije 12 meseci od poslednje izmene |
+
+Ova procena uticaja na zaštitu podataka o ličnosti (u daljem tekstu: DPIA) izrađuje se u skladu sa čl. 54 Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL). DPIA se zasniva na odredbama Glave IX Pravilnika o KOLO sistemu (čl. 60–67), Politici privatnosti KOLO platforme i Registru radnji obrade podataka o ličnosti.
+
+KOLO sistem po svojoj prirodi obrađuje lične podatke — graf verifikacija, evidenciju doprinosa, podatke o donacijama i, u kontekstu pojedinih modula, posebne kategorije podataka. Istovremeno, sistem počiva na principu minimizacije podataka kao jednom od četiri strukturna principa. Ova DPIA pokriva sve aktivne radnje obrade u Fazi 1 i identifikuje dodatne rizike koji nastaju aktiviranjem Modula 3 (Socijalni programi) i Modula 4 (Deca).
+
+## 2. Sistematski opis obrade
+
+## 2.1. Opis sistema
+
+KOLO sistem je platforma za evidenciju doprinosa zajedničkom dobru, zasnovana na principima pseudonimnosti, minimizacije podataka, transparentnosti evidencije i nepovratnosti donacija. Sistem funkciše kroz KOLO Protokol — tehničko sredstvo obrade koje automatski evidentira doprinose korisnika u jedinicama evidencije (POEN).
+
+KOLO Fondacija je rukovalac podataka u smislu ZZPL-a — određuje svrhe i sredstva obrade (čl. 2 st. 1 t. 8 ZZPL-a). Fondacija je rukovalac i kada ne čuva podatke korisnika fizički u sopstvenim bazama — pravno relevantan kriterijum je određivanje svrhe i sredstava obrade, ne fizičko skladištenje podataka. Ako Fondacija angažuje treća lica za održavanje infrastrukture, ta lica su obrađivači podataka u smislu ZZPL-a (čl. 45), na osnovu ugovora o obradi.
+
+## 2.2. Dizajnerske odluke za zaštitu podataka
+
+Zaštita podataka u sistemu zasnovana je na zaštiti po dizajnu i po podrazumevanoj vrednosti (čl. 50 ZZPL-a) i počiva na tri dizajnerske odluke:
+
+Prva dizajnerska odluka — pseudonimnost evidencije. Zapisi u evidenciji doprinosa vezani su za pseudonime, ne za lična imena korisnika. Ne postoji centralizovana tabela koja povezuje pseudonime sa ličnim identitetima korisnika. Pseudonimnost nije anonimnost — pseudonimizovani podaci ostaju lični podaci u smislu ZZPL-a jer se, uz dodatne informacije, mogu povezati sa identifikovanom osobom.
+
+Druga dizajnerska odluka — razdvajanje podataka. Fondacija ne čuva lične podatke korisnika platforme u sopstvenim bazama — svi podaci korisnika čuvaju se na infrastrukturi Protokola. Fondacija direktno čuva samo bankovnu dokumentaciju donacija i evidenciju o vezi između pravnog lica pokrovitelja i korisnika na čiji zapis se doprinos evidentira.
+
+Treća dizajnerska odluka — minimizacija podataka. Platforma prikuplja samo podatke neophodne za funkcionisanje sistema. Minimizacija podataka je strukturni princip KOLO sistema koji se ne može ukinuti nijednom upravljačkom odlukom.
+
+## 2.3. Pregled radnji obrade
+
+Sistem u Fazi 1 obuhvata osamnaest radnji obrade definisanih Registrom radnji obrade (v4.6.3). Sve radnje su aktivne. Radnja 18 obuhvata dokaz pristanka i dokaz zasnivanja ugovornog odnosa, uvedene ovom procenom. Radnja 17 obuhvata privatnu komunikaciju između korisnika, koja je do registra v4.5.1 bila obrađivana a nije bila zasebno popisana. Radnja 16 obuhvata predlog za nabavku i učešće u kolektivnoj nabavci, uvedene članovima 14a i 51a Pravilnika o KOLO sistemu. Modul 3 (Socijalni programi) aktiviran je ranijom verzijom ove procene; radnja 13 obuhvata javnu listu donacija, radnja 14 nadzorni predmet uveden Pravilnikom o dokazu stvarnosti 4.2.1, a radnja 15 putanju doprinosa razmeni uvedenu članom 40b Pravilnika o KOLO sistemu. **Radnja 11 (Modul 4 — Deca) aktivira se ovom procenom**, uz Pravilnik o učešću dece.
+
+| **Radnja** | **Naziv** | **Pravni osnov** | **Status** |
+| --- | --- | --- | --- |
+| Br. 1 | Registracija i upravljanje korisničkim nalogom | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2) | Aktivno |
+| Br. 2 | Dokaz stvarnosti (verifikacija korisnika) | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2) | Aktivno |
+| Br. 3 | Dobrovoljno uneti podaci | Pristanak korisnika (čl. 12 st. 1 t. 1) | Aktivno |
+| Br. 4 | Aktivnost korisnika i evidencija doprinosa | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2) | Aktivno |
+| Br. 5 | Donacije fizičkih lica | Zakonska obaveza (čl. 12 st. 1 t. 3) | Aktivno |
+| Br. 6 | Pokroviteljstvo pravnih lica | Legitimni interes (čl. 12 st. 1 t. 6) | Aktivno |
+| Br. 7 | Tehnički podaci i logovi | Legitimni interes (čl. 12 st. 1 t. 6) | Aktivno |
+| Br. 8 | Automatizovano odlučivanje | Izvršenje ugovornog odnosa / izričit pristanak | Aktivno |
+| Br. 9 | Podaci u oglasu neverifikovanog korisnika | Pristanak korisnika (čl. 12 st. 1 t. 1) | Aktivno |
+| Br. 10 | Posebne kategorije podataka (Modul 3 — Socijalni programi sa verifikatorskom potvrdom) | Izričit pristanak (čl. 17 st. 2 t. 1) | Aktivno |
+| Br. 11 | Podaci maloletnih lica (Modul 4 — Deca) | Pristanak roditelja (čl. 16); za adresu roditelja legitimni interes (čl. 12 st. 1 t. 6) | Aktivno |
+| Br. 12 | Nadzor integriteta sistema verifikacija | Legitimni interes (čl. 12 st. 1 t. 6) | Aktivno |
+| Br. 13 | Objavljivanje imena donatora u listi donacija (javna donacija) | Pristanak (čl. 12 st. 1 t. 1) | Aktivno |
+| Br. 14 | Nadzorni predmet (ishod nadzora verifikacije) | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2) | Aktivno |
+| Br. 15 | Upit povodom oglasa i putanja doprinosa razmeni | Izvršenje ugovornog odnosa (čl. 12 st. 1 t. 2) | Aktivno |
+
+Detaljne kategorije podataka, kategorije lica, primaoci, rokovi čuvanja i mere zaštite za svaku radnju obrade utvrđeni su Registrom radnji obrade (v4.6.3) koji se primenjuje zajedno sa ovom procenom.
+
+## 2.4. Tok podataka
+
+Podaci u KOLO sistemu prate sledeći tok:
+
+Korisnik se registruje na Platformi i unosi pseudonim, email adresu i lozinku. Lozinka se hashuje pre skladištenja. Korisnik može proći postupak dokaza stvarnosti (verifikacija zasnovana na neposrednom ličnom poznavanju verifikatora i verifikovanog), čime se u sistemu evidentira graf verifikacija u pseudonimnom obliku. Korisnik može dobrovoljno uneti dodatne podatke (ime i prezime, broj telefona) radi lakšeg korišćenja platforme.
+
+Aktivnost korisnika — donacije u dinarima, dostizanje pragova, operativni doprinos, verifikacija drugih korisnika — automatski se evidentira u Protokolu kroz emisiju POEN-a. Evidencija je pseudonimna i javna za verifikovane korisnike. Obračunski koeficijent koji određuje vrednost ZRNA izračunava se automatski deterministitičkom formulom.
+
+Fondacija direktno čuva bankovnu dokumentaciju donacija fizičkih lica i evidenciju pokroviteljstva pravnih lica. Ovi podaci se čuvaju odvojeno od podataka platforme.
+
+Tehnički podaci (IP adresa, podaci o uređaju, evidencija pristupa) prikupljaju se automatski radi bezbednosti platforme.
+
+Oglas neverifikovanog korisnika sadrži podatke o ponuđenom dobru ili usluzi (naslov, opis, kategorija, cena, mesto, fotografije) i, po izboru korisnika, broj telefona. Oglas je javno vidljiv; broj telefona dostupan je samo verifikovanim korisnicima.
+
+## 2.5. Primaoci i obrađivači
+
+Infrastrukturu Protokola održavaju sledeći obrađivači u smislu čl. 45 ZZPL-a, svi na osnovu ugovora o obradi: Vercel Inc. (hosting i isporuka aplikacije), Neon Inc. (baza podataka), Cloudflare, Inc. (skladište slika — servis Cloudflare R2; u bazu se upisuje samo URL slike), Resend, Inc. (dostava sistemskih email poruka) i Telegram Messenger Inc. (kanal upozorenja Fondaciji). Uz njih, po pristanku korisnika, Google Ireland Limited odnosno Google LLC obrađuje podatke o posećenosti. Bankovna dokumentacija donacija ostaje kod Fondacije i, po potrebi, kod revizora; kartično plaćanje donacije obrađuje poslovna banka Fondacije i njen posrednik za plaćanje na internetu, oba u Republici Srbiji.
+
+Vercel Inc. i Neon Inc. su društva iz SAD, ali se **aplikacija izvršava i baza podataka nalazi u Evropskoj uniji, u regionu Frankfurt**. Evropska unija obezbeđuje primereni nivo zaštite, pa za te podatke ne postoji prekogranični prenos u smislu čl. 65–69 ZZPL-a; ostaje mogućnost pristupa iz SAD u administrativne i tehničke svrhe. Prekogranični prenos stvarno se vrši za slike (Cloudflare R2), elektronsku poštu koju Platforma šalje (Resend), upozorenja Fondaciji (Telegram) i merenje posećenosti (Google), i uređuje se u skladu sa čl. 65–69 ZZPL-a i čl. 9 Politike privatnosti.
+
+## 3. Procena neophodnosti i srazmernosti
+
+Za svaku radnju obrade procenjuje se da li je obrada neophodna za postizanje svrhe i da li postoji manje invazivna alternativa.
+
+## 3.1. Radnje zasnovane na izvršenju ugovornog odnosa (br. 1, 2, 4, 15)
+
+Registracija (pseudonim, email, lozinka) je minimalan skup podataka neophodan za funkcionisanje sistema. Bez pseudonima nema evidencije; bez emaila nema komunikacije i oporavka naloga. Lozinka se čuva isključivo u hashovanom obliku. Dokaz stvarnosti (graf verifikacija, indeks stvarnosti) je neophodan za obezbeđivanje principa jedna osoba — jedan korisnik. Evidencija aktivnosti je suština funkcionisanja Protokola — bez nje sistem ne može da postoji. Pseudonimizacija smanjuje rizik, a alternativa (anonimizacija) bi onemogućila funkcionisanje. Zaključak: obrade su neophodne i srazmerne.
+
+## 3.2. Radnje zasnovane na pristanku (br. 3, 9)
+
+Dobrovoljno uneti podaci (ime, prezime, telefon) su fakultativni — korisnik ih unosi samo ako želi. Objava oglasa predstavlja pristanak, dat uz upozorenje da je oglas javno vidljiv. Pristanak je dobrovoljan i može se povući u svakom trenutku uklanjanjem oglasa, bez posledica po status. Zaključak: obrade su zasnovane na slobodnom pristanku i srazmerne su svrsi.
+
+## 3.3. Radnje zasnovane na zakonskoj obavezi (br. 5)
+
+Donacije fizičkih lica — Fondacija je po Zakonu o računovodstvu i poreskim propisima obavezna da čuva evidenciju o donacijama 10 godina. Identitet donatora obezbeđuje se kroz bankarski sistem (verifikovani bankovni računi), što je već postojeća infrastruktura. Manje invazivna alternativa ne postoji jer je zakon imperativ. Zaključak: obrada je neophodna i zakonski obavezna.
+
+## 3.4. Radnje zasnovane na legitimnom interesu (br. 6, 7, 12)
+
+Pokroviteljstvo pravnih lica — obrada je neophodna za evidenciju pokroviteljstva i zakonito finansijsko izveštavanje. Testiranje srazmernosti: interesi Fondacije pretežu jer su podaci ograničeni na minimum potreban za evidenciju, a korisnik je unapred obavešten. Tehnički podaci i logovi — obrada je neophodna za bezbednost platforme, sprrečavanje zloupotreba i detekciju neovlašćenog pristupa. Rok čuvanja je 12 meseci, što je srazmerno svrsi. Zaključak: legitimni interes je opravdan i srazmeran u oba slučaja.
+
+Nadzor integriteta sistema verifikacija (br. 12) — obrada je neophodna za sprečavanje zloupotrebe sistema dokaza stvarnosti (lažne i „farmovane" verifikacije, umnožavanje naloga), koja bi obezvredila evidenciju doprinosa i glasanje. Ne prikupljaju se novi podaci — obrada radi nad postojećim pseudonimnim podacima (graf verifikacija, metapodaci evidencije, indikatori aktivnosti). Sistem ne donosi automatske odluke u smislu čl. 38 ZZPL-a — samo označava naloge ili grupe za ljudski pregled, a meru donosi ovlašćeno lice. Testiranje srazmernosti: interes Fondacije i poštenih korisnika za integritet sistema preteže nad minimalnim zadiranjem, jer nema novih podataka, obrada je pseudonimna i bez automatskih odluka, uz pravo na prigovor. Zaključak: legitimni interes je opravdan i srazmeran.
+
+## 3.5. Automatizovano odlučivanje (br. 8)
+
+Emisija POEN-a, izračunavanje obračunskog koeficijenta i poništenje potvrde stvarnosti zbog neaktivnosti u postupku iz čl. 6 Pravilnika o učešću dece su automatizovane obrade koje mogu pravno ili značajno uticati na lice u smislu čl. 38 ZZPL-a. Poništenje je jedina od njih koja dira status lica: ono nastupa istekom roka, bez odluke organa Fondacije, a posledica mu je gubitak date potvrde i otpis POEN-a evidentiranog povodom nje, i kada zapis time pređe u negativnu vrednost. Zato uz njega stoje posebne garancije: obaveštenje svakom licu koje bi poništenjem bilo pogođeno pre isteka roka, izričito pravo prigovora o kome odlučuje čovek, i zapis koji poništenje ne označava kao utvrđenu neistinitu potvrdu. Fondacija obezbeđuje: deterministički definisanu javnu formulu za obračunski koeficijent, pravo korisnika na objašnjenje logike, pravo na ljudski uvid i pravo na prigovor. Javnost formule i deterministitički pristup smanjuju rizik proizvoljnosti. Zaključak: obrada je neophodna za funkcionisanje sistema, uz adekvatne garancije.
+
+## 4. Identifikacija i procena rizika po prava i slobode lica
+
+Rizici se procenjuju prema matrici verovatnoća × ozbiljnost, pri čemu se nivo rizika određuje kao: nizak (1–4), srednji (5–9) ili visok (10–16). Verovatnoća i ozbiljnost se ocenjuju na skali 1–4 (zanemarljiva, niska, srednja, visoka).
+
+| **Identifikovani rizik** | **Verovatnoća** | **Ozbiljnost** | **Nivo** | **Obrazloženje** |
+| --- | --- | --- | --- | --- |
+| R1 — Neovlašćen pristup infrastrukturi | 2 | 4 | 8 | Kompromitovanje servera bi izložilo pseudonimne podatke i email adrese. Mere: TLS, enkripcija u mirovanju, MFA za admin pristup, kontrola pristupa po principu minimalne neophodnosti. |
+| R2 — Reidentifikacija pseudonimizovanih podataka | 2 | 3 | 6 | Kombinovanje pseudonimne evidencije sa eksternim izvorima može dovesti do identifikacije. Uz to, prestankom statusa nalog se pseudonimizuje a ne anonimizuje: Fondacija zadržava interni identifikator, pa zadržani zapisi ostaju podaci o ličnosti i re-identifikacija je na njenoj strani moguća. Mere: ne postoji centralizovana tabela koja pseudonim povezuje sa imenom, razdvajanje identifikacionih i obračunskih podataka, ograničen pristup, mere iz tačke 5.14. |
+| R3 — Gubitak ili uništenje podataka | 1 | 3 | 3 | Kvar infrastrukture ili bezbednosni incident. Mere: bekap na geografski odvojene lokacije, redovno testiranje oporavka, šifrovanje bekapa. |
+| R4 — Zloupotreba grafa verifikacija | 2 | 2 | 4 | Mapiranje socijalnog grafa kroz analizu ko je koga verifikovao. Mere: pseudonimnost zapisa, anonimizacija veza po prestanku statusa, ograničen pristup. |
+| R5 — Javna vidljivost oglasa neverifikovanog korisnika | 2 | 2 | 4 | Oglas je javno vidljiv i indeksira se. Sadržaj bira korisnik; identifikujući podaci se ne traže. Mere: sadržinski minimum umesto ličnih podataka, broj telefona nije javan, najviše tri aktivna oglasa, uklanjanje u svakom trenutku. |
+| R6 — Greške u automatizovanom odlučivanju | 1 | 3 | 3 | Pogrešan obračun POEN-a može uticati na položaj korisnika. Automatsku posledicu po status ima i poništenje potvrde zbog neaktivnosti (čl. 6 Pravilnika o učešću dece). Mere: javna deterministička formula, pravo na objašnjenje i prigovor, ljudski uvid; kod poništenja potvrde još i obaveštenje svim pogođenima pre isteka roka i izričito pravo prigovora o kome odlučuje čovek. |
+| R7 — Neovlašćeno korišćenje tehničkih logova | 1 | 2 | 2 | Logovi sadrže IP adrese i podatke o uređaju. Mere: pristup ograničen na lice koje u Fondaciji odgovara za zaštitu podataka i administratore bezbednosti, rok čuvanja 12 meseci, TLS, zaštićen format. |
+| R8 — Prekogranični prenos podataka | 1 | 3 | 3 | Deo obrade se odvija van Republike Srbije. Mere, sve sprovedene: aplikacija i baza podataka se izvršavaju u Evropskoj uniji (region Frankfurt), koja obezbeđuje primereni nivo zaštite, pa najveći deo podataka uopšte ne izlazi iz tog kruga; u treću zemlju odlaze samo slike, elektronska pošta koju Platforma šalje, upozorenja Fondaciji i podaci o posećenosti; upozorenje Fondaciji ne sadrži podatke iz prijave na program podrške; podaci se prenose isključivo obrađivaču sa kojim je zaključen ugovor o obradi sa merama zaštite iz čl. 65 ZZPL-a; Fondacija čuva primerak svakog takvog ugovora i najmanje jednom godišnje proverava da li je na snazi i da li se spisak podobrađivača promenio. Vidi tačku 5.13. |
+| R9 — Povreda podataka o donacijama | 1 | 3 | 3 | Bankovna dokumentacija čuva se direktno u Fondaciji. Mere: fizička i logička zaštita, kontrola pristupa, razdvojeno čuvanje od podataka platforme. |
+| R10 — Narušavanje integriteta evidencije | 1 | 4 | 4 | Retroaktivna promena zapisa bi ugrozila zajedničko dobro. Mere: zero-sum invarijanta (zbir svih stanja jednak nuli) sa automatskom proverom, atomaran upis promena, vremensko označavanje zapisa, revizijski dnevnik administrativnih radnji i redovne provere konzistentnosti. |
+| R11 — Otkrivanje pripadnosti posebnoj kategoriji verifikatorima | 2 | 3 | 6 | U postupku potvrde socijalnog programa verifikatori podnosioca saznaju da se prijavio za određeni program, što može ukazati na posebnu kategoriju (npr. invaliditet, status roditelja). Verovatnoća se ovom procenom spušta sa 3 na 2: pojedinačno evidentiranje po programu izašlo je iz javnog pregleda evidencije, a opis zapisa više ne imenuje program, pa krug primalaca ponovo jeste ograničen na sopstvene verifikatore podnosioca — lica koja ga i inače lično poznaju. Ranija ocena od 3 počivala je upravo na tome što taj krug nije bio ograničen. Izostavlja se i sam iznos, jer se izvodi iz podataka na osnovu kojih je pravo utvrđeno (kod podrške starijima jednoznačno iz godine rođenja, kod podrške majkama iz broja i uzrasta dece) i odao bi ih i bez naziva. Težina ostaje 3 — reč je o posebnoj kategoriji. Mere: vidi tačku 5.6. |
+| R12 — Pogrešno označavanje poštenog korisnika u nadzoru integriteta | 2 | 2 | 4 | Sistem nadzora može pogrešno označiti pošten nalog ili zbijenu stvarnu zajednicu. Mere: sistem ne donosi automatske odluke (čl. 38 ZZPL-a) — samo označava za ljudski pregled; pravila prioritetizuju odsustvo stvarne aktivnosti („šupljinu"), a ne gustinu veza; mogućnost odbacivanja nalaza; pravo na prigovor; revizijski dnevnik; bez prikupljanja novih podataka. |
+| R13 — Deanonimizacija donatora kroz javnu listu donacija | 2 | 3 | 6 | Javno objavljivanje imena i prezimena donatora koji izabere javnu donaciju (uz evidentiranje POEN-a) omogućava povezivanje pseudonimnog zapisa donatora sa njegovim identitetom, čime se može deanonimizovati celokupna evidencija tog korisnika, pošto je donacija vezana za nalog/pseudonim. Svrha: transparentnost i javno priznanje doprinosa. Pravni osnov: pristanak (čl. 12 ZZPL). Kategorije podataka: ime i prezime, iznos i datum donacije, povezani pseudonim. Primaoci: verifikovani korisnici platforme. Mere: izbor je dobrovoljan i po pojedinačnoj donaciji; jasno upozorenje pre javne donacije; anonimna opcija bez POEN-a kao alternativa; pravilo se primenjuje samo ubuduće; ime se objavljuje isključivo u listi donacija, dostupnoj verifikovanim korisnicima, i ne unosi se u opis zapisa o evidentiranom POEN-u, koji je vidljiv širem krugu — do ove procene je taj opis nosio ime i prezime uplatioca i stizao svakom prijavljenom nalogu, uključujući one kojima je pseudonim strane inače maskiran; anonimna donacija ulazi u listu isključivo iznosom i datumom, bez imena, pseudonima i veze ka profilu. Ime ostaje uz zapis donacije i posle prestanka statusa korisnika (čl. 5a Pravilnika o pokroviteljstvu i donacijama), pa za tog korisnika povezivanje pseudonimne evidencije sa identitetom ostaje moguće i posle gašenja naloga; na tu posledicu se izričito upozorava pre svake javne donacije. |
+| R14 — Neosnovana sumnja zabeležena uz verifikaciju | 2 | 2 | 4 | Nadzornik može evidentirati ishod „za proveru" ili „sporno" bez stvarnog osnova, čime uz verifikaciju ostaje zapis sumnje o dvoje ljudi. Mere: zatvoren šifarnik razloga (slobodan tekst samo uz „ostalo"); nadzor ne može da obavlja učesnik verifikacije; predmet ne proizvodi dejstvo prema korisniku i vidi ga samo Upravni odbor; predmet zatvoren bez osnova briše se po isteku 90 dana bez zahteva lica; revizijski dnevnik; pravo na prigovor po čl. 37 ZZPL-a. |
+
+| R16 — Obrada podataka deteta pre pribavljenog pristanka i graf prijateljstava | 2 | 4 | 8 | Maloletno lice može otvoriti nalog samo, pa se do preuzimanja naloga pseudonim, podaci za pristup nalogu, adresa roditelja i zapisi o prijateljstvima sklopljenim u tom razdoblju obrađuju pre pristanka, po osnovu legitimnog interesa; graf prijateljstava uz to pokazuje krug poznanstava deteta, a POEN evidentiran po tom grafu je javno merljiv u agregatu. Mere: u razdoblju pre pristanka obim je sveden na ono što je neophodno za uspostavljanje kontakta sa roditeljem; Pričaonica, oglasi, komunikacija sa punoletnim licima i evidentiranje POEN-a su u tom razdoblju zatvoreni, pa maloletni korisnik nije izložen punoletnim licima; prijateljstva sklopljena u tom razdoblju nisu javna i po njima se doprinos ne evidentira; maloletni korisnik može sam obrisati nalog u svakom trenutku; brisanje po isteku četrnaest dana bez zahteva lica, zajedno sa zapisima o prijateljstvima; u poruci roditelju samo pseudonim; dve radnje za prekid obrade bez prijave; pun pristup tek kada roditelja potvrdi treće lice u lancu potvrda; graf prijateljstava nije javan i roditelj ga vidi bez sadržaja razgovora; pravo na prigovor po čl. 37 ZZPL-a. Vidi tačku 5.11. Navođenje škole spaja pseudonim sa mestom koje maloletni korisnik pohađa; zato se pripadnost školi objavljuje samo zbirno, a pojedinačni pregled maloletnih korisnika jedne škole dostupan je isključivo maloletnom korisniku te iste škole čiji je nalog aktivan — punoletnom korisniku, neprijavljenom licu i nalogu koji čeka preuzimanje se ne prikazuje, čime se uklanja put kojim je punoletno lice moglo da se predstavi kao maloletni korisnik i pribavi pregled sa pseudonimima i iznosima. Transakcija u kojoj je bilo koja strana maloletni korisnik ne prikazuje se u pregledu evidencije nijednom posmatraču. |
+
+| R15 — Praćenje ponašanja korisnika kroz brojač putanje | 2 | 2 | 4 | Putanja doprinosa razmeni očitava sa kim je korisnik razmenio POEN, u kom iznosu i ko mu se javio povodom oglasa. Skup tih podataka pokazuje krug ljudi sa kojima korisnik posluje, i to izvan onoga što je potrebno za samu razmenu. Mere: ne prikupljaju se novi podaci osim činjenice upita (bez sadržaja poruke); napredak na putanji vidi isključivo sam korisnik i nije javan (čl. 67 Pravilnika); podaci se ne koriste za profilisanje, preporuke ni oglašavanje; zapis o upitu briše se sa oglasom; nema automatizovanog odlučivanja u smislu čl. 38 ZZPL-a — evidentiranje je primena javno objavljenih pravila i ne dira status korisnika; pravo na prigovor po čl. 37 ZZPL-a. |
+
+| R18 — Obrada bez dokazivog pristanka odnosno bez dokaza o zasnivanju ugovornog odnosa | 1 | 3 | 3 | Rukovalac je dužan da bude u stanju da dokaže da je lice dalo pristanak (čl. 15 st. 1 ZZPL-a). Do ove procene takav zapis nije postojao ni za jednu obradu zasnovanu na pristanku, niti je postojao dokaz da je zasnovan ugovorni odnos na kome počiva većina ostalih obrada. Verovatnoća se ovom procenom ocenjuje kao niska jer je zapis uveden i nalog se bez njega ne otvara; težina ostaje 3, jer bi u slučaju spora izostanak dokaza pogodio pravni osnov obrade u celini. Mere: vidi tačku 5.15. Preostali rizik nosi zatečeni krug korisnika, čiji nalozi su otvoreni pre uvođenja zapisa — za njih se prihvatanje može zabeležiti isključivo ubuduće, pri ponovnom traženju saglasnosti u smislu čl. 16 ove politike. |
+| R17 — Objava reda i podataka o učešću u nabavci | 1 | 3 | 3 | Utvrđivanje reda po broju POEN-a i objava spiska onih koji su preuzeli deo pokazuju relativan položaj korisnika u evidenciji doprinosa i njegovo učešće u raspodeli. Mere: predlog sadrži samo naziv dobra, bez količine, cene i obrazloženja; registar predloga objavljuje se zbirno, bez pseudonima; broj POEN-a se ne objavljuje uz spisak preuzimalaca; dobavljaču se dostavlja isključivo spisak kodova za preuzimanje, bez pseudonima i drugih podataka; ne prikupljaju se dokazi o statusu, delatnosti ni imovini; broj POEN-a se ne prikuplja iznova nego očitava iz radnje br. 4; utvrđivanje reda je primena javno objavljenih pravila i ne dira status korisnika, pa nema automatizovanog odlučivanja u smislu čl. 38 ZZPL-a; pravo na prigovor po čl. 37 ZZPL-a i po članu 30 Pravilnika, o kome odlučuje čovek. Vidi tačku 5.12. |
+*Skala boja: zeleno = nizak rizik (1–4), žuto = srednji rizik (5–9), crveno = visok rizik (10–16). Nema identifikovanih visokih rizika u aktuelnoj konfiguraciji sistema.*
+
+## 5. Mere za umanjenje rizika
+
+## 5.1. Tehničke mere
+
+Pseudonimizacija evidencije — zapisi su vezani za pseudonime, bez centralizovane evidencije koja povezuje pseudonim sa stvarnim identitetom (ime i prezime, JMBG). Razdvajanje podataka — identifikacioni podaci (pseudonim, email) vode se u zasebnoj evidenciji od obračunskih podataka (evidencija doprinosa, POEN stanja). Šifrovanje podataka u prenosu — TLS enkripcija minimalno verzija 1.2 za svu komunikaciju. Šifrovanje podataka u mirovanju — enkripcija na nivou hosting infrastrukture. Integritet evidencije — zero-sum invarijanta (zbir svih stanja jednak nuli) sa automatskom proverom, atomaran upis i vremensko označavanje zapisa; odstupanja su vidljiva i predmet su provere. Hashiranje lozinki — lozinke se čuvaju isključivo u hashovanom obliku. Revizijski dnevnik — administrativne radnje i započinjanje razgovora povodom oglasa beleže se u revizijskom dnevniku.
+
+## 5.2. Organizacione mere
+
+Kontrola pristupa po principu minimalne neophodnosti — svaki korisnik, administrator i proces ima pristup samo neophodnim podacima (čl. 51 st. 2 ZZPL-a). Višefaktorska autentifikacija za administrativni pristup infrastrukturi. Obaveza čuvanja poverljivosti za sva lica sa pristupom podacima. Redovna obuka zaposlenih i saradnika o zaštiti podataka. Redovne bezbednosne provere i penetraciono testiranje sistema. Definisana procedura za upravljanje bezbednosnim incidentima sa obaveštavanjem Poverenika u roku od 72 sata (čl. 52 ZZPL-a).
+
+## 5.3. Mere specifične za oglas neverifikovanog korisnika
+
+Minimizacija po dizajnu — za objavu se traži sadržinski minimum o DOBRU ili USLUZI (fotografija, opis, kategorija, mesto), a ne o osobi; fotografija lica, ime i prezime nisu traženi ni potrebni. Broj telefona nije javan — dostupan je isključivo verifikovanim korisnicima. Vidljiva oznaka da oglašivač nije verifikovan — štiti drugu stranu u razmeni. Ograničenje na tri aktivna oglasa po neverifikovanom korisniku. Uklanjanje oglasa u svakom trenutku, čime se povlači i pristanak, bez pisanog zahteva.
+
+*Napomena o izmeni.* Ovom verzijom ukinuta je ranija tabla zahteva za jemstvo i sa njom obrada „kartica prepoznavanja" (ime, prezime, godište, mesto, nadimak, opis zanimanja, broj telefona i saglasnost za pozivanje) — najosetljivija obrada ličnih podataka koju je sistem imao. Svi podaci prikupljeni tim putem su obrisani. Izmena skida obradu; rizik R5 time pada sa 6 na 4.
+
+## 5.4. Mere za automatizovano odlučivanje
+
+Deterministitički definisana javna formula za obračunski koeficijent — svaki korisnik može da proveri logiku obračuna. Pravo korisnika na objašnjenje logike obrade. Pravo na ljudski uvid — korisnik može zahtevati da odluka bude preispitana od strane ovlašćenog lica. Pravo na prigovor u skladu sa čl. 38 ZZPL-a. Za poništenje potvrde stvarnosti zbog neaktivnosti prigovor je posebno predviđen kao vrsta prigovora na odluku, a pre isteka roka obaveštava se svako lice koje bi poništenjem bilo pogođeno.
+
+## 5.5. Mere za bekap i oporavak
+
+Podaci se redovno bekapuju na geografski odvojene lokacije. Bekap uključuje evidenciju protokola, identifikacione podatke i konfiguraciju sistema. Procedure oporavka se redovno testiraju. Bekap podaci podležu istim merama zaštite kao primarni podaci — šifrovanje, kontrola pristupa, evidencija pristupa.
+
+## 5.6. Mere za socijalne programe (Modul 3 — verifikatorska potvrda)
+
+Izričit pristanak — prijava na program i traženje potvrde od verifikatora pokreću se isključivo uz izričit pristanak podnosioca. Pristanak se traži pre nego što se od bilo koga zatraži potvrda i izričito imenuje: koliko će lica biti zamoljeno; da ta lica saznaju o kom je programu reč i da im to može otkriti pripadnost posebnoj kategoriji; i da se pojedinačno evidentiranje POEN-a po programu ne objavljuje, nego se objavljuje dnevni zbir po programu, bez imena i pseudonima korisnika. Minimizacija prema verifikatorima — verifikatorima se ne prikazuje sadržaj prijave (datumi rođenja dece, rešenje o invaliditetu, starosna dob); oni potvrđuju isključivo na osnovu ličnog poznavanja podnosioca. Ograničen krug primalaca u postupku — zahtev za potvrdu prima samo sopstvena mreža verifikatora podnosioca (lica koja ga već lično poznaju), ne i šira zajednica. Posebne kategorije samo kod obrađivača prijave — uneti podaci dostupni su isključivo licu koje obrađuje prijavu u Fondaciji, koje je jedino i ovlašćeno da o prijavi odluči. Bez spoljnih kanala — obaveštenje o zahtevu za potvrdu prikazuje se isključivo unutar platforme; poruka koju platforma šalje elektronskom poštom ili na uređaj korisnika ne sadrži ni naziv programa ni pseudonim podnosioca. Tvrda blokada i odgovornost — prijava se ne odobrava dok svi verifikatori ne potvrde pod punom odgovornošću; odbijanje zahteva obrazloženje. Povlačenje pristanka — sprovedeno kao radnja dostupna korisniku uz sam program, u svakom trenutku i bez navođenja razloga; povlačenjem se postupak prekida, evidentiranje prestaje, a uneti podaci se brišu. Brisanje unetih podataka pri prestanku prijave — podaci uneti u prijavu brišu se i kada je prijava odbijena, obustavljena pri reviziji statusa ili kada prestane svojstvo korisnika; ponovna prijava traži ponovan unos i ponovnu potvrdu svih verifikatora. Zatvaranje postupka — po okončanju postupka zahtevi za potvrdu i obaveštenja o njima uklanjaju se iz naloga verifikatora. Dokaz statusa invaliditeta je rešenje nadležnog organa — ne prikupljaju se medicinska dokumentacija ni dijagnoza (minimizacija posebnih kategorija).
+
+Izostavljanje pojedinačnog zapisa iz javnog pregleda — pojedinačno evidentiranje doprinosa po socijalnom programu ne prikazuje se u pregledu evidencije i opis zapisa ne imenuje program. Umesto pojedinačnih zapisa objavljuje se dnevni zbir po programu (broj korisnika i ukupan iznos), a dan u kome je u jednom programu doprinos evidentiran samo jednom korisniku ne objavljuje se, jer bi zbir tada bio jednak pojedinačnom iznosu. Izostavlja se i sam iznos, ne samo naziv: iznos se izvodi iz podataka na osnovu kojih je pravo utvrđeno — kod podrške starijima jednoznačno iz godine rođenja korisnika, kod podrške majkama iz broja dece i njihovog uzrasta — pa bi objavljen pojedinačan iznos odao posebnu kategoriju i bez ijedne reči uz njega. Proverljivost evidencije time nije umanjena: zbir objavljenih dnevnih iznosa zajedno sa ostalim kanalima daje promenu ukupnog broja evidentiranih POEN-a, koji je javan. Razlaganje po programu dostupno je samom korisniku, uz program, i Fondaciji.
+
+Saglasnost roditelja za podatak o detetu — kod podrške majkama obrađuje se datum rođenja deteta koje samo nije korisnik Platforme. Pravni osnov je saglasnost roditelja odnosno zakonskog zastupnika (čl. 16 ZZPL-a), koju daje sam podnosilac prijave; obrađuje se isključivo datum rođenja, bez imena deteta i bez drugog podatka o njemu, a briše se kada prijava prestane da važi.
+
+Prihvaćena posledica — pripadnost programu ostaje poznata sopstvenim verifikatorima podnosioca i posle prestanka prijave. To se ne može ukloniti a da se ne ukine sam mehanizam potvrde, koji štiti integritet programa od neistinitih prijava. Umanjenje je u tome što se pristanak daje pošto je ta posledica izričito saopštena, zajedno sa jedinom alternativom — da se korisnik na program ne prijavi.
+
+## 5.7. Mere za nadzor integriteta verifikacija
+
+Bez prikupljanja novih podataka — nadzor radi isključivo nad podacima koji se već zakonito obrađuju (graf verifikacija, metapodaci evidencije POEN-a, indikatori aktivnosti), u pseudonimnom obliku. Bez automatskog odlučivanja — sistem ne preduzima nijednu radnju nad nalogom; isključivo označava naloge ili grupe i numerički skor rizika za pregled, a svaku meru donosi ovlašćeno lice (superadministrator). Težina na šupljini, ne na gustini — pravila prioritetizuju odsustvo stvarne aktivnosti, kako zbijena stvarna zajednica ne bi bila pogrešno tretirana kao zloupotreba. Mogućnost odbacivanja — pregledač može označiti nalaz kao neosnovan, čime se nalog određeno vreme ne re-obeležava. Pravo na prigovor — korisnik može osporiti meru u skladu sa čl. 37 ZZPL-a. Revizijski dnevnik — sve radnje povodom nalaza beleže se u revizijskom dnevniku. Ograničen pristup — nalazi su dostupni isključivo superadministratorima; kanal upozorenja sadrži samo zbirne brojeve, bez ličnih podataka. Rok čuvanja — rešeni nalazi čuvaju se najduže 12 meseci, potom se brišu.
+
+## 5.9. Mere za nadzorni predmet
+
+Bez novih podataka od korisnika — predmet nastaje iz procene nadzornika nad zapisom koji se već zakonito obrađuje. Zatvoren šifarnik — razlog se bira sa unapred utvrđene liste, a slobodan tekst je moguć samo uz razlog „ostalo", čime se sprečava upisivanje proizvoljnih zapažanja o čoveku. Bez sukoba interesa — nadzor ne može da obavlja onaj ko je u verifikaciji učestvovao, ni sa jedne strane, niti isti nadzornik dvaput nad istim zapisom. Bez odlučivanja — predmet je evidencija, ne organ; lažnu verifikaciju utvrđuje isključivo Upravni odbor, pa nema automatizovanog odlučivanja u smislu čl. 38 ZZPL-a. Uzak krug primalaca — predmet vidi samo superadministrator; verifikator i verifikovani ga ne vide. Brisanje po roku — sumnja koja se nije potvrdila briše se 90 dana po zatvaranju predmeta, automatski i bez zahteva lica. Revizijski dnevnik — otvaranje i svako rešavanje predmeta beleže se. Pravo na prigovor — čl. 37 ZZPL-a i prigovor na odluku po Uslovima korišćenja.
+
+## 5.10. Mere za putanju doprinosa razmeni
+
+Minimizacija — jedini nov podatak je činjenica upita (koji korisnik se javio i povodom kog oglasa); sadržaj poruka se u ovu svrhu ne obrađuje, a ponovljeno javljanje istom oglasu ne stvara nov zapis. Bez novog prikupljanja — ostalo se očitava iz podataka koji se već zakonito obrađuju: zapisa o ažuriranju evidencije POEN-a (radnja br. 4) i grafa verifikacija (radnja br. 2). Uska svrha — podaci se koriste isključivo za utvrđivanje pređenih koraka; ne koriste se za profilisanje, preporuke, rangiranje ni oglašavanje. Nejavnost — napredak na putanji vidi samo sam korisnik (čl. 67 Pravilnika); ne ulazi u javne agregate ni u prikaz drugim korisnicima. Bez odlučivanja — evidentiranje je primena javno objavljenih pravila i ne proizvodi posledice po status korisnika, pa nema automatizovanog odlučivanja u smislu čl. 38 ZZPL-a. Brisanje — zapis o upitu briše se sa oglasom na koji se odnosi. Pravo na prigovor — čl. 37 ZZPL-a.
+
+## 5.11. Mere za dečji prostor (Modul 4 — Deca)
+
+**Minimizacija u razdoblju pre pristanka** — do preuzimanja naloga od roditelja obrađuju se pseudonim, podaci neophodni za pristup nalogu, elektronska adresa roditelja i zapisi o prijateljstvima sklopljenim u tom razdoblju; datum rođenja se ne traži od deteta nego ga upisuje roditelj, i posle upisa se ne menja. **Zatvorene funkcije u tom razdoblju** — Pričaonica, oglasi, komunikacija sa punoletnim licima i evidentiranje POEN-a nisu dostupni dok nalog nije preuzet, pa maloletni korisnik u tom razdoblju nije izložen punoletnim licima; prijateljstvo sklapa isključivo skeniranjem koda uživo, sa drugim maloletnim korisnikom. **Sopstveni izlaz maloletnog korisnika** — maloletni korisnik čiji nalog čeka preuzimanje može ga sam obrisati u svakom trenutku, bez posredovanja roditelja i bez obraćanja Fondaciji. **Rok kao mera** — nalog koji niko ne preuzme u roku od četrnaest dana briše se bez zahteva lica. **Bez identifikujućih podataka u poruci trećem licu** — u pozivu roditelju stoji samo pseudonim, nikad ime, jer tačnost adrese nije proverena. **Dva izlaza bez prijave** — primalac poruke može izjaviti da nije roditelj tog deteta i može obrisati nalog. **Posredna ali stvarna provera identiteta roditelja** — pun pristup i evidentiranje doprinosa otvaraju se tek kada roditelj postane verifikovan korisnik kroz lanac potvrda. **Sužen uvid roditelja** — razgovori između maloletnih korisnika se ne prikazuju roditelju; prikazuju se prijateljstva sa datumima i razgovori bez sadržaja. **Obaveštavanje punoletnog sagovornika** — u razgovoru sa maloletnim korisnikom punoletnom korisniku se prikazuje da razgovor čita roditelj. **Filtriranje dečje Pričaonice grafom prijateljstava** — maloletni korisnik vidi poruke svojih prijatelja, a odgovor sa navođenjem tuđe poruke nije podržan da se filter ne bi zaobišao. **Nejavnost grafa** — prijateljstva nisu javna i ne ulaze u javne agregate. **Bez automatizovanog odlučivanja** — evidentiranje doprinosa je primena javno objavljenih pravila i ne dira status korisnika (čl. 38 ZZPL-a). **Zatvoren profil maloletnog korisnika** — punoletnim korisnicima se umesto profila prikazuje obaveštenje sa pseudonimom roditelja; saglasnost roditelja profil ne otvara, nego uređuje komunikaciju i razmenu. **Zbirnost pregleda po školama** — javno se objavljuju samo brojevi i udeli, bez podataka o ličnosti; pojedinačni pregled jedne škole dostupan je prijavljenim korisnicima i sa njega se ne pristupa profilu. **Bez istorije izbora škole** — čuva se samo tekuća vrednost i trenutak poslednje izmene, uz rok od trideset dana između dve promene. **Potvrda sopstvene elektronske adrese** — adresa koju navede maloletni korisnik upisuje se tek pošto je potvrdi otvaranjem veze poslate na tu adresu; omaška u kucanju time ne predaje pristup nalogu trećem licu. **Svrha uža od kanala** — na adresu maloletnog korisnika se ne šalju obaveštenja; ona služi samo postavljanju nove lozinke. **Izlaz i bez adrese** — kada maloletni korisnik nema sopstvenu adresu, novu lozinku postavlja roditelj, uz obaveštenje maloletnom korisniku, pa zaboravljena lozinka ne znači gubitak naloga. **Procena srazmernosti za obradu po legitimnom interesu** — obrada elektronske adrese roditelja i podataka maloletnog korisnika u razdoblju do preuzimanja naloga zasniva se na legitimnom interesu (čl. 12 st. 1 t. 6 ZZPL-a). Interes je pribavljanje saglasnosti koju zakon traži: bez kontakta sa roditeljem saglasnost se ne može ni zatražiti, pa se bez ove obrade maloletnom licu ne može omogućiti zakonit pristup. Obrada je neophodna jer blažeg sredstva nema — adresa roditelja je jedini podatak kojim maloletno lice raspolaže, a bez zapisa o samom nalogu poziv se ne bi mogao vezati ni za koga. Interesi i prava maloletnog lica pretegli su gde su mogli: obim je sveden na neophodno, razdoblje je ograničeno na četrnaest dana, funkcije koje bi maloletnog korisnika izložile punoletnim licima su zatvorene, poruka roditelju sadrži samo pseudonim, primalac poruke ima dva izlaza bez prijave, a maloletni korisnik sopstveni izlaz. Očekivanja lica na koje se podaci odnose poštovana su time što obradu pokreće samo maloletno lice, unosom adrese svog roditelja, i što je jedini ishod obrade poruka tom roditelju. **Prihvaćena posledica brisanja bez prijave** — nalog se po pozivu može obrisati bez prijave na sistem, na osnovu jednokratnog ovlašćenja iz poruke, pa onaj ko poruku drži može obrisati nalog i kada nije roditelj tog deteta. Posledica je prihvaćena: alternativa je da nalog i dalje koristi adresu lica koje sa maloletnim korisnikom nema veze, a jedina osoba koju sistem u tom trenutku može pitati jeste onaj ko poruku drži.
+
+
+**Potvrda postojanja deteta traži izjašnjenje obe strane** — nalog otvoren po članu 4, odnosno preuzet po članu 4b, prati izjava roditelja pod punom odgovornošću, čiji se tekst snima i posle davanja ne menja; lica koja su potvrdila stvarnost roditelja izjašnjavaju se u roku od šezdeset dana, a potvrda opstaje samo ako se izjasne oba člana veze. **Obaveštenje svakom pogođenom pre isteka roka** — poništenje umanjuje zapis i licu koje je potvrdu dalo, i roditelju, i nadzorniku, pa se svima njima javlja pre isteka roka, uz iznos koji bi im bio otpisan. **Poništenje nije kvalifikacija** — u zapisu pogođenog stoji da je potvrda pala zbog neaktivnosti u postupku, a ne da je utvrđena neistinita potvrda; teret se ne prenosi na drugo lice, a protiv poništenja stoji prigovor o kome odlučuje čovek.
+
+## 5.12. Mere za kolektivnu nabavku
+
+**Minimizacija predloga** — predlog za nabavku sadrži samo naziv dobra; količina, cena, obrazloženje i bilo koji drugi podatak se ne traže. **Zbirna objava** — registar predloga objavljuje se bez pseudonima; pojedinačni predlog se ne objavljuje. **Bez dokazivanja statusa** — kriterijumi učešća se ne postavljaju, pa se ne prikupljaju isprave ni izjave o delatnosti, imovini ili prilikama korisnika. **Bez novog prikupljanja** — broj POEN-a po kome se utvrđuje red očitava se iz radnje br. 4. **Dobavljač ne dobija podatke o ličnosti** — dostavlja mu se isključivo spisak kodova za preuzimanje. **Suženo objavljivanje ishoda** — uz spisak onih koji su preuzeli deo objavljuju se pseudonim i mesto u redu, ali ne i broj POEN-a u zapisu. **Bez automatizovanog odlučivanja** — utvrđivanje reda je primena javno objavljenih pravila i ne proizvodi posledice po status korisnika (čl. 38 ZZPL-a), uz izričito pravo na prigovor o kome odlučuje čovek. **Brisanje** — predlog se briše izborom drugog naziva, uklanjanjem, sprovođenjem nabavke tog naziva i najkasnije po isteku dvanaest meseci.
+
+## 5.13. Mere za prekogranični prenos
+
+**Obrada u Evropskoj uniji** — aplikacija se izvršava i baza podataka se nalazi u regionu Frankfurt. Time evidencija Protokola, podaci iz prijava na programe podrške, poruke između korisnika i podaci maloletnih korisnika ostaju u krugu sa primerenim nivoom zaštite. **Uzak obim onoga što izlazi** — u treću zemlju odlaze samo slike koje korisnici postavljaju, elektronska pošta koju Platforma šalje, upozorenja koja se šalju Fondaciji i podaci o posećenosti. **Kanal upozorenja je sveden na najmanju meru** — upozorenje Fondaciji sadrži pseudonim i vrstu događaja, a ne sadrži podatke unete u prijavi na program podrške ni sadržaj poruka korisnika. **Ugovor kao uslov prenosa** — podaci se prenose isključivo obrađivaču sa kojim je zaključen ugovor o obradi koji sadrži standardne ugovorne klauzule ili druge mere zaštite iz čl. 65 ZZPL-a. **Godišnja provera** — Fondacija čuva primerak svakog takvog ugovora i najmanje jednom godišnje proverava da li je na snazi i da li se spisak podobrađivača promenio. **Merenje posećenosti po pristanku** — Google Analytics se ne učitava dok korisnik ne pristane, a merenje bez kolačića ne postavlja kolačiće i ne prati korisnika između sajtova.
+
+## 5.14. Mere za prestanak statusa i pravo na brisanje
+
+Tačno imenovan postupak — prestankom statusa nalog se pseudonimizuje, ne anonimizuje; zadržani zapisi ostaju podaci o ličnosti, a ograničenje brisanja stoji na čl. 30 st. 3 ZZPL-a (zakonska obaveza čuvanja i pravni zahtev), ne na tvrdnji da su podaci prestali to da budu. Brisanje sadržaja — brišu se elektronska adresa, dobrovoljno uneti podaci, sadržaj i fotografije oglasa (oglasi se uklanjaju sa prostora za oglašavanje, fotografije iz skladišta) i slobodan tekst unet uz prepise POEN-a. Brisanje poruka — poruke u razgovoru brišu se kada bar jedna strana ugasi nalog. Izričit spisak onoga što ostaje — numerički zapisi uz pseudonim koji ne upućuje na ime, osnov po kome je POEN upisan i ime uz javnu donaciju; obim je nabrojan u čl. 11 Politike umesto da se podrazumeva. Upozorenje pre nastanka podatka — pre svake javne donacije korisnik se obaveštava da ime ostaje u listi i posle gašenja naloga i da mu je alternativa anonimna donacija. Pravo na ispravku — zahtev za ispravku netačnog podatka podnosi se u Platformi, prigovorom vrste za ispravku podatka. Provera rokova — Fondacija najmanje jednom godišnje proverava da li je za neku kategoriju podataka rok čuvanja istekao.
+
+Prihvaćena posledica javne donacije — to je jedini slučaj u kome pseudonimna evidencija ostaje povezana sa imenom i posle prestanka statusa. Prihvaćeno je svesno: bez imena uz donaciju upis POEN-a ne bi se mogao pripisati nijednom licu, a ukupan broj POEN-a je javan i zbir zapisa u Protokolu je nula. Umanjenje nosi sam izbor — anonimna donacija, uz saopštenu posledicu da ne nosi POEN.
+
+## 5.15. Mere za dokaz pristanka i dokaz zasnivanja ugovornog odnosa
+
+Zapis o pristanku — za svaku obradu čiji je pravni osnov pristanak, kao i za prihvatanje Uslova korišćenja kojim se zasniva ugovorni odnos, beleže se trenutak, verzija akta i tekst koji je licu bio prikazan, na jeziku prikaza. Do ove procene takav zapis nije postojao: polja za potvrdu pri registraciji proveravana su isključivo u pretraživaču, pa se nije moglo dokazati ni da je pristanak dat ni da je ugovorni odnos zasnovan, a on je pravni osnov većine obrada iz tačke 3.
+
+Provera na strani rukovaoca — nalog se ne otvara bez zabeleženog prihvatanja, a provera se vrši na serveru, ne u pretraživaču. Zapis nastaje u istoj atomskoj radnji kojom i nalog, pa nalog bez zapisa ne može da nastane ni pri prekidu u toku upisa.
+
+Razdvojenost izjava — prihvatanje Uslova korišćenja i prihvatanje Politike privatnosti beleže se kao dve odvojene izjave, jer se odnose na različita pitanja (čl. 15 st. 2 ZZPL-a).
+
+Nepromenljivost teksta na koji se pristanak odnosi — objavljena verzija akta se ne menja; izmenjen akt dobija novu oznaku i objavljuje se kao zaseban dokument. Zapis o pristanku zato trajno upućuje na tekst koji je važio u trenutku davanja.
+
+Izričit pristanak za posebne kategorije — uz prijavu na socijalni program beleži se i sam tekst pristanka, a ne samo činjenica da je dat. Tekst sadrži broj lica koja će biti zamoljena za potvrdu, koji je za svakog podnosioca različit, pa se bez snimka ne bi moglo utvrditi na šta je konkretno lice pristalo.
+
+Razdvajanje saglasnosti roditelja od izjave o postojanju deteta — saglasnost na obradu podataka deteta beleži se odvojeno od izjave kojom roditelj pod punom odgovornošću tvrdi da dete postoji. Izjava je tvrdnja o činjenici i njen izostanak proizvodi dejstvo prema trećim licima; saglasnost se povlači u svakom trenutku i bez posledica po bilo koga drugog. Dok su stajale u jednom tekstu, povlačenje saglasnosti nije se moglo izvršiti a da ne obori i tvrdnju o postojanju deteta.
+
+Bez novih podataka radi dokazivanja — uz zapis o pristanku ne beleže se IP adresa, podaci o uređaju ni drugi identifikatori. Kod pristanka na kolačiće koji nisu neophodni, za posetioca koji nije prijavljen ne uspostavlja se nikakav identifikator; odluka se beleži u samom kolačiću, zajedno sa verzijom obaveštenja po kojoj je doneta, a zapis uz nalog vodi se samo za prijavljenog korisnika, kod koga nalog već postoji.
+
+Obnavljanje odluke pri izmeni — odluka doneta po ranijoj verziji obaveštenja o kolačićima ne prenosi se na novu; lice se pita ponovo.
+
+Opoziv i uvid — pristanak se povlači jednako jednostavno kao što je dat, zapis o datom pristanku se pri tome ne briše nego se u njemu beleži i trenutak povlačenja, a lice u svom nalogu i u izvozu podataka vidi koje je pristanke dalo i kojim tekstom.
+
+Potvrda elektronske adrese — na adresu unetu pri registraciji upućuje se poruka sa linkom za potvrdu. Potvrda nije uslov za korišćenje naloga; njome se utvrđuje da adresa pripada licu koje je nalog otvorilo, čime zapis o pristanku prestaje da svedoči samo o nalogu.
+
+## 5.8. Rezidualni rizik
+
+Nakon primene svih navedenih mera, rezidualni rizik se ocenjuje kao prihvatljiv. Najviši rezidualni rizici su R1 (neovlašćen pristup), R2 (reidentifikacija), R11 (otkrivanje pripadnosti posebnoj kategoriji verifikatorima), R13 (deanonimizacija donatora kroz javnu listu donacija) i R16 (dečji prostor), svi na srednjem nivou (5–9). Rizik R8 (prekogranični prenos) pada na nizak nivo (3) time što se aplikacija i baza podataka izvršavaju u Evropskoj uniji, pa najveći deo podataka uopšte ne izlazi iz kruga sa primerenim nivoom zaštite. Rizik R5 (javna vidljivost oglasa) ukidanjem table i sužavanjem obrade pada na nizak nivo (4). Ovi rizici se dodatno umanjuju kontinuiranim nadzorom, redovnim testiranjem i ažuriranjem mera.
+
+## 6. Prava lica na koja se podaci odnose
+
+Korisnici KOLO sistema imaju sva prava koja im ZZPL garantuje. Fondacija obezbeđuje pristupačan mehanizam za podnošenje zahteva i odgovara u roku od 30 dana, sa mogućnošću produženja za još 60 dana u složenim slučajevima (čl. 21 st. 3 ZZPL-a).
+
+| **Prava korisnika i način ostvarivanja** |
+| --- |
+| **Pravo na pristup (čl. 26)** | Korisnik može zatražiti potvrdu da li se obrađuju njegovi podaci i dobiti kopiju. |
+| **Pravo na ispravku (čl. 29)** | Korisnik može zahtevati ispravku netačnih ili dopunu nepotpunih podataka. |
+| **Pravo na brisanje (čl. 30)** | Ograničeno u dva slučaja: zakonska obaveza čuvanja i integritet evidencije — primenjuje se anonimizacija (čl. 34 Pravilnika, čl. 11 Politike). |
+| **Pravo na ograničenje obrade (čl. 31)** | Privremeno ograničenje dok se rešava prigovor ili ispravka. |
+| **Pravo na prenosivost (čl. 36)** | Podaci u strukturisanom, mašinski čitljivom formatu. |
+| **Pravo na prigovor (čl. 37)** | Za obradu zasnovanu na legitimnom interesu — Fondacija prestaje sa obradom osim ako dokaže pretegnute zakonite razloge. |
+| **Pravo na povlačenje pristanka** | Za dobrovoljne podatke, objavljene oglase i posebne kategorije — povlačenje u svakom trenutku bez posledica. |
+| **Pravo na objašnjenje (čl. 38)** | Za automatizovano odlučivanje — objašnjenje logike, ljudski uvid, prigovor. |
+| **Pravo na pritužbu** | Poverenik za informacije od javnog značaja i zaštitu podataka o ličnosti, Bulevar kralja Aleksandra 15, Beograd. |
+
+Mehanika anonimizacije pri prestanku statusa: email adresa se briše, veze u grafu verifikacija se anonimizuju, zapisi u evidenciji ostaju pod identifikatorom koji više ne omogućava identifikaciju — čime prestaju da budu lični podaci u smislu ZZPL-a i čuvaju se trajno kao deo zajedničkog dobra.
+
+## 7. Procena odgovornog lica rukovaoca
+
+Fondacija nije odredila lice za zaštitu podataka, iz razloga navedenih u članu 1 Politike privatnosti, pa se mišljenje iz člana 54 stav 5 ZZPL-a ne pribavlja — ta odredba obavezu vezuje za slučaj u kome je takvo lice određeno.
+
+Ranija verzija ove procene sadržala je mišljenje lica za zaštitu podataka koje je istovremeno odlučivalo o svrsi i sredstvima obrade. Takvo mišljenje nije predstavljalo nezavisnu ocenu i zamenjeno je procenom odgovornog lica rukovaoca, koja se kao takva i označava.
+
+| **Procena odgovornog lica rukovaoca** |
+| --- |
+| **Datum procene** | 14.09.2026. |
+| **Procena** | Nakon primene tehničkih i organizacionih mera iz tačke 5, rezidualni rizik se ocenjuje kao prihvatljiv. Obrada može da se nastavi uz redovno praćenje mera i ažuriranje ove procene u slučajevima iz tačke 8, kao i uz preispitivanje obaveze određivanja lica za zaštitu podataka iz člana 1 Politike privatnosti. |
+| **Potpis** |  |
+
+## 8. Plan za module koji se naknadno aktiviraju
+
+## 8.1. Modul 3 — Socijalni programi (aktiviran ovom procenom)
+
+Modul 3 se aktivira ovom procenom, u skladu sa čl. 57 Pravilnika i Pravilnikom o programima podrške (v4.6.1). Sistem uvodi obradu posebnih kategorija podataka — status roditelja, starosna dob, invaliditet (rešenje nadležnog organa — ne dijagnoza), studentski status (čl. 17 ZZPL-a). Pravni osnov je izričit pristanak korisnika (čl. 17 st. 2 t. 1 ZZPL-a). Fondacija ne čuva kopije podnesene dokumentacije — ostaje samo minimalni zapis o pripadnosti grupi i datum verifikacije.
+
+Radi zaštite integriteta programa od neistinitih prijava, pre odobravanja ispunjenost uslova potvrđuju svi verifikatori podnosioca, pod punom odgovornošću i na osnovu ličnog poznavanja, bez uvida u unete podatke; odbijanje zahteva obrazloženje, a prijava se ne odobrava dok svi ne potvrde (tvrda blokada). Ovaj postupak uvodi rizik R11 (otkrivanje pripadnosti posebnoj kategoriji sopstvenim verifikatorima podnosioca), za koji su mere utvrđene u tački 5.6.
+
+Dodatni rizici koje modul uvodi: obrada posebnih kategorija nosi inherentno veći rizik za prava i slobode lica; mogućnost diskriminacije na osnovu statusa; potreba za pojačanom kontrolom pristupa i odvojenim čuvanjem. Mere su utvrđene u tačkama 5.1, 5.2 i 5.6. Naredna izmena ove DPIA potrebna je pri svakoj izmeni mehanizma potvrde ili uvođenju novih kategorija podataka.
+
+## 8.2. Modul 4 — Deca
+
+Ovom procenom Modul 4 se **aktivira**, uz Pravilnik o učešću dece. Sistem obrađuje podatke maloletnih lica (čl. 16 ZZPL-a) po pristanku roditelja ili zakonskog zastupnika, sa dodatnim ograničenjima za lica mlađa od petnaest godina.
+
+**Dva ulaza i razdoblje pre pristanka.** Nalog maloletnog korisnika otvara roditelj iz svog naloga, ili ga maloletno lice otvara samo. U drugom slučaju postoji razdoblje u kome se podaci obrađuju PRE pribavljenog pristanka roditelja. Razdoblje je namerno svedeno na najmanju meru: obrađuju se pseudonim, podaci neophodni za pristup nalogu, elektronska adresa roditelja i zapisi o prijateljstvima sklopljenim u tom razdoblju; Pričaonica, oglasi i komunikacija sa punoletnim licima su zatvoreni, doprinos se ne evidentira, maloletni korisnik nalog može sam obrisati, a nalog koji niko ne preuzme u roku od četrnaest dana se briše. Obrada se u tom razdoblju zasniva na legitimnom interesu (čl. 12 st. 1 t. 6 ZZPL-a), sa procenom srazmernosti u tački 5.11. Rok od četrnaest dana je mera zaštite, ne operativna pogodnost.
+
+**Adresa roditelja kao podatak o trećem licu.** Adresu unosi maloletno lice i njena tačnost nije proverena. Obrađuje se po osnovu legitimnog interesa (čl. 12 st. 1 t. 6 ZZPL-a) radi pribavljanja pristanka koji zakon traži. Test srazmernosti: interes pretežе jer je obrada svedena na jednu poruku, u poruci stoji samo pseudonim (nikad ime), adresa se ne upisuje kao adresa naloga maloletnog korisnika i ne otvara put za prijavu, a primalac poruke ima dve radnje kojima obradu prekida — izjavu da nije roditelj tog deteta i brisanje naloga, obe bez prijave.
+
+**Pristanak je jači od standarda razumnog napora.** Nalog maloletnog korisnika dobija pun pristup i evidentiranje doprinosa tek kada roditelj postane verifikovan korisnik kroz lanac potvrda — dakle kada njegov identitet potvrdi treće lice u stvarnom svetu. Uobičajena praksa se zadovoljava pritiskom na dugme u poruci; ovde je ta provera posredna ali stvarna.
+
+**Uvid roditelja je SUŽEN u odnosu na prethodnu verziju.** Roditelj ne čita razgovore između maloletnih korisnika, jer takav uvid dodiruje i drugo dete čiji roditelj ga nije dao; vidi spisak prijateljstava i spisak razgovora bez sadržaja. Razgovor sa punoletnim korisnikom roditelj čita, a punoletnom sagovorniku se to izričito prikazuje. Ovo je jedina izmena u istoriji ove procene koja **skida** obradu umesto da je dodaje.
+
+**Nov kanal evidentiranja.** Prijateljstvo maloletnih korisnika evidentira doprinos (čl. 15 t. 9 Pravilnika). Evidentiranje je primena javno objavljenih pravila i ne proizvodi posledice po status korisnika, pa nema automatizovanog odlučivanja u smislu čl. 38 ZZPL-a.
+
+Dodatni rizici: maloletna lica su posebno ranjiva kategorija; graf prijateljstava pokazuje krug poznanstava deteta; razdoblje pre pristanka. Rizik je opisan kao **R16**, a mere u tački **5.11**. Naredna izmena ove procene potrebna je pri svakoj izmeni pravila dečjeg prostora.
+
+## 9. Zaključak i odluka
+
+Na osnovu sprovedene procene:
+
+Identifikovano je osamnaest rizika po prava i slobode lica na koja se podaci odnose. Nijedan rizik nije ocenjen kao visok. Pet rizika je na srednjem nivou (R1, R2, R11, R13, R16), a trinaest na niskom (R3, R4, R5, R6, R7, R8, R9, R10, R12, R14, R15, R17, R18).
+
+Za svaki identifikovani rizik primenjene su odgovarajuće tehničke i organizacione mere zaštite. Rezidualni rizik nakon primene mera ocenjuje se kao prihvatljiv.
+
+Obrada može da se nastavi uz primenu svih opisanih mera zaštite. Konsultacija sa Poverenikom za informacije od javnog značaja i zaštitu podataka o ličnosti u skladu sa čl. 55 ZZPL-a nije neophodna jer nijedan rizik nije ocenjen kao visok koji se ne može umanjiti merama.
+
+Ova DPIA se ažurira u sledećim slučajevima: pre aktiviranja Modula 4 (Deca), pri izmeni mehanizma verifikatorske potvrde socijalnih programa ili uvođenju novih kategorija podataka, pri izmeni sistema nadzora integriteta verifikacija (npr. uvođenje pravila koja koriste nove podatke ili automatsko preduzimanje radnji), pri značajnoj promeni infrastrukture ili obrađivača, pri promeni pravnog okvira, ili najkasnije 12 meseci od poslednje izmene.
+
+| **Odobrenje dokumenta** |
+| --- |
+| **Izradio** | Nikola Šarić |
+| **Datum izrade** | 23.05.2026. |
+| **Odobrio — Predsednik UO** |  |
+| **Potpis** |  |
+| **Datum odobrenja** |  |
+| **Procena odgovornog lica rukovaoca** | Prihvatljivo / Prihvatljivo uz preporuke / Neprihvatljivo |
+| **Potpis** |  |
+
+U Somboru, dana 23.05.2026. godine.
+
+**ZA UPRAVNI ODBOR**
+
+Predsednik Upravnog odbora
+
+_________________________
+
+Jelena Stijepović

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { smeProsireno } from "@/lib/dozvole";
 import { prisma } from "@/lib/prisma";
 import { zabeleziUpit } from "@/lib/protokol/doprinos-razmeni";
 import { smePokrenutiRazgovor, ucitajUcesnika } from "@/lib/protokol/deca";
@@ -92,7 +93,7 @@ export async function POST(req: NextRequest) {
   // i `smeDaKomunicira` za parove sa detetom (koji sam odbija nalog što još čeka
   // roditelja, jer je stanje deo `Ucesnik`-a). Isti poziv radi i ekran Pijace, pa
   // dugme ne može ponovo postati strože od rute.
-  const dozvoljeno = smePokrenutiRazgovor(jaUcesnik, drugiUcesnik, session.user.verified);
+  const dozvoljeno = smePokrenutiRazgovor(jaUcesnik, drugiUcesnik, smeProsireno(session.user));
   if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
 
   // Raskinut par ne otvara nov razgovor — inače bi se ugašeni razgovor zaobišao

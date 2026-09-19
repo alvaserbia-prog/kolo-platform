@@ -1,17 +1,18 @@
 import { NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
 import { prisma } from "@/lib/prisma";
-import { dohvatiSaldoFondacije } from "@/lib/protokol/fondacija";
+import { dohvatiSaldoFondacije, dohvatiGodisnjiProjektniPregled } from "@/lib/protokol/fondacija";
 
 /**
  * GET /api/javno/fondacija
  * Javna transparentnost sredstava Fondacije.
  * Vraca: saldo, ukupan priliv (donacije + pokroviteljstvo), ukupan odliv (troskovi),
- *        i pun spisak troskova grupisan po kategoriji.
+ *        pun spisak troskova grupisan po kategoriji i zbirni godisnji pregled
+ *        projekata (Pravilnik o projektima i kolektivnim nabavkama cl. 31).
  */
 export async function GET() {
   try {
-    const [saldo, troskoviPoKategoriji, ukupnoTroskova] = await Promise.all([
+    const [saldo, troskoviPoKategoriji, ukupnoTroskova, projekti] = await Promise.all([
       dohvatiSaldoFondacije(),
       prisma.fondacijaTrosak.groupBy({
         by: ["kategorija"],
@@ -19,6 +20,7 @@ export async function GET() {
         _count: true,
       }),
       prisma.fondacijaTrosak.count(),
+      dohvatiGodisnjiProjektniPregled(),
     ]);
 
     return NextResponse.json({
@@ -29,6 +31,7 @@ export async function GET() {
         brojTroskova: t._count,
       })),
       ukupnoZapisaTroskova: ukupnoTroskova,
+      projekti,
     });
   } catch (e) {
     return await greska(String(e), 500);

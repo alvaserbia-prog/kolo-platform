@@ -21,6 +21,9 @@ import {
   raspolozivSlot,
 } from "@/lib/protokol/dokaz-stvarnosti";
 import IndeksPrikaz from "@/components/verifikacija/IndeksPrikaz";
+import { dohvatiZabelezenePotvrde } from "@/lib/protokol/potvrda-poen";
+import { POEN_VERIFIKATOR } from "@/lib/protokol/dokaz-stvarnosti";
+import { PotvrdaPoenStatus } from "@/generated/prisma/client";
 import MiniStablo, {
   type CvorVerifikator,
   type CvorVerifikovani,
@@ -43,6 +46,7 @@ export default async function VerifikacijaPage() {
       maloletan: true,
       tipKorisnika: true,
       jeOsnivac: true,
+      identitetUtvrdjenAt: true,
       indeksStvarnosti: true,
       slotoviPotroseni: true,
       verifikacijeKojeSuMeVerifikovale: {
@@ -58,6 +62,9 @@ export default async function VerifikacijaPage() {
           oznakaVerifikatora: true,
           podlezeNadzoru: true,
           nadzornikId: true,
+          // Da li je POEN po toj potvrdi upisan (dokaz stvarnosti čl. 7). Zabeležena
+          // potvrda se u spisku obeležava, da se vidi koga treba podsetiti.
+          poenStatus: true,
           verifikovani: { select: { id: true, pseudonim: true } },
         },
       },
@@ -105,12 +112,18 @@ export default async function VerifikacijaPage() {
     })
   );
 
-  const mojeOznake: VerifikovanaOsoba[] = user.verifikacijeKojeSamObavio.map((v) => ({
-    verifikacijaId: v.id,
-    korisnikId: v.verifikovani.id,
-    pseudonim: v.verifikovani.pseudonim,
-    oznaka: v.oznakaVerifikatora,
-  }));
+  // 🔴 Zabeležene potvrde idu NA VRH spiska. Ceo smisao obeležavanja je da se vidi
+  // koga treba podsetiti da objavi ponudu; da su razbacane po spisku, čovek bi ih
+  // tražio umesto da ih vidi.
+  const mojeOznake: VerifikovanaOsoba[] = user.verifikacijeKojeSamObavio
+    .map((v) => ({
+      verifikacijaId: v.id,
+      korisnikId: v.verifikovani.id,
+      pseudonim: v.verifikovani.pseudonim,
+      oznaka: v.oznakaVerifikatora,
+      cekaDoprinos: v.poenStatus === PotvrdaPoenStatus.ZABELEZEN,
+    }))
+    .sort((a, b) => Number(b.cekaDoprinos) - Number(a.cekaDoprinos));
 
   const podnaslov =
     user.tipKorisnika === TipKorisnika.NEVERIFIKOVAN
@@ -120,6 +133,18 @@ export default async function VerifikacijaPage() {
         : t("slotovi_prikaz", { raspolozivo: slotoviRaspolozivi ?? 0, potroseno: user.slotoviPotroseni });
 
   const jeNeverifikovan = user.tipKorisnika === TipKorisnika.NEVERIFIKOVAN;
+
+  // POEN po potvrdi čeka trag stvarnog učešća (dokaz stvarnosti čl. 7). Bez ovog
+  // prikaza potvrda za obe strane izgleda kao kvar: indeks skoči, POEN-a nema, i
+  // niko ne kaže zašto. Zato red stoji i onome ko je potvrdu dobio i onome ko ju je
+  // dao — njemu čak i više, jer on čeka TUĐI potez i treba da zna čiji.
+  const zabelezenePotvrde = await dohvatiZabelezenePotvrde(session.user.id);
+  const cekaMoje = zabelezenePotvrde.kaoPotvrdjeni;
+  const cekaDate = await prisma.verifikacionaVeza.findMany({
+    where: { verifikatorId: session.user.id, poenStatus: PotvrdaPoenStatus.ZABELEZEN },
+    select: { id: true, verifikovani: { select: { pseudonim: true } } },
+    orderBy: { vremenskiZig: "desc" },
+  });
 
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
@@ -131,7 +156,37 @@ export default async function VerifikacijaPage() {
           na Pijacu; desno: lanac verifikacija. */}
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="flex flex-col gap-6">
-          <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} indeks={user.indeksStvarnosti} jeOsnivac={user.jeOsnivac} podnaslov={podnaslov} />
+          <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} indeks={user.indeksStvarnosti} jeOsnivac={user.jeOsnivac} identitetUtvrdjen={user.identitetUtvrdjenAt !== null} maloletan={user.maloletan} podnaslov={podnaslov} />
+
+          {(cekaMoje > 0 || cekaDate.length > 0) && (
+            <div className="rounded-2xl border border-kolo-border bg-white p-5">
+              <h2 className="text-sm font-semibold text-kolo-text">{t("ceka_naslov")}</h2>
+              {cekaMoje > 0 && (
+                <p className="mt-2 text-sm text-kolo-text">
+                  {t("ceka_moja", { iznos: cekaMoje.toLocaleString("sr-RS") })}
+                </p>
+              )}
+              {cekaDate.map((v) => (
+                <p key={v.id} className="mt-2 text-sm text-kolo-text">
+                  {t("ceka_dao", {
+                    pseudonim: v.verifikovani.pseudonim,
+                    iznos: POEN_VERIFIKATOR.toLocaleString("sr-RS"),
+                  })}
+                </p>
+              ))}
+              <p className="mt-2 text-sm text-kolo-muted">{t("ceka_opis")}</p>
+              {cekaMoje > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <a href="/pijaca/novi" className="kolo-dugme-primarno text-sm">
+                    {t("ceka_dugme_oglas")}
+                  </a>
+                  <a href="/donacije" className="kolo-dugme-sekundarno text-sm">
+                    {t("ceka_dugme_donacija")}
+                  </a>
+                </div>
+              )}
+            </div>
+          )}
 
           <div id="moj-kod">
             <MojQrKod />

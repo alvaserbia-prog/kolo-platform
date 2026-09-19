@@ -13,8 +13,41 @@ describe("nivoZaKumulativ", () => {
   it("110.000 RSD → nivo 6, kurs 1,50", () => {
     expect(nivoZaKumulativ(110_000)).toEqual({ nivo: 6, kurs: 1.5 });
   });
-  it("preko najvišeg praga → nivo 11, kurs 2,00", () => {
-    expect(nivoZaKumulativ(5_000_000_000)).toEqual({ nivo: 11, kurs: 2.0 });
+  it("nivo 11 (5.000.000) → kurs 2,00", () => {
+    expect(nivoZaKumulativ(5_000_000)).toEqual({ nivo: 11, kurs: 2.0 });
+  });
+
+  /**
+   * 🔴 Tabela se od 2026-09-08 NASTAVLJA BEZ KRAJA (odluka vlasnika) — pragovi
+   * idu nizom 1–2–5, koeficijent +0,10 po nivou. Ranije je nivo 11 bio plafon,
+   * pa je donacija od pedeset miliona nosila isti koeficijent kao od pet.
+   */
+  it("nastavlja se iznad nivoa 11, nizom 1–2–5", () => {
+    expect(nivoZaKumulativ(10_000_000)).toEqual({ nivo: 12, kurs: 2.1 });
+    expect(nivoZaKumulativ(20_000_000)).toEqual({ nivo: 13, kurs: 2.2 });
+    expect(nivoZaKumulativ(50_000_000)).toEqual({ nivo: 14, kurs: 2.3 });
+    expect(nivoZaKumulativ(100_000_000)).toEqual({ nivo: 15, kurs: 2.4 });
+  });
+
+  it("nema plafona — veći iznos nikad ne daje manji koeficijent", () => {
+    let prethodni = 0;
+    for (const k of [0, 5_000, 1e6, 5e6, 1e7, 1e9, 1e12]) {
+      const { kurs } = nivoZaKumulativ(k);
+      expect(kurs).toBeGreaterThanOrEqual(prethodni);
+      prethodni = kurs;
+    }
+  });
+
+  it("koeficijent pada na čistu stotinku i za visoke nivoe", () => {
+    expect(nivoZaKumulativ(5_000_000).kurs).toBe(2);
+    const visok = nivoZaKumulativ(1e15).kurs;
+    expect(visok * 100).toBeCloseTo(Math.round(visok * 100), 6);
+  });
+
+  it("beskonačan i besmislen unos pada na nivo 1, bez vrtenja u petlji", () => {
+    expect(nivoZaKumulativ(Number.POSITIVE_INFINITY)).toEqual({ nivo: 1, kurs: 1.0 });
+    expect(nivoZaKumulativ(Number.NaN)).toEqual({ nivo: 1, kurs: 1.0 });
+    expect(nivoZaKumulativ(-5)).toEqual({ nivo: 1, kurs: 1.0 });
   });
 });
 

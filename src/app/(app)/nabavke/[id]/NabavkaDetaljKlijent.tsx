@@ -20,8 +20,7 @@ type Detalj = {
   dobavljac: string | null;
   jedinicaMere: string | null;
   nabavnaCena: number | null;
-  maloprodajna: number | null;
-  izvoriCena: string | null;
+  poenObrazlozenje: string | null;
   saldoSnimak: number | null;
   rezervaSnimak: number | null;
   iznosNabavke: number | null;
@@ -30,7 +29,6 @@ type Detalj = {
   velicinaDela: number | null;
   poenPoDelu: number | null;
   ukupnoPoena: number | null;
-  odnosPonistenja: number | null;
   mestoPreuzimanja: string | null;
   preuzimanjeOd: string | null;
   preuzimanjeDo: string | null;
@@ -224,25 +222,23 @@ export default function NabavkaDetaljKlijent({ id }: { id: string }) {
         {greska && <p className="mt-2 text-sm text-kolo-danger">{greska}</p>}
       </section>
 
-      {/* ── Kalkulacija (čl. 20) ──────────────────────────────────────────── */}
-      {n.maloprodajna !== null && (
+      {/* ── Kalkulacija (čl. 20 st. 1) ────────────────────────────────────── */}
+      {/* 🔴 R-02, mera M-11: dinarska strana je IZVUČENA iz ove tabele. Do 4.5.9 su
+          `k_poen_po_delu` i `k_placeno` stajali jedan ispod drugog, pa se odnos
+          POEN-a prema dinaru dobijao deljenjem — jedino preostalo mesto na kome je
+          Fondacija sama objavljivala kurs, posle svega što je R-01 uklonio. Oba
+          podatka ostaju javna (čl. 31), samo više nisu u istom dokumentu.
+          NE VRAĆATI dinarske redove u ovu tabelu. */}
+      {n.poenPoDelu !== null && (
         <section className="rounded-2xl border border-kolo-border bg-white p-5 shadow-sm">
           <h2 className="text-lg font-semibold">{t("kalkulacija")}</h2>
           <dl className="mt-3 divide-y divide-kolo-border text-sm">
             {[
-              [t("k_saldo"), rsd(n.saldoSnimak)],
-              [t("k_rezerva"), `− ${rsd(n.rezervaSnimak)}`],
-              [t("k_iznos"), rsd(n.iznosNabavke)],
-              [t("k_dobavljac"), n.dobavljac ?? "—"],
-              [t("k_nabavna"), `${rsd(n.nabavnaCena)} / ${n.jedinicaMere ?? ""}`],
-              [t("k_maloprodajna"), rsd(n.maloprodajna)],
               [t("k_jedinica"), String(n.brojJedinica ?? "—")],
               [t("k_delova"), String(n.brojDelova ?? "—")],
               [t("k_deo"), `${n.velicinaDela ?? "—"} × ${n.jedinicaMere ?? ""}`],
               [t("k_poen_po_delu"), poen(n.poenPoDelu)],
               [t("k_ukupno_poena"), poen(n.ukupnoPoena)],
-              [t("k_odnos"), n.odnosPonistenja ? n.odnosPonistenja.toFixed(2) : "—"],
-              [t("k_placeno"), rsd(n.placenoRSD)],
               [t("k_mesto"), n.mestoPreuzimanja ?? "—"],
               [t("k_period"), `${dan(n.preuzimanjeOd)} – ${dan(n.preuzimanjeDo)}`],
             ].map(([k, v]) => (
@@ -252,8 +248,33 @@ export default function NabavkaDetaljKlijent({ id }: { id: string }) {
               </div>
             ))}
           </dl>
-          {n.izvoriCena && <p className="mt-3 text-xs text-kolo-muted">{t("k_izvori", { izvori: n.izvoriCena })}</p>}
+          {n.poenObrazlozenje && (
+            <p className="mt-3 text-xs text-kolo-muted">{t("k_obrazlozenje", { obrazlozenje: n.poenObrazlozenje })}</p>
+          )}
           <p className="mt-2 text-xs text-kolo-muted">{t("paritet_napomena")}</p>
+        </section>
+      )}
+
+      {/* ── Dinarska strana (čl. 20 st. 2, čl. 31 st. 2) ──────────────────── */}
+      {n.poenPoDelu !== null && (
+        <section className="rounded-2xl border border-kolo-border bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-semibold">{t("dinarska_naslov")}</h2>
+          <p className="mt-1 text-sm text-kolo-muted">{t("dinarska_opis")}</p>
+          <dl className="mt-3 divide-y divide-kolo-border text-sm">
+            {[
+              [t("k_saldo"), rsd(n.saldoSnimak)],
+              [t("k_rezerva"), `− ${rsd(n.rezervaSnimak)}`],
+              [t("k_iznos"), rsd(n.iznosNabavke)],
+              [t("k_dobavljac"), n.dobavljac ?? "—"],
+              [t("k_nabavna"), `${rsd(n.nabavnaCena)} / ${n.jedinicaMere ?? ""}`],
+              [t("k_placeno"), rsd(n.placenoRSD)],
+            ].map(([k, v]) => (
+              <div key={k} className="flex justify-between gap-3 py-1.5">
+                <dt className="text-kolo-muted">{k}</dt>
+                <dd className="text-right font-medium">{v}</dd>
+              </div>
+            ))}
+          </dl>
         </section>
       )}
 

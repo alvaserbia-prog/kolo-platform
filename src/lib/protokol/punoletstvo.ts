@@ -114,7 +114,7 @@ async function najaviPunoletstvo(
   sada: Date
 ) {
   const prijateljstva = await prisma.prijateljstvo.findMany({
-    where: { OR: [{ aId: deteId }, { bId: deteId }], raskinutAt: null, poenIsplacen: true },
+    where: { OR: [{ aId: deteId }, { bId: deteId }], raskinutAt: null, poenEvidentiran: true },
     select: { aId: true, bId: true },
   });
   const iznos = otpisPriPunoletstvu(prijateljstva.length);
@@ -185,9 +185,9 @@ async function prevediUPunoletni(deteId: string) {
   // Broje se SAMO živa isplaćena prijateljstva. Ne broje se: raskinuta (njihovih 500
   // je već otpisano — inače bi isti POEN bio oduzet dvaput), prijateljstva sa braćom
   // i sestrama (nikad nisu nosila POEN) i prijateljstva na čekanju (druga strana
-  // nikad nije postala aktivna). Sve tri grupe nosi jedno polje: `poenIsplacen`.
+  // nikad nije postala aktivna). Sve tri grupe nosi jedno polje: `poenEvidentiran`.
   const isplacena = await prisma.prijateljstvo.findMany({
-    where: { OR: [{ aId: deteId }, { bId: deteId }], raskinutAt: null, poenIsplacen: true },
+    where: { OR: [{ aId: deteId }, { bId: deteId }], raskinutAt: null, poenEvidentiran: true },
     select: { aId: true, bId: true },
   });
   const iznos = otpisPriPunoletstvu(isplacena.length);
@@ -242,10 +242,18 @@ async function prevediUPunoletni(deteId: string) {
   // pada sama od sebe kad su roditelji u istom lancu potvrda (zabranjena zona) ili
   // dok traje prelazno ograničenje iz čl. 22 Pravilnika o dokazu stvarnosti — to je
   // upravo ono „ili jednu ako su oba u istom lancu potvrda", i nije greška.
+  // 🔴 POEN po ovim potvrdama upisuje se ODMAH, bez uslova iz dokaza stvarnosti čl. 7.
+  // Od seta 4.6.4 POEN po potvrdi inače čeka trag stvarnog učešća potvrđenog, ali ovde
+  // je izuzetak i on je nužan: istog dana se detetu poništava POEN evidentiran po
+  // prijateljstvima (korak 1 iznad), često u minus. Ako bi i roditeljske potvrde
+  // čekale prvi oglas, 18. rođendan bi se sveo na čist minus bez ijedne protivteže —
+  // a tek punoletan čovek tog dana nije ništa skrivio i nema šta da ispravlja.
   let potvrda = 0;
   for (const veza of dete.roditeljstvaKaoDete) {
     try {
-      await izvrsiVerifikacijuBezTokena(veza.roditeljId, deteId);
+      await izvrsiVerifikacijuBezTokena(veza.roditeljId, deteId, undefined, {
+        bezUslovaZaPoen: true,
+      });
       potvrda += 1;
     } catch (e) {
       console.warn("[punoletstvo] Potvrda roditelja nije upisana", veza.roditeljId, deteId, e);

@@ -15,8 +15,24 @@ export function glasackaMoc(aktivno: number): number {
   return Math.floor(Math.sqrt(aktivno));
 }
 
-export async function trendsKurs(): Promise<number> {
-  // Kurs = |protokol_balance| / zrnaUProtokolu
+/**
+ * Tekući obračunski koeficijent (Pravilnik čl. 23): odnos ukupnog broja
+ * evidentiranih POEN-a i broja ZRNA raspoloživih za upis u Protokolu.
+ *
+ * 🔴 Funkcija se do 13.09.2026. zvala `trendsKurs`, a promenljive `kurs` —
+ * uklonjeno uz R-04. Čl. 23 st. 4: koeficijent „nije cena, nije kurs i nije
+ * indeks performansi". Ne vraćati reč „kurs" ni u jedan identifikator ni u
+ * ijedan opis transakcije.
+ *
+ * 🟢 Upis i otpis ZRNA su po konstrukciji NEUTRALNI za koeficijent: pri upisu
+ * se istovremeno umanjuju brojilac (POEN odlazi Protokolu i izlazi iz opticaja)
+ * i imenilac (raspoloživa ZRNA), pa količnik ostaje isti — (T−Z·k)/(R−Z) = k.
+ * Koeficijent pomeraju SAMO emisije POEN-a (naviše) i poništenja POEN-a
+ * (naniže). To je nosiv argument protiv čitanja ZRNA kao instrumenta: nosilac
+ * sopstvenim potezom koeficijent ne pomera, pa nema ni trgovanja ni tajminga.
+ */
+export async function tekuciKoeficijent(): Promise<number> {
+  // koeficijent = |protokol_balance| / zrnaUProtokolu
   const protokol = await prisma.wallet.findUnique({
     where: { id: PROTOKOL_WALLET_ID },
     select: { balance: true },
@@ -35,16 +51,16 @@ export async function trendsKurs(): Promise<number> {
   return Math.max(0.01, Number((protokolBalance / zrnaUProtokolu).toFixed(2)));
 }
 
-export async function poslednjiKurs(): Promise<number> {
-  const rate = await prisma.zrnoDailyRate.findFirst({ orderBy: { date: "desc" } });
-  if (rate) return Number(rate.kurs);
-  return await trendsKurs();
+export async function poslednjiKoeficijent(): Promise<number> {
+  const snimak = await prisma.zrnoDnevniKoeficijent.findFirst({ orderBy: { date: "desc" } });
+  if (snimak) return Number(snimak.koeficijent);
+  return await tekuciKoeficijent();
 }
 
 // ── Noćna obrada ZRNO operacija ───────────────────────────────────────────────
 
 export async function izvrsiZrnoOperacije(datum: Date) {
-  // Obračunski dan po srpskom vremenu koji ovaj prolaz OTVARA (kurs/brava dana).
+  // Obračunski dan po srpskom vremenu koji ovaj prolaz OTVARA (koeficijent/brava dana).
   const danas = danObracuna(datum);
   // Zahtevi se izvršavaju „u ponoć istog obračunskog perioda": prolaz na ponoći
   // obrađuje zahteve podnete zaključno sa danom koji se upravo završio. `lte`
@@ -52,7 +68,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
   // raspored crona (00:00 UTC — već „sutrašnji" dan) preskakao po datumu.
   const doDana = prethodniDan(danas);
 
-  // 1. Izračunaj kurs za danas
+  // 1. Izračunaj obračunski koeficijent za danas
   const protokol = await prisma.wallet.findUnique({
     where: { id: PROTOKOL_WALLET_ID },
     select: { balance: true },
@@ -64,22 +80,23 @@ export async function izvrsiZrnoOperacije(datum: Date) {
   });
   const kodKorisnika = (ukupnoKodKorisnika._sum.slobodno ?? 0) + (ukupnoKodKorisnika._sum.aktivno ?? 0);
   const zrnaUProtokolu = UKUPNO_ZRNA - kodKorisnika;
-  // V5: kurs se zaokružuje na 2 decimale JEDNOM i ta ista vrednost se koristi i za
-  // prikaz/čuvanje i za sav obračun — tako je naplaćeni kurs identičan prikazanom.
-  // Klamp na min 0.01 da deljenje `poen/kurs` nikad ne pukne (degenerisan sitan kurs).
-  const kursRaw = protokolBalance > 0 && zrnaUProtokolu > 0 ? protokolBalance / zrnaUProtokolu : 1;
-  const kurs = Math.max(0.01, Number(kursRaw.toFixed(2)));
+  // V5: koeficijent se zaokružuje na 2 decimale JEDNOM i ta ista vrednost se
+  // koristi i za prikaz/čuvanje i za sav obračun — tako je primenjeni koeficijent
+  // identičan prikazanom. Klamp na min 0.01 da deljenje `poen/koeficijent` nikad
+  // ne pukne (degenerisan sitan koeficijent).
+  const koeficijentRaw = protokolBalance > 0 && zrnaUProtokolu > 0 ? protokolBalance / zrnaUProtokolu : 1;
+  const koeficijent = Math.max(0.01, Number(koeficijentRaw.toFixed(2)));
 
   // K4: BRAVA DANA — `create` (ne `upsert`). Ako su ZRNO operacije za ovaj dan već
   // pokrenute (cron retry ili cron + ručni admin okidač), drugi poziv dobije P2002
   // na jedinstvenom `date` i ceo posao se preskače — bez duplog izdavanja ZRNA.
   try {
-    await prisma.zrnoDailyRate.create({
-      data: { date: danas, kurs: kurs.toFixed(2), protokolMinus: protokolBalance, zrnaUProtokolu: zrnaUProtokolu },
+    await prisma.zrnoDnevniKoeficijent.create({
+      data: { date: danas, koeficijent: koeficijent.toFixed(2), protokolMinus: protokolBalance, zrnaUProtokolu: zrnaUProtokolu },
     });
   } catch (e) {
     if (e && typeof e === "object" && "code" in e && (e as { code?: string }).code === "P2002") {
-      return { kurs, zrnaUProtokolu, obradjenihUpisa: 0, obradjenihOtpisa: 0, preskoceno: true };
+      return { koeficijent, zrnaUProtokolu, obradjenihUpisa: 0, obradjenihOtpisa: 0, preskoceno: true };
     }
     throw e;
   }
@@ -107,9 +124,9 @@ export async function izvrsiZrnoOperacije(datum: Date) {
       const poenZaTrosak = Math.min(z.poenIznos, maxPoen);
 
       // Zaokruži
-      const zrnaDobija = Math.floor(poenZaTrosak / kurs);
+      const zrnaDobija = Math.floor(poenZaTrosak / koeficijent);
       if (zrnaDobija <= 0) { await cancel(z.id, "upis"); continue; }
-      const poenPlaceno = Math.ceil(zrnaDobija * kurs);
+      const utrosenoPoen = Math.ceil(zrnaDobija * koeficijent);
 
       // Proveri da ima dovoljno slobodnih ZRNA u Protokolu — UMANJENO za već izdato
       // u ovom prolazu (K3), inače se fiksna ponuda od 1.000.000 može probiti.
@@ -118,14 +135,16 @@ export async function izvrsiZrnoOperacije(datum: Date) {
 
       await prisma.$transaction(async (tx) => {
         // POEN: user → Protokol (reverse emission)
-        await tx.wallet.update({ where: { id: z.user.wallet!.id }, data: { balance: { decrement: poenPlaceno } } });
-        await tx.wallet.update({ where: { id: PROTOKOL_WALLET_ID }, data: { balance: { increment: poenPlaceno } } });
+        await tx.wallet.update({ where: { id: z.user.wallet!.id }, data: { balance: { decrement: utrosenoPoen } } });
+        await tx.wallet.update({ where: { id: PROTOKOL_WALLET_ID }, data: { balance: { increment: utrosenoPoen } } });
         await tx.transaction.create({ data: {
           fromWalletId: z.user.wallet!.id,
           toWalletId: PROTOKOL_WALLET_ID,
-          amount: poenPlaceno,
+          amount: utrosenoPoen,
           type: TransactionType.UPIS_ZRNO,
-          description: `Upis ${zrnaDobija} ZRNA po kursu ${kurs.toFixed(2)}`,
+          description: `Upis ${zrnaDobija} ZRNA po koeficijentu ${koeficijent.toFixed(2)}`,
+          opisKljuc: "transakcije.zrno_upis",
+          opisParametri: { zrna: zrnaDobija, koeficijent: koeficijent.toFixed(2) },
         }});
 
         // ZRNO: Protokol → user
@@ -135,9 +154,18 @@ export async function izvrsiZrnoOperacije(datum: Date) {
           update: { slobodno: { increment: zrnaDobija } },
         });
 
-        // Pravilnik čl. 29-30: verifikovani korisnik koji upiše ZRNO postaje
-        // nosilac ZRNA. (POCETNI već ima sva prava nosioca ZRNA — kapacitet i
-        // glasačku moć iz aktivnog ZRNA — pa zadržava svoj bootstrap status.)
+        // Pravilnik čl. 29-30: POTVRĐEN korisnik koji upiše ZRNO postaje nosilac
+        // ZRNA. (POCETNI već ima sva prava nosioca ZRNA — kapacitet i glasačku
+        // moć iz aktivnog ZRNA — pa zadržava svoj bootstrap status.)
+        //
+        // 🔴 Nepotvrđen nalog se NE unapređuje, i to nije slučajno (R-01, odluka
+        // B). `NOSILAC_ZRNA` je status koji NADJAČAVA indeks: nosi neograničen
+        // verifikacioni kapacitet, izuzeće od nadzora i pun pristup operativnom
+        // doprinosu i socijalnim programima (`dokaz-stvarnosti.ts`, `pristup.ts`).
+        // Član koji je ZRNO upisao iz donacije ga DRŽI, ali ostaje NEVERIFIKOVAN
+        // dok ga neko iz mreže ne potvrdi — inače bi jedna linija otvorila sve
+        // što je odlukom B zatvoreno. Kad ga potvrde, status ga sustiže tamo gde
+        // se potvrda upisuje (`verifikacija-service.ts`).
         if (z.user.tipKorisnika === TipKorisnika.REGULARNI) {
           await tx.user.update({
             where: { id: z.userId },
@@ -147,7 +175,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
 
         await tx.zrnoUpisZahtev.update({
           where: { id: z.id },
-          data: { status: "EXECUTED", zrnaKupljeno: zrnaDobija, poenPlaceno },
+          data: { status: "EXECUTED", zrnaUpisana: zrnaDobija, utrosenoPoen },
         });
       });
       // Tek po uspešnoj transakciji uvećaj brojač izdatih ZRNA (K3).
@@ -169,19 +197,21 @@ export async function izvrsiZrnoOperacije(datum: Date) {
       if (!z.user.wallet || !z.user.zrnoStanje) { await cancel(z.id, "otpis"); continue; }
       if (z.user.zrnoStanje.slobodno < z.kolicina) { await cancel(z.id, "otpis"); continue; }
 
-      const poenDobijeno = Math.floor(z.kolicina * kurs);
-      if (poenDobijeno <= 0) { await cancel(z.id, "otpis"); continue; }
+      const evidentiranoPoen = Math.floor(z.kolicina * koeficijent);
+      if (evidentiranoPoen <= 0) { await cancel(z.id, "otpis"); continue; }
 
       await prisma.$transaction(async (tx) => {
         // POEN: Protokol → user
-        await tx.wallet.update({ where: { id: PROTOKOL_WALLET_ID }, data: { balance: { decrement: poenDobijeno } } });
-        await tx.wallet.update({ where: { id: z.user.wallet!.id }, data: { balance: { increment: poenDobijeno } } });
+        await tx.wallet.update({ where: { id: PROTOKOL_WALLET_ID }, data: { balance: { decrement: evidentiranoPoen } } });
+        await tx.wallet.update({ where: { id: z.user.wallet!.id }, data: { balance: { increment: evidentiranoPoen } } });
         await tx.transaction.create({ data: {
           fromWalletId: PROTOKOL_WALLET_ID,
           toWalletId: z.user.wallet!.id,
-          amount: poenDobijeno,
+          amount: evidentiranoPoen,
           type: TransactionType.OTPIS_ZRNO,
-          description: `Otpis ${z.kolicina} ZRNA po kursu ${kurs.toFixed(2)}`,
+          description: `Otpis ${z.kolicina} ZRNA po koeficijentu ${koeficijent.toFixed(2)}`,
+          opisKljuc: "transakcije.zrno_otpis",
+          opisParametri: { zrna: z.kolicina, koeficijent: koeficijent.toFixed(2) },
         }});
 
         // ZRNO: user → Protokol
@@ -204,7 +234,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
 
         await tx.zrnoOtpisZahtev.update({
           where: { id: z.id },
-          data: { status: "EXECUTED", poenDobijeno },
+          data: { status: "EXECUTED", evidentiranoPoen },
         });
       });
     } catch (err) {
@@ -259,7 +289,7 @@ export async function izvrsiZrnoOperacije(datum: Date) {
     }
   }
 
-  return { kurs, zrnaUProtokolu, obradjenihUpisa: upisi.length, obradjenihOtpisa: otpisi.length };
+  return { koeficijent, zrnaUProtokolu, obradjenihUpisa: upisi.length, obradjenihOtpisa: otpisi.length };
 }
 
 async function cancel(id: string, tip: "upis" | "otpis") {

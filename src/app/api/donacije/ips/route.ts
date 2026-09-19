@@ -43,8 +43,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
-  if (!session.user.verified)
-    return await greska("Samo verifikovani korisnik može da donira.", 403);
+  // Donirati sme i član koga niko nije potvrdio (R-01, mera M-9).
 
   const cfg = dohvatiIpsConfig();
   if (!cfg || !ipsAktivno()) {

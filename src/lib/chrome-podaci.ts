@@ -116,7 +116,8 @@ export async function izracunajDnevniBrojeve(
       POKROVITELJSTVO_AKTIVNO
         ? prisma.pokroviteljPrijava.count({ where: { status: "POTPISANA" } })
         : Promise.resolve(0),
-      prisma.donationRecord.count({ where: { status: "PENDING" } }),
+      // NAPLACENO (kartica prošla, POEN čeka potvrdu) je isti red čekanja (M-4a).
+      prisma.donationRecord.count({ where: { status: { in: ["PENDING", "NAPLACENO"] } } }),
       prisma.prigovorNaOdluku.count({ where: { status: { in: ["PENDING", "U_OBRADI"] } } }),
       // Prijavljeni oglasi na Pijaci — red čekanja za moderaciju (Uslovi čl. 25).
       prisma.prijavaOglasa.count({ where: { status: "OTVORENA" } }),

@@ -1,15 +1,33 @@
 import { prisma } from "@/lib/prisma";
 import { TransactionType, DonationStatus } from "@/generated/prisma/client";
 import { emitujPoen } from "./emisija";
-import { izracunajPoenZaDonaciju, nivoZaKumulativ } from "@/lib/donacija-pravila";
+import { probajEvidentiratiPotvrde } from "./potvrda-poen";
+import {
+  izracunajPoenZaDonaciju,
+  nivoZaKumulativ,
+  trebaIzjavaOPoreklu,
+  normalizujUplatioca,
+  PROZOR_PRAGA_MESECI,
+} from "@/lib/donacija-pravila";
+import { generisiUgovorODonaciji } from "@/lib/donacija-ugovor";
 
 // Nivoi, koeficijent i obracun POENA zive u `donacija-pravila.ts` (bez Prisme,
 // jer ih uvozi i admin ekran u pretrazivacu). Ovde se re-eksportuju, pa server
 // i dalje ima jedan ulaz.
 export {
   RANG_TABELA,
+  KORAK_KOEFICIJENTA,
+  PRAG_PROVERE_POREKLA_RSD,
+  PROZOR_PRAGA_MESECI,
+  trebaIzjavaOPoreklu,
   nivoZaKumulativ,
   izracunajPoenZaDonaciju,
+  pragZaNivo,
+  koeficijentZaNivo,
+  tabelaZaPrikaz,
+  normalizujUplatioca,
+  MAX_KARTICNA_UPLATA_RSD,
+  MAX_KARTICNIH_UPLATA_DNEVNO,
 } from "@/lib/donacija-pravila";
 
 /**
@@ -31,8 +49,27 @@ export {
 export async function evidentirajDonaciju(
   userId: string,
   novaRSD: number,
-  options?: { existingRecordId?: string; adminId?: string; javno?: boolean }
-): Promise<{ poenEmitted: number; noviNivo: number; noviKumulativ: number; kurs: number }> {
+  options?: {
+    existingRecordId?: string;
+    adminId?: string;
+    javno?: boolean;
+    /**
+     * Ime uplatioca iz bankovnog izvoda (čl. 3 Pravilnika o pokroviteljstvu i
+     * donacijama). Doprinos se evidentira ISKLJUČIVO korisniku čijim je
+     * sredstvima uplata izvršena — ovo polje je trag da je to provereno.
+     */
+    uplatilac?: string | null;
+    /** Uplata sa računa otvorenog u inostranstvu (čl. 13b t. 4). */
+    straniPriliv?: boolean;
+  }
+): Promise<{
+  poenEmitted: number;
+  noviNivo: number;
+  noviKumulativ: number;
+  kurs: number;
+  /** Zapis donacije — pozivna mesta ga koriste za link na ugovor (čl. 5b). */
+  zapisId: string;
+}> {
   const javno = options?.javno ?? true;
 
   const user = await prisma.user.findUnique({
@@ -40,6 +77,7 @@ export async function evidentirajDonaciju(
     include: {
       wallet: true,
       podaci: { select: { punoIme: true } },
+      // pseudonim ide u ugovor o donaciji (cl. 5b)
       donations: {
         // Samo javne donacije ulaze u kumulativni nivo (anonimne ne nose POEN).
         // Tekući zapis (existingRecordId) se ISKLJUČUJE iz kumulativa — kartični tok
@@ -57,9 +95,30 @@ export async function evidentirajDonaciju(
 
   if (!user) throw new Error("Korisnik nije pronađen.");
   if (!user.wallet) throw new Error("Korisnik nema zapis u Protokolu.");
-  if (!user.verified) throw new Error("Korisnik nije verifikovan.");
+  // 🔴 Uslov potvrđene stvarnosti je UKLONJEN (R-01, mera M-9): donirati sme i
+  // član koga niko nije potvrdio, i POEN mu se evidentira. Time se NE otvara
+  // ništa drugo — prepis POEN-a (čl. 28 st. 2), kolektivna nabavka i socijalni
+  // programi ostaju zatvoreni, a upisano ZRNO ne nosi glas dok stvarnost ne
+  // bude potvrđena. Učinjena donacija NIJE osnov za potvrdu stvarnosti i ne
+  // zamenjuje neposredno lično poznavanje (čl. 32, čl. 5 dokaza stvarnosti).
 
   const dosadaRSD = user.donations.reduce((sum, d) => sum + Number(d.amountRSD), 0);
+
+  // Prag za izjavu o poreklu sredstava (čl. 5b, glava IV) meri se na SVE potvrđene
+  // donacije istog donatora u prozoru — i javne i anonimne. Kumulativni nivo iz
+  // čl. 4 broji samo javne, pa se ta dva zbira namerno računaju odvojeno.
+  const odDatuma = new Date();
+  odDatuma.setMonth(odDatuma.getMonth() - PROZOR_PRAGA_MESECI);
+  const zbir12m = await prisma.donationRecord.aggregate({
+    where: {
+      userId,
+      status: DonationStatus.CONFIRMED,
+      confirmedAt: { gte: odDatuma },
+      ...(options?.existingRecordId ? { id: { not: options.existingRecordId } } : {}),
+    },
+    _sum: { amountRSD: true },
+  });
+  const izjavaOPoreklu = trebaIzjavaOPoreklu(novaRSD, Number(zbir12m._sum.amountRSD ?? 0));
   const izracun = izracunajPoenZaDonaciju(dosadaRSD, novaRSD);
 
   // Anonimna donacija ne nosi POEN i ne pomera kumulativni nivo.
@@ -71,6 +130,30 @@ export async function evidentirajDonaciju(
   // Trajan snapshot imena za javnu donaciju (čl. 5a) — ne menja se kasnije.
   const donatorIme = javno ? user.podaci?.punoIme?.trim() || null : null;
 
+  // Uplatilac iz izvoda (čl. 3). Kad ga pozivno mesto ne prosledi (kartično
+  // plaćanje), upisuje se ime samog korisnika — akt traži da platni instrument
+  // glasi na donatora, pa je to ono što zapis tvrdi.
+  const uplatilac = options?.uplatilac?.trim() || user.podaci?.punoIme?.trim() || null;
+  const uplatilacKljuc = normalizujUplatioca(uplatilac);
+
+  // Ugovor o donaciji (čl. 5b) — sačinjava se pri potvrdi i SNIMA se na zapis.
+  // Jedno mesto za sva tri puta (ručna evidencija, potvrda PENDING zapisa,
+  // kartični callback), jer svi prolaze kroz ovu funkciju.
+  const zapisId = options?.existingRecordId ?? crypto.randomUUID();
+  const ugovorTekst = generisiUgovorODonaciji({
+    ime: donatorIme,
+    pseudonim: user.pseudonim,
+    iznosRSD: novaRSD,
+    poen,
+    nivo: noviNivo,
+    koeficijent: kurs,
+    javno,
+    zapisId,
+    datum: new Date(),
+    uplatilac,
+    izjavaOPoreklu,
+  });
+
   if (options?.existingRecordId) {
     await prisma.donationRecord.update({
       where: { id: options.existingRecordId },
@@ -81,6 +164,10 @@ export async function evidentirajDonaciju(
         poenEmitted: poen,
         javno,
         donatorIme,
+        uplatilac,
+        uplatilacKljuc,
+        straniPriliv: options.straniPriliv ?? false,
+        ugovorTekst,
         status: DonationStatus.CONFIRMED,
         confirmedAt: new Date(),
         confirmedById: options.adminId ?? null,
@@ -89,6 +176,7 @@ export async function evidentirajDonaciju(
   } else {
     await prisma.donationRecord.create({
       data: {
+        id: zapisId,
         userId,
         amountRSD: novaRSD,
         cumulativeRSD: noviKumulativ,
@@ -96,6 +184,10 @@ export async function evidentirajDonaciju(
         poenEmitted: poen,
         javno,
         donatorIme,
+        uplatilac,
+        uplatilacKljuc,
+        straniPriliv: options?.straniPriliv ?? false,
+        ugovorTekst,
         status: DonationStatus.CONFIRMED,
         confirmedAt: new Date(),
         confirmedById: options?.adminId ?? null,
@@ -104,13 +196,85 @@ export async function evidentirajDonaciju(
   }
 
   if (poen > 0) {
+    // 🔴 IME UPLATIOCA NE IDE U OPIS TRANSAKCIJE (R-03, mera M-3b).
+    //
+    // Do ovog seta je opis glasio „… — uplatilac: Petar Petrović", uz obrazloženje
+    // iz R-19 da je ime ionako u listi donacija. To obrazloženje je palo sa merom
+    // M-3a: lista donacija se sužava na redovne članove, a zapis transakcije ide
+    // SVAKOM prijavljenom nalogu, uključujući nepotvrđene, kojima je pseudonim
+    // strane maskiran (`/api/javno/feed`). Ime i prezime u opisu identifikuje
+    // jače nego pseudonim koji je sakriven — opis je time postao širi kanal od
+    // onoga na koji je pristanak dat (Uslovi čl. 17).
+    //
+    // Uplatilac ostaje na `DonationRecord.uplatilac` — tamo mu je mesto po čl. 3
+    // st. 5 (AML trag iz R-19), i vidi ga samo Fondacija.
     await emitujPoen(
       user.wallet.id,
       poen,
       TransactionType.EMISIJA_DONACIJA,
-      `Bonus za donaciju iznos ${poen.toLocaleString("sr-RS")}`, { kljuc: "transakcije.donacija", parametri: { iznos: poen } }
+      `Evidentiran doprinos po donaciji: ${poen.toLocaleString("sr-RS")} POEN`,
+      { kljuc: "transakcije.donacija", parametri: { iznos: poen } }
     );
+
+    // Javna donacija je jedan od četiri traga učešća koji otključavaju POEN po potvrdi
+    // (dokaz stvarnosti čl. 7). 🔴 Stoji UNUTAR `if (poen > 0)`, pa anonimna donacija
+    // ne otključava ništa — i to je namerno: POEN za potvrdu je javan zapis u knjizi,
+    // pa bi se pojavio a na Pijaci ne bi osvanuo nijedan nov oglas, i posmatrač bi
+    // zaključio da je čovek donirao. To je tačno ono što anonimna donacija krije
+    // (čl. 5a). Anoniman donator otključava nekim od druga tri puta.
+    //
+    // Ne baca: donacija je već evidentirana i ne sme da padne zbog ovog kanala.
+    await probajEvidentiratiPotvrde(userId);
   }
 
-  return { poenEmitted: poen, noviNivo, noviKumulativ, kurs };
+  // Identitet utvrđen na donatorskom putu (mera M-9). Postavlja se JEDNOM, pri
+  // prvoj potvrđenoj JAVNOJ donaciji: čovek je uporedio uplatioca iz izvoda sa
+  // nalogom, a ime donatora je javno uz sam zapis.
+  // 🔴 ANONIMNA DONACIJA NE DAJE OVO SVOJSTVO. Za nju se POEN ne evidentira
+  // (čl. 5a st. 2 Pravilnika o pokroviteljstvu i donacijama: upis koji se ne može
+  // pripisati licu nije proverljiv), pa ne nastaje ni položaj koji bi proširena
+  // prava pratila. Uz to je `identitetUtvrdjen` javna oznaka „donator“ na profilu
+  // — postavljena po anonimnoj donaciji, odala bi upravo onoga kome Politika
+  // obećava suprotno. Ne vezivati je za uplatioca bez uslova `javno`.
+  if (javno && uplatilac && !user.identitetUtvrdjenAt) {
+    await prisma.user.updateMany({
+      where: { id: userId, identitetUtvrdjenAt: null },
+      data: { identitetUtvrdjenAt: new Date() },
+    });
+  }
+
+  return { poenEmitted: poen, noviNivo, noviKumulativ, kurs, zapisId };
+}
+
+/**
+ * Provera duplikata po uplatiocu (mera C-1 uz R-01).
+ *
+ * Uplatilac je JEDINI spoljni identitet koji sistem uopšte ima: uplata prolazi
+ * kroz banku, koja je identifikaciju već sprovela. Dva naloga sa uplatama istog
+ * uplatioca su, po pravilu, isti čovek — što Uslovi čl. 8 zabranjuju, a lanac
+ * potvrda ne može da otkrije (verifikator ne zna koliko naloga neko ima).
+ *
+ * 🔴 Ne blokira samo od sebe — vraća nalaz, a odluku donosi čovek. Legitiman
+ * slučaj postoji (uplata sa zajedničkog porodičnog računa), pa bi tvrda zabrana
+ * pogađala i njega. Poklapanje zaustavlja evidentiranje dok ga čovek izričito
+ * ne potvrdi, i to potvrđivanje ide u revizijski dnevnik.
+ */
+export async function proveriDuplikatUplatioca(
+  userId: string,
+  uplatilac: string | null | undefined
+): Promise<{ sudar: boolean; pseudonimi: string[] }> {
+  const kljuc = normalizujUplatioca(uplatilac);
+  if (!kljuc) return { sudar: false, pseudonimi: [] };
+
+  const zapisi = await prisma.donationRecord.findMany({
+    where: {
+      uplatilacKljuc: kljuc,
+      status: DonationStatus.CONFIRMED,
+      userId: { not: userId },
+    },
+    select: { user: { select: { pseudonim: true } } },
+    take: 20,
+  });
+  const pseudonimi = [...new Set(zapisi.map((z) => z.user.pseudonim))];
+  return { sudar: pseudonimi.length > 0, pseudonimi };
 }

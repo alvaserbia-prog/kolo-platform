@@ -213,16 +213,8 @@ describe("zabeleziDoprinos", () => {
     await expect(zabeleziDoprinos("u1", { id: "o1", ...oglas() })).resolves.toBe(false);
   });
 
-  /** Podesi mock-ove tako da evidentiranje odmah po objavi prođe do emisije. */
-  function evidentiranjeProlaziOdmah() {
-    prismaMock.doprinosSadrzaju.create.mockResolvedValue({ id: "d1" });
-    prismaMock.doprinosSadrzaju.findFirst.mockResolvedValue({ id: "d1", iznos: IZNOS });
-    prismaMock.wallet.findUnique.mockResolvedValue({ id: "w1" });
-    prismaMock.doprinosSadrzaju.updateMany.mockResolvedValue({ count: 1 });
-  }
-
-  // 🔴 Nalogu bez potvrde oglas ide na Pijacu odmah, ali POEN čeka odluku čoveka
-  // (čl. 40a st. 4, izmena 2026-08-11) — inače bi prazan nalog naduvao opticaj.
+  // 🔴 Oglas ide na Pijacu odmah, ali POEN čeka odluku čoveka (čl. 40a) — inače bi
+  // prazan nalog naduvao opticaj.
   it("NEVERIFIKOVANOM beleženje ništa ne emituje — čeka odobrenje", async () => {
     prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: "NEVERIFIKOVAN" });
     prismaMock.doprinosSadrzaju.create.mockResolvedValue({ id: "d1" });
@@ -254,35 +246,24 @@ describe("zabeleziDoprinos", () => {
     await expect(zabeleziDoprinos("u1", { id: "o1", ...oglas() })).resolves.toBe(true);
   });
 
-  it("VERIFIKOVANOM se evidentira odmah po objavi (čl. 40a st. 3)", async () => {
-    prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: "REGULARNI" });
-    evidentiranjeProlaziOdmah();
+  // 🔴 Set 4.6.4: SVAKI prvi oglas ide na odobrenje, i potvrđenog člana. Ranije se
+  // verifikovanom doprinos evidentirao odmah pri objavi. Razlog za proširenje je to
+  // što odobren oglas sada otključava i POEN po potvrdi (dokaz stvarnosti čl. 7), pa
+  // jedan klik upisuje najmanje 3.000 POEN-a — a takav upis ne sme da nastane bez
+  // ijedne ljudske odluke. Ne vraćati evidentiranje u trenutak objave.
+  it.each([["REGULARNI"], ["NOSILAC_ZRNA"]])(
+    "%s takođe čeka odobrenje — objava ništa ne emituje",
+    async (tip) => {
+      prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: tip, pseudonim: "Mika" });
+      prismaMock.doprinosSadrzaju.create.mockResolvedValue({ id: "d1" });
 
-    await expect(zabeleziDoprinos("u1", { id: "o1", ...oglas() })).resolves.toBe(true);
+      await expect(zabeleziDoprinos("u1", { id: "o1", ...oglas() })).resolves.toBe(true);
 
-    expect(emitujPoenMock).toHaveBeenCalledTimes(1);
-    expect(emitujPoenMock.mock.calls[0][1]).toBe(IZNOS);
-    // Okidač mora da bude istinit: nije verifikacija ni odobrenje, nego objava.
-    expect(prismaMock.doprinosSadrzaju.updateMany.mock.calls[0][0].data.okidac).toBe("OBJAVA");
-    // Verifikovanom se ništa ne javlja adminima — nema šta da se odobrava.
-    expect(adminAlertMock).not.toHaveBeenCalled();
-  });
-
-  it("NOSILAC_ZRNA se tretira kao verifikovan", async () => {
-    prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: "NOSILAC_ZRNA" });
-    evidentiranjeProlaziOdmah();
-
-    await zabeleziDoprinos("u1", { id: "o1", ...oglas() });
-    expect(emitujPoenMock).toHaveBeenCalledTimes(1);
-  });
-
-  it("neuspeh evidentiranja ne obara objavu — beleženje ostaje uspešno", async () => {
-    prismaMock.user.findUnique.mockResolvedValue({ tipKorisnika: "REGULARNI" });
-    prismaMock.doprinosSadrzaju.create.mockResolvedValue({ id: "d1" });
-    prismaMock.doprinosSadrzaju.findFirst.mockRejectedValue(new Error("baza pukla"));
-
-    await expect(zabeleziDoprinos("u1", { id: "o1", ...oglas() })).resolves.toBe(true);
-  });
+      expect(emitujPoenMock).not.toHaveBeenCalled();
+      // I potvrđen član ulazi u red za odobrenje — inače ga niko ne bi ni pogledao.
+      expect(adminAlertMock).toHaveBeenCalledTimes(1);
+    },
+  );
 });
 
 // ─── Odobrenje i odbijanje (čl. 40a st. 4) ───────────────────────────────────

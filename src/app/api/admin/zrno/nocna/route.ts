@@ -29,10 +29,10 @@ export async function PATCH() {
   if (!session || !jeSuperadmin(session.user))
     return await greska("Pristup odbijen.", 403);
 
-  const current = await prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } });
+  const current = await prisma.zrnoKanal.findUnique({ where: { id: "singleton" } });
   const novoStanje = !(current?.isActive ?? false);
 
-  await prisma.zrnoTrziste.upsert({
+  await prisma.zrnoKanal.upsert({
     where: { id: "singleton" },
     create: { id: "singleton", isActive: novoStanje, activatedAt: novoStanje ? new Date() : null },
     update: { isActive: novoStanje, activatedAt: novoStanje ? new Date() : undefined },

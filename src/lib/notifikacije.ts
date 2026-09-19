@@ -24,6 +24,19 @@ export interface NotifikacijaOpcije {
   kljuc?: string;
   /** Vrednosti za `{parametar}` u prevodu. */
   parametri?: Parametri;
+  /**
+   * Zaseban, NEUTRALAN tekst za kanale VAN aplikacije — mejl (Resend) i push.
+   *
+   * 🔴 Postoji zbog obaveštenja koja u sebi nose podatak koji ne sme da izađe iz
+   * Platforme (naziv socijalnog programa otkriva pripadnost posebnoj kategoriji
+   * podataka — Pravilnik o programima podrške čl. 4, DPIA R11). Kad je postavljen,
+   * zvonce nosi pun tekst, a mejl i push samo poziv da se obaveštenje otvori u
+   * aplikaciji. Bez njega su sva tri kanala ista rečenica.
+   *
+   * Push je namerno pokriven zajedno sa mejlom: stiže na zaključan ekran telefona,
+   * pa je jednako kanal van Platforme.
+   */
+  spoljni?: { kljuc: string; naslov: string; tekst: string; parametri?: Parametri };
 }
 
 export async function posaljiNotifikaciju(
@@ -39,7 +52,7 @@ export async function posaljiNotifikaciju(
   });
   // Jezik primaoca (ne posmatrača i ne pošiljaoca) — mejl i push idu posle
   // odgovora, van konteksta zahteva, pa se čita iz baze.
-  const jezik = opcije?.kljuc
+  const jezik = opcije?.kljuc || opcije?.spoljni
     ? (await prisma.user.findUnique({ where: { id: userId }, select: { jezik: true } }))?.jezik
     : null;
   const naJeziku = (sufiks: string, rezerva: string) =>
@@ -48,15 +61,26 @@ export async function posaljiNotifikaciju(
   const naslovL = naJeziku("naslov", naslov);
   const tekstL = naJeziku("tekst", tekst);
 
+  // Kanali van aplikacije. Podrazumevano ista rečenica kao zvonce; uz `spoljni`
+  // dobijaju neutralan tekst koji ne otkriva sadržaj (vidi NotifikacijaOpcije).
+  const sp = opcije?.spoljni;
+  const spoljniNaslov = sp
+    ? prevedi(jezik, `${sp.kljuc}_naslov`, sp.parametri, sp.naslov)
+    : naslovL;
+  const spoljniTekst = sp
+    ? prevedi(jezik, `${sp.kljuc}_tekst`, sp.parametri, sp.tekst)
+    : tekstL;
+
   // Push na telefon/uređaj (ako je korisnik uključio obaveštenja). Ne blokira i
   // ne baca — zvonce u aplikaciji radi nezavisno od push-a. `zakaziPush` koristi
   // `after()` da push preživi kraj serverless odgovora (vidi push.ts).
-  zakaziPush(userId, { naslov: naslovL, tekst: tekstL, link, tip });
-  // Email (Resend) — isti tekst kao zvonce. Takođe ne blokira i ne baca.
+  zakaziPush(userId, { naslov: spoljniNaslov, tekst: spoljniTekst, link, tip });
+  // Email (Resend) — isti tekst kao zvonce, osim kad je postavljen `spoljni`.
+  // Takođe ne blokira i ne baca.
   if (opcije?.email !== false) {
     void posaljiEmailKorisniku(userId, {
-      naslov: naslovL,
-      tekst: tekstL,
+      naslov: spoljniNaslov,
+      tekst: spoljniTekst,
       link,
       linkTekst: opcije?.emailDugme,
     });
@@ -89,6 +113,7 @@ export async function obavesti(
     emailDugme: o.emailDugme,
     kljuc: o.kljuc,
     parametri: o.parametri,
+    spoljni: o.spoljni,
   });
 }
 

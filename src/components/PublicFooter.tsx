@@ -29,6 +29,7 @@ export default async function PublicFooter() {
             <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase h-7 flex items-center mb-5">{t("footer_sistem")}</p>
             <ul className="space-y-2 text-sm text-kolo-muted">
               <li><Link href="/kako-funkcionise" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_kako")}</Link></li>
+              <li><Link href="/kako-sistem-radi" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_kako_sistem")}</Link></li>
               <li><Link href="/o-sistemu" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_o_sistemu")}</Link></li>
               <li><Link href="/pijaca" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_pijaca")}</Link></li>
               <li><Link href="/whitepaper" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_whitepaper")}</Link></li>
@@ -40,6 +41,7 @@ export default async function PublicFooter() {
             <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase h-7 flex items-center mb-5">{t("footer_zajednica")}</p>
             <ul className="space-y-2 text-sm text-kolo-muted">
               <li><Link href="/o-nama" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_o_nama")}</Link></li>
+              <li><Link href="/vesti" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_vesti")}</Link></li>
               <li><Link href="/cesto-postavljena-pitanja" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_faq")}</Link></li>
               {POKROVITELJSTVO_AKTIVNO && <li><Link href="/pokrovitelji" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_pokrovitelji")}</Link></li>}
               <li><a href="mailto:kontakt@ekolo.rs" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_kontakt")}</a></li>
@@ -50,6 +52,7 @@ export default async function PublicFooter() {
           <div>
             <p className="text-sm font-bold tracking-widest text-kolo-muted uppercase h-7 flex items-center mb-5">{t("footer_pravni")}</p>
             <ul className="space-y-2 text-sm text-kolo-muted">
+              <li><Link href="/pravna-pozicija" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_pravna")}</Link></li>
               <li><Link href="/pravilnik" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_pravilnik")}</Link></li>
               <li><Link href="/statut" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_statut")}</Link></li>
               <li><Link href="/uslovi" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_uslovi")}</Link></li>

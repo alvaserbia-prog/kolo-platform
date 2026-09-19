@@ -29,8 +29,105 @@ export const UZRAST_MIN = 7;
 /** Gornja granica — punoletstvom prestaje svojstvo maloletnog korisnika (čl. 2). */
 export const UZRAST_PUNOLETSTVO = 18;
 
-/** Rok u kome se potvrđivači roditelja izjašnjavaju o postojanju deteta (čl. 6 st. 2). */
-export const ROK_POTVRDE_DANA = 30;
+/**
+ * Granica uzrasnih grupa (čl. 12): **7–14** i **15–17**.
+ *
+ * 🔴 Do ovog uzrasta maloletni korisnik sa punoletnima NITI razmenjuje NITI
+ * komunicira, i saglasnost roditelja to ne otvara. Razlog je pravni, ne
+ * bezbednosni: po članu 64 Porodičnog zakona dete koje nije navršilo četrnaest
+ * godina preduzima samo poslove male vrednosti i poslove kojima pribavlja
+ * isključivo prava, a od navršenih četrnaest sve ostalo uz saglasnost roditelja
+ * — koja se daje za KONKRETAN posao, ne unapred za sve.
+ *
+ * 🔴 Razvrstavanje se odnosi ISKLJUČIVO na odnos sa punoletnim korisnicima.
+ * Prijateljstva (čl. 14a), Pričaonica (čl. 18) i razmena među decom se NE
+ * razvrstavaju po uzrastu — inače bi se graf presekao i po čl. 19 otpisao POEN
+ * evidentiran za prijateljstva koja bi time pala.
+ */
+export const UZRAST_SA_ODRASLIMA = 15;
+
+/**
+ * Prag iznad koga prepis iz zapisa maloletnog korisnika čeka odobrenje roditelja
+ * (čl. 14). Dva praga, jer „mala vrednost" nije ista za sedmogodišnjaka i za
+ * sedamnaestogodišnjaka.
+ */
+export const PRAG_ODOBRENJA_MLADJI = 5_000;
+export const PRAG_ODOBRENJA_STARIJI = 20_000;
+
+/** Koliko dana roditelj ima da se izjasni o prepisu na čekanju (čl. 14). */
+export const ROK_ODOBRENJA_PREPISA_DANA = 7;
+
+/** Prag za dati uzrast; nepoznat uzrast pada na stroži prag. */
+export function pragOdobrenja(godine: number | null): number {
+  return (godine ?? 0) >= UZRAST_SA_ODRASLIMA ? PRAG_ODOBRENJA_STARIJI : PRAG_ODOBRENJA_MLADJI;
+}
+
+/**
+ * Da li maloletni korisnik uopšte sme u odnos sa punoletnim korisnicima (čl. 12).
+ * Punoletni nalog uvek sme — ovo pravilo uređuje samo dečju stranu.
+ */
+export function smeSaOdraslima(u: Ucesnik): boolean {
+  if (!u.maloletan) return true;
+  return (u.godine ?? 0) >= UZRAST_SA_ODRASLIMA;
+}
+
+/**
+ * Da li prepis traži odobrenje roditelja (čl. 14).
+ *
+ * 🔴 Samo ODLIV iz dečjeg zapisa. Priliv se ne odobrava: po članu 64 Porodičnog
+ * zakona posao kojim maloletnik pribavlja isključivo prava preduzima sam.
+ *
+ * 🔴 Prepis između roditelja i njegovog deteta se NE odobrava — čl. 14 st. 2 ga
+ * pušta bez ograničenja, a odobravanje sopstvenog poteza nema predmet.
+ */
+export function trebaOdobrenjeRoditelja(od: Ucesnik, ka: Ucesnik, iznos: number): boolean {
+  if (!od.maloletan) return false;
+  if (jeMojeDete(ka, od)) return false;
+  return iznos >= pragOdobrenja(od.godine);
+}
+
+export const PORUKA_SAMO_SA_DECOM =
+  "Do navršenih 15 godina razmena i razgovor idu samo sa drugom decom. Saglasnost roditelja to ne menja.";
+
+/**
+ * Rok u kome se o postojanju deteta izjašnjavaju OBE strane veze (čl. 6 st. 2).
+ *
+ * 🔴 Sa 30 na 60 dana od seta 4.5.2. Rok ne meri ničiju savesnost nego samo koliko
+ * je vremena razumno dati čoveku da vidi obaveštenje. Trideset dana je za nalog
+ * kojim se ne služi svakodnevno prekratko, a posledica isteka je najteža automatska
+ * posledica u sistemu — pad sopstvene potvrde i negativan zapis.
+ */
+export const ROK_POTVRDE_DANA = 60;
+
+/**
+ * Pragovi podsetnika, u danima do isteka (čl. 6 st. 3).
+ *
+ * 🔴 Podsetnik ide SVAKOME koga bi poništenje oštetilo — potvrđivaču, roditelju i
+ * nadzorniku — a ne samo onome od koga se izjašnjenje traži. Do seta 4.5.2 je
+ * postojalo jedno jedino obaveštenje, u trenutku otvaranja naloga, pa je čovek
+ * gubio potvrdu i POEN bez ijednog upozorenja u međuvremenu.
+ *
+ * Redosled je opadajući i posao ga tako i čita.
+ */
+export const PODSETNIK_PRAGOVI_DANA = [30, 7, 1] as const;
+
+/**
+ * Prag podsetnika koji je sada na redu, ili `null` kad nema šta da se šalje.
+ *
+ * Vraća najveći prag koji je dostignut a još nije poslat. Time jedno polje
+ * (`RoditeljstvoPotvrda.podsetnikDana`) drži ceo raspored: posao koji je preskočen
+ * nekoliko dana ne šalje tri poruke odjednom nego jednu, za prag na kome se rok
+ * zatekao.
+ */
+export function pragPodsetnika(
+  danaDoRoka: number,
+  vecPoslato: number | null
+): number | null {
+  for (const prag of PODSETNIK_PRAGOVI_DANA) {
+    if (danaDoRoka <= prag && (vecPoslato === null || vecPoslato > prag)) return prag;
+  }
+  return null;
+}
 
 /**
  * Koliko važi link iz poruke poslate roditelju (čl. 4b st. 3).
@@ -105,13 +202,49 @@ export type RoditeljStanje = {
 export type Ucesnik = {
   id: string;
   maloletan: boolean;
+  /**
+   * Uzrast u godinama; `null` kod punoletnog naloga i kod deteta kome roditelj
+   * datum rođenja još nije upisao (nalog na čekanju po čl. 4b).
+   */
+  godine: number | null;
   /** Prekidač iz čl. 10 st. 2. Kod punoletnog korisnika nema značenja. */
   dozvolaOdrasli: boolean;
   /** Roditelji (najviše dva, ista ovlašćenja). Kod punoletnog korisnika prazno. */
   roditeljIds: string[];
   /** Kod punoletnog korisnika uvek `AKTIVNO` — stanja se odnose samo na decu. */
   stanje: StanjeDeteta;
+  /** Škola koju je dete samo izabralo (čl. 7). `null` kod punoletnog naloga. */
+  skolaSifra: string | null;
 };
+
+/**
+ * Da li posmatrač sme da vidi SPISAK DECE jedne škole (čl. 15a, 15b).
+ *
+ * Dva uslova, oba nužna:
+ *
+ * 1. 🔴 **Punopravno dete, ne bilo koji maloletan nalog.** Do R-03 je uslov bio
+ *    samo `maloletan`, a maloletan nalog se otvara za dva minuta — pseudonim,
+ *    lozinka i TUĐ imejl — i `maloletan: true` se upisuje odmah, dakle i nalogu u
+ *    stanju `NA_CEKANJU`, iza koga ne stoji niko. Odrastao je tako izlistavao
+ *    decu sa slikama i iznosima. `AKTIVNO` traži bar jednog roditelja koji je
+ *    redovan član, dakle čoveka koga je treće lice potvrdilo u stvarnom svetu —
+ *    ista brana koju Pričaonica već ima iz istog razloga (čl. 18 st. 2).
+ *
+ * 2. 🔴 **Samo SVOJA škola.** Spisak je zajednica u kojoj se deca ionako znaju
+ *    uživo; dete iz Vranja nema razlog da lista decu škole u Somboru. Bez ovog
+ *    uslova jedan nalog vidi decu svih 1.888 škola.
+ *
+ * Nacionalne liste i svi brojevi ostaju svima — one pokreću ceo mehanizam i ne
+ * imenuju nikoga.
+ */
+export function smeVidetiSpisakSkole(
+  posmatrac: Ucesnik | null,
+  sifra: string
+): boolean {
+  if (!posmatrac?.maloletan) return false;
+  if (posmatrac.stanje !== "AKTIVNO") return false;
+  return posmatrac.skolaSifra === sifra;
+}
 
 // ── Stanje naloga ─────────────────────────────────────────────────────────────
 
@@ -189,6 +322,19 @@ export function uzrast(datumRodjenja: Date, danas: Date): number {
     godine -= 1;
   }
   return godine;
+}
+
+/**
+ * Najkasniji datum rođenja pri kome je korisnik danas navršio `godine` godina.
+ *
+ * Postoji zbog upita nad bazom: uzrast se ne može računati u Prismi, pa se uslov
+ * „ima najmanje N godina" izražava kao `datumRodjenja <= granica`. Računa se u
+ * UTC-u, kao i `uzrast`, da se ta dva nikad ne raziđu za jedan dan.
+ */
+export function granicaDatumaZaUzrast(godine: number, danas: Date): Date {
+  return new Date(
+    Date.UTC(danas.getUTCFullYear() - godine, danas.getUTCMonth(), danas.getUTCDate())
+  );
 }
 
 /** Dan kada nalog prelazi u punoletni (čl. 19 st. 1). */
@@ -272,6 +418,11 @@ export function smeDaKomunicira(a: Ucesnik, b: Ucesnik): Provera {
   if (a.maloletan && b.maloletan) return { ok: true };
 
   const dete = a.maloletan ? a : b;
+  // Uzrasna granica ide PRE prekidača: do 15 saglasnost roditelja ne otvara ništa
+  // (čl. 12 st. 4). Zato se prekidač detetu do 14 i ne prikazuje.
+  if (!smeSaOdraslima(dete)) {
+    return { ok: false, razlog: PORUKA_SAMO_SA_DECOM, status: 403 };
+  }
   if (dete.dozvolaOdrasli) return { ok: true };
   return {
     ok: false,
@@ -334,16 +485,19 @@ export function smeDaVidiOglas(
   oglasivac: Ucesnik
 ): boolean {
   if (!oglasivac.maloletan) {
-    // Oglas punoletnog korisnika: javan je svima, a maloletnom se prikazuje uz saglasnost.
+    // Oglas punoletnog korisnika: javan je svima, a maloletnom se prikazuje uz
+    // saglasnost — i tek od 15. godine (čl. 12 st. 4).
     if (!posmatrac?.maloletan) return true;
-    return posmatrac.dozvolaOdrasli;
+    return smeSaOdraslima(posmatrac) && posmatrac.dozvolaOdrasli;
   }
   if (!posmatrac) return false;
   if (posmatrac.id === oglasivac.id) return true;
   if (posmatrac.admin) return true;
   if (oglasivac.roditeljIds.includes(posmatrac.id)) return true;
   if (posmatrac.maloletan) return true;
-  return oglasivac.dozvolaOdrasli;
+  // Punoletnom posmatraču oglas deteta do 15 nije vidljiv ni uz saglasnost: kad
+  // razmene ne sme da bude, prikaz oglasa je izlaganje bez svrhe (čl. 13 st. 3).
+  return smeSaOdraslima(oglasivac) && oglasivac.dozvolaOdrasli;
 }
 
 /**
@@ -456,7 +610,7 @@ export function danaDoIsteka(rokDo: Date, sada: Date): number {
  * 500. Ne broje se raskinuta prijateljstva (njihovih 500 je već otpisano — inače bi
  * isti POEN bio oduzet dvaput), prijateljstva sa braćom i sestrama (nikad nisu
  * nosila POEN) ni prijateljstva na čekanju (druga strana nikad nije postala
- * aktivna). Sve to nosi jedno polje: `Prijateljstvo.poenIsplacen`.
+ * aktivna). Sve to nosi jedno polje: `Prijateljstvo.poenEvidentiran`.
  *
  * Razlog za otpis je uravnoteženje kanala. Prijateljstvo nosi 500 za trideset
  * sekundi u istoj prostoriji; potvrda stvarnosti nosi 1.000, ali traži da tvrdiš

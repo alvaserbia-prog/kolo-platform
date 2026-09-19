@@ -9,7 +9,7 @@
  *
  * `src/lib/protokol/nabavka.ts` sve ovo re-eksportuje, pa server ima jedan ulaz.
  *
- * Osnov: Pravilnik o projektima i kolektivnim nabavkama (set 4.4.1), čl. 5, 8,
+ * Osnov: Pravilnik o projektima i kolektivnim nabavkama (set 4.4.3), čl. 5, 8,
  * 15, 17, 18, 19, 21, 22, 23 i 26; Pravilnik o KOLO sistemu čl. 14a i 51a.
  *
  * 🔴 Brojevi iz ovog fajla stoje DOSLOVNO u aktu i zaključani su testom
@@ -25,18 +25,20 @@ export const KOEFICIJENT_TROSENJA = 1.0;
 /** Čl. 5 st. 3 — operativna rezerva = tri operativna troška prethodnog meseca. */
 export const MESECI_REZERVE = 3;
 
-/**
- * Čl. 18 st. 2 — niz iz kog se IZVODI broj delova, od većeg ka manjem.
- * Bira se najveće N pri kome svako dobija bar jednu celu jedinicu, dakle
- * maksimizuje se broj opsluženih ljudi.
- */
-export const NIZ_DELOVA = [100, 50, 20] as const;
-
 /** Čl. 15 st. 1 — najmanje toliko ponuda pre izbora najpovoljnije. */
 export const NAJMANJE_PONUDA = 3;
 
-/** Čl. 17 — maloprodajna referenca je prosek tačno toliko javnih cena. */
-export const BROJ_CENA_ZA_REFERENCU = 3;
+/**
+ * Čl. 21 st. 1 — najmanji broj evidentiranih POEN-a za prijavu na nabavku.
+ *
+ * Jednak je minimumu za upis ZRNA iz čl. 19 Pravilnika o KOLO sistemu, da prag ne
+ * bi bio proizvoljan broj: za učešće u raspodeli sredstava zajednice traži se isti
+ * red veličine doprinosa kao za ulazak u upravljanje njome.
+ *
+ * 🔴 Poreklo POEN-a se NE ispituje — svih devet kanala iz čl. 15 Pravilnika vredi
+ * jednako, pa i donacija. Prag meri nagomilan doprinos, ne način na koji je nastao.
+ */
+export const PRAG_POENA_ZA_UCESCE = 20_000;
 
 /** Čl. 21 st. 2 — rok za prijavu, u danima od objave kalkulacije. */
 export const ROK_PRIJAVE_DANA = 3;
@@ -88,144 +90,120 @@ export function validanNaziv(naziv: string): boolean {
  *
  * Rezerva je isti reper po kome se trajno gasi zaštitni veto (Gornje Kolo čl. 19),
  * pa nije proizvoljna cifra nego mera održivosti koju akti već priznaju.
- * Negativna razlika se svodi na nulu — nabavka se tada ne sprovodi (st. 4).
+ * Negativna razlika se svodi na nulu — nabavka se tada ne sprovodi.
  */
 export function raspolozivoZaProjekte(saldoRSD: number, trosakPrethodnogMesecaRSD: number): number {
   const rezerva = trosakPrethodnogMesecaRSD * MESECI_REZERVE;
   return Math.max(0, saldoRSD - rezerva);
 }
 
-/** Čl. 8 st. 1 — iznos nabavke. */
-export function iznosNabavke(raspolozivoRSD: number): number {
+/**
+ * Čl. 8 — gornja granica trošenja za jednu nabavku.
+ *
+ * 🔴 Od 4.4.3 ovo NIJE iznos koji se troši nego granica koja se ne sme preći.
+ * Ranije je novac određivao količinu (količina = iznos ÷ cena); sada količinu
+ * utvrđuje odluka o nabavci, a dinar ulazi tek kao provera staje li trošak unutar
+ * granice. Razlika nije računska nego pravna: dok je novac određivao šta ko dobija,
+ * raspodela je bila izvedena iz cene.
+ */
+export function gornjaGranicaTrosenja(raspolozivoRSD: number): number {
   return raspolozivoRSD * KOEFICIJENT_TROSENJA;
 }
 
-// ─── Kalkulacija (čl. 17, 18, 19) ─────────────────────────────────────────────
+// ─── Parametri odluke i kalkulacija (čl. 17, 18) ──────────────────────────────
 
 /**
- * Čl. 17 — maloprodajna referenca: prosek tri javne cene, zaokružen na ceo dinar.
+ * Čl. 17 — parametre nabavke utvrđuje ODLUKA kojom se nabavka pokreće: ukupnu
+ * količinu, veličinu jednog dela i broj POEN-a koji se poništava po delu.
  *
- * 🔴 Ovaj broj JESTE kurs, jer je POEN po jedinici jednak njemu (paritet 1:1).
- * Zato akt traži tačno tri cene i objavljene izvore — bez toga bi jedan čovek
- * određivao koliko POEN-a nestaje iz sistema.
+ * 🔴 Utvrđuju se PRE prikupljanja ponuda, pa se ne mogu izvesti iz dinarske cene —
+ * ona u tom trenutku ne postoji. To je jedina brana koja tvrdnju iz čl. 19 („broj
+ * POEN-a po delu nije cena dobra") čini proverljivom po samoj konstrukciji
+ * postupka. `dodajPonudu` zato odbija ponudu dok parametri nisu utvrđeni.
+ *
+ * Ne vraćati izvođenje količine ili broja delova iz novca i cene.
  */
-export function maloprodajnaReferenca(cene: number[]): number | null {
-  if (cene.length !== BROJ_CENA_ZA_REFERENCU) return null;
-  if (cene.some((c) => !Number.isFinite(c) || c <= 0)) return null;
-  return Math.round(cene.reduce((a, b) => a + b, 0) / cene.length);
-}
-
-/** Čl. 18 st. 1 — najveći broj jedinica koji iznos nabavke pokriva. */
-export function najveciBrojJedinica(iznosRSD: number, nabavnaCenaPoJedinici: number): number {
-  if (!Number.isFinite(nabavnaCenaPoJedinici) || nabavnaCenaPoJedinici <= 0) return 0;
-  return Math.floor(iznosRSD / nabavnaCenaPoJedinici);
-}
-
-export interface Podela {
-  brojDelova: number;
+export interface ParametriOdluke {
+  /** Ukupna količina dobra koja se nabavlja, u jedinicama mere. */
+  kolicina: number;
+  /** Veličina jednog dela, u istim jedinicama. */
   velicinaDela: number;
-  /** Koliko se jedinica stvarno kupuje = velicinaDela × brojDelova. */
-  jedinicaSeKupuje: number;
+  /** Broj POEN-a koji se poništava preuzimanjem jednog dela. */
+  poenPoDelu: number;
 }
 
-/**
- * Čl. 18 st. 2 i 3 — broj delova se NE bira nego izvodi.
- *
- * Uzima se najveće N iz niza pri kome veličina dela iznosi bar jednu celu jedinicu.
- * Time se maksimizuje broj ljudi koji dobiju, uz uslov da svako dobije upotrebljivu
- * količinu; ostatak jedinica se ne kupuje, pa nema viška ni deljenja na komade.
- *
- * Vraća `null` kad ni pri N = 20 deo ne dostiže jednu jedinicu — nabavka se tada
- * ne sprovodi, a sredstva ostaju za narednu (st. 4).
- */
-export function izvediPodelu(najviseJedinica: number): Podela | null {
-  for (const brojDelova of NIZ_DELOVA) {
-    const velicinaDela = Math.floor(najviseJedinica / brojDelova);
-    if (velicinaDela >= 1) {
-      return { brojDelova, velicinaDela, jedinicaSeKupuje: velicinaDela * brojDelova };
-    }
-  }
-  return null;
+export function validniParametri(p: ParametriOdluke): boolean {
+  if (!Number.isInteger(p.kolicina) || p.kolicina <= 0) return false;
+  if (!Number.isInteger(p.velicinaDela) || p.velicinaDela <= 0) return false;
+  if (!Number.isInteger(p.poenPoDelu) || p.poenPoDelu <= 0) return false;
+  // Čl. 17 st. 2 — broj delova je količnik, pa količina mora biti deljiva bez
+  // ostatka: ostatak bi značio deo manji od objavljenog, a delovi su jednaki.
+  return p.kolicina % p.velicinaDela === 0;
 }
 
-/**
- * Čl. 19 — broj POEN-a po delu, u odnosu jedan prema jedan sa maloprodajnom
- * referencom.
- *
- * 🔴 NE izvodi se iz nabavne cene. POEN se ne razmenjuje za dobra i ne dolazi do
- * dobavljača; dobra su kupljena dinarima, a POEN se poništava kao zapis o
- * iskorišćenom učešću.
- */
-export function poenPoDelu(velicinaDela: number, maloprodajnaRef: number): number {
-  return velicinaDela * maloprodajnaRef;
+/** Čl. 17 st. 2 — broj delova jednak je količniku količine i veličine dela. */
+export function brojDelova(kolicina: number, velicinaDela: number): number {
+  return Math.floor(kolicina / velicinaDela);
 }
 
-/**
- * Merilo po kome se nabavka ocenjuje: koliko POEN-a nestane iz sistema po
- * potrošenom dinaru. Što je nabavna cena niža, to je odnos veći — jedan broj koji
- * poravnava interes Fondacije (jeftinije) i interes sistema (više poništenog POEN-a).
- */
-export function odnosPonistenja(maloprodajnaRef: number, nabavnaCena: number): number | null {
-  if (!Number.isFinite(nabavnaCena) || nabavnaCena <= 0) return null;
-  return maloprodajnaRef / nabavnaCena;
+/** Čl. 18 st. 1 — ukupan dinarski trošak = ukupna količina × nabavna cena. */
+export function ukupanTrosak(kolicina: number, nabavnaCenaPoJedinici: number): number {
+  return kolicina * nabavnaCenaPoJedinici;
 }
 
 export interface UlazKalkulacije {
   saldoRSD: number;
   trosakPrethodnogMesecaRSD: number;
+  /** Čl. 17 — odlučeni parametri, poznati pre tendera. */
+  parametri: ParametriOdluke;
+  /** Čl. 18 — nabavna cena po jedinici iz izabrane ponude. */
   nabavnaCena: number;
-  cene: number[];
 }
 
 export interface Kalkulacija {
   rezervaRSD: number;
   raspolozivoRSD: number;
-  iznosNabavkeRSD: number;
-  maloprodajna: number;
-  najviseJedinica: number;
-  brojDelova: number;
+  gornjaGranicaRSD: number;
+  kolicina: number;
   velicinaDela: number;
-  brojJedinica: number;
+  brojDelova: number;
   poenPoDelu: number;
   ukupnoPoena: number;
-  procenjenoPlacanjeRSD: number;
-  odnosPonistenja: number;
+  ukupnoRSD: number;
 }
 
 /**
- * Ceo lanac iz čl. 5 → 19 u jednom pozivu. Vraća `null` kad nabavka nije moguća
- * (nema sredstava, nevažeće cene, ili deo ne dostiže jednu jedinicu).
+ * Čl. 5 → 18 u jednom pozivu. Vraća `null` kad nabavka nije moguća: nema sredstava
+ * iznad rezerve, parametri nisu ispravni, ili ukupan trošak prelazi gornju granicu.
+ *
+ * 🔴 Prekoračenje granice NIJE greška u unosu nego ishod tendera (čl. 18 st. 2):
+ * nabavka se tada ne sprovodi, sredstva ostaju za narednu, a nova odluka može
+ * utvrditi manju količinu. Ne „skraćivati" količinu automatski — time bi novac
+ * ponovo određivao raspodelu.
  */
 export function izracunajKalkulaciju(ulaz: UlazKalkulacije): Kalkulacija | null {
   const rezervaRSD = ulaz.trosakPrethodnogMesecaRSD * MESECI_REZERVE;
   const raspolozivoRSD = raspolozivoZaProjekte(ulaz.saldoRSD, ulaz.trosakPrethodnogMesecaRSD);
   if (raspolozivoRSD <= 0) return null;
+  if (!validniParametri(ulaz.parametri)) return null;
+  if (!Number.isFinite(ulaz.nabavnaCena) || ulaz.nabavnaCena <= 0) return null;
 
-  const iznosNabavkeRSD = iznosNabavke(raspolozivoRSD);
-  const maloprodajna = maloprodajnaReferenca(ulaz.cene);
-  if (maloprodajna === null) return null;
+  const gornjaGranicaRSD = gornjaGranicaTrosenja(raspolozivoRSD);
+  const ukupnoRSD = ukupanTrosak(ulaz.parametri.kolicina, ulaz.nabavnaCena);
+  if (ukupnoRSD > gornjaGranicaRSD) return null;
 
-  const najviseJedinica = najveciBrojJedinica(iznosNabavkeRSD, ulaz.nabavnaCena);
-  const podela = izvediPodelu(najviseJedinica);
-  if (!podela) return null;
-
-  const poenDela = poenPoDelu(podela.velicinaDela, maloprodajna);
-  const odnos = odnosPonistenja(maloprodajna, ulaz.nabavnaCena);
-  if (odnos === null) return null;
+  const delova = brojDelova(ulaz.parametri.kolicina, ulaz.parametri.velicinaDela);
 
   return {
     rezervaRSD,
     raspolozivoRSD,
-    iznosNabavkeRSD,
-    maloprodajna,
-    najviseJedinica,
-    brojDelova: podela.brojDelova,
-    velicinaDela: podela.velicinaDela,
-    brojJedinica: podela.jedinicaSeKupuje,
-    poenPoDelu: poenDela,
-    ukupnoPoena: poenDela * podela.brojDelova,
-    procenjenoPlacanjeRSD: podela.jedinicaSeKupuje * ulaz.nabavnaCena,
-    odnosPonistenja: odnos,
+    gornjaGranicaRSD,
+    kolicina: ulaz.parametri.kolicina,
+    velicinaDela: ulaz.parametri.velicinaDela,
+    brojDelova: delova,
+    poenPoDelu: ulaz.parametri.poenPoDelu,
+    ukupnoPoena: ulaz.parametri.poenPoDelu * delova,
+    ukupnoRSD,
   };
 }
 
@@ -311,22 +289,116 @@ export function predlogIstice(upisanAt: Date): Date {
 
 // ─── Ko učestvuje (čl. 4) ─────────────────────────────────────────────────────
 
+/**
+ * Funkcionalni prag indeksa (čl. 4 Pravilnika o dokazu stvarnosti). Prepisan
+ * ovde umesto uvezen, jer ovaj modul namerno nema uvoza — čitaju ga i ekrani.
+ */
+export const FUNKCIONALNI_PRAG_INDEKSA_NABAVKA = 10;
+
 export interface UcesnikProvera {
   maloletan: boolean;
   deaktiviranAt: Date | null;
   status: string;
+  /**
+   * Potvrđena stvarnost (mera P-1 uz R-01). Dobra se raspodeljuju korisnicima
+   * programa u smislu čl. 9 st. 4 Statuta, a to mora biti lice čija je stvarnost
+   * potvrđena.
+   */
+  verified: boolean;
+  indeksStvarnosti: number;
 }
 
 /**
- * Čl. 4 — u nabavci učestvuju punoletni korisnici sa aktivnim nalogom.
+ * Čl. 4 — u nabavci učestvuju punoletni korisnici sa aktivnim nalogom i
+ * POTVRĐENOM STVARNOŠĆU (indeks ≥ 10%).
  *
  * 🔴 Maloletni nalog je isključen izričito, a ne posredno preko indeksa: dete sme
  * da ima POEN i ušlo bi u red, a ne sme da bude strana u preuzimanju robe.
+ *
+ * 🔴 Uslov potvrde je dodat merom P-1 uz R-01. Do tada je provera gledala samo
+ * uzrast i stanje naloga, pa je prag od 20.000 POEN-a bio dostižan PREPISOM na
+ * svež nepotvrđen nalog — novac → POEN → roba, bez ijedne provere identiteta.
+ * Postojalo je nezavisno od svega ostalog u tom riziku.
  */
+export function ispunjavaPrag(poen: number): boolean {
+  return Number.isFinite(poen) && poen >= PRAG_POENA_ZA_UCESCE;
+}
+
 export function smeUcestvovati(u: UcesnikProvera): boolean {
   if (u.maloletan) return false;
   if (u.deaktiviranAt) return false;
+  if (!u.verified || u.indeksStvarnosti < FUNKCIONALNI_PRAG_INDEKSA_NABAVKA) return false;
   return u.status === "ACTIVE";
+}
+
+// ─── Godišnja granica dinarske vrednosti po korisniku (čl. 21a) ───────────────
+
+/**
+ * Gornja granica ukupne dinarske vrednosti dobara koju jedan korisnik može
+ * preuzeti iz kolektivnih nabavki u jednoj kalendarskoj godini.
+ *
+ * 🔴 Vrednost se meri ISKLJUČIVO sa računa dobavljača (`placenoRSD ÷ brojDelova`),
+ * nikad iz broja POEN-a. Kapa izražena u POEN-ima bila bi preračun POEN → dinar,
+ * dakle upravo onaj odnos koji Uslovi čl. 19 i Pravilnik čl. 13 kažu da Fondacija
+ * ne utvrđuje i ne primenjuje — mera bi oborila odbranu koju treba da štiti.
+ *
+ * 🔴 Broj NE ide u akt (čl. 21a st. 3: utvrđuje ga odluka UO i objavljuje se),
+ * jer zavisi od propisa koji se menjaju nezavisno od pravilnika. Isti razlog iz
+ * kog u aktima nema poreskih stopa ni `PRAG_PROVERE_POREKLA_RSD` iz AML glave.
+ *
+ * 100.000 RSD — iznos do kog davanje jednog davaoca u jednoj kalendarskoj godini
+ * ostaje van oporezivanja po propisima o porezima na imovinu.
+ *
+ * 🟢 Iznos je FIKSAN, ne usklađuje se godišnje (odluka vlasnika uz potvrdu, 13.09.2026).
+ * Godišnje usklađivanje indeksom potrošačkih cena, koje se objavljuje svakog januara i
+ * primenjuje od 1. februara, obuhvata ISKLJUČIVO iznose iz Zakona o porezu na dohodak
+ * građana; ovaj iznos u tom spisku ne stoji.
+ *
+ * 🔴 „Fiksan" ne znači nepromenljiv: iznos se menjao izmenama samog zakona (ranije
+ * 9.000, pa 30.000 dinara). Zato se NE proverava svakog februara, nego pri izmeni
+ * propisa. Menja se izmenom ove konstante, ne izmenom akta.
+ */
+export const GODISNJA_GRANICA_VREDNOSTI_RSD = 100_000;
+
+/**
+ * Dinarska vrednost jednog dela — trošak nabavke podeljen brojem delova.
+ *
+ * Vraća `null` dok trošak ili broj delova nisu poznati (nabavka pre plaćanja),
+ * jer se tada vrednost ne može utvrditi, a procenjena vrednost bi bila upravo
+ * ono što čl. 21a st. 2 zabranjuje — broj izveden iz nečega drugog.
+ */
+export function vrednostDelaRSD(placenoRSD: number | null, brojDelova: number | null): number | null {
+  if (placenoRSD == null || brojDelova == null) return null;
+  if (!Number.isFinite(placenoRSD) || !Number.isFinite(brojDelova) || brojDelova <= 0) return null;
+  return placenoRSD / brojDelova;
+}
+
+/**
+ * Čl. 21a st. 4 — sme li se korisnik prijaviti, s obzirom na već preuzetu
+ * vrednost u tekućoj kalendarskoj godini i vrednost dela ove nabavke.
+ *
+ * Nepoznata vrednost dela (nabavka još nije plaćena) NE zatvara prijavu: granica
+ * se proverava onim što je poznato, a već preuzeto je uvek poznato. Zatvaranje na
+ * osnovu nepoznatog broja bilo bi odbijanje bez utvrđenog razloga.
+ */
+export function uGodisnjojGranici(
+  vecPreuzetoRSD: number,
+  vrednostOvogDelaRSD: number | null,
+  granicaRSD: number = GODISNJA_GRANICA_VREDNOSTI_RSD,
+): boolean {
+  const vec = Number.isFinite(vecPreuzetoRSD) ? Math.max(0, vecPreuzetoRSD) : 0;
+  if (vec >= granicaRSD) return false;
+  if (vrednostOvogDelaRSD == null) return true;
+  return vec + vrednostOvogDelaRSD <= granicaRSD;
+}
+
+/** Koliko je korisniku ostalo do granice u tekućoj godini (nikad negativno). */
+export function preostaloDoGraniceRSD(
+  vecPreuzetoRSD: number,
+  granicaRSD: number = GODISNJA_GRANICA_VREDNOSTI_RSD,
+): number {
+  const vec = Number.isFinite(vecPreuzetoRSD) ? Math.max(0, vecPreuzetoRSD) : 0;
+  return Math.max(0, granicaRSD - vec);
 }
 
 // ─── Izborno glasanje (Gornje Kolo čl. 8 st. 4, čl. 9 st. 2) ──────────────────

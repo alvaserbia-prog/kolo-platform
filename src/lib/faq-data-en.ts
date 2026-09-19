@@ -113,7 +113,7 @@ What confirmed means, and what it does not. A full member is someone whose reali
 
 What works in your favour. The system remembers permanently. Every update of the record stays logged under a pseudonym and visible to full members — bad conduct is not erased from an account.
 
-If the exchange falls through. Report the case to the Foundation — the button sits next to the re-registration itself in your POEN history. A re-registration is not irreversible: if the Foundation annuls it upon your report, the whole amount comes back to you, even when that pushes the other side's ledger below zero. The decision rests with the Foundation, so a report is not an automatic refund.
+If the exchange falls through. Lodge a complaint with the Foundation from your own profile, within 30 days of the re-registration, and select that particular re-registration. The other side is given seven days to make a statement, then the Foundation decides with a statement of reasons sent to both sides. If it annuls the re-registration, the whole amount comes back to you, even when that pushes the other side's ledger below zero. The decision rests with the Foundation, so a complaint is not an automatic refund.
 
 For quality, delivery and performance of the agreement you and the other side are answerable under the general rules of the law of obligations; the Foundation and the Protocol are not a party to that relationship. In the initial phase you may also ask for voluntary mediation by the Foundation — it is not binding, but it is often enough.
 
@@ -153,7 +153,7 @@ POEN exists only in the Protocol. The record is kept by the Protocol and cannot 
 
 POEN is not money. It is not a means of payment, not electronic money, not digital assets, not a financial instrument, and it is not a debt the Foundation owes you. It has no value outside the system: it is not exchanged for money, it is not resold, and the Foundation does not buy it back.
 
-So does it have a value in money? There is no exchange rate. But so that you and the other side can agree on what something is worth, amounts in the system are expressed on a scale where 1 POEN corresponds to 1 dinar. That is a measuring scale for comparison inside the system — the way you express weight in kilograms — not a rate at which something is exchanged for money. The Foundation does not guarantee any value of POEN.`,
+So does it have a value in money? There is no exchange rate, and the Foundation publishes no ratio of POEN to the dinar. You set the amount in your listing yourself. Most people find their bearings by starting from the price they already know for that good or service — that is your own estimate, it holds for that listing, it binds no one else, and it is not a rate. The Foundation does not do that calculation for you: it records no contribution by it, determines no amount from the rulebooks by it, guarantees no value of POEN and does not redeem it.`,
       },
       {
         id: 2,
@@ -176,20 +176,20 @@ An expiry is not ruled out forever: a mechanism for POEN to "age", which would e
       {
         id: 4,
         pitanje: `What is ZRNO and what is it for?`,
-        odgovor: `ZRNO is a record separate from POEN. Where POEN records what you have given the community, ZRNO shows how much of that you have put back into it — and from that stake comes your say in decisions about the rules of the system.
+        odgovor: `ZRNO is a record separate from POEN. Where POEN records what you have given the community, ZRNO records your standing in it — and from that standing comes your say in decisions about the rules of the system.
 
 How it is acquired. You record ZRNO with POEN you already have. How much POEN one ZRNO takes is shown by the coefficient. You can also write ZRNO off.
 
 How it gives you a vote. You lock recorded ZRNO to make it active — only active ZRNO carries voting power. The vote does not grow in a straight line: the number of votes is the square root of the number of active ZRNO, so someone with a hundred times more ZRNO has ten times more votes, not a hundred. That way no one can take over decision-making by accumulating.
 
-What ZRNO is not. It is not a share, not a stock, not digital assets, not a financial instrument. It bears no interest and no dividend, no one pays you anything on account of it, and it is not re-registered to another member. It shows how much you have put into the community, not how much it owes you.`,
+What ZRNO is not. It is not a share, not a stock, not digital assets, not a financial instrument. It bears no interest and no dividend, no one pays you anything on account of it, and it is not re-registered to another member. It shows your standing in the community, not how much it owes you.`,
       },
       {
         id: 5,
         pitanje: `What about taxes and fiscal receipts?`,
         odgovor: `The Foundation does not calculate tax for you and does not issue fiscal receipts in your name. POEN is neither money nor legal tender, and re-registering POEN is not a payment transaction within the meaning of payment services regulations.
 
-POEN is not income in money. It is not paid out, it is not exchanged for dinars, and it cannot leave the Protocol. The 1 POEN = 1 dinar ratio is a measuring scale inside the system, not a price or a rate — POEN has no market on which a value outside the system could be established.
+POEN is not income in money. It is not paid out, it is not exchanged for dinars, and it cannot leave the Protocol. The Foundation publishes no ratio of POEN to the dinar; if people compare it with a price in dinars when agreeing, that is their own estimate, not a price and not a rate — POEN has no market on which a value outside the system could be established.
 
 But KOLO does not cancel obligations you already have. If you occasionally pass on a surplus or help someone out, nothing changes. If you make your living selling goods or providing services, the same regulations apply as outside KOLO — regardless of whether the arrangement is recorded in POEN.
 
@@ -208,6 +208,7 @@ Why that matters. There is no contract between those two acts. There is no arran
       },
       {
         id: 40,
+        link: { href: "/pravna-pozicija", label: "KOLO's legal position" },
         pitanje: `Is this some kind of pyramid scheme or crypto?`,
         odgovor: `It is neither.
 
@@ -235,15 +236,17 @@ The system can carry on without us. The code KOLO runs on is public and publishe
       {
         id: 52,
         pitanje: `Why a ceiling of 1,000,000 ZRNO if ZRNO cannot be traded? Is there staking or a yield?`,
-        odgovor: `Why the ceiling. There are 1,000,000 ZRNO in total and that number can neither be increased nor decreased. That way decision-making cannot be diluted: no one can create new ZRNO later and thereby devalue the vote of those already here. With every recording, the number of ZRNO available in the Protocol falls, so the coefficient is higher.
+        odgovor: `Why the ceiling. There are 1,000,000 ZRNO in total and that number can neither be increased nor decreased. That way decision-making cannot be diluted: no one can create new ZRNO later and thereby devalue the vote of those already here. With every recording, the number of ZRNO available in the Protocol falls — but at the same time the number of POEN in circulation falls too, because the POEN used to record the ZRNO returns to the Protocol. That is why recording itself does not shift the coefficient.
 
 ZRNO is not traded. It is not re-registered to another member and it does not leave the Protocol. It records your standing in the common good, from which your vote in the Upper Kolo follows.
 
-Locking is not staking. You lock recorded ZRNO only so that your vote can be counted — only active ZRNO carries voting power. Locking brings you no POEN, no interest and no compensation of any kind. The coefficient grows the same whether your ZRNO is locked or free — locking gains you nothing but the vote.
+Locking is not staking. You lock recorded ZRNO only so that your vote can be counted — only active ZRNO carries voting power. Locking brings you no POEN, no interest and no compensation of any kind. The coefficient changes the same whether your ZRNO is locked or free; locking gains you nothing but the vote.
 
-Writing off does not return the same amount — and we say that plainly. A write-off goes at the coefficient in force at that moment. Since the coefficient grows as the system grows, a write-off will usually give you more POEN than you put in. That difference is not guaranteed, no one promises it, and no person pays it out.
+Writing off does not return the same number of POEN — and we say that plainly. A write-off goes at the coefficient in force at that moment, and by then the coefficient may have changed — in either direction. It rises when new POEN are recorded in the system through the channels of contribution. It falls when POEN are annulled — when someone closes their account, when POEN is annulled on collection from a collective procurement, or when a friendship in the children's space is ended.
 
-But that is not income. The difference exists solely in POEN, which has no value outside the system, is not exchanged for money and cannot leave the Protocol. You have no profit and no income in money — you have a larger record in the ledger of contributions. So you do not record ZRNO because it pays off, but because you want a say in decisions.`,
+Your own recording and write-off do not shift it. Upon recording, both the number of POEN in circulation and the number of available ZRNO fall at the same time, so the quotient stays the same. So there is no trading here and no right moment to enter or exit: the difference, if there is one, is an arithmetic consequence of what the whole system has recorded in the meantime. No one promises it, no one guarantees it, and no person pays it out.
+
+But that is not income. The difference exists solely in POEN, which has no value outside the system, is not exchanged for money and cannot leave the Protocol. You have no profit and no income in money — you have a different record in the ledger of contributions. So you do not record ZRNO because it pays off, but because you want a say in decisions.`,
       },
       {
         id: 53,
@@ -684,7 +687,7 @@ If you carry on a business through the Marketplace, your tax and fiscal obligati
         pitanje: `How do I set the price and quantities of my products, and who values them?`,
         odgovor: `You set the amount in POEN for your goods and services yourself, freely. The platform does not fix it, does not limit it and does not control it, nor does anyone value your goods for you — you know best what you are offering and what it is worth.
 
-There is only a guide: one POEN corresponds roughly to one dinar. That is a measuring scale that helps you find your bearings when setting an amount, but it binds you to nothing and is not an official exchange rate.
+There is no official ratio and the Foundation publishes none. You set the amount, and the easiest way to find your bearings is to start from the price you already know for that good — that estimate holds for your listing and binds no one else.
 
 What is asked of you is honesty: an accurate and clear description of the good or the service, a realistic quantity and a realistic amount in POEN, and all the terms of the exchange. False or misleading content that misrepresents the nature, quality or quantity of what you offer is not allowed.
 
@@ -726,7 +729,7 @@ The guarantee, the deadline and the terms you agree directly with the other side
 
 The system has no automatic reversal of an exchange. If you agree that something is to be returned, it is carried out as a new, voluntary update of the POEN record in the opposite direction — as a new exchange back.
 
-If something goes wrong, first try to resolve it directly with the other side. In the initial phase you can also ask for voluntary, non-binding mediation by the Foundation; if no agreement is reached, judicial protection under the general rules remains. Next to the re-registration itself in your POEN history there is also a button with which you report the case to the Foundation — if it annuls the re-registration upon your report, the POEN comes back to you in full.`,
+If something goes wrong, first try to resolve it directly with the other side. In the initial phase you can also ask for voluntary, non-binding mediation by the Foundation; if no agreement is reached, judicial protection under the general rules remains. In addition, from your own profile you may lodge a complaint with the Foundation within 30 days of the re-registration; that is not mediation between the two of you but a decision about the record, and if the Foundation annuls the re-registration upon it, the POEN comes back to you in full.`,
       },
       {
         id: 23,
@@ -734,6 +737,10 @@ If something goes wrong, first try to resolve it directly with the other side. I
         odgovor: `Any full member can make a donation, by paying in dinars into the Foundation's account — directly or through the platform, where card payment and the IPS QR code are also available.
 
 Once the payment is confirmed, the Protocol records POEN for you: the amount of the donation × the donation recording coefficient. The coefficient rises with the total (cumulative) amount of your donations across 11 levels, from 1.00 to 2.00 (the highest level at a cumulative 5,000,000 RSD). When a donation takes you past a threshold, the coefficient of the new level applies to that whole donation. A level once reached is permanent and does not fall through the use of POEN. The donation recording coefficient is neither an "exchange rate" nor the accounting coefficient of ZRNO.
+
+Why the coefficient rises at all. A larger single contribution has greater significance for the community than the same amount spread out over time — a rounded sum makes it possible to meet a concrete need at once, to pay for infrastructure or launch a programme. The community therefore holds such a contribution in higher regard. This is not a discount: nothing is bought by a donation, no good is acquired, no claim against the Foundation and no right to a refund, so the difference in the coefficient is not a better price but a greater measure of recognition.
+
+POEN is not bought from other users. Offering, buying, and selling POEN for money are prohibited by the Terms of Use and carry suspension or exclusion. It does not pay off either: whoever acquires POEN outside the Foundation does not move their donation tier, does not raise the coefficient, and receives neither a donation confirmation nor public recognition — so in the long run they are worse off than someone who gave the same amount to the Foundation.
 
 A donation is non-refundable — that is one of the system's unchangeable principles. Donations cover the basic costs of the Foundation's work (server, tools, development, legal and accounting services), and once income exceeds operating costs, the surplus is redirected into collective procurement.`,
       },
@@ -749,9 +756,9 @@ On request, the Foundation issues a confirmation of the donation in accordance w
       {
         id: 24,
         pitanje: `What are Sponsors and how do they differ from donors?`,
-        odgovor: `Sponsors are legal entities and sole traders that support the Foundation's work — not only with money, but also with goods or services.
+        odgovor: `Sponsors are legal entities and sole traders that support the Foundation's work with money.
 
-A sponsor has no account of its own: the POEN bonus is recorded to the account of the owner or co-owner who is a full member, or of the sole trader themselves, under a fixed table of 7 levels (from 10,000 to 1,000,000 RSD).
+A sponsor has no account of its own: POEN is recorded to the account of the owner or legal representative who is a full member, or of the sole trader themselves. The calculation is the same as for donations — amount × recording coefficient — only the coefficient is twenty percent higher. The minimum application is 10,000 RSD.
 
 All sponsors are shown publicly on the Sponsors page — for transparency and public recognition of the contribution.`,
       },
@@ -770,6 +777,7 @@ Companies and sole traders take part through Sponsorship — they support the Fo
     pitanja: [
       {
         id: 47,
+        link: { href: "/pravna-pozicija", label: "KOLO's legal position" },
         pitanje: `Has any regulator (the National Bank, the Tax Administration, the Commissioner) confirmed that this is legal, or is it only the Foundation saying so?`,
         odgovor: `No. At present there is no written opinion from a regulator confirming legality — neither the National Bank, nor the Tax Administration, nor the Commissioner has issued such a confirmation.
 
@@ -792,7 +800,7 @@ A donation is not a hidden purchase of POEN because these are two legally indepe
 
 No claim of yours arises from the donation — neither a right to demand that the Foundation record POEN for you, nor a right to demand your money back. The recording of POEN is not a consideration for the donation.
 
-For orientation, a measuring scale of roughly 1 POEN to 1 dinar is used, but the Foundation does not guarantee that value and does not exchange POEN for money.`,
+The Foundation publishes no ratio of POEN to the dinar; the amount in a listing is set by the user. The Foundation guarantees no value of POEN and does not exchange POEN for money.`,
       },
       {
         id: 98,
@@ -821,9 +829,9 @@ The Foundation does not provide tax advice and is not a party to your exchange: 
       {
         id: 49,
         pitanje: `Does taking part in KOLO / POEN affect my pension or social benefits?`,
-        odgovor: `From the system's side — no. POEN is not money, not earnings and not income: it is an internal record of what you have given the community, and it cannot be turned into anything with value outside the system. The Foundation pays you no monetary compensation and reports POEN nowhere as your income.
+        odgovor: `From the system's side — no. POEN is not money, not earnings and not income: it is an internal record of what you have given the community, and it cannot be turned into anything with value outside the system. The Foundation pays you no money on any basis: the recording brings you neither money nor goods, nothing passes from its assets into yours, and the record cannot be turned into money, assigned or collected. There is therefore no amount expressed in money on that basis.
 
-If POEN is recorded for you through one of the social programmes (as a primary carer, an elderly member or through Schooling, for example), that too is neither social assistance nor a benefit — it is an automatic update of the record that gives such participation an equal place in the system.
+If POEN is recorded for you through one of the social programmes (as a primary carer, an elderly member or through Schooling, for example), that too is not remuneration — it pays for no work or service and nothing is asked of you in return. It is an automatic update of the record that gives such participation an equal place in the system, and the programme is carried out in pursuit of the Foundation's objectives under its statute.
 
 You should, however, distinguish POEN from what you do outside the system. Everything you charge for in money is your own activity, governed by the general regulations — and that may have consequences for your status, depending on what you do and on what scale.
 

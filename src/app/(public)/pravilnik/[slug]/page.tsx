@@ -15,47 +15,138 @@ import { pageMetadata } from "@/lib/seo";
  * čekala da je neko prepiše kao tačnu.
  */
 const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
+  // 4.4.6 — položaj Gornjeg Kola (R-09): telo obrazovano na osnovu Statuta, nije
+  // organ Fondacije; odluku sprovodi UO svojim aktom i dužan je da ga donese osim
+  // po zatvorenoj listi razloga (čl. 51). Brisano „izvršna, ne upravljačka".
+  // 4.5.2 — čl. 14 st. 3 dobija ČETVRTI izuzetak od zabrane negativnog zapisa:
+  // otpis po poništenju potvrde zbog neaktivnosti (čl. 6 Pravilnika o učešću dece).
+  // Bez izmene ovog člana taj otpis ne bi imao osnov — st. 6 izričito kaže da se
+  // drugi osnov ne može ustanoviti nijednim drugim aktom.
+  // 4.5.7 — čl. 14 st. 3 dobija PETI izuzetak: otpis po prevođenju punoletnog naloga
+  // u maloletni (čl. 4d Pravilnika o učešću dece). Kod je taj minus pravio od
+  // 2026-08-23, a akt ga je izričito zabranjivao — R-20.
+  // 4.5.9 — R-02 (Poreska uprava): čl. 13 dobija stav o pojmu prihoda (upisom se
+  // ne prima ni novac ni stvar, ništa ne prelazi iz imovine Fondacije, osnovica u
+  // novcu se ne utvrđuje); čl. 36 st. 4 sustiže operativni čl. 27 (ni rad van
+  // radnog odnosa, naročito ne ugovor o delu); čl. 57 st. 5 briše „nije socijalna
+  // pomoć" — ta rečenica je sama zatvarala izuzeće iz čl. 9 ZPDG i protivrečila
+  // čl. 6 Statuta. Ostaje „nije naknada".
+  // 4.6.2 — R-04: čl. 23 st. 3 je tvrdio da upis i otpis ZRNA pomeraju
+  // koeficijent (netačno — oba člana se menjaju u istoj srazmeri, pa je količnik
+  // isti); čl. 25 dobija odgovor po elementima testa investicionog ugovora
+  // umesto etikete „nije prinos". 🟡 Istog dana su 4.6.0 (R-02) i 4.6.1 (R-03)
+  // već objavljeni na `main`-u, pa dva različita događaja objave ne dele šifru.
+  // 4.6.4 — R-07 (nelojalna i obmanjujuća poslovna praksa): čl. 16 više ne govori
+  // o „ceni" u opisu javnog pregleda oglasa nego o iznosu u POEN-ima. Ista rečenica
+  // stoji i u Uslovima čl. 18; da je ispravljena samo tamo, dva akta bi o istoj
+  // činjenici govorila različito.
+  // 4.6.5 — POEN po potvrdi čeka prvi potvrđen doprinos potvrđenog korisnika
+  // (čl. 15 t. 2, upućivanje na čl. 7 dokaza stvarnosti), a odobrenje prvog oglasa
+  // iz čl. 40a važi za SVAKOG korisnika, ne samo za nalog bez potvrde.
+  // 🟡 Šifru 4.6.4 je istog dana uzeo R-07 na `main`-u, pa dva različita događaja
+  // objave ne dele broj — isti postupak kao 4.6.0 naspram 4.5.9.
   "kolo-sistem": {
-    fajl: "Pravilnik_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "Pravilnik_4_6_5.md",
+    verzija: "4.6.5",
   },
+  // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
+  // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.
   "hijerarhija": {
-    fajl: "hijerarhija_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "hijerarhija_4_4_6.md",
+    verzija: "4.4.6",
   },
+  // 4.6.5 — čl. 7: POEN po potvrdi se beleži, a upisuje kad potvrđeni korisnik
+  // ostvari prvi potvrđen doprinos (odobren oglas, javna donacija, pokroviteljstvo,
+  // operativni doprinos). Isti uslov važi i za nadzornikovih 500, po svom stanju;
+  // izuzeto je samo punoletstvo (roditeljske potvrde iz čl. 19 st. 3).
   "dokaz-stvarnosti": {
-    fajl: "dokaz_stvarnosti_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "dokaz_stvarnosti_4_6_5.md",
+    verzija: "4.6.5",
   },
+  // 4.4.3 — obrazloženje koeficijenta evidencije (čl. 4) i definicija koeficijenta
+  // bez jedinične formulacije „po jednom dinaru" (čl. 2).
+  // 4.4.7 — donacija ne daje pravo na dobra iz kolektivne nabavke ni mesto u redu
+  // (čl. 4). Petlja donacija → POEN → red za robu vidi se iz OVOG akta, pa brana
+  // mora stajati i ovde, ne samo u pravilniku o nabavkama.
   "pokroviteljstvo-donacije": {
-    fajl: "donacije_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "donacije_4_5_8.md",
+    verzija: "4.5.8",
   },
+  // 4.4.4 — pravna priroda operativnog doprinosa (čl. 27): nema naručioca, nema
+  // naknade, rezultat ide u zajedničko dobro pod licencama iz Glave II. Brisan
+  // vremenski ekvivalent (čl. 6), upozorenje verifikatora (čl. 13) i gornja
+  // granica predloženog POEN-a (raniji čl. 26).
   "operativni": {
-    fajl: "operativni_4_4_1.md",
-    verzija: "4.4.1",
+  // 4.5.9 — čl. 27 st. 6 (R-02): odbrana više ne pobija samo pojam „naknade" nego
+  // nabraja elemente pojma prihoda koji nedostaju.
+    fajl: "operativni_4_6_0.md",
+    verzija: "4.6.0",
   },
+  // 4.4.5 — osnov gornje granice (čl. 5): utrošena sopstvena sredstva i vreme, uz
+  // aritmetički razlog zašto taj rad operativni kanal ne može da evidentira (limit
+  // je 10% opticaja, a opticaj je bio nula). Čl. 8 više ne tvrdi da udeo opada —
+  // opada uticaj JEDNOG koraka, a zbirni udeo stoji na ~19–24%. Čl. 4: rezultat
+  // ulazi u zajedničko dobro pod licencama iz Glave II.
   "osnivacki": {
-    fajl: "osnivacki_4_4_1.md",
-    verzija: "4.4.1",
+  // 4.5.9 — čl. 4 (R-02): osnivački rad nije naručen posao ni ugovor o delu.
+  // Jedini kanal koji sam sebe u aktu naziva radom, pa mu je odbrana bila nužna.
+    fajl: "osnivacki_4_6_0.md",
+    verzija: "4.6.0",
   },
+  // 4.4.6 — statutarni osnov (čl. 2), dinamičan sastav bez imenovanja (čl. 4),
+  // sprovođenje odluke aktom UO (čl. 17), izmenu pravilnika donosi UO (čl. 23).
   "gornje-kolo": {
-    fajl: "gornje_kolo_4_4_1.md",
-    verzija: "4.4.1",
+    fajl: "gornje_kolo_4_4_6.md",
+    verzija: "4.4.6",
   },
   "programi-podrske": {
-    fajl: "programi_podrske_4_4_1.md",
-    verzija: "4.4.1",
+  // 4.5.9 — R-02: čl. 2 briše „nije socijalna pomoć"; nov čl. 6a (priroda
+  // evidentiranja) — nema isplate, nema prelaza imovine, nije naknada, program se
+  // sprovodi u ostvarivanju cilja iz čl. 6 Statuta.
+  // 4.6.1 — R-03 (mera M-1): čl. 4 — pojedinačno evidentiranje po programu se ne
+  // objavljuje nego dnevni zbir; izostavlja se i iznos, jer se izvodi iz godine
+  // rođenja odnosno broja i uzrasta dece i sam bi ih odao.
+    fajl: "programi_podrske_4_6_1.md",
+    verzija: "4.6.1",
   },
   // Usvojen 4.3.0 — do tada je stajao kao nacrt u `docs/pravilnik-modul-deca.md`.
+  // 4.5.2 — postupak potvrde postojanja deteta (R-15, čl. 6 prepisan): izjašnjavaju
+  // se OBE strane veze, rok je 60 dana uz podsetnike svima koje bi poništenje
+  // oštetilo, svako vraća isključivo svoje (bez nadoknade iz čl. 20b), poništenje
+  // nije kvalifikacija neistinite potvrde i protiv njega stoji prigovor.
+  // 4.5.3 — uzrasne grupe 7–14 i 15–17 (R-17, čl. 12): do 15 nema ni razmene ni
+  // razgovora sa punoletnima i saglasnost to ne otvara; nov čl. 12a (razmena male
+  // vrednosti, poslovna sposobnost); čl. 14 — prepis iznad praga čeka roditelja;
+  // čl. 10 — roditeljska lozinka samo dok dete nema sopstvenu adresu.
+  // 4.5.7 — nov čl. 4d uređuje prevođenje punoletnog naloga u maloletni: ispravka
+  // uzrasta, izlazak iz lanca potvrda, poništenje doprinosa iz kanala čl. 15 uz
+  // minus na obe strane, obaveštenje i prigovor.
   "ucesce-dece": {
-    fajl: "ucesce_dece_4_4_2.md",
-    verzija: "4.4.2",
+  // 4.5.9 — čl. 14b (R-02): upis iz kanala čl. 15 t. 9 nije naknada i ne donosi
+  // maloletnom korisniku ni novac ni stvar.
+  // 4.6.1 — R-03 (mera M-4): čl. 15a — spisak dece jedne škole vidi samo
+  // punopravno dete te iste škole; nalog koji čeka roditelja ga ne dobija.
+  // 4.6.4 — R-07 (mera M-5″): čl. 12a — razmena maloletnog korisnika odnosi se samo
+  // na dobra koja po propisima sme da pribavi; zabrana iz Uslova čl. 21 važi i kad
+  // razmena nije dogovorena oglasom. Oglas deteta vide pretežno ili isključivo druga
+  // deca, pa je to prostor u kome publika nema nijednog odraslog posmatrača.
+    fajl: "ucesce_dece_4_6_4.md",
+    verzija: "4.6.4",
   },
   // Nov akt uz set 4.4.1 — osnov u čl. 14a i 51a Pravilnika o KOLO sistemu.
+  // 4.4.3 — broj POEN-a po delu je parametar odluke o nabavci (čl. 17), a ne izvod
+  // iz maloprodajne vrednosti dobra (čl. 19). Maloprodajna referenca je brisana.
+  // 4.4.7 — priroda nabavke (R-10): program iz čl. 7 t. c) Statuta, nije privredna
+  // delatnost, zabranjena naknada za ustupljeno dobro (nov čl. 3a); oslobođen deo
+  // ide sledećem u redu i ne prodaje se (čl. 29); godišnji zbir projekata (čl. 31).
   "projekti-nabavke": {
-    fajl: "projekti_nabavke_4_4_1.md",
-    verzija: "4.4.1",
+  // 4.5.9 — R-02: čl. 19 — poništeni zapis ne prelazi Fondaciji, a zapis koji se
+  // poništava je evidencija ranije učinjenog doprinosa, ne jedinica pribavljena
+  // radi preuzimanja; čl. 20 — kalkulacija se deli, dinarska strana ide uz čl. 31
+  // (inače se odnos POEN:RSD čita deljenjem); nov čl. 21a — godišnja granica
+  // dinarske vrednosti preuzetih dobara po korisniku.
+    fajl: "projekti_nabavke_4_6_0.md",
+    verzija: "4.6.0",
   },
 };
 

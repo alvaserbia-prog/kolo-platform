@@ -246,7 +246,7 @@ export const authOptions: NextAuthOptions = {
           try {
             const dbUser = await prisma.user.findUnique({
               where: { id: token.id as string },
-              select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true, status: true },
+              select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true, status: true, identitetUtvrdjenAt: true },
             });
             if (dbUser && dbUser.status !== "ACTIVE") {
               // Suspenzija/isključenje (Uslovi čl. 27, 28) ranije je blokiralo samo
@@ -259,6 +259,9 @@ export const authOptions: NextAuthOptions = {
               // K5: pun pristup zavisi od indeksa ≥ 10%, ne samo od `verified`.
               token.verified = imaPunPristup(dbUser.verified, dbUser.indeksStvarnosti);
               token.tipKorisnika = dbUser.tipKorisnika;
+              // R-01, mera M-9: identitet utvrđen na donatorskom putu. Zasebno
+              // od `verified` — potvrda stvarnosti se time NE stiče.
+              token.identitetUtvrdjen = dbUser.identitetUtvrdjenAt !== null;
               token.pseudonim = dbUser.pseudonim;
               token.oauthPending = dbUser.oauthPending;
               token.osvezenoAt = sada;
@@ -294,6 +297,7 @@ export const authOptions: NextAuthOptions = {
       session.user.tipKorisnika = token.tipKorisnika as string;
       session.user.admin = (token.admin as string) ?? "NONE";
       session.user.verified = (token.verified as boolean) ?? false;
+      session.user.identitetUtvrdjen = (token.identitetUtvrdjen as boolean) ?? false;
       session.user.oauthPending = (token.oauthPending as boolean) ?? false;
       // Nedovršena OAuth registracija — izloži podatke koje /api/oauth/dovrsi
       // koristi za kreiranje naloga (nalog još ne postoji u bazi).

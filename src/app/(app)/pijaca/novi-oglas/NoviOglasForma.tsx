@@ -28,12 +28,20 @@ export default function NoviOglasForma({
   defaultPhone = "",
   initialTip = "PONUDA",
   verifikovan = true,
+  maloletan = false,
 }: {
   defaultLocation?: string;
   defaultPhone?: string;
   initialTip?: "PONUDA" | "POTRAZNJA";
   /** Neverifikovanom je tip zaključan na ponudu i važi sadržinski minimum. */
   verifikovan?: boolean;
+  /**
+   * 🔴 Maloletnom nalogu se iznad izbora kategorije prikazuje šta ne sme da nudi
+   * (Uslovi čl. 21, R-07 mera M-5″). Njegov oglas vide pretežno ili isključivo
+   * druga deca, pa je to jedino mesto na kome ta zabrana stiže do publike koju
+   * štiti. Deklarativno — filtera reči nema i ne uvodi se (Uslovi čl. 25 st. 1).
+   */
+  maloletan?: boolean;
 }) {
   const t = useTranslations("pijaca");
   const router = useRouter();
@@ -304,6 +312,11 @@ export default function NoviOglasForma({
             sopstveno hvatanje klika izvan panela. Čipovi ostaju na Pijaci i u
             profilu, gde je izbor višestruk. */}
         <div>
+          {maloletan && (
+            <p className="mb-3 rounded-xl border border-kolo-danger/30 bg-kolo-danger-light px-3 py-2 text-sm text-kolo-text">
+              {t("dete_zabranjeno")}
+            </p>
+          )}
           <label htmlFor="kategorija" className="block text-sm font-semibold text-kolo-muted mb-2">
             {t("kategorija_label")}
           </label>

@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import {
   KOEFICIJENT_TROSENJA,
   MESECI_REZERVE,
-  NIZ_DELOVA,
   NAJMANJE_PONUDA,
   ROK_PRIJAVE_DANA,
   ROK_POTVRDE_DANA,
@@ -11,12 +10,12 @@ import {
   ociscenNaziv,
   validanNaziv,
   raspolozivoZaProjekte,
-  iznosNabavke,
-  maloprodajnaReferenca,
-  najveciBrojJedinica,
-  izvediPodelu,
-  poenPoDelu,
-  odnosPonistenja,
+  gornjaGranicaTrosenja,
+  validniParametri,
+  brojDelova,
+  ukupanTrosak,
+  ispunjavaPrag,
+  PRAG_POENA_ZA_UCESCE,
   izracunajKalkulaciju,
   poredjajRed,
   krajDana,
@@ -38,9 +37,6 @@ describe("konstante iz akta", () => {
   });
   it("rezerva je tri operativna troška prethodnog meseca (čl. 5 st. 3)", () => {
     expect(MESECI_REZERVE).toBe(3);
-  });
-  it("niz delova je 100, 50, 20 — od većeg ka manjem (čl. 18 st. 2)", () => {
-    expect([...NIZ_DELOVA]).toEqual([100, 50, 20]);
   });
   it("traži se najmanje tri ponude (čl. 15 st. 1)", () => {
     expect(NAJMANJE_PONUDA).toBe(3);
@@ -89,105 +85,120 @@ describe("sredstva (čl. 5 i 8)", () => {
     expect(raspolozivoZaProjekte(0, 0)).toBe(0);
   });
 
-  it("iznos nabavke je raspoloživo × koeficijent", () => {
-    expect(iznosNabavke(385_000)).toBe(385_000);
+  it("gornja granica je raspoloživo × koeficijent", () => {
+    expect(gornjaGranicaTrosenja(385_000)).toBe(385_000);
   });
 });
 
-describe("maloprodajna referenca (čl. 17)", () => {
-  it("prosek tri cene, zaokružen na ceo dinar", () => {
-    expect(maloprodajnaReferenca([4290, 4150, 4400])).toBe(4280);
-    expect(maloprodajnaReferenca([100, 101, 101])).toBe(101);
+// 🔴 Set 4.4.3 — paritet je ODVEZAN. Broj POEN-a po delu je parametar odluke o
+// nabavci; funkcija koja ga je računala iz maloprodajne reference (`poenPoDelu`) i
+// merilo `odnosPonistenja` su obrisani, jer su oboje objavljivali odnos POEN-a
+// prema dinaru. Ostaje samo provera ispravnosti unetog broja.
+// 🔴 Set 4.4.3 — tok je OBRNUT. Odluka utvrđuje količinu, veličinu dela i broj
+// POEN-a po delu PRE tendera; dinar ulazi tek kao provera staje li trošak u
+// gornju granicu. Ranije se količina izvodila iz novca i cene, pa je raspodela
+// bila izvedena iz cene. Ne vraćati izvođenje.
+describe("parametri odluke (čl. 17)", () => {
+  const p = { kolicina: 2000, velicinaDela: 20, poenPoDelu: 4000 };
+
+  it("prima cele brojeve veće od nule", () => {
+    expect(validniParametri(p)).toBe(true);
   });
 
-  it("traži tačno tri cene", () => {
-    expect(maloprodajnaReferenca([100, 200])).toBeNull();
-    expect(maloprodajnaReferenca([100, 200, 300, 400])).toBeNull();
+  it("odbija nulu, negativan i decimalan broj", () => {
+    expect(validniParametri({ ...p, poenPoDelu: 0 })).toBe(false);
+    expect(validniParametri({ ...p, poenPoDelu: -100 })).toBe(false);
+    expect(validniParametri({ ...p, velicinaDela: 20.5 })).toBe(false);
+    expect(validniParametri({ ...p, kolicina: Number.NaN })).toBe(false);
   });
 
-  it("odbija nevažeće cene", () => {
-    expect(maloprodajnaReferenca([100, 0, 300])).toBeNull();
-    expect(maloprodajnaReferenca([100, -5, 300])).toBeNull();
-  });
-});
-
-describe("izvođenje broja delova (čl. 18)", () => {
-  it("bira najveće N pri kome deo ima bar jednu celu jedinicu", () => {
-    expect(izvediPodelu(122)).toEqual({ brojDelova: 100, velicinaDela: 1, jedinicaSeKupuje: 100 });
-    expect(izvediPodelu(70)).toEqual({ brojDelova: 50, velicinaDela: 1, jedinicaSeKupuje: 50 });
-    expect(izvediPodelu(40)).toEqual({ brojDelova: 20, velicinaDela: 2, jedinicaSeKupuje: 40 });
+  // Delovi su jednaki (čl. 3), pa ostatak pri deljenju znači deo manji od
+  // objavljenog — takva odluka se ne sprovodi.
+  it("odbija količinu koja nije deljiva veličinom dela", () => {
+    expect(validniParametri({ ...p, kolicina: 2010 })).toBe(false);
   });
 
-  it("na tačnim granicama uzima veće N", () => {
-    expect(izvediPodelu(100)?.brojDelova).toBe(100);
-    expect(izvediPodelu(99)?.brojDelova).toBe(50);
-    expect(izvediPodelu(50)?.brojDelova).toBe(50);
-    expect(izvediPodelu(49)?.brojDelova).toBe(20);
-    expect(izvediPodelu(20)?.brojDelova).toBe(20);
+  it("broj delova je količnik količine i veličine dela", () => {
+    expect(brojDelova(2000, 20)).toBe(100);
+    expect(brojDelova(60, 20)).toBe(3);
   });
 
-  // Čl. 18 st. 4 — ostatak se NE kupuje, pa nema viška ni deljenja na komade.
-  it("kupuje se tačno deo × broj delova, ostatak ostaje Fondaciji", () => {
-    const p = izvediPodelu(122)!;
-    expect(p.jedinicaSeKupuje).toBe(100);
-    expect(p.jedinicaSeKupuje).toBeLessThanOrEqual(122);
-  });
-
-  it("ispod dvadeset jedinica nabavke nema", () => {
-    expect(izvediPodelu(19)).toBeNull();
-    expect(izvediPodelu(1)).toBeNull();
-    expect(izvediPodelu(0)).toBeNull();
+  it("ukupan trošak je količina × nabavna cena", () => {
+    expect(ukupanTrosak(2000, 150)).toBe(300_000);
   });
 });
 
-describe("POEN po delu (čl. 19)", () => {
-  it("paritet jedan prema jedan sa maloprodajnom referencom", () => {
-    expect(poenPoDelu(1, 4280)).toBe(4280);
-    expect(poenPoDelu(2, 4280)).toBe(8560);
+// Čl. 21 st. 1 — prag za prijavu. Vezan je za minimum za upis ZRNA iz čl. 19
+// Pravilnika (20.000), da ne bi bio proizvoljan broj. Poreklo POEN-a se ne gleda.
+describe("prag za učešće (čl. 21)", () => {
+  it("prag je 20.000 POEN", () => {
+    expect(PRAG_POENA_ZA_UCESCE).toBe(20_000);
   });
 
-  it("odnos poništenja meri koliko POEN-a nestane po dinaru", () => {
-    expect(odnosPonistenja(4280, 3150)).toBeCloseTo(1.3587, 4);
-    expect(odnosPonistenja(4280, 0)).toBeNull();
+  it("na tačnoj granici prolazi", () => {
+    expect(ispunjavaPrag(20_000)).toBe(true);
+    expect(ispunjavaPrag(19_999)).toBe(false);
+    expect(ispunjavaPrag(0)).toBe(false);
+  });
+
+  // Nadoknada i poništen prepis mogu odvesti zapis u minus (čl. 14 st. 3
+  // Pravilnika) — takav nalog ne ulazi u red.
+  it("negativan zapis ne ispunjava prag", () => {
+    expect(ispunjavaPrag(-5_000)).toBe(false);
   });
 });
 
 describe("cela kalkulacija", () => {
-  // Primer iz razrade: kasa 640.000, operativa 85.000/mesec, vreća nabavno 3.150,
-  // tri javne maloprodajne cene 4.290 / 4.150 / 4.400.
-  const ulaz = { saldoRSD: 640_000, trosakPrethodnogMesecaRSD: 85_000, nabavnaCena: 3150, cene: [4290, 4150, 4400] };
+  // Kasa 640.000, operativa 85.000/mesec → granica 385.000. Odluka: 100 vreća,
+  // deo je jedna vreća, 4.280 POEN po delu. Tender daje 3.150 po vreći.
+  const parametri = { kolicina: 100, velicinaDela: 1, poenPoDelu: 4280 };
+  const ulaz = { saldoRSD: 640_000, trosakPrethodnogMesecaRSD: 85_000, nabavnaCena: 3150, parametri };
 
   it("prolazi ceo lanac od salda do broja poništenih POEN-a", () => {
     const k = izracunajKalkulaciju(ulaz)!;
     expect(k.rezervaRSD).toBe(255_000);
     expect(k.raspolozivoRSD).toBe(385_000);
-    expect(k.iznosNabavkeRSD).toBe(385_000);
-    expect(k.maloprodajna).toBe(4280);
-    expect(k.najviseJedinica).toBe(122);
-    expect(k.brojDelova).toBe(100);
+    expect(k.gornjaGranicaRSD).toBe(385_000);
+    expect(k.kolicina).toBe(100);
     expect(k.velicinaDela).toBe(1);
-    expect(k.brojJedinica).toBe(100);
+    expect(k.brojDelova).toBe(100);
     expect(k.poenPoDelu).toBe(4280);
     expect(k.ukupnoPoena).toBe(428_000);
-    expect(k.procenjenoPlacanjeRSD).toBe(315_000);
-    expect(k.odnosPonistenja).toBeCloseTo(1.36, 2);
+    expect(k.ukupnoRSD).toBe(315_000);
   });
 
-  it("plaćanje nikad ne prelazi iznos nabavke", () => {
+  it("trošak nikad ne prelazi gornju granicu", () => {
     const k = izracunajKalkulaciju(ulaz)!;
-    expect(k.procenjenoPlacanjeRSD).toBeLessThanOrEqual(k.iznosNabavkeRSD);
+    expect(k.ukupnoRSD).toBeLessThanOrEqual(k.gornjaGranicaRSD);
   });
 
   it("nema kalkulacije kad rezerva pojede saldo", () => {
     expect(izracunajKalkulaciju({ ...ulaz, saldoRSD: 200_000 })).toBeNull();
   });
 
-  it("nema kalkulacije kad je roba preskupa za dvadeset delova", () => {
-    expect(izracunajKalkulaciju({ ...ulaz, nabavnaCena: 30_000 })).toBeNull();
+  // Čl. 18 st. 2 — prekoračenje granice nije greška u unosu nego ishod tendera:
+  // nabavka se ne sprovodi, a nova odluka može utvrditi manju količinu.
+  it("nema kalkulacije kad ukupan trošak pređe gornju granicu", () => {
+    expect(izracunajKalkulaciju({ ...ulaz, nabavnaCena: 4000 })).toBeNull();
+    expect(izracunajKalkulaciju({ ...ulaz, parametri: { ...parametri, kolicina: 200 } })).toBeNull();
   });
 
-  it("nema kalkulacije bez tri cene", () => {
-    expect(izracunajKalkulaciju({ ...ulaz, cene: [4290, 4150] })).toBeNull();
+  it("nema kalkulacije bez ispravnih parametara odluke", () => {
+    expect(izracunajKalkulaciju({ ...ulaz, parametri: { ...parametri, poenPoDelu: 0 } })).toBeNull();
+    expect(izracunajKalkulaciju({ ...ulaz, parametri: { ...parametri, kolicina: 0 } })).toBeNull();
+  });
+
+  // 🔴 Brana protiv vraćanja izvođenja iz cene: jeftinija roba ne menja NIŠTA u
+  // raspodeli — ni količinu, ni broj delova, ni broj POEN-a. Menja se samo koliko
+  // je dinara Fondacija potrošila.
+  it("cena ne utiče ni na jedan parametar raspodele", () => {
+    const a = izracunajKalkulaciju(ulaz)!;
+    const b = izracunajKalkulaciju({ ...ulaz, nabavnaCena: 1575 })!;
+    expect(b.poenPoDelu).toBe(a.poenPoDelu);
+    expect(b.brojDelova).toBe(a.brojDelova);
+    expect(b.velicinaDela).toBe(a.velicinaDela);
+    expect(b.kolicina).toBe(a.kolicina);
+    expect(b.ukupnoRSD).toBe(157_500);
   });
 });
 
@@ -298,7 +309,13 @@ describe("istek predloga (čl. 32)", () => {
 });
 
 describe("ko učestvuje (čl. 4)", () => {
-  const osnovni = { maloletan: false, deaktiviranAt: null, status: "ACTIVE" };
+  const osnovni = {
+    maloletan: false,
+    deaktiviranAt: null,
+    status: "ACTIVE",
+    verified: true,
+    indeksStvarnosti: 10,
+  };
 
   it("punoletan aktivan nalog učestvuje", () => {
     expect(smeUcestvovati(osnovni)).toBe(true);
@@ -313,6 +330,16 @@ describe("ko učestvuje (čl. 4)", () => {
   it("ugašen i suspendovan nalog ne učestvuju", () => {
     expect(smeUcestvovati({ ...osnovni, deaktiviranAt: new Date() })).toBe(false);
     expect(smeUcestvovati({ ...osnovni, status: "SUSPENDED" })).toBe(false);
+  });
+
+  // 🔴 Mera P-1 uz R-01: prag od 20.000 POEN-a bio je dostižan PREPISOM na svež
+  // nepotvrđen nalog — novac → POEN → roba, bez ijedne provere identiteta.
+  it("nepotvrđen nalog ne učestvuje, ma koliko POEN-a imao", () => {
+    expect(smeUcestvovati({ ...osnovni, verified: false, indeksStvarnosti: 0 })).toBe(false);
+  });
+
+  it("potvrđen nalog kome je indeks pao ispod praga ne učestvuje", () => {
+    expect(smeUcestvovati({ ...osnovni, indeksStvarnosti: 0 })).toBe(false);
   });
 });
 

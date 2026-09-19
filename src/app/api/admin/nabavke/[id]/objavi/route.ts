@@ -9,7 +9,7 @@ import { objaviNabavku, NabavkaGreska } from "@/lib/protokol/nabavka";
 
 /**
  * POST /api/admin/nabavke/[id]/objavi
- *   { ponudaId, cene: [c1,c2,c3], izvoriCena, jedinicaMere, mestoPreuzimanja, preuzimanjeOd }
+ *   { ponudaId, jedinicaMere, mestoPreuzimanja, preuzimanjeOd }
  *
  * Objava kalkulacije i otvaranje prijava (čl. 20).
  *
@@ -27,23 +27,17 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   const { id } = await params;
   const b = await req.json().catch(() => ({}));
 
-  const cene = Array.isArray(b.cene) ? b.cene.map(Number) : [];
-  if (cene.length !== 3 || cene.some((c: number) => !Number.isFinite(c) || c <= 0)) {
-    return await greska("Maloprodajna referenca traži tačno tri javne cene (čl. 17).", 400);
-  }
   const preuzimanjeOd = typeof b.preuzimanjeOd === "string" ? new Date(b.preuzimanjeOd) : null;
   if (!preuzimanjeOd || Number.isNaN(preuzimanjeOd.getTime())) {
     return await greska("Izaberite prvi dan preuzimanja.", 400);
   }
-  for (const polje of ["izvoriCena", "jedinicaMere", "mestoPreuzimanja"]) {
+  for (const polje of ["jedinicaMere", "mestoPreuzimanja"]) {
     if (!String(b[polje] ?? "").trim()) return await greska(`Polje „${polje}" je obavezno.`, 400);
   }
 
   try {
     const kalk = await objaviNabavku(id, {
       ponudaId: String(b.ponudaId ?? ""),
-      cene: [cene[0], cene[1], cene[2]],
-      izvoriCena: String(b.izvoriCena),
       jedinicaMere: String(b.jedinicaMere),
       mestoPreuzimanja: String(b.mestoPreuzimanja),
       preuzimanjeOd,
@@ -52,7 +46,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
       session.user.id,
       "NABAVKA_OBJAVLJENA",
       id,
-      `${kalk.brojDelova} delova × ${kalk.poenPoDelu} POEN; plaćanje ~${kalk.procenjenoPlacanjeRSD} RSD`
+      `${kalk.brojDelova} delova × ${kalk.poenPoDelu} POEN; trošak ${kalk.ukupnoRSD} RSD od granice ${kalk.gornjaGranicaRSD} RSD`
     );
     return NextResponse.json({ ok: true, kalkulacija: kalk });
   } catch (e) {

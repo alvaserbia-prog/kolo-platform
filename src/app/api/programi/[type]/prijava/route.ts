@@ -7,8 +7,15 @@ import { ProgramType } from "@/generated/prisma/client";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { obavesti } from "@/lib/notifikacije";
 import { imaFunkcionalniPristup } from "@/lib/protokol/pristup";
-import { dohvatiVerifikatore, kreirajPotvrde } from "@/lib/protokol/program-potvrda";
+import {
+  dohvatiVerifikatore,
+  kreirajPotvrde,
+  zatvoriPostupakPotvrda,
+  KLJUC_ZAHTEV_POTVRDA,
+} from "@/lib/protokol/program-potvrda";
 import { labelPrograma } from "@/lib/protokol/programi";
+import { getLocale } from "next-intl/server";
+import { prevedi } from "@/lib/prevod-servera";
 
 // PED (operativni doprinos) ne ide kroz enrollment — prijava se vrši na konkretan
 // zadatak kroz /api/doprinos-oglasi/[id]/prijavi (Pravilnik o operativnom doprinosu).
@@ -72,8 +79,28 @@ export async function POST(
   if (verifikatori.length === 0)
     return await greska("Nemate verifikatore koji mogu da potvrde prijavu.", 403);
 
+  // Tekst izričitog pristanka, SKLOPLJEN NA SERVERU (R-06).
+  //
+  // 🔴 Do seta 4.6.3 se snimalo samo `pristanakVerifikatori: true`. Logička
+  // vrednost dokazuje DA je pristanak dat, ali ne i NA ŠTA — a ovde je reč o
+  // izričitom pristanku za posebne kategorije podataka (ZZPL čl. 17 st. 2 t. 1),
+  // gde je sadržina pristanka ceo njegov domet. Tekst se uz to menjao (10.09.2026,
+  // R-13) i nosi broj verifikatora različit za svakog čoveka.
+  //
+  // 🔴 Sklapa se ovde, iz istog ključa iz kog ga ekran prikazuje, a ne prima se od
+  // klijenta: tekst koji šalje pretraživač dokazuje samo šta je pretraživač poslao.
+  const jezik = await getLocale();
+  const pristanakTekst = prevedi(jezik, "programi.pristanak_tekst", {
+    broj: verifikatori.length,
+  });
+  const pristanakAt = new Date();
+
+  // Ponovna prijava: raščisti zatečen postupak (nedovršene potvrde + obaveštenja
+  // ranijeg kruga), da verifikatorima ne ostanu dva zahteva za istu prijavu.
+  if (mozeReapply && vec) await zatvoriPostupakPotvrda(vec.id);
+
   // Kreiranje/obnova prijave + potvrda za verifikatore — atomarno.
-  await prisma.$transaction(async (tx) => {
+  const enrollmentId = await prisma.$transaction(async (tx) => {
     let enrollmentId: string;
     if (mozeReapply && vec) {
       const enr = await tx.programEnrollment.update({
@@ -82,6 +109,11 @@ export async function POST(
           status: "PENDING",
           metadata,
           pristanakVerifikatori: true,
+          // 🔴 Ponovna prijava upisuje NOV pristanak — ne zadržava stari. Tekst se
+          // u međuvremenu mogao promeniti, a i broj verifikatora se menja.
+          pristanakTekst,
+          pristanakAt,
+          pristanakJezik: jezik,
           rejectionReason: null,
           approvedAt: null,
           approvedById: null,
@@ -92,28 +124,62 @@ export async function POST(
       await tx.programPotvrda.deleteMany({ where: { enrollmentId } });
     } else {
       const enr = await tx.programEnrollment.create({
-        data: { userId: session.user.id, type: programType, metadata, pristanakVerifikatori: true },
+        data: {
+          userId: session.user.id,
+          type: programType,
+          metadata,
+          pristanakVerifikatori: true,
+          pristanakTekst,
+          pristanakAt,
+          pristanakJezik: jezik,
+        },
       });
       enrollmentId = enr.id;
     }
     await kreirajPotvrde(tx, enrollmentId, verifikatori);
+    return enrollmentId;
   });
 
-  // In-app notifikacija svakom verifikatoru (jedini kanal — nema email/push).
+  // Notifikacija svakom verifikatoru.
+  //
+  // 🔴 Naziv programa ide ISKLJUČIVO u zvonce, unutar Platforme. Mejl (Resend) i
+  // push dobijaju neutralan tekst kroz `spoljni` — bez pseudonima i bez programa.
+  // Do 4.4.9 su akti tvrdili da se obaveštavanje verifikatora vrši „isključivo
+  // unutar platforme (in-app notifikacija)", a `obavesti` je isti tekst slao i
+  // mejlom i push-om; tvrdnja je od ovog seta istinita. Verifikator po čl. 4
+  // Pravilnika o programima podrške potvrđuje baš taj program, pa naziv mora da
+  // vidi — ali u aplikaciji, ne u tuđem sandučetu i ne na zaključanom ekranu.
+  //
+  // `enrollmentId` u parametrima ne ulazi ni u jednu rečenicu — nosi ga da bi
+  // `zatvoriPostupakPotvrda` mogla da obriše obaveštenje kad se postupak okonča.
   for (const verifikatorId of verifikatori) {
     await obavesti(verifikatorId, {
       tip: "info",
-      kljuc: "notifikacije.zahtev_potvrda_programa",
-      parametri: { pseudonim: korisnik.pseudonim, program: labelPrograma(programType) },
+      kljuc: KLJUC_ZAHTEV_POTVRDA,
+      parametri: {
+        pseudonim: korisnik.pseudonim,
+        program: labelPrograma(programType),
+        enrollmentId,
+      },
       naslov: "Zahtev za potvrdu socijalnog programa",
       tekst: `Korisnik ${korisnik.pseudonim} se prijavio za program „${labelPrograma(programType)}" i navodi tebe kao verifikatora. Potvrdi ispunjenost uslova pod punom odgovornošću, ili obrazloži odbijanje.`,
       link: "/programi/potvrde",
+      spoljni: {
+        kljuc: "notifikacije.zahtev_potvrda_spoljni",
+        naslov: "Nov zahtev čeka tvoj odgovor",
+        tekst: "Neko te je naveo kao osobu koja ga poznaje. Otvori KOLO da vidiš zahtev.",
+      },
     });
   }
 
+  // 🔴 Naziv programa NE ide u kanal upozorenja (Telegram + mejl na ADMIN_EMAIL).
+  // Iz para „pseudonim + POSEBNA_BRIGA" čita se pripadnost posebnoj kategoriji
+  // podataka, a taj kanal ide preko obrađivača u SAD koje Politika navodi samo za
+  // uzak obim (čl. 8, 9). Ko odlučuje o prijavi vidi je u admin panelu, gde su
+  // uneti podaci ionako otvoreni samo superadminu.
   void posaljiAdminAlert(
     "Nova prijava na program",
-    `Program: ${programType}\nKorisnik: ${korisnik.pseudonim}\nČeka potvrdu ${verifikatori.length} verifikatora.`
+    `Korisnik: ${korisnik.pseudonim}\nČeka potvrdu ${verifikatori.length} verifikatora.\nDetalji su u admin panelu.`
   );
 
   return NextResponse.json({ ok: true, brojVerifikatora: verifikatori.length });

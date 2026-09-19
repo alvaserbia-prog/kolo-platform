@@ -7,9 +7,15 @@ import { prisma } from "@/lib/prisma";
  * GDPR data retention cleanup job.
  * Pokreće se mesečno (preporučeno 1. u mesecu u 02:00).
  *
- * Briše poruke u konverzacijama u kojima je poslednja poruka starija od
- * 24 meseca (i obe strane su deaktivirane ili konverzacija je neaktivna).
- * Ako je JEDNA strana i dalje aktivna, poruke se čuvaju dok ona ne deaktivira nalog.
+ * Briše poruke u konverzaciji kada je ISPUNJEN BILO KOJI od dva uslova:
+ *   — bar jedna strana je ugasila nalog (čl. 11 Politike), ili
+ *   — poslednja poruka je starija od 24 meseca (čl. 10 Politike).
+ *
+ * 🔴 Do seta 4.5.1 su oba uslova morala da budu ispunjena ISTOVREMENO, i to uz
+ * uslov da su ugašena OBA naloga — pa su poruke onoga ko ode ostajale kod
+ * sagovornika bez gornje granice, dok i on ne ugasi nalog i dok ne prođu dve
+ * godine. I ovaj komentar i CLAUDE.md su pri tom tvrdili „jedna strana ILI 24
+ * meseca". Uslov je sada takav kakav je opisan.
  *
  * Briše i zapise dnevnika aktivnosti (AktivnostLog) starije od 12 meseci —
  * rok za tehničke logove po Politici čl. 10.
@@ -24,14 +30,14 @@ export async function POST(req: NextRequest) {
   const dvadesetCetiriMesecaUnazad = new Date(sada);
   dvadesetCetiriMesecaUnazad.setMonth(dvadesetCetiriMesecaUnazad.getMonth() - 24);
 
-  // --- Retencija poruka — 24 meseca ---
-  // Briše poruke u konverzacijama u kojima je lastMessageAt > 24 meseca
-  // I obe strane su deaktivirane
+  // --- Retencija poruka: ugašen nalog jedne strane ILI 24 meseca ---
   const stareKonverzacije = await prisma.konverzacija.findMany({
     where: {
-      lastMessageAt: { lte: dvadesetCetiriMesecaUnazad },
-      user1: { deaktiviranAt: { not: null } },
-      user2: { deaktiviranAt: { not: null } },
+      OR: [
+        { user1: { deaktiviranAt: { not: null } } },
+        { user2: { deaktiviranAt: { not: null } } },
+        { lastMessageAt: { lte: dvadesetCetiriMesecaUnazad } },
+      ],
     },
     select: { id: true },
   });

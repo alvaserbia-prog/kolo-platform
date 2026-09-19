@@ -92,7 +92,13 @@ export async function generateMetadata(): Promise<Metadata> {
       description: opis,
     },
     icons: {
-      icon: "/kolo-icon.png",
+      // Favicon je SVG: PNG od 169×159 se na 16 px svede na mrlju, jer su ruke
+      // figura tanje od piksela. `kolo-znak.svg` nosi istu ideju u tri oblika.
+      // Logotip u zaglavlju se NE menja — ovo je samo znak za sitne prikaze.
+      icon: [
+        { url: "/kolo-znak.svg", type: "image/svg+xml" },
+        { url: "/kolo-icon.png", type: "image/png" },
+      ],
       apple: "/kolo-icon.png",
     },
   };

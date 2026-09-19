@@ -3,15 +3,12 @@
  *
  * Pattern (kolo-platform/CLAUDE.md):
  *   - DB promene unutar prisma.$transaction (atomarno)
- *   - emitujPoen() pozivi sekvencijalno VAN transakcije (ima sopstvenu)
+ *   - upis POEN-a sekvencijalno VAN transakcije (emitujPoen ima sopstvenu)
  */
 import crypto from "node:crypto";
 import { prisma } from "@/lib/prisma";
-import { emitujPoen } from "@/lib/protokol/emisija";
 import {
   MAX_INDEKS,
-  POEN_VERIFIKATOR,
-  POEN_VERIFIKOVANI,
   TOKEN_VAZI_SEKUNDI,
   imaPristupVerifikaciji,
   izracunajIndeks,
@@ -27,8 +24,8 @@ import {
   recomputeZonesSaGrafom,
 } from "@/lib/protokol/zona";
 import { dopuniZonuPosleUpisa, ucitajGrafIZone } from "@/lib/protokol/zona-sinhronizacija";
-import { DoprinosOkidac, Prisma, TipKorisnika, TransactionType } from "@/generated/prisma/client";
-import { probajEvidentirati } from "@/lib/protokol/doprinos-sadrzaju";
+import { Prisma, TipKorisnika } from "@/generated/prisma/client";
+import { probajUpisatiPotvrdu, javiZabelezeno } from "@/lib/protokol/potvrda-poen";
 import { probajEvidentiratiKorake, osveziSagovornike } from "@/lib/protokol/doprinos-razmeni";
 import { osveziPrijateljstvaDece } from "@/lib/protokol/prijateljstva";
 import { PORUKA_DETE_VAN_LANCA, smeULanacPotvrda } from "@/lib/deca-pravila";
@@ -292,12 +289,27 @@ async function izvrsiJezgroVerifikacije(
   const noviIndeks = verifikovaniJePoseban
     ? Math.max(verifikovani.indeksStvarnosti, izracunatiIndeks)
     : izracunatiIndeks;
+  // 🔴 Član koji je ZRNO upisao PRE nego što ga je iko potvrdio (R-01, odluka B)
+  // ostaje NEVERIFIKOVAN dok traje to razdoblje, pa ga `zrno.ts` nije unapredio u
+  // nosioca ZRNA. Bez ove provere bi zauvek ostao REGULARNI — ispunio bi oba
+  // uslova za glas (aktivirano ZRNO i potvrđena stvarnost), a glas ne bi dobio,
+  // jer se unapređenje dešava SAMO u trenutku upisa. Status ga sustiže ovde.
+  const zrnoStanje = verifikovaniJePoseban
+    ? null
+    : await tx.zrnoStanje.findUnique({
+        where: { userId: verifikovani.id },
+        select: { slobodno: true, aktivno: true },
+      });
+  const drziZrno = (zrnoStanje?.slobodno ?? 0) + (zrnoStanje?.aktivno ?? 0) > 0;
+
   await tx.user.update({
     where: { id: verifikovani.id },
     data: {
       tipKorisnika: verifikovaniJePoseban
         ? verifikovani.tipKorisnika
-        : TipKorisnika.REGULARNI,
+        : drziZrno
+          ? TipKorisnika.NOSILAC_ZRNA
+          : TipKorisnika.REGULARNI,
       indeksStvarnosti: noviIndeks,
       verified: true,
       // Zadrži datum prve verifikacije pri dodatnim verifikacijama.
@@ -358,63 +370,72 @@ function mapTransakcijaGreska(e: unknown): never {
 }
 
 /**
- * Faza 2: POEN emisija — VAN transakcije (emitujPoen ima sopstvenu).
- * Koristi se walletId direktno iz Faze 1 (bez ponovnog findUnique-a) da bi se
- * izbegao connection-pool race u kojem novokreirani wallet nije još vidljiv.
+ * Faza 2: sve što ide POSLE upisa veze i VAN transakcije iz Faze 1 — upis POEN-a po
+ * potvrdi, koraci putanje razmene, dečji kanal i postupak potvrde postojanja deteta.
+ *
+ * 🔴 Ranije se zvala `emitujPoenZaVerifikaciju` i sama je emitovala 1.000 + 1.000. Od
+ * seta 4.6.4 upis vodi `potvrda-poen.ts` i on čeka trag stvarnog učešća potvrđenog
+ * korisnika, pa ime „emituj" više ne bi bilo tačno.
  */
-async function emitujPoenZaVerifikaciju(
-  fazaJedan: FazaJedan
+async function dovrsiVerifikaciju(
+  fazaJedan: FazaJedan,
+  opcije?: { bezUslovaZaPoen?: boolean }
 ): Promise<IzvrsiVerifikacijuRezultat> {
   const {
     verifikacijaId,
     verifikatorPseudonim,
-    verifikatorWalletId,
     verifikovaniId,
     verifikovaniPseudonim,
-    verifikovaniWalletId,
     verifikovaniNoviIndeks,
   } = fazaJedan;
 
-  try {
-    await emitujPoen(
-      verifikatorWalletId,
-      POEN_VERIFIKATOR,
-      TransactionType.EMISIJA_VERIFIKACIJA,
-      `Verifikacija ${verifikovaniPseudonim}`, { kljuc: "transakcije.verifikacija", parametri: { pseudonim: verifikovaniPseudonim } }
-    );
-    await emitujPoen(
-      verifikovaniWalletId,
-      POEN_VERIFIKOVANI,
-      TransactionType.EMISIJA_VERIFIKACIJA,
-      `Primljena verifikacija od ${verifikatorPseudonim}`, { kljuc: "transakcije.primljena_verifikacija", parametri: { pseudonim: verifikatorPseudonim } }
-    );
-  } catch (e) {
-    console.error("[verifikacija-service] POEN emisija pukla posle Faze 1 — incident", {
-      verifikacijaId,
-      verifikatorWalletId,
-      verifikovaniWalletId,
-      error: e,
-    });
-    // Verifikacija je u bazi, slot iskorišćen, ali POEN nije emitovan.
-    // Bacamo dalje da UI moze da prikaze upozorenje korisniku.
-    throw new VerifikacijaGreska(
-      "Potvrda je evidentirana, ali upis POENA nije uspeo. Javi se administratoru.",
-      500
-    );
+  // 🔴 POEN PO POTVRDI VIŠE NE NASTAJE SAMIM ČINOM POTVRDE (set 4.6.4, dokaz
+  // stvarnosti čl. 7). Upisuje se kad potvrđeni ostvari doprinos koji je NEKO
+  // POTVRDIO: odobren prvi oglas, javna donacija, pokroviteljstvo ili verifikovan
+  // operativni doprinos. Ako je uslov već ispunjen u trenutku potvrde — a to je čest
+  // slučaj, jer ljudi po pravilu prvo objave ponudu pa ih neko potvrdi — upis je
+  // trenutan i ništa se ne menja u odnosu na ranije.
+  //
+  // 🔴 SAM ČIN POTVRDE SE NE MENJA I NE SME DA SE VEŽE ZA USLOV: indeks je već upisan
+  // u Fazi 1, nalog je redovan član istog časa, pun pristup odmah. Čeka SAMO zapis
+  // POEN-a. Bez toga čovek koji tek uđe ne bi mogao ni da se javi nekome kako bi
+  // dogovorio razmenu kojom bi uslov ispunio.
+  //
+  // Ne baca: potvrda je u bazi i slot je iskorišćen, pa upis POEN-a ne sme da je obori.
+  // Raniji kod je ovde bacao `VerifikacijaGreska` kad emisija pukne; sada pad emisije
+  // ostavlja potvrdu u stanju ZABELEZEN i sledeći okidač je pokupi.
+  const upis = await probajUpisatiPotvrdu(verifikacijaId, {
+    bezUslova: opcije?.bezUslovaZaPoen === true,
+  });
+  if (!upis.upisano) {
+    // Obe strane moraju da saznaju da POEN čeka i šta ga otključava — inače potvrda
+    // izgleda kao kvar: indeks skoči, POEN-a nema, i niko ne kaže zašto.
+    await javiZabelezeno(verifikacijaId);
   }
 
-  // Verifikacija je prvi od dva okidača za evidentiranje doprinosa sadržaju
-  // platforme (Pravilnik čl. 40a st. 3): ko je pre verifikacije objavio ponudu koja
-  // ispunjava sadržinski minimum, tek sada dobija zapis od 1.000 POEN-a. Ne baca —
-  // verifikacija je već upisana i ne sme da padne zbog ovog kanala.
-  await probajEvidentirati(verifikovaniId, DoprinosOkidac.VERIFIKACIJA, fazaJedan.verifikatorId);
+  // 🔴 VERIFIKACIJA VIŠE NIJE OKIDAČ ZA ČL. 40a. Od seta 4.6.4 svaki prvi oglas ide na
+  // odobrenje Fondacije; da potvrda i dalje evidentira doprinos, odobrenje bi bilo
+  // šupljikavo (oglas koji niko nije pogledao) i nastao bi krug — potvrda otključava
+  // čl. 40a, a čl. 40a otključava POEN po potvrdi.
 
-  // Ista dva okidača važe i za korake 2–5 putanje doprinosa razmeni.
+  // Koraci 2–5 putanje doprinosa razmeni (čl. 40b) nisu dirani ovom izmenom.
   await probajEvidentiratiKorake(verifikovaniId);
   // Modul Deca: čim roditelj postane redovan član, sva njegova deca prelaze u stanje
   // `AKTIVNO`, pa prijateljstva koja su čekala drugu stranu sazrevaju (čl. 14b st. 2).
   // Ne baca — verifikacija je već upisana i ne sme da padne zbog dečjeg kanala.
   await osveziPrijateljstvaDece(verifikovaniId);
+  // Čl. 6 st. 5 Pravilnika o učešću dece: svakom novom potvrdom stvarnosti
+  // roditelja postupak potvrde postojanja deteta sprovodi se ponovo. Odredba
+  // postoji od prve verzije akta; do seta 4.5.2 je kod nije sprovodio, pa onaj ko
+  // roditelja potvrdi POSLE otvaranja dečjeg naloga nikad nije bio upitan — a
+  // upravo je on jedini potvrđivač koji o detetu ništa nije rekao.
+  // Ne baca — potvrda je već upisana i ne sme da padne zbog ovog postupka.
+  try {
+    const { otvoriPostupakZaNovogPotvrdjivaca } = await import("@/lib/protokol/deca");
+    await otvoriPostupakZaNovogPotvrdjivaca(verifikovaniId, fazaJedan.verifikatorId);
+  } catch {
+    /* postupak potvrde ne obara verifikaciju */
+  }
   // Verifikacija pomera i TUĐE brojače: razmena sa neverifikovanim korisnikom se
   // beleži, a u brojač ulazi tek kad on bude verifikovan. Zato se preračunavaju
   // svi koji su sa njim već obavili razmenu. Sekvencijalno — svaki poziv vodi u
@@ -516,7 +537,7 @@ export async function izvrsiVerifikaciju(
     mapTransakcijaGreska(e);
   }
 
-  return emitujPoenZaVerifikaciju(fazaJedan);
+  return dovrsiVerifikaciju(fazaJedan);
 }
 
 
@@ -536,11 +557,18 @@ export async function izvrsiVerifikaciju(
  * Sve provere jezgra ostaju na snazi — zabranjena zona (pa i ona koja spreči drugog
  * roditelja kad su roditelji u istom lancu), slot, prelazno ograničenje iz čl. 22.
  * Pozivalac hvata `VerifikacijaGreska` i preskače tu potvrdu.
+ *
+ * 🔴 `bezUslovaZaPoen` — POEN po potvrdi se upisuje ODMAH, bez traga stvarnog
+ * učešća iz dokaza stvarnosti čl. 7. Koristi ga ISKLJUČIVO prelazak u punoletstvo:
+ * istog dana se detetu poništava POEN evidentiran po prijateljstvima, često u
+ * minus, pa bi rođendan bez ovoga bio čist minus bez ijedne protivteže. Ne
+ * otvarati ga ničemu drugom.
  */
 export async function izvrsiVerifikacijuBezTokena(
   verifikatorId: string,
   verifikovaniId: string,
-  oznaka?: string
+  oznaka?: string,
+  opcije?: { bezUslovaZaPoen?: boolean }
 ): Promise<IzvrsiVerifikacijuRezultat> {
   let fazaJedan: FazaJedan;
   try {
@@ -551,7 +579,7 @@ export async function izvrsiVerifikacijuBezTokena(
   } catch (e) {
     mapTransakcijaGreska(e);
   }
-  return emitujPoenZaVerifikaciju(fazaJedan);
+  return dovrsiVerifikaciju(fazaJedan, opcije);
 }
 
 /**

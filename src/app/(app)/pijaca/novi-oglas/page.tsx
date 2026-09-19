@@ -44,6 +44,8 @@ export default async function NoviOglasPage({
       // Neverifikovani sme samo ponudu — izbor tipa mu je zaključan u formi.
       initialTip={!verifikovan || tip?.toUpperCase() !== "POTRAZNJA" ? "PONUDA" : "POTRAZNJA"}
       verifikovan={verifikovan}
+      // R-07 M-5″: napomena o dobrima koja dete ne sme da nudi (Uslovi čl. 21).
+      maloletan={korisnik?.maloletan ?? false}
     />
   );
 }

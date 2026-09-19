@@ -5,7 +5,8 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { obavesti } from "@/lib/notifikacije";
 import { labelPrograma, danaDoReverifikacije } from "@/lib/protokol/programi";
-import { jeAdmin } from "@/lib/dozvole";
+import { zatvoriPostupakPotvrda } from "@/lib/protokol/program-potvrda";
+import { jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
 
 // POST /api/admin/programi/enrollments/[id]/odobri
@@ -14,7 +15,9 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await getServerSession(authOptions);
-  if (!session || !jeAdmin(session.user))
+  // Odlučuje isključivo superadmin — isto lice koje jedino i vidi unete podatke
+  // (DPIA 5.6). Odluka bez uvida u prijavu bila bi odluka na slepo.
+  if (!session || !jeSuperadmin(session.user))
     return await greska("Pristup odbijen.", 403);
 
   const { id } = await params;
@@ -58,6 +61,10 @@ export async function POST(
       ...(nextReverifikacija ? { nextReverifikacija } : {}),
     },
   });
+
+  // Postupak je okončan — zahtevi verifikatorima nemaju više svrhu. `metadata`
+  // se ovde NE briše: iz nje se računa dnevni iznos dok program traje.
+  await zatvoriPostupakPotvrda(id);
 
   await logAdminAkcija(session.user.id, "PROGRAM_PRIJAVA_ODOBRENA", enrollment.userId, labelPrograma(enrollment.type));
 

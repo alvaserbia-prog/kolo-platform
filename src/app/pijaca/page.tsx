@@ -6,7 +6,12 @@ import { prisma } from "@/lib/prisma";
 import { pageMetadata } from "@/lib/seo";
 import { parsirajKatParam } from "@/lib/kategorije";
 import PijacaKlijent from "@/app/(app)/pijaca/PijacaKlijent";
-import { ucitajUcesnika, usloviVidljivostiOglasa, nalogRadi } from "@/lib/protokol/deca";
+import {
+  nalogRadi,
+  smeSaOdraslima,
+  ucitajUcesnika,
+  usloviVidljivostiOglasa,
+} from "@/lib/protokol/deca";
 import Link from "next/link";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -101,7 +106,12 @@ export default async function PijacaPage({
         prijavljen={!!session?.user}
         posmatracMaloletan={posmatrac?.maloletan ?? false}
         detePise={!!posmatrac?.maloletan && nalogRadi(posmatrac.stanje)}
-        deteSmeSaOdraslima={!!posmatrac?.dozvolaOdrasli}
+        deteSmeSaOdraslima={
+          // 🔴 Uz prekidač ide i uzrasna granica (čl. 12 st. 4): do 15 dete sa
+          // punoletnima ne komunicira, pa mu se dugme „Kontaktiraj" na tuđem
+          // oglasu ne sme nuditi ni kad je prekidač uključen.
+          !!posmatrac && smeSaOdraslima(posmatrac) && posmatrac.dozvolaOdrasli
+        }
         initialKat={initialKat}
         pracene={pracene}
         mojaLokacija={korisnik?.location ?? null}

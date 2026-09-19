@@ -4,6 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { izracunajDnevniIznos, labelPrograma } from "@/lib/protokol/programi";
 import { FUNKCIONALNI_PRAG_INDEKSA } from "@/lib/protokol/dokaz-stvarnosti";
+import { dohvatiVerifikatore } from "@/lib/protokol/program-potvrda";
 import { ProgramType } from "@/generated/prisma/client";
 import ProgramiKlijent from "./ProgramiKlijent";
 
@@ -27,6 +28,11 @@ export default async function ProgramiPage() {
     prisma.user.findUnique({ where: { id: session.user.id }, select: { indeksStvarnosti: true } }),
   ]);
 
+  // Koliko ljudi će biti zamoljeno da potvrdi — stoji u samom tekstu pristanka
+  // (čl. 4 st. 3): pristanak mora da kaže KOLIKO lica saznaje za koji se program
+  // korisnik prijavio, jer taj podatak otkriva posebnu kategoriju.
+  const brojVerifikatora = (await dohvatiVerifikatore(prisma, session.user.id)).length;
+
   const aktivniTipovi = new Set(aktivniProgrami.map((p) => p.type));
 
   const programi = SVI_TIPOVI.map((type) => {
@@ -48,6 +54,7 @@ export default async function ProgramiPage() {
             approvedAt: enrollment.approvedAt?.toISOString() ?? null,
             rejectionReason: enrollment.rejectionReason,
             ocekivaniDnevni,
+            isplacenoPoen: enrollment.isplacenoPoen,
           }
         : null,
     };
@@ -67,6 +74,7 @@ export default async function ProgramiPage() {
       brojAktivnih={brojAktivnih}
       isVerified={session.user.verified}
       imaPristupProgramima={(korisnik?.indeksStvarnosti ?? 0) >= FUNKCIONALNI_PRAG_INDEKSA}
+      brojVerifikatora={brojVerifikatora}
       emisioniKontekst={{
         opticaj,
         dnevniLimit,

@@ -10,9 +10,11 @@ import { jeKategorija, parsirajKatParam } from "@/lib/kategorije";
 import { emitujNoviOglas } from "@/lib/oglas-dogadjaji";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
 import { smeDaPostaviOglas, zabeleziDoprinos } from "@/lib/protokol/doprinos-sadrzaju";
+import { javiRoditeljimaZaOglas } from "@/lib/protokol/deca";
 import { probajNapredovati } from "@/lib/protokol/doprinos-razmeni";
 import { nalogRadi, stanjeNaloga, ucitajUcesnika, usloviVidljivostiOglasa } from "@/lib/protokol/deca";
 import { PORUKA_CEKA_RODITELJA } from "@/lib/deca-pravila";
+import { smeProsireno } from "@/lib/dozvole";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -150,7 +152,7 @@ export async function POST(req: NextRequest) {
   // za neverifikovane (limit od tri oglasa, zabrana potražnje).
   const korisnik = await prisma.user.findUnique({
     where: { id: session.user.id },
-    select: { verified: true, maloletan: true },
+    select: { verified: true, maloletan: true, identitetUtvrdjenAt: true },
   });
   if (!korisnik) return await greska("Nalog ne postoji.", 401);
 
@@ -162,7 +164,13 @@ export async function POST(req: NextRequest) {
   //
   // Ovim se ništa ne zaobilazi: nalog detetu otvara samo potvrđen korisnik (čl. 5),
   // a on ni sam ta ograničenja nema.
-  const punaPravaObjave = korisnik.verified || korisnik.maloletan;
+  // R-01, mera M-9: isto važi i za člana čiji je identitet utvrđen na
+  // donatorskom putu — iza njegovog naloga stoji identitet koji je banka već
+  // identifikovala, pa ograničenja pisana za nalog iza kog ne stoji niko
+  // (samo ponuda, najviše tri, sadržinski minimum) nemaju predmet.
+  const punaPravaObjave =
+    smeProsireno({ verified: korisnik.verified, identitetUtvrdjen: korisnik.identitetUtvrdjenAt !== null }) ||
+    korisnik.maloletan;
 
   // Nalog koji još čeka roditelja (Modul Deca, čl. 4c) ne objavljuje. Dete na
   // čekanju ima profil, skenira QR kodove i sklapa prijateljstva — ništa više;
@@ -250,6 +258,14 @@ export async function POST(req: NextRequest) {
   // Nov oglas pomera brojač koraka 3 na putanji doprinosa razmeni (čl. 40a).
   // Sekvencijalno i van transakcije — vodi u sopstvenu emisiju. Ne baca.
   await probajNapredovati(session.user.id);
+
+  // 🔴 Oglas maloletnog naloga: javi roditelju (Modul Deca, čl. 10 st. 6; R-07 M-5″).
+  // Roditelj odgovara za sadržaj koji je dete objavilo DO TRENUTKA UKLANJANJA, a taj
+  // oglas vide pretežno ili isključivo druga deca — on je jedini odrastao koji ga
+  // uopšte vidi. Bez obaveštenja je odredba neizvodljiva. Ne baca.
+  if (korisnik.maloletan) {
+    await javiRoditeljimaZaOglas(session.user.id, { id: listing.id, title });
+  }
 
   // Obavesti korisnike koji prate ovu kategoriju. Ne sme da obori objavu oglasa
   // ako pukne — oglas je već upisan.

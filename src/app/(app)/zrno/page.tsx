@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { glasackaMoc, poslednjiKurs, UKUPNO_ZRNA } from "@/lib/protokol/zrno";
+import { glasackaMoc, poslednjiKoeficijent, MINIMUM_POEN_ZA_UPIS_ZRNA, UKUPNO_ZRNA } from "@/lib/protokol/zrno";
 import { beogradskiDan } from "@/lib/protokol/obracunski-dan";
 import { fazaPredloga, zatvoriIstekleIObjaviIshod } from "@/lib/protokol/glasanje";
 import ZrnoKlijent from "./ZrnoKlijent";
@@ -17,7 +17,7 @@ export default async function ZrnoPage() {
   // Zatvori istekle predloge i utvrdi ishod pre čitanja (čl. 13)
   await zatvoriIstekleIObjaviIshod(now);
 
-  const [stanje, wallet, upisZahtev, otpisZahtev, statusZahtevi, delegacija, trziste, kurs, poslednjiKursovi, predlozi] = await Promise.all([
+  const [stanje, wallet, upisZahtev, otpisZahtev, statusZahtevi, delegacija, kanal, koeficijent, predlozi] = await Promise.all([
     prisma.zrnoStanje.findUnique({ where: { userId: session.user.id } }),
     prisma.wallet.findUnique({ where: { userId: session.user.id }, select: { balance: true } }),
     prisma.zrnoUpisZahtev.findUnique({ where: { userId_date: { userId: session.user.id, date: danas } } }),
@@ -27,9 +27,8 @@ export default async function ZrnoPage() {
       where: { delegatorId: session.user.id },
       include: { delegat: { select: { pseudonim: true } }, zakazaniDelegat: { select: { pseudonim: true } } },
     }),
-    prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } }),
-    poslednjiKurs(),
-    prisma.zrnoDailyRate.findMany({ orderBy: { date: "desc" }, take: 7 }),
+    prisma.zrnoKanal.findUnique({ where: { id: "singleton" } }),
+    poslednjiKoeficijent(),
     prisma.glasanjePredlog.findMany({
       orderBy: { createdAt: "desc" },
       include: { author: { select: { pseudonim: true } }, glasovi: true },
@@ -46,9 +45,11 @@ export default async function ZrnoPage() {
       aktivno={aktivno}
       glasackaMoc={moc}
       poenBalans={wallet?.balance ?? 0}
-      kurs={kurs}
-      trzisjeAktivno={trziste?.isActive ?? false}
+      koeficijent={koeficijent}
+      kanalAktivan={kanal?.isActive ?? false}
       isVerified={session.user.verified}
+      identitetUtvrdjen={session.user.identitetUtvrdjen}
+      minimumPoenZaUpis={MINIMUM_POEN_ZA_UPIS_ZRNA}
       upisZahtev={upisZahtev ? { poenIznos: upisZahtev.poenIznos, status: upisZahtev.status } : null}
       otpisZahtev={otpisZahtev ? { kolicina: otpisZahtev.kolicina, status: otpisZahtev.status } : null}
       statusZahtevi={statusZahtevi.map((z) => ({ kolicina: z.kolicina, akcija: z.akcija }))}
@@ -58,7 +59,6 @@ export default async function ZrnoPage() {
         imaZakazano: delegacija.imaZakazano,
         zakazaniPseudonim: delegacija.zakazaniDelegat?.pseudonim ?? null,
       } : null}
-      poslednjiKursovi={poslednjiKursovi.map((r) => ({ date: r.date.toISOString(), kurs: Number(r.kurs) }))}
       predlozi={predlozi.map((p) => ({
         id: p.id,
         title: p.title,

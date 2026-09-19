@@ -8,6 +8,12 @@ declare module "next-auth" {
       tipKorisnika: string;
       admin: string;
       verified: boolean;
+      /**
+       * Identitet utvrđen na donatorskom putu (R-01, mera M-9) — čovek je
+       * uporedio uplatioca iz izvoda sa nalogom. NIJE potvrda stvarnosti i ne
+       * zamenjuje je; otvara uži skup funkcija (vidi `smeProsireno`).
+       */
+      identitetUtvrdjen: boolean;
       oauthPending: boolean;
       // Podaci nedovršene OAuth registracije (još nema reda u bazi)
       pendingEmail?: string;
@@ -24,6 +30,7 @@ declare module "next-auth" {
     tipKorisnika: string;
     admin?: string;
     verified: boolean;
+    identitetUtvrdjen?: boolean;
     oauthPending?: boolean;
     // Markeri/podaci za odloženo kreiranje OAuth naloga (signIn → /oauth/dovrsi)
     needsRegistration?: boolean;
@@ -39,6 +46,7 @@ declare module "next-auth/jwt" {
     tipKorisnika: string;
     admin?: string;
     verified: boolean;
+    identitetUtvrdjen?: boolean;
     oauthPending?: boolean;
     // Vreme (ms) poslednjeg osvežavanja statusa iz baze — throttle u jwt callbacku
     osvezenoAt?: number;

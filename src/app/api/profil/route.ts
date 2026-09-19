@@ -3,7 +3,7 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { TipKorisnika, TransactionType, UserStatus } from "@/generated/prisma/client";
+import { PotvrdaPoenStatus, TipKorisnika, TransactionType, UserStatus } from "@/generated/prisma/client";
 import { obrisiSaR2 } from "@/lib/skladiste";
 import {
   POEN_NADZORNIK,
@@ -14,6 +14,7 @@ import {
 } from "@/lib/protokol/dokaz-stvarnosti";
 import { preracunajZoneUBazi } from "@/lib/protokol/zona-sinhronizacija";
 import { gdePseudonim, poljaPseudonima } from "@/lib/pseudonim";
+import { smeDaSalje } from "@/lib/doprinos-pravila";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
@@ -46,7 +47,16 @@ const PROTOKOL_WALLET_ID = "banka-singleton";
  * 3. Poništi POEN balans korisnika (ili prenesi drugom korisniku ako je zadat primalac)
  * 4. Napusti aktivne Krugove
  * 5. Obriši aktivne tokene (VerifikacijaToken, PasswordResetToken); anonimizuj User i UserPodaci
- * 6. Zadržaj: transakcije, audit log, KrugBonusLog
+ * 6. Ukloni oglase i njihov sadržaj (Politika čl. 11 st. 2) — vidi korak 4b
+ * 7. Obriši slobodan tekst uz prepise POEN-a (Politika čl. 11 st. 2)
+ * 8. Zadržaj: numerička istorija transakcija, audit log, KrugBonusLog
+ *
+ * 🔴 Ovo je PSEUDONIMIZACIJA, ne anonimizacija (set 4.5.1, R-14). `User` red
+ * ostaje sa svojim `id`, a nov pseudonim je iz njega izveden — Fondacija u
+ * svakom trenutku može ponovo da poveže zapis sa osobom. Zapisi zato i dalje
+ * jesu podaci o ličnosti; ograničenje brisanja stoji na čl. 30 st. 3 ZZPL-a
+ * (zakonska obaveza čuvanja i integritet evidencije), ne na tvrdnji da su
+ * prestali to da budu. Ne vraćati raniju formulaciju.
  */
 export async function DELETE(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -108,6 +118,17 @@ export async function DELETE(req: NextRequest) {
     where: { verifikovaniId: userId },
   });
 
+  // 🔴 Od seta 4.6.4 POEN po potvrdi čeka trag stvarnog učešća (dokaz stvarnosti
+  // čl. 7), pa veza u stanju ZABELEZEN nije ništa ni emitovala. Povraćaj se zato
+  // radi SAMO za veze u stanju EVIDENTIRAN — inače bi protivzapis oduzimao POEN
+  // koji ne postoji i pokvario zero-sum.
+  const jeUpisan = (v: { poenStatus: PotvrdaPoenStatus }) =>
+    v.poenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
+  // Nadzornikovih 500 imaju svoje stanje — od seta 4.6.5 i ona čekaju isti uslov, ali
+  // nastaju u svom trenutku (upis ishoda nadzora).
+  const nadzorUpisan = (v: { nadzorPoenStatus: PotvrdaPoenStatus }) =>
+    v.nadzorPoenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
+
   // Helper: skida POEN od jednog korisnika i vraća Protokolu, capped na balance
   // (Pravilnik čl. 14: nijedan korisnik ne može imati negativan zapis POEN-a).
   async function vratiPoenProtokolu(
@@ -145,15 +166,17 @@ export async function DELETE(req: NextRequest) {
       async (tx) => {
         // 2a) Veze gde je obrisani VERIFIKATOR
         for (const v of vezeKaoVerifikator) {
-          // POEN_VERIFIKOVANI se vraća Protokolu
-          await vratiPoenProtokolu(
-            tx,
-            v.verifikovaniId,
-            POEN_VERIFIKOVANI,
-            `Poništavanje verifikacije zbog brisanja verifikatora (čl. 34)`
-          );
-          // POEN_NADZORNIK se vraća ako je veza bila pod nadzorom
-          if (v.podlezeNadzoru && v.nadzornikId) {
+          if (jeUpisan(v)) {
+            // POEN_VERIFIKOVANI se vraća Protokolu
+            await vratiPoenProtokolu(
+              tx,
+              v.verifikovaniId,
+              POEN_VERIFIKOVANI,
+              `Poništavanje verifikacije zbog brisanja verifikatora (čl. 34)`
+            );
+          }
+          // POEN_NADZORNIK se proverava ZASEBNO — svoje stanje, svoj trenutak.
+          if (nadzorUpisan(v) && v.podlezeNadzoru && v.nadzornikId) {
             await vratiPoenProtokolu(
               tx,
               v.nadzornikId,
@@ -198,15 +221,17 @@ export async function DELETE(req: NextRequest) {
 
         // 2b) Veze gde je obrisani VERIFIKOVANI
         for (const v of vezeKaoVerifikovani) {
-          // POEN_VERIFIKATOR se vraća Protokolu
-          await vratiPoenProtokolu(
-            tx,
-            v.verifikatorId,
-            POEN_VERIFIKATOR,
-            `Poništavanje verifikacije zbog brisanja verifikovanog (čl. 34)`
-          );
-          // POEN_NADZORNIK se vraća ako je veza bila pod nadzorom
-          if (v.podlezeNadzoru && v.nadzornikId) {
+          if (jeUpisan(v)) {
+            // POEN_VERIFIKATOR se vraća Protokolu
+            await vratiPoenProtokolu(
+              tx,
+              v.verifikatorId,
+              POEN_VERIFIKATOR,
+              `Poništavanje verifikacije zbog brisanja verifikovanog (čl. 34)`
+            );
+          }
+          // POEN_NADZORNIK — vidi napomenu u petlji iznad.
+          if (nadzorUpisan(v) && v.podlezeNadzoru && v.nadzornikId) {
             await vratiPoenProtokolu(
               tx,
               v.nadzornikId,
@@ -255,12 +280,25 @@ export async function DELETE(req: NextRequest) {
   const svezWallet = await prisma.wallet.findUnique({ where: { userId } });
   const balans = svezWallet?.balance ?? 0;
 
+  // 🔴 Prenos POEN-a drugom korisniku pri gašenju naloga je PREPIS, i zato ga sme
+  // samo redovan član (mera P-2 uz R-01). Član koji nije potvrđen — uključujući
+  // onoga čiji je identitet utvrđen na donatorskom putu — prepis ne inicira
+  // (čl. 28 st. 2); da mu je ovde dozvoljen, zabrana bi se zaobilazila u jednom
+  // potezu: ugasi nalog i sve prepiši kome hoćeš. Njemu POEN ide Protokolu.
+  const smeDaPrenese = smeDaSalje(user.tipKorisnika);
+  if (primalacPseudonim && !smeDaPrenese) {
+    return await greska(
+      "Prenos POEN-a drugom korisniku pri gašenju naloga može da izvrši samo potvrđen član (čl. 28 st. 2). Tvoj zapis se poništava uz protivzapis Protokola.",
+      403
+    );
+  }
+
   // Negativan zapis (nadoknada, čl. 20b Pravilnika o dokazu stvarnosti) se NAMERNO
   // ne dira: izuzetno od čl. 34 Pravilnika o KOLO sistemu ne poništava se prestankom
   // statusa i ne prelazi na Protokol. Kad bi se poništio, istupanje iz sistema bi
   // brisalo nadoknadu, a teret bi pao na sve ostale korisnike.
   if (balans > 0) {
-    if (primalacPseudonim) {
+    if (primalacPseudonim && smeDaPrenese) {
       // Prenesi zadatom korisniku
       const primalac = await prisma.user.findFirst({
         where: gdePseudonim(primalacPseudonim),
@@ -308,6 +346,63 @@ export async function DELETE(req: NextRequest) {
     await prisma.krugClanstvo.update({
       where: { id: m.id },
       data: { leftAt: new Date() },
+    });
+  }
+
+  // --- 4b. Oglasi: uklanjanje sa Pijace + brisanje sadržaja i fotografija ---
+  // 🔴 Politika čl. 11 st. 2 od prve verzije obećava da se brišu „podaci u
+  // objavljenim oglasima, uključujući fotografije i broj telefona" — a do seta
+  // 4.5.1 ovaj tok oglase NIJE ni dodirivao. Ostajali su `ACTIVE` i javni i
+  // gostu, sa opisom u kome ljudi po pravilu ostave telefon, sa mestom i sa
+  // fotografijama na R2. Pseudonim `obrisani-korisnik-…` tu ne pomaže: takav
+  // sadržaj identifikuje sam.
+  const oglasi = await prisma.marketplaceListing.findMany({
+    where: { sellerId: userId },
+    select: { id: true, images: true },
+  });
+  if (oglasi.length > 0) {
+    await prisma.marketplaceListing.updateMany({
+      where: { sellerId: userId },
+      data: {
+        status: "UKLONJEN",
+        title: "",
+        description: "",
+        location: null,
+        images: [],
+        uklonjenAt: new Date(),
+        uklonjenRazlog: "Nalog je ugašen (čl. 34 Pravilnika, čl. 11 Politike privatnosti).",
+      },
+    });
+    // Fotografije sa R2 — best-effort, ne sme da obori brisanje naloga.
+    for (const o of oglasi) {
+      for (const slika of o.images) await obrisiSaR2(slika);
+    }
+  }
+
+  // --- 4c. Slobodan tekst uz prepise POEN-a ---
+  // Odluka vlasnika (2026-09-10): opis prepisa ostaje vidljiv svima, ali se
+  // BRIŠE kad se nalog ugasi. Meri se uzak krug: samo prepisi između DVA
+  // korisnička zapisa u kojima je ugašeni nalog jedna strana. Opisi u kojima je
+  // Protokol jedna strana su sistemski (osnov emisije, protivzapisi po čl. 34) —
+  // oni nose proverljivost evidencije i ostaju.
+  const mojWalletId = user.wallet?.id ?? null;
+  if (mojWalletId) {
+    // 🔴 `NOT: { fromWalletId: null }` je obavezan: Prisma u `not` filter
+    // UKLJUČUJE NULL, a emisije Protokola upravo tako izgledaju (`fromWalletId`
+    // je null). Bez ovoga bi se brisali i opisi emisija — osnov po kome je POEN
+    // upisan, koji je odlukom uz R-13 namerno javan.
+    await prisma.transaction.updateMany({
+      where: {
+        type: TransactionType.TRANSFER,
+        description: { not: null },
+        NOT: { fromWalletId: null },
+        AND: [
+          { fromWalletId: { not: PROTOKOL_WALLET_ID } },
+          { toWalletId: { not: PROTOKOL_WALLET_ID } },
+          { OR: [{ fromWalletId: mojWalletId }, { toWalletId: mojWalletId }] },
+        ],
+      },
+      data: { description: null },
     });
   }
 

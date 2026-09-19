@@ -72,6 +72,48 @@ export async function dohvatiSaldoFondacije(): Promise<FondacijaSaldo> {
   };
 }
 
+export interface GodisnjiProjektniPregled {
+  godina: number;
+  utrosenoRSD: number;   // zbir ProjekatTrosak za tekucu kalendarsku godinu
+  brojNabavki: number;   // broj sprovedenih (zavrsenih) nabavki u toj godini
+}
+
+/**
+ * Zbirni pregled projekata za tekucu kalendarsku godinu (Pravilnik o projektima
+ * i kolektivnim nabavkama cl. 31).
+ *
+ * 🔴 Ovo je EVIDENCIJA OBIMA, ne ogranicenje. Ucestalost nabavki nije ogranicena
+ * (odluka vlasnika 2026-09-07) — ali dok se godisnji zbir nigde ne vidi, obimu se
+ * prilazi naslepo, ukljucujuci i poreske pragove koji se mere na ono sto Fondacija
+ * daje. Broji SAMO `ProjekatTrosak`, nikad `FondacijaTrosak` (prag za gasenje veta
+ * meri iskljucivo operativu).
+ */
+export async function dohvatiGodisnjiProjektniPregled(
+  sada = new Date()
+): Promise<GodisnjiProjektniPregled> {
+  const godina = sada.getFullYear();
+  const od = new Date(godina, 0, 1);
+  const doDatuma = new Date(godina + 1, 0, 1);
+
+  const [trosakAgg, brojNabavki] = await Promise.all([
+    prisma.projekatTrosak.aggregate({
+      // Meri se po `datum` (dan troska, indeksiran), ne po `createdAt` —
+      // trosak se ume evidentirati i naknadno, a godina je godina troska.
+      where: { datum: { gte: od, lt: doDatuma } },
+      _sum: { iznosRSD: true },
+    }),
+    prisma.nabavka.count({
+      where: { status: "ZAVRSENA", zavrsenoAt: { gte: od, lt: doDatuma } },
+    }),
+  ]);
+
+  return {
+    godina,
+    utrosenoRSD: Number(trosakAgg._sum.iznosRSD ?? 0),
+    brojNabavki,
+  };
+}
+
 /**
  * Operativni trosak Fondacije za prethodni KALENDARSKI mesec — reper za prag
  * gasenja zastitnog veta (Pravilnik o Gornjem Kolu 3.7.6, cl. 19).

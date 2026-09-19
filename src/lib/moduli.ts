@@ -81,13 +81,24 @@ export const POKROVITELJSTVO_AKTIVNO = true;
  * osnivačkog koraka (na svakih 100.000 POEN) i obračunski koeficijent ZRNA — u OBA
  * smera. Paljenje modula zato više nije potez bez traga u brojevima sistema.
  *
- * ─── STANJE: upaljen radi provere na TESTU (14.08.2026) ─────────────────────
+ * ─── STANJE: U RADU na ekolo.rs (odluka vlasnika, 03.09.2026) ───────────────
  *
- * 🔴 MORA nazad na `false` PRE objave na ekolo.rs, dok vlasnik izričito ne kaže da
- * modul ide u rad. Pravna prepreka je otklonjena (akti 4.3.0, DPIA ažuriran), pa je
- * ovo od sada ODLUKA o puštanju u rad, a ne uslov koji čeka da se ispuni. Puštanje
- * je jednosmerno u praksi: čim se upiše prvi dečji nalog, gašenje modula ostavlja
- * decu bez pristupa nalogu, a emitovani POEN u opticaju.
+ * 🟢 Modul je **pušten u rad**. Ranije je ovde stajalo uputstvo da prekidač „MORA
+ * nazad na `false` pre objave na ekolo.rs" — ono više NE važi i namerno je
+ * uklonjeno: zatečena beleška je opisivala privremenu proveru na testu
+ * (14.08.2026), a od tada je prekidač otišao na produkciju i tamo ostao.
+ *
+ * 🔴 **Gašenje više nije čist potez i ne radi se bez odluke vlasnika.** Za razliku
+ * od Kruga, ovaj modul ima korisnike: čim postoji jedan dečji nalog, `false`
+ * ostavlja dete bez pristupa sopstvenom nalogu (stranice 404, rute 410), a POEN
+ * upisan kroz prijateljstva (čl. 14b) ostaje u opticaju bez ijednog ekrana na kome
+ * se vidi. Ako gašenje ikada zatreba, ide istim putem kao gašenje naloga —
+ * protivzapisom Protokola i obaveštenjem roditeljima, ne prekidačem.
+ *
+ * 🟡 Ono što paljenje NE pokriva, jer nije u kodu: puštanje u rad prati obaveštenje
+ * korisnicima (Admin → Obaveštenja, pravni osnov Pravilnik čl. 54 st. 1) i čovek
+ * koji rešava prijave poruka iz dečje Pričaonice (Admin → Prijave). Bez drugog,
+ * red čekanja postoji a niko ga ne gleda.
  */
 export const MODUL_DECA_AKTIVAN = true;
 
@@ -108,8 +119,20 @@ export const MODUL_DECA_AKTIVAN = true;
  * obaveštenje se šalje bez odlaganja. Nema više roka koji bi trebalo odbrojavati —
  * `true` znači samo „prikaži ekran i upiši pristanak", uz nov red `PolitikaVerzija`.
  * Ne vraćati rok u komentare ni u copy: akti ga više ne poznaju.
+ *
+ * 🔴 **UPALJEN 14.09.2026 zbog ZATEČENIH naloga (odluka vlasnika, uz R-06).**
+ * Od tog dana registracija i OAuth upisuju `ZapisPristanka` i `PolitikaPrihvatanje`
+ * u istoj transakciji u kojoj nastaje nalog (`upisiPristankeRegistracije`), pa nov
+ * čovek pristanak daje kvačicom i ekran NE vidi. Ostaju nalozi otvoreni pre te
+ * izmene — za njih dokaz pristanka ne postoji i ne može se napraviti unazad, pa se
+ * traži pri prvoj narednoj prijavi. To je jedini put kojim se taj dug naplaćuje.
+ *
+ * 🔴 **Prekidač se NE gasi dok gejt radi svoj posao.** Gašenje bi zatečene naloge
+ * vratilo u stanje bez dokaza pristanka, a ekran im se više nikad ne bi pojavio.
+ * Uz to: svaka naredna izmena akata traži nov red `PolitikaVerzija` (Uslovi čl. 40,
+ * Politika čl. 16) — bez njega ekran ćuti jer je zatečena verzija već prihvaćena.
  */
-export const PRISTANAK_NA_AKTE_TRAZI_SE = false;
+export const PRISTANAK_NA_AKTE_TRAZI_SE = true;
 
 /**
  * FAQ pitanja koja se ne prikazuju dok je odgovarajući modul ugašen.

@@ -3,18 +3,30 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { registarPredloga } from "@/lib/protokol/nabavka";
+import {
+  registarPredloga,
+  preuzetaVrednostUGodini,
+  preostaloDoGraniceRSD,
+  GODISNJA_GRANICA_VREDNOSTI_RSD,
+} from "@/lib/protokol/nabavka";
+import { dohvatiGodisnjiProjektniPregled } from "@/lib/protokol/fondacija";
 
 /**
  * GET /api/nabavke
  *
- * Registar predloga (zbirno, bez pseudonima — čl. 10 st. 2) i spisak nabavki.
+ * Registar predloga (zbirno, bez pseudonima — čl. 10 st. 2) i spisak nabavki, uz
+ * zbirni godišnji pregled projekata (čl. 31 st. 4) — evidencija obima, ne granica.
+ *
+ * Uz to, korisniku se vraća i njegova sopstvena godišnja granica iz čl. 21a. 🔴 To
+ * je ČINJENICA — dinarska vrednost dobara koja je primio, sa računa dobavljača —
+ * a ne poreska osnovica i ne savet. Kvalifikacija tog davanja nije naša da je
+ * saopštavamo (Izjava o rizicima čl. 10), pa uz broj ne ide nijedna reč o porezu.
  */
 export async function GET() {
   const session = await getServerSession(authOptions);
   if (!session) return await greska("Nije prijavljen.", 401);
 
-  const [registar, nabavke] = await Promise.all([
+  const [registar, nabavke, projekti] = await Promise.all([
     registarPredloga(),
     prisma.nabavka.findMany({
       where: { status: { in: ["OBJAVLJENA", "RED_UTVRDJEN", "PLACENA", "ZAVRSENA"] } },
@@ -32,6 +44,7 @@ export async function GET() {
         _count: { select: { prijave: true } },
       },
     }),
+    dohvatiGodisnjiProjektniPregled(),
   ]);
 
   const moja = await prisma.nabavkaPrijava.findMany({
@@ -40,7 +53,15 @@ export async function GET() {
   });
   const mojePoNabavci = new Map(moja.map((m) => [m.nabavkaId, m]));
 
+  const preuzetoRSD = await preuzetaVrednostUGodini(session.user.id);
+
   return NextResponse.json({
+    projekti,
+    granica: {
+      godisnjaRSD: GODISNJA_GRANICA_VREDNOSTI_RSD,
+      preuzetoRSD: Math.round(preuzetoRSD),
+      preostaloRSD: Math.floor(preostaloDoGraniceRSD(preuzetoRSD)),
+    },
     registar: registar.map((r) => ({
       nazivId: r.nazivId,
       naziv: r.naziv,

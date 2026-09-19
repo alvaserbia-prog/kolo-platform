@@ -157,65 +157,23 @@ export async function zatraziPotvrduEmaila(
 }
 
 /**
- * Potvrđuje adresu i upisuje je na nalog.
+ * Potvrda adrese živi u `potvrda-adrese.ts` — ZAJEDNIČKA je za maloletan i
+ * punoletan nalog otkad se adresa potvrđuje i pri registraciji (R-06, Uslovi
+ * čl. 9). Ovde ostaje re-eksport da pozivna mesta ne moraju da znaju gde je.
  *
- * Radi i bez prijave: link stiže u sanduče, a dete koje ga otvara na tuđem
- * uređaju ili u drugom pretraživaču nije prijavljeno. Sam token je dokaz da je
- * onaj ko ga drži pristupio adresi.
+ * 🔴 Ne praviti drugu potvrdu ovde: dve kopije istog toka razišle bi se pri prvoj
+ * izmeni, a jedna od njih upisuje `User.email` — razlaz bi značio adresu upisanu
+ * bez potvrde.
  */
-export async function potvrdiEmail(token: unknown): Promise<{ pseudonim: string; email: string }> {
-  if (typeof token !== "string" || token.length < 32) {
-    throw new EmailGreska("Link nije važeći.", 400);
-  }
-  const zapis = await prisma.emailPotvrda.findUnique({
-    where: { tokenHash: hashToken(token) },
-    select: {
-      id: true,
-      email: true,
-      usedAt: true,
-      expiresAt: true,
-      user: { select: { id: true, pseudonim: true, maloletan: true, deaktiviranAt: true } },
-    },
-  });
-  if (!zapis || zapis.usedAt || zapis.expiresAt < new Date()) {
-    throw new EmailGreska("Link nije važeći ili je istekao. Upiši adresu ponovo.", 400);
-  }
-  if (!zapis.user.maloletan || zapis.user.deaktiviranAt) {
-    throw new EmailGreska("Link nije važeći.", 400);
-  }
-
-  const zauzeta = await prisma.user.findUnique({
-    where: { email: zapis.email },
-    select: { id: true },
-  });
-  if (zauzeta && zauzeta.id !== zapis.user.id) {
-    throw new EmailGreska("Ta adresa se u međuvremenu upisala na drugi nalog.", 409);
-  }
-
-  await prisma.$transaction(async (tx) => {
-    // Rezerviši token pre upisa: dva klika na isti link ne smeju da prođu oba.
-    const uzeto = await tx.emailPotvrda.updateMany({
-      where: { id: zapis.id, usedAt: null },
-      data: { usedAt: new Date() },
-    });
-    if (uzeto.count === 0) throw new EmailGreska("Link je već upotrebljen.", 409);
-
-    await tx.user.update({
-      where: { id: zapis.user.id },
-      // 🔴 `emailObavestenja: false` — adresa služi povratku u nalog, ne pošti.
-      // Vidi zaglavlje fajla.
-      data: { email: zapis.email, emailObavestenja: false },
-    });
-  });
-
-  return { pseudonim: zapis.user.pseudonim, email: zapis.email };
-}
+export { potvrdiAdresu as potvrdiEmail } from "./potvrda-adrese";
 
 /** Uklanjanje adrese sa naloga. Poništava i sve linkove koji još čekaju. */
 export async function ukloniEmail(userId: string): Promise<{ ok: true }> {
   await deteIliBaci(userId);
   await prisma.$transaction([
-    prisma.user.update({ where: { id: userId }, data: { email: null } }),
+    // Sa adresom odlazi i njena potvrda — inače bi `emailPotvrdjenAt` tvrdio da je
+    // potvrđena adresa koje više nema.
+    prisma.user.update({ where: { id: userId }, data: { email: null, emailPotvrdjenAt: null } }),
     prisma.emailPotvrda.updateMany({
       where: { userId, usedAt: null },
       data: { usedAt: new Date() },

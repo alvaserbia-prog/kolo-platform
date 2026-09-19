@@ -4,7 +4,7 @@
  * Ovde se čuva ono što je u opisu modula obrazloženo kao NOSIVO, pa mora da padne
  * glasno ako se promeni:
  *
- *  - isplata čeka OBE strane (jedina odbrana od farmovanja);
+ *  - evidentiranje čeka OBE strane (jedina odbrana od farmovanja);
  *  - braća i sestre sklapaju prijateljstvo, ali ono ne nosi POEN;
  *  - ciklus raskini–obnovi daje TAČNO NULU (zato zapis sme u minus);
  *  - pri punoletstvu otpis pada na obe strane, i samo za isplaćena prijateljstva.
@@ -21,7 +21,7 @@ import {
 } from "@/lib/deca-pravila";
 
 function dete(id: string, roditeljIds: string[], stanje: StanjeDeteta = "AKTIVNO"): Ucesnik {
-  return { id, maloletan: true, dozvolaOdrasli: false, roditeljIds, stanje };
+  return { id, maloletan: true, godine: 12, dozvolaOdrasli: false, roditeljIds, skolaSifra: null, stanje };
 }
 
 describe("iznos je 500 po strani", () => {
@@ -74,12 +74,12 @@ describe("🔴 ciklus raskini–obnovi mora da daje nulu", () => {
    * Sa minusom (zapis sme ispod nule) ciklus daje tačno nulu, pa je obnavljanje para
    * bezopasno i pomirene drugarice ne gube ništa trajno.
    *
-   * Test opisuje aritmetiku koju sprovodi `raskiniPrijateljstvo` / `probajIsplatiti`.
+   * Test opisuje aritmetiku koju sprovodi `raskiniPrijateljstvo` / `probajEvidentirati`.
    */
   function ciklus(krugova: number, potrosiOdmah: boolean): number {
     let zapis = 0;
     for (let i = 0; i < krugova; i++) {
-      zapis += PRIJATELJSTVO_POEN; // isplata
+      zapis += PRIJATELJSTVO_POEN; // evidentiranje
       if (potrosiOdmah) zapis -= PRIJATELJSTVO_POEN; // prepis roditelju
       zapis -= PRIJATELJSTVO_POEN; // otpis pri raskidu — SME u minus
       if (potrosiOdmah) zapis += PRIJATELJSTVO_POEN; // ono što je prepisano roditelju
@@ -104,7 +104,7 @@ describe("otpis pri punoletstvu — čl. 19 st. 2", () => {
   });
 
   it("raskinuta, bratska i prijateljstva na čekanju se ne broje", () => {
-    // Sva tri slučaja nose isto polje `poenIsplacen === false`, pa je brojač isti.
+    // Sva tri slučaja nose isto polje `poenEvidentiran === false`, pa je brojač isti.
     const isplacenih = 3;
     expect(otpisPriPunoletstvu(isplacenih)).toBe(3 * PRIJATELJSTVO_POEN);
   });

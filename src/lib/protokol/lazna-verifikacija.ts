@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { TransactionType, UserStatus } from "@/generated/prisma/client";
+import { PotvrdaPoenStatus, TransactionType, UserStatus } from "@/generated/prisma/client";
 import {
   POEN_NADZORNIK,
   POEN_VERIFIKATOR,
@@ -100,11 +100,31 @@ async function stanje(tx: Tx, userId: string): Promise<number> {
  *
  * Vraća listu nadoknada nastalih ovim poništenjem.
  */
+export type PonistavanjeOpcije = {
+  /**
+   * Opis koji ide u zapise umesto podrazumevanog. Obavezan svuda gde poništenje
+   * NIJE utvrđena lažna verifikacija — inače bi čoveku koji nije slagao u zapisu
+   * i u GDPR izvozu stajalo da jeste (čl. 20a se poziva samo u svom slučaju).
+   */
+  opis?: string;
+  /**
+   * 🔴 Teret se NE prenosi: svaki pogođeni vraća tačno ono što je po toj potvrdi
+   * dobio, i njegov zapis sme u minus. Nadoknada iz čl. 20b je posledica UTVRĐENE
+   * lažne verifikacije i vezuje se za verifikatora zato što je on uveo nalog koji
+   * ne postoji; tamo gde utvrđenja nema, nema ni razloga da jedan čovek nosi tuđe.
+   *
+   * Koristi poništenje potvrde zbog neaktivnosti (Pravilnik o učešću dece, čl. 6),
+   * za koje Pravilnik čl. 14 st. 3 tačka 4 propisuje upravo taj režim.
+   */
+  bezNadoknade?: boolean;
+};
+
 async function ponistiVezu(
   tx: Tx,
   vezaId: string,
   pogodjeni: Set<string>,
-  nadoknade: Map<string, number>
+  nadoknade: Map<string, number>,
+  opcije?: PonistavanjeOpcije
 ): Promise<void> {
   const v = await tx.verifikacionaVeza.findUnique({
     where: { id: vezaId },
@@ -115,24 +135,59 @@ async function ponistiVezu(
   });
   if (!v) return;
 
-  const opis = `Poništavanje lažne verifikacije ${v.verifikator.pseudonim} → ${v.verifikovani.pseudonim} (čl. 20a)`;
+  const opis =
+    opcije?.opis ??
+    `Poništavanje lažne verifikacije ${v.verifikator.pseudonim} → ${v.verifikovani.pseudonim} (čl. 20a)`;
+  const bezNadoknade = opcije?.bezNadoknade === true;
+
+  // 🔴 POEN PO OVOJ POTVRDI MOŽDA NIKAD NIJE NI UPISAN (dokaz stvarnosti čl. 7, set
+  // 4.6.4): upis čeka trag stvarnog učešća potvrđenog korisnika. Dok je veza u stanju
+  // ZABELEZEN, nema šta da se poništi — protivzapis bi bio LAŽAN: oduzeo bi POEN koji
+  // Protokol nikad nije emitovao, gurnuo bi ljude u minus bez ijednog upisa iza toga
+  // i pokvario zero-sum. Iz istog razloga tu nema ni nadoknade po čl. 20b: ona pokriva
+  // nepokriven deo PONIŠTENOG upisa, a poništenja nema.
+  //
+  // 🔴 Nadzornikovih 500 imaju SVOJE stanje (`nadzorPoenStatus`) i proveravaju se
+  // odvojeno — od seta 4.6.5 i ona čekaju isti uslov, ali u svom trenutku.
+  //
+  // Veza se i tada briše i indeks se preračunava — to je posledica pada potvrde, ne
+  // POEN-a. Potvrda zabeležena a neupisana tako naprosto nestaje.
+  const poenUpisan = v.poenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
 
   // 1. Verifikovani — najviše do nule; nepokriveni deo tereti verifikatora (čl. 20c st. 2).
-  const podelaVerifikovani = podelaTereta(await stanje(tx, v.verifikovaniId), POEN_VERIFIKOVANI);
-  await uProtokol(tx, v.verifikovaniId, podelaVerifikovani.saKorisnika, opis);
+  //    Bez nadoknade: pun iznos, i njegov zapis sme u minus.
+  let podelaVerifikovani = { saKorisnika: 0, naVerifikatora: 0 };
+  if (poenUpisan) {
+    podelaVerifikovani = bezNadoknade
+      ? { saKorisnika: POEN_VERIFIKOVANI, naVerifikatora: 0 }
+      : podelaTereta(await stanje(tx, v.verifikovaniId), POEN_VERIFIKOVANI);
+    await uProtokol(tx, v.verifikovaniId, podelaVerifikovani.saKorisnika, opis);
+  }
 
   // 2. Nadzornik — samo ako je ishod bio „uredno" (čl. 20a st. 2). Ko je evidentirao
-  //    „za proveru" ili „sporno" zadržava svojih 500.
+  //    „za proveru" ili „sporno" zadržava svojih 500. Pravilo važi u oba režima:
+  //    ko je sumnju prijavio i bio u pravu ne sme da prođe gore od onoga ko je ćutao.
+  //
+  // 🔴 NIJE pod uslovom `poenUpisan` nego pod SVOJIM: od seta 4.6.5 nadzornikovih 500
+  // čekaju isti uslov, ali imaju zasebno stanje (`nadzorPoenStatus`), jer nastaju u
+  // svom trenutku — pri upisu ishoda nadzora. Veza ume da ima upisan POEN po potvrdi
+  // a nadzor koji čeka, i obrnuto; jedno polje to ne bi razlikovalo.
   let podelaNadzornik = { saKorisnika: 0, naVerifikatora: 0 };
-  if (v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
-    podelaNadzornik = podelaTereta(await stanje(tx, v.nadzornikId), POEN_NADZORNIK);
+  const nadzorUpisan = v.nadzorPoenStatus === PotvrdaPoenStatus.EVIDENTIRAN;
+  if (nadzorUpisan && v.podlezeNadzoru && v.nadzornikId && v.nadzorIshod === "UREDNO") {
+    podelaNadzornik = bezNadoknade
+      ? { saKorisnika: POEN_NADZORNIK, naVerifikatora: 0 }
+      : podelaTereta(await stanje(tx, v.nadzornikId), POEN_NADZORNIK);
     await uProtokol(tx, v.nadzornikId, podelaNadzornik.saKorisnika, opis);
   }
 
-  // 3. Verifikator — pun iznos, bez ograničenja: on je jedini koji sme u minus.
-  await uProtokol(tx, v.verifikatorId, POEN_VERIFIKATOR, opis);
+  // 3. Verifikator — pun iznos, bez ograničenja.
+  if (poenUpisan) {
+    await uProtokol(tx, v.verifikatorId, POEN_VERIFIKATOR, opis);
+  }
 
   // 4. Nadoknada — nepokriveni delovi prelaze na verifikatora (čl. 20b st. 2).
+  //    U režimu bez nadoknade oba sabirka su nula, pa se ovde ništa ne dešava.
   const teretVerifikatora = podelaVerifikovani.naVerifikatora + podelaNadzornik.naVerifikatora;
   if (teretVerifikatora > 0) {
     await uProtokol(
@@ -188,7 +243,8 @@ async function skupiNadoknade(nadoknade: Map<string, number>): Promise<Nadoknada
  * ponovo biti verifikovan (čl. 20c).
  */
 export async function ponistiVerifikaciju(
-  verifikacijaId: string
+  verifikacijaId: string,
+  opcije?: PonistavanjeOpcije
 ): Promise<PonistavanjeRezultat> {
   const veza = await prisma.verifikacionaVeza.findUnique({
     where: { id: verifikacijaId },
@@ -201,7 +257,7 @@ export async function ponistiVerifikaciju(
 
   await prisma.$transaction(
     async (tx) => {
-      await ponistiVezu(tx, verifikacijaId, pogodjeni, nadoknade);
+      await ponistiVezu(tx, verifikacijaId, pogodjeni, nadoknade, opcije);
       // Zabranjena zona nije zaseban zapis nego se izvodi iz važećih verifikacija
       // (čl. 12 st. 4). Unija nije invertibilna, pa se keš preračunava od nule —
       // bez toga bi poništenom verifikacijom ostao zatvoren deo mreže i pogođeni

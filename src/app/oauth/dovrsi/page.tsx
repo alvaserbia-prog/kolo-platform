@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { AKT_POLITIKA, AKT_USLOVI } from "@/lib/verzije-akata";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -61,7 +62,7 @@ export default function OAuthDovrsiPage() {
     const res = await fetch("/api/oauth/dovrsi", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ pseudonim: pseudonim.trim() }),
+      body: JSON.stringify({ pseudonim: pseudonim.trim(), prihvatamUslove: uslovi, prihvatamPolitiku: privatnost }),
     });
     const data = await res.json();
     setLoading(false);
@@ -127,14 +128,16 @@ export default function OAuthDovrsiPage() {
               <input type="checkbox" checked={uslovi} onChange={(e) => setUslovi(e.target.checked)}
                 className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
               <span className="text-xs text-kolo-muted">
-                {tReg("uslovi")} <a href="/uslovi" target="_blank" className="text-kolo-green-700 underline">{tReg("uslovi_link")}</a>
+                {tReg("uslovi")} <a href="/uslovi" target="_blank" className="text-kolo-green-700 underline">{tReg("uslovi_link")}</a>{" "}
+                <span className="text-kolo-muted/70">(v{AKT_USLOVI.verzija})</span>
               </span>
             </label>
             <label className="flex items-start gap-2.5 cursor-pointer">
               <input type="checkbox" checked={privatnost} onChange={(e) => setPrivatnost(e.target.checked)}
                 className="mt-0.5 accent-kolo-green-700 w-4 h-4 shrink-0" />
               <span className="text-xs text-kolo-muted">
-                {tReg("uslovi")} <a href="/privatnost" target="_blank" className="text-kolo-green-700 underline">{tReg("privatnost_link")}</a>
+                {tReg("uslovi")} <a href="/privatnost" target="_blank" className="text-kolo-green-700 underline">{tReg("privatnost_link")}</a>{" "}
+                <span className="text-kolo-muted/70">(v{AKT_POLITIKA.verzija})</span>
               </span>
             </label>
           </div>

@@ -3,7 +3,6 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { odnosPonistenja } from "@/lib/protokol/nabavka";
 
 /**
  * GET /api/nabavke/[id]
@@ -59,8 +58,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     dobavljac: n.dobavljac,
     jedinicaMere: n.jedinicaMere,
     nabavnaCena: nabavna,
-    maloprodajna: n.maloprodajna,
-    izvoriCena: n.izvoriCena,
+    poenObrazlozenje: n.poenObrazlozenje,
     saldoSnimak: n.saldoSnimak ? Number(n.saldoSnimak) : null,
     rezervaSnimak: n.rezervaSnimak ? Number(n.rezervaSnimak) : null,
     iznosNabavke: n.iznosNabavke ? Number(n.iznosNabavke) : null,
@@ -69,7 +67,6 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
     velicinaDela: n.velicinaDela,
     poenPoDelu: n.poenPoDelu,
     ukupnoPoena: n.poenPoDelu && n.brojDelova ? n.poenPoDelu * n.brojDelova : null,
-    odnosPonistenja: n.maloprodajna && nabavna ? odnosPonistenja(n.maloprodajna, nabavna) : null,
     mestoPreuzimanja: n.mestoPreuzimanja,
     preuzimanjeOd: n.preuzimanjeOd?.toISOString() ?? null,
     preuzimanjeDo: n.preuzimanjeDo?.toISOString() ?? null,

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import { MojiPristanci } from "@/components/profil/MojiPristanci";
 import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
@@ -54,6 +55,15 @@ interface ProfilProps {
   stanjeDeteta?: "NA_CEKANJU" | "POVEZANO" | "AKTIVNO" | null;
 }
 
+/** Predmeti prigovora i izjašnjenja koja se od korisnika traže (Uslovi čl. 37a). */
+type Predmeti = {
+  razmena: { id: string; iznos: number; datum: string; strana: string; smer: "poslao" | "ponisten" }[];
+  nabavka: { id: string; dobro: string; datum: string | null }[];
+  izjasnjenja: {
+    id: string; pseudonim: string; opis: string; iznos: number; datum: string; rokDo: string | null;
+  }[];
+};
+
 export default function ProfilKlijent({ user, praceneKategorije, maloletan = false, stanjeDeteta = null }: ProfilProps) {
   const locale = useLocale();
   const t = useTranslations("profil");
@@ -62,10 +72,14 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
   const { update } = useSession();
 
   const TIPOVI_ODLUKA = [
+    { value: "RAZMENA", label: t("prigovor_tip_razmena") },
+    { value: "NABAVKA", label: t("prigovor_tip_nabavka") },
     { value: "VERIFIKACIJA", label: t("prigovor_tip_verifikacija") },
     { value: "SUSPENZIJA", label: t("prigovor_tip_suspenzija") },
     { value: "PROGRAM", label: t("prigovor_tip_program") },
     { value: "OGLAS", label: t("prigovor_tip_oglas") },
+    { value: "PODACI", label: t("prigovor_tip_podaci") },
+    { value: "POTVRDA", label: t("prigovor_tip_potvrda") },
     { value: "OSTALO", label: t("prigovor_tip_ostalo") },
   ];
   const [avatar, setAvatar] = useState<string | null>(user.avatar);
@@ -160,6 +174,8 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
 
   // Prigovor
   const [prigovorTip, setPrigovorTip] = useState("OSTALO");
+  const [prigovorPredmet, setPrigovorPredmet] = useState("");
+  const [predmeti, setPredmeti] = useState<Predmeti | null>(null);
   const [prigovorOpis, setPrigovorOpis] = useState("");
   const [prigovorError, setPrigovorError] = useState("");
   const [prigovorSuccess, setPrigovorSuccess] = useState("");
@@ -353,13 +369,84 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
     const res = await fetch("/api/prigovor", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ opis: prigovorOpis, tipOdluke: prigovorTip }),
+      body: JSON.stringify({
+        opis: prigovorOpis,
+        tipOdluke: prigovorTip,
+        predmetId: prigovorPredmet || null,
+      }),
     });
     const data = await res.json();
     setPrigovorLoading(false);
     if (!res.ok) { setPrigovorError(data.error ?? t("prigovor_greska_slanja")); return; }
     setPrigovorSuccess(t("prigovor_uspeh"));
     setPrigovorOpis("");
+    setPrigovorPredmet("");
+    ucitajPredmete();
+  }
+
+  // Predmeti se učitavaju jednom, pri otvaranju profila: spisak je kratak (samo
+  // ono što je u roku) i treba i obrascu i bloku sa izjašnjenjima.
+  const ucitajPredmete = useCallback(() => {
+    if (maloletan) return;
+    fetch("/api/prigovor/predmeti", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (d) setPredmeti(d); })
+      .catch(() => {});
+  }, [maloletan]);
+
+  useEffect(() => { ucitajPredmete(); }, [ucitajPredmete]);
+
+  const datumKratak = (d: string | null) =>
+    d ? new Date(d).toLocaleDateString(intlTag(locale), { day: "2-digit", month: "2-digit", year: "numeric" }) : "";
+
+  const predmetiZaTip: { id: string; label: string }[] =
+    prigovorTip === "RAZMENA"
+      ? (predmeti?.razmena ?? []).map((r) => ({
+          id: r.id,
+          label:
+            r.smer === "poslao"
+              ? t("prigovor_predmet_poslao", {
+                  datum: datumKratak(r.datum),
+                  iznos: r.iznos.toLocaleString(intlTag(locale)),
+                  strana: r.strana,
+                })
+              : t("prigovor_predmet_ponisten", {
+                  datum: datumKratak(r.datum),
+                  iznos: r.iznos.toLocaleString(intlTag(locale)),
+                  strana: r.strana,
+                }),
+        }))
+      : prigovorTip === "NABAVKA"
+      ? (predmeti?.nabavka ?? []).map((n) => ({
+          id: n.id,
+          label: t("prigovor_predmet_deo", { datum: datumKratak(n.datum), dobro: n.dobro }),
+        }))
+      : [];
+
+  async function posaljiIzjasnjenje(id: string, odgovor: string) {
+    const res = await fetch(`/api/prigovor/razmena/${id}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ odgovor }),
+    });
+    if (res.ok) ucitajPredmete();
+    return res.ok;
+  }
+
+  // Dete čiji nalog čeka preuzimanje briše nalog samo (čl. 4a st. 6). Zaseban tok
+  // od `obrisiNalog`: tamo se nalog anonimizuje i ostaje, ovde nestaje.
+  const [deteBrisiOpen, setDeteBrisiOpen] = useState(false);
+  const [deteBrisiLoading, setDeteBrisiLoading] = useState(false);
+  const [deteBrisiError, setDeteBrisiError] = useState("");
+
+  async function obrisiDecjiNalog() {
+    setDeteBrisiError("");
+    setDeteBrisiLoading(true);
+    const res = await fetch("/api/deca/nalog", { method: "DELETE" });
+    const data = await res.json().catch(() => ({}));
+    setDeteBrisiLoading(false);
+    if (!res.ok) { setDeteBrisiError(data.error ?? t("dete_brisi_greska")); return; }
+    await signOut({ callbackUrl: "/" });
   }
 
   async function obrisiNalog() {
@@ -755,6 +842,23 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
       <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 items-start ${maloletan ? "hidden" : ""}`}>
         {/* Prigovor na odluku — levo */}
         <div className="bg-white rounded-2xl border border-kolo-border p-6">
+          {/* Izjašnjenje pre odluke (Pravilnik čl. 16 st. 10) — stoji IZNAD obrasca
+              jer je vezano rokom: dok traje, Fondacija ne odlučuje. */}
+          {(predmeti?.izjasnjenja.length ?? 0) > 0 && (
+            <div className="mb-6 rounded-xl border border-kolo-gold-300 bg-kolo-gold-50 p-4 space-y-4">
+              <h3 className="text-sm font-semibold text-kolo-text">{t("izjasni_naslov")}</h3>
+              {predmeti!.izjasnjenja.map((iz) => (
+                <Izjasnjenje
+                  key={iz.id}
+                  stavka={iz}
+                  datum={datumKratak(iz.datum)}
+                  rok={datumKratak(iz.rokDo)}
+                  iznos={iz.iznos.toLocaleString(intlTag(locale))}
+                  posalji={posaljiIzjasnjenje}
+                />
+              ))}
+            </div>
+          )}
           <h2 className="text-base font-semibold text-kolo-muted mb-2">{t("prigovor_naslov")}</h2>
           <p className="text-xs text-kolo-muted mb-4">
             {t("prigovor_opis")}
@@ -769,6 +873,26 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
                 <option key={tip.value} value={tip.value}>{tip.label}</option>
               ))}
             </select>
+            {/* Predmet — obavezan za dve vrste (Uslovi čl. 37a st. 3): o prepisu i
+                o delu iz nabavke odlučuje se pojedinačno, pa se mora reći o kom. */}
+            {(prigovorTip === "RAZMENA" || prigovorTip === "NABAVKA") && (
+              predmetiZaTip.length > 0 ? (
+                <select
+                  value={prigovorPredmet}
+                  onChange={(e) => setPrigovorPredmet(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600"
+                >
+                  <option value="">{t("prigovor_predmet_izaberi")}</option>
+                  {predmetiZaTip.map((p) => (
+                    <option key={p.id} value={p.id}>{p.label}</option>
+                  ))}
+                </select>
+              ) : (
+                <p className="text-xs text-kolo-muted bg-kolo-bg rounded-lg px-3 py-2">
+                  {t("prigovor_predmet_prazno")}
+                </p>
+              )
+            )}
             <textarea
               value={prigovorOpis}
               onChange={(e) => setPrigovorOpis(e.target.value)}
@@ -805,6 +929,9 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
               {t("eksport_dugme")}
             </a>
           </div>
+
+          {/* Šta sam prihvatio i kada (R-06) */}
+          <MojiPristanci />
 
           {/* Gašenje profila (brisanje naloga) */}
           <div className="bg-white rounded-2xl border border-red-200 p-6">
@@ -855,6 +982,102 @@ export default function ProfilKlijent({ user, praceneKategorije, maloletan = fal
           </div>
         </div>
       </div>
+
+      {/* Sopstveni izlaz deteta iz naloga koji čeka preuzimanje (čl. 4a st. 6).
+          Stoji IZVAN grida iznad, koji je detetu sakriven: prigovor, GDPR eksport
+          i anonimizacija punoletnog naloga nisu radnje sedmogodišnjaka, ali izlaz
+          iz obrade koja se u tom razdoblju vodi po legitimnom interesu jeste.
+          Po preuzimanju naloga blok nestaje — tada nalog briše roditelj. */}
+      {maloletan && stanjeDeteta === "NA_CEKANJU" && (
+        <div className="bg-white rounded-2xl border border-red-200 p-6">
+          <h2 className="text-base font-semibold text-kolo-danger mb-2">{t("dete_brisi_naslov")}</h2>
+          <p className="text-xs text-kolo-muted mb-4">{t("dete_brisi_opis")}</p>
+          {!deteBrisiOpen ? (
+            <button
+              onClick={() => setDeteBrisiOpen(true)}
+              className="px-4 py-2.5 rounded-xl border border-red-300 text-kolo-danger text-sm font-semibold hover:bg-red-50 transition-colors"
+            >
+              {t("dete_brisi_dugme")}
+            </button>
+          ) : (
+            <div className="space-y-3 border border-red-200 rounded-xl p-4 bg-red-50">
+              <p className="text-sm font-semibold text-kolo-danger">{t("dete_brisi_potvrda")}</p>
+              {deteBrisiError && (
+                <p className="text-xs text-kolo-danger bg-kolo-danger-light rounded-lg px-3 py-2">{deteBrisiError}</p>
+              )}
+              <div className="flex gap-3">
+                <button
+                  onClick={() => { setDeteBrisiOpen(false); setDeteBrisiError(""); }}
+                  className="flex-1 py-2.5 rounded-xl border border-kolo-border text-sm text-kolo-muted hover:bg-kolo-bg transition-colors"
+                >
+                  {t("odustani")}
+                </button>
+                <button
+                  onClick={obrisiDecjiNalog}
+                  disabled={deteBrisiLoading}
+                  className="flex-1 py-2.5 rounded-xl bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors disabled:opacity-60"
+                >
+                  {deteBrisiLoading ? t("brisem") : t("dete_brisi_potvrdi")}
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Izjašnjenje druge strane o prigovoru na prepis (Pravilnik čl. 16 st. 10).
+ *
+ * Zaseban mali komponent samo zbog sopstvenog stanja teksta — bez njega bi svako
+ * kucanje preiscrtavalo ceo profil.
+ */
+function Izjasnjenje({
+  stavka, datum, rok, iznos, posalji,
+}: {
+  stavka: { id: string; pseudonim: string; opis: string };
+  datum: string;
+  rok: string;
+  iznos: string;
+  posalji: (id: string, odgovor: string) => Promise<boolean>;
+}) {
+  const t = useTranslations("profil");
+  const [tekst, setTekst] = useState("");
+  const [salje, setSalje] = useState(false);
+  const [poslato, setPoslato] = useState(false);
+
+  if (poslato) return <p className="text-xs text-kolo-green-700">{t("izjasni_poslato")}</p>;
+
+  return (
+    <div className="space-y-2">
+      <p className="text-xs text-kolo-muted">
+        {t("izjasni_opis", { pseudonim: stavka.pseudonim, iznos, datum })}
+      </p>
+      <p className="text-xs text-kolo-text italic">„{stavka.opis}"</p>
+      {rok && <p className="text-xs text-kolo-muted">{t("izjasni_rok", { datum: rok })}</p>}
+      <textarea
+        value={tekst}
+        onChange={(e) => setTekst(e.target.value)}
+        rows={3}
+        maxLength={2000}
+        placeholder={t("izjasni_placeholder")}
+        className="w-full px-3 py-2 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-600 resize-none"
+      />
+      <button
+        type="button"
+        disabled={salje || tekst.trim().length < 10}
+        onClick={async () => {
+          setSalje(true);
+          const ok = await posalji(stavka.id, tekst.trim());
+          setSalje(false);
+          if (ok) setPoslato(true);
+        }}
+        className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-kolo-green-700 disabled:opacity-50"
+      >
+        {t("izjasni_dugme")}
+      </button>
     </div>
   );
 }

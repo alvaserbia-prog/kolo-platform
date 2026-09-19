@@ -25,10 +25,16 @@ const OSNOVA = {
   prijaviocId: "ja",
   vecPrijavljena: false,
   otvorenihPrijava: 0,
+  prijaviocMaloletan: false,
   opis: "Prepisao sam POEN, robu nisam dobio.",
 };
 
 describe("smePrijaviti", () => {
+  it("odbija maloletnog prijavioca — za njega poništenje prepisa ne važi (čl. 14 st. 5)", () => {
+    const ishod = smePrijaviti({ ...OSNOVA, prijaviocMaloletan: true });
+    expect(ishod.ok).toBe(false);
+  });
+
   it("propušta prepis koji je prijavio sam pošiljalac", () => {
     expect(smePrijaviti(OSNOVA)).toEqual({ ok: true });
   });

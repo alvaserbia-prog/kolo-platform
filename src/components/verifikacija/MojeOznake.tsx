@@ -16,6 +16,12 @@ export type VerifikovanaOsoba = {
   korisnikId: string;
   pseudonim: string;
   oznaka: string | null;
+  /**
+   * POEN po ovoj potvrdi još nije upisan — čeka prvi potvrđen doprinos potvrđenog
+   * člana (dokaz stvarnosti čl. 7). Takav red se obeležava bojom, da se iz spiska
+   * vidi koga treba podsetiti da objavi ponudu.
+   */
+  cekaDoprinos?: boolean;
 };
 
 function Red({ osoba }: { osoba: VerifikovanaOsoba }) {
@@ -52,13 +58,27 @@ function Red({ osoba }: { osoba: VerifikovanaOsoba }) {
   }
 
   return (
-    <li className="flex flex-wrap items-center gap-2 px-4 py-3">
+    <li
+      className={`flex flex-wrap items-center gap-2 px-4 py-3 ${
+        osoba.cekaDoprinos ? "bg-amber-50" : ""
+      }`}
+    >
       <Link
         href={profilHref({ id: osoba.korisnikId, pseudonim: osoba.pseudonim })}
-        className="text-sm font-medium text-kolo-green-700 hover:underline shrink-0 min-w-[7rem]"
+        className={`text-sm font-medium hover:underline shrink-0 min-w-[7rem] ${
+          osoba.cekaDoprinos ? "text-amber-800" : "text-kolo-green-700"
+        }`}
       >
         @<Pseudonim>{osoba.pseudonim}</Pseudonim>
       </Link>
+      {osoba.cekaDoprinos && (
+        <span
+          className="shrink-0 rounded-full bg-amber-200 px-2 py-0.5 text-[11px] font-semibold text-amber-900"
+          title={t("oznake_ceka_naslov")}
+        >
+          {t("oznake_ceka")}
+        </span>
+      )}
       <input
         type="text"
         value={vrednost}
@@ -91,6 +111,11 @@ export default function MojeOznake({ osobe }: { osobe: VerifikovanaOsoba[] }) {
       <p className="text-sm text-kolo-muted mb-4">
         {t("oznake_opis")}
       </p>
+      {osobe.some((o) => o.cekaDoprinos) && (
+        <p className="text-sm text-amber-900 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 mb-4">
+          {t("oznake_ceka_opis", { broj: osobe.filter((o) => o.cekaDoprinos).length })}
+        </p>
+      )}
       <ul className="divide-y divide-kolo-border border border-kolo-border rounded-xl">
         {osobe.map((o) => (
           <Red key={o.verifikacijaId} osoba={o} />

@@ -48,7 +48,7 @@ export default async function AdminPage({
       orderBy: { createdAt: "asc" },
     }),
     Promise.all([
-      prisma.zrnoTrziste.findUnique({ where: { id: "singleton" } }),
+      prisma.zrnoKanal.findUnique({ where: { id: "singleton" } }),
       prisma.protokolProgram.findMany(),
       prisma.programEnrollment.findMany({ where: { status: "PENDING" }, include: { user: { select: { pseudonim: true } } }, orderBy: { createdAt: "asc" } }),
       prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
@@ -121,7 +121,9 @@ export default async function AdminPage({
       include: { author: { select: { pseudonim: true } } },
     }),
     prisma.donationRecord.findMany({
-      where: { status: "PENDING" },
+      // NAPLACENO = kartična uplata prošla kroz banku, POEN čeka ljudsku potvrdu
+      // (R-01, mera M-4a). Stoji u istom redu čekanja kao najavljena uplata.
+      where: { status: { in: ["PENDING", "NAPLACENO"] } },
       include: { user: { select: { pseudonim: true } } },
       orderBy: { createdAt: "asc" },
     }),
@@ -172,6 +174,7 @@ export default async function AdminPage({
         cumulativeRSD: Number(d.cumulativeRSD), level: d.level, poenEmitted: d.poenEmitted,
         nacinUplate: d.nacinUplate, referenceNumber: d.referenceNumber,
         createdAt: d.createdAt.toISOString(),
+        status: d.status, donatorIme: d.donatorIme,
       }))}
       otvoreniPrigovori={otvoreniPrigovori.map((p) => ({
         id: p.id, pseudonim: p.user.pseudonim, opis: p.opis, tipOdluke: p.tipOdluke,
@@ -194,14 +197,16 @@ export default async function AdminPage({
         createdAt: z.createdAt.toISOString(),
       }))}
       adminProgrami={{
-        zrnoTrzisjeAktivno: adminProgrami[0]?.isActive ?? false,
+        zrnoKanalAktivan: adminProgrami[0]?.isActive ?? false,
         programi: SVI_PROGRAMI.map((type) => {
           const bp = adminProgrami[1].find((p) => p.type === type);
           return { type, label: labelPrograma(type), isActive: bp?.isActive ?? false, activatedAt: bp?.activatedAt?.toISOString() ?? null };
         }),
         pendingEnrollments: adminProgrami[2].map((e) => ({
           id: e.id, pseudonim: e.user.pseudonim, type: e.type, label: labelPrograma(e.type),
-          metadata: e.metadata as Record<string, unknown> | null, createdAt: e.createdAt.toISOString(),
+          // Posebne kategorije — samo superadminu (DPIA 5.6). Vidi /api/admin/programi.
+          metadata: viewerJeSuperadmin ? (e.metadata as Record<string, unknown> | null) : null,
+          createdAt: e.createdAt.toISOString(),
         })),
         poslednjeEmisije: adminProgrami[3].map((s) => ({
           date: s.date.toISOString(), opticaj: s.opticaj, limit: s.limit,

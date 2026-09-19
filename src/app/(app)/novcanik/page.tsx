@@ -5,6 +5,7 @@ import { sesija } from "@/lib/sesija";
 import NovcanikKartice from "./NovcanikKartice";
 import IstorijaTransakcija, { IstorijaSkeleton } from "./IstorijaTransakcija";
 import { dohvatiZabelezen } from "@/lib/protokol/doprinos-sadrzaju";
+import { dohvatiZabelezenePotvrde } from "@/lib/protokol/potvrda-poen";
 import { dohvatiZabelezeneKorake } from "@/lib/protokol/doprinos-razmeni";
 import PutanjaRazmene, { PutanjaSkeleton } from "./PutanjaRazmene";
 import { ucitajUcesnika } from "@/lib/protokol/deca";
@@ -24,7 +25,9 @@ export default async function NovcanikPage({
 
   // Laki upiti potrebni za gornju karticu (stanje POEN). ZRNO kartica je
   // privremeno uklonjena iz Novčanika (ostaje dostupna preko sidebara /zrno).
-  const [wallet, dbUser, zabelezenOglas, zabelezeniKoraci, rezervisano] = await Promise.all([
+  const [wallet, dbUser, zabelezenOglas, zabelezeniKoraci, rezervisano,
+    zabelezenePotvrde,
+  ] = await Promise.all([
     prisma.wallet.findUnique({
       where: { userId: session.user.id },
       select: { id: true, balance: true },
@@ -42,6 +45,9 @@ export default async function NovcanikPage({
     // Rezervisano za kolektivnu nabavku (čl. 23 st. 2). Zaseban red, nikad sabran
     // sa stanjem: do preuzimanja POEN nije poništen (čl. 27 st. 3).
     rezervisanoZaNabavku(session.user.id),
+    // POEN po potvrdama koji čeka prvi doprinos (dokaz stvarnosti čl. 7). Dva
+    // broja, jer čekaju različite stvari: tvoj prvi doprinos i tuđi.
+    dohvatiZabelezenePotvrde(session.user.id),
   ]);
   const zabelezenDoprinos = zabelezenOglas + zabelezeniKoraci;
   const maloletan = dbUser?.maloletan ?? false;
@@ -55,6 +61,8 @@ export default async function NovcanikPage({
 
   return (
     <div className="space-y-6">
+      {/* Maloletni nalog ne ulazi u lanac potvrda (čl. 15 Pravilnika o učešću dece),
+          pa po toj osnovi nema šta da čeka. */}
       <NovcanikKartice
         balance={wallet?.balance ?? 0}
         pseudonim={session.user.pseudonim}
@@ -63,6 +71,9 @@ export default async function NovcanikPage({
         prefillIznos={iznos}
         prefillOpis={description}
         zabelezenDoprinos={maloletan ? 0 : zabelezenDoprinos}
+        zabelezenePotvrdeMoje={maloletan ? 0 : zabelezenePotvrde.kaoPotvrdjeni}
+        zabelezenePotvrdeTudje={maloletan ? 0 : zabelezenePotvrde.kaoPotvrdjivac}
+        zabelezenePotvrdeNadzor={maloletan ? 0 : zabelezenePotvrde.kaoNadzornik}
         // Maloletni nalog ne učestvuje u nabavci (čl. 4), pa reda ni nema.
         rezervisanoNabavka={maloletan ? 0 : rezervisano}
         maloletan={maloletan}

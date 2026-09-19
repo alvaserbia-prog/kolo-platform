@@ -1,5 +1,7 @@
 # Analiza: kod platforme vs. najnoviji pravilnici (nova dokumentacija)
 
+> ⚠️ **Ovo je snimak stanja od 02.06.2026, ne tekuće stanje.** Deo nalaza je u međuvremenu rešen; ispravljeni su označeni u tekstu, sa datumom provere. Pre pozivanja na bilo koji nalaz iz ovog dokumenta proveriti kod.
+>
 > Datum: 2026-06-02. Metod: inventar koda (schema + `src/lib/protokol/*` + 124 API rute + frontend) upoređen, po jedan agent na dokument, sa najnovijim verzijama svih dokumenata iz `nova dokumentacija/`.
 > Upoređene verzije: Pravilnik **3.7.5**, politika **3.7.4**, uslovi/donacije/dokaz_stvarnosti/radnje_obrade/DPIA/programi_podrske **3.7.3**, whitepaper/hijerarhija/operativni/osnivacki/rizici/statut **3.7.2**.
 
@@ -9,7 +11,10 @@
 
 1. ✅ **REŠENO (2026-06-02).** ~~`NOSILAC_ZRNA` status se nigde ne dodeljuje u kodu.~~ `izvrsiZrnoOperacije` ([zrno.ts](../src/lib/protokol/zrno.ts)) sada postavlja `tipKorisnika = NOSILAC_ZRNA` pri izvršenom upisu ZRNA (čl. 29-30) i vraća na `REGULARNI` kad se ZRNO u celosti otpiše (čl. 30). Indeks se namerno NE dira — pristup/kapacitet nosioca ZRNA proizlaze iz statusa, ne iz indeksa (dokaz stvarnosti čl. 17); `izracunajKapacitet`/`imaPristupVerifikaciji` već daju NOSILAC_ZRNA neograničen kapacitet i pristup. POCETNI (UO bootstrap) zadržava svoj status pri upisu jer već ima sva prava nosioca ZRNA.
 2. ✅ **REŠENO (2026-06-02).** ~~Kod ZABRANJUJE verifikaciju POCETNI/NOSILAC_ZRNA korisnika~~ — [verifikacija-service.ts](../src/lib/protokol/verifikacija-service.ts) sada dozvoljava verifikaciju posebnih statusa (čl. 15): uklonjen 409, indeks im raste kao evidencija (cap 100, nikad ispod postojećeg da se ne pregazi bootstrap 10% iz čl. 14), a `tipKorisnika` se zadržava (ne spušta se na REGULARNI).
-3. **Posebne kategorije podataka u plaintext-u, suprotno politici i DPIA.** `ProgramEnrollment.metadata` (JSON) čuva `dijagnoza` (POSEBNA_BRIGA), imena+datume rođenja dece (PODRSKA_MAJKAMA), `datumRodjenja`. Nema enkripcije nigde (`encrypt/aes` = 0 pogodaka). `programi_podrske` čl. 12 **izričito zabranjuje** traženje dijagnoze — a kod je traži (`prijava/route.ts:83`).
+3. ✅ **PREVAZIĐENO — provereno 07.09.2026.** ~~Posebne kategorije podataka u plaintext-u, suprotno politici i DPIA: `metadata` čuva `dijagnoza`, imena dece, `datumRodjenja`; `programi_podrske` čl. 12 izričito zabranjuje traženje dijagnoze — a kod je traži.~~
+   **Stanje danas:** `buildMetadata` (`prijava/route.ts`) upisuje samo datume rođenja dece **bez imena** (PODRSKA_MAJKAMA), datum rođenja (PODRSKA_STARIJIMA), **datum rešenja i opcioni datum isteka** — bez broja, organa, slobodnog teksta i dijagnoze (POSEBNA_BRIGA), i naziv ustanove i programa (SKOLOVANJE). Kod se poklapa sa čl. 12 i 14 Pravilnika o programima podrške.
+   **Enkripcija na nivou aplikacije i dalje ne postoji, ali je DPIA ni ne obećava:** tačka 5.1 kaže „šifrovanje podataka u mirovanju — enkripcija **na nivou hosting infrastrukture**", što je tačno ono što postoji.
+   🔴 **Ostaje jedan stvaran razlaz:** DPIA 5.6 kaže da su uneti podaci „dostupni isključivo licu koje obrađuje prijavu u Fondaciji", a u kodu ih vidi **svaki ADMIN** — `/api/admin/programi` traži `jeAdmin`, ne `jeSuperadmin`, i `metadata` se ispisuje u admin panelu. Ili suziti kod, ili prepisati meru. Obrnuto od enkripcije: ovde je tekst **uži** od primene.
 4. **Čl. 34 (Pravilnik) / čl. 16 (dokaz stvarnosti) se NE primenjuju pri isključenju.** `admin/korisnici/[id]/iskljuci` samo postavlja `EXCLUDED` + izlazak iz krugova; ne radi otpis ZRNA, poništavanje POEN-a ni anonimizaciju/preračun indeksa. Puna mehanika postoji samo na putanji samostalnog brisanja (`DELETE /api/profil`).
 5. **Eksport ličnih podataka korisnika je slomljen** — `profil/eksport/route.ts:158` referencira nedefinisan `referrals` → ReferenceError/HTTP 500. Pravo na prenosivost (politika čl. 13/36) trenutno ne radi.
 6. **Upravljanje (Gornje Kolo + Zaštitni veto) je samo evidenciono/računsko.** Glasanje se sprovodi ali ishod ne pokreće nikakvu akciju; veto se računa i prikazuje ali ne blokira nijedan predlog. Veto i glasanje nisu povezani u kodu.
@@ -112,7 +117,7 @@
 | 5 | Ko verifikuje operativni doprinos | nosioci ZRNA / UO (čl. 36) | `ADMIN` ili `NOSILAC_ZRNA`, bez razlike faza | doprinos-oglasi admin rute |
 | 6 | Dnevni limit operativnog doprinosa | 10% samo za operativni (operativni čl. 23/24) | 10% **zajednički pool** sa svim programima | `programi.ts:104-157` |
 | 7 | Plan izvršenja | obavezan u svakoj prijavi (čl. 10/11) | samo ako `saOdobravanjem` | `prijavi/route.ts:29` |
-| 8 | POSEBNA_BRIGA dokaz | „rešenje o invalidnosti", BEZ dijagnoze (čl. 12) | traži `dijagnoza` | `prijava/route.ts:82-83` |
+| 8 | POSEBNA_BRIGA dokaz | „rešenje o invalidnosti", BEZ dijagnoze (čl. 12) | ~~traži `dijagnoza`~~ → **ispravljeno; čuva samo datum rešenja i datum isteka** (provereno 07.09.2026) | `prijava/route.ts` |
 | 9 | Udeo osnivača | apsolutni iznos, zbir=2.4M (čl. 12) | razlomak (brojilac/imenilac), zbir=1 | `osnivacki.ts:121-124` |
 | 10 | Javnost udela osnivača | „svi korisnici" (čl. 16) | samo verifikovani | `javno/osnivacki-doprinos/route.ts:17` |
 | 11 | ZRNO „kurs" | „obračunski koeficijent", NIJE kurs (rizici čl. 4) | reč `kurs` posvuda | `zrno.ts`, `ZrnoDailyRate.kurs` |
