@@ -7,7 +7,7 @@ import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
 import { MAX_PO_SLICI, MAX_SLIKA } from "@/lib/slika-upload";
 import { parsirajCenu } from "@/lib/cena-oglas";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
-import { oglasIspunjavaMinimum } from "@/lib/protokol/doprinos-sadrzaju";
+import { oglasIspunjavaMinimum, zabeleziDoprinos } from "@/lib/protokol/doprinos-sadrzaju";
 import { IZBOR_UCESNIKA, smeDaVidiOglas, ucesnikIzReda, ucitajUcesnika } from "@/lib/protokol/deca";
 import { jeAdmin } from "@/lib/dozvole";
 import { writeFile, mkdir } from "fs/promises";
@@ -215,6 +215,30 @@ export async function PATCH(
         phone: phone || null,
         images: [...zadrzaneSlike, ...noveSlike],
       },
+    });
+
+    // Doprinos sadržaju platforme (čl. 40a) i pri IZMENI, ne samo pri objavi.
+    //
+    // 🔴 Bez ovoga oglas koji u trenutku objave nije ispunjavao sadržinski minimum
+    // (potvrđenom članu se minimum pri objavi ne proverava, pa mu oglas bez
+    // fotografije prolazi) nikad ne bi ušao u red čekanja — dopuna izmenom ga ne bi
+    // vratila. Isto je važilo i posle odbijanja, iako obaveštenje koje korisnik tada
+    // dobije izričito kaže: „Kad ga dopuniš ili objaviš bolji, doprinos se ponovo
+    // razmatra." Kod je to obećanje ispunjavao samo za „objavi bolji".
+    //
+    // Jednokratnost kanala i dalje drži BAZA (`DoprinosSadrzaju.userId @unique`), ne
+    // ovaj poziv: ko doprinos već ima — zabeležen ili evidentiran — dobija P2002 i
+    // funkcija tiho vraća `false`. Sama proverava tip oglasa, minimum i maloletstvo,
+    // pa se ti uslovi ovde ne dupliraju. Van transakcije je i ne baca — evidentiranje
+    // vodi u `emitujPoen()`, koji otvara sopstvenu.
+    await zabeleziDoprinos(session.user.id, {
+      id,
+      tip: listing.tip,
+      title,
+      description,
+      category: listing.category,
+      location: mesto,
+      images: [...zadrzaneSlike, ...noveSlike],
     });
 
     return NextResponse.json({ ok: true });
