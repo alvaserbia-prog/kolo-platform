@@ -414,7 +414,11 @@ function DecjaPricaonica({
               const moja = p.userId === mojId;
               return (
                 <li key={p.id} className={moja ? "text-right" : ""}>
-                  <span className="text-sm text-kolo-muted">{p.pseudonim}</span>
+                  {/* 🔴 Sopstvena poruka NE nosi ime. Dete zna ko je, a strana i boja
+                      oblačića to već govore; ime je tu samo stajalo kao red teksta
+                      koji poslednju poruku lepi uz polje za kucanje. Ime tuđe poruke
+                      ostaje — ono jeste podatak, jer u sobi piše više prijatelja. */}
+                  {!moja && <span className="text-sm text-kolo-muted">{p.pseudonim}</span>}
                   <p
                     className={`inline-block max-w-[80%] rounded-2xl px-3 py-2 text-base ${
                       moja
