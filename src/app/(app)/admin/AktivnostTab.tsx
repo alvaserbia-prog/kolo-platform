@@ -1,9 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { intlTag } from "@/lib/format";
 import { useTranslations, useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
+import { profilHref } from "@/lib/profil-link";
 
 interface PregledRed {
   userId: string;
@@ -233,7 +235,17 @@ export default function AktivnostTab() {
                   {pregled.map((r) => (
                     <tr key={r.userId} className="border-b border-kolo-border last:border-0">
                       <td className="px-4 py-2.5">
-                        <Pseudonim>{r.pseudonim}</Pseudonim>
+                        {r.pseudonim === "?" ? (
+                          <Pseudonim>{r.pseudonim}</Pseudonim>
+                        ) : (
+                          <Link
+                            href={profilHref({ id: r.userId, pseudonim: r.pseudonim })}
+                            target="_blank"
+                            className="font-semibold text-kolo-green-700 hover:underline"
+                          >
+                            <Pseudonim>{r.pseudonim}</Pseudonim>
+                          </Link>
+                        )}
                       </td>
                       <td className="px-4 py-2.5 text-kolo-muted">
                         {formatVreme(r.poslednjaAktivnost, locale)}
@@ -320,9 +332,14 @@ export default function AktivnostTab() {
                             <span className="text-xs text-kolo-muted shrink-0 tabular-nums">
                               {formatSat(r.createdAt, locale)}
                             </span>
-                            <span className="font-mono text-xs text-kolo-text break-all">
+                            <Link
+                              href={r.putanja}
+                              target="_blank"
+                              rel="noopener"
+                              className="font-mono text-xs text-kolo-green-700 hover:underline break-all"
+                            >
                               {r.putanja}
-                            </span>
+                            </Link>
                           </div>
                         ))}
                       </div>
