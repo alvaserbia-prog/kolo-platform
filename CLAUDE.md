@@ -315,6 +315,15 @@ razidu sa nekom sekcijom ispod, **merodavno je ovo**.
 
 ### Evidencija
 1. **Zero-sum.** Zbir svih zapisa, uključujući Protokol, je nula. Protokol ide u minus pri svakoj emisiji.
+   🟡 **Ali zero-sum NE proverava da se stanje slaže sa istorijom.** `Wallet.balance` je **zaseban
+   upisan broj**, ne zbir transakcija: `emitujPoen()` radi `increment`/`decrement` nad `Wallet` i
+   upisuje zapis **paralelno**, a nigde u `src/` nema koda koji balans izvodi iz zapisa. I
+   `checkZeroSum()` i cron `/api/cron/zero-sum` sabiraju **stanja**, pa dve greške u suprotnim
+   smerovima prolaze nečujno, a promena nad `Transaction` ne obara nijedan alarm. Posledica pri
+   svakom zahvatu u istoriju: par `+X`/`−X` sme da ode samo **ceo i u istoj transakciji**, uz
+   proveru `balance == Σ(ulaz) − Σ(izlaz)` po pogođenom novčaniku **unutar** te transakcije (tako
+   radi `protokol/potvrde-parovi.ts`). Uklonjena jedna polovina pomera zbir zapisa a stanje ostavlja
+   isto — i to niko ne vidi.
 2. **U minus sme samo Protokol** — i korisnik, po **tačno šest** osnova iz Pravilnika čl. 14 st. 3, koje taj član nabraja iscrpno i zatvara („ni bilo kojim drugim aktom"):
    nadoknada po čl. 20b · poništen prepis po prijavi razmene · otpis prijateljstva · otpis po poništenju potvrde zbog neaktivnosti · prevođenje punoletnog naloga u maloletni (čl. 4d) · otpis po usklađivanju zatečenih potvrda (čl. 22a dokaza stvarnosti).
    🔴 **Sedmi se ne može uvesti bez izmene tog člana.** Nema zasebne kolone za minus — minus JESTE nadoknada, pa `jeNadoknada`/`iznosNadoknade`/`raspolozivo` iz `nadoknada.ts` pokrivaju sve slučajeve.
