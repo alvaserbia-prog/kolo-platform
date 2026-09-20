@@ -2664,7 +2664,21 @@
     "potvrde_pregled_minus": "🔴 U minus prelazi {ljudi} ljudi, ukupno {poen} POENA. Svakome od njih ide obaveštenje.",
     "potvrde_pregled_opticaj": "Opticaj posle radnje",
     "potvrde_pregled_prag": "🔴 Pad opticaja prelazi osnivački prag od {prag} POENA unazad — već upaljeni koraci ostaju, ali sledeći čeka da opticaj ponovo naraste.",
-    "potvrde_sprovedeno": "Usklađivanje je sprovedeno."
+    "potvrde_sprovedeno": "Usklađivanje je sprovedeno.",
+    "parovi_naslov": "Uklanjanje parova iz istorije",
+    "parovi_opis": "Jednokratna prelazna radnja, posledica usklađivanja. Zatečena potvrda je POEN prvo upisala, pa ga je usklađivanje povuklo, pa se on ponovo upisuje kad uslov nastupi — tri reda u istoriji za isti POEN. Prva dva opisuju POEN koji je celo vreme bio na čekanju i ovim se uklanjaju; treći, ponovni upis, ostaje netaknut. Nijedno stanje, opticaj ni zero-sum se ne menjaju: par je +X i −X, pa se u svakom zbiru poništava. Radnja pogađa sve članove, ne samo onoga ko je pokreće.",
+    "parovi_ukloni": "Ukloni parove",
+    "parovi_potvrda_broja": "Otkucaj broj zapisa koji se uklanjaju, tačno kako piše u pregledu",
+    "parovi_pregled_povlacenja": "Povlačenja u istoriji",
+    "parovi_pregled_parova": "Uparenih parova",
+    "parovi_pregled_redova": "Zapisa se uklanja",
+    "parovi_pregled_od_ukupno": "od ukupno {ukupno}",
+    "parovi_pregled_ljudi": "Pogođenih naloga",
+    "parovi_pregled_minus": "{ljudi} pogođenih naloga je u minusu. Minus im ostaje isti — gasi se tek prvim odobrenim oglasom, kao i do sada.",
+    "parovi_pregled_nepromenjeno": "Stanja, opticaj ({opticaj}) i zero-sum ostaju nepromenjeni.",
+    "parovi_spisak": "Pogledaj spisak ({ljudi})",
+    "parovi_spisak_red": "{parova} para · {poen} POENA · stanje {stanje}",
+    "parovi_sprovedeno": "Uklonjeno je {redova} zapisa. Stanja i zero-sum su nepromenjeni."
   },
   "kolacici": {
     "aria": "Pristanak na kolačiće",
