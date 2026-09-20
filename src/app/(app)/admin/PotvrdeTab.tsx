@@ -9,6 +9,9 @@
  *     programu podrške. Bez njega bi njima i njihovim potvrđivačima POEN čekao zauvek.
  *  2. USKLAĐIVANJE ZATEČENIH — jednokratna prelazna radnja, u dva koraka
  *     (Izračunaj → Sprovedi), gde se broj POENA iz pregleda otkucava rukom.
+ *  3. UKLANJANJE PAROVA — čisti istoriju od para „emisija pa povlačenje" koji je
+ *     usklađivanje ostavilo za sobom. Isti obrazac u dva koraka, ali se otkucava
+ *     broj REDOVA, jer se POEN ovom radnjom ne menja.
  *
  * Podaci se učitavaju lenjo, iz taba.
  */
@@ -40,6 +43,21 @@ type Pregled = {
   osnivackiPragPredjen: number | null;
 };
 
+type ParoviPregled = {
+  sprovedeno: boolean;
+  povlacenjaUkupno: number;
+  parova: number;
+  redova: number;
+  neupareni: number;
+  pogodjenihLjudi: number;
+  ljudiUMinusu: number;
+  neslozeniNalozi: number;
+  opticaj: number;
+  zapisaUkupno: number;
+  prepreke: string[];
+  ucesnici: { pseudonim: string; parova: number; poen: number; stanje: number }[];
+};
+
 export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boolean; onDone?: () => void }) {
   const t = useTranslations("admin");
   const [veze, setVeze] = useState<Veza[]>([]);
@@ -53,6 +71,12 @@ export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boo
   const [potvrdaBroja, setPotvrdaBroja] = useState("");
   const [radiUskladjivanje, setRadiUskladjivanje] = useState(false);
   const [poruka, setPoruka] = useState("");
+
+  // Uklanjanje parova — sopstveno stanje, jer je to zasebna odluka od usklađivanja.
+  const [parovi, setParovi] = useState<ParoviPregled | null>(null);
+  const [potvrdaParova, setPotvrdaParova] = useState("");
+  const [radiParove, setRadiParove] = useState(false);
+  const [porukaParova, setPorukaParova] = useState("");
 
   const ucitaj = useCallback(async () => {
     setUcitava(true);
@@ -143,8 +167,52 @@ export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boo
     }
   }
 
+  async function izracunajParove() {
+    setRadiParove(true);
+    setGreska("");
+    setPorukaParova("");
+    try {
+      const res = await fetch("/api/admin/potvrde-parovi", { method: "POST" });
+      const d = await res.json();
+      if (!res.ok) throw new Error(d?.error ?? "Pregled nije uspeo.");
+      setParovi(d);
+      setPotvrdaParova("");
+    } catch (e) {
+      setGreska(e instanceof Error ? e.message : "Greška.");
+    } finally {
+      setRadiParove(false);
+    }
+  }
+
+  async function ukloniParove() {
+    if (!parovi) return;
+    setRadiParove(true);
+    setGreska("");
+    try {
+      const res = await fetch("/api/admin/potvrde-parovi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ potvrda: Number(potvrdaParova) }),
+      });
+      const d = await res.json();
+      if (!res.ok) {
+        if (d?.pregled) setParovi(d.pregled);
+        throw new Error(d?.error ?? "Radnja nije izvršena.");
+      }
+      setParovi(d);
+      setPorukaParova(t("parovi_sprovedeno", { redova: Number(d.redova).toLocaleString("sr-RS") }));
+      setPotvrdaParova("");
+      onDone?.();
+    } catch (e) {
+      setGreska(e instanceof Error ? e.message : "Greška.");
+    } finally {
+      setRadiParove(false);
+    }
+  }
+
   const broj = (n: number) => n.toLocaleString("sr-RS");
   const potvrdaTacna = pregled !== null && Number(potvrdaBroja) === pregled.poenPonisten;
+  const parovaPotvrdaTacna = parovi !== null && Number(potvrdaParova) === parovi.redova;
 
   return (
     <div className="space-y-8">
@@ -259,6 +327,98 @@ export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boo
           )}
 
           {poruka && <p className="text-sm font-medium text-kolo-green-700">{poruka}</p>}
+        </section>
+      )}
+
+      {/* ── Uklanjanje parova emisija+usklađivanje ─────────────────────────── */}
+      {jeSuperadmin && (
+        <section className="space-y-3 rounded-2xl border border-sky-200 bg-sky-50 p-5">
+          <h2 className="text-lg font-semibold text-sky-900">{t("parovi_naslov")}</h2>
+          <p className="text-sm text-sky-900/80">{t("parovi_opis")}</p>
+
+          <button
+            type="button"
+            className="kolo-dugme-sekundarno text-sm"
+            disabled={radiParove}
+            onClick={() => void izracunajParove()}
+          >
+            {t("potvrde_izracunaj")}
+          </button>
+
+          {parovi && (
+            <div className="space-y-2 rounded-xl bg-white p-4 text-sm">
+              <p>{t("parovi_pregled_povlacenja")}: <strong>{broj(parovi.povlacenjaUkupno)}</strong></p>
+              <p>{t("parovi_pregled_parova")}: <strong>{broj(parovi.parova)}</strong></p>
+              <p>
+                {t("parovi_pregled_redova")}: <strong>{broj(parovi.redova)}</strong>{" "}
+                {t("parovi_pregled_od_ukupno", { ukupno: broj(parovi.zapisaUkupno) })}
+              </p>
+              <p>{t("parovi_pregled_ljudi")}: <strong>{broj(parovi.pogodjenihLjudi)}</strong></p>
+              {parovi.ljudiUMinusu > 0 && (
+                <p className="text-amber-800">{t("parovi_pregled_minus", { ljudi: broj(parovi.ljudiUMinusu) })}</p>
+              )}
+              <p className="text-kolo-muted">{t("parovi_pregled_nepromenjeno", { opticaj: broj(parovi.opticaj) })}</p>
+
+              {parovi.ucesnici.length > 0 && (
+                <details className="pt-1">
+                  <summary className="cursor-pointer text-sm font-medium text-sky-900">
+                    {t("parovi_spisak", { ljudi: broj(parovi.ucesnici.length) })}
+                  </summary>
+                  <ul className="mt-2 space-y-1">
+                    {parovi.ucesnici.map((u) => (
+                      <li key={u.pseudonim} className="flex items-center gap-2 text-xs">
+                        <span className={u.stanje < 0 ? "font-semibold text-red-700" : ""}>
+                          <Pseudonim>{u.pseudonim}</Pseudonim>
+                        </span>
+                        <span className="text-kolo-muted">
+                          {t("parovi_spisak_red", {
+                            parova: broj(u.parova),
+                            poen: broj(u.poen),
+                            stanje: broj(u.stanje),
+                          })}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+
+              {/* 🔴 Prepreke se prikazuju umesto dugmeta — ne pored njega. Dugme koje
+                  stoji uz crveni tekst poziva da se klikne „ipak". */}
+              {parovi.prepreke.length > 0 ? (
+                <ul className="list-disc space-y-1 pl-5 pt-2 text-red-700">
+                  {parovi.prepreke.map((p) => (
+                    <li key={p}>{p}</li>
+                  ))}
+                </ul>
+              ) : (
+                !parovi.sprovedeno &&
+                parovi.parova > 0 && (
+                  <div className="pt-2">
+                    <label className="block text-sm font-medium text-kolo-text">
+                      {t("parovi_potvrda_broja")}
+                    </label>
+                    <input
+                      className="kolo-input mt-1 w-48"
+                      inputMode="numeric"
+                      value={potvrdaParova}
+                      onChange={(e) => setPotvrdaParova(e.target.value.replace(/\D/g, ""))}
+                    />
+                    <button
+                      type="button"
+                      className="kolo-dugme-primarno ml-2 text-sm"
+                      disabled={!parovaPotvrdaTacna || radiParove}
+                      onClick={() => void ukloniParove()}
+                    >
+                      {t("parovi_ukloni")}
+                    </button>
+                  </div>
+                )
+              )}
+            </div>
+          )}
+
+          {porukaParova && <p className="text-sm font-medium text-kolo-green-700">{porukaParova}</p>}
         </section>
       )}
     </div>
