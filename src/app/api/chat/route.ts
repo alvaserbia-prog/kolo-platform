@@ -5,39 +5,9 @@ import { authOptions } from "@/lib/auth";
 import { smeProsireno } from "@/lib/dozvole";
 import { prisma } from "@/lib/prisma";
 import { ChatSoba } from "@/generated/prisma/client";
-import { idPrijatelja, smeUSobu } from "@/lib/protokol/prijateljstva";
+import { smeUSobu } from "@/lib/protokol/prijateljstva";
+import { sobaKorisnika, usloviSobe } from "@/lib/protokol/pricaonica";
 import { PORUKA_CEKA_RODITELJA } from "@/lib/deca-pravila";
-
-/**
- * Soba se IZVODI iz toga ko je prijavljen, ne bira se parametrom (Modul Deca,
- * čl. 12). Maloletni korisnik uvek dobija dečju sobu, punoletni sobu odraslih —
- * pa ne postoji adresa kojom bi odrasli ušao među decu ni obrnuto.
- */
-async function mojaSoba(userId: string): Promise<ChatSoba> {
-  const u = await prisma.user.findUnique({ where: { id: userId }, select: { maloletan: true } });
-  return u?.maloletan ? ChatSoba.DECA : ChatSoba.ODRASLI;
-}
-
-/**
- * Uslov nad autorima poruka koje korisnik vidi.
- *
- * ─── Dečja soba: svako vidi samo poruke SVOJIH PRIJATELJA (čl. 18 st. 3) ────
- *
- * Jedna soba za svu decu, ali filtrirana grafom prijateljstava. Posledica koja se
- * dobija besplatno: kad su svi učesnici međusobno prijatelji, sam od sebe nastaje
- * grupni razgovor — graf pravi sobe umesto nas.
- *
- * 🟡 Poznata i PRIHVAĆENA posledica: kad Milica napiše poruku, vide je svi njeni
- * prijatelji; Ana odgovori, i taj odgovor vidi Petar, koji je Milicin prijatelj a
- * Anu ne poznaje — pa mu Anina poruka stoji bez povoda. To nije greška.
- *
- * 🔴 Zato u dečjoj sobi NEMA odgovora sa citatom. Citat bi Petru pokazao Milicin
- * tekst i zaobišao ovaj filter. Ne dodavati citiranje.
- */
-async function vidljiviAutori(userId: string, soba: ChatSoba): Promise<string[] | null> {
-  if (soba !== ChatSoba.DECA) return null;
-  return idPrijatelja(userId);
-}
 
 // GET /api/chat — poslednje poruke (samo prijavljeni)
 // Query: ?since=ISO-datum (opciono) — vraća samo poruke nakon datog vremena
@@ -51,23 +21,17 @@ export async function GET(req: NextRequest) {
   const since = url.searchParams.get("since");
   const limit = Math.min(Number(url.searchParams.get("limit") ?? "100"), 200);
 
-  const soba = await mojaSoba(session.user.id);
-  // Nalog koji još čeka roditelja (čl. 4c) sobu ne vidi — ni da čita. Vraća se
-  // prazna soba, a ekran deteta objašnjava zašto i šta mu to otvara.
-  if (soba === ChatSoba.DECA && !(await smeUSobu(session.user.id))) {
+  const soba = await sobaKorisnika(session.user.id);
+  // `null` znači da korisnik sobu ne vidi uopšte — nalog deteta koje još čeka
+  // roditelja (čl. 4c). Vraća se prazna soba, a ekran deteta objašnjava zašto i
+  // šta mu to otvara.
+  const uslovi = await usloviSobe(session.user.id, soba);
+  if (!uslovi) {
     return NextResponse.json([]);
   }
-  const autori = await vidljiviAutori(session.user.id, soba);
 
-  // Uklonjene poruke (Uslovi čl. 25 st. 2) nestaju iz sobe za sve — i za autora.
-  const where = {
-    uklonjenoAt: null,
-    soba,
-    ...(autori ? { userId: { in: autori } } : {}),
-    ...(since ? { createdAt: { gt: new Date(since) } } : {}),
-  };
   const poruke = await prisma.chatMessage.findMany({
-    where,
+    where: { ...uslovi, ...(since ? { createdAt: { gt: new Date(since) } } : {}) },
     orderBy: { createdAt: "desc" },
     take: limit,
     include: { user: { select: { id: true, pseudonim: true, verified: true, avatar: true } } },
@@ -97,7 +61,7 @@ export async function POST(req: NextRequest) {
   // 🔴 Dete piše u svojoj sobi BEZ ikakve potvrde. Uslov „samo potvrđeni" je pisan
   // za sobu odraslih; preneseno na decu, dečja soba bi zauvek bila samo za čitanje,
   // jer maloletni korisnik potvrdu nikad ne stiče (Modul Deca, čl. 15).
-  const soba = await mojaSoba(session.user.id);
+  const soba = await sobaKorisnika(session.user.id);
   if (soba === ChatSoba.ODRASLI && !smeProsireno(session.user)) {
     return await greska("Pisanje u pričaonicu je dostupno samo verifikovanim članovima.", 403);
   }

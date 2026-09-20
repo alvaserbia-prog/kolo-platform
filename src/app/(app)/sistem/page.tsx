@@ -7,6 +7,7 @@ import { dohvatiSaldoFondacije } from "@/lib/protokol/fondacija";
 import { BEZ_DECE } from "@/lib/protokol/deca";
 import { dnevniPregledPrograma, labelPrograma } from "@/lib/protokol/programi";
 import { USLOV_AKTIVNO_DETE } from "@/lib/protokol/skole";
+import { USLOV_RAZMENE } from "@/lib/razmena-brojac-pravila";
 import SistemKlijent from "./SistemKlijent";
 import { SEKCIJE, type Sekcija } from "./sekcije";
 
@@ -94,10 +95,12 @@ export default async function SistemPage({
         toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
       },
     }),
-    // „Ukupno razmena" → isključivo prepisi između korisnika (TRANSFER).
+    // „Ukupno razmena" → isključivo prepisi između korisnika (TRANSFER), i to
+    // oni od najmanje `MIN_POEN_RAZMENE`. Spisak ide kroz isti uslov kao brojač
+    // iznad njega — inače bi ispod kartice stajali redovi koje kartica ne broji.
     prisma.transaction.findMany({
       where: {
-        type: "TRANSFER",
+        ...USLOV_RAZMENE,
         AND: [
           { OR: [{ fromWalletId: null }, { fromWallet: { is: BEZ_DECE } }] },
           { toWallet: { is: BEZ_DECE } },
@@ -111,8 +114,9 @@ export default async function SistemPage({
       },
     }),
     // Kartica „Ukupno razmena" broji samo prenose između korisnika (TRANSFER),
-    // ne i evidentiranje Protokola (EMISIJA_*, UPIS/OTPIS_ZRNO).
-    prisma.transaction.count({ where: { type: "TRANSFER" } }),
+    // ne i evidentiranje Protokola (EMISIJA_*, UPIS/OTPIS_ZRNO), i ne prepise
+    // ispod praga iz `razmena-brojac-pravila.ts`.
+    prisma.transaction.count({ where: { ...USLOV_RAZMENE } }),
     prisma.user.findMany({
       // Sakrij nezavršene OAuth naloge (privremeni pseudonim „korisnik_…",
       // oauthPending=true) i deaktivirane/neaktivne naloge iz spiska članova.
@@ -147,12 +151,16 @@ export default async function SistemPage({
       where: { createdAt: { gte: danas } },
     }),
     prisma.transaction.count({
-      where: { type: "TRANSFER", createdAt: { gte: danas } },
+      where: { ...USLOV_RAZMENE, createdAt: { gte: danas } },
     }),
     prisma.donationRecord.count({ where: { status: "CONFIRMED" } }),
     prisma.donationRecord.count({
       where: { status: "CONFIRMED", confirmedAt: { gte: danas } },
     }),
+    // 🔴 Kartica „Ukupno prepisa" NEMA prag i namerno ga nema: ona meri POEN
+    // koji je prošao između članova, ne broj razmena. Prepis od 50 POEN jeste
+    // prepis — samo se ne broji kao razmena. Kad bi i zbir imao prag, dva
+    // pokazatelja bi govorila o dva različita skupa prepisa a zvala se isto.
     prisma.transaction.aggregate({
       _sum: { amount: true },
       where: { type: "TRANSFER" },

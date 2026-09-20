@@ -3,7 +3,7 @@ import { jeAdmin, mozeNadzor, type KorisnikDozvole } from "@/lib/dozvole";
 import { listajVerifikacijeZaNadzor } from "@/lib/protokol/nadzor-service";
 import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 import { ChatSoba } from "@/generated/prisma/client";
-import { idPrijatelja, smeUSobu } from "@/lib/protokol/prijateljstva";
+import { usloviSobe, usloviSobeOdraslih } from "@/lib/protokol/pricaonica";
 
 /**
  * Zajednička logika za podatke „chrome"-a (Header + Sidebar badge-evi).
@@ -37,30 +37,18 @@ async function brojNovoNaPocetnoj(
   maloletan: boolean,
   od: Date,
 ): Promise<number> {
+  // Isti uslov koji sprovode i ruta i ekran (`protokol/pricaonica.ts`) — badge
+  // koji broji šire od vidljivog ne može se spustiti.
   if (maloletan) {
-    if (!(await smeUSobu(userId))) return 0;
-    // `idPrijatelja` vraća i sam nalog — svoje poruke se ne broje.
-    const autori = (await idPrijatelja(userId)).filter((id) => id !== userId);
-    if (autori.length === 0) return 0;
-    return prisma.chatMessage.count({
-      where: {
-        createdAt: { gt: od },
-        uklonjenoAt: null,
-        soba: ChatSoba.DECA,
-        userId: { in: autori },
-      },
-    });
+    // Dečja Početna nema Vesti, pa se Blog ne broji.
+    const uslovi = await usloviSobe(userId, ChatSoba.DECA, { bezSvojih: true });
+    if (!uslovi) return 0;
+    return prisma.chatMessage.count({ where: { ...uslovi, createdAt: { gt: od } } });
   }
 
+  const uslovi = usloviSobeOdraslih(userId, { bezSvojih: true });
   const [chatNove, blogNove] = await Promise.all([
-    prisma.chatMessage.count({
-      where: {
-        createdAt: { gt: od },
-        uklonjenoAt: null,
-        soba: ChatSoba.ODRASLI,
-        userId: { not: userId },
-      },
-    }),
+    prisma.chatMessage.count({ where: { ...uslovi, createdAt: { gt: od } } }),
     prisma.blogPost.count({ where: { publishedAt: { gt: od } } }),
   ]);
   return chatNove + blogNove;
