@@ -11,6 +11,7 @@ import FaqAkordeon from "@/components/FaqAkordeon";
 import KomeKartice from "@/components/KomeKartice";
 import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { prisma } from "@/lib/prisma";
+import { USLOV_RAZMENE } from "@/lib/razmena-brojac-pravila";
 import { usloviVidljivostiOglasa } from "@/lib/protokol/deca";
 import { getTranslations, getLocale } from "next-intl/server";
 import { pageMetadata } from "@/lib/seo";
@@ -84,7 +85,8 @@ async function getPijacaPreview() {
 // gradiranoj vidljivosti (Politika čl. 6), gost vidi SAMO agregate — ne
 // pojedinačne transakcije ni pseudonime. Četiri pokazatelja: verifikovani
 // članovi (poverenje), transakcije među članovima (samo tip TRANSFER — bez
-// emisija Protokola), aktivni oglasi (pregled oglasa je ionako javan, čl. 16)
+// emisija Protokola, i bez prepisa ispod praga iz `USLOV_RAZMENE`), aktivni
+// oglasi (pregled oglasa je ionako javan, čl. 16)
 // i ukupno evidentiranih POEN-a. Opticaj se računa kao zbir pozitivnih
 // stanja (pod zero-sum jednako apsolutnoj vrednosti minusa Protokola) — bez
 // zavisnosti od ID-ja Protokol novčanika. Zbir ide preko SVIH ne-Protokol
@@ -95,7 +97,7 @@ async function getAgregati() {
   try {
     const [brojClanova, brojTransfera, brojOglasa, opticajAgg] = await Promise.all([
       prisma.user.count({ where: { verified: true } }),
-      prisma.transaction.count({ where: { type: "TRANSFER" } }),
+      prisma.transaction.count({ where: { ...USLOV_RAZMENE } }),
       prisma.marketplaceListing.count({ where: { status: "ACTIVE" } }),
       prisma.wallet.aggregate({ _sum: { balance: true }, where: { type: { not: "PROTOKOL" } } }),
     ]);

@@ -11,6 +11,7 @@ import { usloviSobe, usloviSobeOdraslih } from "@/lib/protokol/pricaonica";
 import { smeUPricaonicu } from "@/lib/deca-pravila";
 import DecjaPocetna from "./DecjaPocetna";
 import { karticaSkoleZaDete } from "@/lib/protokol/skole";
+import { USLOV_RAZMENE } from "@/lib/razmena-brojac-pravila";
 
 export default async function PocetnaPage() {
   const session = await getServerSession(authOptions);
@@ -102,8 +103,10 @@ export default async function PocetnaPage() {
   }
 
   // Brojač na vrhu početne: članovi, oglasi, razmene, opticaj. Isti izvor kao
-  // kartice na /sistem — „razmene" su prenosi između korisnika (TRANSFER), a
-  // „opticaj" apsolutna vrednost protivzapisa Protokola.
+  // kartice na /sistem — „razmene" su prenosi između korisnika (TRANSFER) od
+  // najmanje `MIN_POEN_RAZMENE` (uslov stoji na jednom mestu, u
+  // `razmena-brojac-pravila.ts`), a „opticaj" apsolutna vrednost protivzapisa
+  // Protokola.
   const [blogObjave, chatPoruke, clanovi, oglasi, razmene, protokol] = await Promise.all([
     prisma.blogPost.findMany({
       orderBy: { publishedAt: "desc" },
@@ -121,7 +124,7 @@ export default async function PocetnaPage() {
     }),
     prisma.user.count({ where: { deaktiviranAt: null } }),
     prisma.marketplaceListing.count({ where: { status: "ACTIVE" } }),
-    prisma.transaction.count({ where: { type: "TRANSFER" } }),
+    prisma.transaction.count({ where: { ...USLOV_RAZMENE } }),
     prisma.wallet.findUnique({ where: { id: "banka-singleton" }, select: { balance: true } }),
   ]);
 
