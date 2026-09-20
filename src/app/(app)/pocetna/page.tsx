@@ -6,7 +6,8 @@ import PocetnaKlijent from "./PocetnaKlijent";
 import { jeAdmin } from "@/lib/dozvole";
 import { ChatSoba } from "@/generated/prisma/client";
 import { usloviVidljivostiOglasa, ucitajUcesnika } from "@/lib/protokol/deca";
-import { dohvatiPrijatelje, idPrijatelja } from "@/lib/protokol/prijateljstva";
+import { dohvatiPrijatelje } from "@/lib/protokol/prijateljstva";
+import { usloviSobe, usloviSobeOdraslih } from "@/lib/protokol/pricaonica";
 import { smeUPricaonicu } from "@/lib/deca-pravila";
 import DecjaPocetna from "./DecjaPocetna";
 import { karticaSkoleZaDete } from "@/lib/protokol/skole";
@@ -27,7 +28,9 @@ export default async function PocetnaPage() {
     // NIJEDNA poruka ne stiže do klijenta — filter je i na serveru, ne samo u
     // prikazu, jer je to bezbednosno pravilo a ne ukras.
     const soba = smeUPricaonicu(ja.stanje);
-    const vidljiviAutori = soba ? await idPrijatelja(ja.id) : [];
+    // Isti uslov koji sprovodi `GET /api/chat` — ekran i ruta ne smeju da imaju
+    // dva različita pojma o tome ko šta vidi (vidi `protokol/pricaonica.ts`).
+    const usloviDecje = soba ? await usloviSobe(ja.id, ChatSoba.DECA) : null;
     // Šestocifreni kod stoji na ekranu deteta koje čeka: to je rezervni put do
     // roditelja kad poruka ne stigne, i dete ga sa ekrana može pročitati naglas.
     const poziv = soba
@@ -51,9 +54,9 @@ export default async function PocetnaPage() {
       prisma.marketplaceListing.count({ where: { sellerId: ja.id, status: "ACTIVE" } }),
       // Svako vidi SAMO poruke svojih prijatelja (čl. 18 st. 3) — jedna soba,
       // filtrirana grafom prijateljstava.
-      soba
+      usloviDecje
         ? prisma.chatMessage.findMany({
-            where: { uklonjenoAt: null, soba: ChatSoba.DECA, userId: { in: vidljiviAutori } },
+            where: usloviDecje,
             orderBy: { createdAt: "desc" },
             take: 50,
             include: { user: { select: { id: true, pseudonim: true, avatar: true } } },
@@ -107,8 +110,11 @@ export default async function PocetnaPage() {
       take: 5,
       include: { author: { select: { pseudonim: true } } },
     }),
+    // 🔴 Soba se MORA navesti i ovde. Bez toga je prvih sto poruka koje odrastao
+    // član vidi pri otvaranju ekrana mešano sa dečjom sobom — pravilo je stajalo
+    // tačno u `GET /api/chat`, a ovaj upit je za njega znao ništa.
     prisma.chatMessage.findMany({
-      where: { uklonjenoAt: null },
+      where: usloviSobeOdraslih(session.user.id),
       orderBy: { createdAt: "desc" },
       take: 100,
       include: { user: { select: { id: true, pseudonim: true, verified: true, avatar: true } } },
