@@ -105,52 +105,121 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
   const router = useRouter();
   const t = useTranslations("novcanik");
   const tc = useTranslations("common");
-  const [showSend, setShowSend] = useState(!!platiPseudonim);
-  const [showQR, setShowQR] = useState(false);
-  const [showSkener, setShowSkener] = useState(false);
-
   // Nadoknada po poništenju lažne verifikacije (dokaz stvarnosti čl. 20b). Negativan
   // zapis JESTE nadoknada — nema zasebne kolone. Prikazuje se kao zaseban red, a ne
   // kao „minus stanje", jer nije dug i ne može se naplatiti.
   const uNadoknadi = jeNadoknada(balance);
 
+  // Sme li nalog da prepiše POEN drugome. Spaja dva razloga zabrane koja su se do
+  // sada proveravala odvojeno: tip naloga (čl. 28 st. 2, odn. čl. 14 Pravilnika o
+  // učešću dece) i nepokriven zapis (nadoknada po čl. 20b).
+  //
+  // 🔴 Obrazac za prepis se NE otvara nalogu koji ne sme da prepisuje. Do ove izmene
+  // ga je `?plati=` (skeniran QR ili link iz oglasa) otvarao bez obzira na dozvolu,
+  // pa je nov član popunjavao ceo obrazac i tek pri slanju dobijao 403 sa
+  // `/api/transfer`. Ista provera stoji i nad skenerom, koji vodi pravo u taj obrazac.
+  const smeDaPrepisuje = smeDaSalje && !uNadoknadi;
+
+  const [showSend, setShowSend] = useState(smeDaPrepisuje && !!platiPseudonim);
+  const [showQR, setShowQR] = useState(false);
+  const [showSkener, setShowSkener] = useState(false);
+  // Razlaganje zabeleženog doprinosa po stavkama — zatvoreno dok se ne zatraži.
+  const [showStavke, setShowStavke] = useState(false);
+
+  // Zabeleženo se na ekranu sabira u JEDAN broj, a razlaže po tome NA KOGA SE ČEKA.
+  // Kanal (oglas, putanja razmene, potvrda, nadzor) je podatak o poreklu; vlasnika
+  // naloga zanima čiji se potez čeka, jer samo to kaže šta on može da uradi.
+  const cekaFondaciju = zabelezenDoprinos;
+  const cekaTebe = zabelezenePotvrdeMoje;
+  const cekaDruge = zabelezenePotvrdeTudje + zabelezenePotvrdeNadzor;
+  const zabelezenoUkupno = cekaFondaciju + cekaTebe + cekaDruge;
+
   return (
     <>
       {/* Gornja kartica: balans POEN (ZRNO kartica privremeno uklonjena) */}
       <div>
-        {/* Balans kartica: dugmad levo (jedno ispod drugog), stanje veliko desno */}
-        <div className="bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg flex items-center justify-between gap-4">
-          {/* LEVO — dugmad jedno ispod drugog */}
-          <div className="flex flex-col gap-3 shrink-0">
-            {smeDaSalje && !uNadoknadi && (
+        {/* Balans kartica: dugmad levo (jedno ispod drugog), stanje veliko desno.
+
+            🔴 Ko ne sme da prepisuje NE dobija novčanik-vizual. Zelena kartica, broj
+            preko pola visine kartice, oznaka jedinice ispod njega i dugmad za plaćanje
+            pored — to je vizuelni jezik platne kartice i obećava raspolaganje koje
+            pravilo ne daje, pa odsustvo dugmeta „Prepiši POEN" izgleda kao kvar. Takvom nalogu
+            kartica pokazuje ono što veliki broj i inače znači — koliko SME da prepiše,
+            dakle nulu — a koliko mu je stvarno evidentirano stoji u redu „Na tvom
+            zapisu" odmah ispod. To nije nov obrazac: `raspolozivo()` isto tako već
+            pokazuje nulu zapisu u nadoknadi, a pravi iznos nosi zaseban red.
+
+            🟢 „Moj QR" OSTAJE i takvom nalogu, i to namerno: nov član sme da PRIMA
+            (čl. 28 st. 2), a QR je način da mu se prepiše POEN za prodato dobro. To mu
+            je ujedno i put do potvrde (čl. 40a), pa bi sklanjanje tog dugmeta zatvorilo
+            ulaz kroz Pijacu. Skener se sklanja jer vodi u suprotnom smeru — u obrazac
+            za prepis DRUGOME. */}
+        <div
+          className={
+            smeDaSalje
+              ? "bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg"
+              : "rounded-2xl border border-kolo-border bg-white p-6"
+          }
+        >
+          <div className="flex items-center justify-between gap-4">
+            {/* LEVO — dugmad jedno ispod drugog */}
+            <div className="flex flex-col gap-3 shrink-0">
+              {smeDaPrepisuje && (
+                <button
+                  onClick={() => setShowSend(true)}
+                  className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
+                >
+                  {t("posalji_poen")}
+                </button>
+              )}
+              {/* Skener otvara obrazac za prepis, pa ga ne vidi ko ne sme da prepisuje. */}
+              {smeDaPrepisuje && (
+                <button
+                  onClick={() => setShowSkener(true)}
+                  className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
+                >
+                  {t("skeniraj_dugme")}
+                </button>
+              )}
               <button
-                onClick={() => setShowSend(true)}
-                className="px-5 py-2 bg-white text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors"
+                onClick={() => setShowQR(true)}
+                className={
+                  smeDaSalje
+                    ? "px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
+                    : "px-5 py-2 bg-kolo-green-50 text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors border border-kolo-border"
+                }
               >
-                {t("posalji_poen")}
+                {t("moj_qr")}
               </button>
-            )}
-            <button
-              onClick={() => setShowSkener(true)}
-              className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
-            >
-              {t("skeniraj_dugme")}
-            </button>
-            <button
-              onClick={() => setShowQR(true)}
-              className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
-            >
-              {t("moj_qr")}
-            </button>
+            </div>
+
+            {/* DESNO — stanje veliko */}
+            <div className="text-right min-w-0">
+              <p
+                className={`text-4xl sm:text-5xl font-bold tracking-tight tabular-nums break-words${
+                  smeDaSalje ? "" : " text-kolo-text"
+                }`}
+              >
+                {(smeDaSalje ? raspolozivo(balance) : 0).toLocaleString(intlTag(locale))}
+              </p>
+              <p className={smeDaSalje ? "text-lg text-white/70 mt-0.5" : "text-lg text-kolo-muted mt-0.5"}>
+                {tc("poen")}
+              </p>
+              {/* Bez ove oznake veliki broj se i dalje čita kao „stanje računa". */}
+              {!smeDaSalje && (
+                <p className="text-sm text-kolo-muted mt-0.5">{t("raspolozivo_labela")}</p>
+              )}
+            </div>
           </div>
 
-          {/* DESNO — stanje veliko */}
-          <div className="text-right min-w-0">
-            <p className="text-4xl sm:text-5xl font-bold tracking-tight tabular-nums break-words">
-              {raspolozivo(balance).toLocaleString(intlTag(locale))}
+          {/* Objašnjenje stoji UZ broj, u istoj kartici. Do ove izmene je stajalo ispod
+              svih redova, pa se na dužem ekranu nije videlo u istom pogledu sa brojem
+              koji objašnjava — a bez njega nula izgleda kao da je nešto nestalo. */}
+          {!smeDaSalje && (
+            <p className="mt-4 text-sm text-kolo-muted">
+              {razlogZabrane === "ceka_roditelja" ? t("ceka_roditelja") : t("samo_primalac")}
             </p>
-            <p className="text-lg text-white/70 mt-0.5">{tc("poen")}</p>
-          </div>
+          )}
         </div>
 
         {/* Forma za prepis POEN-a stoji ODMAH ispod kartice sa stanjem, a iznad
@@ -187,63 +256,144 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
           </div>
         )}
 
-        {/* Zabeležen doprinos stoji ISPOD kartice, kao zaseban red — namerno nije
-            sabran sa stanjem: do okidača to nije zapis POENA (Pravilnik čl. 40a
+        {/* Na tvom zapisu — POEN koji nalog STVARNO ima, ali njime još ne sme da
+            raspolaže (čl. 28 st. 2 za nov član, čl. 14 Pravilnika o učešću dece za
+            dete koje čeka roditelja). Veliki broj iznad pokazuje raspoloživo za
+            prepis, dakle nulu; bez ovog reda bi čovek koji je nešto prodao na Pijaci
+            pomislio da mu je prodaja nestala. Zapis JESTE njegov i zbir u sistemu ga
+            broji — čeka se samo pravo raspolaganja, koje dolazi sa potvrdom.
+
+            🔴 Ovo NIJE isto što i zabeleženo ispod: ovde je POEN upisan u Protokol,
+            tamo zapis još ne postoji (čl. 40a st. 3). Dva reda se ne spajaju. */}
+        {!smeDaSalje && raspolozivo(balance) > 0 && (
+          <div className="mt-3 rounded-2xl border border-kolo-border bg-white px-5 py-4">
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="text-sm font-semibold text-kolo-text">{t("na_zapisu_naslov")}</p>
+              <p className="text-lg font-bold tabular-nums text-kolo-green-700">
+                {raspolozivo(balance).toLocaleString(intlTag(locale))} {tc("poen")}
+              </p>
+            </div>
+            <p className="text-sm text-kolo-muted mt-1">
+              {t(razlogZabrane === "ceka_roditelja" ? "na_zapisu_opis_dete" : "na_zapisu_opis")}
+            </p>
+          </div>
+        )}
+
+        {/* Zabeležen doprinos — JEDAN broj za sve što čeka uslov, sa razlaganjem na
+            klik. Do ove izmene je to bilo pet redova sa skoro istim naslovima
+            (doprinos po čl. 40a, koraci putanje razmene, potvrde primljene, potvrde
+            date, nadzor), pa se iz ekrana nije video odgovor na jedino pitanje koje
+            vlasnika naloga zanima: šta treba da se desi da se ovo upiše.
+
+            🔴 Razlaganje ide po tome NA KOGA SE ČEKA, ne po kanalu. Kanal je podatak o
+            poreklu; čeka se uvek nečiji potez — Fondacijin, sopstveni ili tuđi — i samo
+            to kaže čoveku šta može da uradi. Po kanalu poređani redovi su to skrivali:
+            „potvrde koje si dao" i „nadzor" čekaju treća lica i on tu ne može ništa
+            osim da ih podseti, a „prvi oglas" čeka UO.
+
+            🔴 Nikad se ne sabira sa stanjem: do okidača to nije zapis POEN-a (čl. 40a
             st. 3). Naziv je „Zabeležen doprinos", nikad „POEN na čekanju" — POEN
-            postoji isključivo kao zapis u Protokolu (čl. 12). */}
-        {zabelezenDoprinos > 0 && (
+            postoji isključivo kao zapis u Protokolu (čl. 12), a to pravilo čuva
+            `potvrda-uslov-izvor.test.ts`.
+
+            🔴 Rezervisano za nabavku NIJE ovde i ne sme da se doda: taj POEN je već
+            upisan u zapis, samo je vezan do preuzimanja (čl. 23 st. 2) — drugi institut
+            i drugi ishod. */}
+        {zabelezenoUkupno > 0 && (
           <div className="mt-3 rounded-2xl border border-kolo-border bg-white px-5 py-4">
             <div className="flex items-baseline justify-between gap-3">
               <p className="text-sm font-semibold text-kolo-text">{t("zabelezen_naslov")}</p>
               <p className="text-lg font-bold tabular-nums text-kolo-green-700">
-                {zabelezenDoprinos.toLocaleString(intlTag(locale))} {tc("poen")}
+                {zabelezenoUkupno.toLocaleString(intlTag(locale))} {tc("poen")}
               </p>
             </div>
             <p className="text-sm text-kolo-muted mt-1">{t("zabelezen_opis")}</p>
-          </div>
-        )}
 
-        {/* Zabeležene potvrde — ZASEBAN red, ne sabran sa „Zabeleženim doprinosom"
-            iako oba čekaju. Razlog je što čekaju RAZLIČITE stvari: doprinos po
-            čl. 40a čeka tvoj oglas, a potvrda koju si DAO čeka tuđi prvi doprinos.
-            Spojeni u jedan broj, rekli bi čoveku da o svemu tome odlučuje sam.
-            Naziv je „Zabeležene potvrde", nikad „POEN na čekanju" (čl. 12). */}
-        {(zabelezenePotvrdeMoje > 0 || zabelezenePotvrdeTudje > 0 || zabelezenePotvrdeNadzor > 0) && (
-          <div className="mt-3 rounded-2xl border border-kolo-border bg-white px-5 py-4">
-            <div className="flex items-baseline justify-between gap-3">
-              <p className="text-sm font-semibold text-kolo-text">{t("zabelezene_potvrde_naslov")}</p>
-              <p className="text-lg font-bold tabular-nums text-kolo-green-700">
-                {(zabelezenePotvrdeMoje + zabelezenePotvrdeTudje + zabelezenePotvrdeNadzor).toLocaleString(intlTag(locale))} {tc("poen")}
-              </p>
-            </div>
-            {zabelezenePotvrdeMoje > 0 && (
-              <p className="text-sm text-kolo-muted mt-1">
-                {t("zabelezene_potvrde_moje", {
-                  iznos: zabelezenePotvrdeMoje.toLocaleString(intlTag(locale)),
-                })}
-              </p>
-            )}
-            {zabelezenePotvrdeTudje > 0 && (
-              <div className="mt-1">
-                <p className="text-sm text-kolo-muted">
-                  {t("zabelezene_potvrde_tudje", {
-                    iznos: zabelezenePotvrdeTudje.toLocaleString(intlTag(locale)),
-                  })}
-                </p>
-                <SpisakCekanja ljudi={cekamPotvrdjene} />
+            <button
+              type="button"
+              onClick={() => setShowStavke((v) => !v)}
+              aria-expanded={showStavke}
+              className="mt-2 text-sm font-semibold text-kolo-green-700 hover:underline"
+            >
+              {showStavke ? t("zabelezen_sakrij") : t("zabelezen_stavke")}
+            </button>
+
+            {showStavke && (
+              <div className="mt-3 space-y-3 border-t border-kolo-border pt-3">
+                {cekaFondaciju > 0 && (
+                  <div>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <p className="text-sm font-semibold text-kolo-text">{t("ceka_fondaciju")}</p>
+                      <p className="text-sm font-bold tabular-nums text-kolo-text">
+                        {cekaFondaciju.toLocaleString(intlTag(locale))} {tc("poen")}
+                      </p>
+                    </div>
+                    <p className="text-sm text-kolo-muted mt-1">{t("ceka_fondaciju_opis")}</p>
+                  </div>
+                )}
+
+                {cekaTebe > 0 && (
+                  <div>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <p className="text-sm font-semibold text-kolo-text">{t("ceka_tebe")}</p>
+                      <p className="text-sm font-bold tabular-nums text-kolo-text">
+                        {cekaTebe.toLocaleString(intlTag(locale))} {tc("poen")}
+                      </p>
+                    </div>
+                    <p className="text-sm text-kolo-muted mt-1">
+                      {t("zabelezene_potvrde_moje", {
+                        iznos: cekaTebe.toLocaleString(intlTag(locale)),
+                      })}
+                    </p>
+                  </div>
+                )}
+
+                {cekaDruge > 0 && (
+                  <div>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <p className="text-sm font-semibold text-kolo-text">{t("ceka_druge")}</p>
+                      <p className="text-sm font-bold tabular-nums text-kolo-text">
+                        {cekaDruge.toLocaleString(intlTag(locale))} {tc("poen")}
+                      </p>
+                    </div>
+                    {zabelezenePotvrdeTudje > 0 && (
+                      <div className="mt-1">
+                        <p className="text-sm text-kolo-muted">
+                          {t("zabelezene_potvrde_tudje", {
+                            iznos: zabelezenePotvrdeTudje.toLocaleString(intlTag(locale)),
+                          })}
+                        </p>
+                        <SpisakCekanja ljudi={cekamPotvrdjene} />
+                      </div>
+                    )}
+                    {zabelezenePotvrdeNadzor > 0 && (
+                      <div className="mt-1">
+                        <p className="text-sm text-kolo-muted">
+                          {t("zabelezene_potvrde_nadzor", {
+                            iznos: zabelezenePotvrdeNadzor.toLocaleString(intlTag(locale)),
+                          })}
+                        </p>
+                        <SpisakCekanja ljudi={cekamNadzorom} />
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Mehanizam potvrda objašnjen JEDNOM, na kraju: uslov je isti za „čeka
+                    tebe" i za „čeka druge", samo se meri na različitom čoveku. Naslov
+                    je uvodna reč te rečenice — oba ključa traži
+                    `potvrda-uslov-izvor.test.ts` i ne smeju da nestanu iz copy-ja. */}
+                {(cekaTebe > 0 || cekaDruge > 0) && (
+                  <p className="text-sm text-kolo-muted border-t border-kolo-border pt-3">
+                    <span className="font-semibold text-kolo-text">
+                      {t("zabelezene_potvrde_naslov")}
+                    </span>
+                    {" — "}
+                    {t("zabelezene_potvrde_opis")}
+                  </p>
+                )}
               </div>
             )}
-            {zabelezenePotvrdeNadzor > 0 && (
-              <div className="mt-1">
-                <p className="text-sm text-kolo-muted">
-                  {t("zabelezene_potvrde_nadzor", {
-                    iznos: zabelezenePotvrdeNadzor.toLocaleString(intlTag(locale)),
-                  })}
-                </p>
-                <SpisakCekanja ljudi={cekamNadzorom} />
-              </div>
-            )}
-            <p className="text-sm text-kolo-muted mt-1">{t("zabelezene_potvrde_opis")}</p>
           </div>
         )}
 
@@ -263,13 +413,6 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
           </div>
         )}
 
-        {/* Neverifikovanom se objašnjava zašto dugmeta za upis nema. Bez ovoga
-            izgleda kao da je nešto pokvareno. */}
-        {!smeDaSalje && (
-          <p className="mt-3 text-sm text-kolo-muted">
-            {razlogZabrane === "ceka_roditelja" ? t("ceka_roditelja") : t("samo_primalac")}
-          </p>
-        )}
       </div>
 
       {/* QR modal */}
