@@ -83,54 +83,58 @@ export default function VerifikacijaCard({
 
   return (
     <div className="rounded-2xl border border-kolo-border bg-white p-4 shadow-sm space-y-3">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div className="min-w-0 flex-1">
-          <div className="text-sm">
-            <Link href={profilHref(verifikator)} className="font-semibold hover:underline">
-              @<Pseudonim>{verifikator.pseudonim}</Pseudonim>
-            </Link>
-            <span className="text-kolo-muted"> → </span>
-            <Link href={profilHref(verifikovani)} className="font-semibold hover:underline">
-              @<Pseudonim>{verifikovani.pseudonim}</Pseudonim>
-            </Link>
-          </div>
-          <div className="mt-1 text-xs text-kolo-muted">
-            {datumLepo} · {t("potroseno_slotova", { broj: verifikator.slotoviPotroseni })}
-          </div>
-          {ranijiZapisi.length > 0 && (
-            <div className="mt-1 text-xs text-amber-700">
-              {t("vec_gledali", { broj: ranijiZapisi.length })}
-            </div>
-          )}
-          {error && <div className="mt-1 text-xs text-kolo-danger">{error}</div>}
+      <div className="min-w-0 space-y-1">
+        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm leading-tight">
+          <Link href={profilHref(verifikator)} className="font-semibold break-all hover:underline">
+            @<Pseudonim>{verifikator.pseudonim}</Pseudonim>
+          </Link>
+          <span className="text-kolo-muted" aria-hidden="true">
+            →
+          </span>
+          <Link href={profilHref(verifikovani)} className="font-semibold break-all hover:underline">
+            @<Pseudonim>{verifikovani.pseudonim}</Pseudonim>
+          </Link>
         </div>
-
-        {formaZa === null && (
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => posalji("UREDNO")}
-              disabled={loading}
-              className="px-3 py-1.5 rounded-xl bg-kolo-green-700 text-white text-sm font-medium hover:bg-kolo-green-900 disabled:opacity-50"
-            >
-              {t("ishod_uredno")}
-            </button>
-            <button
-              onClick={() => setFormaZa("ZA_PROVERU")}
-              disabled={loading}
-              className="px-3 py-1.5 rounded-xl border border-amber-300 bg-amber-50 text-amber-800 text-sm font-medium hover:bg-amber-100 disabled:opacity-50"
-            >
-              {t("ishod_za_proveru")}
-            </button>
-            <button
-              onClick={() => setFormaZa("SPORNO")}
-              disabled={loading}
-              className="px-3 py-1.5 rounded-xl border border-red-300 bg-red-50 text-red-700 text-sm font-medium hover:bg-red-100 disabled:opacity-50"
-            >
-              {t("ishod_sporno")}
-            </button>
+        <div className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-xs text-kolo-muted">
+          <span className="whitespace-nowrap">{datumLepo}</span>
+          <span aria-hidden="true">·</span>
+          <span className="whitespace-nowrap">
+            {t("potroseno_slotova", { broj: verifikator.slotoviPotroseni })}
+          </span>
+        </div>
+        {ranijiZapisi.length > 0 && (
+          <div className="text-xs text-amber-700">
+            {t("vec_gledali", { broj: ranijiZapisi.length })}
           </div>
         )}
+        {error && <div className="text-xs text-kolo-danger">{error}</div>}
       </div>
+
+      {formaZa === null && (
+        <div className="grid grid-cols-3 gap-2">
+          <button
+            onClick={() => posalji("UREDNO")}
+            disabled={loading}
+            className="w-full px-2 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-medium hover:bg-kolo-green-900 disabled:opacity-50"
+          >
+            {t("ishod_uredno")}
+          </button>
+          <button
+            onClick={() => setFormaZa("ZA_PROVERU")}
+            disabled={loading}
+            className="w-full px-2 py-2 rounded-xl border border-amber-300 bg-amber-50 text-amber-800 text-sm font-medium hover:bg-amber-100 disabled:opacity-50"
+          >
+            {t("ishod_za_proveru")}
+          </button>
+          <button
+            onClick={() => setFormaZa("SPORNO")}
+            disabled={loading}
+            className="w-full px-2 py-2 rounded-xl border border-red-300 bg-red-50 text-red-700 text-sm font-medium hover:bg-red-100 disabled:opacity-50"
+          >
+            {t("ishod_sporno")}
+          </button>
+        </div>
+      )}
 
       {formaZa !== null && (
         <div className="space-y-2 border-t border-kolo-border pt-3">
