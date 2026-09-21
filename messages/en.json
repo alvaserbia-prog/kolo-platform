@@ -458,7 +458,7 @@
     "ceka_naslov": "Recorded confirmations",
     "ceka_opis": "The confirmation stands and your index is recorded. POEN is recorded once the confirmed member makes their first contribution: an offer listing approved by the Foundation, a donation, a patronage, or completed operational work.",
     "ceka_moja": "{iznos} POEN is waiting for you — post your first offer or donate.",
-    "ceka_dao": "You confirmed {pseudonim} — {iznos} POEN is recorded for you once they make their first contribution.",
+    "ceka_dao_zbir": "{iznos} POEN is pending for the confirmations you gave — it is recorded once the person you confirmed makes their first contribution:",
     "ceka_dugme_oglas": "Post an offer",
     "ceka_dugme_donacija": "Donate",
     "oznake_ceka": "awaiting first contribution",

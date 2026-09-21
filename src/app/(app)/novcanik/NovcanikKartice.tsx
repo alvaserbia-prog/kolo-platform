@@ -5,40 +5,10 @@ import { intlTag } from "@/lib/format";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { useTranslations, useLocale } from "next-intl";
-import Link from "next/link";
 import Pseudonim from "@/components/Pseudonim";
 import UspehKartica from "@/components/UspehKartica";
-import { profilHref } from "@/lib/profil-link";
+import SpisakCekanja from "@/components/SpisakCekanja";
 import { jeNadoknada, iznosNadoknade, raspolozivo } from "@/lib/protokol/nadoknada";
-
-/**
- * Spisak ljudi čiji se prvi doprinos čeka, uz zabeleženu potvrdu odnosno nadzor.
- *
- * Namerno LINKOVI na profil, a ne goli tekst: podsetiti čoveka znači otići kod njega,
- * pa put do njega mora biti jedan klik — inače spisak samo imenuje problem. Adresa ide
- * kroz `profilHref` (u interfejsu pseudonim, interni id u svemu što se čuva).
- *
- * 🔴 Ne prikazuje ni iznos po čoveku ni datum potvrde. Iznos stoji jednom, u redu
- * iznad: po vezi je uvek isti (1.000 odn. 500), pa bi ponovljen uz svako ime samo
- * sugerisao da se o njemu pregovara. Spisak odgovara na jedno pitanje — koga podsetiti.
- */
-function SpisakCekanja({ ljudi }: { ljudi: { id: string; pseudonim: string }[] }) {
-  if (ljudi.length === 0) return null;
-  return (
-    <ul className="mt-1.5 flex flex-wrap gap-1.5">
-      {ljudi.map((o) => (
-        <li key={o.id}>
-          <Link
-            href={profilHref({ id: o.id, pseudonim: o.pseudonim })}
-            className="inline-block rounded-full border border-amber-200 bg-amber-50 px-2.5 py-0.5 text-sm text-amber-900 hover:bg-amber-100"
-          >
-            @<Pseudonim>{o.pseudonim}</Pseudonim>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 // qrcode.react se deli sa html5-qrcode u isti veliki chunk (~361KB). Učitava se
 // LENJO — QR se prikazuje tek kad korisnik otvori karticu za upis POEN-a, pa ne

@@ -458,7 +458,7 @@
     "ceka_naslov": "Zabilježene potvrde",
     "ceka_opis": "Potvrda vrijedi i indeks je upisan. POEN se upisuje kad potvrđeni član ostvari svoj prvi doprinos: objavi ponudu koju Zaklada odobri, donira, postane pokrovitelj ili izvrši operativni doprinos.",
     "ceka_moja": "Tebe čeka {iznos} POENA — objavi prvu ponudu ili doniraj.",
-    "ceka_dao": "Potvrdio si {pseudonim} — {iznos} POENA upisuje ti se kad on ostvari svoj prvi doprinos.",
+    "ceka_dao_zbir": "Za potvrde koje si dao čeka {iznos} POENA — upisuje se kad onaj koga si potvrdio ostvari svoj prvi doprinos:",
     "ceka_dugme_oglas": "Objavi ponudu",
     "ceka_dugme_donacija": "Doniraj",
     "oznake_ceka": "čeka prvi doprinos",
