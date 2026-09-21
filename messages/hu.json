@@ -341,7 +341,7 @@
     "send_uspeh_opis": "{iznos} POEN átírva @{pseudonim} tag bejegyzésébe.",
     "send_uspeh_dugme": "Kész",
     "zabelezen_naslov": "Feljegyzett hozzájárulás",
-    "zabelezen_opis": "Akkor kerül rögzítésre, amikor az Alapítvány jóváhagyja az első hirdetésedet. Addig ez nem POEN-bejegyzés: sem az egyenlegedbe, sem a rendszerben lévő POEN teljes számába nem számít bele.",
+    "zabelezen_opis": "Amíg a feltétel nem teljesül, ez nem POEN-bejegyzés: sem az egyenlegedbe, sem a rendszerben lévő POEN teljes számába nem számít bele.",
     "zabelezen_stavke": "Nézd meg, mire vár",
     "zabelezen_sakrij": "Elrejtés",
     "ceka_fondaciju": "Az Alapítványra vár",
