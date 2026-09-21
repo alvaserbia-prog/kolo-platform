@@ -398,6 +398,7 @@
     "slotovi_prikaz": "Slots: {raspolozivo} free / {potroseno} used",
     "graf_kartica_naslov": "Confirmation network",
     "graf_kartica_opis": "See the whole network of confirmations — who confirmed whom and where you stand.",
+    "graf_kartica_dugme": "View the confirmation network",
     "dugme_otkazi": "Cancel",
     "prijava_link": "Something wrong with your confirmation? Report it.",
     "prijava_placeholder": "Briefly describe what's wrong (e.g. you don't know the person who confirmed you).",

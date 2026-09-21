@@ -163,43 +163,14 @@ export default async function VerifikacijaPage() {
         <h1 className="kolo-naslov">{t("page_naslov")}</h1>
       </div>
 
-      {/* Levo: indeks stvarnosti → kartice "Pokaži kod" / "Verifikuj nekoga" → ulaz
-          na Pijacu; desno: lanac verifikacija. */}
+      {/* Redosled je odluka vlasnika (21.09.2026): LEVO ono što čovek RADI — indeks,
+          „Pokaži kod", „Potvrdi nekoga koga poznaješ"; DESNO ono što ČITA — lanac
+          potvrda, zabeležene potvrde, mreža potvrda. Na telefonu se kolone slažu jedna
+          ispod druge tačno tim redom. Zabeležene potvrde su do tada stajale levo, odmah
+          ispod indeksa, pa su razdvajale indeks od radnji koje uz njega idu. */}
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="flex flex-col gap-6">
           <IndeksPrikaz prikaz={prikaz} tip={user.tipKorisnika} indeks={user.indeksStvarnosti} jeOsnivac={user.jeOsnivac} identitetUtvrdjen={user.identitetUtvrdjenAt !== null} maloletan={user.maloletan} podnaslov={podnaslov} />
-
-          {(cekaMoje > 0 || cekaDate.length > 0) && (
-            <div className="rounded-2xl border border-kolo-border bg-white p-5">
-              <h2 className="text-sm font-semibold text-kolo-text">{t("ceka_naslov")}</h2>
-              {cekaMoje > 0 && (
-                <p className="mt-2 text-sm text-kolo-text">
-                  {t("ceka_moja", { iznos: cekaMoje.toLocaleString("sr-RS") })}
-                </p>
-              )}
-              {cekaDate.length > 0 && (
-                <div className="mt-2">
-                  <p className="text-sm text-kolo-text">
-                    {t("ceka_dao_zbir", {
-                      iznos: (cekaDate.length * POEN_VERIFIKATOR).toLocaleString("sr-RS"),
-                    })}
-                  </p>
-                  <SpisakCekanja ljudi={cekaDateLjudi} />
-                </div>
-              )}
-              <p className="mt-2 text-sm text-kolo-muted">{t("ceka_opis")}</p>
-              {cekaMoje > 0 && (
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <a href="/pijaca/novi" className="kolo-dugme-primarno text-sm">
-                    {t("ceka_dugme_oglas")}
-                  </a>
-                  <a href="/donacije" className="kolo-dugme-sekundarno text-sm">
-                    {t("ceka_dugme_donacija")}
-                  </a>
-                </div>
-              )}
-            </div>
-          )}
 
           <div id="moj-kod">
             <MojQrKod />
@@ -242,16 +213,67 @@ export default async function VerifikacijaPage() {
             verifikovani={verifikovaniCvorovi}
             jeJaPocetni={user.jeOsnivac}
           />
-          {/* Ulaz na graf verifikacija — mala kartica ispod lanca; samo za
-              korisnike sa pristupom (indeks ≥ 10%), jer je graf zaključan za ostale. */}
+          {(cekaMoje > 0 || cekaDate.length > 0) && (
+            <div className="rounded-2xl border border-kolo-border bg-white p-5">
+              <h2 className="text-sm font-semibold text-kolo-text">{t("ceka_naslov")}</h2>
+              {cekaMoje > 0 && (
+                <p className="mt-2 text-sm text-kolo-text">
+                  {t("ceka_moja", { iznos: cekaMoje.toLocaleString("sr-RS") })}
+                </p>
+              )}
+              {cekaDate.length > 0 && (
+                <div className="mt-2">
+                  <p className="text-sm text-kolo-text">
+                    {t("ceka_dao_zbir", {
+                      iznos: (cekaDate.length * POEN_VERIFIKATOR).toLocaleString("sr-RS"),
+                    })}
+                  </p>
+                  <SpisakCekanja ljudi={cekaDateLjudi} />
+                </div>
+              )}
+              <p className="mt-2 text-sm text-kolo-muted">{t("ceka_opis")}</p>
+              {/* 🔴 Klase `kolo-dugme-primarno`/`-sekundarno` NE POSTOJE — nisu
+                  definisane ni u `globals.css` ni igde drugde, pa su ova dva dugmeta
+                  do 21.09.2026 bila gola, neuokvirena linkovanja. Pišu se izričite
+                  Tailwind klase, iste kao na zelenom dugmetu u kartici ispod. */}
+              {cekaMoje > 0 && (
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <a
+                    href="/pijaca/novi-oglas"
+                    className="inline-block px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-medium hover:bg-kolo-green-800 transition-colors"
+                  >
+                    {t("ceka_dugme_oglas")}
+                  </a>
+                  <a
+                    href="/donacije"
+                    className="inline-block px-4 py-2 rounded-xl border border-kolo-border bg-white text-kolo-text text-sm font-medium hover:border-kolo-green-700 transition-colors"
+                  >
+                    {t("ceka_dugme_donacija")}
+                  </a>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Ulaz na graf verifikacija — ispod lanca i zabeleženih potvrda; samo za
+              korisnike sa pristupom (indeks ≥ 10%), jer je graf zaključan za ostale.
+
+              Kartica ima OBLIK lanca potvrda (isti okvir i isti naslov u verzalu), a
+              radnja je izdvojena u zeleno dugme. Do 21.09.2026 je cela kartica bila
+              jedan `<a>` bez dugmeta, pa se iz nje nije videlo da išta vodi dalje. */}
           {imaPristupGrafu && (
-            <a
-              href="/graf"
-              className="block bg-white rounded-2xl border border-kolo-border p-5 hover:border-kolo-green-700 transition-colors"
-            >
-              <p className="font-semibold text-kolo-text">{t("graf_kartica_naslov")}</p>
-              <p className="text-sm text-kolo-muted mt-0.5">{t("graf_kartica_opis")}</p>
-            </a>
+            <div className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
+              <div className="text-sm uppercase tracking-wide text-kolo-muted font-semibold mb-4">
+                {t("graf_kartica_naslov")}
+              </div>
+              <p className="text-sm text-kolo-muted">{t("graf_kartica_opis")}</p>
+              <a
+                href="/graf"
+                className="inline-block mt-3 px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-medium hover:bg-kolo-green-800 transition-colors"
+              >
+                {t("graf_kartica_dugme")}
+              </a>
+            </div>
           )}
         </div>
       </div>

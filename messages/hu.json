@@ -391,6 +391,7 @@
     "slotovi_prikaz": "Helyek: {raspolozivo} szabad / {potroseno} felhasznált",
     "graf_kartica_naslov": "Megerősítési hálózat",
     "graf_kartica_opis": "Nézd meg a teljes megerősítési hálózatot — ki kit megerősített, és hol állsz te.",
+    "graf_kartica_dugme": "Nézd meg a megerősítések hálózatát",
     "vn_naslov": "Valaki megerősítése",
     "vn_nema_prava": "Nincs jogod másokat megerősíteni. Ok: nem vagy megerősítve, az indexed 10% alatt van, vagy nincs szabad helyed (várd meg a felügyeletet).",
     "vn_potvrdi_obavezno": "Meg kell erősítened a személyes ismeretséget és a felelősséget.",

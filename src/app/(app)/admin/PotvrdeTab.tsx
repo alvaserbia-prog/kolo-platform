@@ -58,6 +58,12 @@ type ParoviPregled = {
   ucesnici: { pseudonim: string; parova: number; poen: number; stanje: number }[];
 };
 
+// 🔴 Ovaj tab je bio napisan rečnikom dizajn-sistema koji u projektu NE POSTOJI:
+// `kolo-dugme-primarno`, `kolo-dugme-sekundarno` i `kolo-input` nisu definisani ni u
+// `globals.css` ni igde drugde (jedina definisana `kolo-` klasa je `.kolo-naslov`).
+// Posledica: sva dugmad i polja u ovom tabu bila su gola — bez okvira, boje i stanja
+// `disabled`. Ispravljeno 21.09.2026 izričitim Tailwind klasama, istim kakve koriste
+// ostali admin tabovi. 🔴 Ne uvoditi te klase nazad dok ih neko zaista ne definiše.
 export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boolean; onDone?: () => void }) {
   const t = useTranslations("admin");
   const [veze, setVeze] = useState<Veza[]>([]);
@@ -242,7 +248,7 @@ export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boo
                   · {new Date(v.vremenskiZig).toLocaleDateString("sr-RS")} · čeka {broj(poenVerifikator)} + {broj(poenVerifikator)} POENA
                 </p>
                 <textarea
-                  className="kolo-input mt-2 w-full text-sm"
+                  className="mt-2 w-full rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
                   rows={2}
                   placeholder={t("potvrde_razlog")}
                   value={razlozi[v.id] ?? ""}
@@ -250,7 +256,7 @@ export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boo
                 />
                 <button
                   type="button"
-                  className="kolo-dugme-primarno mt-2 text-sm"
+                  className="mt-2 px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
                   disabled={radiId === v.id}
                   onClick={() => void upisi(v.id)}
                 >
@@ -270,7 +276,7 @@ export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boo
 
           <button
             type="button"
-            className="kolo-dugme-sekundarno text-sm"
+            className="px-4 py-2 rounded-xl border border-kolo-border bg-white text-kolo-text text-sm font-semibold hover:border-kolo-green-700 transition-colors disabled:opacity-50"
             disabled={radiUskladjivanje}
             onClick={() => void izracunaj()}
           >
@@ -308,14 +314,14 @@ export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boo
                     {t("potvrde_potvrda_broja")}
                   </label>
                   <input
-                    className="kolo-input mt-1 w-48"
+                    className="mt-1 w-48 rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
                     inputMode="numeric"
                     value={potvrdaBroja}
                     onChange={(e) => setPotvrdaBroja(e.target.value.replace(/\D/g, ""))}
                   />
                   <button
                     type="button"
-                    className="kolo-dugme-primarno ml-2 text-sm"
+                    className="ml-2 px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
                     disabled={!potvrdaTacna || radiUskladjivanje}
                     onClick={() => void sprovedi()}
                   >
@@ -338,7 +344,7 @@ export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boo
 
           <button
             type="button"
-            className="kolo-dugme-sekundarno text-sm"
+            className="px-4 py-2 rounded-xl border border-kolo-border bg-white text-kolo-text text-sm font-semibold hover:border-kolo-green-700 transition-colors disabled:opacity-50"
             disabled={radiParove}
             onClick={() => void izracunajParove()}
           >
@@ -399,14 +405,14 @@ export default function PotvrdeTab({ jeSuperadmin, onDone }: { jeSuperadmin: boo
                       {t("parovi_potvrda_broja")}
                     </label>
                     <input
-                      className="kolo-input mt-1 w-48"
+                      className="mt-1 w-48 rounded-xl border border-kolo-border px-3 py-1.5 text-sm"
                       inputMode="numeric"
                       value={potvrdaParova}
                       onChange={(e) => setPotvrdaParova(e.target.value.replace(/\D/g, ""))}
                     />
                     <button
                       type="button"
-                      className="kolo-dugme-primarno ml-2 text-sm"
+                      className="ml-2 px-4 py-2 rounded-xl bg-kolo-green-700 text-white text-sm font-semibold hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
                       disabled={!parovaPotvrdaTacna || radiParove}
                       onClick={() => void ukloniParove()}
                     >

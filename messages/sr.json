@@ -398,6 +398,7 @@
     "slotovi_prikaz": "Mesta: {raspolozivo} slobodno / {potroseno} potrošeno",
     "graf_kartica_naslov": "Mreža potvrda",
     "graf_kartica_opis": "Pogledaj celu mrežu, ko je koga potvrdio i gde si ti.",
+    "graf_kartica_dugme": "Pogledaj mrežu potvrda",
     "dugme_otkazi": "Otkaži",
     "prijava_link": "Nešto nije u redu sa tvojom potvrdom? Prijavi.",
     "prijava_placeholder": "Ukratko opiši šta nije u redu (npr. ne poznaješ osobu koja te je potvrdila).",
