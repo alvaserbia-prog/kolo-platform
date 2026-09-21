@@ -301,21 +301,35 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
             i drugi ishod. */}
         {zabelezenoUkupno > 0 && (
           <div className="mt-3 rounded-2xl border border-kolo-border bg-white px-5 py-4">
-            <div className="flex items-baseline justify-between gap-3">
-              <p className="text-sm font-semibold text-kolo-text">{t("zabelezen_naslov")}</p>
-              <p className="text-lg font-bold tabular-nums text-kolo-green-700">
-                {zabelezenoUkupno.toLocaleString(intlTag(locale))} {tc("poen")}
-              </p>
-            </div>
-            <p className="text-sm text-kolo-muted mt-1">{t("zabelezen_opis")}</p>
-
+            {/* Zatvoreno stanje nosi SAMO naziv i iznos (odluka vlasnika): rečenica
+                objašnjenja je sklonjena, a znak da se red otvara je strelica. Ceo red
+                je dugme — meta od jednog reda je na telefonu pouzdanija od male
+                strelice, a šta se čeka piše u stavkama koje se otvaraju. */}
             <button
               type="button"
               onClick={() => setShowStavke((v) => !v)}
               aria-expanded={showStavke}
-              className="mt-2 text-sm font-semibold text-kolo-green-700 hover:underline"
+              className="flex w-full items-baseline justify-between gap-3 text-left"
             >
-              {showStavke ? t("zabelezen_sakrij") : t("zabelezen_stavke")}
+              <span className="flex items-center gap-1.5 text-sm font-semibold text-kolo-text">
+                {t("zabelezen_naslov")}
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className={`shrink-0 opacity-70 transition-transform ${showStavke ? "rotate-180" : ""}`}
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </span>
+              <span className="text-lg font-bold tabular-nums text-kolo-green-700">
+                {zabelezenoUkupno.toLocaleString(intlTag(locale))} {tc("poen")}
+              </span>
             </button>
 
             {showStavke && (
@@ -351,7 +365,9 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
                 {cekaDruge > 0 && (
                   <div>
                     <div className="flex items-baseline justify-between gap-3">
-                      <p className="text-sm font-semibold text-kolo-text">{t("ceka_druge")}</p>
+                      <p className="text-sm font-semibold text-kolo-text">
+                        {t("zabelezene_potvrde_naslov")}
+                      </p>
                       <p className="text-sm font-bold tabular-nums text-kolo-text">
                         {cekaDruge.toLocaleString(intlTag(locale))} {tc("poen")}
                       </p>
@@ -379,19 +395,12 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
                   </div>
                 )}
 
-                {/* Mehanizam potvrda objašnjen JEDNOM, na kraju: uslov je isti za „čeka
-                    tebe" i za „čeka druge", samo se meri na različitom čoveku. Naslov
-                    je uvodna reč te rečenice — oba ključa traži
-                    `potvrda-uslov-izvor.test.ts` i ne smeju da nestanu iz copy-ja. */}
-                {(cekaTebe > 0 || cekaDruge > 0) && (
-                  <p className="text-sm text-kolo-muted border-t border-kolo-border pt-3">
-                    <span className="font-semibold text-kolo-text">
-                      {t("zabelezene_potvrde_naslov")}
-                    </span>
-                    {" — "}
-                    {t("zabelezene_potvrde_opis")}
-                  </p>
-                )}
+                {/* 🔴 Ovde je stajao zaključni pasus sa `zabelezene_potvrde_opis`
+                    („Upisuje se kad se pojavi prvi doprinos onoga na koga se potvrda
+                    odnosi…"). Sklonjen je odlukom vlasnika 21.09.2026 — red nosi samo
+                    kratke tekstove uz stavke. Ključ OSTAJE u `messages/*.json` jer ga
+                    traži `potvrda-uslov-izvor.test.ts`; ne brisati ga bez izmene te
+                    brane. */}
               </div>
             )}
           </div>
