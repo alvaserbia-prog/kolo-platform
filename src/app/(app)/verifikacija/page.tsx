@@ -22,6 +22,7 @@ import {
 } from "@/lib/protokol/dokaz-stvarnosti";
 import IndeksPrikaz from "@/components/verifikacija/IndeksPrikaz";
 import { dohvatiZabelezenePotvrde } from "@/lib/protokol/potvrda-poen";
+import SpisakCekanja from "@/components/SpisakCekanja";
 import { POEN_VERIFIKATOR } from "@/lib/protokol/dokaz-stvarnosti";
 import { PotvrdaPoenStatus } from "@/generated/prisma/client";
 import MiniStablo, {
@@ -142,9 +143,19 @@ export default async function VerifikacijaPage() {
   const cekaMoje = zabelezenePotvrde.kaoPotvrdjeni;
   const cekaDate = await prisma.verifikacionaVeza.findMany({
     where: { verifikatorId: session.user.id, poenStatus: PotvrdaPoenStatus.ZABELEZEN },
-    select: { id: true, verifikovani: { select: { pseudonim: true } } },
+    // `id` potvrđenog je obavezan — spisak je klikabilan i vodi na njegov profil.
+    select: { id: true, verifikovani: { select: { id: true, pseudonim: true } } },
     orderBy: { vremenskiZig: "desc" },
   });
+  // Isti oblik kao na ekranu POEN: jedan red sa zbirom pa pločice sa pseudonimima.
+  // Rečenica po čoveku („Potvrdio si X — 1.000 POENA ti se upisuje kad…") je pet
+  // potvrda pretvarala u pet redova teksta, a iznos je po vezi uvek isti, pa je
+  // ponovljen uz svako ime samo pravio buku. Spisak odgovara na jedno pitanje —
+  // koga podsetiti — i zato su imena linkovi.
+  const cekaDateLjudi = cekaDate.map((v) => ({
+    id: v.verifikovani.id,
+    pseudonim: v.verifikovani.pseudonim,
+  }));
 
   return (
     <div className="max-w-3xl mx-auto py-6 space-y-6">
@@ -166,14 +177,16 @@ export default async function VerifikacijaPage() {
                   {t("ceka_moja", { iznos: cekaMoje.toLocaleString("sr-RS") })}
                 </p>
               )}
-              {cekaDate.map((v) => (
-                <p key={v.id} className="mt-2 text-sm text-kolo-text">
-                  {t("ceka_dao", {
-                    pseudonim: v.verifikovani.pseudonim,
-                    iznos: POEN_VERIFIKATOR.toLocaleString("sr-RS"),
-                  })}
-                </p>
-              ))}
+              {cekaDate.length > 0 && (
+                <div className="mt-2">
+                  <p className="text-sm text-kolo-text">
+                    {t("ceka_dao_zbir", {
+                      iznos: (cekaDate.length * POEN_VERIFIKATOR).toLocaleString("sr-RS"),
+                    })}
+                  </p>
+                  <SpisakCekanja ljudi={cekaDateLjudi} />
+                </div>
+              )}
               <p className="mt-2 text-sm text-kolo-muted">{t("ceka_opis")}</p>
               {cekaMoje > 0 && (
                 <div className="mt-3 flex flex-wrap gap-2">

@@ -451,7 +451,7 @@
     "ceka_naslov": "Feljegyzett megerősítések",
     "ceka_opis": "A megerősítés érvényes, és az index be van jegyezve. A POEN akkor kerül bejegyzésre, amikor a megerősített tag megteszi az első hozzájárulását: az Alapítvány által jóváhagyott ajánlati hirdetés, adomány, pártfogás vagy teljesített operatív hozzájárulás.",
     "ceka_moja": "{iznos} POEN vár rád — tedd közzé az első ajánlatodat vagy adományozz.",
-    "ceka_dao": "Megerősítetted őt: {pseudonim} — {iznos} POEN akkor kerül bejegyzésre neked, amikor ő megteszi az első hozzájárulását.",
+    "ceka_dao_zbir": "Az általad adott megerősítésekre {iznos} POEN vár — akkor kerül rögzítésre, amikor az általad megerősített személy megteszi az első hozzájárulását:",
     "ceka_dugme_oglas": "Ajánlat közzététele",
     "ceka_dugme_donacija": "Adományozás",
     "oznake_ceka": "első hozzájárulásra vár",
