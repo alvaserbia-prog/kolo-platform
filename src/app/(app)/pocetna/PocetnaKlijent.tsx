@@ -6,6 +6,13 @@ import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import { profilHref } from "@/lib/profil-link";
+import {
+  ClanoviSekcija,
+  ProtokolLista,
+  TransakcijeSekcija,
+  type Clan,
+  type Transakcija,
+} from "@/components/SistemListe";
 
 interface BlogObjava {
   id: string;
@@ -24,6 +31,13 @@ interface ChatPoruka {
   content: string;
   createdAt: string;
 }
+
+/**
+ * Kartica brojača koja se otvara u spisak ispod. `oglasi` je jedina bez spiska —
+ * oglasi žive na Pijaci, sa svojom pretragom po kategoriji i mestu, pa ih ovde
+ * ne treba prepisivati; kartica vodi tamo.
+ */
+type Sekcija = "clanovi" | "oglasi" | "razmene" | "protokol";
 
 interface Props {
   pseudonim: string;
@@ -48,12 +62,56 @@ export default function PocetnaKlijent({
 }: Props) {
   const locale = useLocale();
   const t = useTranslations("pocetna");
+  const tc = useTranslations("common");
   const [poruke, setPoruke] = useState<ChatPoruka[]>(chatInicijalno);
   const [input, setInput] = useState("");
   const [salje, setSalje] = useState(false);
   const [greska, setGreska] = useState<string | null>(null);
   const [otvorenaObjava, setOtvorenaObjava] = useState<string | null>(null);
   const chatScrollRef = useRef<HTMLDivElement>(null);
+
+  // Otvorena kartica brojača. `null` = sve zatvorene; ponovni klik na istu
+  // karticu je gasi, kao na /sistem gde kartica ostaje upaljena dok se ne
+  // izabere druga.
+  const [sekcija, postaviSekciju] = useState<Sekcija | null>(null);
+  // Jednom dignut spisak ostaje u stanju — gašenje i paljenje kartice ne sme da
+  // pokrene isti upit iznova.
+  const [clanovi, setClanovi] = useState<Clan[] | null>(null);
+  const [razmene, setRazmene] = useState<Transakcija[] | null>(null);
+  const [protokolTx, setProtokolTx] = useState<Transakcija[] | null>(null);
+  const [greskaListe, setGreskaListe] = useState(false);
+
+  /**
+   * Spiskovi se dižu tek kad se kartica otvori (`/api/pocetna/liste`).
+   *
+   * Početna je prvi ekran posle prijave i otvara je svako; spisak članova nosi
+   * upit nad svim nalozima, pa zatvorena kartica ne sme da košta nijedan upit.
+   */
+  useEffect(() => {
+    if (!sekcija || sekcija === "oglasi") return;
+    const vec =
+      sekcija === "clanovi" ? clanovi : sekcija === "razmene" ? razmene : protokolTx;
+    if (vec !== null) return;
+
+    let aktivno = true;
+    setGreskaListe(false);
+    fetch(`/api/pocetna/liste?sekcija=${sekcija}`)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("greska"))))
+      .then((d) => {
+        if (!aktivno) return;
+        if (sekcija === "clanovi") setClanovi(d.clanovi ?? []);
+        else if (sekcija === "razmene") setRazmene(d.stavke ?? []);
+        else setProtokolTx(d.stavke ?? []);
+      })
+      .catch(() => {
+        if (aktivno) setGreskaListe(true);
+      });
+    return () => {
+      aktivno = false;
+    };
+  }, [sekcija, clanovi, razmene, protokolTx]);
+
+  const prebaci = (s: Sekcija) => postaviSekciju((prethodna) => (prethodna === s ? null : s));
 
   /**
    * Uklanjanje sporne poruke iz Pričaonice (Uslovi čl. 25 st. 2 — obuhvata „svu
@@ -139,22 +197,103 @@ export default function PocetnaKlijent({
       </h1>
 
       {/* Brojač stanja sistema. Stoji na vrhu jer je jedini zajednički pokazatelj
-          da mreža raste — sve ostalo na strani je tekst pojedinaca. */}
+          da mreža raste — sve ostalo na strani je tekst pojedinaca.
+
+          Od 2026-09-22 je svaka kartica dugme koje ispod sebe otvara isti spisak
+          koji stoji iza iste kartice na /sistem — i to iste komponente
+          (`SistemListe`), ne njihov prepis. Klik na upaljenu karticu je gasi. */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {([
-          ["brojac_clanovi", brojac.clanovi],
-          ["brojac_oglasi", brojac.oglasi],
-          ["brojac_razmene", brojac.razmene],
-          ["brojac_opticaj", brojac.opticaj],
-        ] as const).map(([kljuc, vrednost]) => (
-          <div key={kljuc} className="bg-white rounded-2xl border border-kolo-border px-4 py-3">
-            <p className="text-2xl font-bold tabular-nums text-kolo-text">
-              {vrednost.toLocaleString(intlTag(locale))}
-            </p>
-            <p className="text-xs text-kolo-muted mt-0.5">{t(kljuc)}</p>
-          </div>
-        ))}
+          ["brojac_clanovi", brojac.clanovi, "clanovi"],
+          ["brojac_oglasi", brojac.oglasi, "oglasi"],
+          ["brojac_razmene", brojac.razmene, "razmene"],
+          ["brojac_opticaj", brojac.opticaj, "protokol"],
+        ] as const).map(([kljuc, vrednost, koja]) => {
+          const aktivna = sekcija === koja;
+          return (
+            <button
+              key={kljuc}
+              type="button"
+              onClick={() => prebaci(koja)}
+              aria-expanded={aktivna}
+              className={`rounded-2xl border px-4 py-3 text-left transition-all ${
+                aktivna
+                  ? "bg-kolo-green-700 border-kolo-green-700 text-white shadow-md"
+                  : "bg-white border-kolo-border hover:border-kolo-green-500 hover:shadow-sm"
+              }`}
+            >
+              <p className={`text-2xl font-bold tabular-nums ${aktivna ? "text-white" : "text-kolo-text"}`}>
+                {vrednost.toLocaleString(intlTag(locale))}
+              </p>
+              <p className={`text-xs mt-0.5 ${aktivna ? "text-white/70" : "text-kolo-muted"}`}>
+                {t(kljuc)}
+              </p>
+            </button>
+          );
+        })}
       </div>
+
+      {/* Spisak otvorene kartice — ispod kartica, IZNAD vesti i Pričaonice. */}
+      {sekcija && (
+        <div className="space-y-3">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="text-lg font-semibold text-kolo-text">
+              {t(
+                sekcija === "clanovi"
+                  ? "brojac_clanovi"
+                  : sekcija === "oglasi"
+                    ? "brojac_oglasi"
+                    : sekcija === "razmene"
+                      ? "brojac_razmene"
+                      : "brojac_opticaj"
+              )}
+            </h2>
+            <button
+              type="button"
+              onClick={() => postaviSekciju(null)}
+              className="text-sm font-medium text-kolo-muted hover:text-kolo-text transition-colors"
+            >
+              {tc("zatvori")}
+            </button>
+          </div>
+
+          {sekcija === "oglasi" ? (
+            /* Oglasi se NE prepisuju ovde: na Pijaci imaju svoju pretragu po
+               kategoriji i mestu, sliku i put do oglašivača. Kartica vodi tamo. */
+            <div className="bg-white rounded-2xl border border-kolo-border p-6 text-center">
+              <p className="text-sm text-kolo-muted mb-3">{t("oglasi_panel_opis")}</p>
+              <Link
+                href="/pijaca"
+                className="inline-block px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-500 transition-colors"
+              >
+                {t("oglasi_panel_dugme")}
+              </Link>
+            </div>
+          ) : greskaListe ? (
+            <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+              {tc("greska_ucitavanja")}
+            </div>
+          ) : sekcija === "clanovi" ? (
+            clanovi === null && verified ? (
+              <UcitavanjeListe poruka={tc("ucitavanje")} />
+            ) : (
+              /* Nov član spisak članova ne dobija ni od servera (Pravilnik
+                 čl. 67) — komponenta mu na isto mesto stavlja objašnjenje. */
+              <ClanoviSekcija clanovi={clanovi ?? []} verified={verified} />
+            )
+          ) : sekcija === "razmene" ? (
+            razmene === null ? (
+              <UcitavanjeListe poruka={tc("ucitavanje")} />
+            ) : (
+              <TransakcijeSekcija razmene={razmene} verified={verified} />
+            )
+          ) : protokolTx === null ? (
+            <UcitavanjeListe poruka={tc("ucitavanje")} />
+          ) : (
+            <ProtokolLista protokolTx={protokolTx} verified={verified} />
+          )}
+        </div>
+      )}
 
       {/* Levo Vesti Fondacije, desno Pričaonica */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
@@ -361,5 +500,14 @@ function ChatAvatar({
         inicijal
       )}
     </Link>
+  );
+}
+
+// Mesto spiska dok se diže — ista visina okvira kao spisak, da se strana ne trza.
+function UcitavanjeListe({ poruka }: { poruka: string }) {
+  return (
+    <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
+      {poruka}
+    </div>
   );
 }

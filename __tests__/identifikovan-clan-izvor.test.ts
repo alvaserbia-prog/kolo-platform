@@ -151,10 +151,18 @@ describe("oznaka „donator“ (odluka vlasnika, 13.09.2026)", () => {
     expect(izvor("src/app/(app)/sistem/page.tsx")).toContain(
       "identitetUtvrdjen: u.identitetUtvrdjenAt !== null"
     );
+    // Isti spisak članova otvara i kartica na početnoj — diže ga svoja ruta, pa
+    // i ona mora da nosi oznaku. Bez ovoga bi javni donator na jednom od dva
+    // ulaza opet stajao kao „?".
+    expect(izvor("src/app/api/pocetna/liste/route.ts")).toContain(
+      "identitetUtvrdjen: u.identitetUtvrdjenAt !== null"
+    );
   });
 
   it("spisak članova ne prikazuje javnog donatora kao „?“", () => {
-    expect(izvor("src/app/(app)/sistem/SistemKlijent.tsx")).toContain(
+    // Red spiska je 22.09.2026 iz `SistemKlijent.tsx` prešao u zajedničku
+    // komponentu — istu otvaraju /sistem i /pocetna.
+    expect(izvor("src/components/SistemListe.tsx")).toContain(
       "!c.verified && c.identitetUtvrdjen"
     );
   });

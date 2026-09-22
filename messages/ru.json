@@ -1951,6 +1951,8 @@
     "brojac_oglasi": "Объявлений",
     "brojac_razmene": "Обменов",
     "brojac_opticaj": "Всего ПОЕН",
+    "oglasi_panel_opis": "Объявления просматриваются на Рынке — по категории и месту, с фотографией и способом связаться с подателем объявления.",
+    "oglasi_panel_dugme": "Открыть Рынок →",
     "greska_uklanjanje": "Ошибка при удалении сообщения."
   },
   "postaniPokrovitelj": {

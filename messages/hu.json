@@ -1944,6 +1944,8 @@
     "brojac_oglasi": "Hirdetés",
     "brojac_razmene": "Csere",
     "brojac_opticaj": "Összes POEN",
+    "oglasi_panel_opis": "A hirdetéseket a Piacon lehet böngészni — kategória és hely szerint, képpel és a hirdetőhöz vezető úttal.",
+    "oglasi_panel_dugme": "Piac megnyitása →",
     "greska_uklanjanje": "Hiba az üzenet eltávolításakor."
   },
   "postaniPokrovitelj": {
