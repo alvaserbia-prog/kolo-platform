@@ -928,6 +928,9 @@ docs/             — pun zapis odluka + radne beleške (nije normativa)
 
 ### Početna (`/pocetna`)
 - Vesti Fondacije (Blog, poslednjih 5) levo + globalna **Pričaonica** desno (50/50; svi prijavljeni vide, **samo verifikovani** pišu, max 1.000 znakova). „Pričaonica" je UI naziv (commit `9140b82`); model ostaje `ChatMessage`.
+- 🔴 **Četiri kartice brojača su dugmad i pale se/gase kao na `/sistem` (2026-09-22).** Otvorena kartica spušta spisak **ispod kartica, iznad vesti i Pričaonice**; ponovni klik je gasi. Članovi → spisak članova, Razmena → prepisi između korisnika, Ukupno POENA → zapisi Protokola, Oglasa → **link na Pijacu** (oglasi se ne prepisuju ovde — na Pijaci imaju pretragu po kategoriji i mestu).
+- 🔴 **Spiskovi su JEDNA komponenta sa `/sistem` — `src/components/SistemListe.tsx`** (`ClanoviSekcija`, `TransakcijeSekcija`, `ProtokolLista`, `Ucesnik`). Prepisan spisak bi se razišao baš na pravilu vidljivosti: pseudonim u evidenciji doprinosa vidi samo potvrđen član (Pravilnik čl. 67), a to pravilo nosi `Ucesnik`. Ne praviti drugu kopiju.
+- 🟡 **Podatke diže `GET /api/pocetna/liste?sekcija=clanovi|razmene|protokol`, tek pri otvaranju kartice** — početna je prvi ekran posle prijave, a spisak članova je upit nad svim nalozima; zatvorena kartica ne sme da košta nijedan upit. Ruta koristi **iste uslove** kao `/sistem` (`USLOV_RAZMENE`, `BEZ_DECE`, izuzeće `EMISIJA_PROGRAM`) — dve kartice sa istim imenom ne smeju da mere dva skupa. 🔴 Vidljivost sprovodi **server**: novom članu se strane maskiraju (`pseudonim: null` → „—"), a spisak članova mu se ne šalje uopšte, pa pseudonim ne stigne ni u mrežni odgovor.
 
 ### Sistem (`/sistem`)
 - `/dashboard` redirectuje na `/sistem`. Lični pregled + 4 kartice (Članovi, Transakcije, Krugovi, Opticaj sa zero-sum kvačicom). Klikabilne kartice → filtrirani prikazi.

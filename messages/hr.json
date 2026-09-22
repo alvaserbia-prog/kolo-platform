@@ -1951,6 +1951,8 @@
     "brojac_oglasi": "Oglasa",
     "brojac_razmene": "Razmjena",
     "brojac_opticaj": "Ukupno POEN-a",
+    "oglasi_panel_opis": "Oglasi se pretražuju na Pijaci — po kategoriji i mjestu, sa slikom i putem do oglašivača.",
+    "oglasi_panel_dugme": "Otvori Pijacu →",
     "greska_uklanjanje": "Greška pri uklanjanju poruke."
   },
   "postaniPokrovitelj": {

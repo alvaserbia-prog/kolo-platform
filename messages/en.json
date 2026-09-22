@@ -1951,6 +1951,8 @@
     "brojac_oglasi": "Listings",
     "brojac_razmene": "Exchanges",
     "brojac_opticaj": "Total POEN",
+    "oglasi_panel_opis": "Listings are browsed on the Marketplace — by category and location, with photos and a way to reach the advertiser.",
+    "oglasi_panel_dugme": "Open the Marketplace →",
     "greska_uklanjanje": "Error while removing the message."
   },
   "postaniPokrovitelj": {
