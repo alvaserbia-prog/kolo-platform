@@ -960,6 +960,27 @@ docs/             — pun zapis odluka + radne beleške (nije normativa)
 - **Korisnik platforme** (neverifikovan/verifikovan), **Verifikovani korisnik** (indeks ≥ 10%), **Nosilac ZRNA**, **Član Kruga** (preko `KrugClanstvo`), **Admin** = UO Fondacije (`admin` kolona = `AdminNivo` ADMIN/SUPERADMIN; tip ostaje `NOSILAC_ZRNA`), **Pokrovitelj** (pravno lice ili preduzetnik, bez naloga).
 - ✅ **Jedinstveni statusni model:** legacy `Role` enum (`FIZICKO_LICE`/`CLAN_KRUGA`/`ADMIN`) je **uklonjen** (Faza C). Kanonski `TipKorisnika` ima tri vrednosti (`REGULARNI`/`NOSILAC_ZRNA`/`NEVERIFIKOVAN`); `POCETNI` je naknadno **uklonjen iz enum-a**. **Admin = UO Fondacije** se vodi preko **`admin` kolone (`AdminNivo`)**, NE preko `tipKorisnika` (autorizacija `/admin` panela ide preko `jeAdmin({admin})`; `tipKorisnika === "POCETNI"` ostaje samo kao legacy JWT-fallback u `proxy.ts`, za uklanjanje). **Članstvo u Krugu** se vodi isključivo preko `KrugClanstvo` (nema više `CLAN_KRUGA` na korisniku). Migracije `20260603150000_drop_role_enum` (drop legacy `Role`).
 
+### 🔴 Ko je ko — sastav UO i početni članovi (odluka vlasnika, 2026-09-21)
+
+**Upravni odbor Fondacije čine četvoro:** vlasnik (pseudonim `dr.nikola.šarić`),
+**Danijel**, **Jelena**, **Stefan**. **Mihajlo NIJE član UO** — on je nosilac ZRNA,
+odnosno početni član.
+
+🔴 **Zamka sa imenom Jelena.** U bazi postoje **tri** naloga sa tim imenom —
+`Jelena` (UO, osnivač), `Jelena N.` i `Jelena1710.` — a uz njih i `jellena92`, koja
+je roditelj deteta `Lazar` i **nije** ona iz UO. Kad se u razgovoru kaže „Jelena",
+misli se na **osnivača**; svaki drugi nalog se imenuje punim pseudonimom.
+
+🟡 **Svih petoro (UO + Mihajlo) su početni članovi** — `jeOsnivac = true`, indeks
+fiksno 100%. To se ne poklapa sa članstvom u UO i ne sme se izjednačavati: početni
+član je normativni pojam iz Pravilnika o dokazu stvarnosti čl. 14, a UO je organ
+Fondacije.
+
+🔴 **Članstvo u UO se u sistemu izražava ISKLJUČIVO kolonom `admin`** (`AdminNivo`),
+nikad `tipKorisnika`-om ni markerom `jeOsnivac` — oba su kod svih petoro ista, pa ne
+razlikuju organ od statusa. Tekuće stanje kolone čita se iz baze, **ne prepisuje se
+ovde** (pravilo 10).
+
 ## Sidebar linkovi (grupisana navigacija od 2026-06-13/16, `src/components/Sidebar.tsx`)
 Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)** grupom; više nije ravan spisak.
 - **Nov član:** gornja grupa (Početna, Sistem, **POEN**, Pijaca) + grupa **„Poverenje"** (**Potvrde**).
