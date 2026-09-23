@@ -6,6 +6,7 @@ import { intlTag } from "@/lib/format";
 import { useTranslations, useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import { profilHref } from "@/lib/profil-link";
+import { useStanjeUAdresi } from "@/hooks/useStanjeUAdresi";
 
 interface PregledRed {
   userId: string;
@@ -85,6 +86,26 @@ function grupisiUSesije(logs: DnevnikRed[]): Sesija[] {
   return sesije;
 }
 
+const OTVORENE_KLJUC = "admin-aktivnost-otvorene";
+
+function procitajOtvorene(): Set<string> {
+  try {
+    const sacuvano = sessionStorage.getItem(OTVORENE_KLJUC);
+    return new Set(sacuvano ? (JSON.parse(sacuvano) as string[]) : []);
+  } catch {
+    // sessionStorage nedostupan (SSR, privatni mod) — sve zatvoreno.
+    return new Set();
+  }
+}
+
+function zapamtiOtvorene(otvorene: Set<string>) {
+  try {
+    sessionStorage.setItem(OTVORENE_KLJUC, JSON.stringify([...otvorene]));
+  } catch {
+    // bez pamćenja
+  }
+}
+
 function formatVreme(iso: string | null, locale: string) {
   if (!iso) return "—";
   return new Date(iso).toLocaleString(intlTag(locale), {
@@ -111,13 +132,32 @@ function formatSat(iso: string, locale: string) {
 export default function AktivnostTab() {
   const locale = useLocale();
   const t = useTranslations("admin");
-  const [view, setView] = useState<"pregled" | "dnevnik">("pregled");
+  // Prikaz i filter žive u adresi (`?pogled=dnevnik&q=...`), a otvorene sesije u
+  // sessionStorage — da „nazad" sa profila ili posećene putanje vrati admina
+  // tačno tamo gde je kliknuo, a ne na prazan „Pregled".
+  const [pogled, postaviPogled] = useStanjeUAdresi("pogled", "pregled");
+  const view: "pregled" | "dnevnik" = pogled === "dnevnik" ? "dnevnik" : "pregled";
+  const setView = (v: "pregled" | "dnevnik") => {
+    zapamtiOtvorene(new Set());
+    postaviPogled(v);
+  };
   const [pregled, setPregled] = useState<PregledRed[] | null>(null);
   const [dnevnik, setDnevnik] = useState<DnevnikRed[]>([]);
-  const [otvorene, setOtvorene] = useState<Set<string>>(new Set());
+  const [otvorene, postaviOtvorene] = useState<Set<string>>(new Set());
+  const prebaciOtvorenu = (kljuc: string) => {
+    const nove = new Set(otvorene);
+    if (nove.has(kljuc)) nove.delete(kljuc);
+    else nove.add(kljuc);
+    zapamtiOtvorene(nove);
+    postaviOtvorene(nove);
+  };
   const [imaJos, setImaJos] = useState(false);
-  const [q, setQ] = useState("");
-  const [aktivanQ, setAktivanQ] = useState("");
+  const [aktivanQ, postaviAktivanQ] = useStanjeUAdresi("q");
+  const setAktivanQ = (v: string) => {
+    zapamtiOtvorene(new Set());
+    postaviAktivanQ(v);
+  };
+  const [q, setQ] = useState(aktivanQ);
   const [loading, setLoading] = useState(false);
   const [greska, setGreska] = useState(false);
 
@@ -149,7 +189,14 @@ export default function AktivnostTab() {
         const data = await res.json();
         const novi: DnevnikRed[] = data.dnevnik;
         setDnevnik((prev) => (pre ? [...prev, ...novi] : novi));
-        if (!pre) setOtvorene(new Set());
+        // Sveže učitan dnevnik zadržava samo one otvorene sesije koje su i
+        // dalje u spisku (npr. posle povratka sa putanje); ostale se zatvaraju.
+        if (!pre) {
+          const kljucevi = new Set(grupisiUSesije(novi).map((s) => s.key));
+          const zadrzane = new Set([...procitajOtvorene()].filter((k) => kljucevi.has(k)));
+          zapamtiOtvorene(zadrzane);
+          postaviOtvorene(zadrzane);
+        }
         setImaJos(novi.length === TAKE);
       } catch {
         setGreska(true);
@@ -240,7 +287,6 @@ export default function AktivnostTab() {
                         ) : (
                           <Link
                             href={profilHref({ id: r.userId, pseudonim: r.pseudonim })}
-                            target="_blank"
                             className="font-semibold text-kolo-green-700 hover:underline"
                           >
                             <Pseudonim>{r.pseudonim}</Pseudonim>
@@ -294,14 +340,7 @@ export default function AktivnostTab() {
                   >
                     <button
                       type="button"
-                      onClick={() =>
-                        setOtvorene((prev) => {
-                          const nove = new Set(prev);
-                          if (nove.has(s.key)) nove.delete(s.key);
-                          else nove.add(s.key);
-                          return nove;
-                        })
-                      }
+                      onClick={() => prebaciOtvorenu(s.key)}
                       className="w-full px-4 py-3 flex items-center justify-between gap-3 text-left hover:bg-kolo-bg transition-colors"
                     >
                       <div className="min-w-0 flex items-center gap-2 flex-wrap">
@@ -334,8 +373,6 @@ export default function AktivnostTab() {
                             </span>
                             <Link
                               href={r.putanja}
-                              target="_blank"
-                              rel="noopener"
                               className="font-mono text-xs text-kolo-green-700 hover:underline break-all"
                             >
                               {r.putanja}

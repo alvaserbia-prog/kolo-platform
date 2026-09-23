@@ -16,6 +16,7 @@ import { intlTag } from "@/lib/format";
 import { useLocale } from "next-intl";
 import Link from "next/link";
 import Pseudonim from "@/components/Pseudonim";
+import { useStanjeUAdresi } from "@/hooks/useStanjeUAdresi";
 
 type Prikaz = "prijavljeni" | "aktivni" | "uklonjeni";
 
@@ -54,8 +55,11 @@ const PRIKAZI: [Prikaz, string][] = [
 
 export default function PijacaTab() {
   const locale = useLocale();
-  const [prikaz, setPrikaz] = useState<Prikaz>("prijavljeni");
-  const [q, setQ] = useState("");
+  // Pod-prikaz (i pretraga) žive u adresi, da „nazad" sa oglasa ili profila
+  // vrati na isti spisak.
+  const [prikazIzAdrese, setPrikaz] = useStanjeUAdresi("prikaz", "prijavljeni");
+  const prikaz: Prikaz = PRIKAZI.find(([k]) => k === prikazIzAdrese)?.[0] ?? "prijavljeni";
+  const [q, setQ] = useStanjeUAdresi("q");
   const [oglasi, setOglasi] = useState<Oglas[]>([]);
   const [otvorenihPrijava, setOtvorenihPrijava] = useState(0);
   const [ucitava, setUcitava] = useState(true);
@@ -201,7 +205,7 @@ export default function PijacaTab() {
             <div key={o.id} className="border border-kolo-border rounded-xl p-4 space-y-3">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
-                  <Link href={`/pijaca/${o.id}`} target="_blank" className="text-sm font-semibold text-kolo-green-700 hover:underline">
+                  <Link href={`/pijaca/${o.id}`} className="text-sm font-semibold text-kolo-green-700 hover:underline">
                     {o.title}
                   </Link>
                   <div className="text-xs text-kolo-muted mt-0.5">

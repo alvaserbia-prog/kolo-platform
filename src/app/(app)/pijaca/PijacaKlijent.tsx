@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useMemo, useCallback, memo } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useStanjeUAdresi, upisiUAdresu } from "@/hooks/useStanjeUAdresi";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
@@ -69,17 +70,32 @@ export default function PijacaKlijent({
 }: Props) {
   const t = useTranslations("pijaca");
   const router = useRouter();
-  const [tipPrikaza, setTipPrikaza] = useState<"PONUDA" | "POTRAZNJA">("PONUDA");
+  // Filteri žive u adresi (vidi `useStanjeUAdresi`): „nazad" sa oglasa vraća
+  // isti izbor — tab, pretragu, sort, cenu i mesta — a ne celu Pijacu iznova.
+  const [tipIzAdrese, postaviTip] = useStanjeUAdresi("tip", "PONUDA");
+  const tipPrikaza: "PONUDA" | "POTRAZNJA" = tipIzAdrese === "POTRAZNJA" ? "POTRAZNJA" : "PONUDA";
+  const setTipPrikaza = (v: "PONUDA" | "POTRAZNJA") => postaviTip(v);
   const [selektovaneKat, setSelektovaneKat] = useState<string[]>(initialKat);
-  const [pretraga, setPretraga] = useState("");
-  const [sort, setSort] = useState("novo");
-  const [minCena, setMinCena] = useState("");
-  const [maxCena, setMaxCena] = useState("");
+  const [pretraga, setPretraga] = useStanjeUAdresi("q");
+  const [sort, setSort] = useStanjeUAdresi("sort", "novo");
+  const [minCena, setMinCena] = useStanjeUAdresi("od");
+  const [maxCena, setMaxCena] = useStanjeUAdresi("do");
   const [showCena, setShowCena] = useState(false);
   const [showSort, setShowSort] = useState(false);
   // Filter lokacije: multi-select lokacija iz samih oglasa; prazan izbor = sve lokacije.
   const [showLokacija, setShowLokacija] = useState(false);
-  const [lokacijeIzabrane, setLokacijeIzabrane] = useState<string[]>([]);
+  const searchParams = useSearchParams();
+  const [lokacijeIzabrane, postaviLokacije] = useState<string[]>(() => {
+    // Isto čitanje kao u `useStanjeUAdresi` (server: kontekst, klijent: adresa).
+    const params =
+      typeof window === "undefined" ? searchParams : new URLSearchParams(window.location.search);
+    const mesto = params.get("mesto");
+    return mesto ? mesto.split("|").filter(Boolean) : [];
+  });
+  const setLokacijeIzabrane = useCallback((next: string[]) => {
+    postaviLokacije(next);
+    upisiUAdresu({ mesto: next.length > 0 ? next.join("|") : null });
+  }, []);
   // Blok čipova kategorija je sklopiv (dugme-strelica desno od tabova).
   // Otvoren je odmah samo kad URL već nosi izabrane kategorije (?kat=).
   const [showKategorije, setShowKategorije] = useState(initialKat.length > 0);
@@ -138,11 +154,15 @@ export default function PijacaKlijent({
     return [...brojaci.entries()].sort((a, b) => a[0].localeCompare(b[0], "sr"));
   }, [listings, jePotraznja]);
 
-  const toggleLokacija = useCallback((lok: string) => {
-    setLokacijeIzabrane((prev) =>
-      prev.includes(lok) ? prev.filter((x) => x !== lok) : [...prev, lok]
-    );
-  }, []);
+  const toggleLokacija = useCallback(
+    (lok: string) =>
+      setLokacijeIzabrane(
+        lokacijeIzabrane.includes(lok)
+          ? lokacijeIzabrane.filter((x) => x !== lok)
+          : [...lokacijeIzabrane, lok],
+      ),
+    [lokacijeIzabrane, setLokacijeIzabrane],
+  );
 
   const filtrirani = useMemo(() => {
     return listings

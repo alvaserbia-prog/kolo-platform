@@ -20,6 +20,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Pseudonim from "@/components/Pseudonim";
 import { profilHref } from "@/lib/profil-link";
+import { useStanjeUAdresi } from "@/hooks/useStanjeUAdresi";
 
 type Prikaz = "cekanje" | "odobreni";
 
@@ -50,7 +51,10 @@ const PRIKAZI: [Prikaz, string][] = [
 
 export default function PrviOglasiTab({ onDone }: { onDone?: () => void }) {
   const locale = useLocale();
-  const [prikaz, setPrikaz] = useState<Prikaz>("cekanje");
+  // Pod-prikaz živi u adresi, da „nazad" sa oglasa ili profila
+  // vrati na isti spisak.
+  const [prikazIzAdrese, setPrikaz] = useStanjeUAdresi("prikaz", "cekanje");
+  const prikaz: Prikaz = PRIKAZI.find(([k]) => k === prikazIzAdrese)?.[0] ?? "cekanje";
   const [stavke, setStavke] = useState<Stavka[]>([]);
   const [ukupnoNaCekanju, setUkupnoNaCekanju] = useState(0);
   const [ucitava, setUcitava] = useState(true);
@@ -171,7 +175,6 @@ export default function PrviOglasiTab({ onDone }: { onDone?: () => void }) {
                 {s.oglas && s.oglas.brojSlika > 0 ? (
                   <Link
                     href={`/pijaca/${s.oglas.id}`}
-                    target="_blank"
                     className="shrink-0 relative w-24 h-24 rounded-lg overflow-hidden bg-kolo-bg"
                   >
                     <Image
@@ -194,7 +197,6 @@ export default function PrviOglasiTab({ onDone }: { onDone?: () => void }) {
                       {s.oglas ? (
                         <Link
                           href={`/pijaca/${s.oglas.id}`}
-                          target="_blank"
                           className="text-sm font-semibold text-kolo-green-700 hover:underline"
                         >
                           {s.oglas.title}
@@ -203,7 +205,7 @@ export default function PrviOglasiTab({ onDone }: { onDone?: () => void }) {
                         <span className="text-sm font-semibold text-kolo-muted">Oglas je obrisan</span>
                       )}
                       <div className="text-xs text-kolo-muted mt-0.5">
-                        <Link href={profilHref(s.korisnik)} target="_blank" className="hover:underline">
+                        <Link href={profilHref(s.korisnik)} className="hover:underline">
                           <Pseudonim>{s.korisnik.pseudonim}</Pseudonim>
                         </Link>
                         {s.oglas?.location ? ` · ${s.oglas.location}` : ""}
@@ -285,10 +287,9 @@ export default function PrviOglasiTab({ onDone }: { onDone?: () => void }) {
                       {s.oglas && (
                         <Link
                           href={`/pijaca/${s.oglas.id}`}
-                          target="_blank"
                           className="px-3 py-1.5 rounded-lg bg-kolo-bg text-sm font-medium text-kolo-muted hover:bg-kolo-border"
                         >
-                          Otvori oglas ↗
+                          Otvori oglas →
                         </Link>
                       )}
                     </div>

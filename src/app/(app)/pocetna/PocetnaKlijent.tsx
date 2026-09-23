@@ -13,6 +13,7 @@ import {
   type Clan,
   type Transakcija,
 } from "@/components/SistemListe";
+import { useStanjeUAdresi } from "@/hooks/useStanjeUAdresi";
 
 interface BlogObjava {
   id: string;
@@ -38,6 +39,7 @@ interface ChatPoruka {
  * ne treba prepisivati; kartica vodi tamo.
  */
 type Sekcija = "clanovi" | "oglasi" | "razmene" | "protokol";
+const SEKCIJE: Sekcija[] = ["clanovi", "oglasi", "razmene", "protokol"];
 
 interface Props {
   pseudonim: string;
@@ -72,8 +74,13 @@ export default function PocetnaKlijent({
 
   // Otvorena kartica brojača. `null` = sve zatvorene; ponovni klik na istu
   // karticu je gasi, kao na /sistem gde kartica ostaje upaljena dok se ne
-  // izabere druga.
-  const [sekcija, postaviSekciju] = useState<Sekcija | null>(null);
+  // izabere druga. Živi u adresi (`?kartica=clanovi`), da „nazad" sa profila
+  // člana vrati otvoren spisak, a ne zatvorene kartice.
+  const [karticaIzAdrese, postaviKarticu] = useStanjeUAdresi("kartica");
+  const sekcija: Sekcija | null = SEKCIJE.includes(karticaIzAdrese as Sekcija)
+    ? (karticaIzAdrese as Sekcija)
+    : null;
+  const postaviSekciju = (s: Sekcija | null) => postaviKarticu(s ?? "");
   // Jednom dignut spisak ostaje u stanju — gašenje i paljenje kartice ne sme da
   // pokrene isti upit iznova.
   const [clanovi, setClanovi] = useState<Clan[] | null>(null);
@@ -111,7 +118,7 @@ export default function PocetnaKlijent({
     };
   }, [sekcija, clanovi, razmene, protokolTx]);
 
-  const prebaci = (s: Sekcija) => postaviSekciju((prethodna) => (prethodna === s ? null : s));
+  const prebaci = (s: Sekcija) => postaviSekciju(sekcija === s ? null : s);
 
   /**
    * Uklanjanje sporne poruke iz Pričaonice (Uslovi čl. 25 st. 2 — obuhvata „svu

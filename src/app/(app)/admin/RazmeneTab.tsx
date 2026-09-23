@@ -21,6 +21,7 @@ import { useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
 import { profilHref } from "@/lib/profil-link";
 import { iznosPovracaja, stanjePosle, idUMinus } from "@/lib/razmena-prijava";
+import { useStanjeUAdresi } from "@/hooks/useStanjeUAdresi";
 
 type Prikaz = "otvorene" | "resene";
 
@@ -44,7 +45,10 @@ const PRIKAZI: [Prikaz, string][] = [
 
 export default function RazmeneTab({ onDone }: { onDone?: () => void }) {
   const locale = useLocale();
-  const [prikaz, setPrikaz] = useState<Prikaz>("otvorene");
+  // Pod-prikaz živi u adresi, da „nazad" sa oglasa ili profila
+  // vrati na isti spisak.
+  const [prikazIzAdrese, setPrikaz] = useStanjeUAdresi("prikaz", "otvorene");
+  const prikaz: Prikaz = PRIKAZI.find(([k]) => k === prikazIzAdrese)?.[0] ?? "otvorene";
   const [stavke, setStavke] = useState<Stavka[]>([]);
   const [ukupnoOtvorenih, setUkupnoOtvorenih] = useState(0);
   const [ucitava, setUcitava] = useState(true);

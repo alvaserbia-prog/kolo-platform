@@ -963,6 +963,34 @@ docs/             — pun zapis odluka + radne beleške (nije normativa)
 - **Korisnik platforme** (neverifikovan/verifikovan), **Verifikovani korisnik** (indeks ≥ 10%), **Nosilac ZRNA**, **Član Kruga** (preko `KrugClanstvo`), **Admin** = UO Fondacije (`admin` kolona = `AdminNivo` ADMIN/SUPERADMIN; tip ostaje `NOSILAC_ZRNA`), **Pokrovitelj** (pravno lice ili preduzetnik, bez naloga).
 - ✅ **Jedinstveni statusni model:** legacy `Role` enum (`FIZICKO_LICE`/`CLAN_KRUGA`/`ADMIN`) je **uklonjen** (Faza C). Kanonski `TipKorisnika` ima tri vrednosti (`REGULARNI`/`NOSILAC_ZRNA`/`NEVERIFIKOVAN`); `POCETNI` je naknadno **uklonjen iz enum-a**. **Admin = UO Fondacije** se vodi preko **`admin` kolone (`AdminNivo`)**, NE preko `tipKorisnika` (autorizacija `/admin` panela ide preko `jeAdmin({admin})`; `tipKorisnika === "POCETNI"` ostaje samo kao legacy JWT-fallback u `proxy.ts`, za uklanjanje). **Članstvo u Krugu** se vodi isključivo preko `KrugClanstvo` (nema više `CLAN_KRUGA` na korisniku). Migracije `20260603150000_drop_role_enum` (drop legacy `Role`).
 
+### 🔴 Ko je ko — UO, direktor i početni članovi (odluka vlasnika, 2026-09-23)
+
+**Upravni odbor Fondacije čine TROJE: Danijel, Jelena, Stefan.**
+**Vlasnik (pseudonim `dr.nikola.šarić`) je DIREKTOR**, ne član UO.
+**Mihajlo je pomoćni programer**, takođe ne član UO.
+
+**Svih petoro su početni članovi i nosioci ZRNA** — `jeOsnivac = true`, indeks fiksno
+100%. 🔴 To se sa članstvom u UO **ne poklapa i ne sme se izjednačavati**: početni član
+je normativni pojam iz Pravilnika o dokazu stvarnosti čl. 14, UO je organ Fondacije, a
+direktor je zastupnik. Tri različite stvari kod istih ljudi.
+
+🔴 **Zamka sa imenom Jelena.** U bazi postoje **tri** naloga sa tim imenom — `Jelena`
+(UO, osnivač), `Jelena N.` i `Jelena1710.` — a uz njih i `jellena92`, koja je roditelj
+deteta `Lazar` i **nije** ona iz UO. Kad se u razgovoru kaže „Jelena", misli se na
+**onu iz UO**; svaki drugi nalog se imenuje punim pseudonimom.
+
+🔴 **Jednačina „Admin = UO Fondacije", koja stoji iznad i u sekciji o `admin`
+namespace-u, NIJE opis zatečenog stanja.** Kolonu `admin` (`AdminNivo`) drže **direktor
+i pomoćni programer** — dakle oni koji platformu vode — dok **nijedan od trojice iz UO
+nema ijedan nivo**. Provereno u prod bazi 21.09.2026.
+
+🔴 **Taj nesklad se NE ispravlja usput, ni u kodu ni u ovom fajlu.** Pre bilo kakve
+izmene mora se odlučiti šta je admin panel: **alat organa** (pa UO dobija pristup, a
+operativa ga gubi ili zadržava uz drugi osnov) ili **alat operative** (pa se rečenica u
+ovom fajlu i obrazloženje uz `admin` namespace ispravljaju, jer se pozivaju na UO).
+Odluka je vlasnikova; dotle se stanje samo zna, ne menja. 🔴 Tekuće stanje kolone se
+**ne prepisuje ovde** (pravilo 10) — čita se iz baze.
+
 ## Sidebar linkovi (grupisana navigacija od 2026-06-13/16, `src/components/Sidebar.tsx`)
 Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)** grupom; više nije ravan spisak.
 - **Nov član:** gornja grupa (Početna, Sistem, **POEN**, Pijaca) + grupa **„Poverenje"** (**Potvrde**).
