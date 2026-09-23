@@ -12,8 +12,9 @@ import hu from "@/../messages/hu.json";
  * ISKLJUČIVO u `messages/sr.json`; `src/i18n/request.ts` ga dodaje svakom drugom
  * jeziku pri učitavanju poruka.
  *
- * Razlog nije ušteda nego tačnost: admin panel je alat Upravnog odbora i njegova
- * terminologija preslikava akte, u kojima je merodavan srpski original. Uz to
+ * Razlog nije ušteda nego tačnost: admin panel je alat operative Fondacije
+ * (ne UO — ispravljeno 2026-09-23) i njegova terminologija preslikava akte,
+ * u kojima je merodavan srpski original. Uz to
  * akti namerno razdvajaju institute koje prevod lako slepi u jednu reč —
  * prigovor (Uslovi čl. 37a), prijava razmene, prijava oglasa, nadzorni predmet —
  * pa bi loš prevod vodio ka odluci po pogrešnom institutu.

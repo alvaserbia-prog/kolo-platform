@@ -122,8 +122,10 @@ Odluka vlasnika. Namespace `admin` (**450 ključeva, 13,4% fajla**) živi **iskl
 u `messages/sr.json`**; `src/i18n/request.ts` ga dodaje svakom drugom jeziku pri
 učitavanju poruka (`{ ...messages, admin: sr.admin }`).
 
-🔴 **Razlog nije ušteda nego tačnost.** Admin panel je alat Upravnog odbora —
-terminologija mu preslikava akte, a **merodavan je srpski original** (to sami
+🔴 **Razlog nije ušteda nego tačnost.** Admin panel je alat **operative Fondacije**
+(ranije je ovde stajalo „alat Upravnog odbora“ — ispravljeno 2026-09-23, vidi „Ko je
+ko“). 🔴 **Razlog brane se time NE menja:** panel i dalje barata institutima iz akata,
+pa mu terminologija preslikava akte, a **merodavan je srpski original** (to sami
 prevodi akata kažu u disklejmeru). Uz to akti namerno razdvajaju institute koje
 prevod lako slepi u jednu reč — **prigovor** (Uslovi čl. 37a), **prijava razmene**,
 **prijava oglasa**, **nadzorni predmet** — a na tri mesta u ovom fajlu stoji „tri
@@ -960,8 +962,8 @@ docs/             — pun zapis odluka + radne beleške (nije normativa)
 - **Badge po tabu = sidebar Admin badge (od 2026-06-13):** svaki tab koji ima stavke „na čekanju" prikazuje broj u zagradi (Programi, PED, Pokrovitelji, Donacije, Prigovori, Pijaca, Prvi oglasi, Nadzor). Sidebar `adminCekanje` (`/api/dnevni-brojevi`) broji ISTE kategorije — **krugovi izbačeni** iz brojanja (nemaju tab). **Donacije** tab: potvrda PENDING `donationRecord` preko `POST /api/admin/donacija {donationId}`. **Prigovori** tab: odgovor preko `PATCH /api/admin/prigovori/[id] {status, odgovor}` (RESENO/ODBIJENO/U_OBRADI). 🟡 Preostali nesklad: Pokrovitelji **tab** broji SVE pokrovitelje, a sidebar broji `pokroviteljPrijava` POTPISANA (na čekanju) — različiti brojevi.
 
 ## Uloge u sistemu
-- **Korisnik platforme** (neverifikovan/verifikovan), **Verifikovani korisnik** (indeks ≥ 10%), **Nosilac ZRNA**, **Član Kruga** (preko `KrugClanstvo`), **Admin** = UO Fondacije (`admin` kolona = `AdminNivo` ADMIN/SUPERADMIN; tip ostaje `NOSILAC_ZRNA`), **Pokrovitelj** (pravno lice ili preduzetnik, bez naloga).
-- ✅ **Jedinstveni statusni model:** legacy `Role` enum (`FIZICKO_LICE`/`CLAN_KRUGA`/`ADMIN`) je **uklonjen** (Faza C). Kanonski `TipKorisnika` ima tri vrednosti (`REGULARNI`/`NOSILAC_ZRNA`/`NEVERIFIKOVAN`); `POCETNI` je naknadno **uklonjen iz enum-a**. **Admin = UO Fondacije** se vodi preko **`admin` kolone (`AdminNivo`)**, NE preko `tipKorisnika` (autorizacija `/admin` panela ide preko `jeAdmin({admin})`; `tipKorisnika === "POCETNI"` ostaje samo kao legacy JWT-fallback u `proxy.ts`, za uklanjanje). **Članstvo u Krugu** se vodi isključivo preko `KrugClanstvo` (nema više `CLAN_KRUGA` na korisniku). Migracije `20260603150000_drop_role_enum` (drop legacy `Role`).
+- **Korisnik platforme** (neverifikovan/verifikovan), **Verifikovani korisnik** (indeks ≥ 10%), **Nosilac ZRNA**, **Član Kruga** (preko `KrugClanstvo`), **Admin** = **operativa Fondacije, NE UO** (`admin` kolona = `AdminNivo` ADMIN/SUPERADMIN; tip ostaje `NOSILAC_ZRNA`; vidi „Ko je ko“), **Pokrovitelj** (pravno lice ili preduzetnik, bez naloga).
+- ✅ **Jedinstveni statusni model:** legacy `Role` enum (`FIZICKO_LICE`/`CLAN_KRUGA`/`ADMIN`) je **uklonjen** (Faza C). Kanonski `TipKorisnika` ima tri vrednosti (`REGULARNI`/`NOSILAC_ZRNA`/`NEVERIFIKOVAN`); `POCETNI` je naknadno **uklonjen iz enum-a**. **Admin = operativa Fondacije** (odluka vlasnika 2026-09-23 — **ne UO**, vidi „Ko je ko“) se vodi preko **`admin` kolone (`AdminNivo`)**, NE preko `tipKorisnika` (autorizacija `/admin` panela ide preko `jeAdmin({admin})`; `tipKorisnika === "POCETNI"` ostaje samo kao legacy JWT-fallback u `proxy.ts`, za uklanjanje). **Članstvo u Krugu** se vodi isključivo preko `KrugClanstvo` (nema više `CLAN_KRUGA` na korisniku). Migracije `20260603150000_drop_role_enum` (drop legacy `Role`).
 
 ### 🔴 Ko je ko — UO, direktor i početni članovi (odluka vlasnika, 2026-09-23)
 
@@ -979,17 +981,38 @@ direktor je zastupnik. Tri različite stvari kod istih ljudi.
 deteta `Lazar` i **nije** ona iz UO. Kad se u razgovoru kaže „Jelena", misli se na
 **onu iz UO**; svaki drugi nalog se imenuje punim pseudonimom.
 
-🔴 **Jednačina „Admin = UO Fondacije", koja stoji iznad i u sekciji o `admin`
-namespace-u, NIJE opis zatečenog stanja.** Kolonu `admin` (`AdminNivo`) drže **direktor
-i pomoćni programer** — dakle oni koji platformu vode — dok **nijedan od trojice iz UO
-nema ijedan nivo**. Provereno u prod bazi 21.09.2026.
+### 🔴 Admin panel je ALAT OPERATIVE, ne organa (odluka vlasnika, 2026-09-23)
 
-🔴 **Taj nesklad se NE ispravlja usput, ni u kodu ni u ovom fajlu.** Pre bilo kakve
-izmene mora se odlučiti šta je admin panel: **alat organa** (pa UO dobija pristup, a
-operativa ga gubi ili zadržava uz drugi osnov) ili **alat operative** (pa se rečenica u
-ovom fajlu i obrazloženje uz `admin` namespace ispravljaju, jer se pozivaju na UO).
-Odluka je vlasnikova; dotle se stanje samo zna, ne menja. 🔴 Tekuće stanje kolone se
-**ne prepisuje ovde** (pravilo 10) — čita se iz baze.
+Do tada je na dva mesta u ovom fajlu i u komentaru `__tests__/admin-namespace.test.ts`
+stajalo **„Admin = UO Fondacije"**, a to nikad nije opisivalo stvarnost: kolonu `admin`
+(`AdminNivo`) drže **direktor i pomoćni programer**, dok **nijedan od trojice iz UO nema
+ijedan nivo** (provereno u prod bazi 21.09.2026). Sva tri mesta su ispravljena.
+
+🔴 **Brana oko `admin` namespace-a time NIJE oslabljena.** Njen razlog nije bio „panel
+pripada UO" nego „panel barata institutima iz akata, pa loš prevod vodi ka odluci po
+pogrešnom institutu". Nosilac je bio pogrešno imenovan, razlog stoji — **ne ukidati je.**
+
+🔴 **Ostaje otvoreno ono što odluka NE rešava: radnje koje akti izričito daju UO.**
+Kod na deset mesta izjednačava admina sa UO, a četiri su **normativne nadležnosti**, ne
+operativa:
+
+| Radnja | Akt | Kapija u kodu |
+|---|---|---|
+| Sprovođenje odluke Gornjeg Kola | Gornje Kolo čl. 51 | `jeSuperadmin` |
+| Zaštitni veto | Pravilnik čl. 48 | `jeSuperadmin` |
+| Odgovor UO na dinarsku preporuku | Gornje Kolo čl. 20 | `jeAdmin` |
+| Verifikacija operativnog doprinosa u Fazi 1 | Pravilnik čl. 36 | `jeAdmin` |
+
+Posledica: te akte danas može da izvrši direktor i **pomoćni programer**, a **UO ne može
+nijedan** — nema pristup. Za veto i sprovođenje odluke to je akt organa koji donosi neko
+drugi.
+
+🔴 **Ne rešavati davanjem `admin` nivoa članovima UO** — time bi panel ponovo postao alat
+organa, što je suprotno ovoj odluci. Rešenje ide u drugom smeru: te četiri radnje dobijaju
+**sopstvenu kapiju** odvojenu od `AdminNivo`-a (oznaka „član UO" na nalogu), pa operativa
+zadržava panel a organ svoje akte. Zaseban potez, ne otvarati bez naloga vlasnika.
+
+🔴 Tekuće stanje kolone se **ne prepisuje ovde** (pravilo 10) — čita se iz baze.
 
 ## Sidebar linkovi (grupisana navigacija od 2026-06-13/16, `src/components/Sidebar.tsx`)
 Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)** grupom; više nije ravan spisak.
