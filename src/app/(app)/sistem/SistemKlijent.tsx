@@ -18,7 +18,8 @@ import {
   type Transakcija,
 } from "@/components/SistemListe";
 
-import type { Sekcija } from "./sekcije";
+import { SEKCIJE, type Sekcija } from "./sekcije";
+import { pocetnoIzAdrese } from "@/hooks/useStanjeUAdresi";
 import { profilHref } from "@/lib/profil-link";
 import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 
@@ -130,7 +131,10 @@ export default function SistemKlijent({
   pocetnaSekcija,
 }: Props) {
   const locale = useLocale();
-  const [sekcija, postaviSekciju] = useState<Sekcija>(pocetnaSekcija);
+  // Adresa je merodavna i pri povratku (back) — vidi `pocetnoIzAdrese`.
+  const [sekcija, postaviSekciju] = useState<Sekcija>(() =>
+    pocetnoIzAdrese("sekcija", SEKCIJE, pocetnaSekcija),
+  );
   const t = useTranslations("sistem");
 
   // Aktivna sekcija se ogleda u URL-u (?sekcija=...) bez nove navigacije,
