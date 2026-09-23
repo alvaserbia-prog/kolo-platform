@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import Pseudonim from "@/components/Pseudonim";
-import type { Tab } from "./tabovi";
+import { KRUG_TABOVI, type Tab } from "./tabovi";
+import { pocetnoIzAdrese } from "@/hooks/useStanjeUAdresi";
 import { profilHref } from "@/lib/profil-link";
 
 interface Projekat {
@@ -50,7 +51,8 @@ export default function KrugDetalj({ krug, mojeClansvo, imaPristupnicu, isVerifi
   const t = useTranslations("krug");
   const tc = useTranslations("common");
   const router = useRouter();
-  const [tab, postaviTab] = useState<Tab>(pocetniTab);
+  // Adresa je merodavna i pri povratku (back) — vidi `pocetnoIzAdrese`.
+  const [tab, postaviTab] = useState<Tab>(() => pocetnoIzAdrese("tab", KRUG_TABOVI, pocetniTab));
 
   // Aktivan tab u URL-u (?tab=...) bez nove navigacije — povratak (back) sa
   // profila člana vraća na isti tab. replaceState: bez novih unosa u istoriji.

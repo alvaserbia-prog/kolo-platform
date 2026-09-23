@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import type { NadzorNalaz } from "./NadzorTab";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { ADMIN_TABOVI, type Tab } from "./tabovi";
+import { pocetnoIzAdrese } from "@/hooks/useStanjeUAdresi";
 import Pseudonim from "@/components/Pseudonim";
 import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 import { RANG_TABELA } from "@/lib/donacija-pravila";
@@ -267,7 +268,18 @@ const statusLabel = (t: (k: string) => string): Record<string, string> => ({
 export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProgrami, adminPed, adminPokrovitelji, dashboard, auditLogs, krugoviLista, verifikovaniKorisnici, krugoviLista2, blogObjave, nadzorNalazi, otvorenihPredmeta, pendingDonacije, otvoreniPrigovori, viewerJeSuperadmin, viewerId, pocetniTab, otvorenihPrijavaOglasa, prvihOglasaNaCekanju, otvorenihPrijavaRazmene }: AdminKlijentProps) {
   const router = useRouter();
   const t = useTranslations("admin");
-  const [tab, postaviTab] = useState<Tab>(pocetniTab);
+  // Pri povratku (back) sa oglasa ili profila `pocetniTab` stiže iz stabla koje je
+  // nastalo pre promene taba, pa bi vraćao na Dashboard — merodavna je adresa.
+  // Ista zabrana kao na serveru: tabovi samo za superadmina se drugima ne otvaraju.
+  const [tab, postaviTab] = useState<Tab>(() =>
+    pocetnoIzAdrese(
+      "tab",
+      ADMIN_TABOVI.filter(
+        (t) => viewerJeSuperadmin || (t !== "audit" && t !== "nadzor" && t !== "odluke" && t !== "aktivnost"),
+      ),
+      pocetniTab,
+    ),
+  );
 
   // Aktivan tab u URL-u (?tab=...) bez nove navigacije — povratak (back) sa
   // profila i sl. vraća na isti tab. replaceState: promena taba ne pravi novi

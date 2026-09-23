@@ -55,3 +55,20 @@ export function upisiUAdresu(izmene: Record<string, string | null>) {
     qs ? `${window.location.pathname}?${qs}` : window.location.pathname,
   );
 }
+
+/**
+ * Početna vrednost ekrana čiji serverski prop (`pocetniTab`, `pocetnaSekcija`)
+ * potiče iz adrese. Pri povratku (back) Next vraća stablo iz istorije — ono je
+ * nastalo za adresu kakva je bila PRE `replaceState`, pa prop nosi stari tab
+ * (npr. „dashboard"), iako adresa kaže `?tab=pijaca`. Na klijentu je zato
+ * merodavna adresa; pri hidrataciji je ista kao na serveru, pa razlike nema.
+ */
+export function pocetnoIzAdrese<T extends string>(
+  kljuc: string,
+  dozvoljene: readonly T[],
+  izProp: T,
+): T {
+  if (typeof window === "undefined") return izProp;
+  const v = new URLSearchParams(window.location.search).get(kljuc);
+  return v !== null && (dozvoljene as readonly string[]).includes(v) ? (v as T) : izProp;
+}
