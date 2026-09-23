@@ -270,7 +270,6 @@ sprečava da se predlog vrati u drugom obliku. Pun zapis: `docs/sprovodjenje-riz
 - **Humanitarna nabavka** (red po potrebi, bez praga od 20.000 POEN) — *„Ne radimo takve nabavke."*
 - **Sopstveni KYC za velike donacije** — identifikaciju uplatioca sprovodi banka.
 - **Izravnat koeficijent / fiksan iznos po nivou donacije** — *„hoću da favorizujem velike donacije."* 🔴 Ali se **tako ne piše** u aktima, FAQ-u ni copy-ju: stoji „veći pojedinačan doprinos ima veći značaj za zajednicu", nikad opis podsticaja.
-- **Kripto** — zabranjena tema. **PayPal** se ne nudi dok banka odnosno knjigovođa ne potvrdi prijem na račun u Srbiji.
 
 ### Podaci o ličnosti
 
@@ -286,7 +285,6 @@ sprečava da se predlog vrati u drugom obliku. Pun zapis: `docs/sprovodjenje-riz
 - **Kapa na vrednost pojedinačnog posla deteta** — umesto nje odobrenje roditelja iznad praga.
 - **Dugme kojim roditelj obara prepis** — roditelj bi poništio ispravnu razmenu, a drugo dete završilo u minusu; ZOO čl. 56 daje pravo da se obori **ugovor** između strana, ne naš zapis.
 - **Roditeljsko čitanje razgovora između dece** — uvid ide kroz prijavu u nalog, i to samo dok dete nema svoju adresu.
-- **Izuzetak od minusa pri poništenju prepisa između dvoje dece** — *„mora da ide u minus jer se stvara problem."*
 - **Ublažavanje odgovornosti roditelja od 15 godina** i **gubitak roditeljskog čitanja razgovora sa punoletnim licem od 15** — oba odbijena, čl. 9 st. 3 i čl. 10 st. 5 ostaju netaknuti.
 - **Podizanje donje granice za samostalnu registraciju** (13 ili 15 umesto 7) — „ne za sada", jedina zabrana koja nije trajna; može se vratiti kad modul dobije više korisnika.
 - **Filter reči ili pre-moderacija** oglasa i poruka — moderacija je reaktivna (Uslovi čl. 25 st. 1).
@@ -300,12 +298,10 @@ sprečava da se predlog vrati u drugom obliku. Pun zapis: `docs/sprovodjenje-riz
 - **Kućica „nudim u okviru registrovane delatnosti"** na oglasu — na Pijaci su fizička lica bez registrovane delatnosti; „trgovac" se po zakonu određuje ponašanjem, ne registracijom.
 - **Traženje registracije od proizvođača u RAZMENI** — „mala kuća koja prodaje jaja" ne sme se time isključiti. Važi samo za razmenu; u **nabavci** je dobavljač uvek registrovano pravno lice.
 - **Pomeranje poništenja POEN-a sa preuzimanja na istek roka za prigovor** — produžilo bi rezervaciju i odložilo zatvaranje svake nabavke.
-- **Isprava uz novčano pokroviteljstvo** — iz izvoda se ionako vidi ko je uplatio; kolona je obrisana 08.09.2026.
 
 ### Otvoreno, ne zabranjeno
 
 - **Prijava razmene se osmišljava iznova** (odluka 10.09.2026) — zaseban zadatak.
-- **Režim donacije USLUGA** — čeka se odluka između dve varijante; do tada isti režim kao roba (a roba je ukinuta, pa je institut mrtav).
 - **Spoljni DPO kao usluga** — nije odbijen, samo za sada nema ko.
 - **Pravno mišljenje o čl. 65/67 ZZPL** za standardne ugovorne klauzule — odloženo, ne otvarati sada.
 
