@@ -60,15 +60,33 @@ export function useSkrolPamcenje<T extends HTMLElement>() {
 
     // Next posle commit-a nove stranice sam skroluje sadržaj na vrh, a sadržaj
     // može da se doraduje kroz još koji frejm — zato poziciju namećemo kroz
-    // nekoliko uzastopnih frejmova umesto jednom.
-    let preostalo = 8;
+    // više uzastopnih frejmova umesto jednom. Spiskovi koji se dižu tek posle
+    // montiranja (admin tabovi, kartice na početnoj) dostignu punu visinu tek
+    // kad stigne odgovor, pa se pokušava dok pozicija ne „legne" ili do ~2 s.
+    // Čim korisnik sam skroluje, prestaje se — ne otima mu se ekran.
+    const kraj = performance.now() + 2000;
+    let stabilnih = 0;
     let raf = 0;
+    let prekinuto = false;
+    const prekini = () => {
+      prekinuto = true;
+    };
     const vrati = () => {
+      if (prekinuto) return;
       el.scrollTop = sacuvano;
-      if (--preostalo > 0) raf = requestAnimationFrame(vrati);
+      stabilnih = Math.abs(el.scrollTop - sacuvano) < 2 ? stabilnih + 1 : 0;
+      if (stabilnih < 8 && performance.now() < kraj) raf = requestAnimationFrame(vrati);
     };
     raf = requestAnimationFrame(vrati);
-    return () => cancelAnimationFrame(raf);
+    el.addEventListener("wheel", prekini, { passive: true });
+    el.addEventListener("touchstart", prekini, { passive: true });
+    window.addEventListener("keydown", prekini);
+    return () => {
+      cancelAnimationFrame(raf);
+      el.removeEventListener("wheel", prekini);
+      el.removeEventListener("touchstart", prekini);
+      window.removeEventListener("keydown", prekini);
+    };
   }, [pathname, searchParams]);
 
   return ref;
