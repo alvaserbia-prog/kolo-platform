@@ -11,6 +11,96 @@ i `docs/istorija-bumpova.md` (hronologija verzija akata).
 
 ---
 
+## 🔴 Prepis POEN-a otvoren identifikovanom članu (R-01, 23.09.2026, set 4.6.6)
+
+**Odluka vlasnika.** Članu čiji je identitet utvrđen povodom javne donacije otvara se
+**prepis POEN-a** (Pravilnik čl. 28 st. 2 i st. 6, Uslovi čl. 14). Upis ZRNA ostaje
+otvoren kao i do sada. **Zatvoreni ostaju** aktiviranje i otpis ZRNA, glas i delegiranje
+u Gornjem Kolu, potvrđivanje drugih i nadzor, operativni doprinos, socijalni programi,
+kolektivna nabavka, pokroviteljstvo i kontakt oglašivača.
+
+### Razlog: zabrana nije sprečavala ishod nego samo redosled
+
+Obrazloženje vlasnika, i ono je tačno. Identifikovanom članu su **već bili otvoreni**
+POTRAŽNJA, pokretanje razgovora i pretraga članova. Znači: donira → nađe prodavca →
+dogovore se → sretnu se radi preuzimanja → **prodavac ga na tom sastanku sme i potvrditi**,
+jer ga je upoznao i na to ima pravo, a potvrda je u interesu obojice i ne krši nijedno
+pravilo → potvrđen je → prepis radi → plati. Isti ishod, isti par ljudi, isti susret.
+**Odbrana koja se zadovoljava zamenom mesta dvema radnjama je formalnost**, a formalnost
+koju svi rutinski zaobilaze je pred regulatorom slabija od nepostojanja pravila, jer
+praksa pokazuje da je pravilo ukrasno.
+
+🔴 **Drugi razlog, jači od prvog i mehanički.** Pre ove izmene je identifikovanom članu
+bio otvoren **upis ZRNA**, a zatvoreni prepis, otpis, nabavka i programi — dakle POEN mu
+je imao **tačno jednu upotrebu: ZRNO.** Sadašnji raspored nije sprečavao da novac kupi
+položaj, nego je novac **usmeravao isključivo ka položaju.** Potrošen POEN je POEN koji
+nije otišao u ZRNO, pa je zabrana trošenja bila podsticaj gomilanju — a gomilanje je put
+ka preuzimanju. Otvaranje prepisa stvara **alternativnu upotrebu** koja taj put drenira.
+
+### 🔴 Ocena: registar kaže 9, sesija procenjuje 6–7 — obe stoje
+
+Tabela ocena uz R-01 vodi varijantu **„sve mere + puna C (prepis otvoren)" na 9**, to jest
+na zatečenu ocenu: sve mere prestaju da vrede. **Ta ocena je zabeležena i ne briše se.**
+
+Procena ove sesije je **6–7**, sa ovim obrazloženjem: registar sam kaže da pod od 5 drži
+element *„lica ga prihvataju kao sredstvo razmene"*, koji je *„ispunjen bez obzira na sve
+mere"*. Definicija virtuelne valute traži i **prenosivost**, a ona je već ispunjena —
+**potvrđen član sme da kupi POEN donacijom po objavljenom koeficijentu i sme da ga
+prepiše.** Lanac *kupljeno → preneto → prihvaćeno kao sredstvo razmene* je dakle bio
+zatvoren u rukama jednog čoveka i pre ove izmene; opcija B ga nije prekidala nego
+**odlagala za jednu potvrdu**. Razlika između 9 i 6–7 je tačno onoliko koliko se ceni da
+je potvrda stvarna brana.
+
+🔴 **Sledeća sesija ne bira između dve ocene bez naloga** — beleže se obe, jer se
+razilaze u pretpostavci, ne u činjenici.
+
+### Šta ovo košta na drugim rizicima — imenovano
+
+1. **R-11 (prepis kao platna usluga / POEN kao elektronski novac), ocena 7, NEOBRAĐEN.**
+   Predmet tog rizika je doslovno prepis, pa je ovo trebalo da se odluči u njegovoj
+   obradi. Vlasnik je odlučio da se sprovede odmah. 🔴 **R-11 time ulazi u svoju obradu sa
+   izmenjenom polaznom tačkom** i to mora biti prvi podatak u njoj.
+2. **R-12 (pranje novca), ocena 7, neobrađen.** Otvoren prepis obara **R22-M2**
+   („uplatilac kao ključ za duplikat"), koju registar opisuje kao *najjeftiniju detekciju
+   koju imamo*: do sada je punjenje pet naloga tražilo pet uplatilaca, a sada je dovoljna
+   jedna donacija pa raspodela iznutra.
+3. **R-22 (jedna osoba — jedan korisnik se ne dokazuje ničim), ocena 7.** Deljenje na više
+   naloga i dalje nosi **konkavni koren** iz čl. 46: pet naloga po 100 ZRNA daje 50 glasova,
+   jedan sa 500 daje 22 — dakle koren **nagrađuje deljenje**. Glas i dalje traži potvrđenu
+   stvarnost, pa duplikat mora proći ceo drugi skup potvrda; to ostaje jedina brana, jer
+   koren ne brani ništa. Traži svoj potez.
+
+### Šta je izmenjeno
+
+**Akti (set 4.6.6, po 5 jezika):** `Pravilnik_4_6_6.md` — čl. 28 st. 3 (prepis dostupan i
+pre verifikacije korisniku iz st. 6), st. 6 (prepis ulazi u spisak otvorenih prava, uz
+obrazloženje da su to radnje učešća a ne upravljanja), st. 7 (prepis izlazi iz spiska
+zatvorenih radnji). `uslovi_koriscenja_4_6_6.md` — čl. 14, ista dva mesta, uz izričito
+nabrajanje onoga što ostaje vezano za potvrđenu stvarnost.
+
+🟢 **Whitepaper provera je NEGATIVNA i to je uspešna provera** (pravilo 17). Poglavlje o
+ažuriranju evidencije govori opšte („Korisnik može da inicira ažuriranje evidencije…") i
+nikad nije nosilo tvrdnju da identifikovan član prepis ne sme — nije ga trebalo dirati.
+
+**Kod:** `doprinos-pravila.ts` — `smeDaSalje(tipKorisnika, identitetUtvrdjen = false)`;
+🔴 izostavljen drugi argument znači „identitet nije utvrđen" i tiho vraća staro ponašanje,
+pa se ne sme zvati bez njega kad se podatak ima. `api/transfer/route.ts` i
+`api/profil/route.ts` (mera **P-2** — gašenje naloga je prepis i prati **isto** pravilo;
+da je ostalo strože, gašenje bi bilo jedini put na kome zabrana još važi, a to nije
+pravilo nego ostatak). `dozvole.ts` — napomena uz `smeProsireno` prepisana.
+
+🔴 **Nalaz usput: ekran POEN je nosio PREPISAN uslov** (`dbUser?.tipKorisnika !==
+"NEVERIFIKOVAN"`) umesto da čita pravilo. Da je ostao, ruta bi bila otvorena a dugme
+zatvoreno — čovek bi video kvar. Sada uvozi `smeDaSalje`; `select` je dopunjen sa
+`identitetUtvrdjenAt`. To je peti zapis iste pouke („ekran nije poslednja reč").
+
+**Brana:** `identifikovan-clan-izvor.test.ts` — provere prepisa prepisane u **oba smera**
+(otvoreno za utvrđen identitet i za potvrđenog, zatvoreno za nalog bez oboje, uključujući
+poziv bez drugog argumenta), nova provera da ekran **čita** pravilo, P-2 usklađen. Provere
+otpisa, aktiviranja i glasa **nisu menjane** — 36 provera prolazi. Pun set: 1191 test.
+
+---
+
 ## Ugovor o donaciji za svakog donatora (2026-09-08)
 
 Odluka vlasnika uz analizu rizika **R-04** (donacija sa rastućim koeficijentom —

@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_6_5.md`, `uslovi_koriscenja_4_6_4.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_6_6.md`, `uslovi_koriscenja_4_6_6.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,11 +27,11 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_6_5.md",
+  "Pravilnik_4_6_6.md",
   "dokaz_stvarnosti_4_6_5.md",
   "DPIA_4_6_3.md",
   "radnje_obrade_4_6_3.md",
-  "uslovi_koriscenja_4_6_4.md",
+  "uslovi_koriscenja_4_6_6.md",
   "politika_4_6_3.md",
   "statut_4_1_0.md",
   "whitepaper_4_6_2.md",
@@ -83,7 +83,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Эта возможность не является стимулом",
     ],
   },
-  "Pravilnik_4_6_5.md": {
+  "Pravilnik_4_6_6.md": {
     sr: [
       // ═══ 4.6.1 (R-04 — ZRNO kao investicioni instrument, Komisija za HOV) ═══
       // 🔴 Čl. 23 st. 3 je do 4.6.1 tvrdio da „upis i otpis ZRNA pomeraju
@@ -638,7 +638,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
   // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
   // počiva upravo na tome da takav promet nije dopušten.
-  "uslovi_koriscenja_4_6_4.md": {
+  "uslovi_koriscenja_4_6_6.md": {
     sr: [
       // ── 4.6.4 — R-07 (nelojalna i obmanjujuća poslovna praksa) ──────────────
       // 🔴 Čl. 22b prvi put odgovara na PRETHODNO pitanje celog rizika: da li je
@@ -1498,7 +1498,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_6_5.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_6_6.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });

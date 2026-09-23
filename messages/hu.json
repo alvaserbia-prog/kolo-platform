@@ -1024,7 +1024,7 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.6.4"
+      "ver": "4.6.6"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
@@ -1052,7 +1052,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.6.5",
+      "ver": "4.6.6",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -1072,7 +1072,7 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek · KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.4-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.6-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat · KOLO",
     "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.6.3-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya · KOLO",
@@ -1086,7 +1086,7 @@
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.2-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai · KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.5-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.6-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",

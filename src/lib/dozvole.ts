@@ -31,12 +31,21 @@ export type KorisnikDozvole = {
  * 🔴 Ovo NIJE potvrda stvarnosti i ne zamenjuje je (čl. 32 Pravilnika, čl. 5
  * Pravilnika o dokazu stvarnosti). Otvara: oglas POTRAŽNJA i više od tri oglasa,
  * pokretanje razgovora, Pričaonicu, pretragu članova i sužen pregled tuđeg
- * profila, i UPIS ZRNA.
+ * profila, UPIS ZRNA i — od seta 4.6.6 — PREPIS POEN-a.
  *
- * 🔴 Ne otvara, i to je razlika između R-01 = 5 i R-01 = 9: prepis POEN-a,
- * aktiviranje i otpis ZRNA, glas i delegiranje u Gornjem Kolu, nadzor
- * verifikacija, potvrđivanje drugih, operativni doprinos, socijalne programe,
- * kolektivnu nabavku, pokroviteljstvo i kontakt oglašivača.
+ * 🔴 Ne otvara: aktiviranje i otpis ZRNA, glas i delegiranje u Gornjem Kolu,
+ * nadzor verifikacija, potvrđivanje drugih, operativni doprinos, socijalne
+ * programe, kolektivnu nabavku, pokroviteljstvo i kontakt oglašivača. Granica
+ * je jedna: radnje učešća u razmeni i u obračunu jesu otvorene, radnje
+ * UPRAVLJANJA i JEMČENJA za druge nisu.
+ *
+ * 🔴 Prepis se ne odlučuje ovde nego u `smeDaSalje` (`doprinos-pravila.ts`) —
+ * jedno mesto za rutu, ekran i gašenje naloga. Ne uvoditi drugu proveru.
+ *
+ * 🟡 Zatečena zabrana prepisa (do 4.6.5) vodila se kao razlika između R-01 = 5
+ * i R-01 = 9. Odluka vlasnika 23.09.2026: zabrana nije sprečavala ishod nego
+ * samo redosled, jer oglašivač sme da potvrdi kupca na istom sastanku. Obe
+ * ocene i obrazloženje stoje u `docs/sprovodjenje-rizika-2026-09.md`.
  */
 export type KorisnikProsireni = {
   verified?: boolean | null;

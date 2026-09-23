@@ -250,12 +250,8 @@ sprečava da se predlog vrati u drugom obliku. Pun zapis: `docs/sprovodjenje-riz
 | Zabranjeno | Zašto |
 |---|---|
 | **Dinarska kapa ili prag na POEN**, u bilo kom kanalu | svaka takva mera je preračun POEN → dinar, dakle povratak odnosa 1:1 koji je R-01 uklonio iz Uslova čl. 19. *„POEN nije vezan za dinar."* Kape u dinarima smeju **samo** na robu iz nabavke (meri se sa računa dobavljača) |
-| **Prećutati odnos POEN ≈ RSD** (M-7b) | prećutan odnos je prvi protivargument; akt zato kaže da ga Fondacija ne objavljuje i ne primenjuje, a ne da ne postoji |
-| **Uklanjanje ili „zaokruživanje" iznosa u primerima na naslovnoj** | isto — odnos 1:1 u primerima je namerno, čitalac ga izvodi sam, Fondacija ga ne tvrdi |
-| **Vraćanje bilo kog izraza za paritet u copy** | „POEN po jedinici jednak je maloprodajnoj referenci" je osam dana stajao na ekranu posle ukidanja instituta |
-| **Otvaranje prepisa POEN-a identifikovanom članu** | razlika između R-01 = 5 i R-01 = 9; prepis je jedina radnja kojom POEN prestaje da bude zapis |
-| **Otvaranje otpisa ZRNA identifikovanom članu** (D-1) i **prenos POEN-a pri gašenju naloga bez potvrde** (P-2) | to je prepis na drugom ulazu |
-| **Otvaranje glasa identifikovanom članu** (C′) | podiže R-04, R-10 i R-17 za po jedan bod |
+| **Dirati odnos POEN ≈ RSD u tekstu** — prećutati ga (M-7b), ukloniti ili „zaokružiti" iznose u primerima na naslovnoj, ili vratiti bilo koji izraz za paritet u copy | prećutan odnos je prvi protivargument, pa akt kaže da ga Fondacija ne objavljuje i ne primenjuje, a ne da ne postoji; iznosi u primerima su namerni jer odnos izvodi čitalac, ne Fondacija. „POEN po jedinici jednak je maloprodajnoj referenci" je osam dana stajao na ekranu posle ukidanja instituta — otud i brana `r07-obmanjujuca-praksa-izvor.test.ts` |
+| **Širiti dozvole identifikovanog člana** — otpis i aktiviranje ZRNA (D-1), glas i delegiranje (C′), potvrđivanje drugih, nadzor, operativni doprinos, socijalni programi, nabavka, pokroviteljstvo, kontakt oglašivača | granica je jedna i posle 4.6.6: radnje **učešća** u razmeni i obračunu su otvorene, radnje **upravljanja i jemčenja za druge** nisu. Otpis je jedino mesto gde položaj donosi prinos (upis po nižem, otpis po višem koeficijentu); glas podiže R-04, R-10 i R-17 za po jedan bod. 🔴 Odluka je na dva mesta i samo na njima: `smeProsireno` (`dozvole.ts`) i `smeDaSalje` (`doprinos-pravila.ts`) — ne uvoditi treću proveru |
 | **Otpis ZRNA po koeficijentu iz upisa; period vezivanja pre otpisa; tvrda kapa na glasačku moć** | odbijeno 07.09.2026; kvadratni koren (čl. 46) i kapa od 1% po periodu (čl. 19) su jedine kočnice i ostaju |
 | **Vraćanje automatskog upisa POEN-a po kartičnom callback-u** | M-4a je odluka, ne privremeno rešenje |
 | **Praćenje obrazaca prepisa POEN-a** | *„nemoguće je sprovesti kontrolu kada je transfer poena slobodan."* Posledica: zabrana prodaje POEN-a (Uslovi čl. 24) ostaje nesprovedena kontrola, i to je prihvaćeno |
@@ -284,10 +280,7 @@ sprečava da se predlog vrati u drugom obliku. Pun zapis: `docs/sprovodjenje-riz
 
 - **Kapa na vrednost pojedinačnog posla deteta** — umesto nje odobrenje roditelja iznad praga.
 - **Dugme kojim roditelj obara prepis** — roditelj bi poništio ispravnu razmenu, a drugo dete završilo u minusu; ZOO čl. 56 daje pravo da se obori **ugovor** između strana, ne naš zapis.
-- **Roditeljsko čitanje razgovora između dece** — uvid ide kroz prijavu u nalog, i to samo dok dete nema svoju adresu.
 - **Ublažavanje odgovornosti roditelja od 15 godina** i **gubitak roditeljskog čitanja razgovora sa punoletnim licem od 15** — oba odbijena, čl. 9 st. 3 i čl. 10 st. 5 ostaju netaknuti.
-- **Podizanje donje granice za samostalnu registraciju** (13 ili 15 umesto 7) — „ne za sada", jedina zabrana koja nije trajna; može se vratiti kad modul dobije više korisnika.
-- **Filter reči ili pre-moderacija** oglasa i poruka — moderacija je reaktivna (Uslovi čl. 25 st. 1).
 
 ### Nabavka, pokroviteljstvo, upravljanje
 
@@ -302,6 +295,7 @@ sprečava da se predlog vrati u drugom obliku. Pun zapis: `docs/sprovodjenje-riz
 ### Otvoreno, ne zabranjeno
 
 - **Prijava razmene se osmišljava iznova** (odluka 10.09.2026) — zaseban zadatak.
+- **Podizanje donje granice za samostalnu registraciju** (13 ili 15 umesto 7) — odbijeno „ne za sada" (R-11, 09.09.2026), dakle **nije trajna zabrana**; može se vratiti kad modul dobije više korisnika. Premešteno ovde 23.09.2026 — po sopstvenom tekstu nije pripadalo spisku zabrana.
 - **Spoljni DPO kao usluga** — nije odbijen, samo za sada nema ko.
 - **Pravno mišljenje o čl. 65/67 ZZPL** za standardne ugovorne klauzule — odloženo, ne otvarati sada.
 
@@ -584,7 +578,7 @@ ne stoji poreska stopa i ne stoji nijedan prag koji se menja zakonom. Rečenica
 | Tema | Šta vezuje dalji rad |
 |---|---|
 | **POEN nije virtuelna valuta** (R-01, R-19; Pravilnik čl. 13) | odnos 1 POEN ≈ 1 RSD služi **isključivo korisniku** u sopstvenom oglasu; Fondacija ga ne objavljuje, ne preporučuje i ne primenjuje ni u jednom svom postupku. Kartična donacija: kapa **100.000 RSD** po uplati, **3 dnevno** po nalogu, POEN tek po ljudskoj potvrdi uz uplatioca iz izvoda |
-| **Identifikovan član** (`User.identitetUtvrdjenAt`) | postavlja se **isključivo po JAVNOJ donaciji** (anonimna ne evidentira POEN). Nije četvrti status. Otvoreno mu je: POTRAŽNJA, pokretanje razgovora, pretraga, **upis ZRNA bez glasa**. Zatvoreno: prepis POEN-a, **otpis ZRNA**, glas, potvrđivanje drugih. Odluka je na jednom mestu — `smeProsireno` u `dozvole.ts` |
+| **Identifikovan član** (`User.identitetUtvrdjenAt`) | postavlja se **isključivo po JAVNOJ donaciji** (anonimna ne evidentira POEN). Nije četvrti status. Otvoreno mu je: POTRAŽNJA, pokretanje razgovora, pretraga, **upis ZRNA bez glasa** i — od seta **4.6.6** — **prepis POEN-a**. Zatvoreno ostaje: **aktiviranje i otpis ZRNA**, glas i delegiranje, potvrđivanje drugih, nadzor, operativni doprinos, socijalni programi, nabavka, pokroviteljstvo, kontakt oglašivača. 🔴 Granica je **učešće naspram upravljanja**, ne više „položaj naspram kupovne moći". Dozvole su na dva mesta: `smeProsireno` (`dozvole.ts`) i `smeDaSalje` (`doprinos-pravila.ts`) — prepis se odlučuje u drugom, i ekran ga **čita**, ne prepisuje (na tome je zatečeni ekran bio stroži od rute) |
 | **ZRNO nije ulaganje** (R-04; čl. 25) | upis i otpis ZRNA su po konstrukciji **neutralni** za koeficijent — pomeraju ga samo emisije i poništenja, i on **može da padne**. Nikad ne pisati da upis diže koeficijent ni da se otpisom „dobija više" — to je predviđanje prinosa |
 | **POEN nije prihod** (R-02) | dinar nikad ne dodiruje POEN — dodiruje samo račun. Godišnja granica **100.000 RSD** vrednosti preuzetih dobara po korisniku, merena **sa računa dobavljača** (`placenoRSD ÷ brojDelova`), živi u `nabavka-pravila.ts`, ne u aktu. Uz prikaz te vrednosti korisniku **ne ide nijedna reč o porezu** |
 | **Nabavka nije privredna delatnost** (R-10; nabavke čl. 3a) | Fondacija za ustupljeno dobro **ne sme primiti naknadu** ni od koga (zabrana, ne opis); nepreuzeti delovi se **ne prodaju**; statutarni osnov je čl. 7 t. c). Ulazak u sistem PDV-a doneo bi samo sopstveni promet — a to je tačno ono što čl. 3a i čl. 19 brane |

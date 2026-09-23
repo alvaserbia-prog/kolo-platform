@@ -40,14 +40,16 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // o „ceni" u opisu javnog pregleda oglasa nego o iznosu u POEN-ima. Ista rečenica
   // stoji i u Uslovima čl. 18; da je ispravljena samo tamo, dva akta bi o istoj
   // činjenici govorila različito.
+  // 4.6.6 — R-01: čl. 28 — prepis POEN-a otvoren članu sa utvrđenim identitetom.
+  // Aktiviranje i otpis ZRNA, glas i potvrđivanje drugih ostaju zatvoreni.
   // 4.6.5 — POEN po potvrdi čeka prvi potvrđen doprinos potvrđenog korisnika
   // (čl. 15 t. 2, upućivanje na čl. 7 dokaza stvarnosti), a odobrenje prvog oglasa
   // iz čl. 40a važi za SVAKOG korisnika, ne samo za nalog bez potvrde.
   // 🟡 Šifru 4.6.4 je istog dana uzeo R-07 na `main`-u, pa dva različita događaja
   // objave ne dele broj — isti postupak kao 4.6.0 naspram 4.5.9.
   "kolo-sistem": {
-    fajl: "Pravilnik_4_6_5.md",
-    verzija: "4.6.5",
+    fajl: "Pravilnik_4_6_6.md",
+    verzija: "4.6.6",
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.

@@ -2,13 +2,16 @@ import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { smeProsireno, smeGlasati } from "@/lib/dozvole";
+import { smeDaSalje } from "@/lib/doprinos-pravila";
 
 /**
  * R-01, mera M-9 i odluka vlasnika „opcija B" — obim prava člana čiji je
  * identitet utvrđen na donatorskom putu.
  *
- * Sažeto: novcem se dobija položaj u zajedničkom dobru, ne kupovna moć i ne
- * glas. Ovi testovi gledaju IZVOR, jer je pouka u CLAUDE.md zapisana tri puta
+ * Sažeto: novcem se dobija učešće u razmeni i položaj u obračunu, ne glas i ne
+ * ovlašćenje prema drugim korisnicima. 🔴 Do seta 4.6.6 je sažetak glasio „ne
+ * kupovna moć i ne glas" — prepis je otvoren odlukom vlasnika 23.09.2026, uz
+ * nalaz da ga je zabrana odlagala za jednu potvrdu, a ne sprečavala. Ovi testovi gledaju IZVOR, jer je pouka u CLAUDE.md zapisana tri puta
  * (oglas deteta, zatvoren profil, lanac potvrda): ispravno pravilo ne vredi
  * ništa dok svaka staza zaista ne prođe kroz njega.
  */
@@ -87,15 +90,49 @@ describe("zatvoreno i posle donacije — razlika između R-01 = 5 i R-01 = 9", (
     });
   }
 
-  it("prepis POEN-a ostaje vezan za TIP naloga (čl. 28 st. 2)", () => {
+  // ── Prepis POEN-a: OTVOREN od seta 4.6.6 (R-01, odluka vlasnika 23.09.2026) ──
+  //
+  // Zatečena zabrana nije sprečavala ishod nego samo redosled: član sa utvrđenim
+  // identitetom sme da pokrene razgovor i da se sretne sa oglašivačem, a oglašivač
+  // ga na tom sastanku sme i potvrditi — pa se isti prepis izvršavao posle potvrde.
+  // 🔴 Granica se time nije izgubila, samo se premestila: otvorene su radnje
+  // UČEŠĆA (razmena, obračun), zatvorene ostaju radnje UPRAVLJANJA i JEMČENJA —
+  // aktiviranje i otpis ZRNA, glas, potvrđivanje drugih, nadzor. Te provere su
+  // niže u ovom fajlu i NE menjaju se.
+  it("prepis je otvoren članu sa utvrđenim identitetom (čl. 28 st. 6)", () => {
+    expect(smeDaSalje("NEVERIFIKOVAN", true)).toBe(true);
+    expect(smeDaSalje("REGULARNI", false)).toBe(true);
+  });
+
+  it("prepis ostaje zatvoren nalogu bez potvrde i bez utvrđenog identiteta", () => {
+    expect(smeDaSalje("NEVERIFIKOVAN", false)).toBe(false);
+    // Izostavljen drugi argument znači „identitet nije utvrđen" — ne sme tiho da
+    // otvori prepis nalogu o kome pozivalac nije proverio ništa.
+    expect(smeDaSalje("NEVERIFIKOVAN")).toBe(false);
+  });
+
+  it("ruta za prepis odlučuje po utvrđenom identitetu, ne po tipu naloga samom", () => {
     const transfer = izvor("src/app/api/transfer/route.ts");
-    expect(transfer).toContain("smeDaSalje");
+    expect(transfer).toContain("smeDaSalje(posiljac.tipKorisnika, !!posiljac.identitetUtvrdjenAt)");
     expect(transfer).not.toContain("smeProsireno");
   });
 
-  it("gašenje naloga nije drugi ulaz za prepis (mera P-2)", () => {
+  // 🔴 Ekran je do 4.6.5 nosio PREPISAN uslov (`tipKorisnika !== "NEVERIFIKOVAN"`),
+  // pa je u trenutku otvaranja rute ostao stroži od nje — čovek bi video zatvoreno
+  // dugme za radnju koju mu ruta dopušta. Pravilo se čita, ne prepisuje.
+  it("ekran POEN čita pravilo iz `doprinos-pravila`, ne prepisuje ga", () => {
+    const ekran = izvor("src/app/(app)/novcanik/page.tsx");
+    expect(ekran).toContain("smeDaSalje as smePrepisPravilo");
+    expect(ekran).toContain("identitetUtvrdjenAt: true");
+    expect(ekran).not.toContain('dbUser?.tipKorisnika !== "NEVERIFIKOVAN"');
+  });
+
+  // Mera P-2: gašenje naloga je PREPIS i prati isto pravilo — nikad svoje. Da je
+  // ovde stroža od `/api/transfer`, gašenje bi bilo jedini put na kome zabrana još
+  // važi, a to nije pravilo nego ostatak.
+  it("gašenje naloga prati ISTO pravilo kao prepis (mera P-2)", () => {
     const profil = izvor("src/app/api/profil/route.ts");
-    expect(profil).toContain("smeDaSalje(user.tipKorisnika)");
+    expect(profil).toContain("smeDaSalje(user.tipKorisnika, !!user.identitetUtvrdjenAt)");
     expect(profil).toContain("primalacPseudonim && smeDaPrenese");
   });
 
