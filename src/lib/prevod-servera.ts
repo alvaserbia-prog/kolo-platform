@@ -72,3 +72,16 @@ export function prevedi(
 
   return cirilica ? lat2cyr(popunjen) : popunjen;
 }
+
+/**
+ * Opis transakcije za prikaz. Stavka sa ključem se prevodi (pa i stari redovi
+ * dobijaju važeću formulaciju), stavka bez ključa — stari redovi i nekonvertovana
+ * pozivna mesta — prikazuje sačuvan srpski `description`.
+ */
+export function opisTransakcije(
+  locale: string | null | undefined,
+  t: { opisKljuc: string | null; opisParametri: unknown; description: string | null },
+): string | null {
+  if (!t.opisKljuc) return t.description;
+  return prevedi(locale, t.opisKljuc, (t.opisParametri ?? undefined) as Parametri | undefined, t.description ?? "");
+}

@@ -138,7 +138,7 @@ export async function probajUpisatiPotvrdu(
         verifikatorWalletId,
         POEN_VERIFIKATOR,
         TransactionType.EMISIJA_VERIFIKACIJA,
-        `Verifikacija ${veza.verifikovani.pseudonim}`,
+        `Potvrda člana ${veza.verifikovani.pseudonim}`,
         { kljuc: "transakcije.verifikacija", parametri: { pseudonim: veza.verifikovani.pseudonim } },
       );
       verifikatorTxId = transaction.id;
@@ -158,7 +158,7 @@ export async function probajUpisatiPotvrdu(
         verifikovaniWalletId,
         POEN_VERIFIKOVANI,
         TransactionType.EMISIJA_VERIFIKACIJA,
-        `Primljena verifikacija od ${veza.verifikator.pseudonim}`,
+        `Primljena potvrda od ${veza.verifikator.pseudonim}`,
         { kljuc: "transakcije.primljena_verifikacija", parametri: { pseudonim: veza.verifikator.pseudonim } },
       );
       verifikovaniTxId = transaction.id;
@@ -240,7 +240,7 @@ export async function probajUpisatiNadzor(
         wallet.id,
         POEN_NADZORNIK,
         TransactionType.EMISIJA_NADZOR,
-        `Nadzor verifikacije ${veza.verifikator.pseudonim} → ${veza.verifikovani.pseudonim}`,
+        `Nadzor potvrde ${veza.verifikator.pseudonim} → ${veza.verifikovani.pseudonim}`,
         {
           kljuc: "transakcije.nadzor",
           parametri: {

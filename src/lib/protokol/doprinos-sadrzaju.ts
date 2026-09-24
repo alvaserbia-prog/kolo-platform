@@ -351,8 +351,10 @@ export async function probajEvidentirati(
         wallet.id,
         zabelezen.iznos,
         TransactionType.EMISIJA_SADRZAJ,
-        "Doprinos sadržaju platforme",
-        { kljuc: "transakcije.doprinos_sadrzaju" },
+        // Opis imenuje konkretnu aktivnost, ne kanal: danas je jedina aktivnost
+        // ovog kanala prvi oglas (čl. 40a). Nova aktivnost dobija svoj ključ.
+        "Prvi oglas",
+        { kljuc: "transakcije.prvi_oglas" },
       );
       transakcijaId = transaction.id;
     } catch (e) {

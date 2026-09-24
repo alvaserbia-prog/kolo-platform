@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
 import { getLocale } from "next-intl/server";
-import { prevedi, type Parametri } from "@/lib/prevod-servera";
+import { opisTransakcije } from "@/lib/prevod-servera";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -65,9 +65,7 @@ export async function GET(req: NextRequest) {
       amount: t.amount,
       type: t.type,
       typeLabel: TIP_LABELA[t.type] ?? t.type,
-      description: t.opisKljuc
-        ? prevedi(locale, t.opisKljuc, (t.opisParametri ?? undefined) as Parametri | undefined, t.description ?? "")
-        : t.description,
+      description: opisTransakcije(locale, t),
       primio,
       drugiPseudonim,
       createdAt: t.createdAt.toISOString(),
