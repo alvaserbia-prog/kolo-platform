@@ -2380,7 +2380,7 @@
     "nadzor_poen_upisan": "Potvrda koju si nadzirao otključana je prvim doprinosom potvrđenoga člana, pa ti je upisano {iznos} POENA za obavljen nadzor."
   },
   "transakcije": {
-    "verifikacija": "Potvrda {pseudonim}",
+    "verifikacija": "Potvrda člana {pseudonim}",
     "primljena_verifikacija": "Primljena potvrda od {pseudonim}",
     "nadzor": "Nadzor potvrde {verifikator} → {verifikovani}",
     "donacija": "Evidentiran doprinos po donaciji: {iznos} POEN",
@@ -2391,7 +2391,7 @@
     "krug_osnivanje": "Osnivanje Kruga „{krug}”",
     "program": "Program {program}",
     "socijalni_program": "Socijalni program",
-    "doprinos_sadrzaju": "Doprinos sadržaju platforme",
+    "doprinos_sadrzaju": "Prvi oglas",
     "prvi_oglas": "Prvi oglas",
     "doprinos_razmeni": "Doprinos razmjeni, korak {korak}",
     "prijateljstvo": "Prijateljstvo s {pseudonim}",

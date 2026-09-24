@@ -2380,7 +2380,7 @@
     "nadzor_poen_upisan": "The confirmation you supervised has been unlocked by the confirmed member's first contribution, so {iznos} POEN has been recorded for you for the supervision performed."
   },
   "transakcije": {
-    "verifikacija": "Confirmation of {pseudonim}",
+    "verifikacija": "Confirmation of member {pseudonim}",
     "primljena_verifikacija": "Confirmation received from {pseudonim}",
     "nadzor": "Supervision of confirmation {verifikator} → {verifikovani}",
     "donacija": "Contribution recorded for a donation: {iznos} POEN",
@@ -2391,7 +2391,7 @@
     "krug_osnivanje": "Founding of Circle “{krug}”",
     "program": "Programme {program}",
     "socijalni_program": "Social programme",
-    "doprinos_sadrzaju": "Contribution to platform content",
+    "doprinos_sadrzaju": "First listing",
     "prvi_oglas": "First listing",
     "doprinos_razmeni": "Exchange contribution — step {korak}",
     "prijateljstvo": "Friendship with {pseudonim}",

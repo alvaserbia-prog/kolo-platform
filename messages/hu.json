@@ -2373,7 +2373,7 @@
     "nadzor_poen_upisan": "Az általad felügyelt megerősítést a megerősített tag első hozzájárulása feloldotta, ezért az elvégzett felügyeletért {iznos} POEN került bejegyzésre neked."
   },
   "transakcije": {
-    "verifikacija": "Megerősítés: {pseudonim}",
+    "verifikacija": "Tag megerősítése: {pseudonim}",
     "primljena_verifikacija": "Megerősítés érkezett tőle: {pseudonim}",
     "nadzor": "Megerősítés felügyelete: {verifikator} → {verifikovani}",
     "donacija": "Adomány alapján bejegyzett hozzájárulás: {iznos} POEN",
@@ -2384,7 +2384,7 @@
     "krug_osnivanje": "A „{krug}” Kör alapítása",
     "program": "Program: {program}",
     "socijalni_program": "Szociális program",
-    "doprinos_sadrzaju": "Hozzájárulás a platform tartalmához",
+    "doprinos_sadrzaju": "Első hirdetés",
     "prvi_oglas": "Első hirdetés",
     "doprinos_razmeni": "Hozzájárulás a cseréhez — {korak}. lépés",
     "prijateljstvo": "Barátság vele: {pseudonim}",
