@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { getLocale } from "next-intl/server";
+import { opisTransakcije } from "@/lib/prevod-servera";
 import { greska } from "@/lib/greska-api";
 import { sesija } from "@/lib/sesija";
 import { prisma } from "@/lib/prisma";
@@ -123,6 +125,7 @@ export async function GET(req: Request) {
     return { id: korisnik.id, pseudonim: korisnik.pseudonim };
   };
 
+  const locale = await getLocale();
   return NextResponse.json({
     stavke: zapisi.map((t) => {
       const od = strana(t.fromWallet?.user);
@@ -131,7 +134,7 @@ export async function GET(req: Request) {
         id: t.id,
         amount: t.amount,
         type: t.type,
-        description: t.description,
+        description: opisTransakcije(locale, t),
         createdAt: t.createdAt.toISOString(),
         fromPseudonim: od.pseudonim,
         fromId: od.id,

@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { jeSuperadmin } from "@/lib/dozvole";
+import { opisTransakcije } from "@/lib/prevod-servera";
 
 export async function GET(req: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -41,7 +42,8 @@ export async function GET(req: NextRequest) {
       to: walletLabel(t.toWallet),
       amount: t.amount,
       type: t.type,
-      description: t.description,
+      // Admin panel je samo na srpskom (namespace `admin` se ne prevodi).
+      description: opisTransakcije("sr", t),
       createdAt: t.createdAt.toISOString(),
     })),
   });

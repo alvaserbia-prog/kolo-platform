@@ -1,5 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { getLocale } from "next-intl/server";
+import { opisTransakcije } from "@/lib/prevod-servera";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { nivoZaKumulativ } from "@/lib/protokol/donacija";
@@ -238,11 +240,12 @@ export default async function SistemPage({
   const danasEmitovano = danasEmisija?.totalEmitted ?? 0;
   const danasLimit = danasEmisija?.limit ?? Math.floor(opticaj * 0.1);
 
+  const locale = await getLocale();
   const zaPrikaz = (t: (typeof protokolZapisi)[number]) => ({
     id: t.id,
     amount: t.amount,
     type: t.type,
-    description: t.description,
+    description: opisTransakcije(locale, t),
     createdAt: t.createdAt.toISOString(),
     fromPseudonim: t.fromWallet?.user?.pseudonim ?? "Protokol",
     fromId: t.fromWallet?.user?.id ?? null,
