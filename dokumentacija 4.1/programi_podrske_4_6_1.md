@@ -30,7 +30,7 @@ Programi podrške obuhvataju sledeće kvalifikovane grupe:
 
 2) stariji korisnici — program Podrška Starijima;
 
-3) korisnici u režimu posebne brige (osobe sa invaliditetom) — program Posebna Briga;
+3) korisnici u otežanim okolnostima — program Posebna Podrška;
 
 4) učenici i studenti — program Školovanje.
 
@@ -48,9 +48,15 @@ Pravo na program ostvaruje verifikovani korisnik sa indeksom stvarnosti od najma
 
 Pre odlučivanja Fondacije, ispunjenost uslova potvrđuju svi verifikatori podnosioca. Svaki verifikator, pod punom odgovornošću i na osnovu neposrednog ličnog poznavanja podnosioca, potvrđuje da podnosilac ispunjava uslov programa, ili odbija potvrdu uz obavezno obrazloženje. Verifikatori nemaju uvid u podatke koje je podnosilac uneo — potvrđuju na osnovu sopstvenog saznanja. Fondacija može odobriti prijavu tek kada svi verifikatori potvrde; izostanak ili odbijanje makar jednog verifikatora sprečava odobravanje. Ovaj mehanizam štiti integritet programa od neistinitih prijava (anti-malverzacija).
 
-Prijava i traženje potvrde od verifikatora vrše se isključivo uz izričit pristanak podnosioca. Pristanak se daje pre podnošenja prijave i pre nego što se od bilo koga zatraži potvrda, a u njemu se izričito navodi: koliko će lica biti zamoljeno da potvrdi; da ta lica saznaju o kom je programu reč i da im taj podatak može otkriti pripadnost podnosioca posebnoj kategoriji podataka; da ona nemaju uvid u unete podatke; i da se pojedinačno evidentiranje POEN-a po programu ne objavljuje, nego se objavljuje dnevni zbir po programu, bez imena i pseudonima korisnika.
+Prijava i traženje potvrde od verifikatora vrše se isključivo uz izričit pristanak podnosioca. Pristanak se daje pre podnošenja prijave i pre nego što se od bilo koga zatraži potvrda, a u njemu se izričito navodi: koliko će lica biti zamoljeno da potvrdi; da ta lica saznaju o kom je programu reč i da im taj podatak može otkriti pripadnost podnosioca posebnoj kategoriji podataka; da ona nemaju uvid u unete podatke; da se evidentiranje POEN-a po programu prikazuje verifikovanim korisnicima, uz pseudonim podnosioca, naziv programa i iznos; da se kod programa Podrška Starijima iz iznosa može izvesti godina rođenja podnosioca, a kod programa Podrška Majkama broj dece i njihov uzrast; i da se osnov po kome je pravo ostvareno ne prikazuje nijednom korisniku.
 
-Zapis o evidentiranom POEN-u po socijalnom programu ne imenuje program i ne prikazuje se pojedinačno u pregledu evidencije. Umesto pojedinačnih zapisa objavljuje se dnevni zbir po programu — broj korisnika i ukupan broj evidentiranih POEN-a; dan u kome je u jednom programu doprinos evidentiran samo jednom korisniku ne objavljuje se. Razlog nije samo naziv programa: iznos dnevnog evidentiranja izvodi se iz podataka na osnovu kojih je pravo utvrđeno i sam bi ih odao — kod podrške starijima godinu rođenja, a kod podrške majkama broj dece i njihov uzrast — pa uklanjanje naziva bez izostavljanja pojedinačnog iznosa ne bi bilo dovoljno. Proverljivost evidencije time ostaje potpuna, jer zbir objavljenih dnevnih iznosa sa ostalim kanalima daje promenu ukupnog broja evidentiranih POEN-a. Razlaganje po programu dostupno je samom korisniku, uz program, i Fondaciji.
+Evidentiranje POEN-a po socijalnom programu prikazuje se verifikovanim korisnicima — pseudonim korisnika, naziv programa i iznos. Neprijavljenim licima i korisnicima čija stvarnost nije potvrđena prikazuje se isključivo dnevni zbir po programu: broj korisnika i ukupan broj evidentiranih POEN-a; dan u kome je u jednom programu doprinos evidentiran samo jednom korisniku ne objavljuje se, jer bi zbir tada bio jednak pojedinačnom iznosu.
+
+Osnov po kome je pravo ostvareno ne prikazuje se nijednom korisniku. To je nosivo pravilo prikaza, a ne tehnička sitnica: program Posebna Podrška obuhvata i smanjenu sposobnost i gubitak doma, pa objavljen naziv programa ne kazuje koji je osnov u pitanju — dok bi prikaz osnova bio prikaz podatka o zdravlju, odnosno o prinudnoj raseljenosti, koja je blizu podatka o nacionalnoj pripadnosti.
+
+Kod programa Podrška Starijima i Podrška Majkama iznos dnevnog evidentiranja izvodi se iz podataka na osnovu kojih je pravo utvrđeno i sam ih odaje — kod podrške starijima godinu rođenja, a kod podrške majkama broj dece i njihov uzrast. Iznos se ipak prikazuje, jer je proverljivost evidencije prema zajednici odabrana kao pretežniji interes; podnosilac na to pristaje pri prijavi (stav 4), a pristanak izričito navodi šta se iz iznosa može izvesti. Kod programa Posebna Podrška i Školovanje iznos je fiksan i ne odaje ništa.
+
+Proverljivost evidencije time ostaje potpuna, jer zbir objavljenih dnevnih iznosa sa ostalim kanalima daje promenu ukupnog broja evidentiranih POEN-a. Razlaganje po osnovu dostupno je samom korisniku, uz program, i licu koje u Fondaciji obrađuje prijavu.
 
 Verifikatori se o zahtevu za potvrdu obaveštavaju isključivo unutar Platforme. U poruci koju Platforma šalje elektronskom poštom ili na uređaj korisnika ne navode se ni naziv programa ni pseudonim podnosioca.
 
@@ -140,17 +146,31 @@ Dnevni iznos jednak je: 1.000 + 100 × (broj godina − 50). Tako korisnik od 65
 
 Iznos nema gornju granicu i raste sa brojem godina korisnika.
 
-## V — Posebna Briga
+## V — Posebna Podrška
 
 ### Član 12
 
-*Pravo, iznos i revizija*
+*Pravo, iznos i trajanje*
 
-Pravo imaju osobe sa invaliditetom. Jedini dokaz statusa je rešenje o invalidnosti nadležnog organa. Ne traži se medicinska dokumentacija, dijagnoza niti dokaz bolesti — takva obrada predstavljala bi nesrazmerno zadiranje u posebne kategorije podataka.
+Pravo imaju korisnici u otežanim okolnostima, po jednom od dva osnova iz ovog člana. Osnov po kome je pravo ostvareno ne prikazuje se (član 4).
 
-Dnevni iznos je fiksan i iznosi 2.000 POEN.
+**Osnov smanjene sposobnosti.** Pravo ima korisnik u čijem je slučaju rešenjem nadležnog organa utvrđen stepen invaliditeta, uključujući rešenje komisije za procenu radne sposobnosti; kao i korisnik koji zbog akutne ili hronične bolesti ne može ili je bitno ograničen da učestvuje u razmeni i drugim aktivnostima u sistemu.
 
-Status podleže godišnjoj reviziji. Ako se status pri reviziji ne potvrdi, automatsko evidentiranje prestaje.
+Uzima se postojanje rešenja, ne njegov sadržaj. Stepen invaliditeta, ocena radne sposobnosti, dijagnoza i medicinska dokumentacija ne dostavljaju se, ne prikupljaju se i ne čuvaju — takva obrada predstavljala bi nesrazmerno zadiranje u posebne kategorije podataka. Beleži se datum rešenja i, ako ga rešenje sadrži, datum isteka. Kad se pravo ostvaruje zbog bolesti, dokaz je izjava pod punom odgovornošću, ne isprava, uz potvrdu verifikatora iz člana 4.
+
+Pravo po ovom osnovu ostvaruje sam korisnik kad je lice sa smanjenom sposobnošću punoletan korisnik platforme. Kad to lice nije korisnik platforme, pravo ostvaruje korisnik koji se o njemu neposredno stara. Kad je to lice maloletno, pravo ostvaruje roditelj odnosno zakonski zastupnik koji se o njemu neposredno stara, do punoletstva tog lica. Po jednoj takvoj situaciji nastaje jedno pravo — osnov određuje samo u čijem se zapisu doprinos evidentira.
+
+Identitet lica o kome se korisnik stara i njegovo stanje ne prikazuju se i ne unose u prijavu preko onoga što je neophodno za utvrđivanje osnova. To lice nije podnosilac prijave i od njega se ništa ne traži.
+
+**Osnov gubitka doma.** Pravo ima korisnik koji je izgubio dom ili imovinu potrebnu za život usled elementarne nepogode, požara, poplave ili prinudne raseljenosti. Dokaz je izjava pod punom odgovornošću, uz potvrdu verifikatora iz člana 4.
+
+**Iznos.** Dnevni iznos je fiksan i iznosi 2.000 POEN, isti po svim osnovima. Korisnik koji ispunjava više osnova, odnosno koji se stara o više lica, ostvaruje jedan dnevni iznos.
+
+Pravo iz ovog programa ne isključuje pravo iz programa Podrška Majkama i ostvaruje se uz njega, i kada se oba ostvaruju povodom istog deteta — nega lica sa smanjenom sposobnošću i roditeljstvo su dva različita osnova.
+
+**Trajanje i revizija.** Pravo po osnovu smanjene sposobnosti podleže godišnjoj reviziji, a kad se ostvaruje za maloletno lice prestaje i punoletstvom tog lica; kad se ostvaruje zbog akutne bolesti, traje šest meseci, pa se prijava podnosi ponovo ako stanje potraje. Pravo po osnovu gubitka doma traje dvanaest meseci od događaja i prestaje istekom tog roka, bez revizije.
+
+Ako se status pri reviziji ne potvrdi, automatsko evidentiranje prestaje.
 
 ## VI — Školovanje
 

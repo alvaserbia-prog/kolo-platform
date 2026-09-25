@@ -834,7 +834,7 @@ Socijalni programi su mehanizam automatske evidencije POEN-a za grupe korisnika 
 
 Automatsko evidentiranje novih POEN-a za kvalifikovane grupe ima redistribucioni efekat: novi zapisi uvećavaju ukupan broj evidentiranih POEN-a u sistemu, čime menjaju obračunski koeficijent za sve korisnike. Ovaj efekat je namerna dizajnerska odluka — sistem prepoznaje da učešće koje je po svojoj prirodi kontinuirano i difuzno ne može da se evidentira kroz pojedinačne aktivnosti.
 
-Početne kvalifikovane grupe su majke (primarni staratelji), stariji korisnici, korisnici u režimu posebne brige i korisnici u školovanju. Nove grupe se mogu dodavati odlukom Fondacije u Fazi 1, odnosno Gornjeg Kola u Fazi 2.
+Početne kvalifikovane grupe su majke (primarni staratelji), stariji korisnici, korisnici u otežanim okolnostima i korisnici u školovanju. Nove grupe se mogu dodavati odlukom Fondacije u Fazi 1, odnosno Gornjeg Kola u Fazi 2.
 
 Korisnik koji pripada kvalifikovanoj grupi verifikuje podatke koji potvrđuju taj status. Nakon verifikacije, Protokol automatski upisuje nove zapise POEN-a za tog korisnika bez potrebe za konkretnom aktivnošću.
 
