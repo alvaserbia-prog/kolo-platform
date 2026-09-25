@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<title>KOLO 04 — Ana, Milan, Lazar i Marija</title>
+<style>
+  html, body { margin: 0; background: #111; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<img id="logo" src="../../../public/kolo-logo.png" style="display:none">
+<script>
+// ─────────────────────────────────────────────────────────────────────────
+// Video 04 — animacija je čista funkcija vremena: render(t) crta kadar u
+// sekundi t. Snimač (render.mjs) poziva render za svaki kadar redom, pa je
+// rezultat isti pri svakom pokretanju. Tajming scena prati trajanje audio
+// fajlova iz ../audio (izmereno, vidi DUR).
+// ─────────────────────────────────────────────────────────────────────────
+const W = 1080, H = 1920;
+const ctx = document.getElementById('c').getContext('2d');
+const FONT = '"DejaVu Sans", "Liberation Sans", sans-serif';
+
+// trajanje scena-1..6.mp3 u sekundama
+const DUR = [4.48, 8.88, 9.84, 11.28, 9.36, 6.40];
+const GAP = 0.35, LEAD = 0.4, TAIL = 1.8;
+const START = [];
+{ let t = LEAD; for (const d of DUR) { START.push(t); t += d + GAP; } }
+const END = START[5] + DUR[5] + TAIL;
+
+// titlovi: [tekst, težina] — težina ≈ dužina izgovorenog dela
+const CAPS = [
+  [["Četvoro ljudi iz Sombora.", 26], ["Niko nikog ne poznaje.", 24]],
+  [["Milanu treba med.", 18], ["Ana ga pravi.", 14], ["Dogovore se za pet tegli, 5.000 POENA,", 48], ["i Milan joj ih prepiše.", 24]],
+  [["Ani se pokvari veš mašina.", 28], ["Lazar je popravi!", 20], ["Ana mu prepiše 4.000 POENA.", 38], ["Nije dala nijedan dinar.", 26]],
+  [["Lazaru se jede burek.", 22], ["Marija ispeče tepsiju,", 22], ["a Lazar joj prepiše 1.000 POENA.", 36], ["Marija za njih uzme teglu Aninog meda.", 40]],
+  [["Na početku se nisu poznavali…", 36], ["A sad su u istom kolu.", 24], ["POEN nije novac.", 18], ["To je zapis o tome šta je ko dao.", 34]],
+  [["Uhvati se i ti u kolo!", 24], ["Registracija traje oko minut.", 30], ["ekolo.rs", 18]],
+];
+// apsolutno vreme početka titla (s, i)
+function cap(s, i) {
+  const list = CAPS[s], tot = list.reduce((a, c) => a + c[1], 0);
+  let acc = 0; for (let k = 0; k < i; k++) acc += list[k][1];
+  return START[s] + DUR[s] * acc / tot;
+}
+
+// ── pomoćne ─────────────────────────────────────────────────────────────
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; };
+const easeOut = k => 1 - Math.pow(1 - clamp(k), 3);
+const back = k => { k = clamp(k); const c = 1.7; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
+const prog = (t, a, d) => clamp((t - a) / d);
+function rr(x, y, w, h, r) { ctx.beginPath(); ctx.roundRect(x, y, w, h, r); }
+
+// ── likovi ──────────────────────────────────────────────────────────────
+const C = { x: 540, y: 720 }, R = 270;
+const CH = {
+  milan:  { name: 'Milan',  color: '#2B6CB0', ang: -135, hair: '#3B2A1E', style: 'short' },
+  ana:    { name: 'Ana',    color: '#D99520', ang:  -45, hair: '#7A4A22', style: 'pony'  },
+  lazar:  { name: 'Lazar',  color: '#1B6B3A', ang:   45, hair: '#2A2A2A', style: 'cap'   },
+  marija: { name: 'Marija', color: '#C5401A', ang:  135, hair: '#5A2E1A', style: 'braid' },
+};
+const ORDER = ['milan', 'ana', 'lazar', 'marija'];
+
+// položaj lika u trenutku t (grupa se u 5. sceni vrti kao kolo, u 6. se udaljava)
+function group(t) {
+  const s5 = START[4], s6 = START[5];
+  const spin = t > s5 ? ease(prog(t, s5 + 1.2, DUR[4] + DUR[5] + 2)) * 50 : 0;
+  const shrink = ease(prog(t, s6 - 0.2, 1.4));
+  return { rot: spin, scale: lerp(1, 0.62, shrink), cy: lerp(C.y, 610, shrink) };
+}
+function pos(id, t) {
+  const g = group(t), a = (CH[id].ang + g.rot) * Math.PI / 180;
+  let x = C.x + Math.cos(a) * R * g.scale, y = g.cy + Math.sin(a) * R * g.scale;
+  const o = OFF[id](t); x += o[0]; y += o[1];
+  // u koli likovi lako poskakuju
+  if (t > START[4] + 1) y += Math.sin((t - START[4]) * 5 + CH[id].ang) * 8 * g.scale;
+  return { x, y, s: g.scale };
+}
+// pomeranje lika ka drugom (npr. Milan prilazi Ani)
+function toward(from, to, t, a, hold) {
+  const k = ease(prog(t, a, 0.7)) - ease(prog(t, a + hold, 0.7));
+  const A = CH[from].ang * Math.PI / 180, B = CH[to].ang * Math.PI / 180;
+  const dx = Math.cos(B) - Math.cos(A), dy = Math.sin(B) - Math.sin(A), L = Math.hypot(dx, dy);
+  return [dx / L * 70 * k, dy / L * 70 * k];
+}
+const OFF = {
+  milan:  t => toward('milan', 'ana', t, cap(1, 0), 2.2),
+  ana:    t => [0, 0],
+  lazar:  t => toward('lazar', 'milan', t, cap(2, 1) - 0.3, 1.8),
+  marija: t => { const a = toward('marija', 'lazar', t, cap(3, 1) + 0.6, 1.6), b = toward('marija', 'ana', t, cap(3, 3), 1.8); return [a[0] + b[0], a[1] + b[1]]; },
+};
+// raspoloženje: osmeh od -1 (tužan) do 1
+function mood(id, t) {
+  let m = 0.55;
+  if (id === 'ana') {
+    const worry = prog(t, cap(2, 0), 0.4) - prog(t, cap(2, 1) + 0.5, 0.5);
+    m = lerp(m, -0.8, clamp(worry));
+  }
+  if (t > START[4] + 1.5) m = 1;
+  return m;
+}
+// pojava lika (1. scena)
+const APPEAR = { milan: 0, ana: 1, lazar: 2, marija: 3 };
+function appear(id, t) { return back(prog(t, START[0] + 0.5 + APPEAR[id] * 0.45, 0.5)); }
+
+function drawFace(id, t) {
+  const c = CH[id], p = pos(id, t), k = appear(id, t);
+  if (k <= 0) return;
+  const r = 88 * p.s * k;
+  ctx.save(); ctx.translate(p.x, p.y);
+  // senka
+  ctx.fillStyle = 'rgba(80,50,20,.18)';
+  ctx.beginPath(); ctx.ellipse(0, r * 1.02, r * .8, r * .18, 0, 0, 7); ctx.fill();
+  // kosa iza glave
+  ctx.fillStyle = c.hair;
+  if (c.style === 'pony') { ctx.beginPath(); ctx.ellipse(r * .78, r * .05, r * .22, r * .5, .3, 0, 7); ctx.fill(); }
+  if (c.style === 'braid') { for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.arc(-r * .72, r * (.1 + i * .22), r * .14, 0, 7); ctx.fill(); } }
+  // krug u boji lika
+  ctx.fillStyle = c.color; ctx.beginPath(); ctx.arc(0, 0, r, 0, 7); ctx.fill();
+  ctx.fillStyle = '#F6D7B8'; ctx.beginPath(); ctx.arc(0, r * .06, r * .8, 0, 7); ctx.fill();
+  // kosa / kapa
+  ctx.fillStyle = c.hair;
+  ctx.beginPath();
+  if (c.style === 'cap') {
+    ctx.fillStyle = '#E4572E';
+    ctx.ellipse(0, -r * .38, r * .74, r * .42, 0, Math.PI, 0); ctx.fill();
+    ctx.fillRect(-r * .1, -r * .42, r * .92, r * .12);
+  } else if (c.style === 'short') {
+    ctx.ellipse(0, -r * .42, r * .76, r * .4, 0, Math.PI, 0); ctx.fill();
+  } else {
+    ctx.ellipse(0, -r * .38, r * .8, r * .46, 0, Math.PI, 0); ctx.fill();
+  }
+  // oči
+  const blink = (Math.sin(t * 1.3 + c.ang) > .985) ? .15 : 1;
+  ctx.fillStyle = '#2A1D14';
+  for (const sx of [-1, 1]) { ctx.beginPath(); ctx.ellipse(sx * r * .28, r * .02, r * .075, r * .1 * blink, 0, 0, 7); ctx.fill(); }
+  // obrve (zabrinuto kad je osmeh negativan)
+  const m = mood(id, t);
+  ctx.strokeStyle = c.hair; ctx.lineWidth = r * .06; ctx.lineCap = 'round';
+  for (const sx of [-1, 1]) {
+    const tilt = m < 0 ? -m * .12 : 0;
+    ctx.beginPath(); ctx.moveTo(sx * r * .4, -r * .16 + sx * tilt * r * -1); ctx.lineTo(sx * r * .16, -r * .18 - tilt * r); ctx.stroke();
+  }
+  // brkovi za Milana
+  if (id === 'milan') { ctx.strokeStyle = c.hair; ctx.lineWidth = r * .08; ctx.beginPath(); ctx.moveTo(-r * .2, r * .3); ctx.quadraticCurveTo(0, r * .22, r * .2, r * .3); ctx.stroke(); }
+  // usta
+  ctx.strokeStyle = '#8A3B2A'; ctx.lineWidth = r * .07;
+  ctx.beginPath(); ctx.moveTo(-r * .24, r * .42); ctx.quadraticCurveTo(0, r * (.42 + m * .26), r * .24, r * .42); ctx.stroke();
+  // rumenilo
+  ctx.fillStyle = 'rgba(230,110,90,.28)';
+  for (const sx of [-1, 1]) { ctx.beginPath(); ctx.arc(sx * r * .48, r * .28, r * .1, 0, 7); ctx.fill(); }
+  // znoj kad je zabrinuta
+  if (m < -0.3) { ctx.fillStyle = '#7CC4E8'; ctx.beginPath(); ctx.ellipse(r * .6, -r * .2 + Math.sin(t * 6) * 3, r * .06, r * .1, 0, 0, 7); ctx.fill(); }
+  // ime
+  ctx.font = `bold ${Math.round(36 * p.s)}px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  const tw = ctx.measureText(c.name).width + 36 * p.s;
+  ctx.fillStyle = c.color; rr(-tw / 2, r + 14 * p.s, tw, 52 * p.s, 26 * p.s); ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.fillText(c.name, 0, r + 41 * p.s);
+  ctx.restore();
+}
+
+// ── pozadina: mapa Sombora ─────────────────────────────────────────────
+function drawBackground(t) {
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#FDF4E0'); g.addColorStop(1, '#F6E1BD');
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.save();
+  const drift = t * 3;
+  ctx.globalAlpha = 0.5;
+  // ulice
+  ctx.strokeStyle = '#EBCB98'; ctx.lineWidth = 14;
+  ctx.save(); ctx.translate(540, 720); ctx.rotate(-0.18);
+  for (let i = -8; i <= 8; i++) { ctx.beginPath(); ctx.moveTo(i * 130 + drift % 130, -900); ctx.lineTo(i * 130 + drift % 130, 900); ctx.stroke(); }
+  for (let i = -8; i <= 8; i++) { ctx.beginPath(); ctx.moveTo(-900, i * 150); ctx.lineTo(900, i * 150); ctx.stroke(); }
+  ctx.restore();
+  // kanal
+  ctx.strokeStyle = '#A9D3E0'; ctx.lineWidth = 34; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(-40, 1080); ctx.bezierCurveTo(260, 980, 420, 1150, 700, 1040); ctx.bezierCurveTo(900, 970, 1000, 1010, 1120, 960); ctx.stroke();
+  ctx.globalAlpha = 1;
+  // drveće
+  const trees = [[90, 420], [990, 380], [120, 1000], [960, 1180], [70, 700], [1010, 760]];
+  for (const [x, y] of trees) {
+    ctx.fillStyle = '#9CC58A'; ctx.beginPath(); ctx.arc(x, y, 30, 0, 7); ctx.fill();
+    ctx.fillStyle = '#7FAE6E'; ctx.beginPath(); ctx.arc(x + 12, y - 10, 18, 0, 7); ctx.fill();
+  }
+  ctx.restore();
+  // vojvođanske kuće na dnu pozornice
+  for (let i = 0; i < 7; i++) {
+    const x = 20 + i * 155, y = 1095 + (i % 2) * 14;
+    ctx.fillStyle = ['#F8E7C9', '#F3D9AE', '#FBEFD9'][i % 3];
+    ctx.fillRect(x, y, 130, 70);
+    ctx.fillStyle = '#C8703F';
+    ctx.beginPath(); ctx.moveTo(x - 8, y); ctx.lineTo(x + 65, y - 46); ctx.lineTo(x + 138, y); ctx.fill();
+    ctx.fillStyle = '#7FA6B8'; ctx.fillRect(x + 22, y + 20, 24, 24); ctx.fillRect(x + 84, y + 20, 24, 24);
+  }
+  // oznaka grada
+  ctx.font = `bold 30px ${FONT}`; ctx.fillStyle = 'rgba(120,80,40,.55)'; ctx.textAlign = 'left';
+  ctx.fillText('SOMBOR', 60, 330);
+}
+
+// veš mašina stoji na sredini pozornice
+const MX = 540, MY = 700;
+
+// ── predmeti ───────────────────────────────────────────────────────────
+function jar(x, y, s = 1, a = 1) {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.scale(s, s);
+  ctx.fillStyle = '#F5B842'; rr(-24, -26, 48, 56, 12); ctx.fill();
+  ctx.fillStyle = '#D99520'; rr(-24, 2, 48, 28, 10); ctx.fill();
+  ctx.fillStyle = '#8A5A2B'; rr(-27, -38, 54, 14, 5); ctx.fill();
+  ctx.fillStyle = 'rgba(255,255,255,.55)'; rr(-15, -18, 8, 30, 4); ctx.fill();
+  ctx.restore();
+}
+function machine(x, y, s, t, broken, a) {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.scale(s, s);
+  const shake = broken ? Math.sin(t * 40) * 3 : 0;
+  ctx.translate(shake, 0);
+  ctx.fillStyle = '#FFFFFF'; ctx.strokeStyle = '#B9B5AC'; ctx.lineWidth = 4;
+  rr(-60, -70, 120, 140, 14); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = '#E8E6E1'; ctx.fillRect(-60, -70, 120, 26);
+  ctx.fillStyle = '#6B6860'; ctx.beginPath(); ctx.arc(34, -57, 6, 0, 7); ctx.fill();
+  ctx.fillStyle = '#CFE8F3'; ctx.strokeStyle = '#8FA3AE'; ctx.lineWidth = 6;
+  ctx.beginPath(); ctx.arc(0, 12, 38, 0, 7); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = 'rgba(80,150,200,.5)';
+  ctx.beginPath(); ctx.arc(0, 12, 30, t * 3, t * 3 + 3.5); ctx.fill();
+  ctx.restore();
+  if (broken) {
+    ctx.fillStyle = '#7CC4E8';
+    for (let i = 0; i < 5; i++) {
+      const ph = ((t * 1.4 + i * .21) % 1);
+      ctx.globalAlpha = a * (1 - ph);
+      ctx.beginPath(); ctx.ellipse(x + 50 * s + i * 7 - 14, y + 70 * s + ph * 70, 7, 11, 0, 0, 7); ctx.fill();
+    }
+    ctx.globalAlpha = a * .7; ctx.beginPath(); ctx.ellipse(x + 40 * s, y + 150 * s, 70 * s, 12 * s, 0, 0, 7); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+}
+function wrench(x, y, rot, s, a) {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
+  ctx.fillStyle = '#8A949B'; rr(-8, -10, 16, 90, 7); ctx.fill();
+  ctx.beginPath(); ctx.arc(0, -18, 22, 0, 7); ctx.fill();
+  ctx.fillStyle = '#FDF4E0'; ctx.fillRect(-8, -44, 16, 26);
+  ctx.restore();
+}
+function burek(x, y, s, t, a) {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.scale(s, s);
+  ctx.fillStyle = '#9AA3A8'; ctx.beginPath(); ctx.ellipse(0, 6, 70, 26, 0, 0, 7); ctx.fill();
+  ctx.fillStyle = '#E9B45A'; ctx.beginPath(); ctx.ellipse(0, 0, 62, 22, 0, 0, 7); ctx.fill();
+  ctx.strokeStyle = '#C98A2E'; ctx.lineWidth = 3;
+  ctx.beginPath(); for (let k = 0; k < 40; k++) { const an = k * .5, rr2 = k * 1.5; ctx.lineTo(Math.cos(an) * rr2, Math.sin(an) * rr2 * .35); } ctx.stroke();
+  ctx.strokeStyle = 'rgba(255,255,255,.7)'; ctx.lineWidth = 4;
+  for (let i = -1; i <= 1; i++) {
+    ctx.beginPath(); const ph = t * 2 + i;
+    ctx.moveTo(i * 22, -26); ctx.bezierCurveTo(i * 22 + 10 * Math.sin(ph), -40, i * 22 - 10 * Math.sin(ph), -52, i * 22, -66); ctx.stroke();
+  }
+  ctx.restore();
+}
+function sparkle(x, y, k) {
+  if (k <= 0 || k >= 1) return;
+  ctx.save(); ctx.translate(x, y); ctx.globalAlpha = 1 - k; ctx.strokeStyle = '#F5B842'; ctx.lineWidth = 6; ctx.lineCap = 'round';
+  for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4; ctx.beginPath(); ctx.moveTo(Math.cos(a) * 30 * (1 + k), Math.sin(a) * 30 * (1 + k)); ctx.lineTo(Math.cos(a) * 60 * (1 + k), Math.sin(a) * 60 * (1 + k)); ctx.stroke(); }
+  ctx.restore();
+}
+// predmet koji putuje od jednog lika do drugog
+function travel(from, to, t, a, d, draw) {
+  const k = ease(prog(t, a, d));
+  const p = pos(from, t), q = pos(to, t);
+  const x = lerp(p.x, q.x, k), y = lerp(p.y, q.y, k) - Math.sin(k * Math.PI) * 90;
+  return [x, y, k];
+}
+
+// ── linije veza ────────────────────────────────────────────────────────
+const LINKS = [
+  { a: 'milan', b: 'ana',    t: () => cap(1, 2) },
+  { a: 'ana',   b: 'lazar',  t: () => cap(2, 2) },
+  { a: 'lazar', b: 'marija', t: () => cap(3, 2) },
+  { a: 'marija', b: 'ana',   t: () => cap(3, 3) + 0.4 },
+];
+function drawLinks(t) {
+  const fade = 1 - 0.7 * ease(prog(t, START[4] + 0.8, 1.2));
+  for (const L of LINKS) {
+    const k = ease(prog(t, L.t(), 0.9));
+    if (k <= 0) continue;
+    const p = pos(L.a, t), q = pos(L.b, t);
+    const dx = q.x - p.x, dy = q.y - p.y, len = Math.hypot(dx, dy), ux = dx / len, uy = dy / len;
+    const r = 96 * p.s;
+    const x1 = p.x + ux * r, y1 = p.y + uy * r, x2 = q.x - ux * r, y2 = q.y - uy * r;
+    ctx.save(); ctx.globalAlpha = fade;
+    ctx.strokeStyle = '#2E9D54'; ctx.lineWidth = 12 * p.s; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(lerp(x1, x2, k), lerp(y1, y2, k)); ctx.stroke();
+    // puls svetla po liniji dok se crta
+    if (k < 1) { ctx.fillStyle = '#F5B842'; ctx.beginPath(); ctx.arc(lerp(x1, x2, k), lerp(y1, y2, k), 14 * p.s, 0, 7); ctx.fill(); }
+    ctx.restore();
+  }
+}
+// kolo: pun krug kroz sve četiri osobe
+function drawKolo(t) {
+  const k = ease(prog(t, cap(4, 1) - 0.2, 1.4));
+  if (k <= 0) return;
+  const g = group(t);
+  ctx.save();
+  ctx.shadowColor = 'rgba(245,184,66,.9)'; ctx.shadowBlur = 40 * k;
+  ctx.strokeStyle = '#F5B842'; ctx.lineWidth = 20 * g.scale; ctx.lineCap = 'round';
+  const a0 = (-135 + g.rot) * Math.PI / 180;
+  ctx.beginPath(); ctx.arc(C.x, g.cy, R * g.scale, a0, a0 + Math.PI * 2 * k); ctx.stroke();
+  ctx.restore();
+}
+
+// ── knjiga evidencije ──────────────────────────────────────────────────
+const ROWS = [
+  { a: 'milan', b: 'ana', n: '5.000', t: () => cap(1, 3) },
+  { a: 'ana', b: 'lazar', n: '4.000', t: () => cap(2, 2) + 0.2 },
+  { a: 'lazar', b: 'marija', n: '1.000', t: () => cap(3, 2) + 0.2 },
+  { a: 'marija', b: 'ana', n: '1.000', t: () => cap(3, 3) + 0.8 },
+];
+function drawLedger(t) {
+  const open = ease(prog(t, cap(1, 2), 0.6)) * (1 - ease(prog(t, START[4] + 2.2, 0.8)));
+  if (open <= 0) return;
+  const x = 80, y = 1140, w = 920, rowH = 70, hh = 80, h = hh + rowH * 4 + 20;
+  ctx.save();
+  ctx.translate(0, y + h / 2); ctx.scale(1, open); ctx.translate(0, -(y + h / 2));
+  ctx.shadowColor = 'rgba(60,40,10,.25)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 10;
+  ctx.fillStyle = '#FFFDF7'; rr(x, y, w, h, 24); ctx.fill();
+  ctx.shadowColor = 'transparent';
+  ctx.fillStyle = '#1B6B3A'; rr(x, y, w, hh, [24, 24, 0, 0]); ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.font = `bold 38px ${FONT}`; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  ctx.fillText('Knjiga evidencije', x + 36, y + hh / 2);
+  ctx.strokeStyle = '#E8E6E1'; ctx.lineWidth = 2;
+  for (let i = 1; i < 4; i++) { ctx.beginPath(); ctx.moveTo(x + 30, y + hh + 10 + i * rowH); ctx.lineTo(x + w - 30, y + hh + 10 + i * rowH); ctx.stroke(); }
+  ROWS.forEach((r, i) => {
+    const k = prog(t, r.t(), 0.9);
+    if (k <= 0) return;
+    const parts = [[CH[r.a].name, CH[r.a].color], [' → ', '#6B6860'], [CH[r.b].name, CH[r.b].color], ['  ·  ', '#6B6860'], [r.n + ' POENA', '#1A1A17']];
+    const full = parts.map(p => p[0]).join(''); const shown = Math.floor(full.length * k);
+    let cx = x + 44, used = 0; const cy = y + hh + 10 + i * rowH + rowH / 2;
+    ctx.font = `bold 40px ${FONT}`;
+    // označavanje novog reda
+    const hl = 1 - prog(t, r.t() + 0.9, 1.2);
+    if (hl > 0) { ctx.fillStyle = `rgba(245,184,66,${.28 * hl})`; rr(x + 20, cy - rowH / 2 + 4, w - 40, rowH - 8, 12); ctx.fill(); }
+    for (const [txt, col] of parts) {
+      const take = clamp(shown - used, 0, txt.length); used += txt.length;
+      if (take <= 0) break;
+      const s = txt.slice(0, take); ctx.fillStyle = col; ctx.fillText(s, cx, cy); cx += ctx.measureText(s).width;
+    }
+  });
+  ctx.restore();
+}
+
+// ── tekstovi ───────────────────────────────────────────────────────────
+function wrap(text, maxW) {
+  const words = text.split(' '), lines = []; let line = '';
+  for (const w of words) { const test = line ? line + ' ' + w : w; if (ctx.measureText(test).width > maxW && line) { lines.push(line); line = w; } else line = test; }
+  if (line) lines.push(line); return lines;
+}
+function drawCaption(t) {
+  for (let s = 0; s < 6; s++) for (let i = 0; i < CAPS[s].length; i++) {
+    const a = cap(s, i), b = i + 1 < CAPS[s].length ? cap(s, i + 1) : START[s] + DUR[s] + GAP * .8;
+    if (t < a || t >= b) continue;
+    const k = easeOut(prog(t, a, .18));
+    ctx.save(); ctx.font = `bold 58px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const lines = wrap(CAPS[s][i][0], 900), lh = 74, bh = lines.length * lh + 40;
+    const y0 = 1690 - bh / 2 + (1 - k) * 20;
+    ctx.globalAlpha = k;
+    const bw = Math.max(...lines.map(l => ctx.measureText(l).width)) + 70;
+    ctx.fillStyle = 'rgba(15,61,32,.88)'; rr(540 - bw / 2, y0, bw, bh, 28); ctx.fill();
+    ctx.fillStyle = '#fff';
+    lines.forEach((l, j) => ctx.fillText(l, 540, y0 + 20 + lh / 2 + j * lh));
+    ctx.restore();
+  }
+}
+function drawTitle(t) {
+  const k = easeOut(prog(t, START[0] + 0.1, 0.5)) * (1 - ease(prog(t, START[1] + 0.3, 0.5)));
+  if (k > 0) {
+    ctx.save(); ctx.globalAlpha = k; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.font = `bold 66px ${FONT}`; ctx.fillStyle = '#0F3D20';
+    ctx.fillText('Kako izgleda razmena', 540, 170 - (1 - k) * 30);
+    ctx.fillStyle = '#1B6B3A'; ctx.fillText('u KOLU?', 540, 250 - (1 - k) * 30);
+    ctx.restore();
+  }
+  // mala oznaka posle naslova
+  const m = ease(prog(t, START[1] + 0.5, 0.5)) * (1 - ease(prog(t, START[5], 0.5)));
+  if (m > 0) {
+    ctx.save(); ctx.globalAlpha = m; ctx.textAlign = 'center'; ctx.font = `bold 34px ${FONT}`; ctx.fillStyle = '#1B6B3A';
+    ctx.fillText('KOLO · razmena bez dinara', 540, 170); ctx.restore();
+  }
+}
+function drawStatement(t) {
+  const k = easeOut(prog(t, cap(4, 2) - 0.1, 0.5)) * (1 - ease(prog(t, START[5] + 0.1, 0.5)));
+  if (k <= 0) return;
+  ctx.save(); ctx.globalAlpha = k; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  const y = 1300 - (1 - k) * 30;
+  ctx.shadowColor = 'rgba(60,40,10,.2)'; ctx.shadowBlur = 24;
+  ctx.fillStyle = '#FFFDF7'; rr(90, y - 130, 900, 260, 32); ctx.fill(); ctx.shadowColor = 'transparent';
+  ctx.fillStyle = '#0F3D20'; ctx.font = `bold 64px ${FONT}`; ctx.fillText('POEN nije novac.', 540, y - 45);
+  ctx.fillStyle = '#1B6B3A'; ctx.font = `bold 46px ${FONT}`; ctx.fillText('To je zapis o doprinosu.', 540, y + 45);
+  ctx.restore();
+}
+function drawOutro(t) {
+  const s6 = START[5];
+  // nove prazne tačke oko kola
+  const d = ease(prog(t, s6 + 0.3, 1.2));
+  if (d > 0) {
+    const g = group(t);
+    for (let i = 0; i < 10; i++) {
+      const a = i / 10 * Math.PI * 2 + 0.3, rr2 = R * g.scale + 150 + (i % 2) * 40;
+      const x = C.x + Math.cos(a) * rr2, y = g.cy + Math.sin(a) * rr2;
+      const kk = back(clamp(d * 1.6 - i * .06));
+      if (kk <= 0) continue;
+      ctx.save(); ctx.globalAlpha = .9; ctx.setLineDash([10, 8]); ctx.strokeStyle = '#2E9D54'; ctx.lineWidth = 5;
+      ctx.beginPath(); ctx.arc(x, y, 34 * kk * (1 + .06 * Math.sin(t * 4 + i)), 0, 7); ctx.stroke(); ctx.restore();
+    }
+  }
+  const k = easeOut(prog(t, s6 + 0.5, 0.6));
+  if (k <= 0) return;
+  const logo = document.getElementById('logo');
+  ctx.save(); ctx.globalAlpha = k;
+  ctx.shadowColor = 'rgba(60,40,10,.2)'; ctx.shadowBlur = 30;
+  ctx.fillStyle = '#fff'; rr(190, 1000, 700, 560, 40); ctx.fill(); ctx.shadowColor = 'transparent';
+  if (logo.complete && logo.naturalWidth) ctx.drawImage(logo, 60, 50, 395, 250, 340, 1020, 400, 253);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#0F3D20'; ctx.font = `bold 96px ${FONT}`; ctx.fillText('ekolo.rs', 540, 1370);
+  ctx.fillStyle = '#6B6860'; ctx.font = `bold 34px ${FONT}`;
+  ctx.fillText('Pridruži se besplatno', 540, 1455); ctx.fillText('registracija oko minut', 540, 1502);
+  ctx.restore();
+}
+
+// ── predmeti po scenama ────────────────────────────────────────────────
+function drawProps(t) {
+  // S2: med kod Ane, pet tegli putuje Milanu
+  const jarsIn = back(prog(t, cap(1, 1), 0.5)), jarsOut = prog(t, cap(1, 2) + 0.3, 1.2);
+  const jarsGone = 1 - prog(t, START[2] + 0.2, 0.5);
+  if (jarsIn > 0 && jarsGone > 0) {
+    for (let i = 0; i < 5; i++) {
+      const [x, y, k] = travel('ana', 'milan', t, cap(1, 2) + 0.3 + i * 0.12, 1.1);
+      const pa = pos('ana', t);
+      const bx = pa.x - 110 + i * 46, by = pa.y - 160;
+      const px = k > 0 ? lerp(bx, x - 110 + i * 46, k) : bx, py = k > 0 ? y - 160 : by;
+      jar(px, py, 0.85 * jarsIn, jarsGone);
+    }
+  }
+  // S3: mašina kod Ane, Lazar je popravi
+  const mIn = easeOut(prog(t, cap(2, 0), 0.4)), mOut = 1 - prog(t, START[3] + 0.2, 0.5);
+  if (mIn > 0 && mOut > 0) {
+    const pa = pos('ana', t);
+    const fixed = t > cap(2, 1) + 0.9;
+    machine(MX, MY, 0.95, t, !fixed, mIn * mOut);
+    const w = prog(t, cap(2, 1) - 0.2, 1.1);
+    if (w > 0 && w < 1) {
+      const pl = pos('lazar', t);
+      wrench(lerp(pl.x, MX + 60, ease(w)), lerp(pl.y, MY - 30, ease(w)), Math.sin(t * 14) * .6, 1, 1);
+    }
+    sparkle(MX, MY, prog(t, cap(2, 1) + 0.9, 0.8));
+  }
+  // S4: burek od Marije Lazaru, pa tegla od Ane Mariji
+  const bIn = back(prog(t, cap(3, 1), 0.5)), bGone = 1 - prog(t, cap(3, 3) - 0.3, 0.4);
+  if (bIn > 0 && bGone > 0) {
+    const [x, y, k] = travel('marija', 'lazar', t, cap(3, 1) + 0.7, 1.3);
+    const pm = pos('marija', t);
+    const bx = k > 0 ? x : pm.x + 140, by = k > 0 ? y - 150 : pm.y - 20;
+    burek(bx, by, 0.9 * bIn, t, bGone);
+  }
+  const jIn = prog(t, cap(3, 3), 0.1), jGone = 1 - prog(t, START[4] + 0.6, 0.5);
+  if (jIn > 0 && jGone > 0) {
+    const [x, y] = travel('ana', 'marija', t, cap(3, 3) + 0.2, 1.3);
+    jar(x, y - 150, 1, jGone);
+  }
+}
+
+// ── glavni kadar ───────────────────────────────────────────────────────
+function render(t) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalAlpha = 1; ctx.shadowColor = 'transparent';
+  drawBackground(t);
+  drawTitle(t);
+  drawKolo(t);
+  drawLinks(t);
+  for (const id of ORDER) drawFace(id, t);
+  drawProps(t);
+  drawLedger(t);
+  drawStatement(t);
+  drawOutro(t);
+  drawCaption(t);
+  // početni i završni fade
+  const f = Math.max(1 - prog(t, 0, 0.4), prog(t, END - 0.6, 0.6));
+  if (f > 0) { ctx.fillStyle = `rgba(250,244,224,${f})`; ctx.fillRect(0, 0, W, H); }
+}
+window.KOLO = { render, END, START, DUR };
+// ručni pregled: otvori fajl u pregledaču, animacija ide u realnom vremenu
+if (!location.search.includes('snimanje')) {
+  const t0 = performance.now();
+  (function loop() { render(((performance.now() - t0) / 1000) % END); requestAnimationFrame(loop); })();
+}
+</script>
+</body>
+</html>
