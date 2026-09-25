@@ -2,7 +2,7 @@
  * Čuvar kanonskog seta akata.
  *
  * Javne pravne stranice učitavaju markdown po IMENU FAJLA, a ime nosi verziju
- * (`Pravilnik_4_6_5.md`, `uslovi_koriscenja_4_6_4.md`). Pri podizanju verzije lako je
+ * (`Pravilnik_4_6_6.md`, `uslovi_koriscenja_4_6_6.md`). Pri podizanju verzije lako je
  * repointovati jednu stranicu a drugu zaboraviti, ili preimenovati srpski original
  * a ostaviti prevod — loader tada tiho padne na srpski i čitalac na engleskom dobije
  * stari tekst, bez ijedne greške u logu.
@@ -27,12 +27,12 @@ const AKTI = [
   // Set je od 4.2.2 ponovo JEDINSTVEN: svi akti nose istu verziju, i kad su
   // sadržinski nepromenjeni. Mešovit set (4.2.0 uz 4.1.1) je proizvodio
   // reference na verziju koja kao dokument više ne postoji.
-  "Pravilnik_4_6_5.md",
+  "Pravilnik_4_6_6.md",
   "dokaz_stvarnosti_4_6_5.md",
-  "DPIA_4_6_3.md",
-  "radnje_obrade_4_6_3.md",
-  "uslovi_koriscenja_4_6_4.md",
-  "politika_4_6_3.md",
+  "DPIA_4_6_7.md",
+  "radnje_obrade_4_6_7.md",
+  "uslovi_koriscenja_4_6_6.md",
+  "politika_4_6_7.md",
   "statut_4_1_0.md",
   "whitepaper_4_6_2.md",
   "rizici_4_6_0.md",
@@ -41,7 +41,7 @@ const AKTI = [
   "operativni_4_6_0.md",
   "osnivacki_4_6_0.md",
   "gornje_kolo_4_4_6.md",
-  "programi_podrske_4_6_1.md",
+  "programi_podrske_4_6_7.md",
   // Usvojen 4.3.0 — do tada nacrt u `docs/pravilnik-modul-deca.md`.
   "ucesce_dece_4_6_4.md",
   // Usvojen 4.4.1 — sedamnaesti akt; osnov u čl. 14a i 51a Pravilnika.
@@ -83,7 +83,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Эта возможность не является стимулом",
     ],
   },
-  "Pravilnik_4_6_5.md": {
+  "Pravilnik_4_6_6.md": {
     sr: [
       // ═══ 4.6.1 (R-04 — ZRNO kao investicioni instrument, Komisija za HOV) ═══
       // 🔴 Čl. 23 st. 3 je do 4.6.1 tvrdio da „upis i otpis ZRNA pomeraju
@@ -371,7 +371,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Согласование не является мерой в отношении пользователя",
     ],
   },
-  "radnje_obrade_4_6_3.md": {
+  "radnje_obrade_4_6_7.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16", "Radnja obrade br. 17"],
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16", "Processing activity No. 17"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16", "Операция обработки № 17"],
@@ -386,7 +386,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // (`vercel.json` → regions: fra1, Neon endpoint u EU). Ako se region ikad vrati u
   // SAD, ocena i mere iz 5.13 postaju netačne — zato se traže doslovno, uz nov zbir
   // srednjih i niskih rizika.
-  "DPIA_4_6_3.md": {
+  "DPIA_4_6_7.md": {
     sr: [
       "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
       "Pet rizika je na srednjem nivou (R1, R2, R11, R13, R16)",
@@ -403,7 +403,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // izostavljanja SAMOG IZNOSA — bez njega bi uklonjen naziv ostavio podatak
       // koji se iz iznosa i dalje čita (godina rođenja, broj i uzrast dece).
       "| 2 | 3 | 6 |",
-      "Izostavljanje pojedinačnog zapisa iz javnog pregleda",
+      // 4.6.7: nosiva mera nije više izostavljanje ZAPISA nego izostavljanje OSNOVA —
+      // zapis se verifikovanom članu prikazuje, a osnov unutar programa nikome.
+      "izostavljanje osnova",
       "Saglasnost roditelja za podatak o detetu",
       "## 5.14.",
       // R-06: registar dobija radnju br. 18 (dokaz pristanka), pa ih je osamnaest.
@@ -419,7 +421,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Frankfurt region",
       "at least once a year",
       "| 2 | 3 | 6 |",
-      "Omission of the individual record from the public overview",
+      "omission of the ground",
       "Parental consent for data concerning a child",
       "## 5.14.",
       "eighteen processing activities",
@@ -434,7 +436,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "регион Франкфурт",
       "не реже одного раза в год",
       "| 2 | 3 | 6 |",
-      "Исключение отдельной записи из публичного обзора",
+      "исключение основания",
       "Согласие родителя на данные о ребёнке",
       "## 5.14.",
       "восемнадцать операций обработки",
@@ -638,7 +640,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
   // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
   // počiva upravo na tome da takav promet nije dopušten.
-  "uslovi_koriscenja_4_6_4.md": {
+  "uslovi_koriscenja_4_6_6.md": {
     sr: [
       // ── 4.6.4 — R-07 (nelojalna i obmanjujuća poslovna praksa) ──────────────
       // 🔴 Čl. 22b prvi put odgovara na PRETHODNO pitanje celog rizika: da li je
@@ -1110,7 +1112,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "прекращается, когда несовершеннолетний пользователь укажет и подтвердит собственный электронный адрес",
     ],
   },
-  "politika_4_6_3.md": {
+  "politika_4_6_7.md": {
     sr: [
       // 4.6.3 (R-06) — dokaz pristanka i dokaz zasnivanja ugovornog odnosa.
       // 🔴 Traži se i ono što se NE beleži: bez te rečenice bi se pri sledećoj
@@ -1148,7 +1150,9 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       // iznos je jednoznačno određen godinom rođenja, pa uklonjen naziv bez
       // uklonjenog iznosa ne bi sakrio ništa. Ranija formulacija („nije skriven",
       // uvedena uz R-13) zabranjena je u bloku UKINUTO.
-      "Zapis o evidentiranom POEN-u ne imenuje program",
+      // 4.6.7: opis zapisa i dalje NE nosi naziv programa (trajan je i ide u izvoz),
+      // ali se naziv prikazuje verifikovanom članu — izvodi se iz prijave na program.
+      "ne sadrži naziv programa",
       "jednoznačno određen godinom rođenja korisnika",
       "dnevni zbir po programu",
       "saglasnost roditelja odnosno zakonskog zastupnika",
@@ -1180,7 +1184,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Frankfurt region",
       "at least once a year",
       "Telegram Messenger Inc.",
-      "The record of POEN recorded does not name the program",
+      "does not contain the name of the program",
       "uniquely determined by the user's year of birth",
       "a daily total per program",
       "Exceptions to the display of individual transactions",
@@ -1204,7 +1208,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "регион Франкфурт",
       "не реже одного раза в год",
       "Telegram Messenger Inc.",
-      "Запись об учтённых ПОЕН не называет программу",
+      "не содержит названия программы",
       "однозначно определяется годом рождения пользователя",
       "дневная сумма по программе",
       "Исключения из отображения отдельных операций",
@@ -1226,7 +1230,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // je u normi a ne u kodu; a zapis o evidentiranom POEN-u sa nazivom programa
   // vidljiv je svim verifikovanim korisnicima, o čemu pristanak nije govorio ništa.
   // Traže se sva tri, jer bi se svako lako izgubilo bez ijednog vidljivog kvara.
-  "programi_podrske_4_6_1.md": {
+  "programi_podrske_4_6_7.md": {
     sr: [
       // 4.5.9 (R-02) — nov čl. 6a. „Nije socijalna pomoć" je brisano iz čl. 2.
       "Priroda evidentiranja",
@@ -1235,8 +1239,10 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "koliko će lica biti zamoljeno da potvrdi",
       // 4.6.1 (R-03, mera M-1) — pristanak više ne saopštava javnost zapisa uz
       // pseudonim, nego da se objavljuje samo dnevni zbir po programu.
-      "dnevni zbir po programu, bez imena i pseudonima korisnika",
-      "Zapis o evidentiranom POEN-u po socijalnom programu ne imenuje program",
+      // 4.6.7: pristanak više ne obećava da se zapis ne objavljuje, nego navodi
+      // ŠTA se prikazuje verifikovanom članu i šta se iz iznosa može izvesti.
+      "šta se iz iznosa može izvesti",
+      "Osnov po kome je pravo ostvareno ne prikazuje se nijednom korisniku",
       "ne navode se ni naziv programa ni pseudonim podnosioca",
       "podaci uneti u prijavu se brišu",
       "Uneti podaci brišu se kada prijava prestane da važi",
@@ -1246,8 +1252,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "A program beneficiary is not employed by the Foundation",
       "reality index of at least 10%",
       "how many persons will be asked to confirm",
-      "a daily total per programme, without the names or pseudonyms of users",
-      "does not name the programme and is not displayed individually",
+      "what may be derived from the amount",
+      "is not displayed to any user",
       "states neither the name of the programme nor the applicant's pseudonym",
       "deletes the data entered in the application",
       "The entered data are deleted when the application ceases to be valid",
@@ -1257,8 +1263,8 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Участник программы не состоит в трудовых отношениях с Фондом",
       "индексом реальности не менее 10 %",
       "сколько лиц будет приглашено подтвердить",
-      "дневная сумма по программе, без имён и псевдонимов пользователей",
-      "не называет программу и не отображается отдельно",
+      "что может быть выведено из суммы",
+      "не отображается ни одному пользователю",
       "не указываются ни название программы, ни псевдоним заявителя",
       "удаление данных, внесённых в заявку",
       "Внесённые данные удаляются, когда заявка перестаёт действовать",
@@ -1498,7 +1504,7 @@ describe("kanonski set akata 4.3.3", () => {
       ru: /не требует от пользователей отдельно отмечать/i,
     };
     for (const jez of JEZICI) {
-      const tekst = await ucitajPravniDokument("Pravilnik_4_6_5.md", jez);
+      const tekst = await ucitajPravniDokument("Pravilnik_4_6_6.md", jez);
       expect(tekst, `${jez} nema odredbu o neoznačavanju razmene`).toMatch(BEZ_OZNACAVANJA[jez]);
     }
   });

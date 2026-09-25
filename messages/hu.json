@@ -820,13 +820,26 @@
     "status_odbijen": "Elutasítva",
     "opis_majkama": "2 000 POEN/nap gyermekenként · koefficiensek nőnek a gyermekszámmal · 20 évig",
     "opis_starijima": "1.000 + 100 × (életkor − 50) POEN/nap · 50 éves kortól elérhető a tagoknak",
-    "opis_posebna_briga": "2 000 POEN/nap · rokkantság vagy krónikus betegség · dokumentáció szükséges",
+    "opis_posebna_briga": "2 000 POEN/nap · csökkent képesség vagy az otthon elvesztése",
     "opis_skolovanje": "Az összeget az admin állítja be · 6 havonta újraellenőrzés",
     "isplaceno_ukupno": "E program alapján nyilvántartva: {iznos} POEN",
     "nepun_indeks": "A szociális programhoz legalább egy megerősítés szükséges — 10 %-os valóságindex. A jóváhagyás előtt a teljes láncod megerősíti, hogy a jogosultsági feltétel teljesül.",
     "posebna_briga_datum_resenja": "A fogyatékosságot megállapító határozat kelte",
     "posebna_briga_datum_isteka": "A határozat lejárati dátuma (nem kötelező — hagyd üresen, ha végleges)",
-    "posebna_briga_napomena2": "Csak az illetékes hatóság határozatának keltét rögzítjük — sem a határozat száma, sem a hatóság neve, sem orvosi dokumentáció vagy diagnózis nem szükséges.",
+    "posebna_briga_osnov": "A jogosultság alapja",
+    "posebna_briga_osnov_sposobnost": "Csökkent képesség",
+    "posebna_briga_osnov_dom": "Az otthon elvesztése",
+    "posebna_briga_osnov_napomena": "Az alapot egyetlen felhasználó sem látja. A többi teljes jogú tag a program nevét és az összeget látja, azt soha nem, hogy mi alapján vagy jogosult.",
+    "posebna_briga_dokaz": "Min alapul a jogosultság",
+    "posebna_briga_dokaz_resenje": "Az illetékes hatóság határozata",
+    "posebna_briga_dokaz_akutna": "Akut betegség",
+    "posebna_briga_dokaz_hronicna": "Krónikus betegség",
+    "posebna_briga_dokaz_izjava": "A bizonyíték a teljes felelősséged mellett tett nyilatkozatod, nem okirat. Az akut betegségen alapuló jog hat hónapig tart, ezért a kérelmet újra be kell adni, ha az állapot tovább áll fenn.",
+    "posebna_briga_punoletstvo": "Annak a személynek a felnőttkorúvá válásának dátuma, akiről gondoskodsz (hagyd üresen, ha felnőtt)",
+    "posebna_briga_punoletstvo_napomena": "Csak ezt a dátumot kérjük, mert a kiskorú személy után fennálló jog az ő felnőttkorúvá válásával megszűnik. A neve, állapota és egyéb adatai nem kerülnek rögzítésre.",
+    "posebna_briga_datum_dogadjaja": "Az esemény dátuma (elemi kár, tűz, árvíz vagy kitelepítés)",
+    "posebna_briga_dom_napomena": "A bizonyíték a teljes felelősséged mellett tett nyilatkozatod. A jog az eseménytől számított tizenkét hónapig tart, és e határidő lejártával megszűnik, felülvizsgálat nélkül.",
+    "posebna_briga_napomena2": "A határozat léte számít, nem a tartalma: a határozat száma, a hatóság neve, a rokkantság foka, a munkaképesség értékelése, az orvosi dokumentáció és a diagnózis nem szükséges. A jog évenkénti felülvizsgálat alá tartozik.",
     "pristanak_tekst": "Hozzájárulok, hogy {broj} embert a láncomból megkérjenek, hogy teljes felelősséggel megerősítse: megfelelek e program feltételének. Megtudják, melyik programról van szó — ami elárulhat egészségre, családra vagy életkorra vonatkozó adatot —, de a megadott adatokat nem látják. Az e program alapján jóváírt POEN bejegyzése minden rendes tag számára látható az álnevem mellett. Az Alapítvány csak akkor hagyja jóvá a jelentkezést, ha mindenki megerősítette. A hozzájárulásomat bármikor visszavonhatom.",
     "potvrde_naslov": "Megerősítési kérelmek",
     "potvrde_opis": "Azok, akiket megerősítettél, szociális programra jelentkeztek és téged neveztek meg. Erősítsd meg teljes felelősséggel, hogy az illető megfelel a feltételnek, vagy indokold, miért nem tudod. A beírt adatokat nem látod.",
@@ -1024,11 +1037,11 @@
     "otvoriDokument": "Dokumentum megnyitása →",
     "uslovi": {
       "naslov": "A KOLO platform felhasználási feltételei",
-      "ver": "4.6.4"
+      "ver": "4.6.6"
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -1036,11 +1049,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
@@ -1052,7 +1065,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
-      "ver": "4.6.5",
+      "ver": "4.6.6",
       "sviPravilnici": "← Összes szabályzat",
       "pravilnici": "Szabályzatok"
     },
@@ -1072,21 +1085,21 @@
       "pravilnikKoloSistem": "KOLO rendszer szabályzata"
     },
     "meta_uslovi_title": "Felhasználási feltételek · KOLO",
-    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.4-es verzió",
+    "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.6-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat · KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.6.3-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.6.7-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya · KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.6.3-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.6.7-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása · KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.6.3-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.6.7-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat · KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.0-es verzió",
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.2-es verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai · KOLO",
-    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.5-es verzió",
+    "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.6-es verzió",
     "rb": {
       "kolo-sistem": {
         "naziv": "Szabályzat a KOLO rendszerről",
@@ -1118,7 +1131,7 @@
       },
       "programi-podrske": {
         "naziv": "Szabályzat a támogatási programokról",
-        "opis": "Szociális programok (Anyák támogatása, Idősek támogatása, Különleges gondoskodás, Iskoláztatás) – feltételek, együtthatók és a láncból érkező megerősítés. A hozzáféréshez elég egyetlen megerősítés, vagyis 10%-os valóságindex."
+        "opis": "Szociális programok (Anyák támogatása, Idősek támogatása, Különleges támogatás, Iskoláztatás) – feltételek, együtthatók és a láncból érkező megerősítés. A hozzáféréshez elég egyetlen megerősítés, vagyis 10%-os valóságindex."
       },
       "ucesce-dece": {
         "naziv": "Szabályzat a gyermekek részvételéről",
@@ -1704,7 +1717,7 @@
     "n5_opis": "Egy jogi személy vagy egyéni vállalkozó — cég, egyesület vagy műhely — adományozási szerződést köt az Alapítvánnyal pénzben, javakban vagy szolgáltatásban. Maga a pártfogó nem kap POEN-t. Az elismerés annak a tulajdonosnak kerül feljegyzésre, aki rendes tag, illetve magának az egyéni vállalkozónak, egy hétszintű táblázat szerint.\nA hálózatnak pénzre van szüksége ahhoz, hogy működjön, a pártfogás feltételei pedig minden jogi személy számára azonosak.",
     "n5_iznos": "7 szint · küszöb 10.000 RSD",
     "n4_naslov": "Szociális programok",
-    "n4_opis": "Programok anyáknak és gondviselőknek, időseknek, különös gondoskodásra szorulóknak és tanuláshoz, amelyekben a jóváhagyott felhasználóknak minden nap POEN kerül feljegyzésre. Ez nem szociális segély a jogszabályok értelmében, és nem érinti az államtól járó jogosultságaidat.",
+    "n4_opis": "Programok anyáknak és gondviselőknek, időseknek, különleges támogatásra szorulóknak és tanuláshoz, amelyekben a jóváhagyott felhasználóknak minden nap POEN kerül feljegyzésre. Ez nem szociális segély a jogszabályok értelmében, és nem érinti az államtól járó jogosultságaidat.",
     "n4_iznos": "napi feljegyzés",
     "n3_naslov": "Operatív hozzájárulás",
     "n3_opis": "Konkrét munka a közösségért. A ZRNO-tulajdonosok — az első szakaszban az Alapítvány Igazgatótanácsa — feladatot tesznek közzé, te jelentkezel és elvégzed, majd ők megerősítik az elvégzést, és a POEN csak ekkor kerül feljegyzésre.",

@@ -97,7 +97,18 @@ export function smeDaPostaviOglas(input: {
  *
  * Vezuje se za TIP NALOGA, ne za indeks stvarnosti: ko je jednom verifikovan sme
  * da upisuje POEN i ako mu indeks kasnije padne ispod funkcionalnog praga.
+ *
+ * 🔴 Od seta 4.6.6 (R-01, odluka vlasnika) prepis je otvoren i članu čiji je
+ * IDENTITET UTVRĐEN povodom javne donacije (čl. 28 st. 6). Zatečena zabrana nije
+ * sprečavala ishod nego samo redosled: takav član sme da pokrene razgovor i da se
+ * sretne sa oglašivačem, a oglašivač ga na tom sastanku sme i potvrditi — pa se
+ * isti prepis izvršavao posle potvrde. Ono što OSTAJE zatvoreno do potvrđene
+ * stvarnosti su radnje upravljanja: aktiviranje i otpis ZRNA, glas i delegiranje,
+ * potvrđivanje drugih i nadzor.
+ *
+ * 🔴 Ne zvati sa `undefined` za drugi argument kad se podatak ima — izostavljen
+ * argument znači „identitet nije utvrđen" i tiho vraća staro ponašanje.
  */
-export function smeDaSalje(tipKorisnika: string): boolean {
-  return tipKorisnika !== "NEVERIFIKOVAN";
+export function smeDaSalje(tipKorisnika: string, identitetUtvrdjen = false): boolean {
+  return tipKorisnika !== "NEVERIFIKOVAN" || identitetUtvrdjen;
 }

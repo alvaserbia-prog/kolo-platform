@@ -46,7 +46,7 @@ Confirming others. When you confirm someone you genuinely know, 1,000 POEN is re
 
 Operational contribution. Work for the common good under a published task. Tasks are set by the Foundation in the initial phase, and once the module is activated by ZRNO holders and the Upper Kolo. When you carry out the task and a ZRNO holder confirms performance, POEN is recorded for you.
 
-Social programmes. If you belong to one of the groups the programmes cover — mothers and other primary carers, the elderly, special care, schooling — you submit an application. Once the Foundation approves it, the Protocol records POEN for you on a daily basis, without reporting individual activities.`,
+Social programmes. If you belong to one of the groups the programmes cover — mothers and other primary carers, the elderly, special support, schooling — you submit an application. Once the Foundation approves it, the Protocol records POEN for you on a daily basis, without reporting individual activities.`,
       },
       {
         id: 45,
@@ -554,7 +554,7 @@ All of this is set out in more detail in the Rules on the participation of child
         pitanje: `What are the Protocol Programmes and which ones exist?`,
         odgovor: `Some forms of participation cannot be recorded as individual exchanges, so the Protocol Programmes exist for them.
 
-The social programmes cover groups whose participation in the community is constant and diffuse: Support for Mothers (and other primary carers), Support for the Elderly, Special Care (people with disabilities) and Schooling. Once your application is confirmed, the Protocol records POEN for you automatically on a daily basis, without reporting individual activities. This is not social assistance or a benefit — it is a way for that kind of participation to have an equal place in the system as well.
+The social programmes cover groups whose participation in the community is constant and diffuse: Support for Mothers (and other primary carers), Support for the Elderly, Special Support (users in difficult circumstances) and Schooling. Once your application is confirmed, the Protocol records POEN for you automatically on a daily basis, without reporting individual activities. This is not social assistance or a benefit — it is a way for that kind of participation to have an equal place in the system as well.
 
 Alongside them, the Programmes also include contributions: contribution to exchange (a path of five steps for joining in the exchange), operational contribution (work for the common good through published tasks) and the children's contribution (children's participation in the children's space, described in the section "Children and parents"). Each is explained in its own question.
 
@@ -591,12 +591,18 @@ The application goes through the platform and is open to full members; POEN is t
       },
       {
         id: 18,
-        pitanje: `What is Special Care and how does one apply?`,
-        odgovor: `Special Care is a programme for people with disabilities.
+        pitanje: `What is Special Support and how does one apply?`,
+        odgovor: `Special Support is a programme for users in difficult circumstances. There are two grounds.
 
-The application asks only for the detail of the disability ruling — no medical documentation, no diagnosis, no medical history. The least that is necessary is taken, because this is sensitive data, and even that little is processed only with your explicit consent.
+The first is reduced capacity: you hold a decision of the competent authority establishing a degree of disability — including a decision of the work-capacity assessment commission — or, because of an acute or chronic illness, you are unable or substantially limited in taking part. If the person with reduced capacity is an adult member, the entitlement is theirs; if they are not a member, it belongs to whoever directly cares for them; if they are a minor, it belongs to the parent, until that person comes of age. One such situation gives one amount — the ground only decides in whose record it goes.
 
-The amount is fixed at 2,000 POEN per day, for as long as the status lasts.`,
+The second is loss of home: you lost your home, or the property you need to live, in a disaster, a fire, a flood, or forced displacement. That ground lasts twelve months from the event and expires by itself.
+
+The application asks only whether the decision EXISTS — not its content, not the degree, not the assessment of work capacity, not a diagnosis, not medical documentation. For illness and for loss of home the proof is your own declaration under full responsibility, without a single document, together with the attestation of those who attested to you in the chain.
+
+The amount is fixed at 2,000 POEN per day, the same on every ground. This programme is not mutually exclusive with Support for Mothers — you receive both, including where both concern the same child.
+
+Full members see that you receive Special Support and how much, because the community's ledger has to be open to checking. 🔴 But they do NOT see on which ground — and the programme covers both reduced capacity and loss of home, so the name says nothing. The ground is seen by you and by the person processing the application at the Foundation.`,
       },
       {
         id: 96,

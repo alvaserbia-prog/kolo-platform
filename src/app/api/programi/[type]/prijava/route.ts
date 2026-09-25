@@ -3,7 +3,7 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { ProgramType } from "@/generated/prisma/client";
+import { OsnovPodrske, ProgramType } from "@/generated/prisma/client";
 import { posaljiAdminAlert } from "@/lib/adminAlert";
 import { obavesti } from "@/lib/notifikacije";
 import { imaFunkcionalniPristup } from "@/lib/protokol/pristup";
@@ -22,6 +22,16 @@ import { prevedi } from "@/lib/prevod-servera";
 const DOZVOLJENI_TIPOVI: ProgramType[] = [
   "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE",
 ];
+
+/**
+ * Vrste dokaza u okviru osnova smanjene sposobnosti (čl. 12).
+ *
+ * 🔴 Nisu osnovi i ne smeju postati kolona ni oznaka na ekranu: razdvojeni od
+ * osnova, odali bi da je reč o zdravlju. Žive u `metadata`, koju vidi samo lice
+ * što obrađuje prijavu. Postoje zato što od njih zavisi rok — pravo po rešenju
+ * podleže godišnjoj reviziji, a zbog akutne bolesti traje šest meseci.
+ */
+const DOKAZI_SPOSOBNOSTI = ["RESENJE", "BOLEST_AKUTNA", "BOLEST_HRONICNA"];
 
 // POST /api/programi/[type]/prijava — prijava na socijalni program.
 // Uslov je indeks stvarnosti od najmanje 10% — jedna primljena potvrda (Pravilnik o
@@ -74,6 +84,38 @@ export async function POST(
 
   const metadata = buildMetadata(programType, body);
 
+  // Osnov je obavezan samo za Posebnu podršku — jedini program sa više osnova
+  // (čl. 12). Za ostale ostaje `null`.
+  //
+  // 🔴 Osnov se upisuje u sopstvenu kolonu, a NE PRIKAZUJE se nijednom korisniku
+  // (čl. 4 st. 5). Postoji zato što od njega zavisi trajanje prava: gubitak doma
+  // traje dvanaest meseci od događaja bez revizije, smanjena sposobnost podleže
+  // godišnjoj reviziji.
+  let osnov: OsnovPodrske | null = null;
+  if (programType === "POSEBNA_BRIGA") {
+    if (body.osnov !== "SMANJENA_SPOSOBNOST" && body.osnov !== "GUBITAK_DOMA")
+      return await greska("Izaberi osnov po kome ostvaruješ pravo.", 400);
+    osnov = body.osnov as OsnovPodrske;
+
+    // 🔴 Datum događaja je uslov, ne podatak uz prijavu: pravo po osnovu gubitka
+    // doma „traje dvanaest meseci OD DOGAĐAJA" (čl. 12), pa se rok bez njega ne
+    // može izračunati, a prijava posle isteka tog roka ne bi mogla ništa da
+    // donese — bila bi odobrena i istog dana obustavljena revizijom, što na
+    // ekranu izgleda kao kvar. Odbija se odmah, sa razlogom.
+    if (osnov === "GUBITAK_DOMA") {
+      const dogadjaj = new Date(String(body.datumDogadjaja ?? ""));
+      if (Number.isNaN(dogadjaj.getTime()))
+        return await greska("Unesi datum događaja.", 400);
+      const dana = (Date.now() - dogadjaj.getTime()) / (24 * 60 * 60 * 1000);
+      if (dana < 0) return await greska("Datum događaja ne može biti u budućnosti.", 400);
+      if (dana > 365)
+        return await greska(
+          "Pravo po osnovu gubitka doma traje dvanaest meseci od događaja, a taj rok je istekao.",
+          400,
+        );
+    }
+  }
+
   // Verifikatori koji će potvrđivati — svi koje podnosilac ima (najmanje jedan).
   const verifikatori = await dohvatiVerifikatore(prisma, session.user.id);
   if (verifikatori.length === 0)
@@ -108,6 +150,7 @@ export async function POST(
         data: {
           status: "PENDING",
           metadata,
+          osnov,
           pristanakVerifikatori: true,
           // 🔴 Ponovna prijava upisuje NOV pristanak — ne zadržava stari. Tekst se
           // u međuvremenu mogao promeniti, a i broj verifikatora se menja.
@@ -128,6 +171,7 @@ export async function POST(
           userId: session.user.id,
           type: programType,
           metadata,
+          osnov,
           pristanakVerifikatori: true,
           pristanakTekst,
           pristanakAt,
@@ -196,14 +240,36 @@ function buildMetadata(type: ProgramType, body: Record<string, unknown>): any {
     }
     case "PODRSKA_STARIJIMA":
       return { datumRodjenja: body.datumRodjenja as string };
-    case "POSEBNA_BRIGA":
-      // Dokaz statusa je rešenje o invaliditetu nadležnog organa (čl. 12). Minimizacija
-      // (čl. 14): evidentira se SAMO datum rešenja (donošenje + opcioni istek) — ne
-      // broj/organ, ne slobodan tekst, ne dijagnoza ni medicinska dokumentacija.
+    case "POSEBNA_BRIGA": {
+      // Dva osnova (čl. 12, set 4.6.7): smanjena sposobnost i gubitak doma.
+      //
+      // Minimizacija (čl. 14) je ista kao pre: kad se pravo ostvaruje po rešenju,
+      // beleži se SAMO datum rešenja i opcioni datum isteka — ne broj, ne organ,
+      // ne stepen invaliditeta, ne ocena radne sposobnosti, ne dijagnoza i nikakva
+      // medicinska dokumentacija. Uzima se POSTOJANJE rešenja, ne njegov sadržaj.
+      //
+      // 🔴 `dokaz` stoji u `metadata`, a ne u koloni `osnov`: razlika rešenje /
+      // akutna bolest / hronična bolest je bliža podatku o zdravlju od samog
+      // osnova, a `metadata` vidi isključivo lice koje obrađuje prijavu (čl. 4).
+      // Potrebna je jer od nje zavisi rok — akutna bolest traje šest meseci.
+      //
+      // 🔴 Od lica o kome se korisnik stara beleži se SAMO datum punoletstva, i
+      // samo kad je maloletno: čl. 12 traži da pravo tada prestane punoletstvom
+      // tog lica, a ništa više o njemu se „ne unosi u prijavu preko onoga što je
+      // neophodno za utvrđivanje osnova". Identitet i stanje tog lica se ne traže.
+      if (body.osnov === "GUBITAK_DOMA") {
+        return { datumDogadjaja: (body.datumDogadjaja as string) ?? "" };
+      }
+      const dokaz = DOKAZI_SPOSOBNOSTI.includes(body.dokaz as string)
+        ? (body.dokaz as string)
+        : "RESENJE";
       return {
-        datumResenja: (body.datumResenja as string) ?? "",
-        datumIsteka: (body.datumIsteka as string) ?? "",
+        dokaz,
+        datumResenja: dokaz === "RESENJE" ? ((body.datumResenja as string) ?? "") : "",
+        datumIsteka: dokaz === "RESENJE" ? ((body.datumIsteka as string) ?? "") : "",
+        punoletstvoAt: (body.punoletstvoAt as string) ?? "",
       };
+    }
     case "SKOLOVANJE":
       return { ustanova: (body.ustanova as string)?.trim() ?? "", program: (body.program as string)?.trim() ?? "" };
     default:

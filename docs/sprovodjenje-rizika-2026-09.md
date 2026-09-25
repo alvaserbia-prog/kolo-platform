@@ -11,6 +11,269 @@ i `docs/istorija-bumpova.md` (hronologija verzija akata).
 
 ---
 
+## 🔴 Socijalni programi izlaze iz skrivenog prikaza; Posebna briga postaje Posebna podrška (R-03, 25.09.2026, set 4.6.7)
+
+**Odluka vlasnika, i ona OBRĆE meru M-1 iz R-03.** Evidentiranje POEN-a po socijalnom
+programu **prikazuje se redovnim članovima** — pseudonim, naziv programa i iznos. Gostu
+i novom članu ostaje dnevni zbir po programu, a dan sa jednim korisnikom se i dalje
+preskače.
+
+### Obrazloženje vlasnika
+
+*„Ja mislim da ovi svi podaci treba da budu transparentni jer upravo akteri u zajednici
+ostali koji su produktivni treba da imaju uvida u emisiju svakog člana i da mogu da
+provere."* Uz to: *„ljudi koji žele da pomognu bolesnima treba da mogu da vide da svi
+koji dobijaju pomoć budu obuhvaćeni."* Iznos se prikazuje u punom obimu, sa svime što se
+iz njega izvodi — godina rođenja kod Podrške starijima, broj i uzrast dece kod Podrške
+majkama. Podnosilac na to pristaje pri prijavi, i pristanak izričito navodi **šta se iz
+iznosa može izvesti**.
+
+### 🔴 Zašto je program preimenovan, i zašto ime samo ne bi bilo dovoljno
+
+Zatečeno ime „Posebna briga" bilo je **sinonim za invalidnost** — akt je znao samo jedan
+osnov, pa je objavljen naziv bio objavljen zdravstveni podatak. Vlasnik je izabrao
+varijantu **(b)**: promeniti sam osnov tako da objavljena oznaka nije medicinska.
+
+🔴 **Ali spajanje osnova pod nov naziv samo po sebi NE donosi zaštitu** i to je zapisano
+da se ne bi ponovo tražilo: i invalidnost i bolest su zdravstveni podaci, pa bi ime koje
+pokriva samo njih dva i dalje kazivalo „zdravlje", samo ne koje. **Zaštitu nosi pravilo
+prikaza: objavljuje se PROGRAM, nikad podosnov.** Iza imena „Posebna podrška" stoje
+smanjena sposobnost (sam član, negovatelj, roditelj maloletnog lica) i gubitak doma —
+pet situacija, od kojih dve nisu zdravstvene. Tek to čini oznaku višeznačnom.
+
+### Osnovi i zašto su tako postavljeni
+
+**Smanjena sposobnost.** Rešenje nadležnog organa kojim je utvrđen stepen invaliditeta,
+**uključujući rešenje komisije za procenu radne sposobnosti** — vlasnikov nalaz, i on je
+rešio problem koji je ova sesija prijavila: predlog „trajno nesposoban za rad" bio je
+odbijen jer nema proverljivu granicu, a komisijsko rešenje **jeste** papir, pa se svodi
+na istu osnovicu. 🔴 Uzima se **postojanje** rešenja, nikad sadržaj: u rešenju piše šta
+čovek može da radi, a to je podatak o zdravlju i radnoj sposobnosti. Ni stepen se ne
+čuva — on je uslov, ne podatak koji nam posle treba.
+
+Bolest ulazi **uz branu „ne može ili je bitno ograničen da učestvuje"**. Bez nje program
+prima svakoga sa dijagnozom, a socijalni programi dele **jedan dnevni limit od 10%
+opticaja** sa operativnim doprinosom — `raspodelaKoeficijent` bi onda srazmerno smanjio
+iznos **svima**, uključujući majke, starije i školovanje. 🟡 Brana je vezana za
+**posledicu**, ne za dijagnozu, i zato je verifikator može potvrditi iz sopstvenog
+saznanja; „ima dijabetes" ne bi mogao ni da proveri ni da opovrgne.
+
+**Gubitak doma.** Nepogoda, požar, poplava **ili prinudna raseljenost**, kao **jedan**
+objavljen osnov. 🔴 Razdvojeni, raseljenost bi u maloj zajednici odala **nacionalnu
+pripadnost**, a ona je posebna kategorija po čl. 17 ZZPL — ista zamka kao bolest, samo
+posredna.
+
+**Ko prima.** Sam član kad je punoletan; **negovatelj** kad lice nije član; **roditelj**
+kad je lice maloletno, do njegovog punoletstva. 🔴 Poslednje je vlasnikova ispravka moje
+prve verzije, i praktično je i pravno čistija: da POEN ide detetu, završio bi u dečjem
+zapisu gde prepis iznad 5.000 čeka roditelja sedam dana, a teret nosi roditelj. Jedna
+situacija = jedno pravo; osnov određuje samo **u čiji zapis**.
+
+**Kumulacija sa Podrškom majkama je izričito dopuštena** (odluka vlasnika) — nega lica sa
+smanjenom sposobnošću i roditeljstvo su dva različita tereta. Samohrani roditelj **nije**
+uveden kao osnov, jer ga Podrška majkama već pokriva.
+
+### 🔴 Cena: DPIA R11 ide sa 6 na 9
+
+Rizik „otkrivanje pripadnosti posebnoj kategoriji" stajao je na 6 **izričito zato što** je
+pojedinačno evidentiranje bilo izvan prikaza: u samom redu je pisalo da se verovatnoća
+spušta sa 3 na 2 jer je krug primalaca time ograničen na sopstvene verifikatore, *„lica
+koja ga i inače lično poznaju"*, i da je **ranija ocena 3 počivala upravo na tome što taj
+krug nije bio ograničen**. Objavljivanjem redovnim članovima ta mera je ukinuta, pa se
+verovatnoća vraća na 3: **3 × 3 = 9.**
+
+Ostaje na **srednjem nivou (5–9), ali na njegovoj gornjoj granici.** Zbirovi se ne menjaju
+— pet srednjih, trinaest niskih, nijedan visok, pa se ne otvara pitanje konsultacije sa
+Poverenikom po čl. 55 ZZPL.
+
+🟡 **Gde je granica, da sledeća sesija ne nagađa:** to je 9 uz ocenu **težine 3**. Da se
+težina oceni sa 4 — a argument postoji, jer saznanje cele zajednice pogađa čoveka teže od
+saznanja pet komšija — bilo bi **12, dakle visok rizik**, i konsultacija sa Poverenikom bi
+postala pitanje. Težina je ostavljena na 3 jer je tako ocenjena i pre, i jer sam **obim
+kruga primalaca** taj dokument vodi kroz verovatnoću, ne kroz težinu. Stroža ocena je
+odluka vlasnika, ne sesije.
+
+### Šta je izmenjeno
+
+**Akti, set 4.6.7** (po 5 jezika): `programi_podrske_4_6_7` (čl. 3, Glava V, čl. 12 u
+celini, čl. 4 st. 4 i 5), `politika_4_6_7` (odeljak 4.6 i izuzeci od prikaza),
+`radnje_obrade_4_6_7` (radnja **br. 10** — kategorije lica, kategorije podataka, pravni
+osnov, primaoci, mere zaštite), `DPIA_4_6_7` (R11, mera u 5.6, rezidualni rizici).
+`Pravilnik` je dobio rečenicu o kvalifikovanim grupama i **ostao na 4.6.6**, jer dopuna
+seta koji nije objavljen ne menja šifru (pouka 2).
+
+🔴 **Registar je dobio NOVU kategoriju lica** — lice o kome se korisnik stara kad samo
+nije korisnik. O njemu se obrađuje samo to da postoji i, ako je maloletno, datum rođenja
+bez imena, radi trenutka u kome pravo prestaje. Bez toga bi obrada postojala a ne bi bila
+popisana.
+
+**Migracija:** `20260925120000_pristanak_4_6_7` — red `PolitikaVerzija` za ponovnu
+saglasnost. 🔴 Obavezna, ne kozmetička: ko je pristao na tekst koji je obećavao da se
+pojedinačno evidentiranje **ne objavljuje**, pristao je na uži prikaz. Uslovi čl. 40 i
+Politika čl. 16 traže i obaveštenje bez odlaganja.
+
+**Kod:** `labelPrograma` i napomena uz `OPIS_SOCIJALNOG_PROGRAMA` u `programi.ts`; copy u
+`messages/` i FAQ na svih pet jezika. 🔴 **Opis zapisa i dalje NE nosi naziv programa** —
+naziv se izvodi iz prijave. Opis je trajan i ide u GDPR izvoz, pa upisan naziv više nikad
+ne bi mogao da se suzi ako se odluka o prikazu promeni; prijava se povlačenjem pristanka
+briše i prikaz s njom nestaje.
+
+**Brane:** `pravni-dokumenti.test.ts` — četiri zaključane odredbe prepisane na novu
+formulaciju (nosiva mera je sada *izostavljanje osnova*, ne izostavljanje zapisa).
+🟡 Usput: `copy-ukinuto.test.ts` je uhvatio tri prevoda u kojima je nov FAQ tekst
+upotrebio „verified / верифицированные / hitelesített" — copy govori o **potvrdi**, ne o
+verifikaciji, i imenuje **status** („redovan član"), ne institut. Četvrti put da ta brana
+radi.
+
+### 🟢 Kod je dovršen istog dana (25.09.2026) — akt i ekran govore isto
+
+Tri stavke su bile otvorene kad je set otišao na test; sve tri su zatvorene pre objave.
+Zapisane su ovde zato što je **kako** su rešene ono što vezuje dalji rad.
+
+**1. `Transaction.enrollmentId` — VEZA, ne naziv programa.** Polje je nullable i pokazuje
+na `ProgramEnrollment`, `ON DELETE SET NULL`. 🔴 Naziv programa se **ne upisuje u zapis**
+i opis i dalje glasi samo „Socijalni program" (`OPIS_SOCIJALNOG_PROGRAMA`): zapis je
+trajan i ide u GDPR izvoz, pa upisan naziv se nikad više ne bi mogao **suziti** ako se
+odluka o prikazu promeni, dok prijava prestankom osnova nosi svoj prikaz sa sobom. Naziv
+se zato izvodi **pri čitanju**. Kaskadno brisanje bi oborilo zero-sum, otud `SetNull`.
+🔴 Zatečeni redovi ostaju `null` i **ne popunjavaju se naknadno** (pravilo 11) — stariji
+zapisi zato ne ulaze u pojedinačan prikaz nego ostaju u dnevnom zbiru, a zapis bez veze
+se iz pojedinačnog spiska **izbacuje**, jer bi pseudonim uz neimenovan „socijalni
+program" bio prikaz koji akt ne predviđa.
+
+**2. Odluka o prikazu živi na JEDNOM mestu — `src/lib/protokol/program-prikaz.ts`.**
+Iste zapise dižu tri upita (`/sistem`, `/api/pocetna/liste`, `/api/javno/feed`), a
+njihov razlaz je u ovom projektu **već proizveo kvar**: uslov o deci je postojao samo u
+feedu, pa je `/sistem` prikazivao pseudonime dece. Zato `uslovZapisaProtokola(verifikovan)`
+i `opisZapisaProtokola(...)`, a brana traži da kroz njih prođu **sva tri** i da nijedan ne
+drži sopstveni spisak tipova. `VEZA_PROGRAMA` dovlači **samo tip** prijave — ono što upit
+ne dovuče, prikaz ne može da oda. 🟡 Usput je nađen i ispravljen zatečen kvar u feedu:
+opis je stajao pod uslovom `t.fromWallet === null`, a `emitujPoen` **uvek** upisuje
+`fromWalletId = "banka-singleton"`, pa nijedna emisija nije pokazivala opis.
+
+**3. `ProgramEnrollment.osnov` postoji zbog ROKA, ne zbog prikaza.** Enum `OsnovPodrske`
+ima **dve** vrednosti, kako ih čl. 12 i nabraja. 🔴 Finija razlika — rešenje naspram
+izjave o akutnoj odnosno hroničnoj bolesti — **nije postala treća vrednost ni kolona**:
+razdvojena od osnova, odala bi da je reč o zdravlju. Živi u `metadata`, koju vidi samo
+lice što obrađuje prijavu. Rokovi su u čistoj funkciji `rokReverifikacije`: rešenje i
+hronična bolest 365 dana, **akutna bolest 183**, **gubitak doma 365 od DOGAĐAJA** (ne od
+odobravanja), uz dva gornja ograničenja iz istog člana — **punoletstvo** lica o kome se
+korisnik stara i **datum isteka rešenja**, koji se po čl. 12 i beleži a do tada se nigde
+nije koristio. Zatečena prijava bez osnova drži stari rok od 365 dana: promena pravila ne
+sme da skrati pravo odobreno pre nje.
+
+🔴 **Od lica o kome se korisnik stara beleži se SAMO datum punoletstva**, i samo kad je
+maloletno — čl. 12 traži da pravo tada prestane, a ništa više o tom licu „se ne unosi u
+prijavu preko onoga što je neophodno za utvrđivanje osnova".
+
+🔴 **Osnov ide isključivo superadminu**, istim gejtom kao uneti podaci: ne prikazuje se
+nijednom korisniku (čl. 4 st. 5), ali lice koje odlučuje mora da ga vidi — inače odlučuje
+ne videvši ono od čega zavisi rok, a to je isti razlog zbog kog su mu i uneti podaci
+otvoreni.
+
+🟡 **Prijava po osnovu gubitka doma se odbija ako je od događaja prošlo više od 365 dana.**
+Bez toga bi bila odobrena i istog dana obustavljena revizijom, što na ekranu izgleda kao
+kvar.
+
+🟡 **Gostu je dodat dnevni zbir po programu.** Čl. 4 st. 4 kaže da se „neprijavljenim
+licima i korisnicima čija stvarnost nije potvrđena prikazuje **isključivo** dnevni zbir",
+a njemu je do ovog seta izostajao i on — pa mu je proverljivost evidencije bila prazna.
+
+🟡 **`danaDoReverifikacije` više ne zovu rute** nego samo `rokReverifikacije`, kao svoju
+podrazumevanu vrednost. Ostavljena je da ne nastanu dve istine o istom roku.
+
+---
+
+## 🔴 Prepis POEN-a otvoren identifikovanom članu (R-01, 23.09.2026, set 4.6.6)
+
+**Odluka vlasnika.** Članu čiji je identitet utvrđen povodom javne donacije otvara se
+**prepis POEN-a** (Pravilnik čl. 28 st. 2 i st. 6, Uslovi čl. 14). Upis ZRNA ostaje
+otvoren kao i do sada. **Zatvoreni ostaju** aktiviranje i otpis ZRNA, glas i delegiranje
+u Gornjem Kolu, potvrđivanje drugih i nadzor, operativni doprinos, socijalni programi,
+kolektivna nabavka, pokroviteljstvo i kontakt oglašivača.
+
+### Razlog: zabrana nije sprečavala ishod nego samo redosled
+
+Obrazloženje vlasnika, i ono je tačno. Identifikovanom članu su **već bili otvoreni**
+POTRAŽNJA, pokretanje razgovora i pretraga članova. Znači: donira → nađe prodavca →
+dogovore se → sretnu se radi preuzimanja → **prodavac ga na tom sastanku sme i potvrditi**,
+jer ga je upoznao i na to ima pravo, a potvrda je u interesu obojice i ne krši nijedno
+pravilo → potvrđen je → prepis radi → plati. Isti ishod, isti par ljudi, isti susret.
+**Odbrana koja se zadovoljava zamenom mesta dvema radnjama je formalnost**, a formalnost
+koju svi rutinski zaobilaze je pred regulatorom slabija od nepostojanja pravila, jer
+praksa pokazuje da je pravilo ukrasno.
+
+🔴 **Drugi razlog, jači od prvog i mehanički.** Pre ove izmene je identifikovanom članu
+bio otvoren **upis ZRNA**, a zatvoreni prepis, otpis, nabavka i programi — dakle POEN mu
+je imao **tačno jednu upotrebu: ZRNO.** Sadašnji raspored nije sprečavao da novac kupi
+položaj, nego je novac **usmeravao isključivo ka položaju.** Potrošen POEN je POEN koji
+nije otišao u ZRNO, pa je zabrana trošenja bila podsticaj gomilanju — a gomilanje je put
+ka preuzimanju. Otvaranje prepisa stvara **alternativnu upotrebu** koja taj put drenira.
+
+### 🔴 Ocena: registar kaže 9, sesija procenjuje 6–7 — obe stoje
+
+Tabela ocena uz R-01 vodi varijantu **„sve mere + puna C (prepis otvoren)" na 9**, to jest
+na zatečenu ocenu: sve mere prestaju da vrede. **Ta ocena je zabeležena i ne briše se.**
+
+Procena ove sesije je **6–7**, sa ovim obrazloženjem: registar sam kaže da pod od 5 drži
+element *„lica ga prihvataju kao sredstvo razmene"*, koji je *„ispunjen bez obzira na sve
+mere"*. Definicija virtuelne valute traži i **prenosivost**, a ona je već ispunjena —
+**potvrđen član sme da kupi POEN donacijom po objavljenom koeficijentu i sme da ga
+prepiše.** Lanac *kupljeno → preneto → prihvaćeno kao sredstvo razmene* je dakle bio
+zatvoren u rukama jednog čoveka i pre ove izmene; opcija B ga nije prekidala nego
+**odlagala za jednu potvrdu**. Razlika između 9 i 6–7 je tačno onoliko koliko se ceni da
+je potvrda stvarna brana.
+
+🔴 **Sledeća sesija ne bira između dve ocene bez naloga** — beleže se obe, jer se
+razilaze u pretpostavci, ne u činjenici.
+
+### Šta ovo košta na drugim rizicima — imenovano
+
+1. **R-11 (prepis kao platna usluga / POEN kao elektronski novac), ocena 7, NEOBRAĐEN.**
+   Predmet tog rizika je doslovno prepis, pa je ovo trebalo da se odluči u njegovoj
+   obradi. Vlasnik je odlučio da se sprovede odmah. 🔴 **R-11 time ulazi u svoju obradu sa
+   izmenjenom polaznom tačkom** i to mora biti prvi podatak u njoj.
+2. **R-12 (pranje novca), ocena 7, neobrađen.** Otvoren prepis obara **R22-M2**
+   („uplatilac kao ključ za duplikat"), koju registar opisuje kao *najjeftiniju detekciju
+   koju imamo*: do sada je punjenje pet naloga tražilo pet uplatilaca, a sada je dovoljna
+   jedna donacija pa raspodela iznutra.
+3. **R-22 (jedna osoba — jedan korisnik se ne dokazuje ničim), ocena 7.** Deljenje na više
+   naloga i dalje nosi **konkavni koren** iz čl. 46: pet naloga po 100 ZRNA daje 50 glasova,
+   jedan sa 500 daje 22 — dakle koren **nagrađuje deljenje**. Glas i dalje traži potvrđenu
+   stvarnost, pa duplikat mora proći ceo drugi skup potvrda; to ostaje jedina brana, jer
+   koren ne brani ništa. Traži svoj potez.
+
+### Šta je izmenjeno
+
+**Akti (set 4.6.6, po 5 jezika):** `Pravilnik_4_6_6.md` — čl. 28 st. 3 (prepis dostupan i
+pre verifikacije korisniku iz st. 6), st. 6 (prepis ulazi u spisak otvorenih prava, uz
+obrazloženje da su to radnje učešća a ne upravljanja), st. 7 (prepis izlazi iz spiska
+zatvorenih radnji). `uslovi_koriscenja_4_6_6.md` — čl. 14, ista dva mesta, uz izričito
+nabrajanje onoga što ostaje vezano za potvrđenu stvarnost.
+
+🟢 **Whitepaper provera je NEGATIVNA i to je uspešna provera** (pravilo 17). Poglavlje o
+ažuriranju evidencije govori opšte („Korisnik može da inicira ažuriranje evidencije…") i
+nikad nije nosilo tvrdnju da identifikovan član prepis ne sme — nije ga trebalo dirati.
+
+**Kod:** `doprinos-pravila.ts` — `smeDaSalje(tipKorisnika, identitetUtvrdjen = false)`;
+🔴 izostavljen drugi argument znači „identitet nije utvrđen" i tiho vraća staro ponašanje,
+pa se ne sme zvati bez njega kad se podatak ima. `api/transfer/route.ts` i
+`api/profil/route.ts` (mera **P-2** — gašenje naloga je prepis i prati **isto** pravilo;
+da je ostalo strože, gašenje bi bilo jedini put na kome zabrana još važi, a to nije
+pravilo nego ostatak). `dozvole.ts` — napomena uz `smeProsireno` prepisana.
+
+🔴 **Nalaz usput: ekran POEN je nosio PREPISAN uslov** (`dbUser?.tipKorisnika !==
+"NEVERIFIKOVAN"`) umesto da čita pravilo. Da je ostao, ruta bi bila otvorena a dugme
+zatvoreno — čovek bi video kvar. Sada uvozi `smeDaSalje`; `select` je dopunjen sa
+`identitetUtvrdjenAt`. To je peti zapis iste pouke („ekran nije poslednja reč").
+
+**Brana:** `identifikovan-clan-izvor.test.ts` — provere prepisa prepisane u **oba smera**
+(otvoreno za utvrđen identitet i za potvrđenog, zatvoreno za nalog bez oboje, uključujući
+poziv bez drugog argumenta), nova provera da ekran **čita** pravilo, P-2 usklađen. Provere
+otpisa, aktiviranja i glasa **nisu menjane** — 36 provera prolazi. Pun set: 1191 test.
+
+---
+
 ## Ugovor o donaciji za svakog donatora (2026-09-08)
 
 Odluka vlasnika uz analizu rizika **R-04** (donacija sa rastućim koeficijentom —

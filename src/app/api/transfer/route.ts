@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
     // `Ucesnik`-a, pa nema odvojene provere.
     const dozvoljeno = smeDaPrepise(odUcesnik, kaUcesnik);
     if (!dozvoljeno.ok) return await greska(dozvoljeno.razlog, dozvoljeno.status);
-  } else if (!smeDaSalje(posiljac.tipKorisnika)) {
+  } else if (!smeDaSalje(posiljac.tipKorisnika, !!posiljac.identitetUtvrdjenAt)) {
     return await greska(
       "Dok si nov član, POEN može da se prepisuje u tvoj zapis. Prepis u tuđi zapis otvara se po potvrdi.",
       403,

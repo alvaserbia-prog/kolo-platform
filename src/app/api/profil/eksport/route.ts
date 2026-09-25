@@ -139,6 +139,11 @@ export async function GET() {
       select: {
         type: true,
         status: true,
+        // Osnov po kome je pravo ostvareno (čl. 12). Ne prikazuje se nijednom
+        // DRUGOM korisniku (čl. 4 st. 5), ali je podatak o samom podnosiocu i
+        // izvozu po pravu na pristup pripada — isti razlog zbog kog tu stoji i
+        // tekst pristanka.
+        osnov: true,
         dailyAmount: true,
         approvedAt: true,
         createdAt: true,

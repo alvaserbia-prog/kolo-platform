@@ -827,13 +827,26 @@
     "status_odbijen": "Rejected",
     "opis_majkama": "2,000 POEN/day per child · coefficients grow with number of children · 20 years",
     "opis_starijima": "1,000 + 100 × (age − 50) POEN/day · available to members from the age of 50",
-    "opis_posebna_briga": "2,000 POEN/day · persons with disabilities · decision of the competent authority",
+    "opis_posebna_briga": "2,000 POEN/day · reduced capacity or loss of home",
     "opis_skolovanje": "Amount set by admin · re-confirmation every 6 months",
     "isplaceno_ukupno": "Recorded under this programme: {iznos} POEN",
     "nepun_indeks": "A social programme requires at least one confirmation — a reality index of 10%. Everyone in your chain confirms that the eligibility condition is met before approval.",
     "posebna_briga_datum_resenja": "Date of disability determination decision",
     "posebna_briga_datum_isteka": "Expiry date of the decision (optional — leave empty if permanent)",
-    "posebna_briga_napomena2": "Only the date of the competent authority's decision is recorded — no decision number, authority name, medical documentation, or diagnosis is required.",
+    "posebna_briga_osnov": "Ground on which you qualify",
+    "posebna_briga_osnov_sposobnost": "Reduced capacity",
+    "posebna_briga_osnov_dom": "Loss of home",
+    "posebna_briga_osnov_napomena": "The ground is not displayed to any user. Other full members see the name of the programme and the amount, never how you came to qualify.",
+    "posebna_briga_dokaz": "What the ground rests on",
+    "posebna_briga_dokaz_resenje": "Decision of the competent authority",
+    "posebna_briga_dokaz_akutna": "Acute illness",
+    "posebna_briga_dokaz_hronicna": "Chronic illness",
+    "posebna_briga_dokaz_izjava": "The proof is your statement under full responsibility, not a document. A right based on acute illness lasts six months, so the application is filed again if the condition persists.",
+    "posebna_briga_punoletstvo": "Date on which the person in your care comes of age (leave empty if an adult)",
+    "posebna_briga_punoletstvo_napomena": "Only that date is asked for, because a right exercised for a minor ends when that person comes of age. Their name, condition and other details are not entered.",
+    "posebna_briga_datum_dogadjaja": "Date of the event (natural disaster, fire, flood or displacement)",
+    "posebna_briga_dom_napomena": "The proof is your statement under full responsibility. The right lasts twelve months from the event and ends when that period expires, without review.",
+    "posebna_briga_napomena2": "What counts is that the decision exists, not what it says: the decision number, the authority, the degree of disability, the assessment of working capacity, medical documentation and the diagnosis are not requested. The right is subject to annual review.",
     "pristanak_tekst": "I agree that {broj} people from my chain be asked to confirm, under full responsibility, that I meet the condition for this programme. They learn which programme it is — which may reveal information about health, family or age — but they do not see the data I entered. The record of POEN recorded under this programme is visible to all regular members alongside my pseudonym. The Foundation approves the application only once everyone has confirmed. I may withdraw my consent at any time.",
     "potvrde_naslov": "Confirmation requests",
     "potvrde_opis": "People you have confirmed have applied for a social programme and named you. Confirm, under full responsibility, that the person meets the condition, or explain why you cannot. You do not see the details they entered.",
@@ -1031,11 +1044,11 @@
     "otvoriDokument": "Open document →",
     "uslovi": {
       "naslov": "KOLO Platform Terms of Use",
-      "ver": "4.6.4"
+      "ver": "4.6.6"
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -1043,11 +1056,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
@@ -1059,7 +1072,7 @@
     },
     "pravilnik": {
       "naslov": "KOLO System Rulebooks",
-      "ver": "4.6.5",
+      "ver": "4.6.6",
       "sviPravilnici": "← All rulebooks",
       "pravilnici": "Rulebooks"
     },
@@ -1079,21 +1092,21 @@
       "pravilnikKoloSistem": "KOLO System Rulebook"
     },
     "meta_uslovi_title": "Terms of Use · KOLO",
-    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.6.4",
+    "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.6.6",
     "meta_privatnost_title": "Privacy Policy · KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.6.3",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.6.7",
     "meta_statut_title": "KOLO Foundation Statute · KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.6.3",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.6.7",
     "meta_radnje_title": "Register of Processing Activities · KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 4.6.3",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.6.7",
     "meta_rizici_title": "Risk Acceptance Statement · KOLO",
     "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.6.0",
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, version 4.6.2",
     "meta_pravilnik_title": "KOLO System Rulebooks · KOLO",
-    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.6.5",
+    "meta_pravilnik_desc": "Index of KOLO system rulebooks, version 4.6.6",
     "rb": {
       "kolo-sistem": {
         "naziv": "Rulebook on the KOLO System",
@@ -1125,7 +1138,7 @@
       },
       "programi-podrske": {
         "naziv": "Rulebook on Support Programmes",
-        "opis": "Social programmes (Support for Mothers, Support for the Elderly, Special Care, Schooling) — conditions, coefficients and confirmation from the chain. One attestation, that is a reality index of 10%, is enough for access."
+        "opis": "Social programmes (Support for Mothers, Support for the Elderly, Special Support, Schooling) — conditions, coefficients and confirmation from the chain. One attestation, that is a reality index of 10%, is enough for access."
       },
       "ucesce-dece": {
         "naziv": "Rulebook on the Participation of Children",
@@ -1711,7 +1724,7 @@
     "n5_opis": "A legal entity or a sole trader — a company, an association or a shop — signs a donation contract with the Foundation, in money, goods or services. The patron itself receives no POEN. The recognition is recorded for the owner who is a full member, or for the sole trader themselves, according to a table of seven levels.\nThe network needs money in order to run, and the terms of patronage are the same for every legal entity.",
     "n5_iznos": "7 levels · threshold RSD 10,000",
     "n4_naslov": "Social programmes",
-    "n4_opis": "Programmes for mothers and carers, the elderly, special care and schooling, in which approved users have POEN recorded every day. This is not social assistance in the sense of the law and does not affect any entitlements you have from the state.",
+    "n4_opis": "Programmes for mothers and carers, the elderly, special support and schooling, in which approved users have POEN recorded every day. This is not social assistance in the sense of the law and does not affect any entitlements you have from the state.",
     "n4_iznos": "recorded daily",
     "n3_naslov": "Operational contribution",
     "n3_opis": "Concrete work for the community. ZRNO holders — in the first phase the Foundation's Management Board — publish a task, you apply and carry it out, then they confirm it was done, and only then is POEN recorded.",

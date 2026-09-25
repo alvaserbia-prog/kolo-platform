@@ -19,12 +19,26 @@ export type OpisTransakcije = {
   parametri?: Record<string, string | number>;
 };
 
+/**
+ * Veze zapisa do onoga iz čega je nastao.
+ *
+ * 🔴 `enrollmentId` je veza, ne naziv programa (set 4.6.7, R-03). Čl. 4 st. 4
+ * Pravilnika o programima podrške traži da se evidentiranje po programu prikaže
+ * verifikovanim korisnicima uz naziv programa, a čl. 4 st. 5 da se osnov ne
+ * prikaže nikome. Naziv se zato izvodi iz prijave pri čitanju, dok opis zapisa
+ * i dalje glasi samo „Socijalni program": zapis je trajan i ide u GDPR izvoz.
+ */
+export type VezeZapisa = {
+  enrollmentId?: string | null;
+};
+
 export async function emitujPoen(
   toWalletId: string,
   amount: number,
   type: TransactionType,
   description?: string,
   opis?: OpisTransakcije,
+  veze?: VezeZapisa,
 ) {
   if (amount <= 0) throw new Error("Iznos emisije mora biti pozitivan.");
 
@@ -51,6 +65,7 @@ export async function emitujPoen(
         description,
         opisKljuc: opis?.kljuc,
         opisParametri: opis?.parametri,
+        enrollmentId: veze?.enrollmentId ?? null,
       },
     });
 

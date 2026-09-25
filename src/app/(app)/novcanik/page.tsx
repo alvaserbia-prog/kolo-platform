@@ -10,6 +10,7 @@ import { dohvatiZabelezeneKorake } from "@/lib/protokol/doprinos-razmeni";
 import PutanjaRazmene, { PutanjaSkeleton } from "./PutanjaRazmene";
 import { ucitajUcesnika } from "@/lib/protokol/deca";
 import { nalogRadi } from "@/lib/deca-pravila";
+import { smeDaSalje as smePrepisPravilo } from "@/lib/doprinos-pravila";
 import { rezervisanoZaNabavku } from "@/lib/protokol/nabavka";
 
 export default async function NovcanikPage({
@@ -34,7 +35,7 @@ export default async function NovcanikPage({
     }),
     prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { memberHash: true, tipKorisnika: true, maloletan: true },
+      select: { memberHash: true, tipKorisnika: true, maloletan: true, identitetUtvrdjenAt: true },
     }),
     // Zabeležen doprinos vidi SAMO vlasnik naloga (Pravilnik čl. 67) i nikad se
     // ne sabira sa stanjem — do evidentiranja to nije zapis POEN-a (čl. 40a st. 3).
@@ -55,9 +56,13 @@ export default async function NovcanikPage({
   // Detetu se stanje naloga čita iz veze sa roditeljem (čl. 4c), a ne iz tipa
   // korisnika — vidi napomenu uz `smeDaSalje` ispod.
   const stanjeDeteta = dbUser?.maloletan ? (await ucitajUcesnika(session.user.id))?.stanje : null;
-  const smeDaSalje = dbUser?.maloletan
+  // 🔴 Pravilo se NE prepisuje u ekran — čita se iz `smeDaSalje` (`doprinos-pravila`),
+  // isto mesto kroz koje odlučuje `/api/transfer`. Do seta 4.6.6 je ovde stajao
+  // prepisan uslov `tipKorisnika !== "NEVERIFIKOVAN"`, pa je ekran ostao stroži od
+  // rute u trenutku kad je ruta otvorena članu sa utvrđenim identitetom.
+  const smePrepis = dbUser?.maloletan
     ? nalogRadi(stanjeDeteta ?? "NA_CEKANJU")
-    : dbUser?.tipKorisnika !== "NEVERIFIKOVAN";
+    : smePrepisPravilo(dbUser?.tipKorisnika ?? "NEVERIFIKOVAN", !!dbUser?.identitetUtvrdjenAt);
 
   return (
     <div className="space-y-6">
@@ -82,8 +87,9 @@ export default async function NovcanikPage({
         // Maloletni nalog ne učestvuje u nabavci (čl. 4), pa reda ni nema.
         rezervisanoNabavka={maloletan ? 0 : rezervisano}
         maloletan={maloletan}
-        // Neverifikovani u ažuriranju evidencije učestvuje samo kao primalac
-        // (čl. 28 st. 2) — dugme za upis mu se ne prikazuje, uz objašnjenje zašto.
+        // Nov član u ažuriranju evidencije učestvuje samo kao primalac (čl. 28
+        // st. 2) — dugme za upis mu se ne prikazuje, uz objašnjenje zašto. Član čiji
+        // je identitet utvrđen povodom javne donacije prepis SME (čl. 28 st. 6).
         //
         // 🔴 Maloletni korisnik je IZUZETAK i mora se rešavati posebno. On je
         // `NEVERIFIKOVAN` u smislu šeme i to ostaje do punoletstva, jer dete
@@ -93,7 +99,7 @@ export default async function NovcanikPage({
         // (stanje „povezano"); to isto radi i `/api/transfer`, koji za svaki par
         // sa detetom odlučuje po `smeDaPrepise`. Ekran je do sada bio stroži od
         // rute: dugmeta nije bilo ni detetu u stanju „aktivno".
-        smeDaSalje={smeDaSalje}
+        smeDaSalje={smePrepis}
         razlogZabrane={dbUser?.maloletan ? "ceka_roditelja" : "neverifikovan"}
       />
 

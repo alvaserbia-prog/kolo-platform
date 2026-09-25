@@ -16,7 +16,7 @@
  *
  * 🟢 Zašto je dovoljno snimiti broj, a ne ceo tekst akta: pravilo bumpovanja
  * obezbeđuje da objavljen fajl nikad ne promeni sadržaj — šifra u imenu fajla JESTE
- * objava. `politika_4_6_3.md` zato i za deset godina govori ono što je govorio na
+ * objava. `politika_4_6_7.md` zato i za deset godina govori ono što je govorio na
  * dan davanja pristanka.
  *
  * 🔴 Pri svakom bumpu Uslova ili Politike menja se i ovo. Zaključano testom
@@ -32,17 +32,18 @@ export type Akt = {
 };
 
 export const AKT_USLOVI: Akt = {
+  // 4.6.6 — R-01: čl. 14 — prepis POEN-a otvoren članu sa utvrđenim identitetom
   // 4.6.4 — R-07: čl. 18 („iznos u POEN-ima" umesto „cena"), nov stav u čl. 20
   // (obaveze onoga ko nudi), dva nova stava u čl. 21 (dobra čiji je promet
   // ograničen; zabrana za maloletnog korisnika) i nov čl. 22b (odnos prema
   // propisima o zaštiti potrošača).
-  verzija: "4.6.4",
-  fajl: "uslovi_koriscenja_4_6_4.md",
+  verzija: "4.6.6",
+  fajl: "uslovi_koriscenja_4_6_6.md",
 };
 
 export const AKT_POLITIKA: Akt = {
-  verzija: "4.6.3",
-  fajl: "politika_4_6_3.md",
+  verzija: "4.6.7",
+  fajl: "politika_4_6_7.md",
 };
 
 /**

@@ -57,7 +57,7 @@ Mások megerősítése. Amikor megerősítesz valakit, akit valóban ismersz, 1.
 
 Működési hozzájárulás. Munka a közös jóért, közzétett feladat alapján. A feladatokat a kezdeti szakaszban az Alapítvány tűzi ki, aktiválás után pedig a ZRNO-tartók és a Felső Kolo. Amikor teljesíted a feladatot, és egy ZRNO-tartó megerősíti a teljesítést, POEN rögzül neked.
 
-Szociális programok. Ha a programok által lefedett csoportok valamelyikébe tartozol — anyák és más elsődleges gondviselők, idősek, különleges gondoskodás, tanulás —, kérelmet nyújtasz be. Miután az Alapítvány jóváhagyja, a Protokoll napi szinten rögzít neked POEN-t, az egyes tevékenységek bejelentése nélkül.`,
+Szociális programok. Ha a programok által lefedett csoportok valamelyikébe tartozol — anyák és más elsődleges gondviselők, idősek, különleges támogatás, tanulás —, kérelmet nyújtasz be. Miután az Alapítvány jóváhagyja, a Protokoll napi szinten rögzít neked POEN-t, az egyes tevékenységek bejelentése nélkül.`,
       },
       {
         id: 45,
@@ -565,7 +565,7 @@ Minderről részletesebben a gyermekek részvételéről szóló szabályzat ren
         pitanje: `Mik a Protokoll programjai, és melyek léteznek?`,
         odgovor: `A részvétel egyes formái nem rögzíthetők egyedi cserékként, ezért vannak rájuk a Protokoll programjai.
 
-A szociális programok azokat a csoportokat fedik le, amelyek részvétele a közösségben állandó és szétszórt: Anyák Támogatása (és más elsődleges gondviselőké), Idősek Támogatása, Különleges Gondoskodás (fogyatékossággal élők) és Tanulás. Amint a kérelmedet megerősítik, a Protokoll napi szinten, automatikusan rögzít neked POEN-t, az egyes tevékenységek bejelentése nélkül. Ez nem szociális segély és nem juttatás — ez az a mód, ahogyan az ilyen részvétel is egyenrangú helyet kap a rendszerben.
+A szociális programok azokat a csoportokat fedik le, amelyek részvétele a közösségben állandó és szétszórt: Anyák Támogatása (és más elsődleges gondviselőké), Idősek Támogatása, Különleges Támogatás (nehéz körülmények között élő felhasználók) és Tanulás. Amint a kérelmedet megerősítik, a Protokoll napi szinten, automatikusan rögzít neked POEN-t, az egyes tevékenységek bejelentése nélkül. Ez nem szociális segély és nem juttatás — ez az a mód, ahogyan az ilyen részvétel is egyenrangú helyet kap a rendszerben.
 
 Rajtuk kívül a Programokhoz tartoznak a hozzájárulások is: a cseréhez való hozzájárulás (ötlépcsős út a cserébe való bekapcsolódáshoz), a működési hozzájárulás (munka a közös jóért közzétett feladatokon keresztül) és a gyerekhozzájárulás (a gyerekek részvétele a gyerektérben, lásd a „Gyerekek és szülők" szakaszt). Mindegyiket külön kérdés magyarázza.
 
@@ -602,12 +602,18 @@ A jelentkezés a platformon keresztül megy, és a rendes tagok előtt áll nyit
       },
       {
         id: 18,
-        pitanje: `Mi a Különleges Gondoskodás és hogyan lehet jelentkezni?`,
-        odgovor: `A Különleges Gondoskodás a fogyatékossággal élők programja.
+        pitanje: `Mi a Különleges Támogatás és hogyan lehet jelentkezni?`,
+        odgovor: `A Különleges Támogatás a nehéz körülmények között élő felhasználók programja. Két jogalap van.
 
-A jelentkezéskor csak a rokkantsági határozatra vonatkozó adatot kérjük — nem orvosi dokumentációt, nem diagnózist, nem kórtörténetet. A lehető legkevesebbet vesszük el, mert érzékeny adatokról van szó, és még ez a kevés is kizárólag a kifejezett hozzájárulásoddal kerül feldolgozásra.
+Az első a csökkent képesség: van olyan határozatod az illetékes hatóságtól, amely a fogyatékosság fokát megállapította — ideértve a munkaképesség-értékelő bizottság határozatát is —, vagy akut, illetve krónikus betegség miatt nem tudsz részt venni, vagy ebben lényegesen korlátozott vagy. Ha a csökkent képességű személy felnőtt tag, a jogosultság az övé; ha nem tag, azé, aki közvetlenül gondoskodik róla; ha kiskorú, a szülőé, annak felnőttkorúvá válásáig. Egy ilyen helyzetből egy összeg jár — a jogalap csak azt dönti el, kinek a bejegyzésébe.
 
-Az összeg fix, napi 2.000 POEN, amíg a státusz tart.`,
+A második az otthon elvesztése: elemi csapásban, tűzvészben, árvízben vagy kényszerű lakóhelyelhagyás során elvesztetted otthonodat vagy az élethez szükséges vagyonodat. Ez a jogalap az esemény napjától tizenkét hónapig tart, és magától megszűnik.
+
+A jelentkezéskor csak azt kérdezzük, LÉTEZIK-e a határozat — nem a tartalmát, nem a fokot, nem a munkaképesség értékelését, nem a diagnózist, nem az orvosi dokumentációt. Betegség és otthonvesztés esetén az igazolás a teljes felelősség melletti nyilatkozatod, egyetlen okirat nélkül, azoknak a megerősítésével együtt, akik téged a láncban megerősítettek.
+
+Az összeg fix, napi 2.000 POEN, minden jogalap esetén ugyanannyi. Ez a program nem zárja ki az Anyák támogatását — mindkettőt megkapod, akkor is, ha mindkettő ugyanarra a gyermekre vonatkozik.
+
+A teljes jogú tagok látják, hogy Különleges Támogatást kapsz, és mennyit, mert a közösség nyilvántartásának ellenőrizhetőnek kell lennie. 🔴 De NEM látják, milyen jogalapon — a program pedig a csökkent képességet és az otthon elvesztését egyaránt magában foglalja, így a megnevezés semmit nem árul el. A jogalapot te látod, és az a személy, aki a kérelmet az Alapítványnál feldolgozza.`,
       },
       {
         id: 96,

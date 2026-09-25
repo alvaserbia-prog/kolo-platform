@@ -3,17 +3,78 @@ import { emitujPoen } from "./emisija";
 import { probajEvidentiratiPotvrde } from "./potvrda-poen";
 import { danObracuna } from "./obracunski-dan";
 import { FUNKCIONALNI_PRAG_INDEKSA } from "./dokaz-stvarnosti";
-import { ProgramType, TipKorisnika, TransactionType } from "@/generated/prisma/client";
+import { OsnovPodrske, ProgramType, TipKorisnika, TransactionType } from "@/generated/prisma/client";
 
 const PROTOKOL_WALLET_ID = "banka-singleton";
 
 // ── Reverifikacija / obustava socijalnih programa (Pravilnik o programima podrške) ──
 
-/** Broj dana do reverifikacije po tipu programa (null = nema periodične revizije). */
+/**
+ * Osnovni broj dana do reverifikacije po TIPU programa (null = nema periodične
+ * revizije).
+ *
+ * 🔴 Nije konačan rok i rute je ne zovu — zovu `rokReverifikacije`, koja kod
+ * Posebne podrške uzima u obzir i osnov (gubitak doma teče od događaja, akutna
+ * bolest traje šest meseci) i gornja ograničenja iz čl. 12. Ovde stoji podrazumevana
+ * vrednost i jedno mesto sa koga je `rokReverifikacije` čita, da ne nastanu dve
+ * istine o istom roku.
+ */
 export function danaDoReverifikacije(type: ProgramType): number | null {
   if (type === "POSEBNA_BRIGA") return 365; // godišnja revizija (čl. 12)
   if (type === "SKOLOVANJE") return 183; // po studijskoj godini (čl. 13)
   return null; // MAJKAMA/STARIJIMA — stabilne činjenice, bez periodične revizije
+}
+
+/**
+ * Konkretan rok reverifikacije jedne prijave (Pravilnik o programima podrške
+ * čl. 12, 13). Čista funkcija — vraća datum ili `null` kad roka nema.
+ *
+ * 🔴 Ovo, a ne `danaDoReverifikacije`, zovu rute: kod Posebne podrške rok zavisi
+ * od OSNOVA, a osnov se ne vidi iz tipa programa. Čl. 12 razlikuje tri roka:
+ *  - smanjena sposobnost po rešenju → godišnja revizija;
+ *  - smanjena sposobnost zbog akutne bolesti → šest meseci, pa ponovna prijava;
+ *  - gubitak doma → dvanaest meseci **od događaja**, bez revizije.
+ *
+ * 🔴 Dva gornja ograničenja, oba iz čl. 12: pravo za maloletno lice prestaje
+ * punoletstvom tog lica, a pravo po rešenju ne može nadživeti sam akt, pa datum
+ * isteka rešenja — koji se po istom članu i beleži — obara rok kad je bliži.
+ * Beleži se samo datum, nikad sadržaj rešenja.
+ *
+ * Zatečena prijava bez osnova drži stari rok od 365 dana: promena pravila ne sme
+ * da skrati pravo koje je odobreno pre nje.
+ */
+export function rokReverifikacije(
+  prijava: { type: ProgramType; osnov: OsnovPodrske | null; metadata: unknown },
+  odKada: Date,
+): Date | null {
+  const dan = 24 * 60 * 60 * 1000;
+  const pomeri = (osnovica: Date, dana: number) => new Date(osnovica.getTime() + dana * dan);
+
+  if (prijava.type !== "POSEBNA_BRIGA") {
+    const dana = danaDoReverifikacije(prijava.type);
+    return dana == null ? null : pomeri(odKada, dana);
+  }
+
+  const meta = (prijava.metadata ?? {}) as Record<string, unknown>;
+  const datum = (kljuc: string): Date | null => {
+    const v = meta[kljuc];
+    if (typeof v !== "string" || v.trim() === "") return null;
+    const d = new Date(v);
+    return Number.isNaN(d.getTime()) ? null : d;
+  };
+
+  if (prijava.osnov === "GUBITAK_DOMA") {
+    // „Traje dvanaest meseci **od događaja**" — ne od odobravanja. Bez datuma
+    // događaja rok teče od odobravanja, da pravo ne ostane bez roka.
+    return pomeri(datum("datumDogadjaja") ?? odKada, 365);
+  }
+
+  const akutna = meta.dokaz === "BOLEST_AKUTNA";
+  let rok = pomeri(odKada, akutna ? 183 : 365);
+  for (const gornja of [datum("punoletstvoAt"), akutna ? null : datum("datumIsteka")]) {
+    if (gornja && gornja.getTime() < rok.getTime()) rok = gornja;
+  }
+  return rok;
 }
 
 export type RevizijaRazlog = "revizija" | "indeks";
@@ -219,12 +280,15 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
     const emitAmount = evidentiraniPoen(item.amount, koeficijent);
 
     if (emitAmount > 0) {
-      // 🔴 Opis socijalnog programa NE imenuje program (R-03, mera M-1). Naziv
-      // („Posebna briga", „Podrška starijima") je podatak iz posebne kategorije
-      // po ZZPL čl. 17, a zapis o emisiji je trajan i ide u javne prikaze i u
-      // GDPR izvoz. Umesto naziva stoji opšta oznaka; razlaganje po programu
-      // vidi sam korisnik na kartici programa (`GET /api/programi`), a Fondacija
-      // u admin panelu.
+      // 🔴 Opis socijalnog programa NE imenuje program, i to OSTAJE i posle seta
+      // 4.6.7, koji je naziv programa otvorio verifikovanim članovima. Razlika je
+      // u tome ODAKLE naziv dolazi: iz prijave na program, ne iz opisa zapisa.
+      // Opis je trajan i ide u GDPR izvoz, pa upisan naziv više nikad ne bi mogao
+      // da se suzi ako se odluka o prikazu promeni; prijava se povlačenjem
+      // pristanka briše, i prikaz s njom nestaje. Isto pravilo kao kod snimljenog
+      // teksta ugovora: ono što je trajno mora da nosi najmanje što je dovoljno.
+      // Razlaganje po OSNOVU (smanjena sposobnost / gubitak doma) ne izlazi ni
+      // verifikovanom članu — vidi ga sam korisnik i lice koje obrađuje prijavu.
       //
       // 🔴 Ovo obara odluku od 07.09.2026. („mora biti osnov programa i tip") —
       // tada se nije znalo da iznos sam invertuje godište i broj dece, pa je
@@ -240,7 +304,12 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
         jeOperativni ? `Program ${labelPrograma(item.type)}` : OPIS_SOCIJALNOG_PROGRAMA,
         jeOperativni
           ? { kljuc: "transakcije.program", parametri: { program: labelPrograma(item.type) } }
-          : { kljuc: "transakcije.socijalni_program" }
+          : { kljuc: "transakcije.socijalni_program" },
+        // 🔴 Veza do prijave, ne naziv programa u opisu. Iz nje se naziv izvodi pri
+        // čitanju, za verifikovanog posmatrača (čl. 4 st. 4) — a prestankom prijave
+        // prikaz nestaje s njom. Operativni doprinos nema prijavu na program:
+        // prijavljuje se na konkretan zadatak, pa mu je veza `undefined`.
+        jeOperativni ? undefined : { enrollmentId: item.enrollmentId }
       );
 
       // 🔴 SAMO operativni doprinos otključava POEN po potvrdi (dokaz stvarnosti
@@ -370,7 +439,7 @@ export function labelPrograma(type: ProgramType): string {
     PED:       "Operativni doprinos",
     PODRSKA_MAJKAMA:    "Podrška majkama",
     PODRSKA_STARIJIMA:  "Podrška starijima",
-    POSEBNA_BRIGA:      "Posebna briga",
+    POSEBNA_BRIGA:      "Posebna podrška",
     SKOLOVANJE:         "Školovanje",
   };
   return mapa[type];

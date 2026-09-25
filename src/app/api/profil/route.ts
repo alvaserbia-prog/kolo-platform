@@ -280,12 +280,13 @@ export async function DELETE(req: NextRequest) {
   const svezWallet = await prisma.wallet.findUnique({ where: { userId } });
   const balans = svezWallet?.balance ?? 0;
 
-  // 🔴 Prenos POEN-a drugom korisniku pri gašenju naloga je PREPIS, i zato ga sme
-  // samo redovan član (mera P-2 uz R-01). Član koji nije potvrđen — uključujući
-  // onoga čiji je identitet utvrđen na donatorskom putu — prepis ne inicira
-  // (čl. 28 st. 2); da mu je ovde dozvoljen, zabrana bi se zaobilazila u jednom
-  // potezu: ugasi nalog i sve prepiši kome hoćeš. Njemu POEN ide Protokolu.
-  const smeDaPrenese = smeDaSalje(user.tipKorisnika);
+  // 🔴 Prenos POEN-a drugom korisniku pri gašenju naloga je PREPIS, pa prati
+  // ISTO pravilo kao prepis (mera P-2 uz R-01) — nikad svoje. Od seta 4.6.6 to
+  // znači: sme redovan član i član čiji je identitet utvrđen povodom javne
+  // donacije; nalogu bez ijednog od toga POEN ide Protokolu. Da je ovde stroži
+  // od `/api/transfer`, gašenje naloga bi bilo jedini put na kome zabrana još
+  // važi, a to nije pravilo nego ostatak.
+  const smeDaPrenese = smeDaSalje(user.tipKorisnika, !!user.identitetUtvrdjenAt);
   if (primalacPseudonim && !smeDaPrenese) {
     return await greska(
       "Prenos POEN-a drugom korisniku pri gašenju naloga može da izvrši samo potvrđen član (čl. 28 st. 2). Tvoj zapis se poništava uz protivzapis Protokola.",

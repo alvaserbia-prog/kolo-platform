@@ -184,6 +184,17 @@ enum ProgramType {
   SKOLOVANJE
 }
 
+/// Osnov prava u programu Posebna podrška (Pravilnik o programima podrške čl. 12).
+///
+/// 🔴 Dva osnova, kako ih akt i nabraja. Akutna i hronična bolest NISU treći osnov
+/// nego deo smanjene sposobnosti: razdvojeni, naziv programa bi odao da je reč o
+/// zdravlju. Isto je i razlog što prinudna raseljenost stoji uz nepogodu — sama,
+/// odala bi nacionalnu pripadnost.
+enum OsnovPodrske {
+  SMANJENA_SPOSOBNOST
+  GUBITAK_DOMA
+}
+
 enum EnrollmentStatus {
   PENDING
   ACTIVE
@@ -812,8 +823,29 @@ model Transaction {
   opisParametri Json?
   createdAt     DateTime        @default(now())
 
+  /// Prijava na socijalni program po kojoj je zapis nastao (set 4.6.7, R-03).
+  ///
+  /// 🔴 Ovde stoji VEZA, a ne naziv programa. Naziv se izvodi iz prijave, jer je
+  /// zapis transakcije trajan i ide u GDPR izvoz — upisan naziv se više nikad ne
+  /// bi mogao suziti ako se odluka o prikazu promeni, dok prijava prestankom
+  /// osnova nosi svoj prikaz sa sobom. Isto pravilo po kome opis zapisa i dalje
+  /// glasi samo „Socijalni program" (`OPIS_SOCIJALNOG_PROGRAMA`).
+  ///
+  /// 🔴 Zatečeni redovi ostaju `null` i NE popunjavaju se naknadno (pravilo o
+  /// snimljenom tekstu): veza koja nije postojala u svom trenutku ne sme se
+  /// izmisliti danas. Posledica je da stariji zapisi ne ulaze u pojedinačan
+  /// prikaz — ulaze u dnevni zbir, kao i do sada.
+  ///
+  /// `onDelete: SetNull` — brisanjem prijave (prestanak svojstva korisnika, čl. 34)
+  /// gasi se prikaz, a sam zapis ostaje. Kaskadno brisanje zapisa oborilo bi
+  /// zero-sum.
+  enrollmentId  String?
+  enrollment    ProgramEnrollment? @relation(fields: [enrollmentId], references: [id], onDelete: SetNull)
+
   /// Prijava da razmena povodom ovog prepisa nije ispunjena (najviše jedna).
   prijavaRazmene PrijavaRazmene?
+
+  @@index([type, enrollmentId])
 }
 
 model Krug {
@@ -1228,9 +1260,28 @@ model ProgramEnrollment {
   /// „Socijalni program" i ne zna koji je koji. Razlaganje se zato prikazuje na
   /// kartici programa, gde mu je i kontekst.
   isplacenoPoen         Int              @default(0)
+  /// Osnov po kome je pravo ostvareno u programu Posebna podrška (čl. 12).
+  ///
+  /// 🔴 Osnov se NE PRIKAZUJE nijednom korisniku (čl. 4 st. 5) — ni verifikovanom,
+  /// kome je set 4.6.7 otvorio naziv programa i iznos. Program obuhvata i smanjenu
+  /// sposobnost i gubitak doma, pa objavljen naziv ne kazuje koji je osnov u
+  /// pitanju; prikaz osnova bio bi prikaz podatka o zdravlju, odnosno o prinudnoj
+  /// raseljenosti, koja je blizu podatka o nacionalnoj pripadnosti.
+  ///
+  /// Postoji zato što od osnova zavisi TRAJANJE prava (čl. 12): smanjena sposobnost
+  /// podleže godišnjoj reviziji, gubitak doma traje dvanaest meseci od događaja bez
+  /// revizije. Finija razlika unutar smanjene sposobnosti (rešenje naspram izjave o
+  /// akutnoj bolesti, koja traje šest meseci) živi u `metadata`, koju vidi samo
+  /// lice što obrađuje prijavu — ona je bliža podatku o zdravlju od samog osnova.
+  ///
+  /// `null` za ostale programe i za zatečene prijave.
+  osnov                 OsnovPodrske?
   createdAt             DateTime         @default(now())
   updatedAt             DateTime         @updatedAt
   potvrde               ProgramPotvrda[]
+  /// Zapisi POEN-a evidentirani po ovoj prijavi (set 4.6.7) — iz njih se izvodi
+  /// naziv programa u spisku, jer ga sam zapis ne nosi.
+  transakcije           Transaction[]
 
   @@unique([userId, type])
   @@index([status, type])

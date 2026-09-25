@@ -1,13 +1,13 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { getLocale } from "next-intl/server";
-import { opisTransakcije } from "@/lib/prevod-servera";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { nivoZaKumulativ } from "@/lib/protokol/donacija";
 import { dohvatiSaldoFondacije } from "@/lib/protokol/fondacija";
 import { BEZ_DECE } from "@/lib/protokol/deca";
 import { dnevniPregledPrograma, labelPrograma } from "@/lib/protokol/programi";
+import { uslovZapisaProtokola, opisZapisaProtokola, VEZA_PROGRAMA } from "@/lib/protokol/program-prikaz";
 import { USLOV_AKTIVNO_DETE } from "@/lib/protokol/skole";
 import { USLOV_RAZMENE } from "@/lib/razmena-brojac-pravila";
 import SistemKlijent from "./SistemKlijent";
@@ -74,13 +74,14 @@ export default async function SistemPage({
     // korisnička zapisa, ali je akt Fondacije, ne razmena.
     prisma.transaction.findMany({
       where: {
-        type: { notIn: ["TRANSFER", "EMISIJA_PROGRAM"] },
-        // 🔴 Socijalni programi ne izlaze pojedinačno (R-03, mera M-1) — naziv
-        // programa je posebna kategorija (ZZPL čl. 17), a iznos sam invertuje
-        // godište i broj dece. Umesto redova stoji dnevni zbir po programu
-        // (`dnevniPregledPrograma`). Operativni doprinos je na sopstvenom tipu
-        // `EMISIJA_OPERATIVNI` i ostaje vidljiv.
-        //
+        // 🔴 Zapis socijalnog programa ulazi u spisak samo verifikovanom
+        // posmatraču (Pravilnik o programima podrške čl. 4 st. 4, set 4.6.7),
+        // i uslov za to stoji na JEDNOM mestu — `uslovZapisaProtokola`. Isti
+        // uslov koriste `/api/pocetna/liste` i `/api/javno/feed`; prepisan ovde,
+        // razišao bi se pri prvoj sledećoj izmeni. Osnov po kome je pravo
+        // ostvareno se ne prikazuje nikome (čl. 4 st. 5) i upit ga ne dovlači.
+        // Operativni doprinos je na sopstvenom tipu `EMISIJA_OPERATIVNI`.
+        ...uslovZapisaProtokola(verified),
         // 🔴 Deca izlaze iz spiska, kao i u `/api/javno/feed`. Ovaj upit tu
         // proveru nije imao, pa je pseudonim deteta izlazio uz emisije iz dečjeg
         // prostora — dok isti podatak feed izričito krije (Modul Deca, čl. 13).
@@ -93,6 +94,7 @@ export default async function SistemPage({
       orderBy: { createdAt: "desc" },
       take: 100,
       include: {
+        ...VEZA_PROGRAMA,
         fromWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
         toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
       },
@@ -241,11 +243,15 @@ export default async function SistemPage({
   const danasLimit = danasEmisija?.limit ?? Math.floor(opticaj * 0.1);
 
   const locale = await getLocale();
-  const zaPrikaz = (t: (typeof protokolZapisi)[number]) => ({
+  // Union, jer isti mapper služi oba spiska: zapisi Protokola nose vezu do prijave
+  // na program, prepisi (`TRANSFER`) je po prirodi ne mogu imati.
+  const zaPrikaz = (t: (typeof protokolZapisi)[number] | (typeof razmeneZapisi)[number]) => ({
     id: t.id,
     amount: t.amount,
     type: t.type,
-    description: opisTransakcije(locale, t),
+    // 🔴 Naziv socijalnog programa se sklapa PRI ČITANJU, iz prijave, i samo za
+    // verifikovanog posmatrača — u zapisu i dalje stoji opšta oznaka.
+    description: opisZapisaProtokola(locale, t, verified),
     createdAt: t.createdAt.toISOString(),
     fromPseudonim: t.fromWallet?.user?.pseudonim ?? "Protokol",
     fromId: t.fromWallet?.user?.id ?? null,

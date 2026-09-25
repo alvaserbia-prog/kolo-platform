@@ -99,6 +99,16 @@ interface PendingEnrollment {
   type: string;
   label: string;
   metadata: Record<string, unknown> | null;
+  /**
+   * Osnov po kome je pravo ostvareno u Posebnoj podršci (čl. 12).
+   *
+   * 🔴 Ide ISKLJUČIVO superadminu, uz `metadata`: osnov se ne prikazuje nijednom
+   * korisniku (čl. 4 st. 5), a „razlaganje po osnovu dostupno je samom korisniku
+   * i licu koje u Fondaciji obrađuje prijavu". Bez njega bi superadmin odlučivao
+   * ne videvši ono od čega zavisi rok — odlučivanje na slepo, isti razlog zbog
+   * kog su mu i uneti podaci otvoreni.
+   */
+  osnov: string | null;
   createdAt: string;
 }
 
@@ -1117,7 +1127,10 @@ function EnrollmentKartica({ e, sme, onOdobri, onOdbij }: {
   const t = useTranslations("admin");
   const [dailyAmount, setDailyAmount] = useState("");
 
-  const metaLines = e.metadata ? Object.entries(e.metadata).map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join(" · ") : "";
+  const metaLines = [
+    e.osnov ? `osnov: ${e.osnov}` : null,
+    e.metadata ? Object.entries(e.metadata).map(([k, v]) => `${k}: ${JSON.stringify(v)}`).join(" · ") : null,
+  ].filter(Boolean).join(" · ");
 
   return (
     <div className="bg-white rounded-2xl border border-kolo-border px-5 py-4 space-y-3">

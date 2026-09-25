@@ -827,13 +827,26 @@
     "status_odbijen": "Odbijen",
     "opis_majkama": "2.000 POEN/dan po djetetu · koeficijenti rastu s brojem djece · trajanje 20 god.",
     "opis_starijima": "1.000 + 100 × (godine − 50) POEN/dan · dostupno članovima od 50 godina",
-    "opis_posebna_briga": "2.000 POEN/dan · osobe s invaliditetom · rješenje nadležnog tijela",
+    "opis_posebna_briga": "2.000 POEN/dan · smanjena sposobnost ili gubitak doma",
     "opis_skolovanje": "Iznos postavlja admin · ponovna provjera svakih 6 mjeseci",
     "isplaceno_ukupno": "Evidentirano po ovom programu: {iznos} POEN",
     "nepun_indeks": "Za socijalni program potrebna je najmanje jedna potvrda, indeks stvarnosti od 10 %. Cijeli tvoj lanac potvrđuje ispunjenost uvjeta prije odobravanja.",
     "posebna_briga_datum_resenja": "Datum donošenja rješenja o invaliditetu",
     "posebna_briga_datum_isteka": "Datum isteka rješenja (opcionalno, ostavi prazno ako je trajno)",
-    "posebna_briga_napomena2": "Evidentira se samo datum rješenja nadležnog tijela, ne traži se broj rješenja, naziv tijela, medicinska dokumentacija ni dijagnoza.",
+    "posebna_briga_osnov": "Osnova po kojoj ostvaruješ pravo",
+    "posebna_briga_osnov_sposobnost": "Smanjena sposobnost",
+    "posebna_briga_osnov_dom": "Gubitak doma",
+    "posebna_briga_osnov_napomena": "Osnova se ne prikazuje nijednom korisniku. Ostali redovni članovi vide naziv programa i iznos, nikad po čemu si ga ostvario.",
+    "posebna_briga_dokaz": "Na čemu se osnova zasniva",
+    "posebna_briga_dokaz_resenje": "Rješenje nadležnog tijela",
+    "posebna_briga_dokaz_akutna": "Akutna bolest",
+    "posebna_briga_dokaz_hronicna": "Kronična bolest",
+    "posebna_briga_dokaz_izjava": "Dokaz je tvoja izjava pod punom odgovornošću, ne isprava. Pravo zbog akutne bolesti traje šest mjeseci, pa se prijava podnosi ponovno ako stanje potraje.",
+    "posebna_briga_punoletstvo": "Datum punoljetnosti osobe o kojoj se brineš (prazno ako je punoljetna)",
+    "posebna_briga_punoletstvo_napomena": "Traži se samo taj datum, jer pravo za maloljetnu osobu prestaje njezinom punoljetnošću. Ime, stanje i ostali podaci o toj osobi ne unose se.",
+    "posebna_briga_datum_dogadjaja": "Datum događaja (elementarna nepogoda, požar, poplava ili raseljenje)",
+    "posebna_briga_dom_napomena": "Dokaz je tvoja izjava pod punom odgovornošću. Pravo traje dvanaest mjeseci od događaja i prestaje istekom toga roka, bez revizije.",
+    "posebna_briga_napomena2": "Uzima se postojanje rješenja, ne njegov sadržaj: ne traže se broj rješenja, naziv tijela, stupanj invaliditeta, ocjena radne sposobnosti, medicinska dokumentacija ni dijagnoza. Pravo podliježe godišnjoj reviziji.",
     "pristanak_tekst": "Pristajem da {broj} ljudi iz mojeg lanca bude zamoljeno da pod punom odgovornošću potvrdi da ispunjavam uvjet za ovaj program. Oni saznaju o kojem je programu riječ — što može otkriti podatak o zdravlju, obitelji ili godinama — ali ne vide unesene podatke. Zapis o evidentiranju POEN-a po ovom programu vidljiv je svim redovnim članovima uz moj pseudonim. Prijavu odobrava Zaklada tek kada svi potvrde. Privolu mogu povući u svakom trenutku.",
     "potvrde_naslov": "Zahtjevi za potvrdu",
     "potvrde_opis": "Ljudi koje si potvrdio prijavili su se za socijalni program i naveli tebe. Potvrdi pod punom odgovornošću da osoba ispunjava uvjet, ili obrazloži zašto ne možeš. Ne vidiš unesene podatke prijave.",
@@ -1031,11 +1044,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uvjeti korištenja KOLO platforme",
-      "ver": "4.6.4"
+      "ver": "4.6.6"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -1043,11 +1056,11 @@
     },
     "dpia": {
       "naslov": "DPIA. Procjena učinka na zaštitu osobnih podataka",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade osobnih podataka",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "rizici": {
       "naslov": "Izjava o prihvaćanju rizika",
@@ -1059,7 +1072,7 @@
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sustava",
-      "ver": "4.6.5",
+      "ver": "4.6.6",
       "sviPravilnici": "← Svi pravilnici",
       "pravilnici": "Pravilnici"
     },
@@ -1079,21 +1092,21 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sustavu"
     },
     "meta_uslovi_title": "Uvjeti korištenja · KOLO",
-    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.6.4",
+    "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.6.6",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.3",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.7",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.6.3",
+    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.6.7",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.6.3",
+    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.6.7",
     "meta_rizici_title": "Izjava o prihvaćanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.6.0",
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.2",
     "meta_pravilnik_title": "Pravilnici KOLO sustava · KOLO",
-    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.6.5",
+    "meta_pravilnik_desc": "Indeks pravilnika KOLO sustava, verzija 4.6.6",
     "rb": {
       "kolo-sistem": {
         "naziv": "Pravilnik o KOLO sustavu",
@@ -1125,7 +1138,7 @@
       },
       "programi-podrske": {
         "naziv": "Pravilnik o programima podrške",
-        "opis": "Socijalni programi (Podrška majkama, Podrška starijima, Posebna briga, Školovanje), uvjeti, koeficijenti i potvrda iz lanca. Za pristup je dovoljna jedna potvrda, odnosno indeks stvarnosti od 10%."
+        "opis": "Socijalni programi (Podrška majkama, Podrška starijima, Posebna podrška, Školovanje), uvjeti, koeficijenti i potvrda iz lanca. Za pristup je dovoljna jedna potvrda, odnosno indeks stvarnosti od 10%."
       },
       "ucesce-dece": {
         "naziv": "Pravilnik o sudjelovanju djece",
@@ -1711,7 +1724,7 @@
     "n5_opis": "Pravna osoba ili obrtnik, tvrtka, udruga ili obrt, potpisuje sa Fondacijom ugovor o donaciji u novcu, robi ili uslugama. Sam pokrovitelj ne dobiva POEN. Priznanje se upisuje vlasniku koji je redovan član, odnosno samom obrtniku, po tablici sa sedam razina.\nMreži je potreban novac da bi radila, a uvjeti za pokroviteljstvo isti su za svaku pravnu osobu.",
     "n5_iznos": "7 razina · prag 10.000 RSD",
     "n4_naslov": "Socijalni programi",
-    "n4_opis": "Programi za majke i skrbnike, starije, posebnu skrb i školovanje, u kojima se odobrenim korisnicima POEN upisuje svakog dana. Ovo nije socijalna pomoć u smislu propisa i ne utječe na prava koja ostvaruješ kod države.",
+    "n4_opis": "Programi za majke i skrbnike, starije, posebnu potporu i školovanje, u kojima se odobrenim korisnicima POEN upisuje svakog dana. Ovo nije socijalna pomoć u smislu propisa i ne utječe na prava koja ostvaruješ kod države.",
     "n4_iznos": "dnevna evidencija",
     "n3_naslov": "Operativni doprinos",
     "n3_opis": "Konkretan rad za zajednicu. Nositelji ZRNA, a u prvoj fazi Upravni odbor Fondacije, objave zadatak, ti se prijaviš i izvršiš ga, pa oni potvrde izvršenje i tek tada se POEN upisuje.",

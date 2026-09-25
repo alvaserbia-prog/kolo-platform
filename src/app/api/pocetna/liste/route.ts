@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { getLocale } from "next-intl/server";
-import { opisTransakcije } from "@/lib/prevod-servera";
 import { greska } from "@/lib/greska-api";
 import { sesija } from "@/lib/sesija";
 import { prisma } from "@/lib/prisma";
 import { nivoZaKumulativ } from "@/lib/protokol/donacija";
 import { BEZ_DECE } from "@/lib/protokol/deca";
 import { USLOV_RAZMENE } from "@/lib/razmena-brojac-pravila";
+import { uslovZapisaProtokola, opisZapisaProtokola, VEZA_PROGRAMA } from "@/lib/protokol/program-prikaz";
 
 /**
  * Spiskovi ispod kartica na početnoj — članovi, razmene, zapisi Protokola.
@@ -101,15 +101,18 @@ export async function GET(req: Request) {
         ? { ...USLOV_RAZMENE, AND: bezDece }
         : {
             // Zapisi Protokola = sve što nije prepis između korisnika.
-            // 🔴 Socijalni programi ne izlaze pojedinačno (R-03, mera M-1):
-            // naziv programa je posebna kategorija (ZZPL čl. 17), a iznos sam
-            // odaje godište odnosno broj i uzrast dece.
-            type: { notIn: ["TRANSFER", "EMISIJA_PROGRAM"] },
+            // 🔴 Zapis socijalnog programa ulazi samo verifikovanom posmatraču
+            // (Pravilnik o programima podrške čl. 4 st. 4, set 4.6.7). Uslov je
+            // ISTI onaj koji koriste `/sistem` i `/api/javno/feed`, ne njegova
+            // kopija — razlaz dva takva upita je već jednom proizveo kvar.
+            // Osnov po kome je pravo ostvareno se ne prikazuje nikome (st. 5).
+            ...uslovZapisaProtokola(verified),
             AND: bezDece,
           },
     orderBy: { createdAt: "desc" },
     take: KOLIKO_ZAPISA,
     include: {
+      ...VEZA_PROGRAMA,
       fromWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
       toWallet: { include: { user: { select: { id: true, pseudonim: true } } } },
     },
@@ -134,7 +137,8 @@ export async function GET(req: Request) {
         id: t.id,
         amount: t.amount,
         type: t.type,
-        description: opisTransakcije(locale, t),
+        // Naziv socijalnog programa se sklapa pri čitanju, za verifikovanog.
+        description: opisZapisaProtokola(locale, t, verified),
         createdAt: t.createdAt.toISOString(),
         fromPseudonim: od.pseudonim,
         fromId: od.id,

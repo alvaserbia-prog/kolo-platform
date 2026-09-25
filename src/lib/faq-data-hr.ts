@@ -46,7 +46,7 @@ Potvrđivanje drugih. Kad ti potvrdiš nekoga koga stvarno poznaješ, po 1.000 P
 
 Operativni doprinos. Rad za zajedničko dobro po objavljenom zadatku. Zadatke postavlja Fondacija u početnoj fazi, a po aktivaciji nositelji ZRNA i Gornje Kolo. Kad izvršiš zadatak i nositelj ZRNA potvrdi izvršenje, POEN ti se upisuje.
 
-Socijalni programi. Ako pripadaš nekoj od skupina koje programi pokrivaju (majke i drugi primarni skrbnici, stariji, posebna briga, školovanje) podneseš prijavu. Kad je Fondacija odobri, Protokol ti upisuje POEN na dnevnoj razini, bez prijavljivanja pojedinačnih aktivnosti.`,
+Socijalni programi. Ako pripadaš nekoj od skupina koje programi pokrivaju (majke i drugi primarni skrbnici, stariji, posebna podrška, školovanje) podneseš prijavu. Kad je Fondacija odobri, Protokol ti upisuje POEN na dnevnoj razini, bez prijavljivanja pojedinačnih aktivnosti.`,
       },
       {
         id: 45,
@@ -554,7 +554,7 @@ Podrobnije o svemu ovome piše Pravilnik o sudjelovanju djece, na stranici Pravi
         pitanje: `Što su Programi Protokola i koji postoje?`,
         odgovor: `Neki oblici sudjelovanja ne mogu se evidentirati kao pojedinačne razmjene, pa za njih postoje Programi Protokola.
 
-Socijalni programi pokrivaju skupine čije je sudjelovanje u zajednici stalno i razuđeno: Podrška Majkama (i drugim primarnim skrbnicima), Podrška Starijima, Posebna Briga (osobe s invaliditetom) i Školovanje. Kad se tvoja prijava potvrdi, Protokol ti automatski upisuje POEN na dnevnoj razini, bez prijavljivanja pojedinačnih aktivnosti. To nije socijalna pomoć ni naknada, to je način da i takvo sudjelovanje dobije ravnopravno mjesto u sustavu.
+Socijalni programi pokrivaju skupine čije je sudjelovanje u zajednici stalno i razuđeno: Podrška Majkama (i drugim primarnim skrbnicima), Podrška Starijima, Posebna Podrška (korisnici u otežanim okolnostima) i Školovanje. Kad se tvoja prijava potvrdi, Protokol ti automatski upisuje POEN na dnevnoj razini, bez prijavljivanja pojedinačnih aktivnosti. To nije socijalna pomoć ni naknada, to je način da i takvo sudjelovanje dobije ravnopravno mjesto u sustavu.
 
 Pored njih, u Programe spadaju i doprinosi: doprinos razmjeni (putanja od pet koraka za uključivanje u razmjenu), operativni doprinos (rad za zajedničko dobro kroz objavljene zadatke) i dječji doprinos (sudjelovanje djece u dječjem prostoru, opisano u odjeljku „Djeca i roditelji"). Svaki je objašnjen u posebnom pitanju.
 
@@ -591,12 +591,18 @@ Prijava ide kroz platformu i otvorena je redovnim članovima; POEN se potom upis
       },
       {
         id: 18,
-        pitanje: `Što je Posebna Briga i kako se prijavljuje?`,
-        odgovor: `Posebna Briga je program za osobe s invaliditetom.
+        pitanje: `Što je Posebna Podrška i kako se prijavljuje?`,
+        odgovor: `Posebna Podrška je program za korisnike u otežanim okolnostima. Dvije su osnove.
 
-Pri prijavi se traži samo podatak o rješenju o invalidnosti, ne medicinska dokumentacija, ne dijagnoza, ne povijest bolesti. Uzima se najmanje što je nužno, jer je riječ o osjetljivim podacima, a i to malo obrađuje se samo uz tvoj izričit pristanak.
+Prva je smanjena sposobnost: imaš rješenje nadležnog tijela kojim je utvrđen stupanj invaliditeta — uključujući rješenje komisije za procjenu radne sposobnosti — ili zbog akutne odnosno kronične bolesti ne možeš ili si bitno ograničen sudjelovati. Ako je osoba sa smanjenom sposobnošću punoljetan član, pravo je njezino; ako nije član, pravo ostvaruje onaj koji se o njoj neposredno stara; ako je maloljetna, pravo ostvaruje roditelj, do njezine punoljetnosti. Po jednoj takvoj situaciji ide jedan iznos — osnova samo određuje u čiji zapis.
 
-Iznos je fiksan i iznosi 2.000 POEN dnevno, dok status traje.`,
+Druga je gubitak doma: izgubio si dom ili imovinu potrebnu za život u nepogodi, požaru, poplavi ili prisilnoj raseljenosti. Ta osnova traje dvanaest mjeseci od događaja i gasi se sama.
+
+Pri prijavi se traži samo da rješenje POSTOJI — ne njegov sadržaj, ne stupanj, ne ocjena radne sposobnosti, ne dijagnoza, ne medicinska dokumentacija. Kod bolesti i kod gubitka doma dokaz je tvoja izjava pod punom odgovornošću, bez ijedne isprave, uz potvrdu onih koji su tebe potvrdili u lancu.
+
+Iznos je fiksan i iznosi 2.000 POEN dnevno, jednak po svim osnovama. Ovaj se program ne isključuje s Podrškom majkama — prima se i jedno i drugo, i kada je oboje povodom istoga djeteta.
+
+Redovni članovi vide da primaš Posebnu Podršku i koliko, jer se evidencija zajednice može provjeriti. 🔴 Ali NE vide po kojoj osnovi — a program obuhvaća i smanjenu sposobnost i gubitak doma, pa naziv ništa ne kazuje. Osnovu vidiš ti i osoba koja u Zakladi obrađuje prijavu.`,
       },
       {
         id: 96,

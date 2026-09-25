@@ -353,6 +353,18 @@ function PrijavnaForma({ type, loading, brojVerifikatora, onSubmit, onCancel }: 
   const [datumRodjenja, setDatumRodjenja] = useState("");
   const [datumResenja, setDatumResenja] = useState("");
   const [datumIsteka, setDatumIsteka] = useState("");
+  // Posebna podrška ima dva osnova (Pravilnik o programima podrške čl. 12).
+  //
+  // 🔴 Osnov se ovde BIRA, ali se nigde ne prikazuje drugim korisnicima (čl. 4
+  // st. 5): program obuhvata i smanjenu sposobnost i gubitak doma, pa objavljen
+  // naziv programa ne kazuje koji je osnov u pitanju. Prikaz osnova bio bi prikaz
+  // podatka o zdravlju, odnosno o prinudnoj raseljenosti.
+  const [osnov, setOsnov] = useState<"SMANJENA_SPOSOBNOST" | "GUBITAK_DOMA">("SMANJENA_SPOSOBNOST");
+  // Rešenje / akutna / hronična bolest — od ovoga zavisi ROK (akutna traje šest
+  // meseci), a ne prikaz. Ostaje u prijavi, koju vidi samo lice što je obrađuje.
+  const [dokaz, setDokaz] = useState<"RESENJE" | "BOLEST_AKUTNA" | "BOLEST_HRONICNA">("RESENJE");
+  const [punoletstvoAt, setPunoletstvoAt] = useState("");
+  const [datumDogadjaja, setDatumDogadjaja] = useState("");
   const [ustanova, setUstanova] = useState("");
   const [program, setProgram] = useState("");
   const [deca, setDeca] = useState<{ datumRodjenja: string }[]>([{ datumRodjenja: "" }]);
@@ -361,7 +373,11 @@ function PrijavnaForma({ type, loading, brojVerifikatora, onSubmit, onCancel }: 
   function handleSubmit() {
     const baza = { pristanakVerifikatori: pristanak };
     if (type === "PODRSKA_STARIJIMA") { onSubmit({ ...baza, datumRodjenja }); return; }
-    if (type === "POSEBNA_BRIGA") { onSubmit({ ...baza, datumResenja, datumIsteka }); return; }
+    if (type === "POSEBNA_BRIGA") {
+      if (osnov === "GUBITAK_DOMA") { onSubmit({ ...baza, osnov, datumDogadjaja }); return; }
+      onSubmit({ ...baza, osnov, dokaz, datumResenja, datumIsteka, punoletstvoAt });
+      return;
+    }
     if (type === "SKOLOVANJE") { onSubmit({ ...baza, ustanova, program }); return; }
     if (type === "PODRSKA_MAJKAMA") { onSubmit({ ...baza, deca: deca.filter(d => d.datumRodjenja) }); return; }
   }
@@ -379,20 +395,83 @@ function PrijavnaForma({ type, loading, brojVerifikatora, onSubmit, onCancel }: 
       )}
 
       {type === "POSEBNA_BRIGA" && (
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div>
-            <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("posebna_briga_datum_resenja")}</label>
-            <input type="date" value={datumResenja} onChange={(e) => setDatumResenja(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+            <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("posebna_briga_osnov")}</label>
+            <div className="space-y-1">
+              {([
+                ["SMANJENA_SPOSOBNOST", t("posebna_briga_osnov_sposobnost")],
+                ["GUBITAK_DOMA", t("posebna_briga_osnov_dom")],
+              ] as const).map(([vrednost, naziv]) => (
+                <label key={vrednost} className="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="osnov" checked={osnov === vrednost}
+                    onChange={() => setOsnov(vrednost)} className="shrink-0" />
+                  <span className="text-sm text-kolo-text">{naziv}</span>
+                </label>
+              ))}
+            </div>
+            <p className="text-xs text-kolo-muted mt-1">{t("posebna_briga_osnov_napomena")}</p>
           </div>
-          <div>
-            <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("posebna_briga_datum_isteka")}</label>
-            <input type="date" value={datumIsteka} onChange={(e) => setDatumIsteka(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
-          </div>
-          <p className="text-xs text-kolo-muted">
-            {t("posebna_briga_napomena2")}
-          </p>
+
+          {osnov === "SMANJENA_SPOSOBNOST" && (
+            <>
+              <div>
+                <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("posebna_briga_dokaz")}</label>
+                <div className="space-y-1">
+                  {([
+                    ["RESENJE", t("posebna_briga_dokaz_resenje")],
+                    ["BOLEST_AKUTNA", t("posebna_briga_dokaz_akutna")],
+                    ["BOLEST_HRONICNA", t("posebna_briga_dokaz_hronicna")],
+                  ] as const).map(([vrednost, naziv]) => (
+                    <label key={vrednost} className="flex items-center gap-2 cursor-pointer">
+                      <input type="radio" name="dokaz" checked={dokaz === vrednost}
+                        onChange={() => setDokaz(vrednost)} className="shrink-0" />
+                      <span className="text-sm text-kolo-text">{naziv}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {dokaz === "RESENJE" ? (
+                <>
+                  <div>
+                    <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("posebna_briga_datum_resenja")}</label>
+                    <input type="date" value={datumResenja} onChange={(e) => setDatumResenja(e.target.value)}
+                      className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("posebna_briga_datum_isteka")}</label>
+                    <input type="date" value={datumIsteka} onChange={(e) => setDatumIsteka(e.target.value)}
+                      className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+                  </div>
+                  <p className="text-xs text-kolo-muted">{t("posebna_briga_napomena2")}</p>
+                </>
+              ) : (
+                <p className="text-xs text-kolo-muted">{t("posebna_briga_dokaz_izjava")}</p>
+              )}
+
+              {/* Pravo za maloletno lice prestaje njegovim punoletstvom (čl. 12).
+                  🔴 Od tog lica se traži SAMO taj datum — ne ime, ne stanje, ne
+                  dijagnoza: „identitet lica o kome se korisnik stara i njegovo
+                  stanje ne unose se u prijavu preko onoga što je neophodno za
+                  utvrđivanje osnova". */}
+              <div>
+                <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("posebna_briga_punoletstvo")}</label>
+                <input type="date" value={punoletstvoAt} onChange={(e) => setPunoletstvoAt(e.target.value)}
+                  className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+                <p className="text-xs text-kolo-muted mt-1">{t("posebna_briga_punoletstvo_napomena")}</p>
+              </div>
+            </>
+          )}
+
+          {osnov === "GUBITAK_DOMA" && (
+            <div>
+              <label className="block text-xs font-semibold text-kolo-muted mb-1">{t("posebna_briga_datum_dogadjaja")}</label>
+              <input type="date" value={datumDogadjaja} onChange={(e) => setDatumDogadjaja(e.target.value)}
+                className="w-full px-3 py-2.5 rounded-xl border border-kolo-border text-sm outline-none focus:border-kolo-green-500" />
+              <p className="text-xs text-kolo-muted mt-1">{t("posebna_briga_dom_napomena")}</p>
+            </div>
+          )}
         </div>
       )}
 
