@@ -38,7 +38,7 @@ Python paketi: `numpy scipy soundfile pillow sherpa-onnx`. Render koristi Chromi
 | `scripts/muzika.py` | komponovana i sintetisana podloga → `audio/muzika.wav` |
 | `scripts/mix.py` | glas + muzika sa duckingom, dvoprolazni loudnorm → `public/miks.wav` |
 | `scripts/teksture.py` | generisane teksture papira (`public/papir.jpg`, `public/zrno.png`) |
-| `src/` | Remotion kompozicija: `papir.tsx` (isečci, drhtave linije, uskakanje), `likovi.tsx`, `kolo.tsx`, `scene/Scena1–6.tsx`, `Titlovi.tsx`, `Prelazi.tsx` |
+| `src/` | Remotion kompozicija: `papir.tsx` (isečci, drhtave linije, uskakanje), `likovi.tsx`, `kolo.tsx`, `maskota.tsx`, `scene/Scena1–6.tsx`, `Titlovi.tsx`, `Prelazi.tsx` |
 
 ## Odluke (donete samostalno, po zadatku)
 
@@ -62,8 +62,13 @@ Modeli (~1,7 GB) nisu u repou.
 **POEN nije novac.** Prikazan je kao **kartončić-zapis sa zelenim žigom „POEN“** („zapis — pomoć komšiji“), bez novčića,
 novčanica i brojeva. U sceni 5 reči „kupovina“ i „prodaja“ su etikete koje se precrtaju; novac se nigde ne crta.
 
-**Fotografija.** U sceni 6 („Ja sam Nikola“) je polaroid sa fotografijom koju je vlasnik poslao tokom rada
-(novija, sa bradom), isečena na kvadrat — `public/nikola.jpg`.
+**Maskota „Nikola“** (`src/maskota.tsx`). U sceni 6 („Ja sam Nikola“) stoji papirni lik nacrtan po
+fotografiji koju je vlasnik poslao: kratko ošišana kosa, tamna brada sa sedom bradicom, svetlosiva
+majica sa V izrezom, pločica sa imenom. Isti je stil kao kod ostalih likova (isečci, drhtave ivice), pa se može koristiti
+i kao maskota u drugim materijalima. Maše na „Ja sam Nikola“ i ponovo na „KOLU“, trepće, a usta
+se pomeraju samo dok traje izgovorena reč (vremena iz poravnanja). Stoji u sredini kola ljudi.
+Prva verzija je imala polaroid sa fotografijom; zamenjena je maskotom na zahtev vlasnika, a fotografija
+nije u repou.
 
 **Somborski motivi.** Vojvođanske kuće sa zabatom na ulicu i zelenim kapcima; u sceni 5 grad dobija
 žutu Županiju sa kulom i dva crkvena tornja.

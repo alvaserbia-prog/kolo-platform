@@ -6,6 +6,7 @@ import { P } from "../paleta";
 import { Crta, Defs, Isecak, Pop, Pt, napredak, pravougaonik, usePop } from "../papir";
 import { SANS, RUKOPIS } from "../fontovi";
 import { Kolo, LogoZnak } from "../kolo";
+import { Maskota, otvorenostUsta } from "../maskota";
 import { kad, glasF, scena } from "../vreme";
 
 const SLOVA = "ekolo.rs".split("");
@@ -41,7 +42,8 @@ export const Scena6: React.FC = () => {
   const rx = interpolate(ulaz, [0, 1], [1250, 700]) + izlaz * 500;
   const ry = interpolate(ulaz, [0, 1], [1500, 860]) + izlaz * 600 + (klik ? 14 : 0);
   const dugmeOdlazi = napredak(f, ja - 12, 12, Easing.in(Easing.cubic));
-  const polaroid = usePop(ja - 2, 150);
+  const maskota = usePop(ja - 4, 150);
+  const mahanje = Math.max(0, napredak(f, ja + 2, 8) - napredak(f, ja + 44, 10)) + napredak(f, kolu - 2, 8);
   const cta = usePop(krajGlasa + 4, 150);
 
   return (
@@ -97,7 +99,7 @@ export const Scena6: React.FC = () => {
           <Ruka seed="s6-ruka" />
         </g>
       )}
-      {/* Nikola — polaroid, pa kolo sa praznim mestom „za tebe" */}
+      {/* Nikola — maskota u sredini kola */}
       {f >= cekam - 2 && (
         <Kolo
           seed="s6-kolo"
@@ -106,23 +108,14 @@ export const Scena6: React.FC = () => {
           ruke={cekam + 16}
         />
       )}
-      {polaroid > 0 && (
-        <g transform={`translate(540 ${880 + (1 - Math.min(1, polaroid)) * 60}) rotate(${-4 + (1 - polaroid) * -12}) scale(${polaroid.toFixed(4)})`}>
-          <Isecak pts={pravougaonik(-185, -200, 370, 430)} boja={P.belo} seed="s6-pol" amp={1.6} />
-          <clipPath id="s6-foto">
-            <rect x={-160} y={-176} width={320} height={320} />
-          </clipPath>
-          <image href={staticFile("nikola.jpg")} x={-160} y={-176} width={320} height={320} clipPath="url(#s6-foto)" preserveAspectRatio="xMidYMid slice" style={{ filter: "sepia(0.18) saturate(1.05)" }} />
-          <text x={0} y={200} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={62} fill={P.tekst}>
-            Nikola
-          </text>
-          {/* selotejp */}
-          <Isecak pts={pravougaonik(-70, -222, 140, 44)} boja="#F5E6B8" seed="s6-tejp" senka="bez" zrno={0.3} opacity={0.85} />
+      {maskota > 0 && (
+        <g transform={`translate(540 ${1140 + (1 - Math.min(1, maskota)) * 80}) rotate(${(1 - maskota) * -10}) scale(${maskota.toFixed(4)})`}>
+          <Maskota seed="s6-nikola" usta={otvorenostUsta(f, scena(6).reci, glasF(6, 0), 30)} mahanje={mahanje} />
         </g>
       )}
-      {/* na „KOLU" — ručno nacrtan krug oko Nikole */}
+      {/* na „KOLU" — ručno nacrtan krug oko Nikolinog lica */}
       <Crta
-        pts={Array.from({ length: 33 }, (_, i): Pt => [540 + Math.cos(-Math.PI / 2 + (i / 30) * Math.PI * 2) * 245, 880 + Math.sin(-Math.PI / 2 + (i / 30) * Math.PI * 2) * 275])}
+        pts={Array.from({ length: 33 }, (_, i): Pt => [540 + Math.cos(-Math.PI / 2 + (i / 30) * Math.PI * 2) * 200, 800 + Math.sin(-Math.PI / 2 + (i / 30) * Math.PI * 2) * 205])}
         seed="s6-krug"
         boja={P.zlatna400}
         debljina={12}
