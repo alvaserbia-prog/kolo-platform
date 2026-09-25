@@ -3,7 +3,7 @@
 ## Osnovno
 - Trajanje: 54,2 s (određeno trajanjem naracije)
 - Format: vertikalno 9:16 (Reels)
-- Glavna poruka: Četvoro nepoznatih ljudi se kroz tri razmene poveže u krug, bez ijednog dinara.
+- Glavna poruka: Četvoro nepoznatih ljudi se kroz tri razmene poveže u kolo, bez ijednog dinara.
 - Titlovi: obavezni, krupni, čitljivi bez zvuka
 - Naracija: ElevenLabs, glas „ProVox – Wise & Gentle” (`F2kYsMGahtg8auErVXgY`), model `eleven_v3`
 
@@ -55,7 +55,7 @@ Knjiga: Lazar → Marija · 1.000 POENA / Marija → Ana · 1.000 POENA
 Naracija: Lazaru se jede burek. Marija ispeče tepsiju, a Lazar joj prepiše 1.000 POENA. Marija za njih uzme teglu Aninog meda.
 
 ### Scena 5 (36,3–45,6 s)
-Slika: Oko sve četvorice se iscrta zlatno kolo koje zasvetli, likovi se smeju i polako se okreću kao u kolu. Knjiga se zatvara.
+Slika: Oko svo četvoro se iscrta zlatno kolo koje zasvetli, likovi se smeju i polako se okreću kao u kolu. Knjiga se zatvara.
 Natpis: POEN nije novac. To je zapis o doprinosu.
 Naracija: Na početku se nisu poznavali... A sad su u istom kolu. POEN nije novac. To je zapis o tome šta je ko dao.
 
