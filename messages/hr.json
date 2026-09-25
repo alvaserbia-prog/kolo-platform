@@ -1035,7 +1035,7 @@
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -1043,11 +1043,11 @@
     },
     "dpia": {
       "naslov": "DPIA. Procjena učinka na zaštitu osobnih podataka",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade osobnih podataka",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "rizici": {
       "naslov": "Izjava o prihvaćanju rizika",
@@ -1081,13 +1081,13 @@
     "meta_uslovi_title": "Uvjeti korištenja · KOLO",
     "meta_uslovi_desc": "Uvjeti korištenja KOLO platforme, verzija 4.6.6",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.3",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.7",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.6.3",
+    "meta_dpia_desc": "Procjena učinka na zaštitu osobnih podataka, verzija 4.6.7",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.6.3",
+    "meta_radnje_desc": "Registar radnji obrade osobnih podataka, verzija 4.6.7",
     "meta_rizici_title": "Izjava o prihvaćanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvaćanju rizika sudjelovanja u KOLO sustavu, verzija 4.6.0",
     "meta_whitepaper_title": "Whitepaper · KOLO",
@@ -1125,7 +1125,7 @@
       },
       "programi-podrske": {
         "naziv": "Pravilnik o programima podrške",
-        "opis": "Socijalni programi (Podrška majkama, Podrška starijima, Posebna briga, Školovanje), uvjeti, koeficijenti i potvrda iz lanca. Za pristup je dovoljna jedna potvrda, odnosno indeks stvarnosti od 10%."
+        "opis": "Socijalni programi (Podrška majkama, Podrška starijima, Posebna podrška, Školovanje), uvjeti, koeficijenti i potvrda iz lanca. Za pristup je dovoljna jedna potvrda, odnosno indeks stvarnosti od 10%."
       },
       "ucesce-dece": {
         "naziv": "Pravilnik o sudjelovanju djece",
@@ -1711,7 +1711,7 @@
     "n5_opis": "Pravna osoba ili obrtnik, tvrtka, udruga ili obrt, potpisuje sa Fondacijom ugovor o donaciji u novcu, robi ili uslugama. Sam pokrovitelj ne dobiva POEN. Priznanje se upisuje vlasniku koji je redovan član, odnosno samom obrtniku, po tablici sa sedam razina.\nMreži je potreban novac da bi radila, a uvjeti za pokroviteljstvo isti su za svaku pravnu osobu.",
     "n5_iznos": "7 razina · prag 10.000 RSD",
     "n4_naslov": "Socijalni programi",
-    "n4_opis": "Programi za majke i skrbnike, starije, posebnu skrb i školovanje, u kojima se odobrenim korisnicima POEN upisuje svakog dana. Ovo nije socijalna pomoć u smislu propisa i ne utječe na prava koja ostvaruješ kod države.",
+    "n4_opis": "Programi za majke i skrbnike, starije, posebnu potporu i školovanje, u kojima se odobrenim korisnicima POEN upisuje svakog dana. Ovo nije socijalna pomoć u smislu propisa i ne utječe na prava koja ostvaruješ kod države.",
     "n4_iznos": "dnevna evidencija",
     "n3_naslov": "Operativni doprinos",
     "n3_opis": "Konkretan rad za zajednicu. Nositelji ZRNA, a u prvoj fazi Upravni odbor Fondacije, objave zadatak, ti se prijaviš i izvršiš ga, pa oni potvrde izvršenje i tek tada se POEN upisuje.",

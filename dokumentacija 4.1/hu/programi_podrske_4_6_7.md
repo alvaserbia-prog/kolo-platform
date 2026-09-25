@@ -32,7 +32,7 @@ A támogatási programok a következő minősített csoportokra terjednek ki:
 
 2) idősebb felhasználók — Idősek Támogatása program;
 
-3) különleges gondozási rendben lévő felhasználók (fogyatékossággal élő személyek) — Különleges Gondozás program;
+3) nehéz körülmények között élő felhasználók — Különleges Támogatás program;
 
 4) tanulók és hallgatók — Tanulmányok program.
 
@@ -50,9 +50,15 @@ A programra az a hitelesített felhasználó jogosult, akinek valóságindexe le
 
 Az Alapítvány döntése előtt a feltételek teljesülését a kérelmező valamennyi hitelesítője megerősíti. Minden hitelesítő teljes felelősséggel, a kérelmezővel való közvetlen személyes ismeretség alapján megerősíti, hogy a kérelmező megfelel a program feltételének, vagy kötelező indokolás mellett megtagadja a megerősítést. A hitelesítők nem látják a kérelmező által megadott adatokat — saját tudomásuk alapján erősítenek meg. Az Alapítvány csak akkor hagyhatja jóvá a kérelmet, ha valamennyi hitelesítő megerősítette; akár egyetlen hitelesítő hallgatása vagy elutasítása is megakadályozza a jóváhagyást. Ez a mechanizmus védi a programok integritását a valótlan kérelmekkel szemben (visszaélés elleni védelem).
 
-A kérelem benyújtása és a hitelesítők megerősítésének kérése kizárólag a kérelmező kifejezett hozzájárulásával történik. A hozzájárulást a kérelem benyújtása előtt és azelőtt kell megadni, hogy bárkitől megerősítést kérnének, és abban kifejezetten szerepel: hány személyt kérnek fel megerősítésre; hogy e személyek megtudják, melyik programról van szó, és hogy ez az adat felfedheti előttük a kérelmező különleges adatkategóriához való tartozását; hogy nem látják a megadott adatokat; továbbá hogy a program szerinti egyedi POEN-bejegyzés nem kerül közzétételre, hanem programonkénti napi összeg jelenik meg, a felhasználók neve és álneve nélkül.
+A kérelem benyújtása és a hitelesítők megerősítésének kérése kizárólag a kérelmező kifejezett hozzájárulásával történik. A hozzájárulást a kérelem benyújtása előtt és azelőtt kell megadni, hogy bárkitől megerősítést kérnének, és abban kifejezetten szerepel: hány személyt kérnek fel megerősítésre; hogy e személyek megtudják, melyik programról van szó, és hogy ez az adat felfedheti előttük a kérelmező különleges adatkategóriához való tartozását; hogy nem látják a megadott adatokat; hogy a program szerinti POEN-bejegyzés a hitelesített felhasználók számára megjelenik, a kérelmező álnevével, a program megnevezésével és az összeggel együtt; hogy az idősek támogatása és az anyák támogatása esetében mi vezethető le az összegből (a születési év, illetve a gyermekek száma és életkora); továbbá hogy az a jogalap, amely alapján a jogosultság a programon belül megállapításra került, egyetlen felhasználó számára sem jelenik meg.
 
-A szociális program alapján nyilvántartásba vett POEN bejegyzése nem nevezi meg a programot, és a nyilvántartás áttekintésében nem jelenik meg egyedileg. Az egyedi bejegyzések helyett programonkénti napi összeg kerül közzétételre — a felhasználók száma és a nyilvántartásba vett POEN teljes mennyisége; az a nap, amelyen egy programon belül csak egyetlen felhasználónak került hozzájárulás bejegyzésre, nem kerül közzétételre. Az ok nem csupán a program megnevezése: a napi bejegyzés összege azokból az adatokból vezethető le, amelyek alapján a jogosultságot megállapították, és maga fedné fel azokat — az idősek támogatásánál a születési évet, az anyák támogatásánál a gyermekek számát és életkorát —, így a megnevezés eltávolítása az egyedi összeg elhagyása nélkül nem lenne elegendő. A nyilvántartás ellenőrizhetősége ezzel teljes marad, mivel a közzétett napi összegek és a többi bejegyzési csatorna együttesen adja a nyilvántartásba vett POEN teljes mennyiségének változását. A programonkénti bontás magának a felhasználónak — a program mellett — és az Alapítványnak áll rendelkezésére.
+A szociális program alapján nyilvántartásba vett POEN a hitelesített felhasználók számára megjelenik — a felhasználó álneve, a program megnevezése és az összeg. A be nem jelentkezett személyek és azok a felhasználók, akiknek valódisága nem nyert megerősítést, kizárólag a programonkénti napi összeget látják: a felhasználók számát és a nyilvántartásba vett POEN teljes mennyiségét; az a nap, amelyen egy programon belül csak egyetlen felhasználónak került hozzájárulás bejegyzésre, nem kerül közzétételre, mert az összeg akkor megegyezne az egyedi összeggel.
+
+Az a jogalap, amely alapján a jogosultság megállapításra került, egyetlen felhasználó számára sem jelenik meg. Ez a megjelenítés tartószabálya, nem technikai apróság: a Különleges Támogatás program a csökkent képességet és az otthon elvesztését egyaránt magában foglalja, így a program közzétett megnevezése nem árulja el, melyik jogalapról van szó — miközben a jogalap megjelenítése egészségi állapotra, illetve kényszerű lakóhelyelhagyásra vonatkozó adat megjelenítése lenne, amely közel áll a nemzeti hovatartozásra vonatkozó adathoz.
+
+Az Idősek Támogatása és az Anyák Támogatása program esetében a napi bejegyzés összege azokból az adatokból vezethető le, amelyek alapján a jogosultságot megállapították, és maga fedi fel azokat — az idősek támogatásánál a születési évet, az anyák támogatásánál a gyermekek számát és életkorát. Az összeg mindazonáltal megjelenik, mert a nyilvántartás közösség felé való ellenőrizhetősége került túlnyomó érdekként kiválasztásra; a kérelmező ehhez a kérelem benyújtásakor hozzájárul (4. bekezdés), a hozzájárulás pedig kifejezetten megnevezi, mi vezethető le az összegből. A Különleges Támogatás és a Tanulmányok program esetében az összeg állandó, és semmit nem fed fel.
+
+A nyilvántartás ellenőrizhetősége ezzel teljes marad, mivel a közzétett napi összegek és a többi bejegyzési csatorna együttesen adja a nyilvántartásba vett POEN teljes mennyiségének változását. A jogalap szerinti bontás magának a felhasználónak — a program mellett — és a kérelmet az Alapítványon belül feldolgozó személynek áll rendelkezésére.
 
 A hitelesítőket a megerősítési kérésről kizárólag a Platformon belül értesítik. A Platform által elektronikus levélben vagy a felhasználó eszközére küldött üzenet sem a program megnevezését, sem a kérelmező álnevét nem tartalmazza.
 
@@ -142,17 +148,31 @@ A napi összeg: 1.000 + 100 × (életévek száma − 50). Így a 65 éves felha
 
 Az összegnek nincs felső határa, és a felhasználó életéveinek számával növekszik.
 
-## V — Különleges Gondozás
+## V — Különleges Támogatás
 
 ### 12. cikk
 
-*Jogosultság, összeg és felülvizsgálat*
+*Jogosultság, összeg és időtartam*
 
-Jogosultak a fogyatékossággal élő személyek. A jogállás egyetlen igazolása az illetékes hatóság rokkantsági határozata. Orvosi dokumentáció, diagnózis vagy betegségigazolás nem kérhető — az ilyen adatkezelés aránytalan beavatkozás lenne a különleges adatkategóriákba.
+Jogosultak a nehéz körülmények között élő felhasználók, az e cikkben foglalt két jogalap egyike szerint. Az a jogalap, amely alapján a jogosultság megállapításra került, nem jelenik meg (4. cikk).
 
-A napi összeg állandó, és 2.000 POEN.
+**A csökkent képesség jogalapja.** Jogosult az a felhasználó, akinek esetében az illetékes hatóság határozata a fogyatékosság fokát megállapította, ideértve a munkaképesség-értékelő bizottság határozatát is; valamint az a felhasználó, aki akut vagy krónikus betegség miatt nem képes részt venni a cserében és a rendszer egyéb tevékenységeiben, vagy ebben lényegesen korlátozott.
 
-A jogállás éves felülvizsgálat alá esik. Ha a jogállás a felülvizsgálatkor nem nyer megerősítést, az automatikus nyilvántartásba vétel megszűnik.
+A határozat létezését kell figyelembe venni, nem annak tartalmát. A fogyatékosság foka, a munkaképesség értékelése, a diagnózis és az orvosi dokumentáció nem kerül benyújtásra, gyűjtésre és megőrzésre — az ilyen adatkezelés aránytalan beavatkozás lenne a különleges adatkategóriákba. A határozat kelte kerül feljegyzésre, és — ha a határozat tartalmazza — a lejárat napja. Amikor a jogosultság betegség miatt kerül megállapításra, az igazolás teljes felelősség melletti nyilatkozat, nem pedig okirat, a 4. cikk szerinti hitelesítői megerősítéssel együtt.
+
+Az e jogalap szerinti jogot maga a felhasználó gyakorolja, amikor a csökkent képességű személy a Platform felnőtt felhasználója. Amikor e személy nem a Platform felhasználója, a jogot az a felhasználó gyakorolja, aki közvetlenül gondoskodik róla. Amikor e személy kiskorú, a jogot az a szülő, illetve törvényes képviselő gyakorolja, aki közvetlenül gondoskodik róla, e személy felnőttkorúvá válásáig. Egy ilyen helyzetből egy jogosultság keletkezik — a jogalap csupán azt határozza meg, kinek a bejegyzésében kerül a hozzájárulás nyilvántartásba.
+
+Annak a személynek a személyazonossága, akiről a felhasználó gondoskodik, valamint az állapota nem jelenik meg, és a kérelembe sem kerül be azon túl, ami a jogalap megállapításához szükséges. E személy nem kérelmező, és tőle semmit nem kérnek.
+
+**Az otthon elvesztésének jogalapja.** Jogosult az a felhasználó, aki elemi csapás, tűzvész, árvíz vagy kényszerű lakóhelyelhagyás következtében elvesztette otthonát vagy az élethez szükséges vagyonát. Az igazolás teljes felelősség melletti nyilatkozat, a 4. cikk szerinti hitelesítői megerősítéssel együtt.
+
+**Összeg.** A napi összeg állandó, és 2.000 POEN, minden jogalap esetében azonos. Az a felhasználó, aki több jogalapnak felel meg, illetve aki több személyről gondoskodik, egy napi összegre jogosult.
+
+Az e program szerinti jogosultság nem zárja ki az Anyák Támogatása program szerinti jogosultságot, és amellett is gyakorolható, akkor is, ha mindkettőt ugyanazon gyermekre tekintettel gyakorolják — a csökkent képességű személyről való gondoskodás és a szülőség két különböző jogalap.
+
+**Időtartam és felülvizsgálat.** A csökkent képesség jogalapja szerinti jogosultság éves felülvizsgálat alá esik, és amikor kiskorú személyre tekintettel gyakorolják, e személy felnőttkorúvá válásával is megszűnik; amikor akut betegség miatt gyakorolják, hat hónapig tart, azt követően a kérelmet ismét be kell nyújtani, ha az állapot fennmarad. Az otthon elvesztésének jogalapja szerinti jogosultság az esemény napjától tizenkét hónapig tart, és e határidő elteltével felülvizsgálat nélkül megszűnik.
+
+Ha a jogállás a felülvizsgálatkor nem nyer megerősítést, az automatikus nyilvántartásba vétel megszűnik.
 
 ## VI — Tanulmányok
 

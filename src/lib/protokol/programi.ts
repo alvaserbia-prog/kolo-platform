@@ -219,12 +219,15 @@ export async function izvrsiNocnuEmisiju(datum: Date) {
     const emitAmount = evidentiraniPoen(item.amount, koeficijent);
 
     if (emitAmount > 0) {
-      // 🔴 Opis socijalnog programa NE imenuje program (R-03, mera M-1). Naziv
-      // („Posebna briga", „Podrška starijima") je podatak iz posebne kategorije
-      // po ZZPL čl. 17, a zapis o emisiji je trajan i ide u javne prikaze i u
-      // GDPR izvoz. Umesto naziva stoji opšta oznaka; razlaganje po programu
-      // vidi sam korisnik na kartici programa (`GET /api/programi`), a Fondacija
-      // u admin panelu.
+      // 🔴 Opis socijalnog programa NE imenuje program, i to OSTAJE i posle seta
+      // 4.6.7, koji je naziv programa otvorio verifikovanim članovima. Razlika je
+      // u tome ODAKLE naziv dolazi: iz prijave na program, ne iz opisa zapisa.
+      // Opis je trajan i ide u GDPR izvoz, pa upisan naziv više nikad ne bi mogao
+      // da se suzi ako se odluka o prikazu promeni; prijava se povlačenjem
+      // pristanka briše, i prikaz s njom nestaje. Isto pravilo kao kod snimljenog
+      // teksta ugovora: ono što je trajno mora da nosi najmanje što je dovoljno.
+      // Razlaganje po OSNOVU (smanjena sposobnost / gubitak doma) ne izlazi ni
+      // verifikovanom članu — vidi ga sam korisnik i lice koje obrađuje prijavu.
       //
       // 🔴 Ovo obara odluku od 07.09.2026. („mora biti osnov programa i tip") —
       // tada se nije znalo da iznos sam invertuje godište i broj dece, pa je
@@ -370,7 +373,7 @@ export function labelPrograma(type: ProgramType): string {
     PED:       "Operativni doprinos",
     PODRSKA_MAJKAMA:    "Podrška majkama",
     PODRSKA_STARIJIMA:  "Podrška starijima",
-    POSEBNA_BRIGA:      "Posebna briga",
+    POSEBNA_BRIGA:      "Posebna podrška",
     SKOLOVANJE:         "Školovanje",
   };
   return mapa[type];

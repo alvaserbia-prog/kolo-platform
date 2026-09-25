@@ -836,7 +836,7 @@ A szociális programok a POEN automatikus nyilvántartásba vételének mechaniz
 
 Az új POEN-ek minősített csoportok javára történő automatikus nyilvántartásba vétele újraelosztó hatással bír: az új bejegyzések növelik a rendszerben nyilvántartásba vett POEN-ek teljes számát, amivel valamennyi felhasználó számára megváltoztatják az elszámolási együtthatót. Ez a hatás tudatos tervezési döntés — a rendszer elismeri, hogy a természeténél fogva folyamatos és szétterülő részvétel nem vehető nyilvántartásba egyedi tevékenységeken keresztül.
 
-A kezdeti minősített csoportok az anyák (elsődleges gondviselők), az idősebb felhasználók, a különleges gondozási rendben lévő felhasználók és a tanulmányokat folytató felhasználók. Új csoportok az 1. szakaszban az Alapítvány, a 2. szakaszban a Felső Kolo határozatával adhatók hozzá.
+A kezdeti minősített csoportok az anyák (elsődleges gondviselők), az idősebb felhasználók, a nehéz körülmények között élő felhasználók és a tanulmányokat folytató felhasználók. Új csoportok az 1. szakaszban az Alapítvány, a 2. szakaszban a Felső Kolo határozatával adhatók hozzá.
 
 A minősített csoporthoz tartozó felhasználó hitelesíti az e jogállást megerősítő adatokat. A hitelesítést követően a Protokoll automatikusan új POEN-bejegyzéseket ír be az adott felhasználó javára, konkrét tevékenység szükségessége nélkül.
 

@@ -32,7 +32,7 @@ The support programmes cover the following qualifying groups:
 
 2) elderly users — the Elderly Support programme;
 
-3) users in the special care regime (persons with disabilities) — the Special Care programme;
+3) users in difficult circumstances — the Special Support programme;
 
 4) pupils and students — the Education programme.
 
@@ -50,9 +50,15 @@ The right to a programme is exercised by a verified user with a reality index of
 
 Before the Foundation decides, the fulfilment of conditions is confirmed by all of the applicant's verifiers. Each verifier, under full responsibility and on the basis of direct personal acquaintance with the applicant, confirms that the applicant satisfies the programme's conditions, or refuses confirmation with a mandatory statement of reasons. Verifiers do not have access to the data entered by the applicant — they confirm on the basis of their own knowledge. The Foundation may approve the application only once all verifiers have confirmed; the absence or refusal of even one verifier prevents approval. This mechanism protects the integrity of the programmes against false applications (anti-fraud).
 
-The application and the request for confirmation from verifiers are made exclusively with the explicit consent of the applicant. Consent is given before the application is submitted and before confirmation is requested from anyone, and it expressly states: how many persons will be asked to confirm; that those persons learn which programme is concerned and that this information may reveal to them the applicant's membership of a special category of data; that they have no access to the data entered; and that individual recording of POEN under the programme is not published, but rather a daily total per programme, without the names or pseudonyms of users.
+The application and the request for confirmation from verifiers are made exclusively with the explicit consent of the applicant. Consent is given before the application is submitted and before confirmation is requested from anyone, and it expressly states: how many persons will be asked to confirm; that those persons learn which programme is concerned and that this information may reveal to them the applicant's membership of a special category of data; that they have no access to the data entered; that the recording of POEN under the programme is displayed to verified users, together with the applicant's pseudonym, the name of the programme, and the amount; what may be derived from the amount in the case of support for the elderly and support for mothers (the year of birth, or the number of children and their ages); and that the ground on which the entitlement was established within the programme is not displayed to any user.
 
-The record of POEN recorded under a social programme does not name the programme and is not displayed individually in the ledger overview. Instead of individual records, a daily total per programme is published — the number of users and the total number of POEN recorded; a day on which, within one programme, a contribution was recorded for only one user is not published. The reason is not the name of the programme alone: the amount of the daily recording is derived from the data on the basis of which the entitlement was established and would itself disclose them — the year of birth in the case of support for the elderly, and the number of children and their ages in the case of support for mothers — so removing the name without omitting the individual amount would not suffice. The verifiability of the ledger thereby remains complete, because the sum of the published daily amounts together with the other recording channels yields the change in the total number of recorded POEN. A breakdown by programme is available to the user themselves, alongside the programme, and to the Foundation.
+The recording of POEN under a social programme is displayed to verified users — the user's pseudonym, the name of the programme, and the amount. Unregistered persons and users whose reality has not been confirmed are shown exclusively a daily total per programme: the number of users and the total number of POEN recorded; a day on which, within one programme, a contribution was recorded for only one user is not published, because the total would then equal the individual amount.
+
+The ground on which the entitlement was established is not displayed to any user. This is a load-bearing rule of display, not a technical detail: the Special Support programme covers both reduced capacity and loss of home, so the published name of the programme does not state which ground is concerned — whereas displaying the ground would mean displaying data concerning health, or concerning forced displacement, which is close to data concerning national origin.
+
+In the case of the Support for the Elderly and Support for Mothers programmes, the amount of the daily recording is derived from the data on the basis of which the entitlement was established and itself discloses them — the year of birth in the case of support for the elderly, and the number of children and their ages in the case of support for mothers. The amount is nevertheless displayed, because the verifiability of the ledger towards the community has been chosen as the prevailing interest; the applicant consents to this upon application (paragraph 4), and the consent expressly states what may be derived from the amount. In the case of the Special Support and Education programmes the amount is fixed and discloses nothing.
+
+The verifiability of the ledger thereby remains complete, because the sum of the published daily amounts together with the other recording channels yields the change in the total number of recorded POEN. A breakdown by ground is available to the user themselves, alongside the programme, and to the person processing the application within the Foundation.
 
 Verifiers are notified of a request for confirmation exclusively within the Platform. The message the Platform sends by electronic mail or to the user's device states neither the name of the programme nor the applicant's pseudonym.
 
@@ -142,17 +148,31 @@ The daily amount equals: 1,000 + 100 × (age in years − 50). Thus a user aged 
 
 The amount has no upper limit and increases with the user's age.
 
-## V — Special Care
+## V — Special Support
 
 ### Article 12
 
-*Right, amount, and review*
+*Right, amount, and duration*
 
-The right is held by persons with disabilities. The only proof of status is a disability decision issued by the competent authority. Medical documentation, a diagnosis, or proof of illness is not required — such processing would constitute a disproportionate intrusion into special categories of data.
+The right is held by users in difficult circumstances, on one of the two grounds set out in this Article. The ground on which the entitlement was established is not displayed (Article 4).
 
-The daily amount is fixed at 2,000 POEN.
+**Ground of reduced capacity.** The right is held by a user in whose case a decision of the competent authority has established a degree of disability, including a decision of the work-capacity assessment commission; as well as by a user who, on account of an acute or chronic illness, is unable or substantially limited in participating in exchange and in other activities in the system.
 
-Status is subject to annual review. If status is not confirmed upon review, automatic recording ceases.
+What is taken into account is the existence of the decision, not its content. The degree of disability, the assessment of work capacity, a diagnosis, and medical documentation are not submitted, not collected, and not retained — such processing would constitute a disproportionate intrusion into special categories of data. The date of the decision is recorded and, where the decision contains one, the date of expiry. Where the entitlement is established on account of illness, the proof is a declaration made under full responsibility, not a document, together with the confirmation of verifiers under Article 4.
+
+The right on this ground is exercised by the user themselves where the person with reduced capacity is an adult user of the Platform. Where that person is not a user of the Platform, the right is exercised by the user who directly cares for them. Where that person is a minor, the right is exercised by the parent or legal representative who directly cares for them, until that person comes of age. One such situation gives rise to one entitlement — the ground determines only in whose record the contribution is recorded.
+
+The identity of the person cared for and their condition are not displayed and are not entered in the application beyond what is necessary to establish the ground. That person is not the applicant and nothing is requested of them.
+
+**Ground of loss of home.** The right is held by a user who has lost their home or the property necessary for living as a result of a natural disaster, fire, flood, or forced displacement. The proof is a declaration made under full responsibility, together with the confirmation of verifiers under Article 4.
+
+**Amount.** The daily amount is fixed at 2,000 POEN, the same on all grounds. A user who meets more than one ground, or who cares for more than one person, is entitled to one daily amount.
+
+The entitlement under this programme does not exclude the entitlement under the Support for Mothers programme and is exercised alongside it, including where both are exercised in respect of the same child — caring for a person with reduced capacity and parenthood are two different grounds.
+
+**Duration and review.** The entitlement on the ground of reduced capacity is subject to annual review, and where it is exercised for a minor it also ceases when that person comes of age; where it is exercised on account of an acute illness, it lasts six months, after which the application is submitted anew if the condition persists. The entitlement on the ground of loss of home lasts twelve months from the event and ceases upon the expiry of that period, without review.
+
+If status is not confirmed upon review, automatic recording ceases.
 
 ## VI — Education
 

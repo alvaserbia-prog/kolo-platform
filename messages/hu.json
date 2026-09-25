@@ -1028,7 +1028,7 @@
     },
     "privatnost": {
       "naslov": "A KOLO platform adatvédelmi szabályzata",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "statut": {
       "naslov": "A KOLO Alapítvány alapszabálya",
@@ -1036,11 +1036,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Adatvédelmi hatásvizsgálat",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "radnjeObrade": {
       "naslov": "Adatkezelési tevékenységek nyilvántartása",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "rizici": {
       "naslov": "Kockázatvállalási nyilatkozat",
@@ -1074,13 +1074,13 @@
     "meta_uslovi_title": "Felhasználási feltételek · KOLO",
     "meta_uslovi_desc": "A KOLO platform felhasználási feltételei, 4.6.6-es verzió",
     "meta_privatnost_title": "Adatvédelmi szabályzat · KOLO",
-    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.6.3-es verzió",
+    "meta_privatnost_desc": "A KOLO platform adatvédelmi szabályzata, 4.6.7-es verzió",
     "meta_statut_title": "A KOLO Alapítvány alapszabálya · KOLO",
     "meta_statut_desc": "A KOLO Alapítvány alapszabálya, 4.1-es verzió",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.6.3-es verzió",
+    "meta_dpia_desc": "Adatvédelmi hatásvizsgálat, 4.6.7-es verzió",
     "meta_radnje_title": "Adatkezelési tevékenységek nyilvántartása · KOLO",
-    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.6.3-es verzió",
+    "meta_radnje_desc": "Személyes adatok kezelési tevékenységeinek nyilvántartása, 4.6.7-es verzió",
     "meta_rizici_title": "Kockázatvállalási nyilatkozat · KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.0-es verzió",
     "meta_whitepaper_title": "Whitepaper · KOLO",
@@ -1118,7 +1118,7 @@
       },
       "programi-podrske": {
         "naziv": "Szabályzat a támogatási programokról",
-        "opis": "Szociális programok (Anyák támogatása, Idősek támogatása, Különleges gondoskodás, Iskoláztatás) – feltételek, együtthatók és a láncból érkező megerősítés. A hozzáféréshez elég egyetlen megerősítés, vagyis 10%-os valóságindex."
+        "opis": "Szociális programok (Anyák támogatása, Idősek támogatása, Különleges támogatás, Iskoláztatás) – feltételek, együtthatók és a láncból érkező megerősítés. A hozzáféréshez elég egyetlen megerősítés, vagyis 10%-os valóságindex."
       },
       "ucesce-dece": {
         "naziv": "Szabályzat a gyermekek részvételéről",
@@ -1704,7 +1704,7 @@
     "n5_opis": "Egy jogi személy vagy egyéni vállalkozó — cég, egyesület vagy műhely — adományozási szerződést köt az Alapítvánnyal pénzben, javakban vagy szolgáltatásban. Maga a pártfogó nem kap POEN-t. Az elismerés annak a tulajdonosnak kerül feljegyzésre, aki rendes tag, illetve magának az egyéni vállalkozónak, egy hétszintű táblázat szerint.\nA hálózatnak pénzre van szüksége ahhoz, hogy működjön, a pártfogás feltételei pedig minden jogi személy számára azonosak.",
     "n5_iznos": "7 szint · küszöb 10.000 RSD",
     "n4_naslov": "Szociális programok",
-    "n4_opis": "Programok anyáknak és gondviselőknek, időseknek, különös gondoskodásra szorulóknak és tanuláshoz, amelyekben a jóváhagyott felhasználóknak minden nap POEN kerül feljegyzésre. Ez nem szociális segély a jogszabályok értelmében, és nem érinti az államtól járó jogosultságaidat.",
+    "n4_opis": "Programok anyáknak és gondviselőknek, időseknek, különleges támogatásra szorulóknak és tanuláshoz, amelyekben a jóváhagyott felhasználóknak minden nap POEN kerül feljegyzésre. Ez nem szociális segély a jogszabályok értelmében, és nem érinti az államtól járó jogosultságaidat.",
     "n4_iznos": "napi feljegyzés",
     "n3_naslov": "Operatív hozzájárulás",
     "n3_opis": "Konkrét munka a közösségért. A ZRNO-tulajdonosok — az első szakaszban az Alapítvány Igazgatótanácsa — feladatot tesznek közzé, te jelentkezel és elvégzed, majd ők megerősítik az elvégzést, és a POEN csak ekkor kerül feljegyzésre.",

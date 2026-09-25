@@ -1035,7 +1035,7 @@
     },
     "privatnost": {
       "naslov": "KOLO Platform Privacy Policy",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "statut": {
       "naslov": "KOLO Foundation Statute",
@@ -1043,11 +1043,11 @@
     },
     "dpia": {
       "naslov": "DPIA — Data Protection Impact Assessment",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "radnjeObrade": {
       "naslov": "Register of Processing Activities",
-      "ver": "4.6.3"
+      "ver": "4.6.7"
     },
     "rizici": {
       "naslov": "Risk Acceptance Statement",
@@ -1081,13 +1081,13 @@
     "meta_uslovi_title": "Terms of Use · KOLO",
     "meta_uslovi_desc": "KOLO Platform Terms of Use, version 4.6.6",
     "meta_privatnost_title": "Privacy Policy · KOLO",
-    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.6.3",
+    "meta_privatnost_desc": "KOLO Platform Privacy Policy, version 4.6.7",
     "meta_statut_title": "KOLO Foundation Statute · KOLO",
     "meta_statut_desc": "KOLO Foundation Statute, version 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.6.3",
+    "meta_dpia_desc": "Data Protection Impact Assessment, version 4.6.7",
     "meta_radnje_title": "Register of Processing Activities · KOLO",
-    "meta_radnje_desc": "Register of personal data processing activities, version 4.6.3",
+    "meta_radnje_desc": "Register of personal data processing activities, version 4.6.7",
     "meta_rizici_title": "Risk Acceptance Statement · KOLO",
     "meta_rizici_desc": "Risk acceptance statement for participation in the KOLO system, version 4.6.0",
     "meta_whitepaper_title": "Whitepaper · KOLO",
@@ -1125,7 +1125,7 @@
       },
       "programi-podrske": {
         "naziv": "Rulebook on Support Programmes",
-        "opis": "Social programmes (Support for Mothers, Support for the Elderly, Special Care, Schooling) — conditions, coefficients and confirmation from the chain. One attestation, that is a reality index of 10%, is enough for access."
+        "opis": "Social programmes (Support for Mothers, Support for the Elderly, Special Support, Schooling) — conditions, coefficients and confirmation from the chain. One attestation, that is a reality index of 10%, is enough for access."
       },
       "ucesce-dece": {
         "naziv": "Rulebook on the Participation of Children",
@@ -1711,7 +1711,7 @@
     "n5_opis": "A legal entity or a sole trader — a company, an association or a shop — signs a donation contract with the Foundation, in money, goods or services. The patron itself receives no POEN. The recognition is recorded for the owner who is a full member, or for the sole trader themselves, according to a table of seven levels.\nThe network needs money in order to run, and the terms of patronage are the same for every legal entity.",
     "n5_iznos": "7 levels · threshold RSD 10,000",
     "n4_naslov": "Social programmes",
-    "n4_opis": "Programmes for mothers and carers, the elderly, special care and schooling, in which approved users have POEN recorded every day. This is not social assistance in the sense of the law and does not affect any entitlements you have from the state.",
+    "n4_opis": "Programmes for mothers and carers, the elderly, special support and schooling, in which approved users have POEN recorded every day. This is not social assistance in the sense of the law and does not affect any entitlements you have from the state.",
     "n4_iznos": "recorded daily",
     "n3_naslov": "Operational contribution",
     "n3_opis": "Concrete work for the community. ZRNO holders — in the first phase the Foundation's Management Board — publish a task, you apply and carry it out, then they confirm it was done, and only then is POEN recorded.",

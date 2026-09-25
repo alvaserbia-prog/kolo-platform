@@ -836,7 +836,7 @@ Social programs are a mechanism for the automatic recording of POENs for groups 
 
 The automatic recording of new POENs for qualifying groups has a redistributive effect: new records increase the total number of recorded POENs in the system, thereby changing the accounting coefficient for all users. This effect is a deliberate design decision — the system recognizes that participation that is by its nature continuous and diffuse cannot be recorded through individual activities.
 
-The initial qualifying groups are mothers (primary caregivers), elderly users, users in a special care regime, and users in education. New groups may be added by decision of the Foundation in Phase 1, and of the Upper Kolo in Phase 2.
+The initial qualifying groups are mothers (primary caregivers), elderly users, users in difficult circumstances, and users in education. New groups may be added by decision of the Foundation in Phase 1, and of the Upper Kolo in Phase 2.
 
 A user who belongs to a qualifying group verifies the data that confirms that status. After verification, the Protocol automatically records new POEN entries for that user without the need for a specific activity.
 
