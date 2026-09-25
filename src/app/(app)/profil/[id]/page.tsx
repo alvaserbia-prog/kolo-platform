@@ -105,6 +105,19 @@ export default function JavniProfilPage() {
     EMISIJA_KRUG_OSNIVANJE: t("trx_osnivanje_krugovi"),
     UPIS_ZRNO: t("trx_upis_zrno"),
     OTPIS_ZRNO: t("trx_otpis_zrno"),
+    EMISIJA_NADZOR: t("trx_nadzor"),
+    EMISIJA_OPERATIVNI: t("trx_operativni"),
+    EMISIJA_OSNIVACKI: t("trx_osnivacki"),
+    EMISIJA_SADRZAJ: t("trx_sadrzaj"),
+    EMISIJA_RAZMENA: t("trx_razmena"),
+    PONISTENJE_PREPISA: t("trx_ponistenje_prepisa"),
+    EMISIJA_PRIJATELJSTVO: t("trx_prijateljstvo"),
+    OTPIS_PRIJATELJSTVO: t("trx_otpis_prijateljstva"),
+    OTPIS_PREVOD_U_MALOLETNI: t("trx_prevod_u_maloletni"),
+    OTPIS_NABAVKA: t("trx_nabavka"),
+    ISPRAVKA_NABAVKA: t("trx_ispravka_nabavke"),
+    USKLADJIVANJE_POTVRDE: t("trx_uskladjivanje_potvrde"),
+    EMISIJA_KRUG_BONUS: t("trx_krug_bonus"),
   };
 
   const [ucitavamJos, setUcitavamJos] = useState(false);
@@ -445,7 +458,7 @@ export default function JavniProfilPage() {
                 <li key={trx.id} className="px-6 py-3 flex items-center justify-between gap-4">
                   <div className="min-w-0">
                     <p className="text-sm text-kolo-text truncate">
-                      <span className="text-kolo-muted text-xs mr-2">{TIP_LABELA[trx.type] ?? trx.type}</span>
+                      <span className="text-kolo-muted text-xs mr-2">{TIP_LABELA[trx.type] ?? t("trx_emisija")}</span>
                       {trx.description ?? (drugaStrana ? (
                         <Link href={profilHref(drugaStrana)} className="text-kolo-green-700 hover:underline">
                           <Pseudonim>{drugaStrana.pseudonim}</Pseudonim>

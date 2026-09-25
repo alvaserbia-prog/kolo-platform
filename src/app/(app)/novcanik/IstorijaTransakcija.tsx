@@ -1,4 +1,6 @@
+import { getLocale } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
+import { opisTransakcije } from "@/lib/prevod-servera";
 import IstorijaKlijent from "./IstorijaKlijent";
 
 /**
@@ -32,6 +34,7 @@ export default async function IstorijaTransakcija({
     },
   });
 
+  const locale = await getLocale();
   const txData = transakcije.map((t) => {
     const primio = t.toWallet?.userId
       ? t.toWallet.userId === userId
@@ -49,7 +52,7 @@ export default async function IstorijaTransakcija({
       id: t.id,
       amount: t.amount,
       type: t.type,
-      description: t.description,
+      description: opisTransakcije(locale, t),
       primio,
       drugiPseudonim: drugiUser?.pseudonim ?? (medjuClanovima ? "?" : "Protokol"),
       drugiId: drugiUser?.id ?? null,

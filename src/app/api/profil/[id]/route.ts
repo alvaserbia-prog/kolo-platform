@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { greska } from "@/lib/greska-api";
+import { getLocale } from "next-intl/server";
+import { opisTransakcije } from "@/lib/prevod-servera";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -153,6 +155,8 @@ export async function GET(
       amount: true,
       type: true,
       description: true,
+      opisKljuc: true,
+      opisParametri: true,
       createdAt: true,
       fromWallet: { select: { user: { select: { id: true, pseudonim: true } } } },
       toWallet: { select: { user: { select: { id: true, pseudonim: true } } } },
@@ -160,7 +164,14 @@ export async function GET(
   }) : [];
 
   const imaJos = transakcije.length === 11;
-  const transakcijeSlice = imaJos ? transakcije.slice(0, 10) : transakcije;
+  // Opis se prevodi preko ključa na jeziku posmatrača; ključ i parametri ne idu klijentu.
+  const locale = await getLocale();
+  const transakcijeSlice = (imaJos ? transakcije.slice(0, 10) : transakcije).map(
+    ({ opisKljuc, opisParametri, ...t }) => ({
+      ...t,
+      description: opisTransakcije(locale, { opisKljuc, opisParametri, description: t.description }),
+    }),
+  );
   const nextCursor = imaJos ? transakcijeSlice[9].id : null;
 
   // V3: neverifikovan korisnik (na sopstvenom profilu — jedini koji ovde dospeva bez
