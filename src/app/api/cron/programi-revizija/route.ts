@@ -58,11 +58,19 @@ export async function GET(req: NextRequest) {
     if (razlogObustave == null) continue;
     const istekla = razlogObustave === "revizija";
 
+    // 🔴 „revizija" pokriva dva ishoda iz čl. 12, jer su mehanički isti (prošao
+    // `nextReverifikacija`), ali se korisniku ne smeju objasniti istim rečima:
+    // pravo po osnovu gubitka doma NE podleže reviziji — ono traje dvanaest
+    // meseci i prosto istekne. Poruka se zato grana po osnovu.
+    const bezRevizije = en.osnov === "GUBITAK_DOMA";
+
     // Briše i unete podatke — osnov (pristanak uz važeći status) je prestao.
     await okoncajPrijavu(en.id, {
       status: "INACTIVE",
       razlog: istekla
-        ? "Istekao rok reverifikacije statusa (čl. 12); status nije ponovo potvrđen."
+        ? bezRevizije
+          ? "Istekao rok od dvanaest meseci po osnovu iz čl. 12; pravo prestaje istekom roka, bez revizije."
+          : "Istekao rok reverifikacije statusa (čl. 12); status nije ponovo potvrđen."
         : "Indeks stvarnosti pao ispod 10% — osnov za program više ne važi.",
     });
 
@@ -70,7 +78,9 @@ export async function GET(req: NextRequest) {
     else palIndeks++;
 
     const razlog = istekla
-      ? "Istekao je rok za godišnju reviziju statusa, a status nije ponovo potvrđen."
+      ? bezRevizije
+        ? "Istekao je rok od dvanaest meseci za koji se pravo po ovom programu ostvaruje."
+        : "Istekao je rok za reviziju statusa, a status nije ponovo potvrđen."
       : "Vaš indeks stvarnosti je pao ispod 10%, pa je osnov za program prestao da važi.";
     await obavesti(en.user.id, {
       tip: "info",

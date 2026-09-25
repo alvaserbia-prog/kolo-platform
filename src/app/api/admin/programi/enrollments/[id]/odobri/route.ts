@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { obavesti } from "@/lib/notifikacije";
-import { labelPrograma, danaDoReverifikacije } from "@/lib/protokol/programi";
+import { labelPrograma, rokReverifikacije } from "@/lib/protokol/programi";
 import { zatvoriPostupakPotvrda } from "@/lib/protokol/program-potvrda";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { logAdminAkcija } from "@/lib/audit";
@@ -45,11 +45,16 @@ export async function POST(
   const dailyAmount = body.dailyAmount ? Number(body.dailyAmount) : undefined;
 
   // Reverifikacija statusa (Pravilnik o programima podrške čl. 12/13).
-  const danaDoRevizije = danaDoReverifikacije(enrollment.type);
+  //
+  // 🔴 Rok se traži od `rokReverifikacije`, ne od broja dana po tipu programa:
+  // kod Posebne podrške zavisi od OSNOVA i od podataka u prijavi — gubitak doma
+  // traje dvanaest meseci od događaja, akutna bolest šest meseci, a pravo za
+  // maloletno lice prestaje njegovim punoletstvom.
   const nextReverifikacija =
-    danaDoRevizije != null
-      ? new Date(Date.now() + danaDoRevizije * 24 * 60 * 60 * 1000)
-      : undefined;
+    rokReverifikacije(
+      { type: enrollment.type, osnov: enrollment.osnov, metadata: enrollment.metadata },
+      new Date(),
+    ) ?? undefined;
 
   await prisma.programEnrollment.update({
     where: { id },

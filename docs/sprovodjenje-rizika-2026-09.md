@@ -125,19 +125,62 @@ upotrebio „verified / верифицированные / hitelesített" — co
 verifikaciji, i imenuje **status** („redovan član"), ne institut. Četvrti put da ta brana
 radi.
 
-### 🔴 Šta OSTAJE da se uradi u kodu — bez ovoga akt tvrdi više nego što kod radi
+### 🟢 Kod je dovršen istog dana (25.09.2026) — akt i ekran govore isto
 
-1. **`Transaction` ne nosi vezu do prijave na program.** Nema polja iz kog bi se izveo
-   naziv programa za pojedinačan zapis, pa prikaz koji akt sada propisuje **još ne
-   postoji**. Traži migraciju (nullable polje, upis pri emisiji) i izmenu
-   `api/javno/feed/route.ts`, gde je `EMISIJA_PROGRAM` danas izbačen u celini.
-   🔴 Zatečeni redovi ostaju `null` — retroaktivno popunjavanje je zabranjeno pravilom 11.
-2. **`ProgramEnrollment` ne nosi osnov**, pa trajanja po osnovu (akutna bolest 6 meseci,
-   gubitak doma 12) nisu sprovedena i obrazac prijave osnov ne prikuplja.
-   `nextReverifikacija` je danas jedan broj po programu.
-3. Dok to ne postoji, **set se ne objavljuje na ekolo.rs** — objavljen akt bi opisivao
-   prikaz koji ekran ne nudi, a to je tačno onaj kvar koji je u ovom fajlu zapisan četiri
-   puta („ekran nije poslednja reč").
+Tri stavke su bile otvorene kad je set otišao na test; sve tri su zatvorene pre objave.
+Zapisane su ovde zato što je **kako** su rešene ono što vezuje dalji rad.
+
+**1. `Transaction.enrollmentId` — VEZA, ne naziv programa.** Polje je nullable i pokazuje
+na `ProgramEnrollment`, `ON DELETE SET NULL`. 🔴 Naziv programa se **ne upisuje u zapis**
+i opis i dalje glasi samo „Socijalni program" (`OPIS_SOCIJALNOG_PROGRAMA`): zapis je
+trajan i ide u GDPR izvoz, pa upisan naziv se nikad više ne bi mogao **suziti** ako se
+odluka o prikazu promeni, dok prijava prestankom osnova nosi svoj prikaz sa sobom. Naziv
+se zato izvodi **pri čitanju**. Kaskadno brisanje bi oborilo zero-sum, otud `SetNull`.
+🔴 Zatečeni redovi ostaju `null` i **ne popunjavaju se naknadno** (pravilo 11) — stariji
+zapisi zato ne ulaze u pojedinačan prikaz nego ostaju u dnevnom zbiru, a zapis bez veze
+se iz pojedinačnog spiska **izbacuje**, jer bi pseudonim uz neimenovan „socijalni
+program" bio prikaz koji akt ne predviđa.
+
+**2. Odluka o prikazu živi na JEDNOM mestu — `src/lib/protokol/program-prikaz.ts`.**
+Iste zapise dižu tri upita (`/sistem`, `/api/pocetna/liste`, `/api/javno/feed`), a
+njihov razlaz je u ovom projektu **već proizveo kvar**: uslov o deci je postojao samo u
+feedu, pa je `/sistem` prikazivao pseudonime dece. Zato `uslovZapisaProtokola(verifikovan)`
+i `opisZapisaProtokola(...)`, a brana traži da kroz njih prođu **sva tri** i da nijedan ne
+drži sopstveni spisak tipova. `VEZA_PROGRAMA` dovlači **samo tip** prijave — ono što upit
+ne dovuče, prikaz ne može da oda. 🟡 Usput je nađen i ispravljen zatečen kvar u feedu:
+opis je stajao pod uslovom `t.fromWallet === null`, a `emitujPoen` **uvek** upisuje
+`fromWalletId = "banka-singleton"`, pa nijedna emisija nije pokazivala opis.
+
+**3. `ProgramEnrollment.osnov` postoji zbog ROKA, ne zbog prikaza.** Enum `OsnovPodrske`
+ima **dve** vrednosti, kako ih čl. 12 i nabraja. 🔴 Finija razlika — rešenje naspram
+izjave o akutnoj odnosno hroničnoj bolesti — **nije postala treća vrednost ni kolona**:
+razdvojena od osnova, odala bi da je reč o zdravlju. Živi u `metadata`, koju vidi samo
+lice što obrađuje prijavu. Rokovi su u čistoj funkciji `rokReverifikacije`: rešenje i
+hronična bolest 365 dana, **akutna bolest 183**, **gubitak doma 365 od DOGAĐAJA** (ne od
+odobravanja), uz dva gornja ograničenja iz istog člana — **punoletstvo** lica o kome se
+korisnik stara i **datum isteka rešenja**, koji se po čl. 12 i beleži a do tada se nigde
+nije koristio. Zatečena prijava bez osnova drži stari rok od 365 dana: promena pravila ne
+sme da skrati pravo odobreno pre nje.
+
+🔴 **Od lica o kome se korisnik stara beleži se SAMO datum punoletstva**, i samo kad je
+maloletno — čl. 12 traži da pravo tada prestane, a ništa više o tom licu „se ne unosi u
+prijavu preko onoga što je neophodno za utvrđivanje osnova".
+
+🔴 **Osnov ide isključivo superadminu**, istim gejtom kao uneti podaci: ne prikazuje se
+nijednom korisniku (čl. 4 st. 5), ali lice koje odlučuje mora da ga vidi — inače odlučuje
+ne videvši ono od čega zavisi rok, a to je isti razlog zbog kog su mu i uneti podaci
+otvoreni.
+
+🟡 **Prijava po osnovu gubitka doma se odbija ako je od događaja prošlo više od 365 dana.**
+Bez toga bi bila odobrena i istog dana obustavljena revizijom, što na ekranu izgleda kao
+kvar.
+
+🟡 **Gostu je dodat dnevni zbir po programu.** Čl. 4 st. 4 kaže da se „neprijavljenim
+licima i korisnicima čija stvarnost nije potvrđena prikazuje **isključivo** dnevni zbir",
+a njemu je do ovog seta izostajao i on — pa mu je proverljivost evidencije bila prazna.
+
+🟡 **`danaDoReverifikacije` više ne zovu rute** nego samo `rokReverifikacije`, kao svoju
+podrazumevanu vrednost. Ostavljena je da ne nastanu dve istine o istom roku.
 
 ---
 

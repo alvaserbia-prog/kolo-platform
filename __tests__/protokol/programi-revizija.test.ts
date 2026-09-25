@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { danaDoReverifikacije, razlogObustaveProgram } from "@/lib/protokol/programi";
+import { danaDoReverifikacije, razlogObustaveProgram, rokReverifikacije } from "@/lib/protokol/programi";
 import { TipKorisnika } from "@/generated/prisma/client";
 
 const SADA = new Date("2026-06-02T12:00:00Z");
@@ -84,5 +84,103 @@ describe("razlogObustaveProgram", () => {
         SADA
       )
     ).toBe("revizija");
+  });
+});
+
+describe("rokReverifikacije — rok zavisi od OSNOVA, ne samo od tipa (čl. 12)", () => {
+  const ODOBRENO = new Date("2026-09-25T00:00:00Z");
+  const dana = (od: Date, do_: Date) => Math.round((do_.getTime() - od.getTime()) / 86400000);
+
+  it("Školovanje — 183 dana od odobravanja", () => {
+    const rok = rokReverifikacije({ type: "SKOLOVANJE", osnov: null, metadata: null }, ODOBRENO);
+    expect(dana(ODOBRENO, rok!)).toBe(183);
+  });
+
+  it("Podrška majkama / starijima — roka nema", () => {
+    expect(rokReverifikacije({ type: "PODRSKA_MAJKAMA", osnov: null, metadata: null }, ODOBRENO)).toBeNull();
+    expect(rokReverifikacije({ type: "PODRSKA_STARIJIMA", osnov: null, metadata: null }, ODOBRENO)).toBeNull();
+  });
+
+  it("smanjena sposobnost po rešenju — godišnja revizija", () => {
+    const rok = rokReverifikacije(
+      { type: "POSEBNA_BRIGA", osnov: "SMANJENA_SPOSOBNOST", metadata: { dokaz: "RESENJE" } },
+      ODOBRENO,
+    );
+    expect(dana(ODOBRENO, rok!)).toBe(365);
+  });
+
+  it("🔴 akutna bolest — šest meseci, pa ponovna prijava", () => {
+    const rok = rokReverifikacije(
+      { type: "POSEBNA_BRIGA", osnov: "SMANJENA_SPOSOBNOST", metadata: { dokaz: "BOLEST_AKUTNA" } },
+      ODOBRENO,
+    );
+    expect(dana(ODOBRENO, rok!)).toBe(183);
+  });
+
+  it("hronična bolest ide uz godišnju reviziju, ne uz šest meseci", () => {
+    const rok = rokReverifikacije(
+      { type: "POSEBNA_BRIGA", osnov: "SMANJENA_SPOSOBNOST", metadata: { dokaz: "BOLEST_HRONICNA" } },
+      ODOBRENO,
+    );
+    expect(dana(ODOBRENO, rok!)).toBe(365);
+  });
+
+  it("🔴 gubitak doma — dvanaest meseci OD DOGAĐAJA, ne od odobravanja", () => {
+    const rok = rokReverifikacije(
+      { type: "POSEBNA_BRIGA", osnov: "GUBITAK_DOMA", metadata: { datumDogadjaja: "2026-06-25" } },
+      ODOBRENO,
+    );
+    // Događaj je tri meseca pre odobravanja, pa rok pada tri meseca ranije.
+    expect(rok!.toISOString().slice(0, 10)).toBe("2027-06-25");
+  });
+
+  it("gubitak doma bez datuma događaja — rok teče od odobravanja, ne izostaje", () => {
+    const rok = rokReverifikacije(
+      { type: "POSEBNA_BRIGA", osnov: "GUBITAK_DOMA", metadata: {} },
+      ODOBRENO,
+    );
+    expect(dana(ODOBRENO, rok!)).toBe(365);
+  });
+
+  it("🔴 punoletstvo lica o kome se korisnik stara obara rok kad je bliže", () => {
+    const rok = rokReverifikacije(
+      {
+        type: "POSEBNA_BRIGA",
+        osnov: "SMANJENA_SPOSOBNOST",
+        metadata: { dokaz: "RESENJE", punoletstvoAt: "2027-01-10" },
+      },
+      ODOBRENO,
+    );
+    expect(rok!.toISOString().slice(0, 10)).toBe("2027-01-10");
+  });
+
+  it("punoletstvo posle godišnje revizije ne pomera rok napred", () => {
+    const rok = rokReverifikacije(
+      {
+        type: "POSEBNA_BRIGA",
+        osnov: "SMANJENA_SPOSOBNOST",
+        metadata: { dokaz: "RESENJE", punoletstvoAt: "2030-01-10" },
+      },
+      ODOBRENO,
+    );
+    expect(dana(ODOBRENO, rok!)).toBe(365);
+  });
+
+  it("🔴 pravo po rešenju ne nadživljava sam akt — datum isteka obara rok", () => {
+    const rok = rokReverifikacije(
+      {
+        type: "POSEBNA_BRIGA",
+        osnov: "SMANJENA_SPOSOBNOST",
+        metadata: { dokaz: "RESENJE", datumIsteka: "2027-03-01" },
+      },
+      ODOBRENO,
+    );
+    expect(rok!.toISOString().slice(0, 10)).toBe("2027-03-01");
+  });
+
+  it("zatečena prijava bez osnova drži stari rok od 365 dana", () => {
+    // Promena pravila ne sme da skrati pravo odobreno pre nje.
+    const rok = rokReverifikacije({ type: "POSEBNA_BRIGA", osnov: null, metadata: null }, ODOBRENO);
+    expect(dana(ODOBRENO, rok!)).toBe(365);
   });
 });

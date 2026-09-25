@@ -52,6 +52,11 @@ export async function GET() {
       type: e.type,
       label: labelPrograma(e.type),
       metadata: smeVidetiPodatke ? e.metadata : null,
+      // 🔴 Osnov se ne prikazuje nijednom korisniku (Pravilnik o programima
+      // podrške čl. 4 st. 5), ali lice koje obrađuje prijavu mora da ga vidi —
+      // od njega zavisi rok iz čl. 12 (gubitak doma teče od događaja i ne
+      // podleže reviziji). Isti gejt kao za unete podatke.
+      osnov: smeVidetiPodatke ? e.osnov : null,
       createdAt: e.createdAt.toISOString(),
     })),
     poslednjeEmisije: poslednjeEmisije.map((s) => ({

@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { TransactionType } from "@/generated/prisma/client";
 import { dnevniPregledPrograma } from "@/lib/protokol/programi";
+import { uslovZapisaProtokola, opisZapisaProtokola, VEZA_PROGRAMA } from "@/lib/protokol/program-prikaz";
 import { BEZ_DECE } from "@/lib/protokol/deca";
 
 /**
@@ -20,8 +20,18 @@ export async function GET(req: NextRequest) {
   const ukupno = await prisma.transaction.count();
 
   // Gost vidi samo agregat — pojedinačne transakcije se ne izlažu neprijavljenima.
+  //
+  // 🔴 Dnevni zbir po programu ide i njemu: čl. 4 st. 4 Pravilnika o programima
+  // podrške kaže da se „neprijavljenim licima i korisnicima čija stvarnost nije
+  // potvrđena prikazuje isključivo dnevni zbir po programu". Do seta 4.6.7 je
+  // gostu izostajao i on, pa je proverljivost evidencije za njega bila prazna.
   if (!prijavljen) {
-    return NextResponse.json({ ukupno, nivo: "gost", transakcije: [] });
+    return NextResponse.json({
+      ukupno,
+      nivo: "gost",
+      programi: await dnevniPregledPrograma(),
+      transakcije: [],
+    });
   }
 
   const offset = Number(req.nextUrl.searchParams.get("offset") ?? "0");
@@ -37,19 +47,28 @@ export async function GET(req: NextRequest) {
       AND: [
         { OR: [{ fromWalletId: null }, { fromWallet: { is: BEZ_DECE } }] },
         { toWallet: { is: BEZ_DECE } },
-        // 🔴 Socijalni programi NE izlaze pojedinačno (R-03, mera M-1).
-        // Ne štiti samo opis: `izracunajStariji` daje 1000 + 100 × (godine − 50),
-        // pa je iznos invertibilan — 2.500 POEN znači tačno 65 godina; a
+        // 🔴 Zapis socijalnog programa izlazi pojedinačno SAMO verifikovanom
+        // posmatraču (čl. 4 st. 4, set 4.6.7), i uslov za to stoji na jednom
+        // mestu — `uslovZapisaProtokola`. Isti koriste `/sistem` i
+        // `/api/pocetna/liste`; prepisan, razišao bi se pri prvoj izmeni.
+        //
+        // 🔴 Iznos je kod dva programa invertibilan: `izracunajStariji` daje
+        // 1000 + 100 × (godine − 50), pa 2.500 POEN znači tačno 65 godina, a
         // `izracunajMajke` iz jednog broja odaje koliko dece korisnica ima i
-        // koliko je svako staro. Zato red mora da izađe ceo, ne samo njegov opis.
-        // Proverljivost nosi dnevni agregat po programu (`dnevniPregledPrograma`).
-        { type: { not: TransactionType.EMISIJA_PROGRAM } },
+        // koliko je svako staro. To se ovim setom PRIHVATA za verifikovanog
+        // posmatraču: pristanak iz čl. 4 st. 3 izričito navodi šta se iz iznosa
+        // može izvesti. Nepotvrđenom članu i gostu ostaje dnevni zbir.
+        //
+        // 🔴 Osnov po kome je pravo ostvareno se ne prikazuje NIKOME (st. 5) —
+        // `VEZA_PROGRAMA` zato dovlači samo tip programa.
+        uslovZapisaProtokola(verifikovan),
       ],
     },
     orderBy: { createdAt: "desc" },
     skip: offset,
     take,
     include: {
+      ...VEZA_PROGRAMA,
       fromWallet: { include: { user: { select: { pseudonim: true } }, krug: { select: { name: true } } } },
       toWallet: { include: { user: { select: { pseudonim: true } }, krug: { select: { name: true } } } },
     },
@@ -75,8 +94,16 @@ export async function GET(req: NextRequest) {
       to: walletLabel(t.toWallet),
       amount: t.amount,
       type: t.type,
-      // Opis samo za emisije Protokola, ne za ažuriranja evidencije između korisnika
-      description: t.fromWallet === null ? t.description : null,
+      // Opis ide uz zapise Protokola, ne uz ažuriranja evidencije između korisnika.
+      //
+      // 🔴 Uslov je bio `t.fromWallet === null`, a `emitujPoen` UVEK upisuje
+      // `fromWalletId = "banka-singleton"` — pa je za svaku emisiju ispadalo
+      // `null` i opis nije izlazio nijedan. Zapis Protokola se prepoznaje po tome
+      // što na izlaznoj strani NEMA korisnika, ne po tome što strane nema.
+      //
+      // Naziv socijalnog programa se sklapa pri čitanju, iz prijave, i samo za
+      // verifikovanog — u samom zapisu stoji opšta oznaka „Socijalni program".
+      description: t.fromWallet?.user ? null : opisZapisaProtokola(null, t, verifikovan),
       createdAt: t.createdAt.toISOString(),
     })),
   });
