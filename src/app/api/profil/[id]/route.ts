@@ -169,6 +169,8 @@ export async function GET(
   const transakcijeSlice = (imaJos ? transakcije.slice(0, 10) : transakcije).map(
     ({ opisKljuc, opisParametri, ...t }) => ({
       ...t,
+      // Smer se računa PRE maskiranja protivstrane — posle njega se iz zapisa ne vidi.
+      izlaz: t.fromWallet?.user?.id === korisnik.id,
       description: opisTransakcije(locale, { opisKljuc, opisParametri, description: t.description }),
     }),
   );

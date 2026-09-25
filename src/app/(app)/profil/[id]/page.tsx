@@ -17,6 +17,7 @@ interface Transakcija {
   amount: number;
   type: string;
   description: string | null;
+  izlaz?: boolean;
   createdAt: string;
   fromWallet: { user: { id: string; pseudonim: string } | null } | null;
   toWallet: { user: { id: string; pseudonim: string } | null } | null;
@@ -452,18 +453,30 @@ export default function JavniProfilPage() {
         ) : (
           <ul className="divide-y divide-kolo-border">
             {sveTrx.map((trx) => {
-              const jeIzlaz = trx.fromWallet?.user?.id === profil.id;
+              const jeIzlaz = trx.izlaz ?? trx.fromWallet?.user?.id === profil.id;
+              // Prepis i njegovo poništenje su jedini zapisi između dva člana: red
+              // imenuje smer i drugu stranu. Ostali zapisi su zapisi Protokola i
+              // nose svoj opis („Potvrda člana X", „Prvi oglas"…), bez oznake tipa.
+              const medjuClanovima = trx.type === "TRANSFER" || trx.type === "PONISTENJE_PREPISA";
+              const prepisKljuc =
+                trx.type === "PONISTENJE_PREPISA"
+                  ? (jeIzlaz ? "ponisten_prepis_ka" : "ponisten_prepis_od")
+                  : (jeIzlaz ? "prepis_ka" : "prepis_od");
               const drugaStrana = jeIzlaz ? trx.toWallet?.user : trx.fromWallet?.user;
               return (
                 <li key={trx.id} className="px-6 py-3 flex items-center justify-between gap-4">
                   <div className="min-w-0">
                     <p className="text-sm text-kolo-text truncate">
-                      <span className="text-kolo-muted text-xs mr-2">{TIP_LABELA[trx.type] ?? t("trx_emisija")}</span>
-                      {trx.description ?? (drugaStrana ? (
-                        <Link href={profilHref(drugaStrana)} className="text-kolo-green-700 hover:underline">
-                          <Pseudonim>{drugaStrana.pseudonim}</Pseudonim>
-                        </Link>
-                      ) : t("protokol"))}
+                      {medjuClanovima ? (
+                        <>
+                          {t(prepisKljuc)}{" "}
+                          {drugaStrana ? (
+                            <Link href={profilHref(drugaStrana)} className="text-kolo-green-700 hover:underline">
+                              <Pseudonim>{drugaStrana.pseudonim}</Pseudonim>
+                            </Link>
+                          ) : "—"}
+                        </>
+                      ) : (trx.description || (TIP_LABELA[trx.type] ?? t("protokol")))}
                     </p>
                     <p className="text-xs text-kolo-muted mt-0.5">
                       {new Date(trx.createdAt).toLocaleString(intlTag(locale), { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
