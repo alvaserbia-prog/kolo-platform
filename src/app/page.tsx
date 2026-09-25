@@ -9,6 +9,7 @@ import PublicHeader from "@/components/PublicHeader";
 import PublicFooter from "@/components/PublicFooter";
 import FaqAkordeon from "@/components/FaqAkordeon";
 import KomeKartice from "@/components/KomeKartice";
+import DrustveneMreze from "@/components/DrustveneMreze";
 import { getFaqPoBrojevima } from "@/lib/faq-data";
 import { prisma } from "@/lib/prisma";
 import { USLOV_RAZMENE } from "@/lib/razmena-brojac-pravila";
@@ -536,6 +537,12 @@ export default async function Home() {
           </div>
           <div className="mt-8 pt-6 border-t border-white/15">
             <p className="text-xs text-white/85">{t("cta_footer")}</p>
+            {/* Mreže idu POSLE dugmeta za pristup, ne u hero: izlaz sa sajta se
+                nudi tek kad je poziv na registraciju već pročitan. */}
+            <div className="mt-5 flex flex-col items-center gap-2">
+              <p className="text-[11px] font-semibold tracking-widest uppercase text-white/70">{t("cta_mreze")}</p>
+              <DrustveneMreze tema="tamna" />
+            </div>
           </div>
         </section>
 

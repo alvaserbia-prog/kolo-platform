@@ -3,6 +3,7 @@ import Image from "next/image";
 import logoImg from "@/assets/kolo-icon.png";
 import { getTranslations } from "next-intl/server";
 import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
+import DrustveneMreze from "@/components/DrustveneMreze";
 
 export default async function PublicFooter() {
   const t = await getTranslations("javneKomponente");
@@ -22,6 +23,9 @@ export default async function PublicFooter() {
                 <span key={i}>{line}{i === 0 ? <br /> : null}</span>
               ))}
             </p>
+            <div className="-ml-2.5 mt-4">
+              <DrustveneMreze />
+            </div>
           </div>
 
           {/* Sistem */}
