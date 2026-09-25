@@ -481,6 +481,10 @@ export default function JavniProfilPage() {
                     <p className="text-xs text-kolo-muted mt-0.5">
                       {new Date(trx.createdAt).toLocaleString(intlTag(locale), { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" })}
                     </p>
+                    {/* Napomena uz prepis, sitno ispod — kao na ekranu POEN. */}
+                    {medjuClanovima && trx.description && (
+                      <p className="mt-1 text-xs text-kolo-muted/70 truncate" title={trx.description}>{trx.description}</p>
+                    )}
                   </div>
                   <span className={`text-sm font-semibold shrink-0 ${!jeIzlaz && trx.type !== "TRANSFER" ? "text-blue-600" : jeIzlaz ? "text-kolo-danger" : "text-kolo-green-700"}`}>
                     {jeIzlaz ? "−" : "+"}{trx.amount.toLocaleString(intlTag(locale))}
