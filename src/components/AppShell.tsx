@@ -6,6 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import PolitikaPristanak from "./PolitikaPristanak";
+import AppFooter from "./AppFooter";
 import { useMe, useMeEventBridge, useMePatch, ME_KEY } from "@/hooks/useMe";
 import { useSkrolPamcenje } from "@/hooks/useSkrolPamcenje";
 
@@ -107,6 +108,7 @@ export default function AppShell({ verified, isAdmin, jeNadzornik, children }: A
           <div className="px-4 py-5 md:px-8 md:py-6">
             {children}
           </div>
+          <AppFooter />
         </main>
       </div>
       </div>
