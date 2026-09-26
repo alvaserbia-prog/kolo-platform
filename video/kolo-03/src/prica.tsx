@@ -1,5 +1,5 @@
-// Likovi i predmeti priče videa 04 (Ana, Milan, Lazar, Marija) — isti papirni
-// stil kao u prvom videu: isečci, drhtave linije, uskakanje. Crta se oko (0,0).
+// Likovi i predmeti iz videa 04 (Ana, Milan, Lazar, Marija) — isti izgled i boje u videu 03.
+// Papirni stil: isečci, drhtave linije, uskakanje. Crta se oko (0,0).
 import React from "react";
 import { staticFile, useCurrentFrame } from "remotion";
 import { P } from "./paleta";

@@ -18,7 +18,8 @@ const list = (x: number): Pt[] => {
 
 export const Prelazi: React.FC = () => {
   const f = useCurrentFrame();
-  const rez = plan.scene.slice(1).map((s) => s.odF);
+  // samo između scena 1 i 2 — od scene 3 sveska ostaje u kadru bez reza
+  const rez = [plan.scene[1].odF];
   const i = rez.findIndex((r) => f >= r - POLA && f < r + POLA);
   if (i < 0) return null;
   const r = rez[i];

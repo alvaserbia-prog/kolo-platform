@@ -1,151 +1,42 @@
-"""Poravnanje reči sa govorom (vremena reči) + sečenje naracije.
+"""Vremena reči za video 03 (jedan snimak naracije).
 
-Whisper large-v3 (sherpa-onnx) daje tačan tekst, ali ne i vremena reči, a
-HuggingFace modeli sa word-timestamps nisu dostupni iz ovog okruženja.
-Zato se vremena izvode iz samog signala:
-
-1. energija po 10 ms -> ostrva govora i pauze (>= 60 ms);
-2. dinamičko programiranje raspoređuje reči po ostrvima: grupa uzastopnih
-   reči pokriva grupu uzastopnih ostrva, trajanje se očekuje srazmerno broju
-   slogova, granica na interpunkciji je jeftinija, a progutana duga pauza
-   skupa;
-3. unutar grupe reči se raspoređuju po slogovima, preko ZVUČNOG vremena
-   (pauze unutar grupe se preskaču).
-
-Kad postoji audio/parakeet.json (scripts/vremena_parakeet.py, NeMo Parakeet
-TDT v3 nad već isečenim klipovima), početak svake reči uzima se iz tokena
-tog modela poravnanjem po slovima — to je tačnije od gornje procene, koja
-tada ostaje samo rezerva.
-
-Izlaz: audio/final/scenaN.wav (početak skraćen na 0,25 s pre prvog glasa)
-i src/timing.json (reči sa početkom i krajem u sekundama, relativno na klip).
+Tekst prati ono što je izgovoreno (snimak My_recording_52; „Nekada", ne „Nekad").
+Početak svake reči uzima se iz tokena Parakeet-a (audio/parakeet.json) poravnanjem po
+slovima; nepogođene reči se interpoliraju. Vremena su u sekundama od početka audio/final/glas.wav.
+Izlaz: src/timing.json {trajanje, scene: [{id, tekst, reci}]}.
 """
-import json, re, subprocess
-import numpy as np, soundfile as sf
+import json, re, difflib
+import soundfile as sf
 
-# Tekst prati ono što je stvarno izgovoreno (Whisper), pravopis ispravljen ručno.
 TEKST = {
-    1: "Ovo je priča o četvoro komšija iz Sombora. Živeli su nadomak jedni drugih, a nikada se nisu upoznali.",
-    2: "Sve je počelo od meda. Milan je tražio domaći med, a Ana ima košnice u dvorištu. Dogovorili su se za pet tegli i 5.000 POENA, i Milan joj ih je prepisao.",
-    3: "Nekoliko dana kasnije, Ani se pokvarila veš-mašina. Popravio ju je Lazar, majstor iz susedne ulice. Ana mu je prepisala 4.000 POENA, bez ijednog dinara.",
-    4: "Lazaru se posle posla jeo pravi domaći burek. Marija mu je ispekla celu tepsiju, a on joj je prepisao 1.000 POENA. A znaš šta je Marija uradila sa njima? Otišla je kod Ane po teglu meda.",
-    5: "I tako se četvoro ljudi koji se nisu poznavali uhvatilo u isto kolo. Jer POEN nije novac. To je zapis o tome šta je ko dao svojoj zajednici.",
-    6: "A šta ti umeš, i šta imaš viška? Uđi na ekolo.rs i postavi svoj prvi oglas. Uhvati se i ti u kolo!",
+    1: "Nekada se u komšiluku znalo ko je kome pomogao.",
+    2: "Ko je doneo drva. Ko je popravio ogradu. Niko to nije zapisivao, ali svi su pamtili.",
+    3: "KOLO to pamćenje zapisuje. Taj zapis se zove POEN.",
+    4: "Daš nekome rad, dobro ili znanje, i on ti prepiše POENE za to.",
+    5: "A kad tebi nešto zatreba, prepišeš deo POENA onome ko tebi pomogne.",
+    6: "Komšijska sveska našeg kraja je otvorena. Pridruži se besplatno na ekolo.rs",
 }
+IZGOVOR = {"ekolo.rs": "ekolotackars"}  # izgovoreno „ekolo tačka rs"
 
-SAMOGLASNICI = set("aeiouAEIOU")
 
-
-def slogovi(rec):
-    r = re.sub(r"[^\wčćšžđČĆŠŽĐ]", "", rec)
-    if r.lower() == "ekolors":  # „e-kolo-tačka-er-es"
-        return 6
-    IZGOVOR = {"5000": 5, "4000": 6, "1000": 3}  # pet hiljada, četiri hiljade, hiljadu
-    if r in IZGOVOR:
-        return IZGOVOR[r]
-    n = sum(1 for c in r if c in SAMOGLASNICI)
-    # slogotvorno r (npr. „prvu", „vrt")
-    n += len(re.findall(r"(?i)(?<![aeiou])r(?![aeiou])", r))
+def slogovi(r):
+    r = IZGOVOR.get(r, r)
+    n = sum(1 for c in r.lower() if c in "aeiou")
     return max(1, n)
-
-
-def ostrva(a, sr):
-    hop = sr // 100
-    n = len(a) // hop
-    db = 20 * np.log10(np.array([np.sqrt(np.mean(a[k * hop:(k + 1) * hop] ** 2)) for k in range(n)]) + 1e-9)
-    prag = np.percentile(db, 90) - 28
-    v = db > prag
-    # zatvori rupe kraće od 60 ms
-    isl = []
-    k = 0
-    while k < n:
-        if v[k]:
-            j = k
-            while j < n and v[j]:
-                j += 1
-            isl.append([k / 100, j / 100])
-            k = j
-        else:
-            k += 1
-    spojeno = [isl[0]]
-    for s, e in isl[1:]:
-        if s - spojeno[-1][1] < 0.06:
-            spojeno[-1][1] = e
-        else:
-            spojeno.append([s, e])
-    # odbaci mrvice kraće od 40 ms (klik, dah)
-    return [x for x in spojeno if x[1] - x[0] >= 0.04]
-
-
-def poravnaj(reci, isl):
-    W, P = len(reci), len(isl)
-    syl = [slogovi(r) for r in reci]
-    kraj_fraze = [bool(re.search(r"[.,?!]$", r)) for r in reci]
-    ukupno_glas = sum(e - s for s, e in isl)
-    rate = ukupno_glas / sum(syl)
-    cs = np.concatenate([[0], np.cumsum(syl)])
-    INF = 1e18
-    # dp[w][p] = najmanji trošak da prvih w reči pokrije prvih p ostrva
-    dp = np.full((W + 1, P + 1), INF)
-    back = {}
-    dp[0][0] = 0
-    for w in range(1, W + 1):
-        for p in range(1, P + 1):
-            for w0 in range(0, w):
-                for p0 in range(0, p):
-                    if dp[w0][p0] >= INF:
-                        continue
-                    glas = sum(isl[k][1] - isl[k][0] for k in range(p0, p))
-                    ocek = (cs[w] - cs[w0]) * rate
-                    c = (glas - ocek) ** 2 / max(ocek, 0.05)
-                    # progutane pauze unutar grupe
-                    for k in range(p0, p - 1):
-                        pauza = isl[k + 1][0] - isl[k][1]
-                        c += 4.0 * max(0, pauza - 0.08)
-                    if w < W and not kraj_fraze[w - 1]:
-                        c += 0.03
-                    t = dp[w0][p0] + c
-                    if t < dp[w][p]:
-                        dp[w][p] = t
-                        back[(w, p)] = (w0, p0)
-    # rekonstrukcija
-    grupe = []
-    w, p = W, P
-    while w > 0:
-        w0, p0 = back[(w, p)]
-        grupe.append((w0, w, p0, p))
-        w, p = w0, p0
-    grupe.reverse()
-    out = []
-    for w0, w1, p0, p1 in grupe:
-        segs = isl[p0:p1]
-        glas = sum(e - s for s, e in segs)
-        tot = cs[w1] - cs[w0]
-
-        def u_vreme(x):  # x = udeo zvučnog vremena grupe -> apsolutno vreme
-            ostalo = x * glas
-            for s, e in segs:
-                if ostalo <= (e - s) + 1e-9:
-                    return s + ostalo
-                ostalo -= e - s
-            return segs[-1][1]
-
-        acc = 0
-        for i in range(w0, w1):
-            s = u_vreme(acc / tot)
-            acc += syl[i]
-            e = u_vreme(acc / tot)
-            out.append({"w": reci[i], "s": round(s, 3), "e": round(e, 3)})
-    return out
 
 
 def norm(c):
     return c.lower() if c.isalpha() else ""
 
 
-def iz_parakeeta(reci, pk, isl):
-    """Reči dobijaju početak iz tokena Parakeet-a, poravnanjem po slovima."""
-    import difflib
+def main():
+    pk = json.load(open("audio/parakeet.json"))
+    a, sr = sf.read("audio/final/glas.wav")
+    kraj_glasa = len(a) / sr - 0.3
+    reci, scena_od = [], []
+    for i in range(1, 7):
+        for w in TEKST[i].split():
+            reci.append(w); scena_od.append(i)
     pk_slova, pk_t = [], []
     for tok, t in zip(pk["tokens"], pk["ts"]):
         for c in tok:
@@ -153,64 +44,38 @@ def iz_parakeeta(reci, pk, isl):
                 pk_slova.append(norm(c)); pk_t.append(t)
     moja, vlasnik = [], []
     for wi, r in enumerate(reci):
-        for c in r:
+        for c in IZGOVOR.get(r, r):
             if norm(c):
                 moja.append(norm(c)); vlasnik.append(wi)
     sm = difflib.SequenceMatcher(None, "".join(moja), "".join(pk_slova), autojunk=False)
     t_slova = [None] * len(moja)
-    for a, b, n in sm.get_matching_blocks():
+    for x, y, n in sm.get_matching_blocks():
         for k in range(n):
-            t_slova[a + k] = pk_t[b + k]
-    pocetak = [None] * len(reci)
+            t_slova[x + k] = pk_t[y + k]
+    poc = [None] * len(reci)
     for i, wi in enumerate(vlasnik):
-        if pocetak[wi] is None and t_slova[i] is not None:
-            # prvo pogođeno slovo reči; ako nije prvo slovo, pomeri malo unazad
+        if poc[wi] is None and t_slova[i] is not None:
             prvo = vlasnik.index(wi)
-            pocetak[wi] = max(0.0, t_slova[i] - 0.06 * (i - prvo))
-    # nepogođene reči: interpolacija po slogovima između suseda
+            poc[wi] = max(0.0, t_slova[i] - 0.06 * (i - prvo))
     for i in range(len(reci)):
-        if pocetak[i] is None:
-            j0 = i - 1
-            j1 = next((j for j in range(i + 1, len(reci)) if pocetak[j] is not None), None)
-            t0 = pocetak[j0] if j0 >= 0 else 0.0
-            t1 = pocetak[j1] if j1 is not None else isl[-1][1]
-            pocetak[i] = t0 + (t1 - t0) * 0.5 if j1 is not None else t0 + 0.3
-    kraj_glasa = isl[-1][1]
-    out = []
-    for i, r in enumerate(reci):
-        s = pocetak[i]
-        nxt = pocetak[i + 1] if i + 1 < len(reci) else kraj_glasa
-        e = min(nxt, s + 0.12 + 0.2 * slogovi(r))
-        if i + 1 == len(reci):
-            e = max(e, min(kraj_glasa, s + 0.2 * slogovi(r)))
-        out.append({"w": r, "s": round(s, 3), "e": round(max(e, s + 0.1), 3)})
-    return out
-
-
-def main():
-    import os
-    pk = json.load(open("audio/parakeet.json")) if os.path.exists("audio/parakeet.json") else None
-    rez = {}
-    for i in range(1, 7):
-        a, sr = sf.read(f"audio/tempo/scena{i}.wav", dtype="float32")
-        isl = ostrva(a, sr)
-        pocetak = max(0.0, isl[0][0] - 0.25)
-        kraj = min(len(a) / sr, isl[-1][1] + 0.30)
-        reci = TEKST[i].split()
-        wts = poravnaj(reci, isl)
-        for x in wts:
-            x["s"] = round(x["s"] - pocetak, 3)
-            x["e"] = round(x["e"] - pocetak, 3)
-        if pk:  # tačnija vremena (klipovi su već isečeni, pa su vremena relativna na klip)
-            isl_klip = [[a0 - pocetak, b0 - pocetak] for a0, b0 in isl]
-            wts = iz_parakeeta(reci, pk[f"scena{i}"], isl_klip)
-        subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", f"audio/tempo/scena{i}.wav",
-                        "-ss", f"{pocetak:.3f}", "-to", f"{kraj:.3f}",
-                        "-af", "afade=t=in:d=0.02,areverse,afade=t=in:d=0.08,areverse",
-                        f"audio/final/scena{i}.wav"], check=True)
-        rez[f"scena{i}"] = {"trajanje": round(kraj - pocetak, 3), "tekst": TEKST[i], "reci": wts}
-        print(i, round(kraj - pocetak, 2), " ".join(f"{x['w']}@{x['s']}" for x in wts))
-    json.dump(rez, open("src/timing.json", "w"), ensure_ascii=False, indent=1)
+        if poc[i] is None:
+            t0 = poc[i - 1] if i else 0.0
+            j1 = next((j for j in range(i + 1, len(reci)) if poc[j] is not None), None)
+            poc[i] = (t0 + poc[j1]) / 2 if j1 is not None else t0 + 0.3
+    out = {"trajanje": round(len(a) / sr, 3), "scene": []}
+    for s in range(1, 7):
+        lista = []
+        for i, r in enumerate(reci):
+            if scena_od[i] != s:
+                continue
+            nxt = poc[i + 1] if i + 1 < len(reci) else kraj_glasa
+            e = min(nxt, poc[i] + 0.12 + 0.2 * slogovi(r))
+            if i + 1 == len(reci):
+                e = max(e, kraj_glasa)
+            lista.append({"w": r, "s": round(poc[i], 3), "e": round(max(e, poc[i] + 0.1), 3)})
+        out["scene"].append({"id": s, "tekst": TEKST[s], "reci": lista})
+        print(s, " ".join(f"{x['w']}@{x['s']:.2f}" for x in lista))
+    json.dump(out, open("src/timing.json", "w"), ensure_ascii=False, indent=1)
 
 
 if __name__ == "__main__":

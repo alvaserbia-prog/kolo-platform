@@ -1,138 +1,94 @@
-// Scena 5 — „I tako se četvoro ljudi koji se nisu poznavali uhvatilo u isto kolo.
-// Jer POEN nije novac. To je zapis o tome šta je ko dao svojoj zajednici."
-// Veze iz prethodnih scena se iscrtaju, likovi se uhvate u kolo, oko njih zapisi,
-// a kamera se odmakne i pokaže ceo grad.
+// Scena 5 — „A kad tebi nešto zatreba, prepišeš deo POENA onome ko tebi pomogne."
+// Ani se pokvari veš-mašina, Lazar je popravi, mašina proradi, Ana se smeje. U svesci
+// novi red „Ana → Lazar · 4.000 POENA · popravka". Natpis: „Kad tebi zatreba, zapis ti pomaže."
 import React from "react";
 import { useCurrentFrame, interpolate, Easing } from "remotion";
-import { P } from "../paleta";
-import { Crta, Defs, Pop, Pt, napredak } from "../papir";
-import { Drvo, Kuca } from "../likovi";
-import { Kolo } from "../kolo";
-import { DefsNalepnica, LIKOVI, Lik, LikId, OSOBE_KOLA, Precrtano, Slika, Veza, Zapis } from "../prica";
+import { Defs, Pop, napredak } from "../papir";
+import { Kljuc, Upitnik } from "../likovi";
+import { LogoZnak } from "../kolo";
+import { KutijaAlata, Lik, VesMasina } from "../prica";
+import { Natpis } from "../selo";
+import { Sveska } from "../sveska";
+import { ANA_LAZAR, MILAN_ANA, SECANJE } from "../zapisi";
+import { SV4 } from "./Scena4";
 import { kad } from "../vreme";
-
-const MESTA: Record<LikId, Pt> = { milan: [250, 640], ana: [830, 640], lazar: [830, 1060], marija: [250, 1060] };
-const VEZE: [LikId, LikId][] = [
-  ["milan", "ana"],
-  ["ana", "lazar"],
-  ["lazar", "marija"],
-  ["marija", "ana"],
-];
-const ZAPISI: { od: LikId; ka: LikId; iznos: string; x: number; y: number; rot: number }[] = [
-  { od: "milan", ka: "ana", iznos: "5.000", x: 190, y: 620, rot: -8 },
-  { od: "ana", ka: "lazar", iznos: "4.000", x: 890, y: 610, rot: 7 },
-  { od: "lazar", ka: "marija", iznos: "1.000", x: 180, y: 1190, rot: 6 },
-  { od: "marija", ka: "ana", iznos: "1.000", x: 900, y: 1200, rot: -6 },
-];
-const CX = 540;
-const CY = 930;
-const FASADE = [P.sunce, "#CFE3C0", P.narandza, "#F7DCC8", "#E8DDF3", "#D5E7F2", "#F6E7C8"];
+import { P } from "../paleta";
 
 export const Scena5: React.FC = () => {
   const f = useCurrentFrame();
-  const tako = kad(5, "tako");
-  const uhvatilo = kad(5, "uhvatilo");
-  const kolo = kad(5, "kolo.");
-  const poen = kad(5, "POEN");
-  const novac = kad(5, "novac.");
-  const zapis = kad(5, "zapis");
-  const tome = kad(5, "tome");
-  const sta = kad(5, "šta");
-  const dao = kad(5, "dao");
-  const svojoj = kad(5, "svojoj");
+  const nesto = kad(5, "nešto");
+  const zatreba = kad(5, "zatreba,");
+  const prepises = kad(5, "prepišeš");
+  const deo = kad(5, "deo");
+  const poena = kad(5, "POENA");
+  const ko = kad(5, "ko");
+  const pomogne = kad(5, "pomogne.");
 
-  const prelaz = napredak(f, uhvatilo - 4, 12);
-  const zum = interpolate(napredak(f, svojoj - 10, 40, Easing.inOut(Easing.cubic)), [0, 1], [1, 0.62]);
-  const R = interpolate(napredak(f, kolo - 6, 22), [0, 1], [0, 1]);
-  const zapisPoz = [zapis, tome, sta, dao];
+  const kvar = napredak(f, nesto, 12);
+  const popravljena = napredak(f, ko - 4, 22, Easing.linear);
+  const anaOsmeh = Math.max(-0.9, Math.min(1, interpolate(kvar, [0, 1], [1, -0.9]) + popravljena * 1.9));
+  const lazarUlaz = napredak(f, prepises - 10, 16, Easing.out(Easing.back(1.3)));
+  const lazarX = interpolate(lazarUlaz, [0, 1], [1280, 900]);
+  const kljucLet = napredak(f, deo - 6, 14, Easing.out(Easing.cubic));
+  const kljucX = interpolate(kljucLet, [0, 1], [860, 690]);
+  const kljucY = interpolate(kljucLet, [0, 1], [640, 470]) - Math.sin(kljucLet * Math.PI) * 110;
+  const kljucRot = kljucLet >= 1 && popravljena < 1 ? Math.sin((f - deo) / 3) * 35 : 0;
+  const kljucOde = napredak(f, pomogne + 6, 10);
+  const staro = napredak(f, 0, 12);
 
-  const kuce: { x: number; y: number; i: number }[] = [];
-  for (let i = 0; i < 7; i++) kuce.push({ x: -250 + i * 260, y: 1620, i });
-  for (let i = 0; i < 3; i++) kuce.push({ x: -250 + i * 250, y: 330, i: i + 7 });
-  for (let i = 0; i < 3; i++) kuce.push({ x: 830 + i * 250, y: 330, i: i + 10 });
+  const redovi = [
+    ...SECANJE.map((r) => ({ ...r, zig: 1 })),
+    { ...MILAN_ANA, zig: 1, marker: 1 - napredak(f, 0, 12) },
+    {
+      ...ANA_LAZAR,
+      pisanje: napredak(f, poena - 6, 28, Easing.linear),
+      zig: Math.max(0, Math.min(1, (f - pomogne - 4) / 8)),
+      marker: napredak(f, pomogne + 14, 10),
+    },
+  ];
 
   return (
     <svg viewBox="0 0 1080 1920" width={1080} height={1920}>
       <Defs />
-      <DefsNalepnica />
-      <g transform={`translate(${CX} ${CY}) scale(${zum}) translate(${-CX} ${-CY})`}>
-        {/* grad oko kola — ulazi u kadar kad se kamera odmakne */}
-        {kuce.map((k) => (
-          <Pop key={k.i} at={svojoj - 6 + k.i * 1.5} x={k.x} y={k.y} skala={0.8}>
-            {k.i % 4 === 3 ? (
-              <Drvo seed={`s5-d${k.i}`} boja={k.i % 2 ? P.trava : P.zelena500} />
-            ) : (
-              <Kuca seed={`s5-k${k.i}`} fasada={FASADE[k.i % FASADE.length]} krov={k.i % 2 ? P.korala : P.korala600} kapci={k.i % 3 ? P.zelena700 : P.nebo} />
-            )}
-          </Pop>
-        ))}
-        <Pop at={svojoj - 2} x={-200} y={1060} skala={1}>
-          <Slika ime="trg-svetog-trojstva" sirina={480} seed="s5-trg" />
-        </Pop>
-        <Pop at={svojoj + 2} x={1290} y={1060} skala={1}>
-          <Slika ime="crkva-svetog-djordja" sirina={470} seed="s5-crk" />
-        </Pop>
-        {/* Županija iza kola */}
-        <Pop at={kolo - 4} x={CX} y={560} skala={1}>
-          <Slika ime="zupanija" sirina={560} seed="s5-zup" />
-        </Pop>
-
-        {/* zlatno kolo na podu */}
-        {R > 0 &&
-          [P.zlatna400, P.zelena700].map((b, k) => (
-            <Crta
-              key={k}
-              pts={Array.from({ length: 49 }, (_, i): Pt => [CX + Math.cos((i / 48) * Math.PI * 2) * 330, CY + 60 + Math.sin((i / 48) * Math.PI * 2) * 135])}
-              seed={`s5-kr${k}`}
-              boja={b}
-              debljina={k ? 8 : 18}
-              napredak={R}
-              korak={40}
-              amp={3}
-            />
-          ))}
-
-        {/* pre kola: četvoro na razmaku, veze se iscrtavaju */}
-        {prelaz < 1 && (
-          <g opacity={1 - prelaz}>
-            {VEZE.map(([a, b], i) => (
-              <Veza key={i} a={[MESTA[a][0], MESTA[a][1] - 60]} b={[MESTA[b][0], MESTA[b][1] - 60]} seed={`s5-v${i}`} napredak={napredak(f, tako + i * 8, 14)} debljina={10} />
-            ))}
-            {(Object.keys(MESTA) as LikId[]).map((id, i) => (
-              <Pop key={id} at={i * 2} x={MESTA[id][0]} y={MESTA[id][1]} skala={1.15 * (1 - 0.3 * prelaz)}>
-                <Lik id={id} seed={`s5-${id}`} />
-              </Pop>
-            ))}
-          </g>
-        )}
-        {/* kolo: ista četiri lika drže se za ruke i igraju */}
-        {prelaz > 0 && (
-          <g opacity={prelaz}>
-            <Kolo
-              seed="s5-kolo"
-              geo={{ cx: CX, cy: CY + 60, rx: 240, ry: 90, ugao: 30 + (f - uhvatilo) * 1.4, skala: 1.35, n: 4 }}
-              pojava={[uhvatilo - 4, uhvatilo - 2, uhvatilo, uhvatilo + 2]}
-              ruke={uhvatilo + 8}
-              osobe={OSOBE_KOLA}
-            />
-          </g>
-        )}
-
-        {/* „POEN nije novac" */}
-        {f >= poen - 2 && f < zapis + 6 && (
-          <g opacity={1 - napredak(f, zapis - 4, 10)}>
-            <Pop at={poen - 2} x={CX} y={1262} rot={-4}>
-              <Precrtano seed="s5-novac" tekst="novac" precrtaj={napredak(f, novac - 2, 10)} velicina={84} />
-            </Pop>
-          </g>
-        )}
-        {/* „to je zapis o tome šta je ko dao" — četiri zapisa iz priče */}
-        {ZAPISI.map((z, i) => (
-          <Pop key={i} at={zapisPoz[i] - 2} x={z.x} y={z.y} rot={z.rot} skala={0.55} njihanje={1.5} faza={i}>
-            <Zapis seed={`s5-z${i}`} od={LIKOVI[z.od].ime} ka={LIKOVI[z.ka].ime} iznos={z.iznos} zig={1} />
-          </Pop>
-        ))}
+      <g transform={`translate(${SV4.x} ${SV4.y}) scale(${SV4.s})`}>
+        <Sveska seed="sv" redovi={redovi} />
+        <g transform="translate(355 -262) rotate(8) scale(0.42)">
+          <LogoZnak seed="s3-logo" r={110} />
+        </g>
       </g>
+      {staro < 1 && (
+        <g opacity={1 - staro} transform={`translate(540 ${165 - staro * 200}) rotate(-2)`}>
+          <Natpis seed="s4-n" tekst="Dao si? Zapisano je." duzina={20} />
+        </g>
+      )}
+
+      <Pop at={2} x={560} y={575} skala={0.86}>
+        <VesMasina seed="s5-ves" kvar={kvar} popravljena={popravljena} />
+      </Pop>
+      <Pop at={0} x={190} y={560} skala={1.25}>
+        <Lik id="ana" seed="s4-ana" ime={false} osmeh={anaOsmeh} />
+      </Pop>
+      {kvar > 0 && popravljena < 0.3 && (
+        <Pop at={zatreba - 2} x={300} y={375} skala={0.36} njihanje={5}>
+          <Upitnik seed="s5-up" boja={P.korala} />
+        </Pop>
+      )}
+      {lazarUlaz > 0 && (
+        <g transform={`translate(${lazarX} 560) scale(1.25)`}>
+          <Lik id="lazar" seed="s5-lazar" ime={false} />
+        </g>
+      )}
+      <Pop at={prepises + 2} x={790} y={712} skala={0.45} rot={4}>
+        <KutijaAlata seed="s5-kutija" />
+      </Pop>
+      {kljucLet > 0 && kljucOde < 1 && (
+        <g opacity={1 - kljucOde} transform={`translate(${kljucX} ${kljucY}) rotate(${-30 + kljucRot}) scale(0.7)`}>
+          <Kljuc seed="s5-kljuc" />
+        </g>
+      )}
+      <Pop at={prepises - 2} x={540} y={165} rot={-2}>
+        <Natpis seed="s5-n" tekst="Kad tebi zatreba, zapis ti pomaže." duzina={34} velicina={56} />
+      </Pop>
     </svg>
   );
 };

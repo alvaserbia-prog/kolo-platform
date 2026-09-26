@@ -1,136 +1,109 @@
-// Scena 2 — „Sve je počelo od meda. Milan je tražio domaći med, a Ana ima
-// košnice u dvorištu. Dogovorili su se za pet tegli i 5.000 POENA,
-// i Milan joj ih je prepisao." Tegle idu Milanu, zapis ide Ani.
+// Scena 2 — „Ko je doneo drva. Ko je popravio ogradu. Niko to nije zapisivao,
+// ali svi su pamtili." Tri sličice iz sećanja uskaču jedna za drugom: Jova nosi drva,
+// Pera popravlja ogradu, Stana nosi kolače. Na „pamtili" iz sličica izlaze srca.
 import React from "react";
-import { useCurrentFrame, interpolate, Easing } from "remotion";
+import { useCurrentFrame } from "remotion";
 import { P } from "../paleta";
-import { Crta, Defs, Isecak, Pop, Pt, napredak, pravougaonik, usePop } from "../papir";
-import { Drvo, Etiketa, spring01 } from "../likovi";
-import { Iskre, Kosnica, Lik, Oblacic, Pcele, Tegla, Veza, Zapis } from "../prica";
+import { Defs, Pop, Crta, napredak } from "../papir";
+import { Cekic, Drva, Kapija, Kolaci, Komsija, Natpis, Ograda, Slicica, Srce } from "../selo";
 import { kad } from "../vreme";
 
-const MILAN: Pt = [250, 960];
-const ANA: Pt = [830, 960];
+/** Položaji sličica — scena 3 kreće iz istih. */
+export const SLICICE = [
+  { x: 330, y: 520, rot: -5, natpis: "drva" },
+  { x: 750, y: 800, rot: 4, natpis: "ograda" },
+  { x: 350, y: 1080, rot: -3, natpis: "kolači" },
+] as const;
+
+/** Sadržaj sličice i (0 drva, 1 ograda, 2 kolači); `t` = frejm od pojave. */
+export const SadrzajSlicice: React.FC<{ i: number; t: number; seed: string }> = ({ i, t, seed }) => {
+  if (i === 0) {
+    const hod = Math.min(1, t / 40);
+    const x = -80 + hod * 60;
+    const bob = Math.abs(Math.sin(t / 4)) * -6 * (1 - hod);
+    return (
+      <g>
+        <g transform="translate(150 150) scale(0.62)">
+          <Kapija seed={`${seed}-kap`} />
+        </g>
+        <g transform={`translate(${x} ${40 + bob}) scale(1.05)`}>
+          <Komsija id="jova" seed={`${seed}-jova`} />
+          <g transform="translate(0 58) scale(0.95)">
+            <Drva seed={`${seed}-drva`} />
+          </g>
+        </g>
+      </g>
+    );
+  }
+  if (i === 1) {
+    const ciklus = (t % 14) / 14;
+    const udarac = ciklus < 0.35 ? ciklus / 0.35 : 1 - (ciklus - 0.35) / 0.65;
+    const pogodak = ciklus > 0.3 && ciklus < 0.5;
+    return (
+      <g>
+        <g transform="translate(-60 30) scale(1.05)">
+          <Komsija id="pera" seed={`${seed}-pera`} />
+        </g>
+        <g transform="translate(0 170)">
+          <Ograda seed={`${seed}-og`} od={-190} do={210} visina={120} razmak={50} />
+        </g>
+        <g transform="translate(80 70)">
+          <Cekic seed={`${seed}-cek`} udarac={udarac} />
+        </g>
+        {pogodak &&
+          [0, 1, 2].map((k) => (
+            <Crta key={k} pts={[[150 + k * 14, 10 - k * 18], [178 + k * 20, -6 - k * 26]]} seed={`${seed}-tuk${k}`} boja={P.zlatna600} debljina={6} />
+          ))}
+      </g>
+    );
+  }
+  return (
+    <g>
+      <g transform="translate(-70 30) scale(1.05)">
+        <Komsija id="stana" seed={`${seed}-stana`} />
+      </g>
+      <g transform={`translate(70 ${108 + Math.sin(t / 8) * 3}) scale(0.82)`}>
+        <Kolaci seed={`${seed}-kol`} />
+      </g>
+    </g>
+  );
+};
 
 export const Scena2: React.FC = () => {
   const f = useCurrentFrame();
-  const meda = kad(2, "meda.");
-  const milan = kad(2, "Milan");
-  const trazio = kad(2, "tražio");
-  const ana = kad(2, "Ana");
-  const kosnice = kad(2, "košnice");
-  const dogovorili = kad(2, "Dogovorili");
-  const pet = kad(2, "pet");
-  const iznos = kad(2, "5.000");
-  const prepisao = kad(2, "prepisao.");
-
-  // velika tegla na početku, pa se skloni
-  const teglaOde = napredak(f, milan - 4, 12, Easing.in(Easing.cubic));
-  const oblak = usePop(trazio - 4, 160);
-  const oblakOde = napredak(f, dogovorili - 4, 10);
-  const zapis = usePop(iznos - 2, 150);
-  const pisanje = napredak(f, iznos + 2, 26, Easing.linear);
-  const zig = f < prepisao ? 0 : spring01(f - prepisao);
+  const doneo = kad(2, "doneo");
+  const popravio = kad(2, "popravio");
+  const niko = kad(2, "Niko");
+  const zapisivao = kad(2, "zapisivao,");
+  const pamtili = kad(2, "pamtili.");
+  const pojava = [Math.min(doneo - 3, 3), popravio - 3, zapisivao - 6];
 
   return (
     <svg viewBox="0 0 1080 1920" width={1080} height={1920}>
       <Defs />
-      {/* dvorište: trava, ograda, drvo i košnice iza Ane */}
-      <Pop at={0} x={540} y={1150}>
-        <Isecak pts={pravougaonik(-620, -40, 1240, 70)} boja={P.trava} seed="s2-trava" />
+      {SLICICE.map((s, i) => (
+        <Pop key={i} at={pojava[i]} x={s.x} y={s.y} rot={s.rot} njihanje={1}>
+          <Slicica seed={`s2-sl${i}`} natpis={s.natpis}>
+            <SadrzajSlicice i={i} t={f - pojava[i]} seed={`s2-c${i}`} />
+          </Slicica>
+        </Pop>
+      ))}
+      <Pop at={niko - 2} x={540} y={170} rot={-2}>
+        <Natpis seed="s2-n1" tekst="Niko nije zapisivao." duzina={20} />
       </Pop>
-      <Pop at={3} x={800} y={1115} skala={1}>
-        <Ograda seed="s2-ograda" duzina={560} />
+      <Pop at={pamtili - 3} x={610} y={290} rot={2}>
+        <Natpis seed="s2-n2" tekst="Svi su pamtili." duzina={15} pozadina={P.zlatna100} />
       </Pop>
-      <Pop at={4} x={1010} y={1120} skala={0.8}>
-        <Drvo seed="s2-drvo" boja={P.trava} />
-      </Pop>
-      <Pop at={kosnice - 4} x={640} y={1130} skala={0.75}>
-        <Kosnica seed="s2-k1" boja={P.nebo} boja2={P.sunce} />
-      </Pop>
-      <Pop at={kosnice + 2} x={1000} y={1150} skala={0.8}>
-        <Kosnica seed="s2-k2" boja={P.korala} boja2={P.trava} />
-      </Pop>
-      <Pcele seed="s2-pc" x={870} y={700} n={4} r={170} od={kosnice} />
-
-      {teglaOde < 1 && (
-        <g opacity={1 - teglaOde} transform={`translate(${teglaOde * -200} ${teglaOde * 120})`}>
-          <Pop at={meda - 4} x={540} y={560} skala={1.9 * (1 - teglaOde * 0.6)} njihanje={2}>
-            <Tegla seed="s2-velika" />
-          </Pop>
-          <Pcele seed="s2-pc0" x={540} y={470} n={3} r={190} od={meda} />
-        </g>
-      )}
-
-      <Pop at={milan - 3} x={MILAN[0]} y={MILAN[1]} skala={1.55}>
-        <Lik id="milan" seed="s2-milan" />
-      </Pop>
-      <Pop at={ana - 3} x={ANA[0]} y={ANA[1]} skala={1.55}>
-        <Lik id="ana" seed="s2-ana" />
-      </Pop>
-
-      {/* Milan misli na med */}
-      {oblak > 0 && oblakOde < 1 && (
-        <g opacity={1 - oblakOde} transform={`translate(390 620) scale(${oblak.toFixed(4)})`}>
-          <Oblacic seed="s2-obl" w={300} h={240} rep={[-120, 180]}>
-            <g transform="scale(0.95) translate(0 10)">
-              <Tegla seed="s2-mala" />
-            </g>
-          </Oblacic>
-        </g>
-      )}
-
-      {/* dogovor: isprekidana veza između njih */}
-      <Veza a={[MILAN[0] + 110, MILAN[1] - 170]} b={[ANA[0] - 110, ANA[1] - 170]} seed="s2-veza" napredak={napredak(f, dogovorili, 18)} />
-      {f >= dogovorili + 14 && f < dogovorili + 40 && <Iskre seed="s2-isk" x={540} y={760} t={napredak(f, dogovorili + 14, 26)} r={110} />}
-
-      {/* pet tegli: iskoče od Ane, pa odlete Milanu */}
-      {[0, 1, 2, 3, 4].map((i) => {
-        const at = pet + i * 3;
-        if (f < at) return null;
-        const pocetak: Pt = [360 + i * 90, 690];
-        const let_ = napredak(f, prepisao - 14 + i * 3, 16, Easing.inOut(Easing.cubic));
-        const x = interpolate(let_, [0, 1], [pocetak[0], MILAN[0] - 20 + i * 12]);
-        const y = interpolate(let_, [0, 1], [pocetak[1], MILAN[1] + 110]) - Math.sin(let_ * Math.PI) * 120;
-        const s = interpolate(let_, [0, 1], [0.52, 0.3]);
+      {/* srca izlaze iz sličica */}
+      {SLICICE.map((s, i) => {
+        const t = napredak(f, pamtili + i * 4, 40);
+        if (t <= 0) return null;
         return (
-          <g key={i} opacity={let_ > 0.92 ? (1 - let_) / 0.08 : 1}>
-            <Pop at={at} x={x} y={y} skala={s} njihanje={3} faza={i}>
-              <Tegla seed={`s2-t${i}`} />
-            </Pop>
+          <g key={`h${i}`} opacity={t < 0.75 ? 1 : (1 - t) / 0.25} transform={`translate(${s.x + 150 + Math.sin(t * 6 + i) * 16} ${s.y - 120 - t * 170}) scale(${0.5 + 0.4 * Math.min(1, t * 4)})`}>
+            <Srce seed={`s2-srce${i}`} r={38} />
           </g>
         );
       })}
-      {f >= pet && f < iznos + 10 && (
-        <g opacity={1 - napredak(f, iznos, 10)}>
-          <Pop at={pet + 2} x={540} y={820} rot={-4}>
-            <Etiketa seed="s2-pet" tekst="5 tegli" velicina={52} />
-          </Pop>
-        </g>
-      )}
-
-      {/* zapis: Milan → Ana */}
-      {zapis > 0 && (
-        <g transform={`translate(540 ${interpolate(zapis, [0, 1], [520, 440])}) rotate(${-3 + (1 - zapis) * -12}) scale(${(1.15 * zapis).toFixed(4)})`}>
-          <Zapis seed="s2-zapis" od="Milan" ka="Ana" iznos="5.000" zig={zig} pisanje={pisanje} />
-        </g>
-      )}
     </svg>
-  );
-};
-
-
-/** Niska drvena ograda (letve), donja ivica na (0,0). */
-const Ograda: React.FC<{ seed: string; duzina: number }> = ({ seed, duzina }) => {
-  const n = Math.round(duzina / 46);
-  return (
-    <g>
-      <Crta pts={[[-duzina / 2, -70], [duzina / 2, -70]]} seed={`${seed}-p1`} boja="#A77A4E" debljina={12} />
-      <Crta pts={[[-duzina / 2, -30], [duzina / 2, -30]]} seed={`${seed}-p2`} boja="#A77A4E" debljina={12} />
-      {Array.from({ length: n }, (_, i) => {
-        const x = -duzina / 2 + 20 + i * 46;
-        return <Isecak key={i} pts={[[x - 14, 0], [x - 14, -100], [x, -116], [x + 14, -100], [x + 14, 0]]} boja="#C8996A" seed={`${seed}-l${i}`} senka="mala" amp={1.2} korak={16} />;
-      })}
-    </g>
   );
 };

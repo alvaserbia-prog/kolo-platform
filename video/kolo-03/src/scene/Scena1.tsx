@@ -1,110 +1,97 @@
-// Scena 1 — „Ovo je priča o četvoro komšija iz Sombora. Živeli su nadomak
-// jedni drugih, a nikada se nisu upoznali." Somborski motivi u pozadini,
-// četiri kuće u istoj ulici, iz svake proviruje jedan lik; između njih upitnici.
+// Scena 1 — „Nekada se u komšiluku znalo ko je kome pomogao."
+// Ulica u somborskom selu: vojvođanske kuće i kapije, ograda; Jova i Stana se preko
+// ograde pozdravljaju. Na „pomogao" između njih luk sa srcem i Stanino „Hvala, komšija!".
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { P } from "../paleta";
 import { Crta, Defs, Isecak, Pop, Pt, napredak, pravougaonik } from "../papir";
-import { Drvo, Etiketa, Kuca, Oblak, Sunce, Upitnik } from "../likovi";
-import { DefsNalepnica, LIKOVI, LikId, Slika } from "../prica";
+import { Drvo, Etiketa, Kuca, Oblak, Sunce } from "../likovi";
+import { DefsNalepnica, Slika } from "../prica";
+import { Govor, Kapija, Komsija, Ograda, Srce } from "../selo";
 import { kad } from "../vreme";
-
-const KUCE: { id: LikId; x: number; fasada: string; krov: string; kapci: string }[] = [
-  { id: "milan", x: 160, fasada: "#E8DDF3", krov: P.korala600, kapci: P.zelena700 },
-  { id: "ana", x: 413, fasada: P.sunce, krov: P.korala, kapci: P.zelena700 },
-  { id: "lazar", x: 667, fasada: "#D5E7F2", krov: P.korala600, kapci: P.nebo },
-  { id: "marija", x: 920, fasada: "#F7DCC8", krov: P.korala, kapci: P.zelena700 },
-];
 
 export const Scena1: React.FC = () => {
   const f = useCurrentFrame();
-  const sombora = kad(1, "Sombora.");
-  const cetvoro = kad(1, "četvoro");
-  const komsija = kad(1, "komšija");
-  const nadomak = kad(1, "nadomak");
-  const nikada = kad(1, "nikada");
-  const zum = 1 + f * 0.00035;
-  const Y = 1150; // linija ulice
+  const nekada = kad(1, "Nekada");
+  const komsiluku = kad(1, "komšiluku");
+  const znalo = kad(1, "znalo");
+  const kome = kad(1, "kome");
+  const pomogao = kad(1, "pomogao.");
+  const zum = 1 + f * 0.0005;
+  const Y = 930; // linija kuća
+
+  const luk = napredak(f, kome - 2, 14);
+  const a: Pt = [370, 850];
+  const b: Pt = [715, 850];
+  const lukPts: Pt[] = Array.from({ length: 12 }, (_, i) => {
+    const t = i / 11;
+    return [a[0] + (b[0] - a[0]) * t, a[1] - Math.sin(t * Math.PI) * 120];
+  });
 
   return (
     <svg viewBox="0 0 1080 1920" width={1080} height={1920}>
       <Defs />
       <DefsNalepnica />
-      <g transform={`translate(540 900) scale(${zum}) translate(-540 -900)`}>
-        <Pop at={2} x={905} y={270} skala={0.75}>
+      <g transform={`translate(540 950) scale(${zum}) translate(-540 -950)`}>
+        <Pop at={2} x={880} y={250} skala={0.72}>
           <Sunce seed="s1-sunce" />
         </Pop>
-        <g transform={`translate(${f * 0.45} 0)`}>
-          <Pop at={6} x={170} y={300} skala={0.7}>
+        <g transform={`translate(${f * 0.4} 0)`}>
+          <Pop at={5} x={180} y={260} skala={0.62}>
             <Oblak seed="s1-ob1" />
           </Pop>
-          <Pop at={10} x={620} y={250} skala={0.55}>
+          <Pop at={9} x={590} y={200} skala={0.48}>
             <Oblak seed="s1-ob2" />
           </Pop>
         </g>
-        {/* Sombor u pozadini: crkve sa strane, Županija u sredini */}
-        <Pop at={4} x={185} y={745} skala={1}>
-          <Slika ime="trg-svetog-trojstva" sirina={420} seed="s1-trg" />
+        {/* toranj seoske crkve u daljini */}
+        <Pop at={6} x={540} y={Y - 150} skala={1}>
+          <Slika ime="crkva-svetog-djordja" sirina={360} seed="s1-crk" />
         </Pop>
-        <Pop at={8} x={900} y={745} skala={1}>
-          <Slika ime="crkva-svetog-djordja" sirina={410} seed="s1-crk" />
+        <Pop at={nekada} x={540} y={420} rot={-3} njihanje={1.2}>
+          <Etiketa seed="s1-nekad" tekst="Sombor, nekad" velicina={78} boja={P.zelena900} />
         </Pop>
-        <Pop at={12} x={540} y={775} skala={1}>
-          <Slika ime="zupanija" sirina={620} seed="s1-zup" />
+        {/* travnjak */}
+        <Pop at={0} x={540} y={Y + 40}>
+          <Isecak pts={pravougaonik(-620, -40, 1240, 460)} boja={P.trava} seed="s1-trava" />
         </Pop>
-        <Pop at={sombora - 2} x={540} y={380} rot={-3} njihanje={1.2}>
-          <Etiketa seed="s1-sombor" tekst="Sombor" velicina={96} boja={P.zelena900} />
+        {/* ulica: kuća – kapija – kuća – kapija – kuća */}
+        <Pop at={3} x={120} y={Y} skala={0.95}>
+          <Kuca seed="s1-k1" fasada="#F4E4C4" krov={P.korala600} kapci={P.zelena700} />
         </Pop>
-        {/* travnjak i ulica */}
-        <Pop at={0} x={540} y={Y - 170}>
-          <Isecak pts={pravougaonik(-620, -30, 1240, 220)} boja={P.trava} seed="s1-trava" />
+        <Pop at={7} x={335} y={Y} skala={0.92}>
+          <Kapija seed="s1-kap1" />
         </Pop>
-        <Pop at={0} x={540} y={Y + 30}>
-          <Isecak pts={pravougaonik(-620, -18, 1240, 44)} boja="#D9CFBE" seed="s1-trotoar" senka="mala" />
+        <Pop at={11} x={560} y={Y} skala={0.95}>
+          <Kuca seed="s1-k2" fasada={P.sunce} krov={P.korala} kapci={P.zelena700} />
         </Pop>
-        {/* četiri kuće; iz prozora proviruju komšije */}
-        {KUCE.map((k, i) => (
-          <Pop key={k.id} at={cetvoro - 6 + i * 4} x={k.x} y={Y} skala={0.86}>
-            <Kuca
-              seed={`s1-k${i}`}
-              fasada={k.fasada}
-              krov={k.krov}
-              kapci={k.kapci}
-              prozori={i % 2 ? [{ glava: LIKOVI[k.id].glava, od: komsija + i * 4 }, undefined] : [undefined, { glava: LIKOVI[k.id].glava, od: komsija + i * 4 }]}
-            />
-          </Pop>
-        ))}
-        {KUCE.map((k, i) => (
-          <Pop key={`e${k.id}`} at={komsija + 6 + i * 4} x={k.x} y={Y + 62} rot={i % 2 ? 3 : -3}>
-            <Etiketa seed={`s1-ime${i}`} tekst={LIKOVI[k.id].ime} velicina={42} />
-          </Pop>
-        ))}
-        <Pop at={20} x={1060} y={Y - 10} skala={0.6}>
-          <Drvo seed="s1-d2" boja={P.zelena700} />
+        <Pop at={15} x={775} y={Y} skala={0.92}>
+          <Kapija seed="s1-kap2" boja="#7A5230" />
         </Pop>
-        <Pop at={22} x={20} y={Y - 10} skala={0.6}>
-          <Drvo seed="s1-d1" boja={P.trava} />
+        <Pop at={19} x={1000} y={Y} skala={0.95}>
+          <Kuca seed="s1-k3" fasada="#D5E7F2" krov={P.korala600} kapci={P.nebo} />
         </Pop>
-        {/* „nadomak": kratke strelice pokazuju koliko su blizu */}
-        {[0, 1, 2].map((i) => {
-          const a = KUCE[i].x + 70;
-          const b = KUCE[i + 1].x - 70;
-          const y = Y - 300;
-          const t = napredak(f, nadomak + i * 5, 12);
-          const pts: Pt[] = [[a, y], [(a + b) / 2, y - 26], [b, y]];
-          const nestaje = napredak(f, nikada - 6, 8);
-          return (
-            <g key={i} opacity={1 - nestaje}>
-              <Crta pts={pts} seed={`s1-bl${i}`} boja={P.zelena700} debljina={6} napredak={t} korak={20} isprekidana />
-            </g>
-          );
-        })}
-        {/* „nikada se nisu upoznali": upitnici između kuća */}
-        {[0, 1, 2].map((i) => (
-          <Pop key={`u${i}`} at={nikada + i * 5} x={(KUCE[i].x + KUCE[i + 1].x) / 2} y={Y - 330} skala={0.36} njihanje={5} faza={i}>
-            <Upitnik seed={`s1-up${i}`} boja={i === 1 ? P.korala : P.zlatna600} />
-          </Pop>
-        ))}
+        <Pop at={21} x={-20} y={Y + 10} skala={0.7}>
+          <Drvo seed="s1-d1" boja={P.zelena700} />
+        </Pop>
+        {/* komšije iza ograde */}
+        <Pop at={komsiluku - 4} x={330} y={1010} skala={1.45}>
+          <Komsija id="jova" seed="s1-jova" mase={znalo} strana={1} />
+        </Pop>
+        <Pop at={komsiluku + 2} x={760} y={1010} skala={1.45}>
+          <Komsija id="stana" seed="s1-stana" mase={znalo + 4} strana={-1} />
+        </Pop>
+        <Pop at={0} x={0} y={1255}>
+          <Ograda seed="s1-ograda" od={-20} do={1100} visina={150} />
+        </Pop>
+        {/* ko je kome pomogao */}
+        {luk > 0 && <Crta pts={lukPts} seed="s1-luk" boja={P.zlatna600} debljina={8} napredak={luk} korak={24} isprekidana />}
+        <Pop at={kome + 6} x={542} y={742} skala={0.9} njihanje={4}>
+          <Srce seed="s1-srce" r={38} />
+        </Pop>
+        <Pop at={pomogao} x={800} y={690} rot={3} skala={0.9}>
+          <Govor seed="s1-hvala" tekst="Hvala, komšija!" velicina={50} rep={-1} />
+        </Pop>
       </g>
     </svg>
   );
