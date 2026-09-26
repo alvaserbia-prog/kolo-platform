@@ -18,6 +18,18 @@ većeg posla proveriti ih ponovo, naročito broj heštegova na Instagramu.
   Ustaljeni: 🤝 🌾 🏡 🔄 👉, a za predmete iz priče 🥧 🚲 🍅.
 - Prva rečenica mora da stoji sama za sebe, jer se samo ona vidi pre „više".
 - Obraćanje: na TikTok-u i Instagramu **„ti"**, na Facebook-u **„vi"** (starija publika).
+- 🔴 **Opis ne prepričava video** (odluka vlasnika, 26.09.2026). Naracija i natpisi iz videa se
+  **ne prepisuju od reči do reči**: ko je video pogledao, ne treba da ga pročita još jednom.
+  Opis nosi istu poruku drugim rečima i dodaje ono čega u videu nema: sliku iz svakodnevice,
+  konkretan domaći detalj (zimnica, slava, rub na pantalonama, razlomci), pitanje publici.
+  Ne nabrajaju se svi primeri iz videa, dovoljan je jedan ili dva, po mogućstvu novi.
+- **Ton je glas čoveka iz komšiluka, ne reklama.** Kratke, prirodne rečenice, kako bi se to
+  reklo uživo. Obavezne činjenice (šta je KOLO, da POEN nije novac, da upis ide posle pregleda)
+  ostaju, ali uvek svojim rečima, ne rečenicom iz videa.
+- **Ne izmišljati događaje ni tuđe reči** („juče nam je komšinica rekla…"). Opšte zapažanje
+  („kad se priča o razmeni, najčešće se čuje…") je autentično; izmišljena anegdota nije.
+- **Obraćanje rodno neutralno gde god može** („šta iz tvoje kuće prvo ide na Pijacu?", ne
+  „šta bi ponudio").
 
 ## 2. Šta se sme reći, a šta ne (usklađeno sa aktima)
 
@@ -238,21 +250,22 @@ Oglas vide ljudi iz vašeg kraja. Neko se javi, dogovorite razmenu i upoznate se
 Video: `video/kolo-sta-da-ponudis/out/kolo-sta-da-ponudis.mp4`. Naslovna: `video/kolo-sta-da-ponudis/out/naslovna.jpg`.
 Zvuk na Instagramu preimenovati u „KOLO, šta ti imaš da ponudiš“.
 U opisima nema reči „besplatno“ (pravilo iz odeljka 2); u samom videu je ostala po odluci vlasnika.
+Opisi su pisani po pravilu „opis ne prepričava video“ (odeljak 1): ista poruka, druge reči i drugi primeri.
 
 ### TikTok
 
 ```
-Misliš da nemaš šta da ponudiš? Prošetaj kroz svoju kuću i nabrojaćeš deset stvari za minut. 🏡
+Najčešća rečenica kad se priča o razmeni među komšijama: „Ma ja nemam šta da ponudim.“ A onda se ispostavi da baš ta osoba pravi zimnicu koju cela ulica pamti. 🍅
 
-U kuhinji su ajvar, pekmez i kolači za slavu. U dvorištu jaja, paradajz iz bašte, košenje trave i slobodno mesto u autu do grada. U dnevnoj sobi šivenje, pomoć detetu oko matematike i strpljenje da nekome pokažeš kako radi telefon. Ono što tebi deluje obično, nekome je baš ono što traži.
+Svaka kuća ima nešto čega drugima fali. Tegla viška od prošle jeseni, sigurna ruka za rub na pantalonama, strpljenje za razlomke, slobodno sedište kad se već ide u grad. Tebi je to svakodnevica, nekom drugom je rešenje.
 
 KOLO je platforma za razmenu dobara i usluga među komšijama. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
 
-Prvi oglas postavljaš na Pijaci: fotografija, šta nudiš i gde si. Iznos u POENIMA predlažeš ti, a možeš ga ostaviti i za dogovor. Kad oglas prođe pregled, upisuje ti se hiljadu POENA. POEN nije novac i ne menja se za novac, to je zapis o tome šta si doneo zajednici.
+Počinje se jednim oglasom na Pijaci, sa slikom i mestom. Kad prvi oglas prođe pregled, upisuje ti se hiljadu POENA. POEN nije novac i ne menja se za novac, on samo beleži šta si doneo zajednici.
 
-U KOLU su samo stvarni ljudi. Dok te niko ne potvrdi, još se ne javljaš na tuđe oglase, ali drugi mogu da se jave tebi. Zato je prvi oglas tvoj ulaz. Kad se upoznate, onaj ko te lično poznaje može da te potvrdi. 🤝
+Na početku se ljudi javljaju tebi, a ne ti njima. Tako se upoznajete uživo, a poverenje kreće odatle. 🤝
 
-Šta iz tvoje kuće prvo ide na Pijacu? Napiši u komentaru.
+Koja stvar iz tvoje kuće prva ide na Pijacu? Napiši u komentaru.
 
 👉 ekolo.rs, link je u profilu
 
@@ -262,15 +275,13 @@ U KOLU su samo stvarni ljudi. Dok te niko ne potvrdi, još se ne javljaš na tu�
 ### Instagram
 
 ```
-Misliš da nemaš šta da ponudiš? Tvoja kuća kaže drugačije. 🏡
+U skoro svakoj ulici postoji neko čiji se ajvar pamti. Pitaj tu osobu šta ima da ponudi, reći će: ništa posebno. 🍅
 
-Ajvar, pekmez, kolači za slavu. Jaja i paradajz iz bašte, košenje trave, mesto u autu do grada. Šivenje, čas matematike, pomoć oko telefona. Ono što tebi deluje obično, nekome je baš ono što traži.
+A upravo to „ništa posebno“ neko u komšiluku traži već nedeljama. Tegla zimnice, skraćene pantalone, jedan čas razlomaka pred kontrolni.
 
-KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Prvi oglas postaviš na Pijaci, a kad prođe pregled, upisuje ti se hiljadu POENA, zapis o doprinosu zajednici, a ne novac. 🌾
+KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Prvi oglas se postavlja za par minuta, a kad prođe pregled, upisuje ti se hiljadu POENA. To je zapis o doprinosu, ne novac. 🌾
 
-Dok te niko ne potvrdi, drugi se javljaju tebi. Zato je prvi oglas tvoj ulaz u KOLO. 🤝
-
-👉 Postavi svoj prvi oglas, link je u bio.
+👉 Šta iz tvoje kuće prvo ide na Pijacu? Link je u bio.
 
 #Sombor #Vojvodina #razmena #komšije #KOLOzajednica
 ```
@@ -278,17 +289,17 @@ Dok te niko ne potvrdi, drugi se javljaju tebi. Zato je prvi oglas tvoj ulaz u K
 ### Facebook
 
 ```
-Mislite da nemate šta da ponudite? Prošetajte kroz svoju kuću. 🏡
+Kad se priča o razmeni među komšijama, najčešće se čuje ista rečenica: „Ja nemam šta da ponudim.“ 🏡
 
-U kuhinji ajvar, pekmez i kolači za slavu. U dvorištu jaja, paradajz iz bašte, košenje trave i slobodno mesto u autu do grada. U dnevnoj sobi šivenje, pomoć detetu oko matematike, strpljenje da nekome pokažete kako radi telefon. Ono što vama deluje obično, nekome je baš ono što traži.
+Pa onda razgovor skrene na zimnicu, na baštu, na to ko u ulici još ume da skrati pantalone ili da detetu objasni razlomke. I ispostavi se da svako ima nešto što drugome fali.
 
 KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
 
-Prvi oglas postavljate na Pijaci. Dovoljni su fotografija, opis onoga što nudite i mesto, a iznos u POENIMA predlažete vi. Kad oglas prođe pregled, upisuje vam se hiljadu POENA. POEN nije novac i ne može se zameniti za novac, on beleži da ste nešto dali zajednici.
+Dovoljno je da na Pijaci objavite jednu stvar, sa fotografijom i mestom. Kad prvi oglas prođe pregled, upisuje vam se hiljadu POENA. POEN nije novac i ne može se zameniti za novac, on beleži ono što ste dali zajednici.
 
-U KOLU su samo stvarni ljudi. Dok vas niko ne potvrdi, još se ne javljate na tuđe oglase, ali drugi mogu da se jave vama. Zato je prvi oglas vaš ulaz u KOLO. Kad se upoznate, onaj ko vas lično poznaje može da vas potvrdi. 🤝
+Na početku se drugi javljaju vama. Tako se ljudi upoznaju uživo, a ko vas lično poznaje može kasnije i da vas potvrdi. 🤝
 
-👉 Uđite na https://ekolo.rs i postavite svoj prvi oglas.
+👉 Pogledajte šta već ima u vašem kraju i postavite svoj prvi oglas: https://ekolo.rs
 
 #Sombor #KOLO
 ```
