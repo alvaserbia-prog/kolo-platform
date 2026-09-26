@@ -3,7 +3,7 @@
 // niti ka medaljonima. „Pridruži se besplatno na ekolo.rs.“: znak KOLO, krupno ekolo.rs, dugme,
 // a oko znaka zaigra kolo malih likova iz priče.
 import React from "react";
-import { Easing, Img, interpolate, staticFile } from "remotion";
+import { Easing, interpolate, staticFile } from "remotion";
 import { P } from "../paleta";
 import { NASLOV, RUKOPIS, SANS } from "../fontovi";
 import { Hrapavo, Kadar, Oblik, Pop, elipsa, kutija, napredak, useF, usePop } from "../alat";
@@ -167,7 +167,6 @@ export const Scena10: React.FC = () => {
           </g>
         </g>
       )}
-      {f < 0 && <Img src={staticFile("kolo-icon.png")} />}
     </Kadar>
   );
 };
