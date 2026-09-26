@@ -39,6 +39,7 @@ python3 scripts/muzika.py      # 6) preslaganje uvoda po taktovima -> audio/muzi
 python3 scripts/mix.py         # 7) glas + muzika sa duckingom -> public/miks.wav
 node scripts/kadrovi.mjs 300 900   # probni kadrovi -> out/kadrovi/
 npm run render                 # ceo video -> out/kolo-03.mp4
+npx remotion still src/index.ts Naslovna out/naslovna.jpg --image-format=jpeg   # naslovna (cover)
 ```
 
 ## Zvuk
