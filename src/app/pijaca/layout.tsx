@@ -1,5 +1,6 @@
 import AppShell from "@/components/AppShell";
 import PublicHeader from "@/components/PublicHeader";
+import PublicFooter from "@/components/PublicFooter";
 import { sesija } from "@/lib/sesija";
 import { jeAdmin, mozeNadzor } from "@/lib/dozvole";
 
@@ -20,9 +21,10 @@ export default async function PijacaLayout({ children }: { children: React.React
   }
 
   return (
-    <div className="min-h-screen bg-kolo-bg">
+    <div className="min-h-screen bg-kolo-bg flex flex-col">
       <PublicHeader />
-      <main className="max-w-4xl mx-auto px-6 py-8">{children}</main>
+      <main className="max-w-4xl mx-auto px-6 py-8 w-full flex-1">{children}</main>
+      <PublicFooter />
     </div>
   );
 }
