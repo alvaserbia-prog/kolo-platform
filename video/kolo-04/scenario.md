@@ -20,7 +20,7 @@ Ana mu je prepisala četiri hiljade POENA, bez ijednog dinara.
 
 **Scena 4**
 Lazaru se posle posla jeo pravi domaći burek. Marija mu je ispekla celu tepsiju,
-a on joj je prepisao hiljadu POENA. A znaš šta je Marija uradila s njima?
+a on joj je prepisao hiljadu POENA. A znaš šta je Marija uradila sa njima?
 Otišla je kod Ane po teglu meda.
 
 **Scena 5**
@@ -35,6 +35,9 @@ A šta ti umeš, i šta imaš viška? Uđi na ekolo.rs i postavi svoj prvi oglas
 - POEN se nikad ne crta kao novčić ni novčanica — samo kao papirni zapis sa žigom „POEN“.
 - „Kolo“, ne „krug“ (Krug je poseban modul sistema).
 - Bez reči: kupi, prodaj, plati, zaradi, cena, vredi.
+
+## Izrada
+Vidi `README.md` (čišćenje glasa, tempo, muzika, miks, scene).
 
 ## Somborski motivi
 Vidi `assets/sombor/README.md`.
