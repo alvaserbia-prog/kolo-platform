@@ -171,3 +171,64 @@ KOLO je zajedničko dobro. Softver je otvorenog koda, a sva pravila su javno obj
 
 #Sombor #KOLO
 ```
+
+## 7. Video 4: Registracija i prvi oglas (septembar 2026)
+
+Video: `video/kolo-prvi-oglas/out/kolo-prvi-oglas.mp4`. Naslovna: `video/kolo-prvi-oglas/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, prvi oglas za dva minuta“.
+
+### TikTok
+
+```
+Za ulazak u KOLO ti treba jedna stvar koju umeš ili imaš viška, i dva minuta.
+
+KOLO je platforma za razmenu dobara i usluga među komšijama. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
+
+Na ekolo.rs klikneš „Pridruži se“, izabereš pseudonim i upišeš mejl i lozinku. Ne tražimo podatke iz lične karte, ni JMBG, ni pravo ime.
+
+Onda na Pijaci postaviš prvi oglas: domaći med, popravku, čas matematike, pomoć u bašti. Dovoljni su naslov, jedna fotografija i mesto, a iznos u POENIMA određuješ sam ili ga ostaviš za dogovor.
+
+Kad Fondacija pregleda tvoj prvi oglas, upisuje ti se hiljadu POENA. POEN nije novac i ne menja se za novac, to je zapis o tome šta si doneo zajednici. 🤝
+
+Tvoj oglas vide ljudi iz tvog kraja. Neko se javi, dogovorite razmenu i upoznate se. Ko te lično poznaje, može da te potvrdi, i sa prvom potvrdom postaješ redovan član koji se i sam javlja na tuđe oglase. 🔄
+
+Šta bi ti ponudio komšiluku?
+
+👉 ekolo.rs, link je u profilu
+
+#Sombor #Vojvodina #razmena #komšije #KOLO
+```
+
+### Instagram
+
+```
+Prvi oglas na KOLU postaviš za dva minuta, bez ijednog dokumenta.
+
+KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Registracija traži samo pseudonim, mejl i lozinku.
+
+Na Pijaci objaviš šta nudiš: med, popravku, čas, pomoć u bašti. Naslov, fotografija i mesto su dovoljni. Kad Fondacija pregleda tvoj prvi oglas, upisuje ti se hiljadu POENA, zapis o doprinosu zajednici, a ne novac. 🌾
+
+Oglas vide ljudi iz tvog kraja. Kad se upoznate kroz razmenu, onaj ko te lično poznaje može da te potvrdi. 🤝
+
+👉 Postavi svoj prvi oglas, link je u bio.
+
+#Sombor #Vojvodina #razmena #komšije #KOLOzajednica
+```
+
+### Facebook
+
+```
+Koliko vam treba da postanete deo KOLA? Otprilike dva minuta.
+
+KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
+
+Na sajtu kliknete „Pridruži se“, izaberete pseudonim i upišete mejl i lozinku. Ne tražimo podatke iz lične karte ni vaše pravo ime.
+
+Zatim na Pijaci postavite prvi oglas. Recimo domaći med, popravku, čas matematike ili pomoć u bašti. Dovoljni su naslov, jedna fotografija i mesto, a broj telefona je po želji. Iznos u POENIMA određujete sami. Kad Fondacija pregleda vaš prvi oglas, upisuje vam se hiljadu POENA. POEN nije novac i ne može se zameniti za novac, on beleži da ste nešto dali zajednici.
+
+Oglas vide ljudi iz vašeg kraja. Neko se javi, dogovorite razmenu i upoznate se. Ko vas lično poznaje, može da vas potvrdi, i sa prvom potvrdom postajete redovan član. 🤝
+
+👉 Uđite na https://ekolo.rs i postavite svoj prvi oglas.
+
+#Sombor #KOLO
+```
