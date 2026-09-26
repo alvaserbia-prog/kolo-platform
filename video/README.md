@@ -39,7 +39,7 @@ Brojevi u imenima foldera su istorijski: `kolo-04` je po ovom redosledu **drugi*
 | 25 | Poljoprivrednici | | |
 | 26 | Zanatlije | | |
 | 27 | Penzioneri | | |
-| 28 | Domaćice | | |
+| 28 | Domaćice („Milica i zimnica“; urađen kao šesti, 26.09.2026) | `kolo-domacice/` | ✅ |
 | 29 | Roditelji | | |
 | 30 | Mladi | | |
 | 31 | Zadruge i udruženja | | |
