@@ -1,6 +1,6 @@
 # KOLO video — Domaćice („Milica i zimnica“)
 
-Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 96,9 s, H.264 + AAC, −14 LUFS**.
+Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 96,9 s, H.264 (~3,8 Mb/s, 48 MB) + AAC, −14 LUFS**.
 Gotov fajl: [`out/kolo-domacice.mp4`](out/kolo-domacice.mp4), naslovna: [`out/naslovna.jpg`](out/naslovna.jpg).
 Scenario i tekst naracije: [`scenario.md`](scenario.md). Naracija: Jelena (My_recording_54).
 
@@ -46,7 +46,11 @@ python3 scripts/muzika.py      # 7) tamburaši -> audio/muzika.wav
 python3 scripts/zvuci.py       # 8) efekti -> audio/zvuci.wav
 python3 scripts/mix.py         # 9) glas + muzika (ducking) + efekti -> public/miks.wav
 node scripts/kadrovi.mjs 300 900   # probni kadrovi -> out/kadrovi/
-npm run render                 # ceo video -> out/kolo-domacice.mp4
+npm run render                 # ceo video (crf 18, ~440 MB zbog zrna papira)
+mv out/kolo-domacice.mp4 out/master.mp4   # master ostaje van repoa
+ffmpeg -i out/master.mp4 -c:v libx264 -preset slow -b:v 3800k -pass 1 -an -f mp4 /dev/null
+ffmpeg -i out/master.mp4 -c:v libx264 -preset slow -b:v 3800k -maxrate 6M -bufsize 12M -pass 2 \
+  -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 192k out/kolo-domacice.mp4   # ~48 MB za mreže
 npx remotion still src/index.ts Naslovna out/naslovna.jpg
 ```
 

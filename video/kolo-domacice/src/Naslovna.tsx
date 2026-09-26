@@ -17,7 +17,7 @@ export const Naslovna: React.FC = () => (
     <Img src={staticFile("papir.jpg")} style={{ position: "absolute", inset: 0, width: 1080, height: 1920 }} />
     <Kadar>
       <Hrapavo>
-        <Kamera x={600} y={960} z={1.42}>
+        <Kamera x={600} y={800} z={1.35}>
           <Kuhinja sezona="jesen" policaTegle={3} />
           <g transform="translate(790 1300)">
             <Kanta s={1.2} otvor={0.7} />
