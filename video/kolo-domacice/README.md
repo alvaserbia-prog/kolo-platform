@@ -39,7 +39,8 @@ npm ci
 python3 scripts/tempo.py       # 2) izbacivanje pogrešnog početka, zbijanje pauza, atempo 1,04 -> audio/final/glas.wav
 ffmpeg -i audio/final/glas.wav -ar 16000 -ac 1 /tmp/glas16.wav
 python3 scripts/vremena_parakeet.py /tmp/glas16.wav audio/parakeet.json   # 3) vremena reči
-python3 scripts/poravnaj.py    # 4) vremena reči -> src/timing.json
+python3 scripts/poravnaj.py    # 4) tekst + gruba vremena (Parakeet) -> src/timing.json
+python3 scripts/poravnaj_ctc.py   #    precizna vremena: prisilno CTC poravnanje (Omnilingual ASR 300M)
 python3 scripts/plan.py        # 5) raspored scena -> src/plan.json
 python3 scripts/teksture.py    # 6) public/papir.jpg, gvas.png, grain.png, pomeraj0–2.png
 python3 scripts/muzika.py      # 7) tamburaši -> audio/muzika.wav
@@ -63,7 +64,7 @@ npx remotion still src/index.ts Naslovna out/naslovna.jpg
 | rez | izbačeno 50,50–57,15 s: pogrešan početak scene 6 („Kolu zimnica ne mora da … moramo ovo ponovo“) |
 | tempo | pauze duže od 0,42 s skraćene, **atempo 1,04** → 88,0 s |
 | provera teksta | Whisper turbo po isečcima + Parakeet TDT 0.6B v3 (sherpa-onnx, int8); tekst u `poravnaj.py` je ono što je izgovoreno |
-| vremena reči | Parakeet nad celim snimkom; „Više“ (sc. 5) ručno 0,55 s pre „ne“ |
+| vremena reči | Parakeet daje gruba vremena, a **prisilno CTC poravnanje** (Omnilingual ASR 300M CTC, `scripts/poravnaj_ctc.py`, tekst preveden u ćirilicu) daje početak svake reči na 20 ms. Parakeet je spajao reči („teglu ajvara“) i preskakao kratke, pa su titlovi mestimično kasnili do 0,5 s. Traka titla se pojavi 8 frejmova pre prve reči, a reč pozeleni 3 frejma pre izgovora |
 | muzika | **vojvođanski tamburaši, komponovano i sintetisano u kodu** (`scripts/muzika.py`): prim sa tremolom (udvojen), brač u tercama, bugarija u kontri, berde. e-mol valcer (sc. 1) → G-dur valcer, tema A (sc. 2) → proređeno (sc. 3–4) → jedan akord koji se gasi i **tišina od „dosta.“** (sc. 5) → 2/4 kolo, 102 BPM (sc. 6–10): uvod, tema K dvaput, tema A široko na „opet ima za koga“, finale. Dužine taktova se računaju iz plana, pa **završni akord pada tačno posle „ekolo.rs“** |
 | efekti | `scripts/zvuci.py`: listanje, staklo, poklopac kante, pečat, fića, kalendar, lonac, ormarić, trzaji na tačkama karte, telefon i zvonce objave, zapis, lišće, kosilica, cvrčanje paprika, završni zvončić |
 | miks | muzika −8 dB, rez na 2,6 kHz, sidechain 3:1 vođen glasom; efekti +2 dB bez duckinga; −14 LUFS / −1,5 dBTP |

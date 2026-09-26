@@ -11,6 +11,8 @@ type RecF = Rec & { f: number; ef: number };
 type Komad = { reci: RecF[]; od: number; do: number };
 
 const MAX_ZNAKOVA = 26;
+const UNAPRED_TRAKA = 8; // frejmova
+const UNAPRED_REC = 3; // frejmova
 const ISTAKNUTE = /^(„?KOLO|KOLU|POEN|ekolo\.rs)/;
 
 const komadi = (): Komad[] => {
@@ -34,10 +36,12 @@ const komadi = (): Komad[] => {
       }
     });
   }
+  // Traka se pojavi ~0,25 s pre prve reči (oko stigne da pročita), a reč pozeleni ~0,1 s pre
+  // izgovora — tako titl deluje „na vreme“; tačno na početku zvuka već deluje zakasnelo.
   out.forEach((k, i) => {
-    k.od = k.reci[0].f - 3;
+    k.od = k.reci[0].f - UNAPRED_TRAKA;
     const kraj = k.reci[k.reci.length - 1].ef + 12;
-    const sled = out[i + 1]?.reci[0].f - 3;
+    const sled = out[i + 1]?.reci[0].f - UNAPRED_TRAKA;
     k.do = sled !== undefined && sled - kraj < 18 ? sled : kraj;
   });
   return out;
@@ -61,7 +65,7 @@ export const Titlovi: React.FC = () => {
   const idx = KOMADI_TITLOVA.indexOf(k);
   const s = spring({ frame: f - k.od, fps, config: { damping: 12, stiffness: 220, mass: 0.6 } });
   const rot = idx % 2 ? 0.9 : -0.9;
-  const tekuca = k.reci.findIndex((w, i) => f >= w.f - 1 && (i === k.reci.length - 1 || f < k.reci[i + 1].f - 1));
+  const tekuca = k.reci.findIndex((w, i) => f >= w.f - UNAPRED_REC && (i === k.reci.length - 1 || f < k.reci[i + 1].f - UNAPRED_REC));
   return (
     <div
       style={{
@@ -99,7 +103,7 @@ export const Titlovi: React.FC = () => {
             style={{
               color: i === tekuca || ISTAKNUTE.test(w.w) ? P.zelena700 : P.mastilo,
               fontWeight: 700,
-              opacity: f >= w.f - 1 ? 1 : 0.5,
+              opacity: f >= w.f - UNAPRED_REC ? 1 : 0.5,
             }}
           >
             {w.w}
