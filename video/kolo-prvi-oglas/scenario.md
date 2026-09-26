@@ -2,14 +2,14 @@
 
 Isti sistem kao `video/kolo-04` i `video/kolo-03`: papirni kolaž, drhtave ručne linije, elementi
 uskaču sa odskokom, titlovi po rečima (izgovorena reč zelena), naracija vlasnika, tamburaška
-muzika, −14 LUFS. Naracija je u drugom licu (odluka vlasnika); u slici „ti“ je papirna ruka sa telefonom, a primer oglasa je med, pa Ana iz prethodnih videa ostaje kao prepoznatljiv motiv.
+muzika, −14 LUFS. Scena 1 je Ana iz prethodnih videa (tegla meda), a od scene 2 naracija je u drugom licu (odluka vlasnika); u slici „ti“ je papirna ruka sa telefonom.
 
 **Cilj videa:** gledalac vidi da ulazak traje minut, da nije potreban nijedan dokument i da
 prvi oglas odmah ima smisla. Posle gledanja treba da ima jednu jasnu radnju: postavi prvi oglas.
 
 ## Naracija (čita vlasnik, drugo lice, obraća se gledaocu)
 
-1. Hoćeš u KOLO? Treba ti jedna stvar koju umeš ili imaš viška. Evo kako, korak po korak.
+1. Ana je u KOLO ušla sa jednom teglom meda. A evo kako ti da uđeš u KOLO.
 2. Na ekolo.rs klikneš „Pridruži se“. Izabereš pseudonim, upišeš mejl i lozinku. Bez lične karte, bez papira. Za minut si unutra.
 3. Onda na Pijaci postaviš svoj prvi oglas. Naslov, recimo: domaći med. Jedna fotografija, kategorija i mesto. Iznos u POENIMA, ili po dogovoru.
 4. Za prvi oglas upisuje ti se hiljadu POENA, čim ga Fondacija pregleda. To je zapis da si nešto doneo zajednici.
@@ -20,7 +20,7 @@ prvi oglas odmah ima smisla. Posle gledanja treba da ima jednu jasnu radnju: pos
 
 | Scena | Slika |
 |---|---|
-| 1 | Udica u prvoj sekundi: papirna ruka drži telefon, pored nje tegla meda, natpis „Prvi oglas za 2 minuta“. Ručno nacrtana štoperica u uglu kreće da teče |
+| 1 | Udica u prvoj sekundi: Ana drži teglu meda, pa se kadar okrene ka gledaocu i uleti papirna ruka sa telefonom; natpis „Prvi oglas za 2 minuta“. Ručno nacrtana štoperica u uglu kreće da teče |
 | 2 | Papirni telefon sa formom „Pridruživanje“: pseudonim `tvoj.pseudonim` se ispisuje slovo po slovo, mejl, lozinka (tačkice). Lična karta uleti i bude precrtana crvenom olovkom, pečat „BEZ PAPIRA“. Štoperica staje na 1:00, konfete od papira |
 | 3 | Ruka slika teglu (blic, polaroid ispadne iz telefona). Kartica oglasa se sklapa deo po deo: naslov „Domaći med, lipa“, fotografija, kategorija „Hrana i piće“, mesto „Sombor“, iznos. Dugme „Objavi oglas“ pritisne ručno nacrtan prst |
 | 4 | Kartica zapisa „Ti · prvi oglas · 1.000 POENA“; najpre žig „ZABELEŽENO“, pa ruka Fondacije udari zeleni žig „UPISANO“. Natpis „zapis o doprinosu, nije novac“ |
@@ -29,11 +29,11 @@ prvi oglas odmah ima smisla. Posle gledanja treba da ima jednu jasnu radnju: pos
 
 ## Za doseg
 
-- **Prva sekunda nosi obećanje** („Prvi oglas za 2 minuta“) i tegla meda koju publika zna iz 2. i 3. videa.
+- **Prva sekunda nosi obećanje** („Prvi oglas za 2 minuta“) i Ana sa teglom, koju publika zna iz 2. i 3. videa.
 - **Štoperica** vizuelno dokazuje brzinu; staje na „za minut je unutra“.
 - **Titlovi krupni**, čitljivi bez zvuka; svaki korak ima i broj (1, 2, 3) kao nalepnicu.
 - **Kraj se vezuje za početak** (prazna kartica oglasa → kartica sa medom sa početka), da se video vrti u krug.
-- **Naslovna slika:** ruka sa telefonom i teglom, natpis „Prvi oglas za 2 minuta“.
+- **Naslovna slika:** Ana sa teglom i natpis „Prvi oglas za 2 minuta“.
 
 ## Pravila
 
