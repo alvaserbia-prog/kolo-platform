@@ -52,7 +52,7 @@ npx remotion still src/index.ts Naslovna out/naslovna.jpg --frame=790   # naslov
 | snimak | `audio/raw/snimak55.m4a` (My_recording_55), cela naracija u jednom snimku, 70,8 s |
 | čišćenje | isto kao videi 2–4: highpass 70 Hz, DeepFilterNet 3 (35 dB), boja glasa, −16 LUFS |
 | tempo | pauze u frazi skraćene na 0,42 s, između scena ostaju 0,85 s (granice scena su zadate u `tempo.py`), **atempo 1,04** → 64,1 s |
-| provera teksta | Whisper turbo po frazama: izgovoreno je tekst iz scenarija, uz dve sitne razlike — „ne možeš da se javljaš“ (bez „sam“) i „Pali svetlo“. Titl prati izgovoreno |
+| provera teksta | Whisper turbo po frazama: izgovoreno je tekst iz scenarija, uz dve sitne razlike — „ne možeš da se javljaš“ (bez „sam“) i „Pali svetlo“. Titl prati izgovoreno, osim što po odluci vlasnika piše „Upali svetlo“ |
 | vremena reči | Parakeet i Whisper na srpskom daju nepouzdana vremena pojedinačnih reči, pa `poravnaj.py` deli snimak po pauzama na fraze (proverene Whisper-om) i unutar fraze raspoređuje reči po broju slogova |
 | muzika | **numera iz videa 3** (ElevenLabs Music v2, tamburica, 112 BPM), jer ElevenLabs nalog nije imao kredita za novu. `muzika.py` uzima uvod od drugog takta i vedar deo dvaput, pa vedar deo pada na „Kuhinja“ (pali se svetlo), a završni akord tik posle „ekolo.rs“ |
 | efekti | `sfx.py` sintetiše prekidač, „pop“ predmeta, šuštanje preleta, blic, pečat, pero, kucanje na vrata, zvonce i sitne „plink“ zvuke kuća; vezani su za reči iz plana, vrh na −9 dBFS |

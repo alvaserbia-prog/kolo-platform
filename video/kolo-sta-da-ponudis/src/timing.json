@@ -626,31 +626,31 @@
   },
   {
    "id": 9,
-   "tekst": "Pali svetlo u svojoj kući. Uđi u KOLO, registracija je besplatna. ekolo.rs",
+   "tekst": "Upali svetlo u svojoj kući. Uđi u KOLO, registracija je besplatna. ekolo.rs",
    "reci": [
     {
-     "w": "Pali",
+     "w": "Upali",
      "s": 56.48,
-     "e": 56.907
+     "e": 57.026
     },
     {
      "w": "svetlo",
-     "s": 56.907,
-     "e": 57.334
+     "s": 57.026,
+     "e": 57.42
     },
     {
      "w": "u",
-     "s": 57.334,
-     "e": 57.596
+     "s": 57.42,
+     "e": 57.662
     },
     {
      "w": "svojoj",
-     "s": 57.596,
-     "e": 58.023
+     "s": 57.662,
+     "e": 58.056
     },
     {
      "w": "kući.",
-     "s": 58.023,
+     "s": 58.056,
      "e": 58.45
     },
     {
