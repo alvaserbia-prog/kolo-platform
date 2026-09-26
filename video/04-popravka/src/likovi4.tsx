@@ -138,7 +138,7 @@ export const Zapis: React.FC<{ seed: string; od: LikId; kome: LikId; iznos: stri
       <text x={-W + 26} y={-86} fontFamily={RUKOPIS} fontWeight={700} fontSize={38} fill={P.siva}>
         zapis
       </text>
-      <text x={-W + 30} y={-2} fontFamily={RUKOPIS} fontWeight={700} fontSize={80} fill={P.tekst}>
+      <text x={-W + 30} y={-2} fontFamily={RUKOPIS} fontWeight={700} fontSize={LIK[od].ime.length + LIK[kome].ime.length > 10 ? 68 : 80} fill={P.tekst}>
         {delovi.map(([t, c], i) => (
           <tspan key={i} fill={c}>
             {uzmi(t)}
