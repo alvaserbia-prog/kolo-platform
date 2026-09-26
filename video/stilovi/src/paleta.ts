@@ -1,0 +1,32 @@
+// Boje preuzete sa ekolo.rs (src/app/globals.css u glavnom repou).
+export const P = {
+  zelena900: "#0F3D20",
+  zelena700: "#1B6B3A",
+  zelena500: "#2E9D54",
+  zelena100: "#E8F5EC",
+  zelenaSvetla: "#86C97A", // znak (kolo-znak.svg)
+  zlatna600: "#D99520",
+  zlatna400: "#F5B842",
+  zlatna100: "#FDF4E0",
+  pozadina: "#FAFAF8",
+  papir: "#F3EAD8",
+  tekst: "#1A1A17",
+  siva: "#6B6860",
+  ivica: "#E8E6E1",
+  // topli akcenti iz „dečjeg" dela sajta (crtež), stopa 400
+  korala: "#E4572E",
+  korala600: "#C5401A",
+  narandza: "#F4A259",
+  sunce: "#F2C14E",
+  trava: "#8FC93A",
+  more: "#4CB5AE",
+  nebo: "#3D7EA6",
+  slezova: "#8E6FBF",
+  roze: "#E56399",
+  koza: "#F1C6A0",
+  koza2: "#D9A27A",
+  kosaSeda: "#D8D4CC",
+  kosaTamna: "#4A3526",
+  kosaSmedja: "#8A5A34",
+  belo: "#FFFDF7",
+};
