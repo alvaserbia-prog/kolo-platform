@@ -232,3 +232,64 @@ Oglas vide ljudi iz vašeg kraja. Neko se javi, dogovorite razmenu i upoznate se
 
 #Sombor #KOLO
 ```
+
+## 8. Video „Domaćice“: Milica i zimnica (septembar 2026)
+
+Video: `video/kolo-domacice/out/kolo-domacice.mp4`. Naslovna: `video/kolo-domacice/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, Milica i zimnica“.
+🟡 U samom videu stoji „Pridruži se besplatno“ (tekst vlasnika), ali opisi po pravilu iz odeljka 2
+reč „besplatno“ ne koriste.
+
+### TikTok
+
+```
+Milica je celog života pravila zimnicu, a onda je prvi put bacila teglu ajvara.
+
+Deca su otišla svojim putem, tegle su stajale u podrumu i jedne jeseni je rekla dosta. Takvih kuhinja ima u svakoj ulici, i u svakoj ulici ima nekog ko bi se rado setio ukusa svog detinjstva. 🏡
+
+KOLO je platforma za razmenu dobara i usluga među komšijama. Nastala je u Somboru, a pokreće je KOLO Fondacija.
+
+Milica je na Pijaci postavila oglas za domaći ajvar po bakinom receptu. Komšije iz susedne ulice su došle po tegle, a razmenu su dogovorili direktno, Fondacija ne posreduje. Prepisale su joj POENE onoliko koliko su se dogovorili. POEN nije novac i ne menja se za novac, to je zapis o tome šta je ko doneo zajednici.
+
+Sa tim POENIMA Milica je dobila pomoć u kući: neko joj je očistio oluke, neko pokosio travu. I opet pravi zimnicu, jer opet ima za koga. 🤝
+
+Za nalog ti trebaju pseudonim, mejl i lozinka, bez dokumenata. Šta ti umeš da napraviš?
+
+👉 ekolo.rs, link je u profilu
+
+#Sombor #Vojvodina #razmena #komšije #KOLO
+```
+
+### Instagram
+
+```
+Milica je celog života pravila zimnicu, a onda je prvi put bacila teglu ajvara.
+
+Deca su otišla, tegle su stajale, i jedne jeseni je rekla: više ne pravim. A u susednoj ulici neko se seća ukusa svog detinjstva. 🏡
+
+Na KOLU, platformi za razmenu među komšijama iz Sombora, Milica je postavila oglas. Komšije su došle po tegle i prepisale joj POENE onoliko koliko su se dogovorili. Sa tim POENIMA dobila je pomoć oko kuće. POEN je zapis o doprinosu zajednici, a ne novac. 🤝
+
+👉 Ponudi ono što umeš da napraviš, link je u bio.
+
+#Sombor #Vojvodina #razmena #komšije #KOLOzajednica
+```
+
+### Facebook
+
+```
+Milica je celog života pravila zimnicu. A onda je prvi put bacila teglu ajvara.
+
+Mnogi to poznaju. Deca odu svojim putem, velika porodica spadne na dvoje, a tegle godinama stoje u podrumu. Jedne jeseni čovek kaže: dosta, više ne pravim. A u susednoj ulici živi neko ko bi se rado podsetio ukusa svog detinjstva. 🏡
+
+KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija.
+
+Milica je na Pijaci postavila oglas za domaći ajvar po bakinom receptu. Komšije su došle po tegle i prepisale joj POENE onoliko koliko su se dogovorili. Razmenu dogovaraju sami članovi, Fondacija ne posreduje. POEN nije novac i ne može se zameniti za novac, on beleži da je neko nešto dao zajednici.
+
+Sa tim POENIMA Milica je dobila pomoć u kući, neko joj je očistio oluke, neko pokosio travu. I danas ponovo pravi zimnicu, jer opet ima za koga. 🤝
+
+Ako znate nešto da napravite, neko u vašem kraju baš to traži.
+
+👉 Uđite na https://ekolo.rs i postavite svoj prvi oglas.
+
+#Sombor #KOLO
+```
