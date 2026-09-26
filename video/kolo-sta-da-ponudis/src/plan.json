@@ -707,28 +707,28 @@
    "od": 58.39,
    "reci": [
     {
-     "w": "Pali",
+     "w": "Upali",
      "s": 0.41,
-     "e": 0.837
+     "e": 0.956
     },
     {
      "w": "svetlo",
-     "s": 0.837,
-     "e": 1.264
+     "s": 0.956,
+     "e": 1.35
     },
     {
      "w": "u",
-     "s": 1.264,
-     "e": 1.526
+     "s": 1.35,
+     "e": 1.592
     },
     {
      "w": "svojoj",
-     "s": 1.526,
-     "e": 1.953
+     "s": 1.592,
+     "e": 1.986
     },
     {
      "w": "kući.",
-     "s": 1.953,
+     "s": 1.986,
      "e": 2.38
     },
     {
@@ -767,7 +767,7 @@
      "e": 7.72
     }
    ],
-   "tekst": "Pali svetlo u svojoj kući. Uđi u KOLO, registracija je besplatna. ekolo.rs",
+   "tekst": "Upali svetlo u svojoj kući. Uđi u KOLO, registracija je besplatna. ekolo.rs",
    "do": 71.3,
    "odF": 1752,
    "doF": 2139,

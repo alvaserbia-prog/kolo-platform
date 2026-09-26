@@ -3,7 +3,7 @@
 Parakeet i Whisper na srpskom daju nepouzdana vremena pojedinačnih reči, ali pauze u snimku su
 jasne. Zato: snimak se deli na govorne komade (tišina ≥ 0,12 s), svaka fraza teksta vezuje se
 za svoj komad (proverom Whisper-om, vidi README), a unutar komada reči se raspoređuju srazmerno
-broju slogova. Tekst prati ono što je izgovoreno („ne možeš da se javljaš“, „Pali svetlo“).
+broju slogova. Tekst prati ono što je izgovoreno („ne možeš da se javljaš“); titl „Upali svetlo“ je po odluci vlasnika, iako je izgovoreno „Pali“.
 Izlaz: src/timing.json {trajanje, scene: [{id, tekst, reci}]}.
 """
 import json
@@ -36,7 +36,7 @@ FRAZE = [
     (8, "Dok te niko ne potvrdi, ne možeš da se javljaš na tuđe oglase,", (46.21, 50.03)),
     (8, "ali drugi mogu da se jave tebi.", (50.45, 52.46)),
     (8, "Zato je tvoj prvi oglas ulaz u KOLO.", (52.88, 55.66)),
-    (9, "Pali svetlo u svojoj kući.", (56.48, 58.45)),
+    (9, "Upali svetlo u svojoj kući.", (56.48, 58.45)),
     (9, "Uđi u KOLO,", (58.85, 59.82)),
     (9, "registracija je besplatna.", (60.17, 61.70)),
     (9, "ekolo.rs", (62.31, 63.79)),
