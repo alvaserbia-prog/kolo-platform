@@ -11,6 +11,7 @@ import CategoryChips from "@/components/CategoryChips";
 import { formatCenaGlavni, prikaziJedinicuCene } from "@/lib/cena-oglas";
 import { KATEGORIJE, kategorijaKljuc, kategorijaEmoji } from "@/lib/kategorije";
 import { koordinateZaMesto, udaljenostKm, type Koordinate } from "@/lib/udaljenost";
+import { dogadjaj } from "@/lib/analitika";
 
 interface Listing {
   id: string;
@@ -201,6 +202,7 @@ export default function PijacaKlijent({
       body: JSON.stringify({ userId: sellerId, oglasId }),
     });
     if (!res.ok) { setKontaktLoadingId(null); return; }
+    dogadjaj("kontakt_oglasivaca", { izvor: "lista" });
     const data = await res.json();
     router.push(`/poruke?k=${data.konverzacijaId}`);
   }, [router]);

@@ -2724,7 +2724,8 @@
     "tekst": "Koristimo neophodne kolačiće za rad platforme. Uz tvoj pristanak koristimo i analitičke kolačiće (Google Analytics) da bismo razumeli korišćenje i poboljšali sajt. Možeš ih prihvatiti ili odbiti, sajt radi i bez njih.",
     "saznaj_vise": "Saznaj više",
     "prihvati": "Prihvati",
-    "odbij": "Odbij"
+    "odbij": "Odbij",
+    "podesavanja": "Podešavanja kolačića"
   },
   "oauthDovrsi": {
     "greska_pseudonim_kratak": "Pseudonim mora imati najmanje 3 znaka.",

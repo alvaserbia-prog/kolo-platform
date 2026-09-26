@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import UspehKartica from "@/components/UspehKartica";
+import { dogadjaj } from "@/lib/analitika";
 
 // Dinamički import — html5-qrcode koristi DOM i ne sme da se izvršava na serveru
 const QrSkener = dynamic(() => import("./QrSkener"), { ssr: false });
@@ -58,6 +59,7 @@ export default function VerifikujNekoga({ mozeDaVerifikuje }: { mozeDaVerifikuje
         setError(data.error ?? t("greska_opsta"));
         return;
       }
+      dogadjaj("potvrda_data");
       setUspeh(data.verifikovaniPseudonim);
       setTokenIliBroj("");
       setOznaka("");

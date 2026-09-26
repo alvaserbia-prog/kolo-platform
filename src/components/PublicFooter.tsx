@@ -4,6 +4,7 @@ import logoImg from "@/assets/kolo-icon.png";
 import { getTranslations } from "next-intl/server";
 import { POKROVITELJSTVO_AKTIVNO } from "@/lib/moduli";
 import DrustveneMreze from "@/components/DrustveneMreze";
+import { KolaciciPodesavanja } from "@/components/CookieConsent";
 
 export default async function PublicFooter() {
   const t = await getTranslations("javneKomponente");
@@ -62,6 +63,7 @@ export default async function PublicFooter() {
               <li><Link href="/uslovi" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_uslovi")}</Link></li>
               <li><Link href="/privatnost" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_privatnost")}</Link></li>
               <li><Link href="/rizici" className="hover:text-kolo-green-700 transition-colors">{t("footer_link_rizici")}</Link></li>
+              <li><KolaciciPodesavanja className="hover:text-kolo-green-700 transition-colors text-left" /></li>
             </ul>
           </div>
         </div>

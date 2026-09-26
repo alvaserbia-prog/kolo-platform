@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { KolaciciPodesavanja } from "@/components/CookieConsent";
 
 // Svedena traka na dnu platforme. Prijavljen član inače nema klik do akata na
 // koje je pristao (Uslovi, Politika, Pravilnik, Izjava o rizicima), do kontakta
@@ -28,6 +29,7 @@ export default function AppFooter() {
         <Link href="/pravilnik" className={link}>{t("footer_link_pravilnik")}</Link>
         <Link href="/rizici" className={link}>{t("footer_link_rizici")}</Link>
         <Link href="/cesto-postavljena-pitanja" className={link}>{t("footer_link_faq")}</Link>
+        <KolaciciPodesavanja className={link} />
         <a href="mailto:kontakt@ekolo.rs" className={link}>kontakt@ekolo.rs</a>
       </nav>
       <p>

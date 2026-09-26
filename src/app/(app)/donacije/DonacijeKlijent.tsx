@@ -8,6 +8,7 @@ import { intlTag } from "@/lib/format";
 import { useTranslations, useLocale } from "next-intl";
 import IpsQrPlacanje from "./IpsQrPlacanje";
 import { MAX_KARTICNA_UPLATA_RSD } from "@/lib/donacija-pravila";
+import { dogadjaj } from "@/lib/analitika";
 
 interface Donacija {
   id: string;
@@ -112,6 +113,8 @@ export default function DonacijeKlijent() {
         setKarticaGreska(j.error ?? t("karticno_nije_moguce"));
         return;
       }
+      // Bez iznosa i bez javnosti donacije.
+      dogadjaj("donacija_zapoceta", { kanal: "kartica" });
       // Auto-submit forme ka NestPay gateway-u banke (preusmeravanje na 3D stranicu).
       const forma = document.createElement("form");
       forma.method = "POST";

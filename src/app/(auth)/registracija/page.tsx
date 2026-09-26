@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import LokacijaSearch from "@/components/LokacijaSearch";
 import PrikaziLozinkuDugme from "@/components/PrikaziLozinkuDugme";
 import { MODUL_DECA_AKTIVAN } from "@/lib/moduli";
+import { dogadjaj } from "@/lib/analitika";
 
 function jacina(p: string, t: (k: string) => string): { nivo: number; tekst: string; boja: string } {
   if (p.length === 0) return { nivo: 0, tekst: "", boja: "" };
@@ -92,6 +93,7 @@ export default function RegistracijaPage() {
     const data = await res.json();
     setLoading(false);
     if (!res.ok) { setError(data.error ?? t("greska_registracija")); return; }
+    dogadjaj("sign_up", { method: "lozinka" });
 
     const result = await signIn("credentials", { email: form.email, password: form.password, redirect: false });
     if (result?.error) { router.push("/login?registered=1"); return; }

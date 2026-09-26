@@ -14,6 +14,8 @@ declare module "next-auth" {
        * zamenjuje je; otvara uži skup funkcija (vidi `smeProsireno`).
        */
       identitetUtvrdjen: boolean;
+      /** Maloletni nalog — za njega se GA ne učitava. `undefined` = još nepoznato. */
+      maloletan?: boolean;
       oauthPending: boolean;
       // Podaci nedovršene OAuth registracije (još nema reda u bazi)
       pendingEmail?: string;
@@ -31,6 +33,7 @@ declare module "next-auth" {
     admin?: string;
     verified: boolean;
     identitetUtvrdjen?: boolean;
+    maloletan?: boolean;
     oauthPending?: boolean;
     // Markeri/podaci za odloženo kreiranje OAuth naloga (signIn → /oauth/dovrsi)
     needsRegistration?: boolean;
@@ -47,6 +50,7 @@ declare module "next-auth/jwt" {
     admin?: string;
     verified: boolean;
     identitetUtvrdjen?: boolean;
+    maloletan?: boolean;
     oauthPending?: boolean;
     // Vreme (ms) poslednjeg osvežavanja statusa iz baze — throttle u jwt callbacku
     osvezenoAt?: number;

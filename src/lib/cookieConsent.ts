@@ -41,6 +41,8 @@ import { VERZIJA_PRISTANKA_KOLACICI } from "./verzije-akata";
 /** Ime kolačića. Zadržava staro ime ključa radi prepoznatljivosti u alatima. */
 export const CONSENT_KEY = "kolo-kolacici-pristanak";
 export const CONSENT_EVENT = "kolo-kolacici-pristanak-promena";
+/** Ponovo otvara banner — link „Podešavanja kolačića" u futeru. */
+export const OTVORI_PODESAVANJA_EVENT = "kolo-kolacici-otvori";
 
 /** Koliko kolačić sa odlukom važi — godinu dana, pa se odluka periodično obnavlja. */
 const TRAJANJE_DANA = 365;
@@ -105,4 +107,17 @@ export function sacuvajPristanak(p: Pristanak): void {
     `${CONSENT_KEY}=${encodeURIComponent(JSON.stringify(odluka))}` +
     `; Path=/; Expires=${istice}; SameSite=Lax${bezbedno}`;
   window.dispatchEvent(new CustomEvent<Pristanak>(CONSENT_EVENT, { detail: p }));
+}
+
+/**
+ * Otvara banner i kad je odluka već doneta.
+ *
+ * 🔴 Politika čl. 7 obećava da se pristanak „može povući u svakom trenutku kroz
+ * podešavanja kolačića", a ZZPL čl. 15 st. 3 traži da povlačenje bude jednako
+ * lako kao davanje. Do 26.09.2026 banner se posle prve odluke više nije
+ * pojavljivao, pa povlačenja faktički nije bilo. Link u oba futera ga vraća.
+ */
+export function otvoriPodesavanjaKolacica(): void {
+  if (typeof window === "undefined") return;
+  window.dispatchEvent(new Event(OTVORI_PODESAVANJA_EVENT));
 }
