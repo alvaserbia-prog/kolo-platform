@@ -13,7 +13,7 @@ Brojevi u imenima foldera su istorijski: `kolo-04` je po ovom redosledu **drugi*
 | 3 | Komšijska sveska (šta je POEN) | `kolo-03/` | ✅ |
 | | **Prvi koraci na platformi** | | |
 | 4 | Registracija i prvi oglas | `kolo-prvi-oglas/` | ✅ |
-| 5 | Šta da ponudiš (prva tri oglasa) | | |
+| 5 | Šta da ponudiš (prva tri oglasa) | `kolo-sta-da-ponudis/` | ✅ |
 | 6 | Pijaca | | |
 | 7 | Šta piše pored tvog imena | | |
 | | **Poverenje** | | |

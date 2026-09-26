@@ -232,3 +232,63 @@ Oglas vide ljudi iz vašeg kraja. Neko se javi, dogovorite razmenu i upoznate se
 
 #Sombor #KOLO
 ```
+
+## 8. Video 5: Šta da ponudiš (septembar 2026)
+
+Video: `video/kolo-sta-da-ponudis/out/kolo-sta-da-ponudis.mp4`. Naslovna: `video/kolo-sta-da-ponudis/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, šta ti imaš da ponudiš“.
+U opisima nema reči „besplatno“ (pravilo iz odeljka 2); u samom videu je ostala po odluci vlasnika.
+
+### TikTok
+
+```
+Misliš da nemaš šta da ponudiš? Prošetaj kroz svoju kuću i nabrojaćeš deset stvari za minut. 🏡
+
+U kuhinji su ajvar, pekmez i kolači za slavu. U dvorištu jaja, paradajz iz bašte, košenje trave i slobodno mesto u autu do grada. U dnevnoj sobi šivenje, pomoć detetu oko matematike i strpljenje da nekome pokažeš kako radi telefon. Ono što tebi deluje obično, nekome je baš ono što traži.
+
+KOLO je platforma za razmenu dobara i usluga među komšijama. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
+
+Prvi oglas postavljaš na Pijaci: fotografija, šta nudiš i gde si. Iznos u POENIMA predlažeš ti, a možeš ga ostaviti i za dogovor. Kad oglas prođe pregled, upisuje ti se hiljadu POENA. POEN nije novac i ne menja se za novac, to je zapis o tome šta si doneo zajednici.
+
+U KOLU su samo stvarni ljudi. Dok te niko ne potvrdi, još se ne javljaš na tuđe oglase, ali drugi mogu da se jave tebi. Zato je prvi oglas tvoj ulaz. Kad se upoznate, onaj ko te lično poznaje može da te potvrdi. 🤝
+
+Šta iz tvoje kuće prvo ide na Pijacu? Napiši u komentaru.
+
+👉 ekolo.rs, link je u profilu
+
+#Sombor #Vojvodina #razmena #komšije #KOLO
+```
+
+### Instagram
+
+```
+Misliš da nemaš šta da ponudiš? Tvoja kuća kaže drugačije. 🏡
+
+Ajvar, pekmez, kolači za slavu. Jaja i paradajz iz bašte, košenje trave, mesto u autu do grada. Šivenje, čas matematike, pomoć oko telefona. Ono što tebi deluje obično, nekome je baš ono što traži.
+
+KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Prvi oglas postaviš na Pijaci, a kad prođe pregled, upisuje ti se hiljadu POENA, zapis o doprinosu zajednici, a ne novac. 🌾
+
+Dok te niko ne potvrdi, drugi se javljaju tebi. Zato je prvi oglas tvoj ulaz u KOLO. 🤝
+
+👉 Postavi svoj prvi oglas, link je u bio.
+
+#Sombor #Vojvodina #razmena #komšije #KOLOzajednica
+```
+
+### Facebook
+
+```
+Mislite da nemate šta da ponudite? Prošetajte kroz svoju kuću. 🏡
+
+U kuhinji ajvar, pekmez i kolači za slavu. U dvorištu jaja, paradajz iz bašte, košenje trave i slobodno mesto u autu do grada. U dnevnoj sobi šivenje, pomoć detetu oko matematike, strpljenje da nekome pokažete kako radi telefon. Ono što vama deluje obično, nekome je baš ono što traži.
+
+KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
+
+Prvi oglas postavljate na Pijaci. Dovoljni su fotografija, opis onoga što nudite i mesto, a iznos u POENIMA predlažete vi. Kad oglas prođe pregled, upisuje vam se hiljadu POENA. POEN nije novac i ne može se zameniti za novac, on beleži da ste nešto dali zajednici.
+
+U KOLU su samo stvarni ljudi. Dok vas niko ne potvrdi, još se ne javljate na tuđe oglase, ali drugi mogu da se jave vama. Zato je prvi oglas vaš ulaz u KOLO. Kad se upoznate, onaj ko vas lično poznaje može da vas potvrdi. 🤝
+
+👉 Uđite na https://ekolo.rs i postavite svoj prvi oglas.
+
+#Sombor #KOLO
+```
