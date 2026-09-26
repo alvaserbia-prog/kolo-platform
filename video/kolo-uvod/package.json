@@ -1,0 +1,26 @@
+{
+  "name": "kolo-uvod-video",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Animirani uvodni video KOLO Fondacije za Facebook i Instagram Reels (Remotion)",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "muzika": "python3 scripts/muzika.py",
+    "mix": "bash scripts/mix.sh",
+    "test10": "remotion render src/index.ts KoloUvod out/test-10s.mp4 --frames=0-299 --browser-executable=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell",
+    "render": "remotion render src/index.ts KoloUvod out/kolo-uvod.mp4 --browser-executable=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell"
+  },
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "@fontsource/caveat": "^5.3.0",
+    "@fontsource/noto-sans": "^5.3.0",
+    "@remotion/cli": "^4.0.529",
+    "@remotion/fonts": "^4.0.529",
+    "@types/react": "^19.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "^4.0.529",
+    "typescript": "^7.0.2"
+  }
+}
