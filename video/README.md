@@ -177,15 +177,15 @@ Kropotkin); XX i XXI vek idu hronološki, osim Kompenzacije i 1993., koja je izv
 - Kod zadruge koja okuplja proizvođače Fondacija ne sme da izgleda kao trgovac: zadruga je zasebno pravno lice,
   a Fondacija za ustupljeno dobro ne prima naknadu (Pravilnik o projektima i nabavkama, čl. 3a).
 - „Tri dela sistema“ su Fondacija, Protokol i Zajednica; Banke iz udžbenika nema.
-- „Ko vodi Fondaciju“: otvoreno je da li se pominju imena ili samo uloge (predlog: samo uloge).
+- „Ko vodi Fondaciju“: samo uloge (Upravni odbor, direktor), bez imena (odluka vlasnika 27.09.2026).
 - Godine i brojke u istorijskim videima proveravaju se pre svakog scenarija.
 
 ## Zajedničko za sve videe
 
 Papirni kolaž, linije koje „ključaju", titlovi po rečima (izgovorena reč zelena), naracija
 vlasnika, tamburaška muzika, −14 LUFS. Trajanje nije unapred određeno: video traje koliko priča traži, i duže od 60 s kad je tako procenjeno (odluka vlasnika, 26.09.2026). POEN se nikad ne crta kao novčić ni novčanica, samo kao
-zapis. Bez reči kupi, prodaj, plati, zaradi, cena. Iznos u oglasu određuje onaj ko oglas postavlja, ni Fondacija ni dogovor dve strane
-(Uslovi čl. 19; vidi `CLAUDE.md`, odeljak „Pijaca / razmena“). Postupak izrade: README u folderu svakog videa.
+zapis. Bez reči kupi, prodaj, plati, zaradi, cena. Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
+a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, odeljak „Pijaca / razmena“). Postupak izrade: README u folderu svakog videa.
 
 **Pregled teksta pre snimanja** (stalna ekipa: pisac, dramaturg, urednik za mreže, gledalac iz
 ciljne grupe, čuvar sadržaja; bez lektora): pravilo je u `CLAUDE.md`, odeljak „Videi — pregled
