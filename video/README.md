@@ -60,13 +60,29 @@ Brojevi u imenima foldera su istorijski: `kolo-04` je po ovom redosledu **drugi*
 | 43 | Zašto Sombor | | |
 | 44 | Solidarna ekonomija u UN i EU | | |
 | 45 | Ko je pokrenuo KOLO | | |
+| | **Kako se živelo bez novca** (dodato 27.09.2026) | | |
+| 46 | Kompenzacija i 1993. (preduzeća prebijaju dugove bez dinara; snalaženje u hiperinflaciji) | | |
+| 47 | Sajam gde niko ne plaća (Šampanja: dug se zapiše, na kraju sajma prebije; scudo di marche, koji nikad nije iskovan) | | |
+| 48 | Priznanica koja se pocepa (Owen: nastaje kad se proizvod donese, gasi se kad ga neko uzme) | | |
+| 49 | Kamen na dnu mora (Jap: zapis je ono što svi znaju) | | |
+| 50 | Trampa nikad nije postojala (mit naspram kredita među ljudima koji se znaju) | | |
+| 51 | Novac koji bledi (Wörgl, Gesell: bon koji svakog meseca gubi vrednost) | | |
+| 52 | Kad pukne: Argentina 2001–2002 (neograničeno izdavanje i falsifikovani bonovi) | | |
+| 53 | Čista ploča (Mesopotamija: dugovi na glinenim pločicama i njihovo brisanje) | | |
 | | **Praktično** | | |
-| 46 | Porez | | |
-| 47 | Penzija i socijalna davanja | | |
-| 48 | Otvoren kod | | |
-| 49 | Izlazak iz sistema | | |
-| 50 | Kolektivna nabavka | | |
-| 51 | Šta dolazi | | |
+| 54 | Porez | | |
+| 55 | Penzija i socijalna davanja | | |
+| 56 | Otvoren kod | | |
+| 57 | Izlazak iz sistema | | |
+| 58 | Kolektivna nabavka | | |
+| 59 | Šta dolazi | | |
+
+Blok „Kako se živelo bez novca“ ima zajedničku nit: jedinica nastaje kad je potrebna i gasi se kad
+obavi posao. Uz WIR, Sardex i scudo di marche se kaže i šta KOLO **nije** (sistemi za preduzeća, sa
+vrednošću u novcu). Godine i brojke se proveravaju pre svakog scenarija. Otvoreno je da li 38–41
+(WIR, LETS, Sardex, Fureai Kippu) ostaju zasebni ili se spajaju sa ovim blokom (WIR uz 51, LETS i
+Sardex uz 47). Blok „Praktično“ je pri dodavanju prenumerisan sa 46–51 na 54–59; nijedan od tih
+videa tada nije bio započet.
 
 ## Zajedničko za sve videe
 
