@@ -44,10 +44,10 @@ export const Scena8: React.FC = () => {
           <Utisak at={tNec - 2} x={470} y={1290}>
             <Katanac s={1.5} />
           </Utisak>
-          <Pop at={kad(8, "Privatno") - 3} x={270} y={1640} rot={-5}>
+          <Pop at={kad(8, "Privatno") - 3} x={250} y={1250} rot={-5}>
             <Tabla tekst="PRIVATNO" font={NASLOV} sirina={320} />
           </Pop>
-          <Pop at={kad(8, "državno.") - 3} x={810} y={1680} rot={4}>
+          <Pop at={kad(8, "državno.") - 3} x={840} y={1260} rot={4}>
             <Tabla tekst="DRŽAVNO" font={NASLOV} sirina={300} />
           </Pop>
         </Kamera>

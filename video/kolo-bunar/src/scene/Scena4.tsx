@@ -126,10 +126,10 @@ export const Scena4: React.FC = () => {
             <Povrs d="M60,1190 L1020,1190 L1000,1250 L80,1250 Z" boja={P.drvo} srafura="srafH" srafuraOp={0.55} debljina={7} />
             {/* ljudi za stolom (sede — noge iza stola) */}
             <g transform="translate(330 1330)">
-              <Covek tip="o" boja={P.okerTamni} ruke={[96, 40]} s={1.05} glavaNagib={12} />
+              <Covek tip="o" boja={P.okerTamni} ruke={[48, 28]} s={1.05} glavaNagib={14} />
             </g>
             <g transform="translate(700 1330)">
-              <Covek tip="st" boja={P.rdja} smer={-1} ruke={[70 + 30 * Math.max(0, dah(f, 22)), 20]} s={1.05} />
+              <Covek tip="st" boja={P.rdja} smer={-1} ruke={[40 + 45 * Math.max(0, dah(f, 22)), 18]} s={1.05} />
             </g>
             <g transform="translate(830 1330)">
               <Covek tip="sta" boja={P.rdja} boja2={P.oker} smer={-1} ruke={[10, 4]} s={1.0} glavaNagib={-6} />

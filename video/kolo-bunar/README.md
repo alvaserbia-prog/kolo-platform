@@ -1,6 +1,6 @@
 # KOLO video 10 — Bunar koji kopamo zajedno
 
-Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 95,3 s, H.264 + AAC, −14 LUFS**.
+Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 95,3 s, H.264 (~3,8 Mb/s, 48 MB) + AAC, −14 LUFS**.
 Gotov fajl: [`out/kolo-bunar.mp4`](out/kolo-bunar.mp4), naslovna: [`out/naslovna.jpg`](out/naslovna.jpg).
 Scenario i tekst naracije: [`scenario.md`](scenario.md). Naracija: vlasnik (My_recording_56).
 
