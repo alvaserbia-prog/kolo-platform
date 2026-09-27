@@ -392,3 +392,73 @@ Na Pijaci objavite ono što pravite. Razmenu dogovarate direktno sa komšijom, a
 
 #Sombor #KOLO
 ```
+
+## 10. Video „KOLO raste sa nama“ (septembar 2026)
+
+Video: `video/kolo-raste/out/kolo-raste.mp4`. Naslovna: `video/kolo-raste/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, uhvati se u kolo“.
+Opis polazi od sabora i od kola koje krene sa troje, četvoro ljudi, a ne od rečenica iz videa.
+U opisima nema reči „nagrađuje“ ni „nagrada“ (pravilo iz odeljka 2); u samom videu je ostala po
+odluci vlasnika. Umesto toga stoji ono što se zaista dešava: prvi oglas se, posle pregleda,
+upisuje kao zapis o doprinosu.
+
+Pregled ekipe (urednik za mreže, gledalac iz ciljne grupe, čuvar sadržaja, 27.09.2026):
+urednik je tražio da prva rečenica stoji sama i da poziv bude jedan (prvi oglas), pa je pitanje
+publici spojeno sa pozivom; gledalac je zapeo na „kanal“ i „evidencija“, pa ih u opisu nema, a
+POEN je objašnjen kao zapis; čuvar sadržaja je izbacio „dovedi prijatelja“ (ne upisuje se POEN za
+dovedenog čoveka nego za potvrdu, i to tek posle prvog doprinosa) i proverio da uz prvi oglas stoji
+„kad ga Fondacija pregleda“.
+Jezička provera (27.09.2026): „Na saboru se kolo ne igra samo“ (dvosmisleno: samo ili samo jedan)
+→ „Kolo niko ne igra sam“; rodno obeleženo „koga bi prvog pozvao“ → „koga iz tvog kraja zoveš
+prvog u kolo“; na Facebook-u dosledno „vi“; nabrajanje majstora rastavljeno na kratke rečenice,
+jer se u jednom dahu nije moglo pročitati; „višak“ → „jabuke koje su ostale posle berbe“.
+
+### TikTok
+
+```
+Kolo niko ne igra sam. Krene sa troje, četvoro, a kad se uhvati još neko, krug se raširi. 🤝
+
+Tako je i sa razmenom u komšiluku. Kad nas je malo, teško se nađe ono što ti treba. Kad se uhvate pčelar iz Čonoplje, krojačica iz Apatina i penzioner koji još ume da naoštri kosu, za svaku potrebu se nađe neko.
+
+KOLO je platforma za razmenu dobara i usluga među komšijama. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
+
+Kad objaviš prvi oglas i Fondacija ga pregleda, upisuje ti se POEN kao zapis o doprinosu. POEN nije novac i ne menja se za novac. Nalog ti potvrđuju ljudi koji te lično poznaju, bez dokumenata, a pravila su javna i ista za svakoga.
+
+Koga iz tvog kraja zoveš prvog u kolo? Napiši u komentaru.
+
+👉 Postavi svoj prvi oglas na ekolo.rs, link je u profilu
+
+#Sombor #Vojvodina #razmena #komšije #KOLO
+```
+
+### Instagram
+
+```
+Kolo niko ne igra sam, a ni razmena u komšiluku ne ide kad nas je malo. 🤝
+
+KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Što se više ljudi iz raznih sela i ulica uhvati, lakše nađeš majstora, teglu domaćeg meda ili nekoga ko će sat vremena pričuvati dete.
+
+Prvi oglas se upisuje kao doprinos kad ga Fondacija pregleda. POEN je zapis, a ne novac, i pravila su javna za sve.
+
+👉 Koga iz tvog kraja zoveš prvog u kolo? Link je u bio.
+
+#Sombor #Vojvodina #razmena #komšije #KOLOzajednica
+```
+
+### Facebook
+
+```
+Na svakom saboru je isto: kolo krene sa troje, četvoro, a posle nekoliko minuta zauzme pola livade. 🤝
+
+Razmena u komšiluku ide na isti način. Kad nas je malo, teško je naći baš ono što vam treba. Kad se uhvate ljudi iz više sela i ulica, sve je lakše. Jedan zna da popravi česmu. Drugi ima jabuke koje su ostale posle berbe. Treći pomaže oko papira.
+
+KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
+
+Kad objavite prvi oglas i Fondacija ga pregleda, upisuje vam se POEN kao zapis o doprinosu. POEN nije novac i ne može se zameniti za novac. Nalog vam potvrđuju ljudi koji vas lično poznaju, bez dokumenata, a sva pravila su javna i ista za svakoga.
+
+Koga iz vašeg kraja biste prvog pozvali u kolo?
+
+👉 Postavite svoj prvi oglas: https://ekolo.rs
+
+#Sombor #KOLO
+```

@@ -1,6 +1,7 @@
 # KOLO video — KOLO raste sa nama
 
-Scenario vlasnika (27.09.2026), prošao lektorsku i književnu proveru. **Čeka naraciju.**
+Scenario vlasnika (27.09.2026), prošao lektorsku i književnu proveru. **Naracija snimljena
+(My_recording_57), video gotov** — postupak i priča u slici: `README.md`.
 Osmi video po redu izrade. Stil: stara ilustrovana slikovnica, isti sistem kao video
 „Milica i zimnica“ (`kolo-domacice/`) — titlovi po rečima (izgovorena reč zelena), tamburaška
 muzika, POEN samo kao zapis. Format 1080×1920 (Reels), titlovi obavezni, krupni i čitljivi bez
