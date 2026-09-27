@@ -343,19 +343,20 @@ Zvuk na Instagramu preimenovati u „KOLO, Milica i zimnica“.
 U opisima nema reči „besplatno“ (pravilo iz odeljka 2); u samom videu je ostala po odluci vlasnika.
 Opisi su pisani po pravilu „opis ne prepričava video“ (odeljak 1): Milicina priča se ne ponavlja,
 opis polazi od podruma punog tegli i od pitanja publici.
+Jezička provera (27.09.2026): bezlično „na Pijaci se postavi oglas“ i „njime se dogovara“ → ko šta radi („postaviš“, „dogovaraš“); izmešano obraćanje („dogovarate“, „kod vas“ uz „ti“ na TikTok-u i Instagramu) → dosledno „ti“; nepotpuna prva rečenica na Instagramu („Tegle koje stoje u podrumu, a…“) → cela rečenica; zarez ispred „i“ u „To je zapis, i njime…“; preduga rečenica na Facebook-u o Pijaci i posredovanju podeljena na dve; „ne novac“ → „a ne novac“.
 
 ### TikTok
 
 ```
 U mnogim kućama podrum je pun tegli koje niko ne otvara. Deca žive u drugom gradu, a ruka i dalje zna koliko soli ide u ajvar. 🍅
 
-Ta ruka je retkost. U istoj ulici često živi neko ko godinama nije okusio pravu domaću zimnicu, ko pamti kako je mirisala kuhinja kad se pekle paprike.
+Ta ruka je retkost. U istoj ulici često živi neko ko godinama nije okusio pravu domaću zimnicu i ko pamti kako je mirisala kuhinja kad su se pekle paprike.
 
 KOLO je platforma za razmenu dobara i usluga među komšijama. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
 
-Na Pijaci se postavi oglas, a razmenu dogovarate direktno, Fondacija ne posreduje. POEN koji ti se prepiše nije novac i ne menja se za novac. To je zapis, i njime se kasnije dogovara nešto što tebi treba, recimo pomoć oko dvorišta.
+Na Pijaci postaviš oglas, a razmenu dogovaraš direktno sa komšijom. Fondacija u tome ne posreduje. POEN koji ti se prepiše nije novac i ne menja se za novac. To je zapis kojim kasnije dogovaraš ono što tebi treba, recimo pomoć oko dvorišta.
 
-Šta se kod tebe u kući i dalje pravi po starom receptu? Napiši u komentaru. 🤝
+Šta ti i dalje praviš po starom receptu? Napiši u komentaru. 🤝
 
 👉 ekolo.rs, link je u profilu
 
@@ -365,11 +366,11 @@ Na Pijaci se postavi oglas, a razmenu dogovarate direktno, Fondacija ne posreduj
 ### Instagram
 
 ```
-Tegle koje stoje u podrumu, a u susednoj ulici neko bi dao mnogo da ponovo okusi ajvar kakav se pravio kod kuće. 🍅
+Tegle stoje u podrumu, a u susednoj ulici neko bi mnogo dao da ponovo okusi ajvar kakav se pravio kod kuće. 🍅
 
-KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Ono što umeš da napraviš ide na Pijacu, a razmenu dogovarate sami. POEN koji ti se prepiše je zapis o doprinosu, ne novac, i njime se dogovara pomoć koja tebi treba. 🤝
+KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Ono što umeš da napraviš staviš na Pijacu, a razmenu dogovaraš direktno. POEN koji ti se prepiše je zapis o doprinosu, a ne novac. Njime kasnije dogovaraš pomoć koja tebi treba. 🤝
 
-👉 Šta se kod vas kuva po bakinom receptu? Link je u bio.
+👉 Šta ti kuvaš po bakinom receptu? Link je u bio.
 
 #Sombor #Vojvodina #razmena #komšije #KOLOzajednica
 ```
@@ -379,13 +380,13 @@ KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru
 ```
 Koliko tegli zimnice ove jeseni ostaje neotvoreno po podrumima? 🏡
 
-Mnogi to znaju iz svoje kuće. Deca su u drugom gradu, dolaze za praznike, a ruka i dalje pravi kao za punu trpezu. U isto vreme, u susednoj ulici živi neko ko domaći ajvar nije okusio godinama.
+Mnogi to znaju iz svoje kuće. Deca su u drugom gradu i dolaze za praznike, a ruka i dalje pravi kao za punu trpezu. U isto vreme, u susednoj ulici živi neko ko domaći ajvar nije okusio godinama.
 
 KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
 
-Na Pijaci objavite ono što pravite, a razmenu dogovarate direktno sa komšijom, Fondacija ne posreduje. POEN koji vam se prepiše nije novac i ne može se zameniti za novac. On beleži vaš doprinos, a njime se kasnije dogovara pomoć koja vama treba, oko kuće ili u dvorištu.
+Na Pijaci objavite ono što pravite. Razmenu dogovarate direktno sa komšijom, a Fondacija u tome ne posreduje. POEN koji vam se prepiše nije novac i ne može se zameniti za novac. On beleži vaš doprinos, a njime kasnije dogovarate pomoć koja vama treba, oko kuće ili u dvorištu.
 
-Šta se kod vas i dalje pravi po starom receptu?
+Šta vi i dalje pravite po starom receptu?
 
 👉 Pogledajte šta već ima u vašem kraju: https://ekolo.rs
 
