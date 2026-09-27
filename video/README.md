@@ -14,6 +14,7 @@ Brojevi u imenima foldera su istorijski: `kolo-04` je po ovom redosledu **drugi*
 | | **Prvi koraci na platformi** | | |
 | 4 | Registracija i prvi oglas | `kolo-prvi-oglas/` | ✅ |
 | 5 | Šta da ponudiš (prva tri oglasa) | `kolo-sta-da-ponudis/` | ✅ |
+| 5a | KOLO raste sa nama (osmi po izradi, 27.09.2026) | `kolo-raste/` | scenario, čeka naraciju |
 | 6 | Pijaca | | |
 | 7 | Šta piše pored tvog imena | | |
 | | **Poverenje** | | |
