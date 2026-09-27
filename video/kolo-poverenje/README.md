@@ -5,7 +5,7 @@ Tri animirana videa za Reels/TikTok/Facebook (1080×1920, 30 fps, H.264 ~3,8 Mb/
 
 | # | Video | Stil | Muzika | Trajanje | Fajl |
 |---|---|---|---|---|---|
-| 1 | Čiji si ti | **linorez**: crno mastilo i urezi dletom na toplom papiru, crvena i oker, pokret „u dvojkama“ (15 otisaka/s), ivica drhti, boja promaši registar; scene briše **valjak sa mastilom**; natpisi urezani u crni blok | frula i samica u e-molu (rubato, burdon), od „KOLO radi isto“ 2/4 kolo u G-duru sa defom | 64,2 s | `out/kolo-ciji-si-ti.mp4` |
+| 1 | Čiji si ti | **linorez**: crno mastilo i urezi dletom na toplom papiru, crvena i oker, pokret „u dvojkama“ (15 otisaka/s), ivica drhti, boja promaši registar; scene briše **valjak sa mastilom**; natpisi urezani u crni blok | vedro od prvog kadra: frula, samica u kontri, bas i def sa praporcima, D-dur, 2/4 šetnja ~100 BPM, od „KOLO radi isto“ puno kolo ~124 BPM (prva verzija u e-molu bila je pretužna, odluka vlasnika 27.09.2026) | 64,2 s | `out/kolo-ciji-si-ti.mp4` |
 | 2 | Poznaješ li nekoga u KOLU? | **naiva** po uzoru na Kovačicu: jarke ravne boje, lutke rumenih obraza, livade sa svakim cvetom posebno, oslikan ram sa belim tačkama; prelaz je krug koji se otvara uz venac cveća; natpisi na crvenoj traci | harmonika: staccato pitanje, pa polka u C-duru, kolo u sceni 5 | 52,4 s | `out/kolo-poznajes-li-nekoga.mp4` |
 | 3 | Potvrda nosi odgovornost | **lavirani tuš i akvarel**: potezi četkicom koji se iscrtavaju, providne boje sa tamnijim rubom pigmenta, mulj se razliva u vodi; bunar sa **đeramom**; natpisi četkicom | gudači: visoka violina i čelo, disonanca na „zamuti“, napetost d–B–g–A, razrešenje u D-dur na „lično“, pizzicato do kraja | 48,7 s | `out/kolo-potvrda-odgovornost.mp4` |
 

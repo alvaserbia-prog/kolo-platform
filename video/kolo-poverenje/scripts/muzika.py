@@ -1,8 +1,8 @@
 """Muzika trilogije „Poverenje“, komponovana i sintetisana u kodu. Upotreba: python3 scripts/muzika.py v1
 
-v1 „Čiji si ti“ (linorez): frula solo u e-molu, rubato, preko burdona samice (sećanje, selo);
-   od scene 6 („KOLO radi isto“) samica ulazi u 2/4 kolo u G-duru, pa frula, bas i def;
-   završni udarac pada tačno na „ekolo.rs“.
+v1 „Čiji si ti“ (linorez): vedro od prvog kadra — frula, samica u kontri, bas i def sa praporcima,
+   D-dur, 2/4 „šetnja“ ~100 BPM; od scene 6 („KOLO radi isto“) brže, puno kolo ~124 BPM;
+   završni udarac pada tačno na „ekolo.rs“. (Prva verzija, frula solo u e-molu, bila je pretužna.)
 v2 „Poznaješ li nekoga“ (naiva): harmonika. Scena 1 je pitanje (staccato koje ostane
    visiti), od „Nije problem“ vedra polka u C-duru; scena 5 kolo, brže i punije; kraj na „ekolo.rs“.
 v3 „Potvrda nosi odgovornost“ (tuš): gudači. Visok ton violine i čelo na d; na „zamuti“ disonanca;
@@ -46,66 +46,72 @@ def strum(ak, t, g, instr, dno=55, vrh=67, pan=-0.3, gore=False):
 kraj_glasa = SC[max(SC)]["glasDo"]
 
 if V == "v1":
+    # Vedro od prvog kadra (odluka vlasnika, 27.09.2026: prva verzija u e-molu bila je pretužna).
+    # D-dur, 2/4 „šetnja“ ~100 BPM (sc. 1–5), pa od scene 6 brže, puno kolo ~124 BPM do kraja.
     s6 = SC[6]["od"]
-    beat = 0.78
-    # burdon: e i h na samici, ponovljeno svaka dva takta, tiho
-    t = 0.2
-    while t < s6 - 0.5:
-        tr.dodaj(bas_zica(40, 2.0), t, 0.22, 0.0)
-        tr.dodaj(samica(59, 1.6), t + 0.02, 0.07, -0.3)
-        tr.dodaj(samica(64, 1.6), t + 0.04, 0.06, 0.3)
-        t += beat * 4
-    A = [(0, 1, 71), (1, 1, 76), (2, 2, 79), (4, 1, 78), (5, 1, 76), (6, 2, 74), (8, 1, 76), (9, 3, 71)]
-    B = [(0, 1, 74), (1, 1, 76), (2, 1, 78), (3, 1, 79), (4, 2, 81), (6, 1, 79), (7, 1, 78), (8, 4, 76)]
-    C = [(0, 2, 83), (2, 1, 81), (3, 1, 79), (4, 2, 78), (6, 2, 76), (8, 1, 74), (9, 1, 76), (10, 2, 71)]
-    t = 0.5
-    for fraza, g in [(A, 0.32), (B, 0.3), (A, 0.27), (C, 0.3), (B, 0.27), (A, 0.3)]:
-        for b, d, m in fraza:
-            tt = t + b * beat + rng.normal(0, 0.02)
-            if tt + d * beat > s6 - 0.2:
-                continue
-            tr.dodaj(frula(m, d * beat * 0.95, rng), tt, g, 0.1)
-            if d >= 2 and rng.random() < 0.6:  # ukras pre dugog tona
-                tr.dodaj(frula(m + 2, 0.07, rng, vib=0), tt - 0.08, g * 0.7, 0.1)
-        t += 13 * beat
-    # kolo: rešetka od kraja unazad, završni udarac na kraju „ekolo.rs“
     t_kraj = kraj_glasa + 0.1
-    takt = 1.14
-    n = int((t_kraj - s6) / takt)
-    t0 = t_kraj - n * takt
-    KOLO = [
-        ("G", [(0, .5, 79), (.5, .5, 81), (1, .5, 83), (1.5, .5, 81)]),
-        ("G", [(0, .5, 79), (.5, .5, 78), (1, 1, 76)]),
-        ("C", [(0, .5, 76), (.5, .5, 79), (1, .5, 84), (1.5, .5, 83)]),
-        ("D7", [(0, 1, 81), (1, 1, 78)]),
-        ("G", [(0, .5, 83), (.5, .5, 81), (1, .5, 79), (1.5, .5, 83)]),
-        ("Em", [(0, .5, 81), (.5, .5, 79), (1, .5, 78), (1.5, .5, 76)]),
-        ("Am", [(0, .5, 74), (.5, .5, 76), (1, .5, 78), (1.5, .5, 79)]),
-        ("D7", [(0, 1, 78), (1, 1, 74)]),
+    SETNJA = [
+        ("D", [(0, .5, 78), (.5, .5, 81), (1, .5, 83), (1.5, .5, 81)]),
+        ("D", [(0, .5, 78), (.5, .5, 76), (1, 1, 74)]),
+        ("G", [(0, .5, 79), (.5, .5, 83), (1, .5, 86), (1.5, .5, 83)]),
+        ("A7", [(0, 1, 81), (1, .5, 79), (1.5, .5, 76)]),
+        ("D", [(0, .5, 74), (.5, .5, 78), (1, .5, 81), (1.5, .5, 86)]),
+        ("G", [(0, .5, 83), (.5, .5, 79), (1, .5, 83), (1.5, .5, 86)]),
+        ("A7", [(0, .5, 85), (.5, .5, 83), (1, .5, 81), (1.5, .5, 79)]),
+        ("D", [(0, 1, 78), (1, 1, 74)]),
     ]
-    s7 = SC[7]["od"]
-    for i in range(n):
-        tb = t0 + i * takt
-        ak, mel = KOLO[i % 8]
-        puno = tb >= s7 - 0.3
-        g = 0.55 + 0.45 * min(1, i / max(1, n - 1))
-        tr.dodaj(bas_zica(koren(ak, 40), takt / 2), tb, 0.55 * g)
-        tr.dodaj(bas_zica(koren(ak, 40) + 7, takt / 2), tb + takt / 2, 0.45 * g)
+    KOLO = [
+        ("D", [(0, .25, 81), (.25, .25, 83), (.5, .5, 85), (1, .5, 86), (1.5, .5, 85)]),
+        ("D", [(0, .5, 83), (.5, .5, 81), (1, .5, 78), (1.5, .5, 81)]),
+        ("G", [(0, .5, 83), (.5, .5, 86), (1, .5, 91), (1.5, .5, 86)]),
+        ("A7", [(0, .5, 85), (.5, .5, 81), (1, 1, 76)]),
+        ("D", [(0, .25, 78), (.25, .25, 81), (.5, .5, 86), (1, .5, 85), (1.5, .5, 83)]),
+        ("G", [(0, .5, 79), (.5, .5, 83), (1, .5, 86), (1.5, .5, 88)]),
+        ("A7", [(0, .5, 88), (.5, .5, 85), (1, .5, 81), (1.5, .5, 79)]),
+        ("D", [(0, 1, 78), (1, .5, 81), (1.5, .5, 86)]),
+    ]
+
+    def takt_muzike(tb, takt, ak, mel, g, def_jak, frula_g, oktava=0):
+        tr.dodaj(bas_zica(koren(ak, 38), takt / 2), tb, 0.5 * g)
+        tr.dodaj(bas_zica(koren(ak, 38) + 7, takt / 2), tb + takt / 2, 0.42 * g)
         for k in (0.25, 0.75):
-            strum(ak, tb + k * takt, 0.14 * g, samica, gore=k > 0.5)
-        if puno or i >= 4:
-            for b, d, m in mel:
-                tr.dodaj(frula(m, d * takt / 2 * 0.9, rng, vib=0.6), tb + b * takt / 2, 0.45 * g, 0.12)
-                tr.dodaj(samica(m - 12, d * takt / 2), tb + b * takt / 2 + 0.01, 0.12 * g, -0.2)
-        if puno:
-            tr.dodaj(def_udarac(rng), tb, 0.35)
-            tr.dodaj(def_udarac(rng, 0.4), tb + takt / 2, 0.22)
-    tz = t_kraj
-    strum("G", tz, 0.3, samica, dno=55, vrh=74)
-    tr.dodaj(bas_zica(43, 2.5), tz, 0.7)
-    tr.dodaj(def_udarac(rng, 1.2), tz, 0.5)
-    tr.dodaj(frula(83, T - tz - 0.4, rng), tz + 0.02, 0.4, 0.1)
-    tr.soba(0.3, 1.8)
+            strum(ak, tb + k * takt, 0.15 * g, samica, dno=57, vrh=69, gore=k > 0.5)
+        for b, d, m in mel:
+            dd = d * takt / 2
+            tr.dodaj(frula(m + oktava, dd * 0.85, rng, vib=0.4), tb + b * takt / 2, frula_g * g, 0.12)
+            if d >= 1 and rng.random() < 0.5:  # kratak ukras ispred dužeg tona
+                tr.dodaj(frula(m + oktava + 2, 0.06, rng, vib=0), tb + b * takt / 2 - 0.07, frula_g * g * 0.6, 0.12)
+        tr.dodaj(def_udarac(rng, def_jak), tb, 0.28 * g)
+        tr.dodaj(def_udarac(rng, def_jak * 0.45), tb + takt / 2, 0.2 * g)
+        tr.dodaj(def_udarac(rng, def_jak * 0.25), tb + takt * 0.75, 0.12 * g)
+
+    # šetnja: rešetka od početka, blagi ulaz (samo samica i bas prva dva takta)
+    takt1 = 1.2
+    tb = 0.3
+    i = 0
+    while tb + takt1 <= s6 - 0.2:
+        ak, mel = SETNJA[i % 8]
+        g = 0.7 if i < 2 else 0.85
+        frula_g = 0.0 if i < 2 else 0.34
+        takt_muzike(tb, takt1, ak, mel, g, 0.6, frula_g)
+        tb += takt1
+        i += 1
+    # prelaz: kratak uspon samice do kola
+    for k, m in enumerate([62, 66, 69, 74, 78, 81]):
+        tr.dodaj(samica(m, 0.2), tb + k * (s6 - tb) / 6, 0.2, -0.2)
+    # kolo: rešetka od kraja unazad, završni udarac na kraju „ekolo.rs“
+    takt2 = 0.97
+    n = int((t_kraj - s6) / takt2)
+    t0 = t_kraj - n * takt2
+    for i in range(n):
+        ak, mel = KOLO[i % 8]
+        g = 0.85 + 0.15 * i / max(1, n - 1)
+        takt_muzike(t0 + i * takt2, takt2, ak, mel, g, 1.0, 0.36)
+    strum("D", t_kraj, 0.32, samica, dno=57, vrh=78)
+    tr.dodaj(bas_zica(38, 2.5), t_kraj, 0.75)
+    tr.dodaj(def_udarac(rng, 1.3), t_kraj, 0.55)
+    tr.dodaj(frula(86, T - t_kraj - 0.4, rng, vib=0.8), t_kraj + 0.03, 0.38, 0.1)
+    tr.soba(0.22, 1.3)
 
 elif V == "v2":
     beat_q = 0.3
