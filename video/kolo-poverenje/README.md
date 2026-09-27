@@ -10,7 +10,7 @@ Tri animirana videa za Reels/TikTok/Facebook (1080×1920, 30 fps, H.264 ~3,8 Mb/
 | 3 | Potvrda nosi odgovornost | **lavirani tuš i akvarel**: potezi četkicom koji se iscrtavaju, providne boje sa tamnijim rubom pigmenta, mulj se razliva u vodi; bunar sa **đeramom**; natpisi četkicom | gudači: visoka violina i čelo, disonanca na „zamuti“, napetost d–B–g–A, razrešenje u D-dur na „lično“, pizzicato do kraja | 48,7 s | `out/kolo-potvrda-odgovornost.mp4` |
 
 Naslovne: `out/naslovna-1.jpg`, `out/naslovna-2.jpg`, `out/naslovna-3.jpg` (tekst između y 300 i 1620 zbog isečka 4:5).
-Scenariji i tekst naracije: `scenario-1…3-*.md`. Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 11.
+Scenariji i tekst naracije: `scenario-1…3-*.md`. Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 12.
 
 ## Šta je zajedničko, a šta nije
 
