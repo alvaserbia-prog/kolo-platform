@@ -1,6 +1,6 @@
 """Zvučni efekti trilogije, sintetisani u kodu i vezani za izgovorene reči. Upotreba: python3 scripts/zvuci.py v1
 
-v1 (linorez): valjak sa mastilom na svakom prelazu, tup udarac „otiska“ (lična karta, medaljoni,
+v1 (papirni kolaž): šuštaj lista papira na svakom prelazu, tup udarac (lična karta, sličice,
    pečat), kucanje po telefonu i zvonce „Potvrda upisana“, koraci.
 v2 (naiva): šuštanje cveća na prelazima, „pop“ upitnika, kucanje i zvonce objave oglasa, poruka,
    udarci sekire sa pucanjem drveta, zapis u KOLU, zvonce potvrde, završno zvonce.
@@ -55,6 +55,16 @@ def valjak(d=0.8):
     return norm(fejd(kot + 0.5 * lepi, 0.12, 0.25) * np.sin(np.pi * np.clip(t / d, 0, 1)))
 
 
+def papir(d=0.5):
+    """Šuštaj lista papira koji preleće preko kadra: brz uzlet, šuštavo telo, meki kraj."""
+    t = tt(d)
+    sum_ = rng.normal(0, 1, len(t))
+    telo = sosfilt(butter(2, [900, 6500], "band", fs=SR, output="sos"), sum_)
+    mrs = sosfilt(butter(2, [3000, 9000], "band", fs=SR, output="sos"), rng.normal(0, 1, len(t))) * (rng.random(len(t)) < 0.02)
+    ob = np.clip(t / (0.35 * d), 0, 1) ** 1.5 * np.exp(-np.clip(t - 0.35 * d, 0, None) / (0.18 * d))
+    return norm((telo + 2.5 * mrs) * ob)
+
+
 def skripa(d=0.6, f0=620):
     t = tt(d)
     f = f0 * (1 + 0.25 * np.sin(2 * np.pi * 1.3 * t)) * (1 + 0.02 * rng.normal(0, 1, len(t)).cumsum() / np.sqrt(len(t)))
@@ -89,9 +99,8 @@ def F(sid, k):
 
 
 if V == "v1":
-    for sid in (2, 3, 4, 5, 7):
-        tr.dodaj(valjak(0.85), od(sid) - 0.42, 0.25, 0.1)
-    tr.dodaj(fejd(sum_obojen(rng, 0.8, 2000, 7000), 0.1, 0.4), od(6) - 0.3, 0.05)
+    for j, sid in enumerate((2, 3, 4, 5, 6, 7)):
+        tr.dodaj(papir(0.55), od(sid) - 0.3, 0.2, -0.3 + 0.12 * j)
     for i in range(6):  # koraci mladića
         tr.dodaj(tup(120, 0.2, 0.8), 0.1 + i * 0.36, 0.08, 0.4)
     tr.dodaj(tup(70), rec(SC, 1, "lične"), 0.3)

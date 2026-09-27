@@ -8,7 +8,7 @@ import type { Plan, Rec } from "./vreme";
 
 type RecF = Rec & { f: number; ef: number };
 export type Komad = { reci: RecF[]; od: number; do: number };
-export type IzgledTitla = "linorez" | "naiva" | "tus";
+export type IzgledTitla = "linorez" | "naiva" | "tus" | "kolaz";
 
 const MAX_ZNAKOVA = 24;
 const UNAPRED_TRAKA = 8;
@@ -86,6 +86,16 @@ const IZGLED: Record<IzgledTitla, { kutija: (idx: number) => React.CSSProperties
     senka: "drop-shadow(0 8px 10px rgba(27,47,107,0.35))",
     font: 62,
   },
+  kolaz: {
+    kutija: (idx) => ({
+      background: "#FFFDF7",
+      clipPath: neravno(`kz${idx}`, 5),
+      transform: `rotate(${idx % 2 ? 1.2 : -1.2}deg)`,
+    }),
+    tekst: "#1A1A17",
+    senka: "drop-shadow(3px 7px 5px rgba(59,42,20,0.3))",
+    font: 62,
+  },
   tus: {
     kutija: (idx) => ({
       background: "rgba(250,247,240,0.92)",
@@ -111,6 +121,8 @@ export const Titlovi: React.FC<{ plan: Plan; izgled: IzgledTitla }> = ({ plan, i
   const ulaz =
     izgled === "linorez"
       ? `scale(${1 + (1 - s) * 0.12})`
+      : izgled === "kolaz"
+        ? `translateY(${(1 - s) * 30}px) scale(${0.9 + 0.1 * s})`
       : izgled === "naiva"
         ? `translateY(${(1 - s) * 30}px) scale(${0.9 + 0.1 * s})`
         : `translateY(${(1 - s) * 14}px)`;

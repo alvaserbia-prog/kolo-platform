@@ -14,6 +14,8 @@ const REZOVI: [string, string, number][] = [
   ["Fredoka", "fredoka", 600],
   ["Fredoka", "fredoka", 700],
   ["Caveat Brush", "caveat-brush", 400],
+  ["Caveat", "caveat", 600],
+  ["Caveat", "caveat", 700],
 ];
 
 let ucitano = false;
@@ -42,3 +44,4 @@ export const SANS = "'Noto Sans', sans-serif";
 export const SLAB = "'Alfa Slab One', 'Noto Sans', serif";
 export const OBLO = "'Fredoka', 'Noto Sans', sans-serif";
 export const CETKA = "'Caveat Brush', 'Noto Sans', cursive";
+export const RUKOPIS = "'Caveat', 'Noto Sans', cursive";

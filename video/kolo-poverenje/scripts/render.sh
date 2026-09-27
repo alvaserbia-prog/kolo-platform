@@ -7,8 +7,8 @@ declare -A IME=([CijiSiTi]=kolo-ciji-si-ti [PoznajesLiNekoga]=kolo-poznajes-li-n
 for id in ${@:-CijiSiTi PoznajesLiNekoga PotvrdaOdgovornost}; do
   ime=${IME[$id]}
   npx remotion render src/index.ts $id out/master-$ime.mp4 --browser-executable=$B --concurrency=4 --log=error
-  ffmpeg -v error -y -i out/master-$ime.mp4 -c:v libx264 -preset slow -b:v 3800k -pass 1 -passlogfile /tmp/claude-0/p-$ime -an -f mp4 /dev/null
-  ffmpeg -v error -y -i out/master-$ime.mp4 -c:v libx264 -preset slow -b:v 3800k -maxrate 6M -bufsize 12M -pass 2 -passlogfile /tmp/claude-0/p-$ime \
+  ffmpeg -v error -y -i out/master-$ime.mp4 -c:v libx264 -preset slow -b:v ${BR:-3800k} -pass 1 -passlogfile /tmp/claude-0/p-$ime -an -f mp4 /dev/null
+  ffmpeg -v error -y -i out/master-$ime.mp4 -c:v libx264 -preset slow -b:v ${BR:-3800k} -maxrate 6M -bufsize 12M -pass 2 -passlogfile /tmp/claude-0/p-$ime \
     -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 192k out/$ime.mp4
   echo "gotovo: out/$ime.mp4"
 done

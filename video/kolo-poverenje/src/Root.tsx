@@ -1,6 +1,6 @@
 import { Composition, Still } from "remotion";
 import { Naslovna1, Naslovna2, Naslovna3 } from "./Naslovne";
-import { CijiSiTi } from "./v1/Video";
+import { CijiSiTi } from "./v1k/Video";
 import { PLAN as P1 } from "./v1/vreme";
 import { PoznajesLiNekoga } from "./v2/Video";
 import { PLAN as P2 } from "./v2/vreme";

@@ -3,10 +3,11 @@
 // Sav tekst je između y 300 i 1620, jer Instagram mrežu seče na 4:5.
 import React from "react";
 import { AbsoluteFill, Sequence } from "remotion";
-import { ucitajFontove, OBLO, SANS, SLAB, CETKA } from "./fontovi";
-import { Scena1 as V1S1 } from "./v1/scene";
-import { List, ListMesanje, PapirPozadina } from "./v1/okvir";
-import { Defs as D1, L } from "./v1/linorez";
+import { ucitajFontove, OBLO, SANS, CETKA, RUKOPIS } from "./fontovi";
+import { Scena1 as V1S1 } from "./v1k/scene";
+import { Defs as D1, Isecak, pravougaonik } from "./v1k/papir";
+import { P as PK } from "./v1k/paleta";
+import { Img, staticFile } from "remotion";
 import { Scena1 as V2S1 } from "./v2/scene";
 import { Platno, PlatnoPozadina, Ram } from "./v2/okvir";
 import { Defs as D2, N } from "./v2/naiva";
@@ -23,35 +24,31 @@ const Kadar: React.FC<{ frejm: number; children: React.ReactNode }> = ({ frejm, 
 );
 
 export const Naslovna1: React.FC = () => (
-  <AbsoluteFill>
-    <PapirPozadina />
-    <Kadar frejm={110}>
-      <V1S1 />
-    </Kadar>
-    <ListMesanje />
-    <AbsoluteFill style={{ zIndex: 2150 }}>
-      <List oznaka="1/3 · Poverenje · „Čiji si ti“" />
+  <AbsoluteFill style={{ background: PK.papir }}>
+    <Img src={staticFile("kolaz/papir.jpg")} style={{ position: "absolute", inset: 0, width: 1080, height: 1920 }} />
+    <AbsoluteFill style={{ filter: "sepia(0.35) saturate(0.9)" }}>
+      <Kadar frejm={120}>
+        <V1S1 />
+      </Kadar>
     </AbsoluteFill>
-    <AbsoluteFill style={{ zIndex: 2200 }}>
+    <AbsoluteFill>
       <svg viewBox="0 0 1080 1920" width={1080} height={1920}>
         <D1 />
-        <g filter="url(#rez1)">
-          <rect x={80} y={330} width={920} height={240} fill={L.mastilo} />
-          <rect x={80} y={330} width={920} height={240} fill="url(#trunje)" opacity={0.5} />
+        <g transform="translate(540 300) rotate(-3)">
+          <Isecak pts={pravougaonik(-400, -100, 800, 190)} boja={PK.belo} seed="n1" amp={3} />
+          <text y={50} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={150} fill={PK.zelena900}>
+            Čiji si ti?
+          </text>
         </g>
-        <text x={540} y={500} textAnchor="middle" fontFamily={SLAB} fontSize={150} fill={L.papir}>
-          Čiji si ti?
-        </text>
-        <rect x={380} y={586} width={320} height={14} fill={L.crvena} />
-        <g filter="url(#rez2)">
-          <rect x={120} y={1400} width={840} height={210} fill={L.papir} stroke={L.mastilo} strokeWidth={8} />
+        <g transform="translate(540 1500) rotate(1.5)">
+          <Isecak pts={pravougaonik(-420, -110, 840, 210)} boja={PK.belo} seed="n1b" amp={3} />
+          <text y={-14} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={48} fill={PK.tekst}>
+            Zašto KOLO ne traži ličnu kartu
+          </text>
+          <text y={66} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={62} fill={PK.zelena700}>
+            ekolo.rs
+          </text>
         </g>
-        <text x={540} y={1478} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={46} fill={L.mastilo}>
-          Zašto KOLO ne traži ličnu kartu
-        </text>
-        <text x={540} y={1566} textAnchor="middle" fontFamily={SLAB} fontSize={62} fill={L.zelena}>
-          ekolo.rs
-        </text>
       </svg>
     </AbsoluteFill>
   </AbsoluteFill>

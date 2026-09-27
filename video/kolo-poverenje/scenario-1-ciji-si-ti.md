@@ -5,7 +5,7 @@ teksta za naraciju“). **Gotov** (naracija My_recording_58). Format 1080×1920 
 trajanje ~55 s, seče se po snimljenoj naraciji.
 
 Trilogija „Poverenje“: **svaki video ima svoj likovni stil** (odluka vlasnika, 27.09.2026):
-„Čiji si ti“ je **linorez**, „Poznaješ li nekoga“ je **naiva** (po uzoru na Kovačicu), a
+„Čiji si ti“ je **papirni kolaž** kao prve animacije, „Poznaješ li nekoga“ je **naiva** (po uzoru na Kovačicu), a
 „Potvrda nosi odgovornost“ je **lavirani tuš i akvarel**. Zajedničko ostaje samo ono što nosi
 seriju: titlovi po rečima (izgovorena reč zelena), zelena boja KOLA samo za potvrdu i KOLO,
 pravi ekran potvrde (kod, kvačica, „Potvrdi ovu osobu“) i završna kartica sa ekolo.rs.
