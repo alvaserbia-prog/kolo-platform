@@ -18,11 +18,11 @@ Brojevi u imenima foldera su istorijski: `kolo-04` je po ovom redosledu **drugi*
 | 6 | Pijaca | | |
 | 7 | Šta piše pored tvog imena | | |
 | | **Poverenje** | | |
-| 8 | „Ne poznajem nikoga u KOLU" | | |
+| 8 | „Ne poznajem nikoga u KOLU" (Poverenje 2/3) | `kolo-poznajes-li-nekoga/` | scenario, čeka naraciju |
 | 9 | Lanac potvrda | | |
-| 10 | Potvrda nosi odgovornost | | |
+| 10 | Potvrda nosi odgovornost (Poverenje 3/3) | `kolo-potvrda-odgovornost/` | scenario, čeka naraciju |
 | 11 | Indeks stvarnosti | | |
-| 12 | Zašto ne tražimo ličnu kartu | | |
+| 12 | Zašto ne tražimo ličnu kartu — „Čiji si ti“ (Poverenje 1/3) | `kolo-ciji-si-ti/` | scenario, čeka naraciju |
 | 13 | Kako prepoznati prevaru | | |
 | 14 | Nije piramida, nije kripto | | |
 | 15 | Šta ako razmena ne uspe | | |
