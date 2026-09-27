@@ -158,9 +158,15 @@ for q in range(6):
 # sc. 3: tačke na karti
 for q in range(5):
     dodaj(trzaj(G[q % 5]), rec(3, "svaki") + q * 0.1, 0.03, -0.2 + 0.1 * q)
-for w, nota in (("uslugu", 83), ("selo", 86), ("grad", 91)):
-    dodaj(trzaj(nota), rec(3, w) - 0.2, 0.06, 0.2)
-    dodaj(zvonce(nota + 5, 1.0), rec(3, w) - 0.1, 0.03, 0.2)
+dodaj(trzaj(83), rec(3, "uslugu") - 0.2, 0.06, 0.2)
+dodaj(zvonce(88, 1.0), rec(3, "uslugu") - 0.1, 0.03, 0.2)
+# novo selo, novi grad: nit iz Sombora, pa kuće niču (trzaji naviše)
+for w, pojava, nota, n in (("novo", 2, 86, 6), ("novi", 2, 91, 10)):
+    t = rec(3, w, pojava)
+    dodaj(fejd(sum_obojen(0.5, 1200, 5000), 0.1, 0.3), t - 0.33, 0.04, -0.3)
+    for q in range(n):
+        dodaj(trzaj(G[q % 7]), t + 0.07 + q * 0.066, 0.022, -0.4 + 0.08 * q)
+    dodaj(zvonce(nota + 5, 1.0), t + 0.3, 0.03, -0.3)
 for q in range(12):
     dodaj(trzaj(G[q % 7]), rec(3, "nove") - 0.1 + q * 0.07, 0.025, rng.uniform(-0.5, 0.5))
 
