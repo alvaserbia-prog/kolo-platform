@@ -12,9 +12,9 @@ PAUZA_FRAZA = 0.42
 PRAG_SCENA = 1.0
 PRAG_DB = 34
 KRAJ_SNIMKA = 71.8  # ceo snimak
-# Izbačeno: ponovljen početak scene 2 („A lakša je kad je ponuda,“) i pogrešan početak
-# kraja scene 5 („istim je za…“) — ostaje drugi, ispravan izgovor.
-IZBACI = [(14.20, 16.62), (43.80, 45.58)]
+# Izbačeno: prekinut početak „Postoj…“ u sceni 2, ponovljen početak „A lakša je kad je ponuda,“
+# i pogrešan početak kraja scene 5 („istim je za…“) — ostaje drugi, ispravan izgovor.
+IZBACI = [(9.70, 11.15), (14.20, 16.62), (43.80, 45.58)]
 TEMPO = 1.04
 
 os.makedirs("audio/final", exist_ok=True)
