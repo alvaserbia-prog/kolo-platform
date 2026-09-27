@@ -21,7 +21,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 7 | Čiji si ti (Poverenje 1/3) | K | `kolo-ciji-si-ti/` | scenario, čeka naraciju |
 | 8 | Poznaješ li nekoga u KOLU? (Poverenje 2/3) | K | `kolo-poznajes-li-nekoga/` | scenario, čeka naraciju |
 | 9 | Potvrda nosi odgovornost (Poverenje 3/3) | K | `kolo-potvrda-odgovornost/` | scenario, čeka naraciju |
-| 10 | Bunar koji kopamo zajedno | K | `kolo-bunar/` | scenario, čeka naraciju |
+| 10 | Bunar koji kopamo zajedno | K | `kolo-bunar/` | ✅ |
 | 11 | KOLO raste sa nama | K | `kolo-raste/` | ✅ |
 | 12 | Pijaca | K |  |  |
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |

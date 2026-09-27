@@ -1,8 +1,8 @@
 # KOLO video 32 — Bunar koji kopamo zajedno
 
-Scenario vlasnika (26–27.09.2026), prošao lektorsku proveru. **Čeka naraciju vlasnika.**
-Format 1080×1920 (Reels), titlovi obavezni, krupni i čitljivi bez zvuka. Trajanje ~65 s,
-seče se po snimljenoj naraciji.
+Scenario vlasnika (26–27.09.2026), prošao lektorsku proveru. **Gotov video:** `out/kolo-bunar.mp4` (naracija: vlasnik, My_recording_56).
+Format 1080×1920 (Reels), titlovi obavezni, krupni i čitljivi bez zvuka. Trajanje 95 s
+(naracija 85 s posle rezova, uz vazduh između scena i završnu karticu).
 
 Zabranjene reči u titlovima i natpisima: kupi, prodaj, plati, zaradi, cena.
 
@@ -24,6 +24,25 @@ danas je gotovo sve nečije → KOLO je jedan takav bunar, koji kopamo zajedno.
 | 8 | Ograde i table „privatni posed“ preko nekadašnjeg pašnjaka | Danas je gotovo sve nečije | A danas je gotovo sve nečije. / Privatno ili državno. |
 | 9 | Đeram bunara se pretapa u telefon u ruci; na telefonu razmena, pomoć, knjiga evidencije | Razmena · pomoć · svaki doprinos je zapisan | Ali i dalje imamo pravo da se udružimo. // KOLO je jedan takav bunar. / Mesto gde razmenjujemo i pomažemo jedni drugima. / Gde sve što uradimo ostaje zapisano, / kao svedočanstvo da smo već nešto dali. |
 | 10 | Ljudi iz Sombora oko bunara, KOLO znak | Bunar kopamo zajedno. **ekolo.rs** | Ovaj bunar kopamo zajedno. / Pridruži nam se na ekolo.rs. |
+
+## Izgovoreno (po snimku, posle izbacivanja tri pogrešna početka)
+
+Titlovi prate ovaj tekst. Razlike od teksta za snimanje su samo u ritmu: sc. 5 je izgovorena kao
+niz „kad …, kad …, kad …“, a sc. 9 kao jedna rečenica posle „KOLO je jedan takav bunar“.
+
+1. Nekada je priroda bila zajedničko dobro.
+2. Seoski pašnjak, bunar, šuma, reka. Svi su ih koristili, a niko ih nije imao samo za sebe.
+3. Dugo se verovalo da zajedničko uvek propada. Svako uzme malo više, dok ne ostane ništa.
+4. Ali sela širom sveta pokazuju da ne mora biti tako. Elinor Ostrom ih je proučavala i za to dobila Nobelovu nagradu.
+5. Zajedničko dobro opstaje kad se zna ko je unutra, kad su pravila poštena, kad o njima odlučuju oni koji ga koriste. Kad svi vide ko šta radi. I kad svako ko prekrši za to odgovara.
+6. Propada kad svako uzima, a niko ne odgovara, i kad niko ne može da spreči zloupotrebu.
+7. Zajednički pašnjaci u švajcarskim Alpima traju već vekovima. Kanali za navodnjavanje u Španiji takođe.
+8. A danas je gotovo sve nečije. Privatno ili državno.
+9. Ali i dalje imamo pravo da se udružimo. KOLO je jedan takav bunar, mesto gde razmenjujemo i pomažemo jedni drugima, gde sve što uradimo ostaje zapisano, kao svedočanstvo da smo već nešto dali.
+10. Ovaj bunar kopamo zajedno. Pridruži nam se na ekolo.rs.
+
+Natpisi u videu: sc. 5 nosi i ploču „Kada opstaje?“ (par sa „Kada propada?“ u sc. 6), a sc. 7
+ploču „Traje vekovima“, dok su imena mesta na karti uz tačke.
 
 ## b) Tekst za snimanje
 
