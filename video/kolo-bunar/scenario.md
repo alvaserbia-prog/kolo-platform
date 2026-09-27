@@ -1,29 +1,29 @@
 # KOLO video 32 — Bunar koji kopamo zajedno
 
-Scenario vlasnika (26–27.09.2026), uz predložene ispravke. **Čeka naraciju vlasnika.**
-Format 1080×1920 (Reels), titlovi obavezni, krupni i čitljivi bez zvuka. Trajanje ~65–70 s,
+Scenario vlasnika (26–27.09.2026), prošao lektorsku proveru. **Čeka naraciju vlasnika.**
+Format 1080×1920 (Reels), titlovi obavezni, krupni i čitljivi bez zvuka. Trajanje ~65 s,
 seče se po snimljenoj naraciji.
 
 Zabranjene reči u titlovima i natpisima: kupi, prodaj, plati, zaradi, cena.
 
-Priča: nekada je priroda bila zajedničko dobro → verovalo se da zajedničko uvek propadne →
+Priča: nekada je priroda bila zajedničko dobro → verovalo se da zajedničko uvek propada →
 Elinor Ostrom je pokazala da ne mora → kada opstaje, kada propada → primeri koji traju →
-danas je gotovo sve nečije → KOLO je bunar koji kopamo zajedno.
+danas je gotovo sve nečije → KOLO je jedan takav bunar, koji kopamo zajedno.
 
 ## a) Scenario po scenama
 
 | # | Slika | Natpis na ekranu | Naracija |
 |---|---|---|---|
 | 1 | Stari bunar sa đermom u bačkom selu, ljudi oko njega | Nekada je priroda bila zajednička | Nekada je priroda bila zajedničko dobro. |
-| 2 | Brzi kadrovi: seoski pašnjak sa kravama, bunar, šuma, reka | Pašnjak · bunar · šuma · reka | Seoski pašnjak. Bunar. Šuma. Reka. // Svi su ih koristili, a niko ih lično nije posedovao. |
-| 3 | Isti pašnjak, ogoljen. Presušen bunar | „Zajedničko uvek propadne“ | Dugo se verovalo da ono što je zajedničko uvek propadne. / Svako uzme malo više, dok ne nestane. |
-| 4 | Ilustracija žene sa beležnicom koja sedi sa seljacima | Elinor Ostrom · Nobelova nagrada za ekonomiju 2009. · prva žena | Ali sela širom sveta pokazuju da ne mora tako. // Elinor Ostrom je za to otkriće dobila Nobelovu nagradu. |
-| 5 | Otvorena knjiga, pravila se ispisuju jedno po jedno, uz zelene kvačice | ✓ Zna se ko je unutra ✓ Pravila su poštena ✓ Odlučuju oni koji koriste ✓ Svi vide ko šta radi ✓ Ko prekrši, odgovara | Zajedničko dobro opstaje kad se zna ko je unutra. / Kad su pravila poštena i o njima odlučuju oni koji ih koriste. / Kad svi vide ko šta radi. / Kad onaj ko prekrši, odgovara. |
-| 6 | Zapušten, zarastao pašnjak i napušten bunar | Kada propada? | Propada kad svako uzima, a niko ne odgovara. // I kad ne možemo da sprečimo zloupotrebu. |
-| 7 | Mapa, pale se zelene tačke | Terbel, Švajcarska · Valensija, Španija | Pašnjaci u Švajcarskoj traju vekovima. / Seljački kanali u Španiji takođe. |
-| 8 | Ograde i table „privatni posed“ preko nekadašnjeg pašnjaka | Danas je gotovo sve nečije | Danas je gotovo sve nečije. / Privatno ili državno. |
-| 9 | Đeram bunara se pretapa u telefon u ruci; na telefonu razmena, pomoć, knjiga evidencije | Razmena · pomoć · svaki doprinos se vidi | Ali pravo da gradimo zajedničko i dalje imamo. / KOLO je takav bunar: / mesto gde razmenjujemo, pomažemo jedni drugima, / i gde se svaki doprinos vidi. |
-| 10 | Ljudi iz Sombora oko bunara, KOLO znak | Bunar kopamo zajedno. **ekolo.rs** | Ovaj bunar kopamo zajedno. / Pridruži se na ekolo.rs. |
+| 2 | Brzi kadrovi: seoski pašnjak sa kravama, bunar, šuma, reka | Pašnjak · bunar · šuma · reka | Seoski pašnjak. Bunar. Šuma. Reka. // Svi su ih koristili, a niko ih nije imao samo za sebe. |
+| 3 | Isti pašnjak, ogoljen. Presušen bunar | „Zajedničko uvek propada“ | Dugo se verovalo da zajedničko uvek propada. / Svako uzme malo više, dok ne ostane ništa. |
+| 4 | Ilustracija žene sa beležnicom koja sedi sa seljacima | Elinor Ostrom · prva žena s Nobelovom nagradom za ekonomiju (2009) | Ali sela širom sveta pokazuju da ne mora biti tako. // Elinor Ostrom ih je proučavala i za to dobila Nobelovu nagradu. |
+| 5 | Otvorena knjiga, pravila se ispisuju jedno po jedno, uz zelene kvačice | ✓ Zna se ko je unutra ✓ Pravila su poštena ✓ Odlučuju oni koji koriste ✓ Svi vide ko šta radi ✓ Ko prekrši, odgovara | Zajedničko dobro opstaje kad se zna ko je unutra. / Kad su pravila poštena. / Kad o njima odlučuju oni koji ga koriste. / Kad svi vide ko šta radi. // I kad svako ko prekrši za to odgovara. |
+| 6 | Zapušten, zarastao pašnjak i napušten bunar | Kada propada? | Propada kad svako uzima, a niko ne odgovara. // I kad niko ne može da spreči zloupotrebu. |
+| 7 | Mapa, pale se zelene tačke | Terbel, Švajcarska · Valensija, Španija | Zajednički pašnjaci u švajcarskim Alpima traju već vekovima. / Kanali za navodnjavanje u Španiji – takođe. |
+| 8 | Ograde i table „privatni posed“ preko nekadašnjeg pašnjaka | Danas je gotovo sve nečije | A danas je gotovo sve nečije. / Privatno ili državno. |
+| 9 | Đeram bunara se pretapa u telefon u ruci; na telefonu razmena, pomoć, knjiga evidencije | Razmena · pomoć · svaki doprinos je zapisan | Ali i dalje imamo pravo da se udružimo. // KOLO je jedan takav bunar. / Mesto gde razmenjujemo i pomažemo jedni drugima. / Gde sve što uradimo ostaje zapisano, / kao svedočanstvo da smo već nešto dali. |
+| 10 | Ljudi iz Sombora oko bunara, KOLO znak | Bunar kopamo zajedno. **ekolo.rs** | Ovaj bunar kopamo zajedno. / Pridruži nam se na ekolo.rs. |
 
 ## b) Tekst za snimanje
 
@@ -31,25 +31,33 @@ Oznake: / kratka pauza · // duža pauza. Između scena ~2 s tišine, bez muzike
 Izgovor: „ekolo tačka er es“; „KOLO“ kao reč.
 
 1. Nekada je priroda bila zajedničko dobro.
-2. Seoski pašnjak. Bunar. Šuma. Reka. // Svi su ih koristili, a niko ih lično nije posedovao.
-3. Dugo se verovalo da ono što je zajedničko uvek propadne. / Svako uzme malo više, dok ne nestane.
-4. Ali sela širom sveta pokazuju da ne mora tako. // Elinor Ostrom je za to otkriće dobila Nobelovu nagradu.
-5. Zajedničko dobro opstaje kad se zna ko je unutra. / Kad su pravila poštena i o njima odlučuju oni koji ih koriste. / Kad svi vide ko šta radi. / Kad onaj ko prekrši, odgovara.
-6. Propada kad svako uzima, a niko ne odgovara. // I kad ne možemo da sprečimo zloupotrebu.
-7. Pašnjaci u Švajcarskoj traju vekovima. / Seljački kanali u Španiji takođe.
-8. Danas je gotovo sve nečije. / Privatno ili državno.
-9. Ali pravo da gradimo zajedničko i dalje imamo. / KOLO je takav bunar: / mesto gde razmenjujemo, pomažemo jedni drugima, / i gde se svaki doprinos vidi.
-10. Ovaj bunar kopamo zajedno. / Pridruži se na ekolo.rs.
+2. Seoski pašnjak. Bunar. Šuma. Reka. // Svi su ih koristili, a niko ih nije imao samo za sebe.
+3. Dugo se verovalo da zajedničko uvek propada. / Svako uzme malo više, dok ne ostane ništa.
+4. Ali sela širom sveta pokazuju da ne mora biti tako. // Elinor Ostrom ih je proučavala i za to dobila Nobelovu nagradu.
+5. Zajedničko dobro opstaje kad se zna ko je unutra. / Kad su pravila poštena. / Kad o njima odlučuju oni koji ga koriste. / Kad svi vide ko šta radi. // I kad svako ko prekrši za to odgovara.
+6. Propada kad svako uzima, a niko ne odgovara. // I kad niko ne može da spreči zloupotrebu.
+7. Zajednički pašnjaci u švajcarskim Alpima traju već vekovima. / Kanali za navodnjavanje u Španiji – takođe.
+8. A danas je gotovo sve nečije. / Privatno ili državno.
+9. Ali i dalje imamo pravo da se udružimo. // KOLO je jedan takav bunar. / Mesto gde razmenjujemo i pomažemo jedni drugima. / Gde sve što uradimo ostaje zapisano, / kao svedočanstvo da smo već nešto dali.
+10. Ovaj bunar kopamo zajedno. / Pridruži nam se na ekolo.rs.
 
-## c) Izmene u odnosu na tekst vlasnika i zašto (predlog, čeka potvrdu)
+## c) Izmene u odnosu na prvi tekst vlasnika i zašto
 
-| Mesto | Tekst vlasnika | Predlog | Razlog |
+| Mesto | Tekst vlasnika | Ovde | Razlog |
 |---|---|---|---|
 | sc. 2 | „Seoski pašnjak. Šuma. Reka.“ | vraćen „Bunar.“ | bunar je nosivi motiv; bez njega „*ovaj* bunar“ u sc. 10 nema na šta da se odnosi |
-| sc. 4 | „Postoje primeri sela širom sveta. / koji govore da ne mora tako. // Elinor Ostrom je za to istraživanje…“ | „Ali sela širom sveta pokazuju da ne mora tako. // … za to otkriće …“ | rečenica je bila prelomljena tačkom; „to istraživanje“ pokazuje na nešto što pre toga nije pomenuto |
-| sc. 8 | „Danas priroda više nije zajedničko dobro / jer sve je u privatnom ili državnom vlasništvu“ | „Danas je gotovo sve nečije. / Privatno ili državno.“ | „sve“ je lako osporiti (reke, utrine, javne površine); „gotovo sve“ je tačno i kraće |
-| sc. 9 | „Ali naše pravo da se udružimo postoji / da olakšamo sebi život / i da omogućimo svima bolju budućnost“ | „Ali pravo da gradimo zajedničko i dalje imamo. / KOLO je takav bunar: …“ | naracija nigde nije govorila šta je KOLO, pa gledalac ne bi znao zašto da ode na sajt; „udružimo“ sugeriše udruženje sa članstvom, a KOLO Zajednica nije pravno lice, niti Fondacija ima članove |
-| sc. 1–10 | — | ranija verzija: sc. 6 „Kad pravila nameće neko sa strane“ | izbačeno u dogovoru: akte KOLO-a donosi Fondacija, pa bi se rečenica okrenula protiv nas |
+| sc. 2 | „a niko ih lično nije posedovao“ | „a niko ih nije imao samo za sebe“ | „lično“ je činovnički registar |
+| sc. 3 | „da ono što je zajedničko uvek propadne“ | „da zajedničko uvek propada“ | uz „uvek“ ide nesvršeni vid |
+| sc. 3 | „dok ne nestane“ | „dok ne ostane ništa“ | nije jasno šta nestaje |
+| sc. 4 | „Postoje primeri sela … / koji govore da ne mora tako. // … za to istraživanje …“ | „Ali sela širom sveta pokazuju da ne mora biti tako. // Elinor Ostrom ih je proučavala i za to dobila …“ | rečenica je bila prelomljena tačkom; „to istraživanje“ nije ranije pomenuto; „otkriće“ nije tačno — sela su pokazala, ona je proučila |
+| sc. 5 | „o njima odlučuju oni koji ih koriste“ | „oni koji ga koriste“ | „ih“ upućuje na pravila, a misli se na dobro |
+| sc. 5 | „Kad onaj ko prekrši, odgovara.“ | „I kad svako ko prekrši za to odgovara.“ | zarez između podmeta i predikata; „I“ zatvara niz |
+| sc. 6 | „I kada ne možemo da sprečimo zloupotrebu“ | „I kad niko ne može da spreči zloupotrebu.“ | nagli prelaz na „mi“; paralelno sa „niko ne odgovara“ |
+| sc. 7 | „Pašnjaci u Švajcarskoj … / Seljački kanali u Španiji takođe.“ | „Zajednički pašnjaci u švajcarskim Alpima traju već vekovima. / Kanali za navodnjavanje u Španiji – takođe.“ | bez „zajednički“ ne vidi se zašto se pominju; „seljački kanali“ nije ustaljen izraz |
+| sc. 8 | „Danas priroda više nije zajedničko dobro / jer sve je u privatnom ili državnom vlasništvu“ | „A danas je gotovo sve nečije. / Privatno ili državno.“ | „sve“ je lako osporiti (reke, utrine, javne površine) |
+| sc. 9 | „Ali naše pravo da se udružimo postoji / da olakšamo sebi život / …“, zatim dopuna vlasnika (pravo da uređujemo razmenu, evidencija kao dokaz datog) | vidi tekst gore | naracija nije govorila šta je KOLO; „svaki doprinos se vidi“ i „razmena“ su se ponavljali, pa su izbačeni; „svedoči da smo već nešto dali“ ne sme preći u „pa imamo pravo da dobijemo“ — evidentiran doprinos nije potraživanje |
+| sc. 10 | „Pridruži se na ekolo.rs.“ | „Pridruži nam se na ekolo.rs.“ | „pridruži se na“ je nepotpuno |
+| sc. 6 (ranija verzija) | „Kad pravila nameće neko sa strane“ | izbačeno | akte KOLO-a donosi Fondacija, pa bi se rečenica okrenula protiv nas |
 
 ## Pravila koja slika mora da poštuje
 
