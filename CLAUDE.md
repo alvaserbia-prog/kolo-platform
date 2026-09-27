@@ -1082,6 +1082,34 @@ Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)**
 - **Vitest** (`npm test`, `npm run test:watch`). Lokacija: `__tests__/protokol/`.
 - Pokriva: `donacija`, `osnivacki`, `delegiranje`, `faza-a-konstante`, `pokrovitelj`, `programi`, `emisija`. Config `vitest.config.ts` (`@/` → `src/`).
 
+## Videi — pregled teksta za naraciju: stalna ekipa (odluka vlasnika, 27.09.2026)
+
+Vlasnik tekst **čita naglas**, zato se tekst za snimanje pre slanja uvek pregleda kroz ovih
+pet uloga. Svaka uloga daje nalaze za sebe, a vlasnik bira. **Lektora nema:** interpunkcija i
+navodnici se ne čuju, a titlovi se ionako ravnaju prema onome što je izgovoreno i tada se
+pravopisno sređuju bez posebnog pitanja.
+
+| Uloga | Šta gleda |
+|---|---|
+| **Pisac** | tekst za uho: ritam, dužina rečenice u jednom dahu, ponavljanja, na kojoj reči rečenica pada, da li se čuje ko šta radi, prirodan govor (kako bi se reklo u Somboru, ne kako se piše) |
+| **Dramaturg** | kuka u prve 3 s, luk priče, jedna misao po sceni, da slika i tekst ne govore isto, da poenta stigne pre nego što gledalac skroluje dalje |
+| **Urednik za mreže** | razume li se bez zvuka (natpisi), da li je poziv na kraju jasan i jedan, dužina za Reels, da li kraj tera na akciju (pridruži se, postavi oglas) |
+| **Gledalac iz ciljne grupe** | penzioner, domaćica ili zanatlija iz Sombora koji za KOLO nije čuo: da li razume svaku reč, gde ga zbuni žargon (POEN, potvrda, kod, indeks), šta bi pitao |
+| **Čuvar sadržaja** | tačnost prema aktima u `dokumentacija 4.1/` i prema ekranu platforme, zabranjene reči, POEN nije novac, već donete odluke vlasnika |
+
+Pravila pregleda:
+- Nalazi idu **tabelom po videu** (scena · uloga · nalaz · predlog), pa **ceo tekst za snimanje**
+  sa izborima u uglastim zagradama `[ovako | ili ovako]`.
+- **Ništa se ne menja bez vlasnika.** Kad vlasnik kaže „reci šta ti se ne sviđa, ne menjaj
+  odmah", daju se samo nalazi.
+- **Odlučeno se ne otvara ponovo.** Ako je vlasnik odbio predlog, ne vraća se u sledećem krugu,
+  ni u drugom obliku.
+- **„Sitnice ne diraj"** znači: pregled prijavljuje samo ono što menja smisao ili razumevanje.
+- 🟡 **Ne mešati sa jezičkom proverom opisa za mreže** (`docs/drustvene-mreze-opisi.md`, odeljak 1a:
+  lektor i književnik). Opis se **čita očima**, pa tamo lektor ostaje. Ova ekipa važi za tekst
+  koji se **izgovara**.
+- Ostalo što važi za sve videe (stil, zabranjene reči, POEN samo kao zapis): `video/README.md`.
+
 ## Reference
 - **`dokumentacija 4.1/`** — kanonski set (17 akata, sr + en/ru/hr/hu). Verzije iz imena fajlova.
 - `docs/registar-rizika-regulatori-2026-09.md` — **nov** registar regulatornih rizika, 22 rizika (radni materijal, nije normativa).

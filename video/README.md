@@ -73,3 +73,7 @@ Brojevi u imenima foldera su istorijski: `kolo-04` je po ovom redosledu **drugi*
 Papirni kolaž, linije koje „ključaju", titlovi po rečima (izgovorena reč zelena), naracija
 vlasnika, tamburaška muzika, −14 LUFS. Trajanje nije unapred određeno: video traje koliko priča traži, i duže od 60 s kad je tako procenjeno (odluka vlasnika, 26.09.2026). POEN se nikad ne crta kao novčić ni novčanica, samo kao
 zapis. Bez reči kupi, prodaj, plati, zaradi, cena. Postupak izrade: README u folderu svakog videa.
+
+**Pregled teksta pre snimanja** (stalna ekipa: pisac, dramaturg, urednik za mreže, gledalac iz
+ciljne grupe, čuvar sadržaja; bez lektora): pravilo je u `CLAUDE.md`, odeljak „Videi — pregled
+teksta za naraciju“.
