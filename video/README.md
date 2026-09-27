@@ -44,7 +44,7 @@ Brojevi u imenima foldera su istorijski: `kolo-04` je po ovom redosledu **drugi*
 | 30 | Mladi | | |
 | 31 | Zadruge i udruženja | | |
 | | **Odlučivanje** | | |
-| 32 | Bunar koji kopamo zajedno | | |
+| 32 | Bunar koji kopamo zajedno | `kolo-bunar/` | scenario, čeka naraciju |
 | 33 | Šta je ZRNO | | |
 | 34 | Kvadratno glasanje | | |
 | 35 | Gornje Kolo | | |
