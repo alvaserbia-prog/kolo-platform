@@ -31,6 +31,37 @@ većeg posla proveriti ih ponovo, naročito broj heštegova na Instagramu.
 - **Obraćanje rodno neutralno gde god može** („šta iz tvoje kuće prvo ide na Pijacu?", ne
   „šta bi ponudio").
 
+## 1a. Jezička provera pre isporuke: lektor i književnik (odluka vlasnika, 27.09.2026)
+
+🔴 **Svaki opis, pre nego što se preda vlasniku, prolazi dva čitanja**, jedno za drugim, i tek
+posle oba ide u ovaj fajl. Ta dva čitanja radi onaj ko piše opis, namerno iz dva ugla; nisu
+zamena za živog lektora kad ga vlasnik ima.
+
+**1. Lektor (pravopis i duh srpskog jezika)**
+- Ekavica i latinica sa č, ć, š, ž, đ; navodnici **„…“**, nikad "…" ni »…«.
+- Bez anglicizama kad postoji domaća reč: objava, a ne post; sadržaj, a ne kontent; podeli, a ne šeruj.
+- **„Par“ znači dva**, ne „nekoliko“: „za nekoliko minuta“, a ne „za par minuta“.
+- Bez birokratskih imenica i pasiva: ne „vrši se upis“, „u cilju“, „izvršiti razmenu“, nego
+  glagol u aktivu („upisuje ti se“, „razmenite“).
+- Bez nizanja bezličnih „se“ konstrukcija („postavlja se“, „počinje se“): gde god može, kaže
+  se ko šta radi.
+- Zarez: ispred „a“ i „ali“ da, ispred „i“ i „da“ po pravilu ne; bez zareza koji samo lome
+  rečenicu („jednu stvar, sa fotografijom“ → „jednu stvar uz fotografiju“).
+- Dosledno obraćanje u jednom opisu (ti ili vi, nikad izmešano); na Facebook-u „vi“ malim
+  slovom, jer se obraća mnogima.
+- Nazivi iz interfejsa pišu se kao na sajtu: Pijaca, POEN / POENA, KOLO.
+
+**2. Književnik (zvuk i slika)**
+- **Opis se čita naglas.** Rečenica koja zapinje ili traži dva daha se deli ili prepisuje.
+- Jedan pasus nosi jednu sliku. Konkretno pobeđuje opšte: „tegla koja je pretekla od jeseni“
+  umesto „višak“.
+- Bez fraza sa plakata („zajedno smo jači“, „budi deo promene“, „nova era“).
+- Ritam: posle duže rečenice ide kratka. Poslednja rečenica pre poziva treba da ostane u uhu.
+- Obične reči pre ukrasnih; ni jedna reč koju komšija ne bi rekla za stolom.
+
+**Zapis provere:** uz opise svakog videa ide kratak red „Jezička provera: …“ sa onim što je
+ispravljeno, da se vidi da je provera urađena i da se iste greške ne ponavljaju.
+
 ## 2. Šta se sme reći, a šta ne (usklađeno sa aktima)
 
 Opis je javni tekst Fondacije, pa za njega važe ista pravila kao za copy na sajtu (`CLAUDE.md`).
@@ -251,19 +282,20 @@ Video: `video/kolo-sta-da-ponudis/out/kolo-sta-da-ponudis.mp4`. Naslovna: `video
 Zvuk na Instagramu preimenovati u „KOLO, šta ti imaš da ponudiš“.
 U opisima nema reči „besplatno“ (pravilo iz odeljka 2); u samom videu je ostala po odluci vlasnika.
 Opisi su pisani po pravilu „opis ne prepričava video“ (odeljak 1): ista poruka, druge reči i drugi primeri.
+Jezička provera (27.09.2026): „tegla viška“ → „tegla koja je pretekla od jeseni“; „za par minuta“ → „za nekoliko minuta“ (par = dva); bezlično „počinje se“ i „postavlja se“ → ko šta radi; „poverenje kreće odatle“ → „odatle počinje poverenje“; suvišan zarez u „jednu stvar, sa fotografijom“.
 
 ### TikTok
 
 ```
 Najčešća rečenica kad se priča o razmeni među komšijama: „Ma ja nemam šta da ponudim.“ A onda se ispostavi da baš ta osoba pravi zimnicu koju cela ulica pamti. 🍅
 
-Svaka kuća ima nešto čega drugima fali. Tegla viška od prošle jeseni, sigurna ruka za rub na pantalonama, strpljenje za razlomke, slobodno sedište kad se već ide u grad. Tebi je to svakodnevica, nekom drugom je rešenje.
+Svaka kuća ima nešto čega drugima fali. Tegla koja je pretekla od jeseni, sigurna ruka kad treba skratiti pantalone, strpljenje za razlomke, slobodno sedište kad se već ide u grad. Tebi je to svakodnevica, nekom drugom je rešenje.
 
 KOLO je platforma za razmenu dobara i usluga među komšijama. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
 
-Počinje se jednim oglasom na Pijaci, sa slikom i mestom. Kad prvi oglas prođe pregled, upisuje ti se hiljadu POENA. POEN nije novac i ne menja se za novac, on samo beleži šta si doneo zajednici.
+Sve počinje jednim oglasom na Pijaci. Dovoljni su slika i mesto. Kad prvi oglas prođe pregled, upisuje ti se hiljadu POENA. POEN nije novac i ne menja se za novac, on samo beleži šta si doneo zajednici.
 
-Na početku se ljudi javljaju tebi, a ne ti njima. Tako se upoznajete uživo, a poverenje kreće odatle. 🤝
+Na početku se ljudi javljaju tebi, a ne ti njima. Tako se upoznate uživo, a odatle počinje poverenje. 🤝
 
 Koja stvar iz tvoje kuće prva ide na Pijacu? Napiši u komentaru.
 
@@ -275,11 +307,11 @@ Koja stvar iz tvoje kuće prva ide na Pijacu? Napiši u komentaru.
 ### Instagram
 
 ```
-U skoro svakoj ulici postoji neko čiji se ajvar pamti. Pitaj tu osobu šta ima da ponudi, reći će: ništa posebno. 🍅
+U skoro svakoj ulici postoji neko čiji se ajvar pamti. Pitaj tu osobu šta ima da ponudi i reći će ti: ništa posebno. 🍅
 
 A upravo to „ništa posebno“ neko u komšiluku traži već nedeljama. Tegla zimnice, skraćene pantalone, jedan čas razlomaka pred kontrolni.
 
-KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Prvi oglas se postavlja za par minuta, a kad prođe pregled, upisuje ti se hiljadu POENA. To je zapis o doprinosu, ne novac. 🌾
+KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Prvi oglas postaviš za nekoliko minuta, a kad prođe pregled, upisuje ti se hiljadu POENA. To je zapis o doprinosu, ne novac. 🌾
 
 👉 Šta iz tvoje kuće prvo ide na Pijacu? Link je u bio.
 
@@ -295,9 +327,9 @@ Pa onda razgovor skrene na zimnicu, na baštu, na to ko u ulici još ume da skra
 
 KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
 
-Dovoljno je da na Pijaci objavite jednu stvar, sa fotografijom i mestom. Kad prvi oglas prođe pregled, upisuje vam se hiljadu POENA. POEN nije novac i ne može se zameniti za novac, on beleži ono što ste dali zajednici.
+Dovoljno je da na Pijaci objavite jednu stvar uz fotografiju i mesto. Kad prvi oglas prođe pregled, upisuje vam se hiljadu POENA. POEN nije novac i ne može se zameniti za novac, on beleži ono što ste dali zajednici.
 
-Na početku se drugi javljaju vama. Tako se ljudi upoznaju uživo, a ko vas lično poznaje može kasnije i da vas potvrdi. 🤝
+Na početku se drugi javljaju vama. Tako se ljudi upoznaju uživo, a ko vas lično upozna, može kasnije i da vas potvrdi. 🤝
 
 👉 Pogledajte šta već ima u vašem kraju i postavite svoj prvi oglas: https://ekolo.rs
 
