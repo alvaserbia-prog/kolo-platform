@@ -1,15 +1,15 @@
 # KOLO video — Čiji si ti (serija „Poverenje“, 1/3)
 
 Scenario vlasnika (27.09.2026), prošao pregled ekipe za naraciju (vidi `CLAUDE.md`, „Videi — pregled
-teksta za naraciju“). **Čeka naraciju vlasnika.** Format 1080×1920 (Reels), titlovi po rečima,
+teksta za naraciju“). **Gotov** (naracija My_recording_58). Format 1080×1920 (Reels), titlovi po rečima,
 trajanje ~55 s, seče se po snimljenoj naraciji.
 
-Trilogija „Poverenje“ (ovaj video, `kolo-poznajes-li-nekoga/`, `kolo-potvrda-odgovornost/`) ide
-**istim stilom**: stara ilustrovana slikovnica kao `kolo-domacice/`, isto selo i ravnica u sva
-tri videa, isti **zeleni krug** oko čoveka u trenutku potvrde, isti **pravi ekran potvrde**
-(osoba pokaže kod → druga skenira → kvačica „Potvrđujem da ovu osobu poznajem lično…“ → dugme
-„Potvrdi ovu osobu“) i ista završna kartica (znak KOLO, ekolo.rs, kolo likova iz priče).
-Redosled objave: 1 Čiji si ti → 2 Poznaješ li nekoga → 3 Potvrda nosi odgovornost.
+Trilogija „Poverenje“: **svaki video ima svoj likovni stil** (odluka vlasnika, 27.09.2026):
+„Čiji si ti“ je **linorez**, „Poznaješ li nekoga“ je **naiva** (po uzoru na Kovačicu), a
+„Potvrda nosi odgovornost“ je **lavirani tuš i akvarel**. Zajedničko ostaje samo ono što nosi
+seriju: titlovi po rečima (izgovorena reč zelena), zelena boja KOLA samo za potvrdu i KOLO,
+pravi ekran potvrde (kod, kvačica, „Potvrdi ovu osobu“) i završna kartica sa ekolo.rs.
+Izrada: `README.md` u ovom folderu. Redosled objave: 1 Čiji si ti → 2 Poznaješ li nekoga → 3 Potvrda nosi odgovornost.
 
 Zabranjene reči u titlovima i natpisima: kupi, prodaj, plati, zaradi, cena.
 

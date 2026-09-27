@@ -1,8 +1,8 @@
 # KOLO video — Potvrda nosi odgovornost (serija „Poverenje“, 3/3)
 
 Scenario vlasnika (27.09.2026), prošao pregled ekipe za naraciju (vidi `CLAUDE.md`, „Videi — pregled
-teksta za naraciju“). **Čeka naraciju vlasnika.** Format 1080×1920 (Reels), titlovi po rečima,
-trajanje ~50 s. Stil i zajednički motivi trilogije: `kolo-ciji-si-ti/scenario.md`.
+teksta za naraciju“). **Gotov** (naracija My_recording_60). Format 1080×1920 (Reels), titlovi po rečima,
+trajanje ~50 s. Stil: vidi `README.md` (svaki video ima svoj).
 
 Zabranjene reči u titlovima i natpisima: kupi, prodaj, plati, zaradi, cena.
 

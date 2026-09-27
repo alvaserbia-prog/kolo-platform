@@ -18,9 +18,9 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 4 | Registracija i prvi oglas | K | `kolo-prvi-oglas/` | ✅ |
 | 5 | Šta da ponudiš (prva tri oglasa) | K | `kolo-sta-da-ponudis/` | ✅ |
 | 6 | Domaćice: Milica i zimnica | K | `kolo-domacice/` | ✅ |
-| 7 | Čiji si ti (Poverenje 1/3) | K | `kolo-ciji-si-ti/` | scenario, čeka naraciju |
-| 8 | Poznaješ li nekoga u KOLU? (Poverenje 2/3) | K | `kolo-poznajes-li-nekoga/` | scenario, čeka naraciju |
-| 9 | Potvrda nosi odgovornost (Poverenje 3/3) | K | `kolo-potvrda-odgovornost/` | scenario, čeka naraciju |
+| 7 | Čiji si ti (Poverenje 1/3, linorez) | K | `kolo-poverenje/` | ✅ |
+| 8 | Poznaješ li nekoga u KOLU? (Poverenje 2/3, naiva) | K | `kolo-poverenje/` | ✅ |
+| 9 | Potvrda nosi odgovornost (Poverenje 3/3, tuš i akvarel) | K | `kolo-poverenje/` | ✅ |
 | 10 | Bunar koji kopamo zajedno | K | `kolo-bunar/` | ✅ |
 | 11 | KOLO raste sa nama | K | `kolo-raste/` | ✅ |
 | 12 | Pijaca | K |  |  |
@@ -186,6 +186,8 @@ Papirni kolaž, linije koje „ključaju", titlovi po rečima (izgovorena reč z
 vlasnika, tamburaška muzika, −14 LUFS. Trajanje nije unapred određeno: video traje koliko priča traži, i duže od 60 s kad je tako procenjeno (odluka vlasnika, 26.09.2026). POEN se nikad ne crta kao novčić ni novčanica, samo kao
 zapis. Bez reči kupi, prodaj, plati, zaradi, cena. Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
 a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, odeljak „Pijaca / razmena“). Postupak izrade: README u folderu svakog videa.
+
+🟡 **Likovni stil i muzika se ne ponavljaju obavezno** (odluka vlasnika, 27.09.2026): od trilogije „Poverenje“ (`kolo-poverenje/`) svaki video može da ima svoj autentičan stil (tamo: linorez, naiva, tuš i akvarel) i svoju muziku. Zajedničko ostaje ono iznad: titlovi po rečima sa zelenom rečju, naracija vlasnika, −14 LUFS, POEN samo kao zapis, zabranjene reči.
 
 **Pregled teksta pre snimanja** (stalna ekipa: pisac, dramaturg, urednik za mreže, gledalac iz
 ciljne grupe, čuvar sadržaja; bez lektora): pravilo je u `CLAUDE.md`, odeljak „Videi — pregled
