@@ -1,6 +1,6 @@
 # KOLO video — „KOLO raste sa nama“
 
-Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 64,4 s, H.264 + AAC, −14 LUFS**.
+Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 64,2 s, H.264 + AAC, −14 LUFS**.
 Gotov fajl: [`out/kolo-raste.mp4`](out/kolo-raste.mp4), naslovna: [`out/naslovna.jpg`](out/naslovna.jpg).
 Scenario i tekst naracije: [`scenario.md`](scenario.md). Naracija: vlasnik (My_recording_57).
 Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 10.
@@ -33,7 +33,8 @@ Kolo sa likovima u perspektivi, zastavice i šaka su u `src/kolo.tsx`, karta u `
 ```bash
 cd video/kolo-raste
 npm ci
-./scripts/ciscenje.sh                                   # 1) audio/raw/snimak57.m4a -> audio/clean/glas.wav (DeepFilterNet 35 dB)
+pip install nara_wpe                                     #    za uklanjanje odjeka
+./scripts/ciscenje.sh                                   # 1) audio/raw/snimak57.m4a -> audio/clean/glas.wav (WPE + DeepFilterNet 35 dB)
 ATTEN=10 IZLAZ=glas_blago ./scripts/ciscenje.sh          #    blago očišćena verzija
 python3 scripts/pocetak.py                              #    vraća „K“ u prvoj reči („Kolo“), koje filter guta
 python3 scripts/tempo.py                                # 2) izbacivanje tri greške, zbijanje pauza, atempo 1,04 -> audio/final/glas.wav
@@ -60,9 +61,9 @@ Teksture u `public/` (papir, gvaš, zrno, pomeraji) i fontovi preuzeti su iz `..
 | Korak | Šta |
 |---|---|
 | snimak | `audio/raw/snimak57.m4a`, vlasnik, cela naracija u jednom snimku, 71,8 s |
-| čišćenje | highpass 70 Hz, DeepFilterNet 3 (35 dB), boja glasa, −16 LUFS. Filter je progutao „K“ u prvoj reči (Whisper je čuo „Polo“), pa se isečak 1,30–1,52 s uzima iz verzije očišćene na 10 dB, izjednačen po jačini (`scripts/pocetak.py`) |
+| čišćenje | snimak je sa telefona, bez spoljnog mikrofona: šum je nizak (oko −65 dB), ali se čuju soba i oštri visoki tonovi. Lanac: **uklanjanje odjeka (WPE, `scripts/odjek.py`)** → highpass 75 Hz → DeepFilterNet 3 (35 dB) → topla boja (+1,5 dB @170 Hz, −2 dB @380 Hz, −3 dB @6,5 kHz, −4 dB iznad 10 kHz, lowpass 14,5 kHz, de-esser) → −16 LUFS linearno. **Bez kompresora:** ranija verzija ga je imala i on je podizao tihe repove posle reči, dakle odjek. DNSMOS P.808: sirov 3,56 → ranije 3,99 → sada 4,00 (SIG 3,52 → 3,56). Filter guta „K“ u prvoj reči, pa se isečak 1,30–1,52 s uzima iz verzije očišćene na 10 dB (`scripts/pocetak.py`). Resemble Enhance (obnavljanje opsega glasa) nije upotrebljen: model je na Hugging Face-u, a taj domen je u ovom okruženju blokiran |
 | rez | izbačeno 9,70–11,15 s (prekinut početak „Postoj…“), 14,20–16,62 s (ponovljen početak „A lakša je kad je ponuda,“) i 43,80–45,58 s (pogrešan početak „istim je za…“); ostaje drugi, ispravan izgovor |
-| tempo | pauze duže od 0,42 s skraćene, **atempo 1,04** → 57,6 s |
+| tempo | pauze duže od 0,42 s skraćene, **atempo 1,04** → 57,5 s |
 | provera teksta | Whisper turbo po isečcima + Parakeet TDT 0.6B v3 + pohlepno dekodiranje Omnilingual CTC (za sporne reči: „dovođenje“, ne „dovođenjem“; „sledeća“) |
 | vremena reči | Parakeet **po isečcima do 12 s** (ceo snimak odjednom je preskočio celu rečenicu scene 7 i kraj), pa prisilno CTC poravnanje (Omnilingual ASR 300M) za početak svake reči na 20 ms |
 | muzika | tamburaši komponovani i sintetisani u kodu (`scripts/muzika.py`), ceo video je **kolo u 2/4, G-dur, 106 BPM**: tema K na saboru i pijaci, muzička kutija na karti, tema A tiše u svesci, dugi tonovi u tremolu uz pravila, tema K raste u mreži, tema A široko na „Sledeća ruka“, finale i **završni akord tačno posle „ekolo.rs“** |
