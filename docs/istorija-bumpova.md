@@ -810,3 +810,120 @@ Folder `docs/` sadrži **interne radne beleške** (analiza FAQ, glosar, predlog 
 **Ključna izmena u 3.7.3 (Pravilnik čl. 16, 28, 67):** precizirana je vidljivost platformskog prostora za oglašavanje — **pregled oglasa je javan** (sadržaj, cena, lokacija, pseudonim oglašivača vide svi posetioci), dok su **postavljanje oglasa, pristup kontaktu i komunikacija** dostupni samo verifikovanim korisnicima. Ovo je razgraničeno od pseudonimne evidencije doprinosa i grafa verifikacija (koje neprijavljeni/neverifikovani NE vide).
 
 > **CLAUDE.md sinhronizovan sa kodom do commita `120d578` (2026-06-16).** Posle 2026-06-13 najviše kozmetičkih UI izmena (Profil/Pijaca/Novčanik/Početna raspored, header jezik switcher, fontovi); činjenične izmene unete iznad: Pijaca slike → R2, „Chat soba" → „Pričaonica", grupisan sidebar, email van podešavanja profila, terminologija „emisija" → „evidencija doprinosa".
+
+
+---
+
+# Pravilo bumpovanja i pouke — pun zapis (izdvojeno iz CLAUDE.md 28.09.2026)
+
+> Sažetak koji vezuje rad stoji u `CLAUDE.md`; ovde su obrazloženja i presedani.
+
+### 🔴 PRAVILO BUMPOVANJA — bumpuje se SAMO akt koji se menja (2026-09-04)
+
+Odluka vlasnika. **Akt koji se sadržinski menja dobija narednu šifru; ostali se ne
+prepisuju i ostaju na svojoj.** Set od sada NIJE jedinstven i to je namerno.
+
+🔴 **Ovo OBARA pravilo koje je ovde stajalo od 4.2.1** („Set je ponovo JEDINSTVEN —
+jedan broj važi za ceo folder"). Raniji zapis je mešovit set držao za grešku, jer je
+prethodni mešovit set (4.2.0 uz 4.1.1) proizveo unakrsna upućivanja na verziju koja
+kao dokument više ne postoji. **Taj rizik nije nestao — samo se sada nosi ručno:**
+pri svakom bumpu obavezno proveriti da li neki akt upućuje na akt koji je promenio
+šifru, i ta upućivanja ispraviti. Provera je jedna komanda:
+
+```
+grep -rn "v4\.[45]\.[0-9]\|verzija 4\.[45]\.[0-9]" "dokumentacija 4.1/"
+```
+
+Upućivanja na akte koji se NISU menjali ostaju na staroj šifri — to nije previd nego
+tačan podatak.
+
+**Šta se menja uz svaki bump:** ime fajla na svih 5 jezika, mapa u
+`src/app/(public)/pravilnik/[slug]/page.tsx` (`fajl` i `verzija`), poziv
+`ucitajPravniDokument` na odgovarajućoj `page.tsx`, verzijske labele u
+`messages/*.json` (`pravne.<doc>.ver` i `meta_<doc>_desc`) i spisak `AKTI` u
+`__tests__/pravni-dokumenti.test.ts`. Sve to samo za akt koji se menja.
+
+🔴 **ODLUKA VLASNIKA (2026-09-09): kad se ceo registar rizika završi, SVI dokumenti
+se povlače na verziju 5.0.** Mešovite šifre 4.4.x su radno stanje dok traje obrada
+rizika; po završetku ide jedan jedinstven bump celog seta na **5.0**, čime se i
+zaostala unakrsna upućivanja (vidi ispod) raščišćavaju odjednom. Ne raditi to
+usput — 5.0 je poslednji potez, posle poslednjeg rizika.
+
+🟢 **Trenutna verzija svakog akta čita se iz imena fajla, ne iz ovog fajla:**
+`ls "dokumentacija 4.1"/*.md`. To je izvor istine — po pravilu iznad, šifra u imenu
+fajla JESTE objava. 🔴 **Ne prepisivati tabelu verzija u `CLAUDE.md`** — razišla bi se
+sa folderom pri prvom sledećem bumpu (isti kvar kao prepisane tabele u ekranima).
+
+📄 **Hronologija svih 36 bumpova je u `docs/istorija-bumpova.md`** (izdvojena
+16.09.2026). Tamo se ide samo kad treba rekonstruisati zašto je neki akt dobio baš
+tu šifru. Pravila koja iz te hronologije proizlaze su ispod — ona se ne čitaju iz
+arhive. 🔴 **Uz svaki nov bump zapis ide u arhivu, ne ovde** — ovde se dopisuje samo
+ako je bump proizveo NOVU pouku koje u spisku nema.
+
+**Trenutno stanje seta:** 17 akata; Registar radnji obrade ima **osamnaest radnji**,
+DPIA **osamnaest rizika** (pet srednjih, trinaest niskih); izuzetaka od zabrane
+negativnog zapisa je **šest** (Pravilnik čl. 14 st. 3). 🔴 Kad se doda radnja obrade,
+zbir u DPIA se usklađuje istim potezom.
+
+#### 🔴 Pouke iz bumpovanja — sve su se već desile, po pravilu više puta
+
+1. 🔴 **Jedan događaj objave = jedna šifra. Pri sudaru dve sesije ide NAREDNA
+   SLOBODNA šifra** (branjeno sedam puta: 4.4.4, 4.4.7, 4.5.5, 4.6.0, 4.6.1, 4.6.4,
+   4.6.5). Pre bumpa **obavezno `git fetch origin main`**. Ako je druga sesija u
+   međuvremenu zauzela šifru: dovuci granu na `main`, prenesi svoje izmene **na
+   main-ovu noviju verziju akta** — nikad na stariju osnovu sa koje je grana krenula,
+   jer to **tiho poništava tuđi set** — i uzmi narednu slobodnu šifru.
+2. 🔴 **Dopuna seta koji NIJE objavljen ne menja šifru.** Tada je reč o jednom
+   događaju objave, pa bi nov bump tvrdio suprotno (presedan: Uslovi su ostali na
+   4.4.3 iako su menjani dvaput istog dana; dokaz stvarnosti i Pravilnik su ostali na
+   4.6.5 uz dopunu od 17.09). 🔴 **Da je set već objavljen, ista dopuna traži nov
+   bump.**
+3. 🔴 **Treći član šifre ostaje JEDNOCIFREN.** Posle 4.5.9 ide **4.6.0**, ne 4.5.10
+   (isto kao 4.4.9 → 4.5.0). Dvocifren član kvari imena fajlova i sve zatečene
+   `grep` provere verzija.
+4. 🔴 **Pri izmeni ILI brisanju odredbe u Pravilniku OBAVEZNO proveriti whitepaper.**
+   Bio je **propust tri puta** (R-08, R-09, R-02), i sva tri puta ga je uhvatio
+   **test, ne pregled** — whitepaper istu tvrdnju po pravilu ponavlja svojim rečima, a
+   dvaput ju je nosio u goroj varijanti. Od 4.6.5 se proverava uvek; tada je provera
+   prvi put ispala negativna (whitepaper nije trebalo dirati) i **to je i dalje
+   uspešna provera**, ne izgubljen posao.
+5. 🔴 **Ne raditi blanket zamenu verzija u aktima.** Regularni izraz ne zna na koji
+   akt pokazuje broj koji menja — pomerio je i upućivanja na akte koji se nisu
+   menjali. Uhvaćeno i vraćeno, a ostatak se mesecima kasnije našao u hu DPIA.
+6. 🔴 **Zaostala unakrsna upućivanja se NE ispravljaju u aktima koji se ovim potezom
+   ne objavljuju.** Objavljen fajl ne sme da govori nešto drugo nego kad je
+   objavljen. Cena je slomljen pokazivač i to je prihvaćeno; **briše ih odjednom bump
+   celog seta na 5.0.** Ispravljaju se samo u aktima koji se ponovo objavljuju.
+   🟡 Isto važi i za istorijska pozivanja („Modul 3 aktiviran DPIA v4.3.0") — ona su
+   tačan podatak o danu donošenja i ne diraju se.
+7. 🔴 **Glavni Pravilnik MORA da se bumpuje kad se uvodi nov osnov za negativan zapis
+   ili nov osnov za uvećanje ukupnog broja POEN-a.** Čl. 14 st. 3 nabraja osnove
+   **iscrpno** i zatvara listu izričito („ni ovim pravilnikom bez izmene ovog člana,
+   ni bilo kojim drugim aktom"), pa poseban pravilnik to ne može sam. Dešavalo se
+   pet puta (R-15, R-18, R-20, kolektivna nabavka, usklađivanje zatečenih potvrda).
+   🟡 Bump glavnog Pravilnika povlači ispravke u DPIA i Pravilniku o učešću dece, pa
+   se ne otvara bez potrebe.
+8. 🔴 **Isto važi i kad akt imenuje KANAL:** čl. 15 imenuje kanale i mora da kaže
+   kada po kojem nastupa upis — pa izmena trenutka upisa u posebnom pravilniku
+   povlači i glavni Pravilnik (tako je 4.6.5 uzeo oba akta).
+9. 🔴 **Numeracija rizika: postoje DVA registra i ne poklapaju se.** Stari
+   (R-01…R-20, opisan po sekcijama ovog fajla) i nov, nezavisan
+   (`docs/registar-rizika-regulatori-2026-09.md`, 22 rizika). Kad se kaže „R-01",
+   misli se na **nov** registar.
+10. 🔴 **Paralelne sesije daju migracijama iste vremenske oznake.** Prisma ih ređa
+    leksikografski po imenu foldera, pa je redosled određen i SQL nezavisan — ali se
+    oznake **NE smeju naknadno preimenovati**, jer su migracije već primenjene na
+    test bazu preview buildom grane.
+11. 🔴 **Konflikt u `CLAUDE.md` i u registru rizika pri paralelnom radu rešava se
+    SPAJANJEM oba reda, ne biranjem jednog.** Svaka sesija dopisuje svoj zapis.
+12. 🟡 **Sadržinski nepromenjen akt se ne bumpuje.** Ako akt ne nosi spornu odredbu,
+    ostaje na svojoj šifri — to nije previd nego tačan podatak.
+13. 🔴 **Gde nov institut SME da živi — hijerarhija čl. 7.** Poseban pravilnik može
+    da uredi pitanje **samo kad KOLO Pravilnik izričito uputi** (čl. 7 st. 4), a
+    razgraničenje između pravilnika ide **po predmetu** (čl. 7 st. 3) — predmet
+    Gornjeg Kola je ORGAN, a nabavki PROCES, pa nabavke nisu mogle biti dopuna
+    Gornjeg Kola. 🔴 Uz to: **akt nižeg ranga ne može izmeniti ono što je uređeno
+    aktom višeg ranga** (čl. 8 st. 2) — na tome je pao čl. 12 st. 4 hijerarhije, koji
+    je nadležnost za opšte akte prenosio na Gornje Kolo (vidi „Gornje Kolo: telo
+    Fondacije"). Nov akt se dopisuje u čl. 7 st. 2 hijerarhije.
+

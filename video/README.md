@@ -192,10 +192,35 @@ bljesak + pisak (uređaj pušta sinhrono) i probom sa pomerenim zvukom; vlasnik 
 Papirni kolaž, linije koje „ključaju", titlovi po rečima (izgovorena reč zelena), naracija
 vlasnika, tamburaška muzika, −14 LUFS. Trajanje nije unapred određeno: video traje koliko priča traži, i duže od 60 s kad je tako procenjeno (odluka vlasnika, 26.09.2026). POEN se nikad ne crta kao novčić ni novčanica, samo kao
 zapis. Bez reči kupi, prodaj, plati, zaradi, cena. Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
-a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, odeljak „Pijaca / razmena“). Postupak izrade: README u folderu svakog videa.
+a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela „Pravna odbrana“, red „Iznos u oglasu“). Postupak izrade: README u folderu svakog videa.
 
 🟡 **Likovni stil i muzika se ne ponavljaju obavezno** (odluka vlasnika, 27.09.2026): od trilogije „Poverenje“ (`kolo-poverenje/`) svaki video može da ima svoj autentičan stil (tamo: papirni kolaž, naiva, tuš i akvarel) i svoju muziku. Zajedničko ostaje ono iznad: titlovi po rečima sa zelenom rečju, naracija vlasnika, −14 LUFS, POEN samo kao zapis, zabranjene reči.
 
-**Pregled teksta pre snimanja** (stalna ekipa: pisac, dramaturg, urednik za mreže, gledalac iz
-ciljne grupe, čuvar sadržaja; bez lektora): pravilo je u `CLAUDE.md`, odeljak „Videi — pregled
-teksta za naraciju“.
+## Pregled teksta za naraciju: stalna ekipa (odluka vlasnika, 27.09.2026)
+
+Vlasnik tekst **čita naglas**, zato se tekst za snimanje pre slanja uvek pregleda kroz ovih
+pet uloga. Svaka uloga daje nalaze za sebe, a vlasnik bira. **Lektora nema:** interpunkcija i
+navodnici se ne čuju, a titlovi se ionako ravnaju prema onome što je izgovoreno i tada se
+pravopisno sređuju bez posebnog pitanja.
+
+| Uloga | Šta gleda |
+|---|---|
+| **Pisac** | tekst za uho: ritam, dužina rečenice u jednom dahu, ponavljanja, na kojoj reči rečenica pada, da li se čuje ko šta radi, prirodan govor (kako bi se reklo u Somboru, ne kako se piše) |
+| **Dramaturg** | kuka u prve 3 s, luk priče, jedna misao po sceni, da slika i tekst ne govore isto, da poenta stigne pre nego što gledalac skroluje dalje |
+| **Urednik za mreže** | razume li se bez zvuka (natpisi), da li je poziv na kraju jasan i jedan, dužina za Reels, da li kraj tera na akciju (pridruži se, postavi oglas) |
+| **Gledalac iz ciljne grupe** | penzioner, domaćica ili zanatlija iz Sombora koji za KOLO nije čuo: da li razume svaku reč, gde ga zbuni žargon (POEN, potvrda, kod, indeks), šta bi pitao |
+| **Čuvar sadržaja** | tačnost prema aktima u `dokumentacija 4.1/` i prema ekranu platforme, zabranjene reči, POEN nije novac, već donete odluke vlasnika |
+
+Pravila pregleda:
+- Nalazi idu **tabelom po videu** (scena · uloga · nalaz · predlog), pa **ceo tekst za snimanje**
+  sa izborima u uglastim zagradama `[ovako | ili ovako]`.
+- **Ništa se ne menja bez vlasnika.** Kad vlasnik kaže „reci šta ti se ne sviđa, ne menjaj
+  odmah", daju se samo nalazi.
+- **Odlučeno se ne otvara ponovo.** Ako je vlasnik odbio predlog, ne vraća se u sledećem krugu,
+  ni u drugom obliku.
+- **„Sitnice ne diraj"** znači: pregled prijavljuje samo ono što menja smisao ili razumevanje.
+- 🟡 **Ne mešati sa jezičkom proverom opisa za mreže** (`docs/drustvene-mreze-opisi.md`, odeljak 1a:
+  lektor i književnik). Opis se **čita očima**, pa tamo lektor ostaje. Ova ekipa važi za tekst
+  koji se **izgovara**.
+- Ostalo što važi za sve videe (stil, zabranjene reči, POEN samo kao zapis): odeljak „Zajedničko za sve videe“ iznad.
+

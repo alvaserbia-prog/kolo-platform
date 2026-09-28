@@ -3226,3 +3226,184 @@ iz čl. 16 st. 5.
 nosioci ZRNA objavljuju zadatak" i delegira proceduru posebnom pravilniku — nema
 protivrečnosti sa novim čl. 4. Bump glavnog Pravilnika povlači ispravke u DPIA i
 Pravilniku o učešću dece, pa se ne otvara bez naloga.
+
+
+---
+
+# Sažetak pravne odbrane iz CLAUDE.md — pun tekst (izdvojeno 28.09.2026)
+
+> U `CLAUDE.md` je ostala skraćena tabela; ovde je verzija sa svim napomenama.
+
+### Pravna odbrana — šta je odlučeno i zašto (sažetak)
+
+🔴 **Pun zapis je u `docs/sprovodjenje-rizika-2026-09.md`** — nalazi, aritmetika, odbačene
+varijante i prihvaćeni ostaci. Ovde stoji samo ono što vezuje dalji rad. Registar sa
+ocenama: `docs/registar-rizika-regulatori-2026-09.md`. **Pre rada na nekoj od ovih tema
+otvoriti pun zapis** — sažetak ne nosi obrazloženja, a obrazloženja su ono što drži odbranu.
+
+**Zajednički obrazac svih odbrana:** ne tvrdi se etiketa („POEN nije X") nego se nabrajaju
+**elementi definicije koji nedostaju**. Etiketa pobija element koji nam niko ne prigovara;
+nabrajanje elemenata odgovara na prigovor koji stvarno dolazi. Tako su pisani Pravilnik
+čl. 13 (nije virtuelna valuta), čl. 25 (ZRNO nije investicioni instrument), operativni
+čl. 27 (nije ugovor o delu), nabavke čl. 3a (nije privredna delatnost), Uslovi čl. 22b
+(Fondacija ne nastupa na tržištu).
+
+🔴 **Samokvalifikacija u aktu je slaba i ume da se okrene protiv nas.** Pišu se činjenice
+koje neku kvalifikaciju čine, ne sama kvalifikacija — zato u aktima ne stoji reč „poklon",
+ne stoji poreska stopa i ne stoji nijedan prag koji se menja zakonom. Rečenica
+„nije socijalna pomoć" je sama sebi zatvorila poresko izuzeće i zato je brisana.
+
+| Tema | Šta vezuje dalji rad |
+|---|---|
+| **POEN nije virtuelna valuta** (R-01, R-19; Pravilnik čl. 13) | odnos 1 POEN ≈ 1 RSD služi **isključivo korisniku** u sopstvenom oglasu; Fondacija ga ne objavljuje, ne preporučuje i ne primenjuje ni u jednom svom postupku. Kartična donacija: kapa **100.000 RSD** po uplati, **3 dnevno** po nalogu, POEN tek po ljudskoj potvrdi uz uplatioca iz izvoda |
+| **Identifikovan član** (`User.identitetUtvrdjenAt`) | postavlja se **isključivo po JAVNOJ donaciji** (anonimna ne evidentira POEN). Nije četvrti status. Otvoreno mu je: POTRAŽNJA, pokretanje razgovora, pretraga, **upis ZRNA bez glasa** i — od seta **4.6.6** — **prepis POEN-a**. Zatvoreno ostaje: **aktiviranje i otpis ZRNA**, glas i delegiranje, potvrđivanje drugih, nadzor, operativni doprinos, socijalni programi, nabavka, pokroviteljstvo, kontakt oglašivača. 🔴 Granica je **učešće naspram upravljanja**, ne više „položaj naspram kupovne moći". Dozvole su na dva mesta: `smeProsireno` (`dozvole.ts`) i `smeDaSalje` (`doprinos-pravila.ts`) — prepis se odlučuje u drugom, i ekran ga **čita**, ne prepisuje (na tome je zatečeni ekran bio stroži od rute) |
+| **ZRNO nije ulaganje** (R-04; čl. 25) | upis i otpis ZRNA su po konstrukciji **neutralni** za koeficijent — pomeraju ga samo emisije i poništenja, i on **može da padne**. Nikad ne pisati da upis diže koeficijent ni da se otpisom „dobija više" — to je predviđanje prinosa |
+| **POEN nije prihod** (R-02) | dinar nikad ne dodiruje POEN — dodiruje samo račun. Godišnja granica **100.000 RSD** vrednosti preuzetih dobara po korisniku, merena **sa računa dobavljača** (`placenoRSD ÷ brojDelova`), živi u `nabavka-pravila.ts`, ne u aktu. Uz prikaz te vrednosti korisniku **ne ide nijedna reč o porezu** |
+| **Nabavka nije privredna delatnost** (R-10; nabavke čl. 3a) | Fondacija za ustupljeno dobro **ne sme primiti naknadu** ni od koga (zabrana, ne opis); nepreuzeti delovi se **ne prodaju**; statutarni osnov je čl. 7 t. c). Ulazak u sistem PDV-a doneo bi samo sopstveni promet — a to je tačno ono što čl. 3a i čl. 19 brane |
+| **Gornje Kolo je telo, ne organ** (R-09) | odluka se **upućuje UO**, koji je sprovodi svojim aktom i **ne ceni celishodnost**; odbiti može samo po zatvorenoj listi (čl. 51). Dinarska strana ostaje **preporuka** sa diskrecijom UO — ta dva režima se ne izjednačavaju. Rečenica „uloga Fondacije je izvršna, ne upravljačka" je brisana i zaključana testom |
+| **Operativni doprinos nema naručioca** (čl. 4, 27) | zadatak objavljuje nosilac ZRNA odn. Gornje Kolo, a u Fazi 1 Fondacija **u ime zajednice**, ne u svoje. Predloženi POEN se **ne izražava kao vrednost jedinice vremena rada**; gornje granice nema. Rezultat ide u zajedničko dobro pod AGPL/CC BY-SA |
+| **Osnivački doprinos** (R-08) | kumulativni udeo osnivača **raste** sa 19,4% na ~24% i to je objavljeno u aktu; kanal prati rast kakav god bio tempo i pravilnik **ne obećava** postupnost |
+| **Pokroviteljstvo** (R-05) | koeficijent = donacija × **1,20**, obrazložen **odricanjem** (donacija pravnog lica ne umanjuje nužno poresku osnovicu), nikad time što je korporativni put jeftiniji. Fondacija **sme** javno imenovati i zahvaliti; pokrovitelj **ne stiče pravo** na logotip, link ni promociju. Donacija robe i usluga je ukinuta — ostaje samo novac |
+| **Donacije** | obe tabele se nastavljaju **bez kraja**, nizom 1–2–5, +0,10 po nivou; `RANG_TABELA` je samo zaključan deo, prag se **računa**. Ugovor o donaciji za svaku donaciju, tekst se snima na zapis. Javnost donacije **nije uslov** za POEN nego **proverljivost** |
+| **Nelojalna praksa** (R-07; Uslovi čl. 22b) | Fondacija prema korisnicima **ne nastupa na tržištu** — time se ZZP na nju formalno ne primenjuje, a između korisnika važi kao i van Platforme. Maloletni korisnik ne sme nuditi ni pribavljati ograničena dobra, **bez obzira da li je razmena dogovorena oglasom ili drukčije** |
+| **Prigovor je jedan institut** (R-18; Uslovi čl. 37a) | devet vrsta, kapa **3 otvorena po vrsti** (ne globalno), rok 7 dana za nabavku i 30 za razmenu. Ispravka evidencije **nije povraćaj** — ni u aktu, ni u kodu, ni u copy-ju; da jeste, pao bi R-10 i sa njim pitanje PDV-a. Ulazna tačka je profil; dugme uz prepis je uklonjeno i **ne vraća se** |
+| **Pranje novca** (R-19) | donacija isključivo **bezgotovinski**; doprinos se evidentira **samo u zapis onoga čijim je sredstvima uplaćeno**; uplata lica koje nije korisnik ne nosi POEN. Mere su izričito **dobrovoljne** — Fondacija nije obveznik, i to mora stajati u aktu. Prag za izjavu o poreklu živi u kodu (`PRAG_PROVERE_POREKLA_RSD`), ne u aktu |
+| **Dokaz pristanka** (R-06) | `ZapisPristanka` sa snimljenim tekstom i verzijom, **bez IP adrese i otiska uređaja**; upis u **istoj transakciji** sa `user.create`; **dva reda, ne jedan**. `src/lib/verzije-akata.ts` je jedan izvor istine za verziju Uslova i Politike — **menja se pri svakom bumpu** ta dva akta. **DPO nije određen** (opcija C), uz napisanu procenu i godišnje preispitivanje; `PRISTANAK_NA_AKTE_TRAZI_SE` je **`true`** i ne gasi se |
+| **Posebne kategorije** (R-03) | 🔴 **OBRNUTO setom 4.6.7** (odluka vlasnika, 25.09.2026): evidentiranje po socijalnom programu **prikazuje se redovnim članovima** uz pseudonim, naziv programa i iznos; gostu i novom članu ostaje **dnevni zbir**, a dan sa jednim korisnikom se i dalje preskače. Nosiva mera nije više izostavljanje zapisa nego **izostavljanje OSNOVA** — `POSEBNA_BRIGA` se na ekranu zove **Posebna podrška** i obuhvata smanjenu sposobnost i gubitak doma, pa naziv ne kazuje osnov. DPIA R11 time ide **6 → 9** (srednji nivo, gornja granica). Uslov „bez dece" živi na jednom mestu (`BEZ_DECE` u `protokol/deca.ts`) i svaki nov spisak transakcija ga uvozi |
+| **Prekogranični prenos** (R-12) | izvršavanje i baza su u **EU (Frankfurt)** — `vercel.json` `regions: ["fra1"]` je **mera zaštite**, zaključana testom. U SAD izlaze samo slike, pošta (uključujući isečak poruke), Telegram i analitika. Osnov prenosa je **norma** („prenosi se isključivo obrađivaču sa kojim je zaključen ugovor"), ne izveštaj |
+| **Prestanak statusa** (R-14) | to je **pseudonimizacija, ne anonimizacija** — ne vraćati tvrdnju da zapisi „prestaju da budu podaci o ličnosti". Ime javnog donatora ostaje u listi i posle gašenja naloga, i to sada piše i u upozorenju pri donaciji |
+| **Socijalni programi** (R-13) | pristanak se daje **pre** nego što se od bilo koga zatraži potvrda i navodi koliko će lica biti zamoljeno; povlačenje pristanka postoji i briše unete podatke. Mejl i push nose **neutralan** tekst (`spoljni`), naziv programa ostaje u zvoncetu |
+| **Deca** (R-11, R-15, R-17) | do 15 godina dete sa punoletnima **niti razmenjuje niti komunicira**, i prekidač iz čl. 10 to ne otvara; oglas takvog deteta punoletnima nije vidljiv. Prepis iznad praga (**5.000** za 7–14, **20.000** za 15–17) čeka roditelja **7 dana**, samo za odliv. Izjašnjavaju se **obe strane** u postupku potvrde postojanja deteta, rok **60 dana**, podsetnici na 30/7/1 dan, svako vraća **isključivo svoje** i **nadoknada se ne primenjuje** |
+
+#### POEN po potvrdi čeka prvi doprinos (2026-09-16/17, set 4.6.5)
+
+Najnovija izmena — zato ovde stoji šire nego ostale. Protokol POEN po potvrdi (1.000
+potvrđivaču, 1.000 potvrđenom, 500 nadzorniku) više ne upisuje odmah nego ga **beleži**,
+a upisuje kad potvrđeni ostvari **prvi potvrđen doprinos**.
+
+🔴 **Sam čin potvrde se NE menja i ne sme se vezati za uslov.** Indeks raste za 10 p.p.
+odmah, pun pristup od tog trenutka. Čeka **samo zapis POEN-a**: pristup ide iz poverenja,
+POEN iz doprinosa, i to se ne spaja.
+
+Četiri uslova, svi sa istim svojstvom — **nijedan se ne može sam sebi izdati**: prvi
+**oglas** (odobrava Fondacija), **javna donacija**, **pokroviteljstvo**, **operativni
+doprinos**. Meri se **postojanje emisije**, ne prijave — pa se anonimna donacija isključuje
+sama od sebe. Nisu uslov: prepis POEN-a, osnivački doprinos, socijalni programi (podrška,
+ne doprinos). **Punoletstvo je izuzeto** (`bezUslovaZaPoen`).
+
+- 🔴 **Nadzornikovih 500 imaju svoje stanje** (`nadzorPoenStatus`) — ta emisija nastaje u svom trenutku, pa se sa jednim poljem ne bi razlikovalo „nema ishoda" od „uslov nije ispunjen". Uslov se **ne vezuje za ishod** nadzora: plaća se rad, ne saglasnost.
+- 🔴 **Kaskade moraju da znaju za `ZABELEZEN`** — takva veza nije ništa emitovala, pa se pri obaranju samo gasi, bez protivzapisa i bez nadoknade. Pokriveno na pet mesta.
+- 🔴 **Odobrenje nije diskrecija.** Fondacija **utvrđuje da je uslov ispunjen**; ne pisati nigde da POEN „dodeljuje" — na tome stoji odbrana iz čl. 13 i operativnog čl. 27.
+- 🔴 **Usklađivanje zatečenih povlači pun iznos i pušta zapis u minus** (čl. 22a dokaza stvarnosti + **šesti** izuzetak u čl. 14 st. 3). Teret se ne prenosi ni na koga; zabeležen doprinos **ostaje**, pa se minus gasi prvim odobrenim oglasom. Pregled i sprovođenje idu kroz **istu funkciju** (`suviHod`).
+- **FAQ 53** („je li ovo provizija za regrutovanje") je najosetljiviji tekst u potezu — **ne skraćivati ga**.
+
+
+
+---
+
+# Zabranjene teme i pravila koja važe uvek — pun tekst iz CLAUDE.md (izdvojeno 28.09.2026)
+
+> U `CLAUDE.md` je ostala skraćena verzija; ako se razidu, merodavan je `CLAUDE.md`.
+
+## 🔴 Zabranjene teme i odbijene mere (jedan spisak)
+
+Sve je odluka vlasnika. **Ne predlagati ponovo bez izričitog naloga** — ni kao „samo
+ideju", ni usput u nekom drugom poslu. Uz svaku stoji razlog, jer razlog je ono što
+sprečava da se predlog vrati u drugom obliku. Pun zapis: `docs/sprovodjenje-rizika-2026-09.md`.
+
+### Ne dirati POEN i ZRNO
+
+| Zabranjeno | Zašto |
+|---|---|
+| **Dinarska kapa ili prag na POEN**, u bilo kom kanalu | svaka takva mera je preračun POEN → dinar, dakle povratak odnosa 1:1 koji je R-01 uklonio iz Uslova čl. 19. *„POEN nije vezan za dinar."* Kape u dinarima smeju **samo** na robu iz nabavke (meri se sa računa dobavljača) |
+| **Dirati odnos POEN ≈ RSD u tekstu** — prećutati ga (M-7b), ukloniti ili „zaokružiti" iznose u primerima na naslovnoj, ili vratiti bilo koji izraz za paritet u copy | prećutan odnos je prvi protivargument, pa akt kaže da ga Fondacija ne objavljuje i ne primenjuje, a ne da ne postoji; iznosi u primerima su namerni jer odnos izvodi čitalac, ne Fondacija. „POEN po jedinici jednak je maloprodajnoj referenci" je osam dana stajao na ekranu posle ukidanja instituta — otud i brana `r07-obmanjujuca-praksa-izvor.test.ts` |
+| **Širiti dozvole identifikovanog člana** — otpis i aktiviranje ZRNA (D-1), glas i delegiranje (C′), potvrđivanje drugih, nadzor, operativni doprinos, socijalni programi, nabavka, pokroviteljstvo, kontakt oglašivača | granica je jedna i posle 4.6.6: radnje **učešća** u razmeni i obračunu su otvorene, radnje **upravljanja i jemčenja za druge** nisu. Otpis je jedino mesto gde položaj donosi prinos (upis po nižem, otpis po višem koeficijentu); glas podiže R-04, R-10 i R-17 za po jedan bod. 🔴 Odluka je na dva mesta i samo na njima: `smeProsireno` (`dozvole.ts`) i `smeDaSalje` (`doprinos-pravila.ts`) — ne uvoditi treću proveru |
+| **Otpis ZRNA po koeficijentu iz upisa; period vezivanja pre otpisa; tvrda kapa na glasačku moć** | odbijeno 07.09.2026; kvadratni koren (čl. 46) i kapa od 1% po periodu (čl. 19) su jedine kočnice i ostaju |
+| **Vraćanje automatskog upisa POEN-a po kartičnom callback-u** | M-4a je odluka, ne privremeno rešenje |
+| **Praćenje obrazaca prepisa POEN-a** | *„nemoguće je sprovesti kontrolu kada je transfer poena slobodan."* Posledica: zabrana prodaje POEN-a (Uslovi čl. 24) ostaje nesprovedena kontrola, i to je prihvaćeno |
+| **Zabrana prepisa POEN-a pribavljenog donacijom** | tražila bi obeležavanje porekla svakog zapisa i razbila zamenljivost evidencije |
+
+### Porez i novac
+
+- **Pozivanje na izuzeća čl. 9 ZPDG za POEN** — sva su u dinarima i pretpostavljaju isplatu; pozivanje bi bilo priznanje vrednosti.
+- **Dobrovoljan obračun poreza po odbitku i PPP-PD prijave** — priznanje da je prihod, a nema iz čega da se obustavi.
+- **Godišnja potvrda korisniku o evidentiranom POEN-u** — izgleda kao obračunski list; GDPR izvoz već postoji.
+- **Vraćanje dinarskog troška u tabelu sa brojem POEN-a po delu** — odnos se tada dobija deljenjem.
+- **Humanitarna nabavka** (red po potrebi, bez praga od 20.000 POEN) — *„Ne radimo takve nabavke."*
+- **Sopstveni KYC za velike donacije** — identifikaciju uplatioca sprovodi banka.
+- **Izravnat koeficijent / fiksan iznos po nivou donacije** — *„hoću da favorizujem velike donacije."* 🔴 Ali se **tako ne piše** u aktima, FAQ-u ni copy-ju: stoji „veći pojedinačan doprinos ima veći značaj za zajednicu", nikad opis podsticaja.
+
+### Podaci o ličnosti
+
+- **IP adresa ili otisak uređaja uz zapis pristanka** — proširenje obrade radi dokazivanja pristanka na obradu.
+- **Serverski zapis pristanka na kolačiće za neprijavljenog posetioca** — traži identifikator posetioca, isto kružno proširenje.
+- **Sklanjanje „Odbij" iz prvog nivoa bannera** — pristanak tada nije slobodno dat.
+- **Uskraćivanje funkcija naloga zbog nepotvrđene adrese** — potvrda je meka, po odluci vlasnika.
+- **Vraćanje imena uplatioca u opis emisije.**
+- 🟢 **NIJE VIŠE ZABRANJENO (odluka vlasnika, 25.09.2026, set 4.6.7): prikaz socijalnog programa uz pseudonim i iznos.** Evidentiranje po programu se od tog seta **prikazuje redovnim članovima** — pseudonim, naziv programa i iznos, uključujući iznose iz kojih se izvode godina rođenja (Podrška starijima) i broj i uzrast dece (Podrška majkama). Gostu i novom članu ostaje dnevni zbir, a dan sa jednim korisnikom se i dalje preskače. 🔴 **Ostaje zabranjeno: prikaz OSNOVA unutar programa Posebna podrška** — on obuhvata smanjenu sposobnost i gubitak doma, pa naziv ništa ne kazuje, a prikaz osnova bio bi prikaz podatka o zdravlju odnosno o prinudnoj raseljenosti (blizu nacionalne pripadnosti). 🔴 Ostaje i: **naziv programa se NE upisuje u opis zapisa** — izvodi se iz prijave, jer je opis trajan i ide u GDPR izvoz.
+- **Otvaranje spiska dece po školi** punoletnim nalozima ili nalogu na čekanju.
+
+### Deca
+
+- **Kapa na vrednost pojedinačnog posla deteta** — umesto nje odobrenje roditelja iznad praga.
+- **Dugme kojim roditelj obara prepis** — roditelj bi poništio ispravnu razmenu, a drugo dete završilo u minusu; ZOO čl. 56 daje pravo da se obori **ugovor** između strana, ne naš zapis.
+- **Ublažavanje odgovornosti roditelja od 15 godina** i **gubitak roditeljskog čitanja razgovora sa punoletnim licem od 15** — oba odbijena, čl. 9 st. 3 i čl. 10 st. 5 ostaju netaknuti.
+
+### Nabavka, pokroviteljstvo, upravljanje
+
+- **Kapa na broj nabavki, kapa na udeo opticaja, uslovljavanje učestalosti** — nabavka je redovan projekat.
+- **Izmena Statuta radi upisa privredne delatnosti** — osnov iz čl. 7 t. c) već postoji.
+- **Izmena Statuta da imenuje Gornje Kolo** — Statut telo može imenovati, ali ga **ne može učiniti organom** (fondacija po zakonu nema članove ni skupštinu), pa bi problem preneo na viši akt i učinio ga vidljivim registracionom organu.
+- **Najviše jedan osnivački korak po obračunskom periodu** — tempo ostaje isti.
+- **Kućica „nudim u okviru registrovane delatnosti"** na oglasu — na Pijaci su fizička lica bez registrovane delatnosti; „trgovac" se po zakonu određuje ponašanjem, ne registracijom.
+- **Traženje registracije od proizvođača u RAZMENI** — „mala kuća koja prodaje jaja" ne sme se time isključiti. Važi samo za razmenu; u **nabavci** je dobavljač uvek registrovano pravno lice.
+- **Pomeranje poništenja POEN-a sa preuzimanja na istek roka za prigovor** — produžilo bi rezervaciju i odložilo zatvaranje svake nabavke.
+
+### Otvoreno, ne zabranjeno
+
+- **Prijava razmene se osmišljava iznova** (odluka 10.09.2026) — zaseban zadatak.
+- **Podizanje donje granice za samostalnu registraciju** (13 ili 15 umesto 7) — odbijeno „ne za sada" (R-11, 09.09.2026), dakle **nije trajna zabrana**; može se vratiti kad modul dobije više korisnika. Premešteno ovde 23.09.2026 — po sopstvenom tekstu nije pripadalo spisku zabrana.
+- **Spoljni DPO kao usluga** — nije odbijen, samo za sada nema ko.
+- **Pravno mišljenje o čl. 65/67 ZZPL** za standardne ugovorne klauzule — odloženo, ne otvarati sada.
+
+## 🔴 Pravila koja važe uvek
+
+Ova pravila su se u ranijim verzijama ovog fajla ponavljala razbacano uz pojedinačne
+izmene (zero-sum na 19 mesta, „zaseban fajl za enum" na 8). Ovde stoje jednom; ako se
+razidu sa nekom sekcijom ispod, **merodavno je ovo**.
+
+### Evidencija
+1. **Zero-sum.** Zbir svih zapisa, uključujući Protokol, je nula. Protokol ide u minus pri svakoj emisiji.
+   🟡 **Ali zero-sum NE proverava da se stanje slaže sa istorijom.** `Wallet.balance` je **zaseban
+   upisan broj**, ne zbir transakcija: `emitujPoen()` radi `increment`/`decrement` nad `Wallet` i
+   upisuje zapis **paralelno**, a nigde u `src/` nema koda koji balans izvodi iz zapisa. I
+   `checkZeroSum()` i cron `/api/cron/zero-sum` sabiraju **stanja**, pa dve greške u suprotnim
+   smerovima prolaze nečujno, a promena nad `Transaction` ne obara nijedan alarm. Posledica pri
+   svakom zahvatu u istoriju: par `+X`/`−X` sme da ode samo **ceo i u istoj transakciji**, uz
+   proveru `balance == Σ(ulaz) − Σ(izlaz)` po pogođenom novčaniku **unutar** te transakcije (tako
+   radi `protokol/potvrde-parovi.ts`). Uklonjena jedna polovina pomera zbir zapisa a stanje ostavlja
+   isto — i to niko ne vidi.
+2. **U minus sme samo Protokol** — i korisnik, po **tačno šest** osnova iz Pravilnika čl. 14 st. 3, koje taj član nabraja iscrpno i zatvara („ni bilo kojim drugim aktom"):
+   nadoknada po čl. 20b · poništen prepis po prijavi razmene · otpis prijateljstva · otpis po poništenju potvrde zbog neaktivnosti · prevođenje punoletnog naloga u maloletni (čl. 4d) · otpis po usklađivanju zatečenih potvrda (čl. 22a dokaza stvarnosti).
+   🔴 **Sedmi se ne može uvesti bez izmene tog člana.** Nema zasebne kolone za minus — minus JESTE nadoknada, pa `jeNadoknada`/`iznosNadoknade`/`raspolozivo` iz `nadoknada.ts` pokrivaju sve slučajeve.
+3. **Minus se nikad ne pojavljuje bez reči.** Ko ode u minus dobija sopstveno obaveštenje — minus menja šta sme sa zapisom.
+4. **Kapirati na nulu je greška, ne blagost.** Ko je POEN brže potrošio ne sme da prođe jeftinije od onoga ko ga je sačuvao; to pravilo već nose otpis prijateljstva, poništen prepis i usklađivanje potvrda.
+5. **Prepis nije emisija.** Prepis seli zapis između dva korisnička zapisa (čl. 14, 16); ukupan broj POEN-a menjaju samo kanali iz čl. 15 i poništenja. Protivzapis uvek ide **sopstvenim tipom transakcije**, nikad `TRANSFER` ni `EMISIJA_*` — inače brojači putanja i opticaj lažu.
+6. **Istorija se ne prepravlja** — ispravka ide protivzapisom, kao pri prestanku statusa (čl. 34).
+
+### Kod
+7. **`emitujPoen()` otvara sopstvenu transakciju** — nikad unutar druge `prisma.$transaction()`. Obrazac: DB promene u jednoj transakciji → `emitujPoen()` sekvencijalno van nje. Okidači kanala (`probajEvidentirati`, `probajNapredovati`) idu van transakcije i **ne bacaju**.
+8. **Nova vrednost enum-a ide u ZASEBAN fajl migracije.** Postgres ne dopušta da se vrednost doda i upotrebi u istoj transakciji. Obrazac: `..._enum` fajl → pa fajl koji je koristi.
+9. **Čista pravila žive u `*-pravila.ts`, bez Prisme** — uvozi ih i pretraživač. Servisni sloj (`protokol/*.ts`) ih re-eksportuje, pa server ima jedan ulaz i ne nastaju dve istine.
+10. **Ne prepisivati tabele u ekrane.** Tabele nivoa, pragova i koeficijenata čitaju se iz pravila. Prepisana vrednost živi na dva mesta i razilazi se pri prvoj sledećoj izmeni — desilo se dvaput (admin panel, `/postani-pokrovitelj`).
+11. **Snimljen tekst se ne generiše ponovo pri čitanju.** `ugovorTekst`, `izjavaTekst`, `pristanakTekst`, kalkulacija nabavke — dokument mora da govori ono što je govorio u svom trenutku. Isto pravilo zabranjuje **retroaktivno popunjavanje**: zatečeni redovi ostaju `null`, jer „sačinjen" dokument sa današnjim datumom je netačan dokument.
+12. **Interni identifikatori se ne menjaju** kad se promeni ime na ekranu: `banka-singleton`, `ChatMessage`, `/novcanik`, `/api/transfer`, `/verifikacija`. Baza je zapis pravne činjenice — bliža aktu nego ekranu, a stari linkovi iz notifikacija i mejlova moraju da rade.
+
+### Brane
+13. **Ekran nije poslednja reč.** Ispravno pravilo ne vredi ništa dok kroz njega ne prođe **svaki** prikaz i svaka ruta. Pouka je zapisana četiri puta (oglas deteta — tri prikaza su dizala svoj upit; zatvoren profil; lanac potvrda — preusmerenje je ličilo na pravilo; vidljivost oglasa). Provera je uvek: ko još čita ovaj podatak mimo pravila?
+14. **Testovi koji gledaju IZVOR** (`*-izvor.test.ts`) su brana za pravila koja se mogu izgubiti bez ijednog vidljivog kvara. Kad se uvodi takvo pravilo, uvodi se i takav test.
+15. **Pri ukidanju izraza pokriti sve imenice koje nosi uz sebe.** „цепь" naspram „цепочка", „kezességi gráf" naspram „kezességi lánc", „maloprodajna referenca" naspram „kurs" — tri puta je brana tražila jednu reč, a izraz je preživeo u drugoj.
+16. **Ne raditi blanket zamenu verzija u aktima** — regularni izraz ne zna na koji akt pokazuje broj koji menja.
+17. **Pri izmeni ili brisanju odredbe u Pravilniku obavezno proveriti whitepaper** — on istu tvrdnju po pravilu ponavlja svojim rečima, po pravilu u goroj varijanti. Uhvaćen testom tri puta.
+18. **Dva builda na istoj test bazi se sudaraju** — grana i `main` se ne guraju u istoj minuti.
+

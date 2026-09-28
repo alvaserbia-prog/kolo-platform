@@ -1,0 +1,578 @@
+# Funkcionalnosti i mapa koda — pun zapis
+
+> Izdvojeno iz `CLAUDE.md` 28.09.2026: opis implementiranih funkcija, ključni koncepti sa
+> obrazloženjima, mapa ruta i biblioteke, sidebar, GAP-ovi. **Otvara se pre rada na toj temi.**
+> Pravila koja vezuju rad stoje sažeto u `CLAUDE.md`; ako se razidu, merodavan je akt u
+> `dokumentacija 4.1/`, pa `CLAUDE.md`, pa ovaj fajl.
+
+## Status usklađenosti
+
+🟢 **Kod je usklađen sa aktima; zatečeni GAP-ovi iz v3.7.x su rešeni.** Snimak
+usklađenosti iz maja–juna 2026. i spisak sedam rešenih GAP-ova izdvojeni su u
+`docs/istorija-uskladjenosti.md` (17.09.2026) — mereni su prema **v3.7.x**, pa su im
+brojevi i imena fajlova zastareli po devet verzija. 🔴 **Ne koristiti ih kao izvor.**
+
+Aktivni GAP-ovi i ono što se svesno ne radi su u sekciji **„Nezavršeni TODO /
+preostali GAP-ovi"** na kraju fajla.
+
+🔴 **Tabla zahteva za jemstvo je UKINUTA (2026-08-09)** — zamenjena ulaskom kroz
+Pijacu, vidi „Ulazak u KOLO kroz razmenu" u `docs/istorija-implementacija.md`.
+
+🔴 **Moduli (Zadruga, internacionalizacija, Glava VIII) nisu fokus razvoja** (odluka
+vlasnika). **Modul Deca je izuzetak** — implementiran i u radu od 2026-09-03.
+
+**Tri statusa korisnika:** Neverifikovani / Verifikovani / Nosilac ZRNA — tako se zovu u **bazi i aktima**; u **interfejsu** su od 2026-08-12 **nov član / redovan član / nosilac ZRNA** (vidi „Copy govori o potvrdi" u `docs/istorija-implementacija.md`). NE POSTOJE organizatorske titule (zagovornik/aktivista/glasnik/šampion); NE POSTOJI "apostol" ni "Pokret" kao modul.
+
+## Tech stack
+- Next.js 16 (App Router), TypeScript
+- PostgreSQL, Prisma ORM 7 (generisani klijent u `src/generated/prisma/`)
+- NextAuth.js (credentials provider + OAuth tok, reset lozinke)
+- Tailwind CSS v4
+- next-intl — i18n biblioteka (prevodi u `messages/`); osnovni jezik srpski (latinica)
+- Srpski jezik (latinica) u celom interfejsu
+- **Nema instaliranog zod, decimal.js, ni sličnih library-a** — validacija ručno, Decimal tipovi se konvertuju sa `Number()`
+- **Skladište slika = Cloudflare R2** (S3-kompatibilan, `aws4fetch`). Sve slike (avatari + slike oglasa na Pijaci) idu na R2; u bazu se upisuje samo **javni URL** (ne base64, ne binarno). Helper `src/lib/skladiste.ts` (`sacuvajNaR2`, `obrisiSaR2`, `r2Konfigurisan`). Env (Vercel, sva okruženja): `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`, `R2_PUBLIC_URL`. Dev fallback (kad R2 nije konfigurisan): lokalni disk `storage/oglasi/...` za oglase; avatar traži R2. Legacy base64 avatari rade dok se ne migriraju (admin Dashboard → „Migracija avatara na R2"; endpoint `/api/admin/migracija-avatara`). `/api/pijaca/slika/...` preusmerava na bilo koji apsolutni https URL (R2/CDN). (Raniji Vercel Blob tok napušten; `@vercel/blob` dep ostaje neiskorišćen.)
+
+## Ugašeni moduli — Krugovi (2026-08-11; pokroviteljstvo vraćeno 2026-08-18)
+
+Odlukom vlasnika **Krugovi** privremeno nisu u radu; vraćaju se kad dođe vreme za implementaciju. **Pokroviteljstvo je 2026-08-18 vraćeno u rad** (`POKROVITELJSTVO_AKTIVNO = true`) — opis ispod i dalje važi kao mapa toga šta prekidač dodiruje, ali su ta mesta sada aktivna. **Zadruga** se ne pominje jer nikad nije ni bila implementirana (Glava VIII, čl. 56) — ostala su samo pominjanja u tekstu.
+
+**Prekidač je jedan fajl — `src/lib/moduli.ts`** (`KRUG_AKTIVAN`, `POKROVITELJSTVO_AKTIVNO`). Povratak = `false` → `true`, bez ijedne dalje izmene. Fajl je namerno **bez ijednog `import`-a** — uvoze ga i serverske i klijentske komponente.
+
+🔴 **Ne brisati tabele, podatke ni migracije.** `Krug` ima sopstveni `Wallet`, čiji balans ulazi u opticaj (`osnivacki.ts` — „suma svih korisničkih + Krug balansa"). Brisanje redova bi oborilo **zero-sum** i smanjilo opticaj, čime bi se pomerili pragovi **osnivačkog koraka** (na svakih 100.000 POEN). Ispravno gašenje Kruga sa balansom išlo bi kroz protivzapis Protokola, kao pri gašenju naloga — dok je modul samo ugašen, ništa od toga nije potrebno. Iz istog razloga ostaju enum vrednosti `WalletType.KRUG`, `TransactionType.EMISIJA_KRUG_OSNIVANJE`, `EMISIJA_KRUG_BONUS`, `EMISIJA_POKROVITELJ` — nose ih istorijske transakcije.
+
+**Akti se NE menjaju.** Krug je **modul** (Glava VIII), a **čl. 54** daje Fondaciji u Fazi 1 ovlašćenje da module aktivira i deaktivira — to je gotov pravni osnov. Pokroviteljstvo **nije modul** nego kanal evidentiranja (čl. 15, čl. 38–40): kanal još nije pušten u rad, nije ukinut. 🔴 **Pravilnik o pokroviteljstvu i donacijama ostaje javno vidljiv** na `/pravilnik/pokroviteljstvo-donacije` — to je **jedan akt** (`donacije_4_2_1.md`) koji uređuje i **donacije**, a one su i dalje aktivne.
+
+**Šta prekidač radi:** stranice `notFound()` (404), API rute **410 Gone** (`PORUKA_MODUL_UGASEN` kroz `greska()`, pa poruka ide prevedena), nav stavke / admin tab / kartice / FAQ pitanja se ne renderuju.
+
+Pogođena mesta: 18 API ruta (24 handlera); stranice `(app)/krug/**`, `(app)/postani-pokrovitelj`, `(public)/pokrovitelji`; `Sidebar` (stavka „Pokrovitelj"), `PublicNav`, `PublicFooter`, `sitemap.ts`; ranglista pokrovitelja na `/sistem`; admin tab **Pokrovitelji**; `chrome-podaci.ts` (badge `adminCekanje` ne broji `PokroviteljPrijava`, jer taba nema pa se ne bi ni mogle rešiti).
+
+- **FAQ se filtrira u `FaqStranica.tsx`, ne u `getFaqSekcije()`** — `__tests__/faq-paritet.test.ts` poredi **identitet** nizova po jeziku (`toBe`) i pun izvorni set, pa bi filtriranje u akcesoru oborilo test. Sakrivena pitanja su u `FAQ_SAKRIVENA_PITANJA` (24 i 25); tekst pitanja ostaje u `faq-data*.ts` na svih 5 jezika.
+- Naslov FAQ sekcije `pijaca-donacije` privremeno je bez pomena pokrovitelja (5 jezika) — vratiti uz prekidač.
+- **Krug je i pre ovoga bio poluugašen:** nijedna navigacija nije vodila na `/krug`, a admin **Krugovi tab** je ranije uklonjen (`KrugoviLista` je mrtva komponenta). `krug` polje u tipovima na `/sistem` i `/profil/[id]` se ne renderuje — ostavljeno namerno, radi manjeg diffa.
+- `validacija.ts` i dalje drži `"krug"` među rezervisanim pseudonimima (ruta postoji, samo vraća 404).
+
+## Fundamentalna pravila sistema
+
+1. **Zero-sum princip**: zbir svih računa (uključujući Protokol) = 0. Protokol ide u minus pri svakoj emisiji.
+2. **Nema negativnog stanja**: korisnici i Krugovi nikad ispod 0. Samo Protokol može u minus.
+3. **POEN i ZRNO su celi brojevi** (INTEGER). Nema decimalnih POEN-a ni ZRNA. Jedini decimalni iznosi su **obračunski koeficijent ZRNA** (DECIMAL(20,2); u kodu još uvek nazvan „kurs") i RSD iznosi (DECIMAL(12,2)).
+4. **Prenos 1:1 (ažuriranje evidencije)**: prenos POEN-a između korisnika je **ažuriranje evidencije** (zapis davaoca se umanjuje, zapis primaoca uvećava), bez provizije; Protokol nije posrednik i **to nije platna transakcija ni prenos monetarne vrednosti** (Pravilnik čl. 14, 16). Izbegavati „slanje/primanje POEN-a". **Dva registra:** UI za običnog korisnika koristi **„Prepiši POEN"** (od 2026-08-11, vidi „Upis vs. prepis" u `docs/istorija-implementacija.md`); pravni/normativni tekst zadržava **„ažuriranje evidencije"** (razlika od „**upisa novih zapisa kroz kanale**" iz čl. 15 — jedino to menja ukupan broj POEN-a, zero-sum). **Interni identifikatori `/api/transfer` i `TransactionType.TRANSFER` zadržani.**
+5. **Obračunski period**: ponoć do ponoći. Grupne operacije (ZRNO, delegacije, programi) izvršavaju se u ponoć **istog obračunskog perioda**.
+6. **Pseudonimi**: nigde u javnom interfejsu ne prikazivati pravo ime. **Po v3.7.3 (Pravilnik čl. 31, DPIA, Whitepaper) ne postoji centralizovana evidencija koja povezuje pseudonim sa identitetom** — Fondacija tu vezu NE poseduje; dokaz stvarnosti ne prikuplja dokumente, a ime/telefon su dobrovoljni i nisu uslov. **Pseudonim u evidenciji doprinosa vidljiv je samo verifikovanim korisnicima** (Pravilnik čl. 67, Politika čl. 6); neregistrovani vide samo agregate. **Izuzetak:** pseudonim **oglašivača na Pijaci** je javan (čl. 16) — ali se za neprijavljene/neverifikovane NE povezuje sa evidencijom doprinosa, stanjem ni profilom.
+7. **Dnevni limit Programa Protokola**: maksimalno 10% opticaja (opticaj = apsolutna vrednost minusa Protokola; baza je „ukupan broj evidentiranih POEN-a na početku perioda"). Odnosi se samo na **operativni doprinos i socijalne programe**; ostali kanali (automatski akti Protokola) ne ulaze u limit.
+8. **Kanali evidentiranja POEN-a (Pravilnik čl. 15 — devet kanala)**:
+   - **Ulaze u dnevni limit:** Operativni doprinos (izvršenje **verifikuju nosioci ZRNA u Fazi 2, odn. UO Fondacije u Fazi 1**, čl. 36); Socijalni programi (Podrška Majkama/primarnim starateljima, Podrška Starijima, Posebna Briga, Školovanje).
+   - **Ne ulaze u dnevni limit (automatski akt Protokola):** verifikacija u lancu potvrda (dokaz stvarnosti), finansijski doprinos (donacije), pokroviteljstvo, rast kolektivnih oblika (bonus Kruga), osnivački doprinos, **doprinos sadržaju platforme (čl. 40a — osmi kanal, od 2026-08-09)**, **doprinos dece u dečjem prostoru (čl. 15 t. 9 — DEVETI kanal, od 2026-08-17; uređen Pravilnikom o učešću dece čl. 14b)**.
+9. **Gradirana vidljivost podataka po ulozi (Pravilnik čl. 28–30, 67; Politika čl. 6; Uslovi):**
+   - **Neregistrovan posetilac**: opšti pokazatelji sistema (agregati) + **pregled oglasa na Pijaci** (sadržaj, cena, lokacija, pseudonim oglašivača — čl. 16). NE vidi pojedinačne transakcije, evidenciju doprinosa, profile, ni kontakt oglašivača.
+   - **Neverifikovan prijavljen korisnik** (izmenjeno 2026-08-09): iznose/vremena ažuriranja evidencije POEN-a **bez pseudonima strana** i bez stanja računa; svoje notifikacije; pregled oglasa. **Može da postavi oglas kojim NUDI dobro/uslugu** (najviše 3 aktivna, uz sadržinski minimum) i da razmenjuje dobra/usluge. U ažuriranju evidencije POEN-a učestvuje **samo kao primalac**. Sme da **odgovara** u razgovoru koji je verifikovani pokrenuo povodom njegovog oglasa. Kroz kanal doprinosa sadržaju (čl. 40a) može mu se evidentirati doprinos.
+   - **Neverifikovan NE MOŽE**: videti pseudonime u evidenciji, rang-liste, profile drugih; postaviti oglas tipa **POTRAZNJA**; **inicirati prenos POEN-a**; pristupati kontaktu oglašivača; **pokretati** razgovor; upisati ZRNO; evidentirati doprinos kroz ostale kanale.
+   - **Verifikovan korisnik (indeks ≥ 10%)**: pun pristup — pseudonimi, sve transakcije sa pseudonimima, stanja, profili, poruke, postavljanje oglasa + kontakt, upis ZRNA, Programi.
+
+
+10. 🔴 **Nalog je NEPRENOSIV** (Uslovi čl. 24): zabranjeno je ustupanje, iznajmljivanje
+    i prodaja pristupa nalogu, kao i korišćenje tuđeg naloga, uz mere iz čl. 27 i 28.
+    Razlog je konkretan — ZRNO se po čl. 22 Pravilnika ne može preneti, ali se **ceo
+    nalog sa ZRNOM u njemu** mogao ustupiti u jednom potezu, pa se neprenosivost
+    zaobilazila bez ijedne zabranjene radnje. Par uz zabranu prometa POEN-a i ZRNA za
+    vrednost van sistema iz istog člana (do 4.4.3 prodaja POEN-a za keš **nije bila
+    zabranjena nijednom odredbom**, pa je nekonvertibilnost bila izjava bez sankcije).
+11. 🔴 **ZRNO NE DAJE PRAVO NA SREDSTVA FONDACIJE** (Izjava o rizicima čl. 4): nosilac
+    nema pravo na dinarska sredstva ni neposredno ni posredno; odluke o raspoređivanju
+    dinara, **uključujući projekte i kolektivne nabavke**, ne stvaraju imovinsko pravo
+    nijednog nosioca; prestankom svojstva ne nastaje potraživanje. Povod: odbrana „iza
+    jedinice nema imovine" (čl. 15 st. 4) oslabljena je kolektivnom nabavkom, u kojoj
+    nosioci ZRNA odlučuju o trošenju dinara — uticaj postoji iako pravo ne postoji.
+    🟡 Najjači dom bio bi **Pravilnik čl. 25**, ali bump glavnog Pravilnika povlači
+## Ključni koncepti
+
+### Dokaz stvarnosti (implementiran)
+- **Model verifikacije (Pravilnik o dokazu stvarnosti 3.7.3, čl. 1):** zasniva se na **neposrednom ličnom poznavanju i NE zahteva fizičko prisustvo** (usklađeno sa Politikom 3.7.4). Kontakt podaci sa table jemstva obrađuju se u toj svrsi.
+- Enum `TipKorisnika` ima **tri vrednosti**: `NEVERIFIKOVAN` / `REGULARNI` (verifikovan običan) / `NOSILAC_ZRNA` (drži ZRNO, nadzire verifikacije). **`POCETNI` NIJE u enum-u** — „početni korisnici" (osnivačko jezgro Fondacije: **indeks fiksno 100%** od 3.9.2, ne troše kapacitet, bez nadzora, **ne mogu biti verifikovani**) su **normativni pojam** (Pravilnik o dokazu stvarnosti čl. 14, v3.9.2; Pravilnik o KOLO sistemu čl. 82). U kodu su modelovani kao `NOSILAC_ZRNA` + `jeOsnivac` marker + `admin` kolona (`AdminNivo`). (Legacy `POCETNI` string ostaje samo kao JWT-fallback u `proxy.ts`, označen za uklanjanje.)
+- **Verifikacija = +10 procentnih poena** indeksa (raspon 0–100%).
+- **Funkcionalni prag:** indeks ≥ 10% = pun pristup; < 10% = verifikovan ali bez pristupa.
+- **Verifikacioni kapacitet** = `⌊indeks/10⌋`.
+- POEN emisija pri verifikaciji: **verifikator 1.000, verifikovani 1.000, nadzornik 500** (kada podleže nadzoru).
+- **Simetrična zabranjena zona (čl. 12, v3.9.2):** pored starih zabrana (recipročno, ancestralno, descendentno, braća) verifikator verifikacijom **trajno preuzima verifikovanog i celu njegovu zonu** (uključujući kasnija proširenja — dinamički); provera ide u **oba smera** (ni meta u zoni verifikatora, ni verifikator u zoni mete). Proširenja tuđim verifikacijama se **ne prenose na početne** — zona početnog raste samo njegovim sopstvenim verifikacijama. Keš tabela `verification_zone` (izvor istine = graf veza); čiste funkcije `zona.ts` (`recomputeZones` = hronološki replay, `proveriDozvoluVerifikacije`); sync u istoj transakciji sa upisom; posle kaskade/prestanka puna rekomputacija (`preracunajZoneUBazi`); backfill `POST /api/admin/verifikacija/zone-recompute` (jednokratno posle deploy-a). **Početni ne može biti meta verifikacije** (čl. 14 st. 3; posebna poruka greške, pokriva i raniju zabranu osnivač→osnivač); tabla jemstva vraća `verifikacijaBlokirana: "zona"|"pocetni"` po posmatraču i skriva dugme.
+- Modeli: `VerifikacionaVeza` (graf), `VerifikacionaZona` (keš zone), `VerifikacijaToken` (QR, **2 sata** — `TOKEN_VAZI_SEKUNDI` u `dokaz-stvarnosti.ts`; raniji zapis „60s" bio je zastareo).
+- UI: `/verifikacija` (QR + skener kamere), `/nadzor` (nosioci ZRNA), profil sa javnim indeksom i mini stablom.
+- 🔴 **Raspored na `/verifikacija` (odluka vlasnika, 21.09.2026):** LEVO ono što čovek RADI — indeks, „Pokaži kod“, „Potvrdi nekoga koga poznaješ“; DESNO ono što ČITA — lanac potvrda, zabeležene potvrde, mreža potvrda. Na telefonu se kolone slažu tim redom. Zabeležene potvrde su do tada stajale levo, odmah ispod indeksa, pa su razdvajale indeks od radnji uz njega. Kartica **Mreža potvrda** ima oblik lanca potvrda (isti okvir, naslov u verzalu) i radnju u zelenom dugmetu; ranije je cela bila jedan `<a>` bez dugmeta. 🔴 **Klase `kolo-dugme-primarno`, `kolo-dugme-sekundarno` i `kolo-input` NE POSTOJE** — nisu definisane ni u `globals.css` ni igde drugde (jedina definisana `kolo-` klasa je `.kolo-naslov`), pa su dugmad i polja koja ih koriste bila gola. Sva mesta ispravljena 21.09.2026 izričitim Tailwind klasama (`/verifikacija` i **admin tab Potvrde**, gde su bila i sva polja za unos). 🔴 Ne uvoditi taj rečnik nazad dok ga neko zaista ne definiše.
+- 🔴 **Spisak onih čiji se prvi doprinos čeka je JEDNA komponenta** — `src/components/SpisakCekanja.tsx`, dele je ekran POEN i stranica Potvrde (21.09.2026). Pločice sa pseudonimima, **linkovi na profil** (podsetiti čoveka znači otići kod njega), **bez iznosa i datuma po čoveku** — iznos je po vezi uvek isti (1.000 odn. 500) i stoji jednom, u redu iznad. 🔴 Ne vraćati rečenicu po čoveku („Potvrdio si X — 1.000 POENA ti se upisuje kad…“): pet potvrda je bilo pet redova teksta. Ne praviti drugu kopiju komponente.
+- Lib: `dokaz-stvarnosti.ts`, `verifikacija-service.ts`, `nadzor-service.ts`, `lazna-verifikacija.ts` (poništavanje), `nadoknada.ts`.
+
+
+### Izmene 08–09/2026 — šta i dalje vezuje (sažetak)
+
+🔴 **Pun zapis je u `docs/istorija-implementacija.md`** — zašto je nešto rađeno tako, šta
+je pri tom otkriveno u kodu i šta je odbačeno. Ovde stoji samo pravilo koje i dalje važi.
+**Pre rada na nekoj od ovih tema otvoriti pun zapis.**
+
+**Dokaz stvarnosti i nadzor** (4.2.0) — nadzor ima **tri ishoda** (`UREDNO`/`ZA_PROVERU`/`SPORNO`);
+slot kapaciteta dopunjava **samo `UREDNO`**; **roka nema** i ne uvodi se (ako zasmeta, rešenje
+je da `ZA_PROVERU` dopuni slot). 500 POEN **prvom** nadzorniku koji evidentira bilo koji ishod —
+plaća se rad, ne pečat. Lažnost se ceni **po čoveku**, ne po verifikatoru: utvrđenje jedne lažne
+potvrde pokreće **preispitivanje** ostalih, ne poništenje. 🔴 Ne vraćati „poništi sve verifikacije
+ovog verifikatora". Kaskada ide kroz `utvrdjenNepostojeci` i staje na prvom nalogu koji nije tako
+označen. Nadoknada (čl. 20b): nepokriveni deo prelazi **na verifikatora**, jedinog koji sme u minus.
+
+**Terminologija** — „lanac potvrda", ne „lanac jemstva"; „potvrdi", ne „verifikuj" u copy-ju.
+🔴 **Imenica za ulogu se ne uvodi** („potvrđivač potvrđuje" muca): imenuje se prava uloga —
+„tvoj lanac", „nosilac ZRNA". Statusi na ekranu: **nov član → redovan član → nosilac ZRNA**.
+🔴 Pečat na Pijaci namerno ostaje **`BEZ POTVRDE`** (zaštitni posao prema kupcu), a oglas deteta
+nosi **`DETE`**. Oznaka statusa čita **indeks**, ne tip naloga. Akti, baza i identifikatori i dalje
+govore „verifikacija" — brana `copy-ukinuto.test.ts` gleda samo `messages/` i `faq-data*.ts`.
+
+**Gejt za pristanak je PREKRIVAČ, ne preusmeravanje** — `AppShell` renderuje komponentu preko svega,
+bez promene rute. 🔴 Ne vraćati redirect: proizveo je mašinsku petlju (98 pregleda za par minuta) i
+ljudsku (120 za sat). Prekrivač se **ne crta dok se ne potvrdi** da je pristanak potreban; početna
+provera se pokreće **tačno jednom**; `useMePatch()` mora ostati stabilan (`useCallback`). Jedan izvor
+istine je `pristanakStatus()` — ne razdvajati ga, i redosled `efektivnaOd, createdAt, id` ostaje.
+
+**Upis vs. prepis** — prepis POEN-a nije upis; uz obrazac **obavezno stoji definiciona rečenica**
+(`novcanik.send_napomena`), bez nje reč radi protiv sistema. „Upis" ostaje za devet kanala, za
+ZRNO i za popunjavanje polja. Ekran se zove **POEN**, ne Novčanik.
+
+**Poništenje prepisa po prijavi razmene** — prijavljuje **isključivo pošiljalac**, jedna prijava po
+prepisu (`@@unique`), povraćaj je **uvek pun** i zapis sme u minus. Protivzapis ide tipom
+`PONISTENJE_PREPISA`, nikad `TRANSFER` (inače lažno otvara korak 2 putanje razmene). 🔴 Ulazna tačka
+je **prigovor sa profila** (Uslovi čl. 37a), ne dugme uz prepis — ono je uklonjeno.
+
+**Kolektivna nabavka** — kalkulacija se **snima** na `Nabavka` pri objavi i posle se ne menja; red je
+**snimak** (`poenSnimak`, `mesto`), ne živa vrednost. Parametri se utvrđuju **pre** prikupljanja ponuda
+(`dodajPonudu` odbija ponudu bez parametara, `utvrdiParametre` odbija izmenu kad ponuda postoji) — time
+tvrdnja da broj POEN-a nije cena postaje svojstvo redosleda. POEN se **rezerviše** pri potvrdi, **gasi**
+pri preuzimanju, tipom `OTPIS_NABAVKA`; zapis **ne sme u minus**. 🔴 Projektni odliv ide u
+`ProjekatTrosak`, **nikad** u `FondacijaTrosak` (prag za gašenje veta meri samo operativu). Predlozi
+izabrane reči se posle nabavke **brišu**. Dva crona su obavezna: `glasanje-zatvaranje` (00:30) i
+`nabavke` (05:00).
+
+**Modul Deca** — u radu od 03.09.2026; gašenje više nije čist potez (išlo bi protivzapisom, ne
+prekidačem). Tri stanja naloga (`NA_CEKANJU` / `POVEZANO` / `AKTIVNO`); dete na čekanju nema Pričaonicu
+— iza njega ne stoji niko. Prijateljstvo: **500 POEN svakom, ali tek kad su OBE strane `AKTIVNO`** —
+obostrano čekanje je cela odbrana od farmovanja; prijateljstvo dece **istog roditelja** se sklapa ali
+**ne nosi POEN**. Raskid može **samo dete**, otpisuje 500 **obema** stranama i zapis sme u minus — bez
+minusa postoji beskonačna kasa iz jednog prijateljstva. Punoletstvo: otpis → brisanje prijateljstava →
+prevođenje naloga → potvrde roditelja, **tim redom**. 🔴 Roditelj **ne čita** razgovore između dece
+(čita samo razgovor sa punoletnim licem, uz natpis koji odrasli vidi). Prepis roditelj↔dete čeka samo
+**preuzimanje** naloga, ne potvrdu.
+
+**Zaštita dece — tri pravila koja se lako tiho izgube:** profil maloletnog naloga se punoletnim
+članovima **ne otvara** (odluka je na serveru, vraća se 200 sa `zatvoren`, a roditeljski prekidač ga
+**ne otvara**); oglas deteta vide samo oni kojima sme (svaki prikaz mora kroz `smeDaVidiOglas` —
+tri prikaza su dizala svoj upit); dete **ne ulazi u lanac potvrda** ni kao meta (indeks tu ne brani
+ništa, jer se indeks potvrdom tek dobija).
+
+**Ranglista škola** — izbor škole **ne nosi POEN** (bio bi deseti kanal). Broji se dete u stanju
+`AKTIVNO`, po **istom** `USLOV_AKTIVNO_DETE` koji broji kartica Članovi — ne praviti drugu definiciju.
+Na listama su samo škole sa bar jednim detetom; **uz procenat uvek ide i razlomak** („8,3% (1 od 12)"),
+jer praga prikaza nema. Promena škole najviše jednom u 30 dana; prva postavka nije promena. 🔴 Škola se
+briše na **tri** mesta: punoletstvo, `DELETE /api/profil`, reset naloga. Šifarnik se **ne piše rukom** —
+generiše ga `scripts/uvezi-skole.mjs`, i oba izvoza idu u istom pozivu.
+
+**Prevođenje punoletnog naloga u maloletni** — samo superadmin, obrazac (ne kucanje), nepovratno.
+Poništava se **neto emisija iz istorije**, ne stanje — prepisan POEN ostaje, jer prepis nije emisija.
+Minus je dopušten **na obe strane** (i trećim licima kojima padaju potvrde), uz protivzapis i
+obaveštenje. Osnov: čl. 4d Pravilnika o učešću dece + čl. 14 st. 3 t. 5.
+
+**Prijava poruke je UKINUTA** i model je obrisan — ni u dečjoj sobi ni u sobi odraslih.
+🔴 Ne mešati sa **prijavom oglasa** (`PrijavaOglasa`, tab Pijaca), koja radi. Moderacija Pričaonice
+ostaje — izgubljen je korisnički signal, ne poluga. Posledica: dečja soba nema kanal do Fondacije;
+detetu ostaju roditelj i raskid prijateljstva.
+
+**Ulazak u KOLO kroz razmenu** (čl. 40a) — 🔴 **beleženje ≠ evidentiranje**: verifikovanom se doprinos
+evidentira odmah, nalogu bez potvrde se **beleži** i čeka **odobrenje Fondacije** (tab „Prvi oglasi").
+Od seta 4.6.5 kroz odobrenje ide **svaki** prvi oglas. Jednokratnost drži **baza** (`userId @unique`),
+ne kod. Uklanjanje oglasa zbog povrede Uslova poništava zabeležen doprinos ali **ne oslobađa kanal**;
+odbijanje u tabu ga **briše** i kanal ostaje slobodan — to su dve različite odluke. Odbijanje **ne
+uklanja oglas** (moderacija je drugi tab).
+
+**Doprinos razmeni** (čl. 40b) — pet koraka × 1.000, kapa 5.000 koju drži **baza** (`CHECK` +
+`@@unique`), ne kod. „Razmena" = **upis POEN-a**, ništa drugo; nema modela `Razmena` i ne vraća se
+ručno označavanje. Prag **1.000 POEN po transakciji** (ne po zbiru), sagovornik mora biti **van kruga
+poznanstava** i verifikovan, i broji se **jednom** za celu lestvicu. Već evidentiran korak se ne
+poništava kad brojač kasnije padne.
+
+**Mesto je jedno naselje iz šifarnika** — `razresiNaselje()` je jedino mesto provere, i klijent i
+server. Zatečene vrednosti se ne zaključavaju (izmena telefona ne sme da padne zbog stare lokacije).
+
+**Moderacija sadržaja** — reaktivna, ne preventivna. 🔴 **Uklanjanje, nikad prepravka** tuđeg oglasa —
+prepravkom Fondacija postaje koautor i gubi zaštitu iz čl. 25 st. 1. Razlog je **obavezan** (400 bez
+njega) i vidi ga samo vlasnik. Uklanjanje je meko i povratno. Sistem sam ne sankcioniše — na tri
+uklonjena oglasa ide predlog adminima, ne mera.
+
+**Pseudonim u adresi profila** — u interfejs ide pseudonim (`profilHref()`), u sve što se **čuva**
+(notifikacija, mejl) ide **interni id**. `pseudonimLower` se upisuje isključivo preko
+`poljaPseudonima()`/`promeniPseudonim()`. Napušteni pseudonimi se čuvaju da ih ne preuzme neko drugi.
+🔴 Pri dodavanju nove statičke podrute pod `/profil/` dopuniti `REZERVISANI_PSEUDONIMI`.
+
+**Reset naloga na dan registracije** — samo superadmin, uz **otkucan pseudonim**; pogađa i druge naloge
+(padaju sve potvrde koje nalog dodiruje). Zero-sum ostaje očuvan. **„Prvi put" je zapis u bazi**
+(`User.vodicVidjenAt`), ne u pregledaču; upis ide pri **otvaranju** vodiča.
+
+### Pristanak na akte — prekidač (2026-08-11; ponovo `true`)
+🟢 **Stanje 28.09.2026: `PRISTANAK_NA_AKTE_TRAZI_SE = true`** (`src/lib/moduli.ts`) — vraćen setom R-06 (vidi „Dokaz pristanka"). Istorijski zapis: prekidač je 2026-08-11 bio postavljen na `false`. Odluka vlasnika: akti 4.2.1 su punovažni danom donošenja, sistem još nije zvanično u radu, a ekran je smetao ljudima koji prvi put dolaze. Provera je na **jednom mestu** — `pristanakStatus()` u `src/lib/politika.ts` — pa i shell i sam ekran ćute; `/politika-prihvati` propušta dalje.
+- **Mehanizam se ne briše.** `PolitikaVerzija`/`PolitikaPrihvatanje` i svi zatečeni pristanci ostaju u bazi (dokaz), red „4.2.1" iz migracije takođe. Povratak je `true`, bez ijedne dalje izmene.
+- 🔴 **Za prvu izmenu akata POSLE puštanja sistema u rad prekidač MORA nazad na `true`** — Uslovi čl. 40 i Politika čl. 16 tada traže nov red `PolitikaVerzija`, ponovnu saglasnost i obaveštenje **bez odlaganja**. 🔴 Roka od 15 dana **više nema** (ukinut setom 4.3.0) — ne vraćati ga.
+- Opis ispod (prekrivač, izvor istine, petlje) i dalje važi — opisuje mehanizam koji radi čim se prekidač vrati.
+
+### Pravna priroda POEN-a (Pravilnik čl. 12–13)
+POEN je **interna obračunska jedinica kojom se evidentira doprinos i drugi oblici učešća u zajedničkom dobru**. Analogija: zapis u matičnoj knjizi — **beleži činjenicu**, ali nije sredstvo van sistema. POEN **nema nosioca**, postoji isključivo kao zapis u Protokolu, izražava se celim brojevima i **ne predstavlja novac, valutu, elektronski novac, platno sredstvo, digitalnu imovinu, finansijski instrument ni hartiju od vrednosti**. Evidentiran doprinos **ne predstavlja potraživanje prema Fondaciji** ni osnov za imovinskopravni zahtev.
+
+### Nasleđivanje (Pravilnik čl. 34, čl. 72)
+POEN i ZRNO **nisu imovinsko pravo i ne nasleđuju se**. Pri prestanku statusa zapisi POEN-a se poništavaju uz protivzapis Protokola, ZRNO se otpisuje u raspoloživa (zero-sum očuvan), a podaci se anonimizuju. Postupanje u slučaju smrti bliže se uređuje Uslovima.
+
+### Zaštitni veto Fondacije (Pravilnik čl. 48–50 — preformulisan u 3.7.5)
+U Fazi 2, Fondacija može da **odbije izvršenje odluke Gornjeg Kola koja bi ugrozila operativnu i finansijsku održivost Fondacije pre nego što ona dostigne finansijsku samostalnost** — naročito odluke o trošenju dinarskih sredstava (uključujući kolektivne nabavke) koje bi narušile sposobnost Fondacije da pokriva osnovne troškove i održava infrastrukturu (čl. 48, v3.7.5). **Ovo je promena u odnosu na raniji opis** (veto NIJE više vezan za narušavanje četiri principa / zakona / pravnog statusa — to su sada zasebna ograničenja Gornjeg Kola po čl. 50, uz licence). Veto nije diskrecion — mora biti obrazložen pozivanjem na konkretnu pretnju održivosti (čl. 48 st. 2). Gasi se **trajno i jednosmerno** kada sredstva Fondacije dostignu **prag finansijske samostalnosti utvrđen posebnim pravilnikom** (čl. 49); gašenje ne ukida zakonske obaveze UO.
+- **Ograničenja Gornjeg Kola (čl. 50):** (1) četiri principa — ne može ukinuti nekonvertibilnost, uvesti imovinsko pravo nad zapisima, učiniti donacije povratnim, ni napustiti minimizaciju podataka; (2) zaštitni veto dok traje + zakonske obaveze UO posle gašenja; (3) licence (AGPL-3.0, CC BY-SA 4.0) se ne mogu zameniti restriktivnijim.
+- Kod: `fondacija.ts` (`dohvatiSaldoFondacije`, `azurirajVetoStatus`), model `SistemskiVeto` (singleton), `FondacijaTrosak`, API `/api/admin/fondacija`, javni status.
+- ✅ **GAP (a) — REŠEN (norma 3.7.6 + kod usklađen):** `gornje_kolo_3_7_6.md` čl. 19 propisuje **jedan uslov** — veto se gasi kad likvidna dinarska sredstva dostignu **3× operativni trošak prethodnog meseca**. Kod (`fondacija.ts`) usklađen: `dohvatiTrosakPrethodnogMeseca()` (prethodni kalendarski mesec) × 3 daje `pragZaGasenje`; raniji placeholder `prosek × 3` (6 meseci) i `PROSEK_PERIOD_MESECI` uklonjeni; `VetoStatus.prosekMesecnihTroskova → trosakPrethodnogMeseca`. (Ranija 3.7.5 norma 24× rezerva + 12-mes. samoodrživost povučena.)
+- 🟡 **GAP (b):** obrazloženje/opis veta u UI/kodu treba uskladiti sa formulacijom 3.7.5 (održivost Fondacije), ako još referencira staru (principi/zakon/pravni status).
+
+### Zajedničko dobro (Pravilnik Glava II, čl. 5–8)
+- Softver: **AGPL-3.0** (čl. 7). Sadržaj: **CC BY-SA 4.0** (čl. 7). Licence se ne mogu zameniti restriktivnijim (važi i za Gornje Kolo).
+- Doprinosi softveru pod **DCO** (Signed-off-by); doprinosi sadržaju uz prihvatanje licence (čl. 8). Vidi `DCO`, `CONTRIBUTING.md`, `.github/workflows/dco.yml`. Javna stranica `/zajednicko-dobro`.
+- **Trajna atribucija** se odnosi na doprinose koda/sadržaja pod licencama Glave II (Uslovi čl. 31) — NE na zapise POEN-a/ZRNA ni graf verifikacija (anonimizuju se pri prestanku, čl. 34).
+
+### Pijaca / razmena (Pravilnik čl. 16, 28, 67 — v3.7.3)
+- Za razmenu odgovaraju korisnici prema **obligacionom pravu**, **ne kroz Protokol** — Fondacija/Protokol ne posreduju i ne odgovaraju.
+- **Pregled oglasa je javan svim posetiocima** (sadržaj, cena, lokacija, pseudonim oglašivača) — radi pristupačnosti razmene (v3.7.3).
+- **Od 4.1.0 (2026-08-09):** postavljanje **PONUDE** otvoreno je i neverifikovanom (čl. 16 st. 5); **POTRAZNJA, pristup kontaktu i POKRETANJE komunikacije** ostaju samo verifikovanima. Oglasi neverifikovanih nose **javnu oznaku** da oglašivač nije verifikovan.
+- **Svi korisnici** mogu da razmenjuju dobra/usluge; **iniciranje** ažuriranja evidencije POEN-a u korist drugog je od 4.1.0 samo za verifikovane (čl. 28 st. 2).
+- 🔴 **Iznos u oglasu NIKAD ne određuje Fondacija** (odluka vlasnika 27.09.2026, ublažena istog dana; norma: Uslovi čl. 19 st. 1 i 6, čl. 22, Pravilnik čl. 13). Iznos određuje onaj ko oglas postavlja, a strane smeju i da ga dogovore; zato opcija „Po dogovoru“ na Pijaci ostaje. Fondacija iznose ne utvrđuje, ne ograničava, ne kontroliše i ne procenjuje. 🔴 U copy-ju, FAQ-u i videima se **ne piše** „vrednost određuje zajednica“ ni „Fondacija procenjuje“. Razlog: centralna procena vrednosti je ono na čemu je pala Owenova berza rada (1832–1834). 🟡 Akt kaže „korisnik koji oglas postavlja“, pa kod oglasa **POTRAŽNJA** iznos predlaže onaj ko traži.
+
+### Krug (kolektivni oblik — Pravilnik Glava VIII, čl. 55)
+- Kolektivni oblik bez pravnog subjektiviteta; ima evidencioni identifikator i zajednički POEN zapis u Protokolu.
+- Ovlašćena lica, min. broj članova i ostali parametri uređeni su **posebnim pravilnikom** (čl. 55); vrednosti u kodu („najmanje 5 verifikovanih", 1–3 ovlašćena lica) potiču iz tog pravilnika/koda.
+- **Rast kolektivnih oblika** je kanal evidentiranja (čl. 15) — Mehanizam platforme (NE ulazi u dnevni limit, svaki prag se loguje jednom u `KrugBonusLog`):
+  - 5 članova (osnivanje): **50.000 POEN** | 10: 100.000 | 20: 200.000 | 50: 500.000 | 100: 1.000.000 | 200: 2.000.000 | 500: 5.000.000
+  - Formula: `broj_članova × 10.000 POEN`
+- Logika: `src/lib/protokol/krug.ts` → `proveriIEmitujBonusPrag()`.
+
+### Programi Protokola
+- **Operativni doprinos (Pravilnik čl. 36; Pravilnik o operativnom doprinosu):** zadatak objavljuje nosilac ZRNA odn. Gornje Kolo, a u Fazi 1 privremeno Fondacija **u ime zajednice** (čl. 4, od 4.4.4 — vidi „Operativni doprinos: nema naručioca, nema naknade" u `docs/sprovodjenje-rizika-2026-09.md`); korisnik (indeks ≥ 10%) se prijavljuje i izvršava; izvršenje **verifikuju nosioci ZRNA (Faza 2), odn. UO (Faza 1)** — **NIJE** međusobno potvrđivanje proizvoljnih korisnika. Model: predlagač zadaje **predloženi POEN** (težinski koeficijent), evidentirani POEN = predloženi × min(1, L/P) u okviru dnevnog limita. ✅ Implementirano u `programi.ts` (`raspodelaKoeficijent`, `evidentiraniPoen`); verifikacija nosilaca ZRNA/UO sa proverom sukoba interesa.
+- **Socijalni programi:** PODRSKA_MAJKAMA (i primarni staratelji), PODRSKA_STARIJIMA, POSEBNA_BRIGA, SKOLOVANJE — uslovi/koeficijenti u programskim pravilnicima.
+- 🔴 **`POSEBNA_BRIGA` se na ekranu i u aktima zove „Posebna podrška" (set 4.6.7, 25.09.2026).** Interni identifikator, enum i zatečene prijave se **ne menjaju** — isti obrazac kao „POEN" naspram `/novcanik` i „Pričaonica" naspram `ChatMessage`. Program ima **dva osnova**: **smanjena sposobnost** (rešenje nadležnog organa kojim je utvrđen stepen invaliditeta, uključujući rešenje komisije za procenu radne sposobnosti — uzima se **postojanje**, nikad sadržaj, stepen ni dijagnoza; odnosno akutna ili hronična bolest zbog koje član **ne može ili je bitno ograničen da učestvuje**, dokaz je izjava) i **gubitak doma** (nepogoda, požar, poplava ili prinudna raseljenost, izjava). Pravo ostvaruje sam korisnik, odnosno **negovatelj** punoletnog lica koje nije član, odnosno **roditelj** maloletnog lica do njegovog punoletstva. **Jedan dnevni iznos po podnosiocu** bez obzira na broj osnova i lica. 🔴 **Kumulira se sa Podrškom majkama**, i kad je oboje povodom istog deteta. Trajanje po osnovu: rešenje 365 dana, **akutna bolest 6 meseci**, **gubitak doma 12 meseci bez revizije**.
+- 🔴 **Prinudna raseljenost i nepogoda su JEDAN objavljen osnov** („gubitak doma") — razdvojena, raseljenost bi odala nacionalnu pripadnost, a ona je posebna kategorija.
+- 🔴 **Prikaz zapisa socijalnog programa odlučuje JEDNO mesto — `src/lib/protokol/program-prikaz.ts`** (`uslovZapisaProtokola`, `opisZapisaProtokola`, `VEZA_PROGRAMA`). Iste zapise dižu **tri** upita (`/sistem`, `/api/pocetna/liste`, `/api/javno/feed`), a razlaz dva takva upita je već proizveo kvar (deca u spisku na `/sistem`). Svaki nov spisak transakcija uzima te funkcije, ne svoju kopiju.
+- 🔴 **`Transaction.enrollmentId` je VEZA, ne naziv programa.** Naziv se izvodi pri čitanju; u zapis se **ne upisuje** (opis ostaje `OPIS_SOCIJALNOG_PROGRAMA` = „Socijalni program"), jer je zapis trajan i ide u GDPR izvoz — upisan naziv se više nikad ne bi mogao suziti. `ON DELETE SET NULL`, nikad kaskada (oborila bi zero-sum). 🔴 Zatečeni redovi ostaju `null` i **ne popunjavaju se naknadno**; zapis bez veze **izlazi** iz pojedinačnog spiska i ostaje u dnevnom zbiru.
+- 🔴 **`ProgramEnrollment.osnov` postoji zbog ROKA, ne zbog prikaza**, i ide **isključivo superadminu** (istim gejtom kao `metadata`). Enum `OsnovPodrske` ima **dve** vrednosti, kako ih čl. 12 nabraja; razlika rešenje / akutna / hronična bolest **nije treća vrednost ni kolona** nego podatak u `metadata` — razdvojena od osnova, odala bi da je reč o zdravlju. Rokovi su u čistoj funkciji **`rokReverifikacije`**: rešenje i hronična bolest 365 dana, akutna bolest **183**, gubitak doma **365 od DOGAĐAJA**, uz gornja ograničenja — punoletstvo lica o kome se korisnik stara i datum isteka rešenja. 🔴 Rute zovu **samo** `rokReverifikacije`, nikad `danaDoReverifikacije`.
+- 🔴 **Školovanje: dokaz statusa je IZJAVA pod punom odgovornošću, ne isprava** (programi podrške čl. 13 st. 2 i 3, od 4.3.2). Za maloletnog korisnika daje je roditelj odnosno zakonski zastupnik i njome potvrđuje da je dete redovno upisano u školu odnosno na fakultet; punoletni korisnik daje je sam. 🔴 **Potvrde o upisu i druge isprave se NE traže** — ne dostavljaju se i ne prikupljaju. Neistinita izjava povlači mere iz Uslova (suspenzija, isključenje), prestanak evidentiranja i poništenje već evidentiranog POEN-a protivzapisom. Uz to važi i verifikatorska potvrda iz čl. 4. 🟡 Program obuhvata **i učenike osnovne i srednje škole**, ne samo studente; iznos je fiksnih 2.000 POEN dnevno (čl. 13).
+- Svi programi otvoreni verifikovanim korisnicima (indeks ≥ 10%), nezavisno od Kruga.
+- 🔴 **Socijalni program traži indeks ≥ 10% — jednu primljenu potvrdu (od seta 4.3.1, 2026-08-18).** Do tada je čl. 4 Pravilnika o programima podrške tražio **pun indeks (100%)**, pa su prijavu mogli da podnesu samo nalozi sa svih deset potvrda; u kodu je to bio zaseban `MAX_INDEKS` gejt u `POST /api/programi/[type]/prijava`, iznad već postojećeg `imaFunkcionalniPristup`. Taj gejt je uklonjen — prag sada drži jedno mesto. Isto važi i za obustavu: `razlogObustaveProgram` (`programi.ts`, cron `/api/cron/programi-revizija`) gasi ACTIVE prijavu tek kad indeks padne **ispod 10%**, ne ispod 100%; ranije je jedna poništena potvrda gasila program čoveku koji uslov i dalje ispunjava. UI prop se zove `imaPristupProgramima` (bio `imaPunIndeks`).
+- **Ostatak čl. 4 je netaknut:** izričit pristanak podnosioca i potvrda SVIH njegovih verifikatora pod punom odgovornošću, bez uvida u unete podatke; Fondacija ne odobrava dok svi ne potvrde. Copy (`programi.nepun_indeks`, `programi.pristanak_tekst`, 5 jezika) više ne pominje „svih deset" — broj verifikatora zavisi od indeksa.
+- Dnevni limit (10% opticaja), proporcionalno smanjenje pri prekoračenju.
+- 🔴 **Povlačenje pristanka postoji od 2026-09-10** (`POST /api/programi/[type]/povuci-pristanak`, dugme uz karticu programa) — pravo iz čl. 4 st. 3 koje je do tada stajalo u tri akta a nije postojalo u kodu. Vidi „Socijalni program: pristanak sada pokriva ono što se zaista dešava" u `docs/sprovodjenje-rizika-2026-09.md`.
+- 🔴 **Unete podatke prijave vidi i odluku donosi ISKLJUČIVO SUPERADMIN (2026-09-07).** DPIA 5.6 kaže da su uneti podaci „dostupni isključivo licu koje obrađuje prijavu u Fondaciji", a do ove izmene ih je video svaki admin — tekst mere bio je **uži od primene**. Sada `GET /api/admin/programi` i SSR u `admin/page.tsx` šalju `metadata` samo superadminu, a rute `enrollments/[id]/{odobri,odbij}` traže `jeSuperadmin`. Odluka i uvid idu zajedno: odlučivanje bez uvida bilo bi odlučivanje na slepo. Običan admin vidi pseudonim, program i datum, uz napomenu `admin.programi_samo_superadmin`. Isti obrazac kao revizijski dnevnik i nadzor.
+- 🟢 **Posebne kategorije se čuvaju minimalno (provereno 2026-09-07):** `buildMetadata` upisuje samo datume rođenja dece **bez imena**, datum rođenja, **datum rešenja i opcioni datum isteka** bez broja, organa i dijagnoze, i naziv ustanove. Raniji nalaz da se čuva `dijagnoza` je **zastareo i netačan** (ispravljen u `docs/analiza-kod-vs-pravilnici.md`). Enkripcije na nivou aplikacije nema, ali je DPIA ni ne obećava — tačka 5.1 govori o enkripciji **na nivou hosting infrastrukture**.
+
+### Moduli sistema (Pravilnik Glava VIII, čl. 53–59)
+- Glava VIII = **Moduli**: kolektivni oblici (**Krug**, **Zadruga** — registrovano pravno lice po Zakonu o zadrugama), socijalni programi, **Modul Deca** (maloletnici, poseban režim < 15, bez ZRNA/glasanja do 18), internacionalizacija.
+- Aktiviranje/deaktiviranje: Fondacija u Fazi 1, Gornje Kolo u Fazi 2 (čl. 54).
+- 🔴 Zadruga nije implementirana (odluka vlasnika: moduli nisu fokus). **Modul Deca JESTE implementiran i U RADU** od 2026-09-03 (`MODUL_DECA_AKTIVAN = true`), uz usvojen Pravilnik o učešću dece (4.3.0) — vidi „Modul Deca — unapređeni model" u `docs/istorija-implementacija.md`. Krug postoji; `KrugProjekat` je samo aktivnost Kruga (PRIKUPLJANJE/REDISTRIBUCIJA).
+
+## Struktura foldera
+```
+src/app/          — Next.js stranice (App Router)
+src/app/(app)/    — autentifikovane stranice (pocetna, sistem, novcanik, pijaca, zrno, programi, doprinos-oglasi, krug, poruke, profil, glasanje, donacije, postani-pokrovitelj, verifikacija, nadzor, politika-prihvati, pravilnik-prihvati, admin; `tabla-jemstva` ostaje samo kao stranica-objašnjenje)
+src/app/(public)/ — javne stranice (pokrovitelji, kako-funkcionise, o-nama, o-sistemu, cesto-postavljena-pitanja, pravilnik, statut, whitepaper, dpia, radnje-obrade, rizici, zajednicko-dobro, osnivacki-doprinos, privatnost, uslovi)
+src/app/pijaca/   — pijaca sa sopstvenim layout-om (javni + auth prikaz)
+src/app/uskoro/   — maintenance/„uskoro" gate stranica
+src/components/   — React komponente
+src/lib/          — pomoćne funkcije, validacije, faq-data
+src/lib/protokol/ — logika KOLO Protokola (vidi sekciju Biblioteka)
+src/generated/prisma/ — generisani Prisma klijent
+prisma/           — šema i migracije
+messages/         — i18n prevodi (next-intl)
+dokumentacija 4.1/ — kanonski set akata (17 akata × 5 jezika) — JEDINI normativni izvor
+dokumentacija 4.0/, 3.9/, 3.8/, nova dokumentacija/ — istorija, ne čitati kao važeće
+docs/             — pun zapis odluka + radne beleške (nije normativa)
+```
+
+## Implementirane funkcionalnosti
+
+### Autentikacija i korisnici
+- Registracija (pseudonim, email, lozinka), login (NextAuth credentials), OAuth tok (`/api/oauth`, `/oauth/dovrsi`), reset lozinke (`/api/zaboravljena-lozinka`, `/api/reset-lozinka`).
+- **Verifikacija = dokaz stvarnosti kroz lanac potvrda, bez dokumenata/JMBG-a** (vidi „Dokaz stvarnosti"). Legacy LK/JMBG tok je UKLONJEN.
+- Profil: pseudonim, lokacija, telefon, punoIme, opis (UserPodaci), profilna slika sa crop modalom. **Email se NE prikazuje u podešavanjima profila** (uklonjen, commit `4492bcf`; i dalje se koristi pri registraciji/loginu). **Promena pseudonima bez odjave** (commit `ba4c505`). Vidljivost se bira uz svako polje. Javni profil `/profil/[id]` (POEN/ZRNO/rang/oglasi uvek vidljivi) — **adresa je sada pseudonim**, vidi sekciju ispod.
+
+### Verzionisanje akata i pristanci
+- **Politika:** `PolitikaVerzija` / `PolitikaPrihvatanje`; pri loginu AppShell proverava `/api/politika/prihvati` → `/politika-prihvati`.
+- **Pravilnik:** `PravilnikVerzija` / `PravilnikPrihvatanje`; analogno → `/pravilnik-prihvati` (Pravilnik čl. 80).
+
+### Prigovor na odluku
+- `PrigovorNaOdluku`: korisnik podnosi (`POST /api/prigovor`), admin odgovara (`PATCH /api/admin/prigovori/[id]`). Tipovi: VERIFIKACIJA, SUSPENZIJA, PROGRAM, OSTALO. Max 3 otvorena; odgovor u 30 dana; notifikacija.
+
+### GDPR cron
+- `POST /api/cron/gdpr-cistenje` (1. u mesecu, 02:00): briše poruke kada je jedna strana deaktivirala nalog ILI je lastMessageAt > 24 meseca. (Legacy brisanje JMBG/slika uklonjeno — ti podaci više ne postoje.) Rokovi po Politici čl. 10: tehnički logovi 12 meseci, transakcije/donacije 10 godina, podaci table jemstva — aktivni zahtev 72h od objave (dopuna 3.9.1), pa brisanje iz prikaza.
+
+### Audit log
+- `ADMIN_EKSPORT_PODATAKA` pri admin eksportu. (Legacy `PRISTUP_DOKUMENT_VERIFIKACIJA`/`PRISTUP_JMBG_PODACI` događaji više nisu relevantni — bez dokumenata/JMBG-a.)
+- **Puna pokrivenost mutirajućih admin ruta (od 2026-07-21):** `logAdminAkcija` (`src/lib/audit.ts`) sada zovu i: programi (odobri/odbij prijavu, toggle), doprinos-oglasi (kreiranje/zatvaranje oglasa, odobri/odbij prijavu i evidenciju — loguje se i kad akciju izvrši nosilac ZRNA, ne samo admin), glasanje (izvršenje odluke, veto, odgovor UO na preporuku), Fondacija troškovi (dodat/obrisan), pokrovitelj doprinos, krugovi (odobri/odbij osnivanje, pristupnica), osnivači (dodat/obrisan), manuelni okidači (noćna emisija, ZRNO noćna + toggle tržišta, osnivački triger). Ranije su se logovale samo akcije nad korisnicima, donacije, blog, politika, pokroviteljstvo potvrda/odbijanje, nadzor i tabla jemstva — zato je audit log u admin panelu delovao „zaglavljen" čim se dnevna aktivnost svede na nepokrivene akcije. Dodato i: `NADZOR_POTVRDJEN` (nadzornik potvrdio verifikaciju); `POKROVITELJ_AZURIRAN` više ne loguje ceo body (kontakt podaci ne idu u log — samo imena izmenjenih polja); dva direktna `auditLog.create` poziva (pokrovitelji) prebačena na `logAdminAkcija`; konvencije dokumentovane u `audit.ts`. **Audit tab + server fetch = samo superadmin** (usklađeno sa `/api/admin/audit-log`).
+
+### POEN (ranije „Novčanik"; ruta i dalje `/novcanik`)
+- Prikaz stanja; prepis POEN-a (ažuriranje evidencije 1:1, bez provizije; `/api/transfer`); istorija sa filterima; klikabilni pseudonimi; QR modal (`/m/[hash]`).
+- **Zabeležen doprinos** stoji kao ZASEBAN red ispod kartice stanja i **nikad se ne sabira** sa stanjem — do okidača to nije zapis POEN-a. Naziv na ekranu je „Zabeležen doprinos", NIKAD „POEN na čekanju" (čl. 12). Vidi ga samo vlasnik naloga (čl. 67).
+- 🔴 **Sve što čeka uslov ide u JEDAN broj, razložen po tome NA KOGA SE ČEKA** (2026-09-21): Fondacija · tvoj prvi doprinos · drugi. Do tada je to bilo **pet redova** sa skoro istim naslovima (čl. 40a, koraci putanje razmene, potvrde primljene, potvrde date, nadzor), poređanih **po kanalu** — a kanal je podatak o poreklu i ne odgovara na jedino pitanje koje vlasnika naloga zanima: čiji se potez čeka. 🔴 **Rezervisano za nabavku se u taj zbir NE dodaje** — taj POEN je već upisan u zapis, samo je vezan do preuzimanja (čl. 23 st. 2). Grupe se zovu **Čeka Fondaciju · Čeka tvoj prvi doprinos · Zabeležene potvrde**. 🔴 U zatvorenom stanju red nosi **samo naziv i iznos** — bez rečenice objašnjenja; da se otvara kaže **strelica**, a ceo red je dugme (odluka vlasnika 21.09.2026). 🔴 Ključ `zabelezene_potvrde_opis` se **ne briše iz `messages/`** iako se od tada nigde ne prikazuje — traži ga `potvrda-uslov-izvor.test.ts`; brisanje ide samo uz izmenu te brane.
+- 🔴 **Ko ne sme da prepisuje vidi NULU, ne svoje stanje** (odluka vlasnika, 2026-09-21). Veliki broj na kartici znači „koliko smeš da prepišeš", pa je za nov član i za dete koje čeka roditelja **0**, uz oznaku `raspolozivo_labela`; koliko mu je stvarno evidentirano nosi zaseban red **„Na tvom zapisu"**. Nije nov obrazac — `raspolozivo()` (`Math.max(0, stanje)`) tako već prikazuje zapis u nadoknadi. 🔴 Red „Na tvom zapisu" se **ne sme izostaviti**: bez njega čovek koji je nešto prodao na Pijaci vidi nulu i zaključuje da mu je prodaja nestala. 🟡 Povod: stanje „imam POEN a ne smem da ga pošaljem" nije ivični slučaj nego **glavni ulaz** (prodaš → upoznaju te → potvrde te), pa se ne leči menjanjem pravila nego prikazom.
+- **Neverifikovanom se dugme za prepis POEN-a ne prikazuje** (čl. 28 st. 2), uz objašnjenje zašto — inače izgleda kao kvar. 🔴 Uz dugme se sklanja i **skener** i ne otvara se obrazac po `?plati=`: oboje vode u prepis DRUGOME, pa je nov član popunjavao ceo obrazac i tek pri slanju dobijao 403 sa `/api/transfer`. 🟢 **„Moj QR" OSTAJE** — nov član sme da prima (čl. 28 st. 2), a QR je način da mu se plati prodato dobro i time put do potvrde.
+- Vidljivost transakcija gradirana po ulozi (vidi `/api/javno/feed`).
+
+### Poruke (Chat 1-na-1)
+- `/poruke` split-panel; polling 5s; badge nepročitanih; Enter/Shift+Enter; mobilni view; „Kontaktiraj prodavca" na oglasu; notifikacija primaocu.
+
+### Pijaca (Marketplace)
+- Listinzi; pretraga po kategoriji/lokaciji; sopstveni layout (`src/app/pijaca/`, van `(app)/` grupe — vidi BUG sa badge-om u „Sidebar badge"); detalji na `/pijaca/[id]`.
+- **Pregled oglasa javan svim posetiocima** (v3.7.3); **postavljanje/kupovina/kontakt samo verifikovani**.
+- **Bez jedinice mere i stanja (količine)** — uklonjeni iz UI i API (commit `ed846fd`); `src/lib/jedinice.ts` obrisan.
+- **Slike oglasa na Cloudflare R2 (od 2026-06-15, commit `8132edb`):** upload ide preko `sacuvajNaR2` (`src/lib/skladiste.ts`) kad je R2 konfigurisan; u bazu se upisuje javni URL. **Disk fallback** (`storage/oglasi/...`) za lokalni dev kad R2 nije konfigurisan. Ruta `slika/[listingId]/[idx]` radi 308 redirect na apsolutne https URL-ove (R2/CDN); legacy disk putanje i dalje rade. (Raniji Vercel Blob tok napušten — vidi Tech stack; `@vercel/blob` dep i `BLOB_READ_WRITE_TOKEN` reference ostaju neiskorišćene.)
+
+### Pretraga članova
+- `ClanPretraga` (debounce 250ms, keyboard nav). Klikabilni pseudonimi u tabelama.
+
+### Krugovi
+- Osnivanje (≥5 verifikovanih); Fondacija proverava formalnu ispravnost; pristupnica; napuštanje (`DELETE /api/krugovi/[id]`); aktivnosti (PRIKUPLJANJE/REDISTRIBUCIJA); bonus pragovi rasta (vidi sekciju Krug).
+
+### Programi Protokola
+- Operativni (PED) + socijalni (PODRSKA_MAJKAMA, PODRSKA_STARIJIMA, POSEBNA_BRIGA, SKOLOVANJE). Svi otvoreni verifikovanima. Dnevni limit 10% opticaja.
+
+### ZRNO
+- Upis/otpis ZRNA (zahtev → noćni cron, ponoć); zaključaj/otključaj (u ponoć istog perioda); delegacija glasova (tranzitivni lanac, krugovi, zakazivanje u ponoć — Pravilnik čl. 47).
+- **Obračunski koeficijent** (Pravilnik čl. 23): `Ukupan broj evidentiranih POEN-a / broj ZRNA raspoloživih za upis u Protokolu`. „Nije cena, nije kurs".
+- **Ograničenja pri upisu** (Pravilnik čl. 19): min. **20.000** evidentiranih POEN-a (`MINIMUM_POEN_ZA_UPIS_ZRNA`); najviše **1%** evidentiranih POEN-a po periodu.
+- `UKUPNO_ZRNA = 1.000.000`. Glasačka moć = `Math.floor(Math.sqrt(aktivno))` (kvadratno, čl. 46).
+
+### Glasanje / Gornje Kolo (usklađeno sa gornje_kolo_3_7_6.md — Faza D)
+- Predlozi, glasanje sa ponderisanom (kvadratnom) glasačkom moći (`izracunajGlasove`).
+- ✅ **Obavezujući obračunski period (čl. 11):** predlagač NE zadaje rok; glasanje je u narednom periodu (`granicePeriodaGlasanja`); `glasanjePocetak`/`deadline`. Faze: NAJAVLJEN → U_TOKU → ZATVOREN.
+- ✅ **Ishod (čl. 8, 9, 13):** prosta većina datih glasova (`utvrdiIshod`; izjednačeno = neusvojeno); `zaZbir`/`protivZbir`/`ishodUsvojen` se beleže pri zatvaranju (`zatvoriIstekleIObjaviIshod`).
+- ✅ **Registar odluka (čl. 21):** nepromenljiv, `dohvatiRegistarOdluka`, stranica `/glasanje/registar`.
+- ✅ **Faza-2 gating (čl. 3, 24)** + **30-dana ponovno predlaganje (čl. 22)** (`postojiSkoroOdbijen`, `normalizujNaslov`).
+- ✅ **Izvršenje + zaštitni veto (čl. 17, 18):** usvojena ODLUKA → `IzvrsenjeStatus` ZA_IZVRSENJE → IZVRSENO ili VETO_OBUSTAVLJENO (obrazloženje obavezno); admin rute `/api/admin/glasanje/[id]/{izvrsi,veto}`.
+- ✅ **Dinarske preporuke (čl. 20):** `PredlogVrsta` ODLUKA/DINARSKA_PREPORUKA; usvojena preporuka nije obavezujuća → obrazložen odgovor UO (`UoOdgovor` PRIHVACENO/ODBIJENO, `odgovoriNaPreporuku`, ruta `/api/admin/glasanje/[id]/odgovor`).
+- Logika: `src/lib/protokol/glasanje.ts`; testovi `__tests__/protokol/glasanje.test.ts`. Migracije: `20260603160000`/`170000`/`180000`.
+
+### Pokrovitelji (pun tok)
+- Pokrovitelj = **pravno lice ili preduzetnik** (ravnopravno, Pravilnik čl. 40), nema login; doprinos se evidentira u zapisu verifikovanog vlasnika pravnog lica, odnosno samog preduzetnika (PIB je ključ).
+- **Tok (Pravilnik o pokroviteljstvu čl. 7–10):** verifikovani korisnik pokreće **prijavu** (`/api/pokroviteljstvo/prijava`) → platforma generiše ugovor → korisnik **potpisuje** (`/[id]/potpisi`) → Fondacija **potvrđuje** (`/api/admin/pokroviteljstvo/prijave/[id]/potvrdi`), što pokreće evidenciju.
+- 🔴 **Isključivo NOVAC, minimum prijave 10.000 RSD** (čl. 6, 7 — od 2026-09-08). **Roba i usluge su UKINUTE**; ruta odbija svaku vrstu osim `NOVAC`. Enum `VrstaDonacije` (NOVAC/ROBA/USLUGE) ostaje u bazi samo zbog zatečenih zapisa.
+- 🔴 **Koeficijentni model: koeficijent = koeficijent donacije × 1,20** (`KOEFICIJENT_POKROVITELJSTVA` u `donacija-pravila.ts`). **Fiksna tabela od 7 nivoa i funkcije `NIVOI_POKROVITELJA`/`bonusZaNivo` su OBRISANE** — ne vraćati ih i ne prepisivati tabelu nivoa u ekrane. Detalji, obrazloženje ×20% i prelazna odredba: sekcija „🔴 Tabele donacija i pokroviteljstva".
+- Model `PokroviteljPrijava`; admin UI `PokroviteljPrijaveTab.tsx`; korisnički UI `PokroviteljstvoPrijava.tsx`. Javna `/pokrovitelji`, app `/postani-pokrovitelj`. Logika: `protokol/pokrovitelj.ts`.
+### Donacije
+- Donacije fizičkih lica Fondaciji (RSD), admin potvrđuje uz **obavezan uplatilac iz izvoda**, pa se evidentira POEN. Logika: `donacija.ts`, `donacija-pravila.ts`.
+- **Koeficijentni model:** kumulativna donacija određuje nivo; koeficijent novodostignutog nivoa primenjuje se na **celu novu donaciju**; `Math.round()`.
+- 🔴 **Prag nivoa 1 je 0** — svaka donacija nosi POEN. 🔴 **Tabela se nastavlja BEZ KRAJA** nizom 1–2–5, +0,10 po nivou; `RANG_TABELA` je samo **zaključan objavljen deo** (jedanaest nivoa, 1,00×→2,00×), a prag se **računa** (`pragZaNivo`), ne traži u nizu.
+- **Ugovor o donaciji za svaku donaciju** (čl. 5b) — vidi zasebnu sekciju.
+### Osnivački doprinos (implementiran)
+- Naknadna evidencija pre-launch rada (Pravilnik čl. 37; Pravilnik o osnivačkom doprinosu).
+- **Parametri:** korak 24.000 POEN, ukupno **100 koraka** (v3.9.1; ranije 120 × 20.000), jedan korak po svakom dostignutom pragu od **100.000** ukupnih POEN-a u sistemu, poslednji prag **10.000.000**; gornja granica **2.400.000 POEN**; kanal se trajno zatvara na 100. koraku. Koraci se evidentiraju samo nad **zaključanom** listom osnivača (admin dugme, uslov zbir udela = 1/1). Zaseban kanal — ne ulazi u dnevni limit.
+- Kod: `osnivacki.ts` (`ITERATION_LIMIT=100`, `KORAK_IZNOS=24_000`, `GORNJA_GRANICA=2_400_000`, `PRAG_SKOK=100_000`, raspodela među osnivačima largest-remainder metodom). Modeli: `OsnivackiKanal`, `Osnivac`, `OsnivackiKorakLog`, `OsnivackiKorakEmisija`. Admin `OsnivaciTab.tsx`, `/api/admin/osnivaci`, `/api/admin/osnivacki/triger`; javno `/api/javno/osnivacki-doprinos`, stranica `/osnivacki-doprinos`. Noćni triger u cron-u.
+
+### Notifikacije
+- Bell ikona, badge, dropdown, toast (polling 15s). `posaljiNotifikaciju()` u `src/lib/notifikacije.ts`.
+- **Tri kanala iz jednog poziva (od 2026-08-03):** `posaljiNotifikaciju()` upiše zvonce (`Notifikacija`), pošalje **web push** (`push.ts`, VAPID) i **email** (`email.ts`, Resend). Push i email idu kao `void` — ne blokiraju odgovor i ne bacaju.
+
+### Email korisnicima (Resend)
+- **`src/lib/email.ts`** je jedini ulaz: `emailLayout()` (zajednički HTML šablon svih mejlova), `posaljiEmailRaw()` (Resend fetch, vraća bool), `posaljiEmailKorisniku()` (obaveštenja, poštuje opt-out), `bazniUrl()` (allowlist host-ova protiv host-header poisoning-a).
+- **Dva režima:**
+  - **Sistemski mejl** — reset/postavljanje lozinke (`passwordReset.ts`). Ide **uvek**, ne poštuje opt-out (bez njega nalog nije povratljiv), bez linka za odjavu.
+  - **Obaveštenja** — sve ostalo. `posaljiEmailKorisniku()` preskače nalog bez email adrese, ugašen nalog (`deaktiviranAt`) i korisnika sa `emailObavestenja=false`; u podnožje ubacuje link za odjavu.
+- **Opt-out:** `User.emailObavestenja` (Boolean, default `true`) + `User.emailOdjavaToken` (nasumičan, generiše se lenjo pri prvom slanju). Migracija `20260803120000_email_obavestenja`. Prekidač u profilu → `PATCH /api/profil/obavestenja`; odjava bez prijave → stranica `/odjava-obavestenja/[token]` → `POST /api/email/odjava`. **Odjava je POST, ne GET** — klijenti za poštu prefetch-uju linkove, pa bi GET odjavio korisnika koji nije kliknuo.
+- **Pokrivenost:** email ide uz **svaku** notifikaciju (23 pozivna mesta — verifikacija, donacije, pokroviteljstvo, programi, doprinos-oglasi, krugovi, prigovori, transfer POEN-a, nadzor, tabla jemstva…), plus dva mesta van `posaljiNotifikaciju`:
+  - **Nove poruke** (`/api/poruke/[konvId]`) — mejl samo za **prvu nepročitanu** poruku u nizu; dok primalac ne otvori konverzaciju, dalje poruke ne šalju mejl.
+  - **Verifikacija QR/token putem** (`/api/verifikacija`) — ranije **nije slala nikakvo obaveštenje** (put sa table jemstva jeste); sada šalje isto obaveštenje kao tabla.
+- **Izuzetak `{ email: false }`:** admin notifikacija „Nov korisnik se priključio" — admini isti događaj već dobijaju preko `posaljiAdminAlert` (email + Telegram), inače bi stigao dvaput.
+- **Jezik:** mejlovi su na srpskom, kao i tekst zvonca (tekstovi notifikacija se generišu na pozivnim mestima i nisu prevedeni). `User.jezik` se ovde još ne koristi.
+- **Admin upozorenja** (`adminAlert.ts`) su zaseban kanal: idu na `ADMIN_EMAIL` + Telegram, nikad korisniku (18 događaja — registracija, prijava verifikacije, ZRNO zahtevi, programi, krugovi, prigovori, bagovi, zero-sum, nadzor).
+
+### Google Analytics (GA4, 26.09.2026)
+- **Učitava se samo:** uz pristanak, na produkciji (`IS_PRODUCTION`) i nikad za maloletni nalog (`session.user.maloletan === false` — `undefined` znači „još nepoznato" i GA se ne učitava). ID ide iz layout-a kao prop (`GA_MEASUREMENT_ID`, env ga može zameniti).
+- 🔴 **Pregled stranice šaljemo sami** (`send_page_view: false`), sa adresom kroz `ocistiAdresu()` (`src/lib/analitika-putanja.ts`): tokeni i pseudonimi iz putanje → šablon, upit se odbacuje osim `utm_*`, a admin/nadzor/dečji prostor/`/programi/potvrde` se ne mere. Zato u GA administraciji **„Page changes based on browser history events" MORA ostati isključeno** — inače ide dvaput, jednom sa neočišćenom adresom. Nova ruta sa pseudonimom ili tokenom u putanji → dopuniti `SABLONI`.
+- 🔴 **Događaji idu SAMO kroz `dogadjaj()`** (`src/lib/analitika.ts`) — dozvoljena lista parametara, bez pseudonima, `user_id`, iznosa POEN-a/RSD i naziva programa. Google Signals i reklamni signali isključeni u kodu. Brana: `__tests__/analitika-izvor.test.ts`.
+- **Povlačenje pristanka:** link „Podešavanja kolačića" u oba futera vraća banner; odbijanje gasi GA odmah (`ga-disable-<ID>`, `consent update`) i briše `_ga` kolačiće.
+- Vercel Analytics ide kroz isto čišćenje (`beforeSend`).
+- 🟡 **Dug u aktima (odluka vlasnika: podešava se kako je najbolje, akti se prilagođavaju):** GA rok čuvanja 14 meseci naspram 12 u Registru radnji obrade; događaji korišćenja i granularna lokacija nisu izričito navedeni u Politici čl. 7 / Registru. Ide uz naredni bump Politike. Dimenzija „status člana" se uvodi tek tim bumpom.
+
+### Cirkularna sistemska obaveštenja (svim korisnicima)
+- **Namena je uska i propisana aktima:** izmene Uslova/Politike (**Uslovi čl. 40, Politika čl. 16** — stupaju na snagu danom donošenja, obaveštenje bez odlaganja; rok od 15 dana ukinut setom 4.3.0), planirani zastoj > 24h (**Uslovi čl. 33**), obaveštenje o suspenziji/isključenju (**Uslovi čl. 27, 28**). Zato ova pošta **NE poštuje `emailObavestenja` opt-out** i mejl **nema link za odjavu** — u podnožju stoji pravni osnov i objašnjenje zašto se ne može isključiti.
+- 🔴 **NIJE kanal za vesti/bilten.** Politika čl. 8 (i DPIA, Radnje obrade) deklariše Resend „**isključivo za dostavljanje sistemskih obaveštenja**". Bilten je **druga svrha obrade** → traži dopunu Politike/DPIA/Radnji obrade, **novu verziju Politike sa ponovnom saglasnošću** (`PolitikaVerzija` + nov DB red) i **zaseban pristanak**. Dok se to ne uradi, slanje biltena ovim kanalom je nedozvoljeno.
+- **Kod:** model `SistemskoObavestenje` + enum `SistemskoStatus` (NACRT/U_SLANJU/POSLATO/PREKINUTO), migracija `20260803140000_sistemsko_obavestenje`; logika `src/lib/sistemsko-obavestenje.ts`; batch slanje `posaljiEmailBatch()` u `email.ts` (Resend `/emails/batch`, **max 100 po pozivu**, pauza 250ms ≈ 4 zahteva/s zbog limita od 10/s, odn. 2/s na starijim nalozima).
+- **`pravniOsnov` je obavezno polje** (npr. „Uslovi čl. 40") — ide u audit log i u podnožje mejla. Bez odredbe iz akata to je bilten, ne sistemsko obaveštenje.
+- **Slanje je nastavljivo, bez cron-a:** Vercel plan **odbija subdnevni cron** (vidi Tablu jemstva), pa jedan poziv rute obradi koliko stigne u budžetu od 45s i zapamti `kursorId` (poslednji obrađeni `User.id`, stabilan rastući redosled). Admin ekran sam poziva rutu u petlji dok `zavrseno` ne bude `true`; ponovni poziv **ne šalje istom korisniku dvaput**. Neuspela porcija se ponavlja jednom, pa se odbroji u `neuspesno` i slanje ide dalje.
+- **Primaoci:** svi nalozi sa email adresom koji nisu ugašeni (`deaktiviranAt: null`). **Suspendovani su namerno unutra** — obaveštenje im se duguje isto (Uslovi čl. 27, 40).
+- **Rute (samo SUPERADMIN** — cirkularna pošta je sistemska poluga): `GET/POST /api/admin/sistemsko-obavestenje`, `POST /api/admin/sistemsko-obavestenje/[id]/{proba,posalji,prekini}`. Admin tab **Obaveštenja** (`ObavestenjaTab.tsx`), vidljiv samo superadminu. Audit: `SISTEMSKO_OBAVESTENJE_{NACRT,POSLATO,PREKINUTO}` (loguje se pokretanje, ne svaki nastavak).
+- 🟡 **Pre prvog masovnog slanja:** domen `ekolo.rs` do sada šalje po nekoliko mejlova dnevno. Nagli skok na hiljade poruka obara reputaciju domena i pogađa i mejlove za reset lozinke — slati postepeno ili sa zasebnog poddomena.
+
+### Početna (`/pocetna`)
+- Vesti Fondacije (Blog, poslednjih 5) levo + globalna **Pričaonica** desno (50/50; svi prijavljeni vide, **samo verifikovani** pišu, max 1.000 znakova). „Pričaonica" je UI naziv (commit `9140b82`); model ostaje `ChatMessage`.
+- 🔴 **Četiri kartice brojača su dugmad i pale se/gase kao na `/sistem` (2026-09-22).** Otvorena kartica spušta spisak **ispod kartica, iznad vesti i Pričaonice**; ponovni klik je gasi. Članovi → spisak članova, Razmena → prepisi između korisnika, Ukupno POENA → zapisi Protokola, Oglasa → **link na Pijacu** (oglasi se ne prepisuju ovde — na Pijaci imaju pretragu po kategoriji i mestu).
+- 🔴 **Spiskovi su JEDNA komponenta sa `/sistem` — `src/components/SistemListe.tsx`** (`ClanoviSekcija`, `TransakcijeSekcija`, `ProtokolLista`, `Ucesnik`). Prepisan spisak bi se razišao baš na pravilu vidljivosti: pseudonim u evidenciji doprinosa vidi samo potvrđen član (Pravilnik čl. 67), a to pravilo nosi `Ucesnik`. Ne praviti drugu kopiju.
+- 🟡 **Podatke diže `GET /api/pocetna/liste?sekcija=clanovi|razmene|protokol`, tek pri otvaranju kartice** — početna je prvi ekran posle prijave, a spisak članova je upit nad svim nalozima; zatvorena kartica ne sme da košta nijedan upit. Ruta koristi **iste uslove** kao `/sistem` (`USLOV_RAZMENE`, `BEZ_DECE`, izuzeće `EMISIJA_PROGRAM`) — dve kartice sa istim imenom ne smeju da mere dva skupa. 🔴 Vidljivost sprovodi **server**: novom članu se strane maskiraju (`pseudonim: null` → „—"), a spisak članova mu se ne šalje uopšte, pa pseudonim ne stigne ni u mrežni odgovor.
+
+### Sistem (`/sistem`)
+- `/dashboard` redirectuje na `/sistem`. Lični pregled + 4 kartice (Članovi, Transakcije, Krugovi, Opticaj sa zero-sum kvačicom). Klikabilne kartice → filtrirani prikazi.
+- 🔴 **Kartica „Članovi" broji i AKTIVNU DECU (2026-08-31).** Veliki broj je `verifikovanih + aktivneDece`, a „novih" je ostatak. Do ove izmene je brojao samo `verified: true`, pa je maloletni nalog zauvek stajao među „novima" — dete se **nikad ne potvrđuje** (u lanac potvrda ne sme da uđe, Pravilnik o učešću dece čl. 15), a nalog u stanju `AKTIVNO` radi u punom obimu. Uslov je **isti `USLOV_AKTIVNO_DETE`** koji broji ranglista škola (`protokol/skole.ts`) — ne praviti drugu definiciju aktivnog deteta.
+- **Dete u spisku članova nosi pečat „DETE"** (`sistem.clan_dete`, 5 jezika), ne „?" — isti razlog kao pečat na Pijaci: „bez potvrde" bi mu saopštavalo nešto što se nikad neće promeniti.
+- 🟡 **Sekcija „Lokacije" se NIJE menjala** — tamo „{ukupno} članova · {verif} redovnih" i pragovi za otključavanje kolektivnih oblika i dalje broje samo redovne članove. Dete ne osniva Zadrugu, pa bi ga brojanje tamo naduvalo prag.
+
+### Blog (Vesti Fondacije)
+- Admin objavljuje (`POST /api/admin/blog`); javna lista `/api/blog`. Model `BlogPost`.
+
+### Pričaonica (globalna soba; UI naziv, ranije „Chat soba")
+- Jedna soba; svi prijavljeni vide, samo verifikovani pišu; auto-čišćenje > 30 dana (`/api/cron/chat-cistenje`). Model `ChatMessage` (interni identifikator nepromenjen).
+
+### Doprinos zajedničkom dobru — Oglasi (Operativni program)
+- Predlagač objavljuje zadatak; verifikovan korisnik (indeks ≥ 10%) se prijavljuje (`/api/doprinos-oglasi/[id]/prijavi`), evidentira izvršenje (`/api/doprinos-oglasi/[id]/evidencija`).
+- ✅ **Usklađeno:** model je **predloženi POEN × min(1, L/P)** (`DoprinosOglas.predlozeniPoen`, `OglasEvidencija.predlozeniPoen`; `programi.ts`), izvršenje verifikuju **nosioci ZRNA (Faza 2) / UO (Faza 1)** uz proveru sukoba interesa (verifikator ≠ izvršilac ≠ predlagač). Satnica (`hourlyRate`/`hoursWorked`) uklonjena. Konsolidovano sa starim PED tokom — `DoprinosEvidencija` i `/programi/ped/evidencija` više ne postoje; „PED" je samo enum/labela koja se rutira kroz doprinos-oglase.
+- Modeli: `DoprinosOglas`, `OglasPrijava`, `OglasEvidencija` + enumi `OglasSource`/`OglasStatus`/`OglasPrijavaStatus`/`EvidencijaStatus`.
+
+### Javne pravne stranice (rendruju iz `dokumentacija 4.1/`, prevodi iz `/en/`, `/ru/`, `/hr/`, `/hu/`)
+- Loader `src/lib/pravni-dokument.ts` (baza = `dokumentacija 4.1`), mapa slugova u `src/app/(public)/pravilnik/[slug]/page.tsx`. Sve otključano za posetioce. 🔴 **Verzija se čita iz imena fajla** (`ls "dokumentacija 4.1"/*.md`), ne iz ovog fajla.
+- Stranice: `/pravilnik` (+ `/pravilnik/[slug]`: kolo-sistem, hijerarhija, dokaz-stvarnosti, pokroviteljstvo-donacije, operativni, osnivacki, gornje-kolo, programi-podrske, projekti-nabavke, ucesce-dece), `/privatnost`, `/uslovi`, `/statut`, `/dpia`, `/radnje-obrade`, `/whitepaper`, `/rizici`, `/zajednicko-dobro`, `/osnivacki-doprinos`.
+- **Verzijske labele** u `messages` (`pravne.<doc>.ver`, `meta_<doc>_desc`, `javneKomponente.dok_tag`) — menjaju se uz svaki bump, vidi „PRAVILO BUMPOVANJA".
+- **i18n (EN/SEO):** javna površina + chrome + Pijaca prevedeni; jezik se bira cookie-om (dugme Lat/Ћир/EN), **bez `/en/` URL prefiksa** — prefiks bi tražio `app/[locale]/` restrukturaciju (vidi `docs/i18n-engleski-plan.md`, sekcija INCIDENT).
+### Admin panel
+- Tabs (`AdminKlijent.tsx`): Dashboard, Programi, Evidencija/PED, Pokrovitelji, **Donacije**, **Prigovori**, Korisnici, Pijaca, **Prvi oglasi** (odobravanje doprinosa iz čl. 40a), Finansije (evidencija doprinosa + veto/troškovi), Osnivači, Vesti, **Obaveštenja** (cirkularna sistemska pošta, samo superadmin), Audit, Nadzor (samo superadmin). (Admin simulator UKLONJEN; **Krugovi tab UKLONJEN** — ostala samo mrtva komponenta `KrugoviLista`.)
+- **Terminologija „emisija" → „evidencija doprinosa" u Sistem/Admin UI** (commit `120d578`, samo `messages/*.json`) — **izuzev istorije transakcija**, gde tip transakcije ostaje vidljiv; u istoriji „Emisija" → prikaz **„Protokol"** uz boje iznosa (Protokol=plavo, primljeno=zeleno, dato=crveno; commit `8fd6d47`).
+- **Badge po tabu = sidebar Admin badge (od 2026-06-13):** svaki tab koji ima stavke „na čekanju" prikazuje broj u zagradi (Programi, PED, Pokrovitelji, Donacije, Prigovori, Pijaca, Prvi oglasi, Nadzor). Sidebar `adminCekanje` (`/api/dnevni-brojevi`) broji ISTE kategorije — **krugovi izbačeni** iz brojanja (nemaju tab). **Donacije** tab: potvrda PENDING `donationRecord` preko `POST /api/admin/donacija {donationId}`. **Prigovori** tab: odgovor preko `PATCH /api/admin/prigovori/[id] {status, odgovor}` (RESENO/ODBIJENO/U_OBRADI). 🟡 Preostali nesklad: Pokrovitelji **tab** broji SVE pokrovitelje, a sidebar broji `pokroviteljPrijava` POTPISANA (na čekanju) — različiti brojevi.
+
+## Sidebar linkovi (grupisana navigacija od 2026-06-13/16, `src/components/Sidebar.tsx`)
+Navigacija je grupisana sa naslovima grupa i jednom **padajućom (collapsible)** grupom; više nije ravan spisak.
+- **Nov član:** gornja grupa (Početna, Sistem, **POEN**, Pijaca) + grupa **„Poverenje"** (**Potvrde**).
+- **Redovan član:** gornja grupa (Početna, **POEN**, Pijaca) → grupa **„Poverenje"** (**Potvrde**) → grupa Donacije/**Pokrovitelj** → padajuća grupa **„Zajedničko dobro"** (Sistem, ZRNO, Doprinos, Programi, + Nadzor ako je nadzornik).
+- Stavka se od 2026-08-12 zove **„Potvrde"** (`nav.verifikacija`), a poziv za nove **„Zamoli za potvrdu →"** (`nav.verifikuj_nalog`); **ruta ostaje `/verifikacija`** — stari linkovi iz notifikacija i mejlova moraju da rade.
+- **Stavka „Tabla jemstva" i njen badge UKLONJENI (2026-08-09)** — tabla je ukinuta; put do potvrde vodi kroz Pijacu, koja je već u gornjoj grupi.
+- **Admin (dodatno):** Admin.
+- „Postani pokrovitelj" → label **„Pokrovitelj"** (commit `80fe35b`). Jezik switcher (Lat/Ћир/EN) je u header-u, ne u sidebar-u.
+- Badge brojevi sa `GET /api/dnevni-brojevi`. Ostale stranice (Poruke, Krug, Glasanje, Profil) dostupne preko drugih ulaznih tačaka.
+
+### Sidebar badge — dve vrste (od 2026-06-11)
+- **„Viđeno" badge-evi (Novčanik, Pijaca):** broje stavke nastale POSLE poslednjeg otvaranja taba. Kolone `User.vidjenoNovcanikAt` / `vidjenoPijacaAt` (migracija `20260611120000_sidebar_vidjeno`); `GET /api/dnevni-brojevi` broji `createdAt > viđeno` (fallback ponoć ako tab nije otvaran); `POST /api/dnevni-brojevi/vidjeno {sekcija}` postavi „viđeno = sad" → badge na 0. Nulovanje okida `AppShell` `useEffect` na promenu `pathname` (`/novcanik` | `/pijaca`): optimističko nulovanje + POST + re-fetch.
+- **Akcioni badge-evi (Admin, Nadzor):** broje otvorene stavke koje traže radnju (stavke na čekanju za admina, verifikacije za nadzor). **Namerno se NE nuluju na otvaranje** — padaju tek kad se sama stavka reši. Ako korisnik očekuje da nestanu „kad se očitaju", to je očekivano ponašanje, nije bug.
+- 🔴 **BUG (Pijaca badge se ne nuluje):** ruta `/pijaca` (index + `[id]`) je u `src/app/pijaca/` sa **sopstvenim** `layout.tsx` koji renderuje `Sidebar` direktno — **van `AppShell`-a**. Zato se „viđeno" `useEffect` (koji je u `AppShell`) NIKAD ne okine pri ulasku u Pijacu → `vidjenoPijacaAt` se ne pomera → badge ostaje. (Novčanik je u `(app)/` grupi pa radi.) Fix: okinuti `POST /api/dnevni-brojevi/vidjeno {sekcija:"pijaca"}` iz klijentske komponente na `/pijaca` (npr. `useEffect` u `PijacaKlijent`), ili dignuti „viđeno" logiku u `Sidebar` (deljen u oba layout-a).
+
+## API endpointi (izbor)
+
+### Korisnici / profil
+`POST /api/registracija` · `GET /api/provjeri-pseudonim` · `PATCH /api/profil/{pseudonim,lozinka,lokacija,podaci,obavestenja}` · `POST /api/email/odjava` · `GET /api/profil/balans` · `GET /api/profil/eksport` · `DELETE /api/profil` · `GET /api/korisnici/pretraga` · `GET /api/m/[hash]/pseudonim` · OAuth (`/api/oauth/*`, `/api/zaboravljena-lozinka`, `/api/reset-lozinka`)
+
+### Novčanik / transfer
+`POST /api/transfer` · `GET /api/novcanik/transakcije`
+
+### Verifikacija / nadzor
+`POST /api/verifikacija` · `GET /api/verifikacija/moj-indeks` · `POST /api/verifikacija/token` · `GET /api/verifikacija/lanac/[korisnikId]` · `/api/nadzor/*` · `POST /api/admin/korisnici/[id]/lazni-verifikator`
+(Rute `/api/tabla-jemstva/**`, `/api/admin/tabla-jemstva/**` i cron `tabla-jemstva-istek` su obrisane 2026-08-09.)
+
+### Pijaca / poruke / chat / blog
+`/api/pijaca` (+ `/[id]`, `/[id]/kupi`, `/slika/...`) · `/api/poruke` (+ `/[konvId]`) · `GET/POST /api/chat` + `/api/cron/chat-cistenje` · `GET /api/blog` + `/api/admin/blog/*`
+
+### ZRNO
+`GET /api/zrno` · `POST /api/zrno/upis` · `POST /api/zrno/otpis` · `POST /api/zrno/{zakljucaj,otkljucaj,delegiraj}` · `POST /api/admin/zrno/nocna`
+
+### Programi / doprinos-oglasi
+`GET /api/programi` · `POST /api/programi/[type]/prijava` · `POST /api/programi/ped/evidencija` · `/api/admin/programi/*` · `/api/doprinos-oglasi/*` (+ admin odobravanje/odbijanje prijava i evidencije)
+
+### Krugovi / glasanje
+`/api/krugovi/*` (+ admin) · `/api/glasanje/*`
+
+### Pokrovitelji / donacije / osnivački
+`GET /api/pokrovitelji` · `/api/pokroviteljstvo/prijava` (+ `/[id]/potpisi`) · `/api/admin/pokroviteljstvo/prijave/*` (potvrdi/odbij) · `/api/admin/pokrovitelji/*` · `POST/GET /api/donacije` · `/api/admin/donacija` · `/api/admin/osnivaci`, `/api/admin/osnivacki/triger`, `/api/javno/osnivacki-doprinos`
+
+### Fondacija / veto / sistem
+`GET /api/admin/prvi-oglasi` + `POST /api/admin/prvi-oglasi/[id]/{odobri,odbij}` (čl. 40a) · `/api/admin/fondacija` (saldo, troškovi, veto) · `GET /api/javno/statistike` · `GET /api/javno/feed` (gradiran: gost→agregat, neverifikovan→maskirano, verifikovan→pseudonimi) · `/api/notifikacije` · `/api/dnevni-brojevi` · `/api/admin/{dashboard,transakcije,audit-log,zero-sum,emisija/nocna}` · `/api/cron/{nocna-emisija,zero-sum,gdpr-cistenje}` · `/api/prigovor` + `/api/admin/prigovori/[id]`
+
+## Biblioteka funkcija (`src/lib/protokol/`)
+- `emisija.ts` — `emitujPoen()`: emisija + zero-sum validacija
+- `programi.ts` — `izracunajDnevniIznos()`, `izvrsiNocnuEmisiju()`, `labelPrograma()`
+- `pokrovitelj.ts` — pun tok prijave; koeficijent = donacija × 1,20, nivo se **izvodi iz kumulativa**. 🔴 `NIVOI_POKROVITELJA`, `bonusZaNivo()` i `izracunajNivo()` su OBRISANE (2026-09-08) — ne vraćati ih
+- `donacija.ts` — `nivoZaKumulativ()`, `izracunajPoenZaDonaciju()`, `evidentirajDonaciju()`; pravila u `src/lib/donacija-pravila.ts` (`pragZaNivo`, `koeficijentZaNivo` — niz se nastavlja bez plafona)
+- `krug.ts` — bonus rasta Kruga (ne ulazi u dnevni limit)
+- `zrno.ts` — `UKUPNO_ZRNA`, `MINIMUM_POEN_ZA_UPIS_ZRNA`, obračunski koeficijent (`tekuciKoeficijent()`/`poslednjiKoeficijent()`), noćna obrada, `glasackaMoc()`. 🔴 Stara imena `trendsKurs`/`poslednjiKurs` i `ZrnoTrziste`/`.kurs` su preimenovana 13.09.2026 (R-04) — **ne vraćati nijedno**
+- `osnivacki.ts` — osnivački kanal (100 × 24.000, granica 2.4M, raspodela; korak na svakih 100.000 opticaja, automatski i uzastopno pri preskočenim pragovima)
+- `fondacija.ts` — saldo Fondacije + zaštitni veto; `pragZaGasenje = dohvatiTrosakPrethodnogMeseca() × 3` po Gornjem Kolu čl. 19. 🔴 Projektni odliv ide u `ProjekatTrosak`, NIKAD u `FondacijaTrosak` (prag meri samo operativu)
+- `faza-sistema.ts` — Faza 1/2, auto prelaz na 1.000.000 POEN
+- `dokaz-stvarnosti.ts`, `verifikacija-service.ts`, `nadzor-service.ts`, `lazna-verifikacija.ts` — dokaz stvarnosti i nadzor
+- `doprinos-sadrzaju.ts` — osmi kanal (čl. 40a); čista pravila u `src/lib/doprinos-pravila.ts`
+- `pristup.ts` — provere pristupa po statusu/indeksu
+- `src/lib/notifikacije.ts` — `posaljiNotifikaciju()`; `src/lib/faq-data.ts` — `FAQ_SEKCIJE`
+
+## Nezavršeni TODO / preostali GAP-ovi
+
+### Stvarni GAP-ovi (dokumentacija propisuje, kod radi drugačije)
+
+🟢 **Sedam zatečenih GAP-ova iz v3.7.x je REŠENO** (tabela donacija, veto prag, operativni doprinos, konsolidacija PED, „kurs" u srpskom UI, verzijske labele, dual `Role`/`TipKorisnika`). Spisak je izdvojen u `docs/istorija-uskladjenosti.md` — 🔴 meren je prema **v3.7.x** i ne koristi se kao izvor.
+
+**Aktivni GAP-ovi se vode po sekcijama ovog fajla** uz oznaku 🟡 (npr. Pijaca badge se ne nuluje, gejt za pristanak je samo klijentski, DPA ugovori obrađivača nisu prikupljeni, `POCETNI` legacy JWT-fallback u `proxy.ts`).
+### Mehanizmi delegirani posebnim pravilnicima / nisu fokus
+8. **Modul Zadruga (čl. 56)** — nije implementiran (odluka vlasnika). Krug postoji. **Modul Deca (čl. 58) JESTE implementiran i pušten u rad 2026-09-03**; Pravilnik o učešću dece je usvojen setom 4.3.0, DPIA ažuriran.
+9. **Raspoređivanje dinarskih sredstava (čl. 51)** — višak iznad troškova u programe; Faza 2 preporuke Gornjeg Kola UO. Postoji `FondacijaTrosak`; automatizacija raspodele nije.
+10. **Unutrašnje odlučivanje Kruga / ovlašćena lica (čl. 55)** — poseban pravilnik o krugovima; `KrugClanstvo.isAdmin` postoji bez formalnog ograničenja broja.
+11. **Rešavanje sporova (čl. 79)** — sud (obligaciono pravo); interni mehanizmi opcioni. Postoji samo `PrigovorNaOdluku`.
+12. **Suspenzija — mehanika u Uslovima (čl. 33)** — `suspendedAt` postoji; rok/auto-ukidanje delegirani Uslovima.
+13. ✅ **REŠENO — Reverifikacija socijalnih programa.** `nextReverifikacija` se postavlja pri odobravanju (rokovi iz čiste funkcije `rokReverifikacije`, vidi „Programi Protokola"); cron `/api/cron/programi-revizija` (vercel.json, 23:00) deaktivira ACTIVE prijavu kad prođe rok ili REGULARNI indeks padne ispod 10% (`FUNKCIONALNI_PRAG_INDEKSA`) → INACTIVE + notifikacija; reapply dozvoljen iz INACTIVE. Čiste funkcije `rokReverifikacije`/`razlogObustaveProgram` u `programi.ts` (testirano).
+14. **Pseudonim — limit izmene** — `pseudonimChangedAt` postoji; limit nije propisan Pravilnikom (Uslovi).
+15. **CC BY-SA označavanje sadržaja na nivou pojedinačnog dela** — bez formalnog mehanizma.
+16. **Trajna atribucija doprinosa koda/sadržaja** — kad bude modul za doprinose, `DELETE /api/profil` NE sme brisati atribuciju (Uslovi čl. 31).
+
+### Operativno
+17. ✅ **Migracije se primenjuju AUTOMATSKI pri svakom deploy-u** (vidi „Migracije se primenjuju AUTOMATSKI" u Deploy sekciji) — `vercel.json buildCommand` pokreće `prisma migrate deploy` kad postoji `DATABASE_URL`. Ručni `npx prisma migrate deploy` više nije potreban (ostaje kao fallback za lokalno/vanredne situacije).
+18. **Git okruženje:** uvek `git fetch origin main` pre poređenja (lokalni `main` u kontejneru ume da bude zastareo).
+
+
+---
+
+## Uloge, Ko je ko i admin panel — pun zapis (izdvojeno iz CLAUDE.md 28.09.2026)
+
+### Uloge u sistemu
+- **Korisnik platforme** (neverifikovan/verifikovan), **Verifikovani korisnik** (indeks ≥ 10%), **Nosilac ZRNA**, **Član Kruga** (preko `KrugClanstvo`), **Admin** = **operativa Fondacije, NE UO** (`admin` kolona = `AdminNivo` ADMIN/SUPERADMIN; tip ostaje `NOSILAC_ZRNA`; vidi „Ko je ko“), **Pokrovitelj** (pravno lice ili preduzetnik, bez naloga).
+- ✅ **Jedinstveni statusni model:** legacy `Role` enum (`FIZICKO_LICE`/`CLAN_KRUGA`/`ADMIN`) je **uklonjen** (Faza C). Kanonski `TipKorisnika` ima tri vrednosti (`REGULARNI`/`NOSILAC_ZRNA`/`NEVERIFIKOVAN`); `POCETNI` je naknadno **uklonjen iz enum-a**. **Admin = operativa Fondacije** (odluka vlasnika 2026-09-23 — **ne UO**, vidi „Ko je ko“) se vodi preko **`admin` kolone (`AdminNivo`)**, NE preko `tipKorisnika` (autorizacija `/admin` panela ide preko `jeAdmin({admin})`; `tipKorisnika === "POCETNI"` ostaje samo kao legacy JWT-fallback u `proxy.ts`, za uklanjanje). **Članstvo u Krugu** se vodi isključivo preko `KrugClanstvo` (nema više `CLAN_KRUGA` na korisniku). Migracije `20260603150000_drop_role_enum` (drop legacy `Role`).
+
+### 🔴 Ko je ko — UO, direktor i početni članovi (odluka vlasnika, 2026-09-23)
+
+**Upravni odbor Fondacije čine TROJE: Danijel, Jelena, Stefan.**
+**Vlasnik (pseudonim `dr.nikola.šarić`) je DIREKTOR**, ne član UO.
+**Mihajlo je pomoćni programer**, takođe ne član UO.
+
+**Svih petoro su početni članovi i nosioci ZRNA** — `jeOsnivac = true`, indeks fiksno
+100%. 🔴 To se sa članstvom u UO **ne poklapa i ne sme se izjednačavati**: početni član
+je normativni pojam iz Pravilnika o dokazu stvarnosti čl. 14, UO je organ Fondacije, a
+direktor je zastupnik. Tri različite stvari kod istih ljudi.
+
+🔴 **Zamka sa imenom Jelena.** U bazi postoje **tri** naloga sa tim imenom — `Jelena`
+(UO, osnivač), `Jelena N.` i `Jelena1710.` — a uz njih i `jellena92`, koja je roditelj
+deteta `Lazar` i **nije** ona iz UO. Kad se u razgovoru kaže „Jelena", misli se na
+**onu iz UO**; svaki drugi nalog se imenuje punim pseudonimom.
+
+### 🔴 Admin panel je ALAT OPERATIVE, ne organa (odluka vlasnika, 2026-09-23)
+
+Do tada je na dva mesta u ovom fajlu i u komentaru `__tests__/admin-namespace.test.ts`
+stajalo **„Admin = UO Fondacije"**, a to nikad nije opisivalo stvarnost: kolonu `admin`
+(`AdminNivo`) drže **direktor i pomoćni programer**, dok **nijedan od trojice iz UO nema
+ijedan nivo** (provereno u prod bazi 21.09.2026). Sva tri mesta su ispravljena.
+
+🔴 **Brana oko `admin` namespace-a time NIJE oslabljena.** Njen razlog nije bio „panel
+pripada UO" nego „panel barata institutima iz akata, pa loš prevod vodi ka odluci po
+pogrešnom institutu". Nosilac je bio pogrešno imenovan, razlog stoji — **ne ukidati je.**
+
+🔴 **Ostaje otvoreno ono što odluka NE rešava: radnje koje akti izričito daju UO.**
+Kod na deset mesta izjednačava admina sa UO, a četiri su **normativne nadležnosti**, ne
+operativa:
+
+| Radnja | Akt | Kapija u kodu |
+|---|---|---|
+| Sprovođenje odluke Gornjeg Kola | Gornje Kolo čl. 51 | `jeSuperadmin` |
+| Zaštitni veto | Pravilnik čl. 48 | `jeSuperadmin` |
+| Odgovor UO na dinarsku preporuku | Gornje Kolo čl. 20 | `jeAdmin` |
+| Verifikacija operativnog doprinosa u Fazi 1 | Pravilnik čl. 36 | `jeAdmin` |
+
+Posledica: te akte danas može da izvrši direktor i **pomoćni programer**, a **UO ne može
+nijedan** — nema pristup. Za veto i sprovođenje odluke to je akt organa koji donosi neko
+drugi.
+
+🔴 **Ne rešavati davanjem `admin` nivoa članovima UO** — time bi panel ponovo postao alat
+organa, što je suprotno ovoj odluci. Rešenje ide u drugom smeru: te četiri radnje dobijaju
+**sopstvenu kapiju** odvojenu od `AdminNivo`-a (oznaka „član UO" na nalogu), pa operativa
+zadržava panel a organ svoje akte. Zaseban potez, ne otvarati bez naloga vlasnika.
+
+🔴 Tekuće stanje kolone se **ne prepisuje ovde** (pravilo 10) — čita se iz baze.
+
