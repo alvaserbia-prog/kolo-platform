@@ -31,6 +31,7 @@ dok zajedničko propada (sc. 3, 6, 8) i vraća se u kolu (sc. 9).
 
 - **POEN se nikad ne crta kao novčić ni novčanica** — u zapisu stoji ko je kome šta dao, bez iznosa u dinarima.
 - Bez reči kupi, prodaj, plati, zaradi, cena u titlovima i natpisima.
+- 🔴 **Tekst ide 0,7 s ispred reči** (`PREDNOST_S` u `src/vreme.ts`): titl, natpis i pokreti vezani za reč, a sa njima i zvučni efekti; glas i muzika ostaju na mestu (odluka vlasnika 28.09.2026, vidi `video/README.md`).
 - Titlovi prate **izgovoreno**: sc. 5 je izgovorena kao niz „kad …, kad …, kad …“, a sc. 9 kao jedna rečenica posle „KOLO je jedan takav bunar“.
 
 ## Kako se pravi

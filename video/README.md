@@ -182,6 +182,13 @@ Kropotkin); XX i XXI vek idu hronološki, osim Kompenzacije i 1993., koja je izv
 
 ## Zajedničko za sve videe
 
+🔴 **Tekst ide 0,7 s ISPRED izgovorene reči** (odluka vlasnika, 28.09.2026). Titl, natpis i pokret
+vezan za reč pojavljuju se 0,7 s pre nego što se reč izgovori; glas i muzika se ne pomeraju, a
+zvučni efekti prate sliku. Kad je tekst išao tačno uz reč (merenjem usklađen na desetinku), gledalac
+ga je doživljavao kao da kasni, i to u svim videima serije. Provereno na uređaju vlasnika testom
+bljesak + pisak (uređaj pušta sinhrono) i probom sa pomerenim zvukom. U kodu: `PREDNOST_S` u
+`src/vreme.ts` (i u `scripts/zvuci.py`), prvi put u `kolo-bunar/`.
+
 Papirni kolaž, linije koje „ključaju", titlovi po rečima (izgovorena reč zelena), naracija
 vlasnika, tamburaška muzika, −14 LUFS. Trajanje nije unapred određeno: video traje koliko priča traži, i duže od 60 s kad je tako procenjeno (odluka vlasnika, 26.09.2026). POEN se nikad ne crta kao novčić ni novčanica, samo kao
 zapis. Bez reči kupi, prodaj, plati, zaradi, cena. Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,

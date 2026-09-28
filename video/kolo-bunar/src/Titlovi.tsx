@@ -5,7 +5,7 @@ import { random, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import plan from "./plan.json";
 import { P } from "./paleta";
 import { SERIF } from "./fontovi";
-import type { Rec } from "./vreme";
+import { PREDNOST_S, type Rec } from "./vreme";
 
 type RecF = Rec & { f: number; ef: number };
 type Komad = { reci: RecF[]; od: number; do: number };
@@ -21,7 +21,7 @@ const komadi = (): Komad[] => {
     let tek: RecF[] = [];
     const reci = s.reci as Rec[];
     reci.forEach((w, i) => {
-      const r = { ...w, f: Math.round((s.glasOd + w.s) * plan.fps), ef: Math.round((s.glasOd + w.e) * plan.fps) };
+      const r = { ...w, f: Math.round((s.glasOd + w.s - PREDNOST_S) * plan.fps), ef: Math.round((s.glasOd + w.e - PREDNOST_S) * plan.fps) };
       const duzina = tek.map((x) => x.w).join(" ").length;
       if (tek.length && duzina + 1 + w.w.length > MAX_ZNAKOVA) {
         out.push({ reci: tek, od: 0, do: 0 });
