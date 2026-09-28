@@ -22,7 +22,7 @@ L = np.zeros(N)
 R = np.zeros(N)
 SC = {s["id"]: s for s in plan["scene"]}
 FPS = plan["fps"]
-PREDNOST_S = 0.7  # efekti prate sliku, a slika ide 0,7 s ispred reči (src/vreme.ts)
+PREDNOST_S = 1.0  # efekti prate sliku, a slika ide 1 s ispred reči (src/vreme.ts)
 
 
 def rec(sid, w, pojava=1):

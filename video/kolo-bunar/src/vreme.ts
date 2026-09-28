@@ -5,10 +5,10 @@ export type Scena = (typeof plan.scene)[number];
 export const FPS = plan.fps;
 /**
  * Koliko tekst i slika idu ISPRED izgovorene reči (odluka vlasnika 28.09.2026): titl, natpis i
- * pokret vezan za reč pojavljuju se 0,7 s pre izgovora, jer oko čita sporije nego što uho čuje;
+ * pokret vezan za reč pojavljuju se 1 s pre izgovora, jer oko čita sporije nego što uho čuje;
  * kad je tekst išao tačno uz reč, gledalac je doživljavao da kasni. Glas i muzika se ne pomeraju.
  */
-export const PREDNOST_S = 0.7;
+export const PREDNOST_S = 1.0;
 export const scena = (id: number): Scena => plan.scene.find((s) => s.id === id)!;
 
 /**
