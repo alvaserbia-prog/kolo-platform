@@ -344,18 +344,14 @@ U opisima nema reči „besplatno“ (pravilo iz odeljka 2); u samom videu je os
 Opisi su pisani po pravilu „opis ne prepričava video“ (odeljak 1): Milicina priča se ne ponavlja,
 opis polazi od podruma punog tegli koje niko ne otvara i od starog recepta.
 
-Pregled ekipe (urednik za mreže, gledalac iz ciljne grupe, čuvar sadržaja, 28.09.2026):
-urednik je tražio jedan poziv, pa su pitanje publici i link spojeni u jednu rečenicu na sve tri
-mreže (ranije su stajali odvojeno); prva rečenica ostaje sama (TikTok 56, Instagram 103 znaka).
-Gledalac iz ciljne grupe (domaćica 55+) nije znao šta je „platforma“ i pomešao bi „Pijacu“ sa
-gradskom pijacom, pa stoji „sajt na kome komšije razmenjuju ono što umeju i imaju“ i „u delu sajta
-koji se zove Pijaca“; dodato je ko kome prepisuje POENE („komšija ti za tegle prepiše POENE“), jer
-bez toga nije jasno odakle POEN dolazi. Čuvar sadržaja je izbacio „neko bi mnogo dao da ponovo
-okusi“ (može da se čita kao ponuda iznosa) i proverio da je POEN svuda zapis, a ne novac, da stoji
-„Fondacija u tome ne posreduje“ i da nema brojeva ni reči „besplatno“.
-Jezička provera (28.09.2026): rodno obeleženo „šta si doneo“ → „tvoj doprinos komšiluku“; duga
-rečenica sa zarezom ispred „i“ na Instagramu podeljena na dve; „pravu domaću zimnicu“ → „domaću
-zimnicu“ (suvišan ukras); po odluci vlasnika bez stilskih figura: „ruka i dalje zna koliko soli ide u ajvar“, „ta ruka je retkost“ i „ruka i dalje pravi“ → rečeno doslovno; na Facebook-u dosledno „vi“, na TikTok-u i Instagramu „ti“.
+Pregled ekipe i jezička provera (28.09.2026), nalazi su išli vlasniku na odobrenje po brojevima.
+Usvojeno: jedan poziv, pitanje spojeno sa linkom (1); prva rečenica na Instagramu stoji sama (2);
+rečeno ko kome prepisuje POENE, „za tegle ti komšija prepiše POENE“ (5); „šta si doneo“ → „tvoj
+doprinos“ (8); duga rečenica na Instagramu podeljena (9); **obraćanje „ti“ na sve tri mreže, i na
+Facebook-u** (10, odluka vlasnika); „pravu domaću zimnicu“ → „domaću zimnicu“ (11); poziv „Ponudi to
+komšijama“ na kraju (12). Nisu usvojeni: „sajt“ umesto „platforma“ (3), objašnjenje „u delu sajta koji
+se zove Pijaca“ (4) i izbacivanje „neko bi mnogo dao“ (6). Po odluci vlasnika i bez stilskih figura:
+„ruka i dalje zna koliko soli ide u ajvar“, „ta ruka je retkost“ i „ruka i dalje pravi“ rečeni su doslovno.
 
 ### TikTok
 
@@ -364,9 +360,9 @@ U mnogim kućama podrum je pun tegli koje niko ne otvara. Deca žive u drugom gr
 
 Malo ko danas ume da napravi ajvar kao nekad. A u istoj ulici često živi neko ko godinama nije okusio domaću zimnicu i ko pamti kako je mirisala kuhinja kad su se pekle paprike.
 
-KOLO je sajt na kome komšije razmenjuju ono što umeju i imaju. Nastao je u Somboru, a pokreće ga KOLO Fondacija. 🌾
+KOLO je platforma za razmenu dobara i usluga među komšijama. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
 
-Oglas postaviš u delu sajta koji se zove Pijaca, a razmenu dogovaraš direktno sa komšijom. Fondacija u tome ne posreduje. Za tegle ti komšija prepiše POENE. POEN nije novac i ne menja se za novac, on beleži tvoj doprinos komšiluku. Njime kasnije dogovaraš ono što tebi treba, recimo pomoć oko dvorišta. 🤝
+Na Pijaci postaviš oglas, a razmenu dogovaraš direktno sa komšijom. Fondacija u tome ne posreduje. Za tegle ti komšija prepiše POENE. POEN nije novac i ne menja se za novac, on beleži tvoj doprinos komšiluku. Njime kasnije dogovaraš ono što tebi treba, recimo pomoć oko dvorišta. 🤝
 
 👉 Šta ti i dalje praviš po starom receptu? Ponudi to komšijama na ekolo.rs, link je u profilu.
 
@@ -376,9 +372,9 @@ Oglas postaviš u delu sajta koji se zove Pijaca, a razmenu dogovaraš direktno 
 ### Instagram
 
 ```
-U podrumu stoje tegle koje niko ne otvara, a u susednoj ulici neko se godinama seća ukusa domaćeg ajvara. 🍅
+U podrumu stoje tegle koje niko ne otvara, a u susednoj ulici neko bi mnogo dao da ponovo okusi ajvar kakav se pravio kod kuće. 🍅
 
-KOLO je sajt na kome komšije iz Sombora i okoline razmenjuju ono što umeju i imaju. Za zimnicu postaviš oglas, a razmenu dogovaraš direktno sa komšijom. POEN koji ti se prepiše je zapis o doprinosu, a ne novac. Njime kasnije dogovaraš pomoć koja tebi treba. 🤝
+KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Ono što umeš da napraviš staviš na Pijacu, a razmenu dogovaraš direktno sa komšijom. Za tegle ti komšija prepiše POENE. POEN je zapis o doprinosu, a ne novac. Njime kasnije dogovaraš pomoć koja tebi treba. 🤝
 
 👉 Šta ti i dalje kuvaš po bakinom receptu? Ponudi to komšijama, link je u bio.
 
@@ -392,11 +388,11 @@ Koliko tegli zimnice ove jeseni ostaje neotvoreno po podrumima? 🏡
 
 Mnogi to znaju iz svoje kuće. Deca su u drugom gradu i dolaze za praznike, a zimnice u podrumu i dalje ima kao za punu kuću. U isto vreme, u susednoj ulici živi neko ko domaći ajvar nije okusio godinama.
 
-KOLO je sajt na kome ljudi iz istog mesta razmenjuju ono što umeju i imaju. Nastao je u Somboru, a pokreće ga KOLO Fondacija. 🌾
+KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
 
-Za svoju zimnicu postavite oglas u delu sajta koji se zove Pijaca. Razmenu dogovarate direktno sa komšijom, a Fondacija u tome ne posreduje. Komšija vam za tegle prepiše POENE. POEN nije novac i ne može se zameniti za novac. On beleži vaš doprinos, a njime kasnije dogovarate pomoć koja vama treba, oko kuće ili u dvorištu.
+Na Pijaci objaviš ono što praviš. Razmenu dogovaraš direktno sa komšijom, a Fondacija u tome ne posreduje. Za tegle ti komšija prepiše POENE. POEN nije novac i ne može se zameniti za novac. On beleži tvoj doprinos, a njime kasnije dogovaraš pomoć koja tebi treba, oko kuće ili u dvorištu.
 
-👉 Šta vi i dalje pravite po starom receptu? Ponudite to komšijama na https://ekolo.rs
+👉 Šta ti i dalje praviš po starom receptu? Ponudi to komšijama na https://ekolo.rs
 
 #Sombor #KOLO
 ```
