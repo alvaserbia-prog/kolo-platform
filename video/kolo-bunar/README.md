@@ -41,6 +41,7 @@ cd video/kolo-bunar
 npm ci
 DEEP_FILTER=/tmp/claude-0/deep-filter python3 scripts/popravka_glasa.py   # 1) audio/raw/snimak56.m4a -> audio/clean/glas.wav (pip install nara_wpe)
 python3 scripts/tempo.py       # 2) izbacivanje tri pogrešna početka, zbijanje pauza (rezovi iz audio/rezovi.json), atempo 1,03 -> audio/final/glas.wav
+python3 scripts/ispravka_ostrom.py --primeni   #    izgovor „Oštrom“ → „Ostrom“ (š zamenjen glasom s iz „ostaje“)
 ffmpeg -i audio/final/glas.wav -ar 16000 -ac 1 /tmp/glas16.wav
 python3 scripts/vremena_parakeet.py /tmp/glas16.wav audio/parakeet.json   # 3) gruba vremena reči
 python3 scripts/poravnaj.py    # 4) izgovoreni tekst + gruba vremena -> src/timing.json
@@ -66,6 +67,7 @@ npx remotion still src/index.ts Naslovna out/naslovna.jpg
 | snimak | `audio/raw/snimak56.m4a`, vlasnik, cela naracija u jednom snimku, 107,1 s |
 | čišćenje | snimak je sa telefona bez mikrofona: šum, odjek sobe i „zviždanje“. Stalnog pištanja na jednoj frekvenciji nema (dug spektar), zviždanje su oštri sibilanti (s, š, c, z), koje je prvi lanac još pojačavao. Zato `scripts/popravka_glasa.py` (28.09.2026): highpass 70 Hz → **WPE dereverberacija** (nara_wpe) + spektralno potiskivanje kasnog odjeka (T60 0,8 s) → DeepFilterNet 3 (45 dB) → **dinamičko stišavanje sibilanata** 4,5–11 kHz samo kad nadjačaju glas (do −10 dB) → +3 dB na 140 Hz (telo glasa), −2 dB na 320 Hz (kutijast zvuk sobe), −1,5 dB na 3,3 kHz, rez iznad 12 kHz → kompresija → ekspander posle nje (rep odjeka između reči; kompresor pre njega bi ga podizao) → −16 LUFS. Rep odjeka posle kraja fraze (pad za 30 dB): sirov snimak 268 ms, prvi lanac 218 ms, sada 165 ms. Rezultat prema prvom lancu: pojas 4,5–8 kHz −5,7 dB, 8–12 kHz −7 dB, telo glasa +1 dB; Whisper prepoznaje isti tekst. Poređenje: [`out/glas-pre-posle.mp3`](out/glas-pre-posle.mp3) (12 s pre, pa posle) |
 | rez | rezovi pauza su zapamćeni u `audio/rezovi.json`, pa popravljen glas ide na ista mesta i slika se ne renderuje ponovo; izbačena tri pogrešna početka, svaki odmah ponovljen: 24,20–27,45 s („Ali sela šir…“), 44,05–48,45 s („kad o njima odlučuju oniga koji…“), 91,30–95,55 s („kao svedočanstvo da smo već…“) |
+| ispravka izgovora | u snimku je izgovoreno „Oštrom“; `scripts/ispravka_ostrom.py` menja glas „š“ (25,885–25,990 s) glasom „s“ iz reči „ostaje“ istog snimka (74,360–74,445 s), iste dužine, bez promene vremena. Whisper posle ispravke čuje „Elinor Ostrom“. Poređenje: [`out/ostrom-pre-posle.mp3`](out/ostrom-pre-posle.mp3) |
 | tempo | pauze između scena skraćene na 0,9 s, ostale duže od 0,45 s na 0,45 s, **atempo 1,03** → 85,3 s |
 | provera teksta | Whisper turbo po isečcima + Parakeet TDT 0.6B v3 (sherpa-onnx, int8), pre i posle reza |
 | vremena reči | Parakeet daje gruba vremena, a prisilno CTC poravnanje (Omnilingual ASR 300M CTC, tekst u ćirilici) početak svake reči na 20 ms |
