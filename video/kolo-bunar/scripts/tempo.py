@@ -5,7 +5,7 @@ muzika diše. Ostale pauze duže od PAUZA_FRAZA skraćuju se na PAUZA_FRAZA.
 Potom atempo=TEMPO (visina glasa ista). Ivice (tišina pre i posle) seku se na 0,25 / 0,30 s.
 Ulaz audio/clean/glas.wav -> izlaz audio/final/glas.wav
 """
-import os, subprocess, numpy as np, soundfile as sf
+import os, json, subprocess, numpy as np, soundfile as sf
 
 PAUZA_SCENA = 0.9
 PAUZA_FRAZA = 0.45
@@ -23,29 +23,39 @@ a = a[: int(KRAJ_SNIMKA * sr)]
 for x0, x1 in sorted(IZBACI, reverse=True):
     a = np.concatenate([a[: int(x0 * sr)], np.zeros(int(0.5 * sr), dtype=a.dtype), a[int(x1 * sr):]])
 hop = sr // 100
-n = len(a) // hop
-db = 20 * np.log10(np.array([np.sqrt(np.mean(a[k*hop:(k+1)*hop]**2)) for k in range(n)]) + 1e-9)
-tiho = db < np.percentile(db, 90) - PRAG_DB
-glas = np.where(~tiho)[0]
-prvi, zadnji = glas[0], glas[-1]
-delovi, poc, k = [], max(0, prvi - 25), prvi
-while k < zadnji:
-    if tiho[k]:
-        j = k
-        while j < zadnji and tiho[j]:
-            j += 1
-        duz = (j - k) / 100
-        cilj = PAUZA_SCENA if duz > PRAG_SCENA else PAUZA_FRAZA
-        if duz > cilj:
-            ostavi = int(cilj * 100)
-            sredina = k + ostavi // 2
-            delovi.append(a[poc*hop: sredina*hop])
-            poc = j - (ostavi - ostavi // 2)
-            print(f"pauza {k/100:6.2f}: {duz:.2f} -> {cilj:.2f}")
-        k = j
-    else:
-        k += 1
-delovi.append(a[poc*hop: min(len(a), (zadnji + 30) * hop)])
+# Rezovi pauza se računaju jednom i pamte u audio/rezovi.json (u stotinkama sekunde). Posle
+# popravke glasa (popravka_glasa.py) glas se seče na ISTIM mestima, pa vremena reči i titlova
+# ostaju ista i slika ne mora ponovo da se renderuje.
+REZOVI = "audio/rezovi.json"
+if os.path.exists(REZOVI):
+    parovi = json.load(open(REZOVI))
+    print(f"rezovi iz {REZOVI}: {len(parovi)} delova")
+else:
+    n = len(a) // hop
+    db = 20 * np.log10(np.array([np.sqrt(np.mean(a[k*hop:(k+1)*hop]**2)) for k in range(n)]) + 1e-9)
+    tiho = db < np.percentile(db, 90) - PRAG_DB
+    glas = np.where(~tiho)[0]
+    prvi, zadnji = glas[0], glas[-1]
+    parovi, poc, k = [], max(0, prvi - 25), prvi
+    while k < zadnji:
+        if tiho[k]:
+            j = k
+            while j < zadnji and tiho[j]:
+                j += 1
+            duz = (j - k) / 100
+            cilj = PAUZA_SCENA if duz > PRAG_SCENA else PAUZA_FRAZA
+            if duz > cilj:
+                ostavi = int(cilj * 100)
+                sredina = k + ostavi // 2
+                parovi.append([int(poc), int(sredina)])
+                poc = j - (ostavi - ostavi // 2)
+                print(f"pauza {k/100:6.2f}: {duz:.2f} -> {cilj:.2f}")
+            k = j
+        else:
+            k += 1
+    parovi.append([int(poc), int(min(len(a) // hop, zadnji + 30))])
+    json.dump(parovi, open(REZOVI, "w"))
+delovi = [a[p0 * hop: p1 * hop] for p0, p1 in parovi]
 x = delovi[0]
 f = int(0.015 * sr)
 for d in delovi[1:]:
