@@ -7,13 +7,13 @@ frekvenciji u snimku nema (provereno dugim spektrom), pa notch filteri nisu potr
 
 Lanac (bez promene trajanja i bez kašnjenja, pa rezovi iz tempo.py ostaju na istim mestima):
   1. highpass 70 Hz, mono 48 kHz;
-  2. odjek: WPE dereverberacija (nara_wpe) po STFT-u;
+  2. odjek: WPE dereverberacija (nara_wpe) po STFT-u, pa spektralno potiskivanje kasnog odjeka (T60 0,8 s, najviše −22 dB);
   3. šum: DeepFilterNet 3, prigušenje do 45 dB, uz nadoknadu kašnjenja (-D);
   4. sibilanti: dinamičko stišavanje pojasa 4,5–11 kHz samo u trenucima kad on nadjača glas
      (do −10 dB, meki napad), pa „s“ ostaje razumljivo a ne zviždi;
   5. boja: +3 dB telo glasa (140 Hz), −2 dB kutijast zvuk sobe (320 Hz), −1,5 dB oštrina
-     (3,3 kHz), blagi rez iznad 12 kHz; ekspander ispod praga spušta rep odjeka između reči;
-     meka kompresija; −16 LUFS u dva prolaza.
+     (3,3 kHz), blagi rez iznad 12 kHz; meka kompresija, pa POSLE nje ekspander koji spušta rep
+     odjeka između reči (kompresor pre njega bi taj rep podizao); −16 LUFS u dva prolaza.
 Ulaz: audio/raw/snimak56.m4a → izlaz: audio/clean/glas.wav.
 """
 import os, subprocess, json
@@ -37,6 +37,20 @@ S = wstft(a, size=1024, shift=256)
 Z = wpe(np.transpose(S, (1, 0))[:, None, :], taps=10, delay=3, iterations=3, statistics_mode="full")
 a = wistft(np.transpose(Z[:, 0, :], (1, 0)), size=1024, shift=256)[:n0]
 a = np.pad(a, (0, max(0, n0 - len(a))))
+# kasni odjek: spektralno potiskivanje (Lebart) — snaga odjeka se procenjuje kao zakasnela
+# (50 ms) i prigušena (T60) snaga istog signala, pa se od nje oduzima
+T60 = float(os.environ.get("T60", "0.8"))
+GMIN = float(os.environ.get("GMIN", "0.08"))
+fS, tS, XS = stft(a, sr, nperseg=1024, noverlap=768)
+PS = np.abs(XS) ** 2
+for i in range(1, PS.shape[1]):
+    PS[:, i] = 0.6 * PS[:, i - 1] + 0.4 * PS[:, i]
+D = int(0.05 * sr / 256)
+kasni = np.zeros_like(PS)
+kasni[:, D:] = np.exp(-6.9 * 2 * 0.05 / T60) * PS[:, :-D]
+XS = XS * np.sqrt(np.maximum(1 - kasni / (PS + 1e-12), GMIN))
+_, a = istft(XS, sr, nperseg=1024, noverlap=768)
+a = a[:n0] if len(a) >= n0 else np.pad(a, (0, n0 - len(a)))
 a = a / (np.max(np.abs(a)) + 1e-9) * 0.6
 sf.write(f"{T}/in/glas.wav", a.astype(np.float32), sr, subtype="FLOAT")
 print("WPE gotov")
@@ -74,8 +88,8 @@ BOJA = ",".join([
     "equalizer=f=320:t=q:w=1.4:g=-2",
     "equalizer=f=3300:t=q:w=1.6:g=-1.5",
     "lowpass=f=12000:poles=2",
-    "agate=threshold=0.02:ratio=2:attack=5:release=180:range=0.3:knee=4",
-    "acompressor=threshold=-22dB:ratio=2.5:attack=8:release=150:makeup=2",
+    "acompressor=threshold=-22dB:ratio=2.5:attack=8:release=120:makeup=2",
+    os.environ.get("GATE", "agate=threshold=0.03:ratio=3:attack=3:release=90:range=0.08:knee=3"),
 ])
 M = subprocess.run(["ffmpeg", "-v", "info", "-y", "-i", f"{T}/deess.wav", "-af", f"{BOJA},loudnorm=I=-16:TP=-1.5:LRA=7:print_format=json", "-f", "null", "-"],
                    capture_output=True, text=True).stderr
