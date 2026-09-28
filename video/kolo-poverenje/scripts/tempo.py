@@ -4,8 +4,13 @@ Pauze između scena (duže od 1,0 s) skraćuju se na PAUZA_SCENA — tu se menja
 muzika diše. Ostale pauze duže od PAUZA_FRAZA skraćuju se na PAUZA_FRAZA.
 Potom atempo=TEMPO (visina glasa ista). Ivice (tišina pre i posle) seku se na 0,25 / 0,30 s.
 Ulaz audio/vN/clean/glas.wav -> izlaz audio/vN/final/glas.wav
+
+Rezovi se pamte u audio/vN/rezovi.json. Ako fajl postoji, koriste se ISTI rezovi, bez nove
+detekcije pauza: ponovno čišćenje glasa menja nivo tišine, pa bi se inače pomerila vremena
+reči (plan.json) i titlovi. Nova detekcija: obrisati rezovi.json (ili REF=putanja do starog
+čistog snimka po kome se traže pauze).
 """
-import os, sys, subprocess, numpy as np, soundfile as sf
+import os, sys, json, subprocess, numpy as np, soundfile as sf
 
 PAUZA_SCENA = 0.85
 PAUZA_FRAZA = 0.42
@@ -25,33 +30,54 @@ IZBACI = {
 TEMPO = 1.04
 
 os.makedirs(f"audio/{V}/final", exist_ok=True)
-a, sr = sf.read(f"audio/{V}/clean/glas.wav", dtype="float32")
-for x0, x1 in sorted(IZBACI, reverse=True):
-    a = np.concatenate([a[: int(x0 * sr)], np.zeros(int(0.6 * sr), dtype=a.dtype), a[int(x1 * sr):]])
+REZOVI = f"audio/{V}/rezovi.json"
+
+
+def ucitaj(put):
+    a, sr = sf.read(put, dtype="float32")
+    for x0, x1 in sorted(IZBACI, reverse=True):
+        a = np.concatenate([a[: int(x0 * sr)], np.zeros(int(0.6 * sr), dtype=a.dtype), a[int(x1 * sr):]])
+    return a, sr
+
+
+a, sr = ucitaj(f"audio/{V}/clean/glas.wav")
 hop = sr // 100
-n = len(a) // hop
-db = 20 * np.log10(np.array([np.sqrt(np.mean(a[k*hop:(k+1)*hop]**2)) for k in range(n)]) + 1e-9)
-tiho = db < np.percentile(db, 90) - PRAG_DB
-glas = np.where(~tiho)[0]
-prvi, zadnji = glas[0], glas[-1]
-delovi, poc, k = [], max(0, prvi - 25), prvi
-while k < zadnji:
-    if tiho[k]:
-        j = k
-        while j < zadnji and tiho[j]:
-            j += 1
-        duz = (j - k) / 100
-        cilj = PAUZA_SCENA if duz > PRAG_SCENA else PAUZA_FRAZA
-        if duz > cilj:
-            ostavi = int(cilj * 100)
-            sredina = k + ostavi // 2
-            delovi.append(a[poc*hop: sredina*hop])
-            poc = j - (ostavi - ostavi // 2)
-            print(f"pauza {k/100:6.2f}: {duz:.2f} -> {cilj:.2f}")
-        k = j
-    else:
-        k += 1
-delovi.append(a[poc*hop: min(len(a), (zadnji + 30) * hop)])
+
+
+def nadji_opsege(a):
+    """Delovi snimka (u stotinkama) koji ostaju posle zbijanja pauza."""
+    n = len(a) // hop
+    db = 20 * np.log10(np.array([np.sqrt(np.mean(a[k*hop:(k+1)*hop]**2)) for k in range(n)]) + 1e-9)
+    tiho = db < np.percentile(db, 90) - PRAG_DB
+    glas = np.where(~tiho)[0]
+    prvi, zadnji = int(glas[0]), int(glas[-1])
+    opsezi, poc, k = [], max(0, prvi - 25), prvi
+    while k < zadnji:
+        if tiho[k]:
+            j = k
+            while j < zadnji and tiho[j]:
+                j += 1
+            duz = (j - k) / 100
+            cilj = PAUZA_SCENA if duz > PRAG_SCENA else PAUZA_FRAZA
+            if duz > cilj:
+                ostavi = int(cilj * 100)
+                opsezi.append([poc, k + ostavi // 2])
+                poc = j - (ostavi - ostavi // 2)
+                print(f"pauza {k/100:6.2f}: {duz:.2f} -> {cilj:.2f}")
+            k = j
+        else:
+            k += 1
+    opsezi.append([poc, zadnji + 30])
+    return opsezi
+
+
+if os.path.exists(REZOVI):
+    opsezi = json.load(open(REZOVI))
+    print(f"rezovi iz {REZOVI}")
+else:
+    opsezi = nadji_opsege(ucitaj(os.environ["REF"])[0] if "REF" in os.environ else a)
+    json.dump(opsezi, open(REZOVI, "w"))
+delovi = [a[p0*hop: min(len(a), p1*hop)] for p0, p1 in opsezi]
 x = delovi[0]
 f = int(0.015 * sr)
 for d in delovi[1:]:

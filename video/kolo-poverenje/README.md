@@ -29,21 +29,22 @@ Scenariji i tekst naracije: `scenario-1…3-*.md`. Opisi za mreže: `docs/drustv
 | Korak | Šta |
 |---|---|
 | snimci | vlasnik, My_recording_58/59/60 (`audio/vN/raw/`) |
-| čišćenje | `scripts/ciscenje.sh vN`: highpass 70 Hz, DeepFilterNet 3, boja glasa, −16 LUFS |
+| čišćenje | `scripts/ciscenje.py vN`: snimak je sa telefona, bez mikrofona. Lanac: WPE skida odjek sobe, DeepFilterNet 3 sa post-filterom skida šum, uski tonovi (zviždanje) se gase, boja kao na mikrofonu (toplina na 140 Hz, bez podizanja visokih, iznad 9 kHz se spušta), de-esser, ekspander u pauzama, −16 LUFS. Dužina ostaje ista kao u snimku |
 | rez | video 1: izbačena tri pogrešna početka (19,60–22,45 · 29,65–34,75 · 43,10–52,15 s u sirovom snimku); videi 2 i 3 bez rezova |
 | tempo | pauze > 0,42 s skraćene, atempo 1,04 (`scripts/tempo.py vN`) |
 | vremena reči | Parakeet TDT 0.6B v3 grubo (`vremena_parakeet.py`), pa prisilno CTC poravnanje (Omnilingual ASR 300M, `poravnaj_ctc.py vN`); tekst u `poravnaj.py` je ono što je izgovoreno |
 | muzika | `scripts/muzika.py vN`, instrumenti u `scripts/zvuk.py`; kraj muzike pada na „ekolo.rs“ |
-| efekti | `scripts/zvuci.py vN` (valjak, pečat, kucanje, sekira, kapi, škripa đerma…) |
+| efekti | `scripts/zvuci.py vN` (list papira, pečat, kucanje, sekira, kapi, škripa đerma…) |
 | miks | `scripts/mix.py vN`: muzika −8 do −11 dB uz sidechain na glas, efekti +2 dB, −14 LUFS / −1,5 dBTP |
 
 ## Kako se pravi
 
 ```bash
 cd video/kolo-poverenje && npm ci
+pip install numpy scipy soundfile nara_wpe sherpa-onnx   # + deep-filter (GitHub izdanje DeepFilterNet) u /tmp/claude-0
 python3 scripts/teksture.py
 for v in v1 v2 v3; do
-  scripts/ciscenje.sh $v && python3 scripts/tempo.py $v
+  python3 scripts/ciscenje.py $v && python3 scripts/tempo.py $v   # tempo uzima iste rezove iz audio/$v/rezovi.json
   ffmpeg -i audio/$v/final/glas.wav -ar 16000 -ac 1 /tmp/$v.wav
   python3 scripts/vremena_parakeet.py /tmp/$v.wav audio/$v/parakeet.json
   python3 scripts/poravnaj.py $v && python3 scripts/poravnaj_ctc.py $v && python3 scripts/plan.py $v
