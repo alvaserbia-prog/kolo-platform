@@ -355,14 +355,14 @@ okusi“ (može da se čita kao ponuda iznosa) i proverio da je POEN svuda zapis
 „Fondacija u tome ne posreduje“ i da nema brojeva ni reči „besplatno“.
 Jezička provera (28.09.2026): rodno obeleženo „šta si doneo“ → „tvoj doprinos komšiluku“; duga
 rečenica sa zarezom ispred „i“ na Instagramu podeljena na dve; „pravu domaću zimnicu“ → „domaću
-zimnicu“ (suvišan ukras); na Facebook-u dosledno „vi“, na TikTok-u i Instagramu „ti“.
+zimnicu“ (suvišan ukras); po odluci vlasnika bez stilskih figura: „ruka i dalje zna koliko soli ide u ajvar“, „ta ruka je retkost“ i „ruka i dalje pravi“ → rečeno doslovno; na Facebook-u dosledno „vi“, na TikTok-u i Instagramu „ti“.
 
 ### TikTok
 
 ```
-U mnogim kućama podrum je pun tegli koje niko ne otvara. Deca žive u drugom gradu, a ruka i dalje zna koliko soli ide u ajvar. 🍅
+U mnogim kućama podrum je pun tegli koje niko ne otvara. Deca žive u drugom gradu, a zimnice i dalje ima kao za punu kuću. 🍅
 
-Ta ruka je retkost. U istoj ulici često živi neko ko godinama nije okusio domaću zimnicu i ko pamti kako je mirisala kuhinja kad su se pekle paprike.
+Malo ko danas ume da napravi ajvar kao nekad. A u istoj ulici često živi neko ko godinama nije okusio domaću zimnicu i ko pamti kako je mirisala kuhinja kad su se pekle paprike.
 
 KOLO je sajt na kome komšije razmenjuju ono što umeju i imaju. Nastao je u Somboru, a pokreće ga KOLO Fondacija. 🌾
 
@@ -390,7 +390,7 @@ KOLO je sajt na kome komšije iz Sombora i okoline razmenjuju ono što umeju i i
 ```
 Koliko tegli zimnice ove jeseni ostaje neotvoreno po podrumima? 🏡
 
-Mnogi to znaju iz svoje kuće. Deca su u drugom gradu i dolaze za praznike, a ruka i dalje pravi kao za punu trpezu. U isto vreme, u susednoj ulici živi neko ko domaći ajvar nije okusio godinama.
+Mnogi to znaju iz svoje kuće. Deca su u drugom gradu i dolaze za praznike, a zimnice u podrumu i dalje ima kao za punu kuću. U isto vreme, u susednoj ulici živi neko ko domaći ajvar nije okusio godinama.
 
 KOLO je sajt na kome ljudi iz istog mesta razmenjuju ono što umeju i imaju. Nastao je u Somboru, a pokreće ga KOLO Fondacija. 🌾
 
