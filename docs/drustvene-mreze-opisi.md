@@ -475,17 +475,16 @@ Opis polazi od utrine, seoskog pašnjaka na kraju sela, koje u videu nema, a ne 
 videa. Elinor Ostrom se pominje drugim rečima (pastiri, ribari, seljaci; „kad se dogovore oko
 pravila i drže ih se“), bez nabrajanja pet pravila iz videa.
 
-Pregled ekipe (urednik za mreže, gledalac iz ciljne grupe, čuvar sadržaja, 27.09.2026):
-urednik je tražio da prva rečenica stoji sama (na TikTok-u 86 znakova, cela se vidi pre „više“) i da
-poziv bude jedan, pa je pitanje publici spojeno sa linkom; gledalac nije znao ko je Elinor Ostrom, pa
-stoji „nobelovka“, a „Pijaca“ bi se pomešala sa gradskom pijacom, pa na TikTok-u stoji „na sajtu, u
-delu koji se zove Pijaca“; „utrina“ je objašnjena u istoj rečenici. Čuvar sadržaja je izbacio
-rečenicu da u KOLU „pravila donose oni koji ga koriste“ (akte donosi Fondacija, isto kao u
-scenariju), dodao „Fondacija u tome ne posreduje“ i proverio da je POEN svuda zapis, a ne novac, i da
-nema reči „besplatno“ ni brojeva.
-Jezička provera (27.09.2026): pogrešan rod uz „utrina“ („niko ga nije imao“ → „niko je nije imao“,
-„o nju“); „svako uzme malo više“ izbačeno jer ponavlja rečenicu iz videa; „niti se menja za novac“ →
-„i ne menja se za novac“; dvostruko „na Pijaci na sajtu“ rastavljeno; na Facebook-u dosledno „vi“.
+Pregled pet uloga (pisac, dramaturg, urednik za mreže, gledalac iz ciljne grupe, čuvar sadržaja,
+28.09.2026), uz odluke vlasnika donete pri opisima za Domaćice (obraćanje „ti“ na sve tri mreže, bez
+„u delu sajta koji se zove Pijaca“, jedan poziv „Ponudi to komšijama“): dramaturg je tražio most od
+Ostromove do KOLA, pa stoji „KOLO je jedno takvo zajedničko mesto, samo na internetu“ (TikTok);
+urednik je tražio jedan poziv umesto dva (komentar i link), pa je pitanje o utrini zamenjeno pozivom
+„Šta ti umeš ili imaš viška? Ponudi to komšijama“; čuvar sadržaja je izbacio „ono što daš ostaje
+zapisano, taj zapis se zove POEN“ (POEN se ne upisuje sam po sebi, nego ga komšija prepiše), pa stoji
+„za ono što daš, komšija ti prepiše POENE“; gledalac je zadržao „nobelovka“ i objašnjenje utrine;
+pisac je podelio dugu rečenicu o KOLU na dve. Facebook prebačen na „ti“.
+Jezička provera (lektor i književnik): dosledno „ti“; bez crtica i nabrajanja; „viška“ u genitivu.
 
 ### TikTok
 
@@ -494,13 +493,11 @@ Na kraju mnogih bačkih sela bila je utrina, pašnjak na koji je celo selo teral
 
 Dugo se mislilo da takvo dobro mora da propadne. Nobelovka Elinor Ostrom decenijama je proučavala pastire, ribare i seljake koji zajedno koriste vodu i zemlju. Pokazala je da ljudi umeju sami da sačuvaju ono što im je zajedničko, kad se dogovore oko pravila i drže ih se.
 
-KOLO je platforma za razmenu dobara i usluga među komšijama. Nastala je u Somboru, a pokreće je KOLO Fondacija. Na sajtu, u delu koji se zove Pijaca, ponudiš ono što imaš ili umeš, a razmenu dogovaraš direktno sa komšijom. Fondacija u tome ne posreduje.
+KOLO je jedno takvo zajedničko mesto, samo na internetu. To je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru, a pokreće je KOLO Fondacija. Na Pijaci ponudiš ono što imaš ili umeš, a razmenu dogovaraš direktno sa komšijom. Fondacija u tome ne posreduje.
 
-Ono što daš ostaje zapisano. Taj zapis se zove POEN, nije novac i ne menja se za novac. Pravila su javna i ista za svakoga.
+Za ono što daš, komšija ti prepiše POENE. POEN je zapis o tvom doprinosu, nije novac i ne menja se za novac. Pravila su javna i ista za svakoga. 🤝
 
-Šta je u tvom selu ili ulici nekad bilo zajedničko? Napiši u komentaru. 🤝
-
-👉 ekolo.rs, link je u profilu
+👉 Šta ti umeš ili imaš viška? Ponudi to komšijama na ekolo.rs, link je u profilu
 
 #Sombor #Vojvodina #razmena #komšije #KOLO
 ```
@@ -510,9 +507,11 @@ Ono što daš ostaje zapisano. Taj zapis se zove POEN, nije novac i ne menja se 
 ```
 Utrina na kraju sela nije bila ničija, a čuvalo ju je celo selo. 🌾
 
-Nobelovka Elinor Ostrom pokazala je da ljudi umeju sami da sačuvaju ono što im je zajedničko, kad se dogovore oko pravila i drže ih se. KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Na Pijaci ponudiš ono što imaš ili umeš, a razmenu dogovaraš direktno. Ono što daš ostaje zapisano kao POEN, a POEN nije novac. 🤝
+Nobelovka Elinor Ostrom pokazala je da ljudi umeju sami da sačuvaju ono što im je zajedničko, kad se dogovore oko pravila i drže ih se.
 
-👉 Šta je u tvom kraju nekad bilo zajedničko? Link je u bio.
+KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Na Pijaci ponudiš ono što imaš ili umeš, a razmenu dogovaraš direktno sa komšijom. Za ono što daš, komšija ti prepiše POENE. POEN je zapis o doprinosu, a ne novac. 🤝
+
+👉 Šta ti umeš ili imaš viška? Ponudi to komšijama, link je u bio.
 
 #Sombor #Vojvodina #razmena #komšije #KOLOzajednica
 ```
@@ -524,13 +523,11 @@ Mnogi u Bačkoj pamte utrinu, pašnjak na kraju sela na koji je celo selo teralo
 
 Dugo se mislilo da takvo dobro mora da propadne. Nobelovka Elinor Ostrom decenijama je proučavala pastire, ribare i seljake širom sveta. Pokazala je da ljudi umeju sami da sačuvaju ono što im je zajedničko, kad se dogovore oko pravila i drže ih se.
 
-KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija. Na sajtu ekolo.rs, u delu koji se zove Pijaca, objavite ono što imate ili umete, a razmenu dogovarate direktno sa komšijom. Fondacija u tome ne posreduje. 🤝
+KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija. Na Pijaci ponudiš ono što imaš ili umeš, a razmenu dogovaraš direktno sa komšijom. Fondacija u tome ne posreduje. 🤝
 
-Vaš doprinos ostaje zapisan kao POEN. POEN nije novac i ne može se zameniti za novac. Pravila su javna i ista za svakoga.
+Za ono što daš, komšija ti prepiše POENE. POEN nije novac i ne može se zameniti za novac, on beleži tvoj doprinos. Pravila su javna i ista za svakoga.
 
-Šta je u vašem selu ili ulici nekad bilo zajedničko?
-
-👉 Pogledajte kako KOLO radi: https://ekolo.rs
+👉 Šta ti umeš ili imaš viška? Ponudi to komšijama na https://ekolo.rs
 
 #Sombor #KOLO
 ```
