@@ -196,10 +196,10 @@ a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela �
 
 🟡 **Likovni stil i muzika se ne ponavljaju obavezno** (odluka vlasnika, 27.09.2026): od trilogije „Poverenje“ (`kolo-poverenje/`) svaki video može da ima svoj autentičan stil (tamo: papirni kolaž, naiva, tuš i akvarel) i svoju muziku. Zajedničko ostaje ono iznad: titlovi po rečima sa zelenom rečju, naracija vlasnika, −14 LUFS, POEN samo kao zapis, zabranjene reči.
 
-## Pregled teksta za naraciju: stalna ekipa (odluka vlasnika, 27.09.2026)
+## Pregled teksta za naraciju: stalna ekipa (odluka vlasnika, 27.09.2026; bez čuvara sadržaja od 29.09.2026)
 
-Vlasnik tekst **čita naglas**, zato se tekst za snimanje pre slanja uvek pregleda kroz ovih
-pet uloga. Svaka uloga daje nalaze za sebe, a vlasnik bira. **Lektora nema:** interpunkcija i
+Vlasnik tekst **čita naglas**, zato se tekst za snimanje pre slanja uvek pregleda kroz ove
+četiri uloge. Svaka uloga daje nalaze za sebe, a vlasnik bira. **Lektora nema:** interpunkcija i
 navodnici se ne čuju, a titlovi se ionako ravnaju prema onome što je izgovoreno i tada se
 pravopisno sređuju bez posebnog pitanja.
 
@@ -209,7 +209,9 @@ pravopisno sređuju bez posebnog pitanja.
 | **Dramaturg** | kuka u prve 3 s, luk priče, jedna misao po sceni, da slika i tekst ne govore isto, da poenta stigne pre nego što gledalac skroluje dalje |
 | **Urednik za mreže** | razume li se bez zvuka (natpisi), da li je poziv na kraju jasan i jedan, dužina za Reels, da li kraj tera na akciju (pridruži se, postavi oglas) |
 | **Gledalac iz ciljne grupe** | penzioner, domaćica ili zanatlija iz Sombora koji za KOLO nije čuo: da li razume svaku reč, gde ga zbuni žargon (POEN, potvrda, kod, indeks), šta bi pitao |
-| **Čuvar sadržaja** | tačnost prema aktima u `dokumentacija 4.1/` i prema ekranu platforme, zabranjene reči, POEN nije novac, već donete odluke vlasnika |
+
+🟡 **Čuvar sadržaja je izbačen iz ekipe** (odluka vlasnika, 29.09.2026) i ne daje nalaze ni za
+naraciju ni za opise za mreže. Zabranjene reči i pravila iz odeljka „Zajedničko za sve videe“ i dalje važe.
 
 Pravila pregleda:
 - Nalazi idu **tabelom po videu** (scena · uloga · nalaz · predlog), pa **ceo tekst za snimanje**

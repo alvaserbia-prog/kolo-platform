@@ -403,19 +403,19 @@ Video: `video/kolo-raste/out/kolo-raste.mp4`. Naslovna: `video/kolo-raste/out/na
 Zvuk na Instagramu preimenovati u „KOLO, uhvati se u kolo“.
 Opis polazi od sabora i od kola koje krene sa troje, četvoro ljudi, a ne od rečenica iz videa.
 U opisima nema reči „nagrađuje“ ni „nagrada“ (pravilo iz odeljka 2); u samom videu je ostala po
-odluci vlasnika. Umesto toga stoji ono što se zaista dešava: prvi oglas se, posle pregleda,
-upisuje kao zapis o doprinosu.
+odluci vlasnika. Umesto nje stoji „svaki korak se beleži“ i šta se upisuje.
 
-Pregled ekipe (urednik za mreže, gledalac iz ciljne grupe, čuvar sadržaja, 27.09.2026):
-urednik je tražio da prva rečenica stoji sama i da poziv bude jedan (prvi oglas), pa je pitanje
-publici spojeno sa pozivom; gledalac je zapeo na „kanal“ i „evidencija“, pa ih u opisu nema, a
-POEN je objašnjen kao zapis; čuvar sadržaja je izbacio „dovedi prijatelja“ (ne upisuje se POEN za
-dovedenog čoveka nego za potvrdu, i to tek posle prvog doprinosa) i proverio da uz prvi oglas stoji
-„kad ga Fondacija pregleda“.
-Jezička provera (27.09.2026): „Na saboru se kolo ne igra samo“ (dvosmisleno: samo ili samo jedan)
-→ „Kolo niko ne igra sam“; rodno obeleženo „koga bi prvog pozvao“ → „koga iz tvog kraja zoveš
-prvog u kolo“; na Facebook-u dosledno „vi“; nabrajanje majstora rastavljeno na kratke rečenice,
-jer se u jednom dahu nije moglo pročitati; „višak“ → „jabuke koje su ostale posle berbe“.
+Drugi krug (29.09.2026), bez čuvara sadržaja (izbačen iz ekipe odlukom vlasnika): pregled pisca,
+dramaturga, urednika za mreže i gledaoca iz ciljne grupe. Vraćena je poruka iz videa o pozivanju
+novih ljudi: „kad pozoveš nekoga koga lično poznaješ i potvrdiš da je stvarna osoba, upisuje se i
+tebi i toj osobi“. Gledalac je zapeo na goloj reči „potvrdiš“, pa uz nju stoji šta se potvrđuje;
+urednik je skratio deo o pregledu oglasa; pisac je „i tebi i njemu“ zamenio sa „i tebi i toj
+osobi“ (rodno neutralno); dramaturg je tražio da „Svaki korak se beleži“ stoji na početku pasusa,
+kao most od kola ka POEN-u.
+Jezička provera (27. i 29.09.2026): „Na saboru se kolo ne igra samo“ (dvosmisleno) → „Kolo niko ne
+igra sam“; „koga bi prvog pozvao“ → „koga iz tvog kraja zoveš prvog u kolo“; na Facebook-u dosledno
+„vi“; nabrajanje majstora rastavljeno na kratke rečenice; „višak“ → „jabuke koje su ostale posle
+berbe“; u drugom krugu bez ispravki.
 
 ### TikTok
 
@@ -426,7 +426,7 @@ Tako je i sa razmenom u komšiluku. Kad nas je malo, teško se nađe ono što ti
 
 KOLO je platforma za razmenu dobara i usluga među komšijama. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
 
-Kad objaviš prvi oglas i Fondacija ga pregleda, upisuje ti se POEN kao zapis o doprinosu. POEN nije novac i ne menja se za novac. Nalog ti potvrđuju ljudi koji te lično poznaju, bez dokumenata, a pravila su javna i ista za svakoga.
+Svaki korak se beleži. Kad objaviš prvi oglas, upisuje ti se POEN kao zapis o doprinosu. Kad pozoveš nekoga koga lično poznaješ i potvrdiš da je stvarna osoba, upisuje se i tebi i toj osobi. POEN nije novac i ne menja se za novac.
 
 Koga iz tvog kraja zoveš prvog u kolo? Napiši u komentaru.
 
@@ -442,7 +442,7 @@ Kolo niko ne igra sam, a ni razmena u komšiluku ne ide kad nas je malo. 🤝
 
 KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Što se više ljudi iz raznih sela i ulica uhvati, lakše nađeš majstora, teglu domaćeg meda ili nekoga ko će sat vremena pričuvati dete.
 
-Prvi oglas se upisuje kao doprinos kad ga Fondacija pregleda. POEN je zapis, a ne novac, i pravila su javna za sve.
+Svaki korak se beleži: prvi oglas, ali i kad pozoveš nekoga koga lično poznaješ i potvrdiš da je stvarna osoba. POEN je zapis, a ne novac.
 
 👉 Koga iz tvog kraja zoveš prvog u kolo? Link je u bio.
 
@@ -458,7 +458,7 @@ Razmena u komšiluku ide na isti način. Kad nas je malo, teško je naći baš o
 
 KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija. 🌾
 
-Kad objavite prvi oglas i Fondacija ga pregleda, upisuje vam se POEN kao zapis o doprinosu. POEN nije novac i ne može se zameniti za novac. Nalog vam potvrđuju ljudi koji vas lično poznaju, bez dokumenata, a sva pravila su javna i ista za svakoga.
+Svaki korak se beleži. Kad objavite prvi oglas, upisuje vam se POEN kao zapis o doprinosu. Kad pozovete nekoga koga lično poznajete i potvrdite da je stvarna osoba, upisuje se i vama i toj osobi. POEN nije novac i ne može se zameniti za novac, a sva pravila su javna i ista za svakoga.
 
 Koga iz vašeg kraja biste prvog pozvali u kolo?
 
