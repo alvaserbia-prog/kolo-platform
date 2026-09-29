@@ -19,6 +19,7 @@ L = np.zeros(N)
 R = np.zeros(N)
 SC = {s["id"]: s for s in plan["scene"]}
 FPS = plan["fps"]
+PREDNOST_S = plan["prednost"]  # efekti prate sliku, a slika ide 1 s ispred reči (scripts/plan.py)
 
 
 def rec(sid, w, pojava=1):
@@ -28,7 +29,7 @@ def rec(sid, w, pojava=1):
         if x["w"].lower().strip(".,:?!") == w.lower():
             n += 1
             if n == pojava:
-                return s["glasOd"] + x["s"]
+                return s["glasOd"] + x["s"] - PREDNOST_S
     raise KeyError(w)
 
 

@@ -1,5 +1,6 @@
 {
  "fps": 30,
+ "prednost": 1.0,
  "trajanje": 64.23,
  "frejmova": 1927,
  "scene": [
@@ -88,9 +89,9 @@
     }
    ],
    "tekst": "Kolo je živo dok ga igramo, a raste svaki put kad se uhvati još neko.",
-   "do": 6.9,
+   "do": 5.9,
    "odF": 0,
-   "doF": 207,
+   "doF": 177,
    "glasOdF": 36
   },
   {
@@ -99,7 +100,7 @@
    "klipDo": 13.46,
    "glasOd": 7.065,
    "glasDo": 14.76,
-   "od": 6.9,
+   "od": 5.9,
    "reci": [
     {
      "w": "Tako",
@@ -203,9 +204,9 @@
     }
    ],
    "tekst": "Tako je i sa našim KOLOM. Postoji da bi nam razmena bila lakša. A lakša je kad je ponuda raznovrsna.",
-   "do": 15.21,
-   "odF": 207,
-   "doF": 456,
+   "do": 14.21,
+   "odF": 177,
+   "doF": 426,
    "glasOdF": 212
   },
   {
@@ -214,7 +215,7 @@
    "klipDo": 21.665,
    "glasOd": 15.31,
    "glasDo": 23.28,
-   "od": 15.21,
+   "od": 14.21,
    "reci": [
     {
      "w": "Svaki",
@@ -298,9 +299,9 @@
     }
    ],
    "tekst": "Svaki novi član donosi nešto novo. Novu uslugu, novo selo, novi grad. Nove mogućnosti za sve.",
-   "do": 23.8,
-   "odF": 456,
-   "doF": 714,
+   "do": 22.8,
+   "odF": 426,
+   "doF": 684,
    "glasOdF": 459
   },
   {
@@ -309,7 +310,7 @@
    "klipDo": 30.29,
    "glasOd": 23.865,
    "glasDo": 32.11,
-   "od": 23.8,
+   "od": 22.8,
    "reci": [
     {
      "w": "Zato",
@@ -388,9 +389,9 @@
     }
    ],
    "tekst": "Zato KOLO nagrađuje korake kojima raste. Prvi oglas. Potvrdu nekoga koga poznaješ. Dovođenje novih članova.",
-   "do": 32.92,
-   "odF": 714,
-   "doF": 988,
+   "do": 31.92,
+   "odF": 684,
+   "doF": 958,
    "glasOdF": 716
   },
   {
@@ -399,7 +400,7 @@
    "klipDo": 37.21,
    "glasOd": 32.84,
    "glasDo": 39.31,
-   "od": 32.92,
+   "od": 31.92,
    "reci": [
     {
      "w": "Ima",
@@ -478,9 +479,9 @@
     }
    ],
    "tekst": "Ima i drugih načina da doprineseš. Svi su zapisani u javnim pravilima, istim za sve.",
-   "do": 40.21,
-   "odF": 988,
-   "doF": 1206,
+   "do": 39.21,
+   "odF": 958,
+   "doF": 1176,
    "glasOdF": 985
   },
   {
@@ -489,7 +490,7 @@
    "klipDo": 44.192,
    "glasOd": 40.06,
    "glasDo": 46.58,
-   "od": 40.21,
+   "od": 39.21,
    "reci": [
     {
      "w": "Što",
@@ -578,9 +579,9 @@
     }
    ],
    "tekst": "Što je KOLO veće, lakše nađeš ono što ti treba, i lakše tebe nađe onaj kome trebaš.",
-   "do": 47.405,
-   "odF": 1206,
-   "doF": 1422,
+   "do": 46.405,
+   "odF": 1176,
+   "doF": 1392,
    "glasOdF": 1202
   },
   {
@@ -589,7 +590,7 @@
    "klipDo": 51.177,
    "glasOd": 47.542,
    "glasDo": 54.135,
-   "od": 47.405,
+   "od": 46.405,
    "reci": [
     {
      "w": "Sledeća",
@@ -663,9 +664,9 @@
     }
    ],
    "tekst": "Sledeća ruka koja se uhvati može da bude tvoja. Svaki tvoj doprinos se nagrađuje.",
-   "do": 55.02,
-   "odF": 1422,
-   "doF": 1651,
+   "do": 54.02,
+   "odF": 1392,
+   "doF": 1621,
    "glasOdF": 1426
   },
   {
@@ -674,7 +675,7 @@
    "klipDo": 57.475,
    "glasOd": 54.927,
    "glasDo": 60.83,
-   "od": 55.02,
+   "od": 54.02,
    "reci": [
     {
      "w": "Uhvati",
@@ -729,7 +730,7 @@
    ],
    "tekst": "Uhvati se u KOLO. Postavi svoj prvi oglas na ekolo.rs.",
    "do": 64.23,
-   "odF": 1651,
+   "odF": 1621,
    "doF": 1927,
    "glasOdF": 1648
   }

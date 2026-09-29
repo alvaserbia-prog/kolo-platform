@@ -11,7 +11,10 @@ UVOD = 1.2          # muzika i prvi kadar pre prvog glasa
 PRE_SCENE = 0.30    # kadar kreće malo pre glasa
 PRE = {2: 0.35, 7: 0.6}
 EXTRA = {2: 0.3, 3: 0.35, 4: 0.35, 5: 0.35, 6: 0.3, 7: 0.5, 8: 0.4}  # dodatna tišina pre scene
-KRAJ_POSLE_GLASA = 3.4  # završna kartica posle poslednje reči
+KRAJ_POSLE_GLASA = 3.4
+# Slika i tekst idu 1 s ispred glasa (odluka vlasnika 28.09.2026, video/README.md): za toliko ranije
+# se seku i scene, da titl nove scene ne izađe preko stare slike. Glas i muzika ostaju na mestu.
+PREDNOST_S = 1.0  # završna kartica posle poslednje reči
 
 t = json.load(open("src/timing.json"))
 sc = t["scene"]
@@ -26,7 +29,7 @@ for i, s in enumerate(sc):
     a, b = rez[i], rez[i + 1]
     glasOd = pomak + a
     reci = [{"w": w["w"], "s": round(w["s"] - a, 3), "e": round(w["e"] - a, 3)} for w in s["reci"]]
-    od = 0.0 if i == 0 else glasOd + reci[0]["s"] - PRE.get(s["id"], PRE_SCENE)
+    od = 0.0 if i == 0 else glasOd + reci[0]["s"] - PRE.get(s["id"], PRE_SCENE) - PREDNOST_S
     scene.append({"id": s["id"], "klipOd": a, "klipDo": b, "glasOd": round(glasOd, 3),
                   "glasDo": round(glasOd + reci[-1]["e"], 3), "od": round(od, 3), "reci": reci, "tekst": s["tekst"]})
 KRAJ = round(scene[-1]["glasDo"] + KRAJ_POSLE_GLASA, 2)
@@ -35,7 +38,7 @@ for i, s in enumerate(scene):
     s["odF"] = round(s["od"] * FPS)
     s["doF"] = round(s["do"] * FPS)
     s["glasOdF"] = round(s["glasOd"] * FPS)
-plan = {"fps": FPS, "trajanje": KRAJ, "frejmova": round(KRAJ * FPS), "scene": scene}
+plan = {"fps": FPS, "prednost": PREDNOST_S, "trajanje": KRAJ, "frejmova": round(KRAJ * FPS), "scene": scene}
 json.dump(plan, open("src/plan.json", "w"), ensure_ascii=False, indent=1)
 for s in scene:
     print(f"scena {s['id']}: {s['od']:6.2f}–{s['do']:6.2f} s ({s['do']-s['od']:.2f}), glas {s['glasOd']+s['reci'][0]['s']:6.2f}–{s['glasDo']:6.2f}")

@@ -26,6 +26,7 @@ Kolo sa likovima u perspektivi, zastavice i šaka su u `src/kolo.tsx`, karta u `
 
 - **POEN se ne crta kao novčić ni novčanica** — u svesci stoje samo redovi i pečat „UPISANO“, bez iznosa.
 - Bez reči kupi, prodaj, plati, zaradi, cena u titlovima i natpisima.
+- 🔴 **Slika i tekst idu 1 s ispred glasa** (`PREDNOST_S`, u `scripts/plan.py` i odatle u `src/vreme.ts` i `scripts/zvuci.py`): titl, natpis, pokreti vezani za reč i zvučni efekti, a za toliko ranije se seku i scene; glas i muzika ostaju na mestu (odluka vlasnika, vidi `video/README.md`).
 - Titlovi prate **izgovoreno**; „Sledeća“ je napisano ekavski, kao u tekstu za snimanje.
 
 ## Kako se pravi
