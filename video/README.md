@@ -25,7 +25,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 11 | KOLO raste sa nama | K | `kolo-raste/` | ✅ |
 | 12 | Pijaca | K |  |  |
 | 13 | Ušteda (uputstvo; scenario stiže) | K |  |  |
-| 14 | Kome ide razlika („čista ušteda“; scenario u pregledu) | K |  |  |
+| 14 | Bez posrednika (scenario u pregledu) | K |  |  |
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
 | 15 | Kompenzacija i 1993. (najava serijala o novcu) | A |  |  |
 | 16 | Praistorija i prastari oblici (trampa, Mesopotamija, kamen sa Japa) | N |  |  |
