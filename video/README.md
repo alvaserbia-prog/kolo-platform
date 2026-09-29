@@ -193,7 +193,11 @@ bljesak + pisak (uređaj pušta sinhrono) i probom sa pomerenim zvukom; vlasnik 
 
 Papirni kolaž, linije koje „ključaju", titlovi po rečima (izgovorena reč zelena), naracija
 vlasnika, tamburaška muzika, −14 LUFS. Trajanje nije unapred određeno: video traje koliko priča traži, i duže od 60 s kad je tako procenjeno (odluka vlasnika, 26.09.2026). POEN se nikad ne crta kao novčić ni novčanica, samo kao
-zapis. Bez reči kupi, prodaj, plati, zaradi, cena. Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
+zapis. Reči kupi, prodaj, plati, zaradi, cena **ne idu uz POEN** (odluka vlasnika, 29.09.2026): uz dinare i uz rad
+smeju („platiš participaciju“, „cena tvoga rada“), uz POEN nikad („kupi za POEN“, „zaradi POEN“, „cena u POENIMA“).
+**Ušteda u dinarima sme i treba da se pokaže kao ishod korišćenja POEN-a** (odluka vlasnika, 29.09.2026): ono što
+dobiješ razmenom u KOLU ne moraš da pribaviš za dinare, i to je ušteda. Ušteda se iskazuje kao dinari koji su ostali
+kod tebe, nikad kao preračun POEN-a u dinare („1 POEN = 1 dinar uštede“, „vrednost tvojih POENA u dinarima“). Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
 a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela „Pravna odbrana“, red „Iznos u oglasu“). Postupak izrade: README u folderu svakog videa.
 
 🟡 **Likovni stil i muzika se ne ponavljaju obavezno** (odluka vlasnika, 27.09.2026): od trilogije „Poverenje“ (`kolo-poverenje/`) svaki video može da ima svoj autentičan stil (tamo: papirni kolaž, naiva, tuš i akvarel) i svoju muziku. Zajedničko ostaje ono iznad: titlovi po rečima sa zelenom rečju, naracija vlasnika, −14 LUFS, POEN samo kao zapis, zabranjene reči.
