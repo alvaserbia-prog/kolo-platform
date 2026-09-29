@@ -4,9 +4,9 @@ Scenario vlasnika (27.09.2026), prošao pregled ekipe za naraciju (vidi `CLAUDE.
 teksta za naraciju“). **Gotov** (naracija My_recording_58). Format 1080×1920 (Reels), titlovi po rečima,
 trajanje ~55 s, seče se po snimljenoj naraciji.
 
-Trilogija „Poverenje“: **svaki video ima svoj likovni stil** (odluka vlasnika, 27.09.2026):
+Trilogija „Poverenje“: stil se bira po videu (odluka vlasnika, 27.09.2026; posle odbačenog linoreza i tuša ostala su dva):
 „Čiji si ti“ je **papirni kolaž** kao prve animacije, „Poznaješ li nekoga“ je **naiva** (po uzoru na Kovačicu), a
-„Potvrda nosi odgovornost“ je **lavirani tuš i akvarel**. Zajedničko ostaje samo ono što nosi
+„Potvrda nosi odgovornost“ je takođe **papirni kolaž** (tuš i akvarel vlasnik je odbacio 29.09.2026). Zajedničko ostaje samo ono što nosi
 seriju: titlovi po rečima (izgovorena reč zelena), zelena boja KOLA samo za potvrdu i KOLO,
 pravi ekran potvrde (kod, kvačica, „Potvrdi ovu osobu“) i završna kartica sa ekolo.rs.
 Izrada: `README.md` u ovom folderu. Redosled objave: 1 Čiji si ti → 2 Poznaješ li nekoga → 3 Potvrda nosi odgovornost.

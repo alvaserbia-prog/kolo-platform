@@ -3,7 +3,7 @@
 // Sav tekst je između y 300 i 1620, jer Instagram mrežu seče na 4:5.
 import React from "react";
 import { AbsoluteFill, Sequence } from "remotion";
-import { ucitajFontove, OBLO, SANS, CETKA, RUKOPIS } from "./fontovi";
+import { ucitajFontove, OBLO, SANS, RUKOPIS } from "./fontovi";
 import { Scena1 as V1S1 } from "./v1k/scene";
 import { Defs as D1, Isecak, pravougaonik } from "./v1k/papir";
 import { P as PK } from "./v1k/paleta";
@@ -11,9 +11,7 @@ import { Img, staticFile } from "remotion";
 import { Scena1 as V2S1 } from "./v2/scene";
 import { Platno, PlatnoPozadina, Ram } from "./v2/okvir";
 import { Defs as D2, N } from "./v2/naiva";
-import { Scena1 as V3S1 } from "./v3/scene";
-import { AkvarelPozadina, AkvarelPreko } from "./v3/okvir";
-import { Defs as D3, T } from "./v3/tus";
+import { Scena2 as V3S2 } from "./v3k/scene";
 
 ucitajFontove();
 
@@ -92,30 +90,32 @@ export const Naslovna2: React.FC = () => (
 );
 
 export const Naslovna3: React.FC = () => (
-  <AbsoluteFill>
-    <AkvarelPozadina />
-    <Kadar frejm={172}>
-      <V3S1 />
+  <AbsoluteFill style={{ background: PK.papir }}>
+    <Img src={staticFile("kolaz/papir.jpg")} style={{ position: "absolute", inset: 0, width: 1080, height: 1920 }} />
+    <Kadar frejm={150}>
+      <V3S2 />
     </Kadar>
-    <AkvarelPreko oznaka="3/3 · Poverenje · tuš i akvarel" />
-    <AbsoluteFill style={{ zIndex: 2200 }}>
+    <AbsoluteFill>
       <svg viewBox="0 0 1080 1920" width={1080} height={1920}>
-        <D3 />
-        <path d="M70,330 C300,300 700,340 1010,315 L1016,590 C700,610 300,580 64,600Z" fill="#fff" opacity={0.88} filter="url(#akv)" />
-        <path d="M70,330 C300,300 700,340 1010,315 L1016,590 C700,610 300,580 64,600Z" fill={T.indigo} opacity={0.18} filter="url(#akv)" />
-        <text x={540} y={440} textAnchor="middle" fontFamily={CETKA} fontSize={120} fill={T.tus}>
-          Bunar može
-        </text>
-        <text x={540} y={560} textAnchor="middle" fontFamily={CETKA} fontSize={120} fill={T.tus}>
-          da se zamuti
-        </text>
-        <path d="M150,1420 C400,1400 700,1430 930,1410 L936,1610 C700,1630 400,1600 144,1620Z" fill="#fff" opacity={0.85} filter="url(#akv)" />
-        <text x={540} y={1500} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={44} fill={T.tus}>
-          Šta znači kad nekoga potvrdiš
-        </text>
-        <text x={540} y={1580} textAnchor="middle" fontFamily={CETKA} fontSize={74} fill={T.zelena}>
-          ekolo.rs
-        </text>
+        <D1 />
+        <g transform="translate(540 370) rotate(-3)">
+          <Isecak pts={pravougaonik(-420, -170, 840, 330)} boja={PK.belo} seed="n3" amp={3} />
+          <text y={-30} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={130} fill={PK.zelena900}>
+            Bunar može
+          </text>
+          <text y={100} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={130} fill={PK.zelena900}>
+            da se zamuti
+          </text>
+        </g>
+        <g transform="translate(540 1500) rotate(1.5)">
+          <Isecak pts={pravougaonik(-420, -110, 840, 210)} boja={PK.belo} seed="n3b" amp={3} />
+          <text y={-14} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={48} fill={PK.tekst}>
+            Šta znači kad nekoga potvrdiš
+          </text>
+          <text y={66} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={62} fill={PK.zelena700}>
+            ekolo.rs
+          </text>
+        </g>
       </svg>
     </AbsoluteFill>
   </AbsoluteFill>

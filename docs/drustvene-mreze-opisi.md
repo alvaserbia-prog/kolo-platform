@@ -534,8 +534,8 @@ Za ono što daš, komšija ti prepiše POENE. POEN nije novac i ne može se zame
 
 ## 12. Trilogija „Poverenje“ (septembar 2026)
 
-Tri videa, svaki u svom likovnom stilu, objavljuju se ovim redom: „Čiji si ti“ (papirni kolaž, kao prve animacije),
-„Poznaješ li nekoga u KOLU?“ (naiva), „Potvrda nosi odgovornost“ (lavirani tuš i akvarel).
+Tri videa objavljuju se ovim redom: „Čiji si ti“ (papirni kolaž, kao prve animacije),
+„Poznaješ li nekoga u KOLU?“ (naiva), „Potvrda nosi odgovornost“ (papirni kolaž).
 Videi i naslovne: `video/kolo-poverenje/out/`. Zvuk na Instagramu preimenovati redom u
 „KOLO, čiji si ti“, „KOLO, dva načina da uđeš“ i „KOLO, potvrdi one koje znaš“.
 

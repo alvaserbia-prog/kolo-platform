@@ -4,7 +4,7 @@ import { CijiSiTi } from "./v1k/Video";
 import { PLAN as P1 } from "./v1/vreme";
 import { PoznajesLiNekoga } from "./v2/Video";
 import { PLAN as P2 } from "./v2/vreme";
-import { PotvrdaOdgovornost } from "./v3/Video";
+import { PotvrdaOdgovornost } from "./v3k/Video";
 import { PLAN as P3 } from "./v3/vreme";
 
 export const Root: React.FC = () => (

@@ -4,7 +4,7 @@ v1 (papirni kolaž): šuštaj lista papira na svakom prelazu, tup udarac (lična
    pečat), kucanje po telefonu i zvonce „Potvrda upisana“, koraci.
 v2 (naiva): šuštanje cveća na prelazima, „pop“ upitnika, kucanje i zvonce objave oglasa, poruka,
    udarci sekire sa pucanjem drveta, zapis u KOLU, zvonce potvrde, završno zvonce.
-v3 (tuš): kapi vode, kap mulja i pljusak, škripa đerma, škripa vratnica, mutni šum,
+v3 (papirni kolaž, bunar): kapi vode, kap mulja i pljusak, škripa đerma, škripa vratnica, mutni šum,
    bistro zvonce na „lično“, šuštanje kartica, završno zvonce.
 Izlaz: audio/vN/zvuci.wav
 """
