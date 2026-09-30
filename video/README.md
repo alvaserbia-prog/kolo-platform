@@ -23,7 +23,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 9 | Potvrda nosi odgovornost (Poverenje 3/3, papirni kolaž) | K | `kolo-poverenje/` | ✅ |
 | 10 | Bunar koji kopamo zajedno | K | `kolo-bunar/` | ✅ |
 | 11 | KOLO raste sa nama | K | `kolo-raste/` | ✅ |
-| 12 | Pijaca | K |  |  |
+| 12 | Pijaca | K | `kolo-pijaca/` | tekst gotov, izrada nije počela |
 | 13 | Ušteda (uputstvo; scenario stiže) | K |  |  |
 | 14 | Bez posrednika (scenario u pregledu) | K |  |  |
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
