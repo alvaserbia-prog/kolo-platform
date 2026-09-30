@@ -1292,6 +1292,7 @@
     "cta_opis": "A hálózat még csak épül. A regisztráció körülbelül egy percet vesz igénybe, név helyett becenevet választasz, dokumentumokra nincs szükség. Az első három hirdetést azonnal feladhatod.",
     "cta_priduzi": "Lépj be a KOLO-ba",
     "cta_footer": "Ami neked hasznos, az a közösségednek is hasznos.",
+    "cta_mreze": "Kövesd a KOLO-t",
     "kako_funkcionise_korak_4_naslov": "Cserélsz",
     "kako_funkcionise_korak_4_opis": "Munkát, javakat és tudást kínálsz és keresel, és meghívod a hálózatba azokat, akiket ismersz. Minden hozzájárulásod feljegyezve és láthatóan megmarad POEN-ben."
   },
@@ -2227,7 +2228,8 @@
     "tekst": "A platform működéséhez szükséges sütiket használunk. Hozzájárulásoddal analitikai sütiket is használunk (Google Analytics), hogy megértsük a használatot és javítsuk az oldalt. Elfogadhatod vagy elutasíthatod — az oldal nélkülük is működik.",
     "saznaj_vise": "Tudj meg többet",
     "prihvati": "Elfogadom",
-    "odbij": "Elutasítom"
+    "odbij": "Elutasítom",
+    "podesavanja": "Süti-beállítások"
   },
   "oauthDovrsi": {
     "greska_pseudonim_kratak": "Az álnévnek legalább 3 karakterből kell állnia.",
