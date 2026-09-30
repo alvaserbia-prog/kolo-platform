@@ -208,6 +208,8 @@ a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela �
 
 🔴 **Muzika je vedra i ritmična, nikad tužna** (odluka vlasnika, 30.09.2026; dvaput vraćeno: „Čiji si ti“ u e-molu i gudači u „Potvrda nosi odgovornost“). Ozbiljan trenutak u priči nosi aranžman (proređen ritam, kratka stanka, šaljiv silazak), ne mol ni spor tempo.
 
+🔴 **Tekst je jasan i direktan, bez metafora i prenesenih izraza** (odluka vlasnika, 30.09.2026, video „Trampa“; važi za sve videe). Kaže se šta se desilo i ko je šta uradio: ne „put se račva“ nego „problem su rešavali na dva načina“, ne „stvar ide iz ruke u ruku“ nego „obućar dobije tu stvar i za nju posle uzme ono što mu treba“. Slika sme da prikaže ono što tekst kaže, ali tekst ne sme da računa na sliku da bi bio razumljiv.
+
 🔴 **Priča o koristi, ne o pravilima** (odluke vlasnika, 30.09.2026, video „Pijaca“):
 - Video pokazuje šta KOLO donosi ljudima i kako je sa njim lakše živeti (višak koji nekome treba, dinari koji ostaju u kući, rad koji vredi, domaće iz svog kraja), a ne nabraja ograničenja, uslove i postupke platforme.
 - Strana onoga ko nudi: ne dobija dinare, nego ono što njemu treba, u razmeni. Strana onoga ko prima ostaje kako je gore: dinari su mu ostali za nešto drugo.
@@ -225,7 +227,7 @@ pravopisno sređuju bez posebnog pitanja.
 
 | Uloga | Šta gleda |
 |---|---|
-| **Pisac** | tekst za uho: ritam, dužina rečenice u jednom dahu, ponavljanja, na kojoj reči rečenica pada, da li se čuje ko šta radi, prirodan govor (kako bi se reklo u Somboru, ne kako se piše) |
+| **Pisac** | tekst za uho: ritam, dužina rečenice u jednom dahu, ponavljanja, na kojoj reči rečenica pada, da li se čuje ko šta radi, prirodan govor (kako bi se reklo u Somboru, ne kako se piše), bez metafora i prenesenih izraza |
 | **Dramaturg** | kuka u prve 3 s, luk priče, jedna misao po sceni, da slika i tekst ne govore isto, da poenta stigne pre nego što gledalac skroluje dalje |
 | **Urednik za mreže** | razume li se bez zvuka (natpisi), da li je poziv na kraju jasan i jedan, dužina za Reels, da li kraj tera na akciju (pridruži se, postavi oglas) |
 | **Gledalac iz ciljne grupe** | penzioner, domaćica ili zanatlija iz Sombora koji za KOLO nije čuo: da li razume svaku reč, gde ga zbuni žargon (POEN, potvrda, kod, indeks), šta bi pitao |
