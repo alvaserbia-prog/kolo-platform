@@ -221,7 +221,8 @@ naraciju ni za opise za mreže. Zabranjene reči i pravila iz odeljka „Zajedni
 
 Pravila pregleda:
 - Nalazi idu **tabelom po videu** (scena · uloga · nalaz · predlog), pa **ceo tekst za snimanje**
-  sa izborima u uglastim zagradama `[ovako | ili ovako]`.
+  kao jedna čista verzija, spremna za čitanje. 🔴 **Bez izbora u uglastim zagradama** `[ovako | ili ovako]`
+  (odluka vlasnika, 30.09.2026): predlog se upisuje u tekst, a alternativa, ako je ima, stoji samo u tabeli nalaza.
 - **Ništa se ne menja bez vlasnika.** Kad vlasnik kaže „reci šta ti se ne sviđa, ne menjaj
   odmah", daju se samo nalazi.
 - **Odlučeno se ne otvara ponovo.** Ako je vlasnik odbio predlog, ne vraća se u sledećem krugu,
