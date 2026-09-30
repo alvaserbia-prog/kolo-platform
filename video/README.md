@@ -29,7 +29,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
 | 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | tekst gotov, izrada nije počela |
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | tekst gotov, izrada nije počela |
-| 17 | Stari oblici zapisa | N |  |  |
+| 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
 | 18 | Šta piše pored tvog imena | K |  |  |
 | 19 | Čije je KOLO? Ničije. | K |  |  |
 | 20 | Šta je Fondacija | K |  |  |
@@ -166,13 +166,12 @@ Kropotkin); XX i XXI vek idu hronološki. Serijal o novcu otvara niz od tri vide
 i dva načina da se reši, stvar koju svi primaju ili zapis; „Stari oblici novca“ i „Stari oblici zapisa“ razrađuju
 svaki od njih, a K video „Šta piše pored tvog imena“ odmah posle pokazuje zapis u KOLU. Tri N zaredom su namerna celina.
 Metal (zlato, srebro, bakar) ostaje svom videu.
-„Kompenzacija i 1993.“ je vraćena na svoje hronološko mesto, jer na početku nije imala vezu sa KOLOM, a priča o
-krizi navodi gledaoca na zaključak da je KOLO zamena kad dinar propadne.
+„Kompenzacija i 1993.“ je vraćena na svoje hronološko mesto, jer na početku nije imala vezu sa KOLOM.
 
 **Ograde čuvara sadržaja za ovu listu:**
-- N „Ko stoji iza novca“, „Da li moraš da koristiš novac“ i „Paralelni put KOLA“ pišu se po okviru
-  koegzistencije (udžbenik 7.5): KOLO je dodatak, ne zamena; obaveze prema državi ostaju u dinarima;
-  „paralelan“ znači pored dinara, ne umesto njega.
+- N „Ko stoji iza novca“, „Da li moraš da koristiš novac“ i „Paralelni put KOLA“: KOLO danas kreće pored
+  dinara, a obaveze prema državi ostaju u dinarima. Ideja da zapis jednom zameni novac sme da ostane
+  (pravilo „Zapis umesto novca“ ispod).
 - Teme iz udžbenika (1.10, februar 2026) prevode se na važeću terminologiju: obračunski koeficijent, ne kurs;
   ZRNO se upisuje i otpisuje, ne kupuje ni prodaje; bez „referentne vrednosti 1 POEN ≈ 1 RSD“, bez Banke.
 - Zadruga je modul koji još nije u radu (Pravilnik, Glava VIII, čl. 56): videi o zadrugama je prikazuju
@@ -187,8 +186,8 @@ krizi navodi gledaoca na zaključak da je KOLO zamena kad dinar propadne.
   a Fondacija za ustupljeno dobro ne prima naknadu (Pravilnik o projektima i nabavkama, čl. 3a).
 - „Tri dela sistema“ su Fondacija, Protokol i Zajednica; Banke iz udžbenika nema.
 - „Ko vodi Fondaciju“: samo uloge (Upravni odbor, direktor), bez imena (odluka vlasnika 27.09.2026).
-- „Kompenzacija i 1993.“: kriza je tema videa, ne poruka o KOLU. Nema mosta „kad novac propadne, tu je KOLO“,
-  a „zapis ko kome duguje“ se ne vezuje za POEN (POEN nije potraživanje, Pravilnik čl. 12–13). Marka se pominje.
+- „Kompenzacija i 1993.“: kriza je tema videa, ne poruka o KOLU. Kriza se ne koristi kao poziv
+  („kad novac propadne, tu je KOLO“), a „zapis ko kome duguje“ se ne vezuje za POEN (POEN nije potraživanje, Pravilnik čl. 12–13). Marka se pominje.
 - Godine i brojke u istorijskim videima proveravaju se pre svakog scenarija.
 
 ## Zajedničko za sve videe
@@ -212,6 +211,8 @@ a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela �
 🟡 **Likovni stil i muzika se ne ponavljaju obavezno** (odluka vlasnika, 27.09.2026): od trilogije „Poverenje“ (`kolo-poverenje/`) svaki video može da ima svoj autentičan stil (tamo: papirni kolaž u prvom i trećem videu, naiva u drugom; linorez i tuš sa akvarelom vlasnik je odbacio) i svoju muziku. Zajedničko ostaje ono iznad: titlovi po rečima sa zelenom rečju, naracija vlasnika, −14 LUFS, POEN samo kao zapis, zabranjene reči.
 
 🔴 **Muzika je vedra i ritmična, nikad tužna** (odluka vlasnika, 30.09.2026; dvaput vraćeno: „Čiji si ti“ u e-molu i gudači u „Potvrda nosi odgovornost“). Ozbiljan trenutak u priči nosi aranžman (proređen ritam, kratka stanka, šaljiv silazak), ne mol ni spor tempo.
+
+🟢 **Zapis umesto novca sme da se kaže** (odluka vlasnika, 30.09.2026). Nije obavezno da tekst govori „KOLO je dodatak, ne zamena“: ideja da zapis može da zameni novac sme da ostane, jer je to krajnji cilj KOLA, iako KOLO danas kreće paralelno sa dinarom. Ono što i dalje važi, jer su to strukturne granice iz akata, a ne stav o cilju: POEN se ne menja za dinare i ne iznosi iz sistema (nekonvertibilnost), obaveze prema državi ostaju u dinarima, i uz POEN ne idu reči kupi, prodaj, plati, zaradi, cena.
 
 🔴 **Tekst je jasan i direktan, bez metafora i prenesenih izraza** (odluka vlasnika, 30.09.2026, video „Trampa“; važi za sve videe). Kaže se šta se desilo i ko je šta uradio: ne „put se račva“ nego „problem su rešavali na dva načina“, ne „stvar ide iz ruke u ruku“ nego „obućar dobije tu stvar i za nju posle uzme ono što mu treba“. Slika sme da prikaže ono što tekst kaže, ali tekst ne sme da računa na sliku da bi bio razumljiv.
 
