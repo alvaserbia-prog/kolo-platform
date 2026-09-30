@@ -216,7 +216,7 @@ export async function POST(req: NextRequest) {
       return await greska("Skladište slika nije konfigurisano (Cloudflare R2).", 503);
     let dir: string | null = null;
     if (!useR2) {
-      dir = path.join(process.cwd(), "storage", "oglasi", listingId);
+      dir = path.join(/*turbopackIgnore: true*/ process.cwd(), "storage", "oglasi", listingId);
       await mkdir(dir, { recursive: true });
     }
     for (const file of imageFiles) {
@@ -227,7 +227,7 @@ export async function POST(req: NextRequest) {
         const url = await sacuvajNaR2(`oglasi/${listingId}/${fname}`, buffer, file.type);
         imagePaths.push(url);
       } else {
-        await writeFile(path.join(dir!, fname), Buffer.from(await file.arrayBuffer()));
+        await writeFile(path.join(/*turbopackIgnore: true*/ dir!, fname), Buffer.from(await file.arrayBuffer()));
         imagePaths.push(`storage/oglasi/${listingId}/${fname}`);
       }
     }

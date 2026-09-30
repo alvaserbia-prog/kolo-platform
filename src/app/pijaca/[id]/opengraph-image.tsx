@@ -37,7 +37,7 @@ async function ucitajFotografiju(images: string[]): Promise<string | null> {
       buffer = Buffer.from(await res.arrayBuffer());
     } else {
       // Legacy putanja na lokalnom disku (dev fallback).
-      buffer = await readFile(path.join(process.cwd(), prva));
+      buffer = await readFile(path.join(/*turbopackIgnore: true*/ process.cwd(), prva));
       const ext = path.extname(prva).toLowerCase();
       tip = ext === ".png" ? "image/png" : ext === ".webp" ? "image/webp" : "image/jpeg";
     }
