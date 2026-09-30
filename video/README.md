@@ -200,6 +200,13 @@ dobiješ razmenom u KOLU ne moraš da pribaviš za dinare, i to je ušteda. Ušt
 kod tebe, nikad kao preračun POEN-a u dinare („1 POEN = 1 dinar uštede“, „vrednost tvojih POENA u dinarima“). Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
 a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela „Pravna odbrana“, red „Iznos u oglasu“). Postupak izrade: README u folderu svakog videa.
 
+🔴 **Natpisi idu samo tamo gde imaju smisla, ne u svaku scenu** (odluka vlasnika, 30.09.2026). Titlovi po
+rečima već nose naraciju, pa natpis koji ponavlja izgovoreno samo udvostručuje tekst i odvlači pogled sa slike.
+Tekst na ekranu pre svega živi **u svetu priče**: ono što lik piše (sveska, tabla, oglas na telefonu), zapis u
+knjizi evidencije, završna kartica sa ekolo.rs. Poseban natpis preko slike dolazi samo kad nosi nešto što ni
+slika ni titl ne kažu (ime, godina, mesto, izvor, nabrajanje koje se čita) ili kad je kuka. U scenariju se ne
+pravi kolona „Natpis“ za svaku scenu; tekst koji je deo slike upisuje se u kolonu „Slika“.
+
 🟡 **Likovni stil i muzika se ne ponavljaju obavezno** (odluka vlasnika, 27.09.2026): od trilogije „Poverenje“ (`kolo-poverenje/`) svaki video može da ima svoj autentičan stil (tamo: papirni kolaž u prvom i trećem videu, naiva u drugom; linorez i tuš sa akvarelom vlasnik je odbacio) i svoju muziku. Zajedničko ostaje ono iznad: titlovi po rečima sa zelenom rečju, naracija vlasnika, −14 LUFS, POEN samo kao zapis, zabranjene reči.
 
 🔴 **Muzika je vedra i ritmična, nikad tužna** (odluka vlasnika, 30.09.2026; dvaput vraćeno: „Čiji si ti“ u e-molu i gudači u „Potvrda nosi odgovornost“). Ozbiljan trenutak u priči nosi aranžman (proređen ritam, kratka stanka, šaljiv silazak), ne mol ni spor tempo.
