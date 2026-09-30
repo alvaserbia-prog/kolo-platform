@@ -16,7 +16,7 @@ načina: stvarom koju svi primaju ili zapisom. Novac je prvi način, KOLO korist
 3. Stevan ima drva. Ali ni Stevanu ne treba ajvar. Njemu treba neko da mu okreči kuću.
 4. To je trampa. Razmena uspe samo ako oboje imaju ono što onom drugom treba. I to istog dana.
 5. Ljudi su taj problem rešavali na dva načina.
-6. Prvi način: ljudi su izabrali jednu stvar koju svi primaju. Nekad stoka, so i školjke, kasnije zlato i novac. Obućar da cipele i dobije tu stvar. Za nju posle uzme ono što njemu treba.
+6. Prvi način: ljudi su izabrali jednu stvar koju svi primaju. Nekad žito, so i školjke, kasnije zlato i novac. Obućar da cipele i dobije tu stvar. Za nju posle uzme ono što njemu treba.
 7. Drugi način: zapisuje se. Obućar da cipele Milici, i zapiše se u zajedničku svesku da je dao. Milica da ajvar nekome kome ajvar treba, i to se zapiše. Kad obućaru zatrebaju drva, Stevan mu ih da, jer se zna da je obućar dao. Tako niko ne mora da čeka nekoga ko ima baš ono što njemu treba.
 8. Novac je prvi način. KOLO koristi drugi. U KOLU se taj zapis zove POEN. Dinar ostaje. KOLO je dodatak.
 9. U sledećem videu: stari oblici novca. Prati serijal.
@@ -31,7 +31,7 @@ načina: stvarom koju svi primaju ili zapisom. Novac je prvi način, KOLO korist
 ## Šta se vidi
 
 - sc. 2–3: iznad glava rastu oblačići „treba mi…“, lanac potreba koji se ne zatvara.
-- sc. 6: stvari prelaze od čoveka do čoveka: krava, džak soli, školjka, novčić.
+- sc. 6: stvari prelaze od čoveka do čoveka: džak žita, kocka soli, školjka, novčić.
 - sc. 7: ljudi daju, a u svesci se pojavljuju redovi „Ime · dao · šta“. Krug Milica → obućar → Stevan se zatvara.
 - sc. 8: sveska ostaje otvorena; natpis KOLO.
 
