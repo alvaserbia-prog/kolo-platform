@@ -9,6 +9,7 @@ import Pseudonim from "@/components/Pseudonim";
 import UspehKartica from "@/components/UspehKartica";
 import SpisakCekanja from "@/components/SpisakCekanja";
 import { jeNadoknada, iznosNadoknade, raspolozivo } from "@/lib/protokol/nadoknada";
+import { dogadjaj } from "@/lib/analitika";
 
 // qrcode.react se deli sa html5-qrcode u isti veliki chunk (~361KB). Učitava se
 // LENJO — QR se prikazuje tek kad korisnik otvori karticu za upis POEN-a, pa ne
@@ -547,6 +548,8 @@ function SendForma({ onClose, onSuccess, initialPseudonim, initialIznos, initial
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error ?? t("send_greska")); return; }
+      // Bez iznosa i bez primaoca — samo da se prepis desio.
+      dogadjaj("prepis_poen");
       // Prepis iz dečjeg zapisa iznad praga se NE izvršava odmah nego čeka roditelja
       // (Pravilnik o učešću dece, čl. 14). Ekran to mora da kaže — inače dete vidi
       // „prepisano" a POEN se nije pomerio.

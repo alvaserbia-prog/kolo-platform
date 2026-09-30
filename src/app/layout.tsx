@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
-import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { sesija } from "@/lib/sesija";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale, getTranslations } from "next-intl/server";
 import CirilicaProvider from "@/components/CirilicaProvider";
-import { Analitika } from "@/components/Analitika";
+import { Analitika, VercelAnalitika } from "@/components/Analitika";
 import { AktivnostTracker } from "@/components/AktivnostTracker";
 import { CookieConsent } from "@/components/CookieConsent";
 import {
@@ -19,6 +18,9 @@ import {
   OG_LOCALE,
   hreflangAlternates,
 } from "@/lib/seo";
+
+/** GA4 ekolo.rs. Env `GA_MEASUREMENT_ID` ga menja bez izmene koda. */
+const GA_MEASUREMENT_ID = "G-JY214NWCDK";
 
 // Podrazumevani font za latiničke korisnike. "latin-ext" pokriva srpske
 // dijakritike (č, ć, š, ž, đ); ćirilica NIJE ovde da ne bi opterećivala
@@ -143,6 +145,15 @@ export default async function RootLayout({
     console.error("[layout] sesija nedostupna — render bez sesije", greska);
   }
 
+  // Google Analytics: samo na ekolo.rs (test i preview ne mešaju podatke sa
+  // produkcijom) i nikad za maloletni nalog. Prijavljen nalog čiji token još ne
+  // zna odgovor (`maloletan === undefined`) čeka prvo osvežavanje — radije
+  // propušten pregled nego merenje deteta.
+  const gaId =
+    IS_PRODUCTION && (!session?.user || session.user.maloletan === false)
+      ? (process.env.GA_MEASUREMENT_ID ?? GA_MEASUREMENT_ID)
+      : null;
+
   // Klijentski i18n payload: NextIntlClientProvider serijalizuje poruke u HTML i
   // šalje ih klijentu na SVAKOJ stranici. Ceo set je ~118KB; ovi namespace-ovi se
   // koriste ISKLJUČIVO u serverskim komponentama (preko `getTranslations`) — javne
@@ -190,9 +201,9 @@ export default async function RootLayout({
           <CookieConsent />
         </NextIntlClientProvider>
         {/* Vercel Analytics — bez kolačića (cookieless, agregatno), ne zahteva pristanak. */}
-        <Analytics />
+        <VercelAnalitika />
         {/* Google Analytics — učitava se SAMO uz pristanak (čl. 7 Politike). */}
-        <Analitika />
+        <Analitika gaId={gaId} />
       </body>
     </html>
   );

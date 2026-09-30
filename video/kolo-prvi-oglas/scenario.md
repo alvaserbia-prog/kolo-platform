@@ -1,0 +1,48 @@
+# KOLO video — Registracija i prvi oglas (4. po redosledu serije)
+
+Isti sistem kao `video/kolo-04` i `video/kolo-03`: papirni kolaž, drhtave ručne linije, elementi
+uskaču sa odskokom, titlovi po rečima (izgovorena reč zelena), naracija vlasnika, tamburaška
+muzika, −14 LUFS. Scena 1 je Ana iz prethodnih videa (tegla meda), a od scene 2 naracija je u drugom licu (odluka vlasnika); u slici „ti“ je papirna ruka sa telefonom.
+
+**Cilj videa:** gledalac vidi da ulazak traje minut, da nije potreban nijedan dokument i da
+prvi oglas odmah ima smisla. Posle gledanja treba da ima jednu jasnu radnju: postavi prvi oglas.
+
+## Naracija (čita vlasnik; scena 1 o Ani, dalje drugo lice)
+
+1. Ana je u KOLO ušla sa jednom teglom meda. A evo kako ti da uđeš u KOLO.
+2. Na ekolo.rs klikneš „Pridruži se“. Izabereš pseudonim, upišeš mejl i lozinku. Za minut si unutra, bez podataka iz lične karte.
+3. Onda na Pijaci postaviš svoj prvi oglas, recimo: domaći med. Jedna fotografija i mesto, a po želji i broj telefona. Iznos u POENIMA određuješ sam.
+4. Kad Fondacija pregleda tvoj prvi oglas, upisuje ti se hiljadu POENA. To je zapis da si nešto doprineo zajednici.
+5. Tvoj oglas vide ljudi iz tvog kraja. Neko od njih se javi i obavite razmenu. Kad te upozna, može da te potvrdi. Sa prvom potvrdom postaješ redovan član i sam možeš da se javljaš na tuđe oglase.
+6. Šta ti imaš da ponudiš? Med, popravku, čas matematike, pomoć u bašti? Uđi na ekolo.rs i postavi svoj prvi oglas. Treba ti dva minuta.
+
+Napomene uz tekst: potvrda se ne dobija razmenom nego ličnim poznavanjem (Pravilnik o dokazu
+stvarnosti čl. 1), pa razmena samo vodi do upoznavanja. 1.000 POENA za prvi oglas upisuje se tek
+po pregledu Fondacije (čl. 40a); do tada je samo zabeleženo.
+
+## Priča u slici
+
+| Scena | Slika |
+|---|---|
+| 1 | Udica u prvoj sekundi: Ana drži teglu meda, pa se kadar okrene ka gledaocu i uleti papirna ruka sa telefonom; natpis „Prvi oglas za 2 minuta“. Ručno nacrtana štoperica u uglu kreće da teče |
+| 2 | Papirni telefon sa formom „Pridruživanje“: pseudonim `tvoj.pseudonim` se ispisuje slovo po slovo, mejl, lozinka (tačkice). Lična karta uleti i bude precrtana crvenom olovkom, pečat „BEZ PAPIRA“. Štoperica staje na 1:00, konfete od papira |
+| 3 | Ruka slika teglu (blic, polaroid ispadne iz telefona). Kartica oglasa se sklapa deo po deo: naslov „Domaći med, lipa“, fotografija, kategorija „Hrana i piće“, mesto „Sombor“, iznos. Dugme „Objavi oglas“ pritisne ručno nacrtan prst |
+| 4 | Kartica zapisa „Ti · prvi oglas · 1.000 POENA“; najpre žig „ZABELEŽENO“, pa ruka Fondacije udari zeleni žig „UPISANO“. Natpis „zapis o doprinosu, nije novac“ |
+| 5 | Mapa Sombora (Županija, Trg Sv. Trojstva): oglas zakačen pribadačom, oko njega se pale komšije (Milan, Lazar, Marija). Oblačić poruke, rukovanje, pa lanac potvrda: Milan stavi kvačicu uz tvoj pseudonim, pečat „redovan član“ |
+| 6 | Prazna kartica oglasa „Tvoj prvi oglas“ sa trepćućim kursorom, oko nje lete primeri (tegla, šrafciger, sveska sa „2+2“, motika). Završna kartica: **ekolo.rs** · „Postavi svoj prvi oglas“ · „registracija oko minut“ |
+
+## Za doseg
+
+- **Prva sekunda nosi obećanje** („Prvi oglas za 2 minuta“) i Ana sa teglom, koju publika zna iz 2. i 3. videa.
+- **Štoperica** vizuelno dokazuje brzinu; staje na „za minut je unutra“.
+- **Titlovi krupni**, čitljivi bez zvuka; svaki korak ima i broj (1, 2, 3) kao nalepnicu.
+- **Kraj se vezuje za početak** (prazna kartica oglasa → kartica sa medom sa početka), da se video vrti u krug.
+- **Naslovna slika:** Ana sa teglom i natpis „Prvi oglas za 2 minuta“.
+
+## Pravila
+
+- Bez reči (titlovi i natpisi): kupi, prodaj, plati, zaradi, cena. Ni „besplatno“ (vidi `docs/drustvene-mreze-opisi.md`).
+- POEN se nikad ne crta kao novčić ni novčanica, samo kao kartica zapisa sa žigom.
+- Fondacija **pregleda i upisuje**, nikad ne „dodeljuje“ POEN (čl. 13, 40a). 1.000 POENA za prvi oglas je tačno po `doprinos-pravila.ts` (`IZNOS`).
+- „Potvrdi“, ne „verifikuje“; statusi na ekranu: nov član → redovan član.
+- Pseudonim, nikad pravo ime u obrascu.

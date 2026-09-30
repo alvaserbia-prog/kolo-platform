@@ -1,0 +1,35 @@
+// Paleta „drvoreza“: ručni papir, toplo crno mastilo i tri boje za otisak (oker, rđa, zelena).
+// Zelena KOLO boja (sa ekolo.rs) je boja zajedničkog dobra: kad zajedničko živi, ima je;
+// kad propada, gasi se u oker i sivo.
+export const P = {
+  papir: "#EFE6D2",
+  krem: "#F6EFDF",
+  belo: "#FBF7EC",
+  mastilo: "#1F1B17",
+  mastiloMeko: "#4A4038",
+  senka: "#3A2F25",
+  oker: "#D9A441",
+  okerSvetli: "#E8C274",
+  okerTamni: "#A9782A",
+  rdja: "#B4472F",
+  rdjaTamna: "#7E2E1E",
+  trava: "#7FAF5A",
+  travaTamna: "#4E7F3A",
+  suvo: "#C8A869",
+  zemlja: "#8E6B4A",
+  zemljaSvetla: "#B89370",
+  nebo: "#B7CBC3",
+  voda: "#6E9DAF",
+  vodaTamna: "#3F6B7E",
+  kamen: "#B9B0A0",
+  kamenTamni: "#857C6E",
+  drvo: "#7A5438",
+  sivo: "#9A9185",
+  koza: "#E6C3A0",
+  // KOLO
+  zelena900: "#0F3D20",
+  zelena700: "#1B6B3A",
+  zelena500: "#2E9D54",
+  zelena100: "#E8F5EC",
+  zlatna: "#F5B842",
+};

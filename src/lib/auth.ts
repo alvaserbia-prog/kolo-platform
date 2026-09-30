@@ -137,6 +137,7 @@ export const authOptions: NextAuthOptions = {
           admin: user.admin,
           verified: imaPunPristup(user.verified, user.indeksStvarnosti),
           oauthPending: user.oauthPending,
+          maloletan: user.maloletan,
         };
       },
     }),
@@ -170,6 +171,7 @@ export const authOptions: NextAuthOptions = {
         user.admin = existing.admin;
         user.verified = imaPunPristup(existing.verified, existing.indeksStvarnosti);
         user.oauthPending = existing.oauthPending;
+        user.maloletan = existing.maloletan;
         return true;
       }
 
@@ -204,6 +206,7 @@ export const authOptions: NextAuthOptions = {
           token.admin = user.admin;
           token.verified = user.verified;
           token.oauthPending = user.oauthPending ?? false;
+          token.maloletan = user.maloletan;
           token.osvezenoAt = Date.now(); // sveže iz authorize() — preskoči odmah refetch
         }
       } else if (trigger === "update" && (session as { userId?: string } | undefined)?.userId) {
@@ -211,7 +214,7 @@ export const authOptions: NextAuthOptions = {
         const noviId = (session as { userId: string }).userId;
         const dbUser = await prisma.user.findUnique({
           where: { id: noviId },
-          select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true },
+          select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true, maloletan: true },
         });
         if (dbUser) {
           token.id = noviId;
@@ -220,6 +223,7 @@ export const authOptions: NextAuthOptions = {
           token.admin = dbUser.admin;
           token.verified = imaPunPristup(dbUser.verified, dbUser.indeksStvarnosti);
           token.oauthPending = dbUser.oauthPending;
+          token.maloletan = dbUser.maloletan;
           token.osvezenoAt = Date.now();
           token.pendingEmail = undefined;
           token.pendingProvider = undefined;
@@ -246,7 +250,7 @@ export const authOptions: NextAuthOptions = {
           try {
             const dbUser = await prisma.user.findUnique({
               where: { id: token.id as string },
-              select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true, status: true, identitetUtvrdjenAt: true },
+              select: { verified: true, indeksStvarnosti: true, oauthPending: true, tipKorisnika: true, admin: true, pseudonim: true, status: true, identitetUtvrdjenAt: true, maloletan: true },
             });
             if (dbUser && dbUser.status !== "ACTIVE") {
               // Suspenzija/isključenje (Uslovi čl. 27, 28) ranije je blokiralo samo
@@ -264,6 +268,7 @@ export const authOptions: NextAuthOptions = {
               token.identitetUtvrdjen = dbUser.identitetUtvrdjenAt !== null;
               token.pseudonim = dbUser.pseudonim;
               token.oauthPending = dbUser.oauthPending;
+              token.maloletan = dbUser.maloletan;
               token.osvezenoAt = sada;
             } else {
               // Token nosi `id` koga više NEMA u bazi (obrisan nalog ili je baza
@@ -298,6 +303,9 @@ export const authOptions: NextAuthOptions = {
       session.user.admin = (token.admin as string) ?? "NONE";
       session.user.verified = (token.verified as boolean) ?? false;
       session.user.identitetUtvrdjen = (token.identitetUtvrdjen as boolean) ?? false;
+      // `undefined` = token izdat pre ovog polja; tretira se kao nepoznato, pa
+      // layout do prvog osvežavanja ne učitava GA (vidi `Analitika.tsx`).
+      session.user.maloletan = token.maloletan as boolean | undefined;
       session.user.oauthPending = (token.oauthPending as boolean) ?? false;
       // Nedovršena OAuth registracija — izloži podatke koje /api/oauth/dovrsi
       // koristi za kreiranje naloga (nalog još ne postoji u bazi).

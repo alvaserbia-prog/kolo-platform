@@ -1299,6 +1299,7 @@
     "cta_opis": "The network is only being built. Signing up takes about a minute, you choose a nickname instead of your name, and no documents are needed. You can post your first three listings straight away.",
     "cta_priduzi": "Join KOLO",
     "cta_footer": "What benefits you benefits your community too.",
+    "cta_mreze": "Follow KOLO",
     "kako_funkcionise_korak_4_naslov": "You exchange",
     "kako_funkcionise_korak_4_opis": "You offer and look for work, goods and knowledge, and you invite people you know into the network. Every contribution of yours stays recorded and visible in POEN."
   },
@@ -2234,7 +2235,8 @@
     "tekst": "We use necessary cookies to run the platform. With your consent we also use analytics cookies (Google Analytics) to understand usage and improve the site. You can accept or decline — the site works without them.",
     "saznaj_vise": "Learn more",
     "prihvati": "Accept",
-    "odbij": "Decline"
+    "odbij": "Decline",
+    "podesavanja": "Cookie settings"
   },
   "oauthDovrsi": {
     "greska_pseudonim_kratak": "The pseudonym must be at least 3 characters long.",

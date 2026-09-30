@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { procitajPristanak, sacuvajPristanak } from "@/lib/cookieConsent";
+import {
+  OTVORI_PODESAVANJA_EVENT,
+  otvoriPodesavanjaKolacica,
+  procitajPristanak,
+  sacuvajPristanak,
+} from "@/lib/cookieConsent";
 
 /**
  * Banner za pristanak na analitičke kolačiće (Politika privatnosti čl. 7).
@@ -27,6 +32,10 @@ export function CookieConsent() {
 
   useEffect(() => {
     setVidljiv(procitajPristanak() === null);
+    // Link „Podešavanja kolačića" (futer) vraća banner i posle odluke.
+    const otvori = () => setVidljiv(true);
+    window.addEventListener(OTVORI_PODESAVANJA_EVENT, otvori);
+    return () => window.removeEventListener(OTVORI_PODESAVANJA_EVENT, otvori);
   }, []);
 
   if (!vidljiv) return null;
@@ -76,5 +85,18 @@ export function CookieConsent() {
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * Link koji ponovo otvara banner — mesto na kome se pristanak povlači
+ * (Politika čl. 7). Stoji u oba futera.
+ */
+export function KolaciciPodesavanja({ className }: { className?: string }) {
+  const t = useTranslations("kolacici");
+  return (
+    <button type="button" onClick={otvoriPodesavanjaKolacica} className={className}>
+      {t("podesavanja")}
+    </button>
   );
 }

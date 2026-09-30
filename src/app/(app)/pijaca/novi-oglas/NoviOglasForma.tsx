@@ -17,6 +17,7 @@ import {
   ukupnaVelicina,
   type IzabranaSlika,
 } from "@/lib/slika-upload";
+import { dogadjaj } from "@/lib/analitika";
 
 const MAX_IMAGES = MAX_SLIKA;
 
@@ -185,6 +186,7 @@ export default function NoviOglasForma({
         return;
       }
       await res.json().catch(() => ({}));
+      dogadjaj("oglas_objavljen", { tip: tip.toLowerCase(), kategorija: category });
       // Potvrda + redirect na Pijacu (ne direktno na detalj oglasa).
       setUspeh(true);
       setTimeout(() => router.push("/pijaca"), 1800);

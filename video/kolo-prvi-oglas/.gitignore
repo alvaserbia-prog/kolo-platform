@@ -1,0 +1,9 @@
+node_modules/
+audio/clean16/
+audio/final16/
+out/test-*.mp4
+out/frejmovi/
+out/kadrovi/
+audio/muzika.wav
+audio/tempo/
+audio/muzika-slozena.wav

@@ -1,0 +1,69 @@
+"""Zbijanje pauza + blago ubrzanje naracije (video Bunar, snimak My_recording_56).
+
+Pauze između scena (duže od 1,0 s) skraćuju se na PAUZA_SCENA — tu se menja kadar i
+muzika diše. Ostale pauze duže od PAUZA_FRAZA skraćuju se na PAUZA_FRAZA.
+Potom atempo=TEMPO (visina glasa ista). Ivice (tišina pre i posle) seku se na 0,25 / 0,30 s.
+Ulaz audio/clean/glas.wav -> izlaz audio/final/glas.wav
+"""
+import os, json, subprocess, numpy as np, soundfile as sf
+
+PAUZA_SCENA = 0.9
+PAUZA_FRAZA = 0.45
+PRAG_SCENA = 1.0
+PRAG_DB = 34
+KRAJ_SNIMKA = 107.1  # ceo snimak
+# Izbačeni pogrešni počeci (ponovljeni odmah posle):
+#  sc. 4 „Ali sela šir…“, sc. 5 „kad o njima odlučuju oniga koji…“, sc. 9 „kao svedočanstvo da smo već…“
+IZBACI = [(24.20, 27.45), (44.05, 48.45), (91.30, 95.55)]
+TEMPO = 1.03
+
+os.makedirs("audio/final", exist_ok=True)
+a, sr = sf.read("audio/clean/glas.wav", dtype="float32")
+a = a[: int(KRAJ_SNIMKA * sr)]
+for x0, x1 in sorted(IZBACI, reverse=True):
+    a = np.concatenate([a[: int(x0 * sr)], np.zeros(int(0.5 * sr), dtype=a.dtype), a[int(x1 * sr):]])
+hop = sr // 100
+# Rezovi pauza se računaju jednom i pamte u audio/rezovi.json (u stotinkama sekunde). Posle
+# popravke glasa (popravka_glasa.py) glas se seče na ISTIM mestima, pa vremena reči i titlova
+# ostaju ista i slika ne mora ponovo da se renderuje.
+REZOVI = "audio/rezovi.json"
+if os.path.exists(REZOVI):
+    parovi = json.load(open(REZOVI))
+    print(f"rezovi iz {REZOVI}: {len(parovi)} delova")
+else:
+    n = len(a) // hop
+    db = 20 * np.log10(np.array([np.sqrt(np.mean(a[k*hop:(k+1)*hop]**2)) for k in range(n)]) + 1e-9)
+    tiho = db < np.percentile(db, 90) - PRAG_DB
+    glas = np.where(~tiho)[0]
+    prvi, zadnji = glas[0], glas[-1]
+    parovi, poc, k = [], max(0, prvi - 25), prvi
+    while k < zadnji:
+        if tiho[k]:
+            j = k
+            while j < zadnji and tiho[j]:
+                j += 1
+            duz = (j - k) / 100
+            cilj = PAUZA_SCENA if duz > PRAG_SCENA else PAUZA_FRAZA
+            if duz > cilj:
+                ostavi = int(cilj * 100)
+                sredina = k + ostavi // 2
+                parovi.append([int(poc), int(sredina)])
+                poc = j - (ostavi - ostavi // 2)
+                print(f"pauza {k/100:6.2f}: {duz:.2f} -> {cilj:.2f}")
+            k = j
+        else:
+            k += 1
+    parovi.append([int(poc), int(min(len(a) // hop, zadnji + 30))])
+    json.dump(parovi, open(REZOVI, "w"))
+delovi = [a[p0 * hop: p1 * hop] for p0, p1 in parovi]
+x = delovi[0]
+f = int(0.015 * sr)
+for d in delovi[1:]:
+    r = np.linspace(0, 1, f, dtype=np.float32)
+    x = np.concatenate([x[:-f], x[-f:] * (1 - r) + d[:f] * r, d[f:]])
+tmp = "audio/final/_glas.wav"
+sf.write(tmp, x, sr, subtype="FLOAT")
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", tmp, "-af", f"atempo={TEMPO},afade=t=in:d=0.02,areverse,afade=t=in:d=0.08,areverse",
+                "-c:a", "pcm_s16le", "audio/final/glas.wav"], check=True)
+os.remove(tmp)
+print(f"{len(a)/sr:.2f} s -> {len(x)/sr/TEMPO:.2f} s")

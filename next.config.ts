@@ -35,8 +35,11 @@ const CSP = [
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
-  "connect-src 'self' https://www.google-analytics.com https://va.vercel-scripts.com https://vitals.vercel-insights.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://va.vercel-scripts.com",
+  // GA4 šalje na regionalne krajnje tačke (`region1.google-analytics.com`), ne na
+  // `www.` — do 26.09.2026 je samo `www.` bio dozvoljen, pa je pregledač odbijao
+  // gotovo svako slanje i GA je primao skoro ništa.
+  "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://va.vercel-scripts.com https://vitals.vercel-insights.com",
   // Service worker (Web Push) i PWA manifest — isti origin.
   "worker-src 'self'",
   "manifest-src 'self'",

@@ -23,6 +23,7 @@ import {
   ukupnaVelicina,
   type IzabranaSlika,
 } from "@/lib/slika-upload";
+import { dogadjaj } from "@/lib/analitika";
 
 interface OglasProps {
   id: string;
@@ -122,6 +123,7 @@ export default function OglasDetalj({
     });
     setChatLoading(false);
     if (!res.ok) return;
+    dogadjaj("kontakt_oglasivaca", { izvor: "oglas" });
     const data = await res.json();
     router.push(`/poruke?k=${data.konverzacijaId}`);
   }
