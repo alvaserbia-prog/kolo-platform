@@ -6,7 +6,7 @@ import json, subprocess, sys
 V = sys.argv[1]
 plan = json.load(open(f"src/{V}/plan.json"))
 T = plan["trajanje"]
-MUZ_DB = {"v1": -9, "v2": -11, "v3": -8}[V]
+MUZ_DB = {"v1": -9, "v2": -11, "v3": -9}[V]
 ulazi, filt = [], []
 for k, s in enumerate(plan["scene"]):
     ulazi += ["-i", f"audio/{V}/final/glas.wav"]

@@ -1,13 +1,14 @@
 """Muzika trilogije „Poverenje“, komponovana i sintetisana u kodu. Upotreba: python3 scripts/muzika.py v1
 
-v1 „Čiji si ti“ (linorez): vedro od prvog kadra — frula, samica u kontri, bas i def sa praporcima,
+v1 „Čiji si ti“: vedro od prvog kadra — frula, samica u kontri, bas i def sa praporcima,
    D-dur, 2/4 „šetnja“ ~100 BPM; od scene 6 („KOLO radi isto“) brže, puno kolo ~124 BPM;
    završni udarac pada tačno na „ekolo.rs“. (Prva verzija, frula solo u e-molu, bila je pretužna.)
 v2 „Poznaješ li nekoga“ (naiva): harmonika. Scena 1 je pitanje (staccato koje ostane
    visiti), od „Nije problem“ vedra polka u C-duru; scena 5 kolo, brže i punije; kraj na „ekolo.rs“.
-v3 „Potvrda nosi odgovornost“ (tuš): gudači. Visok ton violine i čelo na d; na „zamuti“ disonanca;
-   scena 2 toplo F-dur; scena 3 napetost (d–B–g–A, tremolo čela), na „muti“ klaster; scena 4
-   razrešenje u D-dur na „lično“; scene 5–6 pizzicato i tema, kraj na „ekolo.rs“.
+v3 „Potvrda nosi odgovornost“: vedro i ritmično od prvog kadra — violina i harmonika u uglas,
+   samica, pizzicato bas, def; G-dur, 2/4 ~116 BPM. Priča kroz aranžman: šaljiv silazak na
+   „zamuti“, proređena scena 3 i stanka na „muti“, pun sastav oktavu više od „lično“; kraj na
+   „ekolo.rs“. (Prva verzija, spori gudači sa disonancama, bila je tužna.)
 Izlaz: audio/vN/muzika.wav
 """
 import sys
@@ -159,61 +160,70 @@ elif V == "v2":
     tr.soba(0.22, 1.2)
 
 else:  # v3
-    rngv = rng
-    def pad(ak, t0, t1, g, dno=50, vrh=69, napad=0.8):
-        for m in glasovi(ak, dno, vrh)[:4]:
-            tr.dodaj(gudalo(m, max(0.3, t1 - t0), rngv, napad=napad, pust=0.8), t0, g, rngv.uniform(-0.4, 0.4))
-        tr.dodaj(gudalo(koren(ak, 36), max(0.3, t1 - t0), rngv, napad=napad, pust=0.8, svetlo=2500), t0, g * 1.4, 0.0)
-
+    # Vedro i ritmično od prvog kadra (odluka vlasnika, 30.09.2026: prva verzija, spori gudači sa
+    # disonancama, bila je tužna). G-dur, 2/4 ~116 BPM: violina i harmonika u uglas nose temu,
+    # samica na kontri, pizzicato bas, def sa praporcima. Priča se čuje kroz aranžman, ne kroz mol:
+    # na „zamuti“ kratak šaljiv silazak i takt bez melodije; scena 3 je proređena (bas, def, samica),
+    # na „muti“ sve stane na trenutak; na „lično“ ceo sastav se vraća oktavu više; kraj na „ekolo.rs“.
     s = {i: SC[i]["od"] for i in SC}
     t_zamuti = rec(SC, 1, "zamuti")
-    tr.dodaj(gudalo(81, t_zamuti - 0.2, rngv, napad=1.2, pust=0.6, sekcija=2), 0.3, 0.16, 0.3)
-    tr.dodaj(gudalo(38, s[2] + 0.5, rngv, napad=1.0, pust=0.8, svetlo=2000), 0.2, 0.3, 0.0)
-    for m in (75, 80, 44):  # disonanca na „zamuti“
-        tr.dodaj(gudalo(m, s[2] - t_zamuti + 0.2, rngv, napad=0.15, pust=0.8, sekcija=2), t_zamuti, 0.14, rngv.uniform(-0.3, 0.3))
-    # sc. 2 — toplo F-dur, tema violine
-    pad("F", s[2], s[3], 0.13)
-    for i, (b, d, m) in enumerate([(0, 1, 72), (1, 1, 74), (2, 2, 77), (4, 1, 76), (5, 2, 72)]):
-        tr.dodaj(gudalo(m, d * 0.62, rngv, napad=0.12, pust=0.3, sekcija=2), s[2] + 0.4 + b * 0.62, 0.2, 0.2)
-    # sc. 3 — napetost
     t_muti = rec(SC, 3, "muti")
-    t_za = rec(SC, 3, "za")
-    delovi = [("Dm", s[3], s[3] + 2.8), ("Bb", s[3] + 2.8, s[3] + 5.4), ("Gm", s[3] + 5.4, t_muti - 0.3), ("A7", t_muti - 0.3, s[4])]
-    for ak, a, b in delovi:
-        pad(ak, a, b, 0.12, napad=0.5)
-    tt = s[3]
-    while tt < t_muti:  # tremolo čela
-        tr.dodaj(gudalo(38, 0.07, rngv, napad=0.01, pust=0.03, sekcija=1, svetlo=1800), tt, 0.1)
-        tt += 0.075
-    for m in (37, 38, 44, 45):
-        tr.dodaj(gudalo(m, t_za - t_muti + 1.2, rngv, napad=0.3, pust=1.2, svetlo=1600), t_muti - 0.1, 0.16)
-    # sc. 4 — razrešenje na „lično“
     t_licno = rec(SC, 4, "lično")
-    pad("Dm", s[4], t_licno - 0.2, 0.1, napad=0.6)
-    pad("D", t_licno - 0.2, s[5] + 0.5, 0.17, napad=0.35)
-    for b, d, m in [(0, 1, 74), (1, 1, 78), (2, 3, 81)]:
-        tr.dodaj(gudalo(m, d * 0.6, rngv, napad=0.1, pust=0.5, sekcija=2), t_licno + b * 0.6, 0.2, 0.2)
-    # sc. 5–6 — pizzicato puls i tema, kraj na „ekolo.rs“
     t_kraj = kraj_glasa + 0.1
-    takt = 1.2
-    n = int((t_kraj - s[5]) / takt)
+    TEMA = [
+        ("G", [(0, .5, 79), (.5, .5, 83), (1, .5, 86), (1.5, .5, 83)]),
+        ("D7", [(0, .5, 81), (.5, .5, 78), (1, 1, 74)]),
+        ("D7", [(0, .5, 78), (.5, .5, 81), (1, .5, 84), (1.5, .5, 81)]),
+        ("G", [(0, 1, 83), (1, 1, 79)]),
+        ("C", [(0, .5, 76), (.5, .5, 79), (1, .5, 84), (1.5, .5, 88)]),
+        ("G", [(0, .5, 86), (.5, .5, 83), (1, .5, 79), (1.5, .5, 83)]),
+        ("D7", [(0, .5, 81), (.5, .5, 84), (1, .5, 83), (1.5, .5, 81)]),
+        ("G", [(0, 1, 79), (1, .5, 83), (1.5, .5, 86)]),
+    ]
+    AK["D7"] = [2, 6, 9, 0]
+    takt = 1.03
+    n = int((t_kraj - 0.3) / takt)
     t0 = t_kraj - n * takt
-    PROG = ["F", "C", "Dm", "Bb", "F", "C", "Bb", "C"]
-    TEMA = [[(0, 1, 72), (1, 1, 77)], [(0, 2, 76)], [(0, 1, 74), (1, 1, 77)], [(0, 2, 74)], [(0, 1, 72), (1, 1, 81)], [(0, 1, 79), (1, 1, 76)], [(0, 1, 77), (1, 1, 74)], [(0, 2, 72)]]
-    s6 = s[6]
     for i in range(n):
         tb = t0 + i * takt
-        ak = PROG[i % 8]
-        tr.dodaj(pizz(koren(ak, 38)), tb, 0.45)
-        tr.dodaj(pizz(koren(ak, 38) + 7), tb + takt / 2, 0.32)
-        for k, m in enumerate(glasovi(ak, 60, 72)[:3]):
-            tr.dodaj(pizz(m, 0.5), tb + takt / 4 + k * 0.06, 0.12, 0.3)
-        if tb >= s6 - 0.3:
-            pad(ak, tb, tb + takt, 0.07, napad=0.3)
-            for b, d, m in TEMA[i % 8]:
-                tr.dodaj(gudalo(m, d * takt / 2 * 0.95, rngv, napad=0.1, pust=0.3, sekcija=2), tb + b * takt / 2, 0.18, 0.2)
-    pad("F", t_kraj, T - 0.2, 0.2, napad=0.05)
-    tr.dodaj(pizz(41, 2.5), t_kraj, 0.6)
-    tr.soba(0.35, 2.4, svetlo=4500)
+        ak, mel = TEMA[i % 8]
+        uvod = i < 2
+        predah = t_zamuti + 0.25 <= tb < t_zamuti + 0.25 + takt  # takt posle „zamuti“: bez melodije
+        retko = s[3] - 0.2 <= tb < t_licno - 0.3                 # scena 3: bez melodije, tiše
+        stanka = t_muti - 0.15 <= tb < t_muti + 0.5              # „muti“: sve stane
+        if stanka:
+            continue
+        pun = tb >= t_licno - 0.3
+        g = 0.72 if retko else (0.8 if not pun else 0.95)
+        tr.dodaj(pizz(koren(ak, 38), 0.6), tb, 0.55 * g, -0.05)
+        tr.dodaj(pizz(koren(ak, 38) + 7, 0.6), tb + takt / 2, 0.45 * g, -0.05)
+        for k in (0.25, 0.75):
+            strum(ak, tb + k * takt, 0.15 * g, samica, dno=55, vrh=67, pan=-0.3, gore=k > 0.5)
+        tr.dodaj(def_udarac(rng, 0.8 if not pun else 1.05), tb, 0.26 * g)
+        tr.dodaj(def_udarac(rng, 0.35), tb + takt / 2, 0.18 * g)
+        tr.dodaj(def_udarac(rng, 0.25), tb + takt * 0.75, 0.12 * g)
+        if uvod or predah or retko:
+            continue
+        okt = 12 if pun and i % 2 else 0
+        for b, d, m in mel:
+            dd = d * takt / 2
+            tr.dodaj(gudalo(m + okt, dd * 0.8, rng, napad=0.025, pust=0.12, vib=0.6, sekcija=1), tb + b * takt / 2, 0.2 * g, 0.2)
+            tr.dodaj(harmonika(m + okt - 12, dd * 0.75, rng, jezicci=(0,), sjaj=1.0), tb + b * takt / 2, 0.13 * g, 0.25)
+    # „zamuti“: šaljiv silazak pizzicata (pa takt bez melodije)
+    for k, m in enumerate([74, 71, 67, 62, 55]):
+        tr.dodaj(pizz(m, 0.3), t_zamuti + 0.05 + k * 0.1, 0.3, 0.2)
+    # „muti“: posle stanke jedan dubok ton, pa ritam kreće dalje
+    tr.dodaj(pizz(43, 0.8), t_muti + 0.1, 0.55)
+    # „lično“: uzlet do punog sastava
+    for k, m in enumerate([67, 71, 74, 79, 83]):
+        tr.dodaj(harmonika(m, 0.12, rng, jezicci=(0,)), t_licno - 0.55 + k * 0.1, 0.2, 0.2)
+    # kraj na „ekolo.rs“
+    strum("G", t_kraj, 0.3, samica, dno=55, vrh=79)
+    for m in (55, 67, 71, 74, 79):
+        tr.dodaj(harmonika(m, T - t_kraj - 0.3, rng), t_kraj, 0.18, 0.1)
+    tr.dodaj(gudalo(91, T - t_kraj - 0.4, rng, napad=0.05, pust=0.6, sekcija=1), t_kraj + 0.02, 0.15, 0.2)
+    tr.dodaj(pizz(43, 2.5), t_kraj, 0.6)
+    tr.dodaj(def_udarac(rng, 1.3), t_kraj, 0.5)
+    tr.soba(0.22, 1.3)
 
 tr.sacuvaj(f"audio/{V}/muzika.wav")
