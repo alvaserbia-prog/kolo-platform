@@ -27,117 +27,117 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 13 | Ušteda (uputstvo; scenario stiže) | K |  |  |
 | 14 | Bez posrednika (scenario u pregledu) | K |  |  |
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
-| 15 | Kompenzacija i 1993. (najava serijala o novcu) | A |  |  |
-| 16 | Praistorija i prastari oblici (trampa, Mesopotamija, kamen sa Japa) | N |  |  |
-| 17 | Šta piše pored tvog imena | K |  |  |
-| 18 | Čije je KOLO? Ničije. | K |  |  |
-| 19 | Šta je Fondacija | K |  |  |
-| 20 | Zlato, srebro, bakar | N |  |  |
-| 21 | Lanac potvrda | K |  |  |
-| 22 | Indeks stvarnosti | K |  |  |
-| 23 | Sajam gde niko ne plaća | A |  |  |
-| 24 | Ko vodi Fondaciju | K |  |  |
-| 25 | Penzioneri | K |  |  |
-| 26 | Papir sa zlatnom podlogom | N |  |  |
-| 27 | Kako prepoznati prevaru | K |  |  |
-| 28 | Nije piramida, nije kripto | K |  |  |
-| 29 | Owen: priznanica rada | A |  |  |
-| 30 | Tri dela sistema: Fondacija, Protokol, Zajednica | K |  |  |
-| 31 | Zašto se ne isplati varati | K |  |  |
-| 32 | Delimična zlatna podloga | N |  |  |
-| 33 | Šta ako razmena ne uspe | K |  |  |
-| 34 | Poljoprivrednici | K |  |  |
-| 35 | Prudon | A |  |  |
-| 36 | Šta prihvataš kad se registruješ | K |  |  |
-| 37 | Šta KOLO zna o tebi (granica: minimum podataka) | K |  |  |
-| 38 | Fiat novac | N |  |  |
-| 39 | Zbir je uvek nula | K |  |  |
-| 40 | POEN ne izlazi iz KOLA (granica: nekonvertibilnost) | K |  |  |
-| 41 | Mašine koje misle: veštačka inteligencija i rad | Z |  |  |
-| 42 | Zanatlije | K |  |  |
-| 43 | Zapis nije imovina (granica: bez imovinskog prava) | K |  |  |
-| 44 | Warren | A |  |  |
+| 15 | Praistorija i prastari oblici (trampa, Mesopotamija, kamen sa Japa; otvara serijal o novcu) | N |  |  |
+| 16 | Šta piše pored tvog imena | K |  |  |
+| 17 | Čije je KOLO? Ničije. | K |  |  |
+| 18 | Šta je Fondacija | K |  |  |
+| 19 | Zlato, srebro, bakar | N |  |  |
+| 20 | Lanac potvrda | K |  |  |
+| 21 | Indeks stvarnosti | K |  |  |
+| 22 | Sajam gde niko ne plaća | A |  |  |
+| 23 | Ko vodi Fondaciju | K |  |  |
+| 24 | Penzioneri | K |  |  |
+| 25 | Papir sa zlatnom podlogom | N |  |  |
+| 26 | Kako prepoznati prevaru | K |  |  |
+| 27 | Nije piramida, nije kripto | K |  |  |
+| 28 | Owen: priznanica rada | A |  |  |
+| 29 | Tri dela sistema: Fondacija, Protokol, Zajednica | K |  |  |
+| 30 | Zašto se ne isplati varati | K |  |  |
+| 31 | Delimična zlatna podloga | N |  |  |
+| 32 | Šta ako razmena ne uspe | K |  |  |
+| 33 | Poljoprivrednici | K |  |  |
+| 34 | Prudon | A |  |  |
+| 35 | Šta prihvataš kad se registruješ | K |  |  |
+| 36 | Šta KOLO zna o tebi (granica: minimum podataka) | K |  |  |
+| 37 | Fiat novac | N |  |  |
+| 38 | Zbir je uvek nula | K |  |  |
+| 39 | POEN ne izlazi iz KOLA (granica: nekonvertibilnost) | K |  |  |
+| 40 | Mašine koje misle: veštačka inteligencija i rad | Z |  |  |
+| 41 | Zanatlije | K |  |  |
+| 42 | Zapis nije imovina (granica: bez imovinskog prava) | K |  |  |
+| 43 | Warren | A |  |  |
 | | **III. Kanali POENA** | | | |
-| 45 | Devet kanala | K |  |  |
-| 46 | Doprinos razmeni | K |  |  |
-| 47 | Kad nema radnika, nema potrošača | Z |  |  |
-| 48 | Roditelji | K |  |  |
-| 49 | Dečji prostor | K |  |  |
-| 50 | Kako nastaje novac | N |  |  |
-| 51 | Operativni doprinos | K |  |  |
-| 52 | Socijalni programi | K |  |  |
-| 53 | Rad nije samo plata | Z |  |  |
-| 54 | Mladi | K |  |  |
-| 55 | Donacija Fondaciji | K |  |  |
-| 56 | Donacija se ne vraća (granica: nepovratnost) | K |  |  |
-| 57 | Gde idu dinari: dva toka koja se ne sreću | K |  |  |
-| 58 | Rochdale | A |  |  |
-| 59 | Bački Petrovac 1846 | K |  |  |
-| 60 | Pokrovitelji | K |  |  |
-| 61 | Osnivački doprinos | K |  |  |
-| 62 | Kako se meri količina novca | N |  |  |
-| 63 | Princip 1: Reciprocitet bez najamnog odnosa | I |  |  |
-| 64 | Zašto ne osnovni dohodak | Z |  |  |
-| 65 | Zašto Sombor | K |  |  |
-| 66 | William Greene | A |  |  |
+| 44 | Devet kanala | K |  |  |
+| 45 | Doprinos razmeni | K |  |  |
+| 46 | Kad nema radnika, nema potrošača | Z |  |  |
+| 47 | Roditelji | K |  |  |
+| 48 | Dečji prostor | K |  |  |
+| 49 | Kako nastaje novac | N |  |  |
+| 50 | Operativni doprinos | K |  |  |
+| 51 | Socijalni programi | K |  |  |
+| 52 | Rad nije samo plata | Z |  |  |
+| 53 | Mladi | K |  |  |
+| 54 | Donacija Fondaciji | K |  |  |
+| 55 | Donacija se ne vraća (granica: nepovratnost) | K |  |  |
+| 56 | Gde idu dinari: dva toka koja se ne sreću | K |  |  |
+| 57 | Rochdale | A |  |  |
+| 58 | Bački Petrovac 1846 | K |  |  |
+| 59 | Pokrovitelji | K |  |  |
+| 60 | Osnivački doprinos | K |  |  |
+| 61 | Kako se meri količina novca | N |  |  |
+| 62 | Princip 1: Reciprocitet bez najamnog odnosa | I |  |  |
+| 63 | Zašto ne osnovni dohodak | Z |  |  |
+| 64 | Zašto Sombor | K |  |  |
+| 65 | William Greene | A |  |  |
 | | **IV. Zajedničko dobro i upravljanje** | | | |
-| 67 | Wikipedija i Linux: zajednička proizvodnja (Benkler) | I |  |  |
-| 68 | Otvoren kod | K |  |  |
-| 69 | KOLO kao internet: sistem u slojevima | K |  |  |
-| 70 | Platforma u vlasništvu korisnika (Scholz) | I |  |  |
-| 71 | Šta je ZRNO | K |  |  |
-| 72 | Obračunski koeficijent | K |  |  |
-| 73 | Princip 2: Cirkulacija bez gomilanja | I |  |  |
-| 74 | ZRNO: upis, otpis, aktivno i slobodno | K |  |  |
-| 75 | Kvadratno glasanje (i Glen Weyl) | K |  |  |
-| 76 | Likvidna demokratija i zamka oligarhije | I |  |  |
-| 77 | Od osnivača ka zajednici: faze upravljanja | K |  |  |
-| 78 | Gornje Kolo | K |  |  |
-| 79 | Princip 3: Upravljanje bez plutokratije | I |  |  |
-| 80 | Sedamnaest akata: koja pravila važe i ko ih menja | K |  |  |
-| 81 | Javna pravila | K |  |  |
-| 82 | Zaštitni veto | K |  |  |
-| 83 | Novi oblici novca | N |  |  |
-| 84 | Raiffeisen | A |  |  |
+| 66 | Wikipedija i Linux: zajednička proizvodnja (Benkler) | I |  |  |
+| 67 | Otvoren kod | K |  |  |
+| 68 | KOLO kao internet: sistem u slojevima | K |  |  |
+| 69 | Platforma u vlasništvu korisnika (Scholz) | I |  |  |
+| 70 | Šta je ZRNO | K |  |  |
+| 71 | Obračunski koeficijent | K |  |  |
+| 72 | Princip 2: Cirkulacija bez gomilanja | I |  |  |
+| 73 | ZRNO: upis, otpis, aktivno i slobodno | K |  |  |
+| 74 | Kvadratno glasanje (i Glen Weyl) | K |  |  |
+| 75 | Likvidna demokratija i zamka oligarhije | I |  |  |
+| 76 | Od osnivača ka zajednici: faze upravljanja | K |  |  |
+| 77 | Gornje Kolo | K |  |  |
+| 78 | Princip 3: Upravljanje bez plutokratije | I |  |  |
+| 79 | Sedamnaest akata: koja pravila važe i ko ih menja | K |  |  |
+| 80 | Javna pravila | K |  |  |
+| 81 | Zaštitni veto | K |  |  |
+| 82 | Novi oblici novca | N |  |  |
+| 83 | Raiffeisen | A |  |  |
 | | **V. Zadruge i zajednička dobra u komšiluku** | | | |
-| 85 | Osam pravila Elinor Ostrom | K |  |  |
-| 86 | Zajednička bašta | K |  |  |
-| 87 | Krug: kad se ljudi okupe oko jedne stvari | K |  |  |
-| 88 | Pariska komuna | A |  |  |
-| 89 | Biblioteka alata | K |  |  |
-| 90 | Popravljaonica | K |  |  |
-| 91 | Projekat: kako Fondacija troši dinare za zajednicu | K |  |  |
-| 92 | Silvio Gesell | A |  |  |
-| 93 | Radionica: prostor gde se uči i pravi | K |  |  |
-| 94 | Zadruge i udruženja | K |  |  |
-| 95 | Zadruga u KOLU | K |  |  |
-| 96 | Srpske zemljoradničke zadruge, Avramović | A |  |  |
-| 97 | Kako nastaje zadruga | K |  |  |
-| 98 | Zadruga koja okuplja male proizvođače | K |  |  |
-| 99 | Zadruge među sobom | K |  |  |
-| 100 | Princip 4: Univerzalnost bez uniformnosti | I |  |  |
-| 101 | Kad zadruga propadne | K |  |  |
-| 102 | Kolektivna nabavka | K |  |  |
-| 103 | Ostrom u našem selu: kako se čuva zajedničko | K |  |  |
-| 104 | Ko ne može da bude član | K |  |  |
-| 105 | Kropotkin, „Uzajamna pomoć“ | A |  |  |
+| 84 | Osam pravila Elinor Ostrom | K |  |  |
+| 85 | Zajednička bašta | K |  |  |
+| 86 | Krug: kad se ljudi okupe oko jedne stvari | K |  |  |
+| 87 | Pariska komuna | A |  |  |
+| 88 | Biblioteka alata | K |  |  |
+| 89 | Popravljaonica | K |  |  |
+| 90 | Projekat: kako Fondacija troši dinare za zajednicu | K |  |  |
+| 91 | Silvio Gesell | A |  |  |
+| 92 | Radionica: prostor gde se uči i pravi | K |  |  |
+| 93 | Zadruge i udruženja | K |  |  |
+| 94 | Zadruga u KOLU | K |  |  |
+| 95 | Srpske zemljoradničke zadruge, Avramović | A |  |  |
+| 96 | Kako nastaje zadruga | K |  |  |
+| 97 | Zadruga koja okuplja male proizvođače | K |  |  |
+| 98 | Zadruge među sobom | K |  |  |
+| 99 | Princip 4: Univerzalnost bez uniformnosti | I |  |  |
+| 100 | Kad zadruga propadne | K |  |  |
+| 101 | Kolektivna nabavka | K |  |  |
+| 102 | Ostrom u našem selu: kako se čuva zajedničko | K |  |  |
+| 103 | Ko ne može da bude član | K |  |  |
+| 104 | Kropotkin, „Uzajamna pomoć“ | A |  |  |
 | | **VI. Praktično i država** | | | |
-| 106 | Kripto i slični oblici | N |  |  |
-| 107 | Porez | K |  |  |
-| 108 | Penzija i socijalna davanja | K |  |  |
-| 109 | Wörgl: novac koji bledi | A |  |  |
-| 110 | Ni borba ni predaja: KOLO i država | K |  |  |
-| 111 | Izlazak iz sistema | K |  |  |
-| 112 | Ko stoji iza novca | N |  |  |
-| 113 | WIR | A |  |  |
-| 114 | Princip 5: Postepeno, bez kompromisa | I |  |  |
-| 115 | Tehnologija nije rešenje | Z |  |  |
+| 105 | Kripto i slični oblici | N |  |  |
+| 106 | Porez | K |  |  |
+| 107 | Penzija i socijalna davanja | K |  |  |
+| 108 | Wörgl: novac koji bledi | A |  |  |
+| 109 | Ni borba ni predaja: KOLO i država | K |  |  |
+| 110 | Izlazak iz sistema | K |  |  |
+| 111 | Ko stoji iza novca | N |  |  |
+| 112 | WIR | A |  |  |
+| 113 | Princip 5: Postepeno, bez kompromisa | I |  |  |
+| 114 | Tehnologija nije rešenje | Z |  |  |
 | | **VII. Drugi putevi u XX i XXI veku** | | | |
-| 116 | Jugoslovensko samoupravljanje | A |  |  |
-| 117 | Mondragón | A |  |  |
-| 118 | Novac je dizajn (Thomas Greco) | I |  |  |
-| 119 | LETS | A |  |  |
-| 120 | Ithaca Hours | A |  |  |
+| 115 | Jugoslovensko samoupravljanje | A |  |  |
+| 116 | Mondragón | A |  |  |
+| 117 | Novac je dizajn (Thomas Greco) | I |  |  |
+| 118 | LETS | A |  |  |
+| 119 | Ithaca Hours | A |  |  |
+| 120 | Kompenzacija i 1993. | A |  |  |
 | 121 | Da li moraš da koristiš novac | N |  |  |
 | 122 | Fureai Kippu | A |  |  |
 | 123 | Ekonomija krofne (Raworth) | I |  |  |
@@ -160,7 +160,9 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 otprilike jedan na dva. Porez i Penzija idu pre N „Ko stoji iza novca“, „Da li moraš da koristiš novac“ i
 „Paralelni put KOLA“; „Nije piramida, nije kripto“ ide pre N „Kripto“. Serija A XIX veka ide redom koji je
 odredio vlasnik (sajmovi, Owen, Prudon, Warren, Rochdale, Greene, Raiffeisen, Pariska komuna, Gesell, Avramović,
-Kropotkin); XX i XXI vek idu hronološki, osim Kompenzacije i 1993., koja je izvučena napred kao najava.
+Kropotkin); XX i XXI vek idu hronološki. Serijal o novcu otvara „Praistorija“ (odluka vlasnika, 30.09.2026):
+„Kompenzacija i 1993.“ je vraćena na svoje hronološko mesto, jer na početku nije imala vezu sa KOLOM, a priča o
+krizi navodi gledaoca na zaključak da je KOLO zamena kad dinar propadne.
 
 **Ograde čuvara sadržaja za ovu listu:**
 - N „Ko stoji iza novca“, „Da li moraš da koristiš novac“ i „Paralelni put KOLA“ pišu se po okviru
@@ -180,6 +182,8 @@ Kropotkin); XX i XXI vek idu hronološki, osim Kompenzacije i 1993., koja je izv
   a Fondacija za ustupljeno dobro ne prima naknadu (Pravilnik o projektima i nabavkama, čl. 3a).
 - „Tri dela sistema“ su Fondacija, Protokol i Zajednica; Banke iz udžbenika nema.
 - „Ko vodi Fondaciju“: samo uloge (Upravni odbor, direktor), bez imena (odluka vlasnika 27.09.2026).
+- „Kompenzacija i 1993.“: kriza je tema videa, ne poruka o KOLU. Nema mosta „kad novac propadne, tu je KOLO“,
+  a „zapis ko kome duguje“ se ne vezuje za POEN (POEN nije potraživanje, Pravilnik čl. 12–13). Marka se pominje.
 - Godine i brojke u istorijskim videima proveravaju se pre svakog scenarija.
 
 ## Zajedničko za sve videe
