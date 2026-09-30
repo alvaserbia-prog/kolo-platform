@@ -204,6 +204,14 @@ a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela �
 
 🔴 **Muzika je vedra i ritmična, nikad tužna** (odluka vlasnika, 30.09.2026; dvaput vraćeno: „Čiji si ti“ u e-molu i gudači u „Potvrda nosi odgovornost“). Ozbiljan trenutak u priči nosi aranžman (proređen ritam, kratka stanka, šaljiv silazak), ne mol ni spor tempo.
 
+🔴 **Priča o koristi, ne o pravilima** (odluke vlasnika, 30.09.2026, video „Pijaca“):
+- Video pokazuje šta KOLO donosi ljudima i kako je sa njim lakše živeti (višak koji nekome treba, dinari koji ostaju u kući, rad koji vredi, domaće iz svog kraja), a ne nabraja ograničenja, uslove i postupke platforme.
+- Strana onoga ko nudi: ne dobija dinare, nego ono što njemu treba, u razmeni. Strana onoga ko prima ostaje kako je gore: dinari su mu ostali za nešto drugo.
+- Kad lik upisuje POEN, čuje se odakle mu je: sakupio ga je dajući drugim članovima, u razmeni ili kroz druge doprinose.
+- POEN se u priči upisuje pri preuzimanju, kad je stvar u rukama, nikad unapred.
+- Kraj priče sme da bude potvrda: nov član sa pečatom BEZ POTVRDE kroz razmenu uživo postaje potvrđen.
+- Likovi mogu biti novi, a stari iz ranijih videa smeju ponovo da se pojave.
+
 ## Pregled teksta za naraciju: stalna ekipa (odluka vlasnika, 27.09.2026; bez čuvara sadržaja od 29.09.2026)
 
 Vlasnik tekst **čita naglas**, zato se tekst za snimanje pre slanja uvek pregleda kroz ove
