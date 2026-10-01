@@ -9,7 +9,35 @@ Zabranjene reči u titlovima i natpisima: kupi, prodaj, plati, zaradi, cena.
 🟡 Bunar je i slika videa 32 (`kolo-bunar/`). Isti bunar u istom selu — video 32 ga kasnije
 nastavlja; crtati ga istim likovnim rešenjem.
 
-## a) Scenario po scenama
+## Nova verzija teksta (vlasnik, 30.09–01.10.2026) — snimljeno (My_recording_61), gotov video
+
+Prva verzija (bunar, snimak My_recording_60) odbačena: „nema poente, redosled je zbrkan“. Video je o
+**principima potvrde**, bez bunara i bez priče o neznancu; kuka je obično pitanje umesto slike bunara.
+
+```
+[1] Kad nekoga potvrdiš u KOLU, / šta to zapravo znači?
+
+[2] To znači: / ovog čoveka lično poznajem.
+
+[3] U KOLU razmenjuješ i sa ljudima koje prvi put vidiš. / Kako znaš ko je sa druge strane? // Po potvrdi. / Potvrda je osnov poverenja.
+
+[4] Zato potvrđuješ samo one koje lično poznaješ.
+
+[5] Potvrda nekoga koga ne znaš / otvara vrata zloupotrebi, / i može da ostavi posledice na ceo sistem. // Zato nemoj to da radiš.
+
+[6] I ono najbitnije: / ako nekoga potvrdiš, / ne odgovaraš za sve što će on posle da radi. // Odgovaraš samo za to / da je on stvarna osoba / i da ga poznaješ.
+
+[7] Potvrđivanjem samo onih koje lično znamo / čuvamo poverenje, / a sa njim i smisao celog KOLA. // ekolo.rs
+```
+
+🔴 Ova verzija **menja dve ranije odluke** iz odeljka „Odluke“ ispod (vlasnik ih je sam napisao
+30.09.2026): potvrđivač sada odgovara i za to **da je osoba stvarna** (bliže aktu, Pravilnik o
+dokazu stvarnosti čl. 5 i 18), a vraća se rečenica o **posledicama lažne potvrde**, i to posledicama
+**po ceo sistem**, ne po onoga ko je potvrdio (izmena vlasnika 01.10.2026). Odluke ispod važe za prvu verziju.
+
+## Prva verzija (odbačena 30.09.2026)
+
+### a) Scenario po scenama
 
 | # | Slika | Natpis |
 |---|---|---|
@@ -20,7 +48,7 @@ nastavlja; crtati ga istim likovnim rešenjem.
 | 5 | Dve kartice: siva *NISI ODGOVORAN za sve što kasnije uradi*, zelena *ODGOVARAŠ da ga lično poznaješ* | (kartice su natpis) |
 | 6 | Bistra voda u vedru, ljudi se okupljaju oko bunara, znak KOLO, ekolo.rs | Potvrdi one koje znaš · ekolo.rs |
 
-## b) Tekst za snimanje
+### b) Tekst za snimanje
 
 Oznake: / kratka pauza · // duža pauza. Izbori ekipe: `[predlog | tvoja verzija]`.
 

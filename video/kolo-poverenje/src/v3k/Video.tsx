@@ -1,5 +1,6 @@
 // Video 3 trilogije „Poverenje“: „Potvrda nosi odgovornost“ — papirni kolaž, kao „Čiji si ti“
-// i prvi videi serije (odluka vlasnika, 29.09.2026: tuš i akvarel je odbačen).
+// i prvi videi serije (odluka vlasnika, 29.09.2026: tuš i akvarel je odbačen). Tekst od
+// 01.10.2026 govori o principima potvrde (bez bunara).
 // Scene se smenjuju papirnim listom koji prebriše kadar (rez je sakriven ispod njega).
 import React from "react";
 import { AbsoluteFill, Audio, Easing, Img, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
@@ -16,11 +17,12 @@ ucitajFontove();
 type NatpisK = { od: number; do: number; tekst: string };
 const S = (id: number) => scena(id);
 export const NATPISI_K: NatpisK[] = [
-  { od: 6, do: S(2).odF - 8, tekst: "Bunar može da se zamuti" },
-  { od: S(2).odF + 12, do: S(3).odF - 8, tekst: "KOLO je naš bunar" },
-  { od: S(3).odF + 12, do: S(4).odF - 8, tekst: "Lažna potvrda muti bunar svima" },
-  { od: glob(4, "Kažeš") - 6, do: S(5).odF - 8, tekst: "„Znam ga lično.“" },
-  { od: S(6).odF + 12, do: glob(6, "ekolo.rs") - 20, tekst: "Potvrdi samo one koje znaš" },
+  { od: 6, do: S(3).odF - 8, tekst: "Šta znači potvrda?" },
+  { od: glob(3, "Potvrda") - 4, do: S(4).odF - 8, tekst: "Potvrda je osnov poverenja" },
+  { od: S(4).odF + 8, do: S(5).odF - 8, tekst: "Samo one koje lično znaš" },
+  { od: glob(5, "Zato") - 4, do: S(6).odF - 8, tekst: "Nepoznate ne potvrđuj" },
+  { od: glob(6, "Odgovaraš", 2) - 4, do: S(7).odF - 8, tekst: "Odgovaraš samo da ga znaš" },
+  { od: S(7).odF + 8, do: glob(7, "KOLA") - 8, tekst: "Čuvamo poverenje" },
 ];
 
 const Natpisi: React.FC = () => {

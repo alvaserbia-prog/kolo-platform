@@ -45,7 +45,11 @@
     "ukljuci": "Uključi",
     "ukljuceno": "Uključeno",
     "nepodrzano": "Ovaj preglednik ne podržava obavijesti na uređaju.",
-    "blokirano": "Obavijesti su blokirane u postavkama preglednika."
+    "blokirano": "Obavijesti su blokirane u postavkama preglednika.",
+    "iskljuceno": "Isključeno",
+    "profil_toggle": "Šalji mi obavijesti na mobitel",
+    "profil_napomena": "Vrijedi za ovaj uređaj (Android ili iPhone). Stižu i kad je KOLO zatvoren, isto kao zvonce gore.",
+    "profil_ios": "Na iPhoneu obavijesti rade kad se KOLO doda na početni zaslon: Podijeli → Dodaj na početni zaslon."
   },
   "bagovi": {
     "naslov": "Prijava grešaka",
@@ -614,6 +618,7 @@
     "crop_zoom": "Povećanje",
     "moji_oglasi": "Moji oglasi",
     "moji_oglasi_opis": "Pregled aktivnih i razmijenjenih oglasa",
+    "moji_oglasi_dugme": "Otvori moje oglase",
     "ps_min_3": "Najmanje 3 znaka.",
     "sledeca_promena": "Sljedeća promjena moguća:",
     "vidljivost_naslov": "Podaci i vidljivost",

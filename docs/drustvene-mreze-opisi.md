@@ -14,8 +14,8 @@ većeg posla proveriti ih ponovo, naročito broj heštegova na Instagramu.
 - **Bez crtica** (ni `—`, ni `–`, ni crtica kao nabrajanje) i **bez oznaka za nabrajanje**
   (`•`, `🔸`, strelice). Sve ide u običnim rečenicama i pasusima, jer nabrajanja i crtice
   odaju tekst koji je pisala mašina.
-- **Emodžija malo do srednje:** najviše jedan po pasusu i samo gde nešto dodaje.
-  Ustaljeni: 🤝 🌾 🏡 🔄 👉, a za predmete iz priče 🥧 🚲 🍅.
+- **Emodžija malo do srednje:** najviše jedan po pasusu i samo gde nešto dodaje. Nema stalnog
+  spiska: biraju se po videu, a opis sme da bude i bez njih.
 - Prva rečenica mora da stoji sama za sebe, jer se samo ona vidi pre „više".
 - Obraćanje: na TikTok-u i Instagramu **„ti"**, na Facebook-u **„vi"** (starija publika).
 - 🔴 **Opis ne prepričava video** (odluka vlasnika, 26.09.2026). Naracija i natpisi iz videa se
@@ -95,22 +95,30 @@ kao pretraživač. Ali nije tačno da je „što duže, to bolje". Reči za pret
 **Instagram:** od decembra 2025. važi ograničenje od 5 heštegova, i to i u opisu i u komentaru
 zajedno. Pretraga sada čita reči iz opisa, pa je opis važniji od heštegova.
 
-**Stalni heštegovi:** `#Sombor` uvek prvi (lokalna publika je ciljna grupa), pa `#Vojvodina`,
-`#razmena`, `#komšije`, `#KOLO`. Na Instagramu je peti `#KOLOzajednica`, a na Facebook-u samo
-`#Sombor #KOLO`.
+**Heštegovi:** `#Sombor` uvek prvi (lokalna publika je ciljna grupa); ostali se biraju po videu
+(vidi odeljak 4), ne iz stalnog spiska.
 
-## 4. Kostur opisa
+## 4. Svaki opis je unikat (odluka vlasnika, 01.10.2026; zamenjuje raniji „kostur opisa“)
 
-Isti redosled na sve tri mreže, samo kraće ili duže:
+Raniji kostur (isti redosled udica → šta je KOLO → kako radi → poverenje → poziv, na sve tri
+mreže) proizveo je opise koji svi liče jedan na drugi, a rečenica „KOLO je platforma za razmenu
+dobara i usluga među komšijama, nastala u Somboru“ stajala je u skoro svakom. Ukinut je.
 
-1. **Udica:** jedno pitanje ili tvrdnja iz svakodnevice („U svakoj ulici neko ume ono što drugom treba.").
-2. **Šta je KOLO:** platforma za razmenu dobara i usluga među komšijama, nastala u Somboru, pokreće je KOLO Fondacija.
-3. **Kako radi:** ponudiš na Pijaci, dogovor je između članova, POEN kao zapis doprinosa.
-4. **Poverenje:** lične potvrde, bez dokumenata, pseudonim.
-5. **Zašto:** kontekst (znanje i višak u ulici naspram ljudi kojima to fali).
-6. **Zajedničko dobro:** otvoren kod, javna pravila (može se izostaviti na Instagramu).
-7. **Poziv:** „ponudi svoju prvu razmenu" + adresa.
-8. **Heštegovi.**
+1. **Ugao pre pisanja.** Za svaki video se prvo odredi jedan ugao koga u videu nema: slika iz
+   svakodnevice, opšte zapažanje, pitanje, mala istina koju svako zna. Opis se piše iz tog ugla.
+2. **Tri mreže, tri različita teksta.** Svaka mreža dobija svoj ugao i svoj početak, ne isti
+   tekst u tri dužine.
+3. **„Šta je KOLO“ nije obavezna rečenica.** Kad je potrebna, kaže se svaki put drugim rečima;
+   sme i da se izostavi (stoji u opisu profila).
+4. **Zabrana ponavljanja.** Pre isporuke opis se uporedi sa svim ranijim opisima u ovom fajlu
+   i sa naracijom videa: nijedna rečenica se ne ponavlja, a početak nije isti tip kao u
+   prethodnom videu (pitanje, pa opet pitanje).
+5. **Heštegovi po videu.** `#Sombor` ostaje prvi; ostali se biraju prema temi (najviše 5 na
+   Instagramu, 1 do 3 na Facebook-u).
+6. **Jednostavno i bez prenesenog značenja** (odluka vlasnika, 01.10.2026): obične reči, bez
+   slika poput „otvara vrata“, „gradi se“, „temelj“.
+
+Obavezne činjenice iz odeljka 2 i dalje važe, ali svojim rečima i samo kad ih tema traži.
 
 ## 5. Kontrolna lista pri postavljanju
 
@@ -537,7 +545,7 @@ Za ono što daš, komšija ti prepiše POENE. POEN nije novac i ne može se zame
 Tri videa objavljuju se ovim redom: „Čiji si ti“ (papirni kolaž, kao prve animacije),
 „Poznaješ li nekoga u KOLU?“ (naiva), „Potvrda nosi odgovornost“ (papirni kolaž).
 Videi i naslovne: `video/kolo-poverenje/out/`. Zvuk na Instagramu preimenovati redom u
-„KOLO, čiji si ti“, „KOLO, dva načina da uđeš“ i „KOLO, potvrdi one koje znaš“.
+„KOLO, čiji si ti“, „KOLO, dva načina da uđeš“ i „KOLO, šta znači potvrda“.
 
 **Pregled (27.09.2026):** opise su pročitala tri uloge iz ekipe za tekst (`CLAUDE.md`):
 - **Pisac:** izbacio „ko za tebe može da kaže koju reč“, jer „dati reč“ znači jemčiti, a potvrda znači samo da osobu lično poznaješ (odluka vlasnika). Primere iz videa (Stevin zet, cepanje drva, bunar kao „taj bunar“) zamenio drugim, jer opis ne prepričava video. Duge rečenice podelio.
@@ -652,52 +660,56 @@ KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom me
 
 ### 12.3 „Potvrda nosi odgovornost“
 
+Napisano iznova 01.10.2026 po odeljku 4 (svaki opis je unikat). Uglovi: TikTok, komšija kome
+bez razmišljanja daš merdevine; Instagram, KOLO ne traži ličnu kartu; Facebook, poziv sa
+nepoznatog broja. Nijedna rečenica nije iz naracije ni iz ranijih opisa. Bez prenesenog značenja.
+Jezička provera: „aplikacija“ zamenjeno sa „na sajtu“; „preuzimaš odgovornost“ zamenjeno
+običnijim „ne brineš o svemu što on uradi“.
+
 TikTok
 
 ```
-Kad nekoga potvrdiš na KOLU, ne potpisuješ papir. Kažeš zajednici da tog čoveka lično poznaješ. 🤝
+Komšiji koga znaš daš merdevine bez razmišljanja. Nepoznatom čoveku na vratima ne daš. 🪜
 
-Seoski bunar je pripadao svima. Niko ga nije čuvao umesto drugih, i baš zato je voda ostajala čista. Na KOLU se ulazi preko ljudi, ne preko dokumenata, pa je svaka potvrda mali deo tog čuvanja. 🌾
+Na KOLU je slično, samo što ne moraš ti lično da znaš svakoga. Kad je član potvrđen, to znači da ga bar jedan čovek iz KOLA poznaje i zna da postoji.
 
-Za ono što će taj čovek kasnije raditi ne odgovaraš ti. Odgovaraš za jedno: da ga zaista znaš. Ako potvrdiš nekoga koga nikad nisi sreo, ili nalog iza kog ne stoji niko, otvaraš prostor za prevaru, a posledice snose svi.
+Kad ti nekoga potvrdiš, ne brineš o svemu što on posle uradi. Samo kažeš da ga znaš i da je stvarna osoba.
 
-Zato potvrdi komšiju, rođaka, kolegu, nekoga sa kim si već imao razmenu. Onima koje ne znaš reci da prvo postave oglas na Pijaci. 🔄
-
-KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru.
+Zato potvrđuj samo ljude koje zaista poznaješ. Ostali mogu da počnu na Pijaci, pa da se upoznate kroz prvu razmenu.
 
 👉 ekolo.rs, link je u profilu
 
-#Sombor #Vojvodina #razmena #komšije #KOLO
+#Sombor #poverenje #komšiluk #razmena #KOLO
 ```
 
 Instagram
 
 ```
-Jedna potvrda na KOLU znači jedno: ovog čoveka lično poznajem. 🤝
+KOLO ne traži tvoju ličnu kartu ni kopiju dokumenata. Traži da te neko od članova zna. 📱
 
-Za ono što će on kasnije raditi ne odgovaraš ti. Odgovaraš za to da ga zaista znaš. Potvrda nekoga koga nikad nisi sreo otvara vrata prevari, a posledice snosi cela zajednica.
+Taj član te potvrdi na sajtu, i od tada drugi znaju da iza tvog naloga stoji živ čovek koga neko poznaje.
 
-KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Poverenje se ovde gradi preko ljudi, bez dokumenata, pa ga zajedno i čuvamo. 🌾
+On time ne odgovara za tvoje poslove, samo za to da te zna.
 
-👉 Potvrđuj one koje znaš. Link je u bio.
+Kad uđeš, i ti možeš da potvrdiš ljude koje znaš. Samo njih. Link je u bio.
 
-#Sombor #Vojvodina #razmena #komšije #KOLOzajednica
+#Sombor #Vojvodina #poverenje #razmena #KOLO
 ```
 
 Facebook
 
 ```
-Svako selo je imalo bunar iz kog su pili svi. I svi su pazili šta u njega ulazi. 🏡
+Kad vas pozove nepoznat broj, prvo pitate ko je i ko mu je dao vaš broj. ☎️
 
-Na KOLU poverenje ne dolazi iz dokumenata, nego od ljudi. Nalog novog člana potvrđuje neko ko ga lično zna. Potvrda je jednostavna, jedan kod i jedan dodir na ekranu, ali iza nje stoji vaše poznanstvo.
+Ako pomene nekoga koga znate, razgovor odmah teče lakše. Ne znate tog čoveka, ali znate onoga ko ga zna.
 
-Ne odgovarate za sve što će taj čovek posle raditi. Odgovarate za to da ga zaista poznajete. Ako potvrdite nekoga koga nikad niste sreli, ili nalog iza kog ne stoji stvaran čovek, otvarate prostor za zloupotrebu, a trpe svi članovi.
+Na KOLU je isto. Nalog novog člana potvrđuje član koji ga lično poznaje, pa ostali znaju da je reč o stvarnoj osobi.
 
-Zato potvrđujte samo one koje znate: komšiju, rođaka, kolegu, nekoga sa kim ste već imali razmenu. Onima koje ne znate recite da počnu oglasom na Pijaci. 🤝
+Zato potvrđujte samo one koje zaista poznajete. Ako potvrdite nepoznatog, može doći do prevare, a štetu imaju svi članovi. Za ono što taj čovek posle uradi vi ne odgovarate, nego samo za to da postoji i da ga znate.
 
-KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija.
+KOLO služi za razmenu dobara i usluga među ljudima iz istog mesta. Nastalo je u Somboru, a vodi ga KOLO Fondacija.
 
-👉 https://ekolo.rs
+👉 Više na https://ekolo.rs
 
-#Sombor #KOLO
+#Sombor #poverenje
 ```

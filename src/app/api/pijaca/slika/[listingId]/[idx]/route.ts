@@ -41,7 +41,7 @@ export async function GET(
 
   // Legacy: slika na lokalnom disku (dev).
   try {
-    const absPath = path.join(process.cwd(), filePath);
+    const absPath = path.join(/*turbopackIgnore: true*/ process.cwd(), filePath);
     const buffer = await readFile(absPath);
     const ext = path.extname(filePath).toLowerCase();
     const contentType =

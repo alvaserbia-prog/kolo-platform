@@ -45,7 +45,11 @@
     "ukljuci": "Enable",
     "ukljuceno": "Enabled",
     "nepodrzano": "This browser does not support notifications on your device.",
-    "blokirano": "Notifications are blocked in your browser settings."
+    "blokirano": "Notifications are blocked in your browser settings.",
+    "iskljuceno": "Off",
+    "profil_toggle": "Send notifications to my phone",
+    "profil_napomena": "Applies to this device (Android or iPhone). They arrive even when KOLO is closed, just like the bell at the top.",
+    "profil_ios": "On iPhone, notifications work once KOLO is added to the Home Screen: Share → Add to Home Screen."
   },
   "bagovi": {
     "naslov": "Bug reports",
@@ -614,6 +618,7 @@
     "crop_zoom": "Zoom",
     "moji_oglasi": "My listings",
     "moji_oglasi_opis": "Overview of active and exchanged listings",
+    "moji_oglasi_dugme": "Open my listings",
     "ps_min_3": "Minimum 3 characters.",
     "sledeca_promena": "Next change possible:",
     "vidljivost_naslov": "Details & visibility",

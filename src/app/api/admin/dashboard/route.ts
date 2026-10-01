@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { UKUPNO_ZRNA } from "@/lib/protokol/zrno";
 import { jeAdmin } from "@/lib/dozvole";
+import { brojeviClanova } from "@/lib/admin-clanovi";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -12,15 +13,13 @@ export async function GET() {
     return await greska("Pristup odbijen.", 403);
 
   const [
-    ukupnoKorisnika, verifikovanih, suspendovanih,
+    korisnici,
     ukupnoKrug, ukupnoKrugra,
     protokol, zrnoStanje,
     poslednjeEmisije, ukupnoTransakcija,
     noviKorisnici,
   ] = await Promise.all([
-    prisma.user.count(),
-    prisma.user.count({ where: { verified: true } }),
-    prisma.user.count({ where: { status: "SUSPENDED" } }),
+    brojeviClanova(),
     prisma.krug.count({ where: { status: "ACTIVE" } }),
     prisma.krugClanstvo.count({ where: { leftAt: null } }),
     prisma.wallet.findUnique({ where: { id: "banka-singleton" }, select: { balance: true } }),
@@ -49,7 +48,7 @@ export async function GET() {
     .map(([date, count]) => ({ date, count }));
 
   return NextResponse.json({
-    korisnici: { ukupno: ukupnoKorisnika, verifikovanih, suspendovanih },
+    korisnici,
     krugovi: { ukupno: ukupnoKrug, krugra: ukupnoKrugra },
     finansije: { opticaj, protokolBalance: protokol?.balance ?? 0 },
     zrno: { kodKorisnika: zrnaKodKorisnika, uProtokolu: zrnaUProtokolu, ukupno: UKUPNO_ZRNA },

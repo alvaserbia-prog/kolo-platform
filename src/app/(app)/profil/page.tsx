@@ -57,6 +57,7 @@ export default async function ProfilPage() {
       praceneKategorije={user.praceneKategorije.map((p) => p.category)}
       maloletan={user.maloletan}
       stanjeDeteta={stanjeDeteta}
+      mojaDeca={prikaziDecu ? <MojaDeca /> : null}
       user={{
         id: user.id,
         pseudonim: user.pseudonim,
@@ -97,11 +98,6 @@ export default async function ProfilPage() {
         <IzborSkole
           pocetna={skola ? { sifra: skola.sifra, naziv: skola.naziv, mesto: skola.mesto } : null}
         />
-      </div>
-    )}
-    {prikaziDecu && (
-      <div className="mx-auto mt-6 max-w-3xl">
-        <MojaDeca />
       </div>
     )}
     </>
