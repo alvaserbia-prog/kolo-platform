@@ -7,9 +7,10 @@ import { sacuvajNaR2, obrisiSaR2, r2Konfigurisan } from "@/lib/skladiste";
 import { MAX_PO_SLICI, MAX_SLIKA } from "@/lib/slika-upload";
 import { parsirajCenu } from "@/lib/cena-oglas";
 import { razresiNaselje, PORUKA_MESTO_IZ_SPISKA } from "@/lib/naselje";
-import { oglasIspunjavaMinimum, zabeleziDoprinos } from "@/lib/protokol/doprinos-sadrzaju";
-import { IZBOR_UCESNIKA, smeDaVidiOglas, ucesnikIzReda, ucitajUcesnika } from "@/lib/protokol/deca";
-import { jeAdmin } from "@/lib/dozvole";
+import { oglasIspunjavaMinimum, smeDaPostaviOglas, zabeleziDoprinos } from "@/lib/protokol/doprinos-sadrzaju";
+import { IZBOR_UCESNIKA, nalogRadi, smeDaVidiOglas, stanjeNaloga, ucesnikIzReda, ucitajUcesnika } from "@/lib/protokol/deca";
+import { PORUKA_CEKA_RODITELJA } from "@/lib/deca-pravila";
+import { jeAdmin, smeProsireno } from "@/lib/dozvole";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { randomUUID } from "crypto";
@@ -81,20 +82,62 @@ export async function PATCH(
   if (!listing) return await greska("Oglas nije pronađen.", 404);
   if (listing.sellerId !== session.user.id)
     return await greska("Nemaš pravo da menjaš ovaj oglas.", 403);
-  if (listing.status !== "ACTIVE")
-    return await greska("Oglas nije aktivan.", 400);
 
   const contentType = req.headers.get("content-type") ?? "";
 
-  // Deaktivacija dolazi kao JSON
+  // Arhiviranje i vraćanje iz arhive dolaze kao JSON. U arhivi su oglasi koje je
+  // oglašivač sam sklonio (EXPIRED) i zatečeni razmenjeni (RAZMENJEN).
   if (contentType.includes("application/json")) {
     const body = await req.json();
     if (body.akcija === "deaktiviraj") {
+      if (listing.status !== "ACTIVE") return await greska("Oglas nije aktivan.", 400);
       await prisma.marketplaceListing.update({ where: { id }, data: { status: "EXPIRED" } });
+      return NextResponse.json({ ok: true });
+    }
+    if (body.akcija === "aktiviraj") {
+      // 🔴 Oglas koji je uklonila Fondacija (UKLONJEN) se ne vraća — uklanjanje je
+      // njena odluka (Uslovi čl. 25 st. 2), ne oglašivačeva arhiva.
+      if (listing.status !== "EXPIRED" && listing.status !== "RAZMENJEN")
+        return await greska("Ovaj oglas ne može da se vrati iz arhive.", 400);
+      // Vraćen oglas ponovo stoji na Pijaci, pa prolazi ISTE uslove objave kao
+      // nov (POST /api/pijaca): nalog koji čeka roditelja ne objavljuje, a nov
+      // član ima najviše tri aktivna oglasa i samo ponudu — inače bi se arhiva
+      // koristila da se zaobiđe kapa.
+      if (!nalogRadi(await stanjeNaloga(session.user.id)))
+        return await greska(PORUKA_CEKA_RODITELJA, 403);
+      const korisnik = await prisma.user.findUnique({
+        where: { id: session.user.id },
+        select: { verified: true, maloletan: true, identitetUtvrdjenAt: true },
+      });
+      if (!korisnik) return await greska("Nalog ne postoji.", 401);
+      const punaPravaObjave =
+        smeProsireno({ verified: korisnik.verified, identitetUtvrdjen: korisnik.identitetUtvrdjenAt !== null }) ||
+        korisnik.maloletan;
+      const brojAktivnihOglasa = punaPravaObjave
+        ? 0
+        : await prisma.marketplaceListing.count({ where: { sellerId: session.user.id, status: "ACTIVE" } });
+      const smem = smeDaPostaviOglas({
+        verifikovan: punaPravaObjave,
+        brojAktivnihOglasa,
+        oglas: {
+          tip: listing.tip,
+          title: listing.title,
+          description: listing.description,
+          category: listing.category,
+          location: listing.location,
+          images: listing.images,
+        },
+      });
+      if (!smem.ok) return await greska(smem.razlog, smem.status);
+      // Menja se samo status; zatečeni `razmenjenoAt`/`primalacId` ostaju kao zapis.
+      await prisma.marketplaceListing.update({ where: { id }, data: { status: "ACTIVE" } });
       return NextResponse.json({ ok: true });
     }
     return await greska("Nepoznata akcija.", 400);
   }
+
+  if (listing.status !== "ACTIVE")
+    return await greska("Oglas nije aktivan.", 400);
 
   // Izmena oglasa dolazi kao multipart/form-data
   try {
