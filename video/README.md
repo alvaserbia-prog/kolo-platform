@@ -231,6 +231,17 @@ pravi kolona „Natpis“ za svaku scenu; tekst koji je deo slike upisuje se u k
 - Kraj priče sme da bude potvrda: nov član sa pečatom BEZ POTVRDE kroz razmenu uživo postaje potvrđen.
 - Likovi mogu biti novi, a stari iz ranijih videa smeju ponovo da se pojave.
 
+🔴 **Prvo problem iz života, KOLO tek na kraju** (odluka vlasnika, 01.10.2026, posle prvih
+rezultata na mrežama). „Zašto je Milica bacila ajvar?“ je na TikToku imao oko 20 puta više pregleda od
+ostalih; naslovi koji počinju od KOLA („KOLO raste“, „Ne poznaješ nikoga u KOLU?“, „Čiji si ti?“)
+zanimaju samo onoga ko KOLO već zna. Za svaki naredni scenario:
+- Naslov i prve 2 s nose **lik ili predmet i pitanje ili sukob** iz svakodnevice (zimnica, višak,
+  komšiluk, alat koji stoji); logo i ime KOLA ne idu na početak.
+- Priča se razume **bez znanja o KOLU**; KOLO se pojavljuje tek na kraju, kao rešenje.
+- Prednost imaju **serije sa stalnim likovima** („Priče iz komšiluka“), da gledalac ima razlog da zaprati.
+- Kraj nosi **jedno pitanje gledaocu** za komentar (npr. „Šta tebi trune u ostavi svake jeseni?“) ili
+  jedan poziv; ne oba.
+
 ## Pregled teksta za naraciju: stalna ekipa (odluka vlasnika, 27.09.2026; bez čuvara sadržaja od 29.09.2026)
 
 Vlasnik tekst **čita naglas**, zato se tekst za snimanje pre slanja uvek pregleda kroz ove
