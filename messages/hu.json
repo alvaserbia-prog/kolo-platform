@@ -607,6 +607,7 @@
     "crop_zoom": "Nagyítás",
     "moji_oglasi": "Hirdetéseim",
     "moji_oglasi_opis": "Az aktív és elcserélt hirdetések áttekintése",
+    "moji_oglasi_dugme": "Saját hirdetéseim megnyitása",
     "ps_min_3": "Minimum 3 karakter.",
     "sledeca_promena": "Következő módosítás lehetséges:",
     "vidljivost_naslov": "Adatok és láthatóság",
@@ -2840,7 +2841,11 @@
     "ukljuci": "Bekapcsolás",
     "ukljuceno": "Bekapcsolva",
     "nepodrzano": "Ez a böngésző nem támogatja az eszközön megjelenő értesítéseket.",
-    "blokirano": "Az értesítések le vannak tiltva a böngésző beállításaiban."
+    "blokirano": "Az értesítések le vannak tiltva a böngésző beállításaiban.",
+    "iskljuceno": "Kikapcsolva",
+    "profil_toggle": "Értesítések küldése a telefonomra",
+    "profil_napomena": "Erre az eszközre vonatkozik (Android vagy iPhone). Akkor is megérkeznek, ha a KOLO be van zárva, ugyanúgy, mint a fenti csengő.",
+    "profil_ios": "iPhone-on az értesítések akkor működnek, ha a KOLO a Főképernyőhöz van adva: Megosztás → Főképernyőhöz adás."
   },
   "deca": {
     "naslov": "Gyermekeim",
