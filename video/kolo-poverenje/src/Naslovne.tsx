@@ -101,16 +101,16 @@ export const Naslovna3: React.FC = () => (
         <g transform="translate(540 320) rotate(-3)">
           <Isecak pts={pravougaonik(-430, -150, 860, 290)} boja={PK.belo} seed="n3" amp={3} />
           <text y={-28} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={112} fill={PK.zelena900}>
-            Šta znači kad
+            Kako nastaje
           </text>
           <text y={86} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={112} fill={PK.zelena900}>
-            nekoga potvrdiš?
+            poverenje?
           </text>
         </g>
         <g transform="translate(540 1500) rotate(1.5)">
           <Isecak pts={pravougaonik(-420, -110, 840, 210)} boja={PK.belo} seed="n3b" amp={3} />
           <text y={-14} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={48} fill={PK.tekst}>
-            Za šta odgovaraš, a za šta ne
+            Šta znači kad nekoga potvrdiš
           </text>
           <text y={66} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={62} fill={PK.zelena700}>
             ekolo.rs
