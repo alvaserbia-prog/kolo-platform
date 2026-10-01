@@ -652,20 +652,23 @@ KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom me
 
 ### 12.3 „Potvrda nosi odgovornost“
 
-Prepisano 01.10.2026 uz nov tekst videa (principi potvrde, bez bunara; snimak My_recording_61).
-Pregled: pisac, urednik za mreže, gledalac iz ciljne grupe. Prva rečenica svakog opisa je ispod
-100 znakova; potvrđivač odgovara samo za to da je osoba stvarna i da je lično poznaje, kao u videu.
+Prepisano 01.10.2026 uz nov tekst videa (principi potvrde, snimak My_recording_61) i naslovnu
+„Kako nastaje poverenje?“. 🔴 Po odluci vlasnika opisi su **bez prenesenog značenja** (nema „otvara
+vrata“, „gradi se“, „temelj“), jednostavnim rečima. Potvrđivač odgovara samo za to da je osoba
+stvarna i da je lično poznaje, kao u videu.
 
 TikTok
 
 ```
-Kad nekoga potvrdiš u KOLU, šta to zapravo znači? Samo jedno: tog čoveka lično poznaješ. 🤝
+Kako nastaje poverenje u KOLU? Preko potvrde. 🤝
 
-U KOLU razmenjuješ i sa ljudima koje prvi put vidiš. Potvrda ti kaže da ih neko lično zna, i zato je ona osnov poverenja. 🌾
+Potvrda znači samo jedno: tog čoveka lično poznaješ.
 
-Zato potvrđuj samo one koje lično poznaješ. Potvrda nekoga koga ne znaš otvara vrata zloupotrebi, a posledice snose svi.
+U KOLU razmenjuješ i sa ljudima koje prvi put vidiš. Kad je neko potvrđen, znaš da ga neko od članova lično poznaje. Zato potvrdi samo one koje lično poznaješ.
 
-Za ono što će on posle da radi ne odgovaraš ti. Odgovaraš samo za to da je stvarna osoba i da ga poznaješ. 🔄
+Ako potvrdiš nekoga koga ne znaš, otvaraš mogućnost za prevaru i zloupotrebu, a štetu imaju svi članovi.
+
+Za ono što će on posle da radi ne odgovaraš ti. Odgovaraš samo za to da je stvarna osoba i da ga poznaješ. ✅
 
 KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru.
 
@@ -677,11 +680,13 @@ KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru
 Instagram
 
 ```
-Jedna potvrda u KOLU znači jedno: ovog čoveka lično poznajem. 🤝
+Kako nastaje poverenje u KOLU? Kad te potvrdi neko ko te lično zna. 🤝
 
-Za ono što će on posle da radi ne odgovaraš ti. Odgovaraš samo za to da je stvarna osoba i da ga lično znaš. Potvrda nekoga koga ne znaš otvara vrata zloupotrebi, a posledice snose svi.
+Potvrda znači samo to: ovog čoveka lično poznajem. Ne odgovaraš za sve što će on posle da radi, nego samo za to da je stvarna osoba i da ga poznaješ.
 
-KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Poverenje se ovde gradi preko ljudi, bez dokumenata, pa ga zajedno i čuvamo. 🌾
+Ako potvrdiš nekoga koga ne znaš, otvaraš mogućnost za prevaru i zloupotrebu, a štetu imaju svi članovi.
+
+KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Dokumente ne tražimo, poverenje nastaje kroz potvrde ljudi koji se lično poznaju.
 
 👉 Potvrđuj samo one koje znaš. Link je u bio.
 
@@ -691,13 +696,15 @@ KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru
 Facebook
 
 ```
-Šta zapravo znači kad nekoga potvrdite u KOLU? Samo to da tog čoveka lično poznajete. 🤝
+Kako nastaje poverenje u KOLU? Kada vas potvrdi neko ko vas lično poznaje. 🤝
 
-U KOLU razmenjujete i sa ljudima koje prvi put vidite. Kako znate ko je sa druge strane? Po potvrdi: neko ko ga lično zna potvrdio je njegov nalog. Zato je potvrda osnov poverenja.
+Potvrda znači samo jedno: tog čoveka lično poznajete.
 
-Ne odgovarate za sve što će taj čovek posle da radi. Odgovarate samo za to da je stvarna osoba i da ga poznajete. Ako potvrdite nekoga koga ne znate, otvarate vrata zloupotrebi, a posledice trpe svi članovi.
+U KOLU razmenjujete i sa ljudima koje prvi put vidite. Kad je neko potvrđen, znate da ga neko od članova lično poznaje. Zato potvrđujte samo one koje lično znate.
 
-Zato potvrđujte samo one koje znate: komšiju, rođaka, kolegu, nekoga sa kim ste već imali razmenu. 🏡
+Ako potvrdite nekoga koga ne znate, otvarate mogućnost za prevaru i zloupotrebu, a štetu imaju svi članovi.
+
+Za ono što će taj čovek posle da radi ne odgovarate vi. Odgovarate samo za to da je stvarna osoba i da ga poznajete.
 
 KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija.
 
