@@ -4,7 +4,8 @@ v1 (papirni kolaž): šuštaj lista papira na svakom prelazu, tup udarac (lična
    pečat), kucanje po telefonu i zvonce „Potvrda upisana“, koraci.
 v2 (naiva): šuštanje cveća na prelazima, „pop“ upitnika, kucanje i zvonce objave oglasa, poruka,
    udarci sekire sa pucanjem drveta, zapis u KOLU, zvonce potvrde, završno zvonce.
-v3 (papirni kolaž, bunar): kapi vode, kap mulja i pljusak, škripa đerma, škripa vratnica, mutni šum,
+v3 (papirni kolaž, principi potvrde): list papira na prelazima, klik i zvonce potvrde, „pop“ upitnika,
+   tup pečata i temelja, škripa vratnica, pucanje veza, zvonca kvačica, završno zvonce. Ranije (bunar):
    bistro zvonce na „lično“, šuštanje kartica, završno zvonce.
 Izlaz: audio/vN/zvuci.wav
 """
@@ -166,27 +167,42 @@ elif V == "v2":
     tr.dodaj(zvonce(96, 2.0), rec(SC, 6, "ekolo.rs") + 0.3, 0.05)
 
 else:
-    for k in range(10):  # kapi vode tu i tamo
-        tr.dodaj(kap(rng, rng.uniform(0.2, 1)), 0.4 + k * 4.6 + rng.uniform(0, 1.5), 0.05, rng.uniform(-0.5, 0.5))
-    tz = rec(SC, 1, "zamuti")
-    tr.dodaj(kap(rng, 0.1), tz - 0.02, 0.28)
-    tr.dodaj(fejd(sum_obojen(rng, 1.8, 150, 900), 0.05, 1.2), tz, 0.12)
-    for k in range(3):
-        tr.dodaj(skripa(0.7, 560 + k * 40), rec(SC, 2, "pije") + k * 0.9, 0.05, 0.3)
-    tr.dodaj(skripa(0.9, 380), rec(SC, 3, "vrata"), 0.07, -0.4)
-    tr.dodaj(fejd(sum_obojen(rng, 2.0, 100, 700), 0.4, 1.0), rec(SC, 3, "muti") - 0.2, 0.18)
-    tr.dodaj(klik(0.05, 1500, 6000), rec(SC, 3, "potvrdiš") + 0.2, 0.1, -0.3)
-    tl = rec(SC, 4, "lično")
-    tr.dodaj(zvonce(86, 2.0), tl, 0.08)
-    tr.dodaj(zvonce(93, 2.0), tl + 0.2, 0.06)
+    # tekst od 01.10.2026 (principi potvrde); efekti prate SLIKU, a slika ide `prednost` s ispred reči
+    PR = plan.get("prednost", 0.0)
+
+    def sl(sid, w, p=1):
+        return rec(SC, sid, w, p) - PR
+
+    for j, sid in enumerate(range(2, 8)):  # list papira na svakom prelazu
+        tr.dodaj(papir(0.55), od(sid) - 0.3, 0.2, -0.3 + 0.1 * j)
+    tp = sl(1, "potvrdiš")
+    tr.dodaj(klik(0.05, 1500, 6000), tp + 0.07, 0.14)
+    tr.dodaj(zvonce(88, 1.2), tp + 0.45, 0.07)
+    tr.dodaj(pop(520), sl(1, "znači") - 0.13, 0.18, 0.3)
+    tr.dodaj(pop(440), sl(2, "ovog") - 0.13, 0.15, 0.3)
+    tr.dodaj(pop(600), sl(2, "lično") - 0.13, 0.15, -0.2)
+    tr.dodaj(zvonce(91, 1.5), sl(2, "lično") + 0.3, 0.06)
+    tr.dodaj(pop(480), sl(3, "razmenjuješ"), 0.12)
+    tr.dodaj(pop(380), sl(3, "druge") - 0.13, 0.14, 0.3)
+    tr.dodaj(tup(70), sl(3, "Po") + 0.2, 0.3, 0.3)
+    tr.dodaj(tup(90, 0.3), sl(3, "Potvrda") - 0.05, 0.2)
+    tr.dodaj(tup(60, 0.6), sl(3, "osnov") - 0.05, 0.4)
+    for k in range(6):
+        tr.dodaj(pop(420 + k * 40), sl(4, "samo") - 0.2 + k * 0.1, 0.07, -0.4 + k * 0.16)
     for k in range(4):
-        tr.dodaj(kap(rng, 0.8 + k * 0.1), tl + 0.3 + k * 0.25, 0.05, -0.3 + k * 0.2)
-    tr.dodaj(fejd(sum_obojen(rng, 0.5, 1500, 6000), 0.1, 0.3), rec(SC, 5, "nisi") - 0.2, 0.08, -0.3)
-    tr.dodaj(fejd(sum_obojen(rng, 0.5, 1500, 6000), 0.1, 0.3), rec(SC, 5, "ali") - 0.2, 0.08, 0.3)
-    tr.dodaj(zvonce(88, 1.2), rec(SC, 5, "ali"), 0.06, 0.3)
-    for k in range(5):
-        tr.dodaj(zvonce(91 + (k % 3) * 2, 0.8), rec(SC, 6, "čist") + k * 0.12, 0.03, -0.4 + k * 0.2)
-    tr.dodaj(zvonce(89, 2.0), rec(SC, 6, "ekolo.rs") + 0.1, 0.07)
+        tr.dodaj(zvonce(86 + k * 2, 0.7), sl(4, "lično") + 0.1 + k * 0.07, 0.035, -0.3 + k * 0.2)
+    tr.dodaj(skripa(0.8, 380), sl(5, "vrata") - 0.05, 0.07, -0.2)
+    tr.dodaj(pop(300), sl(5, "zloupotrebi") - 0.07, 0.16)
+    for k in range(12):  # veze pucaju jedna za drugom
+        tr.dodaj(klik(0.03, 2500, 8000), sl(5, "sistem") - 0.2 + k * 0.067 + 0.13, 0.06, rng.uniform(-0.5, 0.5))
+    tr.dodaj(tup(60, 0.6), sl(5, "Zato") + 0.1, 0.4)
+    tr.dodaj(pop(500), sl(6, "najbitnije") - 0.2, 0.15)
+    tr.dodaj(papir(0.4), sl(6, "ne") - 0.15, 0.12, -0.3)
+    tr.dodaj(papir(0.4), sl(6, "Odgovaraš", 2) - 0.15, 0.12, 0.3)
+    tr.dodaj(tup(70), sl(6, "poznaješ") + 0.1, 0.3, 0.3)
+    for k in range(9):
+        tr.dodaj(zvonce(89 + (k % 3) * 2, 0.6), sl(7, "čuvamo") + k * 0.067, 0.03, -0.4 + k * 0.1)
+    tr.dodaj(zvonce(89, 2.0), sl(7, "ekolo.rs") + 0.1, 0.07)
 
 out = np.stack([tr.L, tr.R], 1)[: int(T * SR)]
 out /= max(1.0, np.max(np.abs(out)) / 0.95)

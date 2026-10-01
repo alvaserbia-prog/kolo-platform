@@ -537,7 +537,7 @@ Za ono što daš, komšija ti prepiše POENE. POEN nije novac i ne može se zame
 Tri videa objavljuju se ovim redom: „Čiji si ti“ (papirni kolaž, kao prve animacije),
 „Poznaješ li nekoga u KOLU?“ (naiva), „Potvrda nosi odgovornost“ (papirni kolaž).
 Videi i naslovne: `video/kolo-poverenje/out/`. Zvuk na Instagramu preimenovati redom u
-„KOLO, čiji si ti“, „KOLO, dva načina da uđeš“ i „KOLO, potvrdi one koje znaš“.
+„KOLO, čiji si ti“, „KOLO, dva načina da uđeš“ i „KOLO, šta znači potvrda“.
 
 **Pregled (27.09.2026):** opise su pročitala tri uloge iz ekipe za tekst (`CLAUDE.md`):
 - **Pisac:** izbacio „ko za tebe može da kaže koju reč“, jer „dati reč“ znači jemčiti, a potvrda znači samo da osobu lično poznaješ (odluka vlasnika). Primere iz videa (Stevin zet, cepanje drva, bunar kao „taj bunar“) zamenio drugim, jer opis ne prepričava video. Duge rečenice podelio.
@@ -652,16 +652,20 @@ KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom me
 
 ### 12.3 „Potvrda nosi odgovornost“
 
+Prepisano 01.10.2026 uz nov tekst videa (principi potvrde, bez bunara; snimak My_recording_61).
+Pregled: pisac, urednik za mreže, gledalac iz ciljne grupe. Prva rečenica svakog opisa je ispod
+100 znakova; potvrđivač odgovara samo za to da je osoba stvarna i da je lično poznaje, kao u videu.
+
 TikTok
 
 ```
-Kad nekoga potvrdiš na KOLU, ne potpisuješ papir. Kažeš zajednici da tog čoveka lično poznaješ. 🤝
+Kad nekoga potvrdiš u KOLU, šta to zapravo znači? Samo jedno: tog čoveka lično poznaješ. 🤝
 
-Seoski bunar je pripadao svima. Niko ga nije čuvao umesto drugih, i baš zato je voda ostajala čista. Na KOLU se ulazi preko ljudi, ne preko dokumenata, pa je svaka potvrda mali deo tog čuvanja. 🌾
+U KOLU razmenjuješ i sa ljudima koje prvi put vidiš. Potvrda ti kaže da ih neko lično zna, i zato je ona osnov poverenja. 🌾
 
-Za ono što će taj čovek kasnije raditi ne odgovaraš ti. Odgovaraš za jedno: da ga zaista znaš. Ako potvrdiš nekoga koga nikad nisi sreo, ili nalog iza kog ne stoji niko, otvaraš prostor za prevaru, a posledice snose svi.
+Zato potvrđuj samo one koje lično poznaješ. Potvrda nekoga koga ne znaš otvara vrata zloupotrebi, a posledice snose svi.
 
-Zato potvrdi komšiju, rođaka, kolegu, nekoga sa kim si već imao razmenu. Onima koje ne znaš reci da prvo postave oglas na Pijaci. 🔄
+Za ono što će on posle da radi ne odgovaraš ti. Odgovaraš samo za to da je stvarna osoba i da ga poznaješ. 🔄
 
 KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru.
 
@@ -673,13 +677,13 @@ KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru
 Instagram
 
 ```
-Jedna potvrda na KOLU znači jedno: ovog čoveka lično poznajem. 🤝
+Jedna potvrda u KOLU znači jedno: ovog čoveka lično poznajem. 🤝
 
-Za ono što će on kasnije raditi ne odgovaraš ti. Odgovaraš za to da ga zaista znaš. Potvrda nekoga koga nikad nisi sreo otvara vrata prevari, a posledice snosi cela zajednica.
+Za ono što će on posle da radi ne odgovaraš ti. Odgovaraš samo za to da je stvarna osoba i da ga lično znaš. Potvrda nekoga koga ne znaš otvara vrata zloupotrebi, a posledice snose svi.
 
 KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Poverenje se ovde gradi preko ljudi, bez dokumenata, pa ga zajedno i čuvamo. 🌾
 
-👉 Potvrđuj one koje znaš. Link je u bio.
+👉 Potvrđuj samo one koje znaš. Link je u bio.
 
 #Sombor #Vojvodina #razmena #komšije #KOLOzajednica
 ```
@@ -687,13 +691,13 @@ KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru
 Facebook
 
 ```
-Svako selo je imalo bunar iz kog su pili svi. I svi su pazili šta u njega ulazi. 🏡
+Šta zapravo znači kad nekoga potvrdite u KOLU? Samo to da tog čoveka lično poznajete. 🤝
 
-Na KOLU poverenje ne dolazi iz dokumenata, nego od ljudi. Nalog novog člana potvrđuje neko ko ga lično zna. Potvrda je jednostavna, jedan kod i jedan dodir na ekranu, ali iza nje stoji vaše poznanstvo.
+U KOLU razmenjujete i sa ljudima koje prvi put vidite. Kako znate ko je sa druge strane? Po potvrdi: neko ko ga lično zna potvrdio je njegov nalog. Zato je potvrda osnov poverenja.
 
-Ne odgovarate za sve što će taj čovek posle raditi. Odgovarate za to da ga zaista poznajete. Ako potvrdite nekoga koga nikad niste sreli, ili nalog iza kog ne stoji stvaran čovek, otvarate prostor za zloupotrebu, a trpe svi članovi.
+Ne odgovarate za sve što će taj čovek posle da radi. Odgovarate samo za to da je stvarna osoba i da ga poznajete. Ako potvrdite nekoga koga ne znate, otvarate vrata zloupotrebi, a posledice trpe svi članovi.
 
-Zato potvrđujte samo one koje znate: komšiju, rođaka, kolegu, nekoga sa kim ste već imali razmenu. Onima koje ne znate recite da počnu oglasom na Pijaci. 🤝
+Zato potvrđujte samo one koje znate: komšiju, rođaka, kolegu, nekoga sa kim ste već imali razmenu. 🏡
 
 KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija.
 

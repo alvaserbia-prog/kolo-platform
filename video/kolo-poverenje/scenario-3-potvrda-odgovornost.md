@@ -9,7 +9,7 @@ Zabranjene reči u titlovima i natpisima: kupi, prodaj, plati, zaradi, cena.
 🟡 Bunar je i slika videa 32 (`kolo-bunar/`). Isti bunar u istom selu — video 32 ga kasnije
 nastavlja; crtati ga istim likovnim rešenjem.
 
-## Nova verzija teksta (vlasnik, 30.09.2026) — čeka snimanje
+## Nova verzija teksta (vlasnik, 30.09–01.10.2026) — snimljeno (My_recording_61), gotov video
 
 Prva verzija (bunar, snimak My_recording_60) odbačena: „nema poente, redosled je zbrkan“. Video je o
 **principima potvrde**, bez bunara i bez priče o neznancu; kuka je obično pitanje umesto slike bunara.

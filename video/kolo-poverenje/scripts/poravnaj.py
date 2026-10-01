@@ -8,7 +8,7 @@ import json, re, sys, difflib
 import soundfile as sf
 
 V = sys.argv[1]
-# Tekst prati ono što je izgovoreno (snimci My_recording_58/59/60, 27.09.2026), ne scenario.
+# Tekst prati ono što je izgovoreno (snimci My_recording_58/59 i 61), ne scenario.
 TEKSTOVI = {
     "v1": {
         1: "Čiji si ti? Nekada je to pitanje vredelo više od lične karte.",
@@ -27,17 +27,18 @@ TEKSTOVI = {
         5: "Jedne poznaješ od ranije, druge upoznaš kroz razmenu. I tako postaješ deo KOLA.",
         6: "Pridruži se besplatno i postavi prvi oglas. Neko iz tvog kraja će ti se javiti. ekolo.rs",
     },
-    "v3": {
-        1: "Bunar koji smo zajedno iskopali može da se zamuti.",
-        2: "KOLO je taj bunar. Iz njega pije svako i svako ga čuva.",
-        3: "Kad potvrdiš nekoga koga ne znaš ili nekoga ko ne postoji, otvaraš vrata prevari i zloupotrebi. Bunar se muti. Za sve nas.",
-        4: "Ako nekoga potvrdiš, puštaš ga do našeg bunara. Kažeš: „Znam ga lično.“",
-        5: "Nisi odgovoran za sve što on kasnije uradi. Ali odgovaraš za jedno: da ga lično poznaješ.",
-        6: "Potvrdi samo one koje znaš. Tako bunar ostaje čist za sve koji su pošteni. ekolo.rs",
+    "v3": {  # snimak My_recording_61 (01.10.2026), nov tekst o principima potvrde
+        1: "Kad nekoga potvrdiš u KOLU, šta to zapravo znači?",
+        2: "To znači: ovog čoveka lično poznajem.",
+        3: "U KOLU razmenjuješ i sa ljudima koje prvi put vidiš. Kako znaš ko je sa druge strane? Po potvrdi. Potvrda je osnov poverenja.",
+        4: "Zato potvrđuješ samo one koje lično poznaješ.",
+        5: "Potvrda nekoga koga ne znaš otvara vrata zloupotrebi i može da ostavi posledice na ceo sistem. Zato nemoj to da radiš.",
+        6: "I ono najbitnije: ako nekoga potvrdiš, ne odgovaraš za sve što će on posle da radi. Odgovaraš samo za to da je on stvarna osoba i da ga poznaješ.",
+        7: "Potvrđivanjem samo onih koje lično znamo čuvamo poverenje, a sa njim i smisao celog KOLA. ekolo.rs",
     },
 }
 TEKST = TEKSTOVI[V]
-IZGOVOR = {"ekolo.rs": "ekolors", "KOLO": "kolo", "KOLU": "kolu", "KOLA": "kola", "POENE": "poene", "POENE,": "poene"}
+IZGOVOR = {"ekolo.rs": "ekolors", "KOLO": "kolo", "KOLU": "kolu", "KOLA": "kola", "KOLA.": "kola", "POENE": "poene", "POENE,": "poene"}
 
 
 def slogovi(r):

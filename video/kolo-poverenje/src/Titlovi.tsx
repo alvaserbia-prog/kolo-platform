@@ -21,7 +21,8 @@ export const komadiTitlova = (plan: Plan): Komad[] => {
   for (const s of plan.scene) {
     let tek: RecF[] = [];
     s.reci.forEach((w, i) => {
-      const r = { ...w, f: Math.round((s.glasOd + w.s) * plan.fps), ef: Math.round((s.glasOd + w.e) * plan.fps) };
+      const p = plan.prednost ?? 0;
+      const r = { ...w, f: Math.round((s.glasOd + w.s - p) * plan.fps), ef: Math.round((s.glasOd + w.e - p) * plan.fps) };
       const duzina = tek.map((x) => x.w).join(" ").length;
       if (tek.length && duzina + 1 + w.w.length > MAX_ZNAKOVA) {
         out.push({ reci: tek, od: 0, do: 0 });
