@@ -8,6 +8,7 @@ import { labelPrograma } from "@/lib/protokol/programi";
 import { ProgramType } from "@/generated/prisma/client";
 import { UKUPNO_ZRNA } from "@/lib/protokol/zrno";
 import { jeAdmin, jeSuperadmin } from "@/lib/dozvole";
+import { brojeviClanova } from "@/lib/admin-clanovi";
 
 const SVI_PROGRAMI: ProgramType[] = ["PED", "PODRSKA_MAJKAMA", "PODRSKA_STARIJIMA", "POSEBNA_BRIGA", "SKOLOVANJE"];
 
@@ -54,9 +55,7 @@ export default async function AdminPage({
       prisma.dailyEmissionSummary.findMany({ orderBy: { date: "desc" }, take: 7 }),
     ]),
     Promise.all([
-      prisma.user.count(),
-      prisma.user.count({ where: { verified: true } }),
-      prisma.user.count({ where: { status: "SUSPENDED" } }),
+      brojeviClanova(),
       prisma.krug.count({ where: { status: "ACTIVE" } }),
       prisma.krugClanstvo.count({ where: { leftAt: null } }),
       prisma.zrnoStanje.aggregate({ _sum: { slobodno: true, aktivno: true } }),
@@ -142,7 +141,7 @@ export default async function AdminPage({
   ]);
 
   const opticaj = protokol ? Math.abs(protokol.balance) : 0;
-  const zrnaKodKorisnika = (dashboardData[5]._sum.slobodno ?? 0) + (dashboardData[5]._sum.aktivno ?? 0);
+  const zrnaKodKorisnika = (dashboardData[3]._sum.slobodno ?? 0) + (dashboardData[3]._sum.aktivno ?? 0);
 
   // Nadzor integriteta — samo superadmin vidi obeležene naloge/grupe.
   const nadzorRedovi = viewerJeSuperadmin
@@ -217,11 +216,11 @@ export default async function AdminPage({
         })),
       }}
       dashboard={{
-        korisnici: { ukupno: dashboardData[0], verifikovanih: dashboardData[1], suspendovanih: dashboardData[2] },
-        krugovi: { ukupno: dashboardData[3], krugra: dashboardData[4] },
+        korisnici: dashboardData[0],
+        krugovi: { ukupno: dashboardData[1], krugra: dashboardData[2] },
         finansije: { opticaj, protokolBalance: protokol?.balance ?? 0 },
         zrno: { kodKorisnika: zrnaKodKorisnika, uProtokolu: UKUPNO_ZRNA - zrnaKodKorisnika, ukupno: UKUPNO_ZRNA },
-        ukupnoTransakcija: dashboardData[6],
+        ukupnoTransakcija: dashboardData[4],
       }}
       auditLogs={auditLogs.map((l) => ({
         id: l.id, adminPseudonim: l.admin.pseudonim, akcija: l.akcija,
