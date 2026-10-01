@@ -1,0 +1,20 @@
+{
+  "izvor": "audio/raw/snimak62.m4a (44,1 kHz, mono)",
+  "napomena": "Rezovi po odluci vlasnika (01.10.2026). Vremena u sekundama, svaki korak u koordinatama rezultata prethodnog koraka. Na svakom spoju fade 8-10 ms.",
+  "koraci": [
+    {
+      "opis": "izbačeni ponovljeni pokušaji; ubačeno 'joj' iz 'ono što joj treba' između 'upisao' i 'je'",
+      "spoj": [[6.9, 53.65], {"joj": [24.46, 24.705]}, [53.65, 57.9], [60.6, 78.1], [81.2, null]]
+    },
+    {
+      "opis": "izbačeno 'sa pekmezom' (posle 'neko'), 'pekmeza' (posle 'preuzimanju'), 'na pekmez' (posle 'novac')",
+      "izbaci": [[39.84, 40.57], [45.78, 46.30], [50.30, 51.15]]
+    },
+    {
+      "opis": "izbačeno 'pekmeza' posle 'stavila teglu'; 'po pekmez' zamenjeno sa 'po teglu' (reč iz 'stavila teglu')",
+      "izbaci": [[13.63, 14.24]],
+      "zameni": {"mesto": [43.16, 43.66], "sa": [13.325, 13.63]}
+    }
+  ],
+  "trajanje_s": 73.9
+}
