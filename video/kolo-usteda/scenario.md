@@ -37,10 +37,11 @@ Rast se vidi dužinom kolone; procenti se ne ispisuju.
 - Uz POEN nikad: kupi, prodaj, plati, zaradi, cena; ni „za POENE“ kao zamena za „za pare“. Govori se
   „dobija u KOLU“ i „čega u KOLU nema“.
 - Iznos u oglasu određuje onaj ko oglas postavlja; oglas se crta bez iznosa.
-- Porez i računi ostaju u dinarima (okvir koegzistencije: KOLO je dodatak, ne zamena). Ni reči o porezu na POEN.
+- Porez i računi ostaju u dinarima (obaveze prema državi). Ni reči o porezu na POEN.
 - Ne koristiti glagol „nabavlja“: nabavka je poseban institut Fondacije (video 102).
 - Natpisi samo u svetu priče (pravilo „Natpisi“ u `video/README.md`): sveska, oglas, knjiga evidencije,
   završna kartica.
+- Tekst bez metafora (pravilo u `video/README.md`): „plata ide na troškove“, ne „plata se razleti“.
 - Zoran je u priči **već potvrđen član** (zato sme da prepisuje POEN); to se ne izgovara i ne prikazuje.
 
 ## a) Scenario po scenama
@@ -48,7 +49,7 @@ Rast se vidi dužinom kolone; procenti se ne ispisuju.
 | # | Slika (i tekst koji je deo slike) | Naracija |
 |---|---|---|
 | 1 | KUKA. Leto, dvorište. Zoran (~45) sa ženom i dvoje dece tovari kofere i suncobran u auto. Na haubi otvorena sveska, Zoran štiklira red **„More ✓“** | Zoran ove godine / vodi porodicu na more. // Plata mu je ista kao lane. / A pare za more / skupio je za šest meseci. |
-| 2 | Listovi sveske se vraćaju unazad, na list od pre godinu dana. Gore **„Plata: 80.000“**, ispod kolona **„Dinari“**. Uz svaku izgovorenu reč taj isečak se odlepi i odleti; novčanice (stilizovane, ne verne kopije) odlaze za njim | Pre KOLA / išlo je ovako. / Stigne plata, / i razleti se. // Pijaca, / frizer, / mehaničar, / časovi za ćerku, / struja, / gorivo, / porez. |
+| 2 | Listovi sveske se vraćaju unazad, na list od pre godinu dana. Gore **„Plata: 80.000“**, ispod kolona **„Dinari“**. Uz svaku izgovorenu reč taj isečak se odlepi i odleti; novčanice (stilizovane, ne verne kopije) odlaze za njim | Pre KOLA / išlo je ovako. / Stigne plata, / i ide na troškove. // Pijaca, / frizer, / mehaničar, / časovi za ćerku, / struja, / gorivo, / porez. |
 | 3 | Dole na listu Zoran upisuje **„Ostalo: 0“**. Prazan novčanik na stolu | Do kraja meseca / ne ostane ništa. |
 | 4 | Zoran na telefonu kuca oglas: **„Električarske popravke, posle posla i vikendom“**, bez iznosa | Onda je ušao u KOLO / i postavio oglas: / električarske popravke, / posle posla i vikendom. |
 | 5 | Dva kratka kadra: komšinica pokazuje utičnicu koja varniči; baka u susednom selu pred kutijom sa osiguračima, sveća na stolu. Posle svakog posla u knjizi evidencije se ispiše red **„Komšinica → Zoran“**, pa **„Baka iz Bezdana → Zoran“** | Javila se komšinica. / Pa jedna baka / iz susednog sela. // Ljudi kojima je majstor trebao, / a dinara za njega nisu imali. / Zoran je uradio posao, / a oni su mu prepisali POENE. |
@@ -64,7 +65,7 @@ Rast se vidi dužinom kolone; procenti se ne ispisuju.
 Oznake: / kratka pauza · // duža pauza · `[ovako | ili ovako]` izbor vlasnika
 
 1. Zoran ove godine / vodi porodicu na more. // Plata mu je ista kao lane. / A pare za more / skupio je za šest meseci.
-2. Pre KOLA / išlo je ovako. / Stigne plata, / i razleti se. // Pijaca, / frizer, / mehaničar, / časovi za ćerku, / struja, / gorivo, / porez.
+2. Pre KOLA / išlo je ovako. / Stigne plata, / i ide na troškove. // Pijaca, / frizer, / mehaničar, / časovi za ćerku, / struja, / gorivo, / porez.
 3. Do kraja meseca / ne ostane ništa.
 4. Onda je ušao u KOLO / i postavio oglas: / električarske popravke, / posle posla i vikendom.
 5. Javila se komšinica. / Pa jedna baka / iz susednog sela. // Ljudi kojima je majstor trebao, / a dinara za njega nisu imali. / Zoran je uradio posao, / a oni su mu prepisali POENE.
