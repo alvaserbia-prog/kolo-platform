@@ -713,3 +713,65 @@ KOLO služi za razmenu dobara i usluga među ljudima iz istog mesta. Nastalo je 
 
 #Sombor #poverenje
 ```
+
+## 13. Video „Pijaca“ (oktobar 2026)
+
+Video: `video/kolo-pijaca/out/pijaca.mp4`. Naslovna: `video/kolo-pijaca/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, pijaca“. Alternativni tekst: „Izometrijska ilustracija
+pijace sa šarenim tezgama; tegla pekmeza ide od oglasa do susreta dvoje komšija.“
+
+Napisano po odeljku 4 (svaki opis je unikat). Uglovi, kojih u videu nema: TikTok, u svakoj ulici
+neko pravi dobar pekmez, a neko zna da sredi utičnicu, pa retko znaju jedno za drugo; Instagram,
+dinari koji ostanu kod kuće; Facebook, subotnja somborska pijaca kao mesto gde se sazna ko šta ima.
+Primeri su novi (domaći sir, šivenje, pomoć oko računara), ne oni iz videa. Na Facebook-u je
+objašnjena oznaka „bez potvrde“ i savet da se prvi put nađe uživo. Nijedna rečenica nije iz
+naracije ni iz ranijih opisa.
+Jezička provera (lektor i književnik): navodnici „…“, bez crtica i nabrajanja; „kupuješ“ samo uz
+dinare, nikad uz POEN; rodno neutralno („ko se tek učlani“, „na takvom oglasu“); „vi“ dosledno na
+Facebook-u; bez „se“ konstrukcija gde može („tu saznate“); duga rečenica o razmeni podeljena na dve.
+
+### TikTok
+
+```
+U skoro svakoj ulici živi neko ko pravi pekmez kakav nema u prodavnici i neko ko za pola sata sredi utičnicu. Retko znaju jedno za drugo. 🫙
+
+Pijaca na KOLU služi baš tome. Ponudiš ono što imaš u višku ili ono što znaš da radiš, a komšija iz tvog mesta te pronađe kad mu zatreba. Dogovarate se direktno, Fondacija se u to ne meša.
+
+Kad nekome nešto daš, on ti prepiše POEN. To je zapis o tvom doprinosu, nije novac i ne menja se za novac.
+
+Oglase vidi svako, i bez naloga. Ko se tek učlani, odmah može da ponudi do tri stvari.
+
+👉 Pogledaj šta se nudi u tvom mestu, link je u profilu
+
+#Sombor #pijaca #razmena #komšije #KOLO
+```
+
+### Instagram
+
+```
+Dinari koje ne potrošiš na pekmez ostaju za nešto drugo. 🫙
+
+Na Pijaci KOLA komšije nude jedni drugima ono što imaju i ono što znaju: domaći sir, šivenje, pomoć oko računara. Razmenu dogovarate direktno.
+
+Za ono što daš, komšija ti prepiše POEN. To je zapis o doprinosu, a ne novac.
+
+Na svakom oglasu piše odakle je, pa lako nađeš nekoga iz svog mesta. Link je u bio.
+
+#Sombor #Vojvodina #pijaca #razmena #KOLO
+```
+
+### Facebook
+
+```
+Subotom pre podne sa somborske pijace ljudi ne nose kući samo povrće. Tu saznate ko šta ima, ko zna da popravi bojler i kome treba pomoć. 🧺
+
+Pijaca na KOLU radi isto, samo preko interneta i bez dinara. Članovi nude jedni drugima ono što imaju u višku i ono što znaju da rade, od domaćeg sira do šivenja. Razmenu dogovarate direktno sa komšijom. KOLO Fondacija u tome ne posreduje.
+
+Oglase može da vidi svako, i bez prijave. Ko se tek učlani, odmah može da ponudi do tri stvari. Na takvom oglasu stoji oznaka „bez potvrde“, dok ga ne potvrdi neko od članova ko ga lično poznaje. Zato je dobro da se prvi put nađete uživo.
+
+Za ono što date, komšija vam prepiše POEN. POEN nije novac i ne menja se za novac, on beleži vaš doprinos.
+
+👉 Pogledajte šta se nudi u vašem mestu: https://ekolo.rs
+
+#Sombor #KOLO
+```
