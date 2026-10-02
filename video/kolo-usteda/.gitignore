@@ -1,0 +1,8 @@
+node_modules/
+audio/*/tempo/
+audio/*/muzika.wav
+audio/*/zvuci.wav
+out/test-*.mp4
+out/kadrovi/
+out/master-*.mp4
+audio/*/clean/My_recording_*.wav

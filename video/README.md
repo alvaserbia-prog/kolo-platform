@@ -23,8 +23,8 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 9 | Potvrda nosi odgovornost (Poverenje 3/3, papirni kolaž) | K | `kolo-poverenje/` | ✅ |
 | 10 | Bunar koji kopamo zajedno | K | `kolo-bunar/` | ✅ |
 | 11 | KOLO raste sa nama | K | `kolo-raste/` | ✅ |
-| 12 | Pijaca | K | `kolo-pijaca/` | tekst gotov, izrada nije počela |
-| 13 | Ušteda (uputstvo; scenario stiže) | K |  |  |
+| 12 | Pijaca | K | `kolo-pijaca/` | ✅ |
+| 13 | Ušteda (Zoran, električar) | K | `kolo-usteda/` | ✅ |
 | 14 | Bez posrednika (scenario u pregledu) | K |  |  |
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
 | 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | tekst gotov, izrada nije počela |
@@ -208,9 +208,18 @@ dobiješ razmenom u KOLU ne moraš da pribaviš za dinare, i to je ušteda. Ušt
 kod tebe, nikad kao preračun POEN-a u dinare („1 POEN = 1 dinar uštede“, „vrednost tvojih POENA u dinarima“). Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
 a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela „Pravna odbrana“, red „Iznos u oglasu“). Postupak izrade: README u folderu svakog videa.
 
+🔴 **Natpisi idu samo tamo gde imaju smisla, ne u svaku scenu** (odluka vlasnika, 30.09.2026). Titlovi po
+rečima već nose naraciju, pa natpis koji ponavlja izgovoreno samo udvostručuje tekst i odvlači pogled sa slike.
+Tekst na ekranu pre svega živi **u svetu priče**: ono što lik piše (sveska, tabla, oglas na telefonu), zapis u
+knjizi evidencije, završna kartica sa ekolo.rs. Poseban natpis preko slike dolazi samo kad nosi nešto što ni
+slika ni titl ne kažu (ime, godina, mesto, izvor, nabrajanje koje se čita) ili kad je kuka. U scenariju se ne
+pravi kolona „Natpis“ za svaku scenu; tekst koji je deo slike upisuje se u kolonu „Slika“.
+
 🟡 **Likovni stil i muzika se ne ponavljaju obavezno** (odluka vlasnika, 27.09.2026): od trilogije „Poverenje“ (`kolo-poverenje/`) svaki video može da ima svoj autentičan stil (tamo: papirni kolaž u prvom i trećem videu, naiva u drugom; linorez i tuš sa akvarelom vlasnik je odbacio) i svoju muziku. Zajedničko ostaje ono iznad: titlovi po rečima sa zelenom rečju, naracija vlasnika, −14 LUFS, POEN samo kao zapis, zabranjene reči.
 
-🔴 **Muzika je vedra i ritmična, nikad tužna** (odluka vlasnika, 30.09.2026; dvaput vraćeno: „Čiji si ti“ u e-molu i gudači u „Potvrda nosi odgovornost“). Ozbiljan trenutak u priči nosi aranžman (proređen ritam, kratka stanka, šaljiv silazak), ne mol ni spor tempo.
+🔴 **Muzika je vedra i ritmična, nikad tužna** (odluka vlasnika, 30.09.2026; dvaput vraćeno: „Čiji si ti“ u e-molu i gudači u „Potvrda nosi odgovornost“). Ozbiljan trenutak u priči nosi aranžman (proređen ritam, kratka stanka, šaljiv silazak), ne spor tempo. **Mol je dozvoljen kad je brz i igrački** (odluka vlasnika, 02.10.2026), kao u srpskim kolima i trubačkim numerama; zabranjen je samo spor i tužan.
+
+🔴 **Muzika je uvek u srpskom etosu** (odluka vlasnika, 02.10.2026). Prvi izbor je vojvođanska tamburica (prim, brač, bugarija, berde); može i frula, harmonika u srpskom kolu, a za veselije videe truba (trubački sastav). Lestvice, ritmovi (kolo u 2/4, čoček) i ukrasi (predudari, okretaji, šesnaestine) su iz srpskog melosa. Ne idu: gitara u pop progresiji, harmonika u stilu francuskog musette valcera (razdešeni jezičci, treperenje), gudači, klavir, elektronski i „bezveze“ zvuci. Po ovom pravilu ne odgovaraju videi 1 (gitara), 8 i 9 (harmonika u musette stilu, violina); zamena njihove muzike je zaseban potez, samo uz nalog vlasnika.
 
 🟢 **Zapis umesto novca sme da se kaže** (odluka vlasnika, 30.09.2026). Nije obavezno da tekst govori „KOLO je dodatak, ne zamena“: ideja da zapis može da zameni novac sme da ostane, jer je to mogući ishod KOLA, iako KOLO danas kreće paralelno sa dinarom. U tekstu se ne kaže „cilj KOLA“, nego „mogući ishod“. Kaže se kao ideja o razmeni, ne kao obećanje o POEN-u: „razmena može da ide zapisom umesto novcem“ da, „POEN će zameniti dinar“ ne (javna tvrdnja da je POEN zamišljen kao sredstvo plaćanja udara na odbranu iz Pravilnika čl. 13). Ono što i dalje važi, jer su to strukturne granice iz akata, a ne stav o cilju: POEN se ne menja za dinare i ne iznosi iz sistema (nekonvertibilnost), obaveze prema državi ostaju u dinarima, i uz POEN ne idu reči kupi, prodaj, plati, zaradi, cena.
 
@@ -223,6 +232,17 @@ a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela �
 - POEN se u priči upisuje pri preuzimanju, kad je stvar u rukama, nikad unapred.
 - Kraj priče sme da bude potvrda: nov član sa pečatom BEZ POTVRDE kroz razmenu uživo postaje potvrđen.
 - Likovi mogu biti novi, a stari iz ranijih videa smeju ponovo da se pojave.
+
+🔴 **Prvo problem iz života, KOLO tek na kraju** (odluka vlasnika, 01.10.2026, posle prvih
+rezultata na mrežama). „Zašto je Milica bacila ajvar?“ je na TikToku imao oko 20 puta više pregleda od
+ostalih; naslovi koji počinju od KOLA („KOLO raste“, „Ne poznaješ nikoga u KOLU?“, „Čiji si ti?“)
+zanimaju samo onoga ko KOLO već zna. Za svaki naredni scenario:
+- Naslov i prve 2 s nose **lik ili predmet i pitanje ili sukob** iz svakodnevice (zimnica, višak,
+  komšiluk, alat koji stoji); logo i ime KOLA ne idu na početak.
+- Priča se razume **bez znanja o KOLU**; KOLO se pojavljuje tek na kraju, kao rešenje.
+- Prednost imaju **serije sa stalnim likovima** („Priče iz komšiluka“), da gledalac ima razlog da zaprati.
+- Kraj nosi **jedno pitanje gledaocu** za komentar (npr. „Šta tebi trune u ostavi svake jeseni?“) ili
+  jedan poziv; ne oba.
 
 ## Pregled teksta za naraciju: stalna ekipa (odluka vlasnika, 27.09.2026; bez čuvara sadržaja od 29.09.2026)
 

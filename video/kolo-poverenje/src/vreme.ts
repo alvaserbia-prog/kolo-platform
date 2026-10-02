@@ -15,7 +15,7 @@ export type ScenaPlan = {
   reci: Rec[];
   tekst: string;
 };
-export type Plan = { fps: number; trajanje: number; frejmova: number; scene: ScenaPlan[] };
+export type Plan = { fps: number; prednost?: number; trajanje: number; frejmova: number; scene: ScenaPlan[] };
 
 const cisto = (x: string) => x.toLowerCase().replace(/[.,?!:„“"]/g, "");
 
@@ -26,7 +26,7 @@ export const napraviVreme = (plan: Plan) => {
     const s = scena(id);
     let n = 0;
     for (const w of s.reci) {
-      if (cisto(w.w) === cisto(rec) && ++n === pojava) return Math.round((s.glasOd - s.od + w.s) * plan.fps);
+      if (cisto(w.w) === cisto(rec) && ++n === pojava) return Math.round((s.glasOd - s.od + w.s - (plan.prednost ?? 0)) * plan.fps);
     }
     throw new Error(`reč „${rec}" (${pojava}) nije u sceni ${id}`);
   };
@@ -35,7 +35,7 @@ export const napraviVreme = (plan: Plan) => {
     const s = scena(id);
     let n = 0;
     for (const w of s.reci) {
-      if (cisto(w.w) === cisto(rec) && ++n === pojava) return Math.round((s.glasOd - s.od + w.e) * plan.fps);
+      if (cisto(w.w) === cisto(rec) && ++n === pojava) return Math.round((s.glasOd - s.od + w.e - (plan.prednost ?? 0)) * plan.fps);
     }
     throw new Error(`reč „${rec}" (${pojava}) nije u sceni ${id}`);
   };

@@ -11,7 +11,7 @@ import { Img, staticFile } from "remotion";
 import { Scena1 as V2S1 } from "./v2/scene";
 import { Platno, PlatnoPozadina, Ram } from "./v2/okvir";
 import { Defs as D2, N } from "./v2/naiva";
-import { Scena2 as V3S2 } from "./v3k/scene";
+import { Scena1 as V3S1 } from "./v3k/scene";
 
 ucitajFontove();
 
@@ -92,19 +92,19 @@ export const Naslovna2: React.FC = () => (
 export const Naslovna3: React.FC = () => (
   <AbsoluteFill style={{ background: PK.papir }}>
     <Img src={staticFile("kolaz/papir.jpg")} style={{ position: "absolute", inset: 0, width: 1080, height: 1920 }} />
-    <Kadar frejm={150}>
-      <V3S2 />
+    <Kadar frejm={85}>
+      <V3S1 />
     </Kadar>
     <AbsoluteFill>
       <svg viewBox="0 0 1080 1920" width={1080} height={1920}>
         <D1 />
-        <g transform="translate(540 370) rotate(-3)">
-          <Isecak pts={pravougaonik(-420, -170, 840, 330)} boja={PK.belo} seed="n3" amp={3} />
-          <text y={-30} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={130} fill={PK.zelena900}>
-            Bunar može
+        <g transform="translate(540 320) rotate(-3)">
+          <Isecak pts={pravougaonik(-430, -150, 860, 290)} boja={PK.belo} seed="n3" amp={3} />
+          <text y={-28} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={112} fill={PK.zelena900}>
+            Kako nastaje
           </text>
-          <text y={100} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={130} fill={PK.zelena900}>
-            da se zamuti
+          <text y={86} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={112} fill={PK.zelena900}>
+            poverenje?
           </text>
         </g>
         <g transform="translate(540 1500) rotate(1.5)">

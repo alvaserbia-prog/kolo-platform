@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import dynamic from "next/dynamic";
 import type { NadzorNalaz } from "./NadzorTab";
+import type { BrojeviClanova } from "@/lib/admin-clanovi";
 import { jeSuperadmin } from "@/lib/dozvole";
 import { ADMIN_TABOVI, type Tab } from "./tabovi";
 import { pocetnoIzAdrese } from "@/hooks/useStanjeUAdresi";
@@ -49,7 +50,7 @@ interface KorisnikInfo {
 }
 
 interface DashboardData {
-  korisnici: { ukupno: number; verifikovanih: number; suspendovanih: number };
+  korisnici: BrojeviClanova;
   krugovi: { ukupno: number; krugra: number };
   finansije: { opticaj: number; protokolBalance: number };
   zrno: { kodKorisnika: number; uProtokolu: number; ukupno: number };
@@ -1766,20 +1767,31 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
 
   return (
     <div className="space-y-5">
-      {/* Korisnici */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_korisnici_ukupno")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-text">{data.korisnici.ukupno.toLocaleString(intlTag(locale))}</p>
-        </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_verifikovani")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-green-700">{data.korisnici.verifikovanih.toLocaleString(intlTag(locale))}</p>
-        </div>
-        <div className="bg-white rounded-2xl border border-kolo-border p-4 col-span-2 md:col-span-1">
-          <p className="text-xs text-kolo-muted mb-1">{t("dashboard_suspendovani")}</p>
-          <p className="text-xl md:text-2xl font-bold text-kolo-gold-600">{data.korisnici.suspendovanih.toLocaleString(intlTag(locale))}</p>
-        </div>
+      {/* Članovi — prvi red: stanje naloga; drugi red: razlaganje aktivnih */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {[
+          [t("dashboard_korisnici_ukupno"), data.korisnici.ukupno, "text-kolo-text"],
+          [t("dashboard_aktivni"), data.korisnici.aktivni, "text-kolo-green-700"],
+          [t("dashboard_brisani"), data.korisnici.brisani, "text-kolo-muted"],
+          [t("dashboard_suspendovani"), data.korisnici.suspendovani, "text-kolo-gold-600"],
+        ].map(([labela, broj, boja]) => (
+          <div key={labela} className="bg-white rounded-2xl border border-kolo-border p-4">
+            <p className="text-xs text-kolo-muted mb-1">{labela}</p>
+            <p className={`text-xl md:text-2xl font-bold ${boja}`}>{broj.toLocaleString(intlTag(locale))}</p>
+          </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-3 gap-3">
+        {[
+          [t("dashboard_verifikovani"), data.korisnici.redovni, "text-kolo-green-700"],
+          [t("dashboard_novi"), data.korisnici.novi, "text-kolo-text"],
+          [t("dashboard_deca"), data.korisnici.deca, "text-kolo-text"],
+        ].map(([labela, broj, boja]) => (
+          <div key={labela} className="bg-white rounded-2xl border border-kolo-border p-4">
+            <p className="text-xs text-kolo-muted mb-1">{labela}</p>
+            <p className={`text-xl md:text-2xl font-bold ${boja}`}>{broj.toLocaleString(intlTag(locale))}</p>
+          </div>
+        ))}
       </div>
 
       {/* Finansije */}

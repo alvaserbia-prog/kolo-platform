@@ -23,129 +23,136 @@ interface Oglas {
   uklonjenRazlog: string | null;
 }
 
-const statusBoja: Record<string, string> = {
-  ACTIVE:   "bg-kolo-green-100 text-kolo-green-700",
-  RAZMENJEN: "bg-kolo-info-light text-kolo-info",
-  EXPIRED:  "bg-kolo-bg text-kolo-muted",
-  UKLONJEN: "bg-kolo-danger-light text-kolo-danger",
-};
+/** U arhivi je sve što nije aktivno: oglasi koje je oglašivač sklonio (EXPIRED),
+ *  zatečeni razmenjeni (RAZMENJEN) i oni koje je uklonila Fondacija (UKLONJEN).
+ *  Vratiti se mogu samo prva dva — uklanjanje je odluka Fondacije. */
+const MOZE_DA_SE_AKTIVIRA = new Set(["EXPIRED", "RAZMENJEN"]);
 
 export default function MojiOglasiKlijent({ listings }: { listings: Oglas[] }) {
   const locale = useLocale();
   const t = useTranslations("profil");
   const tPijaca = useTranslations("pijaca");
   const router = useRouter();
-  const [filter, setFilter] = useState("sve");
-  const [deaktivacija, setDeaktivacija] = useState<string | null>(null);
+  const [tab, setTab] = useState<"aktivni" | "arhiva">("aktivni");
+  const [radim, setRadim] = useState<string | null>(null);
+  const [greske, setGreske] = useState<Record<string, string>>({});
 
-  const statusLabela: Record<string, string> = {
-    ACTIVE: t("oglas_aktivan"),
-    RAZMENJEN: t("oglas_prodat"),
-    EXPIRED: t("oglas_istekao"),
-    UKLONJEN: tPijaca("oglas_uklonjen"),
-  };
+  const aktivni = listings.filter((l) => l.status === "ACTIVE");
+  const arhiva = listings.filter((l) => l.status !== "ACTIVE");
+  const prikazani = tab === "aktivni" ? aktivni : arhiva;
 
-  const filtrirani = listings.filter((l) => {
-    if (filter === "aktivni") return l.status === "ACTIVE";
-    if (filter === "prodati") return l.status === "RAZMENJEN";
-    return true;
-  });
-
-  async function deaktiviraj(id: string) {
-    setDeaktivacija(id);
-    await fetch(`/api/pijaca/${id}`, {
+  async function promeni(id: string, akcija: "deaktiviraj" | "aktiviraj") {
+    setRadim(id);
+    setGreske((g) => ({ ...g, [id]: "" }));
+    const res = await fetch(`/api/pijaca/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ akcija: "deaktiviraj" }),
+      body: JSON.stringify({ akcija }),
     });
-    setDeaktivacija(null);
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      setGreske((g) => ({ ...g, [id]: data.error ?? t("akcija_greska") }));
+    }
+    setRadim(null);
     router.refresh();
   }
 
   return (
-    <div className="space-y-5">
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <Link href="/profil" className="text-kolo-muted hover:text-kolo-muted text-sm transition-colors">← {t("naslov")}</Link>
-          <h1 className="kolo-naslov">{t("moji_oglasi")}</h1>
-        </div>
+    <div className="space-y-4">
+      {/* Nazad (krug bez natpisa) i naslov — jedan red */}
+      <div className="flex items-center gap-3">
+        <Link
+          href="/profil"
+          aria-label={t("nazad_na_profil")}
+          title={t("nazad_na_profil")}
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-kolo-border bg-white text-kolo-muted hover:text-kolo-text hover:border-kolo-text transition-colors"
+        >
+          <span aria-hidden>←</span>
+        </Link>
+        <h1 className="kolo-naslov truncate">{t("moji_oglasi")}</h1>
+      </div>
+
+      {/* Tabovi levo, Novi oglas desno — jedan red */}
+      <div className="flex items-center gap-2">
+        {([
+          ["aktivni", t("filter_aktivni"), aktivni.length],
+          ["arhiva", t("filter_arhiva"), arhiva.length],
+        ] as ["aktivni" | "arhiva", string, number][]).map(([val, lab, broj]) => (
+          <button
+            key={val}
+            onClick={() => setTab(val)}
+            className={`whitespace-nowrap px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+              tab === val ? "bg-kolo-text text-white" : "bg-white border border-kolo-border text-kolo-muted"
+            }`}
+          >
+            {lab} <span className="opacity-70 tabular-nums">{broj}</span>
+          </button>
+        ))}
         <Link
           href="/pijaca/novi-oglas"
-          className="px-4 py-2 bg-kolo-green-700 text-white text-sm font-semibold rounded-xl hover:bg-kolo-green-900 transition-colors"
+          className="ml-auto whitespace-nowrap px-3 py-2 bg-kolo-green-700 text-white text-xs font-semibold rounded-lg hover:bg-kolo-green-900 transition-colors"
         >
           + {t("novi_oglas")}
         </Link>
       </div>
 
-      {/* Filter */}
-      <div className="flex gap-2">
-        {([
-          ["sve", t("filter_svi")],
-          ["aktivni", t("filter_aktivni")],
-          ["prodati", t("filter_prodati")],
-        ] as [string, string][]).map(([val, lab]) => (
-          <button
-            key={val}
-            onClick={() => setFilter(val)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-              filter === val ? "bg-kolo-text text-white" : "bg-white border border-kolo-border text-kolo-muted"
-            }`}
-          >
-            {lab}
-          </button>
-        ))}
-      </div>
-
       {/* Lista */}
-      {filtrirani.length === 0 ? (
+      {prikazani.length === 0 ? (
         <div className="bg-white rounded-2xl border border-kolo-border p-8 text-center text-sm text-kolo-muted">
           {listings.length === 0 ? (
             <>
               {t("nema_oglasa_jos")}{" "}
               <Link href="/pijaca/novi-oglas" className="text-kolo-green-700 hover:underline">{t("objavite_prvi")}</Link>
             </>
-          ) : t("nema_oglasa_filter")}
+          ) : tab === "aktivni" ? t("nema_aktivnih_oglasa") : t("nema_oglasa_arhiva")}
         </div>
       ) : (
         <div className="bg-white rounded-2xl border border-kolo-border overflow-hidden divide-y divide-gray-100">
-          {filtrirani.map((l) => (
-            <div key={l.id} className="px-5 py-4 flex justify-between items-center gap-4">
-              <div className="flex-1 min-w-0">
-                <Link href={`/pijaca/${l.id}`} className="font-semibold text-kolo-text text-sm hover:text-kolo-green-700 transition-colors line-clamp-1">
-                  {l.title}
-                </Link>
-                <div className="flex items-center gap-2 mt-1">
-                  <span className="text-xs text-kolo-muted">{tPijaca(`kategorija_${kategorijaKljuc(l.category)}`)}</span>
-                  <span className="text-xs text-kolo-border">·</span>
-                  <span className="text-xs font-semibold text-kolo-green-700">{formatCenaGlavni(l, t("cena_po_dogovoru"))}{prikaziJedinicuCene(l) ? " POEN" : ""}</span>
-                  {l.razmenjenoAt && (
-                    <>
-                      <span className="text-xs text-kolo-border">·</span>
-                      <span className="text-xs text-kolo-muted">{t("prodato")}: {new Date(l.razmenjenoAt).toLocaleDateString(intlTag(locale))}</span>
-                    </>
+          {prikazani.map((l) => (
+            <div key={l.id} className="px-4 py-3 sm:px-5 sm:py-4">
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0 flex-1">
+                  <Link href={`/pijaca/${l.id}`} className="font-semibold text-kolo-text text-sm hover:text-kolo-green-700 transition-colors line-clamp-2">
+                    {l.title}
+                  </Link>
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 mt-1 text-xs">
+                    <span className="text-kolo-muted">{tPijaca(`kategorija_${kategorijaKljuc(l.category)}`)}</span>
+                    <span className="text-kolo-border">·</span>
+                    <span className="font-semibold text-kolo-green-700">{formatCenaGlavni(l, t("cena_po_dogovoru"))}{prikaziJedinicuCene(l) ? " POEN" : ""}</span>
+                    {l.status === "UKLONJEN" && (
+                      <span className="px-1.5 py-0.5 rounded-md font-medium bg-kolo-danger-light text-kolo-danger">{tPijaca("oglas_uklonjen")}</span>
+                    )}
+                    {tab === "arhiva" && l.status !== "UKLONJEN" && (
+                      <span className="text-kolo-muted">· {new Date(l.razmenjenoAt ?? l.createdAt).toLocaleDateString(intlTag(locale))}</span>
+                    )}
+                  </div>
+                  {/* Razlog uklanjanja — vlasnik mora da zna zašto (Uslovi čl. 25 st. 2). */}
+                  {l.status === "UKLONJEN" && l.uklonjenRazlog && (
+                    <div className="mt-1.5 text-xs text-kolo-danger">
+                      {tPijaca("oglas_uklonjen_razlog", { razlog: l.uklonjenRazlog })}
+                    </div>
                   )}
                 </div>
-                {/* Razlog uklanjanja — vlasnik mora da zna zašto (Uslovi čl. 25 st. 2). */}
-                {l.status === "UKLONJEN" && l.uklonjenRazlog && (
-                  <div className="mt-1.5 text-xs text-kolo-danger">
-                    {tPijaca("oglas_uklonjen_razlog", { razlog: l.uklonjenRazlog })}
-                  </div>
-                )}
-              </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <span className={`text-xs px-2 py-0.5 rounded-md font-medium ${statusBoja[l.status] ?? "bg-kolo-bg text-kolo-muted"}`}>
-                  {statusLabela[l.status] ?? l.status}
-                </span>
                 {l.status === "ACTIVE" && (
                   <button
-                    onClick={() => deaktiviraj(l.id)}
-                    disabled={deaktivacija === l.id}
-                    className="text-xs text-red-500 hover:text-kolo-danger transition-colors disabled:opacity-50"
+                    onClick={() => promeni(l.id, "deaktiviraj")}
+                    disabled={radim === l.id}
+                    className="shrink-0 whitespace-nowrap px-3 py-1.5 rounded-lg border border-kolo-border text-xs font-medium text-kolo-muted hover:text-kolo-text hover:border-kolo-text transition-colors disabled:opacity-50"
                   >
-                    {deaktivacija === l.id ? "..." : t("ukloni")}
+                    {radim === l.id ? "…" : t("arhiviraj")}
+                  </button>
+                )}
+                {MOZE_DA_SE_AKTIVIRA.has(l.status) && (
+                  <button
+                    onClick={() => promeni(l.id, "aktiviraj")}
+                    disabled={radim === l.id}
+                    className="shrink-0 whitespace-nowrap px-3 py-1.5 rounded-lg bg-kolo-green-700 text-xs font-semibold text-white hover:bg-kolo-green-900 transition-colors disabled:opacity-50"
+                  >
+                    {radim === l.id ? "…" : t("aktiviraj")}
                   </button>
                 )}
               </div>
+              {greske[l.id] && <p className="mt-1.5 text-xs text-kolo-danger">{greske[l.id]}</p>}
             </div>
           ))}
         </div>

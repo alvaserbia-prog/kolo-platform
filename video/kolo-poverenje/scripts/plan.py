@@ -12,8 +12,11 @@ CFG = {
     # UVOD: slika i muzika pre prvog glasa; PRE: koliko ranije kreće kadar; EXTRA: vazduh pre scene
     "v1": dict(UVOD=1.2, PRE={5: 0.8, 6: 0.9}, EXTRA={2: 0.3, 3: 0.3, 4: 0.45, 5: 0.7, 6: 0.8, 7: 0.6}, KRAJ=3.6),
     "v2": dict(UVOD=1.0, PRE={2: 0.5, 5: 0.6}, EXTRA={2: 0.4, 3: 0.35, 4: 0.45, 5: 0.6, 6: 0.6}, KRAJ=3.6),
-    "v3": dict(UVOD=1.5, PRE={2: 0.7, 4: 0.8}, EXTRA={2: 0.6, 3: 0.4, 4: 0.9, 5: 0.6, 6: 0.7}, KRAJ=3.8),
+    "v3": dict(UVOD=1.6, PRE={3: 0.5, 5: 0.5}, EXTRA={2: 0.3, 3: 0.4, 4: 0.3, 5: 0.5, 6: 0.6, 7: 0.6}, KRAJ=3.8, PREDNOST=1.0),
 }[V]
+# Tekst, natpisi i pokret idu PREDNOST s ispred izgovorene reči (odluka vlasnika 28.09.2026,
+# video/README.md); glas i muzika se ne pomeraju. Videi 1 i 2 su renderovani pre te odluke.
+PREDNOST_S = CFG.get("PREDNOST", 0.0)
 PRE_SCENE = 0.30
 
 t = json.load(open(f"src/{V}/timing.json"))
@@ -28,7 +31,7 @@ for i, s in enumerate(sc):
     a, b = rez[i], rez[i + 1]
     glasOd = pomak + a
     reci = [{"w": w["w"], "s": round(w["s"] - a, 3), "e": round(w["e"] - a, 3)} for w in s["reci"]]
-    od = 0.0 if i == 0 else glasOd + reci[0]["s"] - CFG["PRE"].get(s["id"], PRE_SCENE)
+    od = 0.0 if i == 0 else glasOd + reci[0]["s"] - CFG["PRE"].get(s["id"], PRE_SCENE) - PREDNOST_S
     scene.append({"id": s["id"], "klipOd": a, "klipDo": b, "glasOd": round(glasOd, 3),
                   "glasDo": round(glasOd + reci[-1]["e"], 3), "od": round(od, 3), "reci": reci, "tekst": s["tekst"]})
 KRAJ = round(scene[-1]["glasDo"] + CFG["KRAJ"], 2)
@@ -37,7 +40,7 @@ for i, s in enumerate(scene):
     s["odF"] = round(s["od"] * FPS)
     s["doF"] = round(s["do"] * FPS)
     s["glasOdF"] = round(s["glasOd"] * FPS)
-plan = {"fps": FPS, "trajanje": KRAJ, "frejmova": round(KRAJ * FPS), "scene": scene}
+plan = {"fps": FPS, "prednost": PREDNOST_S, "trajanje": KRAJ, "frejmova": round(KRAJ * FPS), "scene": scene}
 json.dump(plan, open(f"src/{V}/plan.json", "w"), ensure_ascii=False, indent=1)
 for s in scene:
     print(f"scena {s['id']}: {s['od']:6.2f}–{s['do']:6.2f} s ({s['do']-s['od']:.2f}), glas {s['glasOd']+s['reci'][0]['s']:6.2f}–{s['glasDo']:6.2f}")

@@ -6,9 +6,9 @@ v1 „Čiji si ti“: vedro od prvog kadra — frula, samica u kontri, bas i def
 v2 „Poznaješ li nekoga“ (naiva): harmonika. Scena 1 je pitanje (staccato koje ostane
    visiti), od „Nije problem“ vedra polka u C-duru; scena 5 kolo, brže i punije; kraj na „ekolo.rs“.
 v3 „Potvrda nosi odgovornost“: vedro i ritmično od prvog kadra — violina i harmonika u uglas,
-   samica, pizzicato bas, def; G-dur, 2/4 ~116 BPM. Priča kroz aranžman: šaljiv silazak na
-   „zamuti“, proređena scena 3 i stanka na „muti“, pun sastav oktavu više od „lično“; kraj na
-   „ekolo.rs“. (Prva verzija, spori gudači sa disonancama, bila je tužna.)
+   samica, pizzicato bas, def; G-dur, 2/4 ~116 BPM. Priča kroz aranžman: pitanje bez melodije,
+   proređena scena o zloupotrebi sa stankom pred „Zato nemoj“, pun sastav oktavu više od
+   „najbitnije“; kraj na „ekolo.rs“. (Prva verzija, spori gudači sa disonancama, bila je tužna.)
 Izlaz: audio/vN/muzika.wav
 """
 import sys
@@ -162,13 +162,15 @@ elif V == "v2":
 else:  # v3
     # Vedro i ritmično od prvog kadra (odluka vlasnika, 30.09.2026: prva verzija, spori gudači sa
     # disonancama, bila je tužna). G-dur, 2/4 ~116 BPM: violina i harmonika u uglas nose temu,
-    # samica na kontri, pizzicato bas, def sa praporcima. Priča se čuje kroz aranžman, ne kroz mol:
-    # na „zamuti“ kratak šaljiv silazak i takt bez melodije; scena 3 je proređena (bas, def, samica),
-    # na „muti“ sve stane na trenutak; na „lično“ ceo sastav se vraća oktavu više; kraj na „ekolo.rs“.
+    # samica na kontri, pizzicato bas, def sa praporcima. Priča se čuje kroz aranžman, ne kroz mol
+    # (tekst od 01.10.2026, principi potvrde): scena 1 je pitanje (ritam bez melodije, pizzicato
+    # se penje na „znači“); od odgovora tema; scena 5 (zloupotreba) proređena, šaljiv silazak na
+    # „zloupotrebi“ i stanka pred „Zato nemoj“; od „najbitnije“ pun sastav oktavu više; kraj na „ekolo.rs“.
     s = {i: SC[i]["od"] for i in SC}
-    t_zamuti = rec(SC, 1, "zamuti")
-    t_muti = rec(SC, 3, "muti")
-    t_licno = rec(SC, 4, "lično")
+    t_znaci = rec(SC, 1, "znači")
+    t_zlo = rec(SC, 5, "zloupotrebi")
+    t_zato = rec(SC, 5, "zato")
+    t_najb = rec(SC, 6, "najbitnije")
     t_kraj = kraj_glasa + 0.1
     TEMA = [
         ("G", [(0, .5, 79), (.5, .5, 83), (1, .5, 86), (1.5, .5, 83)]),
@@ -187,13 +189,13 @@ else:  # v3
     for i in range(n):
         tb = t0 + i * takt
         ak, mel = TEMA[i % 8]
-        uvod = i < 2
-        predah = t_zamuti + 0.25 <= tb < t_zamuti + 0.25 + takt  # takt posle „zamuti“: bez melodije
-        retko = s[3] - 0.2 <= tb < t_licno - 0.3                 # scena 3: bez melodije, tiše
-        stanka = t_muti - 0.15 <= tb < t_muti + 0.5              # „muti“: sve stane
+        uvod = tb < SC[2]["glasOd"] - 0.3                        # pitanje: ritam bez melodije
+        predah = t_zlo + 0.25 <= tb < t_zlo + 0.25 + takt        # takt posle „zloupotrebi“
+        retko = SC[5]["glasOd"] - 0.3 <= tb < t_najb - 0.6      # scena 5: bez melodije, tiše
+        stanka = t_zato - 0.6 <= tb < t_zato + 0.2               # pred „Zato nemoj“: sve stane
         if stanka:
             continue
-        pun = tb >= t_licno - 0.3
+        pun = tb >= t_najb - 0.6
         g = 0.72 if retko else (0.8 if not pun else 0.95)
         tr.dodaj(pizz(koren(ak, 38), 0.6), tb, 0.55 * g, -0.05)
         tr.dodaj(pizz(koren(ak, 38) + 7, 0.6), tb + takt / 2, 0.45 * g, -0.05)
@@ -209,14 +211,17 @@ else:  # v3
             dd = d * takt / 2
             tr.dodaj(gudalo(m + okt, dd * 0.8, rng, napad=0.025, pust=0.12, vib=0.6, sekcija=1), tb + b * takt / 2, 0.2 * g, 0.2)
             tr.dodaj(harmonika(m + okt - 12, dd * 0.75, rng, jezicci=(0,), sjaj=1.0), tb + b * takt / 2, 0.13 * g, 0.25)
-    # „zamuti“: šaljiv silazak pizzicata (pa takt bez melodije)
+    # „znači?“: pizzicato se penje kao pitanje
+    for k, m in enumerate([62, 67, 71, 76]):
+        tr.dodaj(pizz(m, 0.3), t_znaci + 0.05 + k * 0.1, 0.3, 0.2)
+    # „zloupotrebi“: šaljiv silazak pizzicata (pa takt bez melodije)
     for k, m in enumerate([74, 71, 67, 62, 55]):
-        tr.dodaj(pizz(m, 0.3), t_zamuti + 0.05 + k * 0.1, 0.3, 0.2)
-    # „muti“: posle stanke jedan dubok ton, pa ritam kreće dalje
-    tr.dodaj(pizz(43, 0.8), t_muti + 0.1, 0.55)
-    # „lično“: uzlet do punog sastava
+        tr.dodaj(pizz(m, 0.3), t_zlo + 0.05 + k * 0.1, 0.3, 0.2)
+    # „Zato nemoj“: posle stanke jedan dubok ton
+    tr.dodaj(pizz(43, 0.8), t_zato - 0.05, 0.55)
+    # „najbitnije“: uzlet do punog sastava
     for k, m in enumerate([67, 71, 74, 79, 83]):
-        tr.dodaj(harmonika(m, 0.12, rng, jezicci=(0,)), t_licno - 0.55 + k * 0.1, 0.2, 0.2)
+        tr.dodaj(harmonika(m, 0.12, rng, jezicci=(0,)), t_najb - 0.55 + k * 0.1, 0.2, 0.2)
     # kraj na „ekolo.rs“
     strum("G", t_kraj, 0.3, samica, dno=55, vrh=79)
     for m in (55, 67, 71, 74, 79):

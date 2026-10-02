@@ -21,8 +21,12 @@ type Stanje = "ucitavanje" | "nepodrzano" | "blokirano" | "ukljuceno" | "iskljuc
  * Dugme za uključivanje Web Push obaveštenja na ovom uređaju.
  * Registruje service worker, traži dozvolu i čuva/uklanja pretplatu na serveru.
  * Ako VAPID ključ nije konfigurisan (NEXT_PUBLIC_VAPID_PUBLIC_KEY), ne renderuje ništa.
+ *
+ * Dva izgleda, isto stanje: `meni` je red u padajućem meniju zvonca, `profil` je
+ * prekidač ispod email obaveštenja na profilu. Pretplata je po UREĐAJU, ne po
+ * nalogu — prekidač na profilu pokazuje stanje uređaja sa kog se gleda.
  */
-export default function PushObavestenja() {
+export default function PushObavestenja({ varijanta = "meni" }: { varijanta?: "meni" | "profil" }) {
   const t = useTranslations("push");
   const [stanje, setStanje] = useState<Stanje>("ucitavanje");
 
@@ -102,6 +106,8 @@ export default function PushObavestenja() {
   // Feature off ili učitavanje → ništa.
   if (!VAPID_PUBLIC_KEY || stanje === "ucitavanje") return null;
 
+  if (varijanta === "profil") return <PrekidacProfil stanje={stanje} ukljuci={ukljuci} iskljuci={iskljuci} />;
+
   if (stanje === "nepodrzano") {
     return <p className="text-[11px] text-kolo-muted leading-snug">{t("nepodrzano")}</p>;
   }
@@ -127,5 +133,50 @@ export default function PushObavestenja() {
         {stanje === "radim" ? "…" : ukljuceno ? t("ukljuceno") : t("ukljuci")}
       </span>
     </button>
+  );
+}
+
+/** Prekidač na profilu — isti izgled kao prekidač za email obaveštenja. */
+function PrekidacProfil({
+  stanje,
+  ukljuci,
+  iskljuci,
+}: {
+  stanje: Exclude<Stanje, "ucitavanje">;
+  ukljuci: () => void;
+  iskljuci: () => void;
+}) {
+  const t = useTranslations("push");
+  const ukljuceno = stanje === "ukljuceno";
+  const nedostupno = stanje === "nepodrzano" || stanje === "blokirano";
+  return (
+    <div className="flex justify-between items-center gap-4">
+      <div>
+        <p className="text-sm font-semibold text-kolo-text">{t("profil_toggle")}</p>
+        <p className="text-xs text-kolo-muted mt-0.5">
+          {stanje === "nepodrzano"
+            ? `${t("nepodrzano")} ${t("profil_ios")}`
+            : stanje === "blokirano"
+              ? t("blokirano")
+              : t("profil_napomena")}
+        </p>
+      </div>
+      <button
+        type="button"
+        onClick={ukljuceno ? iskljuci : ukljuci}
+        disabled={stanje === "radim" || nedostupno}
+        aria-label={ukljuceno ? t("ukljuceno") : t("iskljuceno")}
+        title={ukljuceno ? t("ukljuceno") : t("iskljuceno")}
+        className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus:outline-none disabled:opacity-60 ${
+          ukljuceno ? "bg-kolo-green-700" : "bg-kolo-border"
+        }`}
+      >
+        <span
+          className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform ${
+            ukljuceno ? "translate-x-6" : "translate-x-1"
+          }`}
+        />
+      </button>
+    </div>
   );
 }
