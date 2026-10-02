@@ -205,7 +205,7 @@ zapis. Reči kupi, prodaj, plati, zaradi, cena **ne idu uz POEN** (odluka vlasni
 smeju („platiš participaciju“, „cena tvoga rada“), uz POEN nikad („kupi za POEN“, „zaradi POEN“, „cena u POENIMA“).
 **Ušteda u dinarima sme i treba da se pokaže kao ishod korišćenja POEN-a** (odluka vlasnika, 29.09.2026): ono što
 dobiješ razmenom u KOLU ne moraš da pribaviš za dinare, i to je ušteda. Ušteda se iskazuje kao dinari koji su ostali
-kod tebe, nikad kao preračun POEN-a u dinare („1 POEN = 1 dinar uštede“, „vrednost tvojih POENA u dinarima“). Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
+kod tebe, nikad kao preračun POEN-a u dinare („1 POEN = 1 dinar uštede“, „vrednost tvojih POENA u dinarima“). U tekstovima (naracija, natpisi, opisi) se ne piše da se razmena dogovara direktno i da se Fondacija u to ne meša, i ne pominje se ograničenje broja oglasa za novog člana (odluke vlasnika, 02.10.2026; vidi `docs/drustvene-mreze-opisi.md`, odeljak 1). Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
 a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela „Pravna odbrana“, red „Iznos u oglasu“). Postupak izrade: README u folderu svakog videa.
 
 🔴 **Natpisi idu samo tamo gde imaju smisla, ne u svaku scenu** (odluka vlasnika, 30.09.2026). Titlovi po

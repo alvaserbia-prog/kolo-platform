@@ -30,6 +30,12 @@ većeg posla proveriti ih ponovo, naročito broj heštegova na Instagramu.
   („kad se priča o razmeni, najčešće se čuje…") je autentično; izmišljena anegdota nije.
 - **Obraćanje rodno neutralno gde god može** („šta iz tvoje kuće prvo ide na Pijacu?", ne
   „šta bi ponudio").
+- 🔴 **Ne piše se da se razmena dogovara direktno i da se Fondacija u to ne meša** (odluka vlasnika,
+  02.10.2026): ni „dogovarate se direktno“, ni „Fondacija ne posreduje“, ni „Fondacija se u to ne meša“.
+  Važi za sve nove opise; raniji opisi u ovom fajlu ostaju kakvi su objavljeni.
+- 🔴 **Ne pominje se ograničenje broja oglasa za novog člana** („do tri oglasa“, „tri stvari“) (odluka
+  vlasnika, 02.10.2026): nov član će moći da postavlja neograničeno oglasa, a akti i sajt se usklađuju
+  posebno. Do tada se piše samo da nov član odmah može da postavi oglas.
 
 ## 1a. Jezička provera pre isporuke: lektor i književnik (odluka vlasnika, 27.09.2026)
 
@@ -70,7 +76,7 @@ Opis je javni tekst Fondacije, pa za njega važe ista pravila kao za copy na saj
 |---|---|
 | „upisuje ti se POEN", „zapis o tvom doprinosu" | „zaradi POEN", „dobij POEN", „nagrada" |
 | „POEN nije novac i ne menja se za novac" | bilo kakvo poređenje POEN-a sa dinarom, „vredi", „vrednost" |
-| „razmenu dogovarate direktno, Fondacija ne posreduje" | da Fondacija prodaje, garantuje ili odgovara za razmenu |
+| „ponudiš ono što imaš, komšija te pronađe" | da Fondacija prodaje, garantuje ili odgovara za razmenu; od 02.10.2026 ni „dogovarate direktno, Fondacija ne posreduje“ (odeljak 1) |
 | „nalog potvrđuju ljudi koji te lično poznaju, bez dokumenata" | „verifikacija", „lična karta se traži" |
 | „razmena", „ponudi" | „kupi", „prodaj", „besplatno" |
 | ono što je stvarno u radu (Pijaca, potvrde, POEN) | Krugove, glasanje, Gornje Kolo, ZRNO kao prinos (nisu u radu ili su osetljivi) |
@@ -725,7 +731,8 @@ neko pravi dobar pekmez, a neko zna da sredi utičnicu, pa retko znaju jedno za 
 dinari koji ostanu kod kuće; Facebook, subotnja somborska pijaca kao mesto gde se sazna ko šta ima.
 Primeri su novi (domaći sir, šivenje, pomoć oko računara), ne oni iz videa. Na Facebook-u je
 objašnjena oznaka „bez potvrde“ i savet da se prvi put nađe uživo. Nijedna rečenica nije iz
-naracije ni iz ranijih opisa.
+naracije ni iz ranijih opisa. Ispravljeno 02.10.2026 po odluci vlasnika: izbačeno „dogovarate se
+direktno, Fondacija se u to ne meša“ i „do tri stvari“ (vidi odeljak 1).
 Jezička provera (lektor i književnik): navodnici „…“, bez crtica i nabrajanja; „kupuješ“ samo uz
 dinare, nikad uz POEN; rodno neutralno („ko se tek učlani“, „na takvom oglasu“); „vi“ dosledno na
 Facebook-u; bez „se“ konstrukcija gde može („tu saznate“); duga rečenica o razmeni podeljena na dve.
@@ -735,11 +742,11 @@ Facebook-u; bez „se“ konstrukcija gde može („tu saznate“); duga rečeni
 ```
 U skoro svakoj ulici živi neko ko pravi pekmez kakav nema u prodavnici i neko ko za pola sata sredi utičnicu. Retko znaju jedno za drugo. 🫙
 
-Pijaca na KOLU služi baš tome. Ponudiš ono što imaš u višku ili ono što znaš da radiš, a komšija iz tvog mesta te pronađe kad mu zatreba. Dogovarate se direktno, Fondacija se u to ne meša.
+Pijaca na KOLU služi baš tome. Ponudiš ono što imaš u višku ili ono što znaš da radiš, a komšija iz tvog mesta te pronađe kad mu zatreba.
 
 Kad nekome nešto daš, on ti prepiše POEN. To je zapis o tvom doprinosu, nije novac i ne menja se za novac.
 
-Oglase vidi svako, i bez naloga. Ko se tek učlani, odmah može da ponudi do tri stvari.
+Oglase vidi svako, i bez naloga. Ko se tek učlani, odmah može da postavi oglas.
 
 👉 Pogledaj šta se nudi u tvom mestu, link je u profilu
 
@@ -751,7 +758,7 @@ Oglase vidi svako, i bez naloga. Ko se tek učlani, odmah može da ponudi do tri
 ```
 Dinari koje ne potrošiš na pekmez ostaju za nešto drugo. 🫙
 
-Na Pijaci KOLA komšije nude jedni drugima ono što imaju i ono što znaju: domaći sir, šivenje, pomoć oko računara. Razmenu dogovarate direktno.
+Na Pijaci KOLA komšije nude jedni drugima ono što imaju i ono što znaju: domaći sir, šivenje, pomoć oko računara.
 
 Za ono što daš, komšija ti prepiše POEN. To je zapis o doprinosu, a ne novac.
 
@@ -765,9 +772,9 @@ Na svakom oglasu piše odakle je, pa lako nađeš nekoga iz svog mesta. Link je 
 ```
 Subotom pre podne sa somborske pijace ljudi ne nose kući samo povrće. Tu saznate ko šta ima, ko zna da popravi bojler i kome treba pomoć. 🧺
 
-Pijaca na KOLU radi isto, samo preko interneta i bez dinara. Članovi nude jedni drugima ono što imaju u višku i ono što znaju da rade, od domaćeg sira do šivenja. Razmenu dogovarate direktno sa komšijom. KOLO Fondacija u tome ne posreduje.
+Pijaca na KOLU radi isto, samo preko interneta i bez dinara. Članovi nude jedni drugima ono što imaju u višku i ono što znaju da rade, od domaćeg sira do šivenja.
 
-Oglase može da vidi svako, i bez prijave. Ko se tek učlani, odmah može da ponudi do tri stvari. Na takvom oglasu stoji oznaka „bez potvrde“, dok ga ne potvrdi neko od članova ko ga lično poznaje. Zato je dobro da se prvi put nađete uživo.
+Oglase može da vidi svako, i bez prijave. Ko se tek učlani, odmah može da postavi oglas. Na takvom oglasu stoji oznaka „bez potvrde“, dok ga ne potvrdi neko od članova ko ga lično poznaje. Zato je dobro da se prvi put nađete uživo.
 
 Za ono što date, komšija vam prepiše POEN. POEN nije novac i ne menja se za novac, on beleži vaš doprinos.
 
