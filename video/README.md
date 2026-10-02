@@ -24,7 +24,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 10 | Bunar koji kopamo zajedno | K | `kolo-bunar/` | ✅ |
 | 11 | KOLO raste sa nama | K | `kolo-raste/` | ✅ |
 | 12 | Pijaca | K | `kolo-pijaca/` | ✅ |
-| 13 | Ušteda (Zoran, električar) | K | `kolo-usteda/` | naracija snimljena, izrada nije počela |
+| 13 | Ušteda (Zoran, električar) | K | `kolo-usteda/` | ✅ |
 | 14 | Bez posrednika (scenario u pregledu) | K |  |  |
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
 | 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | tekst gotov, izrada nije počela |

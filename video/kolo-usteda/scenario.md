@@ -9,7 +9,7 @@ Poenta: **više radi, više dobija, više dinara mu ostaje.**
 
 **Stanje:** prošao pregled stalne ekipe i deset stručnjaka; izmene po odluci vlasnika (30.09.2026):
 natpisi samo u svetu priče, iznosi 5–10–20 hiljada mesečno umesto pola plate, šunka sa salaša, spojene
-scene mora i poente, skraćena montaža meseci. Skraćeno na 9 scena, nabrajanja posle scene 2 su pečati (01.10.2026). **Naracija snimljena (My_recording_65, 02.10.2026)**; scenario prati izgovoreno. Format 1080×1920, titlovi po
+scene mora i poente, skraćena montaža meseci. Skraćeno na 9 scena, nabrajanja posle scene 2 su pečati (01.10.2026). **Naracija snimljena (My_recording_65 + umetak iz 66, varijanta A), video gotov: `out/kolo-usteda.mp4` (83,4 s, 02.10.2026)**; postupak u `README.md`. Format 1080×1920, titlovi po
 rečima (izgovorena reč zelena), naracija vlasnika, vedra tamburaška muzika, −14 LUFS. Procena trajanja: ~60 s.
 
 Stil: **kariran list iz kućne sveske** (papirni kolaž na papiru sveske). Nosiva slika je Zoranova sveska:
@@ -83,9 +83,10 @@ Tekst ispod je ono što je izgovoreno; titlovi i naracija u tabeli prate njega. 
 - ~49–~59 s: dva prekinuta pokušaja „Javili su se ljudi kojima je majstor trebao, a…“ izbacuju se; ostaje treći.
 - ~93,5–~107 s: „Za šest meseci uštedeo je da…“ i „Za šest meseci uštedeo je dovoljno.“ izbacuju se; ostaje
   poslednji, ceo izgovor sa „i cela porodica ide na more“.
-- Scena 4 se **dosnimava cela, iz jednog daha** (odluka vlasnika, 02.10.2026), sa tekstom iz tabele: „Javili su se
-  ljudi kojima je majstor trebao. Za taj posao prepisali su mu POENE, i dobili su ono što im je trebalo, bez
-  dinara.“ Dosnimak zamenjuje scenu 4 iz My_recording_65 (~43–64 s posle „…posle posla.“).
+- Scena 4: dosnimljena u autu (My_recording_66). Izabrana **varijanta A** (odluka vlasnika, 02.10.2026): početak
+  scene 4 ostaje iz snimka 65 („Javili su se ljudi kojima je majstor trebao. Za taj posao prepisali su mu POENE“),
+  a iz snimka 66 se uzima samo „i dobili su ono što im je trebalo, bez dinara“, izjednačeno po boji i jačini
+  (`scripts/spoj.py`).
 
 ## c) Pregled (stalna ekipa i deset stručnjaka, 30.09.2026) i odluke vlasnika
 
