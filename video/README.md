@@ -244,6 +244,9 @@ zanimaju samo onoga ko KOLO već zna. Za svaki naredni scenario:
   komšiluk, alat koji stoji); logo i ime KOLA ne idu na početak.
 - Priča se razume **bez znanja o KOLU**; KOLO se pojavljuje tek na kraju, kao rešenje.
 - Prednost imaju **serije sa stalnim likovima** („Priče iz komšiluka“), da gledalac ima razlog da zaprati.
+- 🟢 **Primer ne mora da ima imenovan lik** (odluka vlasnika, 02.10.2026). Kuka i primer mogu da budu
+  i apstraktni: pitanje, princip, poznata situacija bez imena („Ko krade iz zajedničke kase?“), ili šta god
+  najbolje drži pažnju. Lik se uvodi kad pomaže priči, ne zato što mora; stalni likovi ostaju mogućnost, ne obaveza.
 - Kraj nosi **jedno pitanje gledaocu** za komentar (npr. „Šta tebi trune u ostavi svake jeseni?“) ili
   jedan poziv; ne oba.
 
