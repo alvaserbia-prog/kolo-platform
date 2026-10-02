@@ -1,75 +1,69 @@
-# KOLO video 19 — Šta piše pored tvog imena (pseudonim i otvoren zapis)
+# KOLO video 21 — Svi vide tvoj zapis. A ko zna ko si? (pseudonim)
 
-Drugi video bloka o transparentnosti i privatnosti; ide posle videa 18 „Gde ide novac za
-stepenište?“ (transparentnost). Tekst je prošao ekipu od četiri uloge (30.09.2026); **izbore bira
-vlasnik** (u uglastim zagradama).
+Četvrti video bloka o transparentnosti i privatnosti (18 upravljanje → 19 potrošnja → 20 razmena →
+21 pseudonim). Odgovara na pitanje iz videa 20: ako su svi prepisi otvoreni, šta je sa mojim imenom?
+Tekst je prošao ekipu od četiri uloge (02.10.2026); **izbore bira vlasnik** (u uglastim zagradama).
 
-🟡 **Čeka preradu** (02.10.2026): (1) rečenice 8–9 o otvorenom zapisu sada nosi video 18, pa ovde
-ostaje jedna rečenica koja na njega upućuje; (2) po pravilu „Prvo problem iz života, KOLO tek na
-kraju“ kuka treba da bude lik i pitanje iz svakodnevice, ne rečenica o KOLU.
+**Poruka:** privatnost koju smo dali za otvoren zapis čuva pseudonim. Svako vidi zapis, ali ne zna
+ko stoji iza pseudonima, osim ako te poznaje. Ime i prezime pokažeš samo ako ti to izabereš.
 
-**Poruka:** u KOLU tvoje ime ne piše, piše pseudonim. Ko si, znaju ljudi sa kojima se vidiš;
-nekome iz drugog grada pseudonim ništa ne govori. Zapis je otvoren: svaki potvrđen član može da
-proveri ko je kome koliko POENA prepisao.
-
-**Likovi:** Pera stolar iz Bezdana (pseudonim `stolar.iz.bezdana`), komšinica Ruža, čovek iz Niša.
+**Likovi:** Zoran (pseudonim `struja55`), Vesna, čovek iz Niša.
 
 ## Tekst za snimanje
 
-1. Pored tvog imena u KOLU ne piše ništa. [Jer tvoje ime u KOLU nigde ne piše. | Tvoje ime u KOLU nigde ne piše.]
-2. Kad se registruješ, izabereš pseudonim. To je ime koje sam smisliš, na primer „stolar iz Bezdana“.
-3. Pod tim pseudonimom postavljaš oglase. Pod njim se zapisuje svaki POEN koji ti neko prepiše i koji ti prepišeš nekome.
-4. Ime, prezime i broj telefona ne moraš nigde da upišeš. [Ako ih upišeš, sam biraš ko može da ih vidi. | —]
-5. Ko onda zna ko si? Znaju ljudi sa kojima se vidiš. Komšinica Ruža, kojoj si popravio stolicu, zna da je „stolar iz Bezdana“ Pera iz njene ulice.
-6. Čovek iz Niša vidi samo pseudonim. [Njemu to ime ništa ne govori o tebi. | On ne zna ko si, i ne treba da zna.]
-7. U KOLU ne postoji spisak na kom piše koji pseudonim pripada kom čoveku. [Nema ga ni Fondacija. | —]
-8. A sam zapis je otvoren. Svaki potvrđen član može da vidi svaki prepis: ko je kome prepisao POEN, koliko i kada.
-9. Tako niko ne može da upiše POEN a da se to ne vidi. Svako od nas može da proveri da li zapis valja.
-10. Ko si, znaju oni koje poznaješ. Šta je zapisano, može da vidi svako ko je potvrđen.
-11. Registruj se na ekolo.rs i izaberi svoj pseudonim.
+1. Svi vide tvoj zapis. A čovek iz Niša ne zna ko si.
+2. U prošlom videu smo rekli: svaki prepis POEN-a je otvoren. I tvoj.
+3. Ali pored zapisa ne piše tvoje ime. Piše pseudonim. To je ime koje sam izabereš kad se registruješ.
+4. Zoran je izabrao „struja pedeset pet“. Pod tim imenom postavlja oglase, i pod njim se zapisuje svaki POEN koji mu neko prepiše i koji on prepiše nekome.
+5. Ko zna da je „struja pedeset pet“ Zoran? Vesna zna, jer joj je popravio utičnicu. Zna i onaj ko ga je potvrdio, jer ga poznaje.
+6. Čovek iz Niša vidi samo „struja pedeset pet“. Ne zna Zoranovo ime, ne zna u kojoj ulici živi i ne može da ga nađe.
+7. U KOLU ne postoji spisak na kome piše koji pseudonim pripada kom čoveku.
+8. Ime, prezime i telefon ne moraš nigde da upišeš. [Ako ih upišeš, sam biraš ko može da ih vidi. | —]
+9. Tako je zapis otvoren, a ti si poznat samo onima koji te i inače poznaju.
+10. Registruj se na ekolo.rs i izaberi svoj pseudonim.
 
-## Natpisi (razume se bez zvuka)
+## Scenario
 
-- sc. 1: TVOJE IME NE PIŠE
-- sc. 2: PSEUDONIM: ime koje sam izabereš
-- sc. 5: ZNAJU TE LJUDI SA KOJIMA SE VIDIŠ
-- sc. 8: ZAPIS JE OTVOREN
-- sc. 11: ekolo.rs
+| Sc. | Slika (tekst koji je deo slike je u navodnicima) |
+|---|---|
+| 1 | podeljen ekran: levo Zoran u Somboru sa telefonom, desno čovek u Nišu sa telefonom; na oba ekrana isti red zapisa. Kuka kao natpis: „Svi vide tvoj zapis. A ko zna ko si?“ |
+| 2 | zapis prepisa iz videa 20, redovi teku |
+| 3 | Zoran pri registraciji kuca u polje „Pseudonim“ |
+| 4 | Zoranov oglas „Popravka utičnica i prekidača · struja55“; red u zapisu „struja55 · +300 POEN“ |
+| 5 | Vesnina kuhinja, Zoran zavrće utičnicu; Vesna gleda telefon i smeje se: „Pa to si ti!“ |
+| 6 | čovek u Nišu skroluje; red „struja55“ prolazi pored mnogih drugih pseudonima |
+| 7 | prazna tabela sa zaglavljem „pseudonim · ime i prezime“, bez redova |
+| 8 | Zoranov profil: polja „Ime“ i „Telefon“ prazna, pored svakog izbor vidljivosti |
+| 9 | ponovo podeljen ekran iz sc. 1: levo Vesna i Zoran se pozdravljaju, desno čovek iz Niša gasi telefon |
+| 10 | završna kartica ekolo.rs |
 
-## Šta se vidi
-
-- sc. 1: sveska iz videa 17, red „Pera Petrović“ se briše, na njegovom mestu ostaje prazno.
-- sc. 2–3: Pera kuca pseudonim; u svesci se pojavljuje red „stolar.iz.bezdana · +300 POEN“.
-- sc. 5: Ruža i Pera na kapiji, stolica među njima; iznad Pere natpis sa pseudonimom.
-- sc. 6: čovek u Nišu gleda telefon; na ekranu samo pseudonim, bez lica.
-- sc. 8–9: sveska otvorena pred više ljudi; redovi „ko · kome · koliko · kada“.
-
-## Pregled ekipe (30.09.2026)
+## Pregled ekipe (02.10.2026)
 
 | Sc. | Uloga | Nalaz | Predlog |
 |---|---|---|---|
-| 1 | Dramaturg | kuka mora da odgovori na najavu iz videa 17 i da iznenadi | „Pored tvog imena ne piše ništa“ — odgovor koji gledalac ne očekuje |
-| 2 | Gledalac | „pseudonim“ penzioneru nije poznata reč | objasniti odmah u istoj rečenici: „ime koje sam smisliš“ |
-| 2 | Pisac | tačke i donje crte iz pseudonima se ne izgovaraju | naglas „stolar iz Bezdana“, na ekranu `stolar.iz.bezdana` |
-| 4 | Dramaturg | druga rečenica uvodi vidljivost polja, što je tema videa 38 | izbor: zadržati kao jednu rečenicu ili izostaviti |
-| 5 | Pisac | ovo je rečenica na kojoj video stoji; mora da ima konkretnog čoveka | Ruža, stolica, ista ulica |
-| 7 | Gledalac | „ni Fondacija“ odgovara na pitanje koje bi postavio | izbor: zadržati ili ostaviti samo prvu rečenicu |
-| 8 | Gledalac | „potvrđen član“ je poznat iz trilogije „Poverenje“ (7–9) | bez objašnjenja |
-| 9 | Dramaturg | poenta transparentnosti je korist, ne pravilo | „niko ne može da upiše POEN a da se to ne vidi“ |
-| 10 | Urednik za mreže | zaključak od dve rečenice ponavlja obe poruke | zadržati, kratko |
-| 11 | Urednik za mreže | jedan poziv | „registruj se i izaberi pseudonim“ |
+| 1 | Dramaturg | kuka deluje kao protivrečnost (svi vide, a ne zna se ko si), pa gledalac ostaje da čuje odgovor | zadržati |
+| 3 | Gledalac | „pseudonim“ penzioneru nije poznata reč | objasniti u istoj rečenici: „ime koje sam izabereš“ |
+| 4 | Pisac | brojevi u pseudonimu se izgovaraju | naglas „struja pedeset pet“, na ekranu `struja55` |
+| 4 | Gledalac | pseudonim ne mora da sadrži pravo ime; to je i pouka | „struja55“, ne „zoran.elektricar“ |
+| 5 | Dramaturg | ovde stoji vlasnikova misao: znaju te oni koji te poznaju i oni koji su te potvrdili | Vesna i utičnica, onaj ko ga je potvrdio |
+| 6 | Pisac | „ne može da ga nađe“ je ono što gledalac želi da čuje | zadržati |
+| 8 | Dramaturg | vidljivost polja je tema videa „Šta KOLO zna o tebi“ | izbor: zadržati kao jednu rečenicu ili izostaviti |
+| 10 | Urednik za mreže | jedan poziv | zadržati |
 
 ## Ograde
 
-- **Pseudonim nije anonimnost** (Pravilnik čl. 61). Zato sc. 5 kaže da te znaju ljudi sa kojima se
-  vidiš; ne pisati „niko ne zna ko si“ ni „anonimno“.
-- **Sc. 7 prati Pravilnik čl. 61** („ne postoji centralizovana tabela koja povezuje pseudonime sa
-  ličnim identitetima“). Ne tvrditi da Fondacija „ne zna ništa o tebi“: adresa e-pošte postoji, a
-  minimum podataka je tema videa 38 „Šta KOLO zna o tebi“.
-- **Sc. 8 kaže „svaki potvrđen član“, ne „svako“**: pseudonimna evidencija dostupna je potvrđenim
-  članovima, a posetilac i nov član vide ukupne brojeve (Pravilnik čl. 67, čl. 28). Pseudonim
-  oglašivača na Pijaci vidi svako (čl. 16), zato sc. 6 sme da kaže da čovek iz Niša vidi pseudonim.
-- Ne pominjati lanac potvrda kao javan: graf verifikacija nije deo otvorenog zapisa (čl. 67 st. 3).
-- „Zbir je uvek nula“ ostaje videu 40; ovde se transparentnost pokazuje samo kroz proveru prepisa.
-- Uz POEN ne idu reči kupi, prodaj, plati, zaradi, cena (`video/README.md`).
+- **Pseudonim nije anonimnost** (Pravilnik čl. 61): ne pisati „niko ne zna ko si“ ni „anonimno“.
+  Sc. 5 kaže ko te zna.
+- **Javna donacija:** ko donira javno, uz donaciju stoje njegovo ime i prezime u listi donacija
+  (Pravilnik o pokroviteljstvu i donacijama, čl. 5a). Video to ne pominje, ali zato sc. 9 kaže
+  „ti si poznat samo onima koji te poznaju“, a ne „tvoje ime niko ne može da vidi“. Ako vlasnik
+  želi, rečenica 8 može da dobije nastavak: „Isto važi kad doniraš javno: tada ti biraš da se tvoje
+  ime vidi.“
+- Sc. 7 prati Pravilnik čl. 61 („ne postoji centralizovana tabela koja povezuje pseudonime sa ličnim
+  identitetima“). Ne tvrditi da Fondacija „ne zna ništa o tebi“: adresa e-pošte postoji, a minimum
+  podataka je tema videa „Šta KOLO zna o tebi“.
+- Sc. 6: pseudonim oglašivača na Pijaci vidi svako (čl. 16), zato čovek iz Niša sme da vidi
+  pseudonim. Lanac potvrda nije javan (čl. 67 st. 3): sc. 5 kaže samo da onaj ko je potvrdio Zorana
+  njega poznaje.
+- Uz POEN ne idu kupi, prodaj, plati, zaradi, cena.
 - Pseudonim u primeru je izmišljen; ne koristiti pseudonime iz baze.
