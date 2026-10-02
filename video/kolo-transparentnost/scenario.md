@@ -18,16 +18,16 @@ videa 19; ovde je u središtu **sveska**, ne novac.
 - gore, krupno: **KO KRADE IZ ZAJEDNIČKE KASE?**
 - dole, sitnije: **Kako da upravljanje bude transparentno**
 
-## Tekst za snimanje (verzija vlasnika, 02.10.2026)
+## Tekst za snimanje (verzija vlasnika, 02.10.2026, sa ispravkama ekipe koje je vlasnik prihvatio)
 
 1. Ko krade iz zajedničke kase? Možda niko. Ali kako to da znaš?
 2. Čika Đura je godinama vodio kasu u našoj zgradi. Sve što bi se uplatilo i potrošilo, upisivao je u svoju svesku.
-3. Đura je bio pošten čovek. Ali sveska je stajala kod njega, i niko drugi nije imao uvid.
-4. Jedni verovali, a drugi sumnjali. I Đura je stalno morao da se pravda.
-5. Jednog dana okačio je svesku na tablu u ulazu. Ko god bi prošao, mogao je da vidi šta je upisano. Svaki stanar je mogao sam da svaki dinar proveri.
-6. To je transparentnost upravljanja: ono što upravitelj zapisuje, svi mogu da vide. Najvažnije je da svi vide da onaj ko upravlja ne uzima za sebe.
-7. KOLO je primer takvog sistema. Svaki POEN koji se upiše je vidljiv svima na platformi, i članovi mogu sami da provere da li postoji zloupotreba.
-8. Transparentnost je ono što želimo od sistema.
+3. Đura je bio pošten čovek. Ali sveska je stajala kod njega, i niko drugi nije mogao da je pogleda.
+4. Jedni su verovali, a drugi sumnjali. I Đura je stalno morao da se pravda.
+5. Jednog dana okačio je svesku na tablu u ulazu. Ko god bi prošao, mogao je da vidi šta je upisano. Svaki stanar je mogao sam da proveri svaki dinar. I Đura više nije morao da se pravda.
+6. Đurina sveska je evidencija. Kad je evidencija otvorena, svi vide da onaj ko upravlja ne uzima za sebe. To je transparentnost upravljanja.
+7. KOLO je primer takvog sistema. Vodi ga Fondacija, a svaki POEN koji se upiše vidljiv je svima na platformi, i članovi mogu sami da provere da li postoji zloupotreba.
+8. Ne moraš da veruješ na reč. Možeš sam da proveriš.
 9. Registruj se na ekolo.rs.
 
 ## Scenario
@@ -39,9 +39,9 @@ videa 19; ovde je u središtu **sveska**, ne novac.
 | 3 | sveska u Đurinoj fioci; fioka se zatvara |
 | 4 | stanari u ulazu šapuću i gledaju za Đurom; Đura oborene glave |
 | 5 | Đura pribada otvorenu svesku na tablu u ulazu: „uplate · troškovi · datum“; stanari usput zastaju, prelaze prstom preko redova |
-| 6 | Đura pred tablom, uspravljen, sa osmehom; jedan stanar ga pozdravlja |
+| 6 | Đura pred tablom, uspravljen, sa osmehom; jedan stanar ga pozdravlja; na tabli iznad sveske natpis „EVIDENCIJA“ |
 | 7 | ekran telefona: stranica Sistem; ruka skroluje kroz zapise POEN-a |
-| 8 | tabla iz ulaza i ekran telefona jedno pored drugog |
+| 8 | tabla iz ulaza i ekran telefona jedno pored drugog; kasica sa početka, sada pored otvorene sveske |
 | 9 | završna kartica ekolo.rs |
 
 Muzika: vojvođanska tamburica, vedro; na sc. 1 kratka stanka posle pitanja, pa ulazak ritma.
