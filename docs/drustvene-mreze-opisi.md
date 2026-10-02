@@ -732,7 +732,7 @@ dinari koji ostanu kod kuće; Facebook, subotnja somborska pijaca kao mesto gde 
 Primeri su novi (domaći sir, šivenje, pomoć oko računara), ne oni iz videa. Na Facebook-u je
 objašnjena oznaka „bez potvrde“ i savet da se prvi put nađe uživo. Nijedna rečenica nije iz
 naracije ni iz ranijih opisa. Ispravljeno 02.10.2026 po odluci vlasnika: izbačeno „dogovarate se
-direktno, Fondacija se u to ne meša“ i „do tri stvari“ (vidi odeljak 1).
+direktno, Fondacija se u to ne meša“ i „do tri stvari“ (vidi odeljak 1). Facebook ispravljen bez prenesenog značenja („ne nose kući samo povrće“).
 Jezička provera (lektor i književnik): navodnici „…“, bez crtica i nabrajanja; „kupuješ“ samo uz
 dinare, nikad uz POEN; rodno neutralno („ko se tek učlani“, „na takvom oglasu“); „vi“ dosledno na
 Facebook-u; bez „se“ konstrukcija gde može („tu saznate“); duga rečenica o razmeni podeljena na dve.
@@ -770,9 +770,9 @@ Na svakom oglasu piše odakle je, pa lako nađeš nekoga iz svog mesta. Link je 
 ### Facebook
 
 ```
-Subotom pre podne sa somborske pijace ljudi ne nose kući samo povrće. Tu saznate ko šta ima, ko zna da popravi bojler i kome treba pomoć. 🧺
+Na somborskoj pijaci subotom pre podne ljudi kupuju povrće, ali i razgovaraju. Tako saznate ko šta ima, ko zna da popravi bojler i kome treba pomoć. 🧺
 
-Pijaca na KOLU radi isto, samo preko interneta i bez dinara. Članovi nude jedni drugima ono što imaju u višku i ono što znaju da rade, od domaćeg sira do šivenja.
+Pijaca na KOLU je slična, samo je na internetu i razmenjuje se bez dinara. Članovi nude jedni drugima ono što imaju u višku i ono što znaju da rade, od domaćeg sira do šivenja.
 
 Oglase može da vidi svako, i bez prijave. Ko se tek učlani, odmah može da postavi oglas. Na takvom oglasu stoji oznaka „bez potvrde“, dok ga ne potvrdi neko od članova ko ga lično poznaje. Zato je dobro da se prvi put nađete uživo.
 
