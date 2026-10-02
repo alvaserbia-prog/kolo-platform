@@ -30,7 +30,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | tekst gotov, izrada nije počela |
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | tekst gotov, izrada nije počela |
 | 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
-| 18 | Ko krade iz zajedničke kase? (transparentnost upravljanja) | K | `kolo-transparentnost/` | tekst u pregledu (izbori vlasnika) |
+| 18 | Ko krade iz zajedničke kase? / Kako da upravljanje bude transparentno | K | `kolo-transparentnost/` | tekst u pregledu (izbori vlasnika) |
 | 19 | Gde je park? (transparentnost potrošnje: dinari) | K | `kolo-transparentnost-potrosnje/` | tekst u pregledu (izbori vlasnika) |
 | 20 | Da li pravila važe i za one koji ih pišu? (transparentnost razmene: POEN) | K | `kolo-transparentnost-razmene/` | tekst u pregledu (izbori vlasnika) |
 | 21 | Svi vide tvoj zapis. A ko zna ko si? (pseudonim) | K | `kolo-pseudonim/` | tekst u pregledu (izbori vlasnika) |
