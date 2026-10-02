@@ -3,9 +3,9 @@
 Podaci koji se ponavljaju u zahtevima bankama, pružaocima usluga i institucijama.
 Izvor: rešenje APR o registraciji (BZF 406/2026) i dokumentacija OTP banke.
 
-🔴 **Ovde NE upisivati JMBG ni lične podatke članova UO i upravitelja** (JMBG, lične
-telefone, kućne adrese). Repozitorijum nije mesto za njih — upisuju se ručno, u
-trenutku popunjavanja obrasca.
+🔴 **Lični podaci upravitelja su ovde upisani po izričitoj odluci vlasnika (02.10.2026),
+uprkos tome što je repozitorijum javan.** JMBG-ovi i lični podaci članova UO se
+**ne upisuju** — to su podaci trećih lica, bez njihove saglasnosti.
 
 ## Pravno lice
 
@@ -36,6 +36,16 @@ uzajamne pomoći; socijalna zaštita i solidarna podrška ranjivim grupama; eduk
 | Upravitelj — ovlašćeno lice za zastupanje | Nikola Šarić |
 | Predsednik Upravnog odbora | Jelena Stijepović |
 | Članovi Upravnog odbora | Stefan Milijanović, Danijel Tomasović |
+
+**Upravitelj — lični podaci (za obrasce):**
+
+| Podatak | Vrednost |
+|---|---|
+| Ime i prezime | Nikola Šarić |
+| JMBG | 2907984800056 |
+| Adresa (APR, kao osnivač) | Ivana Gorana Kovačića 1, Sombor |
+| Telefon | 064 245 3710 |
+| E-mail | alva.serbia@gmail.com |
 
 🟡 U APR-u je Nikola Šarić upisan kao **upravitelj**, ne kao direktor — u obrascima
 koje banka proverava u APR-u pisati „upravitelj“.
