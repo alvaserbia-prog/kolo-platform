@@ -1,17 +1,23 @@
-"""Muzika videa 13 „Ušteda“: Suno numera vlasnika „Sombor veče“ (audio/suno/sombor-vece.mp3, 02.10.2026).
-Prim i berde, instrumental, ~97 BPM, 2/4. Upotreba: python3 scripts/muzika_suno.py
+"""Muzika videa 13 „Ušteda“: Suno numera vlasnika (audio/suno/), izbor promenljivom NUMERA.
+Upotreba: python3 scripts/muzika_suno.py
 
-Numera (137,6 s) je duža od videa, pa se iz sredine izbacuje deo dug ceo broj taktova (44 takta, 54,56 s;
-dužina potvrđena poklapanjem harmonije i udaraca sa obe strane reza). Rez je na udarcu, pa ritam ne
+„Sretno kolo“ (02.10.2026, važeća): prim i berde, instrumental, ~116 BPM, 2/4, 134,8 s; izbacuje se 50 taktova.
+„Sombor veče“ (prva, ~97 BPM): vlasniku i stručnjacima prespora; izbacivala se 44 takta.
+Numera je duža od videa, pa se iz sredine izbacuje deo dug ceo broj taktova (dužina potvrđena poklapanjem
+harmonije i udaraca sa obe strane reza). Rez je na udarcu, pa ritam ne
 preskače; poslednji udarac numere pada odmah posle „ekolo.rs“, nikad preko njega (video/README.md).
 Izlaz: audio/v1/muzika.wav, 48 kHz stereo, dužine videa.
 """
 import json, subprocess
 import numpy as np, soundfile as sf
 
-FAJL = "audio/suno/sombor-vece.mp3"
-A, B = 57.74, 112.30      # udarci: poslednji pre reza i prvi posle (B - A = 44 takta)
-KRAJ_U_NUMERI = 135.40    # završni udarac numere
+import os
+# fajl, udarac pre reza, udarac posle reza, završni udarac numere
+NUMERE = {
+    "sretno-kolo": ("audio/suno/sretno-kolo.mp3", 35.11, 86.66, 133.12),   # 50 taktova
+    "sombor-vece": ("audio/suno/sombor-vece.mp3", 57.74, 112.30, 135.40),  # 44 takta
+}
+FAJL, A, B, KRAJ_U_NUMERI = NUMERE[os.environ.get("NUMERA", "sretno-kolo")]
 PRED = 0.02               # rez malo pre udarca
 plan = json.load(open("src/v1/plan.json"))
 T = plan["trajanje"]

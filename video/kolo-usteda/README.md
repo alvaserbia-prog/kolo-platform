@@ -11,11 +11,11 @@ Posebnih natpisa nema (pravilo „Natpisi“ u `video/README.md`): tekst na ekra
 telefonu, zapis u knjizi evidencije („Komšinica → Zoran“, bez iznosa) i završna kartica. POEN se ne crta kao
 novčić; novčanice su samo dinari, stilizovane (pravougaonik sa „din“).
 
-**Muzika:** „Sombor veče“, numera koju je vlasnik napravio na Suno-u (02.10.2026; `audio/suno/sombor-vece.mp3`,
-2:18, instrumental, prim i berde, ~97 BPM, 2/4, lagana i topla). `scripts/muzika_suno.py` izbacuje iz sredine
-44 cela takta (rez na udarcu, 0:57,7 → 1:52,3), pa završni udarac numere pada 1,2 s posle „ekolo.rs“. Muzika je
-stalno iste jačine (−14 dB), bez stišavanja ispod glasa. Prva verzija sa muzikom iz koda (`scripts/muzika.py`,
-tamburica sa harmonikom) zamenjena je na zahtev vlasnika.
+**Muzika:** „Sretno kolo“, numera koju je vlasnik napravio na Suno-u (02.10.2026; `audio/suno/sretno-kolo.mp3`,
+2:15, instrumental, prim i berde, ~116 BPM, 2/4, vedra). `scripts/muzika_suno.py` izbacuje iz sredine 50 celih
+taktova (rez na udarcu, 0:35,1 → 1:26,7), pa završni udarac numere pada 1,9 s posle „ekolo.rs“. Muzika je stalno
+iste jačine (−14 dB), bez stišavanja ispod glasa. Ranije: muzika iz koda (`scripts/muzika.py`), pa Suno numera
+„Sombor veče“ (~97 BPM, `NUMERA=sombor-vece`), koju su vlasnik i stručnjaci ocenili kao prespora.
 
 ## Zvuk
 
@@ -50,4 +50,4 @@ Modeli (sherpa-onnx Parakeet, Whisper turbo, Omnilingual CTC) i `deep-filter` pr
 ## Licence
 
 Kod i sadržaj: AGPL-3.0 / CC BY-SA 4.0, kao i ostatak repoa. Fontovi: SIL Open Font License
-(Noto Sans, Caveat). Muzika: „Sombor veče“, Suno, nalog vlasnika (plaćeni plan). Efekti i teksture nastali su u kodu ovog repoa.
+(Noto Sans, Caveat). Muzika: „Sretno kolo“, Suno, nalog vlasnika (plaćeni plan). Efekti i teksture nastali su u kodu ovog repoa.
