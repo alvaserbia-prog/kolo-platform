@@ -10,18 +10,18 @@ taj zapis zove POEN.
 ## Tekst za snimanje
 
 1. Pre pet hiljada godina, u Mesopotamiji, današnjem Iraku, ljudi su zapisivali na glinenim pločicama.
-2. Zapisivali su ko je koliko ječma doneo u skladište i koliko ovaca je predao.
-3. Prvo pismo nije nastalo za pesme ni za zakone. Nastalo je za ovakve zapise.
-4. U Južnoj Americi Inke nisu imale pismo. Zapisivale su čvorovima na užetu.
+2. Zapisivali su ko je koliko ječma doneo u skladište i koliko je ovaca predao.
+3. Prvo pismo nije nastalo za pesme ni za zakone. Nastalo je upravo zbog ovakvih zapisa.
+4. Narod Inka u Južnoj Americi nije imao pismo. Zapisivali su čvorovima na užetu.
 5. Boja užeta označavala je vrstu robe, a čvorovi količinu. Tako se znalo šta je u skladištima i ko je šta doneo.
-6. Carstvo Inka imalo je milione ljudi i gotovo da nije koristilo novac. Vodilo se zapisom.
+6. Carstvo Inka imalo je milione stanovnika i gotovo da nije koristilo novac. Sve se vodilo kroz zapise.
 7. Zapis se ne predaje. On pokazuje ko je šta dao.
 8. U KOLU se taj zapis zove POEN. Kad nekome daš rad, dobro ili znanje, on ti prepiše POEN.
-9. U sledećem videu: šta piše pored tvog imena. Prati serijal.
+9. Neka i tvoje ime bude u tom zapisu. Postavi svoj prvi oglas na ekolo.rs.
 
 ## Natpisi
 
-GLINENA PLOČICA · ČVOROVI NA UŽETU · POEN: ZAPIS
+GLINENA PLOČICA · ČVOROVI NA UŽETU · POEN: ZAPIS · ekolo.rs
 
 ## Ograde
 
