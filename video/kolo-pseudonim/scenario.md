@@ -1,9 +1,12 @@
-# KOLO video 18 — Šta piše pored tvog imena (pseudonim i otvoren zapis)
+# KOLO video 19 — Šta piše pored tvog imena (pseudonim i otvoren zapis)
 
-K video posle niza o novcu (15 Trampa → 16 Stari oblici novca → 17 Stari oblici zapisa → 18).
-Video 17 završava rečima „u sledećem videu: šta piše pored tvog imena“, pa ovaj video tu najavu
-preuzima kao kuku. Tekst je prošao ekipu od četiri uloge (30.09.2026); **izbore bira vlasnik**
-(u uglastim zagradama).
+Drugi video bloka o transparentnosti i privatnosti; ide posle videa 18 „Gde ide novac za
+stepenište?“ (transparentnost). Tekst je prošao ekipu od četiri uloge (30.09.2026); **izbore bira
+vlasnik** (u uglastim zagradama).
+
+🟡 **Čeka preradu** (02.10.2026): (1) rečenice 8–9 o otvorenom zapisu sada nosi video 18, pa ovde
+ostaje jedna rečenica koja na njega upućuje; (2) po pravilu „Prvo problem iz života, KOLO tek na
+kraju“ kuka treba da bude lik i pitanje iz svakodnevice, ne rečenica o KOLU.
 
 **Poruka:** u KOLU tvoje ime ne piše, piše pseudonim. Ko si, znaju ljudi sa kojima se vidiš;
 nekome iz drugog grada pseudonim ništa ne govori. Zapis je otvoren: svaki potvrđen član može da

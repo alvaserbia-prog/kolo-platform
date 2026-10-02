@@ -1,7 +1,7 @@
 # KOLO video 15 — Trampa: dva načina
 
 Otvara serijal o novcu. Posle njega idu „Stari oblici novca“ (16), „Stari oblici zapisa“ (17) i
-K video „Šta piše pored tvog imena“ (18). Tekst je prošao ekipu od četiri uloge (30.09.2026);
+K video o transparentnosti (18) i „Šta piše pored tvog imena“ (19). Tekst je prošao ekipu od četiri uloge (30.09.2026);
 izbore je napravio pregled po nalogu vlasnika, a jezik je posle toga uredio vlasnik (02.10.2026).
 
 **Poruka:** trampa uspe samo kad oboje imaju ono što drugom treba. Ljudi su to rešavali na dva
