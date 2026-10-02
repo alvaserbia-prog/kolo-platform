@@ -26,7 +26,7 @@ videa 19; ovde je u središtu **sveska**, ne novac.
 4. Jedni su verovali, a drugi sumnjali. I Đura je stalno morao da se pravda.
 5. Jednog dana okačio je svesku na tablu u ulazu. Ko god bi prošao, mogao je da vidi šta je upisano. Svaki stanar je mogao sam da proveri svaki dinar. I Đura više nije morao da se pravda.
 6. Đurina sveska je evidencija. Kad je evidencija otvorena, svi vide da onaj ko upravlja ne uzima za sebe. To je transparentnost upravljanja.
-7. KOLO je primer takvog sistema. Njega vode pravila: POEN se upisuje samo onako kako pravila kažu. Svaki upisan POEN vidljiv je svima na platformi, i članovi mogu sami da provere da li postoji zloupotreba.
+7. KOLO je primer takvog sistema. POEN se upisuje samo onako kako pravila kažu. Svaki upisan POEN vidljiv je svima na platformi, i članovi mogu sami da provere da li postoji zloupotreba.
 8. Ne moraš da veruješ na reč. Možeš sam da proveriš.
 9. Registruj se na ekolo.rs.
 
