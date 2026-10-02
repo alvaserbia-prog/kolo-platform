@@ -31,50 +31,50 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | tekst gotov, izrada nije počela |
 | 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
 | 18 | Ko krade iz zajedničke kase? / Kako da upravljanje bude transparentno | K | `kolo-transparentnost/` | tekst u pregledu (izbori vlasnika) |
-| 19 | Zašto klupa košta 80.000? / Kako da potrošnja bude transparentna | K | `kolo-transparentnost-potrosnje/` | tekst u pregledu (izbori vlasnika) |
-| 20 | Da li pravila važe i za one koji ih pišu? (transparentnost razmene: POEN) | K | `kolo-transparentnost-razmene/` | tekst u pregledu (izbori vlasnika) |
-| 21 | Svi vide tvoj zapis. A ko zna ko si? (pseudonim) | K | `kolo-pseudonim/` | tekst u pregledu (izbori vlasnika) |
-| 22 | Čije je KOLO? Ničije. | K |  |  |
-| 23 | Šta je Fondacija | K |  |  |
-| 24 | Zlato, srebro, bakar | N |  |  |
-| 25 | Lanac potvrda | K |  |  |
-| 26 | Indeks stvarnosti | K |  |  |
-| 27 | Sajam gde niko ne plaća | A |  |  |
-| 28 | Ko vodi Fondaciju | K |  |  |
-| 29 | Penzioneri | K |  |  |
-| 30 | Papir sa zlatnom podlogom | N |  |  |
-| 31 | Kako prepoznati prevaru | K |  |  |
-| 32 | Nije piramida, nije kripto | K |  |  |
-| 33 | Owen: priznanica rada | A |  |  |
-| 34 | Tri dela sistema: Fondacija, Protokol, Zajednica | K |  |  |
-| 35 | Zašto se ne isplati varati | K |  |  |
-| 36 | Delimična zlatna podloga | N |  |  |
-| 37 | Šta ako razmena ne uspe | K |  |  |
-| 38 | Poljoprivrednici | K |  |  |
-| 39 | Prudon | A |  |  |
-| 40 | Šta prihvataš kad se registruješ | K |  |  |
-| 41 | Šta KOLO zna o tebi (granica: minimum podataka) | K |  |  |
-| 42 | Fiat novac | N |  |  |
-| 43 | Zbir je uvek nula | K |  |  |
-| 44 | POEN ne izlazi iz KOLA (granica: nekonvertibilnost) | K |  |  |
-| 45 | Mašine koje misle: veštačka inteligencija i rad | Z |  |  |
-| 46 | Zanatlije | K |  |  |
-| 47 | Zapis nije imovina (granica: bez imovinskog prava) | K |  |  |
-| 48 | Warren | A |  |  |
+| 19 | Da li pravila važe i za one koji ih pišu? (transparentnost razmene: POEN) | K | `kolo-transparentnost-razmene/` | tekst u pregledu (izbori vlasnika) |
+| 20 | Svi vide tvoj zapis. A ko zna ko si? (pseudonim) | K | `kolo-pseudonim/` | tekst u pregledu (izbori vlasnika) |
+| 21 | Čije je KOLO? Ničije. | K |  |  |
+| 22 | Šta je Fondacija | K |  |  |
+| 23 | Zlato, srebro, bakar | N |  |  |
+| 24 | Lanac potvrda | K |  |  |
+| 25 | Indeks stvarnosti | K |  |  |
+| 26 | Sajam gde niko ne plaća | A |  |  |
+| 27 | Ko vodi Fondaciju | K |  |  |
+| 28 | Penzioneri | K |  |  |
+| 29 | Papir sa zlatnom podlogom | N |  |  |
+| 30 | Kako prepoznati prevaru | K |  |  |
+| 31 | Nije piramida, nije kripto | K |  |  |
+| 32 | Owen: priznanica rada | A |  |  |
+| 33 | Tri dela sistema: Fondacija, Protokol, Zajednica | K |  |  |
+| 34 | Zašto se ne isplati varati | K |  |  |
+| 35 | Delimična zlatna podloga | N |  |  |
+| 36 | Šta ako razmena ne uspe | K |  |  |
+| 37 | Poljoprivrednici | K |  |  |
+| 38 | Prudon | A |  |  |
+| 39 | Šta prihvataš kad se registruješ | K |  |  |
+| 40 | Šta KOLO zna o tebi (granica: minimum podataka) | K |  |  |
+| 41 | Fiat novac | N |  |  |
+| 42 | Zbir je uvek nula | K |  |  |
+| 43 | POEN ne izlazi iz KOLA (granica: nekonvertibilnost) | K |  |  |
+| 44 | Mašine koje misle: veštačka inteligencija i rad | Z |  |  |
+| 45 | Zanatlije | K |  |  |
+| 46 | Zapis nije imovina (granica: bez imovinskog prava) | K |  |  |
+| 47 | Warren | A |  |  |
 | | **III. Kanali POENA** | | | |
-| 49 | Devet kanala | K |  |  |
-| 50 | Doprinos razmeni | K |  |  |
-| 51 | Kad nema radnika, nema potrošača | Z |  |  |
-| 52 | Roditelji | K |  |  |
-| 53 | Dečji prostor | K |  |  |
-| 54 | Kako nastaje novac | N |  |  |
-| 55 | Operativni doprinos | K |  |  |
-| 56 | Socijalni programi | K |  |  |
-| 57 | Rad nije samo plata | Z |  |  |
-| 58 | Mladi | K |  |  |
-| 59 | Donacija Fondaciji | K |  |  |
-| 60 | Donacija se ne vraća (granica: nepovratnost) | K |  |  |
-| 61 | Gde idu dinari: dva toka koja se ne sreću | K |  |  |
+| 48 | Devet kanala | K |  |  |
+| 49 | Doprinos razmeni | K |  |  |
+| 50 | Kad nema radnika, nema potrošača | Z |  |  |
+| 51 | Roditelji | K |  |  |
+| 52 | Dečji prostor | K |  |  |
+| 53 | Kako nastaje novac | N |  |  |
+| 54 | Operativni doprinos | K |  |  |
+| 55 | Socijalni programi | K |  |  |
+| 56 | Rad nije samo plata | Z |  |  |
+| 57 | Mladi | K |  |  |
+| 58 | Donacija Fondaciji | K |  |  |
+| 59 | Donacija se ne vraća (granica: nepovratnost) | K |  |  |
+| 60 | Gde idu dinari: dva toka koja se ne sreću | K |  |  |
+| 61 | Zašto klupa košta 200.000? / Kako da potrošnja bude transparentna | K | `kolo-transparentnost-potrosnje/` | tekst gotov (verzija vlasnika), izrada nije počela |
 | 62 | Rochdale | A |  |  |
 | 63 | Bački Petrovac 1846 | K |  |  |
 | 64 | Pokrovitelji | K |  |  |
@@ -167,7 +167,7 @@ otprilike jedan na dva. Porez i Penzija idu pre N „Ko stoji iza novca“, „D
 odredio vlasnik (sajmovi, Owen, Prudon, Warren, Rochdale, Greene, Raiffeisen, Pariska komuna, Gesell, Avramović,
 Kropotkin); XX i XXI vek idu hronološki. Serijal o novcu otvara niz od tri videa (odluka vlasnika, 30.09.2026): „Trampa“ pokazuje problem
 i dva načina da se reši, stvar koju svi primaju ili zapis; „Stari oblici novca“ i „Stari oblici zapisa“ razrađuju
-svaki od njih, a za njima ide blok od četiri K videa o transparentnosti i privatnosti (odluka vlasnika, 02.10.2026): 18 upravljanje, 19 potrošnja (dinari), 20 razmena (POEN), 21 pseudonim. Video 18 prvi pokazuje zapis u KOLU; svaki video bloka počinje kukom koja pita zašto je transparentnost bitna. Tri N zaredom su namerna celina.
+svaki od njih, a za njima ide blok od tri K videa o transparentnosti i privatnosti (odluka vlasnika, 02.10.2026): 18 upravljanje (evidencija), 19 razmena (POEN), 20 pseudonim. Video o transparentnosti potrošnje dinara („Zašto klupa košta 200.000?“) izdvojen je iz bloka i ide posle „Gde idu dinari“, jer traži da gledalac već zna za Fondaciju i donacije. Tri N zaredom su namerna celina.
 Metal (zlato, srebro, bakar) ostaje svom videu.
 „Kompenzacija i 1993.“ je vraćena na svoje hronološko mesto, jer na početku nije imala vezu sa KOLOM.
 

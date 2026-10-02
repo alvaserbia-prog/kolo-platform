@@ -1,7 +1,7 @@
-# KOLO video 21 — Svi vide tvoj zapis. A ko zna ko si? (pseudonim)
+# KOLO video 20 — Svi vide tvoj zapis. A ko zna ko si? (pseudonim)
 
-Četvrti video bloka o transparentnosti i privatnosti (18 upravljanje → 19 potrošnja → 20 razmena →
-21 pseudonim). Odgovara na pitanje iz videa 20: ako su svi prepisi otvoreni, šta je sa mojim imenom?
+Treći video bloka o transparentnosti i privatnosti (18 upravljanje → 19 razmena →
+20 pseudonim). Odgovara na pitanje iz videa 19: ako su svi prepisi otvoreni, šta je sa mojim imenom?
 Tekst je prošao ekipu od četiri uloge (02.10.2026); **izbore bira vlasnik** (u uglastim zagradama).
 
 **Poruka:** privatnost koju smo dali za otvoren zapis čuva pseudonim. Svako vidi zapis, ali ne zna

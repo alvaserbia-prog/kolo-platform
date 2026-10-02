@@ -1,7 +1,7 @@
 # KOLO video 17 — Stari oblici zapisa
 
 Treći video niza o novcu (15 Trampa → 16 Stari oblici novca → 17). Razrađuje drugi način iz videa
-15: zapis. Posle njega ide blok o transparentnosti i privatnosti (18–21). Tekst je prošao ekipu od četiri
+15: zapis. Posle njega ide blok o transparentnosti i privatnosti (18–20). Tekst je prošao ekipu od četiri
 uloge (30.09.2026); izbore je napravio pregled po nalogu vlasnika.
 
 **Poruka:** ljudi hiljadama godina zapisuju ko je šta dao, i to je radilo i bez novca. U KOLU se

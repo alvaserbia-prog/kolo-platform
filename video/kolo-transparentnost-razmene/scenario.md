@@ -1,7 +1,7 @@
-# KOLO video 20 — Da li pravila važe i za one koji ih pišu? (transparentnost razmene)
+# KOLO video 19 — Da li pravila važe i za one koji ih pišu? (transparentnost razmene)
 
-Treći video bloka o transparentnosti i privatnosti (18 upravljanje → 19 potrošnja → 20 razmena →
-21 pseudonim). Tekst je prošao ekipu od četiri uloge (02.10.2026); **izbore bira vlasnik**
+Drugi video bloka o transparentnosti i privatnosti (18 upravljanje → 19 razmena →
+20 pseudonim). Tekst je prošao ekipu od četiri uloge (02.10.2026); **izbore bira vlasnik**
 (u uglastim zagradama).
 
 **Poruka:** pravila moraju da budu ista za sve. Zato je pravilo jasno: svi prepisi POEN-a su
@@ -59,4 +59,4 @@ dela svoje privatnosti, da bi uvid u upravljanje bio siguran.
 - Ne kaže se da se vide bankovni računi ni dinari članova: vidi se samo zapis POEN-a.
 - Sc. 2 i 4: „uplatio“ i „kasnim sa uplatom“ idu uz dinare i smeju. Uz POEN ne idu kupi, prodaj,
   plati, zaradi, cena.
-- Zbir je uvek nula ostaje videu 43; ovde se ne pominje.
+- Zbir je uvek nula ostaje videu 42; ovde se ne pominje.

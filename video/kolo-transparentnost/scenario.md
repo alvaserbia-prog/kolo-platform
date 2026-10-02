@@ -1,7 +1,7 @@
 # KOLO video 18 — Ko krade iz zajedničke kase? / Kako da upravljanje bude transparentno
 
-Prvi od četiri videa bloka o transparentnosti i privatnosti (odluka vlasnika, 02.10.2026):
-18 upravljanje → 19 potrošnja (dinari) → 20 razmena (POEN) → 21 pseudonim. Svaki počinje kukom koja
+Prvi od tri videa bloka o transparentnosti i privatnosti (odluka vlasnika, 02.10.2026):
+18 upravljanje → 19 razmena (POEN) → 20 pseudonim; potrošnja dinara je izdvojena u video 61. Svaki počinje kukom koja
 postavlja pitanje zašto je transparentnost bitna. Tekst je prošao ekipu od četiri uloge (02.10.2026),
 drugi krug po primedbama vlasnika (fokus na evidenciji, kraće, pripovedanje u prošlom vremenu, samo Đura);
 **izbore bira vlasnik** (u uglastim zagradama).
@@ -57,7 +57,7 @@ Muzika: vojvođanska tamburica, vedro; na sc. 1 kratka stanka posle pitanja, pa 
 | 4 | Dramaturg | Đura ostaje pošten do kraja; problem je zatvorena sveska, ne Đura | zadržati |
 | 6 | Gledalac | slika table se pamti i bez zvuka | zadržati |
 | 8 | Gledalac | reč „transparentnost“ dolazi posle primera, pa se razume | zadržati |
-| 9 | Dramaturg | troškovi i novac idu u video 19, prepisi u video 20 | ovde samo da je zapis otvoren |
+| 9 | Dramaturg | troškovi i novac idu u video 61, prepisi u video 19 | ovde samo da je zapis otvoren |
 | 10 | Urednik za mreže | jedno pitanje, bez poziva | zadržati |
 
 ## Ograde
