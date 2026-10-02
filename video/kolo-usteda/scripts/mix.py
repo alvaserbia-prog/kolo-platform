@@ -1,4 +1,4 @@
-"""Miks: klipovi naracije na mestima iz plana + muzika sa duckingom + efekti, -14 LUFS.
+"""Miks: klipovi naracije na mestima iz plana + muzika (Suno, stalna jačina) + efekti, -14 LUFS.
 Upotreba: python3 scripts/mix.py v1   ->  public/miks-v1.wav
 """
 import json, subprocess, sys
@@ -6,7 +6,7 @@ import json, subprocess, sys
 V = sys.argv[1]
 plan = json.load(open(f"src/{V}/plan.json"))
 T = plan["trajanje"]
-MUZ_DB = -10
+MUZ_DB = float(__import__("os").environ.get("MUZIKA_DB", "-14"))  # stalna jačina (video/README.md)
 ulazi, filt = [], []
 for k, s in enumerate(plan["scene"]):
     ulazi += ["-i", f"audio/{V}/final/glas.wav"]
@@ -18,7 +18,8 @@ n = len(plan["scene"])
 ulazi += ["-i", f"audio/{V}/muzika.wav", "-i", f"audio/{V}/zvuci.wav"]
 filt.append("".join(f"[g{k}]" for k in range(n)) + f"amix=inputs={n}:normalize=0,apad=whole_dur={T},atrim=0:{T},aformat=channel_layouts=stereo,asplit=2[glas][okidac]")
 filt.append(f"[{n}:a]aformat=channel_layouts=stereo,volume={MUZ_DB}dB,equalizer=f=2600:t=q:w=1:g=-3,apad=whole_dur={T},atrim=0:{T},afade=t=out:st={T-1.2}:d=1.2[muz]")
-filt.append("[muz][okidac]sidechaincompress=threshold=0.05:ratio=3:attack=40:release=600:makeup=1[muzd]")
+# Muzika se ne stišava dok se govori: stalno ista jačina (odluka vlasnika, 02.10.2026).
+filt.append("[muz]anull[muzd];[okidac]anullsink")
 filt.append(f"[{n + 1}:a]aformat=channel_layouts=stereo,volume=2dB,apad=whole_dur={T},atrim=0:{T}[sfx]")
 filt.append("[glas][muzd][sfx]amix=inputs=3:normalize=0[pre]")
 
