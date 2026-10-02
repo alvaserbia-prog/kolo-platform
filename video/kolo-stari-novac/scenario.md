@@ -12,7 +12,7 @@ toga koliko ih ima. POEN nije takva stvar: POEN je zapis o tome ko je šta dao.
 1. U početku ljudi su plaćali žitom. Pre pet hiljada godina, u Mesopotamiji, današnjem Iraku, za rad su dobijali ječam. Žito je lako podeliti, ali je teško za nošenje i vremenom se pokvari.
 2. U Etiopiji su se kocke soli koristile kao novac još pre sto godina. So se ne kvari, ali se na kiši istopi.
 3. U Africi, Indiji i Kini koristile su se male školjke. U kineskom pismu znakovi za novac i danas sadrže znak za školjku.
-4. Sve ove stvari imale su istu svrhu: da ih svi prime. Ali sve su imale i jednu zajedničku manu.
+4. Sva ova sredstva imala su istu svrhu: da ih ljudi prime u razmeni. Ali su imala i jednu zajedničku manu.
 5. Njihova vrednost je zavisila od toga koliko ih ima. Kad žetva podbaci, žita nema, i ljudi nemaju čime da razmene ono što imaju da ponude.
 6. Kad su trgovci brodovima dovezli velike količine školjki, njihova vrednost je drastično pala.
 7. POEN ne kruži od čoveka do čoveka kao novac. POEN je zapis o tome ko je šta dao. Taj zapis nastaje tek kad neko nešto da.
