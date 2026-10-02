@@ -26,7 +26,7 @@ videa 19; ovde je u središtu **sveska**, ne novac.
 4. Jedni su verovali, a drugi sumnjali. I Đura je stalno morao da se pravda.
 5. Jednog dana okačio je svesku na tablu u ulazu. Ko god bi prošao, mogao je da vidi šta je upisano. Svaki stanar je mogao sam da proveri svaki dinar. I Đura više nije morao da se pravda.
 6. Đurina sveska je evidencija. Kad je evidencija otvorena, svi vide da onaj ko upravlja ne uzima za sebe. To je transparentnost upravljanja.
-7. KOLO je primer takvog sistema. Vodi ga Fondacija, a svaki POEN koji se upiše vidljiv je svima na platformi, i članovi mogu sami da provere da li postoji zloupotreba.
+7. KOLO je primer takvog sistema. Njega vode pravila: POEN se upisuje samo onako kako pravila kažu. Svaki upisan POEN vidljiv je svima na platformi, i članovi mogu sami da provere da li postoji zloupotreba.
 8. Ne moraš da veruješ na reč. Možeš sam da proveriš.
 9. Registruj se na ekolo.rs.
 
@@ -69,6 +69,8 @@ Muzika: vojvođanska tamburica, vedro; na sc. 1 kratka stanka posle pitanja, pa 
   prijavljen član; pseudonime strana vide potvrđeni članovi, a posetilac ukupne brojeve (Pravilnik
   čl. 67 i 28). Tekst se ne širi na „svako na internetu“.
 - „Uplatilo i potrošilo“ ide uz dinare i sme. Uz POEN ne idu kupi, prodaj, plati, zaradi, cena.
+- Sc. 7: KOLO ne vodi osoba nego pravila (odluka vlasnika, 02.10.2026); ne pisati „vodi ga Fondacija“.
+  Zloupotreba je upis mimo pravila, i zato se vidi.
 - Ne pominje se nijedno ime iz Fondacije.
 - Videi 19 i 20 u prvoj verziji vraćaju Zorana, Vesnu i tablu iz ovog videa; pri njihovoj preradi
   vezati ih za Đuru i svesku na tabli.
