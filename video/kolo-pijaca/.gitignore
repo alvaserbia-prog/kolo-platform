@@ -1,0 +1,13 @@
+node_modules/
+audio/clean16/
+audio/final16/
+out/test-*.mp4
+out/frejmovi/
+out/kadrovi/
+audio/muzika.wav
+audio/tempo/
+audio/muzika-slozena.wav
+audio/zvuci.wav
+out/master.mp4
+audio/clean/glas_blago.wav
+audio/rez/
