@@ -55,7 +55,7 @@ u muzici. Pečati se **ne izgovaraju i ostaju svi**: na snimku My_recording_65 p
 | 1 | KUKA. Leto, dvorište. Zoran (~45) sa ženom i dvoje dece tovari kofere i suncobran u auto. Na haubi otvorena sveska, Zoran štiklira red **„More ✓“** | Zoran ove godine / vodi porodicu na more. // Plata mu je ista kao lane, / a novac za more / uštedeo je za šest meseci. |
 | 2 | Listovi sveske se vraćaju na list od pre godinu dana. Gore **„Plata: 80.000“**, ispod kolona **„Dinari“**. Uz svaku izgovorenu reč taj isečak se odlepi i odleti; novčanice (stilizovane, ne verne kopije) odlaze za njim. Dole Zoran upisuje **„Ostalo: 0“**, prazan novčanik na stolu | Pre KOLA / celu platu je trošio: / pijaca, / frizer, / mehaničar, / struja, / gorivo, / porez. // Na kraju meseca / nije mu ostajalo ništa. |
 | 3 | Zoran na telefonu kuca oglas: **„Električarske popravke, posle posla“**, bez iznosa | Onda je u KOLU / postavio oglas: / električarske popravke / posle posla. |
-| 4 | Dva kratka kadra: komšinica pokazuje utičnicu koja varniči; baka u susednom selu pred kutijom sa osiguračima, sveća na stolu. Posle svakog posla u knjizi evidencije se ispiše red **„Komšinica → Zoran“**, pa **„Baka iz Bezdana → Zoran“** | Javili su se ljudi / kojima je majstor trebao. // Za taj posao / prepisali su mu POENE. |
+| 4 | Dva kratka kadra: komšinica pokazuje utičnicu koja varniči; baka u susednom selu pred kutijom sa osiguračima, sveća na stolu. Posle svakog posla u knjizi evidencije se ispiše red **„Komšinica → Zoran“**, pa **„Baka iz Bezdana → Zoran“** | Javili su se ljudi / kojima je majstor trebao. // Za taj posao / prepisali su mu POENE, / i dobili su ono što im je trebalo, / bez dinara. |
 | 5 | Nov list, gore **„1. mesec“**. Zoran dopisuje drugu kolonu, **„U KOLU“**. Baštovan predaje gajbicu povrća, komšija šiša Zorana u dvorištu; u kolonu „U KOLU“ padaju pečati **PIJACA** i **FRIZER**. Dole **„Ostalo: 5.000“** | Sa tim POENIMA / Zoran sad u KOLU dobija povrće / i šiša se kod komšije. // Za to više ne troši dinare. / I prvi put / na kraju meseca / ostane mu koja hiljada. |
 | 6 | Telefon zvoni, na karti se pale tačkice oko Sombora, knjiga evidencije se puni. Listovi **„2. mesec“, „3. mesec“** i dalje smenjuju se u ritmu, jedan po taktu; u kolonu „U KOLU“ padaju pečati **MEHANIČAR**, **ČASOVI**, **ŠUNKA SA SALAŠA**, **ZIMNICA** (Miličina tegla, poziv na video 6). Dole **10.000**, pa **20.000** | Zovu ga sve više ljudi, / a što više radi u KOLU, / to više toga / i dobije u KOLU. |
 | 7 | List **„6. mesec“**: kolona „U KOLU“ puna pečata. U koloni „Dinari“ padaju pečati **STRUJA**, **GORIVO**, **POREZ**, **LEKOVI**, pored njih mali crtež fabrike i kamiona. Dole **„Ostalo: 20.000“**, Zoran to podvuče dvaput | Dinare sada troši / samo na ono čega u KOLU nema. // Svakog meseca / ostane mu više. |
@@ -70,7 +70,7 @@ Tekst ispod je ono što je izgovoreno; titlovi i naracija u tabeli prate njega. 
 1. Zoran ove godine / vodi porodicu na more. // Plata mu je ista kao lane, / a novac za more / uštedeo je za šest meseci.
 2. Pre KOLA / celu platu je trošio: / pijaca, / frizer, / mehaničar, / struja, / gorivo, / porez. // Na kraju meseca / nije mu ostajalo ništa.
 3. Onda je u KOLU / postavio oglas: / električarske popravke / posle posla.
-4. Javili su se ljudi / kojima je majstor trebao. // Za taj posao / prepisali su mu POENE.
+4. Javili su se ljudi / kojima je majstor trebao. // Za taj posao / prepisali su mu POENE, / i dobili su ono što im je trebalo, / bez dinara.
 5. Sa tim POENIMA / Zoran sad u KOLU dobija povrće / i šiša se kod komšije. // Za to više ne troši dinare. / I prvi put / na kraju meseca / ostane mu koja hiljada.
 6. Zovu ga sve više ljudi, / a što više radi u KOLU, / to više toga / i dobije u KOLU.
 7. Dinare sada troši / samo na ono čega u KOLU nema. // Svakog meseca / ostane mu više.
@@ -83,8 +83,9 @@ Tekst ispod je ono što je izgovoreno; titlovi i naracija u tabeli prate njega. 
 - ~49–~59 s: dva prekinuta pokušaja „Javili su se ljudi kojima je majstor trebao, a…“ izbacuju se; ostaje treći.
 - ~93,5–~107 s: „Za šest meseci uštedeo je da…“ i „Za šest meseci uštedeo je dovoljno.“ izbacuju se; ostaje
   poslednji, ceo izgovor sa „i cela porodica ide na more“.
-- U sceni 4 u ostavljenom izgovoru nema „a dinara za njega nisu imali“. Odluka vlasnika (02.10.2026): ostaje
-  tako, bez dosnimavanja; misao nosi slika (baka sa svećom, komšinica i utičnica koja varniči).
+- Scena 4 se **dosnimava cela, iz jednog daha** (odluka vlasnika, 02.10.2026), sa tekstom iz tabele: „Javili su se
+  ljudi kojima je majstor trebao. Za taj posao prepisali su mu POENE, i dobili su ono što im je trebalo, bez
+  dinara.“ Dosnimak zamenjuje scenu 4 iz My_recording_65 (~43–64 s posle „…posle posla.“).
 
 ## c) Pregled (stalna ekipa i deset stručnjaka, 30.09.2026) i odluke vlasnika
 
