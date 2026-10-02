@@ -48,7 +48,7 @@ Rast se vidi dužinom kolone; procenti se ne ispisuju.
 
 Stavke se posle scene 2 u animaciji **utiskuju kao pečati** u Zoranovu svesku (odluka vlasnika, 01.10.2026):
 u kolonu „U KOLU“ ono što sada dobija u KOLU, u kolonu „Dinari“ ono što mora u dinarima. Pečat pada uz udarac
-u muzici. Na snimku My_recording_65 posle scene 2 nijedna stavka nije izgovorena: svi pečati padaju bez reči.
+u muzici. Pečati se **ne izgovaraju i ostaju svi**: na snimku My_recording_65 posle scene 2 nijedna stavka nije izgovorena, pa pečati padaju u ritmu muzike, bez reči.
 
 | # | Slika (i tekst koji je deo slike) | Naracija |
 |---|---|---|
@@ -83,8 +83,8 @@ Tekst ispod je ono što je izgovoreno; titlovi i naracija u tabeli prate njega. 
 - ~49–~59 s: dva prekinuta pokušaja „Javili su se ljudi kojima je majstor trebao, a…“ izbacuju se; ostaje treći.
 - ~93,5–~107 s: „Za šest meseci uštedeo je da…“ i „Za šest meseci uštedeo je dovoljno.“ izbacuju se; ostaje
   poslednji, ceo izgovor sa „i cela porodica ide na more“.
-- 🟡 U sceni 4 u ostavljenom izgovoru nema „a dinara za njega nisu imali“ (oba pokušaja sa tim delom su
-  prekinuta). Odluka vlasnika: ostaviti tako, dosnimiti tu rečenicu ili je preuzeti iz My_recording_64 (~31–37 s).
+- U sceni 4 u ostavljenom izgovoru nema „a dinara za njega nisu imali“. Odluka vlasnika (02.10.2026): ostaje
+  tako, bez dosnimavanja; misao nosi slika (baka sa svećom, komšinica i utičnica koja varniči).
 
 ## c) Pregled (stalna ekipa i deset stručnjaka, 30.09.2026) i odluke vlasnika
 
