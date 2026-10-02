@@ -10,7 +10,7 @@ taj zapis zove POEN.
 ## Tekst za snimanje
 
 1. Pre pet hiljada godina, u Mesopotamiji, današnjem Iraku, ljudi su zapisivali na glinenim pločicama.
-2. Zapisivali su ko je koliko ječma doneo u skladište i koliko je ovaca predao.
+2. Zapisivali su ko je koliko ovaca, vune i ulja doneo u skladište.
 3. Prvo pismo nije nastalo za pesme ni za zakone. Nastalo je upravo zbog ovakvih zapisa.
 4. Narod Inka u Južnoj Americi nije imao pismo. Zapisivali su čvorovima na užetu.
 5. Boja užeta označavala je vrstu robe, a čvorovi količinu. Tako se znalo šta je u skladištima i ko je šta doneo.

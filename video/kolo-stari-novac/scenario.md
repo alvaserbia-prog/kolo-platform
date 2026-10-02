@@ -9,7 +9,7 @@ toga koliko ih ima. POEN nije takva stvar: POEN je zapis o tome ko je šta dao.
 
 ## Tekst za snimanje
 
-1. U početku ljudi su plaćali žitom. Pre pet hiljada godina, u Mesopotamiji, današnjem Iraku, za rad su dobijali ječam. Žito je lako podeliti, ali je teško za nošenje i vremenom se pokvari.
+1. U početku ljudi su plaćali žitom. U starom Egiptu, pre više od tri hiljade godina, radnici koji su gradili grobnice faraona dobijali su platu u žitu. Žito je lako podeliti, ali je teško za nošenje i vremenom se pokvari.
 2. U Etiopiji su se kocke soli koristile kao novac još pre sto godina. So se ne kvari, ali se na kiši istopi.
 3. U Africi, Indiji i Kini koristile su se male školjke. U kineskom pismu znakovi za novac i danas sadrže znak za školjku.
 4. Sva ova sredstva imala su istu svrhu: da ih ljudi prime u razmeni. Ali su imala i jednu zajedničku manu.
@@ -27,10 +27,11 @@ toga koliko ih ima. POEN nije takva stvar: POEN je zapis o tome ko je šta dao.
 - Stoka i Homer izbačeni; video počinje žitom. U videu 15 zato stoji „žito, so i školjke“.
 - Kamen sa Japa izbačen: „ono što ljudi znaju“ je bilo nejasno, a poređenje bi POEN prikazalo kao
   nevidljiv novac.
+- Žito je prebačeno iz Mesopotamije u Egipat da se ne ponavlja sa videom 17 (vlasnik, 02.10.2026).
 - „Pre sto godina“, ne „u dvadesetom veku“: da se ne čuje kao vek pre nove ere.
 - Bez „mogu da se izgube, pokvare ili ukradu“ kao razlike prema POEN-u: i zapis može da se izgubi ili
   uništi, pa paralela ne drži (vlasnik, 02.10.2026). Iz istog razloga izostavljeno je gomilanje.
 - „Plaćali“ stoji samo uz žito; uz POEN ne idu kupi, prodaj, plati, zaradi, cena.
-- Pre snimanja proveriti: ječam kao nadnica u Mesopotamiji, kocke soli u Etiopiji (XX vek),
+- Pre snimanja proveriti: plata u žitu radnicima iz Deir el-Medine (Egipat, Novo carstvo), kocke soli u Etiopiji (XX vek),
   školjka u kineskim znakovima (贝); pad vrednosti školjki posle uvoza
   u Zapadnu Afriku u XIX veku.
