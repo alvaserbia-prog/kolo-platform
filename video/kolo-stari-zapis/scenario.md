@@ -9,15 +9,15 @@ taj zapis zove POEN.
 
 ## Tekst za snimanje
 
-1. Pre pet hiljada godina, u Mesopotamiji, današnjem Iraku, ljudi su zapisivali na glinenim pločicama.
+1. Pre pet hiljada godina, u Mesopotamiji, današnjem Iraku, ljudi su zapisivali razmenu na glinenim pločicama.
 2. Zapisivali su ko je koliko ovaca, vune i ulja doneo u skladište.
-3. Prvo pismo nije nastalo za pesme ni za zakone. Nastalo je upravo zbog ovakvih zapisa.
+3. Ljudi nisu izmislili pismo da bi pisali pesme ili zakone, nego da bi zapisali ko je šta dao.
 4. Narod Inka u Južnoj Americi nije imao pismo. Zapisivali su čvorovima na užetu.
 5. Boja užeta označavala je vrstu robe, a čvorovi količinu. Tako se znalo šta je u skladištima i ko je šta doneo.
 6. Carstvo Inka imalo je milione stanovnika i gotovo da nije koristilo novac. Sve se vodilo kroz zapise.
 7. Zapis se ne predaje. On pokazuje ko je šta dao.
 8. U KOLU se taj zapis zove POEN. Kad nekome daš rad, dobro ili znanje, on ti prepiše POEN.
-9. Neka i tvoje ime bude u tom zapisu. Postavi svoj prvi oglas na ekolo.rs.
+9. Budi i ti deo tog zapisa. Postavi svoj prvi oglas na ekolo.rs.
 
 ## Natpisi
 
