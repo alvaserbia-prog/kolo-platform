@@ -15,7 +15,7 @@ taj zapis zove POEN.
 4. Narod Inka u Južnoj Americi nije imao pismo. Zapisivali su čvorovima na užetu.
 5. Boja užeta označavala je vrstu robe, a čvorovi količinu. Tako se znalo šta je u skladištima i ko je šta doneo.
 6. Carstvo Inka imalo je milione stanovnika i gotovo da nije koristilo novac. Sve se vodilo kroz zapise.
-7. Zapis se ne predaje. On pokazuje ko je šta dao.
+7. Zapis se ne koristi kao sredstvo za razmenu. On pokazuje ko je šta dao.
 8. U KOLU se taj zapis zove POEN. Kad nekome daš rad, dobro ili znanje, on ti prepiše POEN.
 9. Budi i ti deo tog zapisa. Postavi svoj prvi oglas na ekolo.rs.
 
