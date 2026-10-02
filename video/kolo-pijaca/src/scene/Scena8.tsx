@@ -61,7 +61,7 @@ export const Scena8: React.FC = () => {
           {MESTA.map((m) => (
             <g key={m.ime} transform={`translate(${m.x},${m.y})`}>
               <circle r={m.glavno ? 22 : 13} fill={m.glavno ? P.zelena500 : "#fff"} stroke={P.mastilo} strokeWidth={4} />
-              <text y={m.glavno ? 64 : 46} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={m.glavno ? 40 : 28} fill={P.mastilo}>{m.ime}</text>
+              <text y={m.glavno ? 72 : 52} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={m.glavno ? 52 : 36} fill={P.mastilo}>{m.ime}</text>
             </g>
           ))}
           <path d="M0,0 Q260,-60 380,-260" stroke={P.zelena500} strokeWidth={10} fill="none" strokeLinecap="round" pathLength={1} strokeDasharray={`${nit} 1`} />

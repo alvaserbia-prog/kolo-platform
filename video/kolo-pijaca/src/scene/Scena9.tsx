@@ -23,13 +23,13 @@ export const Scena9: React.FC = () => {
       <circle cx={540} cy={640} r={400} fill={P.zelena100} opacity={sjaj} />
       {/* kartica */}
       <g transform="translate(540,300)">
-        <Kartica redovi={["Domaći pekmez", "Čonoplja", "Po dogovoru"]} s={1.9} rot={-2} pecat={1 - skida > 0.02 ? 1 : 0} sjaj={sjaj} />
+        <Kartica redovi={["Domaći pekmez", "Čonoplja", "Po dogovoru"]} s={1.6} rot={-2} pecat={skida > 0 ? 0 : 1} sjaj={sjaj} />
       </g>
       {/* pečat koji pada */}
       {skida > 0 && skida < 1 && (
-        <g transform={`translate(${780 + skida * 120},${300 + skida * 900}) rotate(${14 + skida * 200}) scale(1.9)`} opacity={1 - skida}>
-          <rect x={-72} y={-20} width={144} height={36} rx={6} fill="#FFF8E6" stroke="#C98A0B" strokeWidth={4} />
-          <text x={0} y={7} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={19} letterSpacing={1.5} fill="#C98A0B">BEZ POTVRDE</text>
+        <g transform={`translate(${740 + skida * 120},${294 + skida * 900}) rotate(${12 + skida * 200}) scale(1.68)`} opacity={1 - skida}>
+          <rect x={-92} y={-24} width={184} height={44} rx={7} fill="#FFF8E6" stroke="#C98A0B" strokeWidth={5} />
+          <text x={0} y={9} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={25} letterSpacing={1} fill="#C98A0B">BEZ POTVRDE</text>
         </g>
       )}
       {sjaj > 0 && (

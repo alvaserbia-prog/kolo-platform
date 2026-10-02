@@ -3,7 +3,7 @@
 import React, { createContext, useContext } from "react";
 import { Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { P, svetlije, tamnije } from "./paleta";
-import { RUKOPIS, SANS } from "./fontovi";
+import { SANS } from "./fontovi";
 
 // Scena se renderuje nekoliko frejmova pre svog početka (prelaz); animacije se kače na frejm
 // u odnosu na početak scene iz plana.
@@ -110,9 +110,9 @@ export const Dzem: React.FC<{ s?: number }> = ({ s = 1 }) => (
 
 // ── Kartica oglasa ispisana rukom (ekranski prostor, gornja ivica na sredini u 0,0) ──
 export const Kartica: React.FC<{ redovi: string[]; s?: number; rot?: number; sirina?: number; boja?: string; pecat?: number; sjaj?: number }> = ({
-  redovi, s = 1, rot = -3, sirina = 230, boja = P.krem, pecat = 0, sjaj = 0,
+  redovi, s = 1, rot = -3, sirina = 330, boja = P.krem, pecat = 0, sjaj = 0,
 }) => {
-  const vis = 40 + redovi.length * 38;
+  const vis = 44 + redovi.length * 46;
   return (
     <g transform={`scale(${s}) rotate(${rot})`}>
       {sjaj > 0 && <rect x={-sirina / 2 - 24} y={-24} width={sirina + 48} height={vis + 48} rx={30} fill={P.zelena500} opacity={0.35 * sjaj} filter="url(#meko)" />}
@@ -120,14 +120,14 @@ export const Kartica: React.FC<{ redovi: string[]; s?: number; rot?: number; sir
       <rect x={-sirina / 2} y={0} width={sirina} height={vis} rx={10} fill={boja} stroke={sjaj > 0 ? P.zelena500 : tamnije(boja, 0.18)} strokeWidth={sjaj > 0 ? 4 : 2} />
       <circle cx={0} cy={12} r={6} fill={P.crvena} stroke={tamnije(P.crvena, 0.4)} strokeWidth={1.5} />
       {redovi.map((r, i) => (
-        <text key={i} x={0} y={52 + i * 38} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={i === 0 ? 36 : 30} fill={i === 0 ? P.mastilo : P.mastiloSvetlo}>
+        <text key={i} x={0} y={60 + i * 46} textAnchor="middle" fontFamily={SANS} fontWeight={i === 0 ? 900 : 700} fontSize={i === 0 ? 37 : 32} fill={i === 0 ? P.mastilo : P.mastiloSvetlo}>
           {r}
         </text>
       ))}
       {pecat > 0 && (
         <g transform={`translate(${sirina / 2 - 40},${-4}) rotate(14) scale(${(0.6 + 0.4 * pecat) * 1.05})`} opacity={pecat}>
-          <rect x={-72} y={-20} width={144} height={36} rx={6} fill="#FFF8E6" stroke="#C98A0B" strokeWidth={4} />
-          <text x={0} y={7} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={19} letterSpacing={1.5} fill="#C98A0B">BEZ POTVRDE</text>
+          <rect x={-92} y={-24} width={184} height={44} rx={7} fill="#FFF8E6" stroke="#C98A0B" strokeWidth={5} />
+          <text x={0} y={9} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={25} letterSpacing={1} fill="#C98A0B">BEZ POTVRDE</text>
         </g>
       )}
     </g>
@@ -275,8 +275,8 @@ export const LikU: React.FC<LikOpis & { x: number; y: number; s?: number }> = ({
 /** Natpis na vrhu kadra (zaobljena traka). */
 export const Natpis: React.FC<{ tekst: string; y?: number; o?: number; boja?: string }> = ({ tekst, y = 170, o = 1, boja = P.mastilo }) => (
   <g opacity={o} transform={`translate(540,${y + (1 - o) * 20})`}>
-    <rect x={-470} y={-52} width={940} height={96} rx={48} fill={P.belo} opacity={0.94} />
-    <text x={0} y={14} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={42} fill={boja}>{tekst}</text>
+    <rect x={-500} y={-66} width={1000} height={124} rx={62} fill={P.belo} stroke={P.mastilo} strokeWidth={5} />
+    <text x={0} y={18} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={Math.min(52, Math.round(1720 / tekst.length))} fill={boja}>{tekst}</text>
   </g>
 );
 

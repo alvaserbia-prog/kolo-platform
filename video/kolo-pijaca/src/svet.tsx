@@ -145,7 +145,7 @@ export const SvetPijace: React.FC<{
             boja={t.boja}
             roba={t.roba}
             svetlo={svetlo(t.id)}
-            kartica={kartice ? <Kartica redovi={t.redovi} s={0.86} rot={jeRada ? -4 : 3} pecat={jeRada ? pecatRada : 0} sjaj={jeRada ? sjajRada : 0} /> : undefined}
+            kartica={kartice ? <Kartica redovi={t.redovi} s={0.9} rot={jeRada ? -4 : 3} pecat={jeRada ? pecatRada : 0} sjaj={jeRada ? sjajRada : 0} /> : undefined}
           />
         </g>
       );

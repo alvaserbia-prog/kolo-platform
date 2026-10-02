@@ -81,19 +81,20 @@ export const Scena2: React.FC = () => {
       {odlet < 1 && (
         <g transform={`translate(${540 + odlet * 700},${760 - odlet * 300}) rotate(${odlet * 30}) scale(${telPop * (1 - odlet * 0.5)})`}>
           <Telefon s={1.25}>
-            <text x={0} y={-150} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={34} fill={P.mastilo}>Pijaca</text>
-            <text x={0} y={-100} textAnchor="middle" fontFamily={SANS} fontWeight={500} fontSize={24} fill={P.mastiloSvetlo}>Nudiš ono što imaš.</text>
-            <text x={0} y={-70} textAnchor="middle" fontFamily={SANS} fontWeight={500} fontSize={24} fill={P.mastiloSvetlo}>Dobiješ ono što ti treba.</text>
+            <text x={0} y={-150} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={46} fill={P.mastilo}>Pijaca</text>
+            <text x={0} y={-90} textAnchor="middle" fontFamily={SANS} fontWeight={700} fontSize={30} fill={P.mastiloSvetlo}>Nudiš ono što imaš.</text>
+            <text x={0} y={-50} textAnchor="middle" fontFamily={SANS} fontWeight={700} fontSize={30} fill={P.mastiloSvetlo}>Dobiješ ono što</text>
+            <text x={0} y={-12} textAnchor="middle" fontFamily={SANS} fontWeight={700} fontSize={30} fill={P.mastiloSvetlo}>ti treba.</text>
             {clan ? (
               <g>
-                <circle cx={0} cy={60} r={50} fill={P.zelena500} />
-                <path d="M-22,60 l14,16 l30,-34" stroke="#fff" strokeWidth={10} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-                <text x={0} y={160} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={30} fill={P.zelena700}>Dobro došla, Rada!</text>
+                <circle cx={0} cy={80} r={50} fill={P.zelena500} />
+                <path d="M-22,80 l14,16 l30,-34" stroke="#fff" strokeWidth={10} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                <text x={0} y={160} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={31} fill={P.zelena700}>Dobro došla, Rada!</text>
               </g>
             ) : (
-              <Dugme tekst="Učlani se" y={60} pritisak={pritisak} />
+              <Dugme tekst="Učlani se" y={90} pritisak={pritisak} />
             )}
-            <Dodir x={0} y={60} p={napredak(f, fClan - 2, fClan + 12, (x) => x)} />
+            <Dodir x={0} y={90} p={napredak(f, fClan - 2, fClan + 12, (x) => x)} />
           </Telefon>
         </g>
       )}

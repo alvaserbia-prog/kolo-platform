@@ -2,20 +2,20 @@
 // nikad novčić ni novčanica, i bez iznosa.
 import React from "react";
 import { P } from "./paleta";
-import { RUKOPIS, SANS } from "./fontovi";
+import { SANS } from "./fontovi";
 
 export const Zapis: React.FC<{ od: string; ka: string; pero: number; pecat: number }> = ({ od, ka, pero, pecat }) => (
   <g>
     <rect x={-330} y={-150} width={660} height={300} rx={20} fill={P.krem} stroke={P.mastilo} strokeWidth={5} filter="url(#senkaMeka)" />
     <line x1={0} y1={-150} x2={0} y2={150} stroke="#D9C9A8" strokeWidth={3} />
-    <text x={-300} y={-96} fontFamily={SANS} fontWeight={800} fontSize={30} fill={P.mastiloSvetlo}>Zapis u KOLU</text>
+    <text x={-300} y={-92} fontFamily={SANS} fontWeight={900} fontSize={40} fill={P.mastiloSvetlo}>Zapis u KOLU</text>
     {[-40, 30, 100].map((y) => (
       <line key={y} x1={-300} x2={300} y1={y} y2={y} stroke="#E6D8BC" strokeWidth={2} />
     ))}
     <clipPath id="pero">
       <rect x={-310} y={-60} width={620 * pero} height={80} />
     </clipPath>
-    <text x={-290} y={6} fontFamily={RUKOPIS} fontWeight={700} fontSize={50} fill={P.mastilo} clipPath="url(#pero)">
+    <text x={-300} y={8} fontFamily={SANS} fontWeight={900} fontSize={56} fill={P.mastilo} clipPath="url(#pero)">
       {od} → {ka} · POEN
     </text>
     {pecat > 0 && (

@@ -6,7 +6,7 @@
 import React from "react";
 import { interpolate } from "remotion";
 import { P } from "../paleta";
-import { RUKOPIS, SANS } from "../fontovi";
+import { SANS } from "../fontovi";
 import { DEJAN, Kamera, Kuca, Lik, iso, napredak, useF, usePop } from "../iso";
 import { SvetPijace, tezga } from "../svet";
 import { kad, trajanjeF } from "../vreme";
@@ -60,15 +60,15 @@ export const Scena4: React.FC = () => {
         <text x={0} y={16} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={44} fill="#fff">Sombor</text>
       </g>
       {/* Dejanova sveska: red za svaku uslugu */}
-      <g transform={`translate(540,250) scale(${usePop(fUsluge + 4)})`}>
-        <rect x={-300} y={-70} width={600} height={300} rx={18} fill={P.krem} stroke={P.mastilo} strokeWidth={4} filter="url(#senkaMeka)" />
-        <text x={-268} y={-20} fontFamily={SANS} fontWeight={800} fontSize={30} fill={P.mastilo}>Dejanov zapis u KOLU</text>
+      <g transform={`translate(540,240) scale(${usePop(fUsluge + 4)})`}>
+        <rect x={-380} y={-80} width={760} height={340} rx={22} fill={P.krem} stroke={P.mastilo} strokeWidth={4} filter="url(#senkaMeka)" />
+        <text x={-345} y={-22} fontFamily={SANS} fontWeight={900} fontSize={40} fill={P.mastilo}>Dejanov zapis u KOLU</text>
         {KUCE.map((k, i) => (
           <g key={i} opacity={niti[i] > 0.95 ? 1 : 0}>
-            <line x1={-268} x2={268} y1={20 + i * 66} y2={20 + i * 66} stroke="#D9C9A8" strokeWidth={2} />
-            <text x={-262} y={62 + i * 66} fontFamily={RUKOPIS} fontWeight={700} fontSize={36} fill={P.mastilo}>{k.red}</text>
-            <rect x={150} y={30 + i * 66} width={112} height={42} rx={21} fill={P.zelena500} />
-            <text x={206} y={60 + i * 66} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={24} fill="#fff">+ POEN</text>
+            <line x1={-345} x2={345} y1={18 + i * 74} y2={18 + i * 74} stroke="#D9C9A8" strokeWidth={2} />
+            <text x={-345} y={68 + i * 74} fontFamily={SANS} fontWeight={800} fontSize={38} fill={P.mastilo}>{k.red}</text>
+            <rect x={190} y={30 + i * 74} width={155} height={52} rx={26} fill={P.zelena500} />
+            <text x={267} y={66 + i * 74} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={32} fill="#fff">+ POEN</text>
           </g>
         ))}
       </g>

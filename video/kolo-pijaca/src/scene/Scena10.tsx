@@ -27,7 +27,7 @@ export const Scena10: React.FC = () => {
         <SvetPijace svetlo={() => sjaj} pecatRada={0} />
         {prazna > 0 && (
           <g opacity={Math.min(1, prazna * 2)}>
-            <Tezga x={1650} y={240} boja={P.zelena500} kartica={<Kartica redovi={["Tvoj oglas?", "tvoje mesto"]} s={0.95 * prazna} rot={-3} />} />
+            <Tezga x={1650} y={240} boja={P.zelena500} kartica={<Kartica redovi={["Tvoj oglas?", "tvoje mesto"]} s={1.3 * prazna} rot={-3} />} />
           </g>
         )}
       </Kamera>

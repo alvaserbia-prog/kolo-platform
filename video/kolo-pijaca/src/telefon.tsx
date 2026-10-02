@@ -13,7 +13,7 @@ export const Telefon: React.FC<{ children?: React.ReactNode; s?: number }> = ({ 
     </clipPath>
     <g clipPath="url(#ekran)">
       <rect x={-172} y={-350} width={344} height={110} fill={P.zelena700} />
-      <text x={0} y={-272} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={40} fill="#fff">ekolo.rs</text>
+      <text x={0} y={-272} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={48} fill="#fff">ekolo.rs</text>
       {children}
     </g>
   </g>
@@ -22,7 +22,7 @@ export const Telefon: React.FC<{ children?: React.ReactNode; s?: number }> = ({ 
 export const Dugme: React.FC<{ tekst: string; y: number; pritisak?: number; boja?: string }> = ({ tekst, y, pritisak = 0, boja = P.zelena500 }) => (
   <g transform={`translate(0,${y}) scale(${1 - 0.08 * pritisak})`}>
     <rect x={-130} y={-36} width={260} height={72} rx={36} fill={boja} />
-    <text x={0} y={12} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={32} fill="#fff">{tekst}</text>
+    <text x={0} y={12} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={38} fill="#fff">{tekst}</text>
   </g>
 );
 

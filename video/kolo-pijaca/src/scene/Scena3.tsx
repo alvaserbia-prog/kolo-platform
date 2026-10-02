@@ -29,7 +29,7 @@ export const Scena3: React.FC = () => {
       <Kamera x={kx} y={ky} z={zum} cy={800}>
         <SvetPijace pecatRada={1} svetlo={(id) => (USLUGE.includes(id) ? sjaj : 0)} />
       </Kamera>
-      <Natpis tekst="Oglase vidi svako, i bez prijave." y={190} o={napredak(f, 4, 16)} />
+      <Natpis tekst="Oglase vidi svako, i bez prijave" y={200} o={napredak(f, 4, 16)} />
     </g>
   );
 };

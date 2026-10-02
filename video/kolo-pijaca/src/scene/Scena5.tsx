@@ -86,15 +86,15 @@ export const Scena5: React.FC = () => {
       </Kamera>
       {/* telefon: pretraga po mestu */}
       {tel > 0 && (
-        <g transform={`translate(760,560) scale(${0.95 * tel}) rotate(4)`}>
+        <g transform={`translate(720,600) scale(${1.15 * tel}) rotate(3)`}>
           <Telefon>
             <rect x={-150} y={-210} width={300} height={60} rx={30} fill="#fff" stroke={P.mastiloSvetlo} strokeWidth={2} />
-            <text x={-126} y={-170} fontFamily={SANS} fontWeight={700} fontSize={28} fill={P.mastilo}>{"pekmez".slice(0, kucanje)}</text>
-            <rect x={-150} y={-130} width={200} height={48} rx={24} fill={P.zelena100} stroke={P.zelena500} strokeWidth={2} opacity={napredak(f, fJedva + 22, fJedva + 28)} />
-            <text x={-50} y={-97} textAnchor="middle" fontFamily={SANS} fontWeight={700} fontSize={24} fill={P.zelena700} opacity={napredak(f, fJedva + 22, fJedva + 28)}>Čonoplja</text>
+            <text x={-126} y={-168} fontFamily={SANS} fontWeight={800} fontSize={34} fill={P.mastilo}>{"pekmez".slice(0, kucanje)}</text>
+            <rect x={-150} y={-130} width={240} height={56} rx={28} fill={P.zelena100} stroke={P.zelena500} strokeWidth={2} opacity={napredak(f, fJedva + 22, fJedva + 28)} />
+            <text x={-30} y={-92} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={30} fill={P.zelena700} opacity={napredak(f, fJedva + 22, fJedva + 28)}>Čonoplja</text>
             {rez > 0 && (
               <g transform={`translate(0,-30) scale(${rez})`}>
-                <Kartica redovi={["Domaći pekmez", "Čonoplja", "Po dogovoru"]} s={1.05} rot={0} pecat={1} />
+                <Kartica redovi={["Domaći pekmez", "Čonoplja", "Po dogovoru"]} s={1.0} rot={0} pecat={1} />
               </g>
             )}
           </Telefon>

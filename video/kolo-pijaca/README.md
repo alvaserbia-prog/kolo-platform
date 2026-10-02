@@ -5,7 +5,7 @@ Gotov fajl: [`out/pijaca.mp4`](out/pijaca.mp4), naslovna: [`out/naslovna.jpg`](o
 Scenario i tekst naracije: [`scenario.md`](scenario.md). Naracija: vlasnik (My_recording_63, dve reči iz My_recording_62).
 
 Stil je **izometrijska ilustracija** (odluka vlasnika): tezge u pravilnim redovima, gledane odozgo pod uglom,
-u jakim i čistim bojama; kamera klizi kao kroz maketu, oglasi su kartice ispisane rukom (Caveat).
+u jakim i čistim bojama; kamera klizi kao kroz maketu, oglasi su kartice (prvo ispisane rukom fontom Caveat, pa po odluci vlasnika 02.10.2026 krupnije, u Noto Sans, jer rukopis nije bio dovoljno čitljiv).
 Sve je SVG u kodu: projekcija i predmeti u `src/iso.tsx`, pijaca kao jedan svet u `src/svet.tsx`
 (isti raspored tezgi u scenama 2, 3, 4 i 10), telefon u `src/telefon.tsx`, zapis u KOLU u `src/zapis.tsx`.
 
@@ -68,7 +68,7 @@ Fontovi i znak KOLO preuzeti su iz `../kolo-raste/public/`.
 | tempo | pauze duže od 0,42 s skraćene, **atempo 1,04** → 64,6 s govora |
 | provera teksta | Whisper turbo i Parakeet TDT 0.6B v3 po isečcima |
 | vremena reči | Parakeet po isečcima do 12 s, pa prisilno CTC poravnanje (Omnilingual ASR 300M) |
-| muzika | tamburaši u kodu (`scripts/muzika.py`), **pun sastav ceo video, veselo kolo u 2/4, G-dur, 123 BPM**: teme K, B (nova, skakutava, za pijacu) i A se smenjuju po scenama; tegle koje propadaju nosi proređen aranžman (bez brača, tiša kontra), ne mol; vrhunac na potvrdi; završni akord tačno posle „ekolo.rs“ |
+| muzika | u kodu (`scripts/muzika.py`), u srpskom etosu (pravilo od 02.10.2026): **pun tamburaški sastav i harmonika u srpskom kolu**, ceo video kolo u 2/4, 130 BPM. Harmonika je suvo naštimovana (jezičci skoro u uglas i jezičak oktavu niže, bez musette treperenja) i svira brze šesnaestine sa okretajima, sa levom rukom „um-pa“; prim ima predudare na dugim tonovima. Smenjuju se durska tema harmonike (G-dur) i molska (e-mol harmonski, sa dis), te tamburaške teme K, B i A: harmonika najavi kolo, od „propadne“ prelazi u brz igrački mol, pijaca i karta su harmonika uz tamburaše, kuhinja mol, potvrda je vrhunac celog sastava; završni akord tačno posle „ekolo.rs“. Prva verzija (samo tamburaši, 123 BPM) zamenjena je po želji vlasnika |
 | glasovi pijace | žamor složen u `scripts/zvuci.py` od isečaka vlasnikovog snimka 62, puštenih **unazad** i pomerenih po visini (devet slojeva), pa se nijedna reč ne razume; najjači u scenama na pijaci (3 i 10), tiši u 2 i 4, nema ga u ostavi, kuhinji i kod novčanika |
 | efekti | `scripts/zvuci.py`: staklo tegli, dodir na telefonu, tezga i pečat, novčanica, oblačići, sijalica, niti, cvrčanje i tiganj, kucanje, papirni avion, koraci, pero i pečat UPISANO, novčanik, pečat koji pada, završni zvončići |
 | miks | muzika −8 dB, rez na 2,6 kHz, sidechain 3:1 vođen glasom; efekti i žamor +2 dB; −14 LUFS / −1,5 dBTP |
@@ -78,5 +78,5 @@ Modeli (sherpa-onnx Parakeet/Whisper/Omnilingual) i `deep-filter` preuzimaju se 
 ## Licence
 
 Kod i sadržaj: AGPL-3.0 / CC BY-SA 4.0, kao i ostatak repoa. Fontovi: SIL Open Font License
-(Noto Sans, Playfair Display, Caveat, Lora). Muzika, efekti i žamor: nastali u kodu ovog repoa
+(Noto Sans, Playfair Display, Lora). Muzika, efekti i žamor: nastali u kodu ovog repoa
 (žamor od vlasnikovog snimka).
