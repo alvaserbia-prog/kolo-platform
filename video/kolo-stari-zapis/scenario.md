@@ -9,19 +9,19 @@ taj zapis zove POEN.
 
 ## Tekst za snimanje
 
-1. Pre pet hiljada godina, u Mesopotamiji, današnjem Iraku, ljudi su zapisivali na glinenim pločicama.
-2. Zapisivali su ko je koliko ječma doneo u skladište i koliko ovaca je predao.
-3. Prvo pismo nije nastalo za pesme ni za zakone. Nastalo je za ovakve zapise.
-4. U Južnoj Americi Inke nisu imale pismo. Zapisivale su čvorovima na užetu.
+1. Pre pet hiljada godina, u Mesopotamiji, današnjem Iraku, ljudi su zapisivali razmenu na glinenim pločicama.
+2. Zapisivali su ko je koliko ovaca, vune i ulja doneo u skladište.
+3. Ljudi nisu izmislili pismo da bi pisali pesme ili zakone, nego da bi zapisali ko je šta dao.
+4. Narod Inka u Južnoj Americi nije imao pismo. Zapisivali su čvorovima na užetu.
 5. Boja užeta označavala je vrstu robe, a čvorovi količinu. Tako se znalo šta je u skladištima i ko je šta doneo.
-6. Carstvo Inka imalo je milione ljudi i gotovo da nije koristilo novac. Vodilo se zapisom.
-7. Zapis se ne predaje i ne može da se izgubi kao stvar. On pokazuje ko je šta dao.
+6. Carstvo Inka imalo je milione stanovnika i gotovo da nije koristilo novac. Sve se vodilo kroz zapise.
+7. Zapis se ne koristi kao sredstvo za razmenu. On pokazuje ko je šta dao.
 8. U KOLU se taj zapis zove POEN. Kad nekome daš rad, dobro ili znanje, on ti prepiše POEN.
-9. U sledećem videu: šta piše pored tvog imena. Prati serijal.
+9. Budi i ti deo tog zapisa. Postavi svoj prvi oglas na ekolo.rs.
 
 ## Natpisi
 
-GLINENA PLOČICA · ČVOROVI NA UŽETU · POEN: ZAPIS
+GLINENA PLOČICA · ČVOROVI NA UŽETU · POEN: ZAPIS · ekolo.rs
 
 ## Ograde
 
