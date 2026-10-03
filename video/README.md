@@ -31,7 +31,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | tekst gotov, izrada nije počela |
 | 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
 | 18 | Ko krade iz zajedničke kase? / Kako da upravljanje bude transparentno | K | `kolo-transparentnost/` | tekst u pregledu (izbori vlasnika) |
-| 19 | Hoćeš transparentno rukovodstvo? / Onda svi moramo da budemo transparentni | K | `kolo-transparentnost-razmene/` | tekst u pregledu (izbori vlasnika) |
+| 19 | Da li bi komšiji pokazao svoj račun? / Zašto je tvoj zapis u KOLU otvoren | K | `kolo-transparentnost-razmene/` | tekst u pregledu (izbori vlasnika) |
 | 20 | Svi vide tvoj zapis. A ko zna ko si? (pseudonim) | K | `kolo-pseudonim/` | tekst u pregledu (izbori vlasnika) |
 | 21 | Čije je KOLO? Ničije. | K |  |  |
 | 22 | Šta je Fondacija | K |  |  |
@@ -167,7 +167,7 @@ otprilike jedan na dva. Porez i Penzija idu pre N „Ko stoji iza novca“, „D
 odredio vlasnik (sajmovi, Owen, Prudon, Warren, Rochdale, Greene, Raiffeisen, Pariska komuna, Gesell, Avramović,
 Kropotkin); XX i XXI vek idu hronološki. Serijal o novcu otvara niz od tri videa (odluka vlasnika, 30.09.2026): „Trampa“ pokazuje problem
 i dva načina da se reši, stvar koju svi primaju ili zapis; „Stari oblici novca“ i „Stari oblici zapisa“ razrađuju
-svaki od njih, a za njima ide blok od tri K videa o transparentnosti i privatnosti (odluka vlasnika, 02.10.2026): 18 upravljanje (evidencija), 19 razmena (POEN), 20 pseudonim. Video o transparentnosti potrošnje dinara („Zašto klupa košta 200.000?“) izdvojen je iz bloka i ide posle „Gde idu dinari“, jer traži da gledalac već zna za Fondaciju i donacije. Tri N zaredom su namerna celina.
+svaki od njih, a za njima ide blok od tri K videa o transparentnosti i privatnosti (odluka vlasnika, 02.10.2026): 18 upravljanje (evidencija), 19 zapis korisnika (POEN), 20 pseudonim. Video o transparentnosti potrošnje dinara („Zašto klupa košta 200.000?“) izdvojen je iz bloka i ide posle „Gde idu dinari“, jer traži da gledalac već zna za Fondaciju i donacije. Tri N zaredom su namerna celina.
 Metal (zlato, srebro, bakar) ostaje svom videu.
 „Kompenzacija i 1993.“ je vraćena na svoje hronološko mesto, jer na početku nije imala vezu sa KOLOM.
 
