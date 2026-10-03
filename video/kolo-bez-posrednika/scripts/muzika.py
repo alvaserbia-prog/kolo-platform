@@ -1,10 +1,8 @@
 """Muzika za video „Bez posrednika“: pesma „Od mraka do sunca“ (Suno, nalog vlasnika), složena po glasu.
 
 Pesma (3:00): mol sa kucavim pulsom do ~28 s, tamni prelaz 28,5–34,4 s, kolo u duru od udara 34,56 s
-(123 BPM), završni udari 172,3–179 s. Video počinje početkom pesme (pravilo u video/README.md). Do kola je
-u pesmi 34,56 s, a do izgovorenog „KOLO“ ~48,6 s, pa se mol produžava ponavljanjem, ne skraćuje: jednom fraza
-od 10,92 s (4,52 s ≈ 15,44 s po spektru) i jednom odsečak od 3,11 s (11,40 s ≈ 8,29 s). Sve po merenju
-(jačina, spektar, ritam), ne slušanjem.
+(123 BPM), završni udari 172,3–179 s. Sve po merenju (jačina, spektar, ritam): fraza mola se ponavlja na 10,92 s
+(4,52 s ≈ 15,44 s po spektru), pa se mol produžava ponavljanjem te fraze dok kolo ne padne na reč „KOLO“.
 Kolo traje dok traje glas, pa se celim taktovima skače na završne udare, koji počinju posle „ušteda“.
 Ulaz audio/raw/muzika-suno.mp3 + src/plan.json -> audio/muzika.wav (48 kHz, stereo).
 """
@@ -21,13 +19,14 @@ T1, T2 = 4.52, 15.44                    # ista mesta u fraze mola (period 10,92 
 MK = 34.56                              # prvi udar kola
 TAKT_KOLO = 4 * 60 / 123.0
 E0 = 172.31                             # udar pred završne akorde
-J, L2 = 11.40, 3.11                     # drugi skok nazad: sa 11,40 s na 8,29 s
-print("kolo u videu", round(T2 - T1 + L2 + MK, 2), "reč KOLO", round(K, 2))
+PETLJI = 2
+s0 = MK - K + (T2 - T1) * PETLJI      # početak u pesmi
+assert 0 <= s0 < T2, s0
 # kolo: celi taktovi do skoka na završetak, koji pada ~0,4 s posle poslednje reči
 n = max(1, round((KRAJ_GLASA + 0.4 - K) / TAKT_KOLO))
 kolo_do = MK + n * TAKT_KOLO
-delovi = [(0.0, T2), (T1, J), (J - L2, kolo_do), (E0, 180.0)]
-print("taktova kola", n, "delovi", [(round(a, 2), round(b, 2)) for a, b in delovi])
+delovi = [(s0, T2)] + [(T1, T2)] * (PETLJI - 1) + [(T1, kolo_do), (E0, 180.0)]
+print("s0", round(s0, 2), "K", round(K, 2), "taktova kola", n, "delovi", [(round(a, 2), round(b, 2)) for a, b in delovi])
 
 ul, filt = [], []
 for k, (a, b) in enumerate(delovi):
@@ -37,7 +36,7 @@ x = "[d0]"
 for k in range(1, len(delovi)):
     filt.append(f"{x}[d{k}]acrossfade=d=0.08:c1=tri:c2=tri[x{k}]")
     x = f"[x{k}]"
-filt.append(f"{x}apad=whole_dur={T},atrim=0:{T},afade=t=out:st={T - 1.0}:d=1.0[out]")
+filt.append(f"{x}afade=t=in:d=0.25,apad=whole_dur={T},atrim=0:{T},afade=t=out:st={T - 1.0}:d=1.0[out]")
 subprocess.run(["ffmpeg", "-v", "error", "-y", *ul, "-filter_complex", ";".join(filt), "-map", "[out]", "-ac", "2",
                 "-c:a", "pcm_s16le", "audio/muzika.wav"], check=True)
 print("gotovo: audio/muzika.wav")

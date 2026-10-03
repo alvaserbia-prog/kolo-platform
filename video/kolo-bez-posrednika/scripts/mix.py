@@ -1,8 +1,7 @@
 """Miks (video „Bez posrednika“): jedanaest klipova naracije na mestima iz plana + muzika sa duckingom, -14 LUFS.
 
 Glas: iz audio/final/glas.wav seče se [klipOd, klipDo] svake scene i postavlja na glasOd.
-Muzika: audio/muzika.wav (pesma složena u scripts/muzika.py), stalno −14 dB, bez stišavanja dok se govori
-(odluka vlasnika 02.10.2026, video/README.md), rez na 2,6 kHz.
+Muzika: audio/muzika.wav (pesma složena u scripts/muzika.py), -8 dB, rez na 2,6 kHz, sidechain vođen glasom.
 Efekata nema: pesma sama nosi udare.
 Zbir: loudnorm u dva prolaza na -14 LUFS / -1,5 dBTP -> public/miks.wav.
 """
@@ -22,9 +21,9 @@ ulazi += ["-i", "audio/muzika.wav"]
 glasovi = "".join(f"[g{k}]" for k in range(n))
 filt.append(f"{glasovi}amix=inputs={n}:normalize=0,apad=whole_dur={T},atrim=0:{T},"
             f"aformat=channel_layouts=stereo,asplit=2[glas][okidac]")
-filt.append(f"[{n}:a]aformat=channel_layouts=stereo,volume=-14dB,equalizer=f=2600:t=q:w=1:g=-4,"
+filt.append(f"[{n}:a]aformat=channel_layouts=stereo,volume=-8dB,equalizer=f=2600:t=q:w=1:g=-3,"
             f"apad=whole_dur={T},atrim=0:{T},afade=t=out:st={T-1.2}:d=1.2[muz]")
-filt.append("[muz]anull[muzd];[okidac]anullsink")  # bez stišavanja
+filt.append("[muz][okidac]sidechaincompress=threshold=0.05:ratio=3:attack=40:release=600:makeup=1[muzd]")
 filt.append("[glas][muzd]amix=inputs=2:normalize=0[pre]")
 
 

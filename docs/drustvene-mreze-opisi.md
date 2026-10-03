@@ -846,70 +846,70 @@ Struju, gorivo i porez i dalje plaćate u dinarima. POEN nije novac i ne menja s
 ## 15. Video „Bez posrednika“ (oktobar 2026)
 
 Video: `video/kolo-bez-posrednika/out/kolo-bez-posrednika.mp4`. Naslovna: `video/kolo-bez-posrednika/out/naslovna.jpg`.
-Zvuk na Instagramu preimenovati u „KOLO, bez posrednika“. Alternativni tekst: „Slikovnica: sa gomilice novca
-na stočiću, natpis TVOJA PLATA, novčanice odlaze banci, apoteci, pumpi i prodavnici, a na kraju je gomilica
-opet puna, usred kola na saboru.“
+Zvuk na Instagramu preimenovati u „KOLO, bez posrednika“.
+Opis polazi od kraja meseca i plate od koje ostane sitnina, a ne od nabrajanja iz videa (porez,
+banka, apoteka, zubar, gorivo, mleko se ne ponavljaju). Primer iz svakodnevice kog u videu nema:
+komšinica zakrpi jaknu, a ti njoj prekopaš baštu. Ušteda se iskazuje samo kao dinari koje niko nije
+morao da izdvoji, nikad kao preračun POEN-a u dinare (pravilo u `video/README.md`). O porezu se ne
+govori ništa, pa ni da ga u KOLU „nema“. Reč „vrednost“ se ne koristi (odeljak 2).
 
-Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, put tegle meda od košnice do police u
-prodavnici; Instagram, domaći pekmez koji nije na rafu nego u nečijem podrumu; Facebook, pijaca na kojoj
-se zna od koga je sir. Nabrajanje iz videa (porez, banka, apoteka, zubar, gorivo, mleko) se ne ponavlja,
-a porez se ne pominje. Ne piše se da se razmena dogovara direktno ni da se Fondacija ne meša (odeljak 1);
-„bez posrednika“ se kaže kao „bez preprodavca“ i „bez provizije“, o putu stvari, ne o dogovoru. Ušteda se
-iskazuje samo kao dinari koji ostanu, nikad kao preračun POEN-a. Uporedo sa odeljkom 14 („Ušteda“):
-nijedna rečenica nije ista, a početak nije „plata do dvadesetog“.
+**Pregled ekipe (03.10.2026):**
+- **Pisac:** „od plate ostala sitnina“ umesto „ništa ne ostane“ (konkretnije, a nije preterano); duga rečenica o posrednicima podeljena na dve.
+- **Dramaturg:** prva rečenica stoji sama i odmah otvara ranu (kraj meseca); most ka KOLU je „između vas nema nikoga“.
+- **Urednik za mreže:** prva rečenica ispod 100 znakova; jedan poziv, pitanje spojeno sa linkom; pet heštegova na TikTok-u i Instagramu, dva na Facebook-u; link klikabilan samo na Facebook-u.
+- **Urednik (drugi krug):** opisi bili kraći od preporučene dužine, pa je dodat pasus o poverenju iz kostura (odeljak 4): dokumenti se ne traže, nalog potvrđuje neko ko te lično zna, pseudonim, javna pravila.
+- **Gledalac iz ciljne grupe:** zapeo na „posrednik“ bez slike, pa stoji „neko treći, i svako uzme svoje“; „iznos u oglasu“ dopunjen sa „ili se dogovorite“, da ne zvuči kao cenovnik.
 
-**Pregled ekipe (03.10.2026):** pisac je pitanje o medu ostavio kao pitanje, a nabrajanje poslova na TikTok-u stavio u imenice da bude rodno neutralno, jer odgovor u brojkama
-nije proveren; dramaturg je tražio da svaki opis ima jednog „junaka“ (pčelar, komšinica sa pekmezom,
-domaćin sa sirom); urednik za mreže: prva rečenica ispod 100 znakova, jedan poziv, heštegovi po temi;
-gledalac je zapeo na „posrednik“, pa stoji „preprodavac“, reč koju svako zna. Kako se POEN dobija kaže
-se tačno: prepiše ti ga član kome si nešto dao ili uradio.
-
-**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; „platiš“ i „plaćate“ samo uz
-dinare; bez „vrednost“; rodno neutralno na TikTok-u i Instagramu; „vi“ dosledno na Facebook-u; bez
-prenesenog značenja („vraća pijačni odnos“ zamenjeno sa „kao na pijaci“).
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; „zakrpi“ umesto „pokrpi“;
+„niko od vas dvoje“ umesto „ni jedno od vas“; obraćanje rodno neutralno („Šta bi iz tvoje kuće prvo
+stiglo na Pijacu?“, „određuješ ti“); na Facebook-u dosledno „vi“ malim slovom, kao u odeljku 1.
 
 ### TikTok
 
 ```
-Kad u prodavnici platiš teglu meda, koliko od tih dinara stigne do pčelara? 🍯
+Kraj meseca, a od plate ostala sitnina. Svako zna taj osećaj.
 
-Između košnice i police stoje otkupljivač, prevoznik, veletrgovac i prodavnica. Svako uzme svoj deo, jer i oni rade. Ali pčelar iz tvog kraja je možda dve ulice od tebe.
+Deo novca ode pre nego što stigne na račun, a deo usput, na troškove za koje te niko ne pita da li ti odgovaraju. Između onoga ko nešto napravi i onoga kome je to potrebno često stoji neko treći. I svako uzme svoje.
 
-Na KOLU ga nađeš bez preprodavca i bez provizije. Za teglu mu prepišeš POEN. POEN skupljaš tako što drugim članovima nešto uradiš ili daš: košenje trave, sređivanje papira, čuvanje deteta. Med stigne do tebe, a dinari ostanu u novčaniku.
+KOLO je platforma za razmenu dobara i usluga među komšijama. Nastala je u Somboru, a pokreće je KOLO Fondacija. Na Pijaci ponudiš ono što imaš ili umeš, a razmenu dogovaraš direktno sa komšijom. Između vas nema nikoga i nema provizije. 🤝
 
-POEN je zapis o doprinosu. Nije novac i ne menja se za novac.
+Kad ti komšinica zakrpi jaknu, a ti njoj prekopaš baštu, niko od vas dvoje nije izdvojio ni dinar. To je ušteda koja ostaje u kući. Iznos u oglasu određuješ ti, ili se dogovorite. POEN je samo zapis o doprinosu, nije novac i ne menja se za novac. 🌾
 
-👉 Ko u tvom kraju pravi nešto što sada uzimaš sa police? Link je u profilu
+Dokumenti se ne traže. Nalog ti potvrđuje neko ko te lično zna, a na platformi si pod pseudonimom koji biraš. Pravila su javna i ista za svakoga.
 
-#Sombor #domaće #med #komšije #KOLO
+👉 Šta bi iz tvoje kuće prvo stiglo na Pijacu? Postavi oglas na ekolo.rs, link je u profilu
+
+#Sombor #Vojvodina #razmena #komšije #KOLO
 ```
 
 ### Instagram
 
 ```
-Najbolji pekmez u tvom kraju verovatno nije na rafu, nego u nečijem podrumu. 🫙
+Kraj meseca, a od plate ostala sitnina. Svako zna taj osećaj.
 
-Na KOLU ga nađeš kod komšinice koja ga kuva, bez preprodavca i bez provizije. Za teglu joj prepišeš POEN, a njega skupljaš pomažući drugim članovima. Dinari ostaju za ono što komšiluk ne može da ti da.
+KOLO je platforma za razmenu dobara i usluga među komšijama, nastala u Somboru. Na Pijaci ponudiš ono što imaš ili umeš i dogovoriš se direktno sa komšijom. Između vas nema nikoga i nema provizije. 🤝
 
-POEN nije novac, nego zapis o tome šta si dao zajednici.
+Kad ti komšinica zakrpi jaknu, a ti njoj prekopaš baštu, dinari ostaju u kući. POEN je zapis o doprinosu, a ne novac. Nalog ti potvrđuje neko ko te lično zna, bez ikakvih dokumenata.
 
-👉 Link je u bio.
+👉 Šta bi iz tvoje kuće prvo stiglo na Pijacu? Link je u bio.
 
-#Sombor #Vojvodina #domaće #komšije #KOLO
+#Sombor #Vojvodina #razmena #komšije #KOLOzajednica
 ```
 
 ### Facebook
 
 ```
-Na pijaci se oduvek znalo čiji je sir i od koga su paprike. 🧀
+Kraj meseca, a od plate ostala sitnina. Ko to nije doživeo?
 
-U prodavnici toga nema. Između onoga ko je nešto napravio i vas stoji više ruku, i svaka uzme svoj deo. To je posao kao svaki drugi, ali se na kraju oseti u ceni.
+Deo novca ode pre nego što stigne na račun, a deo usput, na troškove za koje vas niko ne pita da li vam odgovaraju. Između onoga ko nešto napravi i onoga kome je to potrebno često stoji neko treći. I svako uzme svoje.
 
-Na KOLU je opet kao na pijaci: znate od koga je stvar, a između vas nema preprodavca ni provizije. Za ono što vam drugi članovi daju ili urade, prepisujete im POEN, koji ste i sami sakupili radeći za druge. Dinari vam ostanu za račune i za ono što komšiluk ne može da vam da.
+KOLO je platforma za razmenu dobara i usluga među ljudima koji žive u istom mestu. Nastala je u Somboru, a pokreće je KOLO Fondacija. Na Pijaci ponudite ono što imate ili umete, a razmenu dogovarate direktno sa komšijom. Fondacija u tome ne posreduje i ne uzima proviziju. 🤝
 
-POEN je zapis o doprinosu zajednici. Nije novac i ne menja se za novac.
+Kad vam komšinica zakrpi jaknu, a vi njoj prekopate baštu, niko od vas dvoje nije izdvojio ni dinar. Iznos u oglasu određujete vi, ili se dogovorite. POEN je samo zapis o doprinosu zajednici, nije novac i ne može se zameniti za novac. 🌾
 
-👉 Šta bi iz vaše kuće komšije rado uzele? Ponudite na https://ekolo.rs
+Dokumenti se ne traže. Nalog vam potvrđuje neko ko vas lično zna, a na platformi ste pod pseudonimom. Sva pravila su javna i ista za svakoga.
 
-#Sombor #domaće #KOLO
+👉 Šta bi iz vaše kuće prvo stiglo na Pijacu? Postavite oglas na https://ekolo.rs
+
+#Sombor #KOLO
 ```

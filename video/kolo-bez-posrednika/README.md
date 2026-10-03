@@ -67,8 +67,8 @@ KOMPOZICIJA=Naslovna node scripts/kadrovi.mjs 0 && mv out/kadrovi/f0.jpg out/nas
 | rez | izbačeni prvi, prekinuti izgovori: rečenica o banci (13,50–24,66 s snimka), rečenica o zubaru (41,95–46,25), „I tako. Ako se na kraju mes… i tako.“ (65,90–71,62); posle tempa još ostatak „uzme“ pred „Banka uzme“ (čulo se „…uzme, Banka uzme“), „A kome ide razlika, kada se mleko…“ i „Niko ti.“ Ostaje poslednji, ceo izgovor |
 | tempo | pauze duže od 0,45 s skraćene, **atempo 1,03** → 65,5 s |
 | vremena reči | Parakeet TDT 0.6B v3 po isečcima, pa prisilno CTC poravnanje (Omnilingual ASR 300M); „40“ i „160“ se poravnavaju kao „četrdeset“ i „sto šezdeset“, adresa kao „ekolo tačka rs“, kako je izgovorena |
-| muzika | „Od mraka do sunca“ (3:00): mol do ~28 s, tamni prelaz, **kolo od udara 34,56 s (123 BPM)**, završni udari 172,3–179 s. Video počinje početkom pesme (pravilo u `video/README.md`); pošto kolo u pesmi stiže 14 s pre izgovorenog „KOLO“, mol se produžava ponavljanjem: jednom fraza od 10,92 s (4,52 ≈ 15,44 s po spektru) i jednom odsečak od 3,11 s (11,40 ≈ 8,29 s). Kolo traje devet taktova, pa se skače na završne udare, koji počinju posle „ušteda“ (`scripts/muzika.py`). Delovi su određeni merenjem jačine, spektra i ritma, ne slušanjem |
-| miks | muzika stalno −14 dB, bez stišavanja dok se govori (odluka vlasnika 02.10.2026), rez na 2,6 kHz; −14 LUFS / −1,5 dBTP; zvučnih efekata nema |
+| muzika | „Od mraka do sunca“ (3:00): mol do ~28 s, tamni prelaz, **kolo od udara 34,56 s (123 BPM)**, završni udari 172,3–179 s. Fraza mola se ponavlja na 10,92 s (4,52 ≈ 15,44 po spektru), pa je mol produžen sa dva ponavljanja te fraze, tako da **kolo kreće na izgovoreno „KOLO“**; kolo traje devet taktova, pa se skače na završne udare, koji počinju posle „ušteda“ (`scripts/muzika.py`). Delovi su određeni merenjem jačine, spektra i ritma, ne slušanjem |
+| miks | muzika −8 dB, rez na 2,6 kHz, sidechain 3:1 vođen glasom; −14 LUFS / −1,5 dBTP; zvučnih efekata nema |
 
 Modeli (sherpa-onnx Parakeet i Omnilingual) i `deep-filter` preuzeti su sa GitHub izdanja i nisu u repou.
 
