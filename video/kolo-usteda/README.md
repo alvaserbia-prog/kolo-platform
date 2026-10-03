@@ -1,7 +1,7 @@
 # KOLO video 13 — Ušteda („Zoran, električar“)
 
 Reels/TikTok/Facebook, 1080×1920, 30 fps, H.264 ~3,8 Mb/s + AAC, −14 LUFS. **Trajanje 91,6 s.**
-Gotov video: `out/kolo-usteda.mp4`. Naslovne: `out/naslovna.jpg` (kadar iz scene 1, „More za šest meseci“), `out/naslovna-2.jpg` („Na kraju meseca ništa?“, sveska pre KOLA), `out/naslovna-3.jpg` („20.000 dinara svakog meseca“, šesti mesec), `out/naslovna-4.jpg` („95.000 dinara za šest meseci“, sabiranje) ( `npx remotion still src/index.ts NaslovnaN out/naslovna-N.jpg`). Scenario i izgovoren tekst: `scenario.md`. Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 14.
+Gotov video: `out/kolo-usteda.mp4`. Naslovne: `out/naslovna.jpg` (kadar iz scene 1, „More za šest meseci“), `out/naslovna-2.jpg` („Na kraju meseca ništa?“, sveska pre KOLA), `out/naslovna-3.jpg` („20.000 dinara svakog meseca“, šesti mesec), `out/naslovna-4.jpg` („95.000 dinara za šest meseci“, sabiranje); sa kadrom porodice i mora, koji je vlasniku najbolji, i natpisom o uštedi: `out/naslovna-more-1.jpg` („Kako je uštedeo za more?“), `-2` („Ušteda za more“), `-3` („Svakog meseca ostane više“) ( `npx remotion still src/index.ts NaslovnaN out/naslovna-N.jpg`). Scenario i izgovoren tekst: `scenario.md`. Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 14.
 
 **Stil:** papirni kolaž, isti alat kao trilogija „Poverenje“ (`src/kolaz/`, kopija `kolo-poverenje/src/v1k`).
 Nosiva slika je Zoranova sveska na kariranom papiru: kolone „Dinari“ i „U KOLU“, red po trošku. Stavka koja

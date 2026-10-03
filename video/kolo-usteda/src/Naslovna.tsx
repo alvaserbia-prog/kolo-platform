@@ -14,7 +14,7 @@ const Scena1 = SCENE[0];
 export const Naslovna: React.FC = () => (
   <AbsoluteFill style={{ background: P.papir }}>
     <Img src={staticFile("kolaz/papir.jpg")} style={{ position: "absolute", inset: 0, width: 1080, height: 1920 }} />
-    <Sequence from={-240} layout="none">
+    <Sequence from={-(trajanjeF(1) - 6)} layout="none">
       <Scena1 />
     </Sequence>
     <AbsoluteFill>
@@ -41,7 +41,7 @@ export const Naslovna: React.FC = () => (
 );
 
 // Dodatne naslovne (03.10.2026): kadar iz sveske i krupan natpis o ušteđenim dinarima.
-const Natpis: React.FC<{ naslov: string; podnaslov: string; y?: number; velicina?: number }> = ({ naslov, podnaslov, y = 1400, velicina = 96 }) => (
+const Natpis: React.FC<{ naslov: string; podnaslov: string; y?: number; velicina?: number; pod?: number }> = ({ naslov, podnaslov, y = 1400, velicina = 96, pod = 48 }) => (
   <svg viewBox="0 0 1080 1920" width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
     <Defs />
     <g transform={`translate(540 ${y}) rotate(-2)`}>
@@ -49,7 +49,7 @@ const Natpis: React.FC<{ naslov: string; podnaslov: string; y?: number; velicina
       <text y={-12} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={velicina} fill={P.zelena900}>
         {naslov}
       </text>
-      <text y={82} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={48} fill={P.tekst}>
+      <text y={82} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={pod} fill={P.tekst}>
         {podnaslov}
       </text>
     </g>
@@ -101,3 +101,17 @@ export const Naslovna4: React.FC = () => (
     <Natpis naslov="95.000 dinara za šest meseci" podnaslov="Bez veće plate, uz KOLO" y={1395} velicina={80} />
   </Osnova>
 );
+
+// Varijante prve naslovne (kadar sa porodicom i morem), sa natpisom o uštedi (vlasnik, 03.10.2026).
+const More: React.FC<{ naslov: string; podnaslov: string; velicina?: number; pod?: number }> = ({ naslov, podnaslov, velicina = 96, pod = 44 }) => (
+  <AbsoluteFill style={{ background: P.papir }}>
+    <Img src={staticFile("kolaz/papir.jpg")} style={{ position: "absolute", inset: 0, width: 1080, height: 1920 }} />
+    <Sequence from={-(trajanjeF(1) - 6)} layout="none">
+      <Scena1 />
+    </Sequence>
+    <Natpis naslov={naslov} podnaslov={podnaslov} y={1370} velicina={velicina} pod={pod} />
+  </AbsoluteFill>
+);
+export const NaslovnaMore1: React.FC = () => <More naslov="Kako je uštedeo za more?" podnaslov="Ista plata, a svakog meseca ostane više" />;
+export const NaslovnaMore2: React.FC = () => <More naslov="Ušteda za more" podnaslov="Ista plata, 95.000 dinara za šest meseci" velicina={110} pod={42} />;
+export const NaslovnaMore3: React.FC = () => <More naslov="Svakog meseca ostane više" podnaslov="Za šest meseci skupio je za more" velicina={92} />;
