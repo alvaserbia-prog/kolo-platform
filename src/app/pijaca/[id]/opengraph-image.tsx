@@ -66,53 +66,58 @@ async function brendiranaKartica(naslov: string) {
           height: "100%",
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
           position: "relative",
           background: "linear-gradient(135deg, #0F3D20 0%, #1B6B3A 100%)",
           color: "#FAFAF8",
           fontFamily: "Inter",
-          padding: "80px",
-          justifyContent: "space-between",
+          textAlign: "center",
           overflow: "hidden",
         }}
       >
         <div
           style={{
             position: "absolute",
-            top: "-180px",
-            right: "-180px",
-            width: "560px",
-            height: "560px",
+            top: "-200px",
+            right: "-160px",
+            width: "520px",
+            height: "520px",
             borderRadius: "50%",
             border: "40px solid rgba(245, 184, 66, 0.18)",
             display: "flex",
           }}
         />
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+        {/* Sadržaj u središnjem kvadratu — Facebook (komentari, mobilni)
+            seče karticu na kvadrat iz sredine; vidi app/opengraph-image.tsx. */}
+        <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <div
             style={{
-              width: "20px",
-              height: "20px",
+              width: "18px",
+              height: "18px",
               borderRadius: "50%",
               background: "#F5B842",
               display: "flex",
             }}
           />
-          <span style={{ fontSize: "30px", letterSpacing: "8px", color: "#E8F5EC", fontWeight: 700 }}>
+          <span style={{ fontSize: "26px", letterSpacing: "7px", color: "#E8F5EC", fontWeight: 700 }}>
             PIJACA
           </span>
         </div>
         <div
           style={{
-            fontSize: naslov.length > 60 ? "56px" : "72px",
+            fontSize: naslov.length > 60 ? "44px" : naslov.length > 25 ? "56px" : "72px",
             fontWeight: 700,
             lineHeight: 1.15,
-            maxWidth: "1040px",
+            maxWidth: "600px",
+            marginTop: "36px",
             display: "flex",
+            justifyContent: "center",
           }}
         >
           {naslov}
         </div>
-        <div style={{ display: "flex", fontSize: "32px" }}>
+        <div style={{ display: "flex", fontSize: "28px", marginTop: "40px" }}>
           <span style={{ color: "#F5B842", fontWeight: 700 }}>ekolo.rs</span>
         </div>
       </div>

@@ -30,23 +30,24 @@ export default async function OpengraphImage() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
           position: "relative",
           background: "linear-gradient(135deg, #0F3D20 0%, #1B6B3A 100%)",
           color: "#FAFAF8",
           fontFamily: "Inter",
-          padding: "80px",
-          justifyContent: "space-between",
+          textAlign: "center",
           overflow: "hidden",
         }}
       >
-        {/* Kružni motiv (kolo) — dekorativni prsten u pozadini */}
+        {/* Kružni motiv (kolo) — dekorativni prstenovi, simetrično po uglovima */}
         <div
           style={{
             position: "absolute",
-            top: "-180px",
-            right: "-180px",
-            width: "560px",
-            height: "560px",
+            top: "-200px",
+            right: "-160px",
+            width: "520px",
+            height: "520px",
             borderRadius: "50%",
             border: "40px solid rgba(245, 184, 66, 0.18)",
             display: "flex",
@@ -55,69 +56,71 @@ export default async function OpengraphImage() {
         <div
           style={{
             position: "absolute",
-            bottom: "-220px",
-            right: "120px",
-            width: "360px",
-            height: "360px",
+            bottom: "-200px",
+            left: "-160px",
+            width: "520px",
+            height: "520px",
             borderRadius: "50%",
-            border: "28px solid rgba(46, 157, 84, 0.35)",
+            border: "32px solid rgba(46, 157, 84, 0.35)",
             display: "flex",
           }}
         />
 
-        {/* Gornji red: oznaka */}
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+        {/* Sav sadržaj stoji u središnjem kvadratu (~600 px širine): Facebook
+            u komentarima i na mobilnom seče 1200×630 na kvadrat iz sredine,
+            pa sve levo poravnato ispada iz kadra. */}
+        <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
           <div
             style={{
-              width: "20px",
-              height: "20px",
+              width: "18px",
+              height: "18px",
               borderRadius: "50%",
               background: "#F5B842",
               display: "flex",
             }}
           />
-          <span style={{ fontSize: "30px", letterSpacing: "8px", color: "#E8F5EC", fontWeight: 700 }}>
+          <span style={{ fontSize: "26px", letterSpacing: "7px", color: "#E8F5EC", fontWeight: 700 }}>
             ZAJEDNIČKO DOBRO
           </span>
         </div>
 
-        {/* Glavni naziv + tagline */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              fontSize: "180px",
-              fontWeight: 700,
-              letterSpacing: "-4px",
-              lineHeight: 1,
-              display: "flex",
-            }}
-          >
-            KOLO
-          </div>
-          <div
-            style={{
-              fontSize: "44px",
-              marginTop: "24px",
-              color: "#E8F5EC",
-              maxWidth: "820px",
-              lineHeight: 1.25,
-              display: "flex",
-            }}
-          >
-            Sistem uzajamnosti zasnovan na doprinosu zajedničkom dobru
-          </div>
+        <div
+          style={{
+            fontSize: "176px",
+            fontWeight: 700,
+            letterSpacing: "-4px",
+            lineHeight: 1,
+            marginTop: "28px",
+            display: "flex",
+          }}
+        >
+          KOLO
+        </div>
+        <div
+          style={{
+            fontSize: "36px",
+            marginTop: "24px",
+            color: "#E8F5EC",
+            maxWidth: "600px",
+            lineHeight: 1.3,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          Sistem uzajamnosti zasnovan na doprinosu zajedničkom dobru
         </div>
 
-        {/* Donji red: domen + besplatno */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
-            fontSize: "32px",
+            gap: "18px",
+            marginTop: "40px",
+            fontSize: "28px",
           }}
         >
           <span style={{ color: "#F5B842", fontWeight: 700 }}>ekolo.rs</span>
+          <span style={{ color: "rgba(232, 245, 236, 0.5)" }}>·</span>
           <span style={{ color: "#E8F5EC" }}>Članstvo je besplatno</span>
         </div>
       </div>
