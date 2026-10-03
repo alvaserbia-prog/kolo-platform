@@ -25,7 +25,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 11 | KOLO raste sa nama | K | `kolo-raste/` | ✅ |
 | 12 | Pijaca | K | `kolo-pijaca/` | ✅ |
 | 13 | Ušteda (Zoran, električar) | K | `kolo-usteda/` | ✅ |
-| 14 | Bez posrednika (scenario u pregledu) | K |  |  |
+| 14 | Bez posrednika | K | `kolo-bez-posrednika/` | ✅ |
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
 | 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | tekst gotov, izrada nije počela |
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | tekst gotov, izrada nije počela |
@@ -190,14 +190,36 @@ Metal (zlato, srebro, bakar) ostaje svom videu.
   („kad novac propadne, tu je KOLO“), a „zapis ko kome duguje“ se ne vezuje za POEN (POEN nije potraživanje, Pravilnik čl. 12–13). Marka se pominje.
 - Godine i brojke u istorijskim videima proveravaju se pre svakog scenarija.
 
+## Tok izrade videa (odluka vlasnika, 03.10.2026)
+
+🔴 **Produkcija mora biti najbolja moguća, na profesionalnom nivou.** Radi se koliko god treba, uz sve dostupne
+alate. Cilj svakog videa: gledalac da razume šta je KOLO i čemu služi i da poželi da se registruje i postavi oglas.
+
+🔴 **Koraci idu ovim redom; posle svakog završenog koraka sve urađeno do tada se ponovo pregleda i ispravi
+pre sledećeg.** Greška nađena kasnije vraća rad na korak u kome je nastala.
+
+| # | Korak | Šta se predaje | Provera posle koraka |
+|---|---|---|---|
+| 1 | **Tekst za glas** — dogovara se sa vlasnikom; prolazi pregled stalne ekipe (pisac, dramaturg, urednik za mreže, gledalac) | konačan tekst za snimanje | zabranjene reči; pravna odbrana iz `CLAUDE.md`; brojke i činjenice provereni; tekst se čita naglas bez zastoja |
+| 2 | **Scenario** — scena po scena: vreme, naracija, slika, šta se dešava na kojoj reči | scenario u razgovoru, pa u `scenario.md` | 🟡 šalje se vlasniku pre izrade slike; slika ne govori isto što i tekst; nosiva slika razume se bez zvuka |
+| 3 | **Muzika: upiti za Suno** — žanr, tempo, tok po delovima, mesto obrta i završnog akorda, sa obrazloženjem (pravila o muzici ispod) | upiti (Style i Lyrics) u razgovoru | tok muzike prati tok teksta; obrt pada na ključnu reč |
+| 4 | **Slika** — scene po scenariju | probni kadrovi svake scene | svaka scena se pogleda kao slika: preklapanja, ruke, lica, čitljivost, mesto za titl |
+| 5 | **Glas** — čišćenje, izbacivanje ponovljenih i prekinutih izgovora, tempo | očišćen glas | 🔴 snimak se prepoznaje mašinski (dva modela) i poredi sa tekstom reč po reč: ne sme ostati reč viška, prekinut početak ni dupla reč |
+| 6 | **Titlovi** — po rečima, uz izgovorenu reč, kako je izgovoreno | probni kadrovi | svaka reč titla postoji u glasu i nijedna reč glasa ne fali u titlu |
+| 7 | **Natpisi** — samo po pravilu o natpisima ispod | spisak natpisa sa obrazloženjem | natpis ne ponavlja titl |
+| 8 | **Muzika i miks** — numera koju vlasnik pošalje uklapa se po glasu (obrt na ključnoj reči, završetak posle poslednje reči) | miks | −14 LUFS; muzika stalne jačine; rez u muzici na udarcu |
+| 9 | **Završna kontrola i predaja** — ceo video od početka do kraja | gotov video, naslovna, opisi za TikTok, Instagram i Facebook po `docs/drustvene-mreze-opisi.md` (lektor i književnik) | trajanje, 1080×1920, glasnoća, zabranjene reči u slici, titlu i opisu; kopija za pregled manja od 30 MB |
+
+- Vlasnik odobrava tekst (1), scenario (2) i numeru (3 i 8); sve ostalo se radi samostalno i šalje gotovo.
+- U folderu videa ostaju scenario, uputstvo sa postupkom i tabelom „Priča u slici“, skripte i gotov fajl; opisi idu u `docs/drustvene-mreze-opisi.md`.
+- 🔴 Odluka vlasnika doneta tokom izrade odmah se zapisuje: ovde (za sve videe) ili u uputstvo videa (samo za taj video). Ono što nije zapisano, sledeća sesija ne zna.
+
 ## Zajedničko za sve videe
 
-🔴 **Tekst ide 1 s ISPRED izgovorene reči** (odluka vlasnika, 28.09.2026). Titl, natpis i pokret
-vezan za reč pojavljuju se 1 s pre nego što se reč izgovori; glas i muzika se ne pomeraju, a
-zvučni efekti prate sliku. Kad je tekst išao tačno uz reč (merenjem usklađen na desetinku), gledalac
-ga je doživljavao kao da kasni, i to u svim videima serije. Provereno na uređaju vlasnika testom
-bljesak + pisak (uređaj pušta sinhrono) i probom sa pomerenim zvukom; vlasnik je posle probe od 0,4 s tražio 0,7, pa 1 s. U kodu: `PREDNOST_S` u
-`src/vreme.ts` (i u `scripts/zvuci.py`), prvi put u `kolo-bunar/`.
+🔴 **Pravilo „tekst 1 s ispred glasa“ je ukinuto** (odluka vlasnika, 03.10.2026: „to sad žuri“). Titl, natpis
+i pokret vezan za reč idu uz izgovorenu reč (`PREDNOST_S = 0` u `scripts/plan.py`); traka titla se i dalje
+pojavi ~0,25 s pre prve reči, a reč pozeleni ~0,1 s pre izgovora. Videi napravljeni dok je pravilo važilo
+nisu ponovo renderovani.
 
 Papirni kolaž, linije koje „ključaju", titlovi po rečima (izgovorena reč zelena), naracija
 vlasnika, tamburaška muzika, −14 LUFS. Trajanje nije unapred određeno: video traje koliko priča traži, i duže od 60 s kad je tako procenjeno (odluka vlasnika, 26.09.2026). POEN se nikad ne crta kao novčić ni novčanica, samo kao

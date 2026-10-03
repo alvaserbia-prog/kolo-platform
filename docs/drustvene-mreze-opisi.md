@@ -842,3 +842,74 @@ Struju, gorivo i porez i dalje plaćate u dinarima. POEN nije novac i ne menja s
 
 #Sombor #KOLO
 ```
+
+## 15. Video „Bez posrednika“ (oktobar 2026)
+
+Video: `video/kolo-bez-posrednika/out/kolo-bez-posrednika.mp4`. Naslovna: `video/kolo-bez-posrednika/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, bez posrednika“. Alternativni tekst: „Slikovnica: sa gomilice novca
+na stočiću, natpis TVOJA PLATA, novčanice odlaze banci, apoteci, pumpi i prodavnici, a na kraju je gomilica
+opet puna, usred kola na saboru.“
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, put tegle meda od košnice do police u
+prodavnici; Instagram, domaći pekmez koji nije na rafu nego u nečijem podrumu; Facebook, pijaca na kojoj
+se zna od koga je sir. Nabrajanje iz videa (porez, banka, apoteka, zubar, gorivo, mleko) se ne ponavlja,
+a porez se ne pominje. Ne piše se da se razmena dogovara direktno ni da se Fondacija ne meša (odeljak 1);
+„bez posrednika“ se kaže kao „bez preprodavca“ i „bez provizije“, o putu stvari, ne o dogovoru. Ušteda se
+iskazuje samo kao dinari koji ostanu, nikad kao preračun POEN-a. Uporedo sa odeljkom 14 („Ušteda“):
+nijedna rečenica nije ista, a početak nije „plata do dvadesetog“.
+
+**Pregled ekipe (03.10.2026):** pisac je pitanje o medu ostavio kao pitanje, a nabrajanje poslova na TikTok-u stavio u imenice da bude rodno neutralno, jer odgovor u brojkama
+nije proveren; dramaturg je tražio da svaki opis ima jednog „junaka“ (pčelar, komšinica sa pekmezom,
+domaćin sa sirom); urednik za mreže: prva rečenica ispod 100 znakova, jedan poziv, heštegovi po temi;
+gledalac je zapeo na „posrednik“, pa stoji „preprodavac“, reč koju svako zna. Kako se POEN dobija kaže
+se tačno: prepiše ti ga član kome si nešto dao ili uradio.
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; „platiš“ i „plaćate“ samo uz
+dinare; bez „vrednost“; rodno neutralno na TikTok-u i Instagramu; „vi“ dosledno na Facebook-u; bez
+prenesenog značenja („vraća pijačni odnos“ zamenjeno sa „kao na pijaci“).
+
+### TikTok
+
+```
+Kad u prodavnici platiš teglu meda, koliko od tih dinara stigne do pčelara? 🍯
+
+Između košnice i police stoje otkupljivač, prevoznik, veletrgovac i prodavnica. Svako uzme svoj deo, jer i oni rade. Ali pčelar iz tvog kraja je možda dve ulice od tebe.
+
+Na KOLU ga nađeš bez preprodavca i bez provizije. Za teglu mu prepišeš POEN. POEN skupljaš tako što drugim članovima nešto uradiš ili daš: košenje trave, sređivanje papira, čuvanje deteta. Med stigne do tebe, a dinari ostanu u novčaniku.
+
+POEN je zapis o doprinosu. Nije novac i ne menja se za novac.
+
+👉 Ko u tvom kraju pravi nešto što sada uzimaš sa police? Link je u profilu
+
+#Sombor #domaće #med #komšije #KOLO
+```
+
+### Instagram
+
+```
+Najbolji pekmez u tvom kraju verovatno nije na rafu, nego u nečijem podrumu. 🫙
+
+Na KOLU ga nađeš kod komšinice koja ga kuva, bez preprodavca i bez provizije. Za teglu joj prepišeš POEN, a njega skupljaš pomažući drugim članovima. Dinari ostaju za ono što komšiluk ne može da ti da.
+
+POEN nije novac, nego zapis o tome šta si dao zajednici.
+
+👉 Link je u bio.
+
+#Sombor #Vojvodina #domaće #komšije #KOLO
+```
+
+### Facebook
+
+```
+Na pijaci se oduvek znalo čiji je sir i od koga su paprike. 🧀
+
+U prodavnici toga nema. Između onoga ko je nešto napravio i vas stoji više ruku, i svaka uzme svoj deo. To je posao kao svaki drugi, ali se na kraju oseti u ceni.
+
+Na KOLU je opet kao na pijaci: znate od koga je stvar, a između vas nema preprodavca ni provizije. Za ono što vam drugi članovi daju ili urade, prepisujete im POEN, koji ste i sami sakupili radeći za druge. Dinari vam ostanu za račune i za ono što komšiluk ne može da vam da.
+
+POEN je zapis o doprinosu zajednici. Nije novac i ne menja se za novac.
+
+👉 Šta bi iz vaše kuće komšije rado uzele? Ponudite na https://ekolo.rs
+
+#Sombor #domaće #KOLO
+```
