@@ -1,7 +1,7 @@
 # KOLO video 13 — Ušteda („Zoran, električar“)
 
 Reels/TikTok/Facebook, 1080×1920, 30 fps, H.264 ~3,8 Mb/s + AAC, −14 LUFS. **Trajanje 83,4 s.**
-Gotov video: `out/kolo-usteda.mp4`. Scenario i izgovoren tekst: `scenario.md`.
+Gotov video: `out/kolo-usteda.mp4`. Naslovna: `out/naslovna.jpg` (kadar iz scene 1, „More za šest meseci“; `npx remotion still src/index.ts Naslovna out/naslovna.jpg`). Scenario i izgovoren tekst: `scenario.md`. Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 14.
 
 **Stil:** papirni kolaž, isti alat kao trilogija „Poverenje“ (`src/kolaz/`, kopija `kolo-poverenje/src/v1k`).
 Nosiva slika je Zoranova sveska na kariranom papiru: kolone „Dinari“ i „U KOLU“, red po trošku. Stavka koja

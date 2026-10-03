@@ -782,3 +782,63 @@ Za ono što date, komšija vam prepiše POEN. POEN nije novac i ne menja se za n
 
 #Sombor #KOLO
 ```
+
+## 14. Video „Ušteda“ (oktobar 2026)
+
+Video: `video/kolo-usteda/out/kolo-usteda.mp4`. Naslovna: `video/kolo-usteda/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, ušteda“. Alternativni tekst: „Papirni kolaž: porodica tovari
+kofere u crveni auto, a u svesci troškova stavke jedna po jedna prelaze iz kolone Dinari u kolonu U KOLU.“
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, plata koja stigne prvog, a do dvadesetog je nema;
+Instagram, pitanje koliko mesečnih troškova može da pokrije neko iz tvog mesta; Facebook, dobri majstori
+koji bi radili više i ljudi koji odlažu popravku do plate. Primeri su novi (popravka bicikla, torta za
+rođendan, časovi engleskog, kolači), ne oni iz videa. Ušteda se iskazuje samo kao dinari koji ostanu u kući,
+nikad kao preračun POEN-a. Nijedna rečenica nije iz naracije ni iz ranijih opisa.
+Jezička provera (lektor i književnik): navodnici „…“, bez crtica i nabrajanja; „plaćaš“ samo uz dinare;
+POEN se „prepiše“, ne „dobija“; rodno neutralno na TikTok-u i Instagramu („ono što ti znaš da radiš“,
+„neko iz tvog mesta“); „vi“ dosledno na Facebook-u; „rešava se u komšiluku“ zamenjeno rečenicom sa
+vršiocem radnje; duga rečenica o majstoru podeljena na dve.
+
+### TikTok
+
+```
+Plata stigne prvog, a do dvadesetog je već nema. To zna skoro svaka kuća. 🗓️
+
+Deo tog novca ode na stvari koje neko iz tvoje ulice ume da uradi: šišanje, popravku bicikla, kolače za rođendan. Na KOLU nudiš ono što ti znaš da radiš, a od drugih članova dobijaš ono što tebi treba. Za to ne daješ dinare, pa ti ostanu.
+
+Kad nekome uradiš posao, on ti prepiše POEN. To je zapis o tvom doprinosu, nije novac i ne menja se za novac.
+
+Struju, gorivo i porez i dalje plaćaš u dinarima. Ali ono što ti komšije mogu dati, ne moraš više da plaćaš u prodavnici.
+
+👉 Napiši šta znaš da radiš, link je u profilu
+
+#Sombor #ušteda #razmena #komšije #KOLO
+```
+
+### Instagram
+
+```
+Koliko tvojih mesečnih troškova može da pokrije neko iz tvog mesta? 🧾
+
+Torta za rođendan, popravka bicikla, časovi engleskog. Na KOLU to dobijaš od drugih članova, a zauzvrat nudiš ono što ti znaš da radiš. Dinari namenjeni tome ostaju u kući.
+
+Svaki posao koji uradiš za nekog člana ostaje zapisan kao POEN. POEN nije novac i ne menja se za novac.
+
+Što više ljudi iz tvog mesta nudi nešto, to više toga nađeš u komšiluku. Link je u bio.
+
+#Sombor #Vojvodina #ušteda #razmena #KOLO
+```
+
+### Facebook
+
+```
+U Somboru ima dobrih majstora koji bi radili više. Ima i ljudi koji popravku odlažu do plate, jer im fali novca. 🔧
+
+Na KOLU mogu da se nađu bez dinara. Majstor uradi posao, a komšija mu prepiše POEN, zapis o njegovom doprinosu. Posle od drugih članova dobije ono što njemu treba: povrće, šišanje, časove za dete. Ono što bi inače platio u dinarima sada dobije u komšiluku, pa mu na kraju meseca ostane više.
+
+Struju, gorivo i porez i dalje plaćate u dinarima. POEN nije novac i ne menja se za novac.
+
+👉 Napišite šta umete da radite: https://ekolo.rs
+
+#Sombor #KOLO
+```
