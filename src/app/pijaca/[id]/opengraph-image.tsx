@@ -249,15 +249,61 @@ export default async function OpengraphImage({
     });
   }
 
-  // Fotografija preko cele kartice (cover — messengeri očekuju tačno 1200×630).
+  return karticaSaFotografijom(foto);
+}
+
+/**
+ * Kartica sa fotografijom oglasa. Fotografija se NE seče na 1200×630: Facebook
+ * (komentari, mobilni) iz kartice još jednom seče kvadrat iz sredine, pa je od
+ * uspravne fotografije sa telefona ostajala uska traka. Zato cela fotografija
+ * stoji u središnjem kvadratu 630×630 (contain), a ostatak širine popunjava ista
+ * fotografija, zamućena i zatamnjena, da kartica ne bude prazna u širokom prikazu.
+ */
+function karticaSaFotografijom(foto: string) {
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex" }}>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+          background: "#0F3D20",
+          overflow: "hidden",
+        }}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={foto}
           alt=""
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          style={{
+            position: "absolute",
+            top: "-40px",
+            left: "-40px",
+            width: "1280px",
+            height: "710px",
+            objectFit: "cover",
+            filter: "blur(28px)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(0, 0, 0, 0.35)",
+            display: "flex",
+          }}
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={foto}
+          alt=""
+          style={{ width: "630px", height: "630px", objectFit: "contain" }}
         />
       </div>
     ),
