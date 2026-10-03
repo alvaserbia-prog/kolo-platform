@@ -23,10 +23,10 @@ export const Naslovna: React.FC = () => (
         <g transform="translate(560 1370) rotate(-2)">
           <Isecak pts={pravougaonik(-450, -130, 900, 250)} boja={P.belo} seed="nas1" amp={3} />
           <text y={-12} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={104} fill={P.zelena900}>
-            More za šest meseci
+            More za 6 meseci
           </text>
           <text y={82} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={50} fill={P.tekst}>
-            Ista plata, ostaje više dinara
+            Ista plata, veća ušteda
           </text>
         </g>
         <g transform="translate(540 1560) rotate(1.5)">
