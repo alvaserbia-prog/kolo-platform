@@ -29,15 +29,15 @@ const AKTI = [
   // reference na verziju koja kao dokument više ne postoji.
   "Pravilnik_4_6_6.md",
   "dokaz_stvarnosti_4_6_5.md",
-  "DPIA_4_6_7.md",
-  "radnje_obrade_4_6_7.md",
-  "uslovi_koriscenja_4_6_6.md",
-  "politika_4_6_7.md",
+  "DPIA_4_6_8.md",
+  "radnje_obrade_4_6_8.md",
+  "uslovi_koriscenja_4_6_8.md",
+  "politika_4_6_8.md",
   "statut_4_1_0.md",
   "whitepaper_4_6_2.md",
-  "rizici_4_6_0.md",
-  "hijerarhija_4_4_6.md",
-  "donacije_4_5_8.md",
+  "rizici_4_6_8.md",
+  "hijerarhija_4_6_8.md",
+  "donacije_4_6_8.md",
   "operativni_4_6_0.md",
   "osnivacki_4_6_0.md",
   "gornje_kolo_4_4_6.md",
@@ -371,7 +371,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "Согласование не является мерой в отношении пользователя",
     ],
   },
-  "radnje_obrade_4_6_7.md": {
+  "radnje_obrade_4_6_8.md": {
     sr: ["Radnja obrade br. 14", "Radnja obrade br. 15", "Radnja obrade br. 16", "Radnja obrade br. 17"],
     en: ["Processing activity No. 14", "Processing activity No. 15", "Processing activity No. 16", "Processing activity No. 17"],
     ru: ["Операция обработки № 14", "Операция обработки № 15", "Операция обработки № 16", "Операция обработки № 17"],
@@ -386,7 +386,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // (`vercel.json` → regions: fra1, Neon endpoint u EU). Ako se region ikad vrati u
   // SAD, ocena i mere iz 5.13 postaju netačne — zato se traže doslovno, uz nov zbir
   // srednjih i niskih rizika.
-  "DPIA_4_6_7.md": {
+  "DPIA_4_6_8.md": {
     sr: [
       "R15 —", "## 5.10.", "R17 —", "## 5.12.", "## 5.13.",
       "Pet rizika je na srednjem nivou (R1, R2, R11, R13, R16)",
@@ -475,7 +475,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 🔴 4.4.6 (R-09) — čl. 12 st. 4 je do tada prenosio nadležnost za opšte akte na
   // Gornje Kolo, čime je akt obarao sopstveni čl. 8 st. 2 („akt nižeg ranga ne može
   // izmeniti ono što je uređeno aktom višeg ranga"). Jedini takav slučaj u setu.
-  "hijerarhija_4_4_6.md": {
+  "hijerarhija_4_6_8.md": {
     sr: [
       "Izmenu donosi Upravni odbor Fondacije",
       "Opšte akte Fondacije, u smislu Statuta, u svim fazama donosi Upravni odbor",
@@ -640,7 +640,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // nekonvertibilnost samo izjava o nameri: sivo tržište se ne bi moglo ni utvrditi
   // kao povreda ni sankcionisati, a odbrana da POEN nema vrednost van sistema
   // počiva upravo na tome da takav promet nije dopušten.
-  "uslovi_koriscenja_4_6_6.md": {
+  "uslovi_koriscenja_4_6_8.md": {
     sr: [
       // ── 4.6.4 — R-07 (nelojalna i obmanjujuća poslovna praksa) ──────────────
       // 🔴 Čl. 22b prvi put odgovara na PRETHODNO pitanje celog rizika: da li je
@@ -771,7 +771,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 4.4.3 — obrazloženje koeficijenta evidencije. Tabela nivoa (1,00–2,00) bez
   // obrazloženja čita se kao cenovnik; odredba da se donacijom NIŠTA ne pribavlja
   // je ono što razliku u koeficijentu drži izvan pojma popusta, pa se traži doslovno.
-  "donacije_4_5_8.md": {
+  "donacije_4_6_8.md": {
     sr: [
       // 🔴 4.5.8 (R-01) — donirati sme i član koga niko nije potvrdio (M-9), a
       // evidentiranje NIJE trenutno: pokreće se tek pošto Fondacija utvrdi prijem
@@ -882,7 +882,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   },
   // 4.4.3 — upozorenje o pribavljanju POEN-a mimo sistema. Ekonomski deo (ne stiče
   // nivo, ne pomera koeficijent) je ono što zabranu iz Uslova čini samoodrživom.
-  "rizici_4_6_0.md": {
+  "rizici_4_6_8.md": {
     sr: [
       // 4.5.9 (R-02) — najjača poreska činjenica seli se iz čl. 11a (AML) u čl. 10.
       "ni po jednom osnovu ne isplaćuje novac",
@@ -1112,7 +1112,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "прекращается, когда несовершеннолетний пользователь укажет и подтвердит собственный электронный адрес",
     ],
   },
-  "politika_4_6_7.md": {
+  "politika_4_6_8.md": {
     sr: [
       // 4.6.3 (R-06) — dokaz pristanka i dokaz zasnivanja ugovornog odnosa.
       // 🔴 Traži se i ono što se NE beleži: bez te rečenice bi se pri sledećoj

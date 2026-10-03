@@ -30,6 +30,9 @@ export async function GET() {
           poenEmitted: true,
           status: true,
           javno: true,
+          // Da li ime još stoji u listi — ekran po tome nudi povlačenje (čl. 5a st. 4).
+          donatorIme: true,
+          imePovucenoAt: true,
           createdAt: true,
           // Ne salje se ceo tekst ugovora u listu — samo da li postoji, pa
           // ekran zna da li da ponudi link (cl. 5b).
@@ -61,13 +64,22 @@ export async function GET() {
   // obrnuto: iznos ulazi u zbir svuda, a lice nigde.
   //
   // Ime se čita iz `donatorIme` snimljenog na zapisu (čl. 5a) — ne iz profila,
-  // jer je podatak trajan i ostaje i pošto korisnik ugasi nalog.
+  // pa ga kasnija izmena profila ne menja.
+  //
+  // 🔴 Od seta 4.6.8 ime NIJE trajno (čl. 5a st. 4): donator ga povlači, a gašenje
+  // naloga ga briše. Donacija kojoj je ime povučeno OSTAJE u listi — iznosom,
+  // datumom i pseudonimom — jer je upis POEN-a i dalje pripisan nalogu. Ispadanje
+  // iz liste bi menjalo zbir koji lista pokazuje.
   const javneDonacije = verifikovan
     ? await prisma.donationRecord.findMany({
         where: {
           status: "CONFIRMED",
           // Anonimne prolaze; ime im je null i ne prikazuje se.
-          OR: [{ javno: false }, { javno: true, donatorIme: { not: null } }],
+          OR: [
+            { javno: false },
+            { javno: true, donatorIme: { not: null } },
+            { javno: true, imePovucenoAt: { not: null } },
+          ],
         },
         orderBy: [{ confirmedAt: "desc" }, { createdAt: "desc" }],
         take: 50,
@@ -77,6 +89,7 @@ export async function GET() {
           level: true,
           poenEmitted: true,
           donatorIme: true,
+          imePovucenoAt: true,
           javno: true,
           confirmedAt: true,
           createdAt: true,
@@ -110,6 +123,8 @@ export async function GET() {
       poenEmitted: d.poenEmitted,
       status: d.status,
       javno: d.javno,
+      imeObjavljeno: d.javno && d.donatorIme !== null,
+      imePovuceno: d.imePovucenoAt !== null,
       imaUgovor: d.ugovorTekst !== null,
       createdAt: d.createdAt.toISOString(),
     })),
@@ -120,6 +135,7 @@ export async function GET() {
       id: d.id,
       ime: d.javno ? d.donatorIme : null,
       anonimno: !d.javno,
+      imePovuceno: d.javno && d.imePovucenoAt !== null,
       pseudonim: d.javno ? d.user?.pseudonim ?? null : null,
       userId: d.javno ? d.user?.id ?? null : null,
       amountRSD: Number(d.amountRSD),

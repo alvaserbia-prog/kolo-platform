@@ -32,18 +32,21 @@ export type Akt = {
 };
 
 export const AKT_USLOVI: Akt = {
+  // 4.6.8 — čl. 16: evidentiranje POEN-a ne menja poresku kvalifikaciju posla, a
+  // obaveza računa ostaje (R-05); čl. 17: ime uz javnu donaciju se povlači.
   // 4.6.6 — R-01: čl. 14 — prepis POEN-a otvoren članu sa utvrđenim identitetom
   // 4.6.4 — R-07: čl. 18 („iznos u POEN-ima" umesto „cena"), nov stav u čl. 20
   // (obaveze onoga ko nudi), dva nova stava u čl. 21 (dobra čiji je promet
   // ograničen; zabrana za maloletnog korisnika) i nov čl. 22b (odnos prema
   // propisima o zaštiti potrošača).
-  verzija: "4.6.6",
-  fajl: "uslovi_koriscenja_4_6_6.md",
+  verzija: "4.6.8",
+  fajl: "uslovi_koriscenja_4_6_8.md",
 };
 
 export const AKT_POLITIKA: Akt = {
-  verzija: "4.6.7",
-  fajl: "politika_4_6_7.md",
+  // 4.6.8 — 4.5, čl. 11 i 13: ime uz javnu donaciju se povlači i briše gašenjem naloga.
+  verzija: "4.6.8",
+  fajl: "politika_4_6_8.md",
 };
 
 /**

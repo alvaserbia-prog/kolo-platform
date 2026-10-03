@@ -53,9 +53,11 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   },
   // 4.4.6 — čl. 12 st. 4 više ne prenosi nadležnost za opšte akte na Gornje Kolo
   // (akt nižeg ranga to ne može po sopstvenom čl. 8 st. 2); nov st. 6.
+  // 4.6.8 — čl. 3 st. 4: FAQ, ekrani i video ne stvaraju prava ni obaveze, kao
+  // ni Whitepaper; čl. 14 više ne nosi neodlučen izbor u uglastim zagradama.
   "hijerarhija": {
-    fajl: "hijerarhija_4_4_6.md",
-    verzija: "4.4.6",
+    fajl: "hijerarhija_4_6_8.md",
+    verzija: "4.6.8",
   },
   // 4.6.5 — čl. 7: POEN po potvrdi se beleži, a upisuje kad potvrđeni korisnik
   // ostvari prvi potvrđen doprinos (odobren oglas, javna donacija, pokroviteljstvo,
@@ -70,9 +72,11 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // 4.4.7 — donacija ne daje pravo na dobra iz kolektivne nabavke ni mesto u redu
   // (čl. 4). Petlja donacija → POEN → red za robu vidi se iz OVOG akta, pa brana
   // mora stajati i ovde, ne samo u pravilniku o nabavkama.
+  // 4.6.8 — čl. 5a st. 4: ime uz javnu donaciju više NIJE trajno — donator povlači
+  // pristanak po donaciji, a gašenje naloga ga briše; donacija ostaje u listi.
   "pokroviteljstvo-donacije": {
-    fajl: "donacije_4_5_8.md",
-    verzija: "4.5.8",
+    fajl: "donacije_4_6_8.md",
+    verzija: "4.6.8",
   },
   // 4.4.4 — pravna priroda operativnog doprinosa (čl. 27): nema naručioca, nema
   // naknade, rezultat ide u zajedničko dobro pod licencama iz Glave II. Brisan

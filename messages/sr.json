@@ -989,12 +989,13 @@
     "vidljivost_javna_opis": "Tvoje ime i prezime biće javno prikazano u listi donacija. Samo za javnu donaciju se upisuje POEN.",
     "vidljivost_anonimna": "Anonimna donacija (bez POENA)",
     "vidljivost_anonimna_opis": "Tvoje ime se ne prikazuje. Za anonimnu donaciju se ne evidentira POEN.",
-    "vidljivost_upozorenje": "Napomena: javnim prikazom imena pored donacije tvoj pseudonim i ostala evidencija mogu se povezati sa tvojim identitetom. Ime ostaje uz zapis donacije i u listi i kada ugasiš nalog.",
+    "vidljivost_upozorenje": "Napomena: javnim prikazom imena pored donacije tvoj pseudonim i ostala evidencija mogu se povezati sa tvojim identitetom. Ime možeš u svakom trenutku da povučeš iz liste, a uklanja se i kada ugasiš nalog. Ono što je neko već video ili zabeležio van platforme time se ne briše.",
     "lista_naslov": "Lista donacija",
     "lista_opis": "Javni donatori su prikazani imenom i prezimenom, uz pseudonim; anonimna donacija ulazi u listu samo iznosom i donator se ne identifikuje ni imenom ni pseudonimom.",
     "lista_prazno": "Još nema evidentiranih donacija.",
     "lista_zakljucana": "Listu donacija vide redovni članovi. Sopstvene donacije vidiš iznad, bez obzira na status.",
     "lista_anoniman": "Anonimna donacija",
+    "lista_ime_povuceno": "Ime nije objavljeno",
     "ips_naslov": "Doniraj preko IPS QR koda (instant)",
     "ips_opis": "Skeniraj QR mobilnom bankom, uplata u dinarima stiže za par sekundi, bez provizije platforme. POEN se evidentira nakon što Fondacija potvrdi priliv.",
     "ips_uskoro": "Račun Fondacije za IPS uplate biće otvoren uskoro. Opcija će se aktivirati automatski čim račun bude podešen.",
@@ -1014,6 +1015,10 @@
     "vas_broj_opis": "Ovo je tvoj trajni broj za uplate (model 97). Navedi ga uz svaku uplatu, po njemu se uplata prepoznaje kao tvoja i POEN se upisuje tebi. Banka odbija pogrešno ukucan broj, pa uplata ne može da ode pogrešnom članu.",
     "rang_pojasnjenje": "Veći pojedinačan doprinos uvažava se većim koeficijentom evidencije. To nije popust — donacijom se ništa ne pribavlja.",
     "ugovor_link": "Ugovor o donaciji",
+    "povuci_ime": "Povuci ime iz liste",
+    "povuci_ime_potvrda": "Ime i prezime biće uklonjeni iz liste donacija i obrisani iz zapisa ove donacije. Donacija ostaje u listi iznosom, datumom i pseudonimom, a POEN se ne menja. Ime se posle toga ne može vratiti. Nastaviti?",
+    "povuci_ime_greska": "Ime nije povučeno. Pokušaj ponovo.",
+    "ime_povuceno": "Ime povučeno iz liste",
     "ugovor_naslov": "Ugovor o donaciji",
     "ugovor_stampaj": "Odštampaj",
     "ugovor_nazad": "Nazad na donacije",
@@ -1056,11 +1061,11 @@
     "otvoriDokument": "Otvori dokument →",
     "uslovi": {
       "naslov": "Uslovi korišćenja KOLO platforme",
-      "ver": "4.6.6"
+      "ver": "4.6.8"
     },
     "privatnost": {
       "naslov": "Politika privatnosti KOLO platforme",
-      "ver": "4.6.7"
+      "ver": "4.6.8"
     },
     "statut": {
       "naslov": "Statut KOLO Fondacije",
@@ -1068,15 +1073,15 @@
     },
     "dpia": {
       "naslov": "DPIA. Procena uticaja na zaštitu podataka o ličnosti",
-      "ver": "4.6.7"
+      "ver": "4.6.8"
     },
     "radnjeObrade": {
       "naslov": "Registar radnji obrade podataka o ličnosti",
-      "ver": "4.6.7"
+      "ver": "4.6.8"
     },
     "rizici": {
       "naslov": "Izjava o prihvatanju rizika",
-      "ver": "4.6.0"
+      "ver": "4.6.8"
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
@@ -1104,17 +1109,17 @@
       "pravilnikKoloSistem": "Pravilnik o KOLO sistemu"
     },
     "meta_uslovi_title": "Uslovi korišćenja · KOLO",
-    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.6.6",
+    "meta_uslovi_desc": "Uslovi korišćenja KOLO platforme, verzija 4.6.8",
     "meta_privatnost_title": "Politika privatnosti · KOLO",
-    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.7",
+    "meta_privatnost_desc": "Politika privatnosti KOLO platforme, verzija 4.6.8",
     "meta_statut_title": "Statut KOLO Fondacije · KOLO",
     "meta_statut_desc": "Statut KOLO Fondacije, verzija 4.1",
     "meta_dpia_title": "DPIA · KOLO",
-    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.6.7",
+    "meta_dpia_desc": "Procena uticaja na zaštitu podataka o ličnosti, verzija 4.6.8",
     "meta_radnje_title": "Registar radnji obrade · KOLO",
-    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.6.7",
+    "meta_radnje_desc": "Registar radnji obrade podataka o ličnosti, verzija 4.6.8",
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
-    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.6.0",
+    "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.6.8",
     "meta_whitepaper_title": "Whitepaper · KOLO",
     "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.2",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
@@ -2962,6 +2967,7 @@
     "automatska_poruka": "KOLO Platforma, automatska poruka. Ne odgovaraj na ovaj email."
   },
   "greske": {
+    "donacija_nije_pronadjena_ili_ime_nije_objavljeno": "Donacija nije pronađena ili ime nije objavljeno.",
     "broj_izvrsilaca_mora_biti_izmedju_1_i_1000": "Broj izvršilaca mora biti između 1 i 1000.",
     "cenovnik_je_prevelik_maks_3mb": "Cenovnik je prevelik (maks. ~3MB).",
     "clan_koga_potvrdjujes_ne_postoji": "Član koga potvrđuješ ne postoji.",

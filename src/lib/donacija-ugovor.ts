@@ -69,7 +69,7 @@ export function generisiUgovorODonaciji(p: UlazUgovoraODonaciji): string {
     : ["Koeficijent evidencije se na anonimnu donaciju ne primenjuje."];
 
   const clan5 = p.javno
-    ? "Donacija je javna. Ime i prezime Donatora beleže se uz zapis donacije i objavljuju u listi donacija dostupnoj potvrđenim korisnicima, radi transparentnosti sredstava Fondacije i provere osnova po kome je POEN upisan (čl. 5a Pravilnika o pokroviteljstvu i donacijama)."
+    ? "Donacija je javna. Ime i prezime Donatora beleže se uz zapis donacije i objavljuju u listi donacija dostupnoj potvrđenim korisnicima, radi transparentnosti sredstava Fondacije i provere osnova po kome je POEN upisan (čl. 5a Pravilnika o pokroviteljstvu i donacijama). Donator može u svakom trenutku povući pristanak na objavljivanje imena i prezimena; ime se tada uklanja iz liste, a donacija ostaje u listi iznosom, datumom i pseudonimom. Ime se uklanja iz liste i prestankom svojstva korisnika."
     : "Donacija je anonimna. Ime Donatora se ne beleži uz zapis donacije i ne objavljuje se.";
 
   return [

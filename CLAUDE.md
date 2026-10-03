@@ -228,6 +228,7 @@ Jedna rečenica po zamci; opis i razlozi u `docs/funkcionalnosti.md` i `docs/ist
 - Gejt za pristanak je **prekrivač**, ne redirect (redirect je pravio petlje). Jedan izvor istine `pristanakStatus()`; `useMePatch()` ostaje stabilan.
 - Pseudonim u evidenciji vidi samo potvrđen član (Pravilnik čl. 67); vidljivost sprovodi **server**, ne ekran. Pseudonim oglašivača na Pijaci je javan, ali se ne povezuje sa evidencijom.
 - Spiskovi na `/sistem` i `/pocetna` su **jedna** komponenta (`SistemListe.tsx`) i isti uslovi (`USLOV_RAZMENE`, `BEZ_DECE`). Prikaz socijalnog programa odlučuje **samo** `protokol/program-prikaz.ts`.
+- 🔴 Ime uz javnu donaciju **nije trajno** (set 4.6.8): povlači se po donaciji, gašenje naloga ga briše, donacija ostaje u listi; `uplatilac` i `ugovorTekst` se ne diraju. Brana `donator-ime-izvor.test.ts`.
 - U adresu profila ide pseudonim (`profilHref()`), u sve što se čuva interni id. Nova statička podruta pod `/profil/` → dopuniti `REZERVISANI_PSEUDONIMI`.
 
 **Deca**

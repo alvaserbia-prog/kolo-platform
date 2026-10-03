@@ -1595,7 +1595,15 @@ model DonationRecord {
   // trajan zapis (kao i podaci o uplati), nezavisan od kasnijih izmena profila.
   // Lista donacija prikazuje upravo ovo polje. Null = anonimna ili istorijska
   // donacija (pre uvođenja pravila) → ne prikazuje se u listi.
+  // 🔴 Od seta 4.6.8 ime NIJE trajno: donator sme da povuče pristanak (čl. 5a
+  // st. 4), a briše se i prestankom svojstva korisnika. Tada se `donatorIme`
+  // briše, a `imePovucenoAt` beleži trenutak — donacija ostaje u listi iznosom,
+  // datumom i pseudonimom.
   donatorIme String?
+
+  // Trenutak kada je ime uklonjeno iz liste (povlačenje ili gašenje naloga).
+  // Null = ime nikad nije povučeno (ili anonimna/istorijska donacija).
+  imePovucenoAt DateTime?
 
   // Ugovor o donaciji (Pravilnik o pokroviteljstvu i donacijama, cl. 5b) —
   // SNIMLJEN tekst u trenutku potvrde donacije. Ne generise se ponovo pri
