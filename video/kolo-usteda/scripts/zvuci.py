@@ -95,6 +95,7 @@ def F(sid, k):
 
 
 # Efekti prate SLIKU, a slika ide `prednost` s ispred reči (video/README.md).
+# Šumni efekti (papir, novčanice, talasi) upola tiši od 03.10.2026 (vlasnik: „zvuk dosta šušti“).
 PR = plan.get("prednost", 0.0)
 
 
@@ -103,7 +104,7 @@ def sl(sid, w, p=1):
 
 
 for j, sid in enumerate((2, 3, 4, 5, 8, 9)):  # list papira na prelazima (5→6→7 je ista sveska)
-    tr.dodaj(papir(0.55), od(sid) - 0.3, 0.2, -0.3 + 0.12 * j)
+    tr.dodaj(papir(0.55), od(sid) - 0.3, 0.1, -0.3 + 0.12 * j)
 # 1: kuferi i suncobran padaju, štikla u svesci
 tr.dodaj(tup(90, 0.3), sl(1, "porodicu") + 0.15, 0.25, -0.1)
 tr.dodaj(tup(90, 0.3), sl(1, "porodicu") + 0.35, 0.22, 0.1)
@@ -112,9 +113,9 @@ tr.dodaj(klik(0.04, 1500, 6000), sl(1, "uštedeo") + 0.1, 0.12, -0.3)
 tr.dodaj(zvonce(88, 1.0), sl(1, "uštedeo") + 0.3, 0.06, -0.3)
 # 2: novčanice odleću (šušanj papira), na „nije“ prazan novčanik
 for w in ("pijaca", "frizer", "mehaničar", "struja", "gorivo", "porez"):
-    tr.dodaj(papir(0.35), sl(2, w) + 0.05, 0.13, 0.4)
+    tr.dodaj(papir(0.35), sl(2, w) + 0.05, 0.06, 0.4)
 for k in range(5):
-    tr.dodaj(papir(0.3), sl(2, "porez") + 0.5 + k * 5 / FPS, 0.08, 0.4)
+    tr.dodaj(papir(0.3), sl(2, "porez") + 0.5 + k * 5 / FPS, 0.04, 0.4)
 tr.dodaj(tup(70, 0.5), sl(2, "nije") + 0.3, 0.3, 0.2)
 # 3: kucanje oglasa, dugme
 for k in range(14):
@@ -136,7 +137,7 @@ for sid, w, k in PECAT:
     t = sl(sid, w) + k / FPS
     tr.dodaj(tup(65, 0.45, 0.7), t, 0.32, rng.uniform(-0.3, 0.3))
 for sid, w in ((6, "što"), (6, "toga")):  # nov mesec: list sveske
-    tr.dodaj(papir(0.3), sl(sid, w) - 0.15, 0.12, -0.3)
+    tr.dodaj(papir(0.3), sl(sid, w) - 0.15, 0.06, -0.3)
 for k in range(3):  # telefon zvoni
     tr.dodaj(zvonce(93, 0.25), sl(6, "Zovu") + k * 0.18, 0.05, 0.4)
     tr.dodaj(zvonce(96, 0.25), sl(6, "Zovu") + k * 0.18 + 0.06, 0.04, 0.4)
@@ -145,7 +146,7 @@ tr.dodaj(klik(0.05, 1500, 6000), sl(7, "više") + 0.1, 0.1)
 for k in range(6):
     tr.dodaj(klik(0.02, 2500, 7000), F(8, k * 6), 0.05)
 tr.dodaj(zvonce(91, 1.4), sl(8, "dovoljno"), 0.07)
-tr.dodaj(fejd(sum_obojen(rng, 2.5, 300, 2500), 0.6, 1.2), sl(8, "cela") - 0.3, 0.05)  # talasi
+tr.dodaj(fejd(sum_obojen(rng, 2.5, 300, 2500), 0.6, 1.2), sl(8, "cela") - 0.3, 0.025)  # talasi
 tr.dodaj(pop(500), sl(8, "dobija"), 0.12, -0.4)
 # 9: dugme, završno zvonce
 tr.dodaj(klik(0.05, 1500, 6000), sl(9, "Postavi"), 0.14)

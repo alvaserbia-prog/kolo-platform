@@ -25,8 +25,9 @@ iste jačine (−14 dB), bez stišavanja ispod glasa. Ranije: muzika iz koda (`s
 | čišćenje | `scripts/ciscenje.py v1 <snimak>` za oba snimka (WPE, DeepFilterNet 3, boja, −16 LUFS) |
 | spoj | `scripts/spoj.py`: varijanta A (odluka vlasnika 02.10.2026) — iz snimka 66 samo „i dobili su ono što im je trebalo, bez dinara“, posle „…prepisali su mu POENE“ iz snimka 65; boja i jačina izjednačene sa snimkom 65, pauze popunjene tišinom sobe -> `audio/v1/clean/glas.wav` |
 | rez | `scripts/tempo.py v1`: izbačeni lažni počeci scene 1 i 2, dva prekinuta „Javili su se ljudi…“, prvo „Zovu ga sve više ljudi“, tri nedovršena „Za šest meseci uštedeo je…“; pauze skraćene, atempo 1,04 |
+| de-esser i ekspander | `scripts/deeser.py` (03.10.2026, vlasnik: „glas dosta šušti“): opseg sibilanata 4,5–11 kHz se stišava samo kad č, ć, š, ž, s, z, c sikću (do −10 dB), iznad 8 kHz blago −2,5 dB; pa `scripts/ekspander.py` (iz videa „Pijaca“) stišava šum između reči. Oba idu posle `tempo.py`, dužina glasa se ne menja |
 | vremena reči | Parakeet TDT 0.6B v3 grubo, pa prisilno CTC poravnanje (Omnilingual ASR 300M); tekst u `poravnaj.py` je ono što je izgovoreno |
-| muzika, efekti, miks | `muzika_suno.py` (Suno numera vlasnika, isečena po taktovima), `zvuci.py` (list papira, novčanice, kucanje, varnice, zvonca zapisa, tup pečata, telefon, talasi), `mix.py` (muzika −14 dB, stalna jačina; efekti +2 dB) |
+| muzika, efekti, miks | `muzika_suno.py` (Suno numera vlasnika, isečena po taktovima), `zvuci.py` (šumni efekti upola tiši od 03.10.2026: list papira, novčanice, kucanje, varnice, zvonca zapisa, tup pečata, telefon, talasi), `mix.py` (muzika −14 dB, stalna jačina; efekti +2 dB) |
 
 Tekst, titlovi i pokret idu 1 s ispred izgovorene reči (`PREDNOST` u `plan.json`).
 
@@ -37,6 +38,7 @@ cd video/kolo-usteda && npm ci
 pip install numpy scipy soundfile nara_wpe sherpa-onnx onnxruntime   # + deep-filter (DeepFilterNet) u /tmp/claude-0
 python3 scripts/ciscenje.py v1 My_recording_65 && python3 scripts/ciscenje.py v1 My_recording_66
 python3 scripts/spoj.py && python3 scripts/tempo.py v1          # tempo uzima iste rezove iz audio/v1/rezovi.json
+python3 scripts/deeser.py && python3 scripts/ekspander.py      # manje šuštanja na č, š; tišina između reči
 ffmpeg -i audio/v1/final/glas.wav -ar 16000 -ac 1 /tmp/claude-0/v1.wav
 python3 scripts/vremena_parakeet.py /tmp/claude-0/v1.wav audio/v1/parakeet.json
 python3 scripts/poravnaj.py v1 && python3 scripts/poravnaj_ctc.py v1 && python3 scripts/plan.py v1
