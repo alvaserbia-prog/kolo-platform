@@ -3,7 +3,7 @@
 Scenario vlasnika (29.09.2026), četrnaesti po redosledu objave (`video/README.md`). Tekst je
 prošao pregled ekipe i lektora na izričit zahtev vlasnika; odluke iz pregleda su u
 `video/README.md` (reči kupi, prodaj, plati, zaradi, cena smeju uz dinare i rad, nikad uz POEN;
-ušteda u dinarima je ishod korišćenja POEN-a). **Naracija snimljena (My_recording_67), video
+ušteda u dinarima je ishod korišćenja POEN-a). **Naracija snimljena (My_recording_70; „I tako“ nije izgovoreno), video
 gotov** — postupak i priča u slici: `README.md`.
 
 ## Tekst za snimanje

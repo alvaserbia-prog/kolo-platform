@@ -1,4 +1,4 @@
-"""Vremena reči za video „Bez posrednika“ (jedan snimak naracije, My_recording_67).
+"""Vremena reči za video „Bez posrednika“ (jedan snimak naracije, My_recording_70).
 
 Tekst prati ono što je izgovoreno, a ne scenario.
 Početak svake reči uzima se iz tokena Parakeet-a (audio/parakeet.json) poravnanjem po
@@ -16,7 +16,7 @@ TEKST = {
     5: "Kod zubara ti osiguranje ne važi.",
     6: "Sipaš gorivo, platiš i akcize.",
     7: "A kome ide razlika, kad se mleko od proizvođača otkupljuje po 40, a u prodavnici prodaje po 160 dinara?",
-    8: "I tako, ako se na kraju meseca pitaš zašto ne možeš da uštediš, dođi u KOLO.",
+    8: "Ako se na kraju meseca pitaš zašto ne možeš da uštediš, dođi u KOLO.",
     9: "Nema provizije, nema participacije. Niko ti ne određuje cenu tvoga rada ni proizvoda.",
     10: "Ovde vrednost ostaje kod tebe, a koristi ima cela zajednica.",
     11: "ekolo.rs, čista ušteda!",

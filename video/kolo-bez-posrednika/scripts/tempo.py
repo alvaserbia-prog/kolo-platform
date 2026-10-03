@@ -1,4 +1,4 @@
-"""Zbijanje pauza + blago ubrzanje naracije (video Bez posrednika, jedan snimak, My_recording_67).
+"""Zbijanje pauza + blago ubrzanje naracije (video Bez posrednika, jedan snimak, My_recording_70).
 
 Pauze između scena (duže od 1,0 s) skraćuju se na PAUZA_SCENA — tu se menja kadar i
 muzika diše. Ostale pauze duže od PAUZA_FRAZA skraćuju se na PAUZA_FRAZA.
@@ -11,14 +11,12 @@ PAUZA_SCENA = 0.80
 PAUZA_FRAZA = 0.45
 PRAG_SCENA = 1.0
 PRAG_DB = 34
-KRAJ_SNIMKA = 101.7  # ceo snimak
-# Izbačeno: prvi, prekinut izgovor rečenice o banci („…deci, supružniku.“ i „Banka ti u…“), prvi izgovor
-# rečenice o zubaru i dva prekinuta početka „I tako. Ako se na kraju mes…“; ostaje poslednji, ceo izgovor.
-IZBACI = [(13.50, 24.66), (41.95, 46.25), (65.90, 71.62)]
+KRAJ_SNIMKA = 86.2  # ceo snimak
+# Izbačeno: prekinut prvi izgovor „A kome ide razlika, kad se mle…“; ostaje drugi, ceo izgovor.
+IZBACI = [(42.60, 46.30)]
 TEMPO = 1.03
-# Posle tempa (vremena u audio/final/glas.wav): ostatak prvog izgovora („uzme“) pred „Banka uzme“,
-# prekinut prvi izgovor „A kome ide razlika, kada se mleko…“ i „Niko ti.“ pre ponovljenog „Niko ti ne određuje…“.
-IZBACI_POSLE = [(9.95, 10.55), (33.60, 36.68), (55.62, 56.78)]
+# Posle tempa (vremena u audio/final/glas.wav): ništa.
+IZBACI_POSLE = []
 
 os.makedirs("audio/final", exist_ok=True)
 a, sr = sf.read("audio/clean/glas.wav", dtype="float32")
