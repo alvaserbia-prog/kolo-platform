@@ -79,7 +79,7 @@ usput. Uz svaku stoji razlog, jer razlog sprečava da se predlog vrati u drugom 
 - **Vraćanje dinarskog troška u tabelu sa brojem POEN-a po delu** — odnos se tada dobija deljenjem.
 - **Humanitarna nabavka** (red po potrebi, bez praga od 20.000 POEN) — *„Ne radimo takve nabavke."*
 - **Sopstveni KYC za velike donacije** — identifikaciju uplatioca sprovodi banka.
-- **Izravnat koeficijent / fiksan iznos po nivou donacije** — *„hoću da favorizujem velike donacije."* 🔴 Ali se **tako ne piše** u aktima, FAQ-u ni copy-ju: stoji „veći pojedinačan doprinos ima veći značaj za zajednicu", nikad opis podsticaja.
+- **Izravnat koeficijent / fiksan iznos po nivou donacije** — *„hoću da favorizujem velike donacije."* 🟢 Od 03.10.2026. podsticaj za veće donacije **sme da se opiše** (odluka vlasnika; ranija zabrana ukinuta, zapis u `docs/sprovodjenje-rizika-2026-09.md`).
 
 ### Podaci o ličnosti
 - **IP adresa ili otisak uređaja uz zapis pristanka** — proširenje obrade radi dokazivanja pristanka.

@@ -327,9 +327,12 @@ generisati ga ponovo pri čitanju.**
 
 🔴 **ODBIJENE MERE UZ R-04 (odluka vlasnika, 2026-09-07) — ne predlagati ponovo:**
 - **Izravnati koeficijent / fiksan iznos po nivou** — odbijeno: „hoću da favorizujem
-  velike donacije, što pre što više, to je cilj." 🔴 **Tako se NE piše u aktima, FAQ-u
-  ni copy-ju** — isto pravilo kao kod ZRNA: u tekstu stoji „veći pojedinačan doprinos
-  ima veći značaj za zajednicu", nikad opis podsticaja.
+  velike donacije, što pre što više, to je cilj." 🟢 **Zabrana opisa podsticaja za
+  donacije ukinuta je 03.10.2026. (odluka vlasnika):** podsticaj za veće donacije sme da
+  se opiše u copy-ju i videima. Ranije pravilo je glasilo da u tekstu stoji samo „veći
+  pojedinačan doprinos ima veći značaj za zajednicu", nikad opis podsticaja, jer opisan
+  podsticaj može da učini da donacija izgleda kao protivčinidba za POEN. Pravilo za ZRNO
+  (R-04, `zrno-nije-instrument-izvor.test.ts`) ostaje.
 - **Sopstveni KYC za velike donacije** — odbijeno: uplata ide preko računa Fondacije,
   pa identifikaciju uplatioca po Zakonu o sprečavanju pranja novca sprovodi **banka**;
   platforma samo evidentira ko je donirao.
@@ -3331,7 +3334,7 @@ sprečava da se predlog vrati u drugom obliku. Pun zapis: `docs/sprovodjenje-riz
 - **Vraćanje dinarskog troška u tabelu sa brojem POEN-a po delu** — odnos se tada dobija deljenjem.
 - **Humanitarna nabavka** (red po potrebi, bez praga od 20.000 POEN) — *„Ne radimo takve nabavke."*
 - **Sopstveni KYC za velike donacije** — identifikaciju uplatioca sprovodi banka.
-- **Izravnat koeficijent / fiksan iznos po nivou donacije** — *„hoću da favorizujem velike donacije."* 🔴 Ali se **tako ne piše** u aktima, FAQ-u ni copy-ju: stoji „veći pojedinačan doprinos ima veći značaj za zajednicu", nikad opis podsticaja.
+- **Izravnat koeficijent / fiksan iznos po nivou donacije** — *„hoću da favorizujem velike donacije."* 🟢 Opis podsticaja za veće donacije dozvoljen od 03.10.2026. (odluka vlasnika).
 
 ### Podaci o ličnosti
 
