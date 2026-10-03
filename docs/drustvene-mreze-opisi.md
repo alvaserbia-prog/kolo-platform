@@ -167,6 +167,9 @@ Obavezne činjenice iz odeljka 2 i dalje važe, ali svojim rečima i samo kad ih
 
 Konačne verzije, po pravilima iznad. Poslužiće kao uzor za ton i dužinu.
 
+🟡 Napisano po prvom kosturu, pre pravila iz odeljaka 1 i 4. Nove verzije za isti video, sa naslovnom,
+su u odeljku 16; ove ostaju kao zapis.
+
 ### TikTok
 
 ```
@@ -914,4 +917,74 @@ POEN je zapis o doprinosu zajednici. Nije novac i ne menja se za novac.
 👉 Šta bi iz vaše kuće komšije rado uzele? Ponudite na https://ekolo.rs
 
 #Sombor #domaće #KOLO
+```
+
+## 16. Uvodni video „U Somboru svako nešto ume“, nove verzije (oktobar 2026)
+
+Video: `video/kolo-uvod/out/kolo-uvod.mp4`. Naslovna: `video/kolo-uvod/out/naslovna.jpg`
+(kompozicija `Naslovna` u `src/Naslovna.tsx`): „Ana ima višak paradajza / Ko će joj prekopati baštu?“,
+po pravilu iz `video/README.md` da naslov nosi lik i pitanje, a KOLO se vidi tek na dnu kao adresa.
+Zvuk na Instagramu preimenovati u „KOLO, svako nešto ume“. Alternativni tekst: „Papirni kolaž: somborske
+kuće sa komšijama na prozorima, baka sa pitom, majstor sa biciklom i žena sa korpom paradajza; ljudi se
+hvataju u kolo, a na kraju se pojavljuje adresa ekolo.rs.“
+
+Opisi iz odeljka 6 pisani su po starom kosturu i nose rečenice koje su od 02.10.2026 zabranjene
+(„dogovaraš direktno“, „Fondacija ne posreduje“), pa su za ovaj video napisani iznova, po odeljku 4.
+Uglovi, kojih u videu nema: TikTok, penzionisani majstor čije znanje niko ne traži; Instagram, polica
+koja mesecima čeka da je neko okači; Facebook, moba, stari vojvođanski običaj zajedničkog rada kod
+komšije. Primeri su novi (televizori, skraćivanje pantalona, matematika, jabuke, bušilica, čuvanje mačke,
+ograda), ne pita, bicikl i paradajz iz videa. Nijedna rečenica nije iz naracije ni iz ranijih opisa
+(provereno pretragom po ovom fajlu); obavezna rečenica o POEN-u rečena je svaki put drugačije.
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; bez zareza ispred „može“ u
+„Ko te lično poznaje može…“; rodno neutralno na TikTok-u i Instagramu („Šta ti znaš da uradiš“, „neko
+ima bušilicu“); „vi“ dosledno na Facebook-u; „krojačica“ zamenjena jer je već bila u odeljku 10; bez
+prenesenog značenja („ide od ruke“ zamenjeno konkretnim primerima); POEN se „prepiše“, nikad „dobija“.
+
+### TikTok
+
+```
+Komšija koji je četrdeset godina popravljao televizore danas uglavnom čeka da ga neko nešto pita. 📺
+
+Takvih ljudi ima u svakoj ulici. Penzionerka koja je trideset godina šila u konfekciji i za deset minuta skrati pantalone. Bivši profesor matematike. Domaćin koji svake jeseni ima više jabuka nego što porodica može da pojede. Njihovo znanje i višak retko stignu do onih kojima trebaju, jer se ljudi danas manje poznaju nego nekad.
+
+Na KOLU komšije iz tvog mesta objave šta umeju i šta imaju. Oglas postaviš odmah po registraciji, a tuđe oglase vidi svako, i bez naloga.
+
+Kad nekome nešto uradiš ili daš, ta osoba ti prepiše POEN. POEN se ne može zameniti za dinare. On beleži šta si dao drugima, a ti ga posle prepišeš onome ko pomogne tebi.
+
+Ko te lično poznaje može da potvrdi tvoj nalog. Za to ne treba nijedan dokument.
+
+👉 Šta ti znaš da uradiš bolje od većine? Link je u profilu
+
+#Sombor #komšiluk #znanje #razmena #KOLO
+```
+
+### Instagram
+
+```
+Polica koja od proleća stoji naslonjena na zid, jer nema ko da je okači. 🔨
+
+U tvom mestu sigurno neko ima bušilicu i slobodan sat, a ne zna da tebi treba. Na Pijaci KOLA vidiš ko šta nudi u blizini i javiš se. Zauzvrat i ti ponudiš nešto: kolač, prevod, čuvanje mačke dok je neko na moru.
+
+Svaka takva pomoć ostaje zapisana kao POEN. POEN nije novac, on samo pokazuje šta si dao drugima.
+
+Link je u bio.
+
+#Sombor #Vojvodina #komšiluk #pomoć #KOLO
+```
+
+### Facebook
+
+```
+Po vojvođanskim selima nekad se išlo na mobu. Kad je trebalo obrati kukuruz ili pokriti kuću, došla bi cela ulica, a domaćin je posle išao kod njih kad je njima trebalo. 🌽
+
+Taj običaj je skoro nestao. Ljudi i dalje imaju šta da ponude, ali se manje poznaju i retko znaju ko u blizini šta ume.
+
+Na KOLU to ponovo može da se sazna. Na Pijaci članovi iz vašeg mesta objavljuju šta umeju i šta imaju u višku, od domaćih kolača do popravke ograde. Oglase može da pogleda svako, a ko se registruje odmah može da postavi svoj.
+
+Za pomoć koju date neko vam prepiše POEN, a vi ga prepišete onome ko pomogne vama. POEN nije novac i ne može se zameniti za dinare. On pokazuje koliko ste dali drugima.
+
+👉 Pogledajte ko u vašem mestu šta nudi: https://ekolo.rs
+
+#Sombor #moba #KOLO
 ```
