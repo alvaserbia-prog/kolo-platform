@@ -17,7 +17,7 @@ načina: sredstvom koje svi primaju ili zapisom. Prvi način je novac, drugi je 
 4. To je trampa. Razmena može da uspe samo ako oboje imaju ono što treba onom drugom. I to istovremeno.
 5. Ljudi su taj problem rešavali na dva načina.
 6. Prvi način je da se ljudi dogovore oko jednog sredstva koje će svako primiti. Nekad je to bilo žito, so ili školjke, a kasnije zlato i novac. Obućar da cipele i za njih dobije to sredstvo. Onda za njega uzme ono što je njemu potrebno. To je novac.
-7. Drugi način je da se zapisuje. Obućar da Milici cipele, i u zajedničku svesku se zapiše da je on dao. Milica da ajvar onome kome treba, i to se takođe zapiše. Kad obućaru zatrebaju drva, Stevan mu ih donese, jer se zna da je obućar već dao svoje. Tako niko ne mora da čeka da naiđe neko ko ima baš ono što mu treba, a ono što je upisano je zauvek tu. To je KOLO. U KOLU se taj zapis zove POEN.
+7. Drugi način je da se zapisuje. Obućar da Milici cipele, i u zajedničku svesku se zapiše da je on dao. Milica da ajvar onome kome treba, i to se takođe zapiše. Kad obućaru zatrebaju drva, Stevan mu ih donese, jer se zna da je obućar već dao svoje. Tako niko ne mora da čeka da naiđe neko ko ima baš ono što mu treba. A ono što je upisano ostaje zauvek. To je KOLO. U KOLU se taj zapis zove POEN.
 8. Šta ti imaš da ponudiš? Pridruži se besplatno na ekolo.rs.
 
 ## Natpisi (razume se bez zvuka)
@@ -38,6 +38,7 @@ načina: sredstvom koje svi primaju ili zapisom. Prvi način je novac, drugi je 
 ## Pravila
 
 - Tekst jasan i direktan, bez metafora (pravilo iz `video/README.md`).
+- „Ostaje zauvek“ govori o zapisu (istorija se ne briše), ne o stanju POEN-a; ne prepričavati kao „tvoji POENI su zauvek tvoji“.
 - Zapis nije dug: nigde „duguje“, samo „zapiše se da je dao“.
 - POEN se ne crta kao novčić; u sc. 6 novčić je novac, ne POEN.
 - Stil i muzika: otvoreno (predlog: kreda na školskoj tabli, zajednička za videe 15–17; tamburica, šaljivo pizzicato u sc. 2–3).
