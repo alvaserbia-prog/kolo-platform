@@ -10,7 +10,7 @@ V = sys.argv[1]
 FPS = 30
 CFG = {
     # UVOD: slika i muzika pre prvog glasa; PRE: koliko ranije kreće kadar; EXTRA: vazduh pre scene
-    "v1": dict(UVOD=1.4, PRE={}, EXTRA={2: 0.3, 3: 0.3, 4: 0.2, 5: 0.3, 6: 0.3, 7: 0.3, 8: 0.5, 9: 0.6}, KRAJ=3.8, PREDNOST=1.0),
+    "v1": dict(UVOD=1.4, PRE={}, EXTRA={2: 0.3, 3: 0.3, 4: 0.2, 5: 0.3, 6: 0.3, 7: 0.3, 8: 0.5, 9: 0.6}, KRAJ=3.8, PREDNOST=0.0),
 }[V]
 # Tekst, natpisi i pokret idu PREDNOST s ispred izgovorene reči (odluka vlasnika 28.09.2026,
 # video/README.md); glas i muzika se ne pomeraju.

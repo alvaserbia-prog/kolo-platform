@@ -1,7 +1,7 @@
 """Muzika videa 13 „Ušteda“: Suno numera vlasnika (audio/suno/), izbor promenljivom NUMERA.
 Upotreba: python3 scripts/muzika_suno.py
 
-„Sretno kolo“ (02.10.2026, važeća): prim i berde, instrumental, ~116 BPM, 2/4, 134,8 s; izbacuje se 50 taktova.
+„Sretno kolo“ (02.10.2026, važeća): prim i berde, instrumental, ~116 BPM, 2/4, 134,8 s; izbacuje se 43 takta.
 „Sombor veče“ (prva, ~97 BPM): vlasniku i stručnjacima prespora; izbacivala se 44 takta.
 Numera je duža od videa, pa se iz sredine izbacuje deo dug ceo broj taktova (dužina potvrđena poklapanjem
 harmonije i udaraca sa obe strane reza). Rez je na udarcu, pa ritam ne
@@ -14,7 +14,7 @@ import numpy as np, soundfile as sf
 import os
 # fajl, udarac pre reza, udarac posle reza, završni udarac numere
 NUMERE = {
-    "sretno-kolo": ("audio/suno/sretno-kolo.mp3", 35.11, 86.66, 133.12),   # 50 taktova
+    "sretno-kolo": ("audio/suno/sretno-kolo.mp3", 37.45, 81.99, 133.12),   # 43 takta (glas My_recording_68)
     "sombor-vece": ("audio/suno/sombor-vece.mp3", 57.74, 112.30, 135.40),  # 44 takta
 }
 FAJL, A, B, KRAJ_U_NUMERI = NUMERE[os.environ.get("NUMERA", "sretno-kolo")]
