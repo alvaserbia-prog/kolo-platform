@@ -29,7 +29,7 @@ iste jačine (−14 dB), bez stišavanja ispod glasa. Ranije: muzika iz koda (`s
 | vremena reči | Parakeet TDT 0.6B v3 grubo, pa prisilno CTC poravnanje (Omnilingual ASR 300M); tekst u `poravnaj.py` je ono što je izgovoreno |
 | muzika, efekti, miks | `muzika_suno.py` (Suno numera vlasnika, isečena po taktovima), `zvuci.py` (šumni efekti upola tiši od 03.10.2026: list papira, novčanice, kucanje, varnice, zvonca zapisa, tup pečata, telefon, talasi), `mix.py` (muzika −14 dB, stalna jačina; efekti +2 dB) |
 
-Slika i pokret idu uz izgovorenu reč (`PREDNOST = 0`; pravilo „1 s ispred“ ukinuto 03.10.2026). **Titl ide 0,5 s ispred reči** (`PREDNOST_TITLA` u `src/Titlovi.tsx`; vlasnik 03.10.2026: tačno poravnat titl je opet delovao kao da kasni).
+🔴 **Titl, slika i pokret idu 1 s ispred izgovorene reči** (`PREDNOST = 1.0` u `scripts/plan.py`; odluka vlasnika za ovaj video, 03.10.2026: „bilo je dobro ono 1 s“). Probano i odbačeno: tačno uz reč (titl kasni) i 0,5 s samo za titl.
 
 ## Kako se pravi
 

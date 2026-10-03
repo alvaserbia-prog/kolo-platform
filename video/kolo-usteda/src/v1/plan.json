@@ -1,6 +1,6 @@
 {
  "fps": 30,
- "prednost": 0.0,
+ "prednost": 1.0,
  "trajanje": 91.58,
  "frejmova": 2747,
  "scene": [
@@ -124,9 +124,9 @@
     }
    ],
    "tekst": "Zoran ove godine vodi porodicu na more. Plata mu je ista kao lane, a novac za more uštedeo je za šest meseci.",
-   "do": 11.65,
+   "do": 10.65,
    "odF": 0,
-   "doF": 350,
+   "doF": 320,
    "glasOdF": 42
   },
   {
@@ -135,7 +135,7 @@
    "klipDo": 21.445,
    "glasOd": 11.565,
    "glasDo": 22.74,
-   "od": 11.65,
+   "od": 10.65,
    "reci": [
     {
      "w": "Pre",
@@ -234,9 +234,9 @@
     }
    ],
    "tekst": "Pre KOLA celu platu je trošio: pijaca, frizer, mehaničar, struja, gorivo, porez. Na kraju meseca nije mu ostajalo ništa.",
-   "do": 23.55,
-   "odF": 350,
-   "doF": 706,
+   "do": 22.55,
+   "odF": 320,
+   "doF": 676,
    "glasOdF": 347
   },
   {
@@ -245,7 +245,7 @@
    "klipDo": 27.235,
    "glasOd": 23.445,
    "glasDo": 28.82,
-   "od": 23.55,
+   "od": 22.55,
    "reci": [
     {
      "w": "Onda",
@@ -299,9 +299,9 @@
     }
    ],
    "tekst": "Onda je u KOLU postavio oglas: električarske popravke posle posla.",
-   "do": 29.55,
-   "odF": 706,
-   "doF": 886,
+   "do": 28.55,
+   "odF": 676,
+   "doF": 856,
    "glasOdF": 703
   },
   {
@@ -310,7 +310,7 @@
    "klipDo": 38.355,
    "glasOd": 29.435,
    "glasDo": 40.28,
-   "od": 29.55,
+   "od": 28.55,
    "reci": [
     {
      "w": "Javili",
@@ -439,9 +439,9 @@
     }
    ],
    "tekst": "Javili su se ljudi kojima je majstor trebao. Za taj posao prepisali su mu POENE, i dobili su ono što im je trebalo, bez dinara.",
-   "do": 40.83,
-   "odF": 886,
-   "doF": 1225,
+   "do": 39.83,
+   "odF": 856,
+   "doF": 1195,
    "glasOdF": 883
   },
   {
@@ -450,7 +450,7 @@
    "klipDo": 52.62,
    "glasOd": 40.855,
    "glasDo": 54.7,
-   "od": 40.83,
+   "od": 39.83,
    "reci": [
     {
      "w": "Sa",
@@ -604,9 +604,9 @@
     }
    ],
    "tekst": "Sa tim POENIMA Zoran sad u KOLU dobija povrće i šiša se kod komšije. Za to više ne troši dinare. I prvi put na kraju meseca ostane mu koja hiljada.",
-   "do": 55.541,
-   "odF": 1225,
-   "doF": 1666,
+   "do": 54.541,
+   "odF": 1195,
+   "doF": 1636,
    "glasOdF": 1226
   },
   {
@@ -615,7 +615,7 @@
    "klipDo": 59.531,
    "glasOd": 55.42,
    "glasDo": 62.131,
-   "od": 55.541,
+   "od": 54.541,
    "reci": [
     {
      "w": "Zovu",
@@ -709,9 +709,9 @@
     }
    ],
    "tekst": "Zovu ga sve više ljudi, a što više radi u KOLU, to više toga i dobije u KOLU.",
-   "do": 62.53,
-   "odF": 1666,
-   "doF": 1876,
+   "do": 61.53,
+   "odF": 1636,
+   "doF": 1846,
    "glasOdF": 1663
   },
   {
@@ -720,7 +720,7 @@
    "klipDo": 66.655,
    "glasOd": 62.631,
    "glasDo": 69.54,
-   "od": 62.53,
+   "od": 61.53,
    "reci": [
     {
      "w": "Dinare",
@@ -799,9 +799,9 @@
     }
    ],
    "tekst": "Dinare sada troši samo na ono čega u KOLU nema. Svakog meseca ostane mu više.",
-   "do": 70.17,
-   "odF": 1876,
-   "doF": 2105,
+   "do": 69.17,
+   "odF": 1846,
+   "doF": 2075,
    "glasOdF": 1879
   },
   {
@@ -810,7 +810,7 @@
    "klipDo": 77.555,
    "glasOd": 70.255,
    "glasDo": 80.96,
-   "od": 70.17,
+   "od": 69.17,
    "reci": [
     {
      "w": "Za",
@@ -929,9 +929,9 @@
     }
    ],
    "tekst": "Za šest meseci uštedeo je dovoljno, i cela porodica ide na more. Zoran sada radi više, dobija više i više dinara mu ostaje.",
-   "do": 81.65,
-   "odF": 2105,
-   "doF": 2450,
+   "do": 80.65,
+   "odF": 2075,
+   "doF": 2420,
    "glasOdF": 2108
   },
   {
@@ -940,7 +940,7 @@
    "klipDo": 84.87,
    "glasOd": 81.755,
    "glasDo": 87.78,
-   "od": 81.65,
+   "od": 80.65,
    "reci": [
     {
      "w": "Šta",
@@ -1000,7 +1000,7 @@
    ],
    "tekst": "Šta ti znaš da uradiš? Postavi svoj prvi oglas na ekolo.rs",
    "do": 91.58,
-   "odF": 2450,
+   "odF": 2420,
    "doF": 2747,
    "glasOdF": 2453
   }

@@ -15,9 +15,9 @@ const UNAPRED_TRAKA = 8;
 const UNAPRED_REC = 3;
 const ISTAKNUTE = /^(„?KOLO|KOLU|KOLA|POEN|ekolo\.rs)/;
 const ZELENA = "#1F8A4C";
-// Titl ide PREDNOST_TITLA s ispred izgovorene reči (video 13, vlasnik 03.10.2026: posle ukidanja pravila
-// „1 s ispred“ tačno poravnat titl je opet delovao kao da kasni). Pokret i slika ostaju uz reč.
-const PREDNOST_TITLA = 0.5;
+// Dodatna prednost samo za titl (0: titl, slika i pokret idu zajedno, 1 s ispred reči po plan.json;
+// video 13, vlasnik 03.10.2026: „bilo je dobro ono 1 s“; 0,5 s samo za titl je odbačeno).
+const PREDNOST_TITLA = 0;
 
 export const komadiTitlova = (plan: Plan): Komad[] => {
   const out: Komad[] = [];
