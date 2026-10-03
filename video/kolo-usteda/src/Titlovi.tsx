@@ -15,13 +15,16 @@ const UNAPRED_TRAKA = 8;
 const UNAPRED_REC = 3;
 const ISTAKNUTE = /^(„?KOLO|KOLU|KOLA|POEN|ekolo\.rs)/;
 const ZELENA = "#1F8A4C";
+// Titl ide PREDNOST_TITLA s ispred izgovorene reči (video 13, vlasnik 03.10.2026: posle ukidanja pravila
+// „1 s ispred“ tačno poravnat titl je opet delovao kao da kasni). Pokret i slika ostaju uz reč.
+const PREDNOST_TITLA = 0.5;
 
 export const komadiTitlova = (plan: Plan): Komad[] => {
   const out: Komad[] = [];
   for (const s of plan.scene) {
     let tek: RecF[] = [];
     s.reci.forEach((w, i) => {
-      const p = plan.prednost ?? 0;
+      const p = (plan.prednost ?? 0) + PREDNOST_TITLA;
       const r = { ...w, f: Math.round((s.glasOd + w.s - p) * plan.fps), ef: Math.round((s.glasOd + w.e - p) * plan.fps) };
       const duzina = tek.map((x) => x.w).join(" ").length;
       if (tek.length && duzina + 1 + w.w.length > MAX_ZNAKOVA) {
