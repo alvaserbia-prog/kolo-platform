@@ -452,6 +452,16 @@ export async function DELETE(req: NextRequest) {
       where: { userId },
       data: { punoIme: null, opis: null },
     });
+
+    // Ime uz javnu donaciju (donacije čl. 5a st. 4, Politika čl. 11, set 4.6.8).
+    // 🔴 Do 4.6.8 je ime OSTAJALO u listi i posle gašenja naloga — to je obrnuto.
+    // Sada se briše iz zapisa donacije, a donacija ostaje u listi iznosom,
+    // datumom i pseudonimom koji ne upućuje na ime. `uplatilac` (podatak iz
+    // izvoda) se NE dira: to je računovodstveni zapis, ne objava.
+    await tx.donationRecord.updateMany({
+      where: { userId, donatorIme: { not: null } },
+      data: { donatorIme: null, imePovucenoAt: new Date() },
+    });
   });
 
   // Obriši avatar sa R2 (ako je tamo) — sprečava orphan fajlove. Legacy

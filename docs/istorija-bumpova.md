@@ -19,6 +19,30 @@
 
 ---
 
+**AŽURIRANO 2026-10-03:** na **4.6.8** ide **SEDAM akata** — Pravilnik o
+pokroviteljstvu i donacijama (sa 4.5.8), Uslovi korišćenja (sa 4.6.6), Politika
+privatnosti (sa 4.6.7), Registar radnji obrade (sa 4.6.7), DPIA (sa 4.6.7), Izjava o
+prihvatanju rizika (sa 4.6.0) i Pravilnik o hijerarhiji (sa 4.4.6). Ostalih deset
+ostaje gde jeste. Povod: tri nalaza spoljne revizije (vidi
+`docs/sprovodjenje-rizika-2026-09.md`, „Spoljna revizija… set 4.6.8").
+- 🟢 **4.6.8 je bila slobodna** — `git fetch` pre bumpa: nijedna grana nije nosila
+  `4_6_8`, a 4.6.7 je bila objavljena na `production` (01.10), pa je dopuna tražila
+  nov bump (pouka 2).
+- **Glavni Pravilnik NIJE diran** (nema novog osnova negativnog zapisa ni kanala),
+  pa ni Pravilnik o učešću dece. DPIA ide zbog R13, ne zbog Pravilnika. Whitepaper
+  proveren: ne pominje trajnost imena donatora (negativna provera).
+- 🔴 **Unakrsna upućivanja ispravljena samo u aktima koji se ovim potezom
+  objavljuju**, i to samo „živi" pokazivači: zaglavlje Registra (Pravilnik → 4.6.6,
+  Politika → 4.6.8, programi → 4.6.7), red „Povezani dokumenti" i dva pomena Registra
+  u DPIA, programi u radnji br. 10. Pozicijski, red po red — ne blanket. **NISU
+  dirana** istorijska pozivanja (DPIA v4.3.0, „od verzije 4.2.1", „registrom v4.5.1")
+  ni pozivanja na član određene verzije (dokaz stvarnosti 4.4.1 čl. 11; Pravilnik
+  4.4.6 čl. 15 t. 8) — numeracija članova se mogla promeniti, pa ih briše 5.0.
+- **Pristanak:** bump Uslova i Politike traži nov red `PolitikaVerzija` (admin panel)
+  i obaveštenje bez odlaganja — **pri objavi na ekolo.rs**, ne na testu.
+
+---
+
 **AŽURIRANO 2026-09-16 (trideset šesti put):** na **4.6.5** idu **DVA akta** —
 Pravilnik o dokazu stvarnosti (sa 4.4.1) i Pravilnik o KOLO sistemu (sa 4.6.2).
 Ostalih petnaest ostaje gde jeste. Povod nije rizik iz registra nego **odluka

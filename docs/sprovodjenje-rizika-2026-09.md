@@ -11,6 +11,89 @@ i `docs/istorija-bumpova.md` (hronologija verzija akata).
 
 ---
 
+## 🔴 Spoljna revizija (ChatGPT, 03.10.2026) — tri stvarna nalaza, set 4.6.8
+
+Vlasnik je doneo spoljnu „pravnu debug" analizu sa 25 zamerki i tražio ocenu svake.
+Oko polovine je već bilo rešeno ranijim setovima (nabavka čl. 3a/19, operativni
+doprinos bez naručioca, osnivački čl. 39, deca, Gornje Kolo, pseudonimizacija). Dva
+predloga su odbijena jer bi oslabila odbranu: rečenica o „eventualnom ugovornom
+odnosu" kod osnivačkog doprinosa (pretpostavlja da je odnos postojao) i oznaka
+„fizičko lice / preduzetnik / pravno lice" na oglasu (to je odbijena kućica
+„nudim u okviru registrovane delatnosti"). „Bug" sa verzijama (4.4.1 naspram 4.6.5)
+**ne postoji** u repozitorijumu: stranica pravilnika i fajl nose isti broj. Ostala
+su tri stvarna nalaza i sva tri idu u **4.6.8**, po nalogu vlasnika „sve odjednom u
+sledećoj verziji".
+
+### 1. Ime javnog donatora više nije trajno
+
+🔴 **Do 4.6.8 je ime ostajalo u listi i posle gašenja naloga**, a pristanak na objavu
+nije mogao da se povuče. Dva kvara: pristanak koji se ne može povući nije slobodan
+(ZZPL čl. 15 st. 3), a obrazloženje „bez imena se upis ne može pripisati licu" važi
+za **trenutak evidentiranja**, kada se osnov proverava, ne za posle. Donacija i bez
+imena ostaje pripisana nalogu, a podatke o uplati Fondacija čuva.
+
+**Sada:** donator povlači ime **po donaciji** (jer se i pristanak daje po donaciji),
+na ekranu donacija, bez pisanog zahteva. Gašenje naloga ime briše na isti način.
+Donacija **ostaje u listi** iznosom, datumom i pseudonimom. Ispadanje iz liste bi
+promenilo zbir koji lista pokazuje i učinilo upis neproverljivim.
+- Akti: donacije čl. 5a (st. 1 skraćen, nov st. 4), Uslovi čl. 17, Politika 4.5,
+  čl. 11 i čl. 13 (pravo na povlačenje), Registar radnja 13 (rok čuvanja, mere),
+  DPIA R13 i 5.14. **Ocena R13 ostaje 6**: dok ime stoji, veza postoji; mera skraćuje
+  trajanje, ne verovatnoću.
+- 🔴 **Ime se BRIŠE iz zapisa, ne skriva** — jedina svrha `donatorIme` je objava.
+  `uplatilac` (izvod) i `ugovorTekst` (ugovor, čl. 5b) **ostaju**: to su
+  računovodstveni i dokazni zapisi, ne objava. Zato akt kaže „podaci o uplati i
+  ugovor o donaciji ne objavljuju se i čuvaju se".
+- Povlačenje **ne dira** POEN, nivo ni `identitetUtvrdjenAt`. Jednosmerno je: ime se
+  ne vraća, jer se ne čuva.
+- Kod: migracija `20261003120000_donacija_ime_povuceno` (`imePovucenoAt`), ruta
+  `POST /api/donacije/[id]/povuci-ime` (uslov u upitu: sopstvena, javna, ime još
+  stoji), korak u `DELETE /api/profil` (u završnoj transakciji), lista u
+  `GET /api/donacije` zadržava povučene, dugme na ekranu, tekst ugovora za NOVE
+  donacije. Zatečeni ugovori se ne diraju (snimljen tekst).
+- Brana: `__tests__/donator-ime-izvor.test.ts` (kod i akti na pet jezika, `UKINUTO`).
+
+### 2. R-05: evidentiranje POEN-a ne menja poresku kvalifikaciju, a račun ostaje
+
+Uslovi čl. 16 (u stav o propisima koji važe za ponuđača, bez novog stava): evidentiranje
+POEN-a povodom razmene **ne određuje i ne menja** poresku, računovodstvenu ni drugu
+javnopravnu kvalifikaciju posla, a ko je dužan da izda račun ili fiskalni račun izdaje
+ga **nezavisno** od evidentiranja. Ista rečenica, kraće, u Izjavi o rizicima čl. 10.
+🟢 Ne dira nijednu zabranjenu temu: nema stope, praga, izuzeća čl. 9 ZPDG ni kućice o
+registrovanoj delatnosti. R-05 time **nije obrađen** — ovo je jedna mera iz njega.
+
+### 3. Hijerarhija: FAQ, ekrani i video ispod akata; ispravljen čl. 14
+
+Nov čl. 3 st. 4: ono što važi za Whitepaper (nije obavezujući, ne stvara prava,
+merodavan je akt) važi i za FAQ, tekstove na ekranima, video i drugi informativni
+sadržaj, **ne dirajući čl. 10 st. 4** (imperativni propisi o zaštiti potrošača i
+dalje važe neposredno). 🔴 **Čl. 14 je od objave nosio neodlučen izbor**
+„[danom donošenja / osmog dana od dana donošenja]" na svih pet jezika. Sada stoji
+„danom donošenja", kao u ostalim aktima. Brana u istom testu traži da u hijerarhiji
+više nema uglastih zagrada sa kosom crtom.
+
+### Šta NIJE urađeno, i zašto
+
+- **„Merilo, ne pravo" u glavni Pravilnik čl. 13** — rečenica već stoji u nabavkama
+  čl. 19 i donacijama čl. 4, a bump glavnog Pravilnika povlači DPIA i Pravilnik o
+  učešću dece. Ne otvara se bez nove potrebe.
+- **„Važi od" uz svaki akt** — svi akti stupaju na snagu „danom donošenja", a datum
+  odluke UO nigde nije zapisan. Prikazati datum koji nemamo bilo bi izmišljanje.
+  Preduslov: UO beleži datum donošenja svakog akta.
+
+### 🔴 OTVORENO — pitanja za pravnicu i knjigovođu (ne pisati kao tvrdnju)
+
+1. **Poništenje POEN-a pri preuzimanju robe iz nabavke** — može li se kvalifikovati
+   kao **naknada** po Zakonu o PDV-u? Ako može, ustupanje postaje promet Fondacije i
+   prag se brzo dostiže. Najslabija tačka modela nabavke (ista kao pitanje (b) uz R-10).
+2. **Pijaca i Zakon o zaštiti potrošača** — da li je platforma „pružalac onlajn
+   tržišta" i da li to traži objavu izjave ponuđača o tome da li je trgovac. Kućica
+   na oglasu je odbijena; pitanje je da li zakon traži nešto što se ne može izbeći.
+3. **R-11 (platne usluge)** — da li prepis POEN-a, od 4.6.6 otvoren i identifikovanom
+   članu, dodiruje Zakon o platnim uslugama ili Zakon o digitalnoj imovini.
+
+---
+
 ## 🔴 Socijalni programi izlaze iz skrivenog prikaza; Posebna briga postaje Posebna podrška (R-03, 25.09.2026, set 4.6.7)
 
 **Odluka vlasnika, i ona OBRĆE meru M-1 iz R-03.** Evidentiranje POEN-a po socijalnom
@@ -3271,7 +3354,7 @@ ne stoji poreska stopa i ne stoji nijedan prag koji se menja zakonom. Rečenica
 | **Dokaz pristanka** (R-06) | `ZapisPristanka` sa snimljenim tekstom i verzijom, **bez IP adrese i otiska uređaja**; upis u **istoj transakciji** sa `user.create`; **dva reda, ne jedan**. `src/lib/verzije-akata.ts` je jedan izvor istine za verziju Uslova i Politike — **menja se pri svakom bumpu** ta dva akta. **DPO nije određen** (opcija C), uz napisanu procenu i godišnje preispitivanje; `PRISTANAK_NA_AKTE_TRAZI_SE` je **`true`** i ne gasi se |
 | **Posebne kategorije** (R-03) | 🔴 **OBRNUTO setom 4.6.7** (odluka vlasnika, 25.09.2026): evidentiranje po socijalnom programu **prikazuje se redovnim članovima** uz pseudonim, naziv programa i iznos; gostu i novom članu ostaje **dnevni zbir**, a dan sa jednim korisnikom se i dalje preskače. Nosiva mera nije više izostavljanje zapisa nego **izostavljanje OSNOVA** — `POSEBNA_BRIGA` se na ekranu zove **Posebna podrška** i obuhvata smanjenu sposobnost i gubitak doma, pa naziv ne kazuje osnov. DPIA R11 time ide **6 → 9** (srednji nivo, gornja granica). Uslov „bez dece" živi na jednom mestu (`BEZ_DECE` u `protokol/deca.ts`) i svaki nov spisak transakcija ga uvozi |
 | **Prekogranični prenos** (R-12) | izvršavanje i baza su u **EU (Frankfurt)** — `vercel.json` `regions: ["fra1"]` je **mera zaštite**, zaključana testom. U SAD izlaze samo slike, pošta (uključujući isečak poruke), Telegram i analitika. Osnov prenosa je **norma** („prenosi se isključivo obrađivaču sa kojim je zaključen ugovor"), ne izveštaj |
-| **Prestanak statusa** (R-14) | to je **pseudonimizacija, ne anonimizacija** — ne vraćati tvrdnju da zapisi „prestaju da budu podaci o ličnosti". Ime javnog donatora ostaje u listi i posle gašenja naloga, i to sada piše i u upozorenju pri donaciji |
+| **Prestanak statusa** (R-14) | to je **pseudonimizacija, ne anonimizacija** — ne vraćati tvrdnju da zapisi „prestaju da budu podaci o ličnosti". 🔴 **Od seta 4.6.8 ime javnog donatora NIJE trajno**: donator ga povlači po donaciji, a gašenje naloga ga briše; donacija ostaje u listi iznosom, datumom i pseudonimom (donacije čl. 5a st. 4) |
 | **Socijalni programi** (R-13) | pristanak se daje **pre** nego što se od bilo koga zatraži potvrda i navodi koliko će lica biti zamoljeno; povlačenje pristanka postoji i briše unete podatke. Mejl i push nose **neutralan** tekst (`spoljni`), naziv programa ostaje u zvoncetu |
 | **Deca** (R-11, R-15, R-17) | do 15 godina dete sa punoletnima **niti razmenjuje niti komunicira**, i prekidač iz čl. 10 to ne otvara; oglas takvog deteta punoletnima nije vidljiv. Prepis iznad praga (**5.000** za 7–14, **20.000** za 15–17) čeka roditelja **7 dana**, samo za odliv. Izjašnjavaju se **obe strane** u postupku potvrde postojanja deteta, rok **60 dana**, podsetnici na 30/7/1 dan, svako vraća **isključivo svoje** i **nadoknada se ne primenjuje** |
 

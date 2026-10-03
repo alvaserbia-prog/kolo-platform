@@ -18,6 +18,9 @@ interface Donacija {
   poenEmitted: number;
   status: "PENDING" | "CONFIRMED";
   javno: boolean;
+  /** Ime još stoji u listi — tada se nudi povlačenje (čl. 5a st. 4). */
+  imeObjavljeno: boolean;
+  imePovuceno: boolean;
   imaUgovor: boolean;
   createdAt: string;
 }
@@ -26,6 +29,8 @@ interface JavnaDonacija {
   id: string;
   ime: string | null;
   anonimno: boolean;
+  /** Javna donacija kojoj je donator povukao ime, ili je nalog ugašen. */
+  imePovuceno: boolean;
   /** 🔴 Kod anonimne donacije su oba `null` — ni pseudonim ni link (R-03, M-3c). */
   pseudonim: string | null;
   userId: string | null;
@@ -77,6 +82,8 @@ export default function DonacijeKlijent() {
   // na zapis donacije kao dokaz u sporu po osporenoj kartičnoj transakciji.
   const [nepovratnost, setNepovratnost] = useState(false);
   const [ishod, setIshod] = useState<"uspeh" | "neuspeh" | "greska" | null>(null);
+  const [povlacenje, setPovlacenje] = useState<string | null>(null);
+  const [povlacenjeGreska, setPovlacenjeGreska] = useState<string | null>(null);
   useEffect(() => {
     fetch("/api/donacije")
       .then((r) => r.json())
@@ -131,6 +138,27 @@ export default function DonacijeKlijent() {
     } catch {
       setKarticaGreska(t("karticno_greska_komunikacije"));
       setKarticaLoading(false);
+    }
+  }
+
+  // Povlačenje imena iz liste (čl. 5a st. 4). Jednosmerno — ime se briše iz
+  // zapisa, pa se pre slanja traži potvrda.
+  async function povuciIme(id: string) {
+    if (!window.confirm(t("povuci_ime_potvrda"))) return;
+    setPovlacenje(id);
+    setPovlacenjeGreska(null);
+    try {
+      const r = await fetch(`/api/donacije/${id}/povuci-ime`, { method: "POST" });
+      if (!r.ok) {
+        setPovlacenjeGreska(id);
+        return;
+      }
+      const sveze = await fetch("/api/donacije").then((x) => x.json());
+      setData(sveze);
+    } catch {
+      setPovlacenjeGreska(id);
+    } finally {
+      setPovlacenje(null);
     }
   }
 
@@ -418,6 +446,22 @@ export default function DonacijeKlijent() {
                       {t("ugovor_link")}
                     </a>
                   )}
+                  {d.imeObjavljeno && (
+                    <button
+                      type="button"
+                      onClick={() => povuciIme(d.id)}
+                      disabled={povlacenje === d.id}
+                      className="block ml-auto text-xs text-kolo-muted underline hover:text-kolo-text mt-1 disabled:opacity-50"
+                    >
+                      {t("povuci_ime")}
+                    </button>
+                  )}
+                  {d.imePovuceno && (
+                    <p className="text-xs text-kolo-muted mt-1">{t("ime_povuceno")}</p>
+                  )}
+                  {povlacenjeGreska === d.id && (
+                    <p className="text-xs text-red-500 mt-1">{t("povuci_ime_greska")}</p>
+                  )}
                 </div>
               </div>
             ))}
@@ -446,7 +490,9 @@ export default function DonacijeKlijent() {
               >
                 <div>
                   <p className="text-sm font-medium text-kolo-text">
-                    {d.anonimno ? t("lista_anoniman") : d.ime || t("lista_anoniman")}
+                    {d.anonimno
+                      ? t("lista_anoniman")
+                      : d.ime || (d.imePovuceno ? t("lista_ime_povuceno") : t("lista_anoniman"))}
                   </p>
                   {!d.anonimno && d.pseudonim && (
                     <Link
