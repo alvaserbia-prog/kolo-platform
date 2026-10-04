@@ -1008,7 +1008,7 @@ Za pomoć koju date neko vam prepiše POEN, a vi ga prepišete onome ko pomogne 
 
 ## 17. Video 15 „Trampa: dva načina“ (oktobar 2026)
 
-Video: `video/kolo-trampa/out/kolo-trampa.mp4`. Naslovna: `video/kolo-trampa/out/naslovna.jpg` („Ajvar za cipele?“).
+Video: `video/kolo-trampa/out/kolo-trampa.mp4`. Naslovna: `video/kolo-trampa/out/naslovna.jpg` („Ajvar za cipele?“, podnaslov „Zašto trampa ne funkcioniše“, odluka vlasnika 04.10.2026).
 Zvuk na Instagramu preimenovati u „KOLO, trampa“. Alternativni tekst: „Crtež kredom na školskoj tabli: Milica
 nudi teglu ajvara obućaru, kome trebaju drva; tabla se deli na dva načina, novac i zajedničku svesku u koju se
 upisuje ko je šta dao, a na kraju se četvoro uhvate u kolo.“

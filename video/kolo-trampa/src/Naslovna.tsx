@@ -22,8 +22,8 @@ export const Naslovna: React.FC = () => (
           <text x={540} y={300} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={150} fill={P.mastilo}>
             Ajvar za cipele?
           </text>
-          <text x={540} y={430} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={84} fill={P.oker}>
-            trampa: dva načina
+          <text x={540} y={430} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={76} fill={P.oker}>
+            Zašto trampa ne funkcioniše
           </text>
           <Pod y={1478} x0={60} x1={1020} />
           <Lik x={250} y={1470} s={0.9} {...MILICA} glava={{ ...MILICA.glava, izraz: "zamisljena", pogled: [1, 0] }} lr={[10, 10]} dr={[82, 0]} drziD={<Tegla vrsta="ajvar" s={0.8} />} />
