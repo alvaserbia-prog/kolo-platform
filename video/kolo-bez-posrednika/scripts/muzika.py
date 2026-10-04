@@ -1,42 +1,78 @@
-"""Muzika za video „Bez posrednika“: pesma „Od mraka do sunca“ (Suno, nalog vlasnika), složena po glasu.
+"""Muzika za video „Bez posrednika“: pesma „Od mraka do sunca (1)“ (Suno, nalog vlasnika, 04.10.2026),
+složena po glasu. Prethodna pesma („Od mraka do sunca“, audio/raw/muzika-suno.mp3) zamenjena je ovom.
 
-Pesma (3:00): mol sa kucavim pulsom do ~28 s, tamni prelaz 28,5–34,4 s, kolo u duru od udara 34,56 s
-(123 BPM), završni udari 172,3–179 s. Sve po merenju (jačina, spektar, ritam): fraza mola se ponavlja na 10,92 s
-(4,52 s ≈ 15,44 s po spektru), pa se mol produžava ponavljanjem te fraze dok kolo ne padne na reč „KOLO“.
-Kolo traje dok traje glas, pa se celim taktovima skače na završne udare, koji počinju posle „ušteda“.
-Ulaz audio/raw/muzika-suno.mp3 + src/plan.json -> audio/muzika.wav (48 kHz, stereo).
+Pesma (3:01.6), ceo tok ~133 BPM (četvrtina 0,4496 s, takt 1,798 s): tamni uvod do ~13 s, pa gradnja,
+proređen deo (pauza) 36,5–42,8 s, **svetli deo („sunce“) od udara ~43,2 s**, završni udarac 177,25 s,
+posle njega zvoni do ~180,8 s. Sve po merenju (jačina, spektar, ritam), ne slušanjem.
+
+Raspored: do izgovorenog „KOLO“ treba ~11 s više nego što pesma ima do sunca, pa se gradnja jednom
+ponovi za 8 taktova (22,56 s ≈ 8,17 s po spektru), a pesma počinje u 3,4 s. Tako proređen deo pada pod
+„Ako se na kraju meseca pitaš…“, a sunce na „KOLO“. Svetli deo traje dok traje glas, pa se na udarcu
+skače na završni udarac pesme, koji pada odmah posle „ušteda“.
+Ulaz audio/raw/muzika-suno-2.mp3 + src/plan.json -> audio/muzika.wav (48 kHz, stereo).
 """
 import json, subprocess
+import numpy as np, soundfile as sf
 
+FAJL = "audio/raw/muzika-suno-2.mp3"
 plan = json.load(open("src/plan.json"))
 sc = {s["id"]: s for s in plan["scene"]}
 rec = lambda i, w: sc[i]["glasOd"] + next(x["s"] for x in sc[i]["reci"] if x["w"] == w)
-K = rec(8, "KOLO.")                     # kolo kreće na izgovorenu reč „KOLO“
+K = rec(8, "KOLO.")
 KRAJ_GLASA = sc[11]["glasDo"]
 T = plan["trajanje"]
 
-T1, T2 = 4.52, 15.44                    # ista mesta u fraze mola (period 10,92 s)
-MK = 34.56                              # prvi udar kola
-TAKT_KOLO = 4 * 60 / 123.0
-E0 = 176.95                             # poslednji udari pesme (177–178,8 s); ranije 172,31 je posle glasa trajalo ~7 s (vlasnik: „muzika jako dugo traje posle videa“)
-PETLJI = 2
-s0 = MK - K + (T2 - T1) * PETLJI      # početak u pesmi
-assert 0 <= s0 < T2, s0
-# kolo: celi taktovi do skoka na završetak, koji pada ~0,4 s posle poslednje reči
-n = max(1, round((KRAJ_GLASA + 0.4 - K) / TAKT_KOLO))
-kolo_do = MK + n * TAKT_KOLO
-delovi = [(s0, T2)] + [(T1, T2)] * (PETLJI - 1) + [(T1, kolo_do), (E0, 180.0)]
-print("s0", round(s0, 2), "K", round(K, 2), "taktova kola", n, "delovi", [(round(a, 2), round(b, 2)) for a, b in delovi])
+DOBA = 60 / 133.45
+FAZA = 14.35                    # jedan udarac na mreži doba
+J, L = 22.56, 8 * 4 * DOBA      # skok nazad za 8 taktova
+MK = 43.2                       # približan početak sunca
+E0 = 177.10                     # malo pre završnog udarca (177,25 s)
 
-ul, filt = [], []
-for k, (a, b) in enumerate(delovi):
-    ul += ["-i", "audio/raw/muzika-suno.mp3"]
-    filt.append(f"[{k}:a]atrim={a}:{b},asetpts=PTS-STARTPTS,aresample=48000[d{k}]")
-x = "[d0]"
-for k in range(1, len(delovi)):
-    filt.append(f"{x}[d{k}]acrossfade=d=0.08:c1=tri:c2=tri[x{k}]")
-    x = f"[x{k}]"
-filt.append(f"{x}afade=t=in:d=0.25,apad=whole_dur={T},atrim=0:{T},afade=t=out:st={T - 1.0}:d=1.0[out]")
-subprocess.run(["ffmpeg", "-v", "error", "-y", *ul, "-filter_complex", ";".join(filt), "-map", "[out]", "-ac", "2",
-                "-c:a", "pcm_s16le", "audio/muzika.wav"], check=True)
-print("gotovo: audio/muzika.wav")
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", FAJL, "-ar", "48000", "-ac", "2", "-c:a", "pcm_f32le", "/tmp/_suno2.wav"], check=True)
+a, sr = sf.read("/tmp/_suno2.wav")
+m = a.mean(1)
+hop = 256
+e = np.array([np.sum(m[i:i + hop] ** 2) for i in range(0, len(m) - hop, hop)])
+onset = np.maximum(0, np.diff(np.log(e + 1e-9), prepend=0))
+
+
+def udarac(t, prozor=0.2):
+    i0, i1 = int((t - prozor) * sr / hop), int((t + prozor) * sr / hop)
+    return (i0 + int(np.argmax(onset[i0:i1]))) * hop / sr
+
+
+def na_dobi(t):
+    return FAZA + round((t - FAZA) / DOBA) * DOBA
+
+
+mk = udarac(MK)
+j = udarac(na_dobi(J))
+jl = udarac(na_dobi(J - L))
+s0 = j - (K - (mk - jl))          # početak u pesmi, da sunce padne na „KOLO“
+assert s0 >= 0, s0
+# kraj: prvi takt posle poslednje reči (+0,3 s), skok na završni udarac
+t_u_pesmi = (KRAJ_GLASA + 0.3) - (j - s0) + jl
+kraj = udarac(na_dobi(t_u_pesmi))
+e0 = E0
+delovi = [(s0, j), (jl, kraj), (e0, len(m) / sr)]
+print("sunce", round(mk, 2), "s0", round(s0, 2), "delovi", [(round(x, 2), round(y, 2)) for x, y in delovi])
+print("sunce u videu", round((j - s0) + (mk - jl), 2), "reč KOLO", round(K, 2),
+      "završni udarac u videu", round((j - s0) + (kraj - jl) + (177.25 - e0), 2), "kraj glasa", round(KRAJ_GLASA, 2))
+
+f = int(0.06 * sr)
+out = None
+for x0, x1 in delovi:
+    d = a[int((x0 - 0.02) * sr): int((x1 - 0.02) * sr)]
+    if out is None:
+        out = d
+    else:
+        r = np.linspace(0, 1, f)[:, None]
+        out = np.concatenate([out[:-f], out[-f:] * (1 - r) + d[:f] * r, d[f:]])
+n = int(T * sr)
+out = out[:n] if len(out) >= n else np.concatenate([out, np.zeros((n - len(out), 2))])
+fo = int(1.0 * sr)
+out[-fo:] *= np.linspace(1, 0, fo)[:, None]
+fi = int(0.05 * sr)
+out[:fi] *= np.linspace(0, 1, fi)[:, None]
+sf.write("audio/muzika.wav", out.astype(np.float32), sr, subtype="PCM_24")
+print("gotovo: audio/muzika.wav", round(len(out) / sr, 2))

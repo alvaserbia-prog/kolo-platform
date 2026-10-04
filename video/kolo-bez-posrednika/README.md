@@ -4,7 +4,7 @@ Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 76,2 s, H.264 + 
 Četrnaesti po redosledu objave (`video/README.md`). Gotov fajl: [`out/kolo-bez-posrednika.mp4`](out/kolo-bez-posrednika.mp4),
 naslovna: [`out/naslovna.jpg`](out/naslovna.jpg). Scenario i tekst naracije: [`scenario.md`](scenario.md).
 Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 15 (po pravilima za opise sa main-a, odluka vlasnika 03.10.2026).
-Naracija: vlasnik (My_recording_70, ponovljeno čitanje 03.10.2026; ranije My_recording_67). Muzika: „Od mraka do sunca“ (Suno, nalog vlasnika); verzija sa muzikom komponovanom u kodu je odbijena (vlasnik 03.10.2026: „vraćamo v3“).
+Naracija: vlasnik (My_recording_70, ponovljeno čitanje 03.10.2026; ranije My_recording_67). Muzika: „Od mraka do sunca (1)“ (Suno, nalog vlasnika, 04.10.2026; zamenila prvu verziju pesme). Verzija sa muzikom komponovanom u kodu je odbijena (03.10.2026).
 
 Stil je **stara ilustrovana slikovnica** (primitivi iz `../kolo-raste/`: gvaš, mastilo, papir, zrno,
 okvir sa lalama, listanje). Nosiva slika je **gomilica „TVOJA PLATA“ na stočiću** (`src/plata.tsx`, odluka vlasnika 03.10.2026):
@@ -67,7 +67,7 @@ KOMPOZICIJA=Naslovna node scripts/kadrovi.mjs 0 && mv out/kadrovi/f0.jpg out/nas
 | rez | izbačen prvi, prekinut izgovor „A kome ide razlika, kad se mle…“ (42,60–46,30 s snimka); ostaje drugi, ceo izgovor. Provera reč po reč (Parakeet + Omnilingual) posle reza: bez reči viška i ponavljanja |
 | tempo | pauze duže od 0,45 s skraćene, **atempo 1,03** → 72,7 s |
 | vremena reči | Parakeet TDT 0.6B v3 po isečcima, pa prisilno CTC poravnanje (Omnilingual ASR 300M); „40“ i „160“ se poravnavaju kao „četrdeset“ i „sto šezdeset“, adresa kao „ekolo tačka rs“, kako je izgovorena |
-| muzika | „Od mraka do sunca“ (3:00): mol do ~28 s, tamni prelaz, **kolo od udara 34,56 s (123 BPM)**, završni udari 172,3–179 s. Fraza mola se ponavlja na 10,92 s (4,52 ≈ 15,44 po spektru), pa je mol produžen sa dva ponavljanja te fraze, tako da **kolo kreće na izgovoreno „KOLO“**; kolo traje deset taktova, pa se skače na poslednje udare pesme (177–178,8 s), koji počinju posle „ušteda“; ranije se skakalo na 172,3 s i muzika je posle glasa trajala ~7 s, pa je skraćeno na ~3 s (vlasnik 03.10.2026) (`scripts/muzika.py`). Delovi su određeni merenjem jačine, spektra i ritma, ne slušanjem |
+| muzika | „Od mraka do sunca (1)“ (`audio/raw/muzika-suno-2.mp3`, 3:01,6, ~133 BPM): tamni uvod, gradnja, proređen deo 36,5–42,8 s, **svetli deo („sunce“) od udara 43,15 s**, završni udarac 177,25 s. Gradnja se jednom ponovi za 8 taktova (22,54 ≈ 8,10 s po spektru), pesma počinje u 3,4 s, pa proređen deo pada pod „Ako se na kraju meseca pitaš…“, a sunce na izgovoreno „KOLO“; svetli deo traje dok traje glas, pa se na udarcu skače na završni udarac, ~0,5 s posle „ušteda“ (`scripts/muzika.py`). Delovi su određeni merenjem jačine, spektra i ritma, ne slušanjem |
 | miks | muzika −8 dB, rez na 2,6 kHz, sidechain 3:1 vođen glasom; −14 LUFS / −1,5 dBTP; zvučnih efekata nema |
 
 Modeli (sherpa-onnx Parakeet i Omnilingual) i `deep-filter` preuzeti su sa GitHub izdanja i nisu u repou.
