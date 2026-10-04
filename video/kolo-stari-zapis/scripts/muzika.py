@@ -7,17 +7,20 @@ završni udarac na 188,41 s, posle koga numera zamire do ~194 s.
 
 Raspored (nalog vlasnika 04.10.2026: „neka krene od 33 sekunde“):
   A  33,000 → 92,394   glavni deo ispod cele istorije (Mesopotamija, Inke)
-  B 156,387 → 176,390   rez posle 16 mreža (64,0 s), na udaru: proređen deo pada na „zapise.“ i nosi
-                        „Zapis se ne koristi…“ (ozbiljan trenutak = proređen ritam, ne spor tempo);
-                        skoro tišina ispod „U KOLU se taj zapis zove…“, PUN ULAZ NA „POEN“
-  C 184,390 → 191,993   rez od dve mreže (8,0 s) u punom delu (najmanja razlika spektra od tri moguća
-                        mesta), pa završni udarac odmah posle poslednje reči „ekolo.rs“ i zamiranje do 87,0 s videa
+  B 156,387 → 164,000   rez posle 16 mreža (64,0 s), na udaru: proređen deo pada na „zapise.“ i nosi
+                        „Zapis se ne koristi…“ (ozbiljan trenutak = proređen ritam, ne spor tempo)
+  C 166,000 → 168,390   iz skoro tišine pred pun ulaz izbačene 2 s (vlasnik, 04.10.2026: „skrati pre te
+                        tamburice na kraju sekund dva tri“); tu je ujednačen ton bez ritma, pa rez ide
+                        preklapanjem od 150 ms. PUN ULAZ pada na „U KOLU“ (~0,1 s pre „U“)
+  D 174,390 → 191,993   rez od 6,0 s u punom delu (168,39 → 174,39: najveća sličnost hrome 0,89 od šest
+                        mogućih mesta; ranije 8 s), pa završni udarac odmah posle „ekolo.rs“ i zamiranje do 87,0 s videa
 Rezovi idu 50 ms pre tačke mreže (pre napada udara), sa preklapanjem od 40 ms.
 """
 import subprocess, numpy as np, soundfile as sf
 
-DELOVI = [(33.000, 92.394), (156.387, 176.390), (184.390, 191.993)]
+DELOVI = [(33.000, 92.394), (156.387, 164.000), (166.000, 168.390), (174.390, 191.993)]
 PREKLOP = 0.040
+PREKLOP_TIHO = 0.150  # rez u tihom delu (164 → 166 s) ide dužim preklapanjem, jer tu nema udara
 ULAZ_POEN = 167.075   # napad punog ulaza u numeri
 ZAVRSNI = 188.410     # napad završnog udarca
 
@@ -27,12 +30,14 @@ a, sr = sf.read("/tmp/claude-0/suno48.wav", dtype="float32")
 f = int(PREKLOP * sr)
 out = None
 for t0, t1 in DELOVI:
-    d = a[int(t0 * sr): int(t1 * sr) + f]
+    k = int((PREKLOP_TIHO if t0 == 166.000 else PREKLOP) * sr)
+    # deo počinje (k − f) uzoraka ranije, da duže preklapanje ne pomeri ostatak numere
+    d = a[int(t0 * sr) - (k - f): int(t1 * sr) + f]
     if out is None:
         out = d
     else:
-        r = np.linspace(0, 1, f, dtype=np.float32)[:, None]
-        out = np.concatenate([out[:-f], out[-f:] * (1 - r) + d[:f] * r, d[f:]])
+        r = np.linspace(0, 1, k, dtype=np.float32)[:, None]
+        out = np.concatenate([out[:-k], out[-k:] * (1 - r) + d[:k] * r, d[k:]])
 # kraj: video staje na 87,0 s (3,6 s posle završnog udarca, pre malog naknadnog udarca na 192,5 s), stišavanje 1,0 s
 n = int(1.0 * sr)
 out[-n:] *= np.linspace(1, 0, n, dtype=np.float32)[:, None]
