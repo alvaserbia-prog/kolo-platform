@@ -3,7 +3,7 @@
 Podaci koji se ponavljaju u zahtevima bankama, pružaocima usluga i institucijama.
 Izvor: rešenje APR o registraciji (BZF 406/2026) i dokumentacija OTP banke.
 
-🔴 **Lični podaci upravitelja su ovde upisani po izričitoj odluci vlasnika (02.10.2026),
+🔴 **Lični podaci direktora su ovde upisani po izričitoj odluci vlasnika (02.10.2026),
 uprkos tome što je repozitorijum javan.** JMBG-ovi i lični podaci članova UO se
 **ne upisuju** — to su podaci trećih lica, bez njihove saglasnosti.
 
@@ -33,11 +33,11 @@ uzajamne pomoći; socijalna zaštita i solidarna podrška ranjivim grupama; eduk
 
 | Uloga (APR) | Ime |
 |---|---|
-| Upravitelj — ovlašćeno lice za zastupanje | Nikola Šarić |
+| Direktor — ovlašćeno lice za zastupanje | Nikola Šarić |
 | Predsednik Upravnog odbora | Jelena Stijepović |
 | Članovi Upravnog odbora | Stefan Milijanović, Danijel Tomasović |
 
-**Upravitelj — lični podaci (za obrasce):**
+**Direktor — lični podaci (za obrasce):**
 
 | Podatak | Vrednost |
 |---|---|
@@ -47,8 +47,8 @@ uzajamne pomoći; socijalna zaštita i solidarna podrška ranjivim grupama; eduk
 | Telefon | 064 245 3710 |
 | E-mail | alva.serbia@gmail.com |
 
-🟡 U APR-u je Nikola Šarić upisan kao **upravitelj**, ne kao direktor — u obrascima
-koje banka proverava u APR-u pisati „upravitelj“.
+🟡 Nikola Šarić je **direktor** Fondacije (Statut); u obrascima pisati „direktor“.
+APR ga vodi u rubrici „upravitelj“ — to je naziv rubrike, ne funkcija.
 
 ## Banka — OTP banka Srbija
 
