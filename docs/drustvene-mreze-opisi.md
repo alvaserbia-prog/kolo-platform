@@ -1310,3 +1310,73 @@ U Somboru pravimo KOLO, gde takve usluge ostaju zapisane. Kome pomognete, prepi�
 ```
 
 Prvi komentar stranice posle objave: „Sajt: https://ekolo.rs“ (odeljak 3, „Facebook i link“).
+
+## 21. Video 17 „Stari oblici zapisa“ (oktobar 2026)
+
+Video: `video/kolo-stari-zapis/out/kolo-stari-zapis.mp4`. Naslovna: `video/kolo-stari-zapis/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, stari oblici zapisa“. Alternativni tekst: „Slikovnica: pisar u
+Mesopotamiji utiskuje znake u glinenu pločicu, Inka drži uže sa obojenim koncima i čvorovima, a na kraju
+zajednička sveska u koju se upisuje ko je šta dao.“
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, rovaš, drveni štap na kome se zarezima
+beležilo koliko je ko dao; Instagram, pamćenje koje posle nekoliko godina izbledi, a zapis ostane;
+Facebook, komšija koji je pomogao oko krova pre deset godina, pa se toga seća samo on. Mesopotamija,
+Inke, glinene pločice i čvorovi iz videa se ne prepričavaju. Zapis se opisuje kao beleška ko je šta dao,
+nikad kao dug („ko kome duguje“ se ne piše). Uporedo sa svim ranijim odeljcima (posebno 17, 18 i 19): nijedna
+rečenica nije ista, a selidba iz odeljka 19 se ne ponavlja.
+
+**Pregled ekipe (04.10.2026):** pisac je rovaš objasnio u istoj rečenici u kojoj ga imenuje, jer reč
+mlađi ne znaju; dramaturg je tražio da svaki opis ima jednu sliku (štap sa zarezima, izbledelo sećanje,
+krov); urednik za mreže: prva rečenica ispod 100 znakova, jedan poziv po opisu; gledalac je zapeo na
+„evidencija“, pa stoji „zapis“. Kako se POEN dobija kaže se tačno: prepiše ti ga član kome si nešto dao
+ili uradio.
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; uz POEN nema reči kupi, prodaj,
+plati, zaradi, cena, vrednost; bez „besplatno“; „vi“ dosledno na Facebook-u; adresa na Facebook-u bez
+`https://`, link ide u prvi komentar (odeljak 3).
+
+### TikTok
+
+```
+Naši stari su na drvenom štapu, rovašu, zarezima beležili koliko je ko dao. 🪵
+
+Nije im trebao ni papir ni olovka. Svaki zarez je značio da je neko nešto doneo, i to se videlo na štapu, a ne samo u nečijem sećanju.
+
+KOLO radi na isti način, samo bez nožića. Kad komšiji pokosiš travu, odneseš teglu zimnice ili mu pomogneš oko papira, on ti prepiše POEN. Tvoj doprinos ostaje zapisan, pa za ono što tebi zatreba ne moraš da tražiš baš onoga ko ima tačno to.
+
+POEN je zapis o tome šta si dao zajednici. Nije novac i ne menja se za novac.
+
+👉 Postavi prvi oglas, link je u profilu.
+
+#Sombor #istorija #komšije #razmena #KOLO
+```
+
+### Instagram
+
+```
+Sećanje posle nekoliko godina izbledi, a zapis ostane. ✍️
+
+Ko je pomogao da se okopa bašta, ko je doneo kolače kad je bilo najpotrebnije, to se zna dok je sveže. Kasnije se samo kaže „neko nam je tada pomogao“.
+
+Na KOLU svaki doprinos ostaje upisan. Kad nekome daš svoj rad ili nešto iz svoje kuće, on ti prepiše POEN. POEN nije novac, nego zapis o tome šta si dao.
+
+👉 Link je u bio.
+
+#Sombor #Vojvodina #komšije #razmena #KOLO
+```
+
+### Facebook
+
+```
+Pre deset godina komšija vam je pomogao oko krova, a danas se toga seća još samo on. 🏠
+
+Tako je sa većinom dobrih stvari među ljudima. Urade se, zahvali se, i posle nekog vremena niko više ne zna ko je kome šta dao. Ljudi su zbog toga oduvek zapisivali: na štapu, u svesci, u knjizi.
+
+KOLO taj zapis vodi za ceo komšiluk. Kad nekome date svoj rad, nešto iz svoje kuće ili ga nečemu naučite, on vam prepiše POEN. Taj zapis ostaje, pa i vama neko izađe u susret kad zatreba, čak i kad to nije onaj kome ste vi pomogli.
+
+POEN je zapis o doprinosu zajednici. Nije novac i ne menja se za novac.
+
+👉 Šta biste vi mogli da ponudite komšijama? Prvi oglas postavite na ekolo.rs
+
+#Sombor #KOLO
+```
