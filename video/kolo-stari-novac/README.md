@@ -55,8 +55,8 @@ python3 scripts/muzika.py                                       # 6) numera sloÅ
 python3 scripts/mix.py                                          # 7) glas + muzika stalne jaÄine -> public/miks.wav
 node scripts/kadrovi.mjs 300 900                                # probni kadrovi -> out/kadrovi/
 npx remotion render src/index.ts StariNovac out/master.mp4 --crf=18
-ffmpeg -i out/master.mp4 -c:v libx264 -preset slow -b:v 2200k -pass 1 -an -f mp4 /dev/null
-ffmpeg -i out/master.mp4 -c:v libx264 -preset slow -b:v 2200k -maxrate 4M -bufsize 8M -pass 2 \
+ffmpeg -i out/master.mp4 -c:v libx264 -preset slow -b:v 2000k -pass 1 -an -f mp4 /dev/null
+ffmpeg -i out/master.mp4 -c:v libx264 -preset slow -b:v 2000k -maxrate 4M -bufsize 8M -pass 2 \
   -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 192k out/kolo-stari-novac.mp4
 KOMPOZICIJA=Naslovna node scripts/kadrovi.mjs 0 && mv out/kadrovi/f0.jpg out/naslovna.jpg
 ```
