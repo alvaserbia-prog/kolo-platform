@@ -1,74 +1,72 @@
-# KOLO video 19 — Zna li iko koliko novca imaš? / Zašto je tvoj zapis u KOLU otvoren
+# KOLO video 19 — Da li bi otvorio svoj račun? / Pravila su ista za sve
 
-Drugi video bloka o transparentnosti i privatnosti (18 upravljanje → 19 tvoj zapis →
+Drugi video bloka o transparentnosti i privatnosti (18 upravljanje → 19 tvoj račun →
 20 pseudonim). Objašnjavajući video: pune rečenice, bez imenovanih likova, ispravke ekipe već unete
-(03.10.2026, četvrti krug po vlasniku: video 18 je o upravljanju, ovaj je o **zapisu korisnika**, da
-se ne preklapaju).
+(04.10.2026, peti krug: početak po ideji vlasnika).
 
-**Poruka:** koliko neko ima novca, na računu ili u gotovini, niko drugi ne zna; u KOLU je zapis svakog člana otvoren. Prvi razlog je u tome šta
-je POEN: zapis o tome ko je šta dao, a ne novac. Drugi razlog nastavlja video 18: otvorena evidencija
-štiti od zloupotrebe samo ako su otvoreni svi zapisi. Korisnik od toga ima i korist (poreklo svakog
-POEN-a se vidi), a cena je deo privatnosti; kako se ona ublažava, objašnjava video 20.
+**Poruka (ideja vlasnika):** svi bismo voleli da imamo uvid u račune onih koji upravljaju; zato i mi
+treba da otvorimo svoje, jer pravila treba da su ista za sve. Uz to, otvoreni računi svih sprečavaju
+da bilo ko od nas vara. Korisnik od toga ima i korist, a cena je deo privatnosti; kako se ona
+ublažava, objašnjava video 20.
 
 ## Naslov (dva reda, na kuki i na naslovnoj slici)
 
-- gore, krupno: **ZNA LI IKO KOLIKO NOVCA IMAŠ?**
-- dole, sitnije: **Zašto je tvoj zapis u KOLU otvoren**
+- gore, krupno: **DA LI BI OTVORIO SVOJ RAČUN?**
+- dole, sitnije: **Pravila su ista za sve**
 
 ## Tekst za snimanje
 
-1. Zna li iko koliko novca imaš? Verovatno ne zna.
-2. Novac je tvoja stvar. Koliko imaš na računu, koliko u novčaniku ili kod kuće, i kome si šta platio, to niko drugi ne mora da zna.
-3. U KOLU je drugačije. Tvoj zapis POEN-a je otvoren: svaki potvrđen član može da vidi koliko POEN-a imaš, ko ti je prepisao POEN i kome si ga ti prepisao.
-4. Razlog je u tome šta je POEN. POEN nije novac, nego zapis o tome šta si ti dao drugima i šta su drugi dali tebi, a takav zapis se tiče cele zajednice.
-5. Postoji i drugi razlog. U prošlom videu smo videli da otvorena evidencija ne dozvoljava onome ko upravlja da uzme za sebe. Ali to važi samo ako su otvoreni svi zapisi, jer bi se iza svakog zatvorenog zapisa mogao sakriti nečiji prepis.
-6. Zato je pravilo isto za sve: otvoren je zapis onih koji upravljaju, a otvoren je i tvoj.
-7. Od toga imaš i korist. Za svaki POEN na tvom zapisu vidi se odakle je došao, pa niko ne može da posumnja da si ga dobio mimo pravila.
-8. [I ti možeš da pogledaš zapis člana sa kojim razmenjuješ i da vidiš da li je i on davao drugima. | —]
-9. To se zove transparentnost zapisa: tvoj zapis vidiš ti, a vide ga i ostali potvrđeni članovi.
+1. Svi bismo voleli da vidimo račune onih koji upravljaju. Ali da li bismo otvorili i svoje?
+2. Kad neko upravlja zajedničkim, želimo da znamo šta je dobio, šta je dao i kome. To je razumljivo, jer samo tako možemo da proverimo da li uzima za sebe.
+3. Ali pravila treba da budu ista za sve. Ako tražimo da račun onoga ko upravlja bude otvoren, onda i naši računi moraju da budu otvoreni.
+4. Uz to, otvoreni računi svih članova sprečavaju da bilo ko od nas vara. Ko bi pokušao da dođe do POEN-a mimo pravila, to bi se videlo na njegovom računu.
+5. U KOLU je tako. Tvoj račun POEN-a je otvoren: svaki potvrđen član može da vidi koliko POEN-a imaš, ko ti je prepisao POEN i kome si ga ti prepisao. Isto važi i za račune onih koji upravljaju.
+6. To je lakše prihvatiti kad se zna šta je POEN. POEN nije novac, nego zapis o tome šta si ti dao drugima i šta su drugi dali tebi, a takav zapis se tiče cele zajednice.
+7. Od toga imaš i korist. Za svaki POEN na tvom računu vidi se odakle je došao, pa niko ne može da posumnja da si ga dobio mimo pravila.
+8. [I ti možeš da pogledaš račun člana sa kojim razmenjuješ i da vidiš da li je i on davao drugima. | —]
+9. To se zove transparentnost računa: svoj račun vidiš ti, a vide ga i ostali potvrđeni članovi.
 10. Cena je deo tvoje privatnosti, i na to smo pristali svesno.
-11. Ali pored tvog zapisa ne piše tvoje ime. Šta tamo piše, videćeš u sledećem videu.
+11. Ali pored tvog računa ne piše tvoje ime. Šta tamo piše, videćeš u sledećem videu.
 
 ## Scenario
 
 | Sc. | Slika (tekst koji je deo slike je u navodnicima) |
 |---|---|
-| 1 | ruka sklanja novčanik u džep i presavija izvod iz banke kad komšija priđe. Preko slike dva reda naslova |
-| 2 | zatvoren novčanik, izvod u koverti i kutija sa ušteđevinom u ormanu, sve zatvoreno |
-| 3 | ekran telefona: zapis POEN-a jednog člana; stanje na vrhu, ispod redovi „od koga · kome · koliko · kada“ |
-| 4 | redovi zapisa se pretvaraju u male prizore: tegla zimnice, popravljena stolica, čas matematike, uz svaki strelica ka drugom članu |
-| 5 | mreža zapisa: jedan red je zaključan, i strelica prepisa koja ulazi u njega tu nestaje |
-| 6 | zaključani red se otključava; strelica se vidi celom dužinom |
-| 7 | uz svaki red u zapisu gledaoca pojavi se kratak osnov: „tegla zimnice“, „popravka“ |
-| 8 | ekran telefona: profil drugog člana sa njegovim oglasima i zapisom |
-| 9 | dva telefona jedan pored drugog, na oba isti zapis |
-| 10 | novčanik i koverta sa početka ostaju zatvoreni; pored njih otvoren zapis POEN-a |
-| 11 | zapis u krupnom kadru; tamo gde bi stajalo ime, znak pitanja; najava sledećeg videa |
+| 1 | otvorena fascikla sa natpisom „UPRAVA“, ljudi se naginju da pogledaju; kamera se okrene ka njihovim fasciklama, zatvorenim, sa njihovim imenima. Preko slike dva reda naslova |
+| 2 | u fascikli „UPRAVA“ redovi „dobio · dao · kome“ |
+| 3 | vaga sa dva tasa: na jednom fascikla „UPRAVA“, na drugom fascikle članova; vaga se poravna kad se i one otvore |
+| 4 | među otvorenim fasciklama jedan red bez osnova zasvetli |
+| 5 | ekran telefona: račun POEN-a jednog člana; stanje na vrhu, ispod redovi prepisa; pored njega isti prikaz za nekoga iz uprave, bez razlike |
+| 6 | redovi računa se pretvaraju u male prizore: tegla zimnice, popravljena stolica, čas matematike |
+| 7 | uz svaki red pojavi se osnov: „tegla zimnice“, „popravka“ |
+| 8 | ekran telefona: profil drugog člana sa njegovim oglasima i računom |
+| 9 | dva telefona jedan pored drugog, na oba isti račun |
+| 10 | otvorena fascikla gledaoca, mirno, među ostalim otvorenim |
+| 11 | račun u krupnom kadru; tamo gde bi stajalo ime, znak pitanja; najava sledećeg videa |
 
 Muzika: vojvođanska tamburica, vedro; na sc. 1 kratka stanka posle pitanja, pa ulazak ritma.
 
-## Pregled ekipe (03.10.2026, četvrti krug; ispravke unete)
+## Pregled ekipe (04.10.2026, peti krug; ispravke unete)
 
 | Sc. | Uloga | Nalaz | Šta je urađeno |
 |---|---|---|---|
-| 1 | Urednik za mreže | kuka se tiče gledaoca lično, ne uprave; tako se ne preklapa sa videom 18 | „Zna li iko koliko novca imaš?“ (novac uopšte: račun i gotovina, po vlasniku) |
-| 2–3 | Dramaturg | poređenje sa novcem odmah pokazuje razliku | novac zatvoren, zapis POEN-a otvoren |
-| 4 | Gledalac | bez objašnjenja „zašto“ otvoren račun deluje kao gubitak | razlog: POEN nije novac nego zapis o davanju |
-| 5 | Dramaturg | veza sa videom 18 u jednoj rečenici, bez ponavljanja njegove priče | „U prošlom videu smo videli…“ |
-| 7 | Gledalac | potrebna je korist za gledaoca, ne samo cena | poreklo svakog POEN-a se vidi |
+| 1 | Urednik za mreže | kuka polazi od onoga što svi žele (uvid u upravu) i okreće pitanje ka gledaocu | „Ali da li bismo otvorili i svoje?“ |
+| 1–2 | Dramaturg | početak se nadovezuje na video 18 bez ponavljanja njegove priče | „račune onih koji upravljaju“ |
+| 3 | Pisac | ideja vlasnika u jednoj rečenici: ista pravila, pa i naši računi | zadržano |
+| 4 | Gledalac | drugi razlog mora biti konkretan | „to bi se videlo na njegovom računu“ |
+| 6 | Gledalac | bez objašnjenja šta je POEN, otvoren račun deluje kao gubitak | „POEN nije novac, nego zapis…“ |
 | 8 | Pisac | korist je stvarna, ali produžava video | izbor vlasnika |
-| 9 | Pisac | „transparentnost računa“ bi mešala POEN sa bankovnim računom | „transparentnost zapisa“ |
-| 10 | Pisac | „cena“ ide uz privatnost; bez „plaćamo“ | „na to smo pristali svesno“ |
+| 10 | Pisac | „cena“ ide uz privatnost; bez „plaćamo“ | zadržano |
 | 11 | Urednik za mreže | najava pravo u video 20 | zadržano |
 
 ## Ograde
 
-- Sc. 3 i 9: stanje i prepise sa pseudonimima vide potvrđeni članovi; posetilac i nov član vide ukupne
+- Sc. 5 i 9: stanje i prepise sa pseudonimima vide potvrđeni članovi; posetilac i nov član vide ukupne
   brojeve (Pravilnik čl. 67 i 28). Privatnost se daje prema drugim članovima, ne prema celom internetu.
-- Sc. 4: „POEN nije novac“ prati Pravilnik čl. 12–13; ne dodavati da „vredi“ koliko dinar, ni
-  „POEN je kao novac“. Novac (račun i gotovina) je samo poređenje sa onim što gledalac zna, ne tvrdnja da je zapis POEN-a račun ni novčanik.
+- Sc. 6: „POEN nije novac“ prati Pravilnik čl. 12–13; ne dodavati da „vredi“ koliko dinar, ni
+  „POEN je kao novac“. „Račun POEN-a“ je izraz akata („stanje računa“); ne znači bankovni račun.
 - Ne vide se dobrovoljno uneti podaci, lanac potvrda ni posebne kategorije podataka (čl. 67 st. 3).
 - Sc. 8: član sam gleda tuđi zapis; ne kaže se da Fondacija prati obrasce prepisa (zabranjeno u `CLAUDE.md`).
 - Ne kaže se „KOLO vodi Fondacija“ (odluka vlasnika uz video 18).
 - Zbir je uvek nula ostaje videu 42; ovde se ne pominje.
-- Uz POEN ne idu kupi, prodaj, plati, zaradi, cena („platio“ u sc. 2 ide uz novac).
+- Uz POEN ne idu kupi, prodaj, plati, zaradi, cena.
