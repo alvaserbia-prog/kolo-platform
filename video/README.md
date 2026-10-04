@@ -29,7 +29,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
 | 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | tekst gotov, izrada nije počela |
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | tekst gotov, izrada nije počela |
-| 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
+| 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | ✅ |
 | 18 | Šta piše pored tvog imena | K |  |  |
 | 19 | Čije je KOLO? Ničije. | K |  |  |
 | 20 | Šta je Fondacija | K |  |  |
