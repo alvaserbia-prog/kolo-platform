@@ -30,24 +30,24 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | ✅ |
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | ✅ |
 | 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
-| 18 | Šta piše pored tvog imena | K |  |  |
-| 19 | Čije je KOLO? Ničije. | K |  |  |
-| 20 | Šta je Fondacija | K |  |  |
-| 21 | Zlato, srebro, bakar | N |  |  |
-| 22 | Lanac potvrda | K |  |  |
-| 23 | Indeks stvarnosti | K |  |  |
-| 24 | Sajam gde niko ne plaća | A |  |  |
-| 25 | Ko vodi Fondaciju | K |  |  |
-| 26 | Penzioneri | K |  |  |
-| 27 | Papir sa zlatnom podlogom | N |  |  |
-| 28 | Kako prepoznati prevaru | K |  |  |
-| 29 | Nije piramida, nije kripto | K |  |  |
-| 30 | Owen: priznanica rada | A |  |  |
-| 31 | Tri dela sistema: Fondacija, Protokol, Zajednica | K |  |  |
-| 32 | Zašto se ne isplati varati | K |  |  |
-| 33 | Delimična zlatna podloga | N |  |  |
-| 34 | Šta ako razmena ne uspe | K |  |  |
-| 35 | Poljoprivrednici | K |  |  |
+| 18 | Poljoprivrednici: Sava i poslednje krave | K | `kolo-poljoprivrednik/` | tekst gotov, scenario napisan |
+| 19 | Šta piše pored tvog imena | K |  |  |
+| 20 | Čije je KOLO? Ničije. | K |  |  |
+| 21 | Šta je Fondacija | K |  |  |
+| 22 | Zlato, srebro, bakar | N |  |  |
+| 23 | Lanac potvrda | K |  |  |
+| 24 | Indeks stvarnosti | K |  |  |
+| 25 | Sajam gde niko ne plaća | A |  |  |
+| 26 | Ko vodi Fondaciju | K |  |  |
+| 27 | Penzioneri | K |  |  |
+| 28 | Papir sa zlatnom podlogom | N |  |  |
+| 29 | Kako prepoznati prevaru | K |  |  |
+| 30 | Nije piramida, nije kripto | K |  |  |
+| 31 | Owen: priznanica rada | A |  |  |
+| 32 | Tri dela sistema: Fondacija, Protokol, Zajednica | K |  |  |
+| 33 | Zašto se ne isplati varati | K |  |  |
+| 34 | Delimična zlatna podloga | N |  |  |
+| 35 | Šta ako razmena ne uspe | K |  |  |
 | 36 | Prudon | A |  |  |
 | 37 | Šta prihvataš kad se registruješ | K |  |  |
 | 38 | Šta KOLO zna o tebi (granica: minimum podataka) | K |  |  |
@@ -164,7 +164,7 @@ otprilike jedan na dva. Porez i Penzija idu pre N „Ko stoji iza novca“, „D
 odredio vlasnik (sajmovi, Owen, Prudon, Warren, Rochdale, Greene, Raiffeisen, Pariska komuna, Gesell, Avramović,
 Kropotkin); XX i XXI vek idu hronološki. Serijal o novcu otvara niz od tri videa (odluka vlasnika, 30.09.2026): „Trampa“ pokazuje problem
 i dva načina da se reši, stvar koju svi primaju ili zapis; „Stari oblici novca“ i „Stari oblici zapisa“ razrađuju
-svaki od njih, a K video „Šta piše pored tvog imena“ odmah posle pokazuje zapis u KOLU. Tri N zaredom su namerna celina.
+svaki od njih. Tri N zaredom su namerna celina. Posle njih ide K video „Poljoprivrednici“ (18), priča iz života, pa „Šta piše pored tvog imena“ (19) pokazuje zapis u KOLU (odluka vlasnika, 04.10.2026: „Poljoprivrednici“ idu odmah posle bloka 15–17, ostali se pomeraju za jedno mesto).
 Metal (zlato, srebro, bakar) ostaje svom videu.
 „Kompenzacija i 1993.“ je vraćena na svoje hronološko mesto, jer na početku nije imala vezu sa KOLOM.
 
