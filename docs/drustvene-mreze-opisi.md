@@ -1005,3 +1005,67 @@ Za pomoć koju date neko vam prepiše POEN, a vi ga prepišete onome ko pomogne 
 
 #Sombor #moba #KOLO
 ```
+
+## 17. Video 16 „Stari oblici novca“ (oktobar 2026)
+
+Video: `video/kolo-stari-novac/out/kolo-stari-novac.mp4`. Naslovna: `video/kolo-stari-novac/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, stari oblici novca“. Alternativni tekst: „Slikovnica: vreća žita,
+šipke soli i niz školjki na polici koja pukne; brod istovaruje školjke na obalu; na kraju zelena knjiga
+u koju se upisuje ko je šta dao.“
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, godina kad šljive rode pa ih ima svuda;
+Instagram, ujam na vodenici; Facebook, risari na salašima koji su platu nosili kući u pšenici. Egipat,
+Etiopija, Kina i brodovi sa školjkama iz videa se ne ponavljaju. Reči „vrednost“ i „vredi“ se ne pišu
+(odeljak 2), pa se mana starih oblika novca kaže kao „kad ih je mnogo, niko ih ne traži“. „Plaćalo“ stoji
+samo uz žito i brašno, nikad uz POEN.
+
+**Pregled ekipe (04.10.2026):** pisac je rečenice o šljivama skratio na jedan dah; dramaturg je tražio da
+svaka mreža ima jednu sliku (šljive, vodenica, risari) i da POEN dođe tek posle nje; urednik za mreže:
+prva rečenica ispod 100 znakova, na TikTok-u pitanje za komentar, na Facebook-u poziv na prvi oglas;
+gledalac nije znao reč „ujam“, pa je u istoj rečenici objašnjena.
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; bez „vrednost“ i „vredi“;
+rodno neutralno na TikTok-u i Instagramu; „vi“ dosledno na Facebook-u; adresa na Facebook-u bez
+`https://` (link ide u prvi komentar, odeljak 3).
+
+### TikTok
+
+```
+Kad šljive dobro rode, pola sela ne zna šta će s njima. 🌳
+
+Tako je nekad bilo i sa stvarima koje su ljudi koristili umesto novca. U rodnoj godini žita ima svuda i niko ga ne traži. U sušnoj ga nema, pa ljudi nemaju čime da razmene ono što imaju. Sa školjkama je bilo još gore: kad ih je stiglo previše, niko ih više nije hteo.
+
+U KOLU se POEN ne gaji, ne kopa i ne dovozi. Upiše se tek kad neko nekome nešto da ili uradi, i pokazuje ko je šta dao. Nije novac i ne menja se za novac.
+
+👉 Šta se u tvom kraju nekad davalo umesto novca? Napiši u komentar. Link je u profilu.
+
+#Sombor #istorija #novac #razmena #KOLO
+```
+
+### Instagram
+
+```
+Na vodenici se nekad nije plaćalo dinarima, nego ujmom: vodeničar je zadržao deo brašna koje je samleo. 🌾
+
+Žito su svi primali, ali je imalo i manu. U sušnoj godini ga nema, a u vlažnom ambaru se pokvari.
+
+POEN u KOLU nije stvar koja se čuva u ambaru. To je zapis o tome šta si dao drugim članovima, i nastaje tek kad nešto daš. Nije novac i ne menja se za novac.
+
+Link je u bio.
+
+#Sombor #Vojvodina #vodenica #istorija #KOLO
+```
+
+### Facebook
+
+```
+Risari koji su po vojvođanskim salašima kosili žito nisu nosili platu u novčaniku. Kući su odnosili deo pšenice koju su požnjeli, i od toga se živelo do sledećeg leta. 🌾
+
+Tako se hiljadama godina plaćalo svuda po svetu: žitom, solju, školjkama. Sve te stvari imale su istu slabost. Kad ih je bilo mnogo, niko ih nije tražio, a kad ih nije bilo, ljudi nisu imali čime da razmene ono što imaju.
+
+POEN na KOLU nije takva stvar. Ne gaji se, ne kopa i ne dovozi. Upiše se onome ko je nešto dao ili uradio za drugog člana i ostaje kao zapis o tome. POEN nije novac i ne menja se za dinare.
+
+👉 Ako imate nešto da ponudite komšijama, prvi oglas postavite na ekolo.rs
+
+#Sombor #istorija #KOLO
+```

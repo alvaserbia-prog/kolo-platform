@@ -2,7 +2,7 @@
 
 Drugi video niza o novcu (15 Trampa → 16 → 17 Stari oblici zapisa). Razrađuje prvi način iz
 videa 15: stvar koju svi primaju. Tekst je prošao ekipu od četiri uloge (30.09.2026); izbore je
-napravio vlasnik.
+napravio vlasnik. **Naracija snimljena (My_recording_72), video gotov** — postupak i priča u slici: `README.md`.
 
 **Poruka:** stvari koje su služile kao novac imale su zajedničku manu: vrednost im je zavisila od
 toga koliko ih ima. POEN nije takva stvar: POEN je zapis o tome ko je šta dao.
@@ -18,9 +18,17 @@ toga koliko ih ima. POEN nije takva stvar: POEN je zapis o tome ko je šta dao.
 7. POEN ne kruži od čoveka do čoveka kao novac. POEN je zapis o tome ko je šta dao. Taj zapis nastaje tek kad neko nešto da.
 8. Imaš nešto da ponudiš? Postavi svoj prvi oglas na ekolo.rs.
 
+## Izgovoreno (titlovi prate ovo)
+
+Razlike prema tekstu za snimanje: „do pre sto godina“ (umesto „još pre“); „kocke“ bez „soli“ (provereno
+prisilnim poravnanjem: „soli“ nije izgovoreno, slika pokazuje so); „Ali su imala jednu zajedničku manu“.
+
 ## Natpisi
 
-ŽITO · SO · ŠKOLJKE · ZAJEDNIČKA MANA: vrednost zavisi od količine · POEN: ZAPIS · ekolo.rs
+Prvobitni spisak (ŽITO · SO · ŠKOLJKE · …) ukinut je pravilom o natpisima (30.09.2026): titl već nosi te reči.
+U videu su samo dva natpisa, jer nose mesto i vreme kojih nema ni u slici ni u titlu:
+„Deir el-Medina, Egipat“ (scena 2) i „Zapadna Afrika, XIX vek“ (scena 12). Ostali tekst je u slici
+(cedulja „amole“, imena na mapi, kineski znaci, knjiga zapisa, oglas na telefonu, ekolo.rs).
 
 ## Odluke vlasnika i ograde
 
