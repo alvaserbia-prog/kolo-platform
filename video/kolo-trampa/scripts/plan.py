@@ -11,7 +11,7 @@ UVOD = 0.5          # prvi kadar i muzika pre prvog glasa (kuka u prve 3 s: glas
 PRE_SCENE = 0.30    # kadar kreće malo pre glasa
 PRE = {2: 0.12}  # scena 1 traje do kraja „cipele“ (palac kroz rupu), pa sunđer kreće kasnije
 EXTRA = {5: 0.3, 8: 0.2, 11: 0.8}  # dah pre „Ljudi su…“ (muzika menja deo), pre „Drugi način“, i pre završnice (završni akord posle „ekolo.rs“)
-KRAJ_POSLE_GLASA = 4.5  # završni akord pesme (~1,5 s posle adrese) i njegovo zamiranje
+KRAJ_POSLE_GLASA = 3.5  # završni udarac pesme (~1,5 s posle adrese) i kratko zamiranje
 # Koliko slika i tekst idu ispred glasa. Pravilo „1 s ispred“ ukinuto je 03.10.2026 (tekst je žurio,
 # video/README.md): slika i tekst idu uz izgovorenu reč.
 PREDNOST_S = 0.0

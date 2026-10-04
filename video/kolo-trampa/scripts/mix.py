@@ -48,12 +48,12 @@ def run(extra, izlaz, nivo="error"):
     return subprocess.run(cmd + izlaz, check=True, capture_output=True, text=True)
 
 
-r = run(";[pre]loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json[out]", ["-f", "null", "-"], nivo="info")
+r = run(";[pre]loudnorm=I=-14:TP=-2.0:LRA=11:print_format=json[out]", ["-f", "null", "-"], nivo="info")
 txt = r.stderr
 m = json.loads(txt[txt.rindex("{"):txt.rindex("}") + 1])
 lin = (f"measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}:"
        f"measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
-run(f";[pre]loudnorm=I=-14:TP=-1.5:LRA=11:{lin},aresample=48000[out]", ["-ar", "48000", "-c:a", "pcm_s16le", "public/miks.wav"])
+run(f";[pre]loudnorm=I=-14:TP=-2.0:LRA=11:{lin},aresample=48000[out]", ["-ar", "48000", "-c:a", "pcm_s16le", "public/miks.wav"])
 r = subprocess.run(["ffmpeg", "-v", "info", "-i", "public/miks.wav", "-af", "ebur128=peak=true", "-f", "null", "-"],
                    capture_output=True, text=True)
 print("\n".join(r.stderr.strip().splitlines()[-12:]))

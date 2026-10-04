@@ -1,8 +1,8 @@
 {
  "fps": 30,
  "prednost": 0.0,
- "trajanje": 108.35,
- "frejmova": 3250,
+ "trajanje": 107.35,
+ "frejmova": 3220,
  "scene": [
   {
    "id": 1,
@@ -1199,9 +1199,9 @@
     }
    ],
    "tekst": "Šta ti imaš da ponudiš? Pridruži se besplatno na ekolo.rs",
-   "do": 108.35,
+   "do": 107.35,
    "odF": 2930,
-   "doF": 3250,
+   "doF": 3220,
    "glasOdF": 2922
   }
  ]

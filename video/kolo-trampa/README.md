@@ -1,10 +1,10 @@
 # KOLO video 15 — „Trampa: dva načina“
 
-Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 108,4 s, H.264 (~3,8 Mb/s, 54 MB) + AAC, −14 LUFS**.
+Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 107,4 s, H.264 (~3,8 Mb/s, 54 MB) + AAC, −14 LUFS**.
 Petnaesti po redosledu objave (`video/README.md`), otvara serijal o novcu. Gotov fajl:
 [`out/kolo-trampa.mp4`](out/kolo-trampa.mp4), naslovna: [`out/naslovna.jpg`](out/naslovna.jpg).
 Tekst naracije i scenario: [`scenario.md`](scenario.md). Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 17.
-Naracija: vlasnik (My_recording_71, 03.10.2026). Muzika: „Harmonija kiše“ (Suno, nalog vlasnika).
+Naracija: vlasnik (My_recording_71, 03.10.2026). Muzika: „Tamna Tamburica“ (Suno, nalog vlasnika; 04.10.2026 zamenila „Harmoniju kiše“).
 
 Stil je **kreda na školskoj tabli** (predlog za videe 15–17, serijal o novcu kao „čas“): tamnozelena tabla sa
 tragovima brisanja i drvenim ramom (`public/tabla.jpg`), bele linije krede i površine kredom u boji. Likovi i
@@ -69,8 +69,8 @@ KOMPOZICIJA=Naslovna node scripts/kadrovi.mjs 0 && mv out/kadrovi/f0.jpg out/nas
 | rez | izbačeno (vremena snimka): prvo čitanje „Prvi način je da se ljudi dogovore… koja će svako primiti“ (43,6–50,9 s), prvo čitanje kraja sa nejasnom adresom i kratak glasan zvuk pred drugim „Šta“ (113,4–122,3 s), i deo između „ponudiš?“ iz drugog čitanja i „Pridruži se besplatno na ekolo tačka rs“ iz trećeg (124,8–130,1 s). Provera reč po reč posle reza (Parakeet + Omnilingual): bez reči viška, prekinutog početka i ponavljanja |
 | tempo | pauze duže od 0,45 s skraćene (između scena 0,8 s), **atempo 1,03** → 102,5 s |
 | vremena reči | Parakeet TDT 0.6B v3 po isečcima, pa prisilno CTC poravnanje (Omnilingual ASR 300M); adresa se poravnava kao „ekolo tačka rs“, kako je izgovorena |
-| muzika | „Harmonija kiše“ (154,6 s, D-mol, 129,2 BPM). **Uvod bez ritma je izbačen** (vlasnik, 04.10.2026): video počinje prvim udarcem ritma (22,27 s pesme), pa novi deo pesme pada tik pred „To je trampa.“. Jedan rez od 48 udaraca (12 taktova), sa izmerenog udarca 113,23 s na 135,48 s, dva ista mesta u pesmi (pauza pred novim delom, najveća sličnost od rezova te dužine na taktu). Rez pada posle „zauvek.“, **novi deo ulazi tik pred „To je KOLO.“**, a poslednji udarac pada ~1,5 s posle „ekolo.rs“. Delovi su određeni merenjem jačine, spektra, ritma i sličnosti po udarcima, ne slušanjem (`scripts/muzika.py`) |
-| miks | glas ujednačen po scenama (najviše ±2,5 dB, `scripts/mix.py`); muzika **stalne jačine** −14 dB (kao u `../kolo-pijaca/`), rez na 2,6 kHz, **bez stišavanja dok se govori** (odluka vlasnika 02.10.2026); −14 LUFS / −1,5 dBTP; zvučnih efekata nema |
+| muzika | „Tamna Tamburica“ (Suno, vlasnik je poslao 04.10.2026 umesto „Harmonije kiše“; ranija numera ostaje u `audio/raw/muzika-suno.mp3`): 115,7 s, D, ~110 BPM, ritam od prvog udarca. Video počinje početkom pesme, a granice delova same padaju na mesta u priči: 21,7 s (pred „To je trampa.“), 36,8 s (prvi način), 73,9 s (pred „Kada obućaru zatrebaju drva“) i **91,23 s, tačno posle „zauvek.“, pred „To je KOLO.“**. Jedan rez od 16 udaraca (4 takta) posle obrta, sa izmerenog udarca 99,89 s na 108,57 s, da poslednji udarac padne ~1,5 s posle „ekolo.rs“. Delovi su određeni merenjem (sličnost po udarcima, jačina, ritam), ne slušanjem (`scripts/muzika.py`) |
+| miks | glas ujednačen po scenama (najviše ±2,5 dB, `scripts/mix.py`); muzika **stalne jačine** −14 dB (kao u `../kolo-pijaca/`), rez na 2,6 kHz, **bez stišavanja dok se govori** (odluka vlasnika 02.10.2026); −14 LUFS / −2 dBTP; zvučnih efekata nema |
 
 Modeli (sherpa-onnx Parakeet i Omnilingual) i `deep-filter` preuzimaju se sa GitHub izdanja i nisu u repou.
 
