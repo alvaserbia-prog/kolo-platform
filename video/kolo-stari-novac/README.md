@@ -1,10 +1,10 @@
 # KOLO video — „Stari oblici novca“
 
-Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 100,9 s, H.264 + AAC, −14 LUFS**.
+Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 102,0 s, H.264 + AAC, −14 LUFS**.
 Šesnaesti po redosledu objave (`video/README.md`), drugi u nizu o novcu (15 Trampa → 16 → 17 Stari oblici zapisa).
 Gotov fajl: [`out/kolo-stari-novac.mp4`](out/kolo-stari-novac.mp4), naslovna: [`out/naslovna.jpg`](out/naslovna.jpg).
 Tekst i odluke: [`scenario.md`](scenario.md). Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 17.
-Naracija: vlasnik (My_recording_72, 04.10.2026). Muzika: „Ethereal Baglama“ (Suno, nalog vlasnika).
+Naracija: vlasnik (My_recording_72, 04.10.2026; rečenica o Etiopiji sa „kocke soli“ iz My_recording_73). Muzika: „Ethereal Baglama“ (Suno, nalog vlasnika).
 Scenario nije slat na odobrenje (odluka vlasnika 04.10.2026, `video/README.md`): video je urađen do kraja.
 
 Stil je **stara ilustrovana slikovnica** (primitivi iz `../kolo-bez-posrednika/`: gvaš, mastilo, papir, zrno,
@@ -36,7 +36,7 @@ knjiga zapisa u kojoj red nastaje tek kad neko nešto da.
 
 - POEN se ne crta kao novčić ni stvar: samo kao red u knjizi zapisa. Školjka koja kruži je stari novac, ne POEN.
 - „Plaćali“ i „platu“ stoje samo uz žito; uz POEN nema kupi, prodaj, plati, zaradi, cena.
-- Titlovi prate **izgovoreno** (`scenario.md`, odeljak „Izgovoreno“), uz jedan izuzetak: „soli“ u „kocke soli“ stoji u titlu iako nije izgovoreno (odluka vlasnika 04.10.2026, `DODAJ_U_TITL` u `scripts/plan.py`).
+- Titlovi prate **izgovoreno** (`scenario.md`, odeljak „Izgovoreno“).
 
 ## Kako se pravi
 
@@ -45,7 +45,8 @@ cd video/kolo-stari-novac
 npm ci
 pip install nara_wpe sherpa-onnx soundfile onnxruntime scipy librosa
 DEEP_FILTER=/tmp/claude-0/deep-filter ./scripts/ciscenje.sh   # 1) audio/raw/snimak72.m4a -> audio/clean/glas.wav
-python3 scripts/tempo.py                                        # 2) izbacivanje tri ponovljena izgovora, zbijanje pauza, atempo 1,03
+ULAZ=snimak73 IZLAZ=etiopija DEEP_FILTER=/tmp/claude-0/deep-filter ./scripts/ciscenje.sh   #    rečenica o Etiopiji -> audio/clean/etiopija.wav
+python3 scripts/tempo.py                                        # 2) tri ponovljena izgovora napolje, Etiopija iz snimka 73, pauze, atempo 1,03
 ffmpeg -i audio/final/glas.wav -ar 16000 -ac 1 /tmp/glas16.wav
 python3 scripts/vremena_parakeet.py /tmp/glas16.wav audio/parakeet.json   # 3) gruba vremena
 python3 scripts/poravnaj.py                                     # 4) tekst (izgovoreno) + gruba vremena -> src/timing.json
@@ -65,12 +66,12 @@ KOMPOZICIJA=Naslovna node scripts/kadrovi.mjs 0 && mv out/kadrovi/f0.jpg out/nas
 
 | Korak | Šta |
 |---|---|
-| snimak | `audio/raw/snimak72.m4a`, vlasnik, cela naracija u jednom snimku, 118,6 s |
+| snimak | `audio/raw/snimak72.m4a`, vlasnik, cela naracija u jednom snimku, 118,6 s; `audio/raw/snimak73.m4a` (8,1 s), ponovljena rečenica „U Etiopiji su se kocke soli koristile kao novac do pre sto godina.“, jer u snimku 72 „soli“ nije izgovoreno (vlasnik, 04.10.2026) |
 | čišćenje | WPE (odjek sobe) → highpass 75 Hz → DeepFilterNet 3 (35 dB) → topla boja → −16 LUFS |
-| rez | izbačena tri prva izgovora, ostaje ponovljen ceo: „U Etiopiji… još pre“ (prekinuto, 23,30–28,90 s), „U Africi, Indiji i Kini koristili su s…“ (prekinuto, 39,85–44,30 s), „Taj zapis nastaje tek kad nešto neko da“ (obrnut red reči, 100,20–104,90 s). Provera reč po reč posle reza (Parakeet + Omnilingual): bez reči viška i ponavljanja |
-| tempo | pauze duže od 0,45 s skraćene, **atempo 1,03** → 96,8 s; vazduh pred „Ali su imala“, pred obrt „POEN“, pred „Taj zapis“ i pred poziv (`scripts/plan.py`) |
+| rez | izbačena tri prva izgovora, ostaje ponovljen ceo: „U Etiopiji… još pre“ (prekinuto, 23,30–28,90 s), „U Africi, Indiji i Kini koristili su s…“ (prekinuto, 39,85–44,30 s), „Taj zapis nastaje tek kad nešto neko da“ (obrnut red reči, 100,20–104,90 s). Rečenica o Etiopiji (snimak 72, 29,00–34,85 s) zamenjena je istom rečenicom iz snimka 73 (0,75–7,45 s), očišćenom istim lancem. Provera reč po reč posle reza (Parakeet + Omnilingual): bez reči viška i ponavljanja |
+| tempo | pauze duže od 0,45 s skraćene, **atempo 1,03** → 97,9 s; vazduh pred „Ali su imala“, pred obrt „POEN“, pred „Taj zapis“ i pred poziv (`scripts/plan.py`) |
 | vremena reči | Parakeet TDT 0.6B v3 po isečcima, pa prisilno CTC poravnanje (Omnilingual ASR 300M); adresa kao „ekolo tačka rs“ |
-| muzika | „Ethereal Baglama“ (3:07, 129 BPM, takt 1,858 s), po merenju jačine, ritma i hrome: numera kreće od 3,0 s; **jedan rez, na udaru**, posle „pala“ (kraj scene 12): iz prvog dela (78,81 s) pravo u poslednji deo (161,31 s). Od reza numera teče bez prekida, a **završni akord (183,79 s) pada ~0,45 s posle „ekolo.rs“** (`scripts/muzika.py`). Ranija verzija je skakala na isprekidan prelaz numere (156,15 s) da poslednji deo krene na „POEN“ i imala još jedan rez od tri takta; vlasnik je to čuo kao bezveze prekid i promenu pred kraj (04.10.2026), pa je prelaz preskočen |
+| muzika | „Ethereal Baglama“ (3:07, 129 BPM, takt 1,858 s), po merenju jačine, ritma i hrome: numera kreće od 1,9 s; **jedan rez, na udaru**, na reči „pala“ (kraj scene 12): iz prvog dela (78,81 s) pravo u poslednji deo (161,31 s). Od reza numera teče bez prekida, a **završni akord (183,79 s) pada ~0,45 s posle „ekolo.rs“** (`scripts/muzika.py`). Ranija verzija je skakala na isprekidan prelaz numere (156,15 s) da poslednji deo krene na „POEN“ i imala još jedan rez od tri takta; vlasnik je to čuo kao bezveze prekid i promenu pred kraj (04.10.2026), pa je prelaz preskočen |
 | miks | muzika stalne jačine −14 dB (bez stišavanja dok se govori), rez na 2,6 kHz; −14 LUFS / −1,5 dBTP; zvučnih efekata nema |
 
 Modeli (sherpa-onnx Parakeet i Omnilingual) i `deep-filter` preuzeti su sa GitHub izdanja i nisu u repou.

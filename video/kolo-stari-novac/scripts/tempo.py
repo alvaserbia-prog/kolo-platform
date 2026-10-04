@@ -17,6 +17,9 @@ KRAJ_SNIMKA = 117.5  # ceo snimak
 #  „U Africi, Indiji i Kini koristili su s…“ (prekinuto),
 #  „Taj zapis nastaje tek kad nešto neko da“ (obrnut red reči).
 IZBACI = [(23.30, 28.90), (39.85, 44.30), (100.20, 104.90)]
+# Zamena: rečenica o Etiopiji iz snimka 73 (vlasnik, 04.10.2026), sa „kocke soli“, koje u snimku 72 nema.
+# (od, do u snimku 72, fajl, od, do u tom fajlu); fajl je očišćen istim lancem (ULAZ=snimak73 IZLAZ=etiopija).
+ZAMENI = [(29.00, 34.85, "audio/clean/etiopija.wav", 0.75, 7.45)]
 TEMPO = 1.03
 # Posle tempa (vremena u audio/final/glas.wav): ništa.
 IZBACI_POSLE = []
@@ -24,8 +27,15 @@ IZBACI_POSLE = []
 os.makedirs("audio/final", exist_ok=True)
 a, sr = sf.read("audio/clean/glas.wav", dtype="float32")
 a = a[: int(KRAJ_SNIMKA * sr)]
-for x0, x1 in sorted(IZBACI, reverse=True):
-    a = np.concatenate([a[: int(x0 * sr)], np.zeros(int(0.5 * sr), dtype=a.dtype), a[int(x1 * sr):]])
+# rezovi i zamene idu od kraja ka početku, da raniji položaji ostanu tačni
+for x0, x1, *z in sorted([(*x, None) for x in IZBACI] + [tuple(x) for x in ZAMENI], key=lambda r: -r[0]):
+    if z[0] is None:
+        umetak = np.zeros(int(0.5 * sr), dtype=a.dtype)
+    else:
+        b, sr_b = sf.read(z[0], dtype="float32")
+        assert sr_b == sr
+        umetak = b[int(z[1] * sr): int(z[2] * sr)]
+    a = np.concatenate([a[: int(x0 * sr)], umetak, a[int(x1 * sr):]])
 hop = sr // 100
 n = len(a) // hop
 db = 20 * np.log10(np.array([np.sqrt(np.mean(a[k*hop:(k+1)*hop]**2)) for k in range(n)]) + 1e-9)

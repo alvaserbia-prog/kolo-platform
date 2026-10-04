@@ -3,8 +3,8 @@
 Numera (3:07, 129 BPM, takt 1,858 s), sve po merenju (jačina, spektar, ritam, hroma), ne slušanjem:
 uvod koji se pojačava do ~2,5 s, puls od 14,19 s, isprekidan prelaz (fill) 156,15–157,55 s, pa poslednji
 deo; završni akord na udaru 183,79 s, odjek do 187 s.
-- Numera kreće od 3,0 s (posle uvoda koji se tek pojačava).
-- Jedan rez, na udaru: iz prvog dela (78,81 s) pravo u poslednji deo (161,31 s), posle „pala“ (kraj scene 12).
+- Numera kreće od ~1,9 s (računa se iz kraja glasa, da završni akord padne posle „ekolo.rs“).
+- Jedan rez, na udaru: iz prvog dela (78,81 s) pravo u poslednji deo (161,31 s), na „pala“ (kraj scene 12).
   Isprekidan prelaz numere se preskače: ranije se na njega skakalo da poslednji deo krene na „POEN“,
   a vlasnik ga je čuo kao bezveze prekid i promenu pred kraj (04.10.2026). Mesto reza je izabrano po
   sličnosti hrome i boje pre i posle reza (0,96) i razlici jačine (1,3 dB).

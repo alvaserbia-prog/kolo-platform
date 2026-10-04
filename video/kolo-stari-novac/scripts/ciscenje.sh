@@ -11,7 +11,7 @@ cd "$(dirname "$0")/.."
 DF=${DEEP_FILTER:-/tmp/claude-0/deep-filter}
 T=$(mktemp -d)
 mkdir -p "$T/in" "$T/out" audio/clean
-ffmpeg -v error -y -i audio/raw/snimak72.m4a -ac 1 -ar 48000 -c:a pcm_f32le "$T/sirov.wav"
+ffmpeg -v error -y -i audio/raw/${ULAZ:-snimak72}.m4a -ac 1 -ar 48000 -c:a pcm_f32le "$T/sirov.wav"
 python3 scripts/odjek.py "$T/sirov.wav" "$T/suv.wav" 24 >/dev/null
 ffmpeg -v error -y -i "$T/suv.wav" -af "highpass=f=75:poles=2,volume=-5dB" -ar 48000 -ac 1 -c:a pcm_f32le "$T/in/glas.wav"
 "$DF" -D -a ${ATTEN:-35} -o "$T/out" "$T/in/glas.wav" 2>/dev/null

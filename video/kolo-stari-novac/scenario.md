@@ -20,9 +20,8 @@ toga koliko ih ima. POEN nije takva stvar: POEN je zapis o tome ko je šta dao.
 
 ## Izgovoreno (titlovi prate ovo)
 
-Razlike prema tekstu za snimanje: „do pre sto godina“ (umesto „još pre“); „kocke“ bez „soli“ (provereno
-prisilnim poravnanjem: „soli“ nije izgovoreno). Titl ipak glasi „kocke soli“ (odluka vlasnika,
-04.10.2026: „fali kocke soli u tekstu“); „Ali su imala jednu zajedničku manu“.
+Razlike prema tekstu za snimanje: „do pre sto godina“ (umesto „još pre“); „kocke soli“ je izgovoreno u
+ponovljenom snimku te rečenice (My_recording_73, vlasnik 04.10.2026), jer u snimku 72 „soli“ fali; „Ali su imala jednu zajedničku manu“.
 
 ## Natpisi
 

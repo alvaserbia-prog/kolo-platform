@@ -1,4 +1,4 @@
-"""Vremena reči za video „Stari oblici novca“ (jedan snimak naracije, My_recording_72).
+"""Vremena reči za video „Stari oblici novca“ (naracija My_recording_72, rečenica o Etiopiji iz My_recording_73).
 
 Tekst prati ono što je izgovoreno, a ne scenario.
 Početak svake reči uzima se iz tokena Parakeet-a (audio/parakeet.json) poravnanjem po
@@ -12,7 +12,7 @@ TEKST = {
     1: "U početku ljudi su plaćali žitom.",
     2: "U starom Egiptu, pre više od tri hiljade godina, radnici koji su gradili grobnice faraona dobijali su platu u žitu.",
     3: "Žito je lako podeliti, ali je teško za nošenje i vremenom se pokvari.",
-    4: "U Etiopiji su se kocke koristile kao novac do pre sto godina.",
+    4: "U Etiopiji su se kocke soli koristile kao novac do pre sto godina.",
     5: "So se ne kvari, ali se na kiši istopi.",
     6: "U Africi, Indiji i Kini koristile su se male školjke.",
     7: "U kineskom pismu znakovi za novac i danas sadrže znak za školjku.",
