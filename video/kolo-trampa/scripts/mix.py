@@ -1,6 +1,6 @@
 """Miks (video „Trampa“): jedanaest klipova naracije na mestima iz plana + muzika stalne jačine, -14 LUFS.
 
-Glas: iz audio/final/glas.wav seče se [klipOd, klipDo] svake scene i postavlja na glasOd.
+Glas: iz audio/final/glas.wav seče se [klipOd, klipDo] svake scene, ujednačava po jačini i postavlja na glasOd.
 Muzika: audio/muzika.wav (pesma složena u scripts/muzika.py), MUZIKA_DB, rez na 2,6 kHz. Muzika se NE stišava dok se
 govori (bez sidechain-a, odluka vlasnika 02.10.2026, video/README.md). Efekata nema.
 Zbir: loudnorm u dva prolaza na -14 LUFS / -1,5 dBTP -> public/miks.wav.
@@ -11,13 +11,28 @@ MUZIKA_DB = -14  # stalna jačina, kao u ../kolo-pijaca/ (vlasnik određuje jač
 
 plan = json.load(open("src/plan.json"))
 T = plan["trajanje"]
+
+# Ujednačavanje glasa po scenama: jačina govora svake scene (RMS aktivnog govora) dovodi se na zajednički nivo,
+# najviše ±2,5 dB, da glas bude jednak od početka do kraja (vlasnik, 04.10.2026).
+import numpy as np, soundfile as sf
+_a, _sr = sf.read("audio/final/glas.wav")
+def _nivo(s):
+    x = _a[int(s["klipOd"] * _sr): int(s["klipDo"] * _sr)]
+    h = int(0.05 * _sr)
+    r = np.array([np.sqrt(np.mean(x[i:i + h] ** 2)) for i in range(0, len(x) - h, h)])
+    r = r[r > np.percentile(r, 40)]
+    return 20 * np.log10(np.mean(r))
+NIVO = {s["id"]: _nivo(s) for s in plan["scene"]}
+CILJ = float(np.median(list(NIVO.values())))
+KOREKCIJA = {k: float(np.clip(CILJ - v, -2.5, 2.5)) for k, v in NIVO.items()}
+print("korekcija glasa po scenama (dB):", {k: round(v, 1) for k, v in KOREKCIJA.items()})
 ulazi, filt = [], []
 for k, s in enumerate(plan["scene"]):
     ulazi += ["-i", "audio/final/glas.wav"]
     ms = int(round(s["glasOd"] * 1000))
     filt.append(f"[{k}:a]atrim={s['klipOd']}:{s['klipDo']},asetpts=PTS-STARTPTS,"
                 f"afade=t=in:d=0.015,areverse,afade=t=in:d=0.03,areverse,"
-                f"aresample=48000,aformat=channel_layouts=mono,adelay={ms}:all=1[g{k}]")
+                f"volume={KOREKCIJA[s['id']]:.2f}dB,aresample=48000,aformat=channel_layouts=mono,adelay={ms}:all=1[g{k}]")
 n = len(plan["scene"])
 ulazi += ["-i", "audio/muzika.wav"]
 glasovi = "".join(f"[g{k}]" for k in range(n))
