@@ -889,6 +889,8 @@ se tačno: prepiše ti ga član kome si nešto dao ili uradio.
 dinare; bez „vrednost“; rodno neutralno na TikTok-u i Instagramu; „vi“ dosledno na Facebook-u; bez
 prenesenog značenja („vraća pijačni odnos“ zamenjeno sa „kao na pijaci“).
 
+Facebook opis usklađen 04.10.2026 sa odeljkom 3: adresa bez `https://`, a klikabilan link ide u prvi komentar stranice („Sajt: https://ekolo.rs“).
+
 ### TikTok
 
 ```
@@ -930,7 +932,7 @@ Na KOLU je opet kao na pijaci: znate od koga je stvar, a između vas nema prepro
 
 POEN je zapis o doprinosu zajednici. Nije novac i ne menja se za novac.
 
-👉 Šta bi iz vaše kuće komšije rado uzele? Ponudite na https://ekolo.rs
+👉 Šta bi iz vaše kuće komšije rado uzele? Ponudite na ekolo.rs
 
 #Sombor #domaće #KOLO
 ```
