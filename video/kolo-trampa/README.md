@@ -1,6 +1,6 @@
 # KOLO video 15 — „Trampa: dva načina“
 
-Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 108,4 s, H.264 + AAC, −14 LUFS**.
+Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 108,5 s, H.264 (~3,8 Mb/s, 55 MB) + AAC, −14 LUFS**.
 Petnaesti po redosledu objave (`video/README.md`), otvara serijal o novcu. Gotov fajl:
 [`out/kolo-trampa.mp4`](out/kolo-trampa.mp4), naslovna: [`out/naslovna.jpg`](out/naslovna.jpg).
 Tekst naracije i scenario: [`scenario.md`](scenario.md). Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 17.
