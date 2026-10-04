@@ -1,4 +1,4 @@
-# KOLO video 19 — Pokaži prvo svoj račun / Pravila su ista za sve
+# KOLO video 19 — Najlakše je tražiti od drugih da budu pošteni / Pravila su ista za sve
 
 Drugi video bloka o transparentnosti i privatnosti (18 upravljanje → 19 tvoj račun →
 20 pseudonim). Objašnjavajući video: pune rečenice, bez imenovanih likova, ispravke ekipe već unete
@@ -11,12 +11,12 @@ ublažava, objašnjava video 20.
 
 ## Naslov (dva reda, na kuki i na naslovnoj slici)
 
-- gore, krupno: **POKAŽI PRVO SVOJ RAČUN**
+- gore, krupno: **NAJLAKŠE JE TRAŽITI OD DRUGIH DA BUDU POŠTENI**
 - dole, sitnije: **Pravila su ista za sve**
 
 ## Tekst za snimanje (verzija vlasnika, 04.10.2026, skraćena bez gubitka smisla)
 
-1. Hoćeš da vidiš račun onoga ko upravlja? Pokaži prvo svoj.
+1. Najlakše je tražiti od drugih da budu pošteni. Teže je pokazati svoj račun.
 2. Kad neko upravlja onim što je zajedničko, želimo da znamo šta je dobio, šta je dao i kome, jer samo tako možemo da proverimo da li uzima za sebe.
 3. Ali ako tražimo da njihov račun bude otvoren, pravila moraju da budu ista za sve, pa i naši računi moraju da budu otvoreni.
 4. Tako se sprečava i da bilo ko od nas vara, jer se za svaki POEN vidi odakle je došao.
@@ -50,7 +50,7 @@ Muzika: vojvođanska tamburica, vedro; na sc. 1 kratka stanka posle pitanja, pa 
 | 4 i 7 vlasnika | Pisac | „mimo pravila“ dva puta (varanje i korist) | varanje: „vidi se odakle je došao“; korist: „niko ne može da posumnja“ |
 | 5 i 9 vlasnika | Pisac | „svaki potvrđen član može da vidi“ i „vide ga i ostali potvrđeni članovi“ kažu isto | definicija spojena sa rečenicom o KOLU |
 | 7–8 vlasnika | Dramaturg | korist i uvid u tuđi račun su jedna misao | spojeno u rečenicu 7 |
-| 1 | Urednik za mreže | kuka je izazov, ne pitanje: ono što svi traže (uvid u upravu) okreće ka gledaocu u šest reči | „Hoćeš da vidiš račun onoga ko upravlja? Pokaži prvo svoj.“; druge opcije: „Da li bi pristao da komšija vidi koliko si dao i koliko si primio?“, „Svi bismo voleli da vidimo račune onih koji upravljaju. Ali da li bismo otvorili i svoje?“ |
+| 1 | Urednik za mreže | kuka je izazov, ne pitanje: ono što svi traže (uvid u upravu) okreće ka gledaocu u šest reči | izbor vlasnika (04.10.2026): „Najlakše je tražiti od drugih da budu pošteni.“, uz drugu rečenicu „Teže je pokazati svoj račun.“ jer kuka nema pitanje; ranije opcije: „Da li bi pristao da komšija vidi koliko si dao i koliko si primio?“, „Svi bismo voleli da vidimo račune onih koji upravljaju. Ali da li bismo otvorili i svoje?“ |
 | 9 | Urednik za mreže | kraj je jedan poziv (zaprati) uz najavu; vodi pravo u video 20, što je za serijal važnije od komentara | druga opcija: „Da li bi ti otvorio svoj račun da bi video račune onih koji upravljaju? Napiši u komentaru.“ |
 
 ## Ograde
