@@ -1,0 +1,4 @@
+# generiše se: python3 scripts/muzika.py
+audio/muzika.wav
+# probe za slušanje, šalju se vlasniku
+out/proba-*
