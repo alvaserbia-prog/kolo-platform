@@ -52,8 +52,8 @@ assert s0 >= 0, s0
 # kraj (vlasnik 04.10.2026: „neka svetli deo nastavi do kraja … kraj na svetlom delu na kraju celine“):
 # svetli deo svira bez prekida posle poslednje reči, do kraja fraze na 65,16 s u pesmi; tu se pušta prvi
 # udarac sledeće fraze i muzika se stišava za SMIRAJ s. Bez skoka na završetak pesme (prelaz je bio izražen).
-KRAJ_FRAZE = 65.16
-SMIRAJ = 1.3
+KRAJ_FRAZE = 65.16 - 4 * DOBA   # jedan takt ranije (vlasnik: „skrati još koju sekundu na kraju“)
+SMIRAJ = 1.2
 kf = udarac(na_dobi(KRAJ_FRAZE))
 t_kraj = (j - s0) + (kf - jl)
 delovi = [(s0, j), (jl, kf + SMIRAJ + 0.5)]

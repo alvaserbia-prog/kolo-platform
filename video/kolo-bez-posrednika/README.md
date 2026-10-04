@@ -1,6 +1,6 @@
 # KOLO video — „Bez posrednika“
 
-Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 77,6 s, H.264 + AAC, −14 LUFS**.
+Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 75,7 s, H.264 + AAC, −14 LUFS**.
 Četrnaesti po redosledu objave (`video/README.md`). Gotov fajl: [`out/kolo-bez-posrednika.mp4`](out/kolo-bez-posrednika.mp4),
 naslovna: [`out/naslovna.jpg`](out/naslovna.jpg). Scenario i tekst naracije: [`scenario.md`](scenario.md).
 Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 15 (po pravilima za opise sa main-a, odluka vlasnika 03.10.2026).
@@ -67,7 +67,7 @@ KOMPOZICIJA=Naslovna node scripts/kadrovi.mjs 0 && mv out/kadrovi/f0.jpg out/nas
 | rez | izbačen prvi, prekinut izgovor „A kome ide razlika, kad se mle…“ (42,60–46,30 s snimka); ostaje drugi, ceo izgovor. Provera reč po reč (Parakeet + Omnilingual) posle reza: bez reči viška i ponavljanja |
 | tempo | pauze duže od 0,45 s skraćene, **atempo 1,03** → 72,7 s |
 | vremena reči | Parakeet TDT 0.6B v3 po isečcima, pa prisilno CTC poravnanje (Omnilingual ASR 300M); „40“ i „160“ se poravnavaju kao „četrdeset“ i „sto šezdeset“, adresa kao „ekolo tačka rs“, kako je izgovorena |
-| muzika | „Od mraka do sunca (1)“ (`audio/raw/muzika-suno-2.mp3`, 3:01,6, ~133 BPM): tamni uvod, gradnja, proređen deo 36,5–42,8 s, **svetli deo („sunce“) od udara 43,15 s**. Gradnja se jednom ponovi za 8 taktova (22,54 ≈ 8,10 s po spektru), pesma počinje u 3,4 s, pa proređen deo pada pod „Ako se na kraju meseca pitaš…“, a sunce na izgovoreno „KOLO“. 🔴 Svetli deo svira bez prekida do kraja (vlasnik 04.10.2026): posle „ušteda“ ide do kraja fraze (65,16 s u pesmi, ~3 s posle glasa) i stišava se za 1,3 s. Dva ranija rasporeda skakala su na završetak pesme i prelaz je bio previše izražen (`scripts/muzika.py`). Delovi su određeni merenjem jačine, spektra i ritma, ne slušanjem |
+| muzika | „Od mraka do sunca (1)“ (`audio/raw/muzika-suno-2.mp3`, 3:01,6, ~133 BPM): tamni uvod, gradnja, proređen deo 36,5–42,8 s, **svetli deo („sunce“) od udara 43,15 s**. Gradnja se jednom ponovi za 8 taktova (22,54 ≈ 8,10 s po spektru), pesma počinje u 3,4 s, pa proređen deo pada pod „Ako se na kraju meseca pitaš…“, a sunce na izgovoreno „KOLO“. 🔴 Svetli deo svira bez prekida do kraja (vlasnik 04.10.2026): posle „ušteda“ ide do kraja takta (63,36 s u pesmi, ~1,2 s posle glasa; vlasnik je tražio kraći kraj) i stišava se za 1,2 s. Dva ranija rasporeda skakala su na završetak pesme i prelaz je bio previše izražen (`scripts/muzika.py`). Delovi su određeni merenjem jačine, spektra i ritma, ne slušanjem |
 | miks | muzika −8 dB, rez na 2,6 kHz, sidechain 3:1 vođen glasom; −14 LUFS / −1,5 dBTP; zvučnih efekata nema |
 
 Modeli (sherpa-onnx Parakeet i Omnilingual) i `deep-filter` preuzeti su sa GitHub izdanja i nisu u repou.
