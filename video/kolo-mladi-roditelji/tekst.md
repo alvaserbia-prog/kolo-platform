@@ -1,6 +1,6 @@
 # KOLO video 22 — Mladi roditelji (Jovana, Nemanja i beba)
 
-Stanje: **nacrt teksta (korak 1), čeka odobrenje vlasnika.** Scenario se piše posle odobrenja.
+Stanje: tekst prihvaćen 04.10.2026 (vlasnik: „nastavljamo scenario“); izbori napravljeni po predlogu ekipe. Konačan tekst i scenario: `scenario.md`.
 
 ## Odluke vlasnika (04.10.2026)
 

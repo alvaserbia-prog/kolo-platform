@@ -34,7 +34,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 19 | Čije je KOLO? Ničije. | K |  |  |
 | 20 | Šta je Fondacija | K |  |  |
 | 21 | Zlato, srebro, bakar | N |  |  |
-| 22 | Mladi roditelji: Jovana, Nemanja i beba | K | `kolo-mladi-roditelji/` | nacrt teksta, čeka odobrenje |
+| 22 | Mladi roditelji: Jovana, Nemanja i beba | K | `kolo-mladi-roditelji/` | scenario gotov, čeka snimak glasa |
 | 23 | Lanac potvrda | K |  |  |
 | 24 | Indeks stvarnosti | K |  |  |
 | 25 | Sajam gde niko ne plaća | A |  |  |
