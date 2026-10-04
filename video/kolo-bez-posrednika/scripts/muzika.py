@@ -26,8 +26,6 @@ DOBA = 60 / 133.45
 FAZA = 14.35                    # jedan udarac na mreži doba
 J, L = 22.56, 8 * 4 * DOBA      # skok nazad za 8 taktova
 MK = 43.2                       # približan početak sunca
-E0 = 168.57                     # ulaz u prirodan završetak pesme (stišavanje 170–177 s, pa završni udarac)
-UDARAC = 177.25                 # završni udarac pesme
 
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", FAJL, "-ar", "48000", "-ac", "2", "-c:a", "pcm_f32le", "/tmp/_suno2.wav"], check=True)
 a, sr = sf.read("/tmp/_suno2.wav")
@@ -51,16 +49,18 @@ j = udarac(na_dobi(J))
 jl = udarac(na_dobi(J - L))
 s0 = j - (K - (mk - jl))          # početak u pesmi, da sunce padne na „KOLO“
 assert s0 >= 0, s0
-# kraj: pesma se ne seče na sam završni udarac (tako je zvučalo odsečeno), nego se ~8,7 s ranije, na udarcu,
-# prelazi u njen prirodan završetak (stišava se pod „ekolo.rs, čista ušteda“), a završni udarac pada ~0,45 s
-# posle poslednje reči
-e0 = udarac(na_dobi(E0))
-t_skoka = (KRAJ_GLASA + 0.45) - (UDARAC - e0)
-kraj = udarac(na_dobi(t_skoka - (j - s0) + jl))
-delovi = [(s0, j), (jl, kraj), (e0, len(m) / sr)]
+# kraj (vlasnik 04.10.2026: „neka svetli deo nastavi do kraja … kraj na svetlom delu na kraju celine“):
+# svetli deo svira bez prekida posle poslednje reči, do kraja fraze na 65,16 s u pesmi; tu se pušta prvi
+# udarac sledeće fraze i muzika se stišava za SMIRAJ s. Bez skoka na završetak pesme (prelaz je bio izražen).
+KRAJ_FRAZE = 65.16
+SMIRAJ = 1.3
+kf = udarac(na_dobi(KRAJ_FRAZE))
+t_kraj = (j - s0) + (kf - jl)
+delovi = [(s0, j), (jl, kf + SMIRAJ + 0.5)]
 print("sunce", round(mk, 2), "s0", round(s0, 2), "delovi", [(round(x, 2), round(y, 2)) for x, y in delovi])
 print("sunce u videu", round((j - s0) + (mk - jl), 2), "reč KOLO", round(K, 2),
-      "završni udarac u videu", round((j - s0) + (kraj - jl) + (UDARAC - e0), 2), "kraj glasa", round(KRAJ_GLASA, 2))
+      "kraj fraze u videu", round(t_kraj, 2), "kraj glasa", round(KRAJ_GLASA, 2), "kraj videa", round(T, 2))
+assert t_kraj + SMIRAJ <= T + 0.05, (t_kraj, T)
 
 f = int(0.06 * sr)
 out = None
@@ -73,8 +73,9 @@ for x0, x1 in delovi:
         out = np.concatenate([out[:-f], out[-f:] * (1 - r) + d[:f] * r, d[f:]])
 n = int(T * sr)
 out = out[:n] if len(out) >= n else np.concatenate([out, np.zeros((n - len(out), 2))])
-fo = int(1.0 * sr)
-out[-fo:] *= np.linspace(1, 0, fo)[:, None]
+i0, fo = int(t_kraj * sr), int(SMIRAJ * sr)
+out[i0:i0 + fo] *= np.linspace(1, 0, len(out[i0:i0 + fo]))[:, None] ** 1.5
+out[i0 + fo:] = 0
 fi = int(0.05 * sr)
 out[:fi] *= np.linspace(0, 1, fi)[:, None]
 sf.write("audio/muzika.wav", out.astype(np.float32), sr, subtype="PCM_24")
