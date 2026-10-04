@@ -10,7 +10,7 @@ Scenario nije slat na odobrenje (odluka vlasnika 04.10.2026, `video/README.md`):
 Stil je **stara ilustrovana slikovnica** (primitivi iz `../kolo-bez-posrednika/`: gvaš, mastilo, papir, zrno,
 okvir sa lalama, listanje). Nosiva slika su **tri stvari na polici** (vreća žita, šipke soli, niz školjki):
 prvo svaka u svom svetu, pa zajedno na polici koja pukne na „manu“, pa merač „vrednost“ koji pada kad ih
-ima previše. Posle obrta (muzika menja deo na „POEN“) svet postaje topao i zelen: umesto stvari koja kruži,
+ima previše. Posle obrta na „POEN“ svet postaje topao i zelen: umesto stvari koja kruži,
 knjiga zapisa u kojoj red nastaje tek kad neko nešto da.
 
 ## Priča u slici
@@ -36,7 +36,7 @@ knjiga zapisa u kojoj red nastaje tek kad neko nešto da.
 
 - POEN se ne crta kao novčić ni stvar: samo kao red u knjizi zapisa. Školjka koja kruži je stari novac, ne POEN.
 - „Plaćali“ i „platu“ stoje samo uz žito; uz POEN nema kupi, prodaj, plati, zaradi, cena.
-- Titlovi prate **izgovoreno** (`scenario.md`, odeljak „Izgovoreno“).
+- Titlovi prate **izgovoreno** (`scenario.md`, odeljak „Izgovoreno“), uz jedan izuzetak: „soli“ u „kocke soli“ stoji u titlu iako nije izgovoreno (odluka vlasnika 04.10.2026, `DODAJ_U_TITL` u `scripts/plan.py`).
 
 ## Kako se pravi
 
@@ -70,7 +70,7 @@ KOMPOZICIJA=Naslovna node scripts/kadrovi.mjs 0 && mv out/kadrovi/f0.jpg out/nas
 | rez | izbačena tri prva izgovora, ostaje ponovljen ceo: „U Etiopiji… još pre“ (prekinuto, 23,30–28,90 s), „U Africi, Indiji i Kini koristili su s…“ (prekinuto, 39,85–44,30 s), „Taj zapis nastaje tek kad nešto neko da“ (obrnut red reči, 100,20–104,90 s). Provera reč po reč posle reza (Parakeet + Omnilingual): bez reči viška i ponavljanja |
 | tempo | pauze duže od 0,45 s skraćene, **atempo 1,03** → 96,8 s; vazduh pred „Ali su imala“, pred obrt „POEN“, pred „Taj zapis“ i pred poziv (`scripts/plan.py`) |
 | vremena reči | Parakeet TDT 0.6B v3 po isečcima, pa prisilno CTC poravnanje (Omnilingual ASR 300M); adresa kao „ekolo tačka rs“ |
-| muzika | „Ethereal Baglama“ (3:07, 129 BPM, takt 1,858 s), po merenju jačine, ritma i hrome: numera kreće od 1,1 s; iz prvog dela (udar 77,42 s) skače se na prelaz 156,15 s, tako da poslednji deo numere krene **na izgovoreno „POEN“**; iz poslednjeg dela izbačena tri cela takta (163,17 → 168,81 s, fraza se tu ponavlja), pa **završni akord (183,79 s) pada ~0,45 s posle „ekolo.rs“** (`scripts/muzika.py`) |
+| muzika | „Ethereal Baglama“ (3:07, 129 BPM, takt 1,858 s), po merenju jačine, ritma i hrome: numera kreće od 3,0 s; **jedan rez, na udaru**, posle „pala“ (kraj scene 12): iz prvog dela (78,81 s) pravo u poslednji deo (161,31 s). Od reza numera teče bez prekida, a **završni akord (183,79 s) pada ~0,45 s posle „ekolo.rs“** (`scripts/muzika.py`). Ranija verzija je skakala na isprekidan prelaz numere (156,15 s) da poslednji deo krene na „POEN“ i imala još jedan rez od tri takta; vlasnik je to čuo kao bezveze prekid i promenu pred kraj (04.10.2026), pa je prelaz preskočen |
 | miks | muzika stalne jačine −14 dB (bez stišavanja dok se govori), rez na 2,6 kHz; −14 LUFS / −1,5 dBTP; zvučnih efekata nema |
 
 Modeli (sherpa-onnx Parakeet i Omnilingual) i `deep-filter` preuzeti su sa GitHub izdanja i nisu u repou.

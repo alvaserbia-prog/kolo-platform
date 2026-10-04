@@ -1,31 +1,29 @@
 """Muzika za video „Stari oblici novca“: numera „Ethereal Baglama“ (Suno, nalog vlasnika), složena po glasu.
 
 Numera (3:07, 129 BPM, takt 1,858 s), sve po merenju (jačina, spektar, ritam, hroma), ne slušanjem:
-uvod koji se pojačava do ~2,5 s, puls od 14,19 s, prelaz (fill) 156,15–157,55 s, pa poslednji deo od
-udara 157,55 s; završni akord na udaru 183,79 s, odjek do 187 s.
-- Numera kreće od početka (od 1,1 s, tako da tempo izađe tačno).
-- Obrt: iz prvog dela (udar 77,42 s, isto mesto u taktu) skače se na prelaz 156,15 s, tako da
-  poslednji deo numere krene na izgovoreno „POEN“ (scena 13).
-- Iz poslednjeg dela izbačena su tri cela takta (163,17 → 168,81 s, rez na udaru; fraza se tu ponavlja,
-  sličnost hrome 0,99), tako da završni akord padne ~0,45 s posle „ekolo.rs“.
+uvod koji se pojačava do ~2,5 s, puls od 14,19 s, isprekidan prelaz (fill) 156,15–157,55 s, pa poslednji
+deo; završni akord na udaru 183,79 s, odjek do 187 s.
+- Numera kreće od 3,0 s (posle uvoda koji se tek pojačava).
+- Jedan rez, na udaru: iz prvog dela (78,81 s) pravo u poslednji deo (161,31 s), posle „pala“ (kraj scene 12).
+  Isprekidan prelaz numere se preskače: ranije se na njega skakalo da poslednji deo krene na „POEN“,
+  a vlasnik ga je čuo kao bezveze prekid i promenu pred kraj (04.10.2026). Mesto reza je izabrano po
+  sličnosti hrome i boje pre i posle reza (0,96) i razlici jačine (1,3 dB).
+- Od reza do kraja numera teče bez reza; završni akord pada ~0,45 s posle „ekolo.rs“.
 Ulaz audio/raw/muzika-suno.mp3 + src/plan.json -> audio/muzika.wav (48 kHz, stereo).
 """
 import json, subprocess
 
 plan = json.load(open("src/plan.json"))
 sc = {s["id"]: s for s in plan["scene"]}
-P = sc[13]["glasOd"] + sc[13]["reci"][0]["s"]   # „POEN“
 T = plan["trajanje"]
-
-A, FILL, UDAR = 77.4245, 156.1542, 157.5474   # isto mesto u taktu (treća doba pre udara)
-C, D = 163.1710, 168.8100                       # tri takta izbačena
-s0 = A - (P - (UDAR - FILL))
-assert 0 <= s0 < 3, s0
-X = 0.06                                         # preklop: deo se produži za preklop, da udar ostane na mestu
-delovi = [(s0, A + X), (FILL, C + X), (D, 187.36)]
-kraj_vid = P + (183.79 - UDAR) - (D - C)
+A, B = 78.8107, 161.3134                     # isto mesto u taktu (prvi udar)
+AKORD = 183.79
 kraj_glasa = sc[16]["glasDo"]
-print("s0", round(s0, 2), "POEN", round(P, 2), "završni akord", round(kraj_vid, 2), "kraj glasa", round(kraj_glasa, 2))
+X = 0.06                                     # preklop: prvi deo se produži za preklop, da udar ostane na mestu
+s0 = A - ((kraj_glasa + 0.6) - (AKORD - B))  # završni akord ~0,45 s posle kraja „ekolo.rs“
+assert 0 <= s0 < 3.2, s0
+delovi = [(s0, A + X), (B, 187.36)]
+print("s0", round(s0, 2), "rez na", round(A - s0, 2), "završni akord", round(A - s0 + AKORD - B, 2), "kraj glasa", round(kraj_glasa, 2))
 
 ul, filt = [], []
 for k, (a, b) in enumerate(delovi):

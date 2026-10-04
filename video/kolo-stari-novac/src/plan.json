@@ -275,7 +275,12 @@
     {
      "w": "kocke",
      "s": 1.64,
-     "e": 2.07
+     "e": 1.87
+    },
+    {
+     "w": "soli",
+     "s": 1.87,
+     "e": 2.1
     },
     {
      "w": "koristile",
@@ -313,7 +318,7 @@
      "e": 5.65
     }
    ],
-   "tekst": "U Etiopiji su se kocke koristile kao novac do pre sto godina.",
+   "tekst": "U Etiopiji su se kocke soli koristile kao novac do pre sto godina.",
    "do": 26.61,
    "odF": 620,
    "doF": 798,

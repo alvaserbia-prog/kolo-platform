@@ -16,7 +16,21 @@ KRAJ_POSLE_GLASA = 3.2  # završni akord numere (~0,45 s posle „ekolo.rs“) i
 # video/README.md): slika i tekst idu uz izgovorenu reč.
 PREDNOST_S = 0.0
 
+# Reči koje stoje u titlu iako nisu izgovorene (odluka vlasnika, 04.10.2026: „fali kocke soli u tekstu“).
+# Reč dobija drugu polovinu trajanja prethodne reči; glas se ne menja.
+DODAJ_U_TITL = {4: ("kocke", "soli")}
+
 t = json.load(open("src/timing.json"))
+for s in t["scene"]:
+    if s["id"] in DODAJ_U_TITL:
+        posle, nova = DODAJ_U_TITL[s["id"]]
+        i = next(k for k, w in enumerate(s["reci"]) if w["w"] == posle)
+        w = s["reci"][i]
+        sled = s["reci"][i + 1]["s"]
+        sred = round(w["s"] + (sled - w["s"]) * 0.5, 3)
+        w["e"] = sred
+        s["reci"].insert(i + 1, {"w": nova, "s": sred, "e": sled})
+        s["tekst"] = s["tekst"].replace(f"{posle} ", f"{posle} {nova} ", 1)
 sc = t["scene"]
 # tačke reza u snimku: sredina između kraja poslednje reči i početka sledeće scene
 rez = [0.0]
