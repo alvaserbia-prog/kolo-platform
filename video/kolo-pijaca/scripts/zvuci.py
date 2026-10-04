@@ -118,7 +118,7 @@ def motor(d, f0=28):
 
 
 def sum_obojen(d, a, b):
-    return norm(bp(rng.normal(0, 1, int(d * SR)), a, b))
+    return 0.5 * norm(bp(rng.normal(0, 1, int(d * SR)), a, b))
 
 
 def fejd(x, u=0.05, i=0.2):
@@ -163,18 +163,10 @@ def zamor():
     return out / (np.sqrt(np.mean(out ** 2)) + 1e-9)
 
 
-# ── glasovi pijace: jačina po scenama ───────────────────────────────────
-JACINA = {1: 0.0, 2: 0.5, 3: 1.0, 4: 0.8, 5: 0.0, 6: 0.25, 7: 0.0, 8: 0.15, 9: 0.3, 10: 1.0}
-z = zamor()
-env = np.zeros(N)
-for s in plan["scene"]:
-    a, b = int(s["od"] * SR), int(s["do"] * SR)
-    env[a:b] = JACINA[s["id"]]
-env = np.convolve(env, np.ones(int(0.6 * SR)) / int(0.6 * SR), "same")
-z = z * env * 0.022
-L += z
-R += np.roll(z, int(0.013 * SR))
-
+# ── glasovi pijace ──────────────────────────────────────────────────────
+# Žamor od vlasnikovog snimka puštenog unazad (funkcija zamor) vlasnik je čuo kao „odzvanja
+# i šušti“ (02.10.2026), pa je isključen. Pravi snimak žamora ide kroz mix.py (audio/zamor.wav)
+# ako postoji.
 # sc. 1: tegle na policama (staklo), na sto, u korpu, prašina
 for q in range(30):
     dodaj(staklo(1900 + (q % 5) * 140, 0.35), rec(1, "trideset") + q * 0.8 / FPS + 0.05, 0.018, -0.5 + (q % 10) * 0.1)

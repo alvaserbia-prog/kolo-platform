@@ -15,13 +15,16 @@ const UNAPRED_TRAKA = 8;
 const UNAPRED_REC = 3;
 const ISTAKNUTE = /^(„?KOLO|KOLU|KOLA|POEN|ekolo\.rs)/;
 const ZELENA = "#1F8A4C";
+// Dodatna prednost samo za titl (0: titl, slika i pokret idu zajedno, 1 s ispred reči po plan.json;
+// video 13, vlasnik 03.10.2026: „bilo je dobro ono 1 s“; 0,5 s samo za titl je odbačeno).
+const PREDNOST_TITLA = 0;
 
 export const komadiTitlova = (plan: Plan): Komad[] => {
   const out: Komad[] = [];
   for (const s of plan.scene) {
     let tek: RecF[] = [];
     s.reci.forEach((w, i) => {
-      const p = plan.prednost ?? 0;
+      const p = (plan.prednost ?? 0) + PREDNOST_TITLA;
       const r = { ...w, f: Math.round((s.glasOd + w.s - p) * plan.fps), ef: Math.round((s.glasOd + w.e - p) * plan.fps) };
       const duzina = tek.map((x) => x.w).join(" ").length;
       if (tek.length && duzina + 1 + w.w.length > MAX_ZNAKOVA) {

@@ -25,10 +25,10 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 11 | KOLO raste sa nama | K | `kolo-raste/` | ✅ |
 | 12 | Pijaca | K | `kolo-pijaca/` | ✅ |
 | 13 | Ušteda (Zoran, električar) | K | `kolo-usteda/` | ✅ |
-| 14 | Bez posrednika (scenario u pregledu) | K |  |  |
+| 14 | Bez posrednika | K | `kolo-bez-posrednika/` | ✅ |
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
-| 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | tekst gotov, izrada nije počela |
-| 16 | Stari oblici novca | N | `kolo-stari-novac/` | tekst gotov, izrada nije počela |
+| 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | ✅ |
+| 16 | Stari oblici novca | N | `kolo-stari-novac/` | ✅ |
 | 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
 | 18 | Ko krade iz zajedničke kase? / Kako da upravljanje bude transparentno | K | `kolo-transparentnost/` | tekst u pregledu (izbori vlasnika) |
 | 19 | Najlakše je tražiti od drugih da budu pošteni / Pravila su ista za sve | K | `kolo-transparentnost-razmene/` | tekst u pregledu (izbori vlasnika) |
@@ -193,14 +193,36 @@ Metal (zlato, srebro, bakar) ostaje svom videu.
   („kad novac propadne, tu je KOLO“), a „zapis ko kome duguje“ se ne vezuje za POEN (POEN nije potraživanje, Pravilnik čl. 12–13). Marka se pominje.
 - Godine i brojke u istorijskim videima proveravaju se pre svakog scenarija.
 
+## Tok izrade videa (odluka vlasnika, 03.10.2026)
+
+🔴 **Produkcija mora biti najbolja moguća, na profesionalnom nivou.** Radi se koliko god treba, uz sve dostupne
+alate. Cilj svakog videa: gledalac da razume šta je KOLO i čemu služi i da poželi da se registruje i postavi oglas.
+
+🔴 **Koraci idu ovim redom; posle svakog završenog koraka sve urađeno do tada se ponovo pregleda i ispravi
+pre sledećeg.** Greška nađena kasnije vraća rad na korak u kome je nastala.
+
+| # | Korak | Šta se predaje | Provera posle koraka |
+|---|---|---|---|
+| 1 | **Tekst za glas** — dogovara se sa vlasnikom; prolazi pregled stalne ekipe (pisac, dramaturg, urednik za mreže, gledalac) | konačan tekst za snimanje | zabranjene reči; pravna odbrana iz `CLAUDE.md`; brojke i činjenice provereni; tekst se čita naglas bez zastoja |
+| 2 | **Scenario** — scena po scena: vreme, naracija, slika, šta se dešava na kojoj reči | scenario u `scenario.md` | ne čeka odobrenje vlasnika (od 04.10.2026); slika ne govori isto što i tekst; nosiva slika razume se bez zvuka |
+| 3 | **Muzika: Claude je pravi na ElevenLabs-u** — iz teksta, emocije i poruke videa odredi žanr, sastav, karakter i tempo, mesto obrta i završnog akorda (pravila o muzici ispod), pa generiše numeru | numera (`audio/raw/`) i opis sa obrazloženjem u uputstvu videa | tok muzike prati tok teksta i emociju priče; obrt pada na ključnu reč; numera služi poruci, ne skreće pažnju sa glasa |
+| 4 | **Slika** — scene po scenariju | probni kadrovi svake scene | svaka scena se pogleda kao slika: preklapanja, ruke, lica, čitljivost, mesto za titl |
+| 5 | **Glas** — čišćenje, izbacivanje ponovljenih i prekinutih izgovora, tempo | očišćen glas | 🔴 snimak se prepoznaje mašinski (dva modela) i poredi sa tekstom reč po reč: ne sme ostati reč viška, prekinut početak ni dupla reč |
+| 6 | **Titlovi** — po rečima, uz izgovorenu reč, kako je izgovoreno | probni kadrovi | svaka reč titla postoji u glasu i nijedna reč glasa ne fali u titlu |
+| 7 | **Natpisi** — samo po pravilu o natpisima ispod | spisak natpisa sa obrazloženjem | natpis ne ponavlja titl |
+| 8 | **Muzika i miks** — numera (sa ElevenLabs-a ili koju vlasnik pošalje) uklapa se po glasu (obrt na ključnoj reči, završetak posle poslednje reči) | miks | −14 LUFS; muzika stalne jačine; rez u muzici na udarcu |
+| 9 | **Završna kontrola i predaja** — ceo video od početka do kraja | gotov video, naslovna, opisi za TikTok, Instagram i Facebook po `docs/drustvene-mreze-opisi.md` (lektor i književnik) | trajanje, 1080×1920, glasnoća, zabranjene reči u slici, titlu i opisu; kopija za pregled manja od 30 MB |
+
+- Vlasnik odobrava tekst (1); sve ostalo, uključujući muziku (3 i 8), radi se samostalno i šalje gotovo (muzika: odluka vlasnika 04.10.2026). 🔴 **Scenario (2) vlasnik više ne odobrava** (odluka vlasnika, 04.10.2026, video 15: „ne moram odobravati scenarije, sve završi“): scenario se piše i zapisuje u folder videa, pa se odmah ide dalje.
+- U folderu videa ostaju scenario, uputstvo sa postupkom i tabelom „Priča u slici“, skripte i gotov fajl; opisi idu u `docs/drustvene-mreze-opisi.md`.
+- 🔴 Odluka vlasnika doneta tokom izrade odmah se zapisuje: ovde (za sve videe) ili u uputstvo videa (samo za taj video). Ono što nije zapisano, sledeća sesija ne zna.
+
 ## Zajedničko za sve videe
 
-🔴 **Tekst ide 1 s ISPRED izgovorene reči** (odluka vlasnika, 28.09.2026). Titl, natpis i pokret
-vezan za reč pojavljuju se 1 s pre nego što se reč izgovori; glas i muzika se ne pomeraju, a
-zvučni efekti prate sliku. Kad je tekst išao tačno uz reč (merenjem usklađen na desetinku), gledalac
-ga je doživljavao kao da kasni, i to u svim videima serije. Provereno na uređaju vlasnika testom
-bljesak + pisak (uređaj pušta sinhrono) i probom sa pomerenim zvukom; vlasnik je posle probe od 0,4 s tražio 0,7, pa 1 s. U kodu: `PREDNOST_S` u
-`src/vreme.ts` (i u `scripts/zvuci.py`), prvi put u `kolo-bunar/`.
+🔴 **Pravilo „tekst 1 s ispred glasa“ je ukinuto** (odluka vlasnika, 03.10.2026: „to sad žuri“). Titl, natpis
+i pokret vezan za reč idu uz izgovorenu reč (`PREDNOST_S = 0` u `scripts/plan.py`); traka titla se i dalje
+pojavi ~0,25 s pre prve reči, a reč pozeleni ~0,1 s pre izgovora. Videi napravljeni dok je pravilo važilo
+nisu ponovo renderovani.
 
 Papirni kolaž, linije koje „ključaju", titlovi po rečima (izgovorena reč zelena), naracija
 vlasnika, tamburaška muzika, −14 LUFS. Trajanje nije unapred određeno: video traje koliko priča traži, i duže od 60 s kad je tako procenjeno (odluka vlasnika, 26.09.2026). POEN se nikad ne crta kao novčić ni novčanica, samo kao
@@ -208,7 +230,7 @@ zapis. Reči kupi, prodaj, plati, zaradi, cena **ne idu uz POEN** (odluka vlasni
 smeju („platiš participaciju“, „cena tvoga rada“), uz POEN nikad („kupi za POEN“, „zaradi POEN“, „cena u POENIMA“).
 **Ušteda u dinarima sme i treba da se pokaže kao ishod korišćenja POEN-a** (odluka vlasnika, 29.09.2026): ono što
 dobiješ razmenom u KOLU ne moraš da pribaviš za dinare, i to je ušteda. Ušteda se iskazuje kao dinari koji su ostali
-kod tebe, nikad kao preračun POEN-a u dinare („1 POEN = 1 dinar uštede“, „vrednost tvojih POENA u dinarima“). Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
+kod tebe, nikad kao preračun POEN-a u dinare („1 POEN = 1 dinar uštede“, „vrednost tvojih POENA u dinarima“). U tekstovima (naracija, natpisi, opisi) se ne piše da se razmena dogovara direktno i da se Fondacija u to ne meša, i ne pominje se ograničenje broja oglasa za novog člana (odluke vlasnika, 02.10.2026; vidi `docs/drustvene-mreze-opisi.md`, odeljak 1). Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
 a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela „Pravna odbrana“, red „Iznos u oglasu“). Postupak izrade: README u folderu svakog videa.
 
 🔴 **Natpisi idu samo tamo gde imaju smisla, ne u svaku scenu** (odluka vlasnika, 30.09.2026). Titlovi po
@@ -222,7 +244,21 @@ pravi kolona „Natpis“ za svaku scenu; tekst koji je deo slike upisuje se u k
 
 🔴 **Muzika je vedra i ritmična, nikad tužna** (odluka vlasnika, 30.09.2026; dvaput vraćeno: „Čiji si ti“ u e-molu i gudači u „Potvrda nosi odgovornost“). Ozbiljan trenutak u priči nosi aranžman (proređen ritam, kratka stanka, šaljiv silazak), ne spor tempo. **Mol je dozvoljen kad je brz i igrački** (odluka vlasnika, 02.10.2026), kao u srpskim kolima i trubačkim numerama; zabranjen je samo spor i tužan.
 
-🔴 **Muzika je uvek u srpskom etosu** (odluka vlasnika, 02.10.2026). Prvi izbor je vojvođanska tamburica (prim, brač, bugarija, berde); može i frula, harmonika u srpskom kolu, a za veselije videe truba (trubački sastav). Lestvice, ritmovi (kolo u 2/4, čoček) i ukrasi (predudari, okretaji, šesnaestine) su iz srpskog melosa. Ne idu: gitara u pop progresiji, harmonika u stilu francuskog musette valcera (razdešeni jezičci, treperenje), gudači, klavir, elektronski i „bezveze“ zvuci. Po ovom pravilu ne odgovaraju videi 1 (gitara), 8 i 9 (harmonika u musette stilu, violina); zamena njihove muzike je zaseban potez, samo uz nalog vlasnika.
+🔴 **Muzika je uvek u srpskom etosu** (odluka vlasnika, 02.10.2026). Prvi izbor je vojvođanska tamburica (prim, brač, bugarija, berde); može i frula, harmonika u srpskom kolu, a za veselije videe truba (trubački sastav). Lestvice, ritmovi (kolo u 2/4, čoček) i ukrasi (predudari, okretaji, šesnaestine) su iz srpskog melosa. Ne idu: gitara u pop progresiji, harmonika u stilu francuskog musette valcera (razdešeni jezičci, treperenje), gudači, klavir, elektronski i „bezveze“ zvuci. Izuzetak: ritam gitara u tamburaškoj pratnji sme kad je vlasnik izričito traži.
+
+🔴 **Muziku pravi Claude na ElevenLabs-u, sam i bez prethodnog dogovora** (odluka vlasnika, 04.10.2026; zamenjuje pravilo od 02.10.2026 da se opis prvo predlaže vlasniku i da numeru generiše vlasnik na Suno-u). Cilj je **najbolja muzika za poruku videa**: numera prati tekst, emociju i poruku priče, tako da poruka stigne do gledaoca. Pre generisanja se iz teksta i scenarija odredi šta muzika nosi (problem, obrt, rešenje, završni poziv), gde pada obrt i kakav je karakter (šaljiv, topao, svečan, razigran), pa se to prevede u kratak opis po pravilu ispod. Opis i obrazloženje se zapisuju u uputstvo videa. Ostaju sva pravila o karakteru i zvuku (vedra i ritmična, srpski etos, bez stišavanja, plaćeni plan). Pravi se **jedna varijanta po pokušaju** (`generations_count = 1`, odluka vlasnika 02.10.2026); ako numera ne prati tekst ili krši pravila o zvuku, pravi se nov pokušaj sa ispravljenim opisom, a razlog se zapisuje.
+
+🔴 **Opis za ElevenLabs je kratak** (odluka vlasnika, 02.10.2026): jedna-dve rečenice, samo žanr, sastav, karakter i tempo, sa „Instrumental“ na početku. Primer: *„Instrumental. Traditional Vojvodina tamburica kolo, acoustic tamburitza orchestra, old-fashioned, 112 BPM.“* Dugi opisi sa nabrajanjem instrumenata i rasporeda po sekundama zbunjuju model (u videu „Pijaca“ dali su drevni etno i „kantri bluz“ umesto tamburice). Reči „folk-pop“ i „pop“ se ne pišu.
+
+🟡 **Suno je izuzetak** (od 04.10.2026): kad vlasnik sam pošalje numeru sa Suno-a (MP3 ili M4A), ona se koristi i uklapa po pravilima ispod; Claude nema pristup Suno-u.
+
+🔴 **Uklapanje duže numere u video** (02.10.2026): video počinje početkom numere; iz sredine se izbacuje deo dug ceo broj taktova, sa rezom na udarcu i na kraju fraze, da ritam ne preskoči; pravi završetak numere pada odmah posle poslednje reči („ekolo.rs“), nikad preko nje. Obrazac: `kolo-pijaca/scripts/muzika_suno.py`.
+
+🔴 **Muzika za javne objave mora biti napravljena na plaćenom planu** (Suno plaćeni plan, ElevenLabs od Starter naviše); besplatni planovi ne daju pravo na komercijalnu upotrebu.
+
+🔴 **Glas mora biti jednake jačine od početka do kraja** (vlasnik, 04.10.2026, video 15): pri čišćenju se ceo snimak pojačava jednim izmerenim pojačanjem i limiterom, ne `loudnorm`-om (kad linearni režim ne može, loudnorm tiho pređe u dinamički i podiže jačinu postepeno; u videu 15 glas je bio ~18 dB tiši na početku). Posle čišćenja se meri jačina po scenama; obrazac: `kolo-trampa/scripts/ciscenje.sh` i `mix.py`.
+
+🔴 **Muzika se ne stišava dok se govori** (odluka vlasnika, 02.10.2026): stalno je iste jačine, bez sidechain kompresije; jačinu određuje vlasnik po numeri.
 
 🟢 **Zapis umesto novca sme da se kaže** (odluka vlasnika, 30.09.2026). Nije obavezno da tekst govori „KOLO je dodatak, ne zamena“: ideja da zapis može da zameni novac sme da ostane, jer je to mogući ishod KOLA, iako KOLO danas kreće paralelno sa dinarom. U tekstu se ne kaže „cilj KOLA“, nego „mogući ishod“. Kaže se kao ideja o razmeni, ne kao obećanje o POEN-u: „razmena može da ide zapisom umesto novcem“ da, „POEN će zameniti dinar“ ne (javna tvrdnja da je POEN zamišljen kao sredstvo plaćanja udara na odbranu iz Pravilnika čl. 13). Ono što i dalje važi, jer su to strukturne granice iz akata, a ne stav o cilju: POEN se ne menja za dinare i ne iznosi iz sistema (nekonvertibilnost), obaveze prema državi ostaju u dinarima, i uz POEN ne idu reči kupi, prodaj, plati, zaradi, cena.
 

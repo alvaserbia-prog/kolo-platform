@@ -1,13 +1,16 @@
-"""Vojvođanski tamburaši i harmonika, komponovano i sintetisano u kodu (video „Pijaca“).
+"""Vojvođanski tamburaši, svadbarsko kolo, komponovano i sintetisano u kodu (video „Pijaca“).
 
-Muzika je u srpskom etosu (odluka vlasnika 02.10.2026, video/README.md): pun tamburaški sastav
-(prim, brač, bugarija, berde) i, za ovaj video, harmonika u srpskom kolu. Harmonika je „suvo“
-naštimovana (jezičci skoro u uglas, bez francuskog musette treperenja), svira brze šesnaestine sa
-okretajima, kao u narodnim kolima. Prim ima predudare (kratak ton iznad) na dugim tonovima.
-
-Ceo video je kolo u 2/4. Smenjuju se durska tema harmonike (G-dur) i molska (e-mol, harmonski:
-dis), tamburaške teme K, B i A. Mol je brz i igrački, nikad tužan. Tempo se računa tako da
-završni akord padne tačno posle „ekolo.rs“.
+Opis i raspored potvrdio je vlasnik 02.10.2026, posle odbijenih ElevenLabs numera: veselo,
+pijačno i svadbarski; prim, brač, bugarija, berde, bez harmonike; muzika prati priču:
+  sc. 1      prim sam, poskočno; na „propadne“ šaljiv silazak i kratka stanka
+  sc. 2–3    ulazi ceo orkestar, svadbarsko kolo
+  sc. 4      Dejan: bugarija i berde, prim tiše, tema K
+  sc. 5      kuhinja: proređeno, samo prim i bas
+  sc. 6      kolo se vraća; na „UPISANO“ kratak akord
+  sc. 7–8    brač preuzima temu, mekše
+  sc. 9      vrhunac: ceo orkestar, prim u tremolu
+  sc. 10     finale kola i „ta-dam“ tačno posle „ekolo.rs“
+Kolo u 2/4, oko 132 BPM. Bez veštačkog odjeka (vlasnik je čuo „odzvanja“).
 Izlaz: audio/muzika.wav, 48 kHz stereo, trajanje = plan videa.
 """
 import json
@@ -131,7 +134,7 @@ def harm_ton(m, dur):
     return y
 
 
-def harmonika16(t0, tk, taktovi, g=1.0, pan=0.15, leva=True):
+def harmonika16(t0, tk, taktovi, g=1.0, pan=0.15, leva=False):
     """Melodija u šesnaestinama: taktovi = [(akord, [8 tonova])], 0 = produži prethodni ton.
     Leva ruka: bas na dobu, akord na „i“ (um-pa), kao u kolu."""
     s16 = tk / 8
@@ -146,7 +149,7 @@ def harmonika16(t0, tk, taktovi, g=1.0, pan=0.15, leva=True):
             if m:
                 akc = 1.0 if k % 4 == 0 else (0.85 if k % 2 == 0 else 0.72)
                 dur = s16 * d * (0.82 if d == 1 else 0.95)
-                dodaj(harm_ton(m, dur), tb + k * s16 + rng.normal(0, 0.003), 0.26 * g * akc, pan)
+                dodaj(harm_ton(m, dur), tb + k * s16 + rng.normal(0, 0.003), 0.17 * g * akc, pan)
             k += d
         if leva:
             for q in (0, 1):
@@ -248,20 +251,32 @@ def deo(t0, takt, dobe, taktovi, g=1.0, prim=True, brac=True, kontra=True, berde
                     strum(akord, tb + k * doba, 0.16 * gg * g_kontra, gore=k == 2)
             else:
                 for k in (0.5, 1.5):
-                    strum(akord, tb + k * doba, 0.17 * gg * g_kontra, gore=k == 1.5)
+                    strum(akord, tb + k * doba, 0.10 * gg * g_kontra, gore=k == 1.5)
 
 
-# ── aranžman: ceo video je kolo u 2/4 ─────────────────────────────────
+# ── aranžman: svadbarsko kolo u 2/4 ───────────────────────────────────
 t0 = 0.15
 t_kraj = SC[10]["glasDo"] + 0.12
-TAKTOVA = 74
+TAKTOVA = 75
 tk = (t_kraj - t0) / TAKTOVA
 print(f"2/4: takt {tk:.4f} s = {120 / tk:.1f} BPM (četvrtina)")
 takt = lambda t: max(0, min(TAKTOVA, round((t - t0) / tk)))
 NSC = 10
 POC = {i: (0 if i == 1 else takt(SC[i]["od"])) for i in range(1, NSC + 1)}
 POC[NSC + 1] = TAKTOVA
+PRED = plan["prednost"]
 
+# svadbarska tema: osmine u cik-cak, sa stankom za uzvik (takt 4)
+TEMA_S = [
+    ("G", [(0, .5, 79), (.5, .5, 83), (1, .5, 81), (1.5, .5, 79)]),
+    ("D7", [(0, .5, 78), (.5, .5, 81), (1, .5, 78), (1.5, .5, 74)]),
+    ("G", [(0, .5, 71), (.5, .5, 74), (1, .5, 79), (1.5, .5, 83)]),
+    ("G", [(0, .5, 86), (.5, .5, 83), (1, 1, None)]),
+    ("C", [(0, .5, 84), (.5, .5, 83), (1, .5, 81), (1.5, .5, 79)]),
+    ("G", [(0, .5, 83), (.5, .5, 81), (1, .5, 79), (1.5, .5, 76)]),
+    ("D7", [(0, .5, 74), (.5, .5, 78), (1, .5, 81), (1.5, .5, 78)]),
+    ("G", [(0, 1, 79), (1, 1, None)]),
+]
 TEMA_K = [
     ("G", [(0, .5, 79), (.5, .5, 78), (1, .5, 79), (1.5, .5, 81)]),
     ("G", [(0, .5, 83), (.5, .5, 81), (1, .5, 79), (1.5, .5, 74)]),
@@ -292,90 +307,51 @@ TEMA_A = [
     ("Am", [(0, 1, 72), (1, 1, 76)]),
     ("D7", [(0, 2, 74, True)]),
 ]
-# harmonika: durska tema u šesnaestinama (G-dur), sa okretajima
-HARM_DUR = [
-    ("G", [74, 71, 72, 74, 76, 74, 72, 71]),
-    ("D7", [69, 71, 72, 69, 74, 72, 71, 69]),
-    ("G", [71, 74, 79, 74, 71, 74, 79, 81]),
-    ("G", [83, 81, 79, 78, 79, 0, 0, 0]),
-    ("C", [76, 79, 84, 79, 76, 79, 84, 83]),
-    ("G", [83, 81, 79, 81, 83, 81, 79, 78]),
-    ("D7", [76, 78, 79, 81, 78, 74, 76, 78]),
-    ("G", [79, 74, 71, 74, 79, 0, 0, 0]),
-]
-# harmonika: molska tema (e-mol harmonski, dis daje srpski „istočni“ prizvuk), brza i igračka
-HARM_MOL = [
-    ("Em", [76, 78, 79, 78, 76, 75, 76, 78]),
-    ("B7", [79, 78, 76, 75, 76, 78, 75, 71]),
-    ("Em", [76, 79, 83, 79, 76, 79, 83, 84]),
-    ("B7", [83, 81, 79, 78, 76, 0, 0, 0]),
-    ("Am", [81, 84, 88, 84, 81, 84, 83, 81]),
-    ("Em", [79, 78, 76, 78, 79, 78, 76, 75]),
-    ("B7", [78, 75, 71, 75, 78, 81, 79, 78]),
-    ("Em", [76, 71, 67, 71, 76, 0, 0, 0]),
-]
 
 
 def isecak(tema, n, od=0):
     return [tema[(od + k) % len(tema)] for k in range(n)]
 
 
-def scena(i):
-    a, b = POC[i], POC[i + 1]
+def scena(i, j=None):
+    a, b = POC[i], POC[(j or i) + 1]
     return t0 + a * tk, b - a
 
 
-def pratnja(t, n, akordi, g=0.8, gk=1.0):
-    """Tamburaška pratnja (bugarija i berde) ispod harmonike, bez melodije."""
-    deo(t, tk, 2, [(a, []) for a in isecak(akordi, n)], g=g, prim=False, brac=False, stil="kolo", g_kontra=gk)
-
-
-AK_DUR = [a for a, _ in HARM_DUR]
-AK_MOL = [a for a, _ in HARM_MOL]
-t_prop = rec_t(1, "propadne") - plan["prednost"]
-
-# sc. 1: harmonika sama najavi takt, pa durska tema uz tamburaše; od „propadne“ molska tema
+# sc. 1: prim sam, poskočno; na „propadne“ šaljiv silazak i stanka do scene 2
 t, n = scena(1)
-k_prop = max(2, min(n - 1, takt(t_prop) - POC[1]))
-harmonika16(t, tk, [("D7", [62, 64, 66, 67, 69, 71, 72, 74])], g=0.8, leva=False)
-harmonika16(t + tk, tk, isecak(HARM_DUR, k_prop - 1), g=0.75)
-pratnja(t + tk, k_prop - 1, AK_DUR, g=0.65)
-harmonika16(t + k_prop * tk, tk, isecak(HARM_MOL, n - k_prop), g=0.7)
-pratnja(t + k_prop * tk, n - k_prop, AK_MOL, g=0.55, gk=0.7)
-# sc. 2: tamburaši tema B
-t, n = scena(2)
-deo(t, tk, 2, isecak(TEMA_B, n), g=[0.75, 0.9], stil="kolo")
-# sc. 3: pijaca — harmonika durska tema, tamburaši prate, prim u uglas na drugoj polovini
-t, n = scena(3)
-harmonika16(t, tk, isecak(HARM_DUR, n), g=1.0)
-pratnja(t, n, AK_DUR, g=0.85)
-# sc. 4: tamburaši tema K
+t_prop = rec_t(1, "propadne") - PRED
+k = max(1, min(n - 1, int((t_prop - t) / tk)))
+deo(t, tk, 2, isecak(TEMA_S, k), g=0.8, brac=False, kontra=False, berde=False, stil="kolo")
+for q, m in enumerate([83, 81, 79, 78, 76, 74, 71]):
+    ton(m, t + k * tk + q * tk / 8, tk / 8, 0.26 * (1 - q * 0.08), -0.12, prim_ton)
+ton(67, t + k * tk + 7 * tk / 8, tk / 2, 0.22, -0.12, prim_ton)
+dodaj(berde_ton(43, 0.6), t + k * tk + 7 * tk / 8, 0.4, 0.0)
+# sc. 2–3: ceo orkestar, svadbarsko kolo
+t, n = scena(2, 3)
+deo(t, tk, 2, isecak(TEMA_S, n), g=[0.8, 0.95], stil="kolo")
+# sc. 4: Dejan — bugarija i berde, prim tiše, tema K
 t, n = scena(4)
-deo(t, tk, 2, isecak(TEMA_K, n), g=0.88, stil="kolo")
-# sc. 5: kuhinja — molska tema na harmonici, tiše
+deo(t, tk, 2, isecak(TEMA_K, n), g=0.85, stil="kolo", g_prim=0.6, brac=False)
+# sc. 5: kuhinja — samo prim i bas, igrački
 t, n = scena(5)
-harmonika16(t, tk, isecak(HARM_MOL, n), g=0.72)
-pratnja(t, n, AK_MOL, g=0.6, gk=0.8)
-# sc. 6: tamburaši tema B
+deo(t, tk, 2, isecak(TEMA_B, n), g=0.75, stil="kolo", brac=False, kontra=False)
+# sc. 6: kolo se vraća; na „UPISANO“ kratak akord
 t, n = scena(6)
-deo(t, tk, 2, isecak(TEMA_B, n), g=0.88, stil="kolo")
-# sc. 7: novčanik — tamburaši tema A
-t, n = scena(7)
-deo(t, tk, 2, isecak(TEMA_A, n), g=0.8, stil="kolo")
-# sc. 8: harmonika i prim zajedno, durska tema
-t, n = scena(8)
-harmonika16(t, tk, isecak(HARM_DUR, n, 4), g=0.85)
-pratnja(t, n, isecak(AK_DUR, 8, 4), g=0.8)
-# sc. 9: vrhunac — ceo sastav, tema K, harmonika u šesnaestinama iznad
+deo(t, tk, 2, isecak(TEMA_S, n), g=0.9, stil="kolo")
+t_up = rec_t(6, "upisao") - PRED + 0.75
+strum("G", t_up, 0.22, dno=55, vrh=74)
+dodaj(berde_ton(43, 0.5), t_up, 0.45, 0.0)
+# sc. 7–8: brač preuzima temu, mekše
+t, n = scena(7, 8)
+deo(t, tk, 2, isecak(TEMA_K, n), g=0.75, stil="kolo", prim=False, g_kontra=0.8)
+# sc. 9: vrhunac — ceo orkestar, prim u tremolu
 t, n = scena(9)
-deo(t, tk, 2, isecak(TEMA_K, n), g=[0.9, 1.05], stil="kolo", g_kontra=1.1)
-harmonika16(t, tk, isecak(HARM_DUR, n), g=0.6, pan=0.35, leva=False)
-# sc. 10: finale tema K + harmonika, pa „ta–dam“
+deo(t, tk, 2, isecak(TEMA_A, n), g=[0.95, 1.05], stil="kolo", g_kontra=1.1)
+# sc. 10: finale kola, pa „ta–dam“
 t, n = scena(10)
-deo(t, tk, 2, isecak(TEMA_K, n - 1), g=1.0, stil="kolo")
-harmonika16(t, tk, isecak(HARM_DUR, n - 1), g=0.55, pan=0.35, leva=False)
+deo(t, tk, 2, isecak(TEMA_S, n - 1), g=1.0, stil="kolo")
 deo(t + (n - 1) * tk, tk, 2, [("D7", [(0, .5, 74), (.5, .5, 78), (1, .5, 81), (1.5, .5, 78)])], g=1.0, stil="kolo")
-harmonika16(t + (n - 1) * tk, tk, [("D7", [74, 76, 78, 79, 81, 83, 84, 86])], g=0.8, leva=False)
 # završni akord: udarac celog orkestra + tremolo koji zvoni do kraja
 tz = t0 + TAKTOVA * tk
 strum("G", tz, 0.3, dno=55, vrh=74)
@@ -383,8 +359,6 @@ strum("G", tz, 0.22, pan=0.35, dno=50, vrh=67)
 tremolo(79, tz, T - tz - 0.6, 0.3, -0.12, prim_ton, kresc=-0.4)
 tremolo(83, tz + 0.01, T - tz - 0.6, 0.16, 0.2, prim_ton)
 tremolo(74, tz + 0.02, T - tz - 0.6, 0.18, 0.32, brac_ton)
-dodaj(harm_ton(79, 1.4), tz, 0.22, 0.3)
-dodaj(harm_ton(71, 1.4), tz, 0.18, 0.3)
 dodaj(berde_ton(43, 2.4), tz, 0.6, 0.0)
 
 # ── soba (mala sala), boja ──────────────────────────────────────────────
@@ -397,8 +371,8 @@ ir_l[: int(0.012 * SR)] = 0
 ir_r[: int(0.017 * SR)] = 0
 ir_l /= np.sqrt(np.sum(ir_l ** 2))
 ir_r /= np.sqrt(np.sum(ir_r ** 2))
-oL = L + 0.24 * fftconvolve(L, ir_l)[:N]
-oR = R + 0.24 * fftconvolve(R, ir_r)[:N]
+oL = L + 0.06 * fftconvolve(L, ir_l)[:N]  # suva soba: vlasnik je čuo „odzvanja“
+oR = R + 0.06 * fftconvolve(R, ir_r)[:N]
 hp = butter(2, 45, "high", fs=SR, output="sos")
 ton_eq = butter(1, 10000, "low", fs=SR, output="sos")
 oL = sosfilt(ton_eq, sosfilt(hp, oL))

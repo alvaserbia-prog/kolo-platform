@@ -14,6 +14,7 @@ rečenicom, bez istorije. Obrazloženja, incidenti, opis ekrana i mapa koda živ
 | `docs/istorija-implementacija.md` | pun zapis izmena 08–09/2026 |
 | `docs/istorija-bumpova.md` | hronologija bumpova + pune pouke bumpovanja |
 | `docs/registar-rizika-regulatori-2026-09.md` | registar sa ocenama (22 rizika) |
+| `docs/podaci-fondacije.md` | opšti podaci Fondacije (APR, banka, tekst poslovnog modela) za obrasce, uključujući lične podatke upravitelja; bez ličnih podataka članova UO |
 | `video/README.md` | sve za videe, uključujući ekipu za pregled teksta naracije |
 | `dokumentacija 4.1/` | kanonski set akata — **jedini normativni izvor** |
 

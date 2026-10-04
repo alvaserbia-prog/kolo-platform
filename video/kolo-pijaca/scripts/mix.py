@@ -5,7 +5,7 @@ Muzika: audio/muzika.wav (tamburaši, komponovano u scripts/muzika.py), -8 dB, r
 Efekti: audio/zvuci.wav (scripts/zvuci.py), bez duckinga.
 Zbir: loudnorm u dva prolaza na -14 LUFS / -1,5 dBTP -> public/miks.wav.
 """
-import json, subprocess
+import json, os, subprocess
 
 plan = json.load(open("src/plan.json"))
 T = plan["trajanje"]
@@ -17,13 +17,16 @@ for k, s in enumerate(plan["scene"]):
                 f"afade=t=in:d=0.015,areverse,afade=t=in:d=0.03,areverse,"
                 f"aresample=48000,aformat=channel_layouts=mono,adelay={ms}:all=1[g{k}]")
 n = len(plan["scene"])
-ulazi += ["-i", "audio/muzika.wav", "-i", "audio/zvuci.wav"]
+ulazi += ["-i", os.environ.get("MUZIKA", "audio/muzika.wav"), "-i", "audio/zvuci.wav"]
 glasovi = "".join(f"[g{k}]" for k in range(n))
 filt.append(f"{glasovi}amix=inputs={n}:normalize=0,apad=whole_dur={T},atrim=0:{T},"
             f"aformat=channel_layouts=stereo,asplit=2[glas][okidac]")
-filt.append(f"[{n}:a]aformat=channel_layouts=stereo,volume=-8dB,equalizer=f=2600:t=q:w=1:g=-3,"
+import os
+MUZIKA_DB = float(os.environ.get("MUZIKA_DB", "-14"))  # stalna jačina, bez stišavanja (vlasnik, 02.10.2026)
+filt.append(f"[{n}:a]aformat=channel_layouts=stereo,volume={MUZIKA_DB}dB,equalizer=f=2600:t=q:w=1:g=-4,"
             f"apad=whole_dur={T},atrim=0:{T},afade=t=out:st={T-1.2}:d=1.2[muz]")
-filt.append("[muz][okidac]sidechaincompress=threshold=0.05:ratio=3:attack=40:release=600:makeup=1[muzd]")
+# Muzika se ne stišava dok se govori: stalno ista jačina (odluka vlasnika, 02.10.2026).
+filt.append("[muz]anull[muzd];[okidac]anullsink")
 filt.append(f"[{n + 1}:a]aformat=channel_layouts=stereo,volume=2dB,apad=whole_dur={T},atrim=0:{T}[sfx]")
 filt.append("[glas][muzd][sfx]amix=inputs=3:normalize=0[pre]")
 

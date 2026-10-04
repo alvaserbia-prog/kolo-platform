@@ -12,12 +12,13 @@ taj zapis zove POEN.
 1. Pre pet hiljada godina, u Mesopotamiji, današnjem Iraku, ljudi su zapisivali razmenu na glinenim pločicama.
 2. Zapisivali su ko je koliko ovaca, vune i ulja doneo u skladište.
 3. Ljudi nisu izmislili pismo da bi pisali pesme ili zakone, nego da bi zapisali ko je šta dao.
-4. Narod Inka u Južnoj Americi nije imao pismo. Zapisivali su čvorovima na užetu.
-5. Boja užeta označavala je vrstu robe, a čvorovi količinu. Tako se znalo šta je u skladištima i ko je šta doneo.
-6. Carstvo Inka imalo je milione stanovnika i gotovo da nije koristilo novac. Sve se vodilo kroz zapise.
-7. Zapis se ne koristi kao sredstvo za razmenu. On pokazuje ko je šta dao.
-8. U KOLU se taj zapis zove POEN. Kad nekome daš rad, dobro ili znanje, on ti prepiše POEN.
-9. Budi i ti deo tog zapisa. Postavi svoj prvi oglas na ekolo.rs.
+4. Mnoge od tih pločica postoje i danas, posle pet hiljada godina.
+5. Narod Inka u Južnoj Americi nije imao pismo. Zapisivali su čvorovima na užetu.
+6. Boja užeta označavala je vrstu robe, a čvorovi količinu. Tako se znalo šta je u skladištima i ko je šta doneo.
+7. Carstvo Inka imalo je milione stanovnika i gotovo da nije koristilo novac. Sve se vodilo kroz zapise.
+8. Zapis se ne koristi kao sredstvo za razmenu. On pokazuje ko je šta dao.
+9. U KOLU se taj zapis zove POEN. Kad nekome daš rad, dobro ili znanje, on ti prepiše POEN.
+10. Budi i ti deo tog zapisa. Postavi svoj prvi oglas na ekolo.rs.
 
 ## Natpisi
 
@@ -27,5 +28,6 @@ GLINENA PLOČICA · ČVOROVI NA UŽETU · POEN: ZAPIS · ekolo.rs
 
 - Kod Inka se ne pominje obavezni rad za državu (mit'a): to nije uzajamnost.
 - Rečenica 2 opisuje isporuke u skladište, ne dugove.
-- Rečenica 6 sme da ostane bez ograde „dinar ostaje“ (pravilo „Zapis umesto novca“ u `video/README.md`).
+- Rečenica 7 sme da ostane bez ograde „dinar ostaje“ (pravilo „Zapis umesto novca“ u `video/README.md`).
+- Trajnost zapisa (rečenica 4) prebačena je ovde iz videa 15 kao istorijska činjenica (vlasnik, 03.10.2026).
 - Pre snimanja proveriti: rano klinasto pismo pretežno kao evidencija; Inke „gotovo bez novca“.

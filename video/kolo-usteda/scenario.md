@@ -62,7 +62,7 @@ u muzici. Pečati se **ne izgovaraju i ostaju svi**: na snimku My_recording_65 p
 | 8 | Zoran sabira šest listova: 5.000 + 10.000 + 20.000 + 20.000 + 20.000 + 20.000 = **95.000**, pored nacrta sunce i talasi. Auto kreće, deca mašu; na „Zoran radi više“ plaža, porodica u vodi; na kraju kratko kapija u Somboru, komšinica i baka mašu | Za šest meseci / uštedeo je dovoljno, / i cela porodica / ide na more. // Zoran sada radi više, / dobija više / i više dinara mu ostaje. |
 | 9 | POZIV. Ruka pruža ka gledaocu telefon sa praznim oglasom. Završna kartica: KOLO znak, **„Postavi svoj prvi oglas · ekolo.rs“** | Šta ti znaš da uradiš? // Postavi svoj prvi oglas / na ekolo.rs. |
 
-## b) Izgovoreno (snimak vlasnika My_recording_65, 02.10.2026; zamenjuje My_recording_64)
+## b) Izgovoreno (snimak vlasnika My_recording_68, 03.10.2026; isti tekst kao My_recording_65 sa umetkom iz 66, koje zamenjuje)
 
 Tekst ispod je ono što je izgovoreno; titlovi i naracija u tabeli prate njega. Iznosi 5.000, 10.000,
 20.000 i 95.000 nisu izgovoreni, ostaju samo upisani u svesci.

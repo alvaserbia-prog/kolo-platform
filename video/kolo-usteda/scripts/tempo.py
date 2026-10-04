@@ -19,12 +19,10 @@ PRAG_DB = 34
 V = sys.argv[1]
 # Izbačeni delovi snimka (s u sirovom snimku): pogrešni počeci koje je vlasnik ponovio.
 IZBACI = {
-    # vremena u audio/v1/clean/glas.wav, posle umetka iz snimka 66 (scripts/spoj.py)
-    "v1": [
-        (0.00, 23.00),    # lažni počeci i ponavljanja scene 1 i početak scene 2
-        (49.30, 58.40),   # dva prekinuta „Javili su se ljudi kojima je majstor trebao, a…“
-        (80.75, 82.85),   # prvo „Zovu ga sve više ljudi.“ (ponovljeno)
-        (96.90, 111.30),  # tri nedovršena „Za šest meseci uštedeo je…“ (ostaje četvrti, ceo)
+    "v1": [  # snimak My_recording_68 (03.10.2026), vremena u audio/v1/clean/glas.wav
+        (15.40, 17.75),   # „Pre KOLA celu platu.“ (prekinuto, ponovljeno)
+        (40.30, 43.10),   # „Za taj posao prepisali su mu“ (prekinuto, ponovljeno)
+        (68.85, 74.15),   # prvo „a što više radi u KOLU, to više toga i dobije u KOLU“ (ponovljeno)
     ],
 }[V]
 TEMPO = 1.04

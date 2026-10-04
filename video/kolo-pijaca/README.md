@@ -3,6 +3,7 @@
 Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 71,1 s, H.264 + AAC, −14 LUFS**.
 Gotov fajl: [`out/pijaca.mp4`](out/pijaca.mp4), naslovna: [`out/naslovna.jpg`](out/naslovna.jpg).
 Scenario i tekst naracije: [`scenario.md`](scenario.md). Naracija: vlasnik (My_recording_63, dve reči iz My_recording_62).
+Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 13.
 
 Stil je **izometrijska ilustracija** (odluka vlasnika): tezge u pravilnim redovima, gledane odozgo pod uglom,
 u jakim i čistim bojama; kamera klizi kao kroz maketu, oglasi su kartice (prvo ispisane rukom fontom Caveat, pa po odluci vlasnika 02.10.2026 krupnije, u Noto Sans, jer rukopis nije bio dovoljno čitljiv).
@@ -40,14 +41,15 @@ pip install nara_wpe sherpa-onnx onnxruntime scipy soundfile
 python3 scripts/sklapanje.py                            # 1) snimak 63 bez ponovljenih pokušaja + dve reči iz 62 -> audio/rez/glas.wav
 ./scripts/ciscenje.sh                                   # 2) WPE + DeepFilterNet 35 dB + boja -> audio/clean/glas.wav
 python3 scripts/tempo.py                                # 3) zbijanje pauza, atempo 1,04 -> audio/final/glas.wav
+python3 scripts/ekspander.py                            #    blagi ekspander između reči
 ffmpeg -i audio/final/glas.wav -ar 16000 -ac 1 /tmp/glas16.wav
 python3 scripts/vremena_parakeet.py /tmp/glas16.wav audio/parakeet.json   # 4) gruba vremena
 python3 scripts/poravnaj.py                             # 5) tekst + gruba vremena -> src/timing.json
 python3 scripts/poravnaj_ctc.py                         #    precizna vremena: prisilno CTC poravnanje
 python3 scripts/plan.py                                 # 6) raspored scena -> src/plan.json
-python3 scripts/muzika.py                               # 7) tamburaši -> audio/muzika.wav
+python3 scripts/muzika_suno.py                          # 7) Suno numera vlasnika, isečena po taktovima -> audio/muzika.wav
 python3 scripts/zvuci.py                                # 8) efekti i glasovi pijace -> audio/zvuci.wav
-python3 scripts/mix.py                                  # 9) glas + muzika (ducking) + efekti -> public/miks.wav
+python3 scripts/mix.py                                  # 9) glas + muzika (stalna jačina) + efekti -> public/miks.wav
 node scripts/kadrovi.mjs 300 900                        # probni kadrovi -> out/kadrovi/
 npx remotion render src/index.ts Pijaca out/master.mp4 --crf=18   # master (van repoa)
 ffmpeg -i out/master.mp4 -c:v libx264 -preset slow -b:v 3800k -pass 1 -an -f mp4 /dev/null
@@ -68,15 +70,14 @@ Fontovi i znak KOLO preuzeti su iz `../kolo-raste/public/`.
 | tempo | pauze duže od 0,42 s skraćene, **atempo 1,04** → 64,6 s govora |
 | provera teksta | Whisper turbo i Parakeet TDT 0.6B v3 po isečcima |
 | vremena reči | Parakeet po isečcima do 12 s, pa prisilno CTC poravnanje (Omnilingual ASR 300M) |
-| muzika | u kodu (`scripts/muzika.py`), u srpskom etosu (pravilo od 02.10.2026): **pun tamburaški sastav i harmonika u srpskom kolu**, ceo video kolo u 2/4, 130 BPM. Harmonika je suvo naštimovana (jezičci skoro u uglas i jezičak oktavu niže, bez musette treperenja) i svira brze šesnaestine sa okretajima, sa levom rukom „um-pa“; prim ima predudare na dugim tonovima. Smenjuju se durska tema harmonike (G-dur) i molska (e-mol harmonski, sa dis), te tamburaške teme K, B i A: harmonika najavi kolo, od „propadne“ prelazi u brz igrački mol, pijaca i karta su harmonika uz tamburaše, kuhinja mol, potvrda je vrhunac celog sastava; završni akord tačno posle „ekolo.rs“. Prva verzija (samo tamburaši, 123 BPM) zamenjena je po želji vlasnika |
-| glasovi pijace | žamor složen u `scripts/zvuci.py` od isečaka vlasnikovog snimka 62, puštenih **unazad** i pomerenih po visini (devet slojeva), pa se nijedna reč ne razume; najjači u scenama na pijaci (3 i 10), tiši u 2 i 4, nema ga u ostavi, kuhinji i kod novčanika |
-| efekti | `scripts/zvuci.py`: staklo tegli, dodir na telefonu, tezga i pečat, novčanica, oblačići, sijalica, niti, cvrčanje i tiganj, kucanje, papirni avion, koraci, pero i pečat UPISANO, novčanik, pečat koji pada, završni zvončići |
-| miks | muzika −8 dB, rez na 2,6 kHz, sidechain 3:1 vođen glasom; efekti i žamor +2 dB; −14 LUFS / −1,5 dBTP |
+| muzika | **„Ljiljan na polju“**, numera koju je vlasnik napravio na Suno-u (`audio/suno/ljiljan-na-polju.mp3`, 3:08, instrumental, oko 134 BPM, kolo u 2/4). `scripts/muzika_suno.py` izbacuje iz sredine 131 ceo takt (rez na udarcu, 0:20 → 2:17), pa poslednji udarac numere pada 1,2 s posle „ekolo.rs“. Pre toga vlasnik je odbio: sintetisane tamburaše sa harmonikom (`scripts/muzika.py`, pa svadbarsko kolo iz koda), više ElevenLabs numera (drevni etno, „kantri bluz“) i numeru iz videa 2 |
+| glasovi pijace | žamor od vlasnikovog snimka puštenog unazad zvučao je kao šuštanje i odjek, pa je **izbačen** (02.10.2026); pravog snimka žamora nema |
+| efekti | `scripts/zvuci.py` (šumni prelazi upola tiši od 02.10.2026): staklo tegli, dodir na telefonu, tezga i pečat, novčanica, oblačići, sijalica, niti, cvrčanje i tiganj, kucanje, papirni avion, koraci, pero i pečat UPISANO, novčanik, pečat koji pada, završni zvončići |
+| miks | muzika **−14 dB, stalno iste jačine, bez stišavanja ispod glasa** (odluka vlasnika), rez na 2,6 kHz; efekti +2 dB; −14 LUFS / −1,5 dBTP. Glas posle `tempo.py` prolazi kroz blagi ekspander (`scripts/ekspander.py`), jer je vlasnik čuo da „odzvanja i šušti“ |
 
 Modeli (sherpa-onnx Parakeet/Whisper/Omnilingual) i `deep-filter` preuzimaju se sa GitHub izdanja i nisu u repou.
 
 ## Licence
 
 Kod i sadržaj: AGPL-3.0 / CC BY-SA 4.0, kao i ostatak repoa. Fontovi: SIL Open Font License
-(Noto Sans, Playfair Display, Lora). Muzika, efekti i žamor: nastali u kodu ovog repoa
-(žamor od vlasnikovog snimka).
+(Noto Sans, Playfair Display, Lora). Efekti: nastali u kodu ovog repoa. Muzika: „Ljiljan na polju“, Suno, nalog vlasnika.

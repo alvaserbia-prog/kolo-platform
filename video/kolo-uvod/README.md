@@ -70,6 +70,10 @@ se pomeraju samo dok traje izgovorena reč (vremena iz poravnanja). Stoji u sred
 Prva verzija je imala polaroid sa fotografijom; zamenjena je maskotom na zahtev vlasnika, a fotografija
 nije u repou.
 
+**Zlatni krug oko Nikolinog lica ostaje** (odluka vlasnika, 03.10.2026). Na „KOLU“ se iscrta oko
+maskote; nastao je kao okvir oko polaroida, a uz lik podseća na oreol. Vlasnik je to video i rekao da
+ostane, pa se ne menja.
+
 **Somborski motivi.** Vojvođanske kuće sa zabatom na ulicu i zelenim kapcima; u sceni 5 grad dobija
 žutu Županiju sa kulom i dva crkvena tornja.
 

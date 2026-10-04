@@ -255,9 +255,15 @@ async function izvrsiJezgroVerifikacije(
     }
   }
 
-  // Izračunaj redniBroj
-  const brojObavljenih = await tx.verifikacionaVeza.count({ where: { verifikatorId } });
-  const redniBroj = brojObavljenih + 1;
+  // Izračunaj redniBroj — najveći postojeći + 1, NE broj veza + 1. Veze se brišu
+  // (lažna verifikacija, prestanak statusa, prevođenje naloga), pa broj ume da bude
+  // manji od najvećeg rednog broja: tada bi `count + 1` udario u
+  // @@unique([verifikatorId, redniBroj]) i potvrda bi pala sa „već postoji".
+  const poslednja = await tx.verifikacionaVeza.aggregate({
+    where: { verifikatorId },
+    _max: { redniBroj: true },
+  });
+  const redniBroj = (poslednja._max.redniBroj ?? 0) + 1;
   const treboNadzor = podlezeNadzoru(verifikator.tipKorisnika);
 
   // Kreiraj VerifikacionaVeza zapis

@@ -30,6 +30,12 @@ većeg posla proveriti ih ponovo, naročito broj heštegova na Instagramu.
   („kad se priča o razmeni, najčešće se čuje…") je autentično; izmišljena anegdota nije.
 - **Obraćanje rodno neutralno gde god može** („šta iz tvoje kuće prvo ide na Pijacu?", ne
   „šta bi ponudio").
+- 🔴 **Ne piše se da se razmena dogovara direktno i da se Fondacija u to ne meša** (odluka vlasnika,
+  02.10.2026): ni „dogovarate se direktno“, ni „Fondacija ne posreduje“, ni „Fondacija se u to ne meša“.
+  Važi za sve nove opise; raniji opisi u ovom fajlu ostaju kakvi su objavljeni.
+- 🔴 **Ne pominje se ograničenje broja oglasa za novog člana** („do tri oglasa“, „tri stvari“) (odluka
+  vlasnika, 02.10.2026): nov član će moći da postavlja neograničeno oglasa, a akti i sajt se usklađuju
+  posebno. Do tada se piše samo da nov član odmah može da postavi oglas.
 
 ## 1a. Jezička provera pre isporuke: lektor i književnik (odluka vlasnika, 27.09.2026)
 
@@ -70,7 +76,7 @@ Opis je javni tekst Fondacije, pa za njega važe ista pravila kao za copy na saj
 |---|---|
 | „upisuje ti se POEN", „zapis o tvom doprinosu" | „zaradi POEN", „dobij POEN", „nagrada" |
 | „POEN nije novac i ne menja se za novac" | bilo kakvo poređenje POEN-a sa dinarom, „vredi", „vrednost" |
-| „razmenu dogovarate direktno, Fondacija ne posreduje" | da Fondacija prodaje, garantuje ili odgovara za razmenu |
+| „ponudiš ono što imaš, komšija te pronađe" | da Fondacija prodaje, garantuje ili odgovara za razmenu; od 02.10.2026 ni „dogovarate direktno, Fondacija ne posreduje“ (odeljak 1) |
 | „nalog potvrđuju ljudi koji te lično poznaju, bez dokumenata" | „verifikacija", „lična karta se traži" |
 | „razmena", „ponudi" | „kupi", „prodaj", „besplatno" |
 | ono što je stvarno u radu (Pijaca, potvrde, POEN) | Krugove, glasanje, Gornje Kolo, ZRNO kao prinos (nisu u radu ili su osetljivi) |
@@ -86,7 +92,7 @@ zajednici, ne novac.**
 | Vidi se pre „više" | ~100 | ~125 | ~2 do 3 reda |
 | Preporučena dužina | 1.200 do 2.000 | 800 do 1.200 | 1.000 do 1.500 |
 | Heštegovi | 3 do 5 | **najviše 5** (više od 5 smanjuje doseg) | 1 do 2 |
-| Klikabilan link u opisu | ne („link u profilu") | ne („link u bio") | **da**, `https://ekolo.rs` |
+| Klikabilan link u opisu | ne („link u profilu") | ne („link u bio") | **ne u Reels-u**: adresa `ekolo.rs` u tekstu, klikabilan link u prvom komentaru |
 
 **TikTok i 4.000 karaktera:** tačno je da duži opis pomaže pretrazi, jer se TikTok koristi
 kao pretraživač. Ali nije tačno da je „što duže, to bolje". Reči za pretragu („razmena",
@@ -94,6 +100,20 @@ kao pretraživač. Ali nije tačno da je „što duže, to bolje". Reči za pret
 
 **Instagram:** od decembra 2025. važi ograničenje od 5 heštegova, i to i u opisu i u komentaru
 zajedno. Pretraga sada čita reči iz opisa, pa je opis važniji od heštegova.
+
+🔴 **Facebook i link (ispravka 03.10.2026, odluka vlasnika).** Ranije je ovde pisalo da je link u opisu
+na Facebook-u klikabilan i da ide u tekst, a ne u komentar. Za Reels to nije tačno:
+- u opisu Reels-a link je klikabilan **samo uz plaćenu pretplatu Meta One** (paket Advanced, od 15.09.2026);
+  bez nje se vidi kao običan tekst;
+- Meta zvanično savetuje da link ide **u komentar**, jer link u tekstu objave „može da smanji doseg“;
+- stranice bez Meta Verified u testu smeju da objave link u tekstu **samo dva puta mesečno**, a linkovi u
+  komentarima nisu ograničeni.
+
+Zato se na Facebook-u adresa u opisu piše **bez `https://`** („na ekolo.rs“), da je ljudi vide i mogu da
+je ukucaju, a klikabilan link `https://ekolo.rs` ide **u prvi komentar** stranice, odmah posle objave.
+Pretplata Meta One se zbog ovoga ne uzima. Opisi u odeljcima 6 do 15 napisani su pre ispravke i nose
+`https://ekolo.rs` u tekstu: ako još nisu objavljeni, pri objavi se adresa piše kao tekst, a link ide u
+komentar.
 
 **Heštegovi:** `#Sombor` uvek prvi (lokalna publika je ciljna grupa); ostali se biraju po videu
 (vidi odeljak 4), ne iz stalnog spiska.
@@ -147,7 +167,9 @@ Obavezne činjenice iz odeljka 2 i dalje važe, ali svojim rečima i samo kad ih
 
 ### Facebook
 1. Objaviti sa **stranice KOLO Fondacije**, a lični profil deli tu objavu.
-2. Link `https://ekolo.rs` stoji u tekstu, ne u komentaru.
+2. U opisu adresa stoji kao tekst, bez `https://` („na ekolo.rs“). **Odmah posle objave** stranica piše
+   prvi komentar sa klikabilnim linkom („Sajt: https://ekolo.rs“) i, ako je opcija ponuđena, kači ga na vrh
+   (vidi odeljak 3, „Facebook i link“).
 3. **Lokacija:** Sombor.
 4. Naslovna slika i isključeni automatski titlovi, kao gore.
 5. Ako se objavljuje sa ličnog profila, označiti stranicu Fondacije.
@@ -160,6 +182,9 @@ Obavezne činjenice iz odeljka 2 i dalje važe, ali svojim rečima i samo kad ih
 ## 6. Primer: uvodni video (septembar 2026)
 
 Konačne verzije, po pravilima iznad. Poslužiće kao uzor za ton i dužinu.
+
+🟡 Napisano po prvom kosturu, pre pravila iz odeljaka 1 i 4. Nove verzije za isti video, sa naslovnom,
+su u odeljku 16; ove ostaju kao zapis.
 
 ### TikTok
 
@@ -713,3 +738,406 @@ KOLO služi za razmenu dobara i usluga među ljudima iz istog mesta. Nastalo je 
 
 #Sombor #poverenje
 ```
+
+## 13. Video „Pijaca“ (oktobar 2026)
+
+Video: `video/kolo-pijaca/out/pijaca.mp4`. Naslovna: `video/kolo-pijaca/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, pijaca“. Alternativni tekst: „Izometrijska ilustracija
+pijace sa šarenim tezgama; tegla pekmeza ide od oglasa do susreta dvoje komšija.“
+
+Napisano po odeljku 4 (svaki opis je unikat). Uglovi, kojih u videu nema: TikTok, u svakoj ulici
+neko pravi dobar pekmez, a neko zna da sredi utičnicu, pa retko znaju jedno za drugo; Instagram,
+dinari koji ostanu kod kuće; Facebook, subotnja somborska pijaca kao mesto gde se sazna ko šta ima.
+Primeri su novi (domaći sir, šivenje, pomoć oko računara), ne oni iz videa. Na Facebook-u je
+objašnjena oznaka „bez potvrde“ i savet da se prvi put nađe uživo. Nijedna rečenica nije iz
+naracije ni iz ranijih opisa. Ispravljeno 02.10.2026 po odluci vlasnika: izbačeno „dogovarate se
+direktno, Fondacija se u to ne meša“ i „do tri stvari“ (vidi odeljak 1). Facebook ispravljen bez prenesenog značenja („ne nose kući samo povrće“).
+Jezička provera (lektor i književnik): navodnici „…“, bez crtica i nabrajanja; „kupuješ“ samo uz
+dinare, nikad uz POEN; rodno neutralno („ko se tek učlani“, „na takvom oglasu“); „vi“ dosledno na
+Facebook-u; bez „se“ konstrukcija gde može („tu saznate“); duga rečenica o razmeni podeljena na dve.
+
+### TikTok
+
+```
+U skoro svakoj ulici živi neko ko pravi pekmez kakav nema u prodavnici i neko ko za pola sata sredi utičnicu. Retko znaju jedno za drugo. 🫙
+
+Pijaca na KOLU služi baš tome. Ponudiš ono što imaš u višku ili ono što znaš da radiš, a komšija iz tvog mesta te pronađe kad mu zatreba.
+
+Kad nekome nešto daš, on ti prepiše POEN. To je zapis o tvom doprinosu, nije novac i ne menja se za novac.
+
+Oglase vidi svako, i bez naloga. Ko se tek učlani, odmah može da postavi oglas.
+
+👉 Pogledaj šta se nudi u tvom mestu, link je u profilu
+
+#Sombor #pijaca #razmena #komšije #KOLO
+```
+
+### Instagram
+
+```
+Dinari koje ne potrošiš na pekmez ostaju za nešto drugo. 🫙
+
+Na Pijaci KOLA komšije nude jedni drugima ono što imaju i ono što znaju: domaći sir, šivenje, pomoć oko računara.
+
+Za ono što daš, komšija ti prepiše POEN. To je zapis o doprinosu, a ne novac.
+
+Na svakom oglasu piše odakle je, pa lako nađeš nekoga iz svog mesta. Link je u bio.
+
+#Sombor #Vojvodina #pijaca #razmena #KOLO
+```
+
+### Facebook
+
+```
+Na somborskoj pijaci subotom pre podne ljudi kupuju povrće, ali i razgovaraju. Tako saznate ko šta ima, ko zna da popravi bojler i kome treba pomoć. 🧺
+
+Pijaca na KOLU je slična, samo je na internetu i razmenjuje se bez dinara. Članovi nude jedni drugima ono što imaju u višku i ono što znaju da rade, od domaćeg sira do šivenja.
+
+Oglase može da vidi svako, i bez prijave. Ko se tek učlani, odmah može da postavi oglas. Na takvom oglasu stoji oznaka „bez potvrde“, dok ga ne potvrdi neko od članova ko ga lično poznaje. Zato je dobro da se prvi put nađete uživo.
+
+Za ono što date, komšija vam prepiše POEN. POEN nije novac i ne menja se za novac, on beleži vaš doprinos.
+
+👉 Pogledajte šta se nudi u vašem mestu: https://ekolo.rs
+
+#Sombor #KOLO
+```
+
+## 14. Video „Ušteda“ (oktobar 2026)
+
+Video: `video/kolo-usteda/out/kolo-usteda.mp4`. Naslovna: `video/kolo-usteda/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, ušteda“. Alternativni tekst: „Papirni kolaž: porodica tovari
+kofere u crveni auto, a u svesci troškova stavke jedna po jedna prelaze iz kolone Dinari u kolonu U KOLU.“
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, plata koja stigne prvog, a do dvadesetog je nema;
+Instagram, pitanje koliko mesečnih troškova može da pokrije neko iz tvog mesta; Facebook, dobri majstori
+koji bi radili više i ljudi koji odlažu popravku do plate. Primeri su novi (popravka bicikla, torta za
+rođendan, časovi engleskog, kolači), ne oni iz videa. Ušteda se iskazuje samo kao dinari koji ostanu u kući,
+nikad kao preračun POEN-a. Nijedna rečenica nije iz naracije ni iz ranijih opisa.
+Jezička provera (lektor i književnik): navodnici „…“, bez crtica i nabrajanja; „plaćaš“ samo uz dinare;
+POEN se „prepiše“, ne „dobija“; rodno neutralno na TikTok-u i Instagramu („ono što ti znaš da radiš“,
+„neko iz tvog mesta“); „vi“ dosledno na Facebook-u; „rešava se u komšiluku“ zamenjeno rečenicom sa
+vršiocem radnje; duga rečenica o majstoru podeljena na dve.
+
+### TikTok
+
+```
+Plata stigne prvog, a do dvadesetog je već nema. To zna skoro svaka kuća. 🗓️
+
+Deo tog novca ode na stvari koje neko iz tvoje ulice ume da uradi: šišanje, popravku bicikla, kolače za rođendan. Na KOLU nudiš ono što ti znaš da radiš, a od drugih članova dobijaš ono što tebi treba. Za to ne daješ dinare, pa ti ostanu.
+
+Kad nekome uradiš posao, on ti prepiše POEN. To je zapis o tvom doprinosu, nije novac i ne menja se za novac.
+
+Struju, gorivo i porez i dalje plaćaš u dinarima. Ali ono što ti komšije mogu dati, ne moraš više da plaćaš u prodavnici.
+
+👉 Napiši šta znaš da radiš, link je u profilu
+
+#Sombor #ušteda #razmena #komšije #KOLO
+```
+
+### Instagram
+
+```
+Koliko tvojih mesečnih troškova može da pokrije neko iz tvog mesta? 🧾
+
+Torta za rođendan, popravka bicikla, časovi engleskog. Na KOLU to dobijaš od drugih članova, a zauzvrat nudiš ono što ti znaš da radiš. Dinari namenjeni tome ostaju u kući.
+
+Svaki posao koji uradiš za nekog člana ostaje zapisan kao POEN. POEN nije novac i ne menja se za novac.
+
+Što više ljudi iz tvog mesta nudi nešto, to više toga nađeš u komšiluku. Link je u bio.
+
+#Sombor #Vojvodina #ušteda #razmena #KOLO
+```
+
+### Facebook
+
+```
+U Somboru ima dobrih majstora koji bi radili više. Ima i ljudi koji popravku odlažu do plate, jer im fali novca. 🔧
+
+Na KOLU mogu da se nađu bez dinara. Majstor uradi posao, a komšija mu prepiše POEN, zapis o njegovom doprinosu. Posle od drugih članova dobije ono što njemu treba: povrće, šišanje, časove za dete. Ono što bi inače platio u dinarima sada dobije u komšiluku, pa mu na kraju meseca ostane više.
+
+Struju, gorivo i porez i dalje plaćate u dinarima. POEN nije novac i ne menja se za novac.
+
+👉 Napišite šta umete da radite: https://ekolo.rs
+
+#Sombor #KOLO
+```
+
+## 15. Video 14 „Bez posrednika“ (oktobar 2026)
+
+Broj odeljka nije broj videa: odeljci idu redom kojim su opisi pisani (13 je video 12 „Pijaca“, 14 je video 13 „Ušteda“).
+
+Video: `video/kolo-bez-posrednika/out/kolo-bez-posrednika.mp4`. Naslovna: `video/kolo-bez-posrednika/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, bez posrednika“. Alternativni tekst: „Slikovnica: sa gomilice novca
+na stočiću, natpis TVOJA PLATA, novčanice odlaze banci, apoteci, pumpi i prodavnici, a na kraju je gomilica
+opet puna, usred kola na saboru.“
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, put tegle meda od košnice do police u
+prodavnici; Instagram, domaći pekmez koji nije na rafu nego u nečijem podrumu; Facebook, pijaca na kojoj
+se zna od koga je sir. Nabrajanje iz videa (porez, banka, apoteka, zubar, gorivo, mleko) se ne ponavlja,
+a porez se ne pominje. Ne piše se da se razmena dogovara direktno ni da se Fondacija ne meša (odeljak 1);
+„bez posrednika“ se kaže kao „bez preprodavca“ i „bez provizije“, o putu stvari, ne o dogovoru. Ušteda se
+iskazuje samo kao dinari koji ostanu, nikad kao preračun POEN-a. Uporedo sa odeljkom 14 („Ušteda“):
+nijedna rečenica nije ista, a početak nije „plata do dvadesetog“.
+
+**Pregled ekipe (03.10.2026):** pisac je pitanje o medu ostavio kao pitanje, a nabrajanje poslova na TikTok-u stavio u imenice da bude rodno neutralno, jer odgovor u brojkama
+nije proveren; dramaturg je tražio da svaki opis ima jednog „junaka“ (pčelar, komšinica sa pekmezom,
+domaćin sa sirom); urednik za mreže: prva rečenica ispod 100 znakova, jedan poziv, heštegovi po temi;
+gledalac je zapeo na „posrednik“, pa stoji „preprodavac“, reč koju svako zna. Kako se POEN dobija kaže
+se tačno: prepiše ti ga član kome si nešto dao ili uradio.
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; „platiš“ i „plaćate“ samo uz
+dinare; bez „vrednost“; rodno neutralno na TikTok-u i Instagramu; „vi“ dosledno na Facebook-u; bez
+prenesenog značenja („vraća pijačni odnos“ zamenjeno sa „kao na pijaci“).
+
+### TikTok
+
+```
+Kad u prodavnici platiš teglu meda, koliko od tih dinara stigne do pčelara? 🍯
+
+Između košnice i police stoje otkupljivač, prevoznik, veletrgovac i prodavnica. Svako uzme svoj deo, jer i oni rade. Ali pčelar iz tvog kraja je možda dve ulice od tebe.
+
+Na KOLU ga nađeš bez preprodavca i bez provizije. Za teglu mu prepišeš POEN. POEN skupljaš tako što drugim članovima nešto uradiš ili daš: košenje trave, sređivanje papira, čuvanje deteta. Med stigne do tebe, a dinari ostanu u novčaniku.
+
+POEN je zapis o doprinosu. Nije novac i ne menja se za novac.
+
+👉 Ko u tvom kraju pravi nešto što sada uzimaš sa police? Link je u profilu
+
+#Sombor #domaće #med #komšije #KOLO
+```
+
+### Instagram
+
+```
+Najbolji pekmez u tvom kraju verovatno nije na rafu, nego u nečijem podrumu. 🫙
+
+Na KOLU ga nađeš kod komšinice koja ga kuva, bez preprodavca i bez provizije. Za teglu joj prepišeš POEN, a njega skupljaš pomažući drugim članovima. Dinari ostaju za ono što komšiluk ne može da ti da.
+
+POEN nije novac, nego zapis o tome šta si dao zajednici.
+
+👉 Link je u bio.
+
+#Sombor #Vojvodina #domaće #komšije #KOLO
+```
+
+### Facebook
+
+```
+Na pijaci se oduvek znalo čiji je sir i od koga su paprike. 🧀
+
+U prodavnici toga nema. Između onoga ko je nešto napravio i vas stoji više ruku, i svaka uzme svoj deo. To je posao kao svaki drugi, ali se na kraju oseti u ceni.
+
+Na KOLU je opet kao na pijaci: znate od koga je stvar, a između vas nema preprodavca ni provizije. Za ono što vam drugi članovi daju ili urade, prepisujete im POEN, koji ste i sami sakupili radeći za druge. Dinari vam ostanu za račune i za ono što komšiluk ne može da vam da.
+
+POEN je zapis o doprinosu zajednici. Nije novac i ne menja se za novac.
+
+👉 Šta bi iz vaše kuće komšije rado uzele? Ponudite na https://ekolo.rs
+
+#Sombor #domaće #KOLO
+```
+
+## 16. Uvodni video „U Somboru svako nešto ume“, nove verzije (oktobar 2026)
+
+Video: `video/kolo-uvod/out/kolo-uvod.mp4`. Naslovna: `video/kolo-uvod/out/naslovna.jpg`
+(kompozicija `Naslovna` u `src/Naslovna.tsx`): „Ana ima višak paradajza / Ko će joj prekopati baštu?“,
+po pravilu iz `video/README.md` da naslov nosi lik i pitanje, a KOLO se vidi tek na dnu kao adresa.
+Zvuk na Instagramu preimenovati u „KOLO, svako nešto ume“. Alternativni tekst: „Papirni kolaž: somborske
+kuće sa komšijama na prozorima, baka sa pitom, majstor sa biciklom i žena sa korpom paradajza; ljudi se
+hvataju u kolo, a na kraju se pojavljuje adresa ekolo.rs.“
+
+Opisi iz odeljka 6 pisani su po starom kosturu i nose rečenice koje su od 02.10.2026 zabranjene
+(„dogovaraš direktno“, „Fondacija ne posreduje“), pa su za ovaj video napisani iznova, po odeljku 4.
+Uglovi, kojih u videu nema: TikTok, penzionisani majstor čije znanje niko ne traži; Instagram, polica
+koja mesecima čeka da je neko okači; Facebook, moba, stari vojvođanski običaj zajedničkog rada kod
+komšije. Primeri su novi (televizori, skraćivanje pantalona, matematika, jabuke, bušilica, čuvanje mačke,
+ograda), ne pita, bicikl i paradajz iz videa. Nijedna rečenica nije iz naracije ni iz ranijih opisa
+(provereno pretragom po ovom fajlu); obavezna rečenica o POEN-u rečena je svaki put drugačije.
+Facebook opis ispravljen 03.10.2026: adresa bez `https://`, a link ide u prvi komentar (odeljak 3).
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; bez zareza ispred „može“ u
+„Ko te lično poznaje može…“; rodno neutralno na TikTok-u i Instagramu („Šta ti znaš da uradiš“, „neko
+ima bušilicu“); „vi“ dosledno na Facebook-u; „krojačica“ zamenjena jer je već bila u odeljku 10; bez
+prenesenog značenja („ide od ruke“ zamenjeno konkretnim primerima); POEN se „prepiše“, nikad „dobija“.
+
+### TikTok
+
+```
+Komšija koji je četrdeset godina popravljao televizore danas uglavnom čeka da ga neko nešto pita. 📺
+
+Takvih ljudi ima u svakoj ulici. Penzionerka koja je trideset godina šila u konfekciji i za deset minuta skrati pantalone. Bivši profesor matematike. Domaćin koji svake jeseni ima više jabuka nego što porodica može da pojede. Njihovo znanje i višak retko stignu do onih kojima trebaju, jer se ljudi danas manje poznaju nego nekad.
+
+Na KOLU komšije iz tvog mesta objave šta umeju i šta imaju. Oglas postaviš odmah po registraciji, a tuđe oglase vidi svako, i bez naloga.
+
+Kad nekome nešto uradiš ili daš, ta osoba ti prepiše POEN. POEN se ne može zameniti za dinare. On beleži šta si dao drugima, a ti ga posle prepišeš onome ko pomogne tebi.
+
+Ko te lično poznaje može da potvrdi tvoj nalog. Za to ne treba nijedan dokument.
+
+👉 Šta ti znaš da uradiš bolje od većine? Link je u profilu
+
+#Sombor #komšiluk #znanje #razmena #KOLO
+```
+
+### Instagram
+
+```
+Polica koja od proleća stoji naslonjena na zid, jer nema ko da je okači. 🔨
+
+U tvom mestu sigurno neko ima bušilicu i slobodan sat, a ne zna da tebi treba. Na Pijaci KOLA vidiš ko šta nudi u blizini i javiš se. Zauzvrat i ti ponudiš nešto: kolač, prevod, čuvanje mačke dok je neko na moru.
+
+Svaka takva pomoć ostaje zapisana kao POEN. POEN nije novac, on samo pokazuje šta si dao drugima.
+
+Link je u bio.
+
+#Sombor #Vojvodina #komšiluk #pomoć #KOLO
+```
+
+### Facebook
+
+```
+Po vojvođanskim selima nekad se išlo na mobu. Kad je trebalo obrati kukuruz ili pokriti kuću, došla bi cela ulica, a domaćin je posle išao kod njih kad je njima trebalo. 🌽
+
+Taj običaj je skoro nestao. Ljudi i dalje imaju šta da ponude, ali se manje poznaju i retko znaju ko u blizini šta ume.
+
+Na KOLU to ponovo može da se sazna. Na Pijaci članovi iz vašeg mesta objavljuju šta umeju i šta imaju u višku, od domaćih kolača do popravke ograde. Oglase može da pogleda svako, a ko se registruje odmah može da postavi svoj.
+
+Za pomoć koju date neko vam prepiše POEN, a vi ga prepišete onome ko pomogne vama. POEN nije novac i ne može se zameniti za dinare. On pokazuje koliko ste dali drugima.
+
+👉 Pogledajte ko u vašem mestu šta nudi na ekolo.rs
+
+#Sombor #moba #KOLO
+```
+
+## 17. Video 16 „Stari oblici novca“ (oktobar 2026)
+
+Video: `video/kolo-stari-novac/out/kolo-stari-novac.mp4`. Naslovna: `video/kolo-stari-novac/out/naslovna.jpg`.
+Zvuk na Instagramu preimenovati u „KOLO, stari oblici novca“. Alternativni tekst: „Slikovnica: vreća žita,
+šipke soli i niz školjki na polici koja pukne; brod istovaruje školjke na obalu; na kraju zelena knjiga
+u koju se upisuje ko je šta dao.“
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, godina kad šljive rode pa ih ima svuda;
+Instagram, ujam na vodenici; Facebook, risari na salašima koji su platu nosili kući u pšenici. Egipat,
+Etiopija, Kina i brodovi sa školjkama iz videa se ne ponavljaju. Reči „vrednost“ i „vredi“ se ne pišu
+(odeljak 2), pa se mana starih oblika novca kaže kao „kad ih je mnogo, niko ih ne traži“. „Plaćalo“ stoji
+samo uz žito i brašno, nikad uz POEN.
+
+**Pregled ekipe (04.10.2026):** pisac je rečenice o šljivama skratio na jedan dah; dramaturg je tražio da
+svaka mreža ima jednu sliku (šljive, vodenica, risari) i da POEN dođe tek posle nje; urednik za mreže:
+prva rečenica ispod 100 znakova, na TikTok-u pitanje za komentar, na Facebook-u poziv na prvi oglas;
+gledalac nije znao reč „ujam“, pa je u istoj rečenici objašnjena.
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; bez „vrednost“ i „vredi“;
+rodno neutralno na TikTok-u i Instagramu; „vi“ dosledno na Facebook-u; adresa na Facebook-u bez
+`https://` (link ide u prvi komentar, odeljak 3).
+
+### TikTok
+
+```
+Kad šljive dobro rode, pola sela ne zna šta će s njima. 🌳
+
+Tako je nekad bilo i sa stvarima koje su ljudi koristili umesto novca. U rodnoj godini žita ima svuda i niko ga ne traži. U sušnoj ga nema, pa ljudi nemaju čime da razmene ono što imaju. Sa školjkama je bilo još gore: kad ih je stiglo previše, niko ih više nije hteo.
+
+U KOLU se POEN ne gaji, ne kopa i ne dovozi. Upiše se tek kad neko nekome nešto da ili uradi, i pokazuje ko je šta dao. Nije novac i ne menja se za novac.
+
+👉 Šta se u tvom kraju nekad davalo umesto novca? Napiši u komentar. Link je u profilu.
+
+#Sombor #istorija #novac #razmena #KOLO
+```
+
+### Instagram
+
+```
+Na vodenici se nekad nije plaćalo dinarima, nego ujmom: vodeničar je zadržao deo brašna koje je samleo. 🌾
+
+Žito su svi primali, ali je imalo i manu. U sušnoj godini ga nema, a u vlažnom ambaru se pokvari.
+
+POEN u KOLU nije stvar koja se čuva u ambaru. To je zapis o tome šta si dao drugim članovima, i nastaje tek kad nešto daš. Nije novac i ne menja se za novac.
+
+Link je u bio.
+
+#Sombor #Vojvodina #vodenica #istorija #KOLO
+```
+
+### Facebook
+
+```
+Risari koji su po vojvođanskim salašima kosili žito nisu nosili platu u novčaniku. Kući su odnosili deo pšenice koju su požnjeli, i od toga se živelo do sledećeg leta. 🌾
+
+Tako se hiljadama godina plaćalo svuda po svetu: žitom, solju, školjkama. Sve te stvari imale su istu slabost. Kad ih je bilo mnogo, niko ih nije tražio, a kad ih nije bilo, ljudi nisu imali čime da razmene ono što imaju.
+
+POEN na KOLU nije takva stvar. Ne gaji se, ne kopa i ne dovozi. Upiše se onome ko je nešto dao ili uradio za drugog člana i ostaje kao zapis o tome. POEN nije novac i ne menja se za dinare.
+
+👉 Ako imate nešto da ponudite komšijama, prvi oglas postavite na ekolo.rs
+
+#Sombor #istorija #KOLO
+```
+
+## 18. Video 15 „Trampa: dva načina“ (oktobar 2026)
+
+Broj odeljka nije broj videa: opis za video 16 („Stari oblici novca“, odeljak 17) napisan je ranije.
+
+Video: `video/kolo-trampa/out/kolo-trampa.mp4`. Naslovna: `video/kolo-trampa/out/naslovna.jpg` („Ajvar za cipele?“, podnaslov „Zašto trampa ne funkcioniše“, odluka vlasnika 04.10.2026).
+Zvuk na Instagramu preimenovati u „KOLO, trampa“. Alternativni tekst: „Crtež kredom na školskoj tabli: Milica
+nudi teglu ajvara obućaru, kome trebaju drva; tabla se deli na dva načina, novac i zajedničku svesku u koju se
+upisuje ko je šta dao, a na kraju se četvoro uhvate u kolo.“
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, menjanje sličica u školi; Instagram, paradajz koji
+sazri celoj ulici iste nedelje (trampa traži i pravi trenutak); Facebook, mali oglasi sa rečju „menjam“ koji
+stoje mesecima. Primeri iz videa (ajvar, cipele, drva, krečenje, žito, so, školjke) se ne ponavljaju. Kako se
+POEN dobija kaže se tačno: prepiše ti ga onaj kome si nešto dao. Zapis se ne opisuje kao dug. Reč „besplatno“
+se ne piše (odeljak 2), iako je u naraciji. Uporedo sa odeljcima 15, 16 i 17: nijedna rečenica nije ista (provereno
+pretragom po ovom fajlu), a obavezna rečenica o POEN-u rečena je svaki put drugačije.
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; rodno neutralno na TikTok-u i
+Instagramu („Šta imaš u višku“, ne „šta bi ponudio“); „vi“ dosledno na Facebook-u; zarez ispred „a“; bez
+prenesenog značenja; POEN se „prepiše“, nikad „dobija“.
+
+### TikTok
+
+```
+Ko je u školi menjao sličice, zna koliko trampa ume da bude teška. ⚽
+
+Imaš tri ista golmana, a fali ti jedan napadač. Drug koji ima napadača traži baš onu sličicu koju niko nema. I tako se menjanje završi pre nego što počne.
+
+Sa odraslima je isto, samo su stvari veće. Ono što ti imaš i ono što ti treba retko se nađu kod istog čoveka.
+
+Na KOLU ne moraš da tražiš baš tu jednu osobu. Daš onome kome treba, a on ti prepiše POEN. Taj POEN posle prepišeš onome ko ima ono što tebi treba, makar to bio neko treći iz drugog kraja grada.
+
+POEN beleži šta si dao zajednici. To nije novac, pa se ni ne menja za dinare.
+
+👉 Šta imaš u višku, a šta ti fali? Link je u profilu
+
+#Sombor #trampa #razmena #komšije #KOLO
+```
+
+### Instagram
+
+```
+Paradajz u baštama sazri celoj ulici iste nedelje. 🍅
+
+Tada ga ima svako i niko ga ne traži, a u decembru bi ga svako rado uzeo. Trampa traži da se dvoje nađu u pravom trenutku, a to se retko poklopi.
+
+Na KOLU daš kad imaš. Onaj kome daš prepiše ti POEN, a ti ga prepišeš kad tebi nešto zatreba, nekome drugom i u neko drugo vreme.
+
+POEN nije novac, nego trag onoga što si dao drugima.
+
+Link je u bio.
+
+#Sombor #Vojvodina #trampa #bašta #KOLO
+```
+
+### Facebook
+
+```
+U malim oglasima i danas se često nađe reč „menjam“: bicikl za kosilicu, prase za drva. 🚲
+
+Takav oglas ume da stoji mesecima. Problem nije u biciklu, nego u tome što treba naći baš onoga ko ima kosilicu i kome uz to treba bicikl.
+
+Na KOLU ne morate da čekate tu jednu osobu. Date ono što imate onome kome treba, a on vam za to prepiše POEN. Kasnije taj POEN prepišete nekome drugom, ko ima ono što vama treba.
+
+POEN nije novac. To je zapis o doprinosu zajednici i za dinare se ne menja.
+
+👉 Šta biste vi ponudili? Pogledajte Pijacu na ekolo.rs
+
+#Sombor #trampa #KOLO
+```
+
+Prvi komentar stranice posle objave: „Sajt: https://ekolo.rs“ (odeljak 3, „Facebook i link“).
