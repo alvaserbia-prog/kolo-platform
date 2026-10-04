@@ -23,7 +23,7 @@ ublažava, objašnjava video 20.
 5. U KOLU svaki potvrđen član može da vidi koliko POEN-a imaš, ko ti je prepisao POEN i kome si ga ti prepisao. Isto važi i za račune onih koji upravljaju, bez izuzetka. To se zove transparentnost razmene.
 6. Od toga imaš i korist. Niko ne može da posumnja da si svoj POEN dobio mimo pravila, a i ti možeš da pogledaš račun člana sa kojim razmenjuješ i da vidiš koliko je on davao drugima.
 7. Cena je deo tvoje privatnosti: tvoj komšija koji je član može da vidi tvoje razmene. Na to smo pristali svesno, jer bez toga ne bi bilo ni uvida u račune onih koji upravljaju.
-8. Postani deo sistema gde svako dobija prema svojim zaslugama.
+8. Postani deo sistema gde su pravila ista za sve.
 9. Uključi se na ekolo.rs.
 
 ## Scenario
@@ -64,5 +64,5 @@ Muzika: vojvođanska tamburica, vedro; na sc. 1 kratka stanka posle pitanja, pa 
 - Ne kaže se „KOLO vodi Fondacija“ (odluka vlasnika uz video 18).
 - Zbir je uvek nula ostaje videu 42; ovde se ne pominje.
 - Uz POEN ne idu kupi, prodaj, plati, zaradi, cena.
-- Rečenica 8 („svako dobija prema svojim zaslugama“) je izbor vlasnika; vidi napomenu u razgovoru od 04.10.2026
-  (POEN se ne opisuje kao nagrada ni naknada koju neko dodeljuje).
+- Rečenica 8: „svako dobija prema svojim zaslugama“ zamenjeno sa „gde su pravila ista za sve“ (odluka vlasnika,
+  04.10.2026): POEN se ne opisuje kao nagrada ni naknada koju neko dodeljuje.

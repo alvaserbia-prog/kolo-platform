@@ -32,7 +32,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
 | 18 | Ko krade iz zajedničke kase? / Kako da upravljanje bude transparentno | K | `kolo-transparentnost/` | tekst u pregledu (izbori vlasnika) |
 | 19 | Najlakše je tražiti od drugih da budu pošteni / Pravila su ista za sve | K | `kolo-transparentnost-razmene/` | tekst u pregledu (izbori vlasnika) |
-| 20 | Svi vide tvoj zapis. A ko zna ko si? (pseudonim) | K | `kolo-pseudonim/` | tekst u pregledu (izbori vlasnika) |
+| 20 | Svi vide šta radiš / Ko si, zna samo onaj ko te poznaje (pseudonim) | K | `kolo-pseudonim/` | tekst u pregledu (izbori vlasnika) |
 | 21 | Čije je KOLO? Ničije. | K |  |  |
 | 22 | Šta je Fondacija | K |  |  |
 | 23 | Zlato, srebro, bakar | N |  |  |
