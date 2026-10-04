@@ -88,9 +88,9 @@ zajednici, ne novac.**
 
 | | TikTok | Instagram (Reels) | Facebook |
 |---|---|---|---|
-| Najviše karaktera | 4.000 | 2.200 | praktično bez ograničenja |
+| Najviše karaktera | 4.000 | 2.200 | **400** (naše pravilo, vidi ispod; mreža ne ograničava) |
 | Vidi se pre „više" | ~100 | ~125 | ~2 do 3 reda |
-| Preporučena dužina | 1.200 do 2.000 | 800 do 1.200 | 1.000 do 1.500 |
+| Preporučena dužina | 1.200 do 2.000 | 800 do 1.200 | **do 400** |
 | Heštegovi | 3 do 5 | **najviše 5** (više od 5 smanjuje doseg) | 1 do 2 |
 | Klikabilan link u opisu | ne („link u profilu") | ne („link u bio") | **ne u Reels-u**: adresa `ekolo.rs` u tekstu, klikabilan link u prvom komentaru |
 
@@ -114,6 +114,12 @@ je ukucaju, a klikabilan link `https://ekolo.rs` ide **u prvi komentar** stranic
 Pretplata Meta One se zbog ovoga ne uzima. Opisi u odeljcima 6 do 15 napisani su pre ispravke i nose
 `https://ekolo.rs` u tekstu: ako još nisu objavljeni, pri objavi se adresa piše kao tekst, a link ide u
 komentar.
+
+🔴 **Facebook: opis najviše 400 karaktera** (odluka vlasnika, 04.10.2026). Broji se ceo tekst, sa emodžijima,
+adresom i heštegovima. Kratko: jedna slika iz svakodnevice, šta KOLO tu donosi, „POEN nije novac i ne menja se
+za novac“ kad se POEN pominje, poziv sa adresom i jedan do dva heštega. Provera pre isporuke: broj karaktera
+se izmeri i upiše u zapis provere uz opis. Opisi u odeljcima pre 14 napisani su pre ovog pravila; ako još nisu
+objavljeni, pri objavi se skraćuju na 400.
 
 **Heštegovi:** `#Sombor` uvek prvi (lokalna publika je ciljna grupa); ostali se biraju po videu
 (vidi odeljak 4), ne iz stalnog spiska.
@@ -804,30 +810,31 @@ Za ono što date, komšija vam prepiše POEN. POEN nije novac i ne menja se za n
 
 ## 14. Video „Ušteda“ (oktobar 2026)
 
-Video: `video/kolo-usteda/out/kolo-usteda.mp4`. Naslovna: `video/kolo-usteda/out/naslovna.jpg`.
-Zvuk na Instagramu preimenovati u „KOLO, ušteda“. Alternativni tekst: „Papirni kolaž: porodica tovari
-kofere u crveni auto, a u svesci troškova stavke jedna po jedna prelaze iz kolone Dinari u kolonu U KOLU.“
+Video: `video/kolo-usteda/out/kolo-usteda.mp4`. Naslovna: `video/kolo-usteda/out/naslovna.jpg` („More za 6 meseci ·
+Ista plata, veća ušteda“). Zvuk na Instagramu preimenovati u „KOLO, ušteda“. Alternativni tekst: „Papirni kolaž:
+porodica tovari kofere u crveni auto, a u svesci troškova stavke jedna po jedna prelaze iz kolone Dinari u kolonu U KOLU.“
 
-Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, plata koja stigne prvog, a do dvadesetog je nema;
-Instagram, pitanje koliko mesečnih troškova može da pokrije neko iz tvog mesta; Facebook, dobri majstori
-koji bi radili više i ljudi koji odlažu popravku do plate. Primeri su novi (popravka bicikla, torta za
-rođendan, časovi engleskog, kolači), ne oni iz videa. Ušteda se iskazuje samo kao dinari koji ostanu u kući,
-nikad kao preračun POEN-a. Nijedna rečenica nije iz naracije ni iz ranijih opisa.
-Jezička provera (lektor i književnik): navodnici „…“, bez crtica i nabrajanja; „plaćaš“ samo uz dinare;
-POEN se „prepiše“, ne „dobija“; rodno neutralno na TikTok-u i Instagramu („ono što ti znaš da radiš“,
-„neko iz tvog mesta“); „vi“ dosledno na Facebook-u; „rešava se u komšiluku“ zamenjeno rečenicom sa
-vršiocem radnje; duga rečenica o majstoru podeljena na dve.
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, plata koja stigne prvog, a do dvadesetog je potrošena;
+Instagram, pitanje šta od mesečnih troškova može da uradi neko iz tvog mesta; Facebook, dobri majstori koji bi
+radili više i ljudi koji čekaju platu da bi platili popravku. Primeri su novi (popravka bicikla, torta za rođendan,
+časovi engleskog, kolači), ne oni iz videa. Ušteda se iskazuje samo kao dinari koji ostanu, nikad kao preračun POEN-a.
+Jezička provera (lektor i književnik): navodnici „…“, bez crtica i nabrajanja; „plaćaš“ samo uz dinare; POEN se
+„prepiše“, ne „dobija“; rodno neutralno na TikTok-u i Instagramu; „vi“ dosledno na Facebook-u.
+**Preneseno značenje (ispravka 03.10.2026, primedba vlasnika):** prva verzija je imala „plate više nema“, „to zna
+svaka kuća“, „novac ode na“, „pokrije troškove“, „dinari ostaju u kući“, „nađu se“; sve je zamenjeno doslovnim
+rečenicama u kojima se kaže ko šta radi. **Facebook skraćen na 370 karaktera** (pravilo od 400, 04.10.2026), adresa bez
+`https://`, link u prvi komentar (odeljak 3).
 
 ### TikTok
 
 ```
-Plata stigne prvog, a do dvadesetog je već nema. To zna skoro svaka kuća. 🗓️
+Plata stigne prvog, a do dvadesetog je potrošena. Tako je u mnogim kućama. 🗓️
 
-Deo tog novca ode na stvari koje neko iz tvoje ulice ume da uradi: šišanje, popravku bicikla, kolače za rođendan. Na KOLU nudiš ono što ti znaš da radiš, a od drugih članova dobijaš ono što tebi treba. Za to ne daješ dinare, pa ti ostanu.
+Deo plate potrošiš na ono što neko iz tvoje ulice ume da uradi: šišanje, popravku bicikla, kolače za rođendan. Na KOLU nudiš ono što ti znaš da radiš, a od drugih članova dobijaš ono što tebi treba. Za to ne daješ dinare, pa ti ostanu.
 
 Kad nekome uradiš posao, on ti prepiše POEN. To je zapis o tvom doprinosu, nije novac i ne menja se za novac.
 
-Struju, gorivo i porez i dalje plaćaš u dinarima. Ali ono što ti komšije mogu dati, ne moraš više da plaćaš u prodavnici.
+Struju, gorivo i porez i dalje plaćaš u dinarima. Ono što ti komšije mogu dati, ne moraš više da plaćaš u prodavnici.
 
 👉 Napiši šta znaš da radiš, link je u profilu
 
@@ -837,27 +844,27 @@ Struju, gorivo i porez i dalje plaćaš u dinarima. Ali ono što ti komšije mog
 ### Instagram
 
 ```
-Koliko tvojih mesečnih troškova može da pokrije neko iz tvog mesta? 🧾
+Šta od onoga što plaćaš svakog meseca može da ti uradi neko iz tvog mesta? 🧾
 
-Torta za rođendan, popravka bicikla, časovi engleskog. Na KOLU to dobijaš od drugih članova, a zauzvrat nudiš ono što ti znaš da radiš. Dinari namenjeni tome ostaju u kući.
+Torta za rođendan, popravka bicikla, časovi engleskog. Na KOLU to dobijaš od drugih članova, a zauzvrat nudiš ono što ti znaš da radiš. Za to ne trošiš dinare, pa ih imaš više na kraju meseca.
 
-Svaki posao koji uradiš za nekog člana ostaje zapisan kao POEN. POEN nije novac i ne menja se za novac.
+Svaki posao koji uradiš za nekog člana zapisuje se kao POEN. POEN nije novac i ne menja se za novac.
 
-Što više ljudi iz tvog mesta nudi nešto, to više toga nađeš u komšiluku. Link je u bio.
+Što više ljudi iz tvog mesta nešto nudi, to više stvari možeš da dobiješ od komšija. Link je u bio.
 
 #Sombor #Vojvodina #ušteda #razmena #KOLO
 ```
 
-### Facebook
+### Facebook (370 karaktera; u prvi komentar: https://ekolo.rs)
 
 ```
-U Somboru ima dobrih majstora koji bi radili više. Ima i ljudi koji popravku odlažu do plate, jer im fali novca. 🔧
+U Somboru ima dobrih majstora koji bi radili više. Ima i ljudi koji čekaju platu da bi platili popravku. 🔧
 
-Na KOLU mogu da se nađu bez dinara. Majstor uradi posao, a komšija mu prepiše POEN, zapis o njegovom doprinosu. Posle od drugih članova dobije ono što njemu treba: povrće, šišanje, časove za dete. Ono što bi inače platio u dinarima sada dobije u komšiluku, pa mu na kraju meseca ostane više.
+Na KOLU mogu da razmene rad bez dinara. Majstor uradi posao, a komšija mu prepiše POEN. Posle od drugih članova dobije povrće ili šišanje i za to ne troši dinare.
 
-Struju, gorivo i porez i dalje plaćate u dinarima. POEN nije novac i ne menja se za novac.
+POEN nije novac i ne menja se za novac.
 
-👉 Napišite šta umete da radite: https://ekolo.rs
+👉 Napišite šta umete da radite na ekolo.rs
 
 #Sombor #KOLO
 ```
