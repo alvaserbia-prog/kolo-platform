@@ -29,7 +29,8 @@ načina: sredstvom koje svi primaju ili zapisom. Prvi način je novac, drugi je 
   Provera reč po reč (Parakeet + Omnilingual): bez reči viška i ponavljanja.
 - **Muzika:** „Harmonija kiše“ (Suno, nalog vlasnika, `audio/raw/muzika-suno.mp3`), 154,6 s, D-mol, 129 BPM;
   deo se menja oko 15, 29, 44, 89 i 103 s, završetak 150–154,6 s. Uklapa se u koraku 8.
-- **Scenario:** ispod, čeka odobrenje vlasnika.
+- **Scenario:** ispod; vlasnik je 04.10.2026 rekao da scenarije ne mora da odobrava („sve završi“), pa je video urađen po njemu. Konačna priča u slici (sa izmenama iz izrade): `README.md`.
+- **Video:** gotov (`out/kolo-trampa.mp4`), postupak u `README.md`.
 
 ## Natpisi (raniji predlog; zamenjuje ga scenario ispod)
 
@@ -55,7 +56,7 @@ načina: sredstvom koje svi primaju ili zapisom. Prvi način je novac, drugi je 
 - Stil i muzika: otvoreno (predlog: kreda na školskoj tabli, zajednička za videe 15–17; tamburica, šaljivo pizzicato u sc. 2–3).
 
 # Scenario
-🟡 **Predlog, čeka odobrenje vlasnika** (korak 2 toka izrade, `video/README.md`). Slika se ne pravi pre odobrenja.
+Scenario (korak 2 toka izrade, `video/README.md`); vremena su iz prvog plana, konačna su u `src/plan.json`.
 
 Naracija: My_recording_71 (03.10.2026), očišćena i složena: 103,2 s glasa, video ~106 s.
 Muzika: „Harmonija kiše“ (Suno, nalog vlasnika), 2:34, D-mol, 129 BPM; skraćuje se po glasu u koraku 8.
@@ -63,7 +64,7 @@ Vremena su u sekundama videa (glas kreće na 0,5 s); posle preciznog poravnanja 
 
 ## Stil (predlog)
 
-**Kreda na školskoj tabli**, zajednička za videe 15–17 (serijal o novcu je „čas“). Tamnozelena tabla sa
+**Kreda na školskoj tabli**, predlog za videe 15–17 (serijal o novcu je „čas“). Tamnozelena tabla sa
 tragovima brisanja, kreda bela i u boji (ajvar crven, drva oker, cipele braon, zapis zelen kao reč u titlu),
 linije koje „ključaju“, prah krede kad se nešto napiše. Scene se smenjuju **brisanjem table sunđerom**
 (trag brisanja ostaje), a ne listanjem. Likovi su crteži kredom: Milica (marama, kecelja, kao u „Domaćicama“),

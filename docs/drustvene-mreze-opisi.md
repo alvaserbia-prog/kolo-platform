@@ -1005,3 +1005,73 @@ Za pomoć koju date neko vam prepiše POEN, a vi ga prepišete onome ko pomogne 
 
 #Sombor #moba #KOLO
 ```
+
+## 17. Video 15 „Trampa: dva načina“ (oktobar 2026)
+
+Video: `video/kolo-trampa/out/kolo-trampa.mp4`. Naslovna: `video/kolo-trampa/out/naslovna.jpg` („Ajvar za cipele?“).
+Zvuk na Instagramu preimenovati u „KOLO, trampa“. Alternativni tekst: „Crtež kredom na školskoj tabli: Milica
+nudi teglu ajvara obućaru, kome trebaju drva; tabla se deli na dva načina, novac i zajedničku svesku u koju se
+upisuje ko je šta dao, a na kraju se četvoro uhvate u kolo.“
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, menjanje sličica u školi; Instagram, paradajz koji
+sazri celoj ulici iste nedelje (trampa traži i pravi trenutak); Facebook, mali oglasi sa rečju „menjam“ koji
+stoje mesecima. Primeri iz videa (ajvar, cipele, drva, krečenje, žito, so, školjke) se ne ponavljaju. Kako se
+POEN dobija kaže se tačno: prepiše ti ga onaj kome si nešto dao. Zapis se ne opisuje kao dug. Reč „besplatno“
+se ne piše (odeljak 2), iako je u naraciji. Uporedo sa odeljcima 15 i 16: nijedna rečenica nije ista (provereno
+pretragom po ovom fajlu), a obavezna rečenica o POEN-u rečena je svaki put drugačije.
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; rodno neutralno na TikTok-u i
+Instagramu („Šta imaš u višku“, ne „šta bi ponudio“); „vi“ dosledno na Facebook-u; zarez ispred „a“; bez
+prenesenog značenja; POEN se „prepiše“, nikad „dobija“.
+
+### TikTok
+
+```
+Ko je u školi menjao sličice, zna koliko trampa ume da bude teška. ⚽
+
+Imaš tri ista golmana, a fali ti jedan napadač. Drug koji ima napadača traži baš onu sličicu koju niko nema. I tako se menjanje završi pre nego što počne.
+
+Sa odraslima je isto, samo su stvari veće. Ono što ti imaš i ono što ti treba retko se nađu kod istog čoveka.
+
+Na KOLU ne moraš da tražiš baš tu jednu osobu. Daš onome kome treba, a on ti prepiše POEN. Taj POEN posle prepišeš onome ko ima ono što tebi treba, makar to bio neko treći iz drugog kraja grada.
+
+POEN beleži šta si dao zajednici. To nije novac, pa se ni ne menja za dinare.
+
+👉 Šta imaš u višku, a šta ti fali? Link je u profilu
+
+#Sombor #trampa #razmena #komšije #KOLO
+```
+
+### Instagram
+
+```
+Paradajz u baštama sazri celoj ulici iste nedelje. 🍅
+
+Tada ga ima svako i niko ga ne traži, a u decembru bi ga svako rado uzeo. Trampa traži da se dvoje nađu u pravom trenutku, a to se retko poklopi.
+
+Na KOLU daš kad imaš. Onaj kome daš prepiše ti POEN, a ti ga prepišeš kad tebi nešto zatreba, nekome drugom i u neko drugo vreme.
+
+POEN nije novac, nego trag onoga što si dao drugima.
+
+Link je u bio.
+
+#Sombor #Vojvodina #trampa #bašta #KOLO
+```
+
+### Facebook
+
+```
+U malim oglasima i danas se često nađe reč „menjam“: bicikl za kosilicu, prase za drva. 🚲
+
+Takav oglas ume da stoji mesecima. Problem nije u biciklu, nego u tome što treba naći baš onoga ko ima kosilicu i kome uz to treba bicikl.
+
+Na KOLU ne morate da čekate tu jednu osobu. Date ono što imate onome kome treba, a on vam za to prepiše POEN. Kasnije taj POEN prepišete nekome drugom, ko ima ono što vama treba.
+
+POEN nije novac. To je zapis o doprinosu zajednici i za dinare se ne menja.
+
+👉 Šta biste vi ponudili? Pogledajte Pijacu na ekolo.rs
+
+#Sombor #trampa #KOLO
+```
+
+Prvi komentar stranice posle objave: „Sajt: https://ekolo.rs“ (odeljak 3, „Facebook i link“).

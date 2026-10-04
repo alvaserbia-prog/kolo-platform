@@ -14,10 +14,10 @@ PRAG_DB = 34
 KRAJ_SNIMKA = 134.5  # posle poslednjeg „rs“ je tišina
 # Izbačeno (vremena snimka, provereno Parakeet-om i Omnilingual-om):
 #  43.6–50.9   prvo čitanje „Prvi način je da se ljudi dogovore … koje (koja) će svako primiti“; ostaje drugo, čisto
-#  113.4–121.4 prvo čitanje kraja („… na ekol rs“, adresa nejasna)
+#  113.4–122.3 prvo čitanje kraja („… na ekol rs“, adresa nejasna) i kratak glasan zvuk pre drugog „Šta“
 #  124.8–130.1 posle „Šta ti imaš da ponudiš?“ iz drugog čitanja ide „Pridruži se besplatno na ekolo tačka rs“
 #              iz trećeg (u drugom je adresa zvučala „e kolor tačka rs“)
-IZBACI = [(43.6, 50.9), (113.4, 121.4), (124.8, 130.1)]
+IZBACI = [(43.6, 50.9), (113.4, 122.3), (124.8, 130.1)]
 TEMPO = 1.03
 # Posle tempa (vremena u audio/final/glas.wav): ništa.
 IZBACI_POSLE = []

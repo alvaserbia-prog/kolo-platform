@@ -27,7 +27,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 13 | Ušteda (Zoran, električar) | K | `kolo-usteda/` | ✅ |
 | 14 | Bez posrednika | K | `kolo-bez-posrednika/` | ✅ |
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
-| 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | glas očišćen, scenario čeka odobrenje |
+| 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | ✅ |
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | tekst gotov, izrada nije počela |
 | 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
 | 18 | Šta piše pored tvog imena | K |  |  |
@@ -201,7 +201,7 @@ pre sledećeg.** Greška nađena kasnije vraća rad na korak u kome je nastala.
 | # | Korak | Šta se predaje | Provera posle koraka |
 |---|---|---|---|
 | 1 | **Tekst za glas** — dogovara se sa vlasnikom; prolazi pregled stalne ekipe (pisac, dramaturg, urednik za mreže, gledalac) | konačan tekst za snimanje | zabranjene reči; pravna odbrana iz `CLAUDE.md`; brojke i činjenice provereni; tekst se čita naglas bez zastoja |
-| 2 | **Scenario** — scena po scena: vreme, naracija, slika, šta se dešava na kojoj reči | scenario u razgovoru, pa u `scenario.md` | 🟡 šalje se vlasniku pre izrade slike; slika ne govori isto što i tekst; nosiva slika razume se bez zvuka |
+| 2 | **Scenario** — scena po scena: vreme, naracija, slika, šta se dešava na kojoj reči | scenario u `scenario.md` | ne čeka odobrenje vlasnika (od 04.10.2026); slika ne govori isto što i tekst; nosiva slika razume se bez zvuka |
 | 3 | **Muzika: upiti za Suno** — žanr, tempo, tok po delovima, mesto obrta i završnog akorda, sa obrazloženjem (pravila o muzici ispod) | upiti (Style i Lyrics) u razgovoru | tok muzike prati tok teksta; obrt pada na ključnu reč |
 | 4 | **Slika** — scene po scenariju | probni kadrovi svake scene | svaka scena se pogleda kao slika: preklapanja, ruke, lica, čitljivost, mesto za titl |
 | 5 | **Glas** — čišćenje, izbacivanje ponovljenih i prekinutih izgovora, tempo | očišćen glas | 🔴 snimak se prepoznaje mašinski (dva modela) i poredi sa tekstom reč po reč: ne sme ostati reč viška, prekinut početak ni dupla reč |
@@ -210,7 +210,7 @@ pre sledećeg.** Greška nađena kasnije vraća rad na korak u kome je nastala.
 | 8 | **Muzika i miks** — numera koju vlasnik pošalje uklapa se po glasu (obrt na ključnoj reči, završetak posle poslednje reči) | miks | −14 LUFS; muzika stalne jačine; rez u muzici na udarcu |
 | 9 | **Završna kontrola i predaja** — ceo video od početka do kraja | gotov video, naslovna, opisi za TikTok, Instagram i Facebook po `docs/drustvene-mreze-opisi.md` (lektor i književnik) | trajanje, 1080×1920, glasnoća, zabranjene reči u slici, titlu i opisu; kopija za pregled manja od 30 MB |
 
-- Vlasnik odobrava tekst (1), scenario (2) i numeru (3 i 8); sve ostalo se radi samostalno i šalje gotovo.
+- Vlasnik odobrava tekst (1) i numeru (3 i 8); sve ostalo se radi samostalno i šalje gotovo. 🔴 **Scenario (2) vlasnik više ne odobrava** (odluka vlasnika, 04.10.2026, video 15: „ne moram odobravati scenarije, sve završi“): scenario se piše i zapisuje u folder videa, pa se odmah ide dalje.
 - U folderu videa ostaju scenario, uputstvo sa postupkom i tabelom „Priča u slici“, skripte i gotov fajl; opisi idu u `docs/drustvene-mreze-opisi.md`.
 - 🔴 Odluka vlasnika doneta tokom izrade odmah se zapisuje: ovde (za sve videe) ili u uputstvo videa (samo za taj video). Ono što nije zapisano, sledeća sesija ne zna.
 
