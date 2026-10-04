@@ -26,7 +26,8 @@ DOBA = 60 / 133.45
 FAZA = 14.35                    # jedan udarac na mreži doba
 J, L = 22.56, 8 * 4 * DOBA      # skok nazad za 8 taktova
 MK = 43.2                       # približan početak sunca
-E0 = 177.10                     # malo pre završnog udarca (177,25 s)
+E0 = 168.57                     # ulaz u prirodan završetak pesme (stišavanje 170–177 s, pa završni udarac)
+UDARAC = 177.25                 # završni udarac pesme
 
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", FAJL, "-ar", "48000", "-ac", "2", "-c:a", "pcm_f32le", "/tmp/_suno2.wav"], check=True)
 a, sr = sf.read("/tmp/_suno2.wav")
@@ -50,14 +51,16 @@ j = udarac(na_dobi(J))
 jl = udarac(na_dobi(J - L))
 s0 = j - (K - (mk - jl))          # početak u pesmi, da sunce padne na „KOLO“
 assert s0 >= 0, s0
-# kraj: prvi takt posle poslednje reči (+0,3 s), skok na završni udarac
-t_u_pesmi = (KRAJ_GLASA + 0.3) - (j - s0) + jl
-kraj = udarac(na_dobi(t_u_pesmi))
-e0 = E0
+# kraj: pesma se ne seče na sam završni udarac (tako je zvučalo odsečeno), nego se ~8,7 s ranije, na udarcu,
+# prelazi u njen prirodan završetak (stišava se pod „ekolo.rs, čista ušteda“), a završni udarac pada ~0,45 s
+# posle poslednje reči
+e0 = udarac(na_dobi(E0))
+t_skoka = (KRAJ_GLASA + 0.45) - (UDARAC - e0)
+kraj = udarac(na_dobi(t_skoka - (j - s0) + jl))
 delovi = [(s0, j), (jl, kraj), (e0, len(m) / sr)]
 print("sunce", round(mk, 2), "s0", round(s0, 2), "delovi", [(round(x, 2), round(y, 2)) for x, y in delovi])
 print("sunce u videu", round((j - s0) + (mk - jl), 2), "reč KOLO", round(K, 2),
-      "završni udarac u videu", round((j - s0) + (kraj - jl) + (177.25 - e0), 2), "kraj glasa", round(KRAJ_GLASA, 2))
+      "završni udarac u videu", round((j - s0) + (kraj - jl) + (UDARAC - e0), 2), "kraj glasa", round(KRAJ_GLASA, 2))
 
 f = int(0.06 * sr)
 out = None
