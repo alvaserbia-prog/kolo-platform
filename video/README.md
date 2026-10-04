@@ -27,7 +27,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 13 | Ušteda (Zoran, električar) | K | `kolo-usteda/` | ✅ |
 | 14 | Bez posrednika | K | `kolo-bez-posrednika/` | ✅ |
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
-| 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | tekst gotov, izrada nije počela |
+| 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | ✅ |
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | ✅ |
 | 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
 | 18 | Šta piše pored tvog imena | K |  |  |
