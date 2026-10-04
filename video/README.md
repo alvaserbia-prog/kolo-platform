@@ -253,6 +253,8 @@ pravi kolona „Natpis“ za svaku scenu; tekst koji je deo slike upisuje se u k
 
 🔴 **Muzika za javne objave mora biti napravljena na plaćenom planu** (Suno plaćeni plan, ElevenLabs od Starter naviše); besplatni planovi ne daju pravo na komercijalnu upotrebu.
 
+🔴 **Glas mora biti jednake jačine od početka do kraja** (vlasnik, 04.10.2026, video 15): pri čišćenju se ceo snimak pojačava jednim izmerenim pojačanjem i limiterom, ne `loudnorm`-om (kad linearni režim ne može, loudnorm tiho pređe u dinamički i podiže jačinu postepeno; u videu 15 glas je bio ~18 dB tiši na početku). Posle čišćenja se meri jačina po scenama; obrazac: `kolo-trampa/scripts/ciscenje.sh` i `mix.py`.
+
 🔴 **Muzika se ne stišava dok se govori** (odluka vlasnika, 02.10.2026): stalno je iste jačine, bez sidechain kompresije; jačinu određuje vlasnik po numeri.
 
 🟢 **Zapis umesto novca sme da se kaže** (odluka vlasnika, 30.09.2026). Nije obavezno da tekst govori „KOLO je dodatak, ne zamena“: ideja da zapis može da zameni novac sme da ostane, jer je to mogući ishod KOLA, iako KOLO danas kreće paralelno sa dinarom. U tekstu se ne kaže „cilj KOLA“, nego „mogući ishod“. Kaže se kao ideja o razmeni, ne kao obećanje o POEN-u: „razmena može da ide zapisom umesto novcem“ da, „POEN će zameniti dinar“ ne (javna tvrdnja da je POEN zamišljen kao sredstvo plaćanja udara na odbranu iz Pravilnika čl. 13). Ono što i dalje važi, jer su to strukturne granice iz akata, a ne stav o cilju: POEN se ne menja za dinare i ne iznosi iz sistema (nekonvertibilnost), obaveze prema državi ostaju u dinarima, i uz POEN ne idu reči kupi, prodaj, plati, zaradi, cena.
