@@ -1,13 +1,13 @@
 """Miks (video „Poljoprivrednici“): sedamnaest klipova naracije na mestima iz plana + muzika stalne jačine, -14 LUFS.
 
 Glas: iz audio/final/glas.wav seče se [klipOd, klipDo] svake scene, ujednačava po jačini i postavlja na glasOd.
-Muzika: audio/muzika.wav (pesma složena u scripts/muzika.py), MUZIKA_DB, rez na 2,6 kHz. Muzika se NE stišava dok se
+Muzika: audio/muzika.wav (Suno remiks vlasnika, uklopljen u scripts/muzika_suno.py), MUZIKA_DB, rez na 2,6 kHz. Muzika se NE stišava dok se
 govori (bez sidechain-a, odluka vlasnika 02.10.2026, video/README.md). Efekata nema.
 Zbir: loudnorm u dva prolaza na -14 LUFS / -1,5 dBTP -> public/miks.wav.
 """
 import json, subprocess
 
-MUZIKA_DB = -15  # stalna jačina: muzika (−15,3 LUFS) ~15 dB ispod glasa; vlasnik određuje jačinu po numeri
+MUZIKA_DB = -14  # stalna jačina, kao u ../kolo-trampa/ i ../kolo-pijaca/ (Suno numera ~ −15 LUFS); vlasnik određuje jačinu po numeri
 
 plan = json.load(open("src/plan.json"))
 T = plan["trajanje"]
