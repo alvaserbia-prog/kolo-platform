@@ -7,13 +7,13 @@ Ulaz src/timing.json, izlaz src/plan.json. Isti plan čitaju Remotion i miks.
 import json
 
 FPS = 30
-# Glas kasni za muzikom 0,377 s: tako ponovni ulaz numere posle prekida (68,65 s, scripts/muzika.py) pada
-# na „KOLU“, a završni udarci (83,39 s) odmah posle „ekolo.rs“. Glas kreće odmah (kuka u prve 3 s).
+# Glas kasni za muzikom 0,377 s: tako ponovni ulaz numere posle prekida (scripts/muzika.py) pada na „POEN“,
+# a završni udarci ~0,5 s posle „ekolo.rs“. Glas kreće odmah (kuka u prve 3 s).
 UVOD = 0.377
 PRE_SCENE = 0.30    # kadar kreće malo pre glasa
 PRE = {}
-EXTRA = {}  # bez dodatnog vazduha: svaki dodatak bi pomerio „KOLU“ sa ponovnog ulaza i završnu reč preko završnog udarca
-KRAJ = 88.0  # kraj numere (audio/muzika.wav, 88,04 s): završni udarci 83,39 s, zvonjenje i stišavanje do 88,0 s
+EXTRA = {}  # bez dodatnog vazduha: svaki dodatak bi pomerio „POEN“ sa ponovnog ulaza i završnu reč preko završnog udarca
+KRAJ = 87.0  # kraj numere (audio/muzika.wav): završni udarci, zvonjenje i stišavanje do 87,0 s
 # Koliko slika i tekst idu ispred glasa. Pravilo „1 s ispred“ ukinuto je 03.10.2026 (tekst je žurio,
 # video/README.md): slika i tekst idu uz izgovorenu reč.
 PREDNOST_S = 0.0
