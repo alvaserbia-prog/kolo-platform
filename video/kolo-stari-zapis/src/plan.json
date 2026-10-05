@@ -1,8 +1,8 @@
 {
  "fps": 30,
  "prednost": 0.0,
- "trajanje": 88.0,
- "frejmova": 2640,
+ "trajanje": 87.0,
+ "frejmova": 2610,
  "scene": [
   {
    "id": 1,
@@ -934,9 +934,9 @@
     }
    ],
    "tekst": "Postavi svoj prvi oglas na ekolo.rs.",
-   "do": 88.0,
+   "do": 87.0,
    "odF": 2366,
-   "doF": 2640,
+   "doF": 2610,
    "glasOdF": 2370
   }
  ]

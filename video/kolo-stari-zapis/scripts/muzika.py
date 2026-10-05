@@ -9,20 +9,21 @@ pa ponovni ulaz predudarom na 161,61 s (udar takta 162,36 s); proređen deo sa d
 završnica 181,5–189,4 s (poslednji udarci 188,25 i 189,3 s) i zvonjenje do ~194 s.
 
 Raspored:
-  A  90,98 → 158,50   kreće na udar takta, u punom ritmičnom delu, ispod cele istorije; prekid u numeri
-                      počinje na „…ko je šta dao.“
-  B 160,483 → 172,28  iz prekida izbačen jedan takt (1,983 s), pa tišina traje ~1,8 s, ne 3,6 (vlasnik je
-                      kod prve numere tražio kraću tišinu pred tamburicu); rez u tihom delu ide preklapanjem
-                      od 150 ms. PONOVNI ULAZ (predudar 161,61 s) pada na „KOLU“
-  C 184,18 → 192,90   rez od 6 taktova (11,90 s): 172,28 → 184,18 s ima najveću sličnost hrome (0,93) i
-                      spektra od osam mogućih mesta; izbacuje proređen deo, pa završni udarci (188,25 s)
-                      dolaze odmah posle „ekolo.rs“, a numera zvoni do kraja videa uz stišavanje od 0,8 s.
+  A  88,996 → 158,300  kreće na udar takta, u punom ritmičnom delu, ispod cele istorije i ispod
+                       „U KOLU“; prekid u numeri počinje na „…se taj zapis zove“
+  B 160,794 → 170,250  iz prekida (bez ritma) izbačeno 2,49 s, pa tišina traje ~1,3 s; rez ide preklapanjem
+                       od 150 ms. PONOVNI ULAZ (predudar 161,61 s) pada na „POEN“
+  C 183,383 → 191,600  rez od 13,13 s u završnici (vlasnik 05.10.2026: prelaz od 11,9 s je „nepravilan“,
+                       „skratiti još 1 s pa da se lepo zalepi“): 170,25 → 183,38 s ima najveće poklapanje
+                       ritma (0,73) i hrome (0,99) od svih mesta dužine 12,6–13,2 s; rez je tik pred udarac
+                       u oba dela. Završni udarci (188,25 s) dolaze ~0,5 s posle „ekolo.rs“, zvonjenje uz
+                       stišavanje od 0,8 s do kraja videa (87,0 s).
 """
 import subprocess, numpy as np, soundfile as sf
 
-DELOVI = [(90.980, 158.500), (160.483, 172.280), (184.180, 192.900)]
+DELOVI = [(88.996, 158.300), (160.794, 170.250), (183.383, 191.600)]
 PREKLOP = 0.040
-PREKLOP_TIHO = 0.150  # rez u prekidu (158,5 → 160,48 s) ide dužim preklapanjem, jer tu nema udara
+PREKLOP_TIHO = 0.150  # rez u prekidu (158,3 → 160,79 s) ide dužim preklapanjem, jer tu nema udara
 ULAZ = 161.610        # predudar ponovnog ulaza posle prekida
 ZAVRSNI = 188.250     # napad završnih udaraca
 
@@ -32,7 +33,7 @@ a, sr = sf.read("/tmp/claude-0/suno2_48.wav", dtype="float32")
 f = int(PREKLOP * sr)
 out = None
 for t0, t1 in DELOVI:
-    k = int((PREKLOP_TIHO if t0 == 160.483 else PREKLOP) * sr)
+    k = int((PREKLOP_TIHO if t0 == 160.794 else PREKLOP) * sr)
     # deo počinje (k − f) uzoraka ranije, da duže preklapanje ne pomeri ostatak numere
     d = a[int(t0 * sr) - (k - f if out is not None else 0): int(t1 * sr) + f]
     if out is None:
