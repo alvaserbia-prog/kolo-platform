@@ -9,7 +9,7 @@ import { kad, scena } from "../vreme";
 import { P } from "../paleta";
 import { NASLOV } from "../fontovi";
 
-const UDARAC_S = 83.417; // završni udarac numere u videu (scripts/muzika.py)
+const UDARAC_S = 83.387; // završni udarci numere u videu (scripts/muzika.py)
 
 export const Scena12: React.FC = () => {
   const f = useF();

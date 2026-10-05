@@ -1,15 +1,15 @@
 # KOLO video 17 — „Stari oblici zapisa“
 
-Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 87,0 s, H.264 + AAC, −14 LUFS**.
+Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 88,0 s, H.264 + AAC, −14 LUFS**.
 Sedamnaesti po redosledu objave (`video/README.md`), treći u nizu o novcu (15 Trampa → 16 Stari oblici novca → 17).
 Gotov fajl: [`out/kolo-stari-zapis.mp4`](out/kolo-stari-zapis.mp4), naslovna: [`out/naslovna.jpg`](out/naslovna.jpg).
 Tekst, scenario i „Priča u slici“: [`scenario.md`](scenario.md). Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 17.
-Naracija: vlasnik (My_recording_74, 04.10.2026). Muzika: „Quarter in the Dryer (1)“ (Suno, vlasnik, 04.10.2026), od 33. sekunde (nalog vlasnika).
+Naracija: vlasnik (My_recording_74, 04.10.2026). Muzika: „Quarter in the Dryer (2)“ (Suno, vlasnik, 05.10.2026), u pozadini. Zamenila je prvu verziju („Quarter in the Dryer (1)“, od 33. s), po nalogu vlasnika: „promenimo skroz muzičku numeru… da bude u pozadini i uklopi je najbolje što možeš“.
 
 Stil je **stara ilustrovana slikovnica** iz videa 14 (gvaš, mastilo, papir, zrno, okvir sa lalama, listanje),
 sa sopstvenom paletom po svetu: pesak i opeka za Mesopotamiju, zelene padine i plavi vrhovi za Ande, drveni sto
 i topla svetlost za svesku. Nosiva slika je zapis „ko je šta dao“ u tri oblika (glinena pločica, kipu, sveska),
-koji se na „U KOLU“ spoje u zapis u KOLU (`src/drevno.tsx`, `src/sveska.tsx`).
+koji se na „KOLU“ spoje u zapis u KOLU (`src/drevno.tsx`, `src/sveska.tsx`).
 
 ## Priča u slici
 
@@ -23,7 +23,7 @@ koji se na „U KOLU“ spoje u zapis u KOLU (`src/drevno.tsx`, `src/sveska.tsx`
 | 6 | Kipu krupno: boje konaca (kukuruz, vuna, krompir), čvorovi, kolke sa robom, žena sa lamom i nov čvor. |
 | 7 | Mapa Južne Amerike, carstvo uz Ande: sela, novčić koji posivi i ode, glasnik putem, kipui na selima. |
 | 8 | Sto: pločica, kipu, zajednička sveska iz videa 15; sredstva iz videa 16 odu; ispiše se ko je šta dao. |
-| 9 | Sveska postane „ZAPIS U KOLU“, znak KOLO i zraci (pun ulaz muzike na „U KOLU“); na „POEN“ udare žigovi POEN. |
+| 9 | Sveska postane „ZAPIS U KOLU“, znak KOLO i zraci (ponovni ulaz muzike na „KOLU“); na „POEN“ udare žigovi POEN. |
 | 10 | Tri sličice: rad, dobro, znanje; zelena strelica od onoga ko je primio ka onome ko je dao, žig POEN. |
 | 11 | Niz pločica → kipu → KOLO; u svesci prazan red „ti“ i pero. |
 | 12 | Telefon sa prvim oglasom, krupno ekolo.rs i znak KOLO; završni udarac numere odmah posle reči. |
@@ -64,8 +64,8 @@ KOMPOZICIJA=Naslovna node scripts/kadrovi.mjs 0 && mv out/kadrovi/f0.jpg out/nas
 | rez | izbačen prvi izgovor „U KOLU se taj zapis zove POEN“ (78,7–81,0 s snimka; vlasnik ga je ponovio, ostaje drugi) i prekinut početak „Kad nekom daš rad“ (85,4–87,0 s). Provera reč po reč posle reza (Parakeet + Omnilingual): bez reči viška, ponavljanja i prekinutih početaka |
 | tempo | pauze duže od 0,45 s skraćene (između rečenica 0,80 s), **atempo 1,03** → 83,1 s |
 | vremena reči | Parakeet TDT 0.6B v3 po isečcima, pa prisilno CTC poravnanje (Omnilingual ASR 300M); adresa kao „ekolo tačka rs“ |
-| muzika | „Quarter in the Dryer (1)“ (`audio/raw/muzika-suno.mp3`, 3:14,9). Izmereno: naglasak na svakih **4,000 s** (36,444 + 4k s), proređen deo 146–163 s, skoro tišina 163–167 s, **pun ulaz 167,075 s**, završni udarac 188,41 s. Složeno (`scripts/muzika.py`): kreće od **33 s** (vlasnik); rez 92,39 → 156,39 s (16 mreža), pa proređen deo pada na „zapise.“ i nosi „Zapis se ne koristi…“; iz skoro tišine pred ulaz izbačene su 2 s (164 → 166 s, vlasnik 04.10.2026: „skrati pre te tamburice na kraju sekund dva tri“), pa **pun ulaz pada ~0,1 s pre „U KOLU“** (68,08 s u videu); u punom delu rez 168,39 → 174,39 s (6 s, najveća sličnost hrome od šest mesta, 0,89), pa **završni udarac na 83,42 s, 0,3 s posle „ekolo.rs“**, i zamiranje i stišavanje do 87 s. Glas kasni za muzikom 0,342 s |
-| miks | muzika **−16 dB, stalno iste jačine, bez stišavanja ispod glasa**, rez na 2,6 kHz; zbir jednim pojačanjem na −14 LUFS i limiter −1,5 dBTP. Razumljivost provereno prepoznavanjem govora iz samog miksa (Omnilingual): ceo tekst prepoznat |
+| muzika | „Quarter in the Dryer (2)“ (`audio/raw/muzika-suno-2.mp3`, 3:14,8). Izmereno: takt **1,983 s** (udar na 140,55 + 1,983k s); mirni uvod bez ritma do 38 s, pun deo od ~57 s, **prekid 157,8–161,4 s i ponovni ulaz predudarom na 161,61 s**, proređen deo 174–181 s, završni udarci 188,25 s i zvonjenje do ~194 s. Složeno (`scripts/muzika.py`): kreće na udar takta na **90,98 s** (u punom delu, ulazi pojačavanjem od 0,4 s); prekid počinje na „…ko je šta dao.“, ali je iz njega izbačen jedan takt, pa tišina traje ~1,8 s; **ponovni ulaz pada na „KOLU“** (68,65 s u videu); u završnici rez od 6 taktova 172,28 → 184,18 s (najveća sličnost hrome od osam mesta, 0,93), pa **završni udarci na 83,39 s, odmah posle „ekolo.rs“**, i zvonjenje uz stišavanje do 88 s. Glas kasni za muzikom 0,377 s |
+| miks | muzika **−18 dB, u pozadini** (~17 LU ispod glasa; po scenama −35,3 do −32,9 dB), **stalno iste jačine, bez stišavanja ispod glasa**, rez na 2,6 kHz; zbir jednim pojačanjem na −14 LUFS i limiter −1,5 dBTP. Razumljivost provereno prepoznavanjem govora iz samog miksa (Omnilingual): ceo tekst prepoznat |
 
 Modeli (sherpa-onnx Parakeet i Omnilingual) i `deep-filter` preuzimaju se sa GitHub izdanja i nisu u repou.
 
@@ -79,4 +79,4 @@ Modeli (sherpa-onnx Parakeet i Omnilingual) i `deep-filter` preuzimaju se sa Git
 ## Licence
 
 Kod i sadržaj: AGPL-3.0 / CC BY-SA 4.0, kao i ostatak repoa. Fontovi: SIL Open Font License
-(Lora, Playfair Display, Noto Sans, Caveat). Muzika: Suno, generisana na nalogu vlasnika (plaćeni plan).
+(Lora, Playfair Display, Noto Sans, Caveat). Muzika: Suno („Quarter in the Dryer (2)“), generisana na nalogu vlasnika (plaćeni plan).
