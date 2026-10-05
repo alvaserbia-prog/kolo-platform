@@ -26,7 +26,7 @@ Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 19.
 |---|---|
 | trajanje, format | 200,1 s; 1080×1920; 30 fps; H.264 + AAC |
 | glasnoća | −14,3 LUFS, vrh −1,8 dBFS (fajl za mreže) |
-| veličina | za mreže `out/kolo-poljoprivrednik.mp4` 67,5 MB (2,5 Mb/s, dva prolaza); kopija za pregled `out/pregled.mp4` 27,3 MB (van repoa); master `out/master.mp4` 82 MB (van repoa) |
+| veličina | za mreže `out/kolo-poljoprivrednik.mp4` 67,7 MB (2,5 Mb/s, dva prolaza); kopija za pregled `out/pregled.mp4` 27,3 MB (van repoa); master `out/master.mp4` 89 MB (van repoa) |
 | titl prema glasu | 321 reč, nijedna ne fali ni viška (Omnilingual po isečcima) |
 | zabranjene reči | u titlu i natpisima nema kupi, prodaj, plati, zaradi, cena uz POEN; „skuplje“, „otkupljivač“, „isplati“ i „prodao“ odnose se na dinare i robu |
 | POEN u slici | samo kao reč u listu „zapis u KOLU“, bez broja; novčanice u fioci su dinari |
