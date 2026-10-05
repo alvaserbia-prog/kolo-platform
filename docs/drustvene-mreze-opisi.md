@@ -24,8 +24,16 @@ većeg posla proveriti ih ponovo, naročito broj heštegova na Instagramu.
   konkretan domaći detalj (zimnica, slava, rub na pantalonama, razlomci), pitanje publici.
   Ne nabrajaju se svi primeri iz videa, dovoljan je jedan ili dva, po mogućstvu novi.
 - **Ton je glas čoveka iz komšiluka, ne reklama.** Kratke, prirodne rečenice, kako bi se to
-  reklo uživo. Obavezne činjenice (šta je KOLO, da POEN nije novac, da upis ide posle pregleda)
-  ostaju, ali uvek svojim rečima, ne rečenicom iz videa.
+  reklo uživo. Činjenice koje tema traži (šta je KOLO, da upis ide posle pregleda, da POEN nije novac,
+  vidi sledeću tačku) kažu se uvek svojim rečima, ne rečenicom iz videa.
+- 🔴 **Rečenica da POEN nije novac ne ide u svaki opis** (odluka vlasnika, 05.10.2026). Ponavljana u svakoj
+  objavi postala je šablon koji čitalac preskoči, a opisi liče jedan na drugi. Piše se **samo kad je tema
+  traži**: kad video ili opis govori o novcu, dinarima, ceni, plati ili uštedi (na primer serijal o novcu,
+  „Ušteda“, „Bez posrednika“), kad poredi POEN sa nečim što se plaća, i kad opis prvi put objašnjava šta je
+  POEN. U ostalim opisima POEN se pominje samo kao zapis („prepiše ti POEN“, „zapis o tome šta si dao“), bez
+  te rečenice. Zabrane iz odeljka 2 važe uvek: nikad „zaradi“, „dobij“, „vredi“, „vrednost“ ni poređenje sa
+  dinarom. Pri pregledu opisa proveri se i obrnuto: ako tema traži rečenicu, ona ne sme da izostane.
+  Raniji opisi u ovom fajlu ostaju kakvi su.
 - **Ne izmišljati događaje ni tuđe reči** („juče nam je komšinica rekla…"). Opšte zapažanje
   („kad se priča o razmeni, najčešće se čuje…") je autentično; izmišljena anegdota nije.
 - **Obraćanje rodno neutralno gde god može** („šta iz tvoje kuće prvo ide na Pijacu?", ne
@@ -75,7 +83,7 @@ Opis je javni tekst Fondacije, pa za njega važe ista pravila kao za copy na saj
 | Piše se | Ne piše se nikad |
 |---|---|
 | „upisuje ti se POEN", „zapis o tvom doprinosu" | „zaradi POEN", „dobij POEN", „nagrada" |
-| „POEN nije novac i ne menja se za novac" | bilo kakvo poređenje POEN-a sa dinarom, „vredi", „vrednost" |
+| „POEN nije novac i ne menja se za novac" (samo kad tema traži, odeljak 1) | bilo kakvo poređenje POEN-a sa dinarom, „vredi", „vrednost" |
 | „ponudiš ono što imaš, komšija te pronađe" | da Fondacija prodaje, garantuje ili odgovara za razmenu; od 02.10.2026 ni „dogovarate direktno, Fondacija ne posreduje“ (odeljak 1) |
 | „nalog potvrđuju ljudi koji te lično poznaju, bez dokumenata" | „verifikacija", „lična karta se traži" |
 | „razmena", „ponudi" | „kupi", „prodaj", „besplatno" |
@@ -117,7 +125,7 @@ komentar.
 
 🔴 **Facebook: opis najviše 400 karaktera** (odluka vlasnika, 04.10.2026). Broji se ceo tekst, sa emodžijima,
 adresom i heštegovima. Kratko: jedna slika iz svakodnevice, šta KOLO tu donosi, „POEN nije novac i ne menja se
-za novac“ kad se POEN pominje, poziv sa adresom i jedan do dva heštega. Provera pre isporuke: broj karaktera
+za novac“ samo kad tema traži (odeljak 1), poziv sa adresom i jedan do dva heštega. Provera pre isporuke: broj karaktera
 se izmeri i upiše u zapis provere uz opis. Opisi u odeljcima pre 14 napisani su pre ovog pravila; ako još nisu
 objavljeni, pri objavi se skraćuju na 400.
 
@@ -144,7 +152,8 @@ dobara i usluga među komšijama, nastala u Somboru“ stajala je u skoro svakom
 6. **Jednostavno i bez prenesenog značenja** (odluka vlasnika, 01.10.2026): obične reči, bez
    slika poput „otvara vrata“, „gradi se“, „temelj“.
 
-Obavezne činjenice iz odeljka 2 i dalje važe, ali svojim rečima i samo kad ih tema traži.
+Obavezne činjenice iz odeljka 2 i dalje važe, ali svojim rečima i samo kad ih tema traži; za rečenicu da
+POEN nije novac vidi odeljak 1 (od 05.10.2026 ne ide u svaki opis).
 
 ## 5. Kontrolna lista pri postavljanju
 
