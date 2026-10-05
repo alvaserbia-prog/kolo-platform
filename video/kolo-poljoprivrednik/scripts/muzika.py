@@ -3,17 +3,19 @@ po istom principu kao u videu 6 „Domaćice“ (orkestar i sinteza žice preuze
 ../kolo-domacice/scripts/muzika.py; nalog vlasnika 04.10.2026: „po istom principu kao za 6. video,
 da prati emotivni luk i da bude lagana tamburaška muzika“).
 
+Melodije su nove (vlasnik, 05.10.2026), ne iz videa 6; tonalitet h-mol / D-dur.
+
 Orkestar: prim (melodija, tremolo, udvojen), brač (terca ispod), bugarija (kontra), berde (bas).
 Lagano: manja jačina kontre i celog orkestra nego u videu 6, kolo umerenog tempa.
 
 Tok prati emotivni luk i plan scena (src/plan.json); dužina takta se računa iz scena:
-  sc. 1        tuga             e-mol, valcer, solo prim (rubato)        „poslednje dve krave“
-  sc. 2–4      sećanje, sreća   G-dur valcer, ceo orkestar, tema A dvaput salaš pun, pijaca
-  sc. 5        prolazak         e-mol, proređeno, bez kontre             deca odlaze, stoka se prodaje
-  sc. 6        melanholija      e-mol, kontra tiho kao sat               klupa ispred salaša
-  sc. 7–8      opet tuga        a-mol/e-mol: melodija se penje („skuplje“), pa pada („jeftinije“)
+  sc. 1        tuga             h-mol, valcer, solo prim (rubato)        „poslednje dve krave“
+  sc. 2–4      sećanje, sreća   D-dur valcer, ceo orkestar, tema A dvaput salaš pun, pijaca
+  sc. 5        prolazak         h-mol, proređeno, bez kontre             deca odlaze, stoka se prodaje
+  sc. 6        melanholija      h-mol, kontra tiho kao sat               klupa ispred salaša
+  sc. 7–8      opet tuga        h-mol: melodija se penje („skuplje“), pa pada („jeftinije“)
   sc. 9        odluka           jedan akord brača koji se gasi do „krave“, pa tišina
-  sc. 10       preokret         G-dur, 2/4: brač kao muzička kutija, ulazi berde, pa prim (Đurika)
+  sc. 10       preokret         D-dur, 2/4: brač kao muzička kutija, ulazi berde, pa prim (Đurika)
   sc. 11–17    rešenje          puno kolo od reči „KOLU“: tema K i tema B; tema A široko na
                                 „I štala ponovo nije prazna“; finale; završni akord odmah posle „ekolo.rs“.
 Izlaz: audio/muzika.wav, 48 kHz stereo, trajanje = plan videa.
@@ -24,7 +26,7 @@ import soundfile as sf
 from scipy.signal import butter, sosfilt, fftconvolve
 
 SR = 48000
-rng = np.random.default_rng(1956)
+rng = np.random.default_rng(2026)
 plan = json.load(open("src/plan.json"))
 T = plan["trajanje"]
 N = int((T + 4) * SR)
@@ -136,6 +138,7 @@ def ton(m, t0, dur, g, pan, instr=prim_ton, trem=False, kresc=0.0):
 AK = {  # pitch klase, koren
     "G": ([7, 11, 2], 7), "C": ([0, 4, 7], 0), "D7": ([2, 6, 9, 0], 2), "D": ([2, 6, 9], 2),
     "Em": ([4, 7, 11], 4), "Am": ([9, 0, 4], 9), "B7": ([11, 3, 6, 9], 11), "A7": ([9, 1, 4, 7], 9),
+    "Bm": ([11, 2, 6], 11), "F#7": ([6, 10, 1, 4], 6), "A": ([9, 1, 4], 9),
 }
 
 
@@ -213,74 +216,82 @@ def taktovi_u(t0, t1, n, dobe, tema, **kw):
     deo(t0, (t1 - t0) / n, dobe, tema[:n], **kw)
 
 
-# sc. 1 — tuga: e-mol, solo prim, rubato
+# Sve melodije su nove (vlasnik, 05.10.2026: „ne dopada mi se što je snimak isti, želim drugačije melodije
+# ali sličnu varijantu kao video 6“). Luk i orkestar su isti kao u videu 6, tonalitet je drugi:
+# h-mol za tugu, D-dur za sreću i kolo (video 6: e-mol i G-dur).
+
+# sc. 1 — tuga: h-mol, solo prim, rubato; melodija kreće visoko i silazi
 deo(0.25, (scena(2) - 0.25) / 4, 3, [
-    ("Em", [(0, 1, 71), (1, 2, 76, True)]),
-    ("Am", [(0, 1, 76), (1, 1, 74), (2, 1, 72)]),
-    ("B7", [(0, 2, 71, True), (2, 1, 69)]),
-    ("Em", [(0, 3, 71, True)]),
+    ("Bm", [(0, 2, 78, True), (2, 1, 76)]),
+    ("Em", [(0, 1, 74), (1, 1, 73), (2, 1, 71)]),
+    ("F#7", [(0, 1, 73), (1, 1, 70), (2, 1, 73)]),
+    ("Bm", [(0, 3, 71, True)]),
 ], g=[0.5, 0.62], kontra=False, berde=True)
 
-# sc. 2–4 — sećanje: G-dur, tema A dvaput, ceo orkestar
+# sc. 2–4 — sećanje: D-dur valcer, tema A (skok na sekstu, pa tremolo), drugi put sa višim krajem
 TEMA_A = [
-    ("G", [(0, 1, 71), (1, 1, 74), (2, 1, 79)]),
-    ("G", [(0, 1, 78), (1, 2, 79)]),
-    ("C", [(0, 1, 76), (1, 1, 79), (2, 1, 76)]),
-    ("G", [(0, 3, 74)]),
-    ("D7", [(0, 1, 72), (1, 1, 74), (2, 1, 72)]),
-    ("D7", [(0, 1, 71), (1, 2, 69)]),
-    ("D7", [(0, 1, 72), (1, 1, 69), (2, 1, 66)]),
-    ("G", [(0, 3, 67)]),
+    ("D", [(0, 1, 69), (1, 1, 74), (2, 1, 78)]),
+    ("D", [(0, 2, 81, True), (2, 1, 78)]),
+    ("G", [(0, 1, 79), (1, 1, 83), (2, 1, 79)]),
+    ("D", [(0, 1, 78), (1, 2, 74)]),
+    ("A7", [(0, 1, 76), (1, 1, 79), (2, 1, 76)]),
+    ("D", [(0, 1, 74), (1, 1, 78), (2, 1, 74)]),
+    ("Em", [(0, 1, 71), (1, 1, 74), (2, 1, 73)]),
+    ("A7", [(0, 3, 69, True)]),
 ]
-TEMA_A2 = TEMA_A[:4] + [
-    ("Am", [(0, 1, 72), (1, 1, 76), (2, 1, 79)]),
-    ("D7", [(0, 1, 78), (1, 1, 76), (2, 1, 74)]),
-    ("D7", [(0, 1, 72), (1, 1, 71), (2, 1, 69)]),
-    ("G", [(0, 3, 67)]),
+TEMA_A2 = [
+    ("D", [(0, 1, 69), (1, 1, 74), (2, 1, 78)]),
+    ("D", [(0, 2, 81, True), (2, 1, 83)]),
+    ("G", [(0, 1, 83), (1, 1, 81), (2, 1, 79)]),
+    ("Bm", [(0, 1, 78), (1, 1, 74), (2, 1, 71)]),
+    ("Em", [(0, 1, 79), (1, 1, 78), (2, 1, 76)]),
+    ("A7", [(0, 1, 73), (1, 1, 76), (2, 1, 79)]),
+    ("A7", [(0, 1, 78), (1, 1, 76), (2, 1, 73)]),
+    ("D", [(0, 3, 74, True)]),
 ]
 taktovi_u(scena(2), scena(5), 16, 3, TEMA_A + TEMA_A2, g=[0.78, 0.86], g_kontra=0.75)
 
-# sc. 5 — prolazak: e-mol, proređeno, bez kontre
+# sc. 5 — prolazak: h-mol, proređeno, bez kontre; niz koji silazi
 taktovi_u(scena(5), scena(6), 8, 3, [
-    ("Em", [(0, 2, 71), (2, 1, 72)]),
-    ("C", [(0, 2, 76), (2, 1, 74)]),
-    ("B7", [(0, 3, 75)]),
-    ("Em", [(0, 1, 71), (1, 1, 67), (2, 1, 64)]),
-    ("Am", [(0, 2, 69), (2, 1, 72)]),
-    ("Em", [(0, 2, 71), (2, 1, 67)]),
-    ("B7", [(0, 1, 66), (1, 1, 69), (2, 1, 71)]),
-    ("Em", [(0, 3, 64)]),
+    ("Bm", [(0, 2, 74), (2, 1, 73)]),
+    ("G", [(0, 2, 71), (2, 1, 74)]),
+    ("Em", [(0, 2, 79), (2, 1, 78)]),
+    ("F#7", [(0, 3, 76)]),
+    ("Bm", [(0, 1, 74), (1, 1, 71), (2, 1, 66)]),
+    ("Em", [(0, 2, 67), (2, 1, 71)]),
+    ("F#7", [(0, 1, 70), (1, 1, 73), (2, 1, 76)]),
+    ("Bm", [(0, 3, 71)]),
 ], g=[0.6, 0.5], kontra=False)
 
-# sc. 6 — melanholija: kontra tiho kao sat, melodija dole
+# sc. 6 — melanholija: kontra tiho kao sat, melodija u dubini
 taktovi_u(scena(6), scena(7), 6, 3, [
-    ("Em", [(0, 1, 64), (1, 1, 67), (2, 1, 71)]),
-    ("Am", [(0, 2, 72), (2, 1, 71)]),
-    ("D7", [(0, 1, 69), (1, 1, 66), (2, 1, 69)]),
-    ("G", [(0, 3, 71)]),
-    ("Am", [(0, 1, 72), (1, 1, 71), (2, 1, 69)]),
-    ("B7", [(0, 3, 71)]),
+    ("Bm", [(0, 1, 62), (1, 1, 66), (2, 1, 69)]),
+    ("G", [(0, 2, 71), (2, 1, 67)]),
+    ("Em", [(0, 1, 67), (1, 1, 71), (2, 1, 74)]),
+    ("F#7", [(0, 3, 73)]),
+    ("G", [(0, 1, 71), (1, 1, 69), (2, 1, 67)]),
+    ("F#7", [(0, 3, 66)]),
 ], g=[0.52, 0.45], g_kontra=0.5)
 
-# sc. 7–8 — opet tuga: melodija se penje („sve skuplje“), pa pada („jeftinije“)
+# sc. 7–8 — opet tuga: melodija se penje do vrha („sve skuplje“), pa pada („jeftinije“)
 taktovi_u(scena(7), scena(9), 10, 3, [
-    ("Am", [(0, 1, 69), (1, 1, 72), (2, 1, 76)]),
-    ("Em", [(0, 1, 71), (1, 1, 74), (2, 1, 79)]),
-    ("Am", [(0, 1, 72), (1, 1, 76), (2, 1, 81)]),
-    ("B7", [(0, 3, 78)]),
-    ("Em", [(0, 1, 79), (1, 1, 76), (2, 1, 71)]),
-    ("Am", [(0, 2, 72), (2, 1, 69)]),
-    ("D7", [(0, 1, 66), (1, 1, 69), (2, 1, 72)]),
-    ("G", [(0, 2, 71), (2, 1, 67)]),
-    ("Am", [(0, 1, 69), (1, 1, 72), (2, 1, 71)]),
-    ("B7", [(0, 3, 71)]),
+    ("Bm", [(0, 1, 66), (1, 1, 71), (2, 1, 74)]),
+    ("Em", [(0, 1, 67), (1, 1, 71), (2, 1, 76)]),
+    ("F#7", [(0, 1, 70), (1, 1, 73), (2, 1, 78)]),
+    ("Bm", [(0, 1, 74), (1, 1, 78), (2, 1, 83)]),
+    ("G", [(0, 1, 83), (1, 1, 79), (2, 1, 74)]),
+    ("Em", [(0, 2, 76), (2, 1, 71)]),
+    ("A7", [(0, 1, 69), (1, 1, 73), (2, 1, 76)]),
+    ("D", [(0, 2, 74), (2, 1, 69)]),
+    ("Em", [(0, 1, 67), (1, 1, 71), (2, 1, 76)]),
+    ("F#7", [(0, 3, 73)]),
 ], g=0.52, g_kontra=0.5)
 
-# sc. 9 — odluka: jedan akord brača koji se gasi do kraja „krave“, pa tišina do preokreta
+# sc. 9 — odluka: jedan akord brača (h-mol) koji se gasi do kraja „krave“, pa tišina do preokreta
 s9, t_krave = scena(9), SC[9]["glasDo"]
-for m in (64, 67, 71):
+for m in (62, 66, 71):
     tremolo(m, s9, t_krave - s9 - 0.1, 0.07, 0.25, brac_ton, brzina=12)
-dodaj(berde_ton(40, 2.4), s9, 0.3, 0.0)
+dodaj(berde_ton(47, 2.4), s9, 0.3, 0.0)
 _kraj9 = int((t_krave + 0.3) * SR)
 _fade = int(1.2 * SR)
 for kanal in (L, R):
@@ -298,16 +309,16 @@ tk = (t_kraj - t_kolu) / N_KOLO
 print(f"uvod: {N_UVOD} taktova po {tu:.3f} s; kolo: {N_KOLO} taktova po {tk:.3f} s = {120 / tk:.1f} BPM")
 
 
-def arpeđo(akord, t0, takt, g, dno=64):
+def arpeđo(akord, t0, takt, g, dno=62):
     gl = [x for x in range(dno, dno + 14) if x % 12 in AK[akord][0]][:3]
-    for k, m in enumerate([gl[0], gl[1], gl[2], gl[1]]):
+    for k, m in enumerate([gl[0], gl[2], gl[1], gl[2]]):
         ton(m, t0 + k * takt / 4, takt / 4, g, 0.3, brac_ton)
 
 
-UVOD_AK = (["G", "Em", "C", "D", "G", "Em", "Am", "D7"] * 3)[:N_UVOD]
+UVOD_AK = (["D", "Bm", "G", "A", "D", "Bm", "Em", "A7"] * 3)[:N_UVOD]
 for i, ak in enumerate(UVOD_AK):
     t = s10 + i * tu
-    arpeđo(ak, t, tu, 0.13 + 0.12 * i / N_UVOD, dno=62 if i < N_UVOD - 4 else 67)
+    arpeđo(ak, t, tu, 0.13 + 0.12 * i / N_UVOD, dno=62 if i < N_UVOD - 4 else 66)
     if i >= N_UVOD - 8:
         ton(bas_ton(ak), t, tu * 0.45, 0.36, 0.0, berde_ton)
         ton(bas_ton(ak, True), t + tu / 2, tu * 0.45, 0.3, 0.0, berde_ton)
@@ -315,39 +326,39 @@ for i, ak in enumerate(UVOD_AK):
         for k in (0.5, 1.5):
             strum(ak, t + k * tu / 2, 0.1)
 deo(s10 + (N_UVOD - 4) * tu, tu, 2, [
-    ("G", [(0, 1, 74), (1, 1, 79)]),
-    ("Em", [(0, 1, 78), (1, 1, 76)]),
-    ("Am", [(0, 1, 72), (1, 1, 69)]),
-    ("D7", [(0, 2, 74, True)]),
+    ("D", [(0, .5, 74), (.5, .5, 76), (1, 1, 78)]),
+    ("G", [(0, .5, 79), (.5, .5, 81), (1, 1, 83)]),
+    ("Em", [(0, 1, 79), (1, 1, 76)]),
+    ("A7", [(0, 2, 76, True)]),
 ], g=[0.5, 0.68], stil="kolo", kontra=False, berde=False)
 
-# sc. 11–17 — kolo
+# sc. 11–17 — kolo u D-duru
 TEMA_K = [
-    ("G", [(0, .5, 79), (.5, .5, 78), (1, .5, 79), (1.5, .5, 81)]),
-    ("G", [(0, .5, 83), (.5, .5, 81), (1, .5, 79), (1.5, .5, 74)]),
-    ("C", [(0, .5, 76), (.5, .5, 78), (1, .5, 79), (1.5, .5, 76)]),
-    ("G", [(0, 1, 74), (1, 1, 71)]),
-    ("C", [(0, .5, 72), (.5, .5, 76), (1, .5, 74), (1.5, .5, 72)]),
-    ("G", [(0, .5, 71), (.5, .5, 74), (1, .5, 79), (1.5, .5, 71)]),
-    ("D7", [(0, .5, 69), (.5, .5, 72), (1, .5, 71), (1.5, .5, 69)]),
-    ("G", [(0, 1, 67), (1.5, .5, 74)]),
+    ("D", [(0, .5, 74), (.5, .25, 76), (.75, .25, 78), (1, .5, 81), (1.5, .5, 78)]),
+    ("A7", [(0, .5, 79), (.5, .5, 76), (1, .5, 73), (1.5, .5, 69)]),
+    ("A7", [(0, .5, 73), (.5, .25, 76), (.75, .25, 79), (1, .5, 78), (1.5, .5, 76)]),
+    ("D", [(0, .5, 74), (.5, .5, 78), (1, 1, 74)]),
+    ("G", [(0, .5, 79), (.5, .5, 83), (1, .5, 81), (1.5, .5, 79)]),
+    ("D", [(0, .5, 78), (.5, .5, 74), (1, .5, 81), (1.5, .5, 78)]),
+    ("A7", [(0, .5, 76), (.5, .5, 79), (1, .5, 78), (1.5, .5, 76)]),
+    ("D", [(0, 1, 74), (1.5, .5, 69)]),
 ]
 TEMA_B = [
-    ("C", [(0, .5, 76), (.5, .5, 79), (1, 1, 84)]),
-    ("G", [(0, .5, 83), (.5, .5, 81), (1, 1, 79)]),
-    ("Am", [(0, .5, 81), (.5, .5, 79), (1, .5, 77), (1.5, .5, 76)]),
-    ("D7", [(0, 1, 74), (1, 1, 78)]),
-    ("C", [(0, .5, 76), (.5, .5, 79), (1, 1, 84)]),
-    ("G", [(0, .5, 83), (.5, .5, 81), (1, .5, 79), (1.5, .5, 76)]),
-    ("D7", [(0, .5, 74), (.5, .5, 78), (1, .5, 81), (1.5, .5, 78)]),
-    ("G", [(0, 1, 79), (1, .5, 74), (1.5, .5, 71)]),
+    ("G", [(0, 1, 79), (1, .5, 81), (1.5, .5, 83)]),
+    ("D", [(0, 1, 81), (1, 1, 78)]),
+    ("Em", [(0, .5, 79), (.5, .5, 78), (1, .5, 76), (1.5, .5, 79)]),
+    ("A7", [(0, 2, 76, True)]),
+    ("G", [(0, 1, 79), (1, .5, 81), (1.5, .5, 83)]),
+    ("D", [(0, .5, 86), (.5, .5, 83), (1, .5, 81), (1.5, .5, 78)]),
+    ("A7", [(0, .5, 76), (.5, .5, 79), (1, .5, 78), (1.5, .5, 76)]),
+    ("D", [(0, 1, 74), (1, .5, 78), (1.5, .5, 81)]),
 ]
-OKRET = ("D7", [(0, .5, 78), (.5, .5, 76), (1, .5, 74), (1.5, .5, 72)])
+OKRET = ("A7", [(0, .5, 81), (.5, .5, 79), (1, .5, 76), (1.5, .5, 73)])
 SIROKO = [
-    ("G", [(0, 1, 71), (1, 1, 74)]),
-    ("G", [(0, 2, 79, True)]),
-    ("C", [(0, 1, 76), (1, 1, 79)]),
-    ("D7", [(0, 2, 81, True)]),
+    ("D", [(0, 1, 69), (1, 1, 74)]),
+    ("D", [(0, 2, 78, True)]),
+    ("G", [(0, 1, 79), (1, 1, 83)]),
+    ("A7", [(0, 2, 81, True)]),
 ]
 i_siroko = round((rec_t(16, "štala") - 0.25 - t_kolu) / tk)
 i_sava = round((scena(15) - t_kolu) / tk)
@@ -357,7 +368,7 @@ while len(pre) < i_siroko - 1:
     tema = TEMA_B if i_sava <= len(pre) < i_sava + 8 else TEMA_K
     pre += tema
 pre = pre[:i_siroko - 1] + [OKRET]
-posle = (TEMA_K * 3)[:N_KOLO - i_siroko - 4 - 1] + [("D7", [(0, .5, 74), (.5, .5, 78), (1, .5, 81), (1.5, .5, 78)])]
+posle = (TEMA_K * 3)[:N_KOLO - i_siroko - 4 - 1] + [("A7", [(0, .5, 76), (.5, .5, 79), (1, .5, 81), (1.5, .5, 85)])]
 for i, takt in enumerate(pre):
     g = 0.72 if i < 8 else 0.8
     deo(t_kolu + i * tk, tk, 2, [takt], g=g, stil="kolo", g_kontra=0.8)
@@ -365,14 +376,14 @@ deo(t_kolu + i_siroko * tk, tk, 2, SIROKO, g=0.9, stil="kolo", g_kontra=0.9)
 for i, takt in enumerate(posle):
     deo(t_kolu + (i_siroko + 4 + i) * tk, tk, 2, [takt], g=0.88, stil="kolo", g_kontra=0.85)
 
-# završni akord odmah posle „ekolo.rs“: udarac orkestra + tremolo koji zvoni do kraja
+# završni akord (D-dur) odmah posle „ekolo.rs“: udarac orkestra + tremolo koji zvoni do kraja
 tz = t_kolu + N_KOLO * tk
-strum("G", tz, 0.26, dno=55, vrh=74)
-strum("G", tz, 0.19, pan=0.35, dno=50, vrh=67)
-tremolo(79, tz, T - tz - 0.6, 0.26, -0.12, prim_ton, kresc=-0.4)
-tremolo(83, tz + 0.01, T - tz - 0.6, 0.14, 0.2, prim_ton)
-tremolo(74, tz + 0.02, T - tz - 0.6, 0.16, 0.32, brac_ton)
-dodaj(berde_ton(43, 2.4), tz, 0.55, 0.0)
+strum("D", tz, 0.26, dno=57, vrh=74)
+strum("D", tz, 0.19, pan=0.35, dno=50, vrh=66)
+tremolo(86, tz, T - tz - 0.6, 0.24, -0.12, prim_ton, kresc=-0.4)
+tremolo(81, tz + 0.01, T - tz - 0.6, 0.15, 0.2, prim_ton)
+tremolo(78, tz + 0.02, T - tz - 0.6, 0.16, 0.32, brac_ton)
+dodaj(berde_ton(38, 2.4), tz, 0.55, 0.0)
 
 # ── soba (mala sala), boja ──────────────────────────────────────────────
 n_ir = int(1.4 * SR)

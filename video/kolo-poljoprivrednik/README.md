@@ -8,7 +8,7 @@ Tekst i scenario: [`scenario.md`](scenario.md). Naracija: vlasnik (My_recording_
 |---|---|
 | 1 Tekst | ✅ dogovoren sa vlasnikom |
 | 2 Scenario | ✅ `scenario.md` |
-| 3 Muzika | ✅ prva verzija, sintetisana u kodu (`scripts/muzika.py`), čeka da je vlasnik čuje |
+| 3 Muzika | ✅ druga verzija (nove melodije), sintetisana u kodu (`scripts/muzika.py`), čeka da je vlasnik čuje |
 | 4 Slika | nije počela |
 | 5 Glas | ✅ očišćen, ponovljena čitanja izbačena, provera reč po reč sa dva modela |
 | 6–9 | nisu počeli |
@@ -22,28 +22,32 @@ Probe za slušanje (nisu u repou): `out/proba-muzika.m4a` (samo muzika) i `out/p
 od pravila da muziku pravi ElevenLabs (`video/README.md`). Orkestar i sinteza žice su preuzeti iz
 `../kolo-domacice/scripts/muzika.py`: prim sa tremolom (udvojen), brač u tercama, bugarija u kontri, berde.
 
+🔴 **Melodije su sopstvene, ne iz videa 6** (vlasnik, 05.10.2026, posle prve verzije u kojoj su teme bile
+preuzete nota za notu: „ne dopada mi se što je snimak isti, želim drugačije melodije ali sličnu varijantu kao
+video 6“). Ostaje isti luk i isti orkestar; tonalitet je h-mol za tugu i D-dur za sreću i kolo (video 6: e-mol i G-dur).
+
 Obrazloženje rasporeda: muzika ide sa pričom, scena po scena, a dužine taktova se računaju iz plana
 (`src/plan.json`), pa svaki deo počinje sa svojom scenom.
 
 | Scene | Luk | Muzika |
 |---|---|---|
-| 1 | tuga | e-mol, valcer, solo prim, rubato |
-| 2–4 | sećanje na srećne godine | G-dur valcer, ceo orkestar, tema A dvaput (druga put sa novim krajem) |
-| 5 | prolazak | e-mol, proređeno, bez kontre; melodija silazi |
-| 6 | melanholija | e-mol, kontra tiho kao sat, melodija u dubini |
-| 7–8 | opet tuga | a-mol/e-mol: melodija se penje na „svake godine sve skuplje“, pa pada na „jeftinije“ |
-| 9 | odluka | jedan akord brača koji se gasi do kraja reči „krave“, pa tišina |
-| 10 | preokret (Đurika) | G-dur, 2/4: brač kao muzička kutija, ulazi berde, pa prim sa uvodnom frazom |
+| 1 | tuga | h-mol, valcer, solo prim, rubato; melodija kreće visoko i silazi |
+| 2–4 | sećanje na srećne godine | D-dur valcer, ceo orkestar, tema A sa skokom na sekstu, dvaput (drugi put sa višim krajem) |
+| 5 | prolazak | h-mol, proređeno, bez kontre; niz koji silazi |
+| 6 | melanholija | h-mol, kontra tiho kao sat, melodija u dubini |
+| 7–8 | opet tuga | h-mol: melodija se penje na „svake godine sve skuplje“, pa pada na „jeftinije“ |
+| 9 | odluka | jedan h-mol akord brača koji se gasi do kraja reči „krave“, pa tišina |
+| 10 | preokret (Đurika) | D-dur, 2/4: brač kao muzička kutija, ulazi berde, pa prim sa uvodnom frazom |
 | 11–15 | rešenje | puno kolo (100,6 BPM) od reči „KOLU“: tema K; tema B kad Sava postavlja oglas za jaja |
 | 16 | „I štala ponovo nije prazna“ | tema A široko, tremolo — vrhunac |
-| 17 | poziv | finale; završni akord odmah posle „ekolo.rs“ |
+| 17 | poziv | finale; završni D-dur akord odmah posle „ekolo.rs“ |
 
 Pravila o muzici iz `video/README.md` koja se poštuju: srpski etos (vojvođanska tamburica), mol samo u
 tamburaškom valceru, bez gudača, klavira i elektronike, muzika stalne jačine u miksu (bez sidechain-a).
 Tuga je u sporijem valceru i proređenom aranžmanu; ako vlasnik oceni da je pretužna, prvi potez je brži
 valcer u sc. 1 i 5–8.
 
-Jačina muzike po scenama (RMS): tužni delovi oko −23 dB, srećni oko −17 dB, kolo −16 dB; luk se čuje i u jačini.
+Jačina muzike po scenama (RMS): tužni delovi oko −22 dB, srećni oko −18 dB, kolo −15 dB; luk se čuje i u jačini.
 
 ## Glas
 
