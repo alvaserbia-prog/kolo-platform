@@ -1,15 +1,15 @@
 {
  "fps": 30,
  "prednost": 0.0,
- "trajanje": 87.0,
- "frejmova": 2610,
+ "trajanje": 88.0,
+ "frejmova": 2640,
  "scene": [
   {
    "id": 1,
    "klipOd": 0.0,
    "klipDo": 9.76,
-   "glasOd": 0.342,
-   "glasDo": 9.642,
+   "glasOd": 0.377,
+   "glasDo": 9.677,
    "od": 0.0,
    "reci": [
     {
@@ -89,18 +89,18 @@
     }
    ],
    "tekst": "Pre pet hiljada godina, u Mesopotamiji, današnjem Iraku, ljudi su zapisivali razmenu na glinenim pločicama.",
-   "do": 10.262,
+   "do": 10.297,
    "odF": 0,
-   "doF": 308,
-   "glasOdF": 10
+   "doF": 309,
+   "glasOdF": 11
   },
   {
    "id": 2,
    "klipOd": 9.76,
    "klipDo": 16.812,
-   "glasOd": 10.102,
-   "glasDo": 16.632,
-   "od": 10.262,
+   "glasOd": 10.137,
+   "glasDo": 16.667,
+   "od": 10.297,
    "reci": [
     {
      "w": "Zapisivali",
@@ -164,18 +164,18 @@
     }
    ],
    "tekst": "Zapisivali su ko je koliko ovaca, vune i ulja doneo u skladište.",
-   "do": 17.377,
-   "odF": 308,
-   "doF": 521,
-   "glasOdF": 303
+   "do": 17.412,
+   "odF": 309,
+   "doF": 522,
+   "glasOdF": 304
   },
   {
    "id": 3,
    "klipOd": 16.812,
    "klipDo": 25.678,
-   "glasOd": 17.154,
-   "glasDo": 25.627,
-   "od": 17.377,
+   "glasOd": 17.189,
+   "glasDo": 25.662,
+   "od": 17.412,
    "reci": [
     {
      "w": "Ljudi",
@@ -269,18 +269,18 @@
     }
    ],
    "tekst": "Ljudi nisu izmislili pismo da bi pisali pesme ili zakone, nego da bi zapisali ko je šta dao.",
-   "do": 26.112,
-   "odF": 521,
-   "doF": 783,
-   "glasOdF": 515
+   "do": 26.147,
+   "odF": 522,
+   "doF": 784,
+   "glasOdF": 516
   },
   {
    "id": 4,
    "klipOd": 25.678,
    "klipDo": 31.37,
-   "glasOd": 26.02,
-   "glasDo": 31.202,
-   "od": 26.112,
+   "glasOd": 26.055,
+   "glasDo": 31.237,
+   "od": 26.147,
    "reci": [
     {
      "w": "Mnoge",
@@ -339,18 +339,18 @@
     }
    ],
    "tekst": "Mnoge od tih pločica postoje i danas, posle pet hiljada godina.",
-   "do": 31.922,
-   "odF": 783,
-   "doF": 958,
-   "glasOdF": 781
+   "do": 31.957,
+   "odF": 784,
+   "doF": 959,
+   "glasOdF": 782
   },
   {
    "id": 5,
    "klipOd": 31.37,
    "klipDo": 39.62,
-   "glasOd": 31.712,
-   "glasDo": 39.532,
-   "od": 31.922,
+   "glasOd": 31.747,
+   "glasDo": 39.567,
+   "od": 31.957,
    "reci": [
     {
      "w": "Narod",
@@ -419,18 +419,18 @@
     }
    ],
    "tekst": "Narod Inka u Južnoj Americi nije imao pismo. Zapisivali su čvorovima na užetu.",
-   "do": 40.092,
-   "odF": 958,
-   "doF": 1203,
-   "glasOdF": 951
+   "do": 40.127,
+   "odF": 959,
+   "doF": 1204,
+   "glasOdF": 952
   },
   {
    "id": 6,
    "klipOd": 39.62,
    "klipDo": 50.32,
-   "glasOd": 39.962,
-   "glasDo": 50.282,
-   "od": 40.092,
+   "glasOd": 39.997,
+   "glasDo": 50.317,
+   "od": 40.127,
    "reci": [
     {
      "w": "Boja",
@@ -539,18 +539,18 @@
     }
    ],
    "tekst": "Boja užeta označavala je vrstu robe, a čvorovi količinu. Tako se znalo šta je u skladištima i ko je šta doneo.",
-   "do": 50.742,
-   "odF": 1203,
-   "doF": 1522,
-   "glasOdF": 1199
+   "do": 50.777,
+   "odF": 1204,
+   "doF": 1523,
+   "glasOdF": 1200
   },
   {
    "id": 7,
    "klipOd": 50.32,
    "klipDo": 60.445,
-   "glasOd": 50.662,
-   "glasDo": 60.352,
-   "od": 50.742,
+   "glasOd": 50.697,
+   "glasDo": 60.387,
+   "od": 50.777,
    "reci": [
     {
      "w": "Carstvo",
@@ -639,18 +639,18 @@
     }
    ],
    "tekst": "Carstvo Inka imalo je milione stanovnika i gotovo da nije koristilo novac. Sve se vodilo kroz zapise.",
-   "do": 60.922,
-   "odF": 1522,
-   "doF": 1828,
-   "glasOdF": 1520
+   "do": 60.957,
+   "odF": 1523,
+   "doF": 1829,
+   "glasOdF": 1521
   },
   {
    "id": 8,
    "klipOd": 60.445,
    "klipDo": 67.457,
-   "glasOd": 60.787,
-   "glasDo": 67.412,
-   "od": 60.922,
+   "glasOd": 60.822,
+   "glasDo": 67.447,
+   "od": 60.957,
    "reci": [
     {
      "w": "Zapis",
@@ -724,18 +724,18 @@
     }
    ],
    "tekst": "Zapis se ne koristi kao sredstvo za razmenu. On pokazuje ko je šta dao.",
-   "do": 67.887,
-   "odF": 1828,
-   "doF": 2037,
-   "glasOdF": 1824
+   "do": 67.922,
+   "odF": 1829,
+   "doF": 2038,
+   "glasOdF": 1825
   },
   {
    "id": 9,
    "klipOd": 67.457,
    "klipDo": 70.362,
-   "glasOd": 67.799,
-   "glasDo": 70.497,
-   "od": 67.887,
+   "glasOd": 67.834,
+   "glasDo": 70.532,
+   "od": 67.922,
    "reci": [
     {
      "w": "U",
@@ -774,18 +774,18 @@
     }
    ],
    "tekst": "U KOLU se taj zapis zove POEN.",
-   "do": 70.612,
-   "odF": 2037,
-   "doF": 2118,
-   "glasOdF": 2034
+   "do": 70.647,
+   "odF": 2038,
+   "doF": 2119,
+   "glasOdF": 2035
   },
   {
    "id": 10,
    "klipOd": 70.362,
    "klipDo": 76.058,
-   "glasOd": 70.704,
-   "glasDo": 76.182,
-   "od": 70.612,
+   "glasOd": 70.739,
+   "glasDo": 76.217,
+   "od": 70.647,
    "reci": [
     {
      "w": "Kad",
@@ -844,18 +844,18 @@
     }
    ],
    "tekst": "Kad nekome daš rad, dobro ili znanje, on ti prepiše POEN.",
-   "do": 76.317,
-   "odF": 2118,
-   "doF": 2290,
-   "glasOdF": 2121
+   "do": 76.352,
+   "odF": 2119,
+   "doF": 2291,
+   "glasOdF": 2122
   },
   {
    "id": 11,
    "klipOd": 76.058,
    "klipDo": 78.623,
-   "glasOd": 76.4,
-   "glasDo": 78.787,
-   "od": 76.317,
+   "glasOd": 76.435,
+   "glasDo": 78.822,
+   "od": 76.352,
    "reci": [
     {
      "w": "Budi",
@@ -889,18 +889,18 @@
     }
    ],
    "tekst": "Budi i ti deo tog zapisa.",
-   "do": 78.842,
-   "odF": 2290,
-   "doF": 2365,
-   "glasOdF": 2292
+   "do": 78.877,
+   "odF": 2291,
+   "doF": 2366,
+   "glasOdF": 2293
   },
   {
    "id": 12,
    "klipOd": 78.623,
    "klipDo": 83.087,
-   "glasOd": 78.965,
-   "glasDo": 82.952,
-   "od": 78.842,
+   "glasOd": 79.0,
+   "glasDo": 82.987,
+   "od": 78.877,
    "reci": [
     {
      "w": "Postavi",
@@ -934,10 +934,10 @@
     }
    ],
    "tekst": "Postavi svoj prvi oglas na ekolo.rs.",
-   "do": 87.0,
-   "odF": 2365,
-   "doF": 2610,
-   "glasOdF": 2369
+   "do": 88.0,
+   "odF": 2366,
+   "doF": 2640,
+   "glasOdF": 2370
   }
  ]
 }

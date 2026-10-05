@@ -8,7 +8,7 @@ od početka do kraja) -> public/miks.wav.
 """
 import json, subprocess
 
-MUZIKA_DB = -16  # numera -15,3 LUFS, glas -16,9: muzika ~14 LU ispod glasa (u punom delu ~11); provereno prepoznavanjem govora iz miksa
+MUZIKA_DB = -18  # numera -15,6 LUFS, glas -16,9: muzika ~17 LU ispod glasa, u pozadini (vlasnik 05.10.2026); provereno prepoznavanjem govora iz miksa
 plan = json.load(open("src/plan.json"))
 T = plan["trajanje"]
 ulazi, filt = [], []

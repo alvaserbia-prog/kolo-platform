@@ -1,4 +1,4 @@
-// Scena 9 — „U KOLU se taj zapis zove POEN.“ (pun ulaz muzike pada na „U KOLU“)
+// Scena 9 — „U KOLU se taj zapis zove POEN.“ (ponovni ulaz muzike pada na „KOLU“)
 // Ista sveska. Na „KOLU“ korice pozelene, zaglavlje postane „ZAPIS U KOLU“, gore uskoči znak KOLO, a
 // pločica i kipu odu u stranu, a iza sveske zasijaju zraci (pun ulaz). Na „POEN“ uz svaki red udari zeleni žig POEN.
 import React from "react";
@@ -19,7 +19,7 @@ export const Scena9: React.FC = () => {
   const kolo = napredak(f, kK - 4, 12);
   const odlaze = napredak(f, kK, 18);
   const znak = usePop(kK - 2, 160, 11);
-  const zraci = napredak(f, kK - 9, 10); // pun ulaz muzike pada ~0,1 s pre „U KOLU“
+  const zraci = napredak(f, kK + 7, 10); // ponovni ulaz muzike pada na „KOLU“ (~0,3 s posle početka reči)
   const zig = (i: number) => napredak(f, kP - 1 + i * 3, 6);
   return (
     <Kadar>
