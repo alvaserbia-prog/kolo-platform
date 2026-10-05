@@ -2,6 +2,8 @@
 
 Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, ~79 s, H.264 + AAC, −14 LUFS**.
 Gotov fajl: [`out/kolo-04.mp4`](out/kolo-04.mp4). Scenario: [`scenario.md`](scenario.md).
+Naslovna: [`out/naslovna.jpg`](out/naslovna.jpg), kompozicija `Naslovna` (`src/Naslovna.tsx`), pravi se sa
+`npx remotion still src/index.ts Naslovna out/naslovna.jpg --image-format=jpeg`. Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 19.
 
 Isti sistem kao prvi video (`video/kolo-uvod` na grani `claude/kolo-animated-video-7y06r5`):
 papirni kolaž, linije koje „ključaju“, elementi uskaču sa odskokom, titlovi na iscepanoj traci,
