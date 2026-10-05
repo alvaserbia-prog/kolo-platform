@@ -2,3 +2,5 @@
 audio/muzika.wav
 # probe za slušanje, šalju se vlasniku
 out/proba-*
+out/kadrovi/
+node_modules/

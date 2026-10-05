@@ -30,7 +30,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | ✅ |
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | ✅ |
 | 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
-| 18 | Poljoprivrednici: Sava i poslednje krave | K | `kolo-poljoprivrednik/` | glas očišćen, muzika (prva verzija) |
+| 18 | Poljoprivrednici: Sava i poslednje krave | K | `kolo-poljoprivrednik/` | ✅ (muzika: Suno, čeka potvrdu plaćenog plana) |
 | 19 | Šta piše pored tvog imena | K |  |  |
 | 20 | Čije je KOLO? Ničije. | K |  |  |
 | 21 | Šta je Fondacija | K |  |  |

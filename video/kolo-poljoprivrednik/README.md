@@ -2,20 +2,92 @@
 
 Tekst i scenario: [`scenario.md`](scenario.md). Naracija: vlasnik (My_recording_75, 04.10.2026).
 
-## Stanje (04.10.2026)
+Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 200,1 s, −14 LUFS**.
+Gotov fajl: [`out/kolo-poljoprivrednik.mp4`](out/kolo-poljoprivrednik.mp4), naslovna: [`out/naslovna.jpg`](out/naslovna.jpg).
+Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 19.
+
+## Stanje (05.10.2026)
 
 | Korak | Stanje |
 |---|---|
 | 1 Tekst | ✅ dogovoren sa vlasnikom |
 | 2 Scenario | ✅ `scenario.md` |
-| 3 Muzika | ✅ druga verzija (nove melodije), sintetisana u kodu (`scripts/muzika.py`), čeka da je vlasnik čuje |
-| 4 Slika | nije počela |
+| 3 Muzika | ✅ **Suno remiks vlasnika** (`audio/raw/muzika-remix-2.mp3`), uklopljen po luku (`scripts/muzika_suno.py`); 🔴 pre objave vlasnik potvrđuje da je numera napravljena na plaćenom Suno planu |
+| 4 Slika | ✅ naiva, 17 scena; probni kadrovi svake scene pregledani |
 | 5 Glas | ✅ očišćen, ponovljena čitanja izbačena, provera reč po reč sa dva modela |
-| 6–9 | nisu počeli |
+| 6 Titlovi | ✅ 321 reč, poređeno sa glasom (Omnilingual): nijedna reč ne fali ni viška |
+| 7 Natpisi | ✅ samo u svetu priče (spisak ispod) |
+| 8 Miks | ✅ −14 LUFS, muzika stalne jačine |
+| 9 Završna kontrola | vidi „Završna kontrola“ ispod |
 
-Probe za slušanje (nisu u repou): `out/proba-muzika.m4a` (samo muzika) i `out/proba-muzika-i-glas.m4a` (probni miks).
+## Muzika: Suno remiks vlasnika (konačna)
 
-## Muzika: tamburaši sintetisani u kodu, po luku priče
+Vlasnik je posle dve verzije sintetisane u kodu (opis ispod, ostaje kao zapis) poslao dva Suno remiksa i izabrao
+drugi („Uklopi ga“, 05.10.2026). Numera ima tri dela koja leže na tri dela priče: početak u h-molu pod
+„poslednje dve krave“, D-dur pod sećanjem na salaš, h-mol pod prolaskom i tugom, pa D-dur od Đurike do kraja.
+Uklapanje (`scripts/muzika_suno.py`, rezovi na udarcu iz praćenja ritma, pretapanje 60 ms):
+
+| Video | Numera | Šta je urađeno |
+|---|---|---|
+| 0–23,9 s | 0–23,9 s | početak numere (h-mol uvod, pa D-dur) |
+| 23,9–100,7 s | od takta 3 do kraja h-mol dela | ponovljeno 6 taktova D-dura (sećanje traje duže), pa ceo h-mol deo |
+| 100,7–102,0 s | — | tišina posle „poslednje krave“ (rep h-mola se gasi 0,8 s) |
+| 102,0–197 s | D-dur od takta 35 | 12 taktova dvaput, zatišje numere (118–123 s) preskočeno, 7 taktova dvaput, pa kraj numere |
+| 196,9 s | poslednji udarac | 0,36 s posle kraja „ekolo.rs“ (196,56 s), nikad preko reči |
+
+Provera: ritam na rezovima ne preskače (praćenje udaraca na gotovom fajlu; nepravilni udarci postoje samo u
+h-mol delu, gde svirači u numeri usporavaju), skok jačine na rezovima najviše 2 dB. U miksu muzika −14 dB, stalne
+jačine (kao `../kolo-trampa/`).
+
+## Priča u slici
+
+Stil: **naiva po uzoru na Kovačicu** (alat iz videa 8, `../kolo-poverenje/src/v2/`, dopunjen kapama, životinjama,
+salašem i predmetima). Ceo kadar je približen 1,22 puta (`Kadar` u `src/naiva.tsx`), da likovi ne budu sitni;
+scena 17 je bez približavanja. **Boja nosi emociju** (`BOJA` u `src/Video.tsx`): sećanje puno i toplo, prolazak
+i tuga isprani do sive, od Đurike se boja vraća, a scena 16 je najtoplija.
+
+| Scena | Slika |
+|---|---|
+| 1 | Jesenje jutro u magli, kamion odvozi dve krave, Sava na kapiji sa praznim ularom; na „Štala“ unutrašnjost prazne štale sa zrakom svetla |
+| 2 | Isti salaš leti, pun boja; na „krave“, „svinje“, „ovce“ životinje uskaču u dvorište |
+| 3 | Mlad Sava gura kolica sa kantama mleka; Božić u snegu oko kotla; na svako ime iz nabrajanja jedan lik (otac, žena, deca, komšije) |
+| 4 | Somborska pijaca pred Županijom (naslikanom kao kod naivaca), tezga sa sirom i kajmakom; na „baš“ žena pokaže njegov sir |
+| 5 | Otac na klupi sa štapom; deca sa koferima, autobus odlazi; zapušteni salaši i ostarele komšije; ovce i svinje izlaze kroz kapiju, ostaju dve krave |
+| 6 | Sava sam radi, porodica se na „svi“ pojavi providna i nestane; veče, Sava na klupi, u štali na „puna“ providne životinje |
+| 7 | Kuhinja: vreća hrane, račun, kanister uskaču i rastu uz crvene strelice; kanta mleka se smanjuje |
+| 8 | Radnja: vaga, jedan litar iz radnje naspram tri Savine kante (bez cene i brojeva); otkupljivač sleže ramenima kraj cisterne |
+| 9 | Noć u štali, Sava između dve krave, fenjer |
+| 10 | Stočna pijaca; Đurika ulazi sa korpom sira, vedar; na „zadržao“ medaljon sa njegovim salašem kod kanala i natpis „Bezdan“ |
+| 11 | Đurikina kuhinja, kotao i kalupi sira; telefon sa oglasom „Domaći sir i mleko · Bezdan“, na „KOLU“ „Objavljeno“; ljudi stižu na kapiju |
+| 12 | Kapija; list „zapis u KOLU“ se puni redovima „… → Đurika · POEN“ |
+| 13 | Momci oko sena, veterinar kod krave, električar kod pumpe, auto ka tabli „Sombor“; uz svaki kadar red u zapisu |
+| 14 | Fioka kredenca sa dinarima, koji su ostali u kući |
+| 15 | Prazna štala, pa kokoške uskaču u dvorište, Sava sa korpom jaja; oglas „Domaća jaja sa salaša“; ljudi dolaze, redovi „… → Sava · POEN“ |
+| 16 | Proleće, dud cveta; Đurika dovodi tele, pa zapis „Sava → Đurika · POEN“; isti kadar štale kao u sceni 1, sada sa teletom |
+| 17 | Medaljoni: korpa jaja, kanta mleka i sir, gajba povrća; karta okoline Sombora sa salašima koji se povezuju; završna kartica sa znakom KOLO i **ekolo.rs**, oko nje Sava, Đurika i tele |
+
+## Natpisi (korak 7)
+
+Posebnih natpisa preko slike nema; tekst na ekranu živi u svetu priče (pravilo o natpisima, `video/README.md`):
+
+| Natpis | Gde | Zašto |
+|---|---|---|
+| oglas „Domaći sir i mleko · Bezdan“, „Domaća jaja sa salaša · kod Sombora“, „Objavi oglas / Objavljeno“ | telefon, sc. 11 i 15 | ono što lik piše; pokazuje kako izgleda oglas |
+| „zapis u KOLU“ sa redovima „od → ka · POEN“, bez broja | sc. 12, 13, 15, 16 | zapis u knjizi evidencije; POEN samo kao reč |
+| „Bezdan“ | traka ispod medaljona, sc. 10 | ime mesta |
+| „Sombor“ | putokaz, sc. 13 | ime mesta, deo pejzaža |
+| imena sela na karti | sc. 17 | karta okoline |
+| „DIN“ na novčanicama | fioka, sc. 14 | dinari, ne POEN |
+| **ekolo.rs** | završna kartica | poziv |
+
+Kartuša sa naslovom u sceni 1 iz scenarija je izostavljena: ponovila bi izgovorenu rečenicu, a natpis ne sme da
+ponavlja titl (`video/README.md`).
+
+**Titl:** prati izgovoreno; jedina pravopisna ispravka je „domaće jaja“ → „domaća jaja“ (`ISPRAVKA` u
+`src/Titlovi.tsx`).
+
+## Muzika u kodu (prve dve verzije, zamenjene Suno remiksom)
+
 
 🔴 **Odluka vlasnika (04.10.2026):** za ovaj video muzika se pravi **po istom principu kao u videu 6**
 („Domaćice“): komponuje se i sintetiše u kodu i prati emotivni luk, „lagana tamburaška muzika“. To je izuzetak
@@ -69,7 +141,8 @@ piše se „Domaća jaja sa salaša“, ili vlasnik presnimi tu rečenicu.
 
 ```bash
 cd video/kolo-poljoprivrednik
-pip install nara_wpe sherpa-onnx soundfile onnxruntime scipy librosa
+npm ci
+pip install nara_wpe sherpa-onnx soundfile onnxruntime scipy librosa pillow
 DEEP_FILTER=/tmp/claude-0/deep-filter ./scripts/ciscenje.sh   # 1) audio/raw/snimak75.m4a -> audio/clean/glas.wav
 python3 scripts/tempo.py                                        # 2) rez, pauze, atempo 1,03 -> audio/final/glas.wav
 ffmpeg -i audio/final/glas.wav -ar 16000 -ac 1 /tmp/glas16.wav
@@ -77,12 +150,17 @@ python3 scripts/vremena_parakeet.py /tmp/glas16.wav audio/parakeet.json   # 3) g
 python3 scripts/poravnaj.py                                     # 4) tekst kako je izgovoren -> src/timing.json
 python3 scripts/poravnaj_ctc.py                                 #    precizna vremena
 python3 scripts/plan.py                                         # 5) src/plan.json
-python3 scripts/muzika.py                                       # 6) audio/muzika.wav
-python3 scripts/mix.py                                          # 7) public/miks.wav
+python3 scripts/muzika_suno.py                                  # 6) Suno remiks uklopljen -> audio/muzika.wav
+python3 scripts/mix.py                                          # 7) public/miks.wav (−14 LUFS)
+node scripts/kadrovi.mjs 300 900                                # probni kadrovi -> out/kadrovi/
+npm run render                                                  # ceo video -> out/kolo-poljoprivrednik.mp4 (master, van repoa)
+npx remotion still src/index.ts Naslovna out/naslovna.jpg
 ```
 
+(`scripts/muzika.py` pravi raniju muziku sintetisanu u kodu; više se ne koristi.)
 Modeli (sherpa-onnx Parakeet i Omnilingual) i `deep-filter` preuzimaju se sa GitHub izdanja i nisu u repou.
 
 ## Licence
 
-Kod i sadržaj: AGPL-3.0 / CC BY-SA 4.0, kao i ostatak repoa. Muzika: nastala u kodu ovog repoa.
+Kod i sadržaj: AGPL-3.0 / CC BY-SA 4.0, kao i ostatak repoa. Fontovi: SIL Open Font License (Fredoka, Caveat, Noto Sans).
+Muzika: Suno remiks vlasnika; pravo na upotrebu zavisi od plaćenog Suno plana (potvrđuje vlasnik pre objave).

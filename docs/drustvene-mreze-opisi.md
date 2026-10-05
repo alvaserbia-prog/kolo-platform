@@ -1141,3 +1141,74 @@ POEN nije novac. To je zapis o doprinosu zajednici i za dinare se ne menja.
 ```
 
 Prvi komentar stranice posle objave: „Sajt: https://ekolo.rs“ (odeljak 3, „Facebook i link“).
+
+## 19. Video 18 „Poljoprivrednici: Sava i poslednje krave“ (oktobar 2026)
+
+Video: `video/kolo-poljoprivrednik/out/kolo-poljoprivrednik.mp4`. Naslovna: `video/kolo-poljoprivrednik/out/naslovna.jpg`
+(„Zašto je Sava prodao poslednje krave?“). Zvuk na Instagramu preimenovati u „KOLO, salaš“. Alternativni tekst:
+„Naivna slika vojvođanskog salaša: Sava je prodao poslednje krave i štala je prazna; seća se godina kad je salaš
+bio pun stoke i ljudi; na stočnoj pijaci sreće Đuriku iz Bezdana, koji preko KOLA daje sir i mleko ljudima iz
+kraja; Sava postavlja oglas za jaja, a na proleće mu Đurika dovodi tele.“
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, zvono sa krave koje se uveče više ne čuje po selima;
+Instagram, kokoške koje nose svaki dan, i uvek više nego što kuća pojede; Facebook, moba, kad se seno i kukuruz
+skupljali uz pomoć komšija. Primeri iz videa (otkupljivač, cena mleka u radnji, veterinar, pumpa, tele) se ne
+ponavljaju. Kako se POEN dobija kaže se tačno: prepiše ti ga onaj kome si nešto dao. Reč „besplatno“ se ne piše
+(odeljak 2). Ne piše se da se razmena dogovara direktno (odeljak 1). Uporedo sa odeljcima 15 do 18: nijedna
+rečenica nije ista (provereno pretragom po ovom fajlu), a početak nije pitanje, kao u odeljku 18 nije ni bio.
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; rodno neutralno na TikTok-u i
+Instagramu („ako držiš kokoške“, ne „ako si domaćin“); „vi“ dosledno na Facebook-u; bez prenesenog značenja;
+POEN se „prepiše“, nikad „dobija“ ni „zarađuje“; uz POEN nema reči kupi, prodaj ni cena.
+
+### TikTok
+
+```
+Po mnogim selima oko Sombora uveče se više ne čuje zvono sa krave. 🐄
+
+Stoka se prodaje glava po glava, a štale ostaju prazne. Najčešće ne zato što neko više ne ume, nego zato što se rad u štali više ne isplati.
+
+A u svakom dvorištu i dalje ima nečega što drugima treba: jaja, mleko, sir, povrće iz bašte.
+
+Na KOLU to ponudiš ljudima iz svog kraja. Ko uzme, prepiše ti POEN. Tim POENOM posle tražiš ono što tebi treba, pomoć oko sena ili majstora, a dinare koje si za to davao ostaviš za nešto drugo.
+
+POEN je zapis o tome koliko si dao drugima. Novac nije i za dinare se ne menja.
+
+👉 Šta iz tvog dvorišta pretekne svake nedelje? Link je u profilu
+
+#Sombor #salaš #selo #razmena #KOLO
+```
+
+### Instagram
+
+```
+Kokoške ne znaju za praznike ni za nedelju. Jaja ima svaki dan, i skoro uvek više nego što kuća pojede. 🥚
+
+Ako držiš kokoške, ono što pretekne na KOLU može da ode ljudima iz tvog kraja koji traže domaće.
+
+Onaj ko uzme prepiše ti POEN. Kad tebi zatreba pomoć ili nešto iz tuđeg dvorišta, prepišeš ga dalje.
+
+POEN nije novac. On samo beleži koliko si dao ljudima oko sebe.
+
+Link je u bio.
+
+#Sombor #Vojvodina #salaš #domaće #KOLO
+```
+
+### Facebook
+
+```
+Nekada se seno i kukuruz nisu skupljali sami. Dođe moba: komšije, rođaci, deca, i za dan se uradi ono za šta jednoj kući treba nedelja. 🌾
+
+Danas su salaši proređeni, a ko je ostao, najčešće radi sam.
+
+KOLO vraća deo toga. Ono što vam pretekne u dvorištu ili u štali ponudite ljudima iz kraja, a oni vam za to prepišu POEN. Kad vama zatreba ruka više oko sena ili majstor, taj POEN prepišete onome ko vam pomogne.
+
+POEN nije novac. To je zapis o onome što ste dali zajednici i za dinare se ne menja.
+
+👉 Pogledajte šta ljudi iz vašeg kraja nude na ekolo.rs
+
+#Sombor #salaš #KOLO
+```
+
+Prvi komentar stranice posle objave: „Sajt: https://ekolo.rs“ (odeljak 3, „Facebook i link“).
