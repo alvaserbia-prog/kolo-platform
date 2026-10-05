@@ -1160,6 +1160,11 @@ Zvuk na Instagramu preimenovati u „KOLO, Ana, Milan, Lazar i Marija“. Altern
 četiri kuće u somborskoj ulici; Milan uzima med od Ane, Lazar popravlja Aninu veš mašinu, Marija peče
 burek za Lazara i odnosi teglu meda; četvoro se uhvati u kolo, a na kraju se pojavljuje adresa ekolo.rs.“
 
+🔴 **Opisi su za lični profil vlasnika** (odluka vlasnika, 05.10.2026), ne za stranicu Fondacije: pisani su u
+prvom licu („sa ekipom u Somboru pravim KOLO“, „koje pokrećemo“), bez izmišljenih događaja (odeljak 1).
+Adresa `ekolo.rs` stoji u tekstu na sve tri mreže, jer lični profil ne mora da ima link u opisu profila.
+Pri objavi označiti stranicu KOLO Fondacije (odeljak 5), a na Instagramu pozvati profil Fondacije kao Collab.
+
 Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, dobar majstor čiji se broj prenosi od komšije
 do komšije; Instagram, domaći med i kućni proizvodi do kojih se dolazi samo preko poznanika; Facebook,
 običaj da se komšiji tanjir ne vraća prazan. Primeri iz videa (veš mašina, burek, pet tegli) se ne
@@ -1171,22 +1176,22 @@ dogovoru ni o broju oglasa (odeljak 1).
 **Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; „veš mašina“ bez crtice kao i
 na naslovnoj; rodno neutralno na TikTok-u i Instagramu („Koga iz svoje ulice prvo zoveš“, „Ko nešto
 uzme“); „vi“ dosledno na Facebook-u; POEN se „prepiše“, nikad „dobija“; bez „vredi“ i „besplatno“.
-Facebook: **317 karaktera** (sa emodžijima, adresom i heštegovima), adresa bez `https://`.
+Facebook: **343 karaktera** (sa emodžijima, adresom i heštegovima), adresa bez `https://`.
 
 ### TikTok
 
 ```
 Dobar majstor se u Somboru ne traži u imeniku, nego kod komšije. 🔧
 
-Kad nešto stane, prvo se pita ko je kome šta popravio i da li je bio zadovoljan. Tako se godinama prenose brojevi električara, vodoinstalatera i onih koji posle posla „samo bace pogled“.
+Pita se ko je kome šta popravio i da li je bio zadovoljan, i tako se godinama prenose brojevi električara, vodoinstalatera i onih koji posle posla „samo bace pogled“. Ko nema pravog komšiju, ostaje bez majstora.
 
-Na KOLU to ne zavisi od toga koga slučajno znaš. Na Pijaci se vidi ko u tvom kraju šta ume, od zamene slavine do torte za rođendan, a svoj oglas postaviš odmah po registraciji. I ti sigurno umeš nešto što nekome u ulici treba, makar to bilo da okačiš zavese ili pričuvaš psa preko vikenda.
+Zato sa ekipom u Somboru pravim KOLO. Na Pijaci se vidi ko u tvom kraju šta ume, od zamene slavine do torte za rođendan, i to ne zavisi od toga koga slučajno znaš. Svoj oglas postaviš odmah po registraciji, a sigurno umeš nešto što nekome u ulici treba, makar da okačiš zavese ili pričuvaš psa preko vikenda.
 
 Kad nekome nešto uradiš, ta osoba ti prepiše POEN. Njega ne menjaš za dinare, nego ga prepišeš dalje kad tebi nešto zatreba. Tako ostaje zapisano ko je kome pomogao.
 
 Nalog ti potvrđuju ljudi koji te lično poznaju, bez ijednog dokumenta.
 
-👉 Koga iz svoje ulice prvo zoveš kad nešto stane? Napiši u komentar. Link je u profilu.
+👉 Koga iz svoje ulice prvo zoveš kad nešto stane? Napiši mi u komentar. Sve je na ekolo.rs
 
 #Sombor #majstor #komšiluk #razmena #KOLO
 ```
@@ -1198,19 +1203,19 @@ Domaći med se retko nađe na rafu. 🐝
 
 Do njega se obično dođe preko nekoga ko zna nekoga ko ima košnice. Tako je sa mnogo toga što se pravi kod kuće: sir, kajmak, džem od dunja, kobasice posle svinjokolja. Ima ga, ali samo za one koji znaju koga da pitaju.
 
-Na Pijaci KOLA domaćin pokaže šta ima, a ljudi iz mesta to vide. Ko nešto uzme, prepiše domaćinu POEN, zapis o tome šta je dao drugima. POEN se ne menja za dinare, jer nije novac.
+Zato sa ekipom u Somboru pravim KOLO. Na Pijaci domaćin pokaže šta ima, a ljudi iz mesta to vide. Ko nešto uzme, prepiše domaćinu POEN, zapis o tome šta je dao drugima. POEN se ne menja za dinare, jer nije novac.
 
-Link je u bio.
+Pogledaj ko u tvom mestu šta nudi na ekolo.rs
 
 #Sombor #Vojvodina #domaće #med #KOLO
 ```
 
-### Facebook (317 karaktera; u prvi komentar: https://ekolo.rs)
+### Facebook (343 karaktera; u prvi komentar: https://ekolo.rs)
 
 ```
 Kod nas se komšiji tanjir ne vraća prazan. Ko donese kolače, dobije nazad nešto iz naše kuhinje. 🥧
 
-Na KOLU je isto, samo što ostaje zapisano. Za ono što date, komšija vam prepiše POEN, a vi ga prepišete onome ko pomogne vama. POEN nije novac i ne menja se za novac.
+KOLO, koje pokrećemo u Somboru, radi isto, samo što ostaje zapisano. Za ono što date, komšija vam prepiše POEN, a vi ga prepišete onome ko pomogne vama. POEN nije novac i ne menja se za novac.
 
 👉 Prvi oglas postavite na ekolo.rs
 
