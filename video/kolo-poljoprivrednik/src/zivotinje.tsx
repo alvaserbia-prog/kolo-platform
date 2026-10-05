@@ -4,6 +4,9 @@ import React from "react";
 import { random, useCurrentFrame } from "remotion";
 import { Boja, N, elipsa, kutija } from "./naiva";
 
+/** Životinje 12% krupnije nego u prvoj verziji (vlasnik, 05.10.2026). */
+export const ZIV = 1.12;
+
 type Z = { x: number; y: number; s?: number; smer?: 1 | -1; seed?: number; opacity?: number; hod?: number };
 
 const useDah = (seed: number) => {
@@ -27,7 +30,7 @@ export const Krava: React.FC<Z & { tele?: boolean; zvono?: boolean }> = ({ x, y,
     rx: 26 + random(`kr${seed}${i}`) * 26,
   }));
   return (
-    <g transform={`translate(${x} ${y}) scale(${s * smer} ${s})`} opacity={opacity}>
+    <g transform={`translate(${x} ${y}) scale(${s * ZIV * smer} ${s * ZIV})`} opacity={opacity}>
       <ellipse cx={0} cy={4} rx={170} ry={16} fill={N.travaTamna} opacity={0.3} />
       {/* rep */}
       <path d={`M-150,-210 C-176,-170 ${-170 + d.rep},-120 ${-166 + d.rep},-80`} stroke={N.kontura} strokeWidth={9} fill="none" strokeLinecap="round" />
@@ -75,7 +78,7 @@ export const Tele: React.FC<Z> = (p) => <Krava {...p} s={(p.s ?? 1) * 0.62} tele
 export const Svinja: React.FC<Z> = ({ x, y, s = 1, smer = 1, seed = 1, opacity = 1 }) => {
   const d = useDah(seed);
   return (
-    <g transform={`translate(${x} ${y}) scale(${s * smer} ${s})`} opacity={opacity}>
+    <g transform={`translate(${x} ${y}) scale(${s * ZIV * smer} ${s * ZIV})`} opacity={opacity}>
       <ellipse cx={0} cy={4} rx={110} ry={12} fill={N.travaTamna} opacity={0.3} />
       {noge([-60, -30, 40, 70], -50, 50, "#F4A6B4", 22)}
       <path d={`M-104,-110 c-24,-6 -26,${-20 + d.rep * 0.5} -10,-24 c14,-4 10,16 -4,12`} stroke="#D87A8E" strokeWidth={5} fill="none" strokeLinecap="round" />
@@ -98,7 +101,7 @@ export const Ovca: React.FC<Z> = ({ x, y, s = 1, smer = 1, seed = 1, opacity = 1
   const d = useDah(seed);
   const vuna = Array.from({ length: 14 }, (_, i) => ({ cx: -80 + (i % 7) * 27, cy: -120 + Math.floor(i / 7) * 40 + (i % 2) * 8 }));
   return (
-    <g transform={`translate(${x} ${y}) scale(${s * smer} ${s})`} opacity={opacity}>
+    <g transform={`translate(${x} ${y}) scale(${s * ZIV * smer} ${s * ZIV})`} opacity={opacity}>
       <ellipse cx={0} cy={4} rx={100} ry={12} fill={N.travaTamna} opacity={0.3} />
       {noge([-60, -30, 40, 66], -60, 60, "#3B2E28", 16, hod)}
       <g transform={`translate(0 ${d.dah})`}>
@@ -124,7 +127,7 @@ export const Kokoska: React.FC<Z & { boja?: string; kljuca?: boolean }> = ({ x, 
   const f = useCurrentFrame();
   const k = kljuca ? Math.max(0, Math.sin((f + seed * 19) / 9)) * 26 : 0;
   return (
-    <g transform={`translate(${x} ${y}) scale(${s * smer} ${s})`} opacity={opacity}>
+    <g transform={`translate(${x} ${y}) scale(${s * ZIV * smer} ${s * ZIV})`} opacity={opacity}>
       <ellipse cx={0} cy={3} rx={40} ry={6} fill={N.travaTamna} opacity={0.3} />
       <path d="M-8,-24 L-10,0 M8,-24 L10,0" stroke={N.zutaTamna} strokeWidth={5} strokeLinecap="round" />
       <Boja d="M-46,-70 C-60,-96 -40,-110 -30,-90 C-20,-60 20,-40 40,-56 C50,-30 30,-18 0,-18 C-30,-18 -44,-40 -46,-70Z" boja={boja} />

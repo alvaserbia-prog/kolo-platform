@@ -147,12 +147,12 @@ export const Cisterna: React.FC<{ x: number; y: number; s?: number }> = ({ x, y,
   </g>
 );
 
-/** Naslov oglasa u jedan ili dva reda (širina ekrana telefona je ~17 znakova). */
+/** Naslov oglasa u jedan ili dva reda (širina ekrana telefona je ~14 znakova na 34 px). */
 const redoviNaslova = (t: string): string[] => {
-  if (t.length <= 17) return [t];
+  if (t.length <= 14) return [t];
   const reci = t.split(" ");
   let i = 1;
-  while (i < reci.length && reci.slice(0, i + 1).join(" ").length <= 17) i++;
+  while (i < reci.length && reci.slice(0, i + 1).join(" ").length <= 14) i++;
   return [reci.slice(0, i).join(" "), reci.slice(i).join(" ")];
 };
 
@@ -163,47 +163,69 @@ export const Telefon: React.FC<{ x: number; y: number; s?: number; naslov: strin
     <rect x={-150} y={-296} width={300} height={592} rx={24} fill={N.bela} />
     <rect x={-150} y={-296} width={300} height={64} rx={24} fill={N.zelena} />
     <rect x={-150} y={-260} width={300} height={28} fill={N.zelena} />
-    <text x={0} y={-252} textAnchor="middle" fontFamily={OBLO} fontWeight={700} fontSize={34} fill={N.bela}>
+    <text x={0} y={-250} textAnchor="middle" fontFamily={OBLO} fontWeight={700} fontSize={40} fill={N.bela}>
       KOLO
     </text>
     <rect x={-130} y={-212} width={260} height={210} rx={14} fill="#EAF4E4" stroke={N.kontura} strokeWidth={2} />
     <g transform="translate(0 -100)">{slika}</g>
     {redoviNaslova(naslov).map((r, i) => (
-      <text key={i} x={-126} y={36 + i * 34} fontFamily={SANS} fontWeight={800} fontSize={28} fill={N.kontura}>
+      <text key={i} x={-130} y={40 + i * 40} fontFamily={SANS} fontWeight={800} fontSize={34} fill={N.kontura}>
         {r}
       </text>
     ))}
-    <text x={-126} y={36 + redoviNaslova(naslov).length * 34 + 8} fontFamily={SANS} fontWeight={700} fontSize={24} fill="#6A6A6A">
+    <text x={-130} y={40 + redoviNaslova(naslov).length * 40 + 10} fontFamily={SANS} fontWeight={700} fontSize={30} fill="#5A5A5A">
       {mesto}
     </text>
     <rect x={-120} y={196} width={240} height={64} rx={32} fill={objavljen > 0.5 ? N.zelenaSvetla : N.zelena} />
-    <text x={0} y={238} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={26} fill={N.bela}>
+    <text x={0} y={240} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={30} fill={N.bela}>
       {objavljen > 0.5 ? "Objavljeno ✓" : "Objavi oglas"}
     </text>
   </g>
 );
 
-/** List evidencije „zapis u KOLU“: redovi „od → ka · POEN“, bez broja. `n` = koliko je redova upisano. */
-export const Knjiga: React.FC<{ x: number; y: number; s?: number; redovi: string[]; n: number; istaknut?: number }> = ({ x, y, s = 1, redovi, n, istaknut = -1 }) => {
-  const h = 110 + Math.max(1, redovi.length) * 62;
+/** List evidencije „zapis u KOLU“: red je jedan prepis „od → ka“ sa zelenom oznakom POEN (bez broja).
+ *  `n` = koliko je redova upisano, `ispis` = koliko je ispisan poslednji red (0–1, otkriva se sleva nadesno). */
+export const Knjiga: React.FC<{ x: number; y: number; s?: number; redovi: string[]; n: number; istaknut?: number; ispis?: number }> = ({ x, y, s = 1, redovi, n, istaknut = -1, ispis = 1 }) => {
+  const R = 84;
+  const h = 120 + Math.max(1, redovi.length) * R;
   return (
     <g transform={`translate(${x} ${y}) scale(${s})`}>
-      <Boja d={kutija(-330, -20, 660, h + 40, 18)} boja={N.zelena} />
-      <Boja d={kutija(-310, 0, 620, h, 12)} boja="#FFF8EC" />
-      {Array.from({ length: redovi.length }, (_, i) => (
-        <path key={i} d={`M-280,${116 + i * 62} L280,${116 + i * 62}`} stroke="#C9D8E8" strokeWidth={2} />
-      ))}
-      <text x={0} y={58} textAnchor="middle" fontFamily={OBLO} fontWeight={700} fontSize={40} fill={N.zelena}>
+      <Boja d={kutija(-350, -24, 700, h + 48, 22)} boja={N.zelena} />
+      <Boja d={kutija(-326, 0, 652, h, 14)} boja="#FFF8EC" />
+      <text x={0} y={66} textAnchor="middle" fontFamily={OBLO} fontWeight={700} fontSize={50} fill={N.zelena}>
         zapis u KOLU
       </text>
-      {redovi.slice(0, n).map((r, i) => (
-        <g key={i}>
-          {i === istaknut && <rect x={-290} y={68 + i * 62} width={580} height={52} rx={10} fill={N.zelenaSvetla} opacity={0.55} />}
-          <text x={0} y={108 + i * 62} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={46} fill={N.kontura}>
-            {r}
-          </text>
-        </g>
+      {redovi.map((_, i) => (
+        <path key={i} d={`M-296,${100 + (i + 1) * R} L296,${100 + (i + 1) * R}`} stroke="#C9D8E8" strokeWidth={2.5} />
       ))}
+      {redovi.slice(0, n).map((r, i) => {
+        const [ko, kome] = r.replace(" · POEN", "").split(" → ");
+        const yy = 100 + i * R;
+        const p = i === n - 1 ? ispis : 1;
+        return (
+          <g key={i}>
+            {i === istaknut && <rect x={-310} y={yy + 6} width={620} height={R - 10} rx={12} fill={N.zelenaSvetla} opacity={0.5} />}
+            <clipPath id={`isp-${i}-${r.length}`}>
+              <rect x={-320} y={yy} width={640 * p} height={R} />
+            </clipPath>
+            <g clipPath={`url(#isp-${i}-${r.length})`}>
+              <text x={-170} y={yy + 60} textAnchor="end" fontFamily={RUKOPIS} fontWeight={700} fontSize={58} fill={N.kontura}>
+                {ko}
+              </text>
+              <text x={-118} y={yy + 58} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={44} fill={N.zelena}>
+                →
+              </text>
+              <text x={-66} y={yy + 60} textAnchor="start" fontFamily={RUKOPIS} fontWeight={700} fontSize={58} fill={N.kontura}>
+                {kome}
+              </text>
+              <rect x={150} y={yy + 18} width={150} height={52} rx={26} fill={N.zelena} />
+              <text x={225} y={yy + 56} textAnchor="middle" fontFamily={OBLO} fontWeight={700} fontSize={36} fill={N.bela}>
+                POEN
+              </text>
+            </g>
+          </g>
+        );
+      })}
     </g>
   );
 };
@@ -271,8 +293,8 @@ export const Fioka: React.FC<{ x: number; y: number; s?: number; otvorena: numbe
 export const TablaMesta: React.FC<{ x: number; y: number; s?: number; ime: string }> = ({ x, y, s = 1, ime }) => (
   <g transform={`translate(${x} ${y}) scale(${s})`}>
     <path d="M0,0 L0,-180" stroke="#7A7A7A" strokeWidth={10} />
-    <Boja d={kutija(-130, -260, 260, 90, 10)} boja={N.bela} kontura={N.plava} debljina={6} />
-    <text x={0} y={-200} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={48} fill={N.plava}>
+    <Boja d={kutija(-170, -280, 340, 110, 12)} boja={N.bela} kontura={N.plava} debljina={7} />
+    <text x={0} y={-207} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={64} fill={N.plava}>
       {ime}
     </text>
   </g>

@@ -10,7 +10,7 @@ type RecF = Rec & { f: number; ef: number };
 export type Komad = { reci: RecF[]; od: number; do: number };
 export type IzgledTitla = "linorez" | "naiva" | "tus" | "kolaz";
 
-const MAX_ZNAKOVA = 24;
+const MAX_ZNAKOVA = 22; // video „Poljoprivrednici“: krupnija slova (70 px), pa kraći red
 const UNAPRED_TRAKA = 8;
 const UNAPRED_REC = 3;
 const ISTAKNUTE = /^(„?KOLO|KOLU|KOLA|POEN|ekolo\.rs)/;
@@ -88,7 +88,7 @@ const IZGLED: Record<IzgledTitla, { kutija: (idx: number) => React.CSSProperties
     }),
     tekst: "#1B2F6B",
     senka: "drop-shadow(0 8px 10px rgba(27,47,107,0.35))",
-    font: 62,
+    font: 70,
   },
   kolaz: {
     kutija: (idx) => ({

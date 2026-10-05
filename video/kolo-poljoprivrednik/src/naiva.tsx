@@ -55,9 +55,9 @@ export const Defs: React.FC = () => (
   </defs>
 );
 
-/** Ceo kadar. `z` je približavanje celog kadra (video „Poljoprivrednici“: 1,22, da likovi ne budu sitni),
+/** Ceo kadar. `z` je približavanje celog kadra (video „Poljoprivrednici“: 1,30, da likovi ne budu sitni),
  *  oko tačke (540, 1040) u svetu, koja pada na y = 1000 na ekranu: tlo na 1300 ostaje iznad titla. */
-export const Kadar: React.FC<{ children: React.ReactNode; z?: number }> = ({ children, z = 1.22 }) => (
+export const Kadar: React.FC<{ children: React.ReactNode; z?: number }> = ({ children, z = 1.3 }) => (
   <svg viewBox="0 0 1080 1920" width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
     <Defs />
     <g filter="url(#nPotez)">

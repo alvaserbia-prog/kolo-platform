@@ -55,8 +55,16 @@ jačine (kao `../kolo-trampa/`).
 ## Priča u slici
 
 Stil: **naiva po uzoru na Kovačicu** (alat iz videa 8, `../kolo-poverenje/src/v2/`, dopunjen kapama, životinjama,
-salašem i predmetima). Ceo kadar je približen 1,22 puta (`Kadar` u `src/naiva.tsx`), da likovi ne budu sitni;
-scena 17 je bez približavanja. **Boja nosi emociju** (`BOJA` u `src/Video.tsx`): sećanje puno i toplo, prolazak
+salašem i predmetima). Ceo kadar je približen 1,30 puta (`Kadar` u `src/naiva.tsx`), tako da tlo pada odmah iznad titla; scena 17 je bez
+približavanja.
+
+🔴 **Veličine (vlasnik, 05.10.2026: „obrati pažnju na natpise, transakcije i ponegde veličine… često mi deluju
+male“).** Posle prve verzije: likovi 15% krupniji (`LIK` u `src/lutke.tsx`), životinje 12% (`ZIV` u
+`src/zivotinje.tsx`), predmeti u kuhinji i vaga krupniji; titl 70 px (bio 62), red najviše 22 znaka; list
+„zapis u KOLU“ (prepisi POEN-a) na 90% širine kadra, red „ko → kome“ rukopisom 58 px i zelena oznaka POEN, a
+svaki novi red se ispisuje sleva nadesno kao rukom; tekst oglasa na telefonu 34 px; „Bezdan“ 58 px; putokaz
+„Sombor“ 64 px; imena na karti 50–64 px sa belim obrubom; završna kartica: znak i ekolo.rs (160 px) krupniji;
+prelaz između scena 24 frejma (bio 18). Likovi na ivicama kadra pomereni su ka sredini. **Boja nosi emociju** (`BOJA` u `src/Video.tsx`): sećanje puno i toplo, prolazak
 i tuga isprani do sive, od Đurike se boja vraća, a scena 16 je najtoplija.
 
 | Scena | Slika |

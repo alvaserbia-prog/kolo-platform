@@ -7,6 +7,9 @@ import { Boja, N, elipsa } from "./naiva";
 export type Izraz = "osmeh" | "srecna" | "zamisljena" | "iznenadjena" | "mirna";
 export type Kosa = "pletenica" | "punda" | "kratka" | "rep";
 export type Odeca = { tip: "zena"; bluza: string; suknja: string; kecelja?: string; sara?: string } | { tip: "muskarac"; kosulja: string; pantalone: string; prsluk?: string };
+/** Video „Poljoprivrednici“: svi likovi 15% krupniji nego u prvoj verziji (vlasnik, 05.10.2026: „često mi deluju male“). */
+export const LIK = 1.15;
+
 export type Kapa = "sesir" | "sajkaca" | "marama";
 export type LutkaCfg = { odeca: Odeca; kosa: Kosa; bojaKose: string; brkovi?: boolean; seed: number; kapa?: Kapa; bojaKape?: string };
 
@@ -66,7 +69,7 @@ export const Lutka: React.FC<
   if (izraz === "srecna") ustaD = "M-20,22 Q0,48 20,22";
   if (izraz === "zamisljena" || izraz === "mirna") ustaD = "M-10,30 Q0,32 10,29";
   return (
-    <g transform={`translate(${x} ${y + odskok}) scale(${s})`} opacity={opacity}>
+    <g transform={`translate(${x} ${y + odskok}) scale(${s * LIK})`} opacity={opacity}>
       <ellipse cx={0} cy={4} rx={80} ry={12} fill={N.travaTamna} opacity={0.35} />
       <g transform={`rotate(${nagib + njihanje * 0.4} 0 -60)`}>
         <Ruka sx={-54} sy={-330} a1={lr[0]} a2={lr[1]} boja={rukav} drzi={drziL} drziRot={drziLRot} />

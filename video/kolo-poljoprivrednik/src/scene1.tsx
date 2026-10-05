@@ -125,12 +125,12 @@ export const Scena3: React.FC = () => {
   const bozic = kad(3, "za");
   const radili = kad(3, "radili");
   const ljudi: [number, typeof OTAC, string, number][] = [
-    [180, OTAC, "otac", 0],
-    [320, ZENA, "žena", 0],
-    [640, CERKA, "deca", 0],
-    [740, SIN, "deca", 6],
-    [850, KOMSIJA, "komšije", 0],
-    [960, KOMSINICA, "komšije", 6],
+    [215, OTAC, "otac", 0],
+    [345, ZENA, "žena", 0],
+    [615, CERKA, "deca", 0],
+    [700, SIN, "deca", 6],
+    [795, KOMSIJA, "komšije", 0],
+    [890, KOMSINICA, "komšije", 6],
   ];
   return (
     <Kadar>
@@ -208,9 +208,9 @@ export const Scena4: React.FC = () => {
           <Zdela x={110} y={0} s={0.9} />
           <Zdela x={210} y={0} s={0.75} />
         </Tezga>
-        <Lutka {...MLADA_ZENA} x={250} y={1330} s={0.56} izraz="srecna" lr={[14, 10]} dr={[mesaj(-14, -100, pokazuje), mesaj(-10, -20, pokazuje)]} pogled={[1, 0]} />
-        <Lutka {...PENZIONER} x={140} y={1340} s={0.52} izraz="osmeh" pogled={[1, 0]} />
-        <Lutka {...KOMSINICA} x={880} y={1330} s={0.54} izraz="osmeh" pogled={[-1, 0]} />
+        <Lutka {...MLADA_ZENA} x={290} y={1330} s={0.56} izraz="srecna" lr={[14, 10]} dr={[mesaj(-14, -100, pokazuje), mesaj(-10, -20, pokazuje)]} pogled={[1, 0]} />
+        <Lutka {...PENZIONER} x={190} y={1340} s={0.52} izraz="osmeh" pogled={[1, 0]} />
+        <Lutka {...KOMSINICA} x={850} y={1330} s={0.54} izraz="osmeh" pogled={[-1, 0]} />
       </Kamera>
     </Kadar>
   );
@@ -289,7 +289,7 @@ export const Scena5: React.FC = () => {
             })}
             <Krava x={600} y={1240} s={0.55} seed={3} />
             <Krava x={880} y={1250} s={0.55} seed={4} smer={-1} />
-            <Lutka {...SAVA} x={180} y={1320} s={0.56} izraz="zamisljena" pogled={[1, 0]} />
+            <Lutka {...SAVA} x={240} y={1320} s={0.56} izraz="zamisljena" pogled={[1, 0]} />
           </g>
         }
       />
@@ -356,22 +356,22 @@ export const Scena7: React.FC = () => {
   return (
     <Kadar>
       <Kuhinja />
-      <Pop at={kad(7, "hrana")} x={260} y={1160}>
-        <g transform={`scale(${rast})`}><Vreca x={0} y={0} s={1.1} /></g>
+      <Pop at={kad(7, "hrana")} x={300} y={1160}>
+        <g transform={`scale(${rast})`}><Vreca x={0} y={0} s={1.35} /></g>
       </Pop>
-      <Pop at={kad(7, "struja")} x={460} y={1160}>
-        <g transform={`scale(${rast})`}><Racun x={0} y={0} s={1.1} /></g>
+      <Pop at={kad(7, "struja")} x={470} y={1160}>
+        <g transform={`scale(${rast})`}><Racun x={0} y={0} s={1.35} /></g>
       </Pop>
-      <Pop at={kad(7, "nafta")} x={660} y={1160}>
-        <g transform={`scale(${rast})`}><Kanister x={0} y={0} s={1.1} /></g>
+      <Pop at={kad(7, "nafta")} x={640} y={1160}>
+        <g transform={`scale(${rast})`}><Kanister x={0} y={0} s={1.35} /></g>
       </Pop>
-      {[260, 460, 660].map((x, i) => (
+      {[300, 470, 640].map((x, i) => (
         <Strelica key={x} x={x} y={820} gore at={skuplje + i * 3} />
       ))}
-      <Pop at={kad(7, "mleko")} x={870} y={1160}>
-        <g transform={`scale(${pad})`}><KantaMleka x={0} y={0} s={1.3} /></g>
+      <Pop at={kad(7, "mleko")} x={840} y={1160}>
+        <g transform={`scale(${pad})`}><KantaMleka x={0} y={0} s={1.6} /></g>
       </Pop>
-      <Strelica x={870} y={860} gore={false} at={jeft} />
+      <Strelica x={840} y={860} gore={false} at={jeft} />
     </Kadar>
   );
 };
@@ -391,7 +391,7 @@ export const Scena8: React.FC = () => {
           <g>
             <PolicaRadnje />
             <Pop at={kad(8, "mleko") - 6} x={540} y={1250}>
-              <Vaga x={0} y={0} s={1.15} nagib={nagib}
+              <Vaga x={0} y={0} s={1.2} nagib={nagib}
                 levo={<Tetrapak x={0} y={0} s={0.9} />}
                 desno={<g><KantaMleka x={-50} y={0} s={0.45} /><KantaMleka x={0} y={0} s={0.45} /><KantaMleka x={50} y={0} s={0.45} /></g>} />
             </Pop>
@@ -421,8 +421,8 @@ export const Scena9: React.FC = () => {
     <Kadar>
       <Kamera z={mesaj(1.0, 1.12, napredak(f, 0, trajanjeF(9)))} y={1050}>
         <StalaUnutra noc>
-          <Krava x={290} y={1250} s={0.62} seed={3} />
-          <Krava x={800} y={1260} s={0.62} seed={4} smer={-1} />
+          <Krava x={330} y={1250} s={0.6} seed={3} />
+          <Krava x={760} y={1260} s={0.6} seed={4} smer={-1} />
           <Lutka {...SAVA} x={540} y={1290} s={0.62} izraz="zamisljena" glavaNagib={-8} lr={[60, 30]} dr={[-60, -30]} />
         </StalaUnutra>
         {/* fenjer */}

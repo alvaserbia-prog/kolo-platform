@@ -50,7 +50,7 @@ const obojeno = (S: React.FC, id: number): React.FC => {
 
 export const SCENE = [Scena1, Scena2, Scena3, Scena4, Scena5, Scena6, Scena7, Scena8, Scena9, Scena10, Scena11, Scena12, Scena13, Scena14, Scena15, Scena16, Scena17].map((S, i) => obojeno(S, i + 1));
 
-export const PRELAZI: Prelaz[] = SCENE.slice(1).map(() => ({ tip: "pretapanje", pola: 9 }));
+export const PRELAZI: Prelaz[] = SCENE.slice(1).map(() => ({ tip: "pretapanje", pola: 12 }));
 
 const Pozadina: React.FC = () => <div style={{ position: "absolute", inset: 0, background: N.bela }} />;
 

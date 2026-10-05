@@ -15,13 +15,15 @@ import { OBLO } from "./fontovi";
 const k = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
 /** Zapis u KOLU u gornjem delu kadra: upisuje se red po red na zadate frejmove. */
-const ZapisGore: React.FC<{ redovi: string[]; kada: number[]; istaknut?: number; y?: number; s?: number }> = ({ redovi, kada, istaknut, y = 330, s = 0.72 }) => {
+const ZapisGore: React.FC<{ redovi: string[]; kada: number[]; istaknut?: number; y?: number; s?: number }> = ({ redovi, kada, istaknut, y = 400, s = 0.9 }) => {
   const f = useF();
   const n = kada.filter((t) => f >= t).length;
   if (n === 0) return null;
+  // poslednji upisani red se ispisuje sleva nadesno za 14 frejmova, kao rukom
+  const ispis = napredak(f, kada[n - 1], 14, (t) => t);
   return (
     <Pop at={kada[0]} x={540} y={y}>
-      <Knjiga x={0} y={0} s={s} redovi={redovi} n={n} istaknut={istaknut ?? n - 1} />
+      <Knjiga x={0} y={0} s={s} redovi={redovi} n={n} istaknut={istaknut ?? n - 1} ispis={ispis} />
     </Pop>
   );
 };
@@ -52,7 +54,7 @@ export const Scena10: React.FC = () => {
         lr={[30, 40]} drziL={<g transform="translate(-10 20)"><Boja d="M-46,0 L46,0 L36,40 L-36,40Z" boja="#C08A4A" /><Sir x={0} y={2} s={0.5} /></g>} />
       {med > 0 && (
         <g opacity={med}>
-          <Medaljon x={640} y={560} r={230} id="dj" skala={0.6 + 0.4 * med}>
+          <Medaljon x={640} y={610} r={220} id="dj" skala={0.6 + 0.4 * med}>
             <g transform="translate(-540 -1000) scale(1)">
               <Pejzaz sezona="leto" horizont={820} sunce={false} oblaci={false} />
               <Kuca x={430} y={1000} s={0.55} />
@@ -61,9 +63,9 @@ export const Scena10: React.FC = () => {
               <Krava x={520} y={1080} s={0.42} seed={45} smer={-1} />
             </g>
           </Medaljon>
-          <g transform="translate(640 850)">
-            <rect x={-130} y={-36} width={260} height={64} rx={32} fill={N.crvena} stroke={N.kontura} strokeWidth={3} />
-            <text x={0} y={10} textAnchor="middle" fontFamily={OBLO} fontWeight={700} fontSize={40} fill={N.bela}>
+          <g transform="translate(640 890)">
+            <rect x={-170} y={-48} width={340} height={88} rx={44} fill={N.crvena} stroke={N.kontura} strokeWidth={4} />
+            <text x={0} y={16} textAnchor="middle" fontFamily={OBLO} fontWeight={700} fontSize={58} fill={N.bela}>
               Bezdan
             </text>
           </g>
@@ -113,9 +115,9 @@ export const Scena11: React.FC = () => {
             <Letve x0={520} x1={1080} y={1320} h={120} />
             <Lutka {...DJURIKA} x={640} y={1320} s={0.58} izraz="srecna" pogled={[-1, 0]} />
             {[
-              { cfg: MLADA_ZENA, x: 120, d: 0 },
-              { cfg: PENZIONER, x: 270, d: 8 },
-              { cfg: ZENA, x: 420, d: 16 },
+              { cfg: MLADA_ZENA, x: 180, d: 0 },
+              { cfg: PENZIONER, x: 310, d: 8 },
+              { cfg: ZENA, x: 440, d: 16 },
             ].map(({ cfg, x, d }) => {
               const p = napredak(f, ljudi + d, 40);
               return <Lutka key={x} {...cfg} x={mesaj(x - 400, x, p)} y={1330} s={0.54} izraz="osmeh" hod={p < 1 ? f / 4 : undefined} pogled={[1, 0]} />;
@@ -138,8 +140,8 @@ export const Scena12: React.FC = () => {
       <Kuca x={820} y={990} s={0.5} />
       <Letve x0={-40} x1={1100} y={1320} h={110} />
       <Lutka {...DJURIKA} x={680} y={1330} s={0.6} izraz="srecna" pogled={[-1, 0]} lr={[-60, -30]} />
-      <Lutka {...MLADA_ZENA} x={330} y={1330} s={0.56} izraz="srecna" pogled={[1, 0]} dr={[-70, -30]} drziD={<Sir x={0} y={10} s={0.5} />} />
-      <Lutka {...PENZIONER} x={130} y={1340} s={0.52} izraz="osmeh" pogled={[1, 0]} drziD={<KantaMleka x={0} y={60} s={0.4} />} />
+      <Lutka {...MLADA_ZENA} x={360} y={1330} s={0.56} izraz="srecna" pogled={[1, 0]} dr={[-70, -30]} drziD={<Sir x={0} y={10} s={0.5} />} />
+      <Lutka {...PENZIONER} x={200} y={1340} s={0.52} izraz="osmeh" pogled={[1, 0]} drziD={<KantaMleka x={0} y={60} s={0.4} />} />
       <ZapisGore redovi={["Jelica → Đurika · POEN", "Đorđe → Đurika · POEN", "Ana → Đurika · POEN"]} kada={[prep, prep + 26, tim - 6]} />
     </Kadar>
   );
@@ -283,9 +285,9 @@ export const Scena15: React.FC = () => {
             <Letve x0={-40} x1={1100} y={1320} h={110} />
             <Lutka {...SAVA} x={700} y={1330} s={0.6} izraz="srecna" pogled={[-1, 0]} lr={[-70, -30]} drziL={<KorpaJaja x={-10} y={70} s={0.6} />} />
             {[
-              { cfg: KOMSINICA, x: 380, d: 0 },
-              { cfg: CERKA, x: 220, d: 8 },
-              { cfg: KOMSIJA, x: 70, d: 16 },
+              { cfg: KOMSINICA, x: 420, d: 0 },
+              { cfg: CERKA, x: 300, d: 8 },
+              { cfg: KOMSIJA, x: 180, d: 16 },
             ].map(({ cfg, x, d }) => {
               const p = napredak(f, ljudi + d, 36);
               return <Lutka key={x} {...cfg} x={mesaj(x - 400, x, p)} y={1330} s={0.54} izraz="osmeh" hod={p < 1 ? f / 4 : undefined} pogled={[1, 0]} />;
@@ -384,14 +386,14 @@ export const Scena17: React.FC = () => {
           <g>
             <rect x={-200} y={-200} width={1480} height={2400} fill={N.bela} />
             <g opacity={kartica} transform={`translate(540 600) scale(${0.8 + 0.2 * kartica}) translate(-540 -600)`}>
-              <image href={staticFile("kolo-hero-logo.png")} x={340} y={300} width={400} height={419} />
-              <text x={540} y={880} textAnchor="middle" fontFamily={OBLO} fontWeight={700} fontSize={130} fill={N.zelena}>
+              <image href={staticFile("kolo-hero-logo.png")} x={330} y={190} width={420} height={440} />
+              <text x={540} y={810} textAnchor="middle" fontFamily={OBLO} fontWeight={700} fontSize={160} fill={N.zelena}>
                 ekolo.rs
               </text>
             </g>
-            <Lutka {...SAVA} x={230} y={1330} s={0.68} izraz="srecna" lr={[-150, -20]} />
-            <Lutka {...DJURIKA} x={850} y={1330} s={0.68} izraz="srecna" dr={[150, 20]} />
-            <Tele x={540} y={1330} s={0.85} seed={70} />
+            <Lutka {...SAVA} x={230} y={1320} s={0.6} izraz="srecna" lr={[-150, -20]} />
+            <Lutka {...DJURIKA} x={850} y={1320} s={0.6} izraz="srecna" dr={[150, 20]} />
+            <Tele x={540} y={1320} s={0.8} seed={70} />
           </g>
         }
       />

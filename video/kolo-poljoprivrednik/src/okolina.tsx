@@ -155,8 +155,8 @@ export const Karta: React.FC<{ mreza: number }> = ({ mreza }) => {
       })}
       {sela.map(([x, y, ime]) => (
         <g key={ime}>
-          <circle cx={x} cy={y} r={ime === "Sombor" ? 26 : 18} fill={N.crvena} stroke={N.kontura} strokeWidth={3} />
-          <text x={x} y={y - 34} textAnchor="middle" fontFamily={OBLO} fontWeight={700} fontSize={ime === "Sombor" ? 44 : 34} fill={N.kontura}>
+          <circle cx={x} cy={y} r={ime === "Sombor" ? 32 : 22} fill={N.crvena} stroke={N.kontura} strokeWidth={3} />
+          <text x={x} y={y - 42} textAnchor="middle" fontFamily={OBLO} fontWeight={700} fontSize={ime === "Sombor" ? 64 : 50} fill={N.kontura} stroke={N.bela} strokeWidth={8} paintOrder="stroke">
             {ime}
           </text>
         </g>
