@@ -4,7 +4,7 @@
 import React from "react";
 import { AbsoluteFill, Img, staticFile } from "remotion";
 import { P } from "./paleta";
-import { NASLOV, SANS, SERIF, ucitajFontove } from "./fontovi";
+import { NASLOV, SANS, ucitajFontove } from "./fontovi";
 import { Hrapavo, Kadar } from "./alat";
 import { Polica } from "./scene/mana";
 import { Stranica } from "./Stranica";
@@ -28,19 +28,16 @@ export const Naslovna: React.FC = () => (
       <Stranica />
     </AbsoluteFill>
     <svg viewBox="0 0 1080 1920" width={1080} height={1920} style={{ position: "absolute", inset: 0, filter: "drop-shadow(0 10px 12px rgba(58,42,29,0.35))" }}>
-      <rect x={90} y={300} width={900} height={330} rx={30} fill={P.krem} stroke={P.mastilo} strokeWidth={5} />
-      <rect x={104} y={314} width={872} height={302} rx={22} fill="none" stroke={P.vez} strokeWidth={3} strokeDasharray="12 7" />
-      <text x={540} y={440} textAnchor="middle" fontFamily={NASLOV} fontStyle="italic" fontWeight={900} fontSize={96} fill={P.mastilo}>
+      <rect x={90} y={330} width={900} height={200} rx={30} fill={P.krem} stroke={P.mastilo} strokeWidth={5} />
+      <rect x={104} y={344} width={872} height={172} rx={22} fill="none" stroke={P.vez} strokeWidth={3} strokeDasharray="12 7" />
+      <text x={540} y={466} textAnchor="middle" fontFamily={NASLOV} fontStyle="italic" fontWeight={900} fontSize={100} fill={P.mastilo}>
         Prokletstvo novca
       </text>
-      <text x={540} y={550} textAnchor="middle" fontFamily={NASLOV} fontStyle="italic" fontWeight={900} fontSize={60} fill={P.ajvar}>
+      <rect x={110} y={1430} width={860} height={200} rx={26} fill={P.belo} stroke={P.mastilo} strokeWidth={4} />
+      <text x={540} y={1510} textAnchor="middle" fontFamily={NASLOV} fontStyle="italic" fontWeight={900} fontSize={54} fill={P.ajvar}>
         ili ga nema, ili ga ima previše
       </text>
-      <rect x={170} y={1440} width={740} height={180} rx={26} fill={P.belo} stroke={P.mastilo} strokeWidth={4} />
-      <text x={540} y={1512} textAnchor="middle" fontFamily={SERIF} fontWeight={700} fontSize={46} fill={P.mastilo}>
-        stari oblici novca
-      </text>
-      <text x={540} y={1588} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={56} fill={P.zelena700}>
+      <text x={540} y={1592} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={56} fill={P.zelena700}>
         ekolo.rs
       </text>
     </svg>
