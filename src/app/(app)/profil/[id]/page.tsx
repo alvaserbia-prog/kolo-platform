@@ -118,6 +118,7 @@ export default function JavniProfilPage() {
     OTPIS_NABAVKA: t("trx_nabavka"),
     ISPRAVKA_NABAVKA: t("trx_ispravka_nabavke"),
     USKLADJIVANJE_POTVRDE: t("trx_uskladjivanje_potvrde"),
+    PONISTENJE_ZAPISA: t("trx_ponistenje_zapisa"),
     EMISIJA_KRUG_BONUS: t("trx_krug_bonus"),
   };
 

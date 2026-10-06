@@ -155,7 +155,7 @@ export async function DELETE(req: NextRequest) {
         fromWalletId: w.id,
         toWalletId: PROTOKOL_WALLET_ID,
         amount: stvarno,
-        type: TransactionType.TRANSFER,
+        type: TransactionType.PONISTENJE_ZAPISA,
         description: opis,
       },
     });
@@ -334,7 +334,7 @@ export async function DELETE(req: NextRequest) {
             fromWalletId: svezWallet!.id,
             toWalletId: PROTOKOL_WALLET_ID,
             amount: balans,
-            type: TransactionType.TRANSFER,
+            type: TransactionType.PONISTENJE_ZAPISA,
             description: `Poništavanje POENA pri prestanku statusa (čl. 34 Pravilnika v3.7.5)`,
           },
         });

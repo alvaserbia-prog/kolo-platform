@@ -34,11 +34,10 @@ export const MIN_POEN_RAZMENE = 100;
 export const USLOV_RAZMENE = {
   type: "TRANSFER" as const,
   amount: { gte: MIN_POEN_RAZMENE },
-  // 🔴 Razmena je prepis između DVA ČLANA. Gašenje naloga (`/api/profil`), lažna
-  // verifikacija i brisanje dečjeg naloga vraćaju POEN Protokolu tipom `TRANSFER`
-  // (prekršaj pravila 5 — protivzapis treba sopstveni tip), pa bi bez ovoga brisanje
-  // jednog profila dodalo dve „razmene". Uslov važi i za zatečene zapise, koji se
-  // ne prepravljaju. Ključ je `NOT`, a ne `fromWalletId`/`toWalletId`, jer upiti
+  // 🔴 Razmena je prepis između DVA ČLANA. Gašenje naloga, lažna verifikacija i
+  // brisanje dečjeg naloga su do 06.10.2026. vraćali POEN Protokolu tipom `TRANSFER`
+  // (od tada `PONISTENJE_ZAPISA`), pa je brisanje jednog profila dodalo dve
+  // „razmene". Zatečeni redovi se ne prepravljaju — ovaj uslov ih drži van brojača. Ključ je `NOT`, a ne `fromWalletId`/`toWalletId`, jer upiti
   // koji ovo spajaju spread-om svoje uslove po novčanicima nose u `AND`.
   // `"banka-singleton"` = `PROTOKOL_WALLET_ID`; fajl je namerno bez importa.
   NOT: [{ fromWalletId: "banka-singleton" }, { toWalletId: "banka-singleton" }],
