@@ -1,8 +1,8 @@
 {
  "fps": 30,
  "prednost": 0.0,
- "trajanje": 75.69,
- "frejmova": 2271,
+ "trajanje": 74.69,
+ "frejmova": 2241,
  "scene": [
   {
    "id": 1,
@@ -789,9 +789,9 @@
     }
    ],
    "tekst": "ekolo.rs, čista ušteda!",
-   "do": 75.69,
+   "do": 74.69,
    "odF": 2068,
-   "doF": 2271,
+   "doF": 2241,
    "glasOdF": 2070
   }
  ]

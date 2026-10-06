@@ -110,6 +110,13 @@ enum TransactionType {
   /// (Pravilnik čl. 14a, nabavke čl. 30a). Protokol → korisnik; NIJE upis kroz
   /// kanal iz čl. 15 nego otklanjanje poništenja izvršenog bez osnova.
   ISPRAVKA_NABAVKA
+  /// Poništenje zapisa POEN-a uz protivzapis Protokola (Pravilnik čl. 34): prestanak
+  /// statusa (gašenje naloga i kaskada potvrda tog naloga), poništenje lažne potvrde
+  /// (čl. 20a) i brisanje dečjeg naloga. Do 06.10.2026. ove radnje su upisivane kao
+  /// `TRANSFER`, pa su ulazile u brojač razmena i zbir prepisa (pravilo 5). Zatečeni
+  /// redovi ostaju `TRANSFER` — istorija se ne prepravlja; brojač ih isključuje
+  /// uslovom u `USLOV_RAZMENE`.
+  PONISTENJE_ZAPISA
 }
 
 enum TipKorisnika {

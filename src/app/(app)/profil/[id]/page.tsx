@@ -62,6 +62,8 @@ interface ProfilData {
   suzen?: boolean;
   /** Maloletni korisnik (Modul Deca) — bez indeksa i bez lanca potvrda. */
   maloletan?: boolean;
+  /** Posmatrač je roditelj ovog deteta — vidi dugme ka podešavanjima deteta. */
+  jaSamRoditelj?: boolean;
   verified: boolean;
   verifiedAt: string | null;
   status: string;
@@ -118,6 +120,7 @@ export default function JavniProfilPage() {
     OTPIS_NABAVKA: t("trx_nabavka"),
     ISPRAVKA_NABAVKA: t("trx_ispravka_nabavke"),
     USKLADJIVANJE_POTVRDE: t("trx_uskladjivanje_potvrde"),
+    PONISTENJE_ZAPISA: t("trx_ponistenje_zapisa"),
     EMISIJA_KRUG_BONUS: t("trx_krug_bonus"),
   };
 
@@ -293,6 +296,15 @@ export default function JavniProfilPage() {
             )}
             {profil.lokacija && (
               <p className="text-sm text-kolo-muted mt-0.5">{profil.lokacija}</p>
+            )}
+
+            {profil.jaSamRoditelj && (
+              <Link
+                href={`/deca/${profil.id}`}
+                className="mt-3 inline-block rounded-xl border border-kolo-border px-4 py-2 text-sm font-medium text-kolo-green-700 transition hover:bg-kolo-bg"
+              >
+                {t("podesavanja_deteta")}
+              </Link>
             )}
 
             <div className="flex flex-wrap justify-center gap-1.5 mt-2">

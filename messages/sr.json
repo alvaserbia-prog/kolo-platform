@@ -575,6 +575,7 @@
     "posalji_zahtev": "Pošalji zahtev za osnivanje"
   },
   "profil": {
+    "podesavanja_deteta": "Podešavanja deteta",
     "naslov": "Profil",
     "profilna_slika": "Profilna slika",
     "postavi_sliku": "Postavi sliku",
@@ -689,6 +690,7 @@
     "trx_nabavka": "Kolektivna nabavka",
     "trx_ispravka_nabavke": "Ispravka evidencije",
     "trx_uskladjivanje_potvrde": "Usklađivanje potvrde",
+    "trx_ponistenje_zapisa": "Poništenje zapisa",
     "prepis_od": "Prepis od",
     "prepis_ka": "Prepis ka",
     "ponisten_prepis_od": "Poništen prepis od",
@@ -2367,6 +2369,7 @@
     "emisija_evidentiram": "Evidentiram...",
     "emisija_btn": "Evidentiraj POEN",
     "dashboard_korisnici_ukupno": "Članovi ukupno",
+    "dashboard_registrovani": "Registrovani",
     "dashboard_aktivni": "Aktivni",
     "dashboard_brisani": "Brisani",
     "dashboard_verifikovani": "Redovni članovi",
@@ -3374,6 +3377,8 @@
     "greska_slanje": "Nije uspelo. Pokušaj ponovo.",
     "greska_ucitavanje": "Učitavanje nije uspelo.",
     "status_dete": "dete",
+    "podesavanja_naslov": "Podešavanja deteta",
+    "pogledaj_profil": "Pogledaj profil deteta",
     "prekidac_naslov": "Dozvoli komunikaciju i razmenu sa punoletnim članovima",
     "prekidac_opis": "Dok je isključen, dete razgovara i razmenjuje samo sa drugom decom. Isključuje se u svakom trenutku.",
     "oglasi_naslov": "Oglasi",

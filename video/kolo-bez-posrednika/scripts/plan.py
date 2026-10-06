@@ -11,7 +11,7 @@ UVOD = 0.5          # prvi kadar i muzika pre prvog glasa (kuka u prve 3 s: glas
 PRE_SCENE = 0.30    # kadar kreće malo pre glasa
 PRE = {}
 EXTRA = {8: 0.25}  # kratak dah pre „I tako“, gde se muzika gasi pred kolo
-KRAJ_POSLE_GLASA = 2.5  # svetli deo do kraja takta ~1,2 s posle glasa i stišavanje
+KRAJ_POSLE_GLASA = 1.5  # svetli deo ~0,3 s posle glasa i stišavanje
 # Koliko slika i tekst idu ispred glasa. Pravilo „1 s ispred“ ukinuto je 03.10.2026 (tekst je žurio,
 # video/README.md): slika i tekst idu uz izgovorenu reč.
 PREDNOST_S = 0.0

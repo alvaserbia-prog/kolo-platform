@@ -860,3 +860,9 @@ Do ove izmene je vodič `/dobrodosli` znao da je prvi prolaz isključivo po `ses
 - Suspenzija/isključenje (admin).
 - **Brisanje naloga** (`DELETE /api/profil`): anonimizacija ličnih podataka, prenos POEN-a ili povrat Protokolu, otpis ZRNA, `deaktiviranAt`; anonimizacija veza u grafu verifikacija (čl. 34); numerička istorija ostaje pod ne-identifikujućim pseudonimom.
 - **Eksport ličnih podataka** (`GET /api/profil/eksport`): JSON. (Bez JMBG-a — više se ne prikuplja.)
+
+## Povraćaj Protokolu nije razmena — `PONISTENJE_ZAPISA` (2026-10-06)
+Brisanje jednog profila (04.10.2026, prod) dodalo je dve „razmene" na naslovnoj, početnoj i `/sistem`: gašenje naloga je POEN vraćalo Protokolu tipom `TRANSFER` (1.000 po kaskadi potvrde + 2.000 stanja), a brojač razmena broji `TRANSFER` od 100 naviše.
+- **Brojač:** `USLOV_RAZMENE` (`src/lib/razmena-brojac-pravila.ts`) isključuje prepis u kom je Protokol strana. Pokriva i zatečene redove, koji ostaju `TRANSFER` (istorija se ne prepravlja). Prod: 10 → 8.
+- **Uzrok (pravilo 5):** nov tip `PONISTENJE_ZAPISA` (zasebna migracija `20261006120000_ponistenje_zapisa_enum`) za tri radnje — gašenje naloga (`/api/profil`, kaskada potvrda i poništenje stanja), poništenje lažne potvrde (`lazna-verifikacija.ts`) i brisanje dečjeg naloga (`deca.ts`). „Prenos pri deaktivaciji" drugom članu ostaje `TRANSFER` — to je pravi prepis.
+- Posledica: ti zapisi izlaze iz zbira prepisa, prigovora na prepis i prijave razmene, a ulaze u spisak zapisa Protokola. Brana: `__tests__/ponistenje-zapisa-izvor.test.ts`.

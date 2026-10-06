@@ -40,7 +40,7 @@ export * from "@/lib/potvrda-uslov";
  * 🔴 `EMISIJA_PROGRAM` (socijalni programi), `EMISIJA_OSNIVACKI`, `TRANSFER` i
  * `EMISIJA_RAZMENA` NISU ovde i to je odluka, ne previd — vidi `potvrda-uslov.ts`.
  */
-const TIP_PO_USLOVU: Record<UslovPotvrde, TransactionType> = {
+export const TIP_PO_USLOVU: Record<UslovPotvrde, TransactionType> = {
   OGLAS: TransactionType.EMISIJA_SADRZAJ,
   DONACIJA: TransactionType.EMISIJA_DONACIJA,
   POKROVITELJSTVO: TransactionType.EMISIJA_POKROVITELJ,

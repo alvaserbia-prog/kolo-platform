@@ -1771,7 +1771,7 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
           [t("dashboard_korisnici_ukupno"), data.korisnici.ukupno, "text-kolo-text"],
-          [t("dashboard_aktivni"), data.korisnici.aktivni, "text-kolo-green-700"],
+          [t("dashboard_registrovani"), data.korisnici.registrovani, "text-kolo-text"],
           [t("dashboard_brisani"), data.korisnici.brisani, "text-kolo-muted"],
           [t("dashboard_suspendovani"), data.korisnici.suspendovani, "text-kolo-gold-600"],
         ].map(([labela, broj, boja]) => (
@@ -1781,9 +1781,10 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          [t("dashboard_verifikovani"), data.korisnici.redovni, "text-kolo-green-700"],
+          [t("dashboard_verifikovani"), data.korisnici.redovni, "text-kolo-text"],
+          [t("dashboard_aktivni"), data.korisnici.aktivni, "text-kolo-green-700"],
           [t("dashboard_novi"), data.korisnici.novi, "text-kolo-text"],
           [t("dashboard_deca"), data.korisnici.deca, "text-kolo-text"],
         ].map(([labela, broj, boja]) => (

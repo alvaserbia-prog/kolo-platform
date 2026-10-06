@@ -575,6 +575,7 @@
     "posalji_zahtev": "Pošalji zahtjev za osnivanje"
   },
   "profil": {
+    "podesavanja_deteta": "Postavke djeteta",
     "naslov": "Profil",
     "profilna_slika": "Profilna slika",
     "postavi_sliku": "Postavi sliku",
@@ -689,6 +690,7 @@
     "trx_nabavka": "Kolektivna nabava",
     "trx_ispravka_nabavke": "Ispravak evidencije",
     "trx_uskladjivanje_potvrde": "Usklađivanje potvrde",
+    "trx_ponistenje_zapisa": "Poništenje zapisa",
     "prepis_od": "Prijepis od",
     "prepis_ka": "Prijepis prema",
     "ponisten_prepis_od": "Poništen prijepis od",
@@ -2881,6 +2883,8 @@
     "greska_slanje": "Nije uspjelo. Pokušaj ponovno.",
     "greska_ucitavanje": "Učitavanje nije uspjelo.",
     "status_dete": "dijete",
+    "podesavanja_naslov": "Postavke djeteta",
+    "pogledaj_profil": "Pogledaj profil djeteta",
     "prekidac_naslov": "Dozvoli komunikaciju i razmjenu s punoljetnim članovima",
     "prekidac_opis": "Dok je isključen, dijete razgovara i razmjenjuje samo s drugom djecom. Isključuje se u svakom trenutku.",
     "oglasi_naslov": "Oglasi",
