@@ -9,11 +9,13 @@ import DeteProfil from "./DeteProfil";
 import { prepisiNaCekanju } from "@/lib/protokol/prepis-odobrenje";
 
 /**
- * Profil deteta viđen od roditelja (Pravilnik o Modulu Deca, čl. 9 i 10).
+ * Podešavanja deteta — mesto radnji roditelja (Pravilnik o Modulu Deca, čl. 9 i 10).
+ * Klik na dete u „Moja deca" vodi ovde; profil deteta je na `/profil/<pseudonim>`,
+ * do koga vodi dugme „Pogledaj profil deteta" (i nazad, dugme na profilu).
  *
- * 🔴 Ovo NIJE nadzorni ekran. Roditelj vidi isti profil koji vidi svako drugo dete —
- * pseudonim, stanje POEN-a, razmene, oglase — a razlikuju se samo dve stvari koje
- * vidi jedino on: dugme „Ukloni" uz svaki oglas i prekidač iz čl. 10 st. 2.
+ * 🔴 Ovo NIJE nadzorni ekran. Sam profil roditelj gleda isto kao svako drugo dete,
+ * na `/profil/<pseudonim>`; ovde su samo radnje koje pripadaju roditelju (odobrenje
+ * prepisa, prekidač iz čl. 10 st. 2, izjava, „Ukloni" uz oglas, lozinka, brisanje).
  *
  * 🔴 Poruke deteta se NE prikazuju ni ovde ni igde drugde (čl. 9 st. 3). Nema ni
  * brojača poruka ni spiska sagovornika — posredno bi se videlo ono što pravilnik
