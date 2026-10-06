@@ -564,6 +564,7 @@
     "posalji_zahtev": "Alapítási kérelem küldése"
   },
   "profil": {
+    "podesavanja_deteta": "Gyermek beállításai",
     "naslov": "Profil",
     "profilna_slika": "Profilkép",
     "postavi_sliku": "Kép feltöltése",
@@ -678,6 +679,7 @@
     "trx_nabavka": "Kollektív beszerzés",
     "trx_ispravka_nabavke": "Nyilvántartás helyesbítése",
     "trx_uskladjivanje_potvrde": "Megerősítés egyeztetése",
+    "trx_ponistenje_zapisa": "Bejegyzés érvénytelenítése",
     "prepis_od": "Átírás tőle:",
     "prepis_ka": "Átírás neki:",
     "ponisten_prepis_od": "Visszavont átírás tőle:",
@@ -2881,6 +2883,8 @@
     "greska_slanje": "Nem sikerült. Próbáld újra.",
     "greska_ucitavanje": "A betöltés nem sikerült.",
     "status_dete": "gyermek",
+    "podesavanja_naslov": "Gyermek beállításai",
+    "pogledaj_profil": "Gyermek profiljának megtekintése",
     "prekidac_naslov": "Engedélyezd a kommunikációt és a cserét nagykorú tagokkal",
     "prekidac_opis": "Amíg ki van kapcsolva, a gyermek csak más gyermekekkel beszélget és cserél. Bármikor kikapcsolható.",
     "oglasi_naslov": "Hirdetések",
