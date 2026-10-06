@@ -1031,7 +1031,7 @@ Zvuk na Instagramu preimenovati u „KOLO, stari oblici novca“. Alternativni t
 šipke soli i niz školjki na polici koja pukne; brod istovaruje školjke na obalu; na kraju zelena knjiga
 u koju se upisuje ko je šta dao.“
 
-Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, godina kad šljive rode pa ih ima svuda;
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, „prokletstvo novca“ sa naslovne (ili ga nema, ili ga ima previše) na šljivama, koje u rodnoj godini niko ne traži, a kad omrzne nema ih (prerađeno 06.10.2026);
 Instagram, ujam na vodenici; Facebook, risari na salašima koji su platu nosili kući u pšenici. Egipat,
 Etiopija, Kina i brodovi sa školjkama iz videa se ne ponavljaju. Reči „vrednost“ i „vredi“ se ne pišu
 (odeljak 2), pa se mana starih oblika novca kaže kao „kad ih je mnogo, niko ih ne traži“. „Plaćalo“ stoji
@@ -1048,16 +1048,18 @@ rodno neutralno na TikTok-u i Instagramu; „vi“ dosledno na Facebook-u; adres
 
 ### TikTok
 
+Prerađeno 06.10.2026 (vlasnik): opis prati naslovnu „Prokletstvo novca: ili ga nema, ili ga ima previše“.
+
 ```
-Kad šljive dobro rode, pola sela ne zna šta će s njima. 🌳
+Novac je vekovima imao istu boljku: ili ga nema, ili ga ima toliko da ga niko neće. 🌾
 
-Tako je nekad bilo i sa stvarima koje su ljudi koristili umesto novca. U rodnoj godini žita ima svuda i niko ga ne traži. U sušnoj ga nema, pa ljudi nemaju čime da razmene ono što imaju. Sa školjkama je bilo još gore: kad ih je stiglo previše, niko ih više nije hteo.
+Isto je i sa šljivama. U rodnoj godini pola sela ne zna šta će s njima, a kad omrzne, nema ih ni za rakiju. Dok je novac bio stvar koja se gaji, kopa ili dovozi, delio je istu sudbinu.
 
-U KOLU se POEN ne gaji, ne kopa i ne dovozi. Upiše se tek kad neko nekome nešto da ili uradi, i pokazuje ko je šta dao. Nije novac i ne menja se za novac.
+POEN u KOLU ne zavisi od roda ni od suše. To je zapis o tome ko je kome šta dao ili uradio, i nastaje tek kad neko nešto da. Nije novac i ne menja se za novac.
 
-👉 Šta se u tvom kraju nekad davalo umesto novca? Napiši u komentar. Link je u profilu.
+👉 Da li su tvoji stari pričali o vremenu kad se plaćalo žitom ili brašnom? Napiši u komentar. Link je u profilu.
 
-#Sombor #istorija #novac #razmena #KOLO
+#Sombor #novac #istorija #razmena #KOLO
 ```
 
 ### Instagram
