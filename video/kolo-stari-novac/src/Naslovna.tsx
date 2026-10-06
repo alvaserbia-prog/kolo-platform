@@ -1,4 +1,5 @@
-// Naslovna (cover) za mreže: polica sa žitom, solju i školjkama, ispod pukotina; krupno pitanje.
+// Naslovna (cover) za mreže: polica sa žitom, solju i školjkama, ispod pukotina; naslov „Prokletstvo novca“
+// (vlasnik, 06.10.2026: naslov o novcu i njegovoj mani, ne o žitu).
 // Sav tekst je u sredini (y 300–1620), jer Instagram mrežu seče na 4:5.
 import React from "react";
 import { AbsoluteFill, Img, staticFile } from "remotion";
@@ -30,10 +31,10 @@ export const Naslovna: React.FC = () => (
       <rect x={90} y={300} width={900} height={330} rx={30} fill={P.krem} stroke={P.mastilo} strokeWidth={5} />
       <rect x={104} y={314} width={872} height={302} rx={22} fill="none" stroke={P.vez} strokeWidth={3} strokeDasharray="12 7" />
       <text x={540} y={440} textAnchor="middle" fontFamily={NASLOV} fontStyle="italic" fontWeight={900} fontSize={96} fill={P.mastilo}>
-        Žito, so i školjke
+        Prokletstvo novca
       </text>
-      <text x={540} y={550} textAnchor="middle" fontFamily={NASLOV} fontStyle="italic" fontWeight={900} fontSize={68} fill={P.ajvar}>
-        šta im je bila mana?
+      <text x={540} y={550} textAnchor="middle" fontFamily={NASLOV} fontStyle="italic" fontWeight={900} fontSize={60} fill={P.ajvar}>
+        ili ga nema, ili ga ima previše
       </text>
       <rect x={170} y={1440} width={740} height={180} rx={26} fill={P.belo} stroke={P.mastilo} strokeWidth={4} />
       <text x={540} y={1512} textAnchor="middle" fontFamily={SERIF} fontWeight={700} fontSize={46} fill={P.mastilo}>
