@@ -1232,3 +1232,79 @@ KOLO, koje pokrećemo u Somboru, radi isto, samo što ostaje zapisano. Za ono š
 ```
 
 Prvi komentar stranice posle objave: „Sajt: https://ekolo.rs“ (odeljak 3, „Facebook i link“).
+
+## 20. Video 3 „Komšijska sveska“ (oktobar 2026)
+
+Video: `video/kolo-03/out/kolo-03.mp4`. Naslovna: `video/kolo-03/out/naslovna.jpg` (kompozicija `Naslovna` u
+`src/Naslovna.tsx`). Zvuk na Instagramu preimenovati u „KOLO, komšijska sveska“. Alternativni tekst: „Papirni kolaž:
+komšije iz starog somborskog sela pomažu jedni drugima, a u svesku se zapisuje ko je kome pomogao; Ana daje Milanu
+med, Lazar popravlja Aninu veš mašinu, a na kraju se sveska zatvara i pojavljuje se adresa ekolo.rs.“
+
+Opisi su za **lični profil vlasnika**, kao i za video 2 (odeljak 19): prvo lice množine („u Somboru pravimo KOLO“),
+adresa `ekolo.rs` u tekstu na sve tri mreže. Pri objavi označiti stranicu KOLO Fondacije, a na Instagramu pozvati
+profil Fondacije kao Collab. Ako se objavljuje sa stranice Fondacije, prvo lice se menja u treće.
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, pozajmice preko ograde (bušilica, merdevine, šerpa za
+slavu) i zgrada u kojoj se ljudi ne poznaju; Instagram, usluge koje se brzo zaborave (selidba, zalivanje cveća,
+čuvanje deteta); Facebook, šećer koji se pozajmljivao preko ograde. Primeri iz videa (drva, ograda, kolači, med,
+veš mašina) se ne ponavljaju. Početci nisu isti tip kao u videu 2 (tamo tri tvrdnje): TikTok i Facebook počinju
+pitanjem, Instagram molbom da se čitalac seti. Rečenica „POEN nije novac i ne menja se za novac“ stoji na sve tri
+mreže, jer opis prvi put objašnjava šta je POEN (odeljak 1). Proverom po šest reči, osim te propisane rečenice,
+nijedan niz se ne ponavlja ni iz naracije ni iz ranijih opisa u ovom fajlu. Nema rečenica o direktnom dogovoru ni o
+broju oglasa, a nema ni reči „besplatno“, iako je ona u naraciji i na završnoj kartici videa.
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; „pretekne“, ne „preteče“; bez zareza
+ispred „i“ („kad je ko mogao i niko nije brojao“); rodno neutralno na TikTok-u i Instagramu („dok te nije bilo“,
+„kad je posao potrajao“, „Ime koje drugi vide biraš sam“); „vi“ dosledno na Facebook-u; POEN se „prepiše“, nikad
+„dobija“; bez prenesenog značenja. Facebook: **356 karaktera** (sa emodžijima, adresom i heštegovima), adresa
+bez `https://`.
+
+### TikTok
+
+```
+Kome u komšiluku još duguješ jednu uslugu? 🤔
+
+Bušilica, merdevine, velika šerpa koja izlazi samo za slavu. Stvari idu preko ograde godinama i niko ih ne beleži. Dok svi žive u istoj ulici, to i ne smeta, jer svako zna kod koga šta stoji. Teže je kad se neko odseli, a u kuću pored uđu ljudi koje niko ne zna.
+
+U zgradama je još teže. Ljudi deset godina dele isto stepenište, a ne znaju ko u ulazu ume da popravi bojler, ni ko bi rado odvezao stariju komšinicu do doktora.
+
+Zato u Somboru pravimo KOLO. Na Pijaci staviš šta umeš ili šta ti pretekne iz bašte, a ljudi iz tvog kraja to vide. Za pomoć koju pružiš, komšija ti prepiše POEN. POEN nije novac i ne menja se za novac. On pokazuje šta si do sada dao drugima, a prepišeš ga dalje onome ko uradi nešto za tebe. Ništa više ne zavisi od toga ko koga pamti. 🔄
+
+Ko si, potvrđuju ljudi koji te znaju uživo, a ne lična karta. Ime koje drugi vide biraš sam.
+
+👉 Šta iz tvoje kuće najčešće ide na pozajmicu? Napiši u komentar. KOLO nađeš na ekolo.rs
+
+#Sombor #komšiluk #pozajmica #razmena #KOLO
+```
+
+### Instagram
+
+```
+Seti se ko ti je poslednji put pomogao oko selidbe. 📦
+
+Takve usluge se brzo zaborave. Ko je nosio ormar na treći sprat, ko je zalivao cveće dok te nije bilo, ko je pričuvao dete kad je posao potrajao.
+
+KOLO pravimo u Somboru, sa ljudima iz grada i okolnih sela, da takve stvari ostanu zapisane. Onaj kome pomogneš prepiše ti POEN. Kasnije ga ti prepisuješ drugima, za ono što urade za tebe. POEN nije novac i ne menja se za novac, on je zapis o tome šta si dao.
+
+Ko je ko, znaju ljudi koji su ti potvrdili nalog, jer te poznaju lično.
+
+👉 Tvoj prvi oglas može da bude baš pomoć oko selidbe. Na ekolo.rs
+
+#Sombor #Vojvodina #komšije #selidba #KOLO
+```
+
+### Facebook (356 karaktera; u prvi komentar: https://ekolo.rs)
+
+```
+Sećate li se kad se šećer pozajmljivao preko ograde? 🥄
+
+Vraćalo se kad je ko mogao i niko nije brojao.
+
+U Somboru pravimo KOLO, gde takve usluge ostaju zapisane. Kome pomognete, prepiše vam POEN. Kad vama nešto treba, POEN prepišete komšiji koji vam pomogne. POEN nije novac i ne menja se za novac.
+
+👉 Pogledajte šta komšije nude na ekolo.rs
+
+#Sombor #KOLO
+```
+
+Prvi komentar stranice posle objave: „Sajt: https://ekolo.rs“ (odeljak 3, „Facebook i link“).
