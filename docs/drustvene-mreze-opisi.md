@@ -1323,7 +1323,7 @@ beležilo koliko je ko dao; Instagram, pamćenje koje posle nekoliko godina izbl
 Facebook, komšija koji je pomogao oko krova pre deset godina, pa se toga seća samo on. Mesopotamija,
 Inke, glinene pločice i čvorovi iz videa se ne prepričavaju. Zapis se opisuje kao beleška ko je šta dao,
 nikad kao dug („ko kome duguje“ se ne piše). Uporedo sa svim ranijim odeljcima (posebno 17, 18 i 19): nijedna
-rečenica nije ista, a selidba iz odeljka 19 se ne ponavlja.
+rečenica nije ista. Selidba stoji i u odeljku 19, ali ostaje po odluci vlasnika (07.10.2026).
 
 **Pregled ekipe (04.10.2026):** pisac je rovaš objasnio u istoj rečenici u kojoj ga imenuje, jer reč
 mlađi ne znaju; dramaturg je tražio da svaki opis ima jednu sliku (štap sa zarezima, izbledelo sećanje,
@@ -1356,7 +1356,7 @@ POEN je zapis o tome šta si dao zajednici. Nije novac i ne menja se za novac.
 ```
 Sećanje posle nekoliko godina izbledi, a zapis ostane. ✍️
 
-Ko je pomogao da se okopa bašta, ko je doneo kolače kad je bilo najpotrebnije, to se zna dok je sveže. Kasnije se samo kaže „neko nam je tada pomogao“.
+Ko je pomogao oko selidbe, ko je doneo kolače kad je bilo najpotrebnije, to se zna dok je sveže. Kasnije se samo kaže „neko nam je tada pomogao“.
 
 Na KOLU svaki doprinos ostaje upisan. Kad nekome daš svoj rad ili nešto iz svoje kuće, on ti prepiše POEN. POEN nije novac, nego zapis o tome šta si dao.
 
