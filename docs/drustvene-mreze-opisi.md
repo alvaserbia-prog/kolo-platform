@@ -1313,7 +1313,8 @@ Prvi komentar stranice posle objave: „Sajt: https://ekolo.rs“ (odeljak 3, �
 
 ## 21. Video 17 „Stari oblici zapisa“ (oktobar 2026)
 
-Video: `video/kolo-stari-zapis/out/kolo-stari-zapis.mp4`. Naslovna: `video/kolo-stari-zapis/out/naslovna.jpg`.
+Video: `video/kolo-stari-zapis/out/kolo-stari-zapis.mp4`. Naslovna: `video/kolo-stari-zapis/out/naslovna.jpg`
+(„Carstvo bez novca: kako su Inke vodile zapis“, vlasnik 07.10.2026).
 Zvuk na Instagramu preimenovati u „KOLO, stari oblici zapisa“. Alternativni tekst: „Slikovnica: pisar u
 Mesopotamiji utiskuje znake u glinenu pločicu, Inka drži uže sa obojenim koncima i čvorovima, a na kraju
 zajednička sveska u koju se upisuje ko je šta dao.“
@@ -1337,10 +1338,12 @@ plati, zaradi, cena, vrednost; bez „besplatno“; „vi“ dosledno na Faceboo
 
 ### TikTok
 
-```
-Naši stari su na drvenom štapu, rovašu, zarezima beležili koliko je ko dao. 🪵
+Prerađeno 07.10.2026 (vlasnik): opis prati naslovnu „Carstvo bez novca: kako su Inke vodile zapis“.
 
-Nije im trebao ni papir ni olovka. Svaki zarez je značio da je neko nešto doneo, i to se videlo na štapu, a ne samo u nečijem sećanju.
+```
+Carstvo bez novca nije samo priča sa druge strane sveta. 🪵
+
+Naši stari su na drvenom štapu, rovašu, zarezima beležili koliko je ko dao. Nije im trebao ni papir ni olovka. Svaki zarez je značio da je neko nešto doneo, i to se videlo na štapu, a ne samo u nečijem sećanju.
 
 KOLO radi na isti način, samo bez nožića. Kad komšiji pokosiš travu, odneseš teglu zimnice ili mu pomogneš oko papira, on ti prepiše POEN. Tvoj doprinos ostaje zapisan, pa za ono što tebi zatreba ne moraš da tražiš baš onoga ko ima tačno to.
 
