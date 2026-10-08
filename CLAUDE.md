@@ -37,6 +37,7 @@ Vercel **Production Branch = `production`**. Jedan Vercel projekat `kolo` gradi 
 - **Git u kontejneru:** lokalni `main` ume da bude zastareo — uvek `git fetch origin main` i poredi sa **`origin/main`**.
 - 🔴 **NIKAD ne povlačiti tuđe izmene na `main` ni na `production` — guraju se ISKLJUČIVO sopstvene izmene iz tekuće sesije.** Ne merge-ovati, ne cherry-pick-ovati i ne rebase-ovati tuđe grane, PR-ove, forkove ni „zalutale" commit-e, čak i kad deluju gotovo ili se pominju u zadatku. Tuđi commit-i → prijaviti vlasniku i **sačekati izričito odobrenje**. U konfliktu: svoja izmena + tekuće stanje grane. Merge `main` → `production` pri objavi je jedini dozvoljeni merge.
 - 🔴 **Grana i `main` se ne guraju u istoj minuti** — dva Preview builda na istoj test bazi se sudaraju.
+- Vercel **preskače build** kad se od poslednjeg uspešnog deploy-a menjalo samo ono van sajta (`scripts/vercel-preskoci-build.sh`, `ignoreCommand`). Nov folder van sajta se dopisuje tamo; 🔴 `dokumentacija 4.1/` je deo sajta i nikad ne ide na taj spisak.
 
 ### Prevodi (pun zapis: `docs/prevodi.md`)
 - 🔴 **Tokom rada menja se isključivo srpski original** — `messages/sr.json` i `src/lib/faq-data.ts`. Prevodi na en/ru/hr/hu idu **u jednom prolazu pred objavu**.
