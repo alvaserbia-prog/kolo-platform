@@ -94,7 +94,19 @@ razvoj, Next.js, hosting Vercel, region Frankfurt, bez fiksne IP adrese).
 - 🔴 POEN se ni u jednom od ovih tokova ne upisuje sam — uplata se pojavi u admin
   panelu i čeka ljudsko odobrenje (mera M-4a).
 
-## Otvorene obaveze iz APR rešenja
+## Obaveze posle registracije
 
-- Upis **stvarnog vlasnika** u Centralnu evidenciju stvarnih vlasnika — rok je bio 30
-  dana od registracije (do ~20.08.2026.). Proveriti da li je urađeno.
+- ✅ **Kvalifikovani elektronski sertifikat** direktora — pribavljen (stanje 12.10.2026.).
+- ✅ **Upis stvarnog vlasnika** u Centralnu evidenciju stvarnih vlasnika (APR) — urađen
+  (stanje 12.10.2026.). Zakonski rok je **15 dana** od registracije, a ne 30 kako je ovde
+  ranije pisalo; upis je bio zakasneo. Pri svakoj promeni lica za zastupanje ili članova
+  organa upis se ažurira u istom roku od 15 dana.
+- ✅ **Knjigovođa** — dogovor postignut (stanje 12.10.2026.). Knjigovođa preuzima
+  poslovne knjige od dana registracije, godišnji finansijski izveštaj APR-u, poreske
+  prijave i proveru obaveze prijema e-faktura (SEF).
+- ⏳ **Sednica UO** — usvajanje važećih akata posebnim odlukama sa datumom, finansijski
+  plan, ovlašćenja direktora. Datum donošenja nedostaje u `donacije_4_5_8.md` i
+  `rizici_4_6_0.md`.
+- ⏳ **DPA ugovori obrađivača** (Vercel, Neon, Cloudflare, mejl servis) — vidi
+  `docs/obradjivaci-i-prenos.md`.
+- ⏳ **Godišnji izveštaj o radu za 2026.** — javno se objavljuje (Statut čl. 21).
