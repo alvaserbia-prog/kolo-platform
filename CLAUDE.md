@@ -8,6 +8,7 @@ rečenicom, bez istorije. Obrazloženja, incidenti, opis ekrana i mapa koda živ
 |---|---|
 | **`CLAUDE.md`** (ovaj) | pravila, zabrane, deploy, bumpovanje, 🔴 zamke po temama |
 | `docs/funkcionalnosti.md` | **opis svih implementiranih funkcija**, ključni koncepti sa obrazloženjima, API rute, biblioteka `protokol/`, sidebar, admin panel, GAP-ovi |
+| `docs/merenje-stanja.md` | šta se broji kad se meri stanje sistema (aktivan nalog, oglas, razmena), upit i zabeleženo stanje po datumima |
 | `docs/deploy-i-migracije.md` | Vercel topologija (ID-jevi, baze), incidenti migracija, postupak P3009 |
 | `docs/prevodi.md` | pravilo prevoda i `admin` namespace-a sa obrazloženjima, alat `scripts/prevodi.mjs` |
 | `docs/sprovodjenje-rizika-2026-09.md` | pun zapis odluka po rizicima R-01…R-20 + pun sažetak pravne odbrane |
@@ -139,6 +140,9 @@ Ako se razidu sa bilo kojim tekstom ispod ili u `docs/`, **merodavno je ovo**.
 16. **Pri ukidanju izraza pokriti sve imenice koje nosi uz sebe** („цепь"/„цепочка", „maloprodajna referenca"/„kurs").
 17. **Ne raditi blanket zamenu verzija u aktima** — regularni izraz ne zna na koji akt pokazuje broj.
 18. **Pri izmeni ili brisanju odredbe u Pravilniku obavezno proveriti whitepaper** — istu tvrdnju ponavlja svojim rečima, po pravilu u goroj varijanti.
+
+### Merenje stanja
+19. 🔴 **Stanje sistema se meri samo nad onim što je živo** — aktivni nalozi (`status = ACTIVE`, bez `deaktiviranAt`), aktivni oglasi aktivnih naloga, razmene kroz `USLOV_RAZMENE` (sirov `TRANSFER` nosi i vraćanja Protokolu pri gašenju naloga). Ukupno ikad upisano nije stanje. Definicije, upit i zabeležene vrednosti: `docs/merenje-stanja.md`.
 
 ## Opis projekta
 Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom dobru. Dve interne jedinice:
