@@ -13,7 +13,6 @@
       "production": true
     }
   },
-  "ignoreCommand": "git diff --quiet ${VERCEL_GIT_PREVIOUS_SHA:-HEAD^} HEAD -- . ':(exclude)video' ':(exclude)docs' ':(exclude)CLAUDE.md'",
   "regions": [
     "fra1"
   ],
