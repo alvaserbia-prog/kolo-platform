@@ -1,6 +1,7 @@
 import { getLocale } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 import { opisTransakcije } from "@/lib/prevod-servera";
+import { PROTOKOL_WALLET_ID } from "@/lib/protokol/zrno";
 import IstorijaKlijent from "./IstorijaKlijent";
 
 /**
@@ -41,7 +42,15 @@ export default async function IstorijaTransakcija({
       : t.toWalletId === walletId;
     // Prepis i njegovo poništenje su jedini zapisi između DVA člana — kod svih
     // ostalih je druga strana Protokol.
-    const medjuClanovima = t.type === "TRANSFER" || t.type === "PONISTENJE_PREPISA";
+    //
+    // 🔴 Tip nije dovoljan: sirov `TRANSFER` nosi i vraćanja PROTOKOLU (poništenje
+    // potvrde pri brisanju potvrđenog člana, poništenje POEN-a pri prestanku
+    // statusa). Takav red je tražio ime člana na novčaniku Protokola, nije ga našao
+    // i pokazivao „?" — kao da je POEN otišao nikome. Odlučuje druga strana zapisa.
+    const drugiNovcanik = primio ? t.fromWalletId : t.toWalletId;
+    const medjuClanovima =
+      (t.type === "TRANSFER" || t.type === "PONISTENJE_PREPISA") &&
+      drugiNovcanik !== PROTOKOL_WALLET_ID;
     const drugiUser = !medjuClanovima
       ? null
       : primio
@@ -54,6 +63,7 @@ export default async function IstorijaTransakcija({
       type: t.type,
       description: opisTransakcije(locale, t),
       primio,
+      medjuClanovima,
       drugiPseudonim: drugiUser?.pseudonim ?? (medjuClanovima ? "?" : "Protokol"),
       drugiId: drugiUser?.id ?? null,
       createdAt: t.createdAt.toISOString(),

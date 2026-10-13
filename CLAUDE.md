@@ -8,13 +8,14 @@ rečenicom, bez istorije. Obrazloženja, incidenti, opis ekrana i mapa koda živ
 |---|---|
 | **`CLAUDE.md`** (ovaj) | pravila, zabrane, deploy, bumpovanje, 🔴 zamke po temama |
 | `docs/funkcionalnosti.md` | **opis svih implementiranih funkcija**, ključni koncepti sa obrazloženjima, API rute, biblioteka `protokol/`, sidebar, admin panel, GAP-ovi |
+| `docs/merenje-stanja.md` | šta se broji kad se meri stanje sistema (aktivan nalog, oglas, razmena), upit i zabeleženo stanje po datumima |
 | `docs/deploy-i-migracije.md` | Vercel topologija (ID-jevi, baze), incidenti migracija, postupak P3009 |
 | `docs/prevodi.md` | pravilo prevoda i `admin` namespace-a sa obrazloženjima, alat `scripts/prevodi.mjs` |
 | `docs/sprovodjenje-rizika-2026-09.md` | pun zapis odluka po rizicima R-01…R-20 + pun sažetak pravne odbrane |
 | `docs/istorija-implementacija.md` | pun zapis izmena 08–09/2026 |
 | `docs/istorija-bumpova.md` | hronologija bumpova + pune pouke bumpovanja |
 | `docs/registar-rizika-regulatori-2026-09.md` | registar sa ocenama (22 rizika) |
-| `docs/podaci-fondacije.md` | opšti podaci Fondacije (APR, banka, tekst poslovnog modela) za obrasce, uključujući lične podatke upravitelja; bez ličnih podataka članova UO |
+| `docs/podaci-fondacije.md` | opšti podaci Fondacije (APR, banka, tekst poslovnog modela) za obrasce, uključujući lične podatke direktora; bez ličnih podataka članova UO |
 | `video/README.md` | sve za videe, uključujući ekipu za pregled teksta naracije |
 | `dokumentacija 4.1/` | kanonski set akata — **jedini normativni izvor** |
 
@@ -37,6 +38,7 @@ Vercel **Production Branch = `production`**. Jedan Vercel projekat `kolo` gradi 
 - **Git u kontejneru:** lokalni `main` ume da bude zastareo — uvek `git fetch origin main` i poredi sa **`origin/main`**.
 - 🔴 **NIKAD ne povlačiti tuđe izmene na `main` ni na `production` — guraju se ISKLJUČIVO sopstvene izmene iz tekuće sesije.** Ne merge-ovati, ne cherry-pick-ovati i ne rebase-ovati tuđe grane, PR-ove, forkove ni „zalutale" commit-e, čak i kad deluju gotovo ili se pominju u zadatku. Tuđi commit-i → prijaviti vlasniku i **sačekati izričito odobrenje**. U konfliktu: svoja izmena + tekuće stanje grane. Merge `main` → `production` pri objavi je jedini dozvoljeni merge.
 - 🔴 **Grana i `main` se ne guraju u istoj minuti** — dva Preview builda na istoj test bazi se sudaraju.
+- Vercel **preskače build** kad se od poslednjeg uspešnog deploy-a menjalo samo ono van sajta (`scripts/vercel-preskoci-build.sh`, `ignoreCommand`). Nov folder van sajta se dopisuje tamo; 🔴 `dokumentacija 4.1/` je deo sajta i nikad ne ide na taj spisak.
 
 ### Prevodi (pun zapis: `docs/prevodi.md`)
 - 🔴 **Tokom rada menja se isključivo srpski original** — `messages/sr.json` i `src/lib/faq-data.ts`. Prevodi na en/ru/hr/hu idu **u jednom prolazu pred objavu**.
@@ -138,6 +140,9 @@ Ako se razidu sa bilo kojim tekstom ispod ili u `docs/`, **merodavno je ovo**.
 16. **Pri ukidanju izraza pokriti sve imenice koje nosi uz sebe** („цепь"/„цепочка", „maloprodajna referenca"/„kurs").
 17. **Ne raditi blanket zamenu verzija u aktima** — regularni izraz ne zna na koji akt pokazuje broj.
 18. **Pri izmeni ili brisanju odredbe u Pravilniku obavezno proveriti whitepaper** — istu tvrdnju ponavlja svojim rečima, po pravilu u goroj varijanti.
+
+### Merenje stanja
+19. 🔴 **Stanje sistema se meri samo nad onim što je živo** — aktivni nalozi (`status = ACTIVE`, bez `deaktiviranAt`), aktivni oglasi aktivnih naloga, razmene kroz `USLOV_RAZMENE` (sirov `TRANSFER` nosi i vraćanja Protokolu pri gašenju naloga). Ukupno ikad upisano nije stanje. Definicije, upit i zabeležene vrednosti: `docs/merenje-stanja.md`.
 
 ## Opis projekta
 Alternativni ekonomski sistem zasnovan na uzajamnosti i doprinosu zajedničkom dobru. Dve interne jedinice:

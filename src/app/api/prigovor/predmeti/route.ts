@@ -3,6 +3,7 @@ import { greska } from "@/lib/greska-api";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { PROTOKOL_WALLET_ID } from "@/lib/protokol/zrno";
 import { ROK_NABAVKA_DANA, ROK_RAZMENA_DANA, rokOd } from "@/lib/prigovor-pravila";
 
 /**
@@ -29,6 +30,9 @@ export async function GET() {
         type: "TRANSFER",
         createdAt: { gte: odRazmene },
         fromWallet: { userId: ja },
+        // Sirov `TRANSFER` nosi i vraćanja Protokolu (poništenje potvrde pri
+        // brisanju člana, prestanak statusa). To nije razmena i nema drugu stranu.
+        toWalletId: { not: PROTOKOL_WALLET_ID },
         prijavaRazmene: null,
       },
       orderBy: { createdAt: "desc" },

@@ -5,6 +5,7 @@ import { opisTransakcije } from "@/lib/prevod-servera";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { PROTOKOL_WALLET_ID } from "@/lib/protokol/zrno";
 
 const TIP_LABELA: Record<string, string> = {
   TRANSFER: "Upis POENA",
@@ -60,7 +61,7 @@ export async function GET(req: NextRequest) {
     const drugiPseudonim =
       primio
         ? (t.fromWallet?.user?.pseudonim ?? "Protokol")
-        : (t.toWallet?.user?.pseudonim ?? "?");
+        : (t.toWallet?.user?.pseudonim ?? (t.toWalletId === PROTOKOL_WALLET_ID ? "Protokol" : "?"));
 
     return {
       id: t.id,
