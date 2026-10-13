@@ -210,6 +210,7 @@ pre sledećeg.** Greška nađena kasnije vraća rad na korak u kome je nastala.
 
 - Vlasnik odobrava tekst (1); sve ostalo, uključujući muziku (3 i 8), radi se samostalno i šalje gotovo (muzika: odluka vlasnika 04.10.2026). 🔴 **Scenario (2) vlasnik više ne odobrava** (odluka vlasnika, 04.10.2026, video 15: „ne moram odobravati scenarije, sve završi“): scenario se piše i zapisuje u folder videa, pa se odmah ide dalje.
 - U folderu videa ostaju scenario, uputstvo sa postupkom i tabelom „Priča u slici“, skripte i gotov fajl; opisi idu u `docs/drustvene-mreze-opisi.md`.
+- 🔴 **Rad na videu se gura samo na granu sesije, ne na `main`, a gotovi videi (MP4) se ne guraju u git** (odluka vlasnika, 13.10.2026). U git idu scenario, uputstvo, kod, skripte, naslovna i opisi; MP4 se vlasniku šalje u razgovoru (kopija za pregled manja od 30 MB). `.gitignore` zato isključuje `video/*/out/*.mp4`; videi koji su već u repou ostaju.
 - 🔴 Odluka vlasnika doneta tokom izrade odmah se zapisuje: ovde (za sve videe) ili u uputstvo videa (samo za taj video). Ono što nije zapisano, sledeća sesija ne zna.
 
 ## Zajedničko za sve videe
