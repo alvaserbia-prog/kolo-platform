@@ -57,3 +57,6 @@ scripts/backups/*.dump
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# gotovi videi se ne guraju u git (odluka vlasnika, 13.10.2026; video/README.md)
+video/*/out/*.mp4
