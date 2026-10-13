@@ -392,7 +392,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
             type="button"
             aria-label={t("tabovi_skroluj_levo")}
             onClick={() => tabsRef.current?.scrollBy({ left: -240, behavior: "smooth" })}
-            className="absolute left-0 top-0 bottom-px flex items-center pr-3 bg-gradient-to-r from-white via-white/90 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
+            className="absolute left-0 top-0 bottom-px flex items-center pr-3 bg-linear-to-r from-white via-white/90 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
           >
             <span className="flex items-center justify-center w-5 h-5 rounded-full border border-kolo-border bg-white shadow-sm text-xs leading-none">
               ‹
@@ -404,7 +404,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
             type="button"
             aria-label={t("tabovi_skroluj_desno")}
             onClick={() => tabsRef.current?.scrollBy({ left: 240, behavior: "smooth" })}
-            className="absolute right-0 top-0 bottom-px flex items-center pl-3 bg-gradient-to-l from-white via-white/90 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
+            className="absolute right-0 top-0 bottom-px flex items-center pl-3 bg-linear-to-l from-white via-white/90 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
           >
             <span className="flex items-center justify-center w-5 h-5 rounded-full border border-kolo-border bg-white shadow-sm text-xs leading-none">
               ›

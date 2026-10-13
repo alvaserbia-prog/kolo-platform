@@ -111,27 +111,24 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
       <div>
         {/* Balans kartica: dugmad levo (jedno ispod drugog), stanje veliko desno.
 
-            🔴 Ko ne sme da prepisuje NE dobija novčanik-vizual. Zelena kartica, broj
-            preko pola visine kartice, oznaka jedinice ispod njega i dugmad za plaćanje
-            pored — to je vizuelni jezik platne kartice i obećava raspolaganje koje
-            pravilo ne daje, pa odsustvo dugmeta „Prepiši POEN" izgleda kao kvar. Takvom nalogu
-            kartica pokazuje ono što veliki broj i inače znači — koliko SME da prepiše,
-            dakle nulu — a koliko mu je stvarno evidentirano stoji u redu „Na tvom
-            zapisu" odmah ispod. To nije nov obrazac: `raspolozivo()` isto tako već
-            pokazuje nulu zapisu u nadoknadi, a pravi iznos nosi zaseban red.
+            🟢 Kartica je zelena SVIMA (odluka vlasnika, 13.10.2026). Do tada je ko ne sme
+            da prepisuje dobijao belu karticu, da zelena ne bi obećavala raspolaganje koje
+            pravilo ne daje. Ostaje ono što nosi pravilo: takav nalog na velikom broju vidi
+            koliko SME da prepiše, dakle nulu, uz oznaku ispod broja i objašnjenje u
+            kartici, a koliko mu je stvarno evidentirano stoji u redu „Na tvom zapisu"
+            odmah ispod. Dugme za prepis i skener mu se i dalje ne prikazuju.
+
+            🔴 Pun ton je `bg-kolo-green-700`, a prelaz ide preko njega. Prelaz sam nije
+            dovoljan: stara klasa za prelaz (`gradient-to`) daje `in oklab` bez rezerve, pa ga
+            pregledač koji to ne zna odbaci celog — kartica je ostajala bela, sa belim
+            slovima, i kod onoga ko sme da prepisuje. Brana: `novcanik-kartica-izvor.test.ts`.
 
             🟢 „Moj QR" OSTAJE i takvom nalogu, i to namerno: nov član sme da PRIMA
             (čl. 28 st. 2), a QR je način da mu se prepiše POEN za prodato dobro. To mu
             je ujedno i put do potvrde (čl. 40a), pa bi sklanjanje tog dugmeta zatvorilo
             ulaz kroz Pijacu. Skener se sklanja jer vodi u suprotnom smeru — u obrazac
             za prepis DRUGOME. */}
-        <div
-          className={
-            smeDaSalje
-              ? "bg-gradient-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg"
-              : "rounded-2xl border border-kolo-border bg-white p-6"
-          }
-        >
+        <div className="bg-kolo-green-700 bg-linear-to-br from-kolo-green-700 to-kolo-green-500 rounded-2xl p-6 text-white shadow-lg">
           <div className="flex items-center justify-between gap-4">
             {/* LEVO — dugmad jedno ispod drugog */}
             <div className="flex flex-col gap-3 shrink-0">
@@ -154,11 +151,7 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
               )}
               <button
                 onClick={() => setShowQR(true)}
-                className={
-                  smeDaSalje
-                    ? "px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
-                    : "px-5 py-2 bg-kolo-green-50 text-kolo-green-700 text-sm font-semibold rounded-xl hover:bg-kolo-green-100 transition-colors border border-kolo-border"
-                }
+                className="px-5 py-2 bg-white/20 text-white text-sm font-semibold rounded-xl hover:bg-white/30 transition-colors border border-white/30"
               >
                 {t("moj_qr")}
               </button>
@@ -166,19 +159,15 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
 
             {/* DESNO — stanje veliko */}
             <div className="text-right min-w-0">
-              <p
-                className={`text-4xl sm:text-5xl font-bold tracking-tight tabular-nums break-words${
-                  smeDaSalje ? "" : " text-kolo-text"
-                }`}
-              >
+              <p className="text-4xl sm:text-5xl font-bold tracking-tight tabular-nums break-words">
                 {(smeDaSalje ? raspolozivo(balance) : 0).toLocaleString(intlTag(locale))}
               </p>
-              <p className={smeDaSalje ? "text-lg text-white/70 mt-0.5" : "text-lg text-kolo-muted mt-0.5"}>
+              <p className="text-lg text-white/70 mt-0.5">
                 {tc("poen")}
               </p>
               {/* Bez ove oznake veliki broj se i dalje čita kao „stanje računa". */}
               {!smeDaSalje && (
-                <p className="text-sm text-kolo-muted mt-0.5">{t("raspolozivo_labela")}</p>
+                <p className="text-sm text-white/80 mt-0.5">{t("raspolozivo_labela")}</p>
               )}
             </div>
           </div>
@@ -187,7 +176,7 @@ export default function NovcanikKartice({ balance, pseudonim, memberHash, platiP
               svih redova, pa se na dužem ekranu nije videlo u istom pogledu sa brojem
               koji objašnjava — a bez njega nula izgleda kao da je nešto nestalo. */}
           {!smeDaSalje && (
-            <p className="mt-4 text-sm text-kolo-muted">
+            <p className="mt-4 text-sm text-white/85">
               {razlogZabrane === "ceka_roditelja" ? t("ceka_roditelja") : t("samo_primalac")}
             </p>
           )}
