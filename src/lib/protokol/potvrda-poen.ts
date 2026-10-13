@@ -467,7 +467,7 @@ export async function javiZabelezeno(vezaId: string): Promise<void> {
         `Član „${veza.verifikator.pseudonim}" potvrdio je tvoju stvarnost. ${iznosVerifikovanog} POEN ` +
         `upisuje ti se kad ostvariš svoj prvi doprinos — objavi ponudu koju Fondacija odobri, ` +
         `doniraj, postani pokrovitelj ili izvrši operativni doprinos.`,
-      link: "/pijaca/novi",
+      link: "/pijaca/novi-oglas",
     });
   } catch (e) {
     console.error("[potvrda-poen] obaveštenje o čekanju nije poslato", { vezaId, e });
