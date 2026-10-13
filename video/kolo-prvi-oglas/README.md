@@ -1,7 +1,7 @@
 # KOLO video — Registracija i prvi oglas (4. po redosledu serije)
 
 Animirani video za Reels/TikTok/Facebook: **1080×1920, 30 fps, 79 s, H.264 + AAC, −14 LUFS**.
-Gotov fajl: [`out/kolo-prvi-oglas.mp4`](out/kolo-prvi-oglas.mp4), naslovna: [`out/naslovna.jpg`](out/naslovna.jpg).
+Gotov fajl: `out/kolo-prvi-oglas.mp4`. Naslovna: [`out/naslovna.jpg`](out/naslovna.jpg), posebna kompozicija `Naslovna` (`src/Naslovna.tsx`, `node scripts/naslovna.mjs`) složena u kvadrat y 420–1500, da je Facebook (4:5, kvadrat) i Instagram mreža (3:4) ne seku.
 Scenario i tekst naracije: [`scenario.md`](scenario.md).
 
 Isti sistem kao videi 2 i 3 (`video/kolo-04`, `video/kolo-03`): papirni kolaž, linije koje
