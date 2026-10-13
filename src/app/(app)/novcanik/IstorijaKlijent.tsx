@@ -12,13 +12,13 @@ export type Transakcija = {
   type: string;
   description: string | null;
   primio: boolean;
+  /** Druga strana je član, ne Protokol (odlučuje server po novčaniku, ne po tipu). */
+  medjuClanovima: boolean;
   drugiPseudonim: string;
   drugiId: string | null;
   createdAt: string;
 };
 
-/** Prepis i njegovo poništenje idu između dva člana; sve ostalo je Protokol. */
-const izmedjuClanova = (tip: string) => tip === "TRANSFER" || tip === "PONISTENJE_PREPISA";
 
 type Filter = "sve" | "primljeno" | "poslato" | "emisije";
 
@@ -27,9 +27,9 @@ export default function IstorijaKlijent({ transakcije, pseudonim }: { transakcij
   const [filter, setFilter] = useState<Filter>("sve");
 
   const filtered = useMemo(() => transakcije.filter((tx) => {
-    if (filter === "primljeno") return tx.primio && izmedjuClanova(tx.type);
-    if (filter === "poslato") return !tx.primio && izmedjuClanova(tx.type);
-    if (filter === "emisije") return !izmedjuClanova(tx.type);
+    if (filter === "primljeno") return tx.primio && tx.medjuClanovima;
+    if (filter === "poslato") return !tx.primio && tx.medjuClanovima;
+    if (filter === "emisije") return !tx.medjuClanovima;
     return true;
   }), [transakcije, filter]);
 
@@ -168,7 +168,7 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
         {/* Opis */}
         <p className="text-xs text-kolo-muted/80 truncate" title={t.description ?? undefined}>{t.description}</p>
         {/* Iznos — od Protokola plavo, primljeno od člana zeleno, dato/upisano crveno */}
-        <span className={`text-base font-bold text-right ${!izmedjuClanova(t.type) && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+        <span className={`text-base font-bold text-right ${!t.medjuClanovima && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
           {t.primio ? "+" : "−"}{t.amount.toLocaleString(intlTag(locale))}
         </span>
       </div>
@@ -209,7 +209,7 @@ const TxRed = memo(function TxRed({ t, pseudonim, jePoslednji }: { t: Transakcij
               })}
             </p>
           </div>
-          <span className={`text-sm font-bold text-right shrink-0 ${!izmedjuClanova(t.type) && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
+          <span className={`text-sm font-bold text-right shrink-0 ${!t.medjuClanovima && t.primio ? "text-blue-600" : t.primio ? "text-kolo-green-700" : "text-red-500"}`}>
             {t.primio ? "+" : "−"}{t.amount.toLocaleString(intlTag(locale))}
           </span>
         </div>
