@@ -8,7 +8,7 @@ novac“ (40), „Kako nastaje novac“ (52) i K „Čije je KOLO? Ničije.“ (
 izdaju i umnožavaju. Kredit lakše dobija onaj ko već ima. Ljudi imaju pravo da se dogovore drugačije: KOLO
 zapisuje doprinos zajedničkom dobru, a taj zapis, POEN, ne traži ni kredit ni platu.
 
-**Trajanje:** ~250 izgovorenih reči, oko 2:08; ispod 2:00 se ide ako se izbaci „Danas za to postoji tehnologija.“ i skrati scena 9 (merilo: „Trampa“, ~200 reči = 103 s).
+**Trajanje:** ~270 izgovorenih reči, oko 2:20 (merilo: „Trampa“, ~200 reči = 103 s).
 
 ## Teze (vlasnik, 14.10.2026)
 
@@ -23,20 +23,33 @@ zapisuje doprinos zajedničkom dobru, a taj zapis, POEN, ne traži ni kredit ni 
 | 7 | Siromašan u KOLU | Ne treba kredit ni plata, dovoljno je imati šta da ponudiš ili znati nešto da uradiš. |
 | 8 | KOLO je naše | Ulazak besplatan, pravila javna i ista za sve. |
 
-## Tekst za snimanje (predlog)
+## Tekst za snimanje (predlog, jezik ispravljen 14.10.2026)
 
-1. Nekad je novac imao svoju vrednost. Bio je od zlata ili srebra, ili je iza njega stajalo zlato.
-2. Iza dinara danas ne stoji zlato. Dinar je dogovor, a važi zato što ga je država zakonom proglasila sredstvom plaćanja.
-3. Dinar izdaje Narodna banka. Banke ga umnožavaju: odobre kredit i upišu nov novac, a u rezervi drže samo mali deo. Na svaki kredit uzimaju kamatu.
-4. Korist ima onaj ko novac izdaje i ko ga prvi dobije. Kredit pomaže i onome ko ga uzme, ali vraća više nego što je dobio.
-5. Tu je nepravda. Kredit lako dobije onaj ko već ima. Ko je bez posla ili ima malu platu, teško ga dobija.
-6. Ali novac je samo dogovor. Niko ne mora za svoj rad da traži dinare. Imamo pravo da se udružimo, da razmenjujemo među sobom i da tu razmenu zapisujemo. Danas za to postoji tehnologija.
-7. Zato smo napravili KOLO. Nije nam se dopalo kako se upravlja novcem, pa smo se dogovorili drugačije.
-8. KOLO zapisuje ono što daješ zajednici. Taj zapis se zove POEN. Njime razmenjujemo robu, usluge i pomoć, zapisom umesto novcem.
+1. Nekad je novac sam po sebi vredeo. Kovan je od zlata i srebra, a papirni novac je bio pokriven zlatom.
+2. Dinar danas nema zlatno pokriće. On je društveni dogovor, a važi zato što ga je država zakonom propisala kao jedino zakonsko sredstvo plaćanja.
+3. Dinar izdaje Narodna banka. Poslovne banke ga umnožavaju kroz kredite: kad odobre kredit, upišu nov novac na račun, a kao obaveznu rezervu drže samo mali deo. Na svaki kredit naplaćuju kamatu.
+4. Korist ima onaj ko novac izdaje i onaj ko do novog novca dođe pre ostalih. Koristi ima i onaj ko podigne kredit, ali on vraća više nego što je uzeo.
+5. I tu počinje nepravda. Kredit lako dobija onaj ko već ima. Ko je bez posla ili ima malu platu, do kredita teško dolazi.
+6. Ali novac je samo dogovor. Niko ne mora za svoj rad da traži dinare. Imamo pravo da se udružimo, da razmenjujemo među sobom i da tu razmenu zapisujemo. Danas to može i preko interneta.
+7. Zato smo napravili KOLO. Nismo bili zadovoljni time kako se upravlja novcem, pa smo se dogovorili drugačije.
+8. U KOLU se zapisuje ono što daješ zajednici. Taj zapis se zove POEN. Njime razmenjujemo robu, usluge i pomoć, zapisom umesto novcem.
 9. POEN se upisuje kad postaviš oglas, kad potvrdiš novog člana, kad razmenjuješ, kad doniraš Fondaciji ili radiš za zajednicu.
-10. Za to ne treba kredit ni plata. Dovoljno je da imaš šta da ponudiš ili da znaš nešto da uradiš. Ko ima malo, u KOLU dobija šansu koju mu banka ne daje.
-11. Ulazak je besplatan, a pravila su javna i ista za sve. KOLO je naše.
+10. Za to ne treba ni kredit ni plata. Dovoljno je da imaš šta da ponudiš ili da znaš nešto da uradiš. U KOLU i onaj ko ima malo dobija priliku koju mu banka ne daje.
+11. Učlanjenje je besplatno, a pravila su javna i ista za sve. KOLO je naše.
 12. Pridruži se na ekolo.rs.
+
+| Bilo je | Sada | Zašto |
+|---|---|---|
+| iza dinara ne stoji zlato; iza njega stajalo zlato | dinar nema zlatno pokriće; bio je pokriven zlatom | doslovan prevod engl. *backed by gold*; srpski stručni izraz je „pokriće“ |
+| imao svoju vrednost | sam po sebi vredeo | prirodnije u govoru |
+| u rezervi drže | kao obaveznu rezervu drže | srpski naziv ustanove |
+| ko ga prvi dobije | ko do novog novca dođe pre ostalih | prevod sa engleskog (*first to receive*) |
+| Kredit pomaže onome ko ga uzme | Koristi ima i onaj ko podigne kredit | „podići kredit“ je srpski izraz |
+| Tu je nepravda | I tu počinje nepravda | „tu je“ ne kaže ništa |
+| Danas za to postoji tehnologija | Danas to može i preko interneta | „postoji tehnologija“ je kalk; kaže se šta je |
+| KOLO zapisuje | U KOLU se zapisuje | prirodniji srpski red |
+| dobija šansu | dobija priliku | domaća reč |
+| Ulazak je besplatan | Učlanjenje je besplatno | „ulazak“ je kalk (engl. *entry*) |
 
 ## Izbori za vlasnika
 

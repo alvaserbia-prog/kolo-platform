@@ -252,7 +252,10 @@ pravi kolona „Natpis“ za svaku scenu; tekst koji je deo slike upisuje se u k
 
 🟢 **Zapis umesto novca sme da se kaže** (odluka vlasnika, 30.09.2026). Nije obavezno da tekst govori „KOLO je dodatak, ne zamena“: ideja da zapis može da zameni novac sme da ostane, jer je to mogući ishod KOLA, iako KOLO danas kreće paralelno sa dinarom. Ono što i dalje važi, jer su to strukturne granice iz akata, a ne stav o cilju: POEN se ne menja za dinare i ne iznosi iz sistema (nekonvertibilnost), obaveze prema državi ostaju u dinarima, i uz POEN ne idu reči kupi, prodaj, plati, zaradi, cena.
 
-🔴 **Tekst je jasan i direktan, bez metafora i prenesenih izraza** (odluka vlasnika, 30.09.2026, video „Trampa“; važi za sve videe). Kaže se šta se desilo i ko je šta uradio: ne „put se račva“ nego „problem su rešavali na dva načina“, ne „stvar ide iz ruke u ruku“ nego „obućar dobije tu stvar i za nju posle uzme ono što mu treba“. Slika sme da prikaže ono što tekst kaže, ali tekst ne sme da računa na sliku da bi bio razumljiv.
+🔴 **Tekst je jasan, ozbiljan i u duhu srpskog jezika** (odluke vlasnika, 30.09.2026 i 14.10.2026; važi za sve videe).
+- **Ne prevodi se doslovno na srpski, nego se upotrebljavaju pravi srpski izrazi** (14.10.2026). Primer: ne „iza dinara ne stoji zlato“ (engl. *backed by gold*), nego „dinar nema zlatno pokriće“; ne „ko ga prvi dobije“, nego „ko do novog novca dođe pre ostalih“; stručni pojmovi po srpskom nazivu (pokriće, obavezna rezerva, zakonsko sredstvo plaćanja, podići kredit).
+- **Preneseni izraz sme, ali samo ako je u duhu srpskog jezika** (14.10.2026; ublažava pravilo od 30.09.2026 „bez metafora“). Ne sme slika prevedena iz drugog jezika ni izmišljena slika koja zamagljuje smisao (ne „put se račva“, nego „problem su rešavali na dva načina“).
+- Slika sme da prikaže ono što tekst kaže, ali tekst ne sme da računa na sliku da bi bio razumljiv.
 
 🟡 **Priča** (odluke vlasnika, 30.09.2026, video „Pijaca“):
 - Strana onoga ko nudi: ne dobija dinare, nego ono što njemu treba, u razmeni. Strana onoga ko prima ostaje kako je gore: dinari su mu ostali za nešto drugo.
