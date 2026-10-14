@@ -29,28 +29,28 @@ videa 62; ovde je u središtu **sveska**, ne novac.
 
 ## Scenario (scena po scena)
 
-Vremena su **okvirna** (procena po broju reči, tempom videa 17: ~1,85 reči u sekundi sa stankama);
-posle snimanja se zamenjuju vremenima iz `src/plan.json`. Ukupno ~80 s glasa, pa numera zamire do ~84 s.
-Likovni stil: papirni kolaž (karton, sveska na kockice, žute cedulje), stambena zgrada iz šezdesetih u Somboru.
+Vremena su iz `src/plan.json` (snimak vlasnika 14.10.2026, posle čišćenja i reza): glas 0,9–80,2 s,
+video 81,5 s. Likovni stil: stara ilustrovana slikovnica iz videa 14 i 17 (gvaš, mastilo, papir, sveska na
+kockice, žute cedulje), stambena zgrada iz šezdesetih u Somboru.
 Natpis preko slike je samo naslov; sav ostali tekst je u svetu priče (sveska, tabla, telefon, kartica).
 
 | Sc. | Vreme | Naracija | Slika i šta se dešava na kojoj reči |
 |---|---|---|---|
-| 1 | 0,0–5,5 | Čika Đura je vodio kasu u svojoj zgradi. | **Kuka:** od prvog kadra gore naslov „Ko krade iz zajedničke kase?“ (stoji do kraja sc. 2, ne izgovara se). Ispod: ruka ubaci novčanicu u limenu kasu „ZGRADA“, poklopac škljocne. Na „Đura“ kamera se odmakne: čika Đura za kuhinjskim stolom, naočare na nosu, kasa pored lakta. Na „zgradi“ iza prozora se vidi zgrada sa ulazom. |
-| 2 | 5,5–12,5 | Primao je uplate stanara i plaćao troškove zgrade i sve je upisivao u svesku. | Na „uplate“ na vratima stanarka pruža novčanice, Đura ih broji. Na „troškove“ majstor menja sijalicu u ulazu, Đura mu daje novac. Na „upisivao“ krupno sveska: olovka ispisuje dve rubrike „uplate“ i „troškovi“, redovi „stan 4 · 2.000“, „sijalica u ulazu · 450“. |
-| 3 | 12,5–18,5 | Dok je sveska stajala kod njega, stanari nisu imali uvid kako se novac troši. | Na „stajala“ Đura zatvori svesku i stavi je u fioku; fioka se zatvori. Na „stanari“ rez na ulaz zgrade: tri-četiri stanara kod sandučića (bez imena). Na „uvid“ jedan od njih pogleda ka Đurinim vratima, zatvorenim. |
-| 4 | 18,5–25,0 | Đura je bio pošten, ali su stanari ipak sumnjali. | Na „pošten“ Đura sam u kuhinji iz svog novčanika doda kovanicu koja je falila u kasi (pokazuje da je pošten bez reči). Na „ali“ rez na ulaz: stanari šapuću, iznad glava im iskoče papirni upitnici; na „sumnjali“ upitnici se zgusnu, a Đura prolazi kroz ulaz pognute glave. Naslov gore polako izbledi. |
-| 5 | 25,0–29,5 | Onda je Đura okačio svesku na oglasnu tablu u ulazu. | **Obrt** (muzika se otvara na „okačio“). Đura iznosi svesku iz fioke. Na „okačio“ pribada je rajsneglama na plutanu tablu „OGLASNA TABLA“ u ulazu, pored cedulje o čišćenju stepeništa. |
-| 6 | 29,5–36,5 | Tada je svaki stanar mogao sam da proveri svaku uplatu i svaki trošak. | Stanari zastaju pred tablom jedan po jedan. Na „uplatu“ prst stanarke prelazi preko reda „stan 4 · 2.000“ i ona klimne (to je njena uplata); na „trošak“ stanar pogleda sijalicu iznad table, pa red „sijalica u ulazu · 450“, i klimne. Upitnici iz sc. 4 se jedan po jedan skupe i nestanu. |
-| 7 | 36,5–41,5 | I Đura više nije morao da se pravda. | Đura prolazi kroz ulaz uspravno; stanar mu otvori vrata, drugi klimne. Đura u prolazu doda nov red u svesku na tabli. |
-| 8 | 41,5–48,0 | Kada je evidencija dostupna svima, svako ima uvid da onaj ko upravlja ne uzima ništa za sebe. | Kamera se približi tabli. Na „evidencija“ na koricama sveske se pojavi rukom pisano „EVIDENCIJA“. Na „svima“ pred tablom više glava (deca, baka sa cegerom). Na „ne uzima“ kraj kolone: „uplate“ i „troškovi“ se svode, kasa „ZGRADA“ otvorena pored, ništa ne fali. |
-| 9 | 48,0–53,5 | To se naziva transparentnost upravljanja. | Tabla u ulazu, sad osvetljena; svi stoje oko nje. Bez natpisa (reč nosi titl). Kadar stoji jedan takt da se reč slegne. |
-| 10 | 53,5–56,0 | Tako radi i KOLO. | **Prelaz:** tabla iz ulaza se okrene kao karton i s druge strane je ekran telefona sa znakom KOLO. |
-| 11 | 56,0–60,0 | POEN se upisuje samo prema pravilima. | Telefon u ruci, stranica Sistem. Na „pravilima“ pored telefona uskoči zatvorena knjiga „PRAVILA“; iz nje tanka zelena linija dođe do novog reda koji se upravo upiše. |
-| 12 | 60,0–65,0 | Svaki upisani POEN vidljiv je svima na platformi. | Ekran: kolone „Vreme · Davalac · Primalac · Iznos“, redovi sa izmišljenim pseudonimima (npr. „Milica · Stevan · 300“), jedan po jedan klize odozdo. Na „svima“ oko telefona se pojave još tri ruke sa telefonima i istim spiskom (prijavljeni članovi, ne ceo internet). |
-| 13 | 65,0–70,5 | Na taj način članovi mogu sami da provere da li je bilo zloupotrebe. | Na „sami“ prst prelazi preko redova kao prst stanarke preko table u sc. 6. Na „zloupotrebe“ lupa prođe preko spiska; svi redovi ostanu zeleni, nijedan ne pocrveni (video ne tvrdi da iko krade). |
-| 14 | 70,5–76,0 | Ne moraš verovati na reč, jer sve možeš da proveriš. | Podeljen kadar: levo tabla iz ulaza sa sveskom, desno telefon sa spiskom. Na „verovati na reč“ Đura levo raširi ruke (nema šta da kaže); na „proveriš“ oba prsta, stanarkin na tabli i član na telefonu, istovremeno stanu na red i oba klimnu. |
-| 15 | 76,0–84,0 | Registruj se na ekolo.rs. | Završna kartica: znak KOLO, krupno „ekolo.rs“. Na „ekolo.rs“ adresa udari sa završnim udarcem numere (odmah posle reči), pa kadar stoji dok numera zamire. |
+| 1 | 0,0–4,8 | Čika Đura je vodio kasu u svojoj zgradi. | **Kuka:** od prvog kadra gore naslov „Ko krade iz zajedničke kase?“ (stoji prvih ~4,6 s, do kraja sc. 1, vlasnik 14.10.2026; ne izgovara se). Ispod: ruka ubaci novčanicu u limenu kasu „ZGRADA“, poklopac škljocne. Na „Đura“ kamera se odmakne: čika Đura za kuhinjskim stolom, naočare na nosu, kasa pored lakta. Na „zgradi“ Đura pogleda kroz prozor. |
+| 2 | 4,8–12,0 | Primao je uplate stanara i plaćao troškove zgrade i sve je upisivao u svesku. | Na „uplate“ na vratima stanarka pruža novčanice, Đura ih broji. Na „troškove“ majstor menja sijalicu u ulazu, Đura mu daje novac. Na „upisivao“ krupno sveska: olovka ispisuje dve rubrike „uplate“ i „troškovi“, redovi „stan 4 · 2.000“, „sijalica u ulazu · 450“. |
+| 3 | 12,0–18,9 | Dok je sveska stajala kod njega, stanari nisu imali uvid kako se novac troši. | Na „stajala“ Đura zatvori svesku i stavi je u fioku; fioka se zatvori. Na „stanari“ rez na ulaz zgrade: tri-četiri stanara kod sandučića (bez imena). Na „uvid“ jedan od njih pogleda ka Đurinim vratima, zatvorenim. |
+| 4 | 18,9–24,3 | Đura je bio pošten, ali su stanari ipak sumnjali. | Na „pošten“ Đura sam u kuhinji iz svog novčanika doda kovanicu koja je falila u kasi (pokazuje da je pošten bez reči). Na „ali“ rez na ulaz: stanari šapuću, iznad glava im iskoče papirni upitnici; na „sumnjali“ upitnici se zgusnu, a Đura prolazi kroz ulaz pognute glave. Naslov gore polako izbledi. |
+| 5 | 24,3–30,2 | Onda je Đura okačio svesku na oglasnu tablu u ulazu. | **Obrt** (muzika se otvara na „okačio“). Đura iznosi svesku iz fioke. Na „okačio“ pribada je rajsneglama na plutanu tablu „OGLASNA TABLA“ u ulazu, pored cedulje o čišćenju stepeništa. |
+| 6 | 30,2–38,3 | Tada je svaki stanar mogao sam da proveri svaku uplatu i svaki trošak. | Krupno tabla sa sveskom, upitnici iz sc. 4 u uglovima. Na „uplatu“ prst stanarke (roze rukav) prelazi preko reda „stan 4 · 2.000“, njene uplate; na „trošak“ prst stanara (oker rukav) preko reda „sijalica u ulazu · 450“. Uz svaku proveru jedan upitnik nestane. |
+| 7 | 38,3–42,5 | I Đura više nije morao da se pravda. | Đura prolazi kroz ulaz uspravno, sa osmehom; stanar ga pozdravi podignutom rukom, stanarka se nasmeje. Đura u prolazu dopiše nov red u svesku na tabli („metla i krpe · 300“). |
+| 8 | 42,5–50,6 | Kada je evidencija dostupna svima, svako ima uvid da onaj ko upravlja ne uzima ništa za sebe. | Kamera se približi tabli. Na „evidencija“ iznad sveske uskoči žuta cedulja, rukom pisano „EVIDENCIJA“. Na „svima“ pred tablom više glava (deca, baka sa cegerom). Na „ne uzima“ ispod kolona se ispiše „ostalo u kasi: 2.850“, a na „ništa“ pored table uskoči otvorena kasa „ZGRADA“ sa istim brojem na cedulji: ništa ne fali. |
+| 9 | 50,6–54,2 | To se naziva transparentnost upravljanja. | Tabla u ulazu, sad osvetljena; svi stoje oko nje. Bez natpisa (reč nosi titl). Kadar stoji jedan takt da se reč slegne. |
+| 10 | 54,2–56,5 | Tako radi i KOLO. | **Prelaz:** tabla iz ulaza se okrene kao karton i s druge strane je ekran telefona sa znakom KOLO. |
+| 11 | 56,5–60,1 | POEN se upisuje samo prema pravilima. | Telefon: profil „Direktor“, račun POEN-a; stanje gore, ispod zapisi: upisi od Protokola („Protokol · oglas · +1.000“, „Protokol · potvrda člana · +1.000“) i dva prepisa („Zoran · +300“, „→ Milica · −200“). Na „prema“ pored telefona uskoči knjiga „PRAVILA“; iz nje tanka zelena linija dođe do mesta novog reda, a na „pravilima“ se upiše „Protokol · potvrda člana · +1.000“ i stanje poraste na 4.100. |
+| 12 | 60,1–64,7 | Svaki upisani POEN vidljiv je svima na platformi. | Isti račun direktora, nov red još sija. Na „svima“ oko telefona se pojave još tri ruke sa telefonima na istom računu: drugi članovi gledaju direktorov zapis (prijavljeni članovi, ne ceo internet). |
+| 13 | 64,7–71,3 | Na taj način članovi mogu sami da provere da li je bilo zloupotrebe. | Na „sami“ prst prelazi preko redova direktorovog računa, kao prst stanarke preko table u sc. 6. Na „zloupotrebe“ lupa prođe preko spiska; uz svaki upis od Protokola stane zelena kvačica (upisano po pravilu), nijedan red ne pocrveni (video ne tvrdi da iko krade). |
+| 14 | 71,3–76,3 | Ne moraš verovati na reč, jer sve možeš da proveriš. | Podeljen kadar: levo tabla iz ulaza sa sveskom, desno telefon sa računom direktora. Na „reč“ Đura levo raširi ruke (nema šta da kaže); na „proveriš“ istovremeno se istakne red u svesci („stan 4 · 2.000“) i red „Protokol · oglas · +1.000“ na telefonu, i uz oba uskoči zelena kvačica. |
+| 15 | 76,3–81,5 | Registruj se na ekolo.rs. | Završna kartica: znak KOLO, krupno „ekolo.rs“. Na „ekolo.rs“ adresa udari sa završnim udarcem numere (odmah posle reči), pa kadar stoji dok numera zamire. |
 
 **Nosiva slika:** sveska prvo u fioci, pa na tabli u ulazu; upitnici nad glavama stanara nestaju kad je
 sveska na tabli. Isti pokret prsta po redu ponavlja se na tabli i na telefonu, pa se veza zgrade i KOLA
@@ -69,11 +69,11 @@ kao novčić ni novčanica, samo kao red u spisku; novčanice i kovanice su samo
 - „ekolo.rs“ razgovetno: „e-kolo tačka er-es“.
 - Naslov se ne čita.
 
-### Muzika (opis se određuje pre generisanja, po `video/README.md`)
+### Muzika
 
-Do „Onda“ suzdržano, sa malo napetosti (sumnja u ulazu); obrt na „okačio“: numera se otvara, toplo i
-vedro do kraja; završni akord odmah posle „ekolo.rs“. Žanr i opis za ElevenLabs upisuju se u uputstvo
-videa pri izradi muzike.
+Numera vlasnika sa Suno-a „Tamburica Kolo“ (opis: tamburaški sastav, prim, brač, bugarija, kontra, berde,
+112 BPM). Tihi deo numere pada ispod „…sumnjali. Onda je Đura“, a ritam ponovo ulazi na „okačio“ (obrt);
+završni akord ~0,7 s posle „ekolo.rs“. Raspored: `README.md` i `scripts/muzika.py`.
 
 ## Pregled ekipe (02.10.2026, drugi krug)
 
@@ -94,6 +94,11 @@ videa pri izradi muzike.
 - Kuka ne sme da ostane bez odgovora „možda niko“: video ne tvrdi da iko krade, ni u zgradi ni u KOLU.
 - „Kontrolor nije bio potreban“ je deo priče o zgradi. Ne kaže se da Fondacija nema nadzor ni
   zakonske obaveze (Statut, glava VI: godišnji finansijski izveštaj, uvid u dokumenta).
+- Sc. 11–14, telefon (odluka vlasnika, 14.10.2026): na ekranu je račun **direktora**, jer je tema upravljanje.
+  Upis POEN-a radi Protokol po pravilima (punjenje računa), pa su redovi pretežno upisi od Protokola, uz poneki
+  prepis; prepisi među članovima su tema videa 20. Osnov upisa je samo „oglas“ ili „potvrda člana“ (vlasnik),
+  iznosi su iz pravila (prvi oglas, čl. 40a, i potvrda novog člana onome ko je potvrdio, po 1.000); naziv socijalnog programa se nikad ne prikazuje uz zapis.
+  Direktor se ne imenuje, piše samo „Direktor“.
 - Rečenica 5 (sc. 12), „vidljiv svima na platformi“ (odluka vlasnika): sam upis POEN-a (iznos i vreme) vidi svaki
   prijavljen član; pseudonime strana vide potvrđeni članovi, a posetilac ukupne brojeve (Pravilnik
   čl. 67 i 28). Tekst se ne širi na „svako na internetu“.

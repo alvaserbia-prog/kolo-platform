@@ -138,8 +138,10 @@ Raniji kostur (isti redosled udica → šta je KOLO → kako radi → poverenje 
 mreže) proizveo je opise koji svi liče jedan na drugi, a rečenica „KOLO je platforma za razmenu
 dobara i usluga među komšijama, nastala u Somboru“ stajala je u skoro svakom. Ukinut je.
 
-1. **Ugao pre pisanja.** Za svaki video se prvo odredi jedan ugao koga u videu nema: slika iz
-   svakodnevice, opšte zapažanje, pitanje, mala istina koju svako zna. Opis se piše iz tog ugla.
+1. **Ugao pre pisanja.** Za svaki video se prvo odredi jedan ugao koga u videu nema. 🔴 Od 14.10.2026
+   (odluka vlasnika, video 19): **opis je u kontekstu KOLO sistema i pravila i opisuje mehaniku**
+   (kako se POEN upisuje, ko šta vidi, šta pravilo propisuje), **ne hipotetičke priče** iz svakodnevice
+   („komšija vam je pomogao oko krova“, „pare za lift“). Opis se piše iz tog ugla.
 2. **Tri mreže, tri različita teksta.** Svaka mreža dobija svoj ugao i svoj početak, ne isti
    tekst u tri dužine.
 3. **„Šta je KOLO“ nije obavezna rečenica.** Kad je potrebna, kaže se svaki put drugim rečima;
@@ -1380,6 +1382,68 @@ KOLO taj zapis vodi za ceo komšiluk. Kad nekome date svoj rad, nešto iz svoje 
 POEN je zapis o doprinosu zajednici. Nije novac i ne menja se za novac.
 
 👉 Šta biste vi mogli da ponudite komšijama? Prvi oglas postavite na ekolo.rs
+
+#Sombor #KOLO
+```
+
+## 22. Video 19 „Ko krade iz zajedničke kase?“ (oktobar 2026)
+
+Video: `video/kolo-transparentnost/out/kolo-transparentnost.mp4`. Naslovna: `video/kolo-transparentnost/out/naslovna.jpg`
+(„Ko krade iz zajedničke kase?“, naslov iz scenarija).
+Zvuk na Instagramu preimenovati u „KOLO, ko krade iz zajedničke kase“. Alternativni tekst: „Slikovnica: čika Đura
+vodi kasu zgrade i sve upisuje u svesku; kad svesku okači na oglasnu tablu u ulazu, stanari sami proveravaju
+uplate i troškove, a na kraju na telefonu se vidi račun direktora u KOLU, sa svakim upisom POEN-a.“
+
+Napisano po odeljku 4, prerađeno 14.10.2026 (vlasnik: „tekstovi moraju biti u kontekstu KOLO sistema i
+pravila, opisuje se mehanika, a ne hipotetičke priče“). Uglovi: TikTok, ko upisuje POEN (Protokol, samo kad
+je ispunjen uslov iz pravila, npr. prvi oglas i potvrda člana); Instagram, račun onih koji upravljaju je
+otvoren kao i svačiji; Facebook, POEN nastaje samo na načine iz Pravilnika i istorija se ne prepravlja
+(ispravka novim zapisom, čl. 34). Đura, sveska i tabla iz videa se ne prepričavaju. Ne tvrdi se da
+iko krade: pitanje ostaje pitanje, a odgovor je da otvoren zapis skida sumnju. Ko vidi zapise kaže se tačno:
+članovi KOLA, ne „svako na internetu“ (Pravilnik čl. 67).
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; uz POEN nema reči kupi, prodaj,
+plati, zaradi, cena, vrednost; „vi“ dosledno na Facebook-u; adresa na Facebook-u bez `https://`, link ide u
+prvi komentar (odeljak 3).
+
+### TikTok
+
+```
+U KOLU POEN ne upisuje čovek po svom nahođenju, nego Protokol po pravilima. 📋
+
+Upis ide samo kad je ispunjen uslov iz Pravilnika: na primer, kad Fondacija odobri tvoj prvi oglas ili kad član koga si potvrdio da svoj prvi doprinos. Svaki upis ostaje na računu člana.
+
+Te zapise vidi svaki prijavljen član. Račun onih koji upravljaju nije izuzetak.
+
+👉 Registruj se, link je u profilu.
+
+#Sombor #KOLO #pravila
+```
+
+### Instagram
+
+```
+Račun onih koji upravljaju KOLOM otvoren je kao i račun svakog člana. 👀
+
+Na njemu stoji svaki upis od Protokola i svaki prepis, sa iznosom i vremenom. Protokol upisuje POEN samo kad je uslov iz pravila ispunjen, pa se upis mimo pravila vidi.
+
+Ne moraš nikome da veruješ na reč, sve možeš da pogledaš sam.
+
+👉 Link je u bio.
+
+#Sombor #Vojvodina #zajednica #KOLO
+```
+
+### Facebook
+
+```
+U KOLU POEN nastaje samo na načine koje propisuje Pravilnik o KOLO sistemu. 📖
+
+Svaki takav upis vodi Protokol i on ostaje zabeležen na računu člana: koliko je upisano i kada. Beleži se i svaki prepis između dva člana. Zapis se ne briše; greška se ispravlja novim zapisom.
+
+Te zapise vide svi prijavljeni članovi, a pseudonime strana potvrđeni članovi. To važi i za račune onih koji upravljaju. Zato niko ne mora da se pravda, a svako može sam da proveri.
+
+👉 Registracija je na ekolo.rs
 
 #Sombor #KOLO
 ```
