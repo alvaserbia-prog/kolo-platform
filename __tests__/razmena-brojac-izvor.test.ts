@@ -34,7 +34,12 @@ const IZUZECI: Record<string, number> = {
 describe("brojač razmena ne broji prepise ispod praga", () => {
   it("prag i uslov stoje na jednom mestu", () => {
     expect(MIN_POEN_RAZMENE).toBe(100);
-    expect(USLOV_RAZMENE).toEqual({ type: "TRANSFER", amount: { gte: MIN_POEN_RAZMENE } });
+    expect(USLOV_RAZMENE).toEqual({
+      type: "TRANSFER",
+      amount: { gte: MIN_POEN_RAZMENE },
+      // Povraćaj Protokolu (gašenje naloga i sl.) nije razmena među članovima.
+      NOT: [{ fromWalletId: "banka-singleton" }, { toWalletId: "banka-singleton" }],
+    });
   });
 
   it.each(PRIKAZI)("%s uvozi zajednički uslov", (rel) => {

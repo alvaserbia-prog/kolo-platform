@@ -87,6 +87,15 @@ const nextConfig: NextConfig = {
     // Bolji tree-shaking barrel-importa → manje „unused JavaScript" u bundle-u.
     optimizePackageImports: ["next-intl", "@tanstack/react-query"],
   },
+  // Stare adrese koje su već otišle u obaveštenja (zvonce, push, mejl). Snimljen
+  // `link` se ne prepravlja u bazi, pa adresa mora da nastavi da radi ovde.
+  // `/pijaca/novi` je do 13.10.2026 slalo obaveštenje „Zabeležen ti je doprinos"
+  // potvrđenom članu — ta stranica nikad nije postojala (404).
+  async redirects() {
+    return [
+      { source: "/pijaca/novi", destination: "/pijaca/novi-oglas", permanent: false },
+    ];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: SECURITY_HEADERS },

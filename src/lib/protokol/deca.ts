@@ -642,7 +642,7 @@ export async function obrisiDecjiNalog(
           fromWalletId: balans > 0 ? w.id : PROTOKOL_WALLET_ID,
           toWalletId: balans > 0 ? PROTOKOL_WALLET_ID : w.id,
           amount: Math.abs(balans),
-          type: TransactionType.TRANSFER,
+          type: TransactionType.PONISTENJE_ZAPISA,
           description: `Poništavanje POENA pri brisanju naloga deteta (${osnov})`,
         },
       });

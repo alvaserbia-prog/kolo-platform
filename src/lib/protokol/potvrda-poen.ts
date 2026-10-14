@@ -40,7 +40,7 @@ export * from "@/lib/potvrda-uslov";
  * 🔴 `EMISIJA_PROGRAM` (socijalni programi), `EMISIJA_OSNIVACKI`, `TRANSFER` i
  * `EMISIJA_RAZMENA` NISU ovde i to je odluka, ne previd — vidi `potvrda-uslov.ts`.
  */
-const TIP_PO_USLOVU: Record<UslovPotvrde, TransactionType> = {
+export const TIP_PO_USLOVU: Record<UslovPotvrde, TransactionType> = {
   OGLAS: TransactionType.EMISIJA_SADRZAJ,
   DONACIJA: TransactionType.EMISIJA_DONACIJA,
   POKROVITELJSTVO: TransactionType.EMISIJA_POKROVITELJ,
@@ -467,7 +467,7 @@ export async function javiZabelezeno(vezaId: string): Promise<void> {
         `Član „${veza.verifikator.pseudonim}" potvrdio je tvoju stvarnost. ${iznosVerifikovanog} POEN ` +
         `upisuje ti se kad ostvariš svoj prvi doprinos — objavi ponudu koju Fondacija odobri, ` +
         `doniraj, postani pokrovitelj ili izvrši operativni doprinos.`,
-      link: "/pijaca/novi",
+      link: "/pijaca/novi-oglas",
     });
   } catch (e) {
     console.error("[potvrda-poen] obaveštenje o čekanju nije poslato", { vezaId, e });

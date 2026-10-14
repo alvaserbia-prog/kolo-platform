@@ -1,8 +1,8 @@
-# KOLO video 61 — Zašto klupa košta 200.000? / Kako da potrošnja bude transparentna
+# KOLO video 63 — Zašto klupa košta 200.000? / Kako da potrošnja bude transparentna
 
 Video o transparentnosti potrošnje dinara. **Izdvojen iz bloka o transparentnosti (18–20)** jer
 traži da gledalac već zna šta su Fondacija i donacije (odluka vlasnika, 02.10.2026); ide posle videa
-„Gde idu dinari: dva toka koja se ne sreću“ (60). Ovo je **objašnjavajući video**: pune, pravilne
+„Gde idu dinari: dva toka koja se ne sreću“ (62). Ovo je **objašnjavajući video**: pune, pravilne
 rečenice, bez kratkih nabrajanja u naratorskom stilu, sve objašnjeno edukativno i tačno.
 
 **Poruka:** zajednički novac se najčešće ne krade tako što posao izostane, nego tako što se posao

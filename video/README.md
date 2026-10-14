@@ -29,137 +29,139 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | | **II. Poverenje, ko stoji iza KOLA, počinje priča o novcu** | | | |
 | 15 | Trampa: dva načina (otvara serijal o novcu) | N | `kolo-trampa/` | ✅ |
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | ✅ |
-| 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | tekst gotov, izrada nije počela |
-| 18 | Ko krade iz zajedničke kase? / Kako da upravljanje bude transparentno | K | `kolo-transparentnost/` | tekst u pregledu (izbori vlasnika) |
-| 19 | Najlakše je tražiti od drugih da budu pošteni / Pravila su ista za sve | K | `kolo-transparentnost-razmene/` | tekst u pregledu (izbori vlasnika) |
-| 20 | Svi vide šta radiš / Ko si, zna samo onaj ko te poznaje (pseudonim) | K | `kolo-pseudonim/` | tekst u pregledu (izbori vlasnika) |
-| 21 | Čije je KOLO? Ničije. | K |  |  |
-| 22 | Šta je Fondacija | K |  |  |
-| 23 | Zlato, srebro, bakar | N |  |  |
-| 24 | Lanac potvrda | K |  |  |
-| 25 | Indeks stvarnosti | K |  |  |
-| 26 | Sajam gde niko ne plaća | A |  |  |
-| 27 | Ko vodi Fondaciju | K |  |  |
-| 28 | Penzioneri | K |  |  |
-| 29 | Papir sa zlatnom podlogom | N |  |  |
-| 30 | Kako prepoznati prevaru | K |  |  |
-| 31 | Nije piramida, nije kripto | K |  |  |
-| 32 | Owen: priznanica rada | A |  |  |
-| 33 | Tri dela sistema: Fondacija, Protokol, Zajednica | K |  |  |
-| 34 | Zašto se ne isplati varati | K |  |  |
-| 35 | Delimična zlatna podloga | N |  |  |
-| 36 | Šta ako razmena ne uspe | K |  |  |
-| 37 | Poljoprivrednici | K |  |  |
-| 38 | Prudon | A |  |  |
-| 39 | Šta prihvataš kad se registruješ | K |  |  |
-| 40 | Šta KOLO zna o tebi (granica: minimum podataka) | K |  |  |
-| 41 | Fiat novac | N |  |  |
-| 42 | Zbir je uvek nula | K |  |  |
-| 43 | POEN ne izlazi iz KOLA (granica: nekonvertibilnost) | K |  |  |
-| 44 | Mašine koje misle: veštačka inteligencija i rad | Z |  |  |
-| 45 | Zanatlije | K |  |  |
-| 46 | Zapis nije imovina (granica: bez imovinskog prava) | K |  |  |
-| 47 | Warren | A |  |  |
+| 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | ✅ |
+| 18 | Šta piše pored tvog imena | K |  |  |
+| 19 | Ko krade iz zajedničke kase? / Kako da upravljanje bude transparentno | K | `kolo-transparentnost/` | tekst konačan (vlasnik, 14.10.2026), izrada nije počela |
+| 20 | Najlakše je tražiti od drugih da budu pošteni / Pravila su ista za sve | K | `kolo-transparentnost-razmene/` | tekst u pregledu |
+| 21 | Svi vide šta radiš / Ko si, zna samo onaj ko te poznaje (pseudonim) | K | `kolo-pseudonim/` | tekst u pregledu |
+| 22 | Čije je KOLO? Ničije. | K |  |  |
+| 23 | Šta je Fondacija | K |  |  |
+| 24 | Zlato, srebro, bakar | N |  |  |
+| 25 | Mladi roditelji: Jovana, Nemanja i beba | K | `kolo-mladi-roditelji/` | scenario gotov, čeka snimak glasa |
+| 26 | Lanac potvrda | K |  |  |
+| 27 | Indeks stvarnosti | K |  |  |
+| 28 | Sajam gde niko ne plaća | A |  |  |
+| 29 | Ko vodi Fondaciju | K |  |  |
+| 30 | Penzioneri | K |  |  |
+| 31 | Papir sa zlatnom podlogom | N |  |  |
+| 32 | Kako prepoznati prevaru | K |  |  |
+| 33 | Nije piramida, nije kripto | K |  |  |
+| 34 | Owen: priznanica rada | A |  |  |
+| 35 | Tri dela sistema: Fondacija, Protokol, Zajednica | K |  |  |
+| 36 | Zašto se ne isplati varati | K |  |  |
+| 37 | Delimična zlatna podloga | N |  |  |
+| 38 | Šta ako razmena ne uspe | K |  |  |
+| 39 | Poljoprivrednici | K |  |  |
+| 40 | Prudon | A |  |  |
+| 41 | Šta prihvataš kad se registruješ | K |  |  |
+| 42 | Šta KOLO zna o tebi (granica: minimum podataka) | K |  |  |
+| 43 | Fiat novac | N |  |  |
+| 44 | Zbir je uvek nula | K |  |  |
+| 45 | POEN ne izlazi iz KOLA (granica: nekonvertibilnost) | K |  |  |
+| 46 | Mašine koje misle: veštačka inteligencija i rad | Z |  |  |
+| 47 | Zanatlije | K |  |  |
+| 48 | Zapis nije imovina (granica: bez imovinskog prava) | K |  |  |
+| 49 | Warren | A |  |  |
 | | **III. Kanali POENA** | | | |
-| 48 | Devet kanala | K |  |  |
-| 49 | Doprinos razmeni | K |  |  |
-| 50 | Kad nema radnika, nema potrošača | Z |  |  |
-| 51 | Roditelji | K |  |  |
-| 52 | Dečji prostor | K |  |  |
-| 53 | Kako nastaje novac | N |  |  |
-| 54 | Operativni doprinos | K |  |  |
-| 55 | Socijalni programi | K |  |  |
-| 56 | Rad nije samo plata | Z |  |  |
-| 57 | Mladi | K |  |  |
-| 58 | Donacija Fondaciji | K |  |  |
-| 59 | Donacija se ne vraća (granica: nepovratnost) | K |  |  |
-| 60 | Gde idu dinari: dva toka koja se ne sreću | K |  |  |
-| 61 | Zašto klupa košta 200.000? / Kako da potrošnja bude transparentna | K | `kolo-transparentnost-potrosnje/` | tekst gotov (verzija vlasnika), izrada nije počela |
-| 62 | Rochdale | A |  |  |
-| 63 | Bački Petrovac 1846 | K |  |  |
-| 64 | Pokrovitelji | K |  |  |
-| 65 | Osnivački doprinos | K |  |  |
-| 66 | Kako se meri količina novca | N |  |  |
-| 67 | Princip 1: Reciprocitet bez najamnog odnosa | I |  |  |
-| 68 | Zašto ne osnovni dohodak | Z |  |  |
-| 69 | Zašto Sombor | K |  |  |
-| 70 | William Greene | A |  |  |
+| 50 | Devet kanala | K |  |  |
+| 51 | Doprinos razmeni | K |  |  |
+| 52 | Kad nema radnika, nema potrošača | Z |  |  |
+| 53 | Roditelji | K |  |  |
+| 54 | Dečji prostor | K |  |  |
+| 55 | Kako nastaje novac | N |  |  |
+| 56 | Operativni doprinos | K |  |  |
+| 57 | Socijalni programi | K |  |  |
+| 58 | Rad nije samo plata | Z |  |  |
+| 59 | Mladi | K |  |  |
+| 60 | Donacija Fondaciji | K |  |  |
+| 61 | Donacija se ne vraća (granica: nepovratnost) | K |  |  |
+| 62 | Gde idu dinari: dva toka koja se ne sreću | K |  |  |
+| 63 | Zašto klupa košta 200.000? / Kako da potrošnja bude transparentna | K | `kolo-transparentnost-potrosnje/` | tekst gotov (verzija vlasnika), izrada nije počela |
+| 64 | Rochdale | A |  |  |
+| 65 | Bački Petrovac 1846 | K |  |  |
+| 66 | Pokrovitelji | K |  |  |
+| 67 | Osnivački doprinos | K |  |  |
+| 68 | Kako se meri količina novca | N |  |  |
+| 69 | Princip 1: Reciprocitet bez najamnog odnosa | I |  |  |
+| 70 | Zašto ne osnovni dohodak | Z |  |  |
+| 71 | Zašto Sombor | K |  |  |
+| 72 | William Greene | A |  |  |
 | | **IV. Zajedničko dobro i upravljanje** | | | |
-| 71 | Wikipedija i Linux: zajednička proizvodnja (Benkler) | I |  |  |
-| 72 | Otvoren kod | K |  |  |
-| 73 | KOLO kao internet: sistem u slojevima | K |  |  |
-| 74 | Platforma u vlasništvu korisnika (Scholz) | I |  |  |
-| 75 | Šta je ZRNO | K |  |  |
-| 76 | Obračunski koeficijent | K |  |  |
-| 77 | Princip 2: Cirkulacija bez gomilanja | I |  |  |
-| 78 | ZRNO: upis, otpis, aktivno i slobodno | K |  |  |
-| 79 | Kvadratno glasanje (i Glen Weyl) | K |  |  |
-| 80 | Likvidna demokratija i zamka oligarhije | I |  |  |
-| 81 | Od osnivača ka zajednici: faze upravljanja | K |  |  |
-| 82 | Gornje Kolo | K |  |  |
-| 83 | Princip 3: Upravljanje bez plutokratije | I |  |  |
-| 84 | Sedamnaest akata: koja pravila važe i ko ih menja | K |  |  |
-| 85 | Javna pravila | K |  |  |
-| 86 | Zaštitni veto | K |  |  |
-| 87 | Novi oblici novca | N |  |  |
-| 88 | Raiffeisen | A |  |  |
+| 73 | Wikipedija i Linux: zajednička proizvodnja (Benkler) | I |  |  |
+| 74 | Otvoren kod | K |  |  |
+| 75 | KOLO kao internet: sistem u slojevima | K |  |  |
+| 76 | Platforma u vlasništvu korisnika (Scholz) | I |  |  |
+| 77 | Šta je ZRNO | K |  |  |
+| 78 | Obračunski koeficijent | K |  |  |
+| 79 | Princip 2: Cirkulacija bez gomilanja | I |  |  |
+| 80 | ZRNO: upis, otpis, aktivno i slobodno | K |  |  |
+| 81 | Kvadratno glasanje (i Glen Weyl) | K |  |  |
+| 82 | Likvidna demokratija i zamka oligarhije | I |  |  |
+| 83 | Od osnivača ka zajednici: faze upravljanja | K |  |  |
+| 84 | Gornje Kolo | K |  |  |
+| 85 | Princip 3: Upravljanje bez plutokratije | I |  |  |
+| 86 | Sedamnaest akata: koja pravila važe i ko ih menja | K |  |  |
+| 87 | Javna pravila | K |  |  |
+| 88 | Zaštitni veto | K |  |  |
+| 89 | Novi oblici novca | N |  |  |
+| 90 | Raiffeisen | A |  |  |
 | | **V. Zadruge i zajednička dobra u komšiluku** | | | |
-| 89 | Osam pravila Elinor Ostrom | K |  |  |
-| 90 | Zajednička bašta | K |  |  |
-| 91 | Krug: kad se ljudi okupe oko jedne stvari | K |  |  |
-| 92 | Pariska komuna | A |  |  |
-| 93 | Biblioteka alata | K |  |  |
-| 94 | Popravljaonica | K |  |  |
-| 95 | Projekat: kako Fondacija troši dinare za zajednicu | K |  |  |
-| 96 | Silvio Gesell | A |  |  |
-| 97 | Radionica: prostor gde se uči i pravi | K |  |  |
-| 98 | Zadruge i udruženja | K |  |  |
-| 99 | Zadruga u KOLU | K |  |  |
-| 100 | Srpske zemljoradničke zadruge, Avramović | A |  |  |
-| 101 | Kako nastaje zadruga | K |  |  |
-| 102 | Zadruga koja okuplja male proizvođače | K |  |  |
-| 103 | Zadruge među sobom | K |  |  |
-| 104 | Princip 4: Univerzalnost bez uniformnosti | I |  |  |
-| 105 | Kad zadruga propadne | K |  |  |
-| 106 | Kolektivna nabavka | K |  |  |
-| 107 | Ostrom u našem selu: kako se čuva zajedničko | K |  |  |
-| 108 | Ko ne može da bude član | K |  |  |
-| 109 | Kropotkin, „Uzajamna pomoć“ | A |  |  |
+| 91 | Osam pravila Elinor Ostrom | K |  |  |
+| 92 | Zajednička bašta | K |  |  |
+| 93 | Krug: kad se ljudi okupe oko jedne stvari | K |  |  |
+| 94 | Pariska komuna | A |  |  |
+| 95 | Biblioteka alata | K |  |  |
+| 96 | Popravljaonica | K |  |  |
+| 97 | Projekat: kako Fondacija troši dinare za zajednicu | K |  |  |
+| 98 | Silvio Gesell | A |  |  |
+| 99 | Radionica: prostor gde se uči i pravi | K |  |  |
+| 100 | Zadruge i udruženja | K |  |  |
+| 101 | Zadruga u KOLU | K |  |  |
+| 102 | Srpske zemljoradničke zadruge, Avramović | A |  |  |
+| 103 | Kako nastaje zadruga | K |  |  |
+| 104 | Zadruga koja okuplja male proizvođače | K |  |  |
+| 105 | Zadruge među sobom | K |  |  |
+| 106 | Princip 4: Univerzalnost bez uniformnosti | I |  |  |
+| 107 | Kad zadruga propadne | K |  |  |
+| 108 | Kolektivna nabavka | K |  |  |
+| 109 | Ostrom u našem selu: kako se čuva zajedničko | K |  |  |
+| 110 | Ko ne može da bude član | K |  |  |
+| 111 | Kropotkin, „Uzajamna pomoć“ | A |  |  |
 | | **VI. Praktično i država** | | | |
-| 110 | Kripto i slični oblici | N |  |  |
-| 111 | Porez | K |  |  |
-| 112 | Penzija i socijalna davanja | K |  |  |
-| 113 | Wörgl: novac koji bledi | A |  |  |
-| 114 | Ni borba ni predaja: KOLO i država | K |  |  |
-| 115 | Izlazak iz sistema | K |  |  |
-| 116 | Ko stoji iza novca | N |  |  |
-| 117 | WIR | A |  |  |
-| 118 | Princip 5: Postepeno, bez kompromisa | I |  |  |
-| 119 | Tehnologija nije rešenje | Z |  |  |
+| 112 | Kripto i slični oblici | N |  |  |
+| 113 | Porez | K |  |  |
+| 114 | Penzija i socijalna davanja | K |  |  |
+| 115 | Wörgl: novac koji bledi | A |  |  |
+| 116 | Ni borba ni predaja: KOLO i država | K |  |  |
+| 117 | Izlazak iz sistema | K |  |  |
+| 118 | Ko stoji iza novca | N |  |  |
+| 119 | WIR | A |  |  |
+| 120 | Princip 5: Postepeno, bez kompromisa | I |  |  |
+| 121 | Tehnologija nije rešenje | Z |  |  |
 | | **VII. Drugi putevi u XX i XXI veku** | | | |
-| 120 | Jugoslovensko samoupravljanje | A |  |  |
-| 121 | Mondragón | A |  |  |
-| 122 | Novac je dizajn (Thomas Greco) | I |  |  |
-| 123 | LETS | A |  |  |
-| 124 | Ithaca Hours | A |  |  |
-| 125 | Kompenzacija i 1993. | A |  |  |
-| 126 | Da li moraš da koristiš novac | N |  |  |
-| 127 | Fureai Kippu | A |  |  |
-| 128 | Ekonomija krofne (Raworth) | I |  |  |
-| 129 | Kad pukne: Argentina | A |  |  |
-| 130 | Sardex | A |  |  |
-| 131 | Degrowth | I |  |  |
-| 132 | Bristol Pound | A |  |  |
-| 133 | Kevin Carson i neo-mutualizam | I |  |  |
-| 134 | Osam lekcija iz istorije | A |  |  |
+| 122 | Jugoslovensko samoupravljanje | A |  |  |
+| 123 | Mondragón | A |  |  |
+| 124 | Novac je dizajn (Thomas Greco) | I |  |  |
+| 125 | LETS | A |  |  |
+| 126 | Ithaca Hours | A |  |  |
+| 127 | Kompenzacija i 1993. | A |  |  |
+| 128 | Da li moraš da koristiš novac | N |  |  |
+| 129 | Fureai Kippu | A |  |  |
+| 130 | Ekonomija krofne (Raworth) | I |  |  |
+| 131 | Kad pukne: Argentina | A |  |  |
+| 132 | Sardex | A |  |  |
+| 133 | Degrowth | I |  |  |
+| 134 | Bristol Pound | A |  |  |
+| 135 | Kevin Carson i neo-mutualizam | I |  |  |
+| 136 | Osam lekcija iz istorije | A |  |  |
 | | **VIII. Završnica** | | | |
-| 135 | Tri problema na kojima su svi zapeli | K |  |  |
-| 136 | Solidarna ekonomija u UN i EU | K |  |  |
-| 137 | Paralelni put KOLA | N |  |  |
-| 138 | Kome KOLO nije potreban | K |  |  |
-| 139 | Šta još ne znamo | K |  |  |
-| 140 | Ko je pokrenuo KOLO | K |  |  |
-| 141 | Šta dolazi (finale) | K |  |  |
+| 137 | Tri problema na kojima su svi zapeli | K |  |  |
+| 138 | Solidarna ekonomija u UN i EU | K |  |  |
+| 139 | Paralelni put KOLA | N |  |  |
+| 140 | Kome KOLO nije potreban | K |  |  |
+| 141 | Šta još ne znamo | K |  |  |
+| 142 | Ko je pokrenuo KOLO | K |  |  |
+| 143 | Šta dolazi (finale) | K |  |  |
 
 **Pravila redosleda** (pregled stalne ekipe, 27.09.2026): obrazovni videi (N, A, Z, I) idu između videa o KOLU,
 otprilike jedan na dva. Porez i Penzija idu pre N „Ko stoji iza novca“, „Da li moraš da koristiš novac“ i
@@ -167,7 +169,7 @@ otprilike jedan na dva. Porez i Penzija idu pre N „Ko stoji iza novca“, „D
 odredio vlasnik (sajmovi, Owen, Prudon, Warren, Rochdale, Greene, Raiffeisen, Pariska komuna, Gesell, Avramović,
 Kropotkin); XX i XXI vek idu hronološki. Serijal o novcu otvara niz od tri videa (odluka vlasnika, 30.09.2026): „Trampa“ pokazuje problem
 i dva načina da se reši, stvar koju svi primaju ili zapis; „Stari oblici novca“ i „Stari oblici zapisa“ razrađuju
-svaki od njih, a za njima ide blok od tri K videa o transparentnosti i privatnosti (odluka vlasnika, 02.10.2026): 18 upravljanje (evidencija), 19 račun korisnika (POEN), 20 pseudonim. Video o transparentnosti potrošnje dinara („Zašto klupa košta 200.000?“) izdvojen je iz bloka i ide posle „Gde idu dinari“, jer traži da gledalac već zna za Fondaciju i donacije. Tri N zaredom su namerna celina.
+svaki od njih, a K video „Šta piše pored tvog imena“ odmah posle pokazuje zapis u KOLU. Za njim ide blok od tri K videa o transparentnosti i privatnosti (odluka vlasnika, 02–14.10.2026): 19 upravljanje (evidencija), 20 razmena (račun POEN-a), 21 pseudonim. Video o transparentnosti potrošnje dinara („Zašto klupa košta 200.000?“) ide posle „Gde idu dinari“, jer traži da gledalac već zna za Fondaciju i donacije. Tri N zaredom su namerna celina.
 Metal (zlato, srebro, bakar) ostaje svom videu.
 „Kompenzacija i 1993.“ je vraćena na svoje hronološko mesto, jer na početku nije imala vezu sa KOLOM.
 
@@ -179,19 +181,13 @@ Metal (zlato, srebro, bakar) ostaje svom videu.
   ZRNO se upisuje i otpisuje, ne kupuje ni prodaje; bez „referentne vrednosti 1 POEN ≈ 1 RSD“, bez Banke.
 - Zadruga je modul koji još nije u radu (Pravilnik, Glava VIII, čl. 56): videi o zadrugama je prikazuju
   kako je akt uređuje, ne kako je opisana u udžbeniku.
-- Brojke iz udžbeničkih scenarija (Marija, Petar) ne prenose se: računate su po starom modelu.
 - Iz whitepapera 4.6.2 se ne preuzimaju tri zastarele rečenice iz pogl. 11: POEN za svaku potvrdu
   (od 4.6.5 čeka prvi doprinos), pokrovitelj koji daje robu i usluge (ukinuto) i praćenje obrazaca razmene
   (zabranjeno u `CLAUDE.md`).
 - Krug je privremeno ugašen, a Zadruga još nije u radu: videi o njima kažu „ovako će raditi“. Bašta
   (zadatak kroz operativni doprinos) i alat (razmena na Pijaci) mogu se prikazati kao nešto što radi sada.
-- Kod zadruge koja okuplja proizvođače Fondacija ne sme da izgleda kao trgovac: zadruga je zasebno pravno lice,
-  a Fondacija za ustupljeno dobro ne prima naknadu (Pravilnik o projektima i nabavkama, čl. 3a).
 - „Tri dela sistema“ su Fondacija, Protokol i Zajednica; Banke iz udžbenika nema.
-- „Ko vodi Fondaciju“: samo uloge (Upravni odbor, direktor), bez imena (odluka vlasnika 27.09.2026).
-- „Kompenzacija i 1993.“: kriza je tema videa, ne poruka o KOLU. Kriza se ne koristi kao poziv
-  („kad novac propadne, tu je KOLO“), a „zapis ko kome duguje“ se ne vezuje za POEN (POEN nije potraživanje, Pravilnik čl. 12–13). Marka se pominje.
-- Godine i brojke u istorijskim videima proveravaju se pre svakog scenarija.
+- „Kompenzacija i 1993.“: „zapis ko kome duguje“ se ne vezuje za POEN (POEN nije potraživanje, Pravilnik čl. 12–13). Marka se pominje.
 
 ## Tok izrade videa (odluka vlasnika, 03.10.2026)
 
@@ -203,15 +199,15 @@ pre sledećeg.** Greška nađena kasnije vraća rad na korak u kome je nastala.
 
 | # | Korak | Šta se predaje | Provera posle koraka |
 |---|---|---|---|
-| 1 | **Tekst za glas** — dogovara se sa vlasnikom; prolazi pregled stalne ekipe (pisac, dramaturg, urednik za mreže, gledalac) | konačan tekst za snimanje | zabranjene reči; pravna odbrana iz `CLAUDE.md`; brojke i činjenice provereni; tekst se čita naglas bez zastoja |
-| 2 | **Scenario** — scena po scena: vreme, naracija, slika, šta se dešava na kojoj reči | scenario u `scenario.md` | ne čeka odobrenje vlasnika (od 04.10.2026); slika ne govori isto što i tekst; nosiva slika razume se bez zvuka |
-| 3 | **Muzika: Claude je pravi na ElevenLabs-u** — iz teksta, emocije i poruke videa odredi žanr, sastav, karakter i tempo, mesto obrta i završnog akorda (pravila o muzici ispod), pa generiše numeru | numera (`audio/raw/`) i opis sa obrazloženjem u uputstvu videa | tok muzike prati tok teksta i emociju priče; obrt pada na ključnu reč; numera služi poruci, ne skreće pažnju sa glasa |
-| 4 | **Slika** — scene po scenariju | probni kadrovi svake scene | svaka scena se pogleda kao slika: preklapanja, ruke, lica, čitljivost, mesto za titl |
-| 5 | **Glas** — čišćenje, izbacivanje ponovljenih i prekinutih izgovora, tempo | očišćen glas | 🔴 snimak se prepoznaje mašinski (dva modela) i poredi sa tekstom reč po reč: ne sme ostati reč viška, prekinut početak ni dupla reč |
-| 6 | **Titlovi** — po rečima, uz izgovorenu reč, kako je izgovoreno | probni kadrovi | svaka reč titla postoji u glasu i nijedna reč glasa ne fali u titlu |
-| 7 | **Natpisi** — samo po pravilu o natpisima ispod | spisak natpisa sa obrazloženjem | natpis ne ponavlja titl |
-| 8 | **Muzika i miks** — numera (sa ElevenLabs-a ili koju vlasnik pošalje) uklapa se po glasu (obrt na ključnoj reči, završetak posle poslednje reči) | miks | −14 LUFS; muzika stalne jačine; rez u muzici na udarcu |
-| 9 | **Završna kontrola i predaja** — ceo video od početka do kraja | gotov video, naslovna, opisi za TikTok, Instagram i Facebook po `docs/drustvene-mreze-opisi.md` (lektor i književnik) | trajanje, 1080×1920, glasnoća, zabranjene reči u slici, titlu i opisu; kopija za pregled manja od 30 MB |
+| 2 | **Tekst za glas** — dogovara se sa vlasnikom; prolazi pregled stalne ekipe (pisac, dramaturg, urednik za mreže, gledalac) | konačan tekst za snimanje | zabranjene reči; pravna odbrana iz `CLAUDE.md`; brojke i činjenice provereni; tekst se čita naglas bez zastoja |
+| 3 | **Scenario** — scena po scena: vreme, naracija, slika, šta se dešava na kojoj reči | scenario u `scenario.md` | ne čeka odobrenje vlasnika (od 04.10.2026); slika ne govori isto što i tekst; nosiva slika razume se bez zvuka |
+| 4 | **Muzika: Claude je pravi na ElevenLabs-u** — iz teksta, emocije i poruke videa odredi žanr, sastav, karakter i tempo, mesto obrta i završnog akorda (pravila o muzici ispod), pa generiše numeru | numera (`audio/raw/`) i opis sa obrazloženjem u uputstvu videa | tok muzike prati tok teksta i emociju priče; obrt pada na ključnu reč; numera služi poruci, ne skreće pažnju sa glasa |
+| 5 | **Slika** — scene po scenariju | probni kadrovi svake scene | svaka scena se pogleda kao slika: preklapanja, ruke, lica, čitljivost, mesto za titl |
+| 6 | **Glas** — čišćenje, izbacivanje ponovljenih i prekinutih izgovora, tempo | očišćen glas | 🔴 snimak se prepoznaje mašinski (dva modela) i poredi sa tekstom reč po reč: ne sme ostati reč viška, prekinut početak ni dupla reč |
+| 7 | **Titlovi** — po rečima, uz izgovorenu reč, kako je izgovoreno | probni kadrovi | svaka reč titla postoji u glasu i nijedna reč glasa ne fali u titlu |
+| 8 | **Natpisi** — samo po pravilu o natpisima ispod | spisak natpisa sa obrazloženjem | natpis ne ponavlja titl |
+| 9 | **Muzika i miks** — numera (sa ElevenLabs-a ili koju vlasnik pošalje) uklapa se po glasu (obrt na ključnoj reči, završetak posle poslednje reči) | miks | −14 LUFS; muzika stalne jačine; rez u muzici na udarcu |
+| 10 | **Završna kontrola i predaja** — ceo video od početka do kraja | gotov video, naslovna, opisi za TikTok, Instagram i Facebook po `docs/drustvene-mreze-opisi.md` (lektor i književnik) | trajanje, 1080×1920, glasnoća, zabranjene reči u slici, titlu i opisu; kopija za pregled manja od 30 MB |
 
 - Vlasnik odobrava tekst (1); sve ostalo, uključujući muziku (3 i 8), radi se samostalno i šalje gotovo (muzika: odluka vlasnika 04.10.2026). 🔴 **Scenario (2) vlasnik više ne odobrava** (odluka vlasnika, 04.10.2026, video 15: „ne moram odobravati scenarije, sve završi“): scenario se piše i zapisuje u folder videa, pa se odmah ide dalje.
 - U folderu videa ostaju scenario, uputstvo sa postupkom i tabelom „Priča u slici“, skripte i gotov fajl; opisi idu u `docs/drustvene-mreze-opisi.md`.
@@ -219,18 +215,20 @@ pre sledećeg.** Greška nađena kasnije vraća rad na korak u kome je nastala.
 
 ## Zajedničko za sve videe
 
+🟡 **Ukinuto 14.10.2026 (odluka vlasnika):** obavezan početak problemom iz života i KOLO tek na kraju, prednost serija sa stalnim likovima, „priča o koristi, ne o pravilima“, poreklo i trenutak upisa POEN-a u priči, zabrana „POEN će zameniti dinar“ i „cilj KOLA“, zabrana da se kaže da se razmena dogovara direktno, ograde o Fondaciji kao trgovcu, krizi kao pozivu, imenima u „Ko vodi Fondaciju“ i brojkama iz udžbenika, obavezna provera godina i brojki, karakter i srpski etos muzike, „odlučeno se ne otvara ponovo“ i „sitnice ne diraj“. Ne vraćati ih bez naloga vlasnika.
+
 🔴 **Pravilo „tekst 1 s ispred glasa“ je ukinuto** (odluka vlasnika, 03.10.2026: „to sad žuri“). Titl, natpis
 i pokret vezan za reč idu uz izgovorenu reč (`PREDNOST_S = 0` u `scripts/plan.py`); traka titla se i dalje
 pojavi ~0,25 s pre prve reči, a reč pozeleni ~0,1 s pre izgovora. Videi napravljeni dok je pravilo važilo
 nisu ponovo renderovani.
 
 Papirni kolaž, linije koje „ključaju", titlovi po rečima (izgovorena reč zelena), naracija
-vlasnika, tamburaška muzika, −14 LUFS. Trajanje nije unapred određeno: video traje koliko priča traži, i duže od 60 s kad je tako procenjeno (odluka vlasnika, 26.09.2026). POEN se nikad ne crta kao novčić ni novčanica, samo kao
+vlasnika, −14 LUFS. Trajanje nije unapred određeno: video traje koliko priča traži, i duže od 60 s kad je tako procenjeno (odluka vlasnika, 26.09.2026). POEN se nikad ne crta kao novčić ni novčanica, samo kao
 zapis. Reči kupi, prodaj, plati, zaradi, cena **ne idu uz POEN** (odluka vlasnika, 29.09.2026): uz dinare i uz rad
 smeju („platiš participaciju“, „cena tvoga rada“), uz POEN nikad („kupi za POEN“, „zaradi POEN“, „cena u POENIMA“).
 **Ušteda u dinarima sme i treba da se pokaže kao ishod korišćenja POEN-a** (odluka vlasnika, 29.09.2026): ono što
 dobiješ razmenom u KOLU ne moraš da pribaviš za dinare, i to je ušteda. Ušteda se iskazuje kao dinari koji su ostali
-kod tebe, nikad kao preračun POEN-a u dinare („1 POEN = 1 dinar uštede“, „vrednost tvojih POENA u dinarima“). U tekstovima (naracija, natpisi, opisi) se ne piše da se razmena dogovara direktno i da se Fondacija u to ne meša, i ne pominje se ograničenje broja oglasa za novog člana (odluke vlasnika, 02.10.2026; vidi `docs/drustvene-mreze-opisi.md`, odeljak 1). Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
+kod tebe, nikad kao preračun POEN-a u dinare („1 POEN = 1 dinar uštede“, „vrednost tvojih POENA u dinarima“). U tekstovima (naracija, natpisi, opisi) se ne pominje ograničenje broja oglasa za novog člana (odluka vlasnika, 02.10.2026; vidi `docs/drustvene-mreze-opisi.md`, odeljak 1). Iznos u oglasu nikad ne određuje Fondacija: određuje ga onaj ko oglas postavlja,
 a strane smeju i da ga dogovore (Uslovi čl. 19 i 22; vidi `CLAUDE.md`, tabela „Pravna odbrana“, red „Iznos u oglasu“). Postupak izrade: README u folderu svakog videa.
 
 🔴 **Natpisi idu samo tamo gde imaju smisla, ne u svaku scenu** (odluka vlasnika, 30.09.2026). Titlovi po
@@ -242,11 +240,7 @@ pravi kolona „Natpis“ za svaku scenu; tekst koji je deo slike upisuje se u k
 
 🟡 **Likovni stil i muzika se ne ponavljaju obavezno** (odluka vlasnika, 27.09.2026): od trilogije „Poverenje“ (`kolo-poverenje/`) svaki video može da ima svoj autentičan stil (tamo: papirni kolaž u prvom i trećem videu, naiva u drugom; linorez i tuš sa akvarelom vlasnik je odbacio) i svoju muziku. Zajedničko ostaje ono iznad: titlovi po rečima sa zelenom rečju, naracija vlasnika, −14 LUFS, POEN samo kao zapis, zabranjene reči.
 
-🔴 **Muzika je vedra i ritmična, nikad tužna** (odluka vlasnika, 30.09.2026; dvaput vraćeno: „Čiji si ti“ u e-molu i gudači u „Potvrda nosi odgovornost“). Ozbiljan trenutak u priči nosi aranžman (proređen ritam, kratka stanka, šaljiv silazak), ne spor tempo. **Mol je dozvoljen kad je brz i igrački** (odluka vlasnika, 02.10.2026), kao u srpskim kolima i trubačkim numerama; zabranjen je samo spor i tužan.
-
-🔴 **Muzika je uvek u srpskom etosu** (odluka vlasnika, 02.10.2026). Prvi izbor je vojvođanska tamburica (prim, brač, bugarija, berde); može i frula, harmonika u srpskom kolu, a za veselije videe truba (trubački sastav). Lestvice, ritmovi (kolo u 2/4, čoček) i ukrasi (predudari, okretaji, šesnaestine) su iz srpskog melosa. Ne idu: gitara u pop progresiji, harmonika u stilu francuskog musette valcera (razdešeni jezičci, treperenje), gudači, klavir, elektronski i „bezveze“ zvuci. Izuzetak: ritam gitara u tamburaškoj pratnji sme kad je vlasnik izričito traži.
-
-🔴 **Muziku pravi Claude na ElevenLabs-u, sam i bez prethodnog dogovora** (odluka vlasnika, 04.10.2026; zamenjuje pravilo od 02.10.2026 da se opis prvo predlaže vlasniku i da numeru generiše vlasnik na Suno-u). Cilj je **najbolja muzika za poruku videa**: numera prati tekst, emociju i poruku priče, tako da poruka stigne do gledaoca. Pre generisanja se iz teksta i scenarija odredi šta muzika nosi (problem, obrt, rešenje, završni poziv), gde pada obrt i kakav je karakter (šaljiv, topao, svečan, razigran), pa se to prevede u kratak opis po pravilu ispod. Opis i obrazloženje se zapisuju u uputstvo videa. Ostaju sva pravila o karakteru i zvuku (vedra i ritmična, srpski etos, bez stišavanja, plaćeni plan). Pravi se **jedna varijanta po pokušaju** (`generations_count = 1`, odluka vlasnika 02.10.2026); ako numera ne prati tekst ili krši pravila o zvuku, pravi se nov pokušaj sa ispravljenim opisom, a razlog se zapisuje.
+🔴 **Muziku pravi Claude na ElevenLabs-u, sam i bez prethodnog dogovora** (odluka vlasnika, 04.10.2026; zamenjuje pravilo od 02.10.2026 da se opis prvo predlaže vlasniku i da numeru generiše vlasnik na Suno-u). Cilj je **najbolja muzika za poruku videa**: numera prati tekst, emociju i poruku priče, tako da poruka stigne do gledaoca. Pre generisanja se iz teksta i scenarija odredi šta muzika nosi (problem, obrt, rešenje, završni poziv), gde pada obrt i kakav je karakter (šaljiv, topao, svečan, razigran), pa se to prevede u kratak opis po pravilu ispod. Opis i obrazloženje se zapisuju u uputstvo videa. Ostaju pravila o zvuku (bez stišavanja, plaćeni plan); žanr i karakter muzike nisu propisani (odluka vlasnika, 14.10.2026). Pravi se **jedna varijanta po pokušaju** (`generations_count = 1`, odluka vlasnika 02.10.2026); ako numera ne prati tekst ili krši pravila o zvuku, pravi se nov pokušaj sa ispravljenim opisom, a razlog se zapisuje.
 
 🔴 **Opis za ElevenLabs je kratak** (odluka vlasnika, 02.10.2026): jedna-dve rečenice, samo žanr, sastav, karakter i tempo, sa „Instrumental“ na početku. Primer: *„Instrumental. Traditional Vojvodina tamburica kolo, acoustic tamburitza orchestra, old-fashioned, 112 BPM.“* Dugi opisi sa nabrajanjem instrumenata i rasporeda po sekundama zbunjuju model (u videu „Pijaca“ dali su drevni etno i „kantri bluz“ umesto tamburice). Reči „folk-pop“ i „pop“ se ne pišu.
 
@@ -260,33 +254,21 @@ pravi kolona „Natpis“ za svaku scenu; tekst koji je deo slike upisuje se u k
 
 🔴 **Muzika se ne stišava dok se govori** (odluka vlasnika, 02.10.2026): stalno je iste jačine, bez sidechain kompresije; jačinu određuje vlasnik po numeri.
 
-🟢 **Zapis umesto novca sme da se kaže** (odluka vlasnika, 30.09.2026). Nije obavezno da tekst govori „KOLO je dodatak, ne zamena“: ideja da zapis može da zameni novac sme da ostane, jer je to mogući ishod KOLA, iako KOLO danas kreće paralelno sa dinarom. U tekstu se ne kaže „cilj KOLA“, nego „mogući ishod“. Kaže se kao ideja o razmeni, ne kao obećanje o POEN-u: „razmena može da ide zapisom umesto novcem“ da, „POEN će zameniti dinar“ ne (javna tvrdnja da je POEN zamišljen kao sredstvo plaćanja udara na odbranu iz Pravilnika čl. 13). Ono što i dalje važi, jer su to strukturne granice iz akata, a ne stav o cilju: POEN se ne menja za dinare i ne iznosi iz sistema (nekonvertibilnost), obaveze prema državi ostaju u dinarima, i uz POEN ne idu reči kupi, prodaj, plati, zaradi, cena.
+🟢 **Zapis umesto novca sme da se kaže** (odluka vlasnika, 30.09.2026). Nije obavezno da tekst govori „KOLO je dodatak, ne zamena“: ideja da zapis može da zameni novac sme da ostane, jer je to mogući ishod KOLA, iako KOLO danas kreće paralelno sa dinarom. Ono što i dalje važi, jer su to strukturne granice iz akata, a ne stav o cilju: POEN se ne menja za dinare i ne iznosi iz sistema (nekonvertibilnost), obaveze prema državi ostaju u dinarima, i uz POEN ne idu reči kupi, prodaj, plati, zaradi, cena.
 
-🔴 **Ton je ozbiljan, bez pevljivosti** (odluka vlasnika, 14.10.2026, blok o transparentnosti). Tekst je jasan, na srpskom književnom jeziku, prostim rečima. Nema veštačkog pripovedačkog tona: bez bajkovitog uvoda („Čika Đura je godinama…“), bez ritmičkih parova i ponavljanja („Jedni su verovali, a drugi sumnjali“, „Ne moraš da veruješ na reč. Možeš sam da proveriš.“), bez zagonetnih obrta i slogana. Kaže se šta je stvar, zašto je takva i šta to znači za gledaoca.
+🔴 **Tekst je jasan, ozbiljan i u duhu srpskog jezika** (odluke vlasnika, 30.09.2026 i 14.10.2026; važi za sve videe).
+- **Ne prevodi se doslovno na srpski, nego se upotrebljavaju pravi srpski izrazi** (14.10.2026). Primer: ne „iza dinara ne stoji zlato“ (engl. *backed by gold*), nego „dinar nema zlatno pokriće“; ne „ko ga prvi dobije“, nego „ko do novog novca dođe pre ostalih“; stručni pojmovi po srpskom nazivu (pokriće, obavezna rezerva, zakonsko sredstvo plaćanja, podići kredit).
+- **Preneseni izraz sme, ali samo ako je u duhu srpskog jezika** (14.10.2026; ublažava pravilo od 30.09.2026 „bez metafora“). Ne sme slika prevedena iz drugog jezika ni izmišljena slika koja zamagljuje smisao (ne „put se račva“, nego „problem su rešavali na dva načina“).
+- Slika sme da prikaže ono što tekst kaže, ali tekst ne sme da računa na sliku da bi bio razumljiv.
 
-🔴 **Objašnjavajući videi idu punim, pravilnim rečenicama** (odluka vlasnika, 02.10.2026, video 19). Ne piše se kratkim nabrajanjem u naratorskom stilu („Toliko za park, toliko za ulice.“), nego rečenicama koje objašnjavaju korak po korak, edukativno i tačno. Priča se pripoveda u prošlom vremenu, kako se priča u našem kraju.
-
-🔴 **Tekst je jasan i direktan, bez metafora i prenesenih izraza** (odluka vlasnika, 30.09.2026, video „Trampa“; važi za sve videe). Kaže se šta se desilo i ko je šta uradio: ne „put se račva“ nego „problem su rešavali na dva načina“, ne „stvar ide iz ruke u ruku“ nego „obućar dobije tu stvar i za nju posle uzme ono što mu treba“. Slika sme da prikaže ono što tekst kaže, ali tekst ne sme da računa na sliku da bi bio razumljiv.
-
-🔴 **Priča o koristi, ne o pravilima** (odluke vlasnika, 30.09.2026, video „Pijaca“):
-- Video pokazuje šta KOLO donosi ljudima i kako je sa njim lakše živeti (višak koji nekome treba, dinari koji ostaju u kući, rad koji vredi, domaće iz svog kraja), a ne nabraja ograničenja, uslove i postupke platforme.
+🟡 **Priča** (odluke vlasnika, 30.09.2026, video „Pijaca“):
 - Strana onoga ko nudi: ne dobija dinare, nego ono što njemu treba, u razmeni. Strana onoga ko prima ostaje kako je gore: dinari su mu ostali za nešto drugo.
-- Kad lik upisuje POEN, čuje se odakle mu je: sakupio ga je dajući drugim članovima, u razmeni ili kroz druge doprinose.
-- POEN se u priči upisuje pri preuzimanju, kad je stvar u rukama, nikad unapred.
 - Kraj priče sme da bude potvrda: nov član sa pečatom BEZ POTVRDE kroz razmenu uživo postaje potvrđen.
 - Likovi mogu biti novi, a stari iz ranijih videa smeju ponovo da se pojave.
 
-🔴 **Prvo problem iz života, KOLO tek na kraju** (odluka vlasnika, 01.10.2026, posle prvih
-rezultata na mrežama). „Zašto je Milica bacila ajvar?“ je na TikToku imao oko 20 puta više pregleda od
-ostalih; naslovi koji počinju od KOLA („KOLO raste“, „Ne poznaješ nikoga u KOLU?“, „Čiji si ti?“)
-zanimaju samo onoga ko KOLO već zna. Za svaki naredni scenario:
-- Naslov i prve 2 s nose **lik ili predmet i pitanje ili sukob** iz svakodnevice (zimnica, višak,
-  komšiluk, alat koji stoji); logo i ime KOLA ne idu na početak.
-- Priča se razume **bez znanja o KOLU**; KOLO se pojavljuje tek na kraju, kao rešenje.
-- Prednost imaju **serije sa stalnim likovima** („Priče iz komšiluka“), da gledalac ima razlog da zaprati.
-- 🟢 **Primer ne mora da ima imenovan lik** (odluka vlasnika, 02.10.2026). Kuka i primer mogu da budu
-  i apstraktni: pitanje, princip, poznata situacija bez imena („Ko krade iz zajedničke kase?“), ili šta god
-  najbolje drži pažnju. Lik se uvodi kad pomaže priči, ne zato što mora; stalni likovi ostaju mogućnost, ne obaveza.
+🔴 **Priča se razume bez znanja o KOLU** (odluka vlasnika, 01.10.2026).
+
+🔴 **Kraj** (odluka vlasnika, 01.10.2026):
 - Kraj nosi **jedno pitanje gledaocu** za komentar (npr. „Šta tebi trune u ostavi svake jeseni?“) ili
   jedan poziv; ne oba.
 
@@ -312,9 +294,6 @@ Pravila pregleda:
   sa izborima u uglastim zagradama `[ovako | ili ovako]`.
 - **Ništa se ne menja bez vlasnika.** Kad vlasnik kaže „reci šta ti se ne sviđa, ne menjaj
   odmah", daju se samo nalazi.
-- **Odlučeno se ne otvara ponovo.** Ako je vlasnik odbio predlog, ne vraća se u sledećem krugu,
-  ni u drugom obliku.
-- **„Sitnice ne diraj"** znači: pregled prijavljuje samo ono što menja smisao ili razumevanje.
 - 🟡 **Ne mešati sa jezičkom proverom opisa za mreže** (`docs/drustvene-mreze-opisi.md`, odeljak 1a:
   lektor i književnik). Opis se **čita očima**, pa tamo lektor ostaje. Ova ekipa važi za tekst
   koji se **izgovara**.

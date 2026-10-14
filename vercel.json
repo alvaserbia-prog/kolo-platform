@@ -1,8 +1,16 @@
 {
   "buildCommand": "if [ -n \"$DATABASE_URL\" ]; then prisma migrate deploy; fi && npm run build",
+  "ignoreCommand": "bash scripts/vercel-preskoci-build.sh",
   "build": {
     "env": {
       "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"
+    }
+  },
+  "git": {
+    "deploymentEnabled": {
+      "*": false,
+      "main": true,
+      "production": true
     }
   },
   "regions": [

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { MIN_LOZINKA, UZRAST_SA_ODRASLIMA, danaDoIsteka } from "@/lib/deca-pravila";
 import { generisiIzjavuRoditelja } from "@/lib/deca-izjava";
+import { profilHref } from "@/lib/profil-link";
 
 type Dete = {
   id: string;
@@ -90,7 +91,9 @@ export default function DeteProfil({
 
   return (
     <div className="mx-auto max-w-3xl space-y-5">
-      {/* Zaglavlje — isto kao na svakom drugom profilu. */}
+      {/* Zaglavlje podešavanja: ko je dete i put do njegovog profila. Stranica je
+          mesto RADNJI roditelja — sam profil deteta je na `/profil/<pseudonim>`. */}
+      <p className="text-sm font-medium text-kolo-muted">{t("podesavanja_naslov")}</p>
       <section className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">
         <div className="flex items-center gap-4">
           {dete.avatar ? (
@@ -114,11 +117,15 @@ export default function DeteProfil({
             <span className="ml-1 text-xs font-normal text-kolo-muted">POEN</span>
           </p>
         </div>
+        <Link
+          href={profilHref(dete)}
+          className="mt-4 inline-block rounded-xl border border-kolo-border px-4 py-2 text-sm font-medium text-kolo-green-700 transition hover:bg-kolo-bg"
+        >
+          {t("pogledaj_profil")}
+        </Link>
       </section>
 
       {greska && <p className="text-sm text-kolo-danger">{greska}</p>}
-
-      <IzjavaRoditelja dete={dete} />
 
       <PrepisiNaCekanju deteId={dete.id} prepisi={prepisi} />
 
@@ -153,6 +160,8 @@ export default function DeteProfil({
           </button>
         </div>
       </section>
+
+      <IzjavaRoditelja dete={dete} />
 
       {/* Oglasi — jedino što roditelj može da ukloni (čl. 10 st. 1). */}
       <section className="rounded-2xl border border-kolo-border bg-white p-6 shadow-sm">

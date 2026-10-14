@@ -575,6 +575,7 @@
     "posalji_zahtev": "Submit founding request"
   },
   "profil": {
+    "podesavanja_deteta": "Child settings",
     "naslov": "Profile",
     "profilna_slika": "Profile picture",
     "postavi_sliku": "Upload picture",
@@ -689,6 +690,7 @@
     "trx_nabavka": "Collective procurement",
     "trx_ispravka_nabavke": "Ledger correction",
     "trx_uskladjivanje_potvrde": "Confirmation reconciliation",
+    "trx_ponistenje_zapisa": "Record cancellation",
     "prepis_od": "Transfer from",
     "prepis_ka": "Transfer to",
     "ponisten_prepis_od": "Reversed transfer from",
@@ -2881,6 +2883,8 @@
     "greska_slanje": "That did not work. Try again.",
     "greska_ucitavanje": "Loading failed.",
     "status_dete": "child",
+    "podesavanja_naslov": "Child settings",
+    "pogledaj_profil": "View child's profile",
     "prekidac_naslov": "Allow communication and exchange with adult members",
     "prekidac_opis": "While it is off, the child talks and exchanges only with other children. It can be switched off at any moment.",
     "oglasi_naslov": "Listings",

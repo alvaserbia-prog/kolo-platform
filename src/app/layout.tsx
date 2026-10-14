@@ -94,13 +94,10 @@ export async function generateMetadata(): Promise<Metadata> {
       description: opis,
     },
     icons: {
-      // Favicon je SVG: PNG od 169×159 se na 16 px svede na mrlju, jer su ruke
-      // figura tanje od piksela. `kolo-znak.svg` nosi istu ideju u tri oblika.
-      // Logotip u zaglavlju se NE menja — ovo je samo znak za sitne prikaze.
-      icon: [
-        { url: "/kolo-znak.svg", type: "image/svg+xml" },
-        { url: "/kolo-icon.png", type: "image/png" },
-      ],
+      // Favicon je ISTI znak kao u sidebaru i manifestu (odluka vlasnika
+      // 06.10.2026). Uprošćen `kolo-znak.svg` (tri kruga oko zrna) je bio favicon
+      // od 27.09., ali nije ličio na KOLO ikonicu, pa je vraćen PNG.
+      icon: [{ url: "/kolo-icon.png", type: "image/png" }],
       apple: "/kolo-icon.png",
     },
   };

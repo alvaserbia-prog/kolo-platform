@@ -392,7 +392,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
             type="button"
             aria-label={t("tabovi_skroluj_levo")}
             onClick={() => tabsRef.current?.scrollBy({ left: -240, behavior: "smooth" })}
-            className="absolute left-0 top-0 bottom-px flex items-center pr-3 bg-gradient-to-r from-white via-white/90 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
+            className="absolute left-0 top-0 bottom-px flex items-center pr-3 bg-linear-to-r from-white via-white/90 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
           >
             <span className="flex items-center justify-center w-5 h-5 rounded-full border border-kolo-border bg-white shadow-sm text-xs leading-none">
               ‹
@@ -404,7 +404,7 @@ export default function AdminKlijent({ users, opticaj, pendingKrugovi, adminProg
             type="button"
             aria-label={t("tabovi_skroluj_desno")}
             onClick={() => tabsRef.current?.scrollBy({ left: 240, behavior: "smooth" })}
-            className="absolute right-0 top-0 bottom-px flex items-center pl-3 bg-gradient-to-l from-white via-white/90 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
+            className="absolute right-0 top-0 bottom-px flex items-center pl-3 bg-linear-to-l from-white via-white/90 to-transparent text-kolo-muted hover:text-kolo-green-700 transition-colors"
           >
             <span className="flex items-center justify-center w-5 h-5 rounded-full border border-kolo-border bg-white shadow-sm text-xs leading-none">
               ›
@@ -1771,7 +1771,7 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
           [t("dashboard_korisnici_ukupno"), data.korisnici.ukupno, "text-kolo-text"],
-          [t("dashboard_aktivni"), data.korisnici.aktivni, "text-kolo-green-700"],
+          [t("dashboard_registrovani"), data.korisnici.registrovani, "text-kolo-text"],
           [t("dashboard_brisani"), data.korisnici.brisani, "text-kolo-muted"],
           [t("dashboard_suspendovani"), data.korisnici.suspendovani, "text-kolo-gold-600"],
         ].map(([labela, broj, boja]) => (
@@ -1781,9 +1781,10 @@ function DashboardTab({ data, onRefresh }: { data: DashboardData; onRefresh: () 
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {[
-          [t("dashboard_verifikovani"), data.korisnici.redovni, "text-kolo-green-700"],
+          [t("dashboard_verifikovani"), data.korisnici.redovni, "text-kolo-text"],
+          [t("dashboard_aktivni"), data.korisnici.aktivni, "text-kolo-green-700"],
           [t("dashboard_novi"), data.korisnici.novi, "text-kolo-text"],
           [t("dashboard_deca"), data.korisnici.deca, "text-kolo-text"],
         ].map(([labela, broj, boja]) => (

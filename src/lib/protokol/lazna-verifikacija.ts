@@ -82,7 +82,7 @@ async function uProtokol(tx: Tx, userId: string, iznos: number, opis: string) {
       fromWalletId: w.id,
       toWalletId: PROTOKOL_WALLET_ID,
       amount: iznos,
-      type: TransactionType.TRANSFER,
+      type: TransactionType.PONISTENJE_ZAPISA,
       description: opis,
     },
   });

@@ -246,6 +246,11 @@ export async function GET(
     // pseudonimima i linkovima. Javnost te veze je prihvaćena PREMA POTVRĐENIM
     // članovima, ne prema nalogu bez ijedne potvrde.
     roditelji: suzen ? [] : korisnik.roditeljstvaKaoDete.map((r) => r.roditelj),
+    // Roditelj na profilu svog deteta dobija put nazad u podešavanja deteta
+    // (`/deca/[id]`). Odluku donosi server, iz iste veze koju čita i ta stranica.
+    jaSamRoditelj:
+      korisnik.maloletan &&
+      korisnik.roditeljstvaKaoDete.some((r) => r.roditelj.id === session.user.id),
     deca: suzen ? [] : korisnik.roditeljstvaKaoRoditelj.map((r) => r.dete),
     verified: korisnik.verified,
     verifiedAt: suzen ? null : korisnik.verifiedAt,

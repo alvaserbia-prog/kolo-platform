@@ -1,4 +1,4 @@
-# KOLO video 19 — Najlakše je tražiti od drugih da budu pošteni / Pravila su ista za sve
+# KOLO video 20 — Najlakše je tražiti od drugih da budu pošteni / Pravila su ista za sve
 
 Drugi video bloka o transparentnosti i privatnosti (18 upravljanje → 19 tvoj račun →
 20 pseudonim). Objašnjavajući video: pune rečenice, bez imenovanih likova, ispravke ekipe već unete
@@ -61,7 +61,7 @@ Muzika: vojvođanska tamburica, vedro; na sc. 1 kratka stanka posle pitanja, pa 
 - Sc. 7: član sam gleda tuđi račun; ne kaže se da Fondacija prati obrasce prepisa (zabranjeno u `CLAUDE.md`).
 - Ne vide se dobrovoljno uneti podaci, lanac potvrda ni posebne kategorije podataka (čl. 67 st. 3).
 - Ne kaže se „KOLO vodi Fondacija“ (odluka vlasnika uz video 18).
-- Zbir je uvek nula ostaje videu 42; ovde se ne pominje.
+- Zbir je uvek nula ostaje videu 44; ovde se ne pominje.
 - Uz POEN ne idu kupi, prodaj, plati, zaradi, cena.
 - Rečenica 8: „svako dobija prema svojim zaslugama“ zamenjeno sa „gde su pravila ista za sve“ (odluka vlasnika,
   04.10.2026): POEN se ne opisuje kao nagrada ni naknada koju neko dodeljuje.

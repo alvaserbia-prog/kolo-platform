@@ -1,4 +1,4 @@
-# KOLO video 18 — Ko krade iz zajedničke kase? / Kako da upravljanje bude transparentno
+# KOLO video 19 — Ko krade iz zajedničke kase? / Kako da upravljanje bude transparentno
 
 Prvi od tri videa bloka o transparentnosti i privatnosti (odluka vlasnika, 02.10.2026):
 18 upravljanje → 19 razmena (POEN) → 20 pseudonim; potrošnja dinara je izdvojena u video 61. Svaki počinje kukom koja
@@ -13,35 +13,31 @@ videa 19; ovde je u središtu **sveska**, ne novac.
 
 **Lik:** čika Đura, pošten čovek koji vodi kasu zgrade. Ostali stanari su skupina, bez imena.
 
-## Naslov (dva reda, na kuki i na naslovnoj slici)
+## Naslov
 
-- gore, krupno: **KO KRADE IZ ZAJEDNIČKE KASE?**
-- dole, sitnije: **Kako da upravljanje bude transparentno**
+- **Ko krade iz zajedničke kase?** stoji gore kao naslov dok priča počinje; ne izgovara se.
 
-## Tekst za snimanje (ozbiljan ton, čika Đura vraćen, prostije rečenice, 14.10.2026)
+## Tekst za snimanje (KONAČAN, vlasnik, 14.10.2026)
 
-1. Ko krade iz zajedničke kase? To ne može da se zna ako se ne vidi šta je upisano.
-2. Čika Đura je vodio kasu u svojoj zgradi. Primao je uplate stanara i plaćao troškove zgrade. Sve je upisivao u svesku.
-3. Sveska je stajala kod njega i stanari nisu mogli da je vide. Đura je bio pošten, ali su neki stanari ipak sumnjali. Zato je stalno morao da se opravdava.
-4. Onda je Đura okačio svesku na oglasnu tablu u ulazu. Tada je svaki stanar mogao sam da proveri svaku uplatu i svaki trošak. Sumnje su nestale, i Đura više nije morao da se opravdava.
-5. Takva sveska je evidencija. Kada je evidencija dostupna svima, svi vide da onaj ko upravlja ne uzima za sebe. To se naziva transparentnost upravljanja.
-6. Tako radi i KOLO. POEN se upisuje samo prema pravilima. Svaki upisani POEN vidljiv je svima na platformi. Zato članovi mogu sami da provere da li je bilo zloupotrebe.
-7. Nije potrebno verovati na reč, jer svako može da proveri.
-8. Registruj se na ekolo.rs.
+1. Čika Đura je vodio kasu u svojoj zgradi. Primao je uplate stanara i plaćao troškove zgrade i sve je upisivao u svesku.
+2. Dok je sveska stajala kod njega, stanari nisu imali uvid kako se novac troši. Đura je bio pošten, ali su stanari ipak sumnjali.
+3. Onda je Đura okačio svesku na oglasnu tablu u ulazu. Tada je svaki stanar mogao sam da proveri svaku uplatu i svaki trošak. I Đura više nije morao da se pravda.
+4. Kada je evidencija dostupna svima, svako ima uvid da onaj ko upravlja ne uzima ništa za sebe. To se naziva transparentnost upravljanja.
+5. Tako radi i KOLO. POEN se upisuje samo prema pravilima. Svaki upisani POEN vidljiv je svima na platformi. Na taj način članovi mogu sami da provere da li je bilo zloupotrebe.
+6. Ne moraš verovati na reč, jer sve možeš da proveriš.
+7. Registruj se na ekolo.rs.
 
 ## Scenario
 
 | Sc. | Slika (tekst koji je deo slike je u navodnicima) |
 |---|---|
-| 1 | krupno: limena kasica sa natpisom „ZGRADA“ na stolu u ulazu, ruka se pruža ka njoj, kadar staje pre nego što se vidi čija je. Preko slike dva reda naslova: „KO KRADE IZ ZAJEDNIČKE KASE?“ / „Kako da upravljanje bude transparentno“ |
-| 2 | čika Đura za kuhinjskim stolom, naočare na nosu, upisuje u debelu svesku; pored kasica |
-| 3 | sveska u Đurinoj fioci; fioka se zatvara |
-| 4 | stanari u ulazu šapuću i gledaju za Đurom; Đura oborene glave |
-| 5 | Đura pribada otvorenu svesku na tablu u ulazu: „uplate · troškovi · datum“; stanari usput zastaju, prelaze prstom preko redova |
-| 6 | Đura pred tablom, uspravljen, sa osmehom; jedan stanar ga pozdravlja; na tabli iznad sveske natpis „EVIDENCIJA“ |
-| 7 | ekran telefona: stranica Sistem; ruka skroluje kroz zapise POEN-a |
-| 8 | tabla iz ulaza i ekran telefona jedno pored drugog; kasica sa početka, sada pored otvorene sveske |
-| 9 | završna kartica ekolo.rs |
+| 1 | naslov „Ko krade iz zajedničke kase?“ gore; ispod čika Đura za stolom upisuje u debelu svesku, pored limena kasica „ZGRADA“ |
+| 2 | sveska u Đurinoj fioci; stanari u ulazu gledaju za Đurom |
+| 3 | Đura pribada otvorenu svesku na tablu u ulazu: „uplate · troškovi · datum“; stanari zastaju i čitaju |
+| 4 | Đura pred tablom; natpis iznad sveske „EVIDENCIJA“ |
+| 5 | ekran telefona: stranica Sistem, zapisi POEN-a |
+| 6 | tabla iz ulaza i ekran telefona jedno pored drugog |
+| 7 | završna kartica ekolo.rs |
 
 Muzika: vojvođanska tamburica, vedro; na sc. 1 kratka stanka posle pitanja, pa ulazak ritma.
 

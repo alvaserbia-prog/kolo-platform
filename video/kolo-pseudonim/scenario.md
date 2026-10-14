@@ -1,4 +1,4 @@
-# KOLO video — Svi vide šta radiš / Ko si, zna samo onaj ko te poznaje (pseudonim)
+# KOLO video 21 — Svi vide šta radiš / Ko si, zna samo onaj ko te poznaje (pseudonim)
 
 Treći video bloka o transparentnosti i privatnosti (upravljanje → račun → pseudonim). Odgovara na
 cenu iz prethodnog videa: ako su sve razmene otvorene, šta ostaje od privatnosti? Objašnjavajući
