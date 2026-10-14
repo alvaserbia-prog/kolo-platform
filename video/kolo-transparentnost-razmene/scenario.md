@@ -1,4 +1,4 @@
-# KOLO video 20 — Najlakše je tražiti od drugih da budu pošteni / Pravila su ista za sve
+# KOLO video 20 — Kako da sprečimo krađu?
 
 Drugi video bloka o transparentnosti i privatnosti (18 upravljanje → 19 tvoj račun →
 20 pseudonim). Objašnjavajući video: pune rečenice, bez imenovanih likova, ispravke ekipe već unete
@@ -11,16 +11,16 @@ ublažava, objašnjava video 20.
 
 ## Naslov
 
-- **Najlakše je tražiti od drugih da budu pošteni** stoji gore kao naslov dok tekst počinje; ne izgovara se (isto kao u videu 19).
+- **Kako da sprečimo krađu?** stoji gore kao naslov dok tekst počinje (vlasnik, 14.10.2026).
 
-## Tekst za snimanje (sređen kao video 19: bez pevljivosti, književni jezik, prostije rečenice, 14.10.2026)
+## Tekst za snimanje (verzija vlasnika, 14.10.2026)
 
-1. Kada neko upravlja zajedničkim sredstvima, želimo da znamo šta je dobio, šta je dao i kome. Samo tako možemo da proverimo da li uzima za sebe.
-2. Ako tražimo da računi onih koji upravljaju budu otvoreni, i naši računi moraju da budu otvoreni. Pravila moraju da važe jednako za sve.
+1. Danas je lako ukrasti novac, posebno kada si na vrhu. Kada neko upravlja zajedničkim sredstvima, moramo biti sigurni da ne uzima ništa za sebe. To je moguće jedino ako imamo uvida u njegove račune.
+2. Ako tražimo da računi onih koji upravljaju budu otvoreni, a pristajemo da su pravila ista za sve, onda i naši računi moraju da budu otvoreni.
 3. Kada su otvoreni računi svih članova, sprečava se i da bilo ko od nas vara, jer se za svaki POEN vidi odakle je došao.
-4. U KOLU svaki potvrđeni član može da vidi koliko POEN-a ima drugi član, od koga ga je dobio i kome ga je prepisao. Isto važi i za račune onih koji upravljaju, bez izuzetka. To se naziva transparentnost razmene.
-5. Od toga imaš i koristi. Niko ne može da posumnja da si POEN dobio mimo pravila. Ti možeš da pogledaš račun člana sa kojim razmenjuješ i da vidiš koliko je on dao drugima.
-6. Zbog toga se odričeš dela privatnosti, jer tvoj komšija, ako je član, može da vidi tvoje razmene. Na to smo pristali svesno, jer bez toga ne bismo mogli da proverimo ni račune onih koji upravljaju.
+4. U KOLU svaki potvrđeni član može da vidi koliko POEN-a ima drugi član, od koga ga je dobio i kome ga je prepisao. To je transparentnost razmene.
+5. A koja je tvoja korist od toga? Niko ne može da posumnja da si POEN dobio mimo pravila. Ti možeš da pogledaš račun člana sa kojim razmenjuješ i da vidiš koliko je on dao zajednici.
+6. Odričemo se dela privatnosti, i svako ko je član može da vidi naše razmene. Bez toga ne bismo mogli da proverimo ni račune onih koji upravljaju.
 7. KOLO je sistem u kome pravila važe jednako za sve.
 8. Uključi se na ekolo.rs.
 
