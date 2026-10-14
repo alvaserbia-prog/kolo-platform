@@ -1383,3 +1383,63 @@ POEN je zapis o doprinosu zajednici. Nije novac i ne menja se za novac.
 
 #Sombor #KOLO
 ```
+
+## 22. Video 19 „Ko krade iz zajedničke kase?“ (oktobar 2026)
+
+Video: `video/kolo-transparentnost/out/kolo-transparentnost.mp4`. Naslovna: `video/kolo-transparentnost/out/naslovna.jpg`
+(„Ko krade iz zajedničke kase?“, naslov iz scenarija).
+Zvuk na Instagramu preimenovati u „KOLO, ko krade iz zajedničke kase“. Alternativni tekst: „Slikovnica: čika Đura
+vodi kasu zgrade i sve upisuje u svesku; kad svesku okači na oglasnu tablu u ulazu, stanari sami proveravaju
+uplate i troškove, a na kraju isti spisak zapisa vidi se na telefonu, na stranici Sistem u KOLU.“
+
+Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, kućni savet i pitanje „gde su otišle pare za
+lift“; Instagram, blagajna udruženja ili kluba, gde se ceo izveštaj čita jednom godišnje; Facebook, mesna
+zajednica i pitanje kome se veruje na reč. Đura, sveska i tabla iz videa se ne prepričavaju. Ne tvrdi se da
+iko krade: pitanje ostaje pitanje, a odgovor je da otvoren zapis skida sumnju. Ko vidi zapise kaže se tačno:
+članovi KOLA, ne „svako na internetu“ (Pravilnik čl. 67).
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; uz POEN nema reči kupi, prodaj,
+plati, zaradi, cena, vrednost; „vi“ dosledno na Facebook-u; adresa na Facebook-u bez `https://`, link ide u
+prvi komentar (odeljak 3).
+
+### TikTok
+
+```
+„Gde su otišle pare za lift?“ Ko je bio na kućnom savetu, čuo je to pitanje. 🏢
+
+Najčešće niko ništa nije uzeo. Problem je što se ne vidi. Dok se računi čuvaju u nečijoj fioci, sumnja ostaje, i to na poštenog čoveka.
+
+U KOLU svaki upisani POEN vide svi članovi. Upisuje se samo po pravilima, pa svako može sam da proveri da li je nešto upisano mimo njih.
+
+👉 Registruj se, link je u profilu.
+
+#Sombor #komšije #zgrada #KOLO
+```
+
+### Instagram
+
+```
+Godišnji izveštaj blagajnika svi saslušaju, a retko ko ga razume. 📒
+
+Poverenje ne dolazi iz jednog izveštaja godišnje. Dolazi kad svaki upis može da se pogleda kad god poželiš.
+
+Tako je u KOLU: svaki upisani POEN vide svi članovi. Ne moraš nikome da veruješ na reč.
+
+👉 Link je u bio.
+
+#Sombor #Vojvodina #zajednica #KOLO
+```
+
+### Facebook
+
+```
+Koliko puta ste čuli „nemoj da pitaš, sve je u redu“? 🤔
+
+Možda je zaista sve u redu. Ali kad se zajednička sredstva vode tako da ih vidi samo onaj ko ih vodi, sumnja je neizbežna, i za pošten rad i za nepošten.
+
+KOLO je drugačije uređen. POEN se upisuje samo po pravilima, a svaki upis vide svi članovi. Niko ne mora da se pravda, jer svako može sam da proveri.
+
+👉 Šta biste vi voleli da vidite otvoreno u svom mestu? Registracija je na ekolo.rs
+
+#Sombor #KOLO
+```
