@@ -18,14 +18,14 @@ videa 19; ovde je u središtu **sveska**, ne novac.
 - gore, krupno: **KO KRADE IZ ZAJEDNIČKE KASE?**
 - dole, sitnije: **Kako da upravljanje bude transparentno**
 
-## Tekst za snimanje (ozbiljan ton, 14.10.2026)
+## Tekst za snimanje (ozbiljan ton, čika Đura vraćen, prostije rečenice, 14.10.2026)
 
-1. Ko krade iz zajedničke kase? Na to pitanje ne može da se odgovori ako se ne vidi šta je upisano.
-2. Uzmimo za primer kućni savet. Predsednik kućnog saveta prima uplate stanara, plaća troškove zgrade i sve to upisuje u svesku.
-3. Ako sveska stoji samo kod njega, stanari ne mogu da provere šta je upisano. Čak i kada je predsednik pošten, neki stanari će sumnjati, a on će morati da se opravdava.
-4. Kada se sveska okači na oglasnu tablu u ulazu, svaki stanar može sam da proveri svaku uplatu i svaki trošak. Sumnja tada nema osnova, a predsednik ne mora da se opravdava.
-5. Takva sveska je evidencija. Kada je evidencija dostupna svima, svi mogu da vide da onaj ko upravlja ne uzima za sebe. To se naziva transparentnost upravljanja.
-6. KOLO je uređen na isti način. POEN se upisuje samo prema pravilima, a svaki upisani POEN vidljiv je svima na platformi. Članovi zato mogu sami da provere da li je bilo zloupotrebe.
+1. Ko krade iz zajedničke kase? To ne može da se zna ako se ne vidi šta je upisano.
+2. Čika Đura je vodio kasu u svojoj zgradi. Primao je uplate stanara i plaćao troškove zgrade. Sve je upisivao u svesku.
+3. Sveska je stajala kod njega i stanari nisu mogli da je vide. Đura je bio pošten, ali su neki stanari ipak sumnjali. Zato je stalno morao da se opravdava.
+4. Onda je Đura okačio svesku na oglasnu tablu u ulazu. Tada je svaki stanar mogao sam da proveri svaku uplatu i svaki trošak. Sumnje su nestale, i Đura više nije morao da se opravdava.
+5. Takva sveska je evidencija. Kada je evidencija dostupna svima, svi vide da onaj ko upravlja ne uzima za sebe. To se naziva transparentnost upravljanja.
+6. Tako radi i KOLO. POEN se upisuje samo prema pravilima. Svaki upisani POEN vidljiv je svima na platformi. Zato članovi mogu sami da provere da li je bilo zloupotrebe.
 7. Nije potrebno verovati na reč, jer svako može da proveri.
 8. Registruj se na ekolo.rs.
 
