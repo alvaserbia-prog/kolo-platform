@@ -138,8 +138,10 @@ Raniji kostur (isti redosled udica → šta je KOLO → kako radi → poverenje 
 mreže) proizveo je opise koji svi liče jedan na drugi, a rečenica „KOLO je platforma za razmenu
 dobara i usluga među komšijama, nastala u Somboru“ stajala je u skoro svakom. Ukinut je.
 
-1. **Ugao pre pisanja.** Za svaki video se prvo odredi jedan ugao koga u videu nema: slika iz
-   svakodnevice, opšte zapažanje, pitanje, mala istina koju svako zna. Opis se piše iz tog ugla.
+1. **Ugao pre pisanja.** Za svaki video se prvo odredi jedan ugao koga u videu nema. 🔴 Od 14.10.2026
+   (odluka vlasnika, video 19): **opis je u kontekstu KOLO sistema i pravila i opisuje mehaniku**
+   (kako se POEN upisuje, ko šta vidi, šta pravilo propisuje), **ne hipotetičke priče** iz svakodnevice
+   („komšija vam je pomogao oko krova“, „pare za lift“). Opis se piše iz tog ugla.
 2. **Tri mreže, tri različita teksta.** Svaka mreža dobija svoj ugao i svoj početak, ne isti
    tekst u tri dužine.
 3. **„Šta je KOLO“ nije obavezna rečenica.** Kad je potrebna, kaže se svaki put drugim rečima;
@@ -1392,9 +1394,11 @@ Zvuk na Instagramu preimenovati u „KOLO, ko krade iz zajedničke kase“. Alte
 vodi kasu zgrade i sve upisuje u svesku; kad svesku okači na oglasnu tablu u ulazu, stanari sami proveravaju
 uplate i troškove, a na kraju na telefonu se vidi račun direktora u KOLU, sa svakim upisom POEN-a.“
 
-Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, kućni savet i pitanje „gde su otišle pare za
-lift“; Instagram, blagajna udruženja ili kluba, gde se ceo izveštaj čita jednom godišnje; Facebook, mesna
-zajednica i pitanje kome se veruje na reč. Đura, sveska i tabla iz videa se ne prepričavaju. Ne tvrdi se da
+Napisano po odeljku 4, prerađeno 14.10.2026 (vlasnik: „tekstovi moraju biti u kontekstu KOLO sistema i
+pravila, opisuje se mehanika, a ne hipotetičke priče“). Uglovi: TikTok, ko upisuje POEN (Protokol, samo kad
+je ispunjen uslov iz pravila, npr. prvi oglas i potvrda člana); Instagram, račun onih koji upravljaju je
+otvoren kao i svačiji; Facebook, POEN nastaje samo na načine iz Pravilnika i istorija se ne prepravlja
+(ispravka novim zapisom, čl. 34). Đura, sveska i tabla iz videa se ne prepričavaju. Ne tvrdi se da
 iko krade: pitanje ostaje pitanje, a odgovor je da otvoren zapis skida sumnju. Ko vidi zapise kaže se tačno:
 članovi KOLA, ne „svako na internetu“ (Pravilnik čl. 67).
 
@@ -1405,25 +1409,25 @@ prvi komentar (odeljak 3).
 ### TikTok
 
 ```
-„Gde su otišle pare za lift?“ Ko je bio na kućnom savetu, čuo je to pitanje. 🏢
+U KOLU POEN ne upisuje čovek po svom nahođenju, nego Protokol po pravilima. 📋
 
-Najčešće niko ništa nije uzeo. Problem je što se ne vidi. Dok se računi čuvaju u nečijoj fioci, sumnja ostaje, i to na poštenog čoveka.
+Upis ide samo kad je ispunjen uslov iz Pravilnika: na primer, kad Fondacija odobri tvoj prvi oglas ili kad član koga si potvrdio da svoj prvi doprinos. Svaki upis ostaje na računu člana.
 
-U KOLU svaki upisani POEN vide svi članovi. Upisuje se samo po pravilima, pa svako može sam da proveri da li je nešto upisano mimo njih.
+Te zapise vidi svaki prijavljen član. Račun onih koji upravljaju nije izuzetak.
 
 👉 Registruj se, link je u profilu.
 
-#Sombor #komšije #zgrada #KOLO
+#Sombor #KOLO #pravila
 ```
 
 ### Instagram
 
 ```
-Godišnji izveštaj blagajnika svi saslušaju, a retko ko ga razume. 📒
+Račun onih koji upravljaju KOLOM otvoren je kao i račun svakog člana. 👀
 
-Poverenje ne dolazi iz jednog izveštaja godišnje. Dolazi kad svaki upis može da se pogleda kad god poželiš.
+Na njemu stoji svaki upis od Protokola i svaki prepis, sa iznosom i vremenom. Protokol upisuje POEN samo kad je uslov iz pravila ispunjen, pa se upis mimo pravila vidi.
 
-Tako je u KOLU: svaki upisani POEN vide svi članovi. Ne moraš nikome da veruješ na reč.
+Ne moraš nikome da veruješ na reč, sve možeš da pogledaš sam.
 
 👉 Link je u bio.
 
@@ -1433,13 +1437,13 @@ Tako je u KOLU: svaki upisani POEN vide svi članovi. Ne moraš nikome da veruje
 ### Facebook
 
 ```
-Koliko puta ste čuli „nemoj da pitaš, sve je u redu“? 🤔
+U KOLU POEN nastaje samo na načine koje propisuje Pravilnik o KOLO sistemu. 📖
 
-Možda je zaista sve u redu. Ali kad se zajednička sredstva vode tako da ih vidi samo onaj ko ih vodi, sumnja je neizbežna, i za pošten rad i za nepošten.
+Svaki takav upis vodi Protokol i on ostaje zabeležen na računu člana: koliko je upisano i kada. Beleži se i svaki prepis između dva člana. Zapis se ne briše; greška se ispravlja novim zapisom.
 
-KOLO je drugačije uređen. POEN se upisuje samo po pravilima, a svaki upis vide svi članovi. Niko ne mora da se pravda, jer svako može sam da proveri.
+Te zapise vide svi prijavljeni članovi, a pseudonime strana potvrđeni članovi. To važi i za račune onih koji upravljaju. Zato niko ne mora da se pravda, a svako može sam da proveri.
 
-👉 Šta biste vi voleli da vidite otvoreno u svom mestu? Registracija je na ekolo.rs
+👉 Registracija je na ekolo.rs
 
 #Sombor #KOLO
 ```
