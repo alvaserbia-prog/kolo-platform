@@ -16,7 +16,7 @@ ponavlja se na tabli i na telefonu (`src/zgrada.tsx`, `src/scene/`).
 
 | Scena | Slika |
 |---|---|
-| 1 | Naslov gore; ruka ubaci novčanicu u kasu „ZGRADA“; kamera se odmakne na Đuru za stolom. |
+| 1 | Naslov gore (prvih ~4,6 s); ruka ubaci novčanicu u kasu „ZGRADA“; kamera se odmakne na Đuru za stolom. |
 | 2 | Stanarka daje uplatu, majstor sa sijalicom dobija novac; krupno sveska: „stan 4 · 2.000“, „sijalica u ulazu · 450“. |
 | 3 | Sveska ide u fioku komode; ulaz: stanari kod sandučića gledaju ka zatvorenim vratima stana 3. |
 | 4 | Đura iz svog džepa doda kovanicu u kasu; ulaz: stanari šapuću, upitnici, Đura prolazi pognute glave. |
@@ -32,7 +32,7 @@ ponavlja se na tabli i na telefonu (`src/zgrada.tsx`, `src/scene/`).
 | 14 | Levo tabla, desno telefon; Đura raširi ruke; isti red istaknut na oba, dve kvačice. |
 | 15 | Znak KOLO i „ekolo.rs“; završni akord odmah posle reči. |
 
-- Jedini natpis je naslov (sc. 1–4); ostali tekst je u svetu priče (sveska, tabla, cedulje, telefon).
+- Jedini natpis je naslov, samo prvih ~4,6 s (sc. 1, odluka vlasnika 14.10.2026); ostali tekst je u svetu priče (sveska, tabla, cedulje, telefon).
 - Novčanice i kovanice su samo dinari u kasi zgrade; POEN je samo red u spisku.
 - Pseudonimi na ekranu su izmišljeni (likovi ranijih videa), ne stvarni članovi.
 

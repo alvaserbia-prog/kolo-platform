@@ -11,8 +11,8 @@ type N = { od: number; do: number; redovi: string[]; otkrij?: number[]; hladno?:
 const glob = (id: number, rec: string, pojava = 1) => scena(id).odF + kad(id, rec, pojava);
 const kraj = (id: number) => scena(id).doF - 6;
 
-// Jedini natpis je naslov (scenario): stoji gore od prvog kadra do obrta (kraj scene 4), ne izgovara se.
-export const NASLOVI: N[] = [{ od: 0, do: kraj(4), redovi: ["Ko krade iz", "zajedničke kase?"] }];
+// Jedini natpis je naslov (scenario): stoji gore prvih nekoliko sekundi, do kraja scene 1 (vlasnik, 14.10.2026), ne izgovara se.
+export const NASLOVI: N[] = [{ od: 0, do: kraj(1), redovi: ["Ko krade iz", "zajedničke kase?"] }];
 
 const Kartusa: React.FC<{ n: N; s: number; izlaz: number }> = ({ n, s, izlaz }) => {
   const f = useCurrentFrame();
