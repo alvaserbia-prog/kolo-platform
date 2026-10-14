@@ -13,7 +13,7 @@ ublažava, objašnjava video 20.
 
 - **Kako da sprečimo krađu?** stoji gore kao naslov dok tekst počinje (vlasnik, 14.10.2026).
 
-## Tekst za snimanje (verzija vlasnika, 14.10.2026, posle prerade rasporeda pasusa)
+## Tekst za snimanje (KONAČAN, vlasnik, 14.10.2026)
 
 1. Danas je lako ukrasti novac, naročito onome ko je na položaju. Zato, kada neko upravlja zajedničkim sredstvima, moramo da imamo uvid u njegove račune. Samo tako možemo biti sigurni da ništa ne uzima za sebe.
 2. Ali pravila moraju da važe za sve. Ako tražimo da računi uprave budu otvoreni, onda i naši moraju biti otvoreni. Tada niko ne može da vara neprimećeno, ni oni koji upravljaju ni bilo ko od nas, jer se za svaki POEN zna odakle je došao.
