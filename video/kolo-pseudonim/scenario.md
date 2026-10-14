@@ -1,4 +1,4 @@
-# KOLO video 21 — Svi vide šta radiš / Ko si, zna samo onaj ko te poznaje (pseudonim)
+# KOLO video 21 — Kako čuvamo privatnost? (pseudonim)
 
 Treći video bloka o transparentnosti i privatnosti (upravljanje → račun → pseudonim). Odgovara na
 cenu iz prethodnog videa: ako su sve razmene otvorene, šta ostaje od privatnosti? Objašnjavajući
@@ -10,41 +10,23 @@ svako vidi naše razmene, ali ne zna ko smo, osim ako nas lično poznaje. Naš i
 koji nas znaju: s kojima smo razmenjivali ili koji su nas potvrdili. Čovek iz drugog grada ne može da
 pročita moje ime i prezime i da me pronađe, osim ako sam ga sam istakao.
 
-## Naslov (dva reda, na kuki i na naslovnoj slici)
+## Naslov
 
-- gore, krupno: **SVI VIDE ŠTA RADIŠ**
-- dole, sitnije: **Ko si, zna samo onaj ko te poznaje**
+- **Kako čuvamo privatnost?** stoji gore kao naslov dok tekst počinje; ne izgovara se (vlasnik, 14.10.2026).
 
-## Tekst za snimanje (ozbiljan ton, 14.10.2026)
+## Tekst za snimanje (KONAČAN, vlasnik, 14.10.2026)
 
-1. U KOLU drugi članovi vide tvoje razmene, ali ne vide tvoje ime i prezime.
-2. Razmene su otvorene zato što pravila važe jednako za sve. Da tvoja privatnost ne bi bila ugrožena, pored razmena ne stoji tvoje ime, već pseudonim.
-3. Pseudonim je ime koje sam izabereš prilikom registracije. Ne mora da ima veze sa tvojim pravim imenom: može biti nadimak, naziv zanata ili bilo koja reč.
-4. Ko stoji iza pseudonima znaju samo ljudi koji te lično poznaju, na primer oni sa kojima si razmenjivao uživo i oni koji su potvrdili da si stvarna osoba.
-5. Član iz drugog grada vidi tvoje razmene i tvoj pseudonim, ali ne zna kako se zoveš ni gde živiš i ne može da te pronađe.
-6. U KOLU ne postoji spisak koji povezuje pseudonime sa imenima ljudi.
-7. Ime, prezime, broj telefona i adresu nisi dužan da upišeš. Ako ih upišeš, sam određuješ ko može da ih vidi. Uz donaciju se tvoje ime prikazuje samo ako izabereš javnu donaciju.
-8. To se naziva pseudonimnost: evidencija je otvorena, a tvoj identitet poznaju samo ljudi koji te i inače poznaju.
-9. Na taj način smo se odrekli samo onog dela privatnosti koji je potreban za transparentnost.
-10. Uključi se na ekolo.rs i izaberi svoj pseudonim.
+1. Kako da sačuvamo našu privatnost ako su sve razmene otvorene?
+2. Iako drugi članovi imaju uvid u sve razmene, važno je da pri tom sačuvamo privatnost.
+3. Iz tog razloga u KOLO ne ulaziš svojim imenom i prezimenom, već pseudonimom. To je naziv koji biraš prilikom registracije i ne mora da ima veze sa tvojim pravim imenom: može biti nadimak, naziv zanata ili bilo koja druga reč.
+4. Ko je iza kog pseudonima, znaju samo ljudi koji te poznaju: oni sa kojima si razmenjivao i oni koji su te potvrdili. Član iz drugog grada vidi tvoj nalog i razmene, ali ne zna da su tvoji, osim ako sam nisi izabrao da tvoji podaci budu vidljivi svima.
+5. Sam odlučuješ koliko ćeš o sebi da otkriješ: ime, broj telefona i adresu nisi dužan da upišeš.
+6. To se zove pseudonimnost. Tako se odričemo samo onog dela privatnosti koji je potreban da bi razmene bile otvorene.
+7. Uključi se na ekolo.rs i izaberi svoj pseudonim.
 
 ## Scenario
 
-| Sc. | Slika (tekst koji je deo slike je u navodnicima) |
-|---|---|
-| 1 | mnogo telefona u mnogo ruku, na svima isti otvoren zapis; jedan red se izdvaja, a umesto imena senka. Preko slike dva reda naslova |
-| 2 | otvorene fascikle iz prethodnog videa, poravnata vaga |
-| 3 | polje „Pseudonim“ pri registraciji; ruka kuca; u zapisu se umesto imena pojavljuje pseudonim |
-| 4 | tri primera pseudonima jedan ispod drugog: nadimak, zanat, obična reč |
-| 5 | kapija; dvoje ljudi razmenjuju teglu i alat; iznad jednog od njih se pojavi njegov pseudonim, i drugi klimne glavom |
-| 6 | karta Srbije; tačka u drugom gradu; čovek gleda telefon, na ekranu samo pseudonim, bez lica i adrese |
-| 7 | prazna tabela sa zaglavljem „pseudonim · ime i prezime“, bez redova |
-| 8 | profil: polja „ime“, „telefon“, „adresa“ prazna, pored svakog izbor vidljivosti; zatim prekidač „javna / anonimna donacija“ |
-| 9 | zapis otvoren; oko jednog reda krug ljudi koji tu osobu poznaju |
-| 10 | vaga: mali teg „deo privatnosti“ na jednoj strani, veći deo ostaje na drugoj |
-| 11 | završna kartica ekolo.rs |
-
-Muzika: vojvođanska tamburica, vedro; na sc. 1 kratka stanka posle prve rečenice, pa ulazak ritma.
+Piše se u koraku 3 toka izrade (`video/README.md`), po konačnom tekstu iznad. Tabela scena iz ranijih verzija teksta je uklonjena jer ne odgovara konačnom tekstu.
 
 ## Pregled ekipe (04.10.2026; ispravke unete)
 
