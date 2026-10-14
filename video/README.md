@@ -31,7 +31,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 16 | Stari oblici novca | N | `kolo-stari-novac/` | ✅ |
 | 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | ✅ |
 | 18 | Šta piše pored tvog imena | K |  |  |
-| 19 | Čije je KOLO? Ničije. | K |  |  |
+| 19 | Čije je KOLO? Ničije. | K | `kolo-nicije/` | tekst predlog, scenario nacrt |
 | 20 | Šta je Fondacija | K |  |  |
 | 21 | Zlato, srebro, bakar | N |  |  |
 | 22 | Mladi roditelji: Jovana, Nemanja i beba | K | `kolo-mladi-roditelji/` | scenario gotov, čeka snimak glasa |
