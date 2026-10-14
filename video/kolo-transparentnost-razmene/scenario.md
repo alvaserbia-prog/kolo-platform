@@ -9,21 +9,20 @@ treba da otvorimo svoje, jer pravila treba da su ista za sve. Uz to, otvoreni ra
 da bilo ko od nas vara. Korisnik od toga ima i korist, a cena je deo privatnosti; kako se ona
 ublažava, objašnjava video 20.
 
-## Naslov (dva reda, na kuki i na naslovnoj slici)
+## Naslov
 
-- gore, krupno: **NAJLAKŠE JE TRAŽITI OD DRUGIH DA BUDU POŠTENI**
-- dole, sitnije: **Pravila su ista za sve**
+- **Najlakše je tražiti od drugih da budu pošteni** stoji gore kao naslov dok tekst počinje; ne izgovara se (isto kao u videu 19).
 
-## Tekst za snimanje (ozbiljan ton, 14.10.2026)
+## Tekst za snimanje (sređen kao video 19: bez pevljivosti, književni jezik, prostije rečenice, 14.10.2026)
 
-1. Najlakše je tražiti od drugih da budu pošteni.
-2. Kada neko upravlja zajedničkim sredstvima, želimo da znamo šta je dobio, šta je dao i kome. Samo tako možemo da proverimo da li uzima za sebe.
-3. Ako tražimo da računi onih koji upravljaju budu otvoreni, moramo da prihvatimo da i naši računi budu otvoreni, jer pravila moraju da važe jednako za sve.
-4. Otvoreni računi svih članova sprečavaju i da bilo ko od nas vara, jer se za svaki POEN vidi odakle je došao.
-5. U KOLU svaki potvrđeni član može da vidi koliko POEN-a ima drugi član, od koga ga je dobio i kome ga je prepisao. Isto važi za račune onih koji upravljaju, bez izuzetka. To se naziva transparentnost razmene.
-6. Od toga i ti imaš koristi. Niko ne može da posumnja da si POEN dobio mimo pravila, a ti možeš da pogledaš račun člana sa kojim razmenjuješ i da vidiš koliko je on dao drugima.
-7. Za to se odričeš dela privatnosti: tvoj komšija, ako je član, može da vidi tvoje razmene. Na to smo pristali svesno, jer bez toga ne bi bilo moguće proveriti ni račune onih koji upravljaju.
-8. KOLO je sistem u kome pravila važe jednako za sve. Uključi se na ekolo.rs.
+1. Kada neko upravlja zajedničkim sredstvima, želimo da znamo šta je dobio, šta je dao i kome. Samo tako možemo da proverimo da li uzima za sebe.
+2. Ako tražimo da računi onih koji upravljaju budu otvoreni, i naši računi moraju da budu otvoreni. Pravila moraju da važe jednako za sve.
+3. Kada su otvoreni računi svih članova, sprečava se i da bilo ko od nas vara, jer se za svaki POEN vidi odakle je došao.
+4. U KOLU svaki potvrđeni član može da vidi koliko POEN-a ima drugi član, od koga ga je dobio i kome ga je prepisao. Isto važi i za račune onih koji upravljaju, bez izuzetka. To se naziva transparentnost razmene.
+5. Od toga imaš i koristi. Niko ne može da posumnja da si POEN dobio mimo pravila. Ti možeš da pogledaš račun člana sa kojim razmenjuješ i da vidiš koliko je on dao drugima.
+6. Zbog toga se odričeš dela privatnosti, jer tvoj komšija, ako je član, može da vidi tvoje razmene. Na to smo pristali svesno, jer bez toga ne bismo mogli da proverimo ni račune onih koji upravljaju.
+7. KOLO je sistem u kome pravila važe jednako za sve.
+8. Uključi se na ekolo.rs.
 
 ## Scenario
 
@@ -61,7 +60,7 @@ Muzika: vojvođanska tamburica, vedro; na sc. 1 kratka stanka posle pitanja, pa 
 - Sc. 7: član sam gleda tuđi račun; ne kaže se da Fondacija prati obrasce prepisa (zabranjeno u `CLAUDE.md`).
 - Ne vide se dobrovoljno uneti podaci, lanac potvrda ni posebne kategorije podataka (čl. 67 st. 3).
 - Ne kaže se „KOLO vodi Fondacija“ (odluka vlasnika uz video 18).
-- Zbir je uvek nula ostaje videu 44; ovde se ne pominje.
+- Zbir je uvek nula ostaje videu 43; ovde se ne pominje.
 - Uz POEN ne idu kupi, prodaj, plati, zaradi, cena.
 - Rečenica 8: „svako dobija prema svojim zaslugama“ zamenjeno sa „gde su pravila ista za sve“ (odluka vlasnika,
   04.10.2026): POEN se ne opisuje kao nagrada ni naknada koju neko dodeljuje.
