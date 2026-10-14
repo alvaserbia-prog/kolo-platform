@@ -1,5 +1,5 @@
 // Scena 14 — „Ne moraš verovati na reč, jer sve možeš da proveriš.“
-// Podeljen kadar: levo tabla iz ulaza sa sveskom, desno telefon sa spiskom. Na „reč“ Đura levo raširi
+// Podeljen kadar: levo tabla iz ulaza sa sveskom, desno telefon sa računom direktora. Na „reč“ Đura levo raširi
 // ruke (nema šta da kaže); na „proveriš“ istovremeno se istakne red u svesci i red na telefonu i na oba
 // uskoči zelena kvačica.
 import React from "react";
@@ -39,7 +39,7 @@ export const Scena14: React.FC = () => {
       {/* desno: telefon */}
       <g transform="translate(800 760) scale(0.78)">
         <VelikiTelefon>
-          <EkranSistem redova={6} isticanje={[1, ist]} />
+          <EkranSistem redova={6} isticanje={[0, ist]} />
         </VelikiTelefon>
       </g>
       <Pop at={kP + 2} x={420} y={560}>

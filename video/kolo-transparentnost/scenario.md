@@ -46,10 +46,10 @@ Natpis preko slike je samo naslov; sav ostali tekst je u svetu priče (sveska, t
 | 8 | 42,5–50,6 | Kada je evidencija dostupna svima, svako ima uvid da onaj ko upravlja ne uzima ništa za sebe. | Kamera se približi tabli. Na „evidencija“ iznad sveske uskoči žuta cedulja, rukom pisano „EVIDENCIJA“. Na „svima“ pred tablom više glava (deca, baka sa cegerom). Na „ne uzima“ ispod kolona se ispiše „ostalo u kasi: 2.850“, a na „ništa“ pored table uskoči otvorena kasa „ZGRADA“ sa istim brojem na cedulji: ništa ne fali. |
 | 9 | 50,6–54,2 | To se naziva transparentnost upravljanja. | Tabla u ulazu, sad osvetljena; svi stoje oko nje. Bez natpisa (reč nosi titl). Kadar stoji jedan takt da se reč slegne. |
 | 10 | 54,2–56,5 | Tako radi i KOLO. | **Prelaz:** tabla iz ulaza se okrene kao karton i s druge strane je ekran telefona sa znakom KOLO. |
-| 11 | 56,5–60,1 | POEN se upisuje samo prema pravilima. | Telefon u ruci, stranica Sistem. Na „pravilima“ pored telefona uskoči zatvorena knjiga „PRAVILA“; iz nje tanka zelena linija dođe do novog reda koji se upravo upiše. |
-| 12 | 60,1–64,7 | Svaki upisani POEN vidljiv je svima na platformi. | Ekran: kolone „Vreme · Davalac · Primalac · Iznos“, redovi sa izmišljenim pseudonimima (npr. „Milica · Stevan · 300“), jedan po jedan klize odozdo. Na „svima“ oko telefona se pojave još tri ruke sa telefonima i istim spiskom (prijavljeni članovi, ne ceo internet). |
-| 13 | 64,7–71,3 | Na taj način članovi mogu sami da provere da li je bilo zloupotrebe. | Na „sami“ prst prelazi preko redova kao prst stanarke preko table u sc. 6. Na „zloupotrebe“ lupa prođe preko spiska; svi redovi ostanu zeleni, nijedan ne pocrveni (video ne tvrdi da iko krade). |
-| 14 | 71,3–76,3 | Ne moraš verovati na reč, jer sve možeš da proveriš. | Podeljen kadar: levo tabla iz ulaza sa sveskom, desno telefon sa spiskom. Na „verovati na reč“ Đura levo raširi ruke (nema šta da kaže); na „proveriš“ oba prsta, stanarkin na tabli i član na telefonu, istovremeno stanu na red i oba klimnu. |
+| 11 | 56,5–60,1 | POEN se upisuje samo prema pravilima. | Telefon: profil „Direktor“, račun POEN-a; stanje gore, ispod zapisi: upisi od Protokola („Protokol · prvi oglas · +1.000“, „Protokol · doprinos razmeni · +1.000“) i dva prepisa („Zoran · +300“, „→ Milica · −200“). Na „prema“ pored telefona uskoči knjiga „PRAVILA“; iz nje tanka zelena linija dođe do mesta novog reda, a na „pravilima“ se upiše „Protokol · doprinos razmeni · +1.000“ i stanje poraste na 4.100. |
+| 12 | 60,1–64,7 | Svaki upisani POEN vidljiv je svima na platformi. | Isti račun direktora, nov red još sija. Na „svima“ oko telefona se pojave još tri ruke sa telefonima na istom računu: drugi članovi gledaju direktorov zapis (prijavljeni članovi, ne ceo internet). |
+| 13 | 64,7–71,3 | Na taj način članovi mogu sami da provere da li je bilo zloupotrebe. | Na „sami“ prst prelazi preko redova direktorovog računa, kao prst stanarke preko table u sc. 6. Na „zloupotrebe“ lupa prođe preko spiska; uz svaki upis od Protokola stane zelena kvačica (upisano po pravilu), nijedan red ne pocrveni (video ne tvrdi da iko krade). |
+| 14 | 71,3–76,3 | Ne moraš verovati na reč, jer sve možeš da proveriš. | Podeljen kadar: levo tabla iz ulaza sa sveskom, desno telefon sa računom direktora. Na „reč“ Đura levo raširi ruke (nema šta da kaže); na „proveriš“ istovremeno se istakne red u svesci („stan 4 · 2.000“) i red „Protokol · prvi oglas · +1.000“ na telefonu, i uz oba uskoči zelena kvačica. |
 | 15 | 76,3–81,5 | Registruj se na ekolo.rs. | Završna kartica: znak KOLO, krupno „ekolo.rs“. Na „ekolo.rs“ adresa udari sa završnim udarcem numere (odmah posle reči), pa kadar stoji dok numera zamire. |
 
 **Nosiva slika:** sveska prvo u fioci, pa na tabli u ulazu; upitnici nad glavama stanara nestaju kad je
@@ -94,6 +94,11 @@ završni akord ~0,7 s posle „ekolo.rs“. Raspored: `README.md` i `scripts/muz
 - Kuka ne sme da ostane bez odgovora „možda niko“: video ne tvrdi da iko krade, ni u zgradi ni u KOLU.
 - „Kontrolor nije bio potreban“ je deo priče o zgradi. Ne kaže se da Fondacija nema nadzor ni
   zakonske obaveze (Statut, glava VI: godišnji finansijski izveštaj, uvid u dokumenta).
+- Sc. 11–14, telefon (odluka vlasnika, 14.10.2026): na ekranu je račun **direktora**, jer je tema upravljanje.
+  Upis POEN-a radi Protokol po pravilima (punjenje računa), pa su redovi pretežno upisi od Protokola, uz poneki
+  prepis; prepisi među članovima su tema videa 20. Osnov upisa piše se samo za prvi oglas i doprinos razmeni,
+  iznosi su iz pravila (čl. 40a i 40b, po 1.000); naziv socijalnog programa se nikad ne prikazuje uz zapis.
+  Direktor se ne imenuje, piše samo „Direktor“.
 - Rečenica 5 (sc. 12), „vidljiv svima na platformi“ (odluka vlasnika): sam upis POEN-a (iznos i vreme) vidi svaki
   prijavljen član; pseudonime strana vide potvrđeni članovi, a posetilac ukupne brojeve (Pravilnik
   čl. 67 i 28). Tekst se ne širi na „svako na internetu“.

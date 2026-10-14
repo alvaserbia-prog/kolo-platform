@@ -1,6 +1,6 @@
 // Scena 13 — „Na taj način članovi mogu sami da provere da li je bilo zloupotrebe.“
-// Na „sami“ prst prelazi preko redova (kao prst stanarke preko table u sceni 6). Na „zloupotrebe“ lupa
-// prođe preko spiska; svi redovi dobiju zelenu kvačicu, nijedan ne pocrveni.
+// Na „sami“ prst prelazi preko redova direktorovog računa (kao prst stanarke preko table u sceni 6). Na
+// „zloupotrebe“ lupa prođe preko spiska; uz svaki upis od Protokola stane zelena kvačica, nijedan red ne pocrveni.
 import React from "react";
 import { Easing, interpolate } from "remotion";
 import { Kadar, mesaj, napredak, useF } from "../alat";
@@ -9,7 +9,7 @@ import { kad } from "../vreme";
 import { P } from "../paleta";
 import { KoloPozadina, TEL } from "./kolo";
 
-const redY = (i: number) => TEL.y + TEL.s * (-170 + i * 78 - 8);
+const redY = (i: number) => TEL.y + TEL.s * (-118 + i * 78 - 10);
 
 export const Scena13: React.FC = () => {
   const f = useF();

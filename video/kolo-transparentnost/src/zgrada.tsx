@@ -331,16 +331,20 @@ export const Upitnik: React.FC<{ s?: number; boja?: string }> = ({ s = 1, boja =
   </g>
 );
 
-// ── Telefon sa stranicom Sistem ──────────────────────────────────────────
-export type RedSistema = { vreme: string; od: string; ka: string; iznos: string };
-export const REDOVI_SISTEMA: RedSistema[] = [
-  { vreme: "09:12", od: "Milica", ka: "Stevan", iznos: "300" },
-  { vreme: "09:40", od: "Zoran", ka: "Jovana", iznos: "1.200" },
-  { vreme: "10:05", od: "Vesna", ka: "Milan", iznos: "450" },
-  { vreme: "10:31", od: "Ana", ka: "Lazar", iznos: "800" },
-  { vreme: "11:02", od: "Marija", ka: "Zoran", iznos: "250" },
-  { vreme: "11:18", od: "Stevan", ka: "Ana", iznos: "600" },
+// ── Telefon: račun direktora ─────────────────────────────────────────────
+// Račun POEN-a jednog člana (ovde direktora): upisi od Protokola po pravilima i poneki prepis.
+// Iznosi upisa su iz pravila: prvi oglas 1.000 (doprinos-pravila.ts, čl. 40a), doprinos razmeni u
+// koracima od po 1.000 (doprinos-razmeni-pravila.ts, čl. 40b). Prepisi između članova su tema videa 20.
+export type RedRacuna = { od: string; osnov: string; iznos: number; protokol: boolean };
+export const REDOVI_RACUNA: RedRacuna[] = [
+  { od: "Protokol", osnov: "prvi oglas", iznos: 1000, protokol: true },
+  { od: "Zoran", osnov: "prepis", iznos: 300, protokol: false },
+  { od: "Protokol", osnov: "doprinos razmeni", iznos: 1000, protokol: true },
+  { od: "→ Milica", osnov: "prepis", iznos: -200, protokol: false },
+  { od: "Protokol", osnov: "doprinos razmeni", iznos: 1000, protokol: true },
+  { od: "Protokol", osnov: "doprinos razmeni", iznos: 1000, protokol: true },
 ];
+const hiljade = (n: number) => Math.abs(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 /** Telefon (tamni okvir), sredina u (0,0), ekran 400×780. */
 export const VelikiTelefon: React.FC<{ s?: number; children?: React.ReactNode }> = ({ s = 1, children }) => (
@@ -353,13 +357,15 @@ export const VelikiTelefon: React.FC<{ s?: number; children?: React.ReactNode }>
 );
 
 /**
- * Ekran: stranica Sistem, tabela zapisa (Vreme · Davalac · Primalac · Iznos).
- * `redova` koliko je redova upisano (može decimalno: poslednji red klizi), `isticanje` [red, 0–1],
- * `zeleno` 0–1 zeleni znak uz svaki red (proveren, sve u redu).
+ * Ekran: račun direktora — naslov, stanje, ispod zapisi (ko je upisao/prepisao · osnov · iznos).
+ * `redova` koliko je redova upisano (decimalno: poslednji red klizi), `isticanje` [red, 0–1],
+ * `zeleno` 0–1 zelena kvačica uz svaki upis od Protokola (proveren po pravilu), `novi` 0–1 sjaj novog reda.
  */
 export const EkranSistem: React.FC<{ redova: number; isticanje?: [number, number]; zeleno?: number; novi?: number }> = ({ redova, isticanje, zeleno = 0, novi = 0 }) => {
-  const y0 = -170;
+  const y0 = -150;
   const korak = 78;
+  const stanje = REDOVI_RACUNA.reduce((a, r, i) => a + r.iznos * Math.max(0, Math.min(1, redova - i)), 0);
+  const zadnji = Math.ceil(redova) - 1;
   return (
     <g>
       <rect x={-200} y={-390} width={400} height={88} rx={26} fill={P.zelena700} />
@@ -368,50 +374,60 @@ export const EkranSistem: React.FC<{ redova: number; isticanje?: [number, number
         KOLO
       </text>
       <text x={172} y={-326} textAnchor="end" fontFamily={SANS} fontWeight={700} fontSize={26} fill={P.zelena100}>
-        Sistem
+        Profil
       </text>
-      <text x={-176} y={-262} fontFamily={SANS} fontWeight={800} fontSize={27} fill={P.mastilo}>
-        Poslednji zapisi
+      <circle cx={-148} cy={-252} r={30} fill={P.zelena100} stroke={P.zelena700} strokeWidth={3} />
+      <text x={-148} y={-242} textAnchor="middle" fontFamily={SANS} fontWeight={900} fontSize={28} fill={P.zelena700}>
+        D
       </text>
-      {/* zaglavlje tabele */}
-      <rect x={-186} y={-236} width={372} height={46} rx={8} fill={P.zelena100} />
-      {[
-        ["Vreme", -176, "start"],
-        ["Davalac", -96, "start"],
-        ["Primalac", 14, "start"],
-        ["Iznos", 176, "end"],
-      ].map(([t, x, a]) => (
-        <text key={t as string} x={x as number} y={-205} textAnchor={a as "start" | "end"} fontFamily={SANS} fontWeight={800} fontSize={19} fill={P.zelena900}>
-          {t}
-        </text>
-      ))}
-      <clipPath id="ekranSistemClip">
-        <rect x={-200} y={-188} width={400} height={570} />
+      <text x={-104} y={-258} fontFamily={SANS} fontWeight={900} fontSize={34} fill={P.mastilo}>
+        Direktor
+      </text>
+      <text x={-104} y={-228} fontFamily={SANS} fontWeight={600} fontSize={19} fill={P.mastiloSvetlo}>
+        račun POEN-a
+      </text>
+      <rect x={-186} y={-208} width={372} height={50} rx={10} fill={P.zelena100} />
+      <text x={-172} y={-175} fontFamily={SANS} fontWeight={700} fontSize={21} fill={P.zelena900}>
+        Stanje
+      </text>
+      <text x={172} y={-173} textAnchor="end" fontFamily={SANS} fontWeight={900} fontSize={28} fill={P.zelena700}>
+        {hiljade(Math.round(stanje / 10) * 10)} POEN
+      </text>
+      <clipPath id="ekranRacunClip">
+        <rect x={-200} y={-154} width={400} height={540} />
       </clipPath>
-      <g clipPath="url(#ekranSistemClip)">
-        {REDOVI_SISTEMA.map((r, i) => {
+      <g clipPath="url(#ekranRacunClip)">
+        {REDOVI_RACUNA.map((r, i) => {
           const p = Math.max(0, Math.min(1, redova - i));
           if (p <= 0) return null;
-          const y = y0 + i * korak + (1 - p) * 60;
+          const y = y0 + i * korak + 32 + (1 - p) * 60;
           const ist = isticanje && isticanje[0] === i ? isticanje[1] : 0;
+          const kv = r.protokol ? Math.min(1, Math.max(0, zeleno * 6 - i * 0.6)) : 0;
           return (
             <g key={i} opacity={Math.min(1, p * 1.6)}>
-              {(i === REDOVI_SISTEMA.length - 1 && novi > 0) && <rect x={-190} y={y - 40} width={380} height={68} rx={10} fill={P.zelenaSvetla} opacity={0.35 * novi} />}
+              {i === zadnji && novi > 0 && <rect x={-190} y={y - 40} width={380} height={68} rx={10} fill={P.zelenaSvetla} opacity={0.35 * novi} />}
               {ist > 0 && <rect x={-190} y={y - 40} width={380 * ist} height={68} rx={10} fill={P.zlatna} opacity={0.42} />}
-              <text x={-176} y={y} fontFamily={SANS} fontWeight={600} fontSize={20} fill={P.mastiloSvetlo}>
-                {r.vreme}
+              {r.protokol ? (
+                <g>
+                  <rect x={-180} y={y - 26} width={112} height={34} rx={17} fill={P.zelena700} />
+                  <text x={-124} y={y - 2} textAnchor="middle" fontFamily={SANS} fontWeight={800} fontSize={18} fill="#fff">
+                    Protokol
+                  </text>
+                </g>
+              ) : (
+                <text x={-178} y={y - 2} fontFamily={SANS} fontWeight={800} fontSize={21} fill={P.mastilo}>
+                  {r.od}
+                </text>
+              )}
+              <text x={-60} y={y - 3} fontFamily={SANS} fontWeight={600} fontSize={15} fill={P.mastiloSvetlo}>
+                {r.osnov}
               </text>
-              <text x={-96} y={y} fontFamily={SANS} fontWeight={700} fontSize={21} fill={P.mastilo}>
-                {r.od}
+              <text x={176 - (kv > 0 ? 34 * Math.min(1, zeleno * 2) : 0)} y={y - 2} textAnchor="end" fontFamily={SANS} fontWeight={900} fontSize={21} fill={r.iznos > 0 ? P.zelena700 : P.ajvarTamni}>
+                {r.iznos > 0 ? "+" : "−"}
+                {hiljade(r.iznos)}
               </text>
-              <text x={14} y={y} fontFamily={SANS} fontWeight={700} fontSize={21} fill={P.mastilo}>
-                {r.ka}
-              </text>
-              <text x={176 - (zeleno > 0 ? 30 * Math.min(1, zeleno * 2) : 0)} y={y} textAnchor="end" fontFamily={SANS} fontWeight={900} fontSize={22} fill={P.zelena700}>
-                {r.iznos}
-              </text>
-              {zeleno > 0 && (
-                <g transform={`translate(170 ${y - 8}) scale(${Math.min(1, Math.max(0, zeleno * 6 - i * 0.6))})`}>
+              {kv > 0 && (
+                <g transform={`translate(170 ${y - 10}) scale(${kv})`}>
                   <circle r={13} fill={P.zelena500} />
                   <path d="M-6,0 L-1,5 L7,-5" fill="none" stroke="#fff" strokeWidth={3.5} strokeLinecap="round" strokeLinejoin="round" />
                 </g>

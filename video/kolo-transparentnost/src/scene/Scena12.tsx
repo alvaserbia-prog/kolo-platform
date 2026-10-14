@@ -1,6 +1,6 @@
 // Scena 12 — „Svaki upisani POEN vidljiv je svima na platformi.“
-// Redovi klize odozdo jedan po jedan. Na „svima“ oko telefona se pojave još tri ruke sa telefonima
-// i istim spiskom (prijavljeni članovi, ne ceo internet).
+// Račun direktora sa svim upisima. Na „svima“ oko telefona se pojave još tri ruke sa telefonima na istom
+// računu: drugi članovi gledaju direktorov zapis (prijavljeni članovi, ne ceo internet).
 import React from "react";
 import { Kadar, napredak, useF, usePop } from "../alat";
 import { EkranSistem, SakaSaTelefonom, VelikiTelefon } from "../zgrada";
@@ -18,7 +18,7 @@ export const Scena12: React.FC = () => {
   const f = useF();
   const kS = kad(12, "svima");
   const kU = kad(12, "upisani");
-  const redova = 5 + napredak(f, kU, 12);
+  const redova = 6;
   const z = napredak(f, kS - 6, 16);
   const pops = [usePop(kS - 4), usePop(kS + 2), usePop(kS + 8)];
   return (
@@ -36,7 +36,7 @@ export const Scena12: React.FC = () => {
       ))}
       <g transform={`translate(${TEL.x} ${TEL.y}) scale(${TEL.s * (1 - z * 0.12)})`}>
         <VelikiTelefon>
-          <EkranSistem redova={redova} novi={napredak(f, kU, 12) * (1 - napredak(f, kU + 30, 20))} />
+          <EkranSistem redova={redova} novi={1 - napredak(f, kU, 20)} />
         </VelikiTelefon>
       </g>
     </Kadar>

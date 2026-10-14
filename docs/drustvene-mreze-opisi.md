@@ -1390,7 +1390,7 @@ Video: `video/kolo-transparentnost/out/kolo-transparentnost.mp4`. Naslovna: `vid
 („Ko krade iz zajedničke kase?“, naslov iz scenarija).
 Zvuk na Instagramu preimenovati u „KOLO, ko krade iz zajedničke kase“. Alternativni tekst: „Slikovnica: čika Đura
 vodi kasu zgrade i sve upisuje u svesku; kad svesku okači na oglasnu tablu u ulazu, stanari sami proveravaju
-uplate i troškove, a na kraju isti spisak zapisa vidi se na telefonu, na stranici Sistem u KOLU.“
+uplate i troškove, a na kraju na telefonu se vidi račun direktora u KOLU, sa svakim upisom POEN-a.“
 
 Napisano po odeljku 4. Uglovi, kojih u videu nema: TikTok, kućni savet i pitanje „gde su otišle pare za
 lift“; Instagram, blagajna udruženja ili kluba, gde se ceo izveštaj čita jednom godišnje; Facebook, mesna
