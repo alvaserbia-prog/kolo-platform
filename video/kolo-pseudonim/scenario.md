@@ -15,19 +15,18 @@ pročita moje ime i prezime i da me pronađe, osim ako sam ga sam istakao.
 - gore, krupno: **SVI VIDE ŠTA RADIŠ**
 - dole, sitnije: **Ko si, zna samo onaj ko te poznaje**
 
-## Tekst za snimanje
+## Tekst za snimanje (ozbiljan ton, 14.10.2026)
 
-1. Svi vide šta radiš. Ali ko si, zna samo onaj ko te poznaje.
-2. U KOLU su sve razmene otvorene, i tvoje. Na to smo pristali da bi pravila bila ista za sve.
-3. Ali pored tvojih razmena ne piše tvoje ime i prezime. Piše pseudonim, odnosno ime koje sam izabereš kad se registruješ.
-4. Pseudonim ne mora da ima nikakve veze sa tvojim pravim imenom. Može da bude nadimak, tvoj zanat ili bilo koja reč koja ti se dopada.
-5. Ko onda zna ko stoji iza tvog pseudonima? Znaju ljudi koji te poznaju: oni sa kojima si nešto razmenio uživo i oni koji su potvrdili da postojiš.
-6. Član iz drugog grada vidi tvoje razmene, ali vidi samo pseudonim. Ne zna kako se zoveš, ne zna gde živiš i ne može da te pronađe.
-7. U KOLU ne postoji ni spisak na kome piše koji pseudonim pripada kom čoveku.
-8. Ime, prezime, broj telefona i adresu ne moraš nigde da upišeš. Ako ih upišeš, sam biraš ko može da ih vidi. Isto važi i za donaciju: tvoje ime se uz nju vidi samo ako sam izabereš da doniraš javno.
-9. To se zove pseudonimnost: zapis je otvoren, a ti si poznat samo onima koji te i inače poznaju.
-10. Tako smo se odrekli dela privatnosti zarad transparentnosti, ali smo najveći deo zadržali.
-11. Uključi se na ekolo.rs i izaberi svoj pseudonim.
+1. U KOLU drugi članovi vide tvoje razmene, ali ne vide tvoje ime i prezime.
+2. Razmene su otvorene zato što pravila važe jednako za sve. Da tvoja privatnost ne bi bila ugrožena, pored razmena ne stoji tvoje ime, već pseudonim.
+3. Pseudonim je ime koje sam izabereš prilikom registracije. Ne mora da ima veze sa tvojim pravim imenom: može biti nadimak, naziv zanata ili bilo koja reč.
+4. Ko stoji iza pseudonima znaju samo ljudi koji te lično poznaju, na primer oni sa kojima si razmenjivao uživo i oni koji su potvrdili da si stvarna osoba.
+5. Član iz drugog grada vidi tvoje razmene i tvoj pseudonim, ali ne zna kako se zoveš ni gde živiš i ne može da te pronađe.
+6. U KOLU ne postoji spisak koji povezuje pseudonime sa imenima ljudi.
+7. Ime, prezime, broj telefona i adresu nisi dužan da upišeš. Ako ih upišeš, sam određuješ ko može da ih vidi. Uz donaciju se tvoje ime prikazuje samo ako izabereš javnu donaciju.
+8. To se naziva pseudonimnost: evidencija je otvorena, a tvoj identitet poznaju samo ljudi koji te i inače poznaju.
+9. Na taj način smo se odrekli samo onog dela privatnosti koji je potreban za transparentnost.
+10. Uključi se na ekolo.rs i izaberi svoj pseudonim.
 
 ## Scenario
 

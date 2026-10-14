@@ -18,17 +18,16 @@ videa 19; ovde je u središtu **sveska**, ne novac.
 - gore, krupno: **KO KRADE IZ ZAJEDNIČKE KASE?**
 - dole, sitnije: **Kako da upravljanje bude transparentno**
 
-## Tekst za snimanje (verzija vlasnika, 02.10.2026, sa ispravkama ekipe koje je vlasnik prihvatio)
+## Tekst za snimanje (ozbiljan ton, 14.10.2026)
 
-1. Ko krade iz zajedničke kase? Možda niko. Ali kako to da znaš?
-2. Čika Đura je godinama vodio kasu u našoj zgradi. Sve što bi se uplatilo i potrošilo, upisivao je u svoju svesku.
-3. Đura je bio pošten čovek. Ali sveska je stajala kod njega, i niko drugi nije mogao da je pogleda.
-4. Jedni su verovali, a drugi sumnjali. I Đura je stalno morao da se pravda.
-5. Jednog dana okačio je svesku na tablu u ulazu. Ko god bi prošao, mogao je da vidi šta je upisano. Svaki stanar je mogao sam da proveri svaki dinar. I Đura više nije morao da se pravda.
-6. Đurina sveska je evidencija. Kad je evidencija otvorena, svi vide da onaj ko upravlja ne uzima za sebe. To je transparentnost upravljanja.
-7. KOLO je primer takvog sistema. POEN se upisuje samo onako kako pravila kažu. Svaki upisan POEN vidljiv je svima na platformi, i članovi mogu sami da provere da li postoji zloupotreba.
-8. Ne moraš da veruješ na reč. Možeš sam da proveriš.
-9. Registruj se na ekolo.rs.
+1. Ko krade iz zajedničke kase? Na to pitanje ne može da se odgovori ako se ne vidi šta je upisano.
+2. Uzmimo za primer kućni savet. Predsednik kućnog saveta prima uplate stanara, plaća troškove zgrade i sve to upisuje u svesku.
+3. Ako sveska stoji samo kod njega, stanari ne mogu da provere šta je upisano. Čak i kada je predsednik pošten, neki stanari će sumnjati, a on će morati da se opravdava.
+4. Kada se sveska okači na oglasnu tablu u ulazu, svaki stanar može sam da proveri svaku uplatu i svaki trošak. Sumnja tada nema osnova, a predsednik ne mora da se opravdava.
+5. Takva sveska je evidencija. Kada je evidencija dostupna svima, svi mogu da vide da onaj ko upravlja ne uzima za sebe. To se naziva transparentnost upravljanja.
+6. KOLO je uređen na isti način. POEN se upisuje samo prema pravilima, a svaki upisani POEN vidljiv je svima na platformi. Članovi zato mogu sami da provere da li je bilo zloupotrebe.
+7. Nije potrebno verovati na reč, jer svako može da proveri.
+8. Registruj se na ekolo.rs.
 
 ## Scenario
 

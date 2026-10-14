@@ -14,17 +14,16 @@ ublažava, objašnjava video 20.
 - gore, krupno: **NAJLAKŠE JE TRAŽITI OD DRUGIH DA BUDU POŠTENI**
 - dole, sitnije: **Pravila su ista za sve**
 
-## Tekst za snimanje (verzija vlasnika, 04.10.2026)
+## Tekst za snimanje (ozbiljan ton, 14.10.2026)
 
 1. Najlakše je tražiti od drugih da budu pošteni.
-2. Kad neko upravlja onim što je zajedničko, želimo da znamo šta je dobio, šta je dao i kome, jer samo tako možemo da proverimo da li uzima za sebe.
-3. Ako želimo da njihov račun bude otvoren, i naši računi moraju da budu otvoreni, jer pravila moraju da budu ista za sve.
-4. Tako se sprečava i da bilo ko od nas vara, jer se za svaki POEN vidi odakle je došao.
-5. U KOLU svaki potvrđen član može da vidi koliko POEN-a imaš, ko ti je prepisao POEN i kome si ga ti prepisao. Isto važi i za račune onih koji upravljaju, bez izuzetka. To se zove transparentnost razmene.
-6. Od toga imaš i korist. Niko ne može da posumnja da si svoj POEN dobio mimo pravila, a i ti možeš da pogledaš račun člana sa kojim razmenjuješ i da vidiš koliko je on davao drugima.
-7. Cena je deo tvoje privatnosti: tvoj komšija koji je član može da vidi tvoje razmene. Na to smo pristali svesno, jer bez toga ne bi bilo ni uvida u račune onih koji upravljaju.
-8. Postani deo sistema gde su pravila ista za sve.
-9. Uključi se na ekolo.rs.
+2. Kada neko upravlja zajedničkim sredstvima, želimo da znamo šta je dobio, šta je dao i kome. Samo tako možemo da proverimo da li uzima za sebe.
+3. Ako tražimo da računi onih koji upravljaju budu otvoreni, moramo da prihvatimo da i naši računi budu otvoreni, jer pravila moraju da važe jednako za sve.
+4. Otvoreni računi svih članova sprečavaju i da bilo ko od nas vara, jer se za svaki POEN vidi odakle je došao.
+5. U KOLU svaki potvrđeni član može da vidi koliko POEN-a ima drugi član, od koga ga je dobio i kome ga je prepisao. Isto važi za račune onih koji upravljaju, bez izuzetka. To se naziva transparentnost razmene.
+6. Od toga i ti imaš koristi. Niko ne može da posumnja da si POEN dobio mimo pravila, a ti možeš da pogledaš račun člana sa kojim razmenjuješ i da vidiš koliko je on dao drugima.
+7. Za to se odričeš dela privatnosti: tvoj komšija, ako je član, može da vidi tvoje razmene. Na to smo pristali svesno, jer bez toga ne bi bilo moguće proveriti ni račune onih koji upravljaju.
+8. KOLO je sistem u kome pravila važe jednako za sve. Uključi se na ekolo.rs.
 
 ## Scenario
 
