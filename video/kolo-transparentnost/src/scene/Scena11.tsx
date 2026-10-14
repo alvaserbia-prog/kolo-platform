@@ -1,6 +1,6 @@
 // Scena 11 — „POEN se upisuje samo prema pravilima.“ Telefon: račun direktora (upisi od Protokola i
 // poneki prepis). Na „prema“ pored telefona uskoči knjiga PRAVILA; iz nje tanka zelena linija dođe do
-// novog reda „Protokol · doprinos razmeni · +1.000“, koji se upiše na „pravilima“.
+// novog reda „Protokol · potvrda člana · +1.000“, koji se upiše na „pravilima“.
 import React from "react";
 import { Easing } from "remotion";
 import { Kadar, Linija, Pop, napredak, useF } from "../alat";

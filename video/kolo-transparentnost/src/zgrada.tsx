@@ -333,16 +333,17 @@ export const Upitnik: React.FC<{ s?: number; boja?: string }> = ({ s = 1, boja =
 
 // ── Telefon: račun direktora ─────────────────────────────────────────────
 // Račun POEN-a jednog člana (ovde direktora): upisi od Protokola po pravilima i poneki prepis.
-// Iznosi upisa su iz pravila: prvi oglas 1.000 (doprinos-pravila.ts, čl. 40a), doprinos razmeni u
-// koracima od po 1.000 (doprinos-razmeni-pravila.ts, čl. 40b). Prepisi između članova su tema videa 20.
+// Osnovi upisa su samo „oglas“ i „potvrda člana“ (odluka vlasnika, 14.10.2026). Iznosi su iz pravila:
+// prvi oglas 1.000 (doprinos-pravila.ts, čl. 40a), potvrda novog člana 1.000 onome ko je potvrdio
+// (POEN_VERIFIKATOR, upis tek po prvom doprinosu potvrđenog). Prepisi između članova su tema videa 20.
 export type RedRacuna = { od: string; osnov: string; iznos: number; protokol: boolean };
 export const REDOVI_RACUNA: RedRacuna[] = [
-  { od: "Protokol", osnov: "prvi oglas", iznos: 1000, protokol: true },
+  { od: "Protokol", osnov: "oglas", iznos: 1000, protokol: true },
   { od: "Zoran", osnov: "prepis", iznos: 300, protokol: false },
-  { od: "Protokol", osnov: "doprinos razmeni", iznos: 1000, protokol: true },
+  { od: "Protokol", osnov: "potvrda člana", iznos: 1000, protokol: true },
   { od: "→ Milica", osnov: "prepis", iznos: -200, protokol: false },
-  { od: "Protokol", osnov: "doprinos razmeni", iznos: 1000, protokol: true },
-  { od: "Protokol", osnov: "doprinos razmeni", iznos: 1000, protokol: true },
+  { od: "Protokol", osnov: "potvrda člana", iznos: 1000, protokol: true },
+  { od: "Protokol", osnov: "potvrda člana", iznos: 1000, protokol: true },
 ];
 const hiljade = (n: number) => Math.abs(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 

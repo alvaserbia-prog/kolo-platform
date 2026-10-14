@@ -26,7 +26,7 @@ ponavlja se na tabli i na telefonu (`src/zgrada.tsx`, `src/scene/`).
 | 8 | Cedulja „EVIDENCIJA“, sve više ljudi pred tablom, „ostalo u kasi: 2.850“ i otvorena kasa sa istim brojem. |
 | 9 | Svi oko osvetljene table. |
 | 10 | Tabla se okrene kao karton i postane telefon sa znakom KOLO. |
-| 11 | Račun direktora: upisi od Protokola i dva prepisa; knjiga PRAVILA, zelena linija, na „pravilima“ nov upis „Protokol · doprinos razmeni · +1.000“. |
+| 11 | Račun direktora: upisi od Protokola i dva prepisa; knjiga PRAVILA, zelena linija, na „pravilima“ nov upis „Protokol · potvrda člana · +1.000“. |
 | 12 | Isti račun direktora; oko telefona još tri ruke sa telefonima na istom računu. |
 | 13 | Prst ide red po red; lupa prođe, uz svaki upis od Protokola zelena kvačica. |
 | 14 | Levo tabla, desno račun direktora; Đura raširi ruke; red u svesci i upis od Protokola istaknuti zajedno, dve kvačice. |
@@ -34,7 +34,7 @@ ponavlja se na tabli i na telefonu (`src/zgrada.tsx`, `src/scene/`).
 
 - Jedini natpis je naslov, samo prvih ~4,6 s (sc. 1, odluka vlasnika 14.10.2026); ostali tekst je u svetu priče (sveska, tabla, cedulje, telefon).
 - Novčanice i kovanice su samo dinari u kasi zgrade; POEN je samo red u spisku.
-- Na telefonu je račun „Direktor“ (uloga, bez imena; odluka vlasnika 14.10.2026); pseudonimi u prepisima (Zoran, Milica) su likovi ranijih videa, ne stvarni članovi. Iznosi upisa su iz pravila (prvi oglas i doprinos razmeni, po 1.000).
+- Na telefonu je račun „Direktor“ (uloga, bez imena; odluka vlasnika 14.10.2026); pseudonimi u prepisima (Zoran, Milica) su likovi ranijih videa, ne stvarni članovi. Osnovi upisa su „oglas“ i „potvrda člana“, iznosi iz pravila (po 1.000).
 
 ## Kako se pravi
 
