@@ -2,9 +2,9 @@
 Šema strofe (8 taktova, 2/4): A | E7 | A | A | D7 | G | G D | A  (V – V/V – V – V – I7 – IV – IV I – V),
 strofa se završava na dominanti; posle poslednje strofe završni akord D.
 Berde svira prvu dobu, bugarija kontru („ća") na drugu polovinu dobe, prim melodiju od tonova akorda.
-Zvuk žice: Karplus-Strong. Izlaz: audio/raw/uzorak-becarac.wav
+Zvuk žice: Karplus-Strong. Izlaz: audio/raw/uzorak-becarac.mp3
 """
-import numpy as np, soundfile as sf
+import os, subprocess, numpy as np, soundfile as sf
 SR, BPM = 44100, 124
 DOBA = 60 / BPM
 TAKT = 2 * DOBA
@@ -52,5 +52,7 @@ dodaj(zica(hz(38), 2.5, 0.998, 0.9), t)
 dodaj(zica(hz(78), 2.5, 0.999, 0.5), t)
 mix = mix[: int((t + 3) * SR)]
 mix = mix / np.max(np.abs(mix)) * 0.8
-sf.write("audio/raw/uzorak-becarac.wav", mix.astype(np.float32), SR)
+sf.write("audio/raw/_uzorak.wav", mix.astype(np.float32), SR)
+subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", "audio/raw/_uzorak.wav", "-b:a", "192k", "audio/raw/uzorak-becarac.mp3"], check=True)
+os.remove("audio/raw/_uzorak.wav")
 print(f"{len(mix)/SR:.1f} s")
