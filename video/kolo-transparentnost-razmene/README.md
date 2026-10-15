@@ -30,3 +30,12 @@ python3 scripts/provera_omni.py audio/final/glas.wav            #    provera re�
 „U KOLU pravila važe“ 73,5 s; „ekolo.rs“ završava ~79,8 s.
 
 Modeli (sherpa-onnx Parakeet i Omnilingual) i `deep-filter` preuzimaju se sa GitHub izdanja i nisu u repou.
+
+## Muzika (odluka vlasnika, 15.10.2026)
+
+- **Klasičan vojvođanski bećarac, samo tamburice, akustično, dva do tri instrumenta** (prim, bugarija, berde);
+  bez harmonike, violine, bubnjeva i ostalih instrumenata, i bez celog orkestra. Numeru pravi vlasnik na Suno-u.
+- **Klasična harmonija bećarca** (po zapisu akorda „Bećarac“, pesmarica.rs): strofa počinje na dominanti
+  sa njenom dominantom (V – V/V – V), ide preko tonike sa septimom u subdominantu (I7 – IV), pa I – V;
+  **strofa se završava na dominanti, otvoreno**, i odmah kreće iz početka. U D-duru: A – E7 – A | D7 – G | G – D – A.
+  Završetak numere je na tonici (D), posle „ekolo.rs“.
