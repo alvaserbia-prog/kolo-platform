@@ -17,7 +17,7 @@
 | **Székhely** | Šetalište 16, 25000 Zombor (Sombor), Szerb Köztársaság |
 | **Adatvédelmi e-mail** | privatnost@ekolo.rs |
 | **Adatvédelmi tisztviselő (DPO)** | Nincs kinevezve (Adatvédelmi szabályzat, 1. cikk). Adatvédelmi kapcsolattartás: privatnost@ekolo.rs |
-| **Készítés dátuma** | 2026.05.23. (utolsó módosítás 2026.06.16.) |
+| **Készítés dátuma** | 2026.05.23. (utolsó módosítás 2026.10.03.) |
 | **A vizsgálat tárgya** | KOLO rendszer — 1. szakasz, az 1–18. sz. aktív adatkezelési tevékenység, ideértve az aktivált 3. modult (Szociális programok hitelesítői megerősítéssel), a hitelesítési rendszer integritásának felügyeletét, az adományok nyilvános listáját, a felügyeleti ügyet, a cseréhez való hozzájárulás útját és az **aktivált 4. modult — Gyermekek (11. sz. tevékenység)** |
 | **Kapcsolódó dokumentumok** | Szabályzat a KOLO rendszerről (v4.6.6), Adatvédelmi szabályzat (v4.6.8), Az adatkezelési tevékenységek nyilvántartása (v4.6.8), Felhasználási feltételek (v4.6.8), Szabályzat a támogatási programokról (v4.6.7), Szabályzat az aktusok hierarchiájáról (v4.6.8), Alapszabály (v4.1), Whitepaper (v4.6.2) |
 | **Következő felülvizsgálat** | A szociális programok megerősítési mechanizmusának módosításakor, a gyermektér szabályainak módosításakor, vagy legkésőbb az utolsó módosítástól számított 12 hónapon belül |

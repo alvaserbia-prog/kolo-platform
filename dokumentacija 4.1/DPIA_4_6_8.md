@@ -15,7 +15,7 @@
 | **Sedište** | Šetalište 16, 25000 Sombor, Republika Srbija |
 | **Email za zaštitu podataka** | privatnost@ekolo.rs |
 | **Lice za zaštitu podataka (DPO)** | Nije određeno (Politika privatnosti, član 1). Kontakt za zaštitu podataka: privatnost@ekolo.rs |
-| **Datum izrade** | 23.05.2026. (poslednja izmena 14.09.2026.) |
+| **Datum izrade** | 23.05.2026. (poslednja izmena 03.10.2026.) |
 | **Predmet procene** | KOLO sistem — Faza 1, aktivne radnje obrade br. 1–18, uključujući aktivirani Modul 3 (Socijalni programi sa verifikatorskom potvrdom), Nadzor integriteta sistema verifikacija, javnu listu donacija, nadzorni predmet, putanju doprinosa razmeni i **aktivirani Modul 4 — Deca (radnja br. 11)** |
 | **Povezani dokumenti** | Pravilnik o KOLO sistemu (v4.6.6), Politika privatnosti (v4.6.8), Registar radnji obrade (v4.6.8), Uslovi korišćenja (v4.6.8), Pravilnik o programima podrške (v4.6.7), Pravilnik o hijerarhiji akata (v4.6.8), Statut (v4.1), Whitepaper (v4.6.2) |
 | **Sledeća revizija** | Pri izmeni mehanizma potvrde socijalnih programa, pri izmeni pravila dečjeg prostora, ili najkasnije 12 meseci od poslednje izmene |

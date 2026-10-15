@@ -36,8 +36,9 @@ export {
  *
  * Javna vs anonimna donacija (Pravilnik o pokroviteljstvu i donacijama čl. 3, 5):
  * - `javno = true` (podrazumevano): evidentira se POEN; ime i prezime donatora
- *   SNIMA se na zapis (`donatorIme`) kao trajan podatak i prikazuje u listi
- *   donacija. Ulazi u kumulativni nivo.
+ *   SNIMA se na zapis (`donatorIme`) i prikazuje u listi donacija. Kasnija
+ *   izmena profila ga ne menja, ali NIJE trajan: donator ga povlači, a gašenje
+ *   naloga ga briše (čl. 5a st. 4, set 4.6.8). Ulazi u kumulativni nivo.
  * - `javno = false` (anonimna): POEN se NE evidentira (0), zapis NE ulazi u
  *   kumulativni nivo, ime se ne beleži.
  *
