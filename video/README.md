@@ -32,7 +32,7 @@ Oznake: **K** KOLO · **N** priča o novcu · **A** drugi putevi (alternativni n
 | 17 | Stari oblici zapisa | N | `kolo-stari-zapis/` | ✅ |
 | 18 | Poljoprivrednici | K |  |  |
 | 19 | Ko krade iz zajedničke kase? / Kako da upravljanje bude transparentno | K | `kolo-transparentnost/` | ✅ (14.10.2026) |
-| 20 | Kako da sprečimo krađu? (transparentnost razmene) | K | `kolo-transparentnost-razmene/` | tekst konačan (vlasnik, 14.10.2026), izrada nije počela |
+| 20 | Kako da sprečimo krađu? (transparentnost razmene) | K | `kolo-transparentnost-razmene/` | glas očišćen (15.10.2026), čeka muziku |
 | 21 | Kako čuvamo privatnost? (pseudonim) | K | `kolo-pseudonim/` | tekst konačan (vlasnik, 14.10.2026), izrada nije počela |
 | 22 | Čije je KOLO? Ničije. | K |  |  |
 | 23 | Šta je Fondacija | K |  |  |
