@@ -6,32 +6,39 @@ Gotov fajl: `out/kolo-transparentnost-razmene.mp4` (nije u gitu, šalje se vlasn
 Tekst i ograde: [`scenario.md`](scenario.md). Opisi za mreže: `docs/drustvene-mreze-opisi.md`, odeljak 23.
 Naracija: vlasnik (snimak 2026_10_15_11_56_59). Muzika: „Morena bračka“ (Suno, vlasnik, 15.10.2026), u pozadini.
 
-Stil i svet su iz videa 19 (stara ilustrovana slikovnica: ulaz zgrade, oglasna tabla, sveska kase, čika Đura
-i stanari, telefon sa KOLOM), da se blok o transparentnosti nastavlja. Novi delovi su u `src/razmena.tsx`
-(ekrani članova, razmena i računa drugog člana, sveske stanara, prozor sa zavesama, fotelja, tamna ruka) i
-`src/scene/zajednicko20.tsx`.
+Sopstveni svet (noćni trg i fenjeri): `src/noc.tsx` (nebo, trg, postolje, sanduk koji postaje stakleni, fenjer,
+mrak sa svetlima, zlatna nit, senka), `src/scene/svet.tsx` (upravnik, seljani sa fenjerom), `src/scene/krug.tsx`
+(kolo odozgo), `src/razmena.tsx` (ekrani KOLA, prozor, tamna ruka), `src/kolo.tsx` (kolo iz videa 11).
 
-## Priča u slici
+🔴 **Odluka vlasnika (15.10.2026): prva verzija je odbačena.** Đura, zgrada i uvid u kasu zgrade su posebna
+priča (video 19) i ne ponavljaju se; video 20 dobija sopstveni svet i sopstvenu likovnu ideju („budi kreativniji“).
+Nova verzija: noć na seoskom trgu i fenjeri (krađa živi u mraku, svetlo koje nose svi otkriva sve).
+
+## Priča u slici (druga verzija: noć i fenjeri)
+
+Stil: stara ilustrovana slikovnica (gvaš, mastilo, papir, zrno), ali **noću**: preko kadra je mrak (`Mrak` u
+`src/noc.tsx`) sa rupama oko svakog fenjera, pa boju ima samo ono što je obasjano. Krađa živi u mraku; kad svi
+donesu svetlo, sve se vidi. Upravnik je nov lik bez imena; seljani su likovi serije (Milica, komšija, komšinica, mladić).
 
 | Scena | Slika |
 |---|---|
-| 1 | Naslov gore („Kako da sprečimo krađu?“, do kraja scene). Krupno otvorena kasa; na „ukrasti“ ruka u tamnom rukavu sa zlatnom manžetnom izvuče novčanicu; na „položaju“ kamera se odmakne na visoku praznu fotelju iza stola. Lice se ne vidi. |
-| 2 | Ulaz zgrade iz videa 19: na tabli otvorena sveska kase, čika Đura pored table, stanari gledaju; na „uvid“ kamera priđe svesci. |
-| 3 | Krupno sveska: prst prelazi uplate i troškove, na „sigurni“ „ostalo u kasi: 3.150“, ispod kasa sa istim brojem; na „sebe“ pečat „U REDU“. |
-| 4 | **Obrt** („Ali“, ritam ponovo ulazi): knjiga PRAVILA sa zracima, ispod Đura i stanari iste veličine. |
-| 5 | Stanari pred tablom drže svoje zatvorene sveske („stan 1/4/7“); na „uprave“ sveska na tabli zasvetli, na drugom „otvoreni“ sve tri sveske se otvore. |
-| 6 | Krupna tabla: sveska uprave i sveske stanara; tamna ruka proviri na „vara“ i povuče se; lupa i zelene kvačice na „upravljaju“ i „nas“. Od „jer“: telefon, račun direktora iz videa 19, red po red ko je upisao i zašto, kvačice na „došao“. |
-| 7 | Znak KOLO. |
-| 8 | Telefon u ruci člana: značka „potvrđen“, spisak članova sa stanjem, pa na „razmene“ spisak razmena (ko je kome prepisao i za šta). |
-| 9 | Isti spisak razmena na još četiri telefona oko srednjeg. |
-| 10 | Prozor kuće: na „odričemo“ zavese se razmaknu samo do pola (deo privatnosti); tamna ruka krene ka kasi, na „zloupotrebe“ sa strane provire komšije i ruka se povuče. |
-| 11 | Ograda: komšija sa telefonom, Milica pruža teglu; na „pogledaš“ telefon sa Miličinim računom (šta je kome dala), prst i kvačice; na kraju komšija klimne. |
-| 12 | Knjiga PRAVILA i četiri iste kartice računa (Direktor, Milica, Zoran, Đura); zelene linije na „važe“, kvačice na „jednako“. |
+| 1 | Naslov gore. Pozorište senki: sveća na podu baca na zid senku čoveka na postolju pored sanduka; na „ukrasti“ ruka senke izvuče novčanicu, na „položaju“ postolje senke raste u visinu. Nikoga konkretnog. |
+| 2 | Noćni trg: upravnik na niskom postolju, drveni sanduk „ZAJEDNIČKO“; sa obe strane dolaze seljani sa fenjerima. Na „uvid“ podignu fenjere i sanduk postane stakleni (novčanice i sveska). |
+| 3 | Krupno stakleni sanduk pod četiri fenjera; svetlo prelazi preko sveske; na „sebe“ upravnik raširi prazne ruke, zelena kvačica. |
+| 4 | **Obrt** („Ali“, ritam ponovo ulazi): upravnik okrene svoj fenjer ka seljanima, snop pređe preko gomile; na „sve“ svi su obasjani. |
+| 5 | Seljani u redu, svako sa svojim sandukom; na „uprave“ zasvetli zajednički sanduk, na drugom „otvoreni“ sanduci seljana jedan za drugim postanu stakleni. |
+| 6 | Ceo trg pod fenjerima na kanapu; na „vara“ tamna ruka proviri iz mraka, na „neprimećeno“ fenjer se zanjiše i ruka se povuče; od „jer“ između sanduka zlatne niti sa brojem POEN-a. |
+| 7 | Kamera iznad trga: seljani sa fenjerima uhvaćeni u kolo, u sredini znak KOLO. |
+| 8 | Telefon pod fenjerom: značka „potvrđen“, spisak članova sa stanjem, pa spisak razmena. |
+| 9 | Kolo odozgo; preko kruga zlatne niti razmena sa brojem POEN-a. |
+| 10 | Kuća noću: zavese se razmaknu samo do pola; tamna ruka krene ka prozoru, sa strane priđu komšije sa fenjerima i ruka se povuče. |
+| 11 | Večernja pijaca pod fenjerom: Milica pruža teglu, komšija gleda telefon (Miličin račun, šta je kome dala), na kraju klimne. |
+| 12 | Svanulo je: kolo na trgu, u njemu i upravnik, prazno postolje iza; na „jednako“ izlazi sunce. |
 | 13 | Znak KOLO i „ekolo.rs“; poslednji udarac numere odmah posle reči. |
 
-- Jedini natpis je naslov (scenario). Ostali tekst je u svetu priče (sveske, telefon, kartice).
-- Pseudonimi na ekranima (Milica, Zoran, Jovana, Đura, Baka Rada) su likovi ranijih videa, „Direktor“ je uloga iz videa 19; iznosi su izmišljeni, celi brojevi.
-- POEN je samo broj u redu, nikad novčić; novčanice su samo u kasi iz scene 1, 3 i 10.
+- Jedini natpis je naslov; ostali tekst je u svetu priče (pločica na sanduku, telefon).
+- POEN je samo broj na niti i u redu na telefonu, nikad novčić; novčanice su samo u sanducima.
+- Video ne tvrdi da iko u KOLU krade: senka u sceni 1 je opšta slika, tamna ruka se povlači kad je sve na videlu.
 
 ## Kako se pravi
 

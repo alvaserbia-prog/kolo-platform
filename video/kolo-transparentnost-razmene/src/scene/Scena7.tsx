@@ -1,27 +1,31 @@
-// Scena 7 — „Tako je uređeno KOLO.“ Znak KOLO uskoči na zelenoj svetlosti.
+// Scena 7 — „Tako je uređeno KOLO.“ Kamera se digne iznad trga: seljani sa fenjerima su se uhvatili u kolo,
+// krug svetla se okreće, a u sredini uskoči znak KOLO.
 import React from "react";
-import { Kadar, napredak, useF, usePop } from "../alat";
+import { Kadar, Kamera, mesaj, napredak, useF, usePop } from "../alat";
 import { ZnakKolo } from "../znak";
 import { kad } from "../vreme";
-import { P } from "../paleta";
-import { KoloPozadina } from "./kolo";
+import { KRUG, KrugOdozgo } from "./krug";
 
 export const Scena7: React.FC = () => {
   const f = useF();
-  const kK = kad(7, "tako");
-  const znak = usePop(kK - 2, 150, 10);
-  const zraci = napredak(f, kK - 2, 14);
+  const kK = kad(7, "kolo.");
+  const znak = usePop(kK - 8, 150, 10);
+  const pojava = napredak(f, -8, 30);
+  const z = napredak(f, -8, 70);
   return (
     <Kadar>
-      <KoloPozadina sjaj={0.8} />
-      <g transform="translate(540 720)" opacity={zraci}>
-        {Array.from({ length: 16 }, (_, i) => (
-          <path key={i} d="M0,-240 L20,-600 L-20,-600Z" fill={P.zelenaSvetla} opacity={0.4} transform={`rotate(${i * 22.5 + f * 0.6})`} />
-        ))}
-      </g>
-      <g transform={`translate(540 720) scale(${znak * 1.05})`}>
-        <ZnakKolo id="znak7" />
-      </g>
+      <Kamera x={540} y={KRUG.cy + 120} z={mesaj(1.5, 1, z)} rot={mesaj(-12, 0, z)}>
+        <KrugOdozgo
+          ugao={f * 0.5}
+          f={f}
+          pojava={pojava}
+          centar={
+            <g transform={`translate(${KRUG.cx} ${KRUG.cy}) scale(${znak * 0.8})`}>
+              <ZnakKolo id="znak7" />
+            </g>
+          }
+        />
+      </Kamera>
     </Kadar>
   );
 };

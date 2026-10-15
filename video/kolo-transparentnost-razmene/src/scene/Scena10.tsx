@@ -1,15 +1,15 @@
 // Scena 10 — „Svesno se odričemo dela privatnosti da bismo sprečili zloupotrebe u sistemu.“
-// Zid kuće sa prozorom, zavese navučene. Na „odričemo“ ruka razmakne zavese, ali samo do pola (deo
-// privatnosti): unutra sto, otvorena sveska računa i kasa. Na „sprečili“ tamna ruka iz scene 1 krene ka kasi;
-// na „zloupotrebe“ sa strane proviruju komšije, ruka se povuče. Niko ništa ne uzme.
+// Noć, kuća na trgu. Na „odričemo“ ruka iznutra razmakne zavese, ali samo do pola (deo privatnosti): svetlo iz
+// sobe padne napolje, unutra se vidi stakleni sanduk. Na „sprečili“ iz mraka krene tamna ruka ka prozoru; na
+// „zloupotrebe“ sa obe strane priđu komšije sa fenjerima, ruka uđe u svetlo i povuče se.
 import React from "react";
 import { Easing, interpolate } from "remotion";
-import { Hrapavo, Kadar, mesaj, napredak, useF } from "../alat";
-import { Lik } from "../likovi";
-import { Kasa, STANAR, BAKA } from "../zgrada";
-import { LicnaSveska, Muskatla, Prozor, TamnaRuka } from "../razmena";
+import { Kadar, mesaj, napredak, useF } from "../alat";
+import { Mrak, N, Nebo, Sanduk } from "../noc";
+import { Muskatla, Prozor, TamnaRuka } from "../razmena";
 import { kad } from "../vreme";
 import { P } from "../paleta";
+import { SELJANI, SaFenjerom, plamen } from "./svet";
 
 const PROZOR = { x: 540, y: 700 };
 
@@ -19,27 +19,31 @@ export const Scena10: React.FC = () => {
   const kS = kad(10, "sprečili");
   const kZ = kad(10, "zloupotrebe");
   const otvor = napredak(f, kO - 4, 24);
-  const ruka = interpolate(f, [kS - 10, kS + 12, kZ + 4, kZ + 18], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) });
-  const komsije = napredak(f, kZ - 8, 14, Easing.out(Easing.back(1.4)));
+  const ruka = interpolate(f, [kS - 10, kS + 12, kZ + 4, kZ + 16], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) });
+  const komsije = napredak(f, kZ - 12, 18, Easing.out(Easing.cubic));
+  const lx = mesaj(-200, 150, komsije);
+  const dx = mesaj(1280, 930, komsije);
+  const svetla = [
+    { x: PROZOR.x, y: PROZOR.y + 80, r: 260 + 260 * otvor },
+    { ...plamen(lx + 95, 1330 - 330 * 0.6, 0.8, 300), a: komsije },
+    { ...plamen(dx - 95, 1330 - 330 * 0.6, 0.8, 300), a: komsije },
+  ];
   return (
     <Kadar>
-      <Hrapavo>
-        <rect x={-100} y={-100} width={1300} height={2200} fill={P.zid} />
-        <rect x={-100} y={-100} width={1300} height={2200} fill="url(#gvasP)" opacity={0.3} style={{ mixBlendMode: "multiply" }} />
-        <rect x={-100} y={1240} width={1300} height={900} fill={P.trava} />
-      </Hrapavo>
+      <Nebo mesec={false} />
+      <rect x={-100} y={180} width={1300} height={1100} fill={N.zid} />
+      <rect x={-100} y={180} width={1300} height={1100} fill="url(#gvasP)" opacity={0.3} style={{ mixBlendMode: "multiply" }} />
+      <rect x={-100} y={1280} width={1300} height={900} fill={N.zemlja} />
       <g transform={`translate(${PROZOR.x} ${PROZOR.y})`}>
         <Prozor
           otvor={otvor}
           unutra={
             <g>
-              <rect x={-300} y={-320} width={600} height={640} fill="#D8C59C" />
-              <rect x={-300} y={120} width={600} height={200} fill={P.drvoTamno} />
-              <g transform="translate(-80 150) scale(0.62)">
-                <LicnaSveska natpis="račun" otvor={1} boja={P.plava} />
-              </g>
-              <g transform="translate(150 190)">
-                <Kasa s={0.55} otvor={1} pun={1} natpis="KUĆA" />
+              <rect x={-300} y={-320} width={600} height={640} fill="#E6C98E" />
+              <circle cx={0} cy={-120} r={260} fill="url(#plamen)" opacity={0.8} />
+              <rect x={-300} y={140} width={600} height={180} fill={P.drvoTamno} />
+              <g transform="translate(40 180)">
+                <Sanduk s={0.55} staklo={1} pun={0.6} />
               </g>
             </g>
           }
@@ -51,17 +55,12 @@ export const Scena10: React.FC = () => {
           <Muskatla />
         </g>
       </g>
-      {/* tamna ruka sa desne strane, ka kasi kroz prozor */}
-      <g transform={`translate(${mesaj(1300, PROZOR.x + 230, ruka)} ${PROZOR.y + 150}) rotate(-4)`}>
+      <g transform={`translate(${mesaj(1300, PROZOR.x + 240, ruka)} ${PROZOR.y + 210}) rotate(-4)`}>
         <TamnaRuka />
       </g>
-      {/* komšije proviruju sa strane */}
-      <g transform={`translate(${mesaj(-260, 0, komsije)} 0)`}>
-        <Lik x={120} y={1460} s={0.68} {...STANAR} glava={{ ...STANAR.glava, izraz: "odlucna", pogled: [7, -2] }} />
-      </g>
-      <g transform={`translate(${mesaj(260, 0, komsije)} 0)`}>
-        <Lik x={960} y={1470} s={0.66} okreni {...BAKA} glava={{ ...BAKA.glava, izraz: "odlucna", pogled: [-7, -2] }} />
-      </g>
+      <SaFenjerom p={SELJANI[1]} x={lx} y={1330} s={0.6} tx={lx + 95} ty={1330 - 330 * 0.6} f={f} izraz="odlucna" pogled={[7, -3]} fs={0.8} />
+      <SaFenjerom p={SELJANI[0]} x={dx} y={1330} s={0.6} tx={dx - 95} ty={1330 - 330 * 0.6} f={f + 9} okreni izraz="odlucna" pogled={[-7, -3]} fs={0.8} />
+      <Mrak id="s10" svetla={svetla} jacina={0.72} />
     </Kadar>
   );
 };

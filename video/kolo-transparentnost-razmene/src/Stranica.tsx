@@ -41,7 +41,7 @@ export const Stranica: React.FC = () => {
           backgroundImage: `url(${staticFile("grain.png")})`,
           backgroundPosition: `${zx}px ${zy}px`,
           mixBlendMode: "overlay",
-          opacity: 0.22,
+          opacity: 0.1, // video 20 je noćni: jače zrno je podizalo tamne delove u mlečno
         }}
       />
       <div

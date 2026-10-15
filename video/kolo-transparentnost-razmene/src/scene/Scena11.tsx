@@ -1,30 +1,59 @@
 // Scena 11 — „A pre razmene možeš da pogledaš račun drugog člana i vidiš koliko je on dao zajednici.“
-// Dva dvorišta i ograda: Milica preko ograde pruža teglu zimnice, komšija drži telefon. Na „pogledaš“ krupno
-// telefon: Miličin račun POEN-a, redovi šta je kome dala; na „dao“ prst prelazi preko redova, na „zajednici“
-// zelene kvačice. Na kraju opet ograda: komšija klimne glavom i uzme teglu.
+// Večernja pijaca pod fenjerom: Milica za tezgom pruža teglu zimnice, komšija drži telefon. Na „pogledaš“ krupno
+// telefon: Miličin račun POEN-a, redovi šta je kome dala; prst prelazi preko redova, na „zajednici“ zelene
+// kvačice. Na kraju opet tezga: komšija klimne glavom i uzme teglu.
 import React from "react";
 import { Easing, interpolate } from "remotion";
 import { Kadar, Kamera, mesaj, napredak, useF } from "../alat";
 import { Lik } from "../likovi";
-import { Ulica, Kuce } from "../pozadine";
 import { Tegla } from "../predmeti";
-import { Prst, STANAR, STANARKA, VelikiTelefon } from "../zgrada";
+import { Prst, VelikiTelefon } from "../zgrada";
 import { Ekran, RACUN_MILICE } from "../razmena";
+import { Fenjer, Mrak, Nebo, Trg } from "../noc";
 import { kad, trajanjeF } from "../vreme";
 import { P } from "../paleta";
 import { rez } from "./zajednicko";
 import { KoloPozadina, TEL } from "./kolo";
-import { Ograda } from "./zajednicko20";
+import { SELJANI } from "./svet";
 
-const MILICA = { ...STANARKA, glava: { ...STANARKA.glava } };
+const MILICA = SELJANI[2];
+const KOMSIJA = SELJANI[1];
 
-const Dvoriste: React.FC<{ klima: number; predaja: number }> = ({ klima, predaja }) => (
+const Tezga: React.FC<{ f: number; klima: number }> = ({ f, klima }) => (
   <g>
-    <Ulica />
-    <Kuce y={880} s={0.55} n={6} x0={-120} razmak={250} />
-    <Lik x={300} y={1400} s={0.82} {...STANAR} glava={{ ...STANAR.glava, izraz: klima > 0 ? "osmeh" : "zamisljena", pogled: klima > 0 ? [6, 3] : [2, 6] }} glavaNagib={Math.sin(klima * Math.PI * 2) * 7} dr={[-70, -40]} drziD={<g transform="rotate(10) scale(0.2)"><VelikiTelefon /></g>} />
-    <Ograda y={1330} x0={580} x1={1120} h={260} />
-    <Lik x={820} y={1410} s={0.8} okreni {...MILICA} glava={{ ...MILICA.glava, izraz: "srecna", pogled: [-6, 0] }} dr={[-95 + predaja * 10, -15]} drziD={<Tegla vrsta="ajvar" s={0.9} />} />
+    <Nebo />
+    <Trg y={1100} prozori={0.8} />
+    {/* tezga sa nadstrešnicom */}
+    <path d="M560,1300 L560,620 M1040,1300 L1040,620" stroke={P.drvoTamno} strokeWidth={16} />
+    <path d="M530,640 L1070,640 L1030,560 L570,560Z" fill={P.ajvar} stroke={P.mastilo} strokeWidth={4} />
+    {[0, 1, 2, 3, 4].map((i) => (
+      <path key={i} d={`M${590 + i * 92},560 L${610 + i * 92},640`} stroke={P.krem} strokeWidth={22} opacity={0.6} />
+    ))}
+    <path d="M800,640 L800,700" stroke={P.mastilo} strokeWidth={3} />
+    <g transform={`translate(800 700) rotate(${Math.sin(f / 22) * 4})`}>
+      <Fenjer s={0.85} f={f} />
+    </g>
+    <Lik x={820} y={1250} s={0.7} okreni {...MILICA} glava={{ ...MILICA.glava, izraz: "srecna", pogled: [-6, 0] }} dr={[-95 + klima * 15, -15]} drziD={<Tegla vrsta="ajvar" s={0.9} />} />
+    <rect x={560} y={1080} width={480} height={220} fill={P.drvo} stroke={P.mastilo} strokeWidth={4} />
+    {[620, 700, 960].map((x, i) => (
+      <g key={x} transform={`translate(${x} 1080)`}>
+        <Tegla vrsta={i === 1 ? "pekmez" : "ajvar"} s={0.6} />
+      </g>
+    ))}
+    <Lik
+      x={300}
+      y={1330}
+      s={0.8}
+      {...KOMSIJA}
+      glava={{ ...KOMSIJA.glava, izraz: klima > 0 ? "osmeh" : "zamisljena", pogled: klima > 0 ? [6, 0] : [3, 6] }}
+      glavaNagib={Math.sin(klima * Math.PI * 2) * 7}
+      dr={[-70, -40]}
+      drziD={
+        <g transform="rotate(10) scale(0.2)">
+          <VelikiTelefon />
+        </g>
+      }
+    />
   </g>
 );
 
@@ -44,8 +73,9 @@ export const Scena11: React.FC = () => {
     <Kadar>
       {tel < 1 && (
         <g opacity={1 - tel}>
-          <Kamera x={560} y={mesaj(980, 1000, prilaz)} z={mesaj(1, 1.08, prilaz)}>
-            <Dvoriste klima={klima} predaja={klima} />
+          <Kamera x={600} y={mesaj(980, 1000, prilaz)} z={mesaj(1, 1.08, prilaz)}>
+            <Tezga f={f} klima={klima} />
+            <Mrak id="s11" svetla={[{ x: 800, y: 790, r: 560 }, { x: 330, y: 960, r: 260 }]} jacina={0.7} />
           </Kamera>
         </g>
       )}

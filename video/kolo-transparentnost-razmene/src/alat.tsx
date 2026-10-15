@@ -61,6 +61,24 @@ export const Defs: React.FC = () => (
       <stop offset="0" stopColor="#FFE3A0" stopOpacity="0.7" />
       <stop offset="1" stopColor="#FFE3A0" stopOpacity="0" />
     </radialGradient>
+    {/* video 20: lik kao senka (noć) i rupa u mraku oko fenjera */}
+    <filter id="silueta" colorInterpolationFilters="sRGB">
+      <feColorMatrix type="matrix" values="0 0 0 0 0.07  0 0 0 0 0.07  0 0 0 0 0.11  0 0 0 0.9 0" />
+    </filter>
+    <radialGradient id="rupaMraka">
+      <stop offset="0" stopColor="#000" stopOpacity="1" />
+      <stop offset="0.55" stopColor="#000" stopOpacity="0.75" />
+      <stop offset="1" stopColor="#000" stopOpacity="0" />
+    </radialGradient>
+    <radialGradient id="plamen">
+      <stop offset="0" stopColor="#FFF4C8" stopOpacity="1" />
+      <stop offset="0.35" stopColor="#FFC85A" stopOpacity="0.55" />
+      <stop offset="1" stopColor="#FF9A2E" stopOpacity="0" />
+    </radialGradient>
+    <linearGradient id="nocNebo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stopColor="#101830" />
+      <stop offset="1" stopColor="#2B3A5E" />
+    </linearGradient>
     <linearGradient id="stakloG" x1="0" x2="1">
       <stop offset="0" stopColor="#fff" stopOpacity="0.0" />
       <stop offset="0.25" stopColor="#fff" stopOpacity="0.55" />

@@ -1452,10 +1452,10 @@ Te zapise vide svi prijavljeni članovi, a pseudonime strana potvrđeni članovi
 
 Video: `video/kolo-transparentnost-razmene/out/kolo-transparentnost-razmene.mp4` (MP4 nije u gitu, šalje se
 vlasniku). Naslovna: `video/kolo-transparentnost-razmene/out/naslovna.jpg` („Kako da sprečimo krađu?“, naslov iz scenarija).
-Zvuk na Instagramu preimenovati u „KOLO, kako da sprečimo krađu“. Alternativni tekst: „Slikovnica: ruka u tamnom
-rukavu izvlači novčanicu iz kase; na oglasnoj tabli zgrade otvorena je sveska kase, a pored nje i sveske stanara;
-na telefonu člana KOLA vide se stanja drugih članova i sve razmene, sa osnovom; komšija preko ograde pre razmene
-pogleda račun komšinice.“
+Zvuk na Instagramu preimenovati u „KOLO, kako da sprečimo krađu“. Alternativni tekst: „Slikovnica noću: senka
+na zidu krade iz sanduka; seljani sa fenjerima obasjaju zajednički sanduk i on postane stakleni, a onda i
+svoje sanduke; uhvate se u kolo, između njih zlatne niti razmena; na telefonu člana KOLA vide se stanja i
+razmene; na pijaci komšija pre razmene pogleda račun komšinice.“
 
 Napisano po odeljku 4 (mehanika iz pravila, ne hipotetičke priče). Uglovi: TikTok, šta potvrđen član vidi
 (stanje drugih članova i obavljene razmene); Instagram, pravila su ista za one koji upravljaju i za ostale;

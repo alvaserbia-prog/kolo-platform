@@ -1,12 +1,17 @@
-// Naslovna (cover) za mreže: „Kako da sprečimo krađu?“; oglasna tabla sa otvorenom sveskom uprave i otvorenim
-// sveskama stanara. Sav tekst je u sredini (y 300–1620), jer Instagram mrežu seče na 4:5.
+// Naslovna (cover) za mreže: „Kako da sprečimo krađu?“; noćni trg, upravnik pored staklenog sanduka i
+// seljani koji ga obasjavaju fenjerima. Sav tekst je u sredini (y 300–1620), jer Instagram mrežu seče na 4:5.
 import React from "react";
 import { AbsoluteFill, Img, staticFile } from "remotion";
 import { P } from "./paleta";
 import { NASLOV, SANS, ucitajFontove } from "./fontovi";
 import { Kadar } from "./alat";
 import { Stranica } from "./Stranica";
-import { TablaSaSveskama } from "./scene/zajednicko20";
+import { Lik } from "./likovi";
+import { Mrak, Nebo, Postolje, Sanduk, Trg } from "./noc";
+import { MESTA, POSTOLJE, SANDUK, S_SELJAK } from "./scene/Scena2";
+import { SELJANI, SaFenjerom, UPRAVNIK, plamen } from "./scene/svet";
+
+const FENJERI = MESTA.map((m, i) => ({ ...m, tx: SANDUK.x + (m.okreni ? 120 : -260) + i * 20, ty: SANDUK.y - 330 }));
 
 ucitajFontove();
 
@@ -14,8 +19,20 @@ export const Naslovna: React.FC = () => (
   <AbsoluteFill style={{ background: P.papir }}>
     <Img src={staticFile("papir.jpg")} style={{ position: "absolute", inset: 0, width: 1080, height: 1920 }} />
     <Kadar>
-      <g transform="translate(0 300)">
-        <TablaSaSveskama />
+      <g transform="translate(540 1000) scale(1.12) translate(-540 -1000)">
+        <Nebo />
+        <Trg />
+        <g transform={`translate(${POSTOLJE.x} ${POSTOLJE.vrh})`}>
+          <Postolje h={POSTOLJE.h} w={460} />
+        </g>
+        <Lik x={430} y={POSTOLJE.vrh} s={0.62} {...UPRAVNIK} glava={{ ...UPRAVNIK.glava, izraz: "osmeh", pogled: [6, 3] }} lr={[20, 20]} dr={[-20, -20]} />
+        <g transform={`translate(${SANDUK.x} ${SANDUK.y})`}>
+          <Sanduk s={SANDUK.s} staklo={1} natpis="ZAJEDNIČKO" />
+        </g>
+        {FENJERI.map((s, i) => (
+          <SaFenjerom key={i} p={SELJANI[i]} x={s.x} y={s.y} s={S_SELJAK} tx={s.tx} ty={s.ty} f={i * 7} okreni={s.okreni} pogled={[s.okreni ? -6 : 6, -3]} fs={0.8} />
+        ))}
+        <Mrak id="naslovna" svetla={[...FENJERI.map((s) => plamen(s.tx, s.ty, 0.8, 310)), { x: SANDUK.x, y: SANDUK.y - 60, r: 380 }]} jacina={0.78} />
       </g>
     </Kadar>
     <AbsoluteFill>

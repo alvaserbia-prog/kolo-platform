@@ -1,45 +1,37 @@
-// Scena 9 — „To se zove transparentnost razmene.“ Isti spisak razmena na telefonu u sredini; oko njega
-// uskoče još tri ruke sa telefonima na istom spisku: svi potvrđeni članovi vide isto.
+// Scena 9 — „To se zove transparentnost razmene.“ Kolo odozgo, kao u sceni 7: preko kruga se, od jednog do
+// drugog seljaka, iscrtavaju zlatne niti razmena sa brojem POEN-a; sve se vidi iz svakog mesta u krugu.
 import React from "react";
-import { Kadar, useF, usePop } from "../alat";
-import { SakaSaTelefonom, VelikiTelefon } from "../zgrada";
-import { Ekran, RAZMENE } from "../razmena";
+import { interpolate } from "remotion";
+import { Kadar, Kamera, useF } from "../alat";
+import { Nit } from "../noc";
 import { kad } from "../vreme";
-import { P } from "../paleta";
-import { KoloPozadina, TEL } from "./kolo";
+import { KRUG, KrugOdozgo, tackaKruga } from "./krug";
 
-const DRUGI = [
-  { x: 170, y: 520, r: -14, rukav: P.roze, koza: P.koza },
-  { x: 910, y: 560, r: 12, rukav: P.oker, koza: P.koza2 },
-  { x: 880, y: 1130, r: 18, rukav: P.zelenaPrigusena, koza: P.koza },
-  { x: 190, y: 1120, r: -16, rukav: P.ajvar, koza: P.koza2 },
+const PAROVI: [number, number, string][] = [
+  [0, 4, "+300"],
+  [6, 2, "+500"],
+  [3, 8, "+250"],
+  [9, 5, "+400"],
+  [1, 7, "+200"],
+  [5, 0, "+350"],
 ];
 
 export const Scena9: React.FC = () => {
   const f = useF();
   const kT = kad(9, "transparentnost");
-  const pops = DRUGI.map((_, i) => usePop(kT - 12 + i * 5));
+  const ugao = 36 + f * 0.5;
   return (
     <Kadar>
-      <KoloPozadina />
-      {DRUGI.map((d, i) => (
-        <g key={i} transform={`translate(${d.x} ${d.y + (1 - Math.min(1, pops[i])) * 500}) rotate(${d.r}) scale(${0.4 * Math.max(0, pops[i])})`} opacity={f >= kT - 12 + i * 5 ? 1 : 0}>
-          <g transform="translate(0 330)">
-            <SakaSaTelefonom rukav={d.rukav} koza={d.koza} />
-          </g>
-          <VelikiTelefon>
-            <Ekran id={`r9-${i}`} naslov="Razmene" podnaslov="obavljene, sa osnovom" bezZnaka redovi={RAZMENE} potvrden={1} />
-          </VelikiTelefon>
-        </g>
-      ))}
-      <g transform={`translate(${TEL.x} ${TEL.y}) scale(${TEL.s * 0.92})`}>
-        <g transform="translate(0 330)">
-          <SakaSaTelefonom rukav={P.plava} />
-        </g>
-        <VelikiTelefon>
-          <Ekran id="r9" naslov="Razmene" podnaslov="obavljene, sa osnovom" bezZnaka redovi={RAZMENE} potvrden={1} />
-        </VelikiTelefon>
-      </g>
+      <Kamera x={540} y={KRUG.cy + 120} z={1}>
+        <KrugOdozgo
+          ugao={ugao}
+          f={f}
+          niti={PAROVI.map(([a, b, iznos], i) => {
+            const p = interpolate(f, [kT - 30 + i * 8, kT - 30 + i * 8 + 26], [0, 1.25], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+            return <Nit key={i} a={tackaKruga(a, ugao, KRUG.r - 40)} b={tackaKruga(b, ugao, KRUG.r - 40)} napredak={p} iznos={iznos} luk={0} s={0.85} />;
+          })}
+        />
+      </Kamera>
     </Kadar>
   );
 };

@@ -1,28 +1,31 @@
 // Scena 6 — „Tada niko ne može da vara neprimećeno, ni oni koji upravljaju ni bilo ko od nas, jer se za svaki
 // POEN zna odakle je došao.“
-// Prvi deo: krupna tabla, gore sveska uprave, ispod otvorene sveske stanara. Na „vara“ tamna ruka iz scene 1
-// proviri sa ivice i na „neprimećeno“ se povuče. Lupa prelazi: na „upravljaju“ preko sveske uprave, na „nas“
-// preko svezaka stanara; uz svaku zelena kvačica.
-// Drugi deo (od „jer“): telefon sa računom direktora iz videa 19; red po red se ističe ko je upisao i zašto,
-// na „došao“ zelene kvačice.
+// Ceo trg je pod fenjerima na kanapu, svi sanduci su stakleni. Na „vara“ iz mraka sa desne strane proviri
+// tamna ruka ka jednom sanduku; na „neprimećeno“ fenjer se zanjiše ka njoj i ruka se povuče. Na „upravljaju“
+// zasvetli zajednički sanduk, na „nas“ sanduci seljana. Od „jer“ između sanduka se iscrtavaju zlatne niti: niz
+// svaku putuje pločica sa brojem POEN-a, pa se za svaki zna odakle je došao.
 import React from "react";
 import { Easing, interpolate } from "remotion";
 import { Kadar, mesaj, napredak, useF } from "../alat";
-import { EkranSistem, Lupa, VelikiTelefon } from "../zgrada";
+import { Fenjer, Mrak, Nebo, Nit, Sanduk, Trg } from "../noc";
 import { TamnaRuka } from "../razmena";
 import { kad } from "../vreme";
 import { P } from "../paleta";
-import { KoloPozadina, TEL } from "./kolo";
-import { RED_STANARA, SVESKA_UPRAVE, SVESKE_STANARA, TablaSaSveskama } from "./zajednicko20";
-import { rez } from "./zajednicko";
 
-const Kvacica: React.FC<{ x: number; y: number; s: number }> = ({ x, y, s }) =>
-  s > 0 ? (
-    <g transform={`translate(${x} ${y}) scale(${s})`}>
-      <circle r={40} fill={P.zelena500} stroke="#fff" strokeWidth={6} />
-      <path d="M-17,0 L-5,12 L19,-14" fill="none" stroke="#fff" strokeWidth={9} strokeLinecap="round" strokeLinejoin="round" />
-    </g>
-  ) : null;
+const SANDUCI: { x: number; y: number; s: number; natpis?: string }[] = [
+  { x: 540, y: 900, s: 0.8, natpis: "ZAJEDNIČKO" },
+  { x: 170, y: 1230, s: 0.56 },
+  { x: 420, y: 1280, s: 0.56 },
+  { x: 670, y: 1280, s: 0.56 },
+  { x: 920, y: 1230, s: 0.56 },
+];
+const KANAP = Array.from({ length: 7 }, (_, i) => [90 + i * 150, 470 + Math.sin((i / 6) * Math.PI) * 90] as [number, number]);
+const NITI: { od: number; ka: number; iznos: string }[] = [
+  { od: 1, ka: 3, iznos: "+300" },
+  { od: 4, ka: 2, iznos: "+500" },
+  { od: 2, ka: 1, iznos: "+250" },
+  { od: 0, ka: 4, iznos: "+400" },
+];
 
 export const Scena6: React.FC = () => {
   const f = useF();
@@ -31,52 +34,44 @@ export const Scena6: React.FC = () => {
   const kU = kad(6, "upravljaju");
   const kNas = kad(6, "nas,");
   const kJ = kad(6, "jer");
-  const kO = kad(6, "odakle");
   const kD = kad(6, "došao.");
-  const drugi = rez(f, kJ - 4);
-  // ruka
-  const ruka = interpolate(f, [kV - 14, kV + 4, kNe + 6, kNe + 18], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) });
-  // lupa: uprava, pa stanari
-  const lx = interpolate(f, [kU - 14, kU + 6, kNas - 14, kNas, kNas + 14], [SVESKA_UPRAVE.x + 220, SVESKA_UPRAVE.x, SVESKE_STANARA[0].x, SVESKE_STANARA[1].x, SVESKE_STANARA[2].x], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-  const ly = interpolate(f, [kU - 14, kU + 6, kNas - 14], [SVESKA_UPRAVE.y + 260, SVESKA_UPRAVE.y, RED_STANARA], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) });
-  const lupa = interpolate(f, [kU - 18, kU - 8, kNas + 16, kNas + 26], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const kvU = napredak(f, kU + 6, 10, Easing.out(Easing.back(2)));
-  const kvS = (i: number) => napredak(f, kNas - 12 + i * 12, 10, Easing.out(Easing.back(2)));
-  // telefon
-  const t = interpolate(f, [kJ + 4, kD], [0, 3.99], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const red = Math.floor(t);
+  const ruka = interpolate(f, [kV - 14, kV + 4, kNe + 2, kNe + 14], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) });
+  const njihanje = interpolate(f, [kNe - 6, kNe + 4, kNe + 20], [0, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const sjajU = napredak(f, kU - 2, 8) * (1 - napredak(f, kNas - 6, 10));
+  const sjajN = napredak(f, kNas - 4, 8) * (1 - napredak(f, kJ, 12));
+  const niti = (i: number) => interpolate(f, [kJ + i * ((kD - kJ) / 4), kJ + (i + 1) * ((kD - kJ) / 4) + 8], [0, 1.3], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const tamno = mesaj(0.62, 0.45, napredak(f, kJ, 20));
+  const svetla = [
+    ...KANAP.map(([x, y], i) => ({ x, y: y + 90, r: i === 6 ? 330 + 120 * njihanje : 330 })),
+    { x: 540, y: 820, r: 300 + 140 * sjajU },
+    ...SANDUCI.slice(1).map((s) => ({ x: s.x, y: s.y - 60, r: 200 + 120 * sjajN })),
+  ];
   return (
     <Kadar>
-      {drugi < 1 && (
-        <g opacity={1 - drugi}>
-          <TablaSaSveskama isticanjeStanara={SVESKE_STANARA.map((_, i) => (f > kNas - 14 + i * 12 && f < kNas + 4 + i * 12 ? 1 : 0))} />
-          <Kvacica x={SVESKA_UPRAVE.x + 280} y={SVESKA_UPRAVE.y - 180} s={kvU} />
-          {SVESKE_STANARA.map((s, i) => (
-            <Kvacica key={i} x={s.x + 120} y={RED_STANARA - 70} s={kvS(i) * 0.8} />
-          ))}
-          {lupa > 0 && (
-            <g transform={`translate(${lx} ${ly})`} opacity={lupa}>
-              <Lupa s={1.1} />
-            </g>
-          )}
-          <g transform={`translate(${mesaj(1300, 930, ruka)} 760) rotate(-6)`}>
-            <TamnaRuka />
-          </g>
+      <Nebo />
+      <Trg y={940} prozori={0.8} />
+      {SANDUCI.map((s, i) => (
+        <g key={i} transform={`translate(${s.x} ${s.y})`}>
+          <Sanduk s={s.s} staklo={1} natpis={s.natpis} pun={i ? 0.5 : 1} />
         </g>
-      )}
-      {drugi > 0 && (
-        <g opacity={drugi}>
-          <KoloPozadina />
-          <g transform={`translate(${TEL.x} ${TEL.y}) scale(${TEL.s})`}>
-            <VelikiTelefon>
-              <EkranSistem redova={6} isticanje={f < kD + 6 ? [red, Math.min(1, (t % 1) * 1.8)] : undefined} zeleno={napredak(f, kO, 30, Easing.linear)} />
-            </VelikiTelefon>
-          </g>
+      ))}
+      {NITI.map((n, i) => {
+        const a = SANDUCI[n.od];
+        const b = SANDUCI[n.ka];
+        return <Nit key={i} a={[a.x, a.y - 120 * a.s]} b={[b.x, b.y - 120 * b.s]} napredak={niti(i)} iznos={n.iznos} luk={-140} />;
+      })}
+      {/* tamna ruka iz mraka */}
+      <g transform={`translate(${mesaj(1300, 990, ruka)} 1110) rotate(-8)`}>
+        <TamnaRuka />
+      </g>
+      <Mrak id="s6" svetla={svetla} jacina={tamno} />
+      {/* kanap sa fenjerima preko trga */}
+      <path d={`M-20,430 ${KANAP.map(([x, y]) => `L${x},${y}`).join(" ")} L1100,430`} fill="none" stroke={P.mastilo} strokeWidth={4} />
+      {KANAP.map(([x, y], i) => (
+        <g key={i} transform={`translate(${x} ${y}) rotate(${i === 6 ? njihanje * 25 : Math.sin(f / 20 + i) * 3})`}>
+          <Fenjer s={0.75} f={f + i * 4} />
         </g>
-      )}
+      ))}
     </Kadar>
   );
 };

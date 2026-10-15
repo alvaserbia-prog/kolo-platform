@@ -1,48 +1,54 @@
 // Scena 1 — „Danas je lako ukrasti novac, naročito onome ko je na položaju.“ (naslov stoji gore)
-// Krupno: otvorena kasa na stolu. Na „ukrasti“ ruka u tamnom rukavu sa zlatnom manžetnom izvuče novčanicu i
-// odnese je iz kadra. Na „položaju“ kamera se odmakne: iza stola visoka prazna fotelja. Lice se ne vidi.
+// Pozorište senki: u mračnoj sobi sveća na podu baca veliku senku na zid. Senka čoveka stoji na postolju pored
+// sanduka; na „ukrasti“ ruka senke zaroni u sanduk i izvuče novčanicu pod kaput. Na „položaju“ postolje senke
+// raste u visinu: što je položaj viši, senka je veća. Lice se ne vidi, nema nikoga konkretnog.
 import React from "react";
 import { Easing, interpolate } from "remotion";
 import { Kadar, Kamera, mesaj, napredak, useF } from "../alat";
-import { Sto } from "../predmeti";
-import { Kasa, Novcanica } from "../zgrada";
-import { Fotelja, TamnaRuka } from "../razmena";
+import { Lik, ikRuka } from "../likovi";
+import { Novcanica } from "../zgrada";
+import { Postolje, Sanduk, Sveca, ZidSvece } from "../noc";
 import { kad } from "../vreme";
-import { Soba } from "./zajednicko20";
-
-const KASA = { x: 470, y: 1112 };
+import { UPRAVNIK } from "./svet";
 
 export const Scena1: React.FC = () => {
   const f = useF();
   const kU = kad(1, "ukrasti");
   const kP = kad(1, "položaju.");
-  // ruka: ulazi zdesna do kase, uhvati, odnese novčanicu udesno
-  const ulaz = interpolate(f, [kU - 26, kU - 4], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) });
-  const izlaz = interpolate(f, [kU + 6, kU + 30], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.in(Easing.cubic) });
-  const rx = mesaj(1300, KASA.x + 40, ulaz) + izlaz * 900;
-  const ry = mesaj(880, 960, ulaz) - izlaz * 60;
-  const uzeo = f > kU - 2;
-  const odmak = napredak(f, kP - 30, 40);
+  const rast = napredak(f, kP - 24, 40, Easing.inOut(Easing.cubic));
+  const h = mesaj(120, 360, rast);
+  const vrh = 1290 - h;
+  const S = 1.05;
+  const X = 470;
+  const SX = 800;
+  // ruka: miruje, zaroni u sanduk, izvuče se ka kaputu
+  const zaron = interpolate(f, [kU - 20, kU - 2], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) });
+  const nazad = interpolate(f, [kU + 4, kU + 24], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) });
+  const tx = mesaj(mesaj(X + 150, SX - 20, zaron), X + 40, nazad);
+  const ty = mesaj(mesaj(vrh - 330, vrh - 150, zaron), vrh - 380, nazad);
+  const [a1, a2] = ikRuka(X, vrh, S, tx, ty);
+  const treperi = 1 + Math.sin(f * 0.7) * 0.03 + Math.sin(f * 1.9) * 0.02;
   return (
     <Kadar>
-      <Kamera x={mesaj(KASA.x + 40, 540, odmak)} y={mesaj(1000, 880, odmak)} z={mesaj(2.1, 1, odmak)}>
-        <Soba />
-        <g transform="translate(540 1050)">
-          <Fotelja s={1.05} />
-        </g>
-        <g transform="translate(540 1120)">
-          <Sto w={900} h={180} stolnjak="#5E3B26" vez={false} />
-        </g>
-        <g transform={`translate(${KASA.x} ${KASA.y})`}>
-          <Kasa s={0.9} otvor={1} pun={1} natpis="KASA" />
-        </g>
-        <g transform={`translate(${rx} ${ry}) rotate(${-8 + izlaz * 6})`}>
-          {uzeo && (
-            <g transform="translate(-30 -6) rotate(-12)">
-              <Novcanica s={0.46} />
+      <Kamera x={540} y={mesaj(980, 900, rast)} z={mesaj(1.08, 0.94, rast)}>
+        <ZidSvece treperi={treperi} />
+        {/* senka na zidu: sve kroz filter siluete, blago iskošeno i treperavo kao od sveće */}
+        <g filter="url(#silueta)" transform={`translate(540 1290) skewX(-6) scale(${treperi} 1) translate(-540 -1290)`}>
+          <g transform={`translate(${X + 60} ${vrh})`}>
+            <Postolje h={h} w={560} />
+          </g>
+          <g transform={`translate(${SX} ${vrh})`}>
+            <Sanduk s={0.62} />
+          </g>
+          <Lik x={X} y={vrh} s={S} {...UPRAVNIK} dr={[a1, a2]} lr={[12, 8]} />
+          {f > kU - 2 && f < kU + 30 && (
+            <g transform={`translate(${tx} ${ty}) rotate(-20)`}>
+              <Novcanica s={0.42} />
             </g>
           )}
-          <TamnaRuka hvata={uzeo ? 1 : 0} />
+        </g>
+        <g transform="translate(210 1420)">
+          <Sveca f={f} />
         </g>
       </Kamera>
     </Kadar>

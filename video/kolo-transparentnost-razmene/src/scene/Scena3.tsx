@@ -1,50 +1,55 @@
 // Scena 3 — „Samo tako možemo biti sigurni da ništa ne uzima za sebe.“
-// Krupno sveska kase na tabli. Prst prelazi preko uplata i troškova; na „sigurni“ se ispiše „ostalo u kasi:
-// 3.150“, a ispod table otvorena kasa ZGRADA sa istim brojem na cedulji. Na „sebe“ pečat „U REDU“.
+// Krupno stakleni sanduk pod četiri fenjera: svežanj novčanica i sveska. Svetlo prelazi preko sveske red po red;
+// na „sebe“ upravnik raširi prazne ruke iznad sanduka, uz njih zelena kvačica.
 import React from "react";
 import { Easing, interpolate } from "remotion";
-import { Kadar, Kamera, Pop, mesaj, napredak, useF } from "../alat";
-import { Kasa, Prst } from "../zgrada";
-import { Zig } from "../predmeti";
+import { Kadar, Kamera, mesaj, napredak, useF, usePop } from "../alat";
+import { Lik } from "../likovi";
+import { Fenjer, Mrak, Nebo, Sanduk, Trg } from "../noc";
 import { kad } from "../vreme";
 import { P } from "../paleta";
-import { RUKOPIS } from "../fontovi";
-import { SVESKA_NA_TABLI, UlazSaTablom } from "./zajednicko";
+import { UPRAVNIK } from "./svet";
+
+const FENJERI: [number, number][] = [
+  [250, 560],
+  [430, 500],
+  [650, 500],
+  [830, 560],
+];
 
 export const Scena3: React.FC = () => {
   const f = useF();
   const kT = kad(3, "tako");
-  const kS = kad(3, "sigurni");
-  const kSe = kad(3, "sebe.");
-  const t = interpolate(f, [kT, kS], [0, 5.9], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const red = Math.floor(t);
-  const ist: [number, number][] = f < kS + 4 ? [[red, Math.min(1, (t % 1) * 1.6)]] : [];
-  const desno = red >= 3;
-  const px = SVESKA_NA_TABLI.x + SVESKA_NA_TABLI.s * (desno ? 170 : -200) + (t % 1) * 80;
-  const py = SVESKA_NA_TABLI.y + SVESKA_NA_TABLI.s * (-250 + 132 + (red % 3) * 74 - 14);
-  const prst = interpolate(f, [kT - 12, kT, kS, kS + 12], [1, 0, 0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) });
-  const zbir = napredak(f, kS - 2, 22, Easing.linear);
-  const odmak = napredak(f, kS + 10, 26);
+  const kS = kad(3, "sebe.");
+  const ist = interpolate(f, [kT, kS - 8], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const ruke = napredak(f, kS - 12, 14, Easing.out(Easing.back(1.5)));
+  const kv = usePop(kS - 2);
+  const zum = napredak(f, 0, 60);
   return (
     <Kadar>
-      <Kamera x={SVESKA_NA_TABLI.x} y={mesaj(SVESKA_NA_TABLI.y + 80, SVESKA_NA_TABLI.y + 200, odmak)} z={mesaj(1.7, 1.35, odmak)}>
-        <UlazSaTablom sveska={1} svetlo={1} vrata={false} sveskaProps={{ isticanje: ist, zbir }} />
-        <g transform={`translate(${px} ${py + prst * 1400}) scale(0.4)`}>
-          <Prst rukav={P.oker} koza={P.koza2} rot={4} />
+      <Kamera x={540} y={mesaj(980, 960, zum)} z={mesaj(1.05, 1.12, zum)}>
+        <Nebo />
+        <Trg y={1220} />
+        <Lik x={540} y={1260} s={0.72} {...UPRAVNIK} glava={{ ...UPRAVNIK.glava, izraz: ruke > 0.5 ? "osmeh" : "mirna", pogled: [0, 4] }} lr={[mesaj(10, -120, ruke), mesaj(8, -40, ruke)]} dr={[mesaj(-10, 120, ruke), mesaj(-8, 40, ruke)]} />
+        <g transform="translate(540 1260)">
+          <Sanduk s={1.25} staklo={1} isticanje={ist} />
         </g>
-        <g transform={`translate(${SVESKA_NA_TABLI.x} 1120)`} opacity={odmak}>
-          <Kasa s={0.62} otvor={1} pun={1} />
-          <g transform="translate(150 -60) rotate(6)">
-            <rect x={-70} y={-34} width={140} height={60} rx={6} fill={P.belo} stroke={P.mastilo} strokeWidth={3} />
-            <text y={10} textAnchor="middle" fontFamily={RUKOPIS} fontWeight={700} fontSize={36} fill={P.mastilo}>
-              3.150
-            </text>
+        {FENJERI.map(([x, y], i) => (
+          <g key={i}>
+            <path d={`M${x},${y} L${x},${y - 400}`} stroke={P.mastilo} strokeWidth={3} />
+            <g transform={`translate(${x} ${y})`}>
+              <Fenjer s={0.9} f={f + i * 5} />
+            </g>
           </g>
-        </g>
+        ))}
+        <Mrak id="s3" svetla={[...FENJERI.map(([x, y]) => ({ x, y: y + 80, r: 280 })), { x: 540, y: 1100, r: 520 }]} jacina={0.75} />
       </Kamera>
-      <Pop at={kSe - 4} x={800} y={560} rot={-12} skala={1.25}>
-        <Zig tekst="U REDU" />
-      </Pop>
+      {kv > 0 && (
+        <g transform={`translate(850 860) scale(${kv})`}>
+          <circle r={56} fill={P.zelena500} stroke="#fff" strokeWidth={7} />
+          <path d="M-24,0 L-7,17 L26,-19" fill="none" stroke="#fff" strokeWidth={12} strokeLinecap="round" strokeLinejoin="round" />
+        </g>
+      )}
     </Kadar>
   );
 };
