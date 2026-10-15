@@ -281,6 +281,7 @@ Jedna rečenica po zamci; opis i razlozi u `docs/funkcionalnosti.md` i `docs/ist
 
 ## Videi
 Tekst za naraciju se pre slanja pregleda kroz stalnu ekipu od četiri uloge (bez lektora; čuvar sadržaja izbačen 29.09.2026). Pravila pregleda, stil i zabranjene reči: `video/README.md`.
+🔴 **Rad na videu se gura samo na granu sesije, ne na `main`; gotovi MP4 se ne guraju u git** (`.gitignore`), nego se vlasniku šalju u razgovoru (odluka vlasnika, 13.10.2026; `video/README.md`).
 
 ## Otvoreni GAP-ovi
 Vode se u `docs/funkcionalnosti.md` (odeljak „Nezavršeni TODO"). Najvažniji: Pijaca badge se ne nuluje (layout `src/app/pijaca/` je van `AppShell`-a), `POCETNI` legacy JWT-fallback u `proxy.ts`, DPA ugovori obrađivača nisu prikupljeni, GA rok čuvanja (14 meseci) naspram Registra (12) ide uz naredni bump Politike.
