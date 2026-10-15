@@ -1447,3 +1447,64 @@ Te zapise vide svi prijavljeni članovi, a pseudonime strana potvrđeni članovi
 
 #Sombor #KOLO
 ```
+
+## 23. Video 20 „Kako da sprečimo krađu?“ (oktobar 2026)
+
+Video: `video/kolo-transparentnost-razmene/out/kolo-transparentnost-razmene.mp4` (MP4 nije u gitu, šalje se
+vlasniku). Naslovna: `video/kolo-transparentnost-razmene/out/naslovna.jpg` („Kako da sprečimo krađu?“, naslov iz scenarija).
+Zvuk na Instagramu preimenovati u „KOLO, kako da sprečimo krađu“. Alternativni tekst: „Slikovnica: ruka u tamnom
+rukavu izvlači novčanicu iz kase; na oglasnoj tabli zgrade otvorena je sveska kase, a pored nje i sveske stanara;
+na telefonu člana KOLA vide se stanja drugih članova i sve razmene, sa osnovom; komšija preko ograde pre razmene
+pogleda račun komšinice.“
+
+Napisano po odeljku 4 (mehanika iz pravila, ne hipotetičke priče). Uglovi: TikTok, šta potvrđen član vidi
+(stanje drugih članova i obavljene razmene); Instagram, pravila su ista za one koji upravljaju i za ostale;
+Facebook, cena je deo privatnosti i kome je zapis otvoren (Pravilnik čl. 67 i 28: pseudonime strana i stanja
+vide potvrđeni članovi, posetilac i nov član ukupne brojeve). Ne kaže se da Fondacija prati obrasce prepisa
+(zabranjeno u `CLAUDE.md`); član sam gleda.
+
+**Jezička provera (odeljak 1a):** navodnici „…“; bez crtica i nabrajanja; uz POEN nema reči kupi, prodaj,
+plati, zaradi, cena, vrednost; „vi“ dosledno na Facebook-u; adresa na Facebook-u bez `https://`, link ide u
+prvi komentar (odeljak 3).
+
+### TikTok
+
+```
+U KOLU potvrđen član vidi koliko POEN-a ima svaki drugi član i sve razmene koje su obavljene. 👀
+
+Uz svaku razmenu stoji ko je kome prepisao POEN i za šta. Zato se za svaki POEN zna odakle je došao.
+
+Pre nego što se dogovoriš za razmenu, možeš da pogledaš račun drugog člana i vidiš koliko je dao zajednici.
+
+👉 Uključi se, link je u profilu.
+
+#Sombor #KOLO #razmena
+```
+
+### Instagram
+
+```
+Ako tražimo da računi onih koji upravljaju budu otvoreni, onda i naši moraju biti otvoreni. 📖
+
+U KOLU je tako: račun svakog člana izgleda isto, i račun direktora i tvoj. Potvrđeni članovi vide stanje i razmene svakoga.
+
+Kad svi vide sve, niko ne može da vara neprimećeno.
+
+👉 Link je u bio.
+
+#Sombor #Vojvodina #zajednica #KOLO
+```
+
+### Facebook
+
+```
+U KOLU smo se svesno odrekli dela privatnosti da bismo sprečili zloupotrebe. 🔍
+
+Potvrđeni članovi vide stanje POEN-a drugih članova i svaku obavljenu razmenu, pod pseudonimom i sa osnovom. Posetilac i nov član vide samo ukupne brojeve. Podaci koje ste dobrovoljno uneli i lanac potvrda ostaju zatvoreni.
+
+Pravila važe jednako za sve, i za one koji upravljaju. Pre razmene možete sami da pogledate koliko je drugi član dao zajednici.
+
+👉 Registracija je na ekolo.rs
+
+#Sombor #KOLO
+```
