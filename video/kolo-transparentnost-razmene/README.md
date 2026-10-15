@@ -39,3 +39,7 @@ Modeli (sherpa-onnx Parakeet i Omnilingual) i `deep-filter` preuzimaju se sa Git
   sa njenom dominantom (V – V/V – V), ide preko tonike sa septimom u subdominantu (I7 – IV), pa I – V;
   **strofa se završava na dominanti, otvoreno**, i odmah kreće iz početka. U D-duru: A – E7 – A | D7 – G | G – D – A.
   Završetak numere je na tonici (D), posle „ekolo.rs“.
+- **Uzorak `audio/raw/uzorak-becarac.mp3` vlasnik je odbacio** (15.10.2026: „užasan"): sintetizovane žice ne zvuče
+  kao tamburica. Traži se karakter **somborskog bećarca** (bački, salašarski, starogradski). Snimak tuđeg izvođenja
+  (npr. Zvonko Bogdan) ne sme da ide u Suno kao uzorak: snimak je zaštićen, a Suno ga i odbija; tradicionalna
+  melodija je slobodna, pa uzorak može biti samo snimak živog tamburaša koji je na to pristao.
