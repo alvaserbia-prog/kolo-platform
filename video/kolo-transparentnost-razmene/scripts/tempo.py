@@ -16,6 +16,10 @@ KRAJ_SNIMKA = 90.2  # posle „ekolo.rs“ (~89,6 s) je samo tišina
 IZBACI = []
 TEMPO = 1.03
 IZBACI_POSLE = []
+# Utišano (vremena u audio/final/glas.wav): kašalj u pauzi između „…za sebe.“ i „Ali“ (19,85–20,65 s).
+# Ne seče se, nego se utišava, da se ne pomere vremena reči i ulaz ritma na „Ali“. Propušten u prvoj predaji:
+# provera reč po reč ne vidi zvuk koji nije reč; od sada se proverava i jačina u pauzama (vlasnik, 16.10.2026).
+UTISAJ = [(19.85, 20.65)]
 
 os.makedirs("audio/final", exist_ok=True)
 a, sr = sf.read("audio/clean/glas.wav", dtype="float32")
@@ -62,5 +66,8 @@ for x0, x1 in sorted(IZBACI_POSLE, reverse=True):
     i0, i1 = int(x0 * sr2), int(x1 * sr2)
     r = np.linspace(0, 1, f, dtype=np.float32)
     b = np.concatenate([b[:i0], b[i0:i0 + f] * (1 - r) + b[i1:i1 + f] * r, b[i1 + f:]])
+for x0, x1 in UTISAJ:
+    i0, i1, r = int(x0 * sr2), int(x1 * sr2), int(0.02 * sr2)
+    b[i0:i1] *= np.concatenate([np.linspace(1, 0, r), np.zeros(i1 - i0 - 2 * r), np.linspace(0, 1, r)]).astype(b.dtype)
 sf.write("audio/final/glas.wav", b, sr2, subtype="PCM_16")
 print(f"{len(a)/sr:.2f} s -> {len(b)/sr2:.2f} s")
