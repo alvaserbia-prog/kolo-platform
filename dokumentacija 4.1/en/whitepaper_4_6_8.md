@@ -502,17 +502,17 @@ Legal dimension: donations are subject to tax regulations governing donations to
 
 ### Sponsorship by Legal Entities and Entrepreneurs
 
-Sponsors are legal entities and entrepreneurs who donate goods, services, or money to the system. This sub-module is the bridge between the external economy and the KOLO system.
+Sponsors are legal entities and entrepreneurs who donate money to the Foundation. This sub-module is a bridge between the external economy and the KOLO system.
 
-The mechanics are as follows: a legal entity or entrepreneur provides real resources — goods, services, or funds in dinars — to the Foundation, which uses them for system programmes or distributes them to users. The contribution of the verified user who stands behind the sponsor — the ultimate beneficial owner of the legal entity, or the entrepreneur themselves — is recorded in POENs as a unilateral administrative entry of the Protocol, according to rules that define the relationship between the value of the sponsorship and the number of POENs recorded.
+The mechanics are as follows: a legal entity or entrepreneur pays a donation into the Foundation's account, and the Foundation uses the funds for the purposes of the system. The contribution is recorded in POEN as a unilateral administrative entry of the protocol, in the record of the verified user who submitted the sponsorship application — the owner or legal representative of the legal entity, or the entrepreneur themselves — under the same table that applies to donations by natural persons. The legal form of the giver does not affect the recording coefficient.
 
-The ledger record is tied to the ultimate beneficial owner of the legal entity — a natural person, not the legal entity itself. A legal entity cannot be a user of the KOLO system — the system is designed for natural persons. The ultimate beneficial owner of a legal entity that is a sponsor must be a verified user of the system in order for the contribution to be recorded in their ledger record.
+The record is tied to a natural person, not to the legal entity itself. A legal entity cannot be a user of the KOLO system — the system is designed for natural persons. The person submitting the application must be a verified user of the system.
 
-This rule requires clarification in cases of multiple ownership and indirect ownership. When the owner of a legal entity is another legal entity, the ledger record is tied to the natural person who is the ultimate beneficial owner at the end of the ownership chain. When a legal entity has multiple ultimate beneficial owners, the ledger record is allocated proportionally to the ownership shares of those beneficial owners who are verified system users — only for the portion corresponding to the verified user's share. Each donation is calculated at the time of receipt on the basis of a separate donation agreement, making the ownership position at the time of the donation the only relevant one. The Foundation maintains a record of the relationship between the legal entity and the user in whose ledger record the contribution is recorded.
+The contribution from a single application is recorded in the record of a single user and is not distributed among other owners, including where the legal entity has several owners. Each donation is calculated at the moment of receipt on the basis of a separate donation agreement. The sponsor's cumulative contribution is kept separately from the user's personal donations, and the two sums are not added together. The Foundation keeps a record of the link between the legal entity and the user in whose record the contribution is recorded.
 
-This is the only point in the system where the external economy directly influences the internal ledger. The legal entity provides real resources, and the Protocol records the contribution in the ledger record of the ultimate beneficial owner of that legal entity. This connection is intentional — it incentivises legal entities to contribute to the common good, and gives their owners a reason to do so.
+This is the only point in the system where the external economy directly influences the internal ledger: the legal entity gives money, and the protocol records the contribution in the record of the natural person who submitted the application. The recording is not a payment from the legal entity to the user, nor a distribution of profit, and creates no property right.
 
-Legal dimension: a sponsor is a legal entity registered in the Republic of Serbia. The Foundation verifies the sponsor on the basis of a donation agreement with the Foundation and determines the ultimate beneficial owner for the purpose of accurate contribution recording. The Foundation documents the relationship between the legal entity and the user in whose ledger record the contribution is recorded, and takes into account the potential risk of abuse of this relationship. The rules define the verification procedure in cases of multiple ownership and indirect ownership.
+Legal dimension: a sponsor is a legal entity or entrepreneur registered in the Republic of Serbia. The Foundation verifies the sponsor on the basis of the donation agreement and the payer data from the bank statement, documents the link between the legal entity and the user in whose record the contribution is recorded, and takes into account the potential risk of abuse of this link. On account of the contribution, the sponsor acquires no advantage in the selection of an offer in a collective procurement.
 
 ## 8.3 Operational Contribution
 
@@ -666,9 +666,9 @@ A donor gives monetary funds to the Foundation non-refundably (chapter 4). The i
 
 In the context of the tension between accumulation and circulation, donation has a special incentive property: it is the only activity in the system through which new POENs arise for the user while simultaneously financing the infrastructure of the common good. The non-refundability structure functions as a selection mechanism — it attracts users who are motivated by using the system, not users seeking an investment return — donating is rational only for users who genuinely use the system and benefit from its functioning (Hurwicz, 1973).
 
-## Incentives of Sponsors
+## Position of Sponsors
 
-A sponsor is a legal entity that donates goods, services, or money to the system (section 8.2). Sponsorship is a public record — the Foundation maintains and publishes a register of sponsors as part of system transparency, not as an advertising service. The ultimate beneficial owner of the legal entity that is a sponsor — the natural person who is a Verified user of the system — benefits from contribution records in POENs. This two-layer structure is intentional: the legal entity gives real resources to the community, the ultimate beneficial owner acquires contribution records in the system. The mechanism is designed so that the benefit to the sponsor arises only if the community receives real resources — which is an incentive-compatible relationship in the sense of mechanism design theory.
+A sponsor is a legal entity or entrepreneur that donates money to the Foundation (section 8.2). Sponsorship is a public record — the foundation keeps and publishes the record of sponsors as part of the system's transparency, not as an advertising service; the sponsor acquires no right to a logo, promotion or any other counter-performance. The contribution is recorded in the record of the user who submitted the application, under the same table as a personal donation, and arises only if the community receives actual funds.
 
 ## Tension Between Accumulation and Circulation
 
@@ -1048,7 +1048,7 @@ Terms are grouped thematically for ease of reference. Each definition is consist
 
 **Operational contribution —** An activity outside the platform whose contribution is recorded in POENs following verification of performance. Not an employment relationship within the meaning of Article 5 of the Law on Labour. Chapter 8.3.
 
-**Sponsorship —** A donation of goods, services, or money by a legal entity or entrepreneur. The ledger entry is linked to the ultimate beneficial owner, or the entrepreneur themselves. The only point in the system where the external economy directly affects the internal ledger. Chapter 8.2.
+**Sponsorship —** A donation of money by a legal entity or entrepreneur. The contribution is recorded in the record of the user who submitted the application, under the same table as a donation by a natural person. The only point in the system where the external economy directly influences the internal ledger. Chapter 8.2.
 
 **Donation recording coefficient —** The ratio between the amount of a monetary donation and the number of POENs recorded for the donor. A parameter that can be changed by a governance decision. It is not the accounting coefficient (which is the total number of POENs divided by the number of available ZRNOs). Chapter 8.2.
 

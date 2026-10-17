@@ -1082,7 +1082,7 @@
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.6.2"
+      "ver": "4.6.8"
     },
     "pravilnik": {
       "naslov": "Правила системы КОЛО",
@@ -1118,7 +1118,7 @@
     "meta_rizici_title": "Заявление о принятии рисков · КОЛО",
     "meta_rizici_desc": "Заявление о принятии рисков участия в системе КОЛО, версия 4.6.8",
     "meta_whitepaper_title": "Whitepaper · КОЛО",
-    "meta_whitepaper_desc": "KOLO Whitepaper, версия 4.6.2",
+    "meta_whitepaper_desc": "KOLO Whitepaper, версия 4.6.8",
     "meta_pravilnik_title": "Правила системы КОЛО · КОЛО",
     "meta_pravilnik_desc": "Указатель правил системы КОЛО, версия 4.6.6",
     "rb": {

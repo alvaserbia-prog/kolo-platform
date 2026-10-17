@@ -500,17 +500,17 @@ Pravna dimenzija: donacije podležu poreskim propisima koji regulišu donacije f
 
 ### Pokroviteljstvo pravnih lica i preduzetnika
 
-Pokrovitelji su pravna lica i preduzetnici koji doniraju robu, usluge ili novac sistemu. Ovaj podmodul je most između spoljne ekonomije i KOLO sistema.
+Pokrovitelji su pravna lica i preduzetnici koji doniraju novac Fondaciji. Ovaj podmodul je most između spoljne ekonomije i KOLO sistema.
 
-Mehanika je sledeća: pravno lice ili preduzetnik daje realne resurse — robu, usluge ili dinarska sredstva — fondaciji, koja ih koristi za programe sistema ili ih distribuira korisnicima. Doprinos verifikovanog korisnika koji stoji iza pokrovitelja — krajnjeg stvarnog vlasnika pravnog lica, odnosno samog preduzetnika — evidentira se u POEN-ima kao jednostrani administrativni zapis protokola, po pravilima koja definišu odnos između vrednosti pokroviteljstva i broja evidentiranih POEN-a.
+Mehanika je sledeća: pravno lice ili preduzetnik uplaćuje donaciju na račun Fondacije, koja sredstva koristi za ciljeve sistema. Doprinos se evidentira u POEN-ima kao jednostrani administrativni zapis protokola, u zapisu verifikovanog korisnika koji je podneo prijavu pokroviteljstva — vlasnika odnosno zakonskog zastupnika pravnog lica, odnosno samog preduzetnika — po istoj tabeli koja važi za donacije fizičkih lica. Pravni oblik davaoca ne utiče na koeficijent evidencije.
 
-Evidencija se vezuje za krajnjeg stvarnog vlasnika pravnog lica (beneficial owner) — fizičko lice, ne za samo pravno lice. Pravno lice ne može biti korisnik KOLO sistema — sistem je dizajniran za fizička lica. Krajnji stvarni vlasnik pravnog lica koje je pokrovitelj mora biti verifikovani korisnik sistema da bi doprinos mogao biti evidentiran u njegovom zapisu.
+Evidencija se vezuje za fizičko lice, ne za samo pravno lice. Pravno lice ne može biti korisnik KOLO sistema — sistem je dizajniran za fizička lica. Lice koje podnosi prijavu mora biti verifikovani korisnik sistema.
 
-Ovo pravilo zahteva preciziranje u slučajevima višestrukog vlasništva i indirektnog vlasništva. Kada je vlasnik pravnog lica drugo pravno lice, evidencija se vezuje za fizičko lice koje je krajnji stvarni vlasnik na kraju lanca vlasništva. Kada pravno lice ima više krajnjih stvarnih vlasnika, evidencija se raspoređuje srazmerno vlasničkim udelima na one stvarne vlasnike koji su verifikovani korisnici sistema — samo za deo koji odgovara udelu verifikovanog korisnika. Svaka donacija se obračunava u trenutku prijema na osnovu zasebnog ugovora o donaciji, čime je vlasničko stanje u trenutku donacije jedino relevantno. Fondacija vodi evidenciju o vezi između pravnog lica i korisnika u čijem zapisu se doprinos evidentira.
+Doprinos iz jedne prijave evidentira se u zapisu jednog korisnika i ne raspoređuje se na druge vlasnike, i kada pravno lice ima više vlasnika. Svaka donacija se obračunava u trenutku prijema na osnovu zasebnog ugovora o donaciji. Kumulativni doprinos pokrovitelja vodi se odvojeno od ličnih donacija korisnika, i dva zbira se ne sabiraju. Fondacija vodi evidenciju o vezi između pravnog lica i korisnika u čijem zapisu se doprinos evidentira.
 
-Ovo je jedina tačka u sistemu gde spoljna ekonomija direktno utiče na internu evidenciju. Pravno lice daje realne resurse, a protokol evidentira doprinos u zapisu krajnjeg stvarnog vlasnika tog pravnog lica. Ova veza je namerna — podstiče pravna lica da doprinose zajedničkom dobru, a njihovim vlasnicima daje razlog da to čine.
+Ovo je jedina tačka u sistemu gde spoljna ekonomija direktno utiče na internu evidenciju: pravno lice daje novac, a protokol evidentira doprinos u zapisu fizičkog lica koje je prijavu podnelo. Evidentiranje nije davanje pravnog lica korisniku ni raspodela dobiti i ne stvara imovinsko pravo.
 
-Pravna dimenzija: pokrovitelj je pravno lice registrovano u Republici Srbiji. Fondacija proverava pokrovitelja na osnovu ugovora o donaciji sa fondacijom i utvrđuje krajnjeg stvarnog vlasnika radi ispravne evidencije doprinosa. Fondacija dokumentuje vezu između pravnog lica i korisnika u čijem zapisu se doprinos evidentira i vodi računa o potencijalnom riziku od zloupotrebe ove veze. Pravila definišu postupak provere u slučajevima višestrukog vlasništva i indirektnog vlasništva.
+Pravna dimenzija: pokrovitelj je pravno lice ili preduzetnik registrovan u Republici Srbiji. Fondacija proverava pokrovitelja na osnovu ugovora o donaciji i podatka o uplatiocu sa izvoda, dokumentuje vezu između pravnog lica i korisnika u čijem zapisu se doprinos evidentira i vodi računa o potencijalnom riziku od zloupotrebe ove veze. Pokrovitelj po osnovu doprinosa ne stiče prednost u izboru ponude u kolektivnoj nabavci.
 
 ## 8.3 Operativni doprinos
 
@@ -664,9 +664,9 @@ Donator daje dinarska sredstva fondaciji nepovratno (poglavlje 4). Neposredan po
 
 U kontekstu tenzije između akumulacije i cirkulacije, donacija ima posebnu podsticajnu osobinu: jedina je aktivnost u sistemu kroz koju za korisnika nastaju novi POEN-i, a istovremeno se finansira infrastruktura zajedničkog dobra. Struktura nepovratnosti funkcioniše kao mehanizam selekcije — privlači korisnike koji su motivisani korišćenjem sistema, ne korisnike koji traže investiciju — doniranje je racionalno samo za korisnike koji zaista koriste sistem i imaju korist od njegovog funkcionisanja (Hurwicz, 1973).
 
-## Podsticaji pokrovitelja
+## Položaj pokrovitelja
 
-Pokrovitelj je pravno lice koje donira robu, usluge ili novac sistemu (odeljak 8.2). Pokroviteljstvo je javna evidencija — fondacija vodi i objavljuje evidenciju o pokroviteljima kao deo transparentnosti sistema, ne kao uslugu reklamiranja. Krajnji stvarni vlasnik pravnog lica koje je pokrovitelj — fizičko lice koje je verifikovani korisnik sistema — ima korist od evidencije doprinosa u POEN-ima. Ova dvoslojnost je namerna: pravno lice daje realne resurse zajednici, krajnji stvarni vlasnik stiče evidenciju doprinosa u sistemu. Mehanizam je dizajniran tako da korist za pokrovitelja nastaje samo ako zajednica prima realne resurse — što je podsticajno uskladen odnos u smislu teorije dizajna mehanizama.
+Pokrovitelj je pravno lice ili preduzetnik koji donira novac Fondaciji (odeljak 8.2). Pokroviteljstvo je javna evidencija — fondacija vodi i objavljuje evidenciju o pokroviteljima kao deo transparentnosti sistema, ne kao uslugu reklamiranja; pokrovitelj ne stiče pravo na logotip, promociju ni drugu protivčinidbu. Doprinos se evidentira u zapisu korisnika koji je prijavu podneo, po istoj tabeli kao lična donacija, i nastaje samo ako zajednica primi stvarna sredstva.
 
 ## Tenzija između akumulacije i cirkulacije
 
@@ -1046,7 +1046,7 @@ Pojmovi su grupisani tematski radi lakšeg snalaženja. Svaka definicija je konz
 
 **Operativni doprinos — **Aktivnost van platforme čiji se doprinos evidentira u POEN-ima nakon verifikacije izvršenja. Nije radni odnos u smislu čl. 5 Zakona o radu. Poglavlje 8.3.
 
-**Pokroviteljstvo — **Donacija robe, usluga ili novca od strane pravnog lica ili preduzetnika. Evidencija se vezuje za krajnjeg stvarnog vlasnika (beneficial owner), odnosno samog preduzetnika. Jedina tačka u sistemu gde spoljna ekonomija direktno utiče na internu evidenciju. Poglavlje 8.2.
+**Pokroviteljstvo — **Donacija novca od strane pravnog lica ili preduzetnika. Doprinos se evidentira u zapisu korisnika koji je prijavu podneo, po istoj tabeli kao donacija fizičkog lica. Jedina tačka u sistemu gde spoljna ekonomija direktno utiče na internu evidenciju. Poglavlje 8.2.
 
 **Koeficijent evidencije donacija — **Odnos između iznosa dinarske donacije i broja POEN-a koji se evidentiraju donatoru. Parametar koji se može menjati upravljačkom odlukom. Nije obračunski koeficijent (koji je ukupan broj POEN-a podeljen brojem raspoloživih ZRNA). Poglavlje 8.2.
 

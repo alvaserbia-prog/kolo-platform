@@ -6,17 +6,15 @@
 
 ### Članak 1. — Predmet
 
-Ovim se pravilnikom uređuju parametri evidentiranja financijskog doprinosa u KOLO sustavu, i to: razine donacija fizičkih osoba i koeficijent evidencije donacija, pokretanje i potvrda evidencije pokroviteljstva pravnih osoba, razine pokroviteljstva i koeficijent evidencije pokroviteljstva te rang-lista pokrovitelja.
+Ovim se pravilnikom uređuju parametri evidentiranja financijskog doprinosa u KOLO sustavu, i to: razine donacija fizičkih osoba i koeficijent evidencije donacija, pokretanje i potvrda evidencije pokroviteljstva pravnih osoba, evidentiranje doprinosa pokrovitelja po istoj tablici te rang-lista pokrovitelja.
 
 ### Članak 2. — Pojmovi
 
 Pojmovi koji se koriste u ovom pravilniku imaju značenje utvrđeno Pravilnikom o KOLO sustavu. Osim toga, u ovom se pravilniku koriste i sljedeći pojmovi:
 
-**Koeficijent evidencije donacija** — broj kojim se uvećava evidentirani doprinos donatora pri utvrđivanju broja POEN-a. Određen je razinom donacija. Nije cijena, nije tečaj i nije obračunski koeficijent u smislu Pravilnika o KOLO sustavu.
+**Koeficijent evidencije donacija** — broj kojim se uvećava evidentirani doprinos donatora, fizičke osobe ili pokrovitelja, pri utvrđivanju broja POEN-a. Određen je razinom donacija. Nije cijena, nije tečaj i nije obračunski koeficijent u smislu Pravilnika o KOLO sustavu.
 
 **Razina donacija** — stupanj kumulativnog doprinosa donatora koji određuje koeficijent evidencije donacija.
-
-**Razina pokroviteljstva** — stupanj kumulativnog doprinosa pokrovitelja koji određuje koeficijent evidencije pokroviteljstva.
 
 **Kumulativni doprinos pokrovitelja** — zbroj svih do danog trenutka potvrđenih novčanih doprinosa pokrovitelja.
 
@@ -133,7 +131,7 @@ Po podnošenju prijave platforma automatski generira ugovor o donaciji između n
 
 Korisnik potpisuje generirani ugovor o donaciji u ime pravne osobe ili obrtnika. Način potpisivanja utvrđuje se posebnom odlukom Zaklade u skladu s važećim računovodstvenim i poreznim propisima. Donacija se izvršava uplatom na račun Zaklade.
 
-Po primitku donacije Zaklada potvrđuje primitak na platformi. Po potvrdi Protokol evidentira POEN-e u zapisu korisnika prema razinama iz članka 10. ovog pravilnika.
+Po primitku donacije Zaklada potvrđuje primitak na platformi. Po potvrdi Protokol evidentira POEN-e u zapisu korisnika prema članku 10. ovog pravilnika.
 
 Ako donacija nije primljena ili vrijednost ne odgovara, Zaklada odbija potvrdu uz obrazloženje. Korisnik može podnijeti novu prijavu.
 
@@ -143,35 +141,21 @@ Zaklada vodi registar pokrovitelja u kojem bilježi sve potvrđene prijave s pod
 
 Na temelju registra Zaklada utvrđuje kumulativni doprinos svakog pokrovitelja zbrajanjem vrijednosti svih potvrđenih prijava.
 
-### Članak 10. — Razine pokroviteljstva i koeficijent evidencije
+### Članak 10. — Koeficijent evidencije pokroviteljstva
 
-Koeficijent evidencije pokroviteljstva jednak je koeficijentu evidencije donacija iz članka 4. uvećanom za dvadeset posto, za isti kumulativni iznos. Koeficijent novodostignute razine primjenjuje se na cijelu novu donaciju.
+Doprinos pokrovitelja evidentira se po tablici iz članka 4. ovog pravilnika, s istim razinama i istim koeficijentima evidencije kao donacija fizičke osobe. Pravni oblik davatelja ne utječe na koeficijent evidencije.
 
-Razlika u odnosu na koeficijent iz članka 4. nije poticaj za određeni pravni oblik davatelja niti protučinidba za doprinos. Donacija pravne osobe odnosno obrtnika ne umanjuje nužno poreznu osnovicu davatelja: u mjeri u kojoj se po poreznim propisima ne priznaje kao rashod, na nju se plaća porez na dobit. Zbog toga takva donacija može predstavljati odricanje veće od samoga doniranog iznosa, što donacija fizičke osobe nikada nije. Ta se razlika u mjeri odricanja izražava kroz koeficijent evidencije.
+Razina se utvrđuje na temelju kumulativnog doprinosa pokrovitelja i nove donacije. Koeficijent evidencije novodostignute razine primjenjuje se na cijelu novu donaciju. Broj evidentiranih POEN-a jednak je iznosu donacije u dinarima pomnoženom tim koeficijentom. Razina je kumulativna i trajna.
 
-Na temelju kumulativnog doprinosa pokrovitelja Protokol evidentira POEN-e u zapisu korisnika, prema sljedećoj tablici:
+Kumulativni doprinos pokrovitelja i kumulativna donacija korisnika iz članka 4. vode se odvojeno i ne zbrajaju se, i kada se doprinos pokrovitelja evidentira u zapisu korisnika koji donira i osobno.
 
-| **Razina** | **Kumulativni doprinos pokrovitelja (RSD)** | **Bonus evidencija POEN-a za tu razinu** |
-| --- | --- | --- |
-| 1 | 10.000 | 20.000 |
-| 2 | 20.000 | 30.000 |
-| 3 | 50.000 | 80.000 |
-| 4 | 100.000 | 150.000 |
-| 5 | 200.000 | 300.000 |
-| 6 | 500.000 | 800.000 |
-| 7 | 1.000.000 | 1.500.000 |
-
-Broj evidentiranih POEN-a jednak je iznosu donacije u dinarima pomnoženom koeficijentom evidencije novodostignute razine. Razina je kumulativna i trajna.
-
-Tablica se nastavlja bez ograničenja, sukladno članku 4. ovoga pravilnika.
-
-POEN evidentiran po ranije važećoj tablici bonusa ne poništava se. Kumulativni doprinos zatečenih pokrovitelja prenosi se i dalje služi kao osnova za utvrđivanje razine.
+POEN evidentiran po ranije važećim koeficijentima pokroviteljstva ne poništava se. Kumulativni doprinos zatečenih pokrovitelja prenosi se i dalje služi kao osnova za utvrđivanje razine.
 
 ### Članak 11. — Pravna kvalifikacija evidencije pokroviteljstva
 
 Evidentiranje POEN-a po osnovi pokroviteljstva automatski je akt Protokola u smislu čl. 40. i čl. 73. Pravilnika o KOLO sustavu. Ne ulazi u dnevni limit emisije Programa Protokola.
 
-Doprinos se evidentira u zapisu korisnika koji je prijavu pokroviteljstva podnio. Pokrovitelj po osnovi doprinosa ne stječe POEN, ZRNO, potraživanje prema Zakladi, pravo na povrat donacije ni bilo koje drugo pravo.
+Doprinos se evidentira u zapisu korisnika koji je prijavu pokroviteljstva podnio. Doprinos iz jedne prijave evidentira se u zapisu jednog korisnika i ne raspoređuje se na druge vlasnike ni na druge osobe povezane s pokroviteljem, i kada pokrovitelj ima više vlasnika. Pokrovitelj po osnovi doprinosa ne stječe POEN, ZRNO, potraživanje prema Zakladi, pravo na povrat donacije ni bilo koje drugo pravo.
 
 Evidentiranje POEN-a nije davanje pravne osobe odnosno obrtnika korisniku, nije raspodjela dobiti niti drugi oblik prijenosa vrijednosti iz imovine pokrovitelja, i ne stvara nijedno imovinsko pravo. POEN nema vrijednost izvan sustava (čl. 12. i čl. 13. Pravilnika o KOLO sustavu).
 
@@ -190,6 +174,8 @@ Pokrovitelj se identificira na rang-listi punim registriranim nazivom, skraćeni
 Objavljivanje rang-liste pokrovitelja predstavlja javno priznanje doprinosa i element transparentnosti rada Zaklade. Zaklada smije pokrovitelja javno imenovati i javno mu zahvaliti.
 
 Pokrovitelj po osnovi doprinosa ne stječe pravo na objavljivanje logotipa, na upućivanje na svoju internetsku stranicu, na oglasni prostor na Platformi, na spominjanje u kampanjama Zaklade niti na bilo koju drugu promotivnu činidbu, i takvu činidbu ne može ugovoriti niti zahtijevati. Javno priznanje akt je Zaklade, a ne protučinidba za doprinos.
+
+Ni donacija ni doprinos pokrovitelja ne daju prednost pri izboru ponude u kolektivnoj nabavi ni u drugom postupku Zaklade. Pokrovitelj koji je i ponuditelj sudjeluje ravnopravno s ostalim ponuditeljima, pod uvjetima Pravilnika o projektima i kolektivnim nabavama.
 
 ## IV — Sprječavanje pranja novca i financiranja terorizma
 
@@ -241,7 +227,7 @@ Pravila raspoređivanja viška utvrđuju osnivač i Zaklada u Fazi 1., a Gornje 
 
 ### Članak 15. — Nadležnost za izmjene
 
-Tablice iz čl. 4. i 10. ovog pravilnika, uključujući dodavanje novih razina, mijenja Upravni odbor Zaklade u Fazi 1., a Gornje Kolo u Fazi 2., u skladu s Pravilnikom o KOLO sustavu.
+Tablicu iz čl. 4. ovog pravilnika, uključujući dodavanje novih razina, mijenja Upravni odbor Zaklade u Fazi 1., a Gornje Kolo u Fazi 2., u skladu s Pravilnikom o KOLO sustavu.
 
 Izmjene parametara stupaju na snagu objavom na platformi i primjenjuju se na donacije i doprinose pokrovitelja primljene nakon stupanja na snagu.
 

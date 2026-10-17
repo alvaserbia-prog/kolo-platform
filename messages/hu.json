@@ -1071,7 +1071,7 @@
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.6.2"
+      "ver": "4.6.8"
     },
     "pravilnik": {
       "naslov": "KOLO rendszer szabályzatai",
@@ -1107,7 +1107,7 @@
     "meta_rizici_title": "Kockázatvállalási nyilatkozat · KOLO",
     "meta_rizici_desc": "A KOLO rendszerben való részvétel kockázatainak elfogadásáról szóló nyilatkozat, 4.6.8-es verzió",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.2-es verzió",
+    "meta_whitepaper_desc": "KOLO Whitepaper, 4.6.8-as verzió",
     "meta_pravilnik_title": "KOLO rendszer szabályzatai · KOLO",
     "meta_pravilnik_desc": "A KOLO rendszer szabályzatainak indexe, 4.6.6-es verzió",
     "rb": {

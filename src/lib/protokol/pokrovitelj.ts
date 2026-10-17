@@ -8,24 +8,23 @@ import { nivoPokroviteljstvaZaKumulativ } from "@/lib/donacija-pravila";
 // (bez Prisme, jer ih uvozi i ekran u pretraživaču). Ovde se re-eksportuju, pa
 // server ima jedan ulaz — isti obrazac kao kod donacija.
 export {
-  KOEFICIJENT_POKROVITELJSTVA,
   MINIMUM_PRIJAVE_POKROVITELJSTVA,
   nivoPokroviteljstvaZaKumulativ,
   tabelaPokroviteljstvaZaPrikaz,
 } from "@/lib/donacija-pravila";
 
 /**
- * Evidentira doprinos pokrovitelja i emituje POEN vlasniku po KOEFICIJENTNOM
- * modelu (čl. 10, od 2026-09-08).
+ * Evidentira doprinos pokrovitelja i emituje POEN po ISTOJ tabeli kao donacija
+ * fizičkog lica (čl. 10, set 4.6.8). Nivo se računa iz kumulativa firme (po
+ * PIB-u), odvojeno od ličnih donacija onoga ko POEN prima.
  *
- * 🔴 Do ove izmene je model bio fiksan bonus po nivou, uz zbir svih novodostignutih
- * nivoa. To je davalo dva kvara odjednom: do milion dinara pokroviteljstvo je
- * plaćalo 60–92% više po dinaru od lične donacije, a preko miliona ništa (tabela
- * je imala sedam nivoa i staja­la). Sada je koeficijent uvek tačno 20% veći od
- * koeficijenta donacije za isti kumulativ, i primenjuje se na CELU novu donaciju.
+ * 🔴 POEN dobija JEDNO lice — ono koje je podnelo prijavu (čl. 11, odluka vlasnika
+ * 2026-10-17), ne `Pokrovitelj.vlasnik` upisan pri prvoj prijavi. Doprinos se ne
+ * raspoređuje na više vlasnika. `primalacId` izostaje samo kod ručnog upisa iz
+ * admin panela, koji nema prijavu; tada POEN ide upisanom vlasniku.
  *
- * 🔴 Već evidentiran POEN po ranijoj tabeli se NE poništava, a kumulativ se
- * prenosi i dalje služi kao osnov za nivo (prelazna odredba čl. 10).
+ * 🔴 Već evidentiran POEN po ranijoj tabeli (fiksni bonusi do 2026-09-08, pa
+ * uvećanje od 20% do 4.6.8) se NE poništava (prelazna odredba čl. 10).
  */
 export async function evidentirajDoprinos(params: {
   pokroviteljId: string;
@@ -33,6 +32,7 @@ export async function evidentirajDoprinos(params: {
   tip: VrstaDonacije;
   evidentiraoId: string;
   napomena?: string;
+  primalacId?: string;
 }) {
   const { pokroviteljId, rsdIznos, tip, evidentiraoId, napomena } = params;
 
@@ -42,6 +42,12 @@ export async function evidentirajDoprinos(params: {
       where: { id: pokroviteljId },
       include: { vlasnik: { include: { wallet: true } } },
     });
+    const primalac = params.primalacId
+      ? await tx.user.findUniqueOrThrow({
+          where: { id: params.primalacId },
+          include: { wallet: true },
+        })
+      : pokrovitelj.vlasnik;
 
     const stariKumulativ = Number(pokrovitelj.rsdKumulativ);
     const noviKumulativ = stariKumulativ + rsdIznos;
@@ -76,7 +82,7 @@ export async function evidentirajDoprinos(params: {
       const bonus = await tx.pokroviteljBonusEmisija.create({
         data: {
           pokroviteljId,
-          vlasnikId: pokrovitelj.vlasnikId,
+          vlasnikId: primalac.id,
           nivo: noviNivo,
           bonusPoen,
         },
@@ -86,8 +92,8 @@ export async function evidentirajDoprinos(params: {
 
     return {
       noviNivoi,
-      vlasnikWalletId: pokrovitelj.vlasnik.wallet!.id,
-      vlasnikId: pokrovitelj.vlasnikId,
+      vlasnikWalletId: primalac.wallet!.id,
+      vlasnikId: primalac.id,
     };
   });
 
@@ -111,13 +117,13 @@ export async function evidentirajDoprinos(params: {
     }
 
     // Pokroviteljstvo je jedan od četiri traga učešća koji otključavaju POEN po potvrdi
-    // (dokaz stvarnosti čl. 7). Doprinos se evidentira u zapisu vlasnika odnosno
-    // preduzetnika koji je prijavu podneo (donacije čl. 11), pa se i uslov meri njemu.
+    // (dokaz stvarnosti čl. 7). Doprinos se evidentira u zapisu onoga ko je prijavu
+    // podneo (donacije čl. 11), pa se i uslov meri njemu.
     // Ne baca: doprinos je već evidentiran.
     await probajEvidentiratiPotvrde(vlasnikId);
   }
 
-  return { noviNivoi };
+  return { noviNivoi, primalacId: vlasnikId };
 }
 
 /**
@@ -151,7 +157,7 @@ export function generisiUgovorTekst(p: {
 /**
  * Potvrda prijema doprinosa (čl. 8). Pronalazi ili registruje pokrovitelja
  * (pravno lice ili preduzetnik) po PIB-u,
- * evidentira doprinos i emituje bonus POEN prema dostignutim nivoima (čl. 10).
+ * evidentira doprinos i emituje POEN podnosiocu prijave (čl. 10 i 11).
  * Mora biti pozvana van prisma.$transaction (zbog emitujPoen).
  */
 export async function potvrdiPrijavu(prijavaId: string, adminId: string) {
@@ -173,12 +179,13 @@ export async function potvrdiPrijavu(prijavaId: string, adminId: string) {
     });
   }
 
-  const { noviNivoi } = await evidentirajDoprinos({
+  const { noviNivoi, primalacId } = await evidentirajDoprinos({
     pokroviteljId: pokrovitelj.id,
     rsdIznos: Number(prijava.vrednostRsd),
     tip: prijava.vrstaDonacije,
     evidentiraoId: adminId,
     napomena: `Prijava pokroviteljstva ${prijava.id}`,
+    primalacId: prijava.podnosilacId,
   });
 
   await prisma.pokroviteljPrijava.update({
@@ -192,7 +199,7 @@ export async function potvrdiPrijavu(prijavaId: string, adminId: string) {
   });
 
   const bonus = noviNivoi.reduce((s, n) => s + n.bonusPoen, 0);
-  return { noviNivoi, bonus, vlasnikId: pokrovitelj.vlasnikId, pokroviteljId: pokrovitelj.id };
+  return { noviNivoi, bonus, vlasnikId: primalacId, pokroviteljId: pokrovitelj.id };
 }
 
 /**

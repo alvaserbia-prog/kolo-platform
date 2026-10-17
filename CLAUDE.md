@@ -81,6 +81,8 @@ usput. Uz svaku stoji razlog, jer razlog sprečava da se predlog vrati u drugom 
 - **Vraćanje dinarskog troška u tabelu sa brojem POEN-a po delu** — odnos se tada dobija deljenjem.
 - **Humanitarna nabavka** (red po potrebi, bez praga od 20.000 POEN) — *„Ne radimo takve nabavke."*
 - **Sopstveni KYC za velike donacije** — identifikaciju uplatioca sprovodi banka.
+- **Uvećan koeficijent po pravnom obliku davaoca** (×1,20 ukinut 17.10.2026) — nagrađivao je jeftiniji put; teza „firma plaća porez, fizičko lice ne" je obrnuta. Pun zapis: `docs/sprovodjenje-rizika-2026-09.md`.
+- **Prednost donatoru ili pokrovitelju u izboru ponude u nabavci** — protivčinidba; učestvuje ravnopravno (donacije čl. 13).
 - **Izravnat koeficijent / fiksan iznos po nivou donacije** — *„hoću da favorizujem velike donacije."* 🔴 Ali se **tako ne piše** u aktima, FAQ-u ni copy-ju: stoji „veći pojedinačan doprinos ima veći značaj za zajednicu", nikad opis podsticaja.
 
 ### Podaci o ličnosti
@@ -196,7 +198,7 @@ Pun tekst tabele sa napomenama i obrazloženja: `docs/sprovodjenje-rizika-2026-0
 | Gornje Kolo je telo, ne organ | odluka se upućuje UO, koji ne ceni celishodnost; odbija samo po zatvorenoj listi (čl. 51). Dinarska strana ostaje preporuka |
 | Operativni doprinos nema naručioca | u Fazi 1 Fondacija objavljuje **u ime zajednice**; POEN se ne izražava kao vrednost vremena rada |
 | Osnivački doprinos | udeo osnivača raste na ~24%, objavljeno; pravilnik ne obećava postupnost |
-| Pokroviteljstvo | koeficijent = donacija × **1,20**, obrazložen **odricanjem**; pokrovitelj ne stiče pravo na logotip ni promociju; samo novac, min. 10.000 RSD |
+| Pokroviteljstvo | **ista tabela kao donacija** (set 4.6.8); zbir firme i lični zbir odvojeni; POEN samo podnosiocu prijave; pokrovitelj ne stiče pravo na logotip, promociju ni prednost u nabavci; samo novac, min. 10.000 RSD |
 | Donacije | tabela se nastavlja **bez kraja** (1–2–5, +0,10); `RANG_TABELA` je samo zaključan deo, prag se računa (`pragZaNivo`). Prag nivoa 1 je 0. Ugovor za svaku donaciju, tekst se snima |
 | Nelojalna praksa (Uslovi čl. 22b) | Fondacija ne nastupa na tržištu; maloletnik ne nudi ograničena dobra ni van oglasa |
 | Prigovor (Uslovi čl. 37a) | jedan institut, devet vrsta, 3 otvorena **po vrsti**. Ispravka evidencije **nije povraćaj**. Ulaz je profil; dugme uz prepis se **ne vraća** |

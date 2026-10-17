@@ -19,7 +19,7 @@
 | **Data Protection Officer (DPO)** | Not appointed (Privacy Policy, Article 1). Data protection contact: privatnost@ekolo.rs |
 | **Date of preparation** | 23.05.2026. (last amended 03.10.2026.) |
 | **Subject of assessment** | KOLO system — Phase 1, active processing activities no. 1–18, including the activated Module 3 (Social Programs with verifier confirmation), Integrity Monitoring of the Verification System, the public list of donations, the supervision case, the exchange contribution path, and the **activated Module 4 — Children (activity no. 11)** |
-| **Related documents** | Rulebook on the KOLO System (v4.6.6), Privacy Policy (v4.6.8), Records of Processing Activities (v4.6.8), Terms of Use (v4.6.8), Rulebook on Support Programmes (v4.6.7), Rulebook on the Hierarchy of Acts (v4.6.8), Statute (v4.1), Whitepaper (v4.6.2) |
+| **Related documents** | Rulebook on the KOLO System (v4.6.6), Privacy Policy (v4.6.8), Records of Processing Activities (v4.6.8), Terms of Use (v4.6.8), Rulebook on Support Programmes (v4.6.7), Rulebook on the Hierarchy of Acts (v4.6.8), Statute (v4.1), Whitepaper (v4.6.8) |
 | **Next review** | Upon amendment of the social program confirmation mechanism, upon amendment of the rules of the children's space, or at the latest 12 months from the last amendment |
 
 This data protection impact assessment (hereinafter: DPIA) is prepared in accordance with Art. 54 of the Law on Personal Data Protection ("Official Gazette of the RS", no. 87/2018, hereinafter: LPDP). The DPIA is based on the provisions of Chapter IX of the Rulebook on the KOLO System (Art. 60–67), the Privacy Policy of the KOLO Platform, and the Records of Processing Activities of Personal Data.

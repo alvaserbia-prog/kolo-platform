@@ -1087,7 +1087,7 @@
     },
     "whitepaper": {
       "naslov": "KOLO Whitepaper",
-      "ver": "4.6.2"
+      "ver": "4.6.8"
     },
     "pravilnik": {
       "naslov": "Pravilnici KOLO sistema",
@@ -1123,7 +1123,7 @@
     "meta_rizici_title": "Izjava o prihvatanju rizika · KOLO",
     "meta_rizici_desc": "Izjava o prihvatanju rizika učešća u KOLO sistemu, verzija 4.6.8",
     "meta_whitepaper_title": "Whitepaper · KOLO",
-    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.2",
+    "meta_whitepaper_desc": "KOLO Whitepaper, verzija 4.6.8",
     "meta_pravilnik_title": "Pravilnici KOLO sistema · KOLO",
     "meta_pravilnik_desc": "Indeks pravilnika KOLO sistema, verzija 4.6.6",
     "rb": {
@@ -1141,7 +1141,7 @@
       },
       "pokroviteljstvo-donacije": {
         "naziv": "Pravilnik o pokroviteljstvu i donacijama",
-        "opis": "Donacije fizičkih lica (11 nivoa, koeficijent 1,00–2,00) i pokroviteljstvo pravnih lica i preduzetnika (7 nivoa, prag 10.000 RSD)."
+        "opis": "Kako se evidentira doprinos donatora i pokrovitelja: jedinstvena tabela koeficijenata za fizička i pravna lica, prag pokroviteljstva od 10.000 RSD i odvojena evidencija ličnih donacija i donacija firme."
       },
       "operativni": {
         "naziv": "Pravilnik o operativnom doprinosu",
@@ -1284,7 +1284,7 @@
     "primer_most": "Na početku se nisu poznavali. Sad su u istom krugu.",
     "primer_napomena_bold": "POEN nije novac.",
     "primer_napomena_1": "To je zapis o tome šta je ko dao zajednici.",
-    "primer_napomena_2": "Iznos u POENIMA predlaže onaj ko postavlja oglas, a dogovaraju ga dve strane. Fondacija nijedan odnos POEN-a prema dinaru ne objavljuje, ne preporučuje i ni u jednom svom postupku ne primenjuje. POEN se ne kupuje za dinare i ne menja za dinare.",
+    "primer_napomena_2": "Iznos u POENIMA predlaže onaj ko postavlja oglas, a dogovaraju ga dve strane. Fondacija ne objavljuje i ne preporučuje nijedan odnos po kome bi se POEN menjao za dinare, niti dinari za POEN. Doprinos donatora evidentira se po javnom pravilniku, jednosmerno i bez ikakvog potraživanja prema Fondaciji. POEN se ne kupuje za dinare i ne menja za dinare.",
     "kako_funkcionise_naslov": "Kako funkcioniše, ukratko",
     "kako_funkcionise_link": "Detaljno objašnjenje",
     "kako_funkcionise_link_postupak": "Ceo postupak, korak po korak",
@@ -1738,11 +1738,11 @@
     "n7_opis": "Priznanje osnivačima za ono što je uloženo pre nego što je sistem uopšte postojao: godine razvoja koncepta i dokumentacije, izrada platforme i materijalni troškovi koje su sami snosili, bez ijednog dinara naknade.",
     "n7_iznos": "do 2.400.000 POENA",
     "n6_naslov": "Donacija Fondaciji",
-    "n6_opis": "Doniraš novac Fondaciji, a Protokol ti upisuje POEN po koeficijentu koji raste sa tvojim ukupnim doprinosom.\nPOEN iz donacije ne daje vlasništvo, ne pretvara se u novac i ne kupuje glasove.",
-    "n6_iznos": "11 nivoa · do 2,00×",
+    "n6_opis": "Doniraš novac Fondaciji, a Protokol po javnom pravilniku evidentira tvoj doprinos u POENIMA, po koeficijentu koji raste sa ukupnim iznosom tvojih donacija.\nEvidencija je jednosmerna: POEN se ne vraća u dinare, ne daje vlasništvo ni potraživanje prema Fondaciji i ne kupuje glasove.",
+    "n6_iznos": "koeficijent od 1,00×",
     "n5_naslov": "Pokroviteljstvo",
-    "n5_opis": "Pravno lice ili preduzetnik, firma, udruženje ili radnja, potpisuje sa Fondacijom ugovor o donaciji u novcu, robi ili uslugama. Priznanje se upisuje vlasniku koji je redovan član, odnosno samom preduzetniku, po tabeli sa sedam nivoa.",
-    "n5_iznos": "7 nivoa · prag 10.000 RSD",
+    "n5_opis": "Pravno lice ili preduzetnik (firma ili radnja) potpisuje sa Fondacijom ugovor o donaciji u novcu. Doprinos se evidentira u zapisu člana koji je podneo prijavu, po istoj tabeli kao kod ličnih donacija. Donacije firme i lične donacije vlasnika vode se odvojeno.",
+    "n5_iznos": "prag 10.000 RSD",
     "n4_naslov": "Socijalni programi",
     "n4_opis": "Programi za majke i staratelje, starije, posebnu podršku i školovanje, u kojima se odobrenim korisnicima POEN upisuje svakog dana. Ovo nije socijalna pomoć u smislu propisa i ne utiče na prava koja ostvaruješ kod države.",
     "n4_iznos": "dnevna evidencija",
@@ -1758,9 +1758,9 @@
   },
   "pokroviteljPage": {
     "meta_title": "Pokrovitelji · KOLO",
-    "meta_desc": "Pokrovitelji KOLO zajednice, pravna lica i preduzetnici koji doprinosom Fondaciji (novac, roba ili usluge) podržavaju sistem. Pregled aktivnih pokrovitelja i njihovih nivoa.",
+    "meta_desc": "Pokrovitelji KOLO zajednice, pravna lica i preduzetnici koji doprinosom Fondaciji u novcu podržavaju sistem. Pregled aktivnih pokrovitelja i njihovih nivoa.",
     "naslov": "Pokrovitelji",
-    "opis": "Pokrovitelji su pravna lica i preduzetnici koji doprinosom Fondaciji (u novcu, robi ili uslugama) podržavaju KOLO sistem.",
+    "opis": "Pokrovitelji su pravna lica i preduzetnici koji doprinosom Fondaciji u novcu podržavaju KOLO sistem.",
     "nivo": "Nivo",
     "prazno_naslov": "Još nema registrovanih pokrovitelja.",
     "postani_naslov": "Postanite pokrovitelj",
@@ -2010,9 +2010,9 @@
     "verifikacija_potrebna": "Potrebna je potvrda stvarnosti",
     "verifikacija_opis": "Za vlasnika pokrovitelja potrebno je da te neko potvrdi.",
     "verifikacija_link": "Postani redovan član →",
-    "nivoi_naslov": "Nivoi pokroviteljstva i koeficijent (čl. 10)",
+    "nivoi_naslov": "Nivoi i koeficijent (čl. 4 i 10)",
     "nivo_red": "Nivo {nivo}: {rsd} RSD kumulativno",
-    "nivoi_napomena": "Koeficijent je za dvadeset odsto veći od koeficijenta donacija fizičkih lica i primenjuje se na celu novu donaciju. Tabela se nastavlja bez ograničenja. Najmanja prijava je 10.000 RSD.",
+    "nivoi_napomena": "Pokroviteljstvo ide po istoj tabeli kao donacija fizičkog lica. Nivo se računa iz zbira donacija firme, odvojeno od tvojih ličnih donacija, a koeficijent novodostignutog nivoa primenjuje se na celu novu donaciju. Tabela se nastavlja bez ograničenja. Najmanja prijava je 10.000 RSD.",
     "ranglista_naslov": "Rang-lista pokrovitelja",
     "ranglista_prazno": "Još nema registrovanih pokrovitelja.",
     "nivo_oznaka": "Nivo {n}",

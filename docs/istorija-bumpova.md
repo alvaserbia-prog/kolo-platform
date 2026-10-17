@@ -19,6 +19,20 @@
 
 ---
 
+**AŽURIRANO 2026-10-17:** set **4.6.8** (još neobjavljen) dopunjen je bez nove
+šifre (pouka 2): Pravilnik o pokroviteljstvu i donacijama ostaje `donacije_4_6_8`, a
+**whitepaper prelazi sa 4.6.2 na 4.6.8**, jer je 4.6.2 bio objavljen i ponavljao staro
+pravilo (krajnji stvarni vlasnik, raspodela po udelima, roba i usluge, „podsticaji
+pokrovitelja"). Povod: ukidanje uvećanja od 20% za pokroviteljstvo (vidi
+`docs/sprovodjenje-rizika-2026-09.md`, „Pokroviteljstvo po istoj tabeli").
+- **Glavni Pravilnik NIJE diran** — nema novog osnova upisa, kanala ni trenutka
+  upisa; njegovo upućivanje na poseban pravilnik za stvarnog vlasnika ostaje
+  ispunjeno čl. 11 akta o donacijama.
+- Unakrsno upućivanje „Whitepaper (v4.6.2)" ispravljeno samo u DPIA 4.6.8 (objavljuje
+  se istim potezom), pozicijski.
+
+---
+
 **AŽURIRANO 2026-10-03:** na **4.6.8** ide **SEDAM akata** — Pravilnik o
 pokroviteljstvu i donacijama (sa 4.5.8), Uslovi korišćenja (sa 4.6.6), Politika
 privatnosti (sa 4.6.7), Registar radnji obrade (sa 4.6.7), DPIA (sa 4.6.7), Izjava o

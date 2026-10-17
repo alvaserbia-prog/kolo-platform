@@ -34,7 +34,7 @@ const AKTI = [
   "uslovi_koriscenja_4_6_8.md",
   "politika_4_6_8.md",
   "statut_4_1_0.md",
-  "whitepaper_4_6_2.md",
+  "whitepaper_4_6_8.md",
   "rizici_4_6_8.md",
   "hijerarhija_4_6_8.md",
   "donacije_4_6_8.md",
@@ -65,7 +65,7 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
   // 🔴 Whitepaper je dokument koji spoljni čitalac — i regulator — otvara prvi, pa
   // je uz R-04 morao uz Pravilnik. Do 4.6.1 je na dva mesta sam nazivao razliku u
   // koeficijentu PODSTICAJEM, a u odeljku 6.4 tvrdio da upis ZRNA diže koeficijent.
-  "whitepaper_4_6_2.md": {
+  "whitepaper_4_6_8.md": {
     sr: [
       "Upis i otpis ZRNA takođe ne pomeraju koeficijent",
       "Koeficijent, dakle, nije monoton i nije predodređen da raste",
@@ -799,16 +799,19 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "bila bi upis koji se ne može proveriti",
       // 🔴 Pokroviteljstvo (čl. 6, 7, 10, 11, 13). Roba i usluge su UKINUTE —
       // iznos je kucao korisnik, cenovnik je bio slika bez stavki i primopredaje.
-      // Koeficijent je izvod iz čl. 4 (× 1,20), pa se dve lestvice ne mogu razići.
+      // 🔴 4.6.8 — ista tabela kao donacija fizičkog lica, BEZ uvećanja od 20%
+      // (premija po pravnom obliku nagrađivala je jeftiniji put i prelazila u glas).
+      // Zbir firme i lični zbir se ne sabiraju; upis ide JEDNOM licu, podnosiocu.
       // Javno imenovanje sme, ali PRAVO na promociju je sponzorstvo.
       "donacija novca pravnog lica ili preduzetnika",
-      "uvećanom za dvadeset odsto",
+      "sa istim nivoima i istim koeficijentima evidencije kao donacija fizičkog lica",
+      "Pravni oblik davaoca ne utiče na koeficijent evidencije",
+      "vode se odvojeno i ne sabiraju se",
+      "ne raspoređuje se na druge vlasnike",
+      // Odluka vlasnika 2026-10-17: donator nema prednost u izboru ponude.
+      "ne daju prednost u izboru ponude u kolektivnoj nabavci",
       "Najmanji iznos prijave pokroviteljstva je 10.000 dinara",
       "Tabela se nastavlja bez ograničenja",
-      // Obrazloženje razlike od 20% (čl. 10). Bez njega je viši koeficijent
-      // za pravno lice gola prednost po pravnoj formi.
-      "nije podsticaj za određeni pravni oblik davaoca",
-      "u meri u kojoj se po poreskim propisima ne priznaje kao rashod, na nju se plaća porez na dobit",
       "nije raspodela dobiti",
       "ne stiče pravo na objavljivanje logotipa",
       "Javno priznanje je akt Fondacije, a ne protivčinidba",
@@ -843,11 +846,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "permanent recognition of a deed performed, not an acquired status",
       "recording that cannot be verified",
       "a donation of money by a legal entity",
-      "increased by twenty percent",
+      "with the same tiers and the same recording coefficients as a donation by a natural person",
+      "The legal form of the giver does not affect the recording coefficient",
+      "is not distributed among other owners",
+      "gives any advantage in the selection of an offer in a collective procurement",
       "minimum amount of a sponsorship application is 10,000 dinars",
       "The table continues without limit",
-      "is neither an incentive for a particular legal form of the giver",
-      "not recognised as an expense under tax regulations, tax on profit is payable on it",
       "is not a distribution of profit",
       "no right to the publication of a logo",
       "Public recognition is an act of the Foundation, not a counter-performance",
@@ -867,11 +871,12 @@ const UVEDENO: Record<string, Record<string, string[]>> = {
       "постоянное признание совершённого дела, а не приобретённый статус",
       "записью, которую невозможно проверить",
       "денежное пожертвование юридическим лицом",
-      "увеличенному на двадцать процентов",
+      "с теми же уровнями и теми же коэффициентами учёта, что и пожертвование физического лица",
+      "Правовая форма дарителя не влияет на коэффициент учёта",
+      "не распределяется между другими владельцами",
+      "не дают преимущества при выборе предложения в коллективной закупке",
       "Наименьшая сумма заявки на покровительство — 10 000 динаров",
       "Таблица продолжается без ограничения",
-      "не является ни стимулом для определённой правовой формы дарителя",
-      "не признаётся расходом, с него уплачивается налог на прибыль",
       "не является распределением прибыли",
       "не приобретает права на публикацию логотипа",
       "Публичное признание является актом Фонда, а не встречным предоставлением",
@@ -1383,11 +1388,13 @@ const UKINUTO: Record<string, RegExp[]> = {
   // naziva socijalnog programa uz pseudonim opisivala kao meru proverljivosti, a
   // naziv je posebna kategorija po ZZPL čl. 17. Vraćena, obarala bi i meru M-1 i
   // ocenu R11 u DPIA, i to bez ijednog vidljivog kvara.
-  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uslov\s+za\s+evidentiranje\s+POEN/i, /zapis\s+o\s+evidentiranom\s+POEN-u\s+nije\s+skriven/i, /Po\s+evidentiranju\s+verifikacionog\s+zapisa,?\s+Protokol\s+automatski\s+upisuje/i],
-  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i, /executive,?\s+not\s+governance/i, /is\s+not\s+social\s+assistance/i, /condition\s+for\s+the\s+recording\s+of\s+POEN/i, /record\s+of\s+POEN\s+recorded\s+is\s+not\s+hidden/i, /[Uu]pon\s+the\s+recording\s+of\s+a\s+verification\s+record,?\s+the\s+Protocol\s+automatically\s+enters/i],
-  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i, /исполнительной,?\s+а\s+не\s+управленческой/i, /не\s+является\s+социальной\s+помощью/i, /услови[ем]\s+учёта\s+ПОЕН/i, /Запись\s+об\s+учтённых\s+ПОЕН\s+не\s+скрыта/i, /По\s+учёту\s+верификационной\s+записи\s+Протокол\s+автоматически\s+вносит/i],
-  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+a\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uvjet\s+za\s+evidentiranje\s+POEN/i, /zapis\s+o\s+evidentiranom\s+POEN-u\s+nije\s+skriven/i, /Po\s+evidentiranju\s+verifikacijskog\s+zapisa\s+Protokol\s+automatski\s+upisuje/i],
-  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i, /végrehajtói,?\s+nem\s+irányítói/i, /nem\s+szociális\s+segély/i, /feltétele\s+a\s+POEN/i, /POEN\s+bejegyzése\s+nem\s+rejtett/i, /A\s+hitelesítési\s+bejegyzés\s+rögzítésével\s+a\s+Protokoll\s+automatikusan/i],
+  // 🔴 4.6.8 — uvećanje od 20% za pokroviteljstvo je ukinuto (čl. 10), a
+  // „krajnji stvarni vlasnik" nije izraz srpskog prava (kaže se „stvarni vlasnik").
+  sr: [/tabl[aeiou]\s+zahteva\s+za\s+jemstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jemstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uslov\s+za\s+evidentiranje\s+POEN/i, /zapis\s+o\s+evidentiranom\s+POEN-u\s+nije\s+skriven/i, /Po\s+evidentiranju\s+verifikacionog\s+zapisa,?\s+Protokol\s+automatski\s+upisuje/i, /uvećan\w*\s+za\s+dvadeset\s+odsto/i, /krajnj\w*\s+stvarn\w*\s+vlasnik/i],
+  en: [/guarantee\s+board/i, /recognition\s+card/i, /vouching\s+chain/i, /time\s+equivalents?/i, /executive,?\s+not\s+governance/i, /is\s+not\s+social\s+assistance/i, /condition\s+for\s+the\s+recording\s+of\s+POEN/i, /record\s+of\s+POEN\s+recorded\s+is\s+not\s+hidden/i, /[Uu]pon\s+the\s+recording\s+of\s+a\s+verification\s+record,?\s+the\s+Protocol\s+automatically\s+enters/i, /increased\s+by\s+twenty\s+percent/i, /ultimate\s+beneficial\s+owner/i],
+  ru: [/доск[аеиуой]\s+запросов/i, /карточк[аеиуой]\s+узнавания/i, /цепочк[аеиуой]\s+поручительства/i, /временн[оы]́?й\s+эквивалент/i, /исполнительной,?\s+а\s+не\s+управленческой/i, /не\s+является\s+социальной\s+помощью/i, /услови[ем]\s+учёта\s+ПОЕН/i, /Запись\s+об\s+учтённых\s+ПОЕН\s+не\s+скрыта/i, /По\s+учёту\s+верификационной\s+записи\s+Протокол\s+автоматически\s+вносит/i, /увеличенн\w*\s+на\s+двадцать\s+процентов/i, /конечн\w*\s+фактическ\w*\s+владел/i],
+  hr: [/ploč[aeiu]\s+zahtjeva\s+za\s+jamstvo/i, /kartic[aeiou]\s+prepoznavanja/i, /lanc[aeu]\s+jamstva/i, /vremensk[aeiou]+\s+ekvivalent/i, /izvršna,?\s+a\s+ne\s+upravljačka/i, /nije\s+socijalna\s+pomoć/i, /uvjet\s+za\s+evidentiranje\s+POEN/i, /zapis\s+o\s+evidentiranom\s+POEN-u\s+nije\s+skriven/i, /Po\s+evidentiranju\s+verifikacijskog\s+zapisa\s+Protokol\s+automatski\s+upisuje/i, /uvećan\w*\s+za\s+dvadeset\s+posto/i, /krajnj\w*\s+stvarn\w*\s+vlasnik/i],
+  hu: [/kezességi\s+kérelmek\s+tábláj/i, /felismerési\s+kártya/i, /kezességi\s+lánc/i, /időbeli\s+egyenérték/i, /végrehajtói,?\s+nem\s+irányítói/i, /nem\s+szociális\s+segély/i, /feltétele\s+a\s+POEN/i, /POEN\s+bejegyzése\s+nem\s+rejtett/i, /A\s+hitelesítési\s+bejegyzés\s+rögzítésével\s+a\s+Protokoll\s+automatikusan/i, /húsz\s+százalékkal\s+növel/i, /végső\s+tényleges\s+tulajdonos/i],
 };
 
 /** Napomene o izmeni namerno pominju ukinutu tablu — one se izuzimaju iz provere. */

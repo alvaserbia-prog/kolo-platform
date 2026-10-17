@@ -787,7 +787,7 @@ Fondacija na zahtev izdaje potvrdu o donaciji u skladu sa zakonom.`,
         pitanje: `Šta su Pokrovitelji i koja je razlika u odnosu na donaciju?`,
         odgovor: `Pokrovitelji su pravna lica i preduzetnici koji novčano podržavaju rad Fondacije.
 
-Pokrovitelj nema sopstveni nalog: POEN se upisuje na nalog vlasnika ili zakonskog zastupnika koji je redovan član, odnosno samog preduzetnika. Obračun je isti kao kod donacija — iznos × koeficijent evidencije — samo je koeficijent za dvadeset odsto veći. Najmanja prijava je 10.000 RSD.
+Pokrovitelj nema sopstveni nalog: POEN se upisuje na nalog člana koji je podneo prijavu, vlasnika ili zakonskog zastupnika koji je redovan član, odnosno samog preduzetnika. Upisuje se samo njemu, i kad firma ima više vlasnika. Obračun i koeficijent su isti kao kod ličnih donacija, a zbir donacija firme vodi se odvojeno od tvojih ličnih donacija. Najmanja prijava je 10.000 RSD.
 
 Svi pokrovitelji javno su prikazani na stranici Pokrovitelji, radi transparentnosti i javnog priznanja doprinosa.`,
       },
@@ -796,7 +796,7 @@ Svi pokrovitelji javno su prikazani na stranici Pokrovitelji, radi transparentno
         pitanje: `Može li firma da bude direktni član?`,
         odgovor: `Ne. Direktni članovi su isključivo fizička lica. Nalog se otvara na čoveka, a stvarnost čoveka potvrđuje drugi čovek koji ga lično poznaje, firma se ne može potvrditi.
 
-Firme i preduzetnici učestvuju kroz Pokroviteljstvo: pravno lice ili preduzetnik potpisuje sa Fondacijom ugovor o donaciji novca, a POEN se upisuje vlasniku ili zakonskom zastupniku, ako je redovan član. Sama firma ne dobija POEN, jer nije član.
+Firme i preduzetnici učestvuju kroz Pokroviteljstvo: pravno lice ili preduzetnik potpisuje sa Fondacijom ugovor o donaciji novca, a POEN se upisuje članu koji je podneo prijavu, vlasniku ili zakonskom zastupniku, ako je redovan član. Sama firma ne dobija POEN, jer nije član.
 
 Vlasnik firme može, naravno, i sam biti član kao fizičko lice, nezavisno od pokroviteljstva.`,
       },

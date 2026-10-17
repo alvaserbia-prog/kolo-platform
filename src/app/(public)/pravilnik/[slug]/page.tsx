@@ -74,6 +74,9 @@ const PRAVILNICI: Record<string, { fajl: string; verzija: string }> = {
   // mora stajati i ovde, ne samo u pravilniku o nabavkama.
   // 4.6.8 — čl. 5a st. 4: ime uz javnu donaciju više NIJE trajno — donator povlači
   // pristanak po donaciji, a gašenje naloga ga briše; donacija ostaje u listi.
+  // Isti set (neobjavljen, šifra se ne menja) — čl. 10: pokroviteljstvo po istoj
+  // tabeli kao donacija, bez uvećanja od 20%; čl. 11: upis samo podnosiocu prijave;
+  // čl. 13: ni donacija ni pokroviteljstvo ne daju prednost u nabavci.
   "pokroviteljstvo-donacije": {
     fajl: "donacije_4_6_8.md",
     verzija: "4.6.8",

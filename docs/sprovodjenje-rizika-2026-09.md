@@ -426,6 +426,67 @@ u aktima ni u copy-ju da je Fondacija „oslobođena poreza" kao svojstvo — to
 za potvrdu od pravnice, i njegov odgovor počiva na istoj besplatnosti davanja na kojoj
 stoji i čl. 19 Pravilnika o nabavkama.
 
+## 🔴 Pokroviteljstvo po istoj tabeli — uvećanje od 20% ukinuto (2026-10-17)
+
+Odluka vlasnika posle tri nezavisna mišljenja (pravno, ekonomsko, praktično), koja su
+se složila. Dopuna neobjavljenog seta 4.6.8 (čl. 1, 2, 8, 10, 11, 13, 15
+`donacije_4_6_8.md`, pet jezika) i whitepaper 4.6.2 → 4.6.8. **Prevazilazi deo sekcije
+ispod** koji govori o ×1,20 i o obrazloženju „odricanjem".
+
+**Zašto je ×1,20 pao:**
+- 🔴 **Teza „fizičko lice nema poreze, pravno ima" je obrnuta.** Fizičko lice daje iz
+  već oporezovanog dohotka (plata, odnosno dobit pa dividenda). Firmi koja rashod ne
+  može da prizna donacija košta tačno onoliko koliko je dala; kad ga prizna, 15% manje.
+  Vlasnika lično 100.000 RSD Fondaciji košta 100.000 iz džepa, ~85.000 preko firme bez
+  priznatog rashoda, ~72.250 sa priznatim — a premija je davala VIŠE POEN-a upravo
+  jeftinijem putu. Obrazloženje iz čl. 10 („odricanje veće od doniranog iznosa") nije
+  izdržalo poređenje sa fizičkim licem. Najgori slučaj: preduzetnik paušalac (+20% čisto).
+- Premija po pravnom obliku liči na različite cene za različite kupce (rizik digitalne
+  imovine), ubrzavala je osnivački kanal za 20% i prelazila u glas preko ZRNA (√1,2 ≈ +9,5%).
+- Odvojeni zbirovi **ne prave arbitražu**: lestvica raste sa kumulativom, pa ko deli
+  davanje na lično i preko firme dobija MANJE (300.000 RSD: 480.000 u jednom zbiru,
+  495.000 podeljeno, naspram 576.000 ranije preko firme). Zato zbirovi ostaju odvojeni.
+
+**Šta je odlučeno:**
+- 🔴 **Pokroviteljstvo ide po tabeli iz čl. 4**, isti nivoi i koeficijenti; pravni oblik
+  davaoca ne utiče na koeficijent. Ovo NIJE zabranjeni „izravnat koeficijent" —
+  progresija po veličini doprinosa ostaje, zajednička za oba oblika.
+- 🔴 **Zbir firme (po PIB-u) i lični zbir se vode odvojeno i ne sabiraju se.**
+- 🔴 **Upis ide JEDNOM licu — podnosiocu prijave** (odluka vlasnika: „neka se oni dele
+  kako hoće"). Ne raspoređuje se na više vlasnika. Tvrdnja whitepaper-a o raspodeli
+  srazmerno udelima nikad nije bila u kodu i brisana je. 🔴 Na sajtu i u aktima se
+  **ne piše** da vlasnici POEN dele među sobom — to bi opisivalo POEN kao raspodelu
+  dobiti firme, a čl. 11 kaže suprotno. Prepis je slobodan i bez toga.
+- 🟡 **Zakonski zastupnik koji nije vlasnik i dalje sme da podnese prijavu i prima
+  POEN** (čl. 7, nepromenjeno). Predlog da POEN ide samo stvarnom vlasniku nije
+  usvojen ni odbijen — otvoreno. Izraz je **„stvarni vlasnik"** (Zakon o Centralnoj
+  evidenciji stvarnih vlasnika, ZSPNFT), nikad „krajnji stvarni vlasnik" — brana u `UKINUTO`.
+- 🔴 **Ni donacija ni pokroviteljstvo ne daju prednost u izboru ponude u nabavci**
+  (čl. 13, nov stav). Prednost bi bila protivčinidba: donacija prestaje da bude
+  besplatna, Fondacija prima naknadu za uslugu (PDV, privredna delatnost, pada čl. 3a
+  nabavki), a šema „doniram pa prodam skuplje" je obrazac povratka novca. Donator
+  učestvuje ravnopravno; poziv na ponudu je isti za sve (nabavke čl. 15–16).
+- Roba i usluge ostaju ukinute (potvrđeno: knjiženje nije rešeno — davanje firme za
+  POEN je za nju promet bez naknade, PDV na nabavnu vrednost; pitanje za knjigovođu).
+- **Početna, napomena uz primer:** „Fondacija ne objavljuje i ne preporučuje nijedan
+  odnos po kome bi se POEN menjao za dinare, niti dinari za POEN. Doprinos donatora
+  evidentira se po javnom pravilniku, jednosmerno…" (izričit nalog vlasnika; „ne
+  primenjuje" je zamenjeno rečenicom o pravilniku, jer evidencija donacije JESTE iznos ×
+  koeficijent). „Ne objavljuje i ne preporučuje" ostaje — brana `r07`.
+
+**Kod:** `donacija-pravila.ts` (obrisani `KOEFICIJENT_POKROVITELJSTVA`,
+`koeficijentPokroviteljstvaZaNivo`, `POMERAJ_NIVOA_POKROVITELJSTVA`;
+`nivoPokroviteljstvaZaKumulativ` = `nivoZaKumulativ`), `pokrovitelj.ts` (`primalacId`
+= `prijava.podnosilacId`; ručni upis iz admin panela bez prijave i dalje ide upisanom
+vlasniku), migracija `20261017120000_pokrovitelj_nivo_jedinstvena_tabela` (zatečeni
+`trenutniNivo` u numeraciju čl. 4; istorijski `PokroviteljBonusEmisija.nivo` netaknut).
+Brane: `pokrovitelj.test.ts` (ista tabela, izvor bez množioca, pragovi migracije =
+`pragZaNivo`), `pravni-dokumenti.test.ts` (nove odredbe na sr/en/ru; `UKINUTO`:
+„uvećan za dvadeset odsto" i „krajnji stvarni vlasnik" na pet jezika).
+
+🔴 **Otvoreno za knjigovođu** (nepromenjeno): čl. 15 Zakona o porezu na dobit, i da li
+upis POEN-a podnosiocu ugrožava priznanje rashoda firmi.
+
 ## 🔴 Tabele donacija i pokroviteljstva — koeficijentni model bez plafona (2026-09-08)
 
 Odluka vlasnika, doneta u drugoj sesiji i preneta ovamo kao samostalan nalog.

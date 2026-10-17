@@ -128,14 +128,6 @@ export const RANG_TABELA: { nivo: number; do: number; kurs: number }[] = [
 /** Korak koeficijenta po nivou (čl. 4). */
 export const KORAK_KOEFICIJENTA = 0.1;
 
-/**
- * 🔴 Koeficijent pokroviteljstva = koeficijent donacije × 1,20 (čl. 10, od
- * 2026-09-08). Nije zasebna tabela nego IZVOD iz čl. 4 — dve lestvice se time
- * ne mogu razići pri sledećoj izmeni, što je i bio razlog izmene: fiksni bonusi
- * su davali 1,67–1,92× više po dinaru do milion, a preko miliona ništa.
- */
-export const KOEFICIJENT_POKROVITELJSTVA = 1.2;
-
 /** Najmanji iznos prijave pokroviteljstva (čl. 7) — ispod toga ugovor košta više. */
 export const MINIMUM_PRIJAVE_POKROVITELJSTVA = 10_000;
 
@@ -159,11 +151,6 @@ export function koeficijentZaNivo(nivo: number): number {
   return (100 + (Math.max(1, nivo) - 1) * 10) / 100;
 }
 
-/** Koeficijent pokroviteljstva za dati nivo — donacija × 1,20, tačno u stotinkama. */
-export function koeficijentPokroviteljstvaZaNivo(nivo: number): number {
-  const cent = 100 + (Math.max(1, nivo) - 1) * 10;
-  return Math.round((cent * 12) / 10) / 100;
-}
 
 
 /**
@@ -181,39 +168,33 @@ export function nivoZaKumulativ(kumulativRSD: number): { nivo: number; kurs: num
 }
 
 /**
- * Nivo i koeficijent pokroviteljstva za dati kumulativ (čl. 10).
+ * 🔴 Pokroviteljstvo ide po ISTOJ tabeli kao donacija fizičkog lica (čl. 10, set
+ * 4.6.8, odluka vlasnika 2026-10-17). Uvećanje od 20% je ukinuto: premija po
+ * pravnom obliku davaoca nagrađivala je jeftiniji put (donacija firme vlasnika
+ * lično košta manje od lične donacije, priznat rashod ili ne), ubrzavala je
+ * osnivački kanal i prelazila u glas preko ZRNA. Obrazloženje „odricanjem" nije
+ * izdržalo poređenje sa fizičkim licem, koje takođe daje iz oporezovanog novca.
  *
- * Numeracija nivoa pokroviteljstva počinje od najmanje prijave (10.000 RSD), pa
- * je pomerena za dva u odnosu na nivoe donacija: nivo 1 pokroviteljstva = nivo 3
- * donacija. 🟢 Zatečeni `Pokrovitelj.trenutniNivo` (1–7 po staroj fiksnoj tabeli)
- * time OSTAJE tačan — stari pragovi 10.000…1.000.000 daju iste brojeve 1…7, pa
- * prelazak na koeficijentni model ne traži migraciju brojeva nivoa.
+ * Nivo se vodi POSEBNO po davaocu — firma po PIB-u (`Pokrovitelj.rsdKumulativ`),
+ * čovek po svom nalogu — i dva zbira se ne sabiraju. Deljenje davanja na dva
+ * zbira ne donosi više POEN-a nego jedan zbir (lestvica raste sa kumulativom).
+ *
+ * Numeracija nivoa je ista kao kod donacija (10.000 RSD = nivo 3). Zatečeni
+ * `Pokrovitelj.trenutniNivo` iz pomerene numeracije prevodi migracija
+ * `20261017120000_pokrovitelj_nivo_jedinstvena_tabela`.
  */
-export const POMERAJ_NIVOA_POKROVITELJSTVA = 2;
-
 export function nivoPokroviteljstvaZaKumulativ(kumulativRSD: number): {
   nivo: number;
   kurs: number;
 } {
-  const { nivo } = nivoZaKumulativ(kumulativRSD);
-  return {
-    nivo: Math.max(1, nivo - POMERAJ_NIVOA_POKROVITELJSTVA),
-    kurs: koeficijentPokroviteljstvaZaNivo(nivo),
-  };
+  return nivoZaKumulativ(kumulativRSD);
 }
 
-/** Redovi Tabele B za prikaz (čl. 10) — počinju od najmanje prijave. */
+/** Redovi tabele iz čl. 4 za ekran pokroviteljstva — od najmanje prijave naviše. */
 export function tabelaPokroviteljstvaZaPrikaz(
-  doNivoa = 12
+  doNivoa = 14
 ): { nivo: number; do: number; kurs: number }[] {
-  return Array.from({ length: doNivoa }, (_, i) => {
-    const nivoDonacije = i + 1 + POMERAJ_NIVOA_POKROVITELJSTVA;
-    return {
-      nivo: i + 1,
-      do: pragZaNivo(nivoDonacije),
-      kurs: koeficijentPokroviteljstvaZaNivo(nivoDonacije),
-    };
-  });
+  return tabelaZaPrikaz(doNivoa).filter((r) => r.do >= MINIMUM_PRIJAVE_POKROVITELJSTVA);
 }
 
 /**

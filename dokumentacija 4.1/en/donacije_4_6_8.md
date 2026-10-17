@@ -6,17 +6,15 @@
 
 ### Article 1 — Subject matter
 
-This Rulebook governs the parameters for recording financial contributions in the KOLO system, specifically: donation tiers for natural persons and the donation recording coefficient, the initiation and confirmation of sponsorship recording for legal entities, sponsorship tiers and the sponsorship recording coefficient, and the sponsor ranking list.
+This Rulebook governs the parameters for recording financial contributions in the KOLO system, specifically: donation tiers for natural persons and the donation recording coefficient, the initiation and confirmation of sponsorship recording for legal entities, the recording of sponsors' contributions under the same table, and the sponsor ranking list.
 
 ### Article 2 — Definitions
 
 Terms used in this Rulebook have the meaning established in the KOLO System Rulebook. In addition, the following terms are used in this Rulebook:
 
-**Donation recording coefficient** — the number by which a donor's recorded contribution is increased when determining the number of POEN. It is determined by the donation tier. It is not a price, not an exchange rate, and not an accounting coefficient within the meaning of the KOLO System Rulebook.
+**Donation recording coefficient** — the number by which the recorded contribution of a donor, whether a natural person or a sponsor, is increased when determining the number of POEN. It is determined by the donation tier. It is not a price, not an exchange rate, and not an accounting coefficient within the meaning of the KOLO System Rulebook.
 
 **Donation tier** — the level of a donor's cumulative contribution that determines the donation recording coefficient.
-
-**Sponsorship tier** — the level of a sponsor's cumulative contribution that determines the sponsorship recording coefficient.
 
 **Sponsor's cumulative contribution** — the sum of all confirmed monetary contributions by the sponsor up to a given moment.
 
@@ -133,7 +131,7 @@ Upon submission of the application, the platform automatically generates a donat
 
 The user signs the generated donation agreement on behalf of the legal entity or entrepreneur. The method of signing is established by a separate decision of the Foundation in accordance with the applicable accounting and tax regulations. The donation is performed by payment into the Foundation account.
 
-Upon receipt of the donation, the Foundation confirms receipt on the platform. Following confirmation, the Protocol records POEN in the user's record according to the tiers set out in Article 10 of this Rulebook.
+Upon receipt of the donation, the Foundation confirms receipt on the platform. Following confirmation, the Protocol records POEN in the user's record in accordance with Article 10 of this Rulebook.
 
 If the donation has not been received or the value does not correspond, the Foundation rejects the confirmation with reasons. The user may submit a new application.
 
@@ -143,35 +141,21 @@ The Foundation maintains a sponsor register in which it records all confirmed ap
 
 On the basis of the register, the Foundation determines each sponsor's cumulative contribution by summing the values of all confirmed applications.
 
-### Article 10 — Sponsorship tiers and recording coefficient
+### Article 10 — Sponsorship recording coefficient
 
-The sponsorship recording coefficient equals the donation recording coefficient from Article 4 increased by twenty percent, for the same cumulative amount. The coefficient of the newly reached tier applies to the entire new donation.
+A sponsor's contribution is recorded under the table in Article 4 of this Rulebook, with the same tiers and the same recording coefficients as a donation by a natural person. The legal form of the giver does not affect the recording coefficient.
 
-The difference relative to the coefficient from Article 4 is neither an incentive for a particular legal form of the giver nor a consideration in return for the contribution. A donation by a legal entity or entrepreneur does not necessarily reduce the giver's tax base: to the extent that it is not recognised as an expense under tax regulations, tax on profit is payable on it. Such a donation may therefore constitute a sacrifice greater than the donated amount itself, which a donation by a natural person never is. That difference in the measure of sacrifice is expressed through the recording coefficient.
+The tier is determined on the basis of the sponsor's cumulative contribution and the new donation. The recording coefficient of the newly reached tier applies to the entire new donation. The number of POEN recorded equals the donation amount in dinars multiplied by that coefficient. The tier is cumulative and permanent.
 
-On the basis of the sponsor's cumulative contribution, the Protocol records POEN in the user's record according to the following table:
+The sponsor's cumulative contribution and the user's cumulative donation under Article 4 are kept separately and are not added together, including where the sponsor's contribution is recorded in the record of a user who also donates personally.
 
-| **Tier** | **Sponsor's cumulative contribution (RSD)** | **Bonus POEN recording for that tier** |
-| --- | --- | --- |
-| 1 | 10,000 | 20,000 |
-| 2 | 20,000 | 30,000 |
-| 3 | 50,000 | 80,000 |
-| 4 | 100,000 | 150,000 |
-| 5 | 200,000 | 300,000 |
-| 6 | 500,000 | 800,000 |
-| 7 | 1,000,000 | 1,500,000 |
-
-The number of POEN recorded equals the donation amount in dinars multiplied by the recording coefficient of the newly reached tier. The tier is cumulative and permanent.
-
-The table continues without limit, in accordance with Article 4 of this Rulebook.
-
-POEN recorded under the previously applicable bonus table is not annulled. The cumulative contribution of existing sponsors is carried over and continues to serve as the basis for determining the tier.
+POEN recorded under previously applicable sponsorship coefficients is not annulled. The cumulative contribution of existing sponsors is carried over and continues to serve as the basis for determining the tier.
 
 ### Article 11 — Legal qualification of sponsorship recording
 
 The recording of POEN on account of sponsorship is an automatic act of the Protocol within the meaning of Art. 40 and Art. 73 of the KOLO System Rulebook. It does not count against the daily emission limit of the Protocol Programme.
 
-The contribution is recorded in the record of the user who submitted the sponsorship application. On account of the contribution the sponsor acquires no POEN, no ZRNO, no claim against the Foundation, no right to a refund of the donation and no other right.
+The contribution is recorded in the record of the user who submitted the sponsorship application. The contribution from a single application is recorded in the record of a single user and is not distributed among other owners or other persons connected with the sponsor, including where the sponsor has several owners. On account of the contribution the sponsor acquires no POEN, no ZRNO, no claim against the Foundation, no right to a refund of the donation and no other right.
 
 The recording of POEN is not a payment from the legal entity or entrepreneur to the user, is not a distribution of profit or any other form of transfer of value from the sponsor's assets, and creates no property right. POEN has no value outside the system (Art. 12 and Art. 13 of the KOLO System Rulebook).
 
@@ -190,6 +174,8 @@ A sponsor is identified on the ranking list by their full registered name, abbre
 Publication of the sponsor ranking list constitutes public recognition of contributions and an element of transparency in the Foundation's work. The Foundation may publicly name a sponsor and publicly thank them.
 
 On account of the contribution the sponsor acquires no right to the publication of a logo, to a link to their website, to advertising space on the Platform, to being mentioned in the Foundation's campaigns or to any other promotional performance, and cannot contract for or demand such performance. Public recognition is an act of the Foundation, not a counter-performance for the contribution.
+
+Neither a donation nor a sponsor's contribution gives any advantage in the selection of an offer in a collective procurement or in any other procedure of the Foundation. A sponsor who is also a bidder participates on an equal footing with the other bidders, under the conditions of the Rulebook on Projects and Collective Procurements.
 
 ## IV — Prevention of money laundering and the financing of terrorism
 
@@ -241,7 +227,7 @@ The rules for allocating the surplus are established by the founder and the Foun
 
 ### Article 15 — Authority to amend
 
-The tables in Art. 4 and Art. 10 of this Rulebook, including the addition of new tiers, are amended by the Management Board (UO) of the Foundation in Phase 1, and by the Upper Kolo in Phase 2, in accordance with the KOLO System Rulebook.
+The table in Art. 4 of this Rulebook, including the addition of new tiers, are amended by the Management Board (UO) of the Foundation in Phase 1, and by the Upper Kolo in Phase 2, in accordance with the KOLO System Rulebook.
 
 Amendments to parameters take effect upon publication on the platform and apply to donations and sponsor contributions received after the entry into force.
 

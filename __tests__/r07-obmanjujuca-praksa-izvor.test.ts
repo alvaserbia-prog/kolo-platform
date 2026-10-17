@@ -134,9 +134,11 @@ describe("IZVOR — naslovna ne preporučuje odnos prema dinaru (Uslovi čl. 19 
     });
   }
 
-  it("sr: napomena uz primer nosi odredbu čl. 19 doslovno", () => {
+  // Formulacija vlasnika (2026-10-17): „ne objavljuje i ne preporučuje" ostaje —
+  // to je jezgro čl. 19; „ne primenjuje" je zamenila rečenica o javnom pravilniku.
+  it("sr: napomena uz primer nosi odredbu čl. 19", () => {
     const m = poruke("sr");
-    expect(m.landing.primer_napomena_2).toContain("ne objavljuje, ne preporučuje");
+    expect(m.landing.primer_napomena_2).toContain("ne objavljuje i ne preporučuje nijedan odnos");
   });
 });
 

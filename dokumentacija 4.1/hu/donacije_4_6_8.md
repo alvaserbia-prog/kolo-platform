@@ -6,17 +6,15 @@
 
 ### 1. cikk — Tárgy
 
-E szabályzat rendezi a pénzügyi hozzájárulás nyilvántartásának paramétereit a KOLO rendszerben, mégpedig: a természetes személyek adományainak szintjeit és az adományok nyilvántartási együtthatóját, a jogi személyek pártfogása nyilvántartásának megindítását és megerősítését, a pártfogás szintjeit és a pártfogás nyilvántartási együtthatóját, valamint a pártfogók rangsorát.
+E szabályzat rendezi a pénzügyi hozzájárulás nyilvántartásának paramétereit a KOLO rendszerben, mégpedig: a természetes személyek adományainak szintjeit és az adományok nyilvántartási együtthatóját, a jogi személyek pártfogása nyilvántartásának megindítását és megerősítését, a pártfogók hozzájárulásának ugyanazon táblázat szerinti nyilvántartását, valamint a pártfogók rangsorát.
 
 ### 2. cikk — Fogalmak
 
 Az e szabályzatban használt fogalmak a KOLO rendszerről szóló szabályzatban megállapított jelentéssel bírnak. Ezen túlmenően e szabályzatban a következő fogalmak is használatosak:
 
-**Az adományok nyilvántartási együtthatója** — az a szám, amellyel az adományozó nyilvántartott hozzájárulása a POEN-ek számának megállapításakor növekszik. Az adományok szintje határozza meg. Nem ár, nem árfolyam és nem elszámolási együttható a KOLO rendszerről szóló szabályzat értelmében.
+**Az adományok nyilvántartási együtthatója** — az a szám, amellyel az adományozó — természetes személy vagy pártfogó — nyilvántartott hozzájárulása a POEN-ek számának megállapításakor növekszik. Az adományok szintje határozza meg. Nem ár, nem árfolyam és nem elszámolási együttható a KOLO rendszerről szóló szabályzat értelmében.
 
 **Az adományok szintje** — az adományozó halmozott hozzájárulásának foka, amely meghatározza az adományok nyilvántartási együtthatóját.
-
-**A pártfogás szintje** — a pártfogó halmozott hozzájárulásának foka, amely meghatározza a pártfogás nyilvántartási együtthatóját.
 
 **A pártfogó halmozott hozzájárulása** — a pártfogó adott időpontig megerősített valamennyi pénzbeli hozzájárulásának összege.
 
@@ -133,7 +131,7 @@ A kérelem benyújtását követően a platform automatikusan létrehozza az ado
 
 A felhasználó a jogi személy vagy az egyéni vállalkozó nevében írja alá a létrehozott adományozási szerződést. Az aláírás módját az Alapítvány külön határozata állapítja meg, a hatályos számviteli és adójogszabályokkal összhangban. Az adomány teljesítése az Alapítvány számlájára történő befizetéssel valósul meg.
 
-Az adomány kézhezvételét követően az Alapítvány a platformon megerősíti az átvételt. A megerősítést követően a Protokoll a felhasználó bejegyzésében nyilvántartásba veszi a POEN-eket az e szabályzat 10. cikke szerinti szintek alapján.
+Az adomány kézhezvételét követően az Alapítvány a platformon megerősíti az átvételt. A megerősítést követően a Protokoll a felhasználó bejegyzésében nyilvántartásba veszi a POEN-eket az e szabályzat 10. cikke szerint.
 
 Ha az adomány nem érkezett meg, vagy az érték nem felel meg, az Alapítvány indokolással megtagadja a megerősítést. A felhasználó új kérelmet nyújthat be.
 
@@ -143,34 +141,21 @@ Az Alapítvány pártfogói nyilvántartást vezet, amelyben rögzíti valamenny
 
 A nyilvántartás alapján az Alapítvány valamennyi megerősített kérelem értékének összeadásával állapítja meg minden pártfogó halmozott hozzájárulását.
 
-### 10. cikk — A pártfogás szintjei és a nyilvántartási együttható
+### 10. cikk — A pártfogás nyilvántartási együtthatója
 
-A pártfogás nyilvántartási együtthatója megegyezik a 4. cikk szerinti adomány-nyilvántartási együtthatóval, húsz százalékkal növelve, azonos halmozott összeg esetén. Az újonnan elért szint együtthatója a teljes új adományra alkalmazandó.
+A pártfogó hozzájárulása az e szabályzat 4. cikke szerinti táblázat alapján kerül nyilvántartásba, ugyanazokkal a szintekkel és ugyanazokkal a nyilvántartási együtthatókkal, mint a természetes személy adománya. Az adományozó jogi formája nem befolyásolja a nyilvántartási együtthatót.
 
-A 4. cikk szerinti együtthatóhoz képesti különbség nem ösztönző az adományozó meghatározott jogi formájára, és nem is ellenszolgáltatás a hozzájárulásért. A jogi személy, illetve egyéni vállalkozó adománya nem feltétlenül csökkenti az adományozó adóalapját: amennyiben az adójogszabályok szerint nem minősül költségnek, arra nyereségadót kell fizetni. Az ilyen adomány ezért az adományozott összegnél nagyobb lemondást jelenthet, ami a természetes személy adománya esetében soha nem áll fenn. A lemondás mértékének e különbsége fejeződik ki a nyilvántartási együtthatóban.
+A szint a pártfogó halmozott hozzájárulása és az új adomány alapján kerül megállapításra. Az újonnan elért szint nyilvántartási együtthatója a teljes új adományra alkalmazandó. A nyilvántartott POEN-ek száma megegyezik az adomány dinárban kifejezett összegének és ennek az együtthatónak a szorzatával. A szint halmozott és tartós.
 
-A pártfogó halmozott hozzájárulása alapján a Protokoll POEN-eket vesz nyilvántartásba a felhasználó bejegyzésében, a következő táblázat szerint:
+A pártfogó halmozott hozzájárulását és a felhasználónak a 4. cikk szerinti halmozott adományát elkülönítve kell vezetni, és azok nem adódnak össze, akkor sem, ha a pártfogó hozzájárulása olyan felhasználó bejegyzésében kerül nyilvántartásba, aki személyesen is adományoz.
 
-| **Szint** | **A pártfogó halmozott hozzájárulása (RSD)** | **Bónusz POEN-nyilvántartás az adott szintért** |
-| --- | --- | --- |
-| 1 | 10.000 | 20.000 |
-| 2 | 20.000 | 30.000 |
-| 3 | 50.000 | 80.000 |
-| 4 | 100.000 | 150.000 |
-| 5 | 200.000 | 300.000 |
-| 6 | 500.000 | 800.000 |
-| 7 | 1.000.000 | 1.500.000 |
+A korábban hatályos pártfogási együtthatók alapján nyilvántartott POEN nem kerül megsemmisítésre. A meglévő pártfogók halmozott hozzájárulása átvitelre kerül, és továbbra is a szint megállapításának alapjául szolgál.
 
-A nyilvántartásba vett POEN-ek száma megegyezik az adomány dinárban kifejezett összegének és az újonnan elért szint nyilvántartási együtthatójának a szorzatával. A szint halmozott és tartós.
-
-A táblázat korlátozás nélkül folytatódik, a jelen szabályzat 4. cikkével összhangban.
-
-A korábban hatályos bónusztáblázat szerint nyilvántartásba vett POEN nem semmisül meg. A meglévő pártfogók halmozott hozzájárulása átvezetésre kerül, és továbbra is a szint megállapításának alapjául szolgál.
 ### 11. cikk — A pártfogás nyilvántartásának jogi minősítése
 
 A POEN pártfogás alapján történő nyilvántartásba vétele a Protokoll automatikus aktusa a KOLO rendszerről szóló szabályzat 40. és 73. cikke értelmében. Nem számít bele a Protokoll Programjainak napi kibocsátási limitjébe.
 
-A hozzájárulás annak a felhasználónak a bejegyzésében kerül nyilvántartásba, aki a pártfogási kérelmet benyújtotta. A hozzájárulás alapján a pártfogó nem szerez sem POEN-t, sem ZRNO-t, sem követelést az Alapítvánnyal szemben, sem az adomány visszatérítéséhez való jogot, sem bármely más jogot.
+A hozzájárulás annak a felhasználónak a bejegyzésében kerül nyilvántartásba, aki a pártfogási kérelmet benyújtotta. Egy kérelem alapján a hozzájárulás egyetlen felhasználó bejegyzésében kerül nyilvántartásba, és nem osztható fel más tulajdonosok vagy a pártfogóval kapcsolatban álló más személyek között, akkor sem, ha a pártfogónak több tulajdonosa van. A hozzájárulás alapján a pártfogó nem szerez sem POEN-t, sem ZRNO-t, sem követelést az Alapítvánnyal szemben, sem az adomány visszatérítéséhez való jogot, sem bármely más jogot.
 
 A POEN nyilvántartásba vétele nem a jogi személy, illetve az egyéni vállalkozó juttatása a felhasználó részére, nem nyereségfelosztás és nem is az érték átadásának más formája a pártfogó vagyonából, továbbá nem keletkeztet semmilyen vagyoni jogot. A POEN-nek a rendszeren kívül nincs értéke (a KOLO rendszerről szóló szabályzat 12. és 13. cikke).
 
@@ -189,6 +174,8 @@ A pártfogó a rangsorban teljes bejegyzett nevével, rövidített nevével vagy
 A pártfogói rangsor közzététele a hozzájárulás nyilvános elismerése és az Alapítvány működése átláthatóságának eleme. Az Alapítvány a pártfogót nyilvánosan megnevezheti és nyilvánosan köszönetet mondhat neki.
 
 A hozzájárulás alapján a pártfogó nem szerez jogot logó közzétételére, saját internetes oldalára mutató hivatkozásra, a Platformon hirdetési felületre, az Alapítvány kampányaiban való említésre, sem bármely más promóciós szolgáltatásra, és ilyen szolgáltatást nem köthet ki és nem követelhet. A nyilvános elismerés az Alapítvány aktusa, nem pedig a hozzájárulás ellenszolgáltatása.
+
+Sem az adomány, sem a pártfogó hozzájárulása nem biztosít előnyt az ajánlat kiválasztásában a kollektív beszerzésben vagy az Alapítvány más eljárásában. Az a pártfogó, aki egyben ajánlattevő is, a többi ajánlattevővel egyenrangúan vesz részt, a projektekről és kollektív beszerzésekről szóló szabályzat feltételei szerint.
 
 ## IV — A pénzmosás és a terrorizmusfinanszírozás megelőzése
 
@@ -240,7 +227,7 @@ A többlet elosztásának szabályait az 1. fázisban az alapító és az Alapí
 
 ### 15. cikk — A módosítás hatásköre
 
-Az e szabályzat 4. és 10. cikke szerinti táblázatokat — ideértve új szintek hozzáadását — az 1. fázisban az Alapítvány Igazgatótanácsa, a 2. fázisban a Felső Kolo módosítja, a KOLO rendszerről szóló szabályzattal összhangban.
+Az e szabályzat 4. cikke szerinti táblázatot — ideértve új szintek hozzáadását — az 1. fázisban az Alapítvány Igazgatótanácsa, a 2. fázisban a Felső Kolo módosítja, a KOLO rendszerről szóló szabályzattal összhangban.
 
 A paraméterek módosításai a platformon való közzététellel lépnek hatályba, és a hatálybalépést követően kapott adományokra és pártfogói hozzájárulásokra alkalmazandók.
 

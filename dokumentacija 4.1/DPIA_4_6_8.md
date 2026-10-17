@@ -17,7 +17,7 @@
 | **Lice za zaštitu podataka (DPO)** | Nije određeno (Politika privatnosti, član 1). Kontakt za zaštitu podataka: privatnost@ekolo.rs |
 | **Datum izrade** | 23.05.2026. (poslednja izmena 03.10.2026.) |
 | **Predmet procene** | KOLO sistem — Faza 1, aktivne radnje obrade br. 1–18, uključujući aktivirani Modul 3 (Socijalni programi sa verifikatorskom potvrdom), Nadzor integriteta sistema verifikacija, javnu listu donacija, nadzorni predmet, putanju doprinosa razmeni i **aktivirani Modul 4 — Deca (radnja br. 11)** |
-| **Povezani dokumenti** | Pravilnik o KOLO sistemu (v4.6.6), Politika privatnosti (v4.6.8), Registar radnji obrade (v4.6.8), Uslovi korišćenja (v4.6.8), Pravilnik o programima podrške (v4.6.7), Pravilnik o hijerarhiji akata (v4.6.8), Statut (v4.1), Whitepaper (v4.6.2) |
+| **Povezani dokumenti** | Pravilnik o KOLO sistemu (v4.6.6), Politika privatnosti (v4.6.8), Registar radnji obrade (v4.6.8), Uslovi korišćenja (v4.6.8), Pravilnik o programima podrške (v4.6.7), Pravilnik o hijerarhiji akata (v4.6.8), Statut (v4.1), Whitepaper (v4.6.8) |
 | **Sledeća revizija** | Pri izmeni mehanizma potvrde socijalnih programa, pri izmeni pravila dečjeg prostora, ili najkasnije 12 meseci od poslednje izmene |
 
 Ova procena uticaja na zaštitu podataka o ličnosti (u daljem tekstu: DPIA) izrađuje se u skladu sa čl. 54 Zakona o zaštiti podataka o ličnosti („Sl. glasnik RS“, br. 87/2018, u daljem tekstu: ZZPL). DPIA se zasniva na odredbama Glave IX Pravilnika o KOLO sistemu (čl. 60–67), Politici privatnosti KOLO platforme i Registru radnji obrade podataka o ličnosti.
