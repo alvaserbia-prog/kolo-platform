@@ -99,7 +99,11 @@ async function getAgregati() {
     const [brojClanova, brojTransfera, brojOglasa, opticajAgg] = await Promise.all([
       prisma.user.count({ where: { verified: true } }),
       prisma.transaction.count({ where: { ...USLOV_RAZMENE } }),
-      prisma.marketplaceListing.count({ where: { status: "ACTIVE" } }),
+      // 🔴 Isti uslov kao spisak na Pijaci za gosta (`src/app/pijaca/page.tsx`).
+      // Goli `status: "ACTIVE"` je brojao i oglase koje Pijaca ne prikazuje (oglas
+      // deteta, nalog deteta bez roditelja), pa je naslovna pokazivala više oglasa
+      // nego što ih posetilac nađe — a takav broj može da oda da dete ima oglas.
+      prisma.marketplaceListing.count({ where: { status: "ACTIVE", seller: usloviVidljivostiOglasa(null) } }),
       prisma.wallet.aggregate({ _sum: { balance: true }, where: { type: { not: "PROTOKOL" } } }),
     ]);
     return {

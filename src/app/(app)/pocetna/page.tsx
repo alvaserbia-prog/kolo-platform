@@ -123,7 +123,9 @@ export default async function PocetnaPage() {
       include: { user: { select: { id: true, pseudonim: true, verified: true, avatar: true } } },
     }),
     prisma.user.count({ where: { deaktiviranAt: null } }),
-    prisma.marketplaceListing.count({ where: { status: "ACTIVE" } }),
+    // Isti uslov kao spisak koji ovaj član vidi na Pijaci — broj ne sme da bude
+    // veći od onoga što se tamo nađe.
+    prisma.marketplaceListing.count({ where: { status: "ACTIVE", seller: usloviVidljivostiOglasa(ja) } }),
     prisma.transaction.count({ where: { ...USLOV_RAZMENE } }),
     prisma.wallet.findUnique({ where: { id: "banka-singleton" }, select: { balance: true } }),
   ]);
